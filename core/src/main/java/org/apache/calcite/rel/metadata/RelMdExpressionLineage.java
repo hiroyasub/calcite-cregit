@@ -515,6 +515,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|KeyFor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -616,12 +648,14 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -691,6 +725,8 @@ return|;
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -712,6 +748,8 @@ literal|null
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -743,6 +781,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -759,11 +799,9 @@ name|RexNode
 name|outputExpression
 parameter_list|)
 block|{
-return|return
-name|mq
-operator|.
-name|getExpressionLineage
-argument_list|(
+name|RelNode
+name|bestOrOriginal
+init|=
 name|Util
 operator|.
 name|first
@@ -778,6 +816,24 @@ operator|.
 name|getOriginal
 argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|bestOrOriginal
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|mq
+operator|.
+name|getExpressionLineage
+argument_list|(
+name|bestOrOriginal
 argument_list|,
 name|outputExpression
 argument_list|)
@@ -785,6 +841,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from {@link TableScan}.    *    *<p>We extract the fields referenced by the expression and we express them    * using {@link RexTableInputRef}.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -933,6 +991,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from {@link Aggregate}.    *    *<p>If the expression references grouping sets or aggregate function    * results, we cannot extract the lineage and we return null.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -1128,6 +1188,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from {@link Join}.    *    *<p>We only extract the lineage for INNER joins.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -1738,6 +1800,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from {@link Union}.    *    *<p>For Union operator, we might be able to extract multiple origins for the    * references in the given expression.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2126,6 +2190,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from Project.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2285,6 +2351,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from Filter.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2317,6 +2385,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from Sort.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2349,6 +2419,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from TableModify.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2381,6 +2453,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from Exchange.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2413,6 +2487,8 @@ return|;
 block|}
 comment|/**    * Expression lineage from Calc.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2592,10 +2668,10 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Given an expression, it will create all equivalent expressions resulting    * from replacing all possible combinations of references in the mapping by    * the corresponding expressions.    *    * @param rexBuilder rexBuilder    * @param expr expression    * @param mapping mapping    * @return set of resulting expressions equivalent to the input expression    */
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -2718,6 +2794,11 @@ name|singleMapping
 parameter_list|)
 block|{
 specifier|final
+annotation|@
+name|KeyFor
+argument_list|(
+literal|"mapping"
+argument_list|)
 name|RexInputRef
 name|inputRef
 init|=
@@ -2739,10 +2820,19 @@ name|RexNode
 argument_list|>
 name|replacements
 init|=
+name|requireNonNull
+argument_list|(
 name|mapping
 operator|.
 name|remove
 argument_list|(
+name|inputRef
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"mapping.remove(inputRef) is null for "
+operator|+
 name|inputRef
 argument_list|)
 decl_stmt|;
@@ -3018,10 +3108,19 @@ name|inputRef
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|replacementValues
 operator|.
 name|get
 argument_list|(
+name|inputRef
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no replacement found for inputRef "
+operator|+
 name|inputRef
 argument_list|)
 return|;

@@ -19,9 +19,15 @@ end_package
 
 begin_import
 import|import
-name|javax
+name|org
 operator|.
-name|annotation
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
 operator|.
 name|Nullable
 import|;

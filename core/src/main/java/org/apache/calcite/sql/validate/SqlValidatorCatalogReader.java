@@ -107,6 +107,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -128,6 +144,8 @@ name|Wrapper
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Finds a table or schema with the given name, possibly qualified.    *    *<p>Uses the case-sensitivity policy of the catalog reader.    *    *<p>If not found, returns null. If you want a more descriptive error    * message or to override the case-sensitivity of the match, use    * {@link SqlValidatorScope#resolveTable}.    *    * @param names Name of table, may be qualified or fully-qualified    *    * @return Table with the given name, or null    */
+annotation|@
+name|Nullable
 name|SqlValidatorTable
 name|getTable
 parameter_list|(
@@ -139,6 +157,8 @@ name|names
 parameter_list|)
 function_decl|;
 comment|/**    * Finds a user-defined type with the given name, possibly qualified.    *    *<p>NOTE jvs 12-Feb-2005: the reason this method is defined here instead    * of on RelDataTypeFactory is that it has to take into account    * context-dependent information such as SQL schema path, whereas a type    * factory is context-independent.    *    * @param typeName Name of type    * @return named type, or null if not found    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getNamedType
 parameter_list|(
@@ -176,6 +196,8 @@ comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#fi
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|field
 parameter_list|(

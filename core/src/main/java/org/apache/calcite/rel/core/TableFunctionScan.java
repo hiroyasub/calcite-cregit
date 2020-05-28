@@ -221,6 +221,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -261,6 +277,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression that calls a table-valued function.  *  *<p>The function returns a result set.  * It can appear as a leaf in a query tree,  * or can be applied to relational inputs.  *  * @see org.apache.calcite.rel.logical.LogicalTableFunctionScan  */
 end_comment
@@ -281,6 +309,8 @@ name|rexCall
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Type
 name|elementType
 decl_stmt|;
@@ -293,6 +323,8 @@ name|inputs
 decl_stmt|;
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableSet
 argument_list|<
 name|RelColumnMapping
@@ -319,12 +351,16 @@ parameter_list|,
 name|RexNode
 name|rexCall
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|elementType
 parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -411,10 +447,15 @@ operator|.
 name|getInputs
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getExpression
 argument_list|(
+literal|"invocation"
+argument_list|)
+argument_list|,
 literal|"invocation"
 argument_list|)
 argument_list|,
@@ -471,7 +512,8 @@ name|rexCall
 argument_list|,
 name|elementType
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|,
 name|columnMappings
 argument_list|)
@@ -495,12 +537,16 @@ parameter_list|,
 name|RexNode
 name|rexCall
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|elementType
 parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -568,7 +614,8 @@ name|rexCall
 argument_list|,
 name|elementType
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|,
 name|columnMappings
 argument_list|)
@@ -795,6 +842,8 @@ return|;
 block|}
 comment|/**    * Returns set of mappings known for this table function, or null if unknown    * (not the same as empty!).    *    * @return set of mappings known for this table function, or null if unknown    * (not the same as empty!)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -808,6 +857,8 @@ return|;
 block|}
 comment|/**    * Returns element type of the collection that will implement this table.    *    * @return element type of the collection that will implement this table    */
 specifier|public
+annotation|@
+name|Nullable
 name|Type
 name|getElementType
 parameter_list|()

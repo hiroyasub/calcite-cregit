@@ -343,6 +343,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -467,6 +483,8 @@ return|;
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -485,6 +503,8 @@ literal|null
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -511,6 +531,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -524,11 +546,9 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-return|return
-name|mq
-operator|.
-name|getTableReferences
-argument_list|(
+name|RelNode
+name|bestOrOriginal
+init|=
 name|Util
 operator|.
 name|first
@@ -543,6 +563,24 @@ operator|.
 name|getOriginal
 argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|bestOrOriginal
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|mq
+operator|.
+name|getTableReferences
+argument_list|(
+name|bestOrOriginal
 argument_list|)
 return|;
 block|}
@@ -582,6 +620,8 @@ return|;
 block|}
 comment|/**    * Table references from Aggregate.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -609,6 +649,8 @@ return|;
 block|}
 comment|/**    * Table references from Join.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -849,6 +891,8 @@ return|;
 block|}
 comment|/**    * Table references from Union, Intersect, Minus.    *    *<p>For Union operator, we might be able to extract multiple table    * references.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1066,6 +1110,8 @@ return|;
 block|}
 comment|/**    * Table references from Project.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1094,6 +1140,8 @@ return|;
 block|}
 comment|/**    * Table references from Filter.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1121,6 +1169,8 @@ return|;
 block|}
 comment|/**    * Table references from Calc.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1148,6 +1198,8 @@ return|;
 block|}
 comment|/**    * Table references from Sort.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1175,6 +1227,8 @@ return|;
 block|}
 comment|/**    * Table references from TableModify.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1202,6 +1256,8 @@ return|;
 block|}
 comment|/**    * Table references from Exchange.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1229,6 +1285,8 @@ return|;
 block|}
 comment|/**    * Table references from Window.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1256,6 +1314,8 @@ return|;
 block|}
 comment|/**    * Table references from Sample.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef

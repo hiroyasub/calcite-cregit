@@ -47,6 +47,22 @@ name|ReflectiveSqlOperatorTable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Operator table that contains only Oracle-specific functions and operators.  *  * @deprecated Use  * {@link SqlLibraryOperatorTableFactory#getOperatorTable(SqlLibrary...)}  * instead, passing {@link SqlLibrary#ORACLE} as argument.  */
 end_comment
@@ -65,6 +81,8 @@ comment|//~ Static fields/initializers -----------------------------------------
 comment|/**    * The table of contains Oracle-specific operators.    */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|OracleSqlOperatorTable
 name|instance
 decl_stmt|;
@@ -180,6 +198,13 @@ name|OracleSqlOperatorTable
 name|instance
 parameter_list|()
 block|{
+name|OracleSqlOperatorTable
+name|instance
+init|=
+name|OracleSqlOperatorTable
+operator|.
+name|instance
+decl_stmt|;
 if|if
 condition|(
 name|instance
@@ -200,6 +225,12 @@ name|instance
 operator|.
 name|init
 argument_list|()
+expr_stmt|;
+name|OracleSqlOperatorTable
+operator|.
+name|instance
+operator|=
+name|instance
 expr_stmt|;
 block|}
 return|return

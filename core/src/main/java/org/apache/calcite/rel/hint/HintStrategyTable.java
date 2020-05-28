@@ -109,6 +109,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -161,16 +177,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -184,6 +190,18 @@ operator|.
 name|stream
 operator|.
 name|Collectors
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -347,6 +365,14 @@ name|containsKey
 argument_list|(
 name|key
 argument_list|)
+operator|:
+literal|"hint "
+operator|+
+name|hint
+operator|.
+name|hintName
+operator|+
+literal|" must be present"
 assert|;
 return|return
 name|this
@@ -447,6 +473,10 @@ decl_stmt|;
 if|if
 condition|(
 name|strategy
+operator|!=
+literal|null
+operator|&&
+name|strategy
 operator|.
 name|hintOptionChecker
 operator|!=
@@ -540,6 +570,14 @@ name|containsKey
 argument_list|(
 name|key
 argument_list|)
+operator|:
+literal|"hint "
+operator|+
+name|hint
+operator|.
+name|hintName
+operator|+
+literal|" must be present"
 assert|;
 specifier|final
 name|HintStrategy
@@ -696,6 +734,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -823,11 +863,11 @@ name|HintStrategy
 operator|.
 name|builder
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|strategy
+argument_list|,
+literal|"HintPredicate"
 argument_list|)
 argument_list|)
 operator|.
@@ -863,11 +903,11 @@ argument_list|(
 name|hintName
 argument_list|)
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|entry
+argument_list|,
+literal|"HintStrategy"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -948,9 +988,13 @@ specifier|public
 name|boolean
 name|fail
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|message
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|args
@@ -960,7 +1004,12 @@ name|LOGGER
 operator|.
 name|warn
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|message
+argument_list|,
+literal|"message"
+argument_list|)
 argument_list|,
 name|args
 argument_list|)
@@ -989,9 +1038,13 @@ parameter_list|(
 name|boolean
 name|condition
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|message
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|args

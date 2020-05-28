@@ -43,6 +43,20 @@ name|calcite
 operator|.
 name|schema
 operator|.
+name|Table
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
 name|Wrapper
 import|;
 end_import
@@ -150,6 +164,21 @@ name|InitializerContext
 name|initializerContext
 parameter_list|)
 function_decl|;
+comment|/** Returns the table. */
+specifier|default
+name|Table
+name|table
+parameter_list|()
+block|{
+return|return
+name|unwrapOrThrow
+argument_list|(
+name|Table
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
 block|}
 end_interface
 

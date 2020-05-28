@@ -57,6 +57,22 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Converts expressions from {@link RexNode} to {@link SqlNode}.  *  *<p>For most purposes, {@link org.apache.calcite.rel.rel2sql.SqlImplementor}  * is superior. See in particular  * {@link org.apache.calcite.rel.rel2sql.SqlImplementor.Context#toSql(RexProgram, RexNode)}.  */
 end_comment
@@ -68,6 +84,8 @@ name|RexToSqlNodeConverter
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Converts a {@link RexNode} to a {@link SqlNode} expression,    * typically by dispatching to one of the other interface methods.    *    * @param node RexNode to translate    * @return SqlNode, or null if no translation was available    */
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertNode
 parameter_list|(
@@ -76,6 +94,8 @@ name|node
 parameter_list|)
 function_decl|;
 comment|/**    * Converts a {@link RexCall} to a {@link SqlNode} expression.    *    * @param call RexCall to translate    * @return SqlNode, or null if no translation was available    */
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertCall
 parameter_list|(
@@ -84,6 +104,8 @@ name|call
 parameter_list|)
 function_decl|;
 comment|/**    * Converts a {@link RexLiteral} to a {@link SqlLiteral}.    *    * @param literal RexLiteral to translate    * @return SqlNode, or null if no translation was available    */
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertLiteral
 parameter_list|(
@@ -92,6 +114,8 @@ name|literal
 parameter_list|)
 function_decl|;
 comment|/**    * Converts a {@link RexInputRef} to a {@link SqlIdentifier}.    *    * @param ref RexInputRef to translate    * @return SqlNode, or null if no translation was available    */
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertInputRef
 parameter_list|(

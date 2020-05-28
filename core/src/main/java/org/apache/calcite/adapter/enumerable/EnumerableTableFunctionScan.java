@@ -305,6 +305,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -375,6 +391,8 @@ name|RelNode
 argument_list|>
 name|inputs
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|elementType
 parameter_list|,
@@ -384,6 +402,8 @@ parameter_list|,
 name|RexNode
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -427,12 +447,16 @@ parameter_list|,
 name|RexNode
 name|rexCall
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|elementType
 parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -689,10 +713,15 @@ specifier|final
 name|JavaRowFormat
 name|format
 decl_stmt|;
-if|if
-condition|(
+name|Type
+name|elementType
+init|=
 name|getElementType
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|elementType
 operator|==
 literal|null
 condition|)
@@ -706,7 +735,8 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
@@ -726,8 +756,7 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
-name|getElementType
-argument_list|()
+name|elementType
 operator|instanceof
 name|Class
 operator|&&
@@ -740,9 +769,11 @@ name|isAssignableFrom
 argument_list|(
 operator|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 operator|)
-name|getElementType
-argument_list|()
+name|elementType
 argument_list|)
 condition|)
 block|{

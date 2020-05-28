@@ -209,6 +209,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -248,6 +264,8 @@ name|getRowType
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the {@link RelOptSchema} this table belongs to.    */
+annotation|@
+name|Nullable
 name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()
@@ -261,6 +279,8 @@ name|context
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a description of the physical ordering (or orderings) of the rows    * returned from this table.    *    * @see RelMetadataQuery#collations(RelNode)    */
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -269,6 +289,8 @@ name|getCollationList
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a description of the physical distribution of the rows    * in this table.    *    * @see RelMetadataQuery#distribution(RelNode)    */
+annotation|@
+name|Nullable
 name|RelDistribution
 name|getDistribution
 parameter_list|()
@@ -282,6 +304,8 @@ name|columns
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a list of unique keys, empty list if no key exist,    * the result should be consistent with {@code isKey}.    */
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -290,6 +314,8 @@ name|getKeys
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the referential constraints existing for this table. These constraints    * are represented over other tables using {@link RelReferentialConstraint} nodes.    */
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelReferentialConstraint
@@ -298,6 +324,8 @@ name|getReferentialConstraints
 parameter_list|()
 function_decl|;
 comment|/**    * Generates code for this table.    *    * @param clazz The desired collection class; for example {@code Queryable}.    *    * @return the code for the table, or null if code generation is not supported    */
+annotation|@
+name|Nullable
 name|Expression
 name|getExpression
 parameter_list|(
@@ -344,6 +372,8 @@ name|String
 argument_list|>
 name|schemaPath
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String

@@ -559,6 +559,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -1605,6 +1621,8 @@ block|}
 block|}
 comment|/** Returns a basic dialect for a given product, or null if none is known. */
 specifier|static
+annotation|@
+name|Nullable
 name|SqlDialect
 name|simple
 parameter_list|(

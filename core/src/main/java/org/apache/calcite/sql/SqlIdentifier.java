@@ -171,6 +171,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -186,6 +216,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -225,11 +265,15 @@ name|names
 decl_stmt|;
 comment|/**    * This identifier's collation (if any).    */
 specifier|final
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 decl_stmt|;
 comment|/**    * A list of the positions of the components of compound identifiers.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|SqlParserPos
@@ -247,12 +291,16 @@ name|String
 argument_list|>
 name|names
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|SqlParserPos
@@ -346,6 +394,8 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 parameter_list|,
@@ -620,6 +670,8 @@ name|String
 argument_list|>
 name|names
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|SqlParserPos
@@ -1045,11 +1097,19 @@ specifier|final
 name|SqlParserPos
 name|pos2
 decl_stmt|;
-if|if
-condition|(
+name|ImmutableList
+argument_list|<
+name|SqlParserPos
+argument_list|>
+name|thisComponentPositions
+init|=
 name|this
 operator|.
 name|componentPositions
+decl_stmt|;
+if|if
+condition|(
+name|thisComponentPositions
 operator|!=
 literal|null
 condition|)
@@ -1074,9 +1134,7 @@ name|builder
 operator|.
 name|addAll
 argument_list|(
-name|this
-operator|.
-name|componentPositions
+name|thisComponentPositions
 argument_list|)
 operator|.
 name|add
@@ -1334,6 +1392,8 @@ specifier|public
 name|boolean
 name|equalsDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|,
@@ -1491,7 +1551,11 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|SqlCollation
 name|getCollation
 parameter_list|()
@@ -1670,6 +1734,8 @@ specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|)
@@ -1708,6 +1774,15 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|scope
+argument_list|,
+literal|"scope"
+argument_list|)
+expr_stmt|;
 comment|// First check for builtin functions which don't have parentheses,
 comment|// like "LOCALTIME".
 specifier|final
@@ -1757,6 +1832,17 @@ argument_list|(
 name|this
 argument_list|)
 decl_stmt|;
+assert|assert
+name|qualified
+operator|.
+name|namespace
+operator|!=
+literal|null
+operator|:
+literal|"namespace must not be null in "
+operator|+
+name|qualified
+assert|;
 specifier|final
 name|SqlIdentifier
 name|fqId

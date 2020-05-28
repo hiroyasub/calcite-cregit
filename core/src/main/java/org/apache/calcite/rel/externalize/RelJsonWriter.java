@@ -103,6 +103,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -138,6 +154,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -182,6 +208,8 @@ specifier|protected
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|relList
@@ -194,6 +222,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -205,6 +235,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|previousId
 decl_stmt|;
@@ -249,6 +281,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -260,6 +294,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -302,6 +338,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|value
@@ -338,6 +376,8 @@ comment|// omit 'inputs: ["3"]' if "3" is the preceding rel
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -360,15 +400,17 @@ operator|!=
 literal|1
 operator|||
 operator|!
+name|Objects
+operator|.
+name|equals
+argument_list|(
 name|list
 operator|.
 name|get
 argument_list|(
 literal|0
 argument_list|)
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|previousId
 argument_list|)
 condition|)
@@ -435,6 +477,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -442,6 +486,8 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -464,6 +510,8 @@ block|}
 specifier|private
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|explainInputs
@@ -478,6 +526,8 @@ block|{
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -552,6 +602,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -588,6 +640,8 @@ parameter_list|(
 name|String
 name|term
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -627,6 +681,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -677,6 +733,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map

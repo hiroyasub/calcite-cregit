@@ -63,6 +63,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -166,6 +182,22 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -543,11 +575,14 @@ name|isPrimitive
 argument_list|()
 assert|;
 return|return
+name|castNonNull
+argument_list|(
 name|primitiveToByteBufferReadMethod
 operator|.
 name|get
 argument_list|(
 name|clazz
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -568,11 +603,14 @@ name|isPrimitive
 argument_list|()
 assert|;
 return|return
+name|castNonNull
+argument_list|(
 name|primitiveToByteBufferWriteMethod
 operator|.
 name|get
 argument_list|(
 name|clazz
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -593,11 +631,14 @@ name|isPrimitive
 argument_list|()
 assert|;
 return|return
+name|castNonNull
+argument_list|(
 name|primitiveToBoxingMap
 operator|.
 name|get
 argument_list|(
 name|primitiveClass
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -979,6 +1020,8 @@ block|}
 comment|/**    * Looks up a visit method.    *    * @param visitorClass    class of object whose visit method is to be invoked    * @param visiteeClass    class of object to be passed as a parameter to the    *                        visit method    * @param visitMethodName name of visit method    * @return method found, or null if none found    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -1017,6 +1060,8 @@ block|}
 comment|/**    * Looks up a visit method taking additional parameters beyond the    * overloaded visitee type.    *    * @param visitorClass             class of object whose visit method is to be    *                                 invoked    * @param visiteeClass             class of object to be passed as a parameter    *                                 to the visit method    * @param visitMethodName          name of visit method    * @param additionalParameterTypes list of additional parameter types    * @return method found, or null if none found    * @see #createDispatcher(Class, Class)    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -1065,16 +1110,8 @@ decl_stmt|;
 name|int
 name|iParam
 init|=
-literal|0
+literal|1
 decl_stmt|;
-name|paramTypes
-index|[
-name|iParam
-operator|++
-index|]
-operator|=
-literal|null
-expr_stmt|;
 for|for
 control|(
 name|Class
@@ -1106,6 +1143,8 @@ argument_list|<
 name|?
 argument_list|>
 argument_list|,
+annotation|@
+name|Nullable
 name|Method
 argument_list|>
 name|cache
@@ -1132,6 +1171,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -1169,6 +1210,8 @@ argument_list|<
 name|?
 argument_list|>
 argument_list|,
+annotation|@
+name|Nullable
 name|Method
 argument_list|>
 name|cache
@@ -1442,6 +1485,8 @@ extends|extends
 name|ReflectiveVisitor
 parameter_list|,
 name|E
+extends|extends
+name|Object
 parameter_list|>
 name|ReflectiveVisitDispatcher
 argument_list|<
@@ -1504,6 +1549,8 @@ argument_list|<
 name|Object
 argument_list|>
 argument_list|,
+annotation|@
+name|Nullable
 name|Method
 argument_list|>
 name|map
@@ -1516,6 +1563,8 @@ decl_stmt|;
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -1558,6 +1607,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -1707,6 +1758,8 @@ specifier|public
 specifier|static
 parameter_list|<
 name|E
+extends|extends
+name|Object
 parameter_list|,
 name|T
 parameter_list|>
@@ -1804,6 +1857,8 @@ specifier|public
 name|T
 name|invoke
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|args
@@ -1814,18 +1869,25 @@ name|method
 init|=
 name|lookupMethod
 argument_list|(
+name|castNonNull
+argument_list|(
 name|args
 index|[
 literal|0
 index|]
 argument_list|)
+argument_list|)
 decl_stmt|;
 try|try
 block|{
+comment|// castNonNull is here because method.invoke can return null, and we don't know if
+comment|// T is nullable
 specifier|final
 name|Object
 name|o
 init|=
+name|castNonNull
+argument_list|(
 name|method
 operator|.
 name|invoke
@@ -1833,6 +1895,7 @@ argument_list|(
 name|visitor
 argument_list|,
 name|args
+argument_list|)
 argument_list|)
 decl_stmt|;
 return|return
@@ -2289,6 +2352,8 @@ comment|/**      * Invokes method on an object with a given set of arguments.   
 name|T
 name|invoke
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|args

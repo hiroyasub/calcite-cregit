@@ -47,6 +47,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -129,6 +145,18 @@ name|RESOURCE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link org.apache.calcite.schema.TableMacro} based on a  * method. */
 end_comment
@@ -159,6 +187,8 @@ block|}
 comment|/** Creates a {@code TableMacro} from a class, looking for an "eval"    * method. Returns null if there is no such method. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|TableMacro
 name|create
 parameter_list|(
@@ -201,6 +231,8 @@ block|}
 comment|/** Creates a {@code TableMacro} from a method. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|TableMacro
 name|create
 parameter_list|(
@@ -299,13 +331,16 @@ name|Override
 specifier|public
 name|TranslatableTable
 name|apply
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
+argument_list|)
 block|{
 try|try
 block|{
@@ -351,11 +386,12 @@ name|newInstance
 argument_list|()
 expr_stmt|;
 block|}
-comment|//noinspection unchecked
 return|return
 operator|(
 name|TranslatableTable
 operator|)
+name|requireNonNull
+argument_list|(
 name|method
 operator|.
 name|invoke
@@ -366,6 +402,17 @@ name|arguments
 operator|.
 name|toArray
 argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"got null from "
+operator|+
+name|method
+operator|+
+literal|" with arguments "
+operator|+
+name|arguments
 argument_list|)
 return|;
 block|}

@@ -57,6 +57,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -79,6 +95,8 @@ block|{
 comment|/** Returns an enumerator over the rows in this Table. Each row is represented    * as an array of its column values.    *    *<p>The list of filters is mutable.    * If the table can implement a particular filter, it should remove that    * filter from the list.    * If it cannot implement a filter, it should leave it in the list.    * Any filters remaining will be implemented by the consuming Calcite    * operator. */
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>

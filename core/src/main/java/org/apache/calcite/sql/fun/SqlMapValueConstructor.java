@@ -137,6 +137,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -158,6 +174,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -198,8 +226,12 @@ parameter_list|)
 block|{
 name|Pair
 argument_list|<
+annotation|@
+name|Nullable
 name|RelDataType
 argument_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 argument_list|>
 name|type
@@ -217,17 +249,6 @@ name|collectOperandTypes
 argument_list|()
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-literal|null
-operator|==
-name|type
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 return|return
 name|SqlTypeUtil
 operator|.
@@ -238,13 +259,23 @@ operator|.
 name|getTypeFactory
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|type
 operator|.
 name|left
 argument_list|,
+literal|"inferred key type"
+argument_list|)
+argument_list|,
+name|requireNonNull
+argument_list|(
 name|type
 operator|.
 name|right
+argument_list|,
+literal|"inferred value type"
+argument_list|)
 argument_list|,
 literal|false
 argument_list|)
@@ -331,8 +362,12 @@ block|}
 specifier|final
 name|Pair
 argument_list|<
+annotation|@
+name|Nullable
 name|RelDataType
 argument_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 argument_list|>
 name|componentType
@@ -390,8 +425,12 @@ block|}
 specifier|private
 name|Pair
 argument_list|<
+annotation|@
+name|Nullable
 name|RelDataType
 argument_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 argument_list|>
 name|getComponentTypes

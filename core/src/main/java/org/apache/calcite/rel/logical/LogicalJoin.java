@@ -239,6 +239,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -274,6 +290,18 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -380,8 +408,6 @@ name|this
 operator|.
 name|systemFieldList
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|systemFieldList
@@ -725,10 +751,15 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getExpression
 argument_list|(
+literal|"condition"
+argument_list|)
+argument_list|,
 literal|"condition"
 argument_list|)
 argument_list|,
@@ -737,6 +768,8 @@ operator|.
 name|of
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getEnum
@@ -746,6 +779,9 @@ argument_list|,
 name|JoinRelType
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"joinType"
 argument_list|)
 argument_list|,
 literal|false
@@ -1026,6 +1062,8 @@ specifier|public
 name|boolean
 name|deepEquals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

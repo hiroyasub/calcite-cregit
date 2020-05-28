@@ -181,6 +181,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -221,6 +237,11 @@ extends|extends
 name|RexSqlReflectiveConvertletTable
 block|{
 comment|//~ Constructors -----------------------------------------------------------
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|public
 name|RexSqlStandardConvertletTable
 parameter_list|()
@@ -702,6 +723,8 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Converts a call to an operator into a {@link SqlCall} to the same    * operator.    *    *<p>Called automatically via reflection.    *    * @param converter Converter    * @param call      Call    * @return Sql call    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertCall
 parameter_list|(
@@ -786,18 +809,20 @@ return|;
 block|}
 specifier|private
 name|SqlNode
-index|[]
+annotation|@
+name|Nullable
+type|[]
 name|convertExpressionList
-parameter_list|(
+function|(
 name|RexToSqlNodeConverter
 name|converter
-parameter_list|,
+function|,
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|nodes
-parameter_list|)
+function|nodes
+block|)
 block|{
 specifier|final
 name|SqlNode
@@ -841,24 +866,19 @@ argument_list|(
 name|i
 argument_list|)
 decl_stmt|;
-name|exprs
-index|[
-name|i
-index|]
-operator|=
+name|SqlNode
+name|converted
+init|=
 name|converter
 operator|.
 name|convertNode
 argument_list|(
 name|node
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
-name|exprs
-index|[
-name|i
-index|]
+name|converted
 operator|==
 literal|null
 condition|)
@@ -867,12 +887,25 @@ return|return
 literal|null
 return|;
 block|}
+name|exprs
+index|[
+name|i
+index|]
+operator|=
+name|converted
+expr_stmt|;
 block|}
 return|return
 name|exprs
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/**    * Creates and registers a convertlet for an operator in which    * the SQL and Rex representations are structurally equivalent.    *    * @param op operator instance    */
+end_comment
+
+begin_function
 specifier|protected
 name|void
 name|registerEquivOp
@@ -893,7 +926,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates and registers a convertlet for an operator in which    * the SQL representation needs the result type appended    * as an extra argument (e.g. CAST).    *    * @param op operator instance    */
+end_comment
+
+begin_function
 specifier|private
 name|void
 name|registerTypeAppendOp
@@ -1002,7 +1041,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates and registers a convertlet for the CASE operator,    * which takes different forms for SQL vs Rex.    *    * @param op instance of CASE operator    */
+end_comment
+
+begin_function
 specifier|private
 name|void
 name|registerCaseOp
@@ -1149,7 +1194,13 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Convertlet that converts a {@link SqlCall} to a {@link RexCall} of the    * same operator. */
+end_comment
+
+begin_class
 specifier|private
 class|class
 name|EquivConvertlet
@@ -1177,6 +1228,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertCall
 parameter_list|(
@@ -1226,8 +1279,8 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

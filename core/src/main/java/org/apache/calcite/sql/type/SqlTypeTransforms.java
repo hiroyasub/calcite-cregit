@@ -104,12 +104,50 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|NonNullableAccessors
+operator|.
+name|getCharset
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|NonNullableAccessors
+operator|.
+name|getCollation
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -151,8 +189,6 @@ operator|.
 name|collectOperandTypes
 argument_list|()
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeToTransform
@@ -222,8 +258,6 @@ argument_list|()
 operator|.
 name|createTypeWithNullability
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeToTransform
@@ -252,8 +286,6 @@ argument_list|()
 operator|.
 name|createTypeWithNullability
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeToTransform
@@ -407,15 +439,15 @@ name|createTypeWithCharsetAndCollation
 argument_list|(
 name|ret
 argument_list|,
-name|typeToTransform
-operator|.
 name|getCharset
-argument_list|()
-argument_list|,
+argument_list|(
 name|typeToTransform
-operator|.
+argument_list|)
+argument_list|,
 name|getCollation
-argument_list|()
+argument_list|(
+name|typeToTransform
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -516,10 +548,23 @@ parameter_list|,
 name|typeToTransform
 parameter_list|)
 lambda|->
+name|requireNonNull
+argument_list|(
 name|typeToTransform
 operator|.
 name|getComponentType
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"componentType for "
+operator|+
+name|typeToTransform
+operator|+
+literal|" in opBinding "
+operator|+
+name|opBinding
+argument_list|)
 decl_stmt|;
 comment|/**    * Parameter type-inference transform strategy that wraps a given type    * in a multiset.    *    * @see org.apache.calcite.rel.type.RelDataTypeFactory#createMultisetType(RelDataType, long)    */
 specifier|public

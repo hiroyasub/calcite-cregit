@@ -360,14 +360,16 @@ return|return
 literal|"{0}({1} PLACING {2} FROM {3} FOR {4})"
 return|;
 default|default:
-break|break;
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"operandsCount shuld be 3 or 4, got "
+operator|+
+name|operandsCount
+argument_list|)
+throw|;
 block|}
-assert|assert
-literal|false
-assert|;
-return|return
-literal|null
-return|;
 block|}
 block|}
 end_class

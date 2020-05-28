@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -64,6 +80,18 @@ operator|.
 name|charset
 operator|.
 name|Charset
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -170,6 +198,8 @@ argument_list|()
 expr_stmt|;
 name|charset
 operator|=
+name|requireNonNull
+argument_list|(
 name|Charset
 operator|.
 name|availableCharsets
@@ -179,6 +209,13 @@ name|get
 argument_list|(
 name|this
 operator|.
+name|charsetName
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"charset is not found: "
+operator|+
 name|charsetName
 argument_list|)
 expr_stmt|;
@@ -196,9 +233,13 @@ block|}
 comment|/**    * Returns a SerializableCharset wrapping the given Charset, or null if the    * {@code charset} is null.    *    * @param charset Character set to wrap, or null    * @return Wrapped charset    */
 specifier|public
 specifier|static
+annotation|@
+name|PolyNull
 name|SerializableCharset
 name|forCharset
 parameter_list|(
+annotation|@
+name|PolyNull
 name|Charset
 name|charset
 parameter_list|)

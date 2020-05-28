@@ -89,6 +89,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -177,6 +193,11 @@ name|providers
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a chain.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"argument.type.incompatible"
+argument_list|)
 specifier|protected
 name|ChainedRelMetadataProvider
 parameter_list|(
@@ -210,6 +231,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -255,17 +278,22 @@ block|}
 annotation|@
 name|Override
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
+expr|@
+name|Nullable
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -273,8 +301,8 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|Class
 argument_list|<
 name|?
@@ -282,9 +310,9 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|)
+argument_list|)
 block|{
-specifier|final
+name|final
 name|List
 argument_list|<
 name|UnboundMetadata
@@ -293,12 +321,12 @@ name|M
 argument_list|>
 argument_list|>
 name|functions
-init|=
+operator|=
 operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
-decl_stmt|;
+block|;
 for|for
 control|(
 name|RelMetadataProvider
@@ -340,6 +368,9 @@ name|function
 argument_list|)
 expr_stmt|;
 block|}
+end_class
+
+begin_switch
 switch|switch
 condition|(
 name|functions
@@ -455,20 +486,18 @@ argument_list|)
 block_content|)
 block_content|)
 empty_stmt|;
-block|}
-empty_stmt|;
-block|}
-end_class
+end_switch
 
 begin_function
-unit|}    @
+unit|};     }   }
+annotation|@
 name|Override
 specifier|public
-argument_list|<
+parameter_list|<
 name|M
 extends|extends
 name|Metadata
-argument_list|>
+parameter_list|>
 name|Multimap
 argument_list|<
 name|Method
@@ -615,6 +644,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|invoke
 parameter_list|(
@@ -624,6 +655,8 @@ parameter_list|,
 name|Method
 name|method
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|args

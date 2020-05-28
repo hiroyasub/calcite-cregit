@@ -63,11 +63,43 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -123,6 +155,8 @@ block|}
 specifier|private
 name|SqlIntervalLiteral
 parameter_list|(
+annotation|@
+name|Nullable
 name|IntervalValue
 name|intervalValue
 parameter_list|,
@@ -220,7 +254,10 @@ operator|(
 operator|(
 name|IntervalValue
 operator|)
+name|castNonNull
+argument_list|(
 name|value
+argument_list|)
 operator|)
 operator|.
 name|signum
@@ -311,6 +348,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

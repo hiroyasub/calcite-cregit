@@ -61,21 +61,27 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|Objects
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
 begin_import
 import|import
-name|javax
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nonnull
+name|Objects
 import|;
 end_import
 
@@ -88,15 +94,11 @@ specifier|public
 class|class
 name|LatticeTable
 block|{
-annotation|@
-name|Nonnull
 specifier|public
 specifier|final
 name|RelOptTable
 name|t
 decl_stmt|;
-annotation|@
-name|Nonnull
 specifier|public
 specifier|final
 name|String
@@ -158,6 +160,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

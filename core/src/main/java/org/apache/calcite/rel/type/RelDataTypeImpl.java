@@ -165,6 +165,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnknownInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -206,6 +238,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -218,6 +260,18 @@ operator|.
 name|Nullness
 operator|.
 name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -238,6 +292,8 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelDataTypeField
@@ -245,6 +301,8 @@ argument_list|>
 name|fieldList
 decl_stmt|;
 specifier|protected
+annotation|@
+name|Nullable
 name|String
 name|digest
 decl_stmt|;
@@ -253,6 +311,8 @@ comment|/**    * Creates a RelDataTypeImpl.    *    * @param fieldList List of f
 specifier|protected
 name|RelDataTypeImpl
 parameter_list|(
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|?
@@ -307,6 +367,8 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|getField
 parameter_list|(
@@ -765,6 +827,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getComponentType
 parameter_list|()
@@ -777,6 +841,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getKeyType
 parameter_list|()
@@ -789,6 +855,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getValueType
 parameter_list|()
@@ -817,6 +885,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -830,12 +900,14 @@ name|obj
 operator|instanceof
 name|RelDataTypeImpl
 operator|&&
-name|this
-operator|.
-name|digest
+name|Objects
 operator|.
 name|equals
 argument_list|(
+name|this
+operator|.
+name|digest
+argument_list|,
 operator|(
 operator|(
 name|RelDataTypeImpl
@@ -855,10 +927,12 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|digest
+name|Objects
 operator|.
 name|hashCode
-argument_list|()
+argument_list|(
+name|digest
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -869,7 +943,12 @@ name|getFullTypeString
 parameter_list|()
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|digest
+argument_list|,
+literal|"digest"
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -886,6 +965,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Charset
 name|getCharset
 parameter_list|()
@@ -897,6 +978,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlCollation
 name|getCollation
 parameter_list|()
@@ -908,6 +991,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlIntervalQualifier
 name|getIntervalQualifier
 parameter_list|()
@@ -957,6 +1042,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|getSqlIdentifier
 parameter_list|()
@@ -1019,10 +1106,20 @@ name|withDetail
 parameter_list|)
 function_decl|;
 comment|/**    * Computes the digest field. This should be called in every non-abstract    * subclass constructor once the type is fully defined.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|void
 name|computeDigest
-parameter_list|()
+parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|RelDataTypeImpl
+name|this
+parameter_list|)
 block|{
 name|StringBuilder
 name|sb
@@ -1355,6 +1452,8 @@ block|}
 comment|/**    * Returns the "extra" field in a row type whose presence signals that    * fields will come into existence just by asking for them.    *    * @param rowType Row type    * @return The "extra" field, or null    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|extra
 parameter_list|(
@@ -1397,6 +1496,8 @@ block|{
 name|int
 name|count
 decl_stmt|;
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|field
 decl_stmt|;

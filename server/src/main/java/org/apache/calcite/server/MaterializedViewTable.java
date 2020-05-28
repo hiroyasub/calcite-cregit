@@ -73,6 +73,22 @@ name|NullInitializerExpressionFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** A table that implements a materialized view. */
 end_comment
@@ -84,6 +100,8 @@ extends|extends
 name|MutableArrayTable
 block|{
 comment|/** The key with which this was stored in the materialization service,    * or null if not (yet) materialized. */
+annotation|@
+name|Nullable
 name|MaterializationKey
 name|key
 decl_stmt|;
@@ -132,7 +150,11 @@ name|Override
 specifier|public
 parameter_list|<
 name|C
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|C
 name|unwrap
 parameter_list|(

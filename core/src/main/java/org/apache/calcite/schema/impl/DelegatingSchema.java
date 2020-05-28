@@ -121,6 +121,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -224,6 +240,8 @@ specifier|public
 name|Expression
 name|getExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -245,6 +263,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Table
 name|getTable
 parameter_list|(
@@ -281,6 +301,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelProtoDataType
 name|getType
 parameter_list|(
@@ -356,6 +378,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Schema
 name|getSubSchema
 parameter_list|(

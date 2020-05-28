@@ -308,6 +308,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Creates an Uncollect.    *    *<p>Use {@link #create} unless you know what you're doing. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|public
 name|Uncollect
 parameter_list|(
@@ -767,6 +772,17 @@ operator|instanceof
 name|MapSqlType
 condition|)
 block|{
+name|MapSqlType
+name|mapType
+init|=
+operator|(
+name|MapSqlType
+operator|)
+name|field
+operator|.
+name|getType
+argument_list|()
+decl_stmt|;
 name|builder
 operator|.
 name|add
@@ -775,10 +791,7 @@ name|SqlUnnestOperator
 operator|.
 name|MAP_KEY_COLUMN_NAME
 argument_list|,
-name|field
-operator|.
-name|getType
-argument_list|()
+name|mapType
 operator|.
 name|getKeyType
 argument_list|()
@@ -792,10 +805,7 @@ name|SqlUnnestOperator
 operator|.
 name|MAP_VALUE_COLUMN_NAME
 argument_list|,
-name|field
-operator|.
-name|getType
-argument_list|()
+name|mapType
 operator|.
 name|getValueType
 argument_list|()

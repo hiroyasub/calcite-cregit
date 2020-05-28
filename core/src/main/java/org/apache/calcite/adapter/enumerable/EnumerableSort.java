@@ -181,15 +181,17 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|checkerframework
 operator|.
-name|common
+name|checker
 operator|.
-name|base
+name|nullness
 operator|.
-name|Preconditions
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
@@ -222,9 +224,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -259,24 +265,20 @@ operator|.
 name|getConvention
 argument_list|()
 assert|;
-name|Preconditions
-operator|.
-name|checkArgument
-argument_list|(
+assert|assert
 name|fetch
 operator|==
 literal|null
-argument_list|)
-expr_stmt|;
-name|Preconditions
-operator|.
-name|checkArgument
-argument_list|(
+operator|:
+literal|"fetch must be null"
+assert|;
+assert|assert
 name|offset
 operator|==
 literal|null
-argument_list|)
-expr_stmt|;
+operator|:
+literal|"offset must be null"
+assert|;
 block|}
 comment|/** Creates an EnumerableSort. */
 specifier|public
@@ -290,9 +292,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -357,9 +363,13 @@ parameter_list|,
 name|RelCollation
 name|newCollation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)

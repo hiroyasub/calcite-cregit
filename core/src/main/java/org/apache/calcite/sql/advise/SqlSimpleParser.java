@@ -51,6 +51,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -116,6 +132,18 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1201,6 +1229,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Token
 name|nextToken
 parameter_list|()
@@ -1801,6 +1831,8 @@ name|type
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|s
 decl_stmt|;
@@ -1823,6 +1855,8 @@ parameter_list|(
 name|TokenType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|s
 parameter_list|)
@@ -2122,6 +2156,8 @@ specifier|public
 name|Query
 name|simplify
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|hintToken
 parameter_list|)
@@ -2485,6 +2521,8 @@ specifier|private
 name|void
 name|purgeSelectListExcept
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|hintToken
 parameter_list|)
@@ -2606,7 +2644,12 @@ name|ID
 case|:
 if|if
 condition|(
+name|requireNonNull
+argument_list|(
 name|hintToken
+argument_list|,
+literal|"hintToken"
+argument_list|)
 operator|.
 name|equals
 argument_list|(
@@ -2987,6 +3030,8 @@ specifier|private
 name|void
 name|purgeFromExcept
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|hintToken
 parameter_list|)
@@ -3075,7 +3120,12 @@ operator|)
 operator|.
 name|contains
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|hintToken
+argument_list|,
+literal|"hintToken"
+argument_list|)
 argument_list|)
 condition|)
 block|{
@@ -3124,7 +3174,12 @@ name|ID
 case|:
 if|if
 condition|(
+name|requireNonNull
+argument_list|(
 name|hintToken
+argument_list|,
+literal|"hintToken"
+argument_list|)
 operator|.
 name|equals
 argument_list|(
@@ -3272,7 +3327,7 @@ name|Token
 argument_list|>
 name|sublist
 init|=
-name|findClause
+name|findClauseOrNull
 argument_list|(
 name|TokenType
 operator|.
@@ -3304,7 +3359,7 @@ name|Token
 argument_list|>
 name|sublist
 init|=
-name|findClause
+name|findClauseOrNull
 argument_list|(
 name|TokenType
 operator|.
@@ -3326,7 +3381,7 @@ expr_stmt|;
 block|}
 name|sublist
 operator|=
-name|findClause
+name|findClauseOrNull
 argument_list|(
 name|TokenType
 operator|.
@@ -3358,7 +3413,7 @@ name|Token
 argument_list|>
 name|sublist
 init|=
-name|findClause
+name|findClauseOrNull
 argument_list|(
 name|TokenType
 operator|.
@@ -3385,6 +3440,35 @@ argument_list|<
 name|Token
 argument_list|>
 name|findClause
+parameter_list|(
+name|TokenType
+name|keyword
+parameter_list|)
+block|{
+return|return
+name|requireNonNull
+argument_list|(
+name|findClauseOrNull
+argument_list|(
+name|keyword
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"clause does not exist: "
+operator|+
+name|keyword
+argument_list|)
+return|;
+block|}
+specifier|private
+annotation|@
+name|Nullable
+name|List
+argument_list|<
+name|Token
+argument_list|>
+name|findClauseOrNull
 parameter_list|(
 name|TokenType
 name|keyword

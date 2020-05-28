@@ -15,11 +15,30 @@ name|linq4j
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|framework
+operator|.
+name|qual
+operator|.
+name|Covariant
+import|;
+end_import
+
 begin_comment
 comment|/**  * Provides functionality to evaluate queries against a specific data source  * wherein the type of the data is known.  *  *<p>Analogous to LINQ's System.Linq.IQueryable.</p>  *  * @param<T> Element type  */
 end_comment
 
 begin_interface
+annotation|@
+name|Covariant
+argument_list|(
+literal|0
+argument_list|)
 specifier|public
 interface|interface
 name|Queryable

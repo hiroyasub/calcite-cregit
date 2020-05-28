@@ -47,6 +47,22 @@ name|SqlOperatorBinding
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Returns the rowtype of a cursor of the operand at a particular 0-based  * ordinal position.  *  * @see OrdinalReturnTypeInference  */
 end_comment
@@ -83,6 +99,8 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|inferReturnType
 parameter_list|(

@@ -103,6 +103,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -134,6 +150,8 @@ name|RelNode
 block|{
 comment|/**    * Pass required traitset from parent node to child nodes,    * returns new node after traits is passed down.    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelNode
 name|passThrough
 parameter_list|(
@@ -258,6 +276,8 @@ return|;
 block|}
 comment|/**    * Pass required traitset from parent node to child nodes,    * returns a pair of traits after traits is passed down.    *    *<p>Pair.left: the new traitset    *<p>Pair.right: the list of required traitsets for child nodes    */
 specifier|default
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet
@@ -289,6 +309,8 @@ throw|;
 block|}
 comment|/**    * Derive traitset from child node, returns new node after    * traits derivation.    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelNode
 name|derive
 parameter_list|(
@@ -422,6 +444,8 @@ return|;
 block|}
 comment|/**    * Derive traitset from child node, returns a pair of traits after    * traits derivation.    *    *<p>Pair.left: the new traitset    *<p>Pair.right: the list of required traitsets for child nodes    */
 specifier|default
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet

@@ -35,6 +35,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|codehaus
 operator|.
 name|janino
@@ -151,6 +167,18 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>JaninoCompiler</code> implements the {@link JavaCompiler} interface by  * calling<a href="http://www.janino.net">Janino</a>.  */
 end_comment
@@ -173,6 +201,8 @@ argument_list|()
 decl_stmt|;
 comment|// REVIEW jvs 28-June-2004:  pool this instance?  Is it thread-safe?
 specifier|private
+annotation|@
+name|Nullable
 name|AccountingClassLoader
 name|classLoader
 decl_stmt|;
@@ -196,27 +226,42 @@ comment|// it creates a series of AccountingClassLoader objects, each with
 comment|// the previous as its parent ClassLoader.  If we refactored this
 comment|// class and its callers to specify all code to compile in one
 comment|// go, we could probably just use a single AccountingClassLoader.
-assert|assert
+name|String
+name|destdir
+init|=
+name|requireNonNull
+argument_list|(
 name|args
 operator|.
 name|destdir
-operator|!=
-literal|null
-assert|;
-assert|assert
+argument_list|,
+literal|"args.destdir"
+argument_list|)
+decl_stmt|;
+name|String
+name|fullClassName
+init|=
+name|requireNonNull
+argument_list|(
 name|args
 operator|.
 name|fullClassName
-operator|!=
-literal|null
-assert|;
-assert|assert
+argument_list|,
+literal|"args.fullClassName"
+argument_list|)
+decl_stmt|;
+name|String
+name|source
+init|=
+name|requireNonNull
+argument_list|(
 name|args
 operator|.
 name|source
-operator|!=
-literal|null
-assert|;
+argument_list|,
+literal|"args.source"
+argument_list|)
+decl_stmt|;
 name|ClassLoader
 name|parentClassLoader
 init|=
@@ -259,13 +304,9 @@ name|ClassFile
 operator|.
 name|getSourceResourceName
 argument_list|(
-name|args
-operator|.
 name|fullClassName
 argument_list|)
 argument_list|,
-name|args
-operator|.
 name|source
 operator|.
 name|getBytes
@@ -285,6 +326,11 @@ argument_list|(
 name|sourceMap
 argument_list|)
 decl_stmt|;
+name|AccountingClassLoader
+name|classLoader
+init|=
+name|this
+operator|.
 name|classLoader
 operator|=
 operator|new
@@ -296,8 +342,6 @@ name|sourceFinder
 argument_list|,
 literal|null
 argument_list|,
-name|args
-operator|.
 name|destdir
 operator|==
 literal|null
@@ -307,12 +351,10 @@ else|:
 operator|new
 name|File
 argument_list|(
-name|args
-operator|.
 name|destdir
 argument_list|)
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 name|CalciteSystemProperty
@@ -342,8 +384,6 @@ name|classLoader
 operator|.
 name|loadClass
 argument_list|(
-name|args
-operator|.
 name|fullClassName
 argument_list|)
 expr_stmt|;
@@ -360,8 +400,6 @@ name|RuntimeException
 argument_list|(
 literal|"while compiling "
 operator|+
-name|args
-operator|.
 name|fullClassName
 argument_list|,
 name|ex
@@ -390,7 +428,22 @@ name|getClassLoader
 parameter_list|()
 block|{
 return|return
+name|getAccountingClassLoader
+argument_list|()
+return|;
+block|}
+specifier|private
+name|AccountingClassLoader
+name|getAccountingClassLoader
+parameter_list|()
+block|{
+return|return
+name|requireNonNull
+argument_list|(
 name|classLoader
+argument_list|,
+literal|"classLoader is null. Need to call #compile()"
+argument_list|)
 return|;
 block|}
 comment|// implement JavaCompiler
@@ -402,7 +455,8 @@ name|getTotalByteCodeSize
 parameter_list|()
 block|{
 return|return
-name|classLoader
+name|getAccountingClassLoader
+argument_list|()
 operator|.
 name|getTotalByteCodeSize
 argument_list|()
@@ -417,12 +471,18 @@ name|JaninoCompilerArgs
 extends|extends
 name|JavaCompilerArgs
 block|{
+annotation|@
+name|Nullable
 name|String
 name|destdir
 decl_stmt|;
+annotation|@
+name|Nullable
 name|String
 name|fullClassName
 decl_stmt|;
+annotation|@
+name|Nullable
 name|String
 name|source
 decl_stmt|;
@@ -519,6 +579,8 @@ name|JavaSourceClassLoader
 block|{
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|File
 name|destDir
 decl_stmt|;
@@ -534,9 +596,13 @@ parameter_list|,
 name|ResourceFinder
 name|sourceFinder
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|optionalCharacterEncoding
 parameter_list|,
+annotation|@
+name|Nullable
 name|File
 name|destDir
 parameter_list|)
@@ -568,6 +634,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String

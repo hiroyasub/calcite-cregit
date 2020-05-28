@@ -514,7 +514,8 @@ argument_list|()
 argument_list|,
 name|traitSet
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|,
 name|tuples
 argument_list|)

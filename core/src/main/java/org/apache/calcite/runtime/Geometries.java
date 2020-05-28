@@ -250,8 +250,6 @@ annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
-literal|"UnnecessaryUnboxing"
-block|,
 literal|"WeakerAccess"
 block|,
 literal|"unused"
@@ -303,6 +301,7 @@ name|UnsupportedOperationException
 argument_list|()
 return|;
 block|}
+comment|/** Returns a Geom that is a Geometry bound to a SRID. */
 specifier|protected
 specifier|static
 name|Geom
@@ -315,17 +314,6 @@ name|int
 name|srid
 parameter_list|)
 block|{
-if|if
-condition|(
-name|geometry
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 if|if
 condition|(
 name|srid
@@ -1296,10 +1284,15 @@ block|}
 return|return
 name|bind
 argument_list|(
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|mg
 operator|.
 name|getGeometry
 argument_list|()
+argument_list|)
 argument_list|,
 name|srid
 argument_list|)

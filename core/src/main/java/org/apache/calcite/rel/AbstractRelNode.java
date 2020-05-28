@@ -351,6 +351,68 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnknownInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -403,6 +465,18 @@ name|AtomicInteger
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Base class for every relational expression ({@link RelNode}).  */
 end_comment
@@ -432,6 +506,8 @@ decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Cached type of this relational expression.    */
 specifier|protected
+annotation|@
+name|MonotonicNonNull
 name|RelDataType
 name|rowType
 decl_stmt|;
@@ -630,14 +706,29 @@ name|cluster
 return|;
 block|}
 annotation|@
+name|Pure
+annotation|@
 name|Override
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|Convention
 name|getConvention
-parameter_list|()
+parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|AbstractRelNode
+name|this
+parameter_list|)
 block|{
 return|return
+name|traitSet
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|traitSet
 operator|.
 name|getTrait
@@ -662,6 +753,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getCorrelVariable
 parameter_list|()
@@ -806,6 +899,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)
@@ -1058,6 +1153,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -1098,38 +1195,41 @@ block|}
 annotation|@
 name|Override
 specifier|public
-specifier|final
-parameter_list|<
+name|final
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
 name|M
 name|metadata
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|,
+argument_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|)
+argument_list|)
 block|{
-specifier|final
+name|final
 name|MetadataFactory
 name|factory
-init|=
+operator|=
 name|cluster
 operator|.
 name|getMetadataFactory
 argument_list|()
-decl_stmt|;
-specifier|final
+block|;
+name|final
 name|M
 name|metadata
-init|=
+operator|=
 name|factory
 operator|.
 name|query
@@ -1140,7 +1240,7 @@ name|mq
 argument_list|,
 name|metadataClass
 argument_list|)
-decl_stmt|;
+block|;
 assert|assert
 name|metadata
 operator|!=
@@ -1164,6 +1264,9 @@ return|return
 name|metadata
 return|;
 block|}
+end_class
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1185,7 +1288,13 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explainTerms}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    * @return Plan writer for fluent-explain pattern    */
+end_function
+
+begin_comment
+comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explainTerms}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link RelWriter#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    * @return Plan writer for fluent-explain pattern    */
+end_comment
+
+begin_function
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -1198,6 +1307,9 @@ return|return
 name|pw
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1340,6 +1452,9 @@ return|return
 name|r
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1353,6 +1468,9 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1376,7 +1494,13 @@ name|this
 argument_list|)
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/** Description; consists of id plus digest. */
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1395,6 +1519,9 @@ name|getDigest
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1413,6 +1540,9 @@ name|toString
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1427,6 +1557,9 @@ name|toString
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1439,9 +1572,14 @@ return|return
 name|digest
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptTable
 name|getTable
 parameter_list|()
@@ -1450,7 +1588,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * {@inheritDoc}    *    *<p>This method (and {@link #hashCode} is intentionally final. We do not want    * sub-classes of {@link RelNode} to redefine identity. Various algorithms    * (e.g. visitors, planner) can define the identity as meets their needs.    */
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1458,6 +1602,8 @@ specifier|final
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -1471,7 +1617,13 @@ name|obj
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * {@inheritDoc}    *    *<p>This method (and {@link #equals} is intentionally final. We do not want    * sub-classes of {@link RelNode} to redefine identity. Various algorithms    * (e.g. visitors, planner) can define the identity as meets their needs.    */
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1487,9 +1639,13 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Equality check for RelNode digest.    *    *<p>By default this method collects digest attributes from    * {@link #explainTerms(RelWriter)}, then compares each attribute pair.    * This should work well for most cases. If this method is a performance    * bottleneck for your project, or the default behavior can't handle    * your scenario properly, you can choose to override this method and    * {@link #deepHashCode()}. See {@code LogicalJoin} as an example.</p>    *    * @return Whether the 2 RelNodes are equivalent or have the same digest.    * @see #deepHashCode()    */
-annotation|@
-name|Override
+end_comment
+
+begin_function
 annotation|@
 name|API
 argument_list|(
@@ -1505,10 +1661,14 @@ name|Status
 operator|.
 name|MAINTAINED
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|deepEquals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -1526,6 +1686,10 @@ return|;
 block|}
 if|if
 condition|(
+name|obj
+operator|==
+literal|null
+operator|||
 name|this
 operator|.
 name|getClass
@@ -1594,6 +1758,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -1610,6 +1776,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -1661,6 +1829,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|attr1
@@ -1676,6 +1846,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|attr2
@@ -1732,7 +1904,13 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Compute hash code for RelNode digest.    *    * @see #deepEquals(Object)    */
+end_function
+
+begin_comment
+comment|/**    * Compute hash code for RelNode digest.    *    * @see RelNode#deepEquals(Object)    */
+end_comment
+
+begin_function
 annotation|@
 name|API
 argument_list|(
@@ -1772,6 +1950,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -1788,6 +1968,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|item
@@ -1861,6 +2043,9 @@ return|return
 name|result
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|List
 argument_list|<
@@ -1868,6 +2053,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -1931,7 +2118,13 @@ operator|.
 name|attrs
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Implementation of {@link RelDigest}. */
+end_comment
+
+begin_class
 specifier|private
 class|class
 name|InnerRelDigest
@@ -1977,6 +2170,8 @@ name|boolean
 name|equals
 parameter_list|(
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -2074,13 +2269,24 @@ name|rdw
 argument_list|)
 expr_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|rdw
 operator|.
 name|digest
+argument_list|,
+literal|"digest"
+argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * A writer object used exclusively for computing the digest of a RelNode.    *    *<p>The writer is meant to be used only for computing a single digest and then thrown away.    * After calling {@link #done(RelNode)} the writer should be used only to obtain the computed    * {@link #digest}. Any other action is prohibited.</p>    *    */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 specifier|final
@@ -2097,6 +2303,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -2107,6 +2315,8 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Nullable
 name|String
 name|digest
 init|=
@@ -2129,6 +2339,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -2165,6 +2377,8 @@ parameter_list|(
 name|String
 name|term
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -2273,6 +2487,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|attr
@@ -2391,8 +2607,8 @@ name|this
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

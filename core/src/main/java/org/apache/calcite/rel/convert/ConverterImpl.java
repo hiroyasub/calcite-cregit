@@ -131,6 +131,22 @@ name|RelMetadataQuery
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Abstract implementation of {@link Converter}.  */
 end_comment
@@ -152,6 +168,8 @@ name|inTraits
 decl_stmt|;
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|RelTraitDef
 name|traitDef
 decl_stmt|;
@@ -163,6 +181,8 @@ parameter_list|(
 name|RelOptCluster
 name|cluster
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelTraitDef
 name|traitDef
 parameter_list|,
@@ -202,6 +222,8 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -286,6 +308,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelTraitDef
 name|getTraitDef
 parameter_list|()

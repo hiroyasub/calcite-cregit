@@ -53,16 +53,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Description of the physical ordering of a relational expression.  *  *<p>An ordering consists of a list of one or more column ordinals and the  * direction of the ordering.  */
 end_comment
@@ -76,8 +66,6 @@ name|RelMultipleTrait
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the ordinals and directions of the columns in this ordering.    */
-annotation|@
-name|Nonnull
 name|List
 argument_list|<
 name|RelFieldCollation
@@ -87,8 +75,6 @@ parameter_list|()
 function_decl|;
 comment|/**    * Returns the ordinals of the key columns.    */
 specifier|default
-annotation|@
-name|Nonnull
 name|ImmutableIntList
 name|getKeys
 parameter_list|()

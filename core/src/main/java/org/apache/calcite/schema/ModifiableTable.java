@@ -103,6 +103,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -133,6 +149,8 @@ extends|extends
 name|QueryableTable
 block|{
 comment|/** Returns the modifiable collection.    * Modifying the collection will change the table's contents. */
+annotation|@
+name|Nullable
 name|Collection
 name|getModifiableCollection
 parameter_list|()
@@ -160,12 +178,16 @@ operator|.
 name|Operation
 name|operation
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|updateColumnList
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode

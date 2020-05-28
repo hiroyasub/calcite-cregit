@@ -33,6 +33,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -101,6 +133,8 @@ parameter_list|>
 extends|extends
 name|HepInstruction
 block|{
+annotation|@
+name|Nullable
 name|Class
 argument_list|<
 name|R
@@ -108,6 +142,8 @@ argument_list|>
 name|ruleClass
 decl_stmt|;
 comment|/**      * Actual rule set instantiated during planning by filtering all of the      * planner's rules through ruleClass.      */
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelOptRule
@@ -162,6 +198,8 @@ extends|extends
 name|HepInstruction
 block|{
 comment|/**      * Collection of rules to apply.      */
+annotation|@
+name|Nullable
 name|Collection
 argument_list|<
 name|RelOptRule
@@ -197,6 +235,8 @@ name|boolean
 name|guaranteed
 decl_stmt|;
 comment|/**      * Actual rule set instantiated during planning by filtering all of the      * planner's rules, looking for the desired converters.      */
+annotation|@
+name|MonotonicNonNull
 name|Set
 argument_list|<
 name|RelOptRule
@@ -228,6 +268,8 @@ name|CommonRelSubExprRules
 extends|extends
 name|HepInstruction
 block|{
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelOptRule
@@ -260,10 +302,14 @@ extends|extends
 name|HepInstruction
 block|{
 comment|/**      * Description to look for, or null if rule specified explicitly.      */
+annotation|@
+name|Nullable
 name|String
 name|ruleDescription
 decl_stmt|;
 comment|/**      * Explicitly specified rule, or rule looked up by planner from      * description.      */
+annotation|@
+name|Nullable
 name|RelOptRule
 name|rule
 decl_stmt|;
@@ -323,6 +369,8 @@ name|MatchOrder
 extends|extends
 name|HepInstruction
 block|{
+annotation|@
+name|Nullable
 name|HepMatchOrder
 name|order
 decl_stmt|;
@@ -379,6 +427,8 @@ name|Subprogram
 extends|extends
 name|HepInstruction
 block|{
+annotation|@
+name|Nullable
 name|HepProgram
 name|subprogram
 decl_stmt|;
@@ -391,6 +441,13 @@ name|boolean
 name|clearCache
 parameter_list|)
 block|{
+if|if
+condition|(
+name|subprogram
+operator|!=
+literal|null
+condition|)
+block|{
 name|subprogram
 operator|.
 name|initialize
@@ -398,6 +455,7 @@ argument_list|(
 name|clearCache
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -424,6 +482,8 @@ name|BeginGroup
 extends|extends
 name|HepInstruction
 block|{
+annotation|@
+name|Nullable
 name|EndGroup
 name|endGroup
 decl_stmt|;
@@ -463,6 +523,8 @@ extends|extends
 name|HepInstruction
 block|{
 comment|/**      * Actual rule set instantiated during planning by collecting grouped      * rules.      */
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelOptRule

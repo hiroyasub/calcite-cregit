@@ -75,6 +75,22 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Namespace for COLLECT and TABLE constructs.  *  *<p>Examples:  *  *<ul>  *<li><code>SELECT deptno, COLLECT(empno) FROM emp GROUP BY deptno</code>,  *<li><code>SELECT * FROM (TABLE getEmpsInDept(30))</code>.  *</ul>  *  *<p>NOTE: jhyde, 2006/4/24: These days, this class seems to be used  * exclusively for the<code>MULTISET</code> construct.  *  * @see CollectScope  */
 end_comment
@@ -186,6 +202,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()

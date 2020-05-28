@@ -323,6 +323,38 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|EnsuresNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -419,6 +451,22 @@ name|TreeSet
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * An assistant which offers hints and corrections to a partially-formed SQL  * statement. It is used in the SQL editor user-interface.  */
 end_comment
@@ -478,15 +526,21 @@ name|parserConfig
 decl_stmt|;
 comment|// Cache for getPreferredCasing
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|prevWord
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|Casing
 name|prevPreferredCasing
 decl_stmt|;
 comment|// Reserved words cache
 specifier|private
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|String
@@ -494,6 +548,8 @@ argument_list|>
 name|reservedWordsSet
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -1035,7 +1091,10 @@ name|prevWord
 condition|)
 block|{
 return|return
+name|castNonNull
+argument_list|(
 name|prevPreferredCasing
+argument_list|)
 return|;
 block|}
 name|boolean
@@ -1478,15 +1537,9 @@ block|{
 return|return
 name|SqlParserUtil
 operator|.
-name|strip
+name|toCase
 argument_list|(
 name|value
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
 argument_list|,
 name|casing
 argument_list|)
@@ -1829,6 +1882,8 @@ return|;
 block|}
 comment|/**    * Tries to parse a SQL statement.    *    *<p>If succeeds, returns the parse tree node; if fails, populates the list    * of hints and returns null.    *    * @param sql      SQL statement    * @param hintList List of hints suggesting allowable tokens at the point of    *                 failure    * @return Parse tree if succeeded, null if parse failed    */
 specifier|private
+annotation|@
+name|Nullable
 name|SqlNode
 name|tryParse
 parameter_list|(
@@ -1942,6 +1997,8 @@ block|}
 block|}
 comment|/**    * Gets the fully qualified name for a {@link SqlIdentifier} at a given    * position of a sql statement.    *    * @param sql    A syntactically correct sql statement for which to retrieve a    *               fully qualified SQL identifier name    * @param cursor to indicate the 0-based cursor position in the query that    *               represents a SQL identifier for which its fully qualified    *               name is to be returned.    * @return a {@link SqlMoniker} that contains the fully qualified name of    * the specified SQL identifier, returns null if none is found or the SQL    * statement is invalid.    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlMoniker
 name|getQualifiedName
 parameter_list|(
@@ -2101,6 +2158,8 @@ return|;
 block|}
 comment|/**    * Attempts to parse and validate a SQL statement. Throws the first    * exception encountered. The error message of this exception is to be    * displayed on the UI    *    * @param sql A user-input sql statement to be validated    * @return a List of ValidateErrorInfo (null if sql is valid)    */
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ValidateErrorInfo
@@ -2146,6 +2205,25 @@ block|{
 return|return
 name|errorList
 return|;
+block|}
+if|else if
+condition|(
+name|sqlNode
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"collectParserError returned null (sql is not valid)"
+operator|+
+literal|", however, the resulting errorList is empty. sql="
+operator|+
+name|sql
+argument_list|)
+throw|;
 block|}
 try|try
 block|{
@@ -2264,6 +2342,15 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns an array of SQL reserved and keywords.    *    * @return an of SQL reserved and keywords    */
+annotation|@
+name|EnsuresNonNull
+argument_list|(
+block|{
+literal|"reservedWordsSet"
+block|,
+literal|"reservedWordsList"
+block|}
+argument_list|)
 specifier|public
 name|List
 argument_list|<
@@ -2279,6 +2366,15 @@ return|return
 name|reservedWordsList
 return|;
 block|}
+annotation|@
+name|EnsuresNonNull
+argument_list|(
+block|{
+literal|"reservedWordsSet"
+block|,
+literal|"reservedWordsList"
+block|}
+argument_list|)
 specifier|private
 name|Set
 argument_list|<
@@ -2294,6 +2390,15 @@ return|return
 name|reservedWordsSet
 return|;
 block|}
+annotation|@
+name|EnsuresNonNull
+argument_list|(
+block|{
+literal|"reservedWordsSet"
+block|,
+literal|"reservedWordsList"
+block|}
+argument_list|)
 specifier|private
 name|void
 name|ensureReservedAndKeyWords
@@ -2302,6 +2407,10 @@ block|{
 if|if
 condition|(
 name|reservedWordsSet
+operator|!=
+literal|null
+operator|&&
+name|reservedWordsList
 operator|!=
 literal|null
 condition|)
@@ -2448,6 +2557,8 @@ return|;
 block|}
 comment|/**    * Attempts to parse a SQL statement and adds to the errorList if any syntax    * error is found. This implementation uses {@link SqlParser}. Subclass can    * re-implement this with a different parser implementation    *    * @param sql       A user-input sql statement to be parsed    * @param errorList A {@link List} of error to be added to    * @return {@link SqlNode } that is root of the parse tree, null if the sql    * is not valid    */
 specifier|protected
+annotation|@
+name|Nullable
 name|SqlNode
 name|collectParserError
 parameter_list|(
@@ -2530,6 +2641,8 @@ name|int
 name|endColumnNum
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|errorMsg
 decl_stmt|;
@@ -2549,6 +2662,8 @@ parameter_list|,
 name|int
 name|endColumnNum
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|errorMsg
 parameter_list|)
@@ -2628,14 +2743,27 @@ operator|.
 name|getEndPosColumn
 argument_list|()
 expr_stmt|;
-name|this
-operator|.
-name|errorMsg
-operator|=
+name|Throwable
+name|cause
+init|=
 name|e
 operator|.
 name|getCause
 argument_list|()
+decl_stmt|;
+name|this
+operator|.
+name|errorMsg
+operator|=
+operator|(
+name|cause
+operator|==
+literal|null
+condition|?
+name|e
+else|:
+name|cause
+operator|)
 operator|.
 name|getMessage
 argument_list|()
@@ -2648,6 +2776,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|errorMsg
 parameter_list|)
@@ -2737,6 +2867,8 @@ return|;
 block|}
 comment|/** Returns the error message. */
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getMessage
 parameter_list|()

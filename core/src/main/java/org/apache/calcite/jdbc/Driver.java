@@ -277,6 +277,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -391,6 +407,11 @@ name|register
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|public
 name|Driver
 parameter_list|()
@@ -571,6 +592,8 @@ name|init
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Nullable
 name|String
 name|model
 parameter_list|(
@@ -727,6 +750,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|root
@@ -757,6 +782,8 @@ expr_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|schemaList
@@ -780,6 +807,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|schema
@@ -834,6 +863,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|operandMap
@@ -1009,6 +1040,8 @@ parameter_list|(
 name|CalciteSchema
 name|rootSchema
 parameter_list|,
+annotation|@
+name|Nullable
 name|JavaTypeFactory
 name|typeFactory
 parameter_list|)
@@ -1049,6 +1082,8 @@ parameter_list|(
 name|CalciteSchema
 name|rootSchema
 parameter_list|,
+annotation|@
+name|Nullable
 name|JavaTypeFactory
 name|typeFactory
 parameter_list|,

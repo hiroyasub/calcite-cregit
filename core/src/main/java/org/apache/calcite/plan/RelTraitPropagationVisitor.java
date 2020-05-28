@@ -57,6 +57,22 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelTraitPropagationVisitor traverses a RelNode and its<i>unregistered</i>  * children, making sure that each has a full complement of traits. When a  * RelNode is found to be missing one or more traits, they are copied from a  * RelTraitSet given during construction.  *  * @deprecated As of 1.19, if you need to perform certain assertions regarding a RelNode tree and  * the contained traits you are encouraged to implement your own RelVisitor or  * {@link org.apache.calcite.rel.RelShuttle} directly. The reasons for deprecating this class are  * the following:  *<ul>  *<li>The contract (Javadoc and naming) and the behavior of the class are inconsistent.</li>  *<li>The class is no longer used by any other components of the framework.</li>  *<li>The class was used only for debugging purposes.</li>  *</ul>  *  */
 end_comment
@@ -118,6 +134,8 @@ parameter_list|,
 name|int
 name|ordinal
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|parent
 parameter_list|)

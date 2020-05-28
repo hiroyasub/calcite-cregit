@@ -271,6 +271,86 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnderInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnknownInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|RequiresNonNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -349,6 +429,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utility class that keeps track of the join factors that  * make up a {@link MultiJoin}.  */
 end_comment
@@ -419,6 +511,8 @@ comment|/**    * Bitmap corresponding to the fields projected from each join fac
 specifier|private
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 argument_list|>
 name|projFields
@@ -436,6 +530,7 @@ name|joinFieldRefCountsMap
 decl_stmt|;
 comment|/**    * For each join filter, associates a bitmap indicating all factors    * referenced by the filter.    */
 specifier|private
+specifier|final
 name|Map
 argument_list|<
 name|RexNode
@@ -443,9 +538,15 @@ argument_list|,
 name|ImmutableBitSet
 argument_list|>
 name|factorsRefByJoinFilter
+init|=
+operator|new
+name|HashMap
+argument_list|<>
+argument_list|()
 decl_stmt|;
 comment|/**    * For each join filter, associates a bitmap indicating all fields    * referenced by the filter.    */
 specifier|private
+specifier|final
 name|Map
 argument_list|<
 name|RexNode
@@ -453,6 +554,11 @@ argument_list|,
 name|ImmutableBitSet
 argument_list|>
 name|fieldsRefByJoinFilter
+init|=
+operator|new
+name|HashMap
+argument_list|<>
+argument_list|()
 decl_stmt|;
 comment|/**    * Starting RexInputRef index corresponding to each join factor.    */
 name|int
@@ -466,13 +572,16 @@ name|nFieldsInJoinFactor
 decl_stmt|;
 comment|/**    * Bitmap indicating which factors each factor references in join filters    * that correspond to comparisons.    */
 name|ImmutableBitSet
-index|[]
+annotation|@
+name|MonotonicNonNull
+type|[]
 name|factorsRefByFactor
 decl_stmt|;
 comment|/**    * Weights of each factor combination.    */
 name|int
-index|[]
-index|[]
+annotation|@
+name|MonotonicNonNull
+type|[][]
 name|factorWeights
 decl_stmt|;
 comment|/**    * Type factory.    */
@@ -481,6 +590,8 @@ name|RelDataTypeFactory
 name|factory
 decl_stmt|;
 comment|/**    * Indicates for each factor whether its join can be removed because it is    * the dimension table in a semijoin. If it can be, the entry indicates the    * factor id of the fact table (corresponding to the dimension table) in the    * semijoin that allows the factor to be removed. If the factor cannot be    * removed, the entry corresponding to the factor is null.    */
+annotation|@
+name|Nullable
 name|Integer
 index|[]
 name|joinRemovalFactors
@@ -581,6 +692,8 @@ argument_list|)
 expr_stmt|;
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|outerJoinFilters
@@ -719,6 +832,8 @@ argument_list|)
 expr_stmt|;
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|outerJoinConds
@@ -753,14 +868,19 @@ name|i
 operator|++
 control|)
 block|{
-if|if
-condition|(
+name|RexNode
+name|outerJoinCond
+init|=
 name|outerJoinConds
 operator|.
 name|get
 argument_list|(
 name|i
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|outerJoinCond
 operator|!=
 literal|null
 condition|)
@@ -773,12 +893,7 @@ name|dependentFactors
 init|=
 name|getJoinFilterFactorBitmap
 argument_list|(
-name|outerJoinConds
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|outerJoinCond
 argument_list|,
 literal|false
 argument_list|)
@@ -934,10 +1049,19 @@ name|joinFilter
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|factorsRefByJoinFilter
 operator|.
 name|get
 argument_list|(
+name|joinFilter
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"joinFilter is not found in factorsRefByJoinFilter: "
+operator|+
 name|joinFilter
 argument_list|)
 return|;
@@ -971,10 +1095,19 @@ name|joinFilter
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|fieldsRefByJoinFilter
 operator|.
 name|get
 argument_list|(
+name|joinFilter
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"joinFilter is not found in fieldsRefByJoinFilter: "
+operator|+
 name|joinFilter
 argument_list|)
 return|;
@@ -982,16 +1115,24 @@ block|}
 comment|/**    * Returns weights of the different factors relative to one another.    */
 specifier|public
 name|int
-index|[]
-index|[]
+annotation|@
+name|Nullable
+type|[][]
 name|getFactorWeights
-parameter_list|()
+type|(
+block|)
 block|{
 return|return
 name|factorWeights
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/**    * Returns a bitmap corresponding to the factors referenced by the specified    * factor in the various join filters that correspond to comparisons.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
 name|ImmutableBitSet
 name|getFactorsRefByFactor
@@ -1001,13 +1142,24 @@ name|factIdx
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|factorsRefByFactor
+argument_list|,
+literal|"factorsRefByFactor"
+argument_list|)
 index|[
 name|factIdx
 index|]
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the starting offset within the multi-join for the specified factor.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
 name|int
 name|getJoinStart
@@ -1023,7 +1175,13 @@ name|factIdx
 index|]
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether the factor corresponds to a null-generating factor    * in a left or right outer join.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isNullGenerating
@@ -1044,7 +1202,13 @@ name|isOuterJoin
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a bitmap containing the factors that a null-generating factor is    * dependent upon, if the factor is null-generating in a left or right outer    * join; otherwise null is returned.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
 name|ImmutableBitSet
 name|getOuterJoinFactors
@@ -1060,8 +1224,16 @@ name|factIdx
 index|]
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns outer join conditions associated with the specified null-generating    * factor.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|RexNode
 name|getOuterJoinCond
 parameter_list|(
@@ -1081,8 +1253,16 @@ name|factIdx
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a bitmap containing the fields that are projected from a factor.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 name|getProjFields
 parameter_list|(
@@ -1099,7 +1279,13 @@ name|factIdx
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the join field reference counts for a factor.    *    * @param factIdx Factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
 name|int
 index|[]
@@ -1110,16 +1296,33 @@ name|factIdx
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|joinFieldRefCountsMap
 operator|.
 name|get
 argument_list|(
 name|factIdx
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no entry in joinFieldRefCountsMap found for "
+operator|+
+name|factIdx
+argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the factor id of the fact table corresponding to a dimension    * table in a semi-join, in the case where the join with the dimension table    * can be removed.    *    * @param dimIdx Dimension factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|Integer
 name|getJoinRemovalFactor
 parameter_list|(
@@ -1134,7 +1337,13 @@ name|dimIdx
 index|]
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the semi-join that allows the join of a dimension table to be    * removed.    *    * @param dimIdx Dimension factor for which information will be returned    */
+end_comment
+
+begin_function
 specifier|public
 name|LogicalJoin
 name|getJoinRemovalSemiJoin
@@ -1150,7 +1359,13 @@ name|dimIdx
 index|]
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Indicates that a dimension factor's join can be removed because of a    * semijoin with a fact table.    *    * @param dimIdx Dimension factor    * @param factIdx Fact factor    */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|setJoinRemovalFactor
@@ -1170,7 +1385,13 @@ operator|=
 name|factIdx
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Indicates the semi-join that allows the join of a dimension table to be    * removed.    *    * @param dimIdx Dimension factor    * @param semiJoin the semijoin    */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|setJoinRemovalSemiJoin
@@ -1190,10 +1411,30 @@ operator|=
 name|semiJoin
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a bitmap representing the factors referenced in a join filter.    *    * @param joinFilter the join filter    * @param setFields if true, add the fields referenced by the join filter    * into a map    *    * @return the bitmap containing the factor references    */
+end_comment
+
+begin_function
+annotation|@
+name|RequiresNonNull
+argument_list|(
+block|{
+literal|"joinStart"
+block|,
+literal|"nFieldsInJoinFactor"
+block|}
+argument_list|)
 name|ImmutableBitSet
 name|getJoinFilterFactorBitmap
 parameter_list|(
+annotation|@
+name|UnderInitialization
+name|LoptMultiJoin
+name|this
+parameter_list|,
 name|RexNode
 name|joinFilter
 parameter_list|,
@@ -1231,7 +1472,11 @@ name|fieldRefBitmap
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
+specifier|static
 name|ImmutableBitSet
 name|fieldBitmap
 parameter_list|(
@@ -1265,26 +1510,34 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sets bitmaps indicating which factors and fields each join filter    * references.    */
+end_comment
+
+begin_function
+annotation|@
+name|RequiresNonNull
+argument_list|(
+block|{
+literal|"allJoinFilters"
+block|,
+literal|"joinStart"
+block|,
+literal|"nFieldsInJoinFactor"
+block|}
+argument_list|)
 specifier|private
 name|void
 name|setJoinFilterRefs
-parameter_list|()
+parameter_list|(
+annotation|@
+name|UnderInitialization
+name|LoptMultiJoin
+name|this
+parameter_list|)
 block|{
-name|fieldsRefByJoinFilter
-operator|=
-operator|new
-name|HashMap
-argument_list|<>
-argument_list|()
-expr_stmt|;
-name|factorsRefByJoinFilter
-operator|=
-operator|new
-name|HashMap
-argument_list|<>
-argument_list|()
-expr_stmt|;
 name|ListIterator
 argument_list|<
 name|RexNode
@@ -1349,11 +1602,31 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sets the bitmap indicating which factors a filter references based on    * which fields it references.    *    * @param fieldRefBitmap bitmap representing fields referenced    * @return bitmap representing factors referenced that will    * be set by this method    */
+end_comment
+
+begin_function
+annotation|@
+name|RequiresNonNull
+argument_list|(
+block|{
+literal|"joinStart"
+block|,
+literal|"nFieldsInJoinFactor"
+block|}
+argument_list|)
 specifier|private
 name|ImmutableBitSet
 name|factorBitmap
 parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|LoptMultiJoin
+name|this
+parameter_list|,
 name|ImmutableBitSet
 name|fieldRefBitmap
 parameter_list|)
@@ -1399,11 +1672,31 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Determines the join factor corresponding to a RexInputRef.    *    * @param rexInputRef rexInputRef index    *    * @return index corresponding to join factor    */
+end_comment
+
+begin_function
+annotation|@
+name|RequiresNonNull
+argument_list|(
+block|{
+literal|"joinStart"
+block|,
+literal|"nFieldsInJoinFactor"
+block|}
+argument_list|)
 specifier|public
 name|int
 name|findRef
 parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|LoptMultiJoin
+name|this
+parameter_list|,
 name|int
 name|rexInputRef
 parameter_list|)
@@ -1462,7 +1755,13 @@ name|AssertionError
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sets weighting for each combination of factors, depending on which join    * filters reference which factors. Greater weight is given to equality    * conditions. Also, sets bitmaps indicating which factors are referenced by    * each factor within join filters that are comparisons.    */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|setFactorWeights
@@ -1567,7 +1866,12 @@ control|(
 name|int
 name|factor
 range|:
+name|requireNonNull
+argument_list|(
 name|factorRefs
+argument_list|,
+literal|"factorRefs"
+argument_list|)
 control|)
 block|{
 name|factorsRefByFactor
@@ -1775,7 +2079,18 @@ block|}
 block|}
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sets an individual weight if the new weight is better than the current    * one.    *    * @param weight weight to be set    * @param leftFactor index of left factor    * @param rightFactor index of right factor    */
+end_comment
+
+begin_function
+annotation|@
+name|RequiresNonNull
+argument_list|(
+literal|"factorWeights"
+argument_list|)
 specifier|private
 name|void
 name|setFactorWeight
@@ -1825,7 +2140,13 @@ name|weight
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether if a join tree contains all factors required.    *    * @param joinTree Join tree to be examined    * @param factorsNeeded Bitmap of factors required    *    * @return true if join tree contains all required factors    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|hasAllFactors
@@ -1856,7 +2177,13 @@ name|factorsNeeded
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sets a bitmap indicating all child RelNodes in a join tree.    *    * @param joinTree join tree to be examined    * @param childFactors bitmap to be set    */
+end_comment
+
+begin_function
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1893,7 +2220,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Retrieves the fields corresponding to a join between a left and right    * tree.    *    * @param left left hand side of the join    * @param right right hand side of the join    *    * @return fields of the join    */
+end_comment
+
+begin_function
 specifier|public
 name|List
 argument_list|<
@@ -1939,7 +2272,13 @@ name|getFieldList
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Adds a join factor to the set of factors that can be removed because the    * factor is the null-generating factor in an outer join, its join keys are    * unique, and the factor is not projected in the query.    *    * @param factIdx Join factor    */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|addRemovableOuterJoinFactor
@@ -1956,7 +2295,13 @@ name|factIdx
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Return whether the factor corresponds to the null-generating factor in    * an outer join that can be removed.    *    * @param factIdx Factor in question    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isRemovableOuterJoinFactor
@@ -1974,7 +2319,13 @@ name|factIdx
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Adds to a map that keeps track of removable self-join pairs.    *    * @param factor1 one of the factors in the self-join    * @param factor2 the second factor in the self-join    */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|addRemovableSelfJoinPair
@@ -2266,8 +2617,16 @@ name|selfJoin
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the other factor in a self-join pair if the factor passed in is    * a factor in a removable self-join; otherwise, returns null.    *    * @param factIdx one of the factors in a self-join pair    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|Integer
 name|getOtherSelfJoinFactor
 parameter_list|(
@@ -2320,7 +2679,13 @@ name|rightFactor
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether the factor is the left factor in a self-join.    *    * @param factIdx Factor in a self-join    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isLeftFactorInRemovableSelfJoin
@@ -2358,7 +2723,13 @@ operator|==
 name|factIdx
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether the factor is the right factor in a self-join.    *    * @param factIdx Factor in a self-join    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isRightFactorInRemovableSelfJoin
@@ -2396,8 +2767,16 @@ operator|==
 name|factIdx
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Determines whether there is a mapping from a column in the right factor    * of a self-join to a column from the left factor. Assumes that the right    * factor is a part of a self-join.    *    * @param rightFactor the index of the right factor    * @param rightOffset the column offset of the right factor    *    * @return the offset of the corresponding column in the left factor, if    * such a column mapping exists; otherwise, null is returned    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|Integer
 name|getRightColumnMapping
 parameter_list|(
@@ -2411,11 +2790,24 @@ block|{
 name|RemovableSelfJoin
 name|selfJoin
 init|=
+name|requireNonNull
+argument_list|(
 name|removableSelfJoinPairs
 operator|.
 name|get
 argument_list|(
 name|rightFactor
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"removableSelfJoinPairs.get(rightFactor) is null for "
+operator|+
+name|rightFactor
+operator|+
+literal|", map="
+operator|+
+name|removableSelfJoinPairs
 argument_list|)
 decl_stmt|;
 assert|assert
@@ -2436,6 +2828,9 @@ name|rightOffset
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|Edge
 name|createEdge
@@ -2472,7 +2867,13 @@ name|fieldRefBitmap
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Information about a join-condition. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|Edge
@@ -2544,8 +2945,17 @@ literal|")"
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/**    * Utility class used to keep track of the factors in a removable self-join.    * The right factor in the self-join is the one that will be removed.    */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -2611,8 +3021,8 @@ name|columnMapping
 expr_stmt|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

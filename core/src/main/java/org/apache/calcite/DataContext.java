@@ -121,6 +121,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -213,21 +229,29 @@ literal|"root"
 argument_list|)
 decl_stmt|;
 comment|/**    * Returns a sub-schema with a given name, or null.    */
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getRootSchema
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the type factory.    */
+annotation|@
+name|Nullable
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the query provider.    */
+annotation|@
+name|Nullable
 name|QueryProvider
 name|getQueryProvider
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a context variable.    *    *<p>Supported variables include: "sparkContext", "currentTimestamp",    * "localTimestamp".</p>    *    * @param name Name of variable    */
+annotation|@
+name|Nullable
 name|Object
 name|get
 parameter_list|(

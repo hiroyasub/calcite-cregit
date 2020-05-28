@@ -549,6 +549,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -660,22 +676,30 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -702,7 +726,10 @@ name|Schemas
 operator|.
 name|createDataContext
 argument_list|(
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 argument_list|,
 literal|null
 argument_list|)
@@ -720,6 +747,8 @@ specifier|static
 name|double
 name|getSelectivity
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|exp
 parameter_list|)
@@ -2335,12 +2364,36 @@ operator|.
 name|getSqlTypeName
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
+specifier|final
+name|RelDataType
+name|type1Final
+init|=
+name|type1
+decl_stmt|;
+name|SqlTypeFamily
+name|family
+init|=
+name|requireNonNull
+argument_list|(
 name|name1
 operator|.
 name|getFamily
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"SqlTypeFamily is null for type "
+operator|+
+name|type1Final
+operator|+
+literal|", SqlTypeName "
+operator|+
+name|name1
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|family
 operator|==
 name|name2
 operator|.
@@ -2350,10 +2403,7 @@ condition|)
 block|{
 switch|switch
 condition|(
-name|name1
-operator|.
-name|getFamily
-argument_list|()
+name|family
 condition|)
 block|{
 case|case
@@ -2893,6 +2943,8 @@ parameter_list|(
 name|RexBuilder
 name|rexBuilder
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -3208,6 +3260,8 @@ specifier|static
 name|RexNode
 name|deref
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -3224,7 +3278,12 @@ condition|)
 block|{
 name|node
 operator|=
+name|requireNonNull
+argument_list|(
 name|program
+argument_list|,
+literal|"program"
+argument_list|)
 operator|.
 name|getExprList
 argument_list|()
@@ -3648,6 +3707,8 @@ block|}
 comment|/**    * Returns whether a given node contains a RexCall with a specified operator.    *    * @param operator Operator to look for    * @param node     a RexNode tree    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexCall
 name|findOperatorCall
 parameter_list|(
@@ -4698,6 +4759,8 @@ block|}
 comment|/**    * Returns whether a given tree contains any {link RexTableInputRef} nodes.    *    * @param node a RexNode tree    * @return first such node found or null if it there is no such node    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexTableInputRef
 name|containsTableInputRef
 parameter_list|(
@@ -4876,11 +4939,11 @@ specifier|public
 specifier|static
 name|RelDataType
 name|createStructType
-parameter_list|(
+argument_list|(
 name|RelDataTypeFactory
 name|typeFactory
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|List
 argument_list|<
 name|?
@@ -4888,18 +4951,25 @@ extends|extends
 name|RexNode
 argument_list|>
 name|exprs
-parameter_list|,
+argument_list|,
+annotation|@
+name|Nullable
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|String
-argument_list|>
+operator|>
 name|names
-parameter_list|,
+argument_list|,
 name|SqlValidatorUtil
 operator|.
+expr|@
+name|Nullable
 name|Suggester
 name|suggester
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -5457,22 +5527,21 @@ block|}
 comment|/** As {@link #composeConjunction(RexBuilder, Iterable, boolean)} but never    * returns null. */
 specifier|public
 specifier|static
-annotation|@
-name|Nonnull
 name|RexNode
 name|composeConjunction
-parameter_list|(
+argument_list|(
 name|RexBuilder
 name|rexBuilder
-parameter_list|,
+argument_list|,
 name|Iterable
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|RexNode
-argument_list|>
+operator|>
 name|nodes
-parameter_list|)
+argument_list|)
 block|{
 specifier|final
 name|RexNode
@@ -5488,8 +5557,6 @@ literal|false
 argument_list|)
 decl_stmt|;
 return|return
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|e
@@ -5499,23 +5566,26 @@ block|}
 comment|/**    * Converts a collection of expressions into an AND.    * If there are zero expressions, returns TRUE.    * If there is one expression, returns just that expression.    * If any of the expressions are FALSE, returns FALSE.    * Removes expressions that always evaluate to TRUE.    * Returns null only if {@code nullOnEmpty} and expression is TRUE.    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|composeConjunction
-parameter_list|(
+argument_list|(
 name|RexBuilder
 name|rexBuilder
-parameter_list|,
+argument_list|,
 name|Iterable
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|RexNode
-argument_list|>
+operator|>
 name|nodes
-parameter_list|,
+argument_list|,
 name|boolean
 name|nullOnEmpty
-parameter_list|)
+argument_list|)
 block|{
 name|ImmutableList
 argument_list|<
@@ -5602,15 +5672,16 @@ argument_list|<
 name|RexNode
 argument_list|>
 name|flattenAnd
-parameter_list|(
+argument_list|(
 name|Iterable
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|RexNode
-argument_list|>
+operator|>
 name|nodes
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -5786,8 +5857,6 @@ block|}
 block|}
 block|}
 comment|/**    * Converts a collection of expressions into an OR.    * If there are zero expressions, returns FALSE.    * If there is one expression, returns just that expression.    * If any of the expressions are TRUE, returns TRUE.    * Removes expressions that always evaluate to FALSE.    * Flattens expressions that are ORs.    */
-annotation|@
-name|Nonnull
 specifier|public
 specifier|static
 name|RexNode
@@ -5819,8 +5888,6 @@ literal|false
 argument_list|)
 decl_stmt|;
 return|return
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|e
@@ -5830,6 +5897,8 @@ block|}
 comment|/**    * Converts a collection of expressions into an OR,    * optionally returning null if the list is empty.    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|composeDisjunction
 parameter_list|(
@@ -6308,6 +6377,8 @@ block|}
 comment|/**    * Applies a mapping to a field collation.    *    *<p>If the field is not mapped, returns null.    *    * @param mapping        Mapping    * @param fieldCollation Field collation    * @return collation with mapping applied    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RelFieldCollation
 name|apply
 parameter_list|(
@@ -6591,6 +6662,8 @@ name|RexNode
 index|[]
 name|exprs
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|expr
 parameter_list|)
@@ -6647,6 +6720,8 @@ name|RexNode
 argument_list|>
 name|exprs
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|expr
 parameter_list|)
@@ -8229,6 +8304,22 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|API
+argument_list|(
+name|since
+operator|=
+literal|"1.27.0"
+argument_list|,
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|EXPERIMENTAL
+argument_list|)
+specifier|public
 specifier|static
 name|SqlOperator
 name|op
@@ -8532,6 +8623,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|negate
 parameter_list|(
@@ -8605,6 +8698,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|invert
 parameter_list|(
@@ -8803,8 +8898,6 @@ block|}
 comment|/**    * Creates the expression {@code e1 AND NOT notTerm1 AND NOT notTerm2 ...}.    *    *<p>Examples:    *<ul>    *<li>andNot(p) returns "p"    *<li>andNot(p, n1, n2) returns "p AND NOT n1 AND NOT n2"    *<li>andNot(x = 10, x = 20, y = 30, x = 30)    *       returns "x = 10 AND NOT (y = 30)"    *</ul>    */
 specifier|public
 specifier|static
-annotation|@
-name|Nonnull
 name|RexNode
 name|andNot
 parameter_list|(
@@ -9378,6 +9471,8 @@ name|RexNode
 name|node
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|RelTableRef
@@ -9387,6 +9482,8 @@ argument_list|>
 name|tableMapping
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|RexTableInputRef
@@ -9423,17 +9520,34 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|RexTableInputRef
+name|inputRefFinal
+init|=
+name|inputRef
+decl_stmt|;
 name|inputRef
 operator|=
 name|RexTableInputRef
 operator|.
 name|of
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|tableMapping
 operator|.
 name|get
 argument_list|(
 name|inputRef
+operator|.
+name|getTableRef
+argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"tableMapping.get(...) for "
+operator|+
+name|inputRefFinal
 operator|.
 name|getTableRef
 argument_list|()
@@ -9510,28 +9624,33 @@ specifier|public
 specifier|static
 name|RexNode
 name|swapColumnTableReferences
-parameter_list|(
-specifier|final
+argument_list|(
+name|final
 name|RexBuilder
 name|rexBuilder
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|RexNode
 name|node
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|Map
-argument_list|<
+operator|<
 name|RexTableInputRef
 argument_list|,
+operator|?
+expr|extends @
+name|Nullable
 name|Set
 argument_list|<
 name|RexTableInputRef
 argument_list|>
-argument_list|>
+operator|>
 name|ec
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
+expr|@
+name|Nullable
 name|Map
 argument_list|<
 name|RelTableRef
@@ -9539,7 +9658,7 @@ argument_list|,
 name|RelTableRef
 argument_list|>
 name|tableMapping
-parameter_list|)
+argument_list|)
 block|{
 name|RexShuttle
 name|visitor
@@ -9604,17 +9723,34 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|RexTableInputRef
+name|inputRefFinal
+init|=
+name|inputRef
+decl_stmt|;
 name|inputRef
 operator|=
 name|RexTableInputRef
 operator|.
 name|of
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|tableMapping
 operator|.
 name|get
 argument_list|(
 name|inputRef
+operator|.
+name|getTableRef
+argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"tableMapping.get(...) for "
+operator|+
+name|inputRefFinal
 operator|.
 name|getTableRef
 argument_list|()
@@ -9734,6 +9870,8 @@ name|ExpressionNormalizer
 extends|extends
 name|RexVisitorImpl
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 block|{
@@ -9828,10 +9966,19 @@ name|expr
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|map
 operator|.
 name|get
 argument_list|(
+name|expr
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"missing normalization for expression "
+operator|+
 name|expr
 argument_list|)
 return|;
@@ -12364,6 +12511,8 @@ throw|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexSubQuery
 name|find
 parameter_list|(
@@ -12417,6 +12566,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexSubQuery
 name|find
 parameter_list|(
@@ -12964,8 +13115,6 @@ name|this
 operator|.
 name|ref
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|ref
@@ -12975,8 +13124,6 @@ name|this
 operator|.
 name|list
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|list
@@ -12986,8 +13133,6 @@ name|this
 operator|.
 name|rexBuilder
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rexBuilder
@@ -12997,8 +13142,6 @@ name|this
 operator|.
 name|type
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|type
@@ -13367,6 +13510,8 @@ name|rexBuilder
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 decl_stmt|;
@@ -13377,6 +13522,8 @@ name|maxComplexity
 decl_stmt|;
 name|SearchExpandingShuttle
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -13556,6 +13703,8 @@ specifier|final
 name|Sarg
 name|sarg
 init|=
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -13563,6 +13712,9 @@ argument_list|(
 name|Sarg
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"Sarg"
 argument_list|)
 decl_stmt|;
 if|if

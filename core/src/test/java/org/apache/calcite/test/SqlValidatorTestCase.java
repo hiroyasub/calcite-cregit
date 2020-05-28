@@ -408,16 +408,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -1233,8 +1223,6 @@ comment|/**      * Checks that a SQL expression gives a particular error.      *
 name|Sql
 name|fails
 parameter_list|(
-annotation|@
-name|Nonnull
 name|String
 name|expected
 parameter_list|)

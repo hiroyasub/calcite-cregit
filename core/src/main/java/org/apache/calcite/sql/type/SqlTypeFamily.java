@@ -141,6 +141,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -498,6 +514,8 @@ decl_stmt|;
 comment|/**    * Gets the primary family containing a JDBC type.    *    * @param jdbcType the JDBC type of interest    * @return containing family    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|SqlTypeFamily
 name|getFamilyForJdbcType
 parameter_list|(
@@ -793,6 +811,8 @@ block|}
 block|}
 comment|/** Return the default {@link RelDataType} that belongs to this family. */
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getDefaultConcreteType
 parameter_list|(

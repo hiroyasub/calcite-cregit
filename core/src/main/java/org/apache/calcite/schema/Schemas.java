@@ -425,6 +425,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -516,16 +532,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -538,6 +544,18 @@ operator|.
 name|CalciteSchema
 operator|.
 name|LatticeEntry
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -567,15 +585,17 @@ specifier|public
 specifier|static
 name|CalciteSchema
 operator|.
+expr|@
+name|Nullable
 name|FunctionEntry
 name|resolve
-parameter_list|(
+argument_list|(
 name|RelDataTypeFactory
 name|typeFactory
-parameter_list|,
+argument_list|,
 name|String
 name|name
-parameter_list|,
+argument_list|,
 name|Collection
 argument_list|<
 name|CalciteSchema
@@ -583,15 +603,15 @@ operator|.
 name|FunctionEntry
 argument_list|>
 name|functionEntries
-parameter_list|,
+argument_list|,
 name|List
 argument_list|<
 name|RelDataType
 argument_list|>
 name|argumentTypes
-parameter_list|)
+argument_list|)
 block|{
-specifier|final
+name|final
 name|List
 argument_list|<
 name|CalciteSchema
@@ -599,12 +619,12 @@ operator|.
 name|FunctionEntry
 argument_list|>
 name|matches
-init|=
+operator|=
 operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
-decl_stmt|;
+block|;
 for|for
 control|(
 name|CalciteSchema
@@ -639,6 +659,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_switch
 switch|switch
 condition|(
 name|matches
@@ -679,8 +702,10 @@ name|argumentTypes
 argument_list|)
 throw|;
 block|}
-block|}
-specifier|private
+end_switch
+
+begin_function
+unit|}    private
 specifier|static
 name|boolean
 name|matches
@@ -789,6 +814,9 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|boolean
@@ -812,7 +840,13 @@ name|fromType
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the expression for a schema. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Expression
@@ -839,7 +873,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the expression for a sub-schema. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Expression
@@ -922,7 +962,13 @@ return|return
 name|call
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Converts a schema expression to a given type by calling the    * {@link SchemaPlus#unwrap(Class)} method. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Expression
@@ -964,7 +1010,13 @@ name|type
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the expression to access a table within a schema. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Expression
@@ -1195,6 +1247,9 @@ name|clazz
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 specifier|static
 name|DataContext
@@ -1203,6 +1258,8 @@ parameter_list|(
 name|Connection
 name|connection
 parameter_list|,
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|rootSchema
 parameter_list|)
@@ -1220,7 +1277,13 @@ name|rootSchema
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns a {@link Queryable}, given a fully-qualified table name. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1262,7 +1325,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns a {@link Queryable}, given a fully-qualified table name as an    * iterable. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1326,6 +1395,13 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|schema
+argument_list|,
+literal|"schema"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|iterator
@@ -1334,14 +1410,40 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|schema
-operator|=
+name|SchemaPlus
+name|next
+init|=
 name|schema
 operator|.
 name|getSubSchema
 argument_list|(
 name|name
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|next
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"schema "
+operator|+
+name|name
+operator|+
+literal|" is not found in "
+operator|+
+name|schema
+argument_list|)
+throw|;
+block|}
+name|schema
+operator|=
+name|next
 expr_stmt|;
 block|}
 else|else
@@ -1361,7 +1463,13 @@ return|;
 block|}
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Returns a {@link Queryable}, given a schema and table name. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1395,11 +1503,37 @@ init|=
 operator|(
 name|QueryableTable
 operator|)
+name|requireNonNull
+argument_list|(
 name|schema
 operator|.
 name|getTable
 argument_list|(
 name|tableName
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"table "
+operator|+
+name|tableName
+operator|+
+literal|" is not found in "
+operator|+
+name|schema
+argument_list|)
+decl_stmt|;
+name|QueryProvider
+name|queryProvider
+init|=
+name|requireNonNull
+argument_list|(
+name|root
+operator|.
+name|getQueryProvider
+argument_list|()
+argument_list|,
+literal|"root.getQueryProvider()"
 argument_list|)
 decl_stmt|;
 return|return
@@ -1407,10 +1541,7 @@ name|table
 operator|.
 name|asQueryable
 argument_list|(
-name|root
-operator|.
-name|getQueryProvider
-argument_list|()
+name|queryProvider
 argument_list|,
 name|schema
 argument_list|,
@@ -1418,11 +1549,19 @@ name|tableName
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns an {@link org.apache.calcite.linq4j.Enumerable} over the rows of    * a given table, representing each row as an object array. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1446,11 +1585,19 @@ name|root
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns an {@link org.apache.calcite.linq4j.Enumerable} over the rows of    * a given table, not applying any filters, representing each row as an object    * array. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1479,11 +1626,19 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns an {@link org.apache.calcite.linq4j.Enumerable} over the rows of    * a given table, not applying any filters and projecting all columns,    * representing each row as an object array. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1498,6 +1653,19 @@ name|DataContext
 name|root
 parameter_list|)
 block|{
+name|JavaTypeFactory
+name|typeFactory
+init|=
+name|requireNonNull
+argument_list|(
+name|root
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
+literal|"root.getTypeFactory"
+argument_list|)
+decl_stmt|;
 return|return
 name|table
 operator|.
@@ -1516,10 +1684,7 @@ name|table
 operator|.
 name|getRowType
 argument_list|(
-name|root
-operator|.
-name|getTypeFactory
-argument_list|()
+name|typeFactory
 argument_list|)
 operator|.
 name|getFieldCount
@@ -1528,6 +1693,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|int
@@ -1578,9 +1746,17 @@ return|return
 name|integers
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns an {@link org.apache.calcite.linq4j.Enumerable} over object    * arrays, given a fully-qualified table name which leads to a    * {@link ScannableTable}. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Table
 name|table
 parameter_list|(
@@ -1640,6 +1816,13 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|schema
+argument_list|,
+literal|"schema"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|iterator
@@ -1648,14 +1831,40 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|schema
-operator|=
+name|SchemaPlus
+name|next
+init|=
 name|schema
 operator|.
 name|getSubSchema
 argument_list|(
 name|name
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|next
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"schema "
+operator|+
+name|name
+operator|+
+literal|" is not found in "
+operator|+
+name|schema
+argument_list|)
+throw|;
+block|}
+name|schema
+operator|=
+name|next
 expr_stmt|;
 block|}
 else|else
@@ -1671,7 +1880,13 @@ return|;
 block|}
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Parses and validates a SQL query. For use within Calcite only. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|CalcitePrepare
@@ -1688,6 +1903,8 @@ name|CalciteSchema
 name|schema
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -1778,7 +1995,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Parses and validates a SQL query and converts to relational algebra. For    * use within Calcite only. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|CalcitePrepare
@@ -1885,7 +2108,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Analyzes a view. For use within Calcite only. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|CalcitePrepare
@@ -1902,6 +2131,8 @@ name|CalciteSchema
 name|schema
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -1912,6 +2143,8 @@ specifier|final
 name|String
 name|viewSql
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2003,7 +2236,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Prepares a SQL query for execution. For use within Calcite only. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|CalcitePrepare
@@ -2023,6 +2262,8 @@ name|CalciteSchema
 name|schema
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2123,7 +2364,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a context for the purposes of preparing a statement.    *    * @param connection Connection    * @param schema Schema    * @param schemaPath Path wherein to look for functions    * @param objectPath Path of the object being analyzed (usually a view),    *                  or null    * @param propValues Connection properties    * @return Context    */
+end_comment
+
+begin_function
 specifier|private
 specifier|static
 name|CalcitePrepare
@@ -2137,12 +2384,16 @@ parameter_list|,
 name|CalciteSchema
 name|schema
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|schemaPath
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2264,6 +2515,9 @@ argument_list|)
 return|;
 block|}
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|CalciteConnectionConfig
@@ -2326,6 +2580,9 @@ return|return
 name|config
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|CalcitePrepare
@@ -2350,6 +2607,8 @@ name|CalciteSchema
 name|schema
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2357,6 +2616,8 @@ argument_list|>
 name|schemaPath
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2365,6 +2626,8 @@ name|objectPath_
 parameter_list|)
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|String
@@ -2463,6 +2726,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2542,7 +2807,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns an implementation of    * {@link RelProtoDataType}    * that asks a given table for its row type with a given type factory. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|RelProtoDataType
@@ -2559,7 +2830,13 @@ operator|::
 name|getRowType
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns an implementation of {@link RelProtoDataType}    * that asks a given scalar function for its return type with a given type    * factory. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|RelProtoDataType
@@ -2576,7 +2853,13 @@ operator|::
 name|getReturnType
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the star tables defined in a schema.    *    * @param schema Schema */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|List
@@ -2621,8 +2904,6 @@ operator|.
 name|TableEntry
 name|starTable
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|entry
@@ -2656,7 +2937,13 @@ block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the lattices defined in a schema.    *    * @param schema Schema */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|List
@@ -2696,7 +2983,13 @@ name|getLattice
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the lattices defined in a schema.    *    * @param schema Schema */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|List
@@ -2734,6 +3027,9 @@ return|return
 name|list
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|void
@@ -2787,9 +3083,17 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Returns a sub-schema of a given schema obtained by following a sequence    * of names.    *    *<p>The result is null if the initial schema is null or any sub-schema does    * not exist.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|subSchema
 parameter_list|(
@@ -2803,6 +3107,13 @@ argument_list|>
 name|names
 parameter_list|)
 block|{
+annotation|@
+name|Nullable
+name|CalciteSchema
+name|current
+init|=
+name|schema
+decl_stmt|;
 for|for
 control|(
 name|String
@@ -2813,7 +3124,7 @@ control|)
 block|{
 if|if
 condition|(
-name|schema
+name|current
 operator|==
 literal|null
 condition|)
@@ -2822,9 +3133,9 @@ return|return
 literal|null
 return|;
 block|}
-name|schema
+name|current
 operator|=
-name|schema
+name|current
 operator|.
 name|getSubSchema
 argument_list|(
@@ -2835,10 +3146,16 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|schema
+name|current
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Generates a table name that is unique within the given schema. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|String
@@ -2854,8 +3171,6 @@ block|{
 name|String
 name|t
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|base
@@ -2894,7 +3209,13 @@ return|return
 name|t
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a path with a given list of names starting from a given root    * schema. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Path
@@ -3043,17 +3364,46 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-name|schema
-operator|=
+name|Schema
+name|next
+init|=
 name|schema
 operator|.
 name|getSubSchema
 argument_list|(
 name|name
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|next
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"schema "
+operator|+
+name|name
+operator|+
+literal|" is not found in "
+operator|+
+name|schema
+argument_list|)
+throw|;
+block|}
+name|schema
+operator|=
+name|next
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 specifier|public
 specifier|static
 name|PathImpl
@@ -3079,7 +3429,13 @@ name|build
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the path to get to a schema from its root. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Path
@@ -3160,7 +3516,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Dummy data context that has no variables. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -3175,6 +3537,8 @@ name|connection
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|rootSchema
 decl_stmt|;
@@ -3193,6 +3557,8 @@ parameter_list|(
 name|CalciteConnection
 name|connection
 parameter_list|,
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|rootSchema
 parameter_list|)
@@ -3222,6 +3588,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getRootSchema
 parameter_list|()
@@ -3233,6 +3601,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()
@@ -3258,6 +3628,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|get
 parameter_list|(
@@ -3275,7 +3647,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Implementation of {@link Path}. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -3348,6 +3726,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -3551,8 +3931,8 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

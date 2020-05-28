@@ -163,6 +163,18 @@ name|REGEXP_REPLACE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utilities used by multiple dialect for RelToSql conversion.  */
 end_comment
@@ -203,12 +215,26 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
+name|String
+name|value
+init|=
+name|requireNonNull
+argument_list|(
 name|valueToTrim
 operator|.
 name|toValue
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"call.operand(1).toValue() for call "
+operator|+
+name|call
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|value
 operator|.
 name|matches
 argument_list|(
@@ -454,6 +480,8 @@ specifier|final
 name|String
 name|regexPattern
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 operator|(
 name|SqlCharStringLiteral
@@ -463,6 +491,13 @@ operator|)
 operator|.
 name|toValue
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"null value for SqlNode "
+operator|+
+name|call
+argument_list|)
 decl_stmt|;
 name|String
 name|escaped

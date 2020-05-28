@@ -33,6 +33,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|framework
+operator|.
+name|qual
+operator|.
+name|Covariant
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -48,6 +78,11 @@ comment|/**  * Core methods that define a {@link Queryable}.  *  *<p>The other m
 end_comment
 
 begin_interface
+annotation|@
+name|Covariant
+argument_list|(
+literal|0
+argument_list|)
 specifier|public
 interface|interface
 name|RawQueryable
@@ -65,7 +100,9 @@ name|Type
 name|getElementType
 parameter_list|()
 function_decl|;
-comment|/**    * Gets the expression tree that is associated with this Queryable.    */
+comment|/**    * Gets the expression tree that is associated with this Queryable.    * @return null if the expression is not available    */
+annotation|@
+name|Nullable
 name|Expression
 name|getExpression
 parameter_list|()

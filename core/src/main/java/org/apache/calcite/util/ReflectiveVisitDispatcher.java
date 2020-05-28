@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -51,10 +67,14 @@ extends|extends
 name|ReflectiveVisitor
 parameter_list|,
 name|E
+extends|extends
+name|Object
 parameter_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Looks up a visit method taking additional parameters beyond the    * overloaded visitee type.    *    * @param visitorClass             class of object whose visit method is to be    *                                 invoked    * @param visiteeClass             class of object to be passed as a parameter    *                                 to the visit method    * @param visitMethodName          name of visit method    * @param additionalParameterTypes list of additional parameter types    * @return method found, or null if none found    */
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(
@@ -85,6 +105,8 @@ name|additionalParameterTypes
 parameter_list|)
 function_decl|;
 comment|/**    * Looks up a visit method.    *    * @param visitorClass    class of object whose visit method is to be invoked    * @param visiteeClass    class of object to be passed as a parameter to the    *                        visit method    * @param visitMethodName name of visit method    * @return method found, or null if none found    */
+annotation|@
+name|Nullable
 name|Method
 name|lookupVisitMethod
 parameter_list|(

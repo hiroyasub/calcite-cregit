@@ -149,6 +149,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -174,16 +190,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -214,6 +220,8 @@ name|over
 decl_stmt|;
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|AggFinder
 name|delegate
 decl_stmt|;

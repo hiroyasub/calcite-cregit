@@ -45,6 +45,22 @@ name|BuiltInMethod
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementations of the  * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory}  * metadata provider for the standard logical algebra.  *  * @see RelMetadataQuery#isPhaseTransition  * @see RelMetadataQuery#splitCount  */
 end_comment
@@ -124,6 +140,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Memory#memory()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#memory    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|memory
 parameter_list|(
@@ -140,6 +158,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhase()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#memory    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|(
@@ -246,6 +266,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhaseSplit()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#cumulativeMemoryWithinPhaseSplit    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhaseSplit
 parameter_list|(

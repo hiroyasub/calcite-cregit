@@ -686,16 +686,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -5932,8 +5922,6 @@ block|}
 return|;
 block|}
 comment|/** Returns a {@link Matcher} that succeeds if the given {@link SqlNode} is a    * VALUES that contains a ROW that contains an identifier whose {@code i}th    * element is quoted. */
-annotation|@
-name|Nonnull
 specifier|private
 specifier|static
 name|Matcher
@@ -30098,8 +30086,6 @@ literal|"INTERVAL '1:1' MINUTE TO SECOND"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Nonnull
 specifier|private
 name|Consumer
 argument_list|<

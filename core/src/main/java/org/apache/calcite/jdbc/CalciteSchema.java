@@ -353,6 +353,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -453,6 +469,8 @@ name|CalciteSchema
 block|{
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|parent
 decl_stmt|;
@@ -521,6 +539,8 @@ argument_list|>
 name|subSchemaMap
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|?
@@ -535,6 +555,8 @@ decl_stmt|;
 specifier|protected
 name|CalciteSchema
 parameter_list|(
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|parent
 parameter_list|,
@@ -544,45 +566,61 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameMap
 argument_list|<
 name|CalciteSchema
 argument_list|>
 name|subSchemaMap
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameMap
 argument_list|<
 name|TableEntry
 argument_list|>
 name|tableMap
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameMap
 argument_list|<
 name|LatticeEntry
 argument_list|>
 name|latticeMap
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameMap
 argument_list|<
 name|TypeEntry
 argument_list|>
 name|typeMap
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameMultimap
 argument_list|<
 name|FunctionEntry
 argument_list|>
 name|functionMap
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameSet
 name|functionNames
 parameter_list|,
+annotation|@
+name|Nullable
 name|NameMap
 argument_list|<
 name|FunctionEntry
 argument_list|>
 name|nullaryFunctionMap
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|?
@@ -819,6 +857,8 @@ block|}
 comment|/** Returns a sub-schema with a given name that is defined implicitly    * (that is, by the underlying {@link Schema} object, not explicitly    * by a call to {@link #add(String, Schema)}), or null. */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|getImplicitSubSchema
 parameter_list|(
@@ -832,6 +872,8 @@ function_decl|;
 comment|/** Returns a table with a given name that is defined implicitly    * (that is, by the underlying {@link Schema} object, not explicitly    * by a call to {@link #add(String, Table)}), or null. */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|TableEntry
 name|getImplicitTable
 parameter_list|(
@@ -845,6 +887,8 @@ function_decl|;
 comment|/** Returns a type with a given name that is defined implicitly    * (that is, by the underlying {@link Schema} object, not explicitly    * by a call to {@link #add(String, RelProtoDataType)}), or null. */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|TypeEntry
 name|getImplicitType
 parameter_list|(
@@ -858,6 +902,8 @@ function_decl|;
 comment|/** Returns table function with a given name and zero arguments that is    * defined implicitly (that is, by the underlying {@link Schema} object,    * not explicitly by a call to {@link #add(String, Function)}), or null. */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|TableEntry
 name|getImplicitTableBasedOnNullaryFunction
 parameter_list|(
@@ -974,6 +1020,8 @@ specifier|abstract
 name|CalciteSchema
 name|snapshot
 parameter_list|(
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|parent
 parameter_list|,
@@ -1345,6 +1393,8 @@ name|String
 argument_list|>
 name|path
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -1442,6 +1492,8 @@ return|;
 block|}
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|getSubSchema
 parameter_list|(
@@ -1511,6 +1563,8 @@ function_decl|;
 comment|/** Returns a table that materializes the given SQL statement. */
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|TableEntry
 name|getTableBySql
 parameter_list|(
@@ -1556,6 +1610,8 @@ block|}
 comment|/** Returns a table with the given name. Does not look for views. */
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|TableEntry
 name|getTable
 parameter_list|(
@@ -1886,6 +1942,8 @@ block|}
 comment|/** Returns a type, explicit and implicit, with a given    * name. Never null. */
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|TypeEntry
 name|getType
 parameter_list|(
@@ -2204,6 +2262,8 @@ block|}
 comment|/** Returns a tables derived from explicit and implicit functions    * that take zero parameters. */
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|TableEntry
 name|getTableBasedOnNullaryFunction
 parameter_list|(
@@ -2949,6 +3009,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getParentSchema
 parameter_list|()
@@ -3054,6 +3116,8 @@ specifier|public
 name|Expression
 name|getExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -3075,6 +3139,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Table
 name|getTable
 parameter_list|(
@@ -3132,6 +3198,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelProtoDataType
 name|getType
 parameter_list|(
@@ -3234,6 +3302,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getSubSchema
 parameter_list|(
@@ -3279,7 +3349,14 @@ argument_list|>
 name|getSubSchemaNames
 parameter_list|()
 block|{
+comment|//noinspection RedundantCast
 return|return
+operator|(
+name|Set
+argument_list|<
+name|String
+argument_list|>
+operator|)
 name|CalciteSchema
 operator|.
 name|this
@@ -3331,6 +3408,8 @@ name|Override
 specifier|public
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|T
 name|unwrap

@@ -301,16 +301,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|concurrent
 operator|.
 name|TimeUnit
@@ -348,6 +338,18 @@ operator|.
 name|sql
 operator|.
 name|DataSource
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -477,8 +479,6 @@ name|this
 operator|.
 name|sqlConsumer
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|sqlConsumer
@@ -501,7 +501,7 @@ name|dialect
 init|=
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|SqlDialect
 operator|.
@@ -514,7 +514,7 @@ name|dataSource
 init|=
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|DataSource
 operator|.
@@ -710,7 +710,7 @@ name|dialect
 init|=
 name|fromTable
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|SqlDialect
 operator|.
@@ -723,7 +723,7 @@ name|dataSource
 init|=
 name|fromTable
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|DataSource
 operator|.
@@ -999,7 +999,7 @@ name|dialect
 init|=
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|SqlDialect
 operator|.
@@ -1012,7 +1012,7 @@ name|dataSource
 init|=
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|DataSource
 operator|.

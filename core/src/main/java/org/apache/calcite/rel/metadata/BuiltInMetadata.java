@@ -219,6 +219,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -282,9 +298,13 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the percentage of an expression's output rows which satisfy a      * given predicate. Returns null to indicate that no reliable estimate can      * be produced.      *      * @param predicate predicate whose selectivity is to be estimated against      *                  rel's output      * @return estimated selectivity (between 0.0 and 1.0), or null if no      * reliable estimate can be determined      */
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -298,6 +318,8 @@ argument_list|<
 name|Selectivity
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -307,6 +329,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -348,6 +372,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Determines the set of unique minimal keys for this expression. A key is      * represented as an {@link org.apache.calcite.util.ImmutableBitSet}, where      * each bit position represents a 0-based output column ordinal.      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param ignoreNulls if true, ignore null values when determining      *                    whether the keys are unique      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -367,6 +393,8 @@ argument_list|<
 name|UniqueKeys
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -618,6 +646,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Returns a multimap from the class to the nodes instantiating that      * class. The default implementation for a node classifies it as a      * {@link RelNode}.      */
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -641,6 +671,8 @@ argument_list|<
 name|NodeTypes
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -698,6 +730,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the number of rows which will be returned by a relational      * expression. The default implementation for this query asks the rel itself      * via {@link RelNode#estimateRowCount}, but metadata providers can override this      * with their own cost models.      *      * @return estimated row count, or null if no reliable estimate can be      * determined      */
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|()
@@ -711,6 +745,8 @@ argument_list|<
 name|RowCount
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -758,6 +794,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the max number of rows which will be returned by a relational      * expression.      *      *<p>The default implementation for this query returns      * {@link Double#POSITIVE_INFINITY},      * but metadata providers can override this with their own cost models.      *      * @return upper bound on the number of rows returned      */
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|()
@@ -771,6 +809,8 @@ argument_list|<
 name|MaxRowCount
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -818,6 +858,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the minimum number of rows which will be returned by a      * relational expression.      *      *<p>The default implementation for this query returns 0,      * but metadata providers can override this with their own cost models.      *      * @return lower bound on the number of rows returned      */
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|()
@@ -831,6 +873,8 @@ argument_list|<
 name|MinRowCount
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(
@@ -878,12 +922,16 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the number of rows which would be produced by a GROUP BY on the      * set of columns indicated by groupKey, where the input to the GROUP BY has      * been pre-filtered by predicate. This quantity (leaving out predicate) is      * often referred to as cardinality (as in gender being a "low-cardinality      * column").      *      * @param groupKey  column mask representing group by columns      * @param predicate pre-filtered predicates      * @return distinct row count for groupKey, filtered by predicate, or null      * if no reliable estimate can be determined      */
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -897,6 +945,8 @@ argument_list|<
 name|DistinctRowCount
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -909,6 +959,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -950,6 +1002,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the percentage of the number of rows actually produced by a      * relational expression out of the number of rows it would produce if all      * single-table filter conditions were removed.      *      * @return estimated percentage (between 0.0 and 1.0), or null if no      * reliable estimate can be determined      */
+annotation|@
+name|Nullable
 name|Double
 name|getPercentageOriginalRows
 parameter_list|()
@@ -963,6 +1017,8 @@ argument_list|<
 name|PercentageOriginalRows
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getPercentageOriginalRows
 parameter_list|(
@@ -1010,6 +1066,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Estimates the distinct row count in the original source for the given      * {@code groupKey}, ignoring any filtering being applied by the expression.      * Typically, "original source" means base table, but for derived columns,      * the estimate may come from a non-leaf rel such as a LogicalProject.      *      * @param groupKey column mask representing the subset of columns for which      *                 the row count will be determined      * @return distinct row count for the given groupKey, or null if no reliable      * estimate can be determined      */
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -1026,6 +1084,8 @@ argument_list|<
 name|PopulationSize
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -1082,6 +1142,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Determines the average size (in bytes) of a row from this relational      * expression.      *      * @return average size of a row, in bytes, or null if not known      */
+annotation|@
+name|Nullable
 name|Double
 name|averageRowSize
 parameter_list|()
@@ -1089,6 +1151,8 @@ function_decl|;
 comment|/**      * Determines the average size (in bytes) of a value of a column in this      * relational expression.      *      *<p>Null values are included (presumably they occupy close to 0 bytes).      *      *<p>It is left to the caller to decide whether the size is the compressed      * size, the uncompressed size, or memory allocation when the value is      * wrapped in an object in the Java heap. The uncompressed size is probably      * a good compromise.      *      * @return an immutable list containing, for each column, the average size      * of a column value, in bytes. Each value or the entire list may be null if      * the metadata is not available      */
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Double
 argument_list|>
 name|averageColumnSizes
@@ -1103,6 +1167,8 @@ argument_list|<
 name|Size
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|averageRowSize
 parameter_list|(
@@ -1113,8 +1179,12 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Double
 argument_list|>
 name|averageColumnSizes
@@ -1163,6 +1233,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * For a given output column of an expression, determines all columns of      * underlying tables which contribute to result values. An output column may      * have more than one origin due to expressions such as Union and      * LogicalProject. The optimizer may use this information for catalog access      * (e.g. index availability).      *      * @param outputColumn 0-based ordinal for output column of interest      * @return set of origin columns, or null if this information cannot be      * determined (whereas empty set indicates definitely no origin columns at      * all)      */
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1182,6 +1254,8 @@ argument_list|<
 name|ColumnOrigin
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1235,6 +1309,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Given the input expression applied on the given {@link RelNode}, this      * provider returns the expression with its lineage resolved.      *      *<p>In particular, the result will be a set of nodes which might contain      * references to columns in TableScan operators ({@link RexTableInputRef}).      * An expression can have more than one lineage expression due to Union      * operators. However, we do not check column equality in Filter predicates.      * Each TableScan operator below the node is identified uniquely by its      * qualified name and its entity number.      *      *<p>For example, if the expression is {@code $0 + 2} and {@code $0} originated      * from column {@code $3} in the {@code 0} occurrence of table {@code A} in the      * plan, result will be: {@code A.#0.$3 + 2}. Occurrences are generated in no      * particular order, but it is guaranteed that if two expressions referred to the      * same table, the qualified name + occurrence will be the same.      *      * @param expression expression whose lineage we want to resolve      *      * @return set of expressions with lineage resolved, or null if this information      * cannot be determined (e.g. origin of an expression is an aggregation      * in an {@link org.apache.calcite.rel.core.Aggregate} operator)      */
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -1254,6 +1330,8 @@ argument_list|<
 name|ExpressionLineage
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -1619,6 +1697,8 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/**      * Derives the predicates that hold on rows emitted from a relational      * expression.      *      * @return predicate list, or null if the provider cannot infer the      * lineage for any of the expressions contained in any of the predicates      */
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|()
@@ -1632,6 +1712,8 @@ argument_list|<
 name|AllPredicates
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -1838,16 +1920,22 @@ name|method
 argument_list|)
 decl_stmt|;
 comment|/** Returns the expected amount of memory, in bytes, required by a physical      * operator implementing this relational expression, across all splits.      *      *<p>How much memory is used depends very much on the algorithm; for      * example, an implementation of      * {@link org.apache.calcite.rel.core.Aggregate} that loads all data into a      * hash table requires approximately {@code rowCount * averageRowSize}      * bytes, whereas an implementation that assumes that the input is sorted      * requires only {@code averageRowSize} bytes to maintain a single      * accumulator for each aggregate function.      */
+annotation|@
+name|Nullable
 name|Double
 name|memory
 parameter_list|()
 function_decl|;
 comment|/** Returns the cumulative amount of memory, in bytes, required by the      * physical operator implementing this relational expression, and all other      * operators within the same phase, across all splits.      *      * @see Parallelism#splitCount()      */
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|()
 function_decl|;
 comment|/** Returns the expected cumulative amount of memory, in bytes, required by      * the physical operator implementing this relational expression, and all      * operators within the same phase, within each split.      *      *<p>Basic formula:      *      *<blockquote>cumulativeMemoryWithinPhaseSplit      *     = cumulativeMemoryWithinPhase / Parallelism.splitCount</blockquote>      */
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhaseSplit
 parameter_list|()
@@ -1861,6 +1949,8 @@ argument_list|<
 name|Memory
 argument_list|>
 block|{
+annotation|@
+name|Nullable
 name|Double
 name|memory
 parameter_list|(
@@ -1871,6 +1961,8 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|(
@@ -1881,6 +1973,8 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhaseSplit
 parameter_list|(

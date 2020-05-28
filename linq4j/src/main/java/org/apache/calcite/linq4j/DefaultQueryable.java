@@ -273,6 +273,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -908,6 +924,8 @@ name|Override
 specifier|public
 name|Queryable
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|>
 name|defaultIfEmpty
@@ -972,6 +990,8 @@ comment|// End disambiguate
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|aggregate
 parameter_list|(
@@ -979,6 +999,8 @@ name|FunctionExpression
 argument_list|<
 name|Function2
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|,
 name|T
@@ -1519,6 +1541,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|firstOrDefault
 parameter_list|(
@@ -2973,6 +2997,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|singleOrDefault
 parameter_list|(

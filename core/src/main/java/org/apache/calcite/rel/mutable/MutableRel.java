@@ -107,6 +107,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -244,6 +260,8 @@ name|MutableRelType
 name|type
 decl_stmt|;
 specifier|protected
+annotation|@
+name|Nullable
 name|MutableRel
 name|parent
 decl_stmt|;
@@ -299,6 +317,8 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|MutableRel
 name|getParent
 parameter_list|()
@@ -347,6 +367,8 @@ parameter_list|)
 function_decl|;
 comment|/** Replaces this {@code MutableRel} in its parent with another node at the    * same position.    *    *<p>Before the method, {@code child} must be an orphan (have null parent)    * and after this method, this {@code MutableRel} is an orphan.    *    * @return The parent    */
 specifier|public
+annotation|@
+name|Nullable
 name|MutableRel
 name|replaceInParent
 parameter_list|(
@@ -469,6 +491,8 @@ specifier|public
 name|void
 name|visit
 parameter_list|(
+annotation|@
+name|Nullable
 name|MutableRel
 name|node
 parameter_list|)

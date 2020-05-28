@@ -695,6 +695,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -776,16 +792,6 @@ operator|.
 name|util
 operator|.
 name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
 import|;
 end_import
 
@@ -933,6 +939,18 @@ name|UPPER
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Translates {@link org.apache.calcite.rex.RexNode REX expressions} to  * {@link Expression linq4j expressions}.  */
 end_comment
@@ -1062,6 +1080,8 @@ name|builder
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 decl_stmt|;
@@ -1074,12 +1094,14 @@ specifier|final
 name|Expression
 name|root
 decl_stmt|;
-specifier|final
+name|final
 name|RexToLixTranslator
 operator|.
+expr|@
+name|Nullable
 name|InputGetter
 name|inputGetter
-decl_stmt|;
+expr_stmt|;
 specifier|private
 specifier|final
 name|BlockBuilder
@@ -1087,6 +1109,8 @@ name|list
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Function1
 argument_list|<
 name|String
@@ -1139,6 +1163,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|Type
 argument_list|>
 argument_list|,
@@ -1168,6 +1194,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|Type
 name|currentStorageType
 decl_stmt|;
@@ -1221,6 +1249,8 @@ block|}
 specifier|private
 name|RexToLixTranslator
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -1230,6 +1260,8 @@ parameter_list|,
 name|Expression
 name|root
 parameter_list|,
+annotation|@
+name|Nullable
 name|InputGetter
 name|inputGetter
 parameter_list|,
@@ -1242,6 +1274,8 @@ parameter_list|,
 name|SqlConformance
 name|conformance
 parameter_list|,
+annotation|@
+name|Nullable
 name|Function1
 argument_list|<
 name|String
@@ -1262,8 +1296,6 @@ name|this
 operator|.
 name|typeFactory
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeFactory
@@ -1273,8 +1305,6 @@ name|this
 operator|.
 name|conformance
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|conformance
@@ -1284,8 +1314,6 @@ name|this
 operator|.
 name|root
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|root
@@ -1301,8 +1329,6 @@ name|this
 operator|.
 name|list
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|list
@@ -1312,8 +1338,6 @@ name|this
 operator|.
 name|builder
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|builder
@@ -1348,6 +1372,8 @@ parameter_list|,
 name|BlockBuilder
 name|list
 parameter_list|,
+annotation|@
+name|Nullable
 name|PhysType
 name|outputPhysType
 parameter_list|,
@@ -1357,6 +1383,8 @@ parameter_list|,
 name|InputGetter
 name|inputGetter
 parameter_list|,
+annotation|@
+name|Nullable
 name|Function1
 argument_list|<
 name|String
@@ -1554,6 +1582,8 @@ parameter_list|,
 name|BlockBuilder
 name|list
 parameter_list|,
+annotation|@
+name|Nullable
 name|InputGetter
 name|inputGetter
 parameter_list|,
@@ -1658,6 +1688,8 @@ parameter_list|(
 name|RexNode
 name|expr
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)
@@ -1702,6 +1734,8 @@ operator|.
 name|NullAs
 name|nullAs
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)
@@ -2785,7 +2819,12 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|interval
+argument_list|,
+literal|"interval"
+argument_list|)
 operator|.
 name|timeUnitRange
 argument_list|)
@@ -2847,7 +2886,12 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|interval
+argument_list|,
+literal|"interval"
+argument_list|)
 operator|.
 name|timeUnitRange
 argument_list|)
@@ -3204,6 +3248,8 @@ name|INTERVAL_SECOND
 case|:
 switch|switch
 condition|(
+name|requireNonNull
+argument_list|(
 name|sourceType
 operator|.
 name|getSqlTypeName
@@ -3211,15 +3257,29 @@ argument_list|()
 operator|.
 name|getFamily
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"null SqlTypeFamily for "
+operator|+
+name|sourceType
+operator|+
+literal|", SqlTypeName "
+operator|+
+name|sourceType
+operator|.
+name|getSqlTypeName
+argument_list|()
+argument_list|)
 condition|)
 block|{
 case|case
 name|NUMERIC
 case|:
-specifier|final
+name|final
 name|BigDecimal
 name|multiplier
-init|=
+operator|=
 name|targetType
 operator|.
 name|getSqlTypeName
@@ -3229,15 +3289,15 @@ name|getEndUnit
 argument_list|()
 operator|.
 name|multiplier
-decl_stmt|;
-specifier|final
+block|;
+name|final
 name|BigDecimal
 name|divider
-init|=
+operator|=
 name|BigDecimal
 operator|.
 name|ONE
-decl_stmt|;
+block|;
 name|convert
 operator|=
 name|RexImpTable
@@ -3250,7 +3310,7 @@ name|multiplier
 argument_list|,
 name|divider
 argument_list|)
-expr_stmt|;
+block|;
 break|break;
 default|default:
 break|break;
@@ -3270,7 +3330,12 @@ name|convert
 argument_list|)
 return|;
 block|}
+end_class
+
+begin_function
 specifier|private
+annotation|@
+name|Nullable
 name|Expression
 name|translateCastToTime
 parameter_list|(
@@ -3438,7 +3503,12 @@ return|return
 name|convert
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
+annotation|@
+name|Nullable
 name|Expression
 name|translateCastToDate
 parameter_list|(
@@ -3567,7 +3637,13 @@ return|return
 name|convert
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Handle checked Exceptions declared in Method. In such case,    * method call should be wrapped in a try...catch block.    * "    *      final Type method_call;    *      try {    *        method_call = callExpr    *      } catch (Exception e) {    *        throw new RuntimeException(e);    *      }    * "    */
+end_comment
+
+begin_function
 name|Expression
 name|handleMethodCheckedExceptions
 parameter_list|(
@@ -3697,7 +3773,13 @@ return|return
 name|methodCall
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Dereferences an expression if it is a    * {@link org.apache.calcite.rex.RexLocalRef}. */
+end_comment
+
+begin_function
 specifier|public
 name|RexNode
 name|deref
@@ -3725,7 +3807,12 @@ specifier|final
 name|RexNode
 name|e2
 init|=
+name|requireNonNull
+argument_list|(
 name|program
+argument_list|,
+literal|"program"
+argument_list|)
 operator|.
 name|getExprList
 argument_list|()
@@ -3763,7 +3850,13 @@ name|expr
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Translates a literal.    *    * @throws ControlFlowException if literal is null but {@code nullAs} is    * {@link org.apache.calcite.adapter.enumerable.RexImpTable.NullAs#NOT_POSSIBLE}.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Expression
@@ -3966,7 +4059,16 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|bd
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"value for "
+operator|+
+name|literal
+argument_list|)
 operator|.
 name|toString
 argument_list|()
@@ -4126,6 +4228,8 @@ operator|.
 name|Geom
 name|geom
 init|=
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -4135,6 +4239,13 @@ operator|.
 name|Geom
 operator|.
 name|class
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getValueAs(Geometries.Geom) for "
+operator|+
+name|literal
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -4174,6 +4285,8 @@ name|SYMBOL
 case|:
 name|value2
 operator|=
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -4181,6 +4294,13 @@ argument_list|(
 name|Enum
 operator|.
 name|class
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getValueAs(Enum.class) for "
+operator|+
+name|literal
 argument_list|)
 expr_stmt|;
 name|javaClass
@@ -4259,6 +4379,9 @@ name|javaClass
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|List
 argument_list|<
@@ -4294,32 +4417,36 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_decl_stmt
 specifier|public
 name|List
 argument_list|<
 name|Expression
 argument_list|>
 name|translateList
-parameter_list|(
+argument_list|(
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|operandList
-parameter_list|,
+argument_list|,
 name|RexImpTable
 operator|.
 name|NullAs
 name|nullAs
-parameter_list|,
+argument_list|,
 name|List
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Type
-argument_list|>
+operator|>
 name|storageTypes
-parameter_list|)
+argument_list|)
 block|{
 specifier|final
 name|List
@@ -4336,15 +4463,16 @@ decl_stmt|;
 for|for
 control|(
 name|Pair
-argument_list|<
+operator|<
 name|RexNode
-argument_list|,
-name|?
-extends|extends
+operator|,
+operator|?
+expr|extends @
+name|Nullable
 name|Type
-argument_list|>
+operator|>
 name|e
-range|:
+operator|:
 name|Pair
 operator|.
 name|zip
@@ -4378,7 +4506,13 @@ return|return
 name|list
 return|;
 block|}
+end_decl_stmt
+
+begin_comment
 comment|/**    * Translates the list of {@code RexNode}, using the default output types.    * This might be suboptimal in terms of additional box-unbox when you use    * the translation later.    * If you know the java class that will be used to store the results, use    * {@link org.apache.calcite.adapter.enumerable.RexToLixTranslator#translateList(java.util.List, java.util.List)}    * version.    *    * @param operandList list of RexNodes to translate    *    * @return translated expressions    */
+end_comment
+
+begin_function
 specifier|public
 name|List
 argument_list|<
@@ -4409,14 +4543,20 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Translates the list of {@code RexNode}, while optimizing for output    * storage.    * For instance, if the result of translation is going to be stored in    * {@code Object[]}, and the input is {@code Object[]} as well,    * then translator will avoid casting, boxing, etc.    *    * @param operandList list of RexNodes to translate    * @param storageTypes hints of the java classes that will be used    *                     to store translation results. Use null to use    *                     default storage type    *    * @return translated expressions    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 name|List
 argument_list|<
 name|Expression
 argument_list|>
 name|translateList
-parameter_list|(
+argument_list|(
 name|List
 argument_list|<
 name|?
@@ -4424,15 +4564,18 @@ extends|extends
 name|RexNode
 argument_list|>
 name|operandList
-parameter_list|,
+argument_list|,
+annotation|@
+name|Nullable
 name|List
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Type
-argument_list|>
+operator|>
 name|storageTypes
-parameter_list|)
+argument_list|)
 block|{
 specifier|final
 name|List
@@ -4564,6 +4707,9 @@ return|return
 name|list
 return|;
 block|}
+end_decl_stmt
+
+begin_function
 specifier|private
 name|Expression
 name|translateTableFunction
@@ -4648,6 +4794,9 @@ name|outputPhysType
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 specifier|static
 name|Expression
@@ -4677,12 +4826,17 @@ name|SqlConformance
 name|conformance
 parameter_list|)
 block|{
-if|if
-condition|(
+name|RexLocalRef
+name|condition
+init|=
 name|program
 operator|.
 name|getCondition
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|condition
 operator|==
 literal|null
 condition|)
@@ -4742,10 +4896,7 @@ name|translator
 operator|.
 name|translate
 argument_list|(
-name|program
-operator|.
-name|getCondition
-argument_list|()
+name|condition
 argument_list|,
 name|RexImpTable
 operator|.
@@ -4755,7 +4906,13 @@ name|FALSE
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns whether an expression is nullable.    * @param e Expression    * @return Whether expression is nullable    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isNullable
@@ -4774,6 +4931,9 @@ name|isNullable
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|RexToLixTranslator
 name|setBlock
@@ -4815,10 +4975,15 @@ name|correlates
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|RexToLixTranslator
 name|setCorrelates
 parameter_list|(
+annotation|@
+name|Nullable
 name|Function1
 argument_list|<
 name|String
@@ -4863,6 +5028,9 @@ name|correlates
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|Expression
 name|getRoot
@@ -4872,6 +5040,9 @@ return|return
 name|root
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|Expression
@@ -4889,6 +5060,8 @@ parameter_list|)
 block|{
 switch|switch
 condition|(
+name|requireNonNull
+argument_list|(
 name|targetType
 operator|.
 name|getSqlTypeName
@@ -4896,6 +5069,13 @@ argument_list|()
 operator|.
 name|getFamily
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"SqlTypeFamily for "
+operator|+
+name|targetType
+argument_list|)
 condition|)
 block|{
 case|case
@@ -4990,12 +5170,21 @@ break|break;
 default|default:
 break|break;
 block|}
+end_function
+
+begin_return
 return|return
 name|operand
 return|;
-block|}
+end_return
+
+begin_comment
+unit|}
 comment|/**    * Visit {@code RexInputRef}. If it has never been visited    * under current storage type before, {@code RexToLixTranslator}    * generally produces three lines of code.    * For example, when visiting a column (named commission) in    * table Employee, the generated code snippet is:    * {@code    *   final Employee current =(Employee) inputEnumerator.current();        final Integer input_value = current.commission;        final boolean input_isNull = input_value == null;    * }    */
-annotation|@
+end_comment
+
+begin_function
+unit|@
 name|Override
 specifier|public
 name|Result
@@ -5010,6 +5199,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|Type
 argument_list|>
 name|key
@@ -5050,7 +5241,12 @@ specifier|final
 name|Expression
 name|valueExpression
 init|=
+name|requireNonNull
+argument_list|(
 name|inputGetter
+argument_list|,
+literal|"inputGetter"
+argument_list|)
 operator|.
 name|field
 argument_list|(
@@ -5201,6 +5397,9 @@ name|valueVariable
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -5223,7 +5422,13 @@ name|this
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Visit {@code RexLiteral}. If it has never been visited before,    * {@code RexToLixTranslator} will generate two lines of code. For example,    * when visiting a primitive int (10), the generated code snippet is:    * {@code    *   final int literal_value = 10;    *   final boolean literal_isNull = false;    * }    */
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -5421,7 +5626,13 @@ return|return
 name|result
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an {@code Expression} for null literal without losing its type    * information.    */
+end_comment
+
+begin_function
 specifier|private
 name|ConstantExpression
 name|getTypedNullLiteral
@@ -5556,7 +5767,13 @@ name|javaClass
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Visit {@code RexCall}. For most {@code SqlOperator}s, we can get the implementor    * from {@code RexImpTable}. Several operators (e.g., CaseWhen) with special semantics    * need to be implemented separately.    */
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -5695,6 +5912,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Type
 argument_list|>
 name|storageTypes
@@ -5804,6 +6023,9 @@ return|return
 name|result
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|Result
@@ -5814,6 +6036,8 @@ name|RexNode
 name|operand
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|,
@@ -5875,6 +6099,9 @@ return|return
 name|operandResult
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|Expression
@@ -5885,6 +6112,8 @@ name|RexNode
 name|operand
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|,
@@ -5928,7 +6157,13 @@ return|return
 name|result
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * For {@code PREV} operator, the offset of {@code inputGetter}    * should be set first.    */
+end_comment
+
+begin_function
 specifier|private
 name|Result
 name|implementPrev
@@ -5987,14 +6222,17 @@ literal|1
 argument_list|)
 argument_list|)
 decl_stmt|;
-operator|(
+name|requireNonNull
+argument_list|(
 operator|(
 name|EnumerableMatch
 operator|.
 name|PrevInputGetter
 operator|)
 name|inputGetter
-operator|)
+argument_list|,
+literal|"inputGetter"
+argument_list|)
 operator|.
 name|setOffset
 argument_list|(
@@ -6010,7 +6248,13 @@ name|this
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * The CASE operator is SQLâs way of handling if/then logic.    * Different with other {@code RexCall}s, it is not safe to    * implement its operands first.    * For example: {@code    *   select case when s=0 then false    *          else 100/s> 0 end    *   from (values (1),(0)) ax(s);    * }    */
+end_comment
+
+begin_function
 specifier|private
 name|Result
 name|implementCaseWhen
@@ -6162,7 +6406,13 @@ return|return
 name|result
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Case statements of the form:    * {@code CASE WHEN a THEN b [WHEN c THEN d]* [ELSE e] END}.    * When {@code a = true}, returns {@code b};    * when {@code c = true}, returns {@code d};    * else returns {@code e}.    *    *<p>We generate code that looks like:    *    *<blockquote><pre>{@code    *      int case_when_value;    *      ......code for a......    *      if (!a_isNull&& a_value) {    *          ......code for b......    *          case_when_value = res(b_isNull, b_value);    *      } else {    *          ......code for c......    *          if (!c_isNull&& c_value) {    *              ......code for d......    *              case_when_value = res(d_isNull, d_value);    *          } else {    *              ......code for e......    *              case_when_value = res(e_isNull, e_value);    *          }    *      }    * }</pre></blockquote>    */
+end_comment
+
+begin_function
 specifier|private
 name|void
 name|implementRecursively
@@ -6198,6 +6448,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Type
 argument_list|>
 name|storageTypes
@@ -6517,6 +6769,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|Result
 name|toInnerStorageType
@@ -6624,6 +6879,9 @@ name|valueVariable
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -6639,6 +6897,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|Type
 argument_list|>
 name|key
@@ -6832,6 +7092,9 @@ return|return
 name|result
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -6847,6 +7110,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|Type
 argument_list|>
 name|key
@@ -7208,6 +7473,9 @@ name|result2
 return|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -7228,6 +7496,9 @@ name|over
 argument_list|)
 throw|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -7250,6 +7521,9 @@ literal|". Correlated variables should always be referenced by field access"
 argument_list|)
 throw|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -7270,6 +7544,9 @@ name|rangeRef
 argument_list|)
 throw|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -7290,6 +7567,9 @@ name|subQuery
 argument_list|)
 throw|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -7310,6 +7590,9 @@ name|fieldRef
 argument_list|)
 throw|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -7327,6 +7610,9 @@ name|fieldRef
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 name|Expression
 name|checkNull
 parameter_list|(
@@ -7372,6 +7658,9 @@ name|NULL_EXPR
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 name|Expression
 name|checkNotNull
 parameter_list|(
@@ -7417,6 +7706,9 @@ name|NULL_EXPR
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 name|BlockBuilder
 name|getBlockBuilder
 parameter_list|()
@@ -7425,6 +7717,9 @@ return|return
 name|list
 return|;
 block|}
+end_function
+
+begin_function
 name|Expression
 name|getLiteral
 parameter_list|(
@@ -7433,18 +7728,37 @@ name|literalVariable
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|literalMap
 operator|.
 name|get
 argument_list|(
 name|literalVariable
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"literalMap.get(literalVariable) for "
+operator|+
+name|literalVariable
+argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the value of a literal. */
+end_comment
+
+begin_function
+annotation|@
+name|Nullable
 name|Object
 name|getLiteralValue
 parameter_list|(
+annotation|@
+name|Nullable
 name|Expression
 name|expr
 parameter_list|)
@@ -7496,6 +7810,9 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_function
 name|List
 argument_list|<
 name|Result
@@ -7507,15 +7824,30 @@ name|call
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|callOperandResultMap
 operator|.
 name|get
 argument_list|(
 name|call
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"callOperandResultMap.get(call) for "
+operator|+
+name|call
+argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Translates a field of an input to an expression. */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|InputGetter
@@ -7529,12 +7861,20 @@ parameter_list|,
 name|int
 name|index
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/** Implementation of {@link InputGetter} that calls    * {@link PhysType#fieldReference}. */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -7588,6 +7928,8 @@ parameter_list|,
 name|int
 name|index
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)
@@ -7685,7 +8027,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Result of translating a {@code RexNode}. */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -7723,8 +8071,8 @@ name|valueVariable
 expr_stmt|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

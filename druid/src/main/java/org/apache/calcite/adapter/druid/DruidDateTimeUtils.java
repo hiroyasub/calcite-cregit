@@ -295,6 +295,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|joda
 operator|.
 name|time
@@ -359,16 +375,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
-import|;
-end_import
-
 begin_comment
 comment|/**  * Utilities for generating intervals from RexNode.  */
 end_comment
@@ -405,14 +411,14 @@ block|{
 block|}
 comment|/**    * Generates a list of {@link Interval}s equivalent to a given    * expression. Assumes that all the predicates in the input    * reference a single column: the timestamp column.    */
 annotation|@
-name|Nullable
-annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"BetaApi"
 argument_list|)
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Interval
@@ -692,10 +698,10 @@ return|return
 name|intervals
 return|;
 block|}
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Range
@@ -1008,14 +1014,14 @@ return|;
 block|}
 block|}
 annotation|@
-name|Nullable
-annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"BetaApi"
 argument_list|)
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Range
@@ -1754,10 +1760,10 @@ argument_list|)
 throw|;
 block|}
 comment|/**    * Returns the literal value for the given node, assuming it is a literal with    * datetime type, or a cast that only alters nullability on top of a literal with    * datetime type.    */
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|Long
 name|literalValue
 parameter_list|(
@@ -2001,10 +2007,10 @@ literal|null
 return|;
 block|}
 comment|/**    * Infers granularity from a time unit.    * It supports {@code FLOOR(<time> TO<timeunit>)}    * and {@code EXTRACT(<timeunit> FROM<time>)}.    * Returns null if it cannot be inferred.    *    * @param node the Rex node    * @return the granularity, or null if it cannot be inferred    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Granularity
 name|extractGranularity
 parameter_list|(
@@ -2189,10 +2195,10 @@ literal|null
 return|;
 block|}
 comment|/**    * Converts a granularity to ISO period format.    *    * @param type Druid Granularity  to translate as period of time    *    * @return String representing the granularity as ISO8601 Period of Time; null    * for unknown case    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|String
 name|toISOPeriodFormat
 parameter_list|(
@@ -2326,18 +2332,18 @@ return|;
 block|}
 block|}
 comment|/**    * Translates a Calcite {@link TimeUnitRange} to a Druid {@link Granularity}.    *    * @param timeUnit Calcite Time unit to convert    *    * @return Druid Granularity or null    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
 name|Granularity
 operator|.
+expr|@
+name|Nullable
 name|Type
 name|toDruidGranularity
-parameter_list|(
+argument_list|(
 name|TimeUnitRange
 name|timeUnit
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -2441,8 +2447,8 @@ literal|null
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

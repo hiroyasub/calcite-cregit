@@ -63,6 +63,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -87,6 +117,8 @@ name|getValidator
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the underlying table, or null if there is none.    */
+annotation|@
+name|Nullable
 name|SqlValidatorTable
 name|getTable
 parameter_list|()
@@ -123,16 +155,24 @@ name|targetRowType
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the parse tree node at the root of this namespace.    *    * @return parse tree node; null for {@link TableNamespace}    */
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the parse tree node that at is at the root of this namespace and    * includes all decorations. If there are no decorations, returns the same    * as {@link #getNode()}.    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|SqlNode
 name|getEnclosingNode
 parameter_list|()
 function_decl|;
 comment|/**    * Looks up a child namespace of a given name.    *    *<p>For example, in the query<code>select e.name from emps as e</code>,    *<code>e</code> is an {@link IdentifierNamespace} which has a child<code>    * name</code> which is a {@link FieldNamespace}.    *    * @param name Name of namespace    * @return Namespace    */
+annotation|@
+name|Nullable
 name|SqlValidatorNamespace
 name|lookupChild
 parameter_list|(
@@ -179,6 +219,8 @@ function_decl|;
 comment|/**    * Returns this namespace, or a wrapped namespace, cast to a particular    * class.    *    * @param clazz Desired type    * @return This namespace cast to desired type    * @throws ClassCastException if no such interface is available    */
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|T
 name|unwrap

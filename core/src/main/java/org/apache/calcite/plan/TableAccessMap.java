@@ -61,6 +61,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -238,6 +254,11 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns a set of qualified names for all tables accessed.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"return.type.incompatible"
+argument_list|)
 specifier|public
 name|Set
 argument_list|<
@@ -431,6 +452,8 @@ parameter_list|,
 name|int
 name|ordinal
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|parent
 parameter_list|)

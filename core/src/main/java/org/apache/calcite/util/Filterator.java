@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -35,6 +51,22 @@ name|NoSuchElementException
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Filtered iterator class: an iterator that includes only elements that are  * instanceof a specified class.  *  *<p>Apologies for the dorky name.  *  * @see Util#cast(java.util.List, Class)  * @see Util#cast(Iterator, Class)  *  * @param<E> Element type  */
 end_comment
@@ -45,6 +77,8 @@ class|class
 name|Filterator
 parameter_list|<
 name|E
+extends|extends
+name|Object
 parameter_list|>
 implements|implements
 name|Iterator
@@ -62,11 +96,11 @@ decl_stmt|;
 name|Iterator
 argument_list|<
 name|?
-extends|extends
-name|Object
 argument_list|>
 name|iterator
 decl_stmt|;
+annotation|@
+name|Nullable
 name|E
 name|lookAhead
 decl_stmt|;
@@ -174,7 +208,10 @@ operator|=
 literal|false
 expr_stmt|;
 return|return
+name|castNonNull
+argument_list|(
 name|o
+argument_list|)
 return|;
 block|}
 while|while

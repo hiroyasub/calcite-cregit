@@ -27,6 +27,38 @@ name|DataContext
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Context for executing a scalar expression in an interpreter.  */
 end_comment
@@ -43,8 +75,12 @@ name|root
 decl_stmt|;
 comment|/** Values of incoming columns from all inputs. */
 specifier|public
+annotation|@
+name|Nullable
 name|Object
-index|[]
+annotation|@
+name|MonotonicNonNull
+type|[]
 name|values
 decl_stmt|;
 name|Context

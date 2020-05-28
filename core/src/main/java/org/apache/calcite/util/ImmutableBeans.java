@@ -135,6 +135,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -346,12 +362,18 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -404,8 +426,6 @@ specifier|public
 name|Def
 name|load
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Class
 name|key
 parameter_list|)
@@ -431,6 +451,8 @@ specifier|public
 specifier|static
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|T
 name|create
@@ -459,6 +481,8 @@ specifier|public
 specifier|static
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|T
 name|copy
@@ -469,8 +493,6 @@ name|T
 argument_list|>
 name|beanClass
 parameter_list|,
-annotation|@
-name|Nonnull
 name|Object
 name|o
 parameter_list|)
@@ -507,6 +529,8 @@ specifier|private
 specifier|static
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|T
 name|create_
@@ -617,6 +641,8 @@ specifier|private
 specifier|static
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|Def
 argument_list|<
@@ -748,7 +774,7 @@ name|hasAnnotation
 argument_list|(
 name|method
 argument_list|,
-literal|"javax.annotation.Nonnull"
+literal|"org.checkerframework.checker.nullness.qual.NonNull"
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -2087,7 +2113,7 @@ return|return
 name|o
 return|;
 block|}
-comment|/** Looks for an annotation by class name.    * Useful if you don't want to depend on the class    * (e.g. "javax.annotation.Nonnull") at compile time. */
+comment|/** Looks for an annotation by class name.    * Useful if you don't want to depend on the class    * (e.g. "org.checkerframework.checker.nullness.qual.NonNull") at compile time. */
 specifier|private
 specifier|static
 name|boolean
@@ -2138,6 +2164,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Object
 name|getDefault
 parameter_list|(
@@ -2268,9 +2296,13 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Object
 name|convertDefault
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|defaultValue
 parameter_list|,
@@ -2321,15 +2353,19 @@ return|return
 name|defaultValue
 return|;
 block|}
+comment|// checkerframework does not infer "isEnum" here, so castNonNull
 for|for
 control|(
 name|Object
 name|enumConstant
 range|:
+name|castNonNull
+argument_list|(
 name|propertyType
 operator|.
 name|getEnumConstants
 argument_list|()
+argument_list|)
 control|)
 block|{
 if|if
@@ -2433,8 +2469,12 @@ interface|interface
 name|Handler
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 block|{
+annotation|@
+name|Nullable
 name|Object
 name|apply
 parameter_list|(
@@ -2444,6 +2484,8 @@ name|T
 argument_list|>
 name|bean
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|args
@@ -2606,6 +2648,8 @@ class|class
 name|BeanImpl
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 implements|implements
 name|InvocationHandler
@@ -2671,6 +2715,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|invoke
 parameter_list|(
@@ -2680,6 +2726,8 @@ parameter_list|,
 name|Method
 name|method
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|args
@@ -2798,6 +2846,8 @@ class|class
 name|Def
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 block|{
 specifier|private

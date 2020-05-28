@@ -281,6 +281,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -391,6 +407,8 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|Filter
 name|filter
 parameter_list|,
@@ -971,6 +989,7 @@ argument_list|,
 name|newJoinRel
 argument_list|)
 expr_stmt|;
+comment|// TODO: review if filter can be nullable here or not
 if|if
 condition|(
 operator|!
@@ -978,6 +997,10 @@ name|leftFilters
 operator|.
 name|isEmpty
 argument_list|()
+operator|&&
+name|filter
+operator|!=
+literal|null
 condition|)
 block|{
 name|call
@@ -1000,6 +1023,10 @@ name|rightFilters
 operator|.
 name|isEmpty
 argument_list|()
+operator|&&
+name|filter
+operator|!=
+literal|null
 condition|)
 block|{
 name|call

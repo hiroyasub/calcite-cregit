@@ -89,6 +89,22 @@ name|SqlUnnestOperator
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Namespace for UNNEST.  */
 end_comment
@@ -163,6 +179,8 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlValidatorTable
 name|getTable
 parameter_list|()
@@ -209,6 +227,19 @@ argument_list|(
 name|id
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|qualified
+operator|.
+name|namespace
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 return|return
 name|qualified
 operator|.
@@ -271,6 +302,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()

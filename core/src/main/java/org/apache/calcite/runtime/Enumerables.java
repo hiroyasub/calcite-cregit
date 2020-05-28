@@ -89,6 +89,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -246,6 +262,8 @@ parameter_list|(
 specifier|final
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -260,6 +278,8 @@ argument_list|(
 operator|(
 name|Function1
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|,
@@ -289,6 +309,8 @@ name|Supplier
 argument_list|<
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -348,6 +370,8 @@ name|Supplier
 argument_list|<
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -495,6 +519,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** Current result row. Null if no row is ready. */
+annotation|@
+name|Nullable
 name|TResult
 name|resultRow
 decl_stmt|;
@@ -727,6 +753,8 @@ name|E
 argument_list|>
 name|rows
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Integer

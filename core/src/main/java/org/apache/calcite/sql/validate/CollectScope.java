@@ -45,6 +45,22 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * The name-resolution context for expression inside a multiset call. The  * objects visible are multiset expressions, and those inherited from the parent  * scope.  *  * @see CollectNamespace  */
 end_comment
@@ -63,6 +79,8 @@ literal|"unused"
 argument_list|)
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|usingScope
 decl_stmt|;
@@ -77,6 +95,8 @@ parameter_list|(
 name|SqlValidatorScope
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|usingScope
 parameter_list|,

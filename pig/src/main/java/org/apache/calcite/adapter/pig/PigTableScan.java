@@ -213,6 +213,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.core.TableScan} in  * {@link PigRel#CONVENTION Pig calling convention}. */
 end_comment
@@ -353,16 +363,8 @@ init|=
 name|getTable
 argument_list|()
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|jdbc
-operator|.
 name|CalciteSchema
 operator|.
 name|class
@@ -372,6 +374,10 @@ return|return
 operator|(
 name|PigTable
 operator|)
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|schema
 operator|.
 name|getTable
@@ -379,6 +385,7 @@ argument_list|(
 name|name
 argument_list|,
 literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|getTable

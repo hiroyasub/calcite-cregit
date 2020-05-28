@@ -47,6 +47,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -255,6 +271,8 @@ specifier|static
 name|Source
 name|file
 parameter_list|(
+annotation|@
+name|Nullable
 name|File
 name|baseDirectory
 parameter_list|,
@@ -374,6 +392,8 @@ block|}
 comment|/** Looks for a suffix on a path and returns    * either the path with the suffix removed    * or null. */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|String
 name|trimOrNull
 parameter_list|(
@@ -597,6 +617,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Source
 name|trimOrNull
 parameter_list|(
@@ -675,6 +697,8 @@ name|Source
 block|{
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|File
 name|file
 decl_stmt|;
@@ -758,7 +782,25 @@ literal|true
 expr_stmt|;
 block|}
 specifier|private
+name|File
+name|fileNonNull
+parameter_list|()
+block|{
+return|return
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|file
+argument_list|,
+literal|"file"
+argument_list|)
+return|;
+block|}
+specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|File
 name|urlToFile
 parameter_list|(
@@ -1042,7 +1084,8 @@ return|return
 operator|(
 name|urlGenerated
 condition|?
-name|file
+name|fileNonNull
+argument_list|()
 else|:
 name|url
 operator|)
@@ -1286,6 +1329,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Source
 name|trimOrNull
 parameter_list|(
@@ -1340,7 +1385,8 @@ name|Sources
 operator|.
 name|trimOrNull
 argument_list|(
-name|file
+name|fileNonNull
+argument_list|()
 operator|.
 name|getPath
 argument_list|()
@@ -1547,7 +1593,8 @@ argument_list|(
 name|this
 argument_list|)
 operator|&&
-name|file
+name|fileNonNull
+argument_list|()
 operator|.
 name|getPath
 argument_list|()
@@ -1567,7 +1614,8 @@ block|{
 name|String
 name|rest
 init|=
-name|file
+name|fileNonNull
+argument_list|()
 operator|.
 name|getPath
 argument_list|()

@@ -629,6 +629,12 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
+name|Boolean
+operator|.
+name|TRUE
+operator|.
+name|equals
+argument_list|(
 name|mq
 operator|.
 name|areColumnsUnique
@@ -642,6 +648,7 @@ name|columns
 operator|.
 name|build
 argument_list|()
+argument_list|)
 argument_list|)
 condition|)
 block|{

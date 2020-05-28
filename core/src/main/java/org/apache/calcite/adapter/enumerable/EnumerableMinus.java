@@ -161,6 +161,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.core.Minus} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
 end_comment
@@ -328,6 +340,13 @@ operator|.
 name|block
 argument_list|)
 decl_stmt|;
+assert|assert
+name|childExp
+operator|!=
+literal|null
+operator|:
+literal|"childExp must not be null"
+assert|;
 if|if
 condition|(
 name|minusExp
@@ -403,7 +422,20 @@ name|builder
 operator|.
 name|add
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|minusExp
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"minusExp is null, inputs="
+operator|+
+name|inputs
+operator|+
+literal|", rel="
+operator|+
+name|this
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final

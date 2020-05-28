@@ -63,6 +63,22 @@ name|SqlReturnTypeInference
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * SqlFunctionalOperator is a base class for special operators which use  * functional syntax.  */
 end_comment
@@ -90,12 +106,18 @@ parameter_list|,
 name|boolean
 name|isLeftAssoc
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|)

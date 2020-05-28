@@ -143,6 +143,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -180,12 +196,16 @@ name|typeNameSpec
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|TimeZone
 name|timeZone
 decl_stmt|;
 comment|/** Whether data type allows nulls.    *    *<p>Nullable is nullable! Null means "not specified". E.g.    * {@code CAST(x AS INTEGER)} preserves the same nullability as {@code x}.    */
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Boolean
 name|nullable
 decl_stmt|;
@@ -222,6 +242,8 @@ specifier|final
 name|SqlTypeNameSpec
 name|typeNameSpec
 parameter_list|,
+annotation|@
+name|Nullable
 name|TimeZone
 name|timeZone
 parameter_list|,
@@ -248,9 +270,13 @@ parameter_list|(
 name|SqlTypeNameSpec
 name|typeNameSpec
 parameter_list|,
+annotation|@
+name|Nullable
 name|TimeZone
 name|timeZone
 parameter_list|,
+annotation|@
+name|Nullable
 name|Boolean
 name|nullable
 parameter_list|,
@@ -311,6 +337,8 @@ specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|)
@@ -322,6 +350,8 @@ name|CONSTANT
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|getCollectionsTypeName
 parameter_list|()
@@ -366,6 +396,8 @@ name|typeNameSpec
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|TimeZone
 name|getTimeZone
 parameter_list|()
@@ -375,6 +407,8 @@ name|timeZone
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|getNullable
 parameter_list|()
@@ -596,6 +630,8 @@ specifier|public
 name|boolean
 name|equalsDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|,

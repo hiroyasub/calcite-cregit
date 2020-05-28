@@ -159,6 +159,22 @@ name|RexNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Sub-class of {@link org.apache.calcite.rel.core.Sort} not  * targeted at any particular engine or calling convention.  */
 end_comment
@@ -186,9 +202,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -245,9 +265,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -325,9 +349,13 @@ parameter_list|,
 name|RelCollation
 name|newCollation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)

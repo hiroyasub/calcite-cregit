@@ -189,6 +189,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -225,6 +241,18 @@ name|RESOURCE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>SqlBinaryOperator</code> is a binary operator.  */
 end_comment
@@ -253,12 +281,18 @@ parameter_list|,
 name|boolean
 name|leftAssoc
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|)
@@ -308,6 +342,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getSignatureTemplate
 parameter_list|(
@@ -574,7 +610,10 @@ operator|.
 name|getCharset
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|resultCol
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -695,21 +734,6 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|mono0
-operator|==
-literal|null
-operator|||
-name|mono1
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 if|if
 condition|(
 name|mono1

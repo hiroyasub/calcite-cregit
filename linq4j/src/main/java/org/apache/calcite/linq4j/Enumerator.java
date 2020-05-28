@@ -15,11 +15,30 @@ name|linq4j
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|framework
+operator|.
+name|qual
+operator|.
+name|Covariant
+import|;
+end_import
+
 begin_comment
 comment|/**  * Supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.Enumerator. Unlike LINQ, if the  * underlying collection has been modified it is only optional that an  * implementation of the Enumerator interface detects it and throws a  * {@link java.util.ConcurrentModificationException}.  *  * @param<T> Element type  */
 end_comment
 
 begin_interface
+annotation|@
+name|Covariant
+argument_list|(
+literal|0
+argument_list|)
 specifier|public
 interface|interface
 name|Enumerator

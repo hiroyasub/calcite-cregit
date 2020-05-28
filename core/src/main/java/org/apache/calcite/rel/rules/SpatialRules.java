@@ -331,6 +331,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -366,6 +382,34 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexLiteral
+operator|.
+name|value
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -447,12 +491,14 @@ specifier|private
 specifier|static
 name|Geometries
 operator|.
+expr|@
+name|Nullable
 name|Geom
 name|constantGeom
-parameter_list|(
+argument_list|(
 name|RexNode
 name|e
-parameter_list|)
+argument_list|)
 block|{
 switch|switch
 condition|(
@@ -509,7 +555,13 @@ literal|null
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Rule that converts ST_DWithin in a Filter condition into a predicate on    * a Hilbert curve. */
+end_comment
+
+begin_class
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -612,6 +664,15 @@ name|getInput
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|predicates
+operator|==
+literal|null
+condition|)
+block|{
+return|return;
+block|}
 name|int
 name|changeCount
 init|=
@@ -865,6 +926,8 @@ block|}
 block|}
 comment|/** Rewrites a spatial predicate to a predicate on a Hilbert curve.      *      *<p>Returns null if the predicate cannot be rewritten;      * a 1-element list (new) if the predicate can be fully rewritten;      * returns a 2-element list (new, original) if the new predicate allows      * some false positives.      *      * @param conjunction Original predicate      * @param builder Builder      * @param ref Reference to Hilbert column      * @param hilbert Function call that populates Hilbert column      *      * @return List containing rewritten predicate and original, or null      */
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -981,11 +1044,11 @@ specifier|final
 name|Number
 name|distance
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|Number
 operator|)
-name|RexLiteral
-operator|.
 name|value
 argument_list|(
 name|within
@@ -996,6 +1059,13 @@ name|get
 argument_list|(
 literal|2
 argument_list|)
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"distance for "
+operator|+
+name|within
 argument_list|)
 decl_stmt|;
 switch|switch
@@ -1718,8 +1788,8 @@ return|;
 block|}
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

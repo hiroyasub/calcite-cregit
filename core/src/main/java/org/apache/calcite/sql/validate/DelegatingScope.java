@@ -267,6 +267,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -338,6 +354,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -737,6 +765,8 @@ specifier|final
 name|SqlValidatorNamespace
 name|ns2
 init|=
+name|requireNonNull
+argument_list|(
 name|ns
 operator|.
 name|lookupChild
@@ -745,6 +775,20 @@ name|field0
 operator|.
 name|getName
 argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"field "
+operator|+
+name|field0
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|" is not found in "
+operator|+
+name|ns
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -864,6 +908,8 @@ specifier|final
 name|SqlValidatorNamespace
 name|ns2
 init|=
+name|requireNonNull
+argument_list|(
 name|ns
 operator|.
 name|lookupChild
@@ -872,6 +918,20 @@ name|field
 operator|.
 name|getName
 argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"field "
+operator|+
+name|field
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|" is not found in "
+operator|+
+name|ns
 argument_list|)
 decl_stmt|;
 name|resolveInNamespace
@@ -1079,6 +1139,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|resolveColumn
 parameter_list|(
@@ -1125,13 +1187,15 @@ argument_list|)
 return|;
 block|}
 annotation|@
-name|Override
-annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlValidatorNamespace
 name|getTableNamespace
 parameter_list|(
@@ -1432,6 +1496,15 @@ argument_list|,
 name|columnName
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+continue|continue;
+block|}
 name|list
 operator|.
 name|add
@@ -2280,7 +2353,12 @@ block|}
 block|}
 if|if
 condition|(
+name|requireNonNull
+argument_list|(
 name|fromPath
+argument_list|,
+literal|"fromPath"
+argument_list|)
 operator|.
 name|stepCount
 argument_list|()
@@ -2912,9 +2990,20 @@ specifier|final
 name|RelDataTypeField
 name|field0
 init|=
+name|requireNonNull
+argument_list|(
 name|step
 operator|.
 name|rowType
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"rowType of step "
+operator|+
+name|step
+operator|.
+name|name
+argument_list|)
 operator|.
 name|getFieldList
 argument_list|()
@@ -3141,6 +3230,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlWindow
 name|lookupWindow
 parameter_list|(
@@ -3179,6 +3270,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|getOrderList
 parameter_list|()

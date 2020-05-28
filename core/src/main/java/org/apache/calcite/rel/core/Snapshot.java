@@ -177,6 +177,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -215,6 +231,11 @@ name|period
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a Snapshot.    *    * @param cluster   Cluster that this relational expression belongs to    * @param traitSet  The traits of this relational expression    * @param input     Input relational expression    * @param period    Timestamp expression which as the table was at the given    *                  time in the past    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Snapshot
 parameter_list|(
@@ -410,6 +431,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)

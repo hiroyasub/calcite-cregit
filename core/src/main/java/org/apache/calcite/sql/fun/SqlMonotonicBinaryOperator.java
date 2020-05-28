@@ -221,22 +221,6 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-comment|// unknown<op> unknown --> unknown
-if|if
-condition|(
-name|mono0
-operator|==
-literal|null
-operator|||
-name|mono1
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 comment|// constant<op> constant --> constant
 if|if
 condition|(

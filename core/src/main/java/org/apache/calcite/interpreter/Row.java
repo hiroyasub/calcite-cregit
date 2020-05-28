@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -36,6 +52,8 @@ name|Row
 block|{
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -44,6 +62,8 @@ comment|/** Creates a Row. */
 comment|// must stay package-protected, because does not copy
 name|Row
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -62,6 +82,8 @@ specifier|static
 name|Row
 name|asCopy
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|values
@@ -84,6 +106,8 @@ specifier|static
 name|Row
 name|of
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|value0
 parameter_list|)
@@ -107,9 +131,13 @@ specifier|static
 name|Row
 name|of
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|value0
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value1
 parameter_list|)
@@ -135,12 +163,18 @@ specifier|static
 name|Row
 name|of
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|value0
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value1
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value2
 parameter_list|)
@@ -168,6 +202,8 @@ specifier|static
 name|Row
 name|of
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|values
@@ -203,6 +239,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -250,6 +288,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|getObject
 parameter_list|(
@@ -265,6 +305,8 @@ index|]
 return|;
 block|}
 comment|// must stay package-protected
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|getValues
@@ -276,6 +318,8 @@ return|;
 block|}
 comment|/** Returns a copy of the values. */
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|copyValues
@@ -323,6 +367,8 @@ specifier|static
 class|class
 name|RowBuilder
 block|{
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -351,6 +397,8 @@ parameter_list|(
 name|int
 name|index
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)

@@ -779,11 +779,71 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -802,6 +862,8 @@ comment|//~ Static fields/initializers -----------------------------------------
 comment|/**    * The standard operator table.    */
 specifier|private
 specifier|static
+annotation|@
+name|MonotonicNonNull
 name|SqlStdOperatorTable
 name|instance
 decl_stmt|;
@@ -3125,7 +3187,10 @@ init|=
 operator|new
 name|SqlSumAggFunction
 argument_list|(
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>COUNT</code> aggregate function.    */
@@ -3337,7 +3402,10 @@ init|=
 operator|new
 name|SqlSingleValueAggFunction
 argument_list|(
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>AVG</code> aggregate function.    */
@@ -3582,7 +3650,10 @@ init|=
 operator|new
 name|SqlHistogramAggFunction
 argument_list|(
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>HISTOGRAM_MIN</code> window aggregate function.    */
@@ -7768,6 +7839,8 @@ block|}
 comment|/** Returns the group function for which a given kind is an auxiliary    * function, or null if it is not an auxiliary function. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|SqlGroupedWindowFunction
 name|auxiliaryToGroup
 parameter_list|(
@@ -7816,6 +7889,8 @@ block|}
 comment|/** Converts a call to a grouped auxiliary function    * to a call to the grouped window function. For other calls returns null.    *    *<p>For example, converts {@code TUMBLE_START(rowtime, INTERVAL '1' HOUR))}    * to {@code TUMBLE(rowtime, INTERVAL '1' HOUR))}. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|SqlCall
 name|convertAuxiliaryToGroupCall
 parameter_list|(
@@ -7844,11 +7919,9 @@ name|isGroupAuxiliary
 argument_list|()
 condition|)
 block|{
-return|return
-name|copy
-argument_list|(
-name|call
-argument_list|,
+name|SqlGroupedWindowFunction
+name|groupFunction
+init|=
 operator|(
 operator|(
 name|SqlGroupedWindowFunction
@@ -7857,6 +7930,18 @@ name|op
 operator|)
 operator|.
 name|groupFunction
+decl_stmt|;
+return|return
+name|copy
+argument_list|(
+name|call
+argument_list|,
+name|requireNonNull
+argument_list|(
+name|groupFunction
+argument_list|,
+literal|"groupFunction"
+argument_list|)
 argument_list|)
 return|;
 block|}

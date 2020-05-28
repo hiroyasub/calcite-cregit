@@ -15,6 +15,22 @@ name|plan
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelOptCostImpl provides a default implementation for the {@link RelOptCost}  * interface. It it defined in terms of a single scalar quantity; somewhat  * arbitrarily, it returns this scalar for rows processed and zero for both CPU  * and I/O.  */
 end_comment
@@ -202,6 +218,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

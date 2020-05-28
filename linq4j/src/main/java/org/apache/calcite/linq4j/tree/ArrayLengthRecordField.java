@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -48,6 +64,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -163,6 +191,8 @@ specifier|public
 name|Object
 name|get
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -174,7 +204,10 @@ name|Array
 operator|.
 name|getLength
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|o
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -195,6 +228,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

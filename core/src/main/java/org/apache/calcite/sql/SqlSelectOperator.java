@@ -97,6 +97,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -112,6 +128,22 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -183,12 +215,16 @@ specifier|public
 name|SqlCall
 name|createCall
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -475,9 +511,12 @@ argument_list|(
 literal|"/*+"
 argument_list|)
 expr_stmt|;
+name|castNonNull
+argument_list|(
 name|select
 operator|.
 name|hints
+argument_list|)
 operator|.
 name|unparse
 argument_list|(
@@ -676,10 +715,15 @@ name|fromFrame
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
+name|SqlNode
+name|where
+init|=
 name|select
 operator|.
+name|where
+decl_stmt|;
+if|if
+condition|(
 name|where
 operator|!=
 literal|null
@@ -704,8 +748,6 @@ block|{
 name|SqlNode
 name|node
 init|=
-name|select
-operator|.
 name|where
 decl_stmt|;
 comment|// decide whether to split on ORs or ANDs
@@ -833,8 +875,6 @@ name|SqlNodeList
 argument_list|(
 name|list
 argument_list|,
-name|select
-operator|.
 name|where
 operator|.
 name|getParserPosition
@@ -845,8 +885,6 @@ expr_stmt|;
 block|}
 else|else
 block|{
-name|select
-operator|.
 name|where
 operator|.
 name|unparse

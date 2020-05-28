@@ -123,6 +123,22 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression representing a scan of a table in a JDBC data source.  */
 end_comment
@@ -224,8 +240,11 @@ argument_list|,
 operator|(
 name|JdbcConvention
 operator|)
+name|castNonNull
+argument_list|(
 name|getConvention
 argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}

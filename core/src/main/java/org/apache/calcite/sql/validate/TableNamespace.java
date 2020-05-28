@@ -209,6 +209,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -414,6 +430,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()
@@ -606,6 +624,10 @@ specifier|final
 name|SqlValidatorTable
 name|validatorTable
 init|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|relOptTable
 operator|.
 name|unwrap
@@ -613,6 +635,13 @@ argument_list|(
 name|SqlValidatorTable
 operator|.
 name|class
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"cant unwrap SqlValidatorTable from "
+operator|+
+name|relOptTable
 argument_list|)
 decl_stmt|;
 return|return
@@ -652,6 +681,10 @@ specifier|final
 name|Table
 name|schemaTable
 init|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|table
 operator|.
 name|unwrap
@@ -659,6 +692,13 @@ argument_list|(
 name|Table
 operator|.
 name|class
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"can't unwrap Table from "
+operator|+
+name|table
 argument_list|)
 decl_stmt|;
 if|if

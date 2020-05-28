@@ -113,6 +113,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelDistributions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
 import|;
 end_import
@@ -219,6 +233,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -243,17 +273,35 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Set
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -479,10 +527,13 @@ parameter_list|()
 block|{
 name|this
 argument_list|(
+name|castNonNull
+argument_list|(
 name|THREAD_PROVIDERS
 operator|.
 name|get
 argument_list|()
+argument_list|)
 argument_list|,
 name|EMPTY
 argument_list|)
@@ -879,8 +930,6 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|metadataProvider
@@ -1096,6 +1145,8 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.NodeTypes#getNodeTypes()}    * statistic.    *    * @param rel the relational expression    */
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -1170,6 +1221,7 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */
 specifier|public
+comment|/* @Nullable: CALCITE-4263 */
 name|Double
 name|getRowCount
 parameter_list|(
@@ -1202,7 +1254,10 @@ name|RelMdUtil
 operator|.
 name|validateResult
 argument_list|(
+name|castNonNull
+argument_list|(
 name|result
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1234,6 +1289,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.MaxRowCount#getMaxRowCount()}    * statistic.    *    * @param rel the relational expression    * @return max row count    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -1288,6 +1345,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.MinRowCount#getMinRowCount()}    * statistic.    *    * @param rel the relational expression    * @return max row count    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(
@@ -1342,6 +1401,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.CumulativeCost#getCumulativeCost()}    * statistic.    *    * @param rel the relational expression    * @return estimated cost, or null if no reliable estimate can be determined    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getCumulativeCost
 parameter_list|(
@@ -1396,6 +1457,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.NonCumulativeCost#getNonCumulativeCost()}    * statistic.    *    * @param rel the relational expression    * @return estimated cost, or null if no reliable estimate can be determined    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getNonCumulativeCost
 parameter_list|(
@@ -1450,6 +1513,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.PercentageOriginalRows#getPercentageOriginalRows()}    * statistic.    *    * @param rel the relational expression    * @return estimated percentage (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPercentageOriginalRows
 parameter_list|(
@@ -1514,6 +1579,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnOrigin#getColumnOrigins(int)}    * statistic.    *    * @param rel           the relational expression    * @param column 0-based ordinal for output column of interest    * @return set of origin columns, or null if this information cannot be    * determined (whereas empty set indicates definitely no origin columns at    * all)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1576,6 +1643,8 @@ block|}
 block|}
 comment|/**    * Determines the origin of a column.    *    * @see #getColumnOrigins(org.apache.calcite.rel.RelNode, int)    *    * @param rel the RelNode of the column    * @param column the offset of the column whose origin we are trying to    * determine    *    * @return the origin of a column    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelColumnOrigin
 name|getColumnOrigin
 parameter_list|(
@@ -1635,6 +1704,8 @@ return|;
 block|}
 comment|/**    * Determines the origin of a column.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RexNode
@@ -1697,6 +1768,8 @@ block|}
 block|}
 comment|/**    * Determines the tables used by a plan.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelTableRef
@@ -1754,6 +1827,8 @@ block|}
 block|}
 comment|/**    * Determines the origin of a {@link RelNode}, provided it maps to a single    * table, optionally with filtering and projection.    *    * @param rel the RelNode    *    * @return the table, if the RelNode is a simple table; otherwise null    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptTable
 name|getTableOrigin
 parameter_list|(
@@ -1828,12 +1903,16 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Selectivity#getSelectivity(RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param predicate predicate whose selectivity is to be estimated against    *                  {@code rel}'s output    * @return estimated selectivity (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1897,6 +1976,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.UniqueKeys#getUniqueKeys(boolean)}    * statistic.    *    * @param rel the relational expression    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -1918,6 +1999,8 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.UniqueKeys#getUniqueKeys(boolean)}    * statistic.    *    * @param rel         the relational expression    * @param ignoreNulls if true, ignore null values when determining    *                    whether the keys are unique    *    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -1980,6 +2063,8 @@ block|}
 block|}
 comment|/**    * Returns whether the rows of a given relational expression are distinct.    * This is derived by applying the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic over all columns.    *    * @param rel     the relational expression    *    * @return true or false depending on whether the rows are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areRowsUnique
 parameter_list|(
@@ -2017,6 +2102,8 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(ImmutableBitSet, boolean)}    * statistic.    *    * @param rel     the relational expression    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    *    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2040,6 +2127,8 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(ImmutableBitSet, boolean)}    * statistic.    *    * @param rel         the relational expression    * @param columns     column mask representing the subset of columns for which    *                    uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2104,6 +2193,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Collation#collations()}    * statistic.    *    * @param rel         the relational expression    * @return List of sorted column combinations, or    * null if not enough information is available to make that determination    */
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -2176,7 +2267,9 @@ control|)
 block|{
 try|try
 block|{
-return|return
+name|RelDistribution
+name|distribution
+init|=
 name|distributionHandler
 operator|.
 name|distribution
@@ -2185,6 +2278,23 @@ name|rel
 argument_list|,
 name|this
 argument_list|)
+decl_stmt|;
+comment|//noinspection ConstantConditions
+if|if
+condition|(
+name|distribution
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|RelDistributions
+operator|.
+name|ANY
+return|;
+block|}
+return|return
+name|distribution
 return|;
 block|}
 catch|catch
@@ -2215,6 +2325,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.PopulationSize#getPopulationSize(ImmutableBitSet)}    * statistic.    *    * @param rel      the relational expression    * @param groupKey column mask representing the subset of columns for which    *                 the row count will be determined    * @return distinct row count for the given groupKey, or null if no reliable    * estimate can be determined    *    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -2284,6 +2396,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Size#averageRowSize()}    * statistic.    *    * @param rel      the relational expression    * @return average size of a row, in bytes, or null if not known      */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getAverageRowSize
 parameter_list|(
@@ -2338,8 +2452,12 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Size#averageColumnSizes()}    * statistic.    *    * @param rel      the relational expression    * @return a list containing, for each column, the average size of a column    * value, in bytes. Each value or the entire list may be null if the    * metadata is not available    */
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Double
 argument_list|>
 name|getAverageColumnSizes
@@ -2397,6 +2515,8 @@ comment|/** As {@link #getAverageColumnSizes(org.apache.calcite.rel.RelNode)} bu
 specifier|public
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Double
 argument_list|>
 name|getAverageColumnSizesNotNull
@@ -2406,8 +2526,12 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Double
 argument_list|>
 name|averageColumnSizes
@@ -2442,6 +2566,8 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Parallelism#isPhaseTransition()}    * statistic.    *    * @param rel      the relational expression    * @return whether each physical operator implementing this relational    * expression belongs to a different process than its inputs, or null if not    * known    */
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|isPhaseTransition
 parameter_list|(
@@ -2496,6 +2622,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Parallelism#splitCount()}    * statistic.    *    * @param rel      the relational expression    * @return the number of distinct splits of the data, or null if not known    */
 specifier|public
+annotation|@
+name|Nullable
 name|Integer
 name|splitCount
 parameter_list|(
@@ -2550,6 +2678,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Memory#memory()}    * statistic.    *    * @param rel      the relational expression    * @return the expected amount of memory, in bytes, required by a physical    * operator implementing this relational expression, across all splits,    * or null if not known    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|memory
 parameter_list|(
@@ -2604,6 +2734,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhase()}    * statistic.    *    * @param rel      the relational expression    * @return the cumulative amount of memory, in bytes, required by the    * physical operator implementing this relational expression, and all other    * operators within the same phase, across all splits, or null if not known    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|(
@@ -2658,6 +2790,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhaseSplit()}    * statistic.    *    * @param rel      the relational expression    * @return the expected cumulative amount of memory, in bytes, required by    * the physical operator implementing this relational expression, and all    * operators within the same phase, within each split, or null if not known    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|cumulativeMemoryWithinPhaseSplit
 parameter_list|(
@@ -2712,6 +2846,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.DistinctRowCount#getDistinctRowCount(ImmutableBitSet, RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param groupKey  column mask representing group by columns    * @param predicate pre-filtered predicates    * @return distinct row count for groupKey, filtered by predicate, or null    * if no reliable estimate can be determined    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -2721,6 +2857,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -2801,7 +2939,9 @@ control|)
 block|{
 try|try
 block|{
-return|return
+name|RelOptPredicateList
+name|result
+init|=
 name|predicatesHandler
 operator|.
 name|getPredicates
@@ -2810,6 +2950,17 @@ name|rel
 argument_list|,
 name|this
 argument_list|)
+decl_stmt|;
+return|return
+name|result
+operator|!=
+literal|null
+condition|?
+name|result
+else|:
+name|RelOptPredicateList
+operator|.
+name|EMPTY
 return|;
 block|}
 catch|catch
@@ -2840,6 +2991,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.AllPredicates#getAllPredicates()}    * statistic.    *    * @param rel the relational expression    * @return All predicates within and below this RelNode    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -2894,7 +3047,7 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.ExplainVisibility#isVisibleInExplain(SqlExplainLevel)}    * statistic.    *    * @param rel          the relational expression    * @param explainLevel level of detail    * @return true for visible, false for invisible; if no metadata is available,    * defaults to true    */
 specifier|public
-name|boolean
+name|Boolean
 name|isVisibleInExplain
 parameter_list|(
 name|RelNode
@@ -2962,6 +3115,8 @@ block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.Distribution#distribution()}    * statistic.    *    * @param rel the relational expression    *    * @return description of how the rows in the relational expression are    * physically distributed    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelDistribution
 name|getDistribution
 parameter_list|(
@@ -3016,6 +3171,8 @@ block|}
 block|}
 comment|/**    * Returns the lower bound cost of a RelNode.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getLowerBoundCost
 parameter_list|(

@@ -321,6 +321,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -424,6 +456,8 @@ name|DEF
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -564,6 +598,8 @@ name|set
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -701,6 +737,8 @@ name|set
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -779,6 +817,8 @@ name|set
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -873,6 +913,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1036,6 +1078,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1067,6 +1111,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1098,6 +1144,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1129,6 +1177,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1160,6 +1210,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1333,6 +1385,8 @@ return|;
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -1446,12 +1500,16 @@ name|set
 return|;
 block|}
 specifier|private
+annotation|@
+name|PolyNull
 name|Set
 argument_list|<
 name|RelColumnOrigin
 argument_list|>
 name|createDerivedColumnOrigins
 parameter_list|(
+annotation|@
+name|PolyNull
 name|Set
 argument_list|<
 name|RelColumnOrigin

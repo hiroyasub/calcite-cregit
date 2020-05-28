@@ -257,6 +257,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.Project}  * past a {@link org.apache.calcite.rel.core.Join}  * by splitting the projection into a projection on top of each child of  * the join.  *  * @see CoreRules#PROJECT_JOIN_TRANSPOSE  */
 end_comment
@@ -633,7 +645,12 @@ operator|.
 name|getTraitSet
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|newJoinFilter
+argument_list|,
+literal|"newJoinFilter must not be null"
+argument_list|)
 argument_list|,
 name|leftProject
 argument_list|,

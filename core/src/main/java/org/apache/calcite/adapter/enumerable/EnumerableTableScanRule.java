@@ -119,6 +119,22 @@ name|Table
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableScan} to  * {@link EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_SCAN_RULE */
 end_comment
@@ -200,6 +216,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(

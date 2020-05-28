@@ -47,6 +47,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -62,6 +78,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -98,6 +124,8 @@ specifier|static
 specifier|final
 name|ThreadLocal
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlTypeCoercionRule
 argument_list|>
 name|THREAD_PROVIDERS
@@ -1188,10 +1216,17 @@ name|instance
 parameter_list|()
 block|{
 return|return
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|THREAD_PROVIDERS
 operator|.
 name|get
 argument_list|()
+argument_list|,
+literal|"threadProviders"
+argument_list|)
 return|;
 block|}
 comment|/** Returns an instance with specified type mappings. */

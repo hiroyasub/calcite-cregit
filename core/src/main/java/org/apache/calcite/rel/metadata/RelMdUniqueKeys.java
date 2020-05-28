@@ -395,6 +395,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -430,6 +446,18 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -498,6 +526,8 @@ name|DEF
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -529,6 +559,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -560,6 +592,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -591,6 +625,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -655,6 +691,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -974,11 +1012,24 @@ name|Util
 operator|.
 name|filter
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|mapInToOutPos
 operator|.
 name|get
 argument_list|(
 name|in
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no entry for column "
+operator|+
+name|in
+operator|+
+literal|" in mapInToOutPos: "
+operator|+
+name|mapInToOutPos
 argument_list|)
 operator|.
 name|powerSet
@@ -1020,6 +1071,8 @@ argument_list|()
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -1702,6 +1755,8 @@ argument_list|()
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -1733,6 +1788,17 @@ operator|.
 name|getKeys
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|keys
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 for|for
 control|(
 name|ImmutableBitSet
@@ -1764,6 +1830,8 @@ return|;
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|ImmutableBitSet

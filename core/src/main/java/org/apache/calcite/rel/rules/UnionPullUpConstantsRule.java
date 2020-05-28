@@ -433,9 +433,12 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+name|RelOptPredicateList
+operator|.
+name|isEmpty
+argument_list|(
 name|predicates
-operator|==
-literal|null
+argument_list|)
 condition|)
 block|{
 return|return;

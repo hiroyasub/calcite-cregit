@@ -203,6 +203,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -246,16 +262,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -268,6 +274,22 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|NullnessUtil
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -354,6 +376,8 @@ parameter_list|,
 name|int
 name|startPrecision
 parameter_list|,
+annotation|@
+name|Nullable
 name|TimeUnit
 name|endUnit
 parameter_list|,
@@ -394,6 +418,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|startUnit
+argument_list|,
+literal|"startUnit"
 argument_list|)
 argument_list|,
 name|endUnit
@@ -418,6 +444,8 @@ parameter_list|(
 name|TimeUnit
 name|startUnit
 parameter_list|,
+annotation|@
+name|Nullable
 name|TimeUnit
 name|endUnit
 parameter_list|,
@@ -444,8 +472,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Nonnull
 annotation|@
 name|Override
 specifier|public
@@ -674,6 +700,8 @@ specifier|public
 name|boolean
 name|equalsDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|,
@@ -681,6 +709,22 @@ name|Litmus
 name|litmus
 parameter_list|)
 block|{
+if|if
+condition|(
+name|node
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"other==null"
+argument_list|)
+return|;
+block|}
 specifier|final
 name|String
 name|thisString
@@ -2841,11 +2885,14 @@ name|secondFrac
 operator|=
 name|normalizeSecondFraction
 argument_list|(
+name|castNonNull
+argument_list|(
 name|m
 operator|.
 name|group
 argument_list|(
 literal|5
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3416,11 +3463,14 @@ name|secondFrac
 operator|=
 name|normalizeSecondFraction
 argument_list|(
+name|castNonNull
+argument_list|(
 name|m
 operator|.
 name|group
 argument_list|(
 literal|4
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3807,11 +3857,14 @@ name|secondFrac
 operator|=
 name|normalizeSecondFraction
 argument_list|(
+name|castNonNull
+argument_list|(
 name|m
 operator|.
 name|group
 argument_list|(
 literal|3
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4048,11 +4101,14 @@ name|secondFrac
 operator|=
 name|normalizeSecondFraction
 argument_list|(
+name|castNonNull
+argument_list|(
 name|m
 operator|.
 name|group
 argument_list|(
 literal|2
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4454,11 +4510,14 @@ return|return
 operator|new
 name|BigDecimal
 argument_list|(
+name|castNonNull
+argument_list|(
 name|m
 operator|.
 name|group
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 argument_list|)
 return|;

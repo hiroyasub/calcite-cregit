@@ -461,6 +461,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -587,6 +603,18 @@ name|NO_EXPRS
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.core.Match} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
 end_comment
@@ -666,6 +694,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|interval
 parameter_list|)
@@ -766,6 +796,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|interval
 parameter_list|)
@@ -860,7 +892,8 @@ argument_list|(
 literal|0
 argument_list|)
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|,
 name|pattern
 argument_list|,
@@ -1945,14 +1978,17 @@ name|matchFunction
 argument_list|)
 expr_stmt|;
 comment|// Work with the implementor
-operator|(
+name|requireNonNull
+argument_list|(
 operator|(
 name|PassedRowsInputGetter
 operator|)
 name|translator
 operator|.
 name|inputGetter
-operator|)
+argument_list|,
+literal|"inputGetter"
+argument_list|)
 operator|.
 name|setIndex
 argument_list|(
@@ -2805,6 +2841,8 @@ specifier|final
 name|int
 name|prev
 init|=
+name|requireNonNull
+argument_list|(
 name|operand
 operator|.
 name|getValueAs
@@ -2812,6 +2850,13 @@ argument_list|(
 name|Integer
 operator|.
 name|class
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"operand in "
+operator|+
+name|call
 argument_list|)
 decl_stmt|;
 name|this
@@ -2852,6 +2897,8 @@ specifier|final
 name|int
 name|next
 init|=
+name|requireNonNull
+argument_list|(
 name|operand
 operator|.
 name|getValueAs
@@ -2859,6 +2906,13 @@ argument_list|(
 name|Integer
 operator|.
 name|class
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"operand in "
+operator|+
+name|call
 argument_list|)
 decl_stmt|;
 name|this
@@ -2909,6 +2963,8 @@ operator|.
 name|InputGetter
 block|{
 specifier|private
+annotation|@
+name|Nullable
 name|Expression
 name|index
 decl_stmt|;
@@ -2997,6 +3053,8 @@ block|}
 name|void
 name|setIndex
 parameter_list|(
+annotation|@
+name|Nullable
 name|Expression
 name|index
 parameter_list|)
@@ -3020,6 +3078,8 @@ parameter_list|,
 name|int
 name|index
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)
@@ -3137,6 +3197,8 @@ operator|.
 name|InputGetter
 block|{
 specifier|private
+annotation|@
+name|Nullable
 name|Expression
 name|offset
 decl_stmt|;
@@ -3211,6 +3273,8 @@ block|}
 name|void
 name|setOffset
 parameter_list|(
+annotation|@
+name|Nullable
 name|Expression
 name|offset
 parameter_list|)
@@ -3234,6 +3298,8 @@ parameter_list|,
 name|int
 name|index
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)
@@ -3291,7 +3357,12 @@ name|MEMORY_GET1
 operator|.
 name|method
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|offset
+argument_list|,
+literal|"offset"
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

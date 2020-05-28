@@ -389,6 +389,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -414,6 +430,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1275,10 +1303,19 @@ name|mergedProgram
 operator|.
 name|expandLocalRef
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|mergedProgram
 operator|.
 name|getCondition
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"mergedProgram.getCondition() for "
+operator|+
+name|mergedProgram
+argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1592,6 +1629,8 @@ specifier|protected
 name|void
 name|createProjectExprs
 parameter_list|(
+annotation|@
+name|Nullable
 name|Project
 name|project
 parameter_list|,

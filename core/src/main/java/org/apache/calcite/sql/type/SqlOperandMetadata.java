@@ -59,23 +59,11 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Extension to {@link SqlOperandTypeChecker} that also provides  * names and types of particular operands.  *  *<p>It is intended for user-defined functions (UDFs), and therefore the number  * of parameters is fixed.  *  * @see OperandTypes  */
 end_comment
 
 begin_interface
-annotation|@
-name|Nonnull
 specifier|public
 interface|interface
 name|SqlOperandMetadata

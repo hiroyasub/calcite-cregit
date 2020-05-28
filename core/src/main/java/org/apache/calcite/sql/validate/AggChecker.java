@@ -199,11 +199,41 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNonNullableAccessors
+operator|.
+name|getSelectList
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -448,10 +478,15 @@ specifier|final
 name|SqlQualified
 name|fqId
 init|=
+name|requireNonNull
+argument_list|(
 name|scopes
 operator|.
 name|peek
 argument_list|()
+argument_list|,
+literal|"scopes.peek()"
+argument_list|)
 operator|.
 name|fullyQualify
 argument_list|(
@@ -561,7 +596,8 @@ block|{
 name|SqlNodeList
 name|selectList
 init|=
-operator|(
+name|getSelectList
+argument_list|(
 operator|(
 name|SqlSelect
 operator|)
@@ -569,10 +605,7 @@ name|scope
 operator|.
 name|getNode
 argument_list|()
-operator|)
-operator|.
-name|getSelectList
-argument_list|()
+argument_list|)
 decl_stmt|;
 comment|// Check if this aggregation function is just an element in the select
 for|for
@@ -796,7 +829,16 @@ specifier|final
 name|SqlWindow
 name|window
 init|=
+name|requireNonNull
+argument_list|(
 name|scope
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"scope for "
+operator|+
+name|call
+argument_list|)
 operator|.
 name|lookupWindow
 argument_list|(
@@ -811,6 +853,17 @@ name|getSimple
 argument_list|()
 argument_list|)
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|window
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"window for "
+operator|+
+name|call
+argument_list|)
+expr_stmt|;
 name|window
 operator|.
 name|getPartitionList
@@ -936,7 +989,16 @@ comment|// Switch to new scope.
 name|SqlValidatorScope
 name|newScope
 init|=
+name|requireNonNull
+argument_list|(
 name|scope
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"scope for "
+operator|+
+name|call
+argument_list|)
 operator|.
 name|getOperandScope
 argument_list|(

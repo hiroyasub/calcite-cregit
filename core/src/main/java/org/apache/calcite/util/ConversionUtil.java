@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -404,9 +420,13 @@ block|}
 comment|/**    * Converts a string into a BOOLEAN.    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Boolean
 name|toBoolean
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|str
 parameter_list|)

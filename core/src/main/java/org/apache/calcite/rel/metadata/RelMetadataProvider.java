@@ -47,6 +47,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -68,17 +84,22 @@ name|RelMetadataProvider
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Retrieves metadata of a particular type and for a particular sub-class    * of relational expression.    *    *<p>The object returned is a function. It can be applied to a relational    * expression of the given type to create a metadata object.</p>    *    *<p>For example, you might call</p>    *    *<blockquote><pre>    * RelMetadataProvider provider;    * LogicalFilter filter;    * RexNode predicate;    * Function&lt;RelNode, Metadata&gt; function =    *   provider.apply(LogicalFilter.class, Selectivity.class};    * Selectivity selectivity = function.apply(filter);    * Double d = selectivity.selectivity(predicate);    *</pre></blockquote>    *    * @param relClass Type of relational expression    * @param metadataClass Type of metadata    * @return Function that will field a metadata instance; or null if this    *     provider cannot supply metadata of this type    */
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
+expr|@
+name|Nullable
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -86,7 +107,7 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|,
+argument_list|,
 name|Class
 argument_list|<
 name|?
@@ -94,8 +115,8 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|)
-function_decl|;
+argument_list|)
+expr_stmt|;
 parameter_list|<
 name|M
 extends|extends

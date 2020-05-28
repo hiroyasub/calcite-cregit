@@ -83,16 +83,6 @@ name|Map
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Utility class to find the implementation method object for a given Pig UDF  * class.  */
 end_comment
@@ -189,8 +179,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Finds the implementation method object for a given Pig UDF class.    *    * @param clazz The Pig UDF class    *    * @throws IllegalArgumentException if not found    */
-annotation|@
-name|Nonnull
 name|Method
 name|findPigUdfImplementationMethod
 parameter_list|(

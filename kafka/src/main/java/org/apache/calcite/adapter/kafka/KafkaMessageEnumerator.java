@@ -97,6 +97,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|time
@@ -139,6 +155,18 @@ name|AtomicBoolean
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Enumerator to read data from {@link Consumer},  * and converted into SQL rows with {@link KafkaRowConverter}.  *  * @param<K> Type for Kafka message key,  *           refer to {@link ConsumerConfig#KEY_DESERIALIZER_CLASS_CONFIG};  * @param<V> Type for Kafka message value,  *           refer to {@link ConsumerConfig#VALUE_DESERIALIZER_CLASS_CONFIG};  */
 end_comment
@@ -155,6 +183,8 @@ parameter_list|>
 implements|implements
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -197,6 +227,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|ConsumerRecord
 argument_list|<
 name|K
@@ -258,7 +290,12 @@ name|rowConverter
 operator|.
 name|toRow
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|curRecord
+argument_list|,
+literal|"curRecord"
+argument_list|)
 argument_list|)
 return|;
 block|}

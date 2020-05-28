@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -50,10 +66,17 @@ comment|/**  * Implementation of {@link Grouping}.  *  * @param<K> Key type  * @
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"type.argument.type.incompatible"
+argument_list|)
 class|class
 name|GroupingImpl
 parameter_list|<
 name|K
+extends|extends
+name|Object
 parameter_list|,
 name|V
 parameter_list|>
@@ -171,6 +194,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

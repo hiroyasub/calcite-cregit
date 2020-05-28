@@ -47,6 +47,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -62,6 +78,22 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -82,12 +114,16 @@ name|operator
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQuantifier
 decl_stmt|;
@@ -102,6 +138,8 @@ parameter_list|(
 name|SqlOperator
 name|operator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
@@ -130,6 +168,8 @@ parameter_list|(
 name|SqlOperator
 name|operator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
@@ -140,6 +180,8 @@ parameter_list|,
 name|boolean
 name|expanded
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|)
@@ -213,6 +255,8 @@ parameter_list|(
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -257,6 +301,8 @@ name|operator
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|getOperands
@@ -266,6 +312,11 @@ return|return
 name|operands
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullness"
+argument_list|)
 annotation|@
 name|Override
 specifier|public
@@ -310,10 +361,13 @@ return|return
 operator|(
 name|S
 operator|)
+name|castNonNull
+argument_list|(
 name|operands
 index|[
 name|i
 index|]
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -332,6 +386,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|getFunctionQuantifier
 parameter_list|()

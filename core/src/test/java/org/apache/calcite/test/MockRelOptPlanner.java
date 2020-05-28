@@ -213,6 +213,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -334,6 +350,8 @@ expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|getRoot
 parameter_list|()
@@ -800,6 +818,8 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|equivRel
 parameter_list|)

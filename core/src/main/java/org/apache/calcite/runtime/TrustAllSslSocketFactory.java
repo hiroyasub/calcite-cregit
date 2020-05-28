@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -112,6 +128,34 @@ operator|.
 name|ssl
 operator|.
 name|X509TrustManager
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -214,7 +258,12 @@ name|this
 operator|.
 name|sslSocketFactory
 operator|=
+name|requireNonNull
+argument_list|(
 name|factory
+argument_list|,
+literal|"sslSocketFactory"
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -398,6 +447,8 @@ block|}
 comment|/**    * Creates an "accept-all" SSLSocketFactory - ssl sockets will accept ANY    * certificate sent to them - thus effectively just securing the    * communications. This could be set in a HttpsURLConnection using    * HttpsURLConnection.setSSLSocketFactory(.....)    *    * @return SSLSocketFactory    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|SSLSocketFactory
 name|createSSLSocketFactory
 parameter_list|()
@@ -487,7 +538,10 @@ name|getAcceptedIssuers
 parameter_list|()
 block|{
 return|return
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 return|;
 block|}
 annotation|@

@@ -163,6 +163,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -409,6 +425,22 @@ name|DataSource
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Executes a SQL statement and returns the result as an {@link Enumerable}.  *  * @param<T> Element type  */
 end_comment
@@ -451,6 +483,8 @@ name|rowBuilderFactory
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|PreparedStatementEnricher
 name|preparedStatementEnricher
 decl_stmt|;
@@ -470,6 +504,8 @@ name|class
 argument_list|)
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|Long
 name|queryStart
 decl_stmt|;
@@ -490,6 +526,8 @@ name|ResultSet
 argument_list|,
 name|Function0
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -595,6 +633,8 @@ block|}
 decl_stmt|;
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|convertColumns
@@ -612,6 +652,8 @@ block|{
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -759,6 +801,8 @@ argument_list|>
 argument_list|>
 name|rowBuilderFactory
 parameter_list|,
+annotation|@
+name|Nullable
 name|PreparedStatementEnricher
 name|preparedStatementEnricher
 parameter_list|)
@@ -826,6 +870,8 @@ specifier|public
 specifier|static
 name|ResultSetEnumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|of
@@ -853,6 +899,8 @@ specifier|public
 specifier|static
 name|ResultSetEnumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|of
@@ -1139,6 +1187,8 @@ parameter_list|,
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -1152,6 +1202,7 @@ operator|==
 literal|null
 condition|)
 block|{
+comment|// TODO: use proper type instead of ANY
 name|preparedStatement
 operator|.
 name|setObject
@@ -1728,6 +1779,7 @@ operator|.
 name|getUpdateCount
 argument_list|()
 decl_stmt|;
+comment|//noinspection unchecked
 return|return
 name|Linq4j
 operator|.
@@ -1815,7 +1867,10 @@ argument_list|(
 name|preparedStatement
 argument_list|)
 expr_stmt|;
+name|castNonNull
+argument_list|(
 name|preparedStatementEnricher
+argument_list|)
 operator|.
 name|enrich
 argument_list|(
@@ -1868,6 +1923,7 @@ operator|.
 name|getUpdateCount
 argument_list|()
 decl_stmt|;
+comment|//noinspection unchecked
 return|return
 name|Linq4j
 operator|.
@@ -1924,11 +1980,22 @@ parameter_list|)
 throws|throws
 name|SQLException
 block|{
+name|Long
+name|queryStart
+init|=
+name|this
+operator|.
+name|queryStart
+decl_stmt|;
 if|if
 condition|(
 name|timeout
 operator|==
 literal|0
+operator|||
+name|queryStart
+operator|==
+literal|null
 condition|)
 block|{
 return|return;
@@ -2059,9 +2126,13 @@ specifier|private
 name|void
 name|closeIfPossible
 parameter_list|(
+annotation|@
+name|Nullable
 name|Connection
 name|connection
 parameter_list|,
+annotation|@
+name|Nullable
 name|Statement
 name|statement
 parameter_list|)
@@ -2138,6 +2209,8 @@ argument_list|>
 name|rowBuilder
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|ResultSet
 name|resultSet
 decl_stmt|;
@@ -2176,6 +2249,18 @@ name|resultSet
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+name|ResultSet
+name|resultSet
+parameter_list|()
+block|{
+return|return
+name|castNonNull
+argument_list|(
+name|resultSet
+argument_list|)
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -2201,6 +2286,7 @@ try|try
 block|{
 return|return
 name|resultSet
+argument_list|()
 operator|.
 name|next
 argument_list|()
@@ -2231,6 +2317,7 @@ block|{
 try|try
 block|{
 name|resultSet
+argument_list|()
 operator|.
 name|beforeFirst
 argument_list|()
@@ -2345,6 +2432,8 @@ name|ResultSet
 argument_list|,
 name|Function0
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -2462,6 +2551,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|convertPrimitiveColumns
@@ -2480,6 +2571,8 @@ block|{
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list

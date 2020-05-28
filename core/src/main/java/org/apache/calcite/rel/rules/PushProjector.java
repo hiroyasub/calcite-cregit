@@ -383,6 +383,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -408,16 +424,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
 import|;
 end_import
 
@@ -467,6 +473,18 @@ name|IntStream
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * PushProjector is a utility class used to perform operations used in push  * projection rules.  *  *<p>Pushing is particularly interesting in the case of join, because there  * are multiple inputs. Generally an expression can be pushed down to a  * particular input if it depends upon no other inputs. If it can be pushed  * down to both sides, it is pushed down to the left.  *  *<p>Sometimes an expression needs to be split before it can be pushed down.  * To flag that an expression cannot be split, specify a rule that it must be  *<dfn>preserved</dfn>. Such an expression will be pushed down intact to one  * of the inputs, or not pushed down at all.</p>  */
 end_comment
@@ -479,11 +497,15 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Project
 name|origProj
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RexNode
 name|origFilter
 decl_stmt|;
@@ -535,11 +557,15 @@ name|childBitmap
 decl_stmt|;
 comment|/**    * Bitmap containing the fields in the right hand side of a join, in the    * case where the projection is being pushed past a join. Not used    * otherwise.    */
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 name|rightBitmap
 decl_stmt|;
 comment|/**    * Bitmap containing the fields that should be strong, i.e. when preserving expressions    * we can only preserve them if the expressions if it is null when these fields are null.    */
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 name|strongBitmap
 decl_stmt|;
@@ -597,9 +623,13 @@ comment|/**    * Creates a PushProjector object for pushing projects past a RelN
 specifier|public
 name|PushProjector
 parameter_list|(
+annotation|@
+name|Nullable
 name|Project
 name|origProj
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|origFilter
 parameter_list|,
@@ -641,8 +671,6 @@ name|this
 operator|.
 name|relBuilder
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|relBuilder
@@ -1190,9 +1218,13 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Decomposes a projection to the input references referenced by a    * projection and a filter, either of which is optional. If both are    * provided, the filter is underneath the project.    *    *<p>Creates a projection containing all input references as well as    * preserving any special expressions. Converts the original projection    * and/or filter to reference the new projection. Then, finally puts on top,    * a final projection corresponding to the original projection.    *    * @param defaultExpr expression to be used in the projection if no fields    *                    or special columns are selected    * @return the converted projection if it makes sense to push elements of    * the projection; otherwise returns null    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convertProject
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|defaultExpr
 parameter_list|)
@@ -1453,7 +1485,12 @@ name|childBitmap
 argument_list|,
 name|rightBitmap
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|strongBitmap
+argument_list|,
+literal|"strongBitmap"
+argument_list|)
 argument_list|,
 name|preserveExprCondition
 argument_list|,
@@ -2440,6 +2477,8 @@ name|leftFields
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 name|rightFields
 decl_stmt|;
@@ -2482,6 +2521,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|leftFields
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 name|rightFields
 parameter_list|,
@@ -2719,7 +2760,12 @@ return|;
 block|}
 if|else if
 condition|(
+name|requireNonNull
+argument_list|(
 name|rightFields
+argument_list|,
+literal|"rightFields"
+argument_list|)
 operator|.
 name|contains
 argument_list|(
@@ -2950,7 +2996,12 @@ name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|destFields
+argument_list|,
+literal|"destFields"
+argument_list|)
 operator|.
 name|get
 argument_list|(

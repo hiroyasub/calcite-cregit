@@ -63,6 +63,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -98,6 +114,18 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -438,12 +466,18 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|// TODO: CALCITE-4308, JointNode in Interpreter might fail with NPE for FULL join
 for|for
 control|(
 name|Row
 name|row
 range|:
+name|requireNonNull
+argument_list|(
 name|innerRows
+argument_list|,
+literal|"innerRows"
+argument_list|)
 control|)
 block|{
 if|if
@@ -645,6 +679,15 @@ argument_list|,
 name|outerRowOnLeft
 argument_list|)
 expr_stmt|;
+name|requireNonNull
+argument_list|(
+name|context
+operator|.
+name|values
+argument_list|,
+literal|"context.values"
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|Row
@@ -716,6 +759,15 @@ case|:
 case|case
 name|FULL
 case|:
+name|requireNonNull
+argument_list|(
+name|context
+operator|.
+name|values
+argument_list|,
+literal|"context.values"
+argument_list|)
+expr_stmt|;
 name|int
 name|nullColumnNum
 init|=
@@ -830,6 +882,8 @@ name|boolean
 name|toLeftSide
 parameter_list|)
 block|{
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -839,6 +893,15 @@ operator|.
 name|getValues
 argument_list|()
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|context
+operator|.
+name|values
+argument_list|,
+literal|"context.values"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|toLeftSide

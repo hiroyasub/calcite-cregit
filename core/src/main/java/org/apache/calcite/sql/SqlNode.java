@@ -189,6 +189,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -261,16 +277,6 @@ name|Collector
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * A<code>SqlNode</code> is a SQL parse tree.  *  *<p>It may be an  * {@link SqlOperator operator}, {@link SqlLiteral literal},  * {@link SqlIdentifier identifier}, and so forth.  */
 end_comment
@@ -287,6 +293,8 @@ comment|//~ Static fields/initializers -----------------------------------------
 specifier|public
 specifier|static
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|EMPTY_ARRAY
@@ -399,8 +407,6 @@ parameter_list|)
 function_decl|;
 comment|/**    * Returns the type of node this is, or    * {@link org.apache.calcite.sql.SqlKind#OTHER} if it's nothing special.    *    * @return a {@link SqlKind} value, never null    * @see #isA    */
 specifier|public
-annotation|@
-name|Nonnull
 name|SqlKind
 name|getKind
 parameter_list|()
@@ -609,6 +615,8 @@ specifier|public
 name|SqlString
 name|toSqlString
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlDialect
 name|dialect
 parameter_list|,
@@ -663,6 +671,8 @@ specifier|public
 name|SqlString
 name|toSqlString
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlDialect
 name|dialect
 parameter_list|)
@@ -860,6 +870,8 @@ specifier|abstract
 name|boolean
 name|equalsDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|,
@@ -875,6 +887,8 @@ specifier|final
 name|boolean
 name|equalsDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|,
@@ -905,9 +919,13 @@ specifier|static
 name|boolean
 name|equalDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node1
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|node2
 parameter_list|,
@@ -958,6 +976,8 @@ specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|)
@@ -1086,6 +1106,8 @@ name|T
 argument_list|,
 name|ArrayList
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 argument_list|,
@@ -1106,31 +1128,47 @@ block|}
 comment|/**    * Returns a {@code Collector} that accumulates the input elements into a    * {@link SqlNodeList}.    *    * @param<T> Type of the input elements    *    * @return a {@code Collector} that collects all the input elements into a    * {@link SqlNodeList}, in encounter order    */
 specifier|public
 specifier|static
-parameter_list|<
+operator|<
 name|T
-extends|extends
+expr|extends @
+name|Nullable
 name|SqlNode
-parameter_list|>
+operator|>
 name|Collector
 argument_list|<
 name|T
 argument_list|,
 name|ArrayList
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 argument_list|,
 name|SqlNodeList
 argument_list|>
 name|toList
-parameter_list|(
+argument_list|(
 name|SqlParserPos
 name|pos
-parameter_list|)
+argument_list|)
 block|{
+comment|//noinspection RedundantTypeArguments
 return|return
 name|Collector
 operator|.
+expr|<
+name|T
+operator|,
+name|ArrayList
+argument_list|<
+annotation|@
+name|Nullable
+name|SqlNode
+argument_list|>
+operator|,
+name|SqlNodeList
+operator|>
 name|of
 argument_list|(
 name|ArrayList
@@ -1145,7 +1183,15 @@ name|Util
 operator|::
 name|combine
 argument_list|,
+parameter_list|(
+name|ArrayList
+argument_list|<
+annotation|@
+name|Nullable
+name|SqlNode
+argument_list|>
 name|list
+parameter_list|)
 lambda|->
 name|SqlNodeList
 operator|.

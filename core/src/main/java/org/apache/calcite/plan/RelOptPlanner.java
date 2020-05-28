@@ -125,6 +125,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -181,6 +197,8 @@ name|rel
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the root node of this query.    *    * @return Root node    */
+annotation|@
+name|Nullable
 name|RelNode
 name|getRoot
 parameter_list|()
@@ -244,6 +262,8 @@ comment|/**    * Sets the exclusion filter to use for this planner. Rules which 
 name|void
 name|setRuleDescExclusionFilter
 parameter_list|(
+annotation|@
+name|Nullable
 name|Pattern
 name|exclusionFilter
 parameter_list|)
@@ -300,6 +320,8 @@ name|lattice
 parameter_list|)
 function_decl|;
 comment|/**    * Retrieves a lattice, given its star table.    */
+annotation|@
+name|Nullable
 name|RelOptLattice
 name|getLattice
 parameter_list|(
@@ -318,6 +340,8 @@ name|getCostFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Computes the cost of a RelNode. In most cases, this just dispatches to    * {@link RelMetadataQuery#getCumulativeCost}.    *    * @param rel Relational expression of interest    * @param mq Metadata query    * @return estimated cost    */
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getCost
 parameter_list|(
@@ -333,6 +357,8 @@ comment|/** @deprecated Use {@link #getCost(RelNode, RelMetadataQuery)}    * or,
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getCost
 parameter_list|(
@@ -347,6 +373,8 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|equivRel
 parameter_list|)
@@ -358,6 +386,8 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|equivRel
 parameter_list|)
@@ -430,11 +460,15 @@ comment|/** Sets the object that can execute scalar expressions. */
 name|void
 name|setExecutor
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexExecutor
 name|executor
 parameter_list|)
 function_decl|;
 comment|/** Returns the executor used to evaluate constant expressions. */
+annotation|@
+name|Nullable
 name|RexExecutor
 name|getExecutor
 parameter_list|()

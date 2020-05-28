@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -80,6 +96,8 @@ name|arguments
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|MemberDeclaration
@@ -103,6 +121,8 @@ name|Expression
 argument_list|>
 name|arguments
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|MemberDeclaration
@@ -182,6 +202,14 @@ name|MemberDeclaration
 argument_list|>
 name|memberDeclarations
 init|=
+name|this
+operator|.
+name|memberDeclarations
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|Expressions
 operator|.
 name|acceptMemberDeclarations
@@ -297,6 +325,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

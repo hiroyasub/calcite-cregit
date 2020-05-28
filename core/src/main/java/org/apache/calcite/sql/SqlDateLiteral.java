@@ -93,6 +93,16 @@ name|DateString
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SQL literal representing a DATE value, such as<code>DATE  * '2004-10-22'</code>.  *  *<p>Create values using {@link SqlLiteral#createDate}.  */
 end_comment
@@ -141,7 +151,14 @@ return|return
 operator|(
 name|DateString
 operator|)
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -158,10 +175,8 @@ return|return
 operator|new
 name|SqlDateLiteral
 argument_list|(
-operator|(
-name|DateString
-operator|)
-name|value
+name|getDate
+argument_list|()
 argument_list|,
 name|pos
 argument_list|)

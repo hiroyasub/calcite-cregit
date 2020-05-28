@@ -125,6 +125,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -143,23 +159,35 @@ interface|interface
 name|TypeCoercion
 block|{
 comment|/**    * Case1: type widening with no precision loss.    * Find the tightest common type of two types that might be used in binary expression.    *    * @return common type    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getTightestCommonType
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|type1
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
 comment|/**    * Case2: type widening. The main difference with    * {@link #getTightestCommonType} is that we allow    * some precision loss when widening decimal to fractional, or promote to string type.    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getWiderTypeForTwo
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|type1
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type2
 parameter_list|,
@@ -168,6 +196,8 @@ name|stringPromotion
 parameter_list|)
 function_decl|;
 comment|/**    * Similar to {@link #getWiderTypeForTwo}, but can handle    * sequence types. {@link #getWiderTypeForTwo} doesn't satisfy the associative law,    * i.e. (a op b) op c may not equal to a op (b op c). This is only a problem for STRING or    * nested STRING in collection type like ARRAY. Excluding these types,    * {@link #getWiderTypeForTwo} satisfies the associative law. For instance,    * (DATE, INTEGER, VARCHAR) should have VARCHAR as the wider common type.    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getWiderTypeFor
 parameter_list|(
@@ -182,23 +212,35 @@ name|stringPromotion
 parameter_list|)
 function_decl|;
 comment|/**    * Finds a wider type when one or both types are DECIMAL type.    *    *<p>If the wider decimal type's precision/scale exceeds system limitation,    * this rule will truncate the decimal type to the max precision/scale.    * For DECIMAL and fractional types, returns DECIMAL type    * that has the higher precision of the two.    *    *<p>The default implementation depends on the max precision/scale of the type system,    * you can override it based on the specific system requirement in    * {@link org.apache.calcite.rel.type.RelDataTypeSystem}.    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getWiderTypeForDecimal
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|type1
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
 comment|/**    * Determines common type for a comparison operator whose operands are STRING    * type and the other (non STRING) type.    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|commonTypeForBinaryComparison
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|type1
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type2
 parameter_list|)
@@ -207,6 +249,8 @@ comment|/**    * Widen a SqlNode ith column type to target type, mainly used for
 name|boolean
 name|rowTypeCoercion
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
@@ -290,6 +334,8 @@ comment|/**    * Coerces the source row expression to target type in an INSERT o
 name|boolean
 name|querySourceCoercion
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,

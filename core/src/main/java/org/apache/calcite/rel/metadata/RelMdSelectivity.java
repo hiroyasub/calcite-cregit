@@ -289,6 +289,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -372,6 +388,8 @@ name|DEF
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -381,6 +399,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -508,7 +528,7 @@ name|adjustments
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|double
+name|Double
 name|sel
 init|=
 name|mq
@@ -520,6 +540,17 @@ argument_list|,
 name|modifiedPred
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|sel
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 name|sumRows
 operator|+=
 name|nRows
@@ -550,6 +581,8 @@ name|sumRows
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -559,6 +592,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -578,6 +613,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -587,6 +624,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -606,6 +645,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -615,6 +656,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -683,6 +726,8 @@ return|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -692,6 +737,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -792,6 +839,8 @@ return|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -801,6 +850,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -891,6 +942,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -900,6 +953,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1025,6 +1080,8 @@ return|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -1034,6 +1091,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1206,6 +1265,8 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)

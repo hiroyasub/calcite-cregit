@@ -273,6 +273,52 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|framework
+operator|.
+name|qual
+operator|.
+name|Covariant
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -326,6 +372,11 @@ comment|/**  * Extension methods in {@link Enumerable}.  *  * @param<TSource> El
 end_comment
 
 begin_interface
+annotation|@
+name|Covariant
+argument_list|(
+literal|0
+argument_list|)
 specifier|public
 interface|interface
 name|ExtendedEnumerable
@@ -337,6 +388,8 @@ comment|/**    * Performs an operation for each member of this enumeration.    *
 parameter_list|<
 name|R
 parameter_list|>
+annotation|@
+name|Nullable
 name|R
 name|foreach
 parameter_list|(
@@ -350,11 +403,15 @@ name|func
 parameter_list|)
 function_decl|;
 comment|/**    * Applies an accumulator function over a    * sequence.    */
+annotation|@
+name|Nullable
 name|TSource
 name|aggregate
 parameter_list|(
 name|Function2
 argument_list|<
+annotation|@
+name|Nullable
 name|TSource
 argument_list|,
 name|TSource
@@ -364,22 +421,30 @@ argument_list|>
 name|func
 parameter_list|)
 function_decl|;
-comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value.    */
+comment|/**    * Applies an accumulator function over a    * sequence. The specified seed value is used as the initial    * accumulator value.    *    *<p>If {@code seed} is not null, the result is never null.    */
 parameter_list|<
 name|TAccumulate
 parameter_list|>
+annotation|@
+name|PolyNull
 name|TAccumulate
 name|aggregate
 parameter_list|(
+annotation|@
+name|PolyNull
 name|TAccumulate
 name|seed
 parameter_list|,
 name|Function2
 argument_list|<
+annotation|@
+name|PolyNull
 name|TAccumulate
 argument_list|,
 name|TSource
 argument_list|,
+annotation|@
+name|PolyNull
 name|TAccumulate
 argument_list|>
 name|func
@@ -641,18 +706,24 @@ function_decl|;
 comment|/**    * Returns the elements of the specified sequence or    * the type parameter's default value in a singleton collection if    * the sequence is empty.    */
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|TSource
 argument_list|>
 name|defaultIfEmpty
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the elements of the specified sequence or    * the specified value in a singleton collection if the sequence    * is empty.    */
+comment|/**    * Returns the elements of the specified sequence or    * the specified value in a singleton collection if the sequence    * is empty.    *    *<p>If {@code value} is not null, the result is never null.    */
 name|Enumerable
 argument_list|<
+annotation|@
+name|PolyNull
 name|TSource
 argument_list|>
 name|defaultIfEmpty
 parameter_list|(
+annotation|@
+name|PolyNull
 name|TSource
 name|value
 parameter_list|)
@@ -688,6 +759,8 @@ name|index
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the element at a specified index in a    * sequence or a default value if the index is out of    * range.    */
+annotation|@
+name|Nullable
 name|TSource
 name|elementAtOrDefault
 parameter_list|(
@@ -786,11 +859,15 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the first element of a sequence, or a    * default value if the sequence contains no elements.    */
+annotation|@
+name|Nullable
 name|TSource
 name|firstOrDefault
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the first element of the sequence that    * satisfies a condition or a default value if no such element is    * found.    */
+annotation|@
+name|Nullable
 name|TSource
 name|firstOrDefault
 parameter_list|(
@@ -1752,11 +1829,15 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the last element of a sequence, or a    * default value if the sequence contains no elements.    */
+annotation|@
+name|Nullable
 name|TSource
 name|lastOrDefault
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the last element of a sequence that    * satisfies a condition or a default value if no such element is    * found.    */
+annotation|@
+name|Nullable
 name|TSource
 name|lastOrDefault
 parameter_list|(
@@ -1784,11 +1865,15 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the maximum value in a generic    * sequence.    */
+annotation|@
+name|Nullable
 name|TSource
 name|max
 parameter_list|()
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Decimal value.    */
+annotation|@
+name|Nullable
 name|BigDecimal
 name|max
 parameter_list|(
@@ -1800,6 +1885,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Decimal    * value.    */
+annotation|@
+name|Nullable
 name|BigDecimal
 name|max
 parameter_list|(
@@ -1822,6 +1909,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Double    * value.    */
+annotation|@
+name|Nullable
 name|Double
 name|max
 parameter_list|(
@@ -1844,6 +1933,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable int value. (Defined    * by Enumerable.)    */
+annotation|@
+name|Nullable
 name|Integer
 name|max
 parameter_list|(
@@ -1866,6 +1957,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable long value. (Defined    * by Enumerable.)    */
+annotation|@
+name|Nullable
 name|Long
 name|max
 parameter_list|(
@@ -1888,6 +1981,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Float    * value.    */
+annotation|@
+name|Nullable
 name|Float
 name|max
 parameter_list|(
@@ -1907,6 +2002,8 @@ argument_list|<
 name|TResult
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|TResult
 name|max
 parameter_list|(
@@ -1920,11 +2017,15 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the minimum value in a generic    * sequence.    */
+annotation|@
+name|Nullable
 name|TSource
 name|min
 parameter_list|()
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Decimal value.    */
+annotation|@
+name|Nullable
 name|BigDecimal
 name|min
 parameter_list|(
@@ -1936,6 +2037,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Decimal    * value.    */
+annotation|@
+name|Nullable
 name|BigDecimal
 name|min
 parameter_list|(
@@ -1958,6 +2061,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Double    * value.    */
+annotation|@
+name|Nullable
 name|Double
 name|min
 parameter_list|(
@@ -1980,6 +2085,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable int value. (Defined    * by Enumerable.)    */
+annotation|@
+name|Nullable
 name|Integer
 name|min
 parameter_list|(
@@ -2002,6 +2109,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable long value. (Defined    * by Enumerable.)    */
+annotation|@
+name|Nullable
 name|Long
 name|min
 parameter_list|(
@@ -2024,6 +2133,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Float    * value.    */
+annotation|@
+name|Nullable
 name|Float
 name|min
 parameter_list|(
@@ -2043,6 +2154,8 @@ argument_list|<
 name|TResult
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|TResult
 name|min
 parameter_list|(
@@ -2373,11 +2486,15 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
+annotation|@
+name|Nullable
 name|TSource
 name|singleOrDefault
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition or a default value if no such    * element exists; this method throws an exception if more than    * one element satisfies the condition.    */
+annotation|@
+name|Nullable
 name|TSource
 name|singleOrDefault
 parameter_list|(

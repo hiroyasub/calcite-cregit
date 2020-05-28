@@ -383,6 +383,22 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdRowCount supplies a default implementation of  * {@link RelMetadataQuery#getRowCount} for the standard logical algebra.  */
 end_comment
@@ -443,6 +459,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.RowCount#getRowCount()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getRowCount(RelNode)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -468,6 +486,8 @@ argument_list|(
 literal|"CatchAndPrintStackTrace"
 argument_list|)
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -491,20 +511,10 @@ name|mq
 operator|.
 name|getRowCount
 argument_list|(
-name|Util
-operator|.
-name|first
-argument_list|(
 name|subset
 operator|.
-name|getBest
+name|getBestOrOriginal
 argument_list|()
-argument_list|,
-name|subset
-operator|.
-name|getOriginal
-argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -577,6 +587,8 @@ return|;
 comment|// if set is empty, estimate large
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -647,6 +659,8 @@ name|rowCount
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -730,6 +744,8 @@ return|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -852,6 +868,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -875,6 +893,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -1011,6 +1031,8 @@ name|rowCount
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -1148,6 +1170,8 @@ return|;
 block|}
 comment|// Covers Converter, Interpreter
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -1171,6 +1195,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -1312,6 +1338,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(
@@ -1335,6 +1363,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|(

@@ -39,6 +39,8 @@ specifier|protected
 specifier|final
 name|Enumerator
 argument_list|<
+name|?
+extends|extends
 name|F
 argument_list|>
 name|enumerator
@@ -48,6 +50,8 @@ name|TransformedEnumerator
 parameter_list|(
 name|Enumerator
 argument_list|<
+name|?
+extends|extends
 name|F
 argument_list|>
 name|enumerator

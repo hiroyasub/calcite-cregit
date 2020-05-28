@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -48,16 +64,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -334,10 +340,10 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/** Returns a valid {@link Granularity} of floor extract, or null when not    * possible.    *    * @param dimensionSpec Druid Dimension specification    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Granularity
 name|toQueryGranularity
 parameter_list|(

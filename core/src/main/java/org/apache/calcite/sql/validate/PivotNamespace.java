@@ -61,6 +61,18 @@ name|SqlPivot
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Namespace for a {@code PIVOT} clause.  */
 end_comment
@@ -123,7 +135,12 @@ name|pivot
 argument_list|)
 expr_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
+argument_list|)
 return|;
 block|}
 annotation|@

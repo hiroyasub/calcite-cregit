@@ -49,6 +49,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -77,6 +93,8 @@ interface|interface
 name|Schema
 block|{
 comment|/**    * Returns a table with a given name, or null if not found.    *    * @param name Table name    * @return Table, or null    */
+annotation|@
+name|Nullable
 name|Table
 name|getTable
 parameter_list|(
@@ -93,6 +111,8 @@ name|getTableNames
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a type with a given name, or null if not found.    *    * @param name Table name    * @return Table, or null    */
+annotation|@
+name|Nullable
 name|RelProtoDataType
 name|getType
 parameter_list|(
@@ -128,6 +148,8 @@ name|getFunctionNames
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a sub-schema with a given name, or null.    *    * @param name Sub-schema name    * @return Sub-schema with a given name, or null    */
+annotation|@
+name|Nullable
 name|Schema
 name|getSubSchema
 parameter_list|(
@@ -147,6 +169,8 @@ comment|/**    * Returns the expression by which this schema can be referenced i
 name|Expression
 name|getExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,

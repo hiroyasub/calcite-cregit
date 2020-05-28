@@ -129,6 +129,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -195,6 +211,8 @@ return|;
 block|}
 comment|/** Rewrites a relational expression to use a lattice.    *    *<p>Returns null if a rewrite is not possible.    *    * @param node Relational expression    * @return Rewritten query    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|rewrite
 parameter_list|(
@@ -215,6 +233,8 @@ return|;
 block|}
 comment|/** Retrieves a materialized table that will satisfy an aggregate query on    * the star table.    *    *<p>The current implementation creates a materialization and populates it,    * provided that {@link Lattice#auto} is true.    *    *<p>Future implementations might return materializations at a different    * level of aggregation, from which the desired result can be obtained by    * rolling up.    *    * @param planner Current planner    * @param groupSet Grouping key    * @param measureList Calls to aggregate functions    * @return Materialized table    */
 specifier|public
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|CalciteSchema
@@ -301,6 +321,15 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+assert|assert
+name|schema
+operator|!=
+literal|null
+operator|:
+literal|"Can't get CalciteSchema from "
+operator|+
+name|starRelOptTable
+assert|;
 return|return
 name|service
 operator|.

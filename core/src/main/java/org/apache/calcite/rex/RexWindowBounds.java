@@ -73,6 +73,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -142,6 +158,8 @@ parameter_list|(
 name|SqlNode
 name|node
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|rexNode
 parameter_list|)
@@ -188,6 +206,13 @@ return|return
 name|CURRENT_ROW
 return|;
 block|}
+assert|assert
+name|rexNode
+operator|!=
+literal|null
+operator|:
+literal|"offset value cannot be null for bounded window"
+assert|;
 return|return
 operator|new
 name|RexBoundedWindowBound
@@ -365,6 +390,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -453,6 +480,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -694,6 +723,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

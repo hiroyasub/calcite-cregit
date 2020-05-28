@@ -17,6 +17,22 @@ name|parser
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Contains a string, the offset of a token within the string, and a parser  * position containing the beginning and end line number.  */
 end_comment
@@ -38,6 +54,8 @@ name|cursor
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlParserPos
 name|pos
 decl_stmt|;
@@ -50,6 +68,8 @@ parameter_list|,
 name|int
 name|cursor
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlParserPos
 name|pos
 parameter_list|)

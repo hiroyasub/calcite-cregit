@@ -195,6 +195,22 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * User-defined aggregate function.  *  *<p>Created by the validator, after resolving a function call to a function  * defined in a Calcite schema.</p>  */
 end_comment
@@ -226,6 +242,8 @@ parameter_list|,
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|,
@@ -302,6 +320,8 @@ parameter_list|,
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandMetadata
 name|operandMetadata
 parameter_list|,
@@ -360,12 +380,16 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlOperandMetadata
 name|getOperandTypeChecker
 parameter_list|()
 block|{
 return|return
 operator|(
+expr|@
+name|Nullable
 name|SqlOperandMetadata
 operator|)
 name|super

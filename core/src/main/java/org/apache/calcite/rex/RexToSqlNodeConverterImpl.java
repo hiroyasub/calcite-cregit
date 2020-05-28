@@ -131,6 +131,34 @@ name|TimestampString
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Standard implementation of {@link RexToSqlNodeConverter}.  */
 end_comment
@@ -164,10 +192,11 @@ name|convertletTable
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RexToSqlNodeConverter
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertNode
 parameter_list|(
@@ -234,6 +263,8 @@ comment|// implement RexToSqlNodeConverter
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertCall
 parameter_list|(
@@ -274,10 +305,11 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RexToSqlNodeConverter
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertLiteral
 parameter_list|(
@@ -309,13 +341,15 @@ name|SqlLiteral
 operator|.
 name|createExactNumeric
 argument_list|(
+name|String
+operator|.
+name|valueOf
+argument_list|(
 name|literal
 operator|.
 name|getValue
 argument_list|()
-operator|.
-name|toString
-argument_list|()
+argument_list|)
 argument_list|,
 name|SqlParserPos
 operator|.
@@ -346,13 +380,15 @@ name|SqlLiteral
 operator|.
 name|createApproxNumeric
 argument_list|(
+name|String
+operator|.
+name|valueOf
+argument_list|(
 name|literal
 operator|.
 name|getValue
 argument_list|()
-operator|.
-name|toString
-argument_list|()
+argument_list|)
 argument_list|,
 name|SqlParserPos
 operator|.
@@ -384,6 +420,8 @@ name|SqlLiteral
 operator|.
 name|createTimestamp
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -391,6 +429,9 @@ argument_list|(
 name|TimestampString
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"literal.getValueAs(TimestampString.class)"
 argument_list|)
 argument_list|,
 literal|0
@@ -425,6 +466,8 @@ name|SqlLiteral
 operator|.
 name|createDate
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -432,6 +475,9 @@ argument_list|(
 name|DateString
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"literal.getValueAs(DateString.class)"
 argument_list|)
 argument_list|,
 name|SqlParserPos
@@ -464,6 +510,8 @@ name|SqlLiteral
 operator|.
 name|createTime
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -471,6 +519,9 @@ argument_list|(
 name|TimeString
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"literal.getValueAs(TimeString.class)"
 argument_list|)
 argument_list|,
 literal|0
@@ -505,7 +556,8 @@ name|SqlLiteral
 operator|.
 name|createCharString
 argument_list|(
-operator|(
+name|requireNonNull
+argument_list|(
 operator|(
 name|NlsString
 operator|)
@@ -513,7 +565,9 @@ name|literal
 operator|.
 name|getValue
 argument_list|()
-operator|)
+argument_list|,
+literal|"literal.getValue()"
+argument_list|)
 operator|.
 name|getValue
 argument_list|()
@@ -551,10 +605,15 @@ argument_list|(
 operator|(
 name|Boolean
 operator|)
+name|requireNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValue
 argument_list|()
+argument_list|,
+literal|"literal.getValue()"
+argument_list|)
 argument_list|,
 name|SqlParserPos
 operator|.
@@ -593,10 +652,11 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RexToSqlNodeConverter
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertInputRef
 parameter_list|(

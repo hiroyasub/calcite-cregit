@@ -353,6 +353,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -448,6 +464,18 @@ operator|.
 name|EnumUtils
 operator|.
 name|overridingMethodDecl
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -3042,6 +3070,26 @@ argument_list|(
 name|fieldOrdinal
 argument_list|)
 decl_stmt|;
+name|RelDataType
+name|componentType
+init|=
+name|requireNonNull
+argument_list|(
+name|field
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getComponentType
+argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"field.getType().getComponentType() for "
+operator|+
+name|field
+argument_list|)
+decl_stmt|;
 return|return
 name|PhysTypeImpl
 operator|.
@@ -3051,13 +3099,7 @@ name|typeFactory
 argument_list|,
 name|toStruct
 argument_list|(
-name|field
-operator|.
-name|getType
-argument_list|()
-operator|.
-name|getComponentType
-argument_list|()
+name|componentType
 argument_list|)
 argument_list|,
 name|format
@@ -3162,6 +3204,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Expression
 name|comparer
 parameter_list|()
@@ -3707,6 +3751,8 @@ parameter_list|,
 name|int
 name|field
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|storageType
 parameter_list|)

@@ -31,6 +31,22 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Source of metadata about relational expressions.  *  *<p>The metadata is typically various kinds of statistics used to estimate  * costs.</p>  *  *<p>Each kind of metadata has an interface that extends {@link Metadata} and  * has a method. Some examples: {@link BuiltInMetadata.Selectivity},  * {@link BuiltInMetadata.ColumnUniqueness}.</p>  */
 end_comment
@@ -41,27 +57,30 @@ interface|interface
 name|MetadataFactory
 block|{
 comment|/** Returns a metadata interface to get a particular kind of metadata    * from a particular relational expression. Returns null if that kind of    * metadata is not available.    *    * @param<M> Metadata type    *    * @param rel Relational expression    * @param mq Metadata query    * @param metadataClazz Metadata class    * @return Metadata bound to {@code rel} and {@code query}    */
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
 name|M
 name|query
-parameter_list|(
+argument_list|(
 name|RelNode
 name|rel
-parameter_list|,
+argument_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|,
+argument_list|,
 name|Class
 argument_list|<
 name|M
 argument_list|>
 name|metadataClazz
-parameter_list|)
-function_decl|;
+argument_list|)
+expr_stmt|;
 block|}
 end_interface
 

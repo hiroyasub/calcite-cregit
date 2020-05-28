@@ -173,6 +173,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -188,16 +204,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -247,9 +253,13 @@ parameter_list|,
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|,
@@ -294,6 +304,8 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|sqlIdentifier
 parameter_list|,
@@ -303,9 +315,13 @@ parameter_list|,
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|,
@@ -348,6 +364,8 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|sqlIdentifier
 parameter_list|,
@@ -357,9 +375,13 @@ parameter_list|,
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|,
@@ -406,6 +428,8 @@ parameter_list|(
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|sqlIdentifier
 parameter_list|,
@@ -415,9 +439,13 @@ parameter_list|,
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|,
@@ -481,7 +509,11 @@ name|Override
 specifier|public
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|unwrap
 parameter_list|(
@@ -592,8 +624,6 @@ return|;
 block|}
 comment|/** Returns whether this aggregate function must, may, or must not contain a    * {@code WITHIN GROUP (ORDER ...)} clause.    *    *<p>Cases:<ul>    *    *<li>If {@link Optionality#MANDATORY},    * then {@code AGG(x) WITHIN GROUP (ORDER BY 1)} is valid,    * and {@code AGG(x)} is invalid.    *    *<li>If {@link Optionality#OPTIONAL},    * then {@code AGG(x) WITHIN GROUP (ORDER BY 1)}    * and {@code AGG(x)} are both valid.    *    *<li>If {@link Optionality#IGNORED},    * then {@code AGG(x)} is valid,    * and {@code AGG(x) WITHIN GROUP (ORDER BY 1)} is valid but is    * treated the same as {@code AGG(x)}.    *    *<li>If {@link Optionality#FORBIDDEN},    * then {@code AGG(x) WITHIN GROUP (ORDER BY 1)} is invalid,    * and {@code AGG(x)} is valid.    *</ul>    */
 specifier|public
-annotation|@
-name|Nonnull
 name|Optionality
 name|requiresGroupOrder
 parameter_list|()
@@ -616,8 +646,6 @@ return|;
 block|}
 comment|/** Returns whether this aggregate function allows the {@code DISTINCT}    * keyword.    *    *<p>The default implementation returns {@link Optionality#OPTIONAL},    * which is appropriate for most aggregate functions, including {@code SUM}    * and {@code COUNT}.    *    *<p>Some aggregate functions, for example {@code MIN}, produce the same    * result with or without {@code DISTINCT}, and therefore return    * {@link Optionality#IGNORED} to indicate this. For such functions,    * Calcite will probably remove {@code DISTINCT} while optimizing the query.    */
 specifier|public
-annotation|@
-name|Nonnull
 name|Optionality
 name|getDistinctOptionality
 parameter_list|()

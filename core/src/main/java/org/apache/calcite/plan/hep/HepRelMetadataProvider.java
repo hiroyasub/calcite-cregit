@@ -141,6 +141,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -148,6 +164,18 @@ operator|.
 name|reflect
 operator|.
 name|Method
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -168,6 +196,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -192,17 +222,20 @@ block|}
 annotation|@
 name|Override
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -210,8 +243,8 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|Class
 argument_list|<
 name|?
@@ -219,7 +252,7 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|)
+argument_list|)
 block|{
 return|return
 parameter_list|(
@@ -245,12 +278,12 @@ return|;
 block|}
 name|HepRelVertex
 name|vertex
-init|=
+operator|=
 operator|(
 name|HepRelVertex
 operator|)
 name|rel
-decl_stmt|;
+expr_stmt|;
 specifier|final
 name|RelNode
 name|rel2
@@ -266,6 +299,8 @@ name|M
 argument_list|>
 name|function
 init|=
+name|requireNonNull
+argument_list|(
 name|rel
 operator|.
 name|getCluster
@@ -273,6 +308,9 @@ argument_list|()
 operator|.
 name|getMetadataProvider
 argument_list|()
+argument_list|,
+literal|"metadataProvider"
+argument_list|)
 operator|.
 name|apply
 argument_list|(
@@ -285,7 +323,16 @@ name|metadataClass
 argument_list|)
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|function
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no metadata provider for class "
+operator|+
+name|metadataClass
+argument_list|)
 operator|.
 name|bind
 argument_list|(
@@ -295,16 +342,21 @@ name|mq
 argument_list|)
 return|;
 block|}
-return|;
-block|}
-annotation|@
+end_class
+
+begin_empty_stmt
+empty_stmt|;
+end_empty_stmt
+
+begin_function
+unit|}    @
 name|Override
 specifier|public
-parameter_list|<
+argument_list|<
 name|M
 extends|extends
 name|Metadata
-parameter_list|>
+argument_list|>
 name|Multimap
 argument_list|<
 name|Method
@@ -330,8 +382,8 @@ name|of
 argument_list|()
 return|;
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

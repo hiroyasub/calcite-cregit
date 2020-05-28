@@ -273,6 +273,22 @@ name|Static
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Base class for grouping functions {@code GROUP_ID}, {@code GROUPING_ID},  * {@code GROUPING}.  */
 end_comment
@@ -297,6 +313,8 @@ parameter_list|,
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,

@@ -41,6 +41,22 @@ name|Enumerable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Table that can be scanned without creating an intermediate relational  * expression.  */
 end_comment
@@ -55,6 +71,8 @@ block|{
 comment|/** Returns an enumerator over the rows in this Table. Each row is represented    * as an array of its column values. */
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>

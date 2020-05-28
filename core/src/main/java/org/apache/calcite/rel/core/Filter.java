@@ -287,6 +287,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|EnsuresNonNullIf
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -302,6 +334,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -325,6 +369,11 @@ name|condition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a filter.    *    * @param cluster   Cluster that this relational expression belongs to    * @param traits    the traits of this rel    * @param child     input relational expression    * @param condition boolean expression which determines whether a row is    *                  allowed to pass    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Filter
 parameter_list|(
@@ -350,11 +399,17 @@ argument_list|,
 name|child
 argument_list|)
 expr_stmt|;
-assert|assert
+name|this
+operator|.
 name|condition
-operator|!=
-literal|null
-assert|;
+operator|=
+name|requireNonNull
+argument_list|(
+name|condition
+argument_list|,
+literal|"condition"
+argument_list|)
+expr_stmt|;
 assert|assert
 name|RexUtil
 operator|.
@@ -363,14 +418,10 @@ argument_list|(
 name|condition
 argument_list|)
 operator|:
+literal|"RexUtil.isFlat should be true for condition "
+operator|+
 name|condition
 assert|;
-name|this
-operator|.
-name|condition
-operator|=
-name|condition
-expr_stmt|;
 comment|// Too expensive for everyday use:
 assert|assert
 operator|!
@@ -416,10 +467,15 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getExpression
 argument_list|(
+literal|"condition"
+argument_list|)
+argument_list|,
 literal|"condition"
 argument_list|)
 argument_list|)
@@ -554,6 +610,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)
@@ -637,6 +695,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -834,10 +894,23 @@ name|Status
 operator|.
 name|INTERNAL
 argument_list|)
+annotation|@
+name|EnsuresNonNullIf
+argument_list|(
+name|expression
+operator|=
+literal|"#1"
+argument_list|,
+name|result
+operator|=
+literal|true
+argument_list|)
 specifier|protected
 name|boolean
 name|deepEquals0
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

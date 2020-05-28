@@ -109,6 +109,22 @@ name|BuiltInMethod
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementations of the  * {@link BuiltInMetadata.LowerBoundCost}  * metadata provider for the standard algebra.  */
 end_comment
@@ -170,6 +186,8 @@ name|DEF
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getLowerBoundCost
 parameter_list|(
@@ -206,6 +224,8 @@ argument_list|()
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|getLowerBoundCost
 parameter_list|(
@@ -246,6 +266,10 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+name|selfCost
+operator|!=
+literal|null
+operator|&&
 name|selfCost
 operator|.
 name|isInfinite

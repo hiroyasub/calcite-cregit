@@ -175,11 +175,17 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|Map
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
@@ -189,7 +195,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Map
 import|;
 end_import
 
@@ -206,6 +212,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -406,16 +424,24 @@ name|jdbcName
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|MakeCall
 name|lookupMakeCallObj
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|SqlCall
 name|lookupCall
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|SqlNode
-index|[]
+annotation|@
+name|Nullable
+type|[]
 name|thisOperands
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -555,12 +581,16 @@ specifier|public
 name|SqlCall
 name|createCall
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -648,7 +678,12 @@ condition|)
 block|{
 name|lookupCall
 operator|=
+name|requireNonNull
+argument_list|(
 name|lookupMakeCallObj
+argument_list|,
+literal|"lookupMakeCallObj"
+argument_list|)
 operator|.
 name|createCall
 argument_list|(
@@ -656,7 +691,12 @@ name|SqlParserPos
 operator|.
 name|ZERO
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|thisOperands
+argument_list|,
+literal|"thisOperands"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -675,7 +715,12 @@ name|name
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|lookupMakeCallObj
+argument_list|,
+literal|"lookupMakeCallObj"
+argument_list|)
 operator|.
 name|getOperator
 argument_list|()
@@ -826,7 +871,12 @@ argument_list|(
 name|getName
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|thisOperands
+argument_list|,
+literal|"thisOperands"
+argument_list|)
 operator|.
 name|length
 argument_list|,
@@ -1060,6 +1110,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -1069,6 +1121,8 @@ name|SqlOperator
 name|getOperator
 parameter_list|()
 function_decl|;
+annotation|@
+name|Nullable
 name|String
 name|isValidArgCount
 parameter_list|(
@@ -1125,6 +1179,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -1144,6 +1200,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|isValidArgCount
 parameter_list|(
@@ -1190,8 +1248,6 @@ name|this
 operator|.
 name|order
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|order
@@ -1207,6 +1263,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -1229,6 +1287,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|isValidArgCount
 parameter_list|(
@@ -1340,10 +1400,14 @@ return|;
 block|}
 comment|/**      * Uses the data in {@link #order} to reorder a SqlNode[] array.      *      * @param operands Operands      */
 specifier|protected
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|reorder
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
@@ -1358,6 +1422,8 @@ name|order
 operator|.
 name|length
 assert|;
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|newOrder
@@ -1455,6 +1521,11 @@ name|MakeCall
 argument_list|>
 name|map
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|private
 name|JdbcToInternalLookupTable
 parameter_list|()
@@ -2415,6 +2486,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -2478,6 +2551,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -2500,6 +2575,10 @@ index|]
 decl_stmt|;
 assert|assert
 name|typeOperand
+operator|!=
+literal|null
+operator|&&
+name|typeOperand
 operator|.
 name|getKind
 argument_list|()
@@ -2507,6 +2586,10 @@ operator|==
 name|SqlKind
 operator|.
 name|LITERAL
+operator|:
+literal|"literal expected, got "
+operator|+
+name|typeOperand
 assert|;
 name|SqlJdbcDataTypeName
 name|jdbcType
@@ -2518,7 +2601,7 @@ operator|)
 name|typeOperand
 operator|)
 operator|.
-name|symbolValue
+name|getValueAs
 argument_list|(
 name|SqlJdbcDataTypeName
 operator|.
@@ -2589,6 +2672,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -2654,6 +2739,8 @@ return|;
 block|}
 comment|/**      * Tries to lookup a given function name JDBC to an internal      * representation. Returns null if no function defined.      */
 specifier|public
+annotation|@
+name|Nullable
 name|MakeCall
 name|lookup
 parameter_list|(

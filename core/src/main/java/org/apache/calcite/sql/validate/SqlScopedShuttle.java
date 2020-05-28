@@ -79,6 +79,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -94,6 +110,18 @@ operator|.
 name|util
 operator|.
 name|Deque
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -144,6 +172,8 @@ annotation|@
 name|Override
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -154,9 +184,7 @@ block|{
 name|SqlValidatorScope
 name|oldScope
 init|=
-name|scopes
-operator|.
-name|peek
+name|getScope
 argument_list|()
 decl_stmt|;
 name|SqlValidatorScope
@@ -195,6 +223,8 @@ return|;
 block|}
 comment|/**    * Visits an operator call. If the call has entered a new scope, the base    * class will have already modified the scope.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|SqlNode
 name|visitScoped
 parameter_list|(
@@ -218,10 +248,15 @@ name|getScope
 parameter_list|()
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|scopes
 operator|.
 name|peek
 argument_list|()
+argument_list|,
+literal|"scopes.peek()"
+argument_list|)
 return|;
 block|}
 block|}

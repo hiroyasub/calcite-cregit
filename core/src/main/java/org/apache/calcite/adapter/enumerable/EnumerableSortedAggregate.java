@@ -379,6 +379,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -406,6 +422,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -437,6 +465,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -492,6 +522,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -527,6 +559,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet
@@ -568,10 +602,19 @@ decl_stmt|;
 name|RelCollation
 name|collation
 init|=
+name|requireNonNull
+argument_list|(
 name|required
 operator|.
 name|getCollation
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"collation trait is null, required traits are "
+operator|+
+name|required
+argument_list|)
 decl_stmt|;
 name|ImmutableBitSet
 name|requiredKeys
@@ -1279,9 +1322,18 @@ name|implementor
 operator|.
 name|implementResult
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|context
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"agg.context is null for "
+operator|+
+name|agg
+argument_list|)
 argument_list|,
 operator|new
 name|AggResultContextImpl
@@ -1292,9 +1344,18 @@ name|agg
 operator|.
 name|call
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|state
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"agg.state is null for "
+operator|+
+name|agg
+argument_list|)
 argument_list|,
 name|key_
 argument_list|,
@@ -1355,11 +1416,21 @@ name|keyPhysType
 operator|.
 name|generateComparator
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|getTraitSet
 argument_list|()
 operator|.
 name|getCollation
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getTraitSet().getCollation() is null, current traits are "
+operator|+
+name|getTraitSet
+argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final

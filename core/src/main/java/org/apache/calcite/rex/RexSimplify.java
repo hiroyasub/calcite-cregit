@@ -441,6 +441,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -545,27 +561,23 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -614,6 +626,18 @@ operator|.
 name|RexUnknownAs
 operator|.
 name|UNKNOWN
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -717,8 +741,6 @@ name|this
 operator|.
 name|rexBuilder
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rexBuilder
@@ -728,8 +750,6 @@ name|this
 operator|.
 name|predicates
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|predicates
@@ -739,8 +759,6 @@ name|this
 operator|.
 name|defaultUnknownAs
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|defaultUnknownAs
@@ -762,8 +780,6 @@ name|this
 operator|.
 name|executor
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|executor
@@ -1657,6 +1673,10 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+literal|"%"
+operator|.
+name|equals
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -1665,10 +1685,6 @@ name|String
 operator|.
 name|class
 argument_list|)
-operator|.
-name|equals
-argument_list|(
-literal|"%"
 argument_list|)
 condition|)
 block|{
@@ -3215,7 +3231,12 @@ name|rexBuilder
 operator|.
 name|makeLiteral
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|sarg
+argument_list|,
+literal|"sarg"
+argument_list|)
 operator|.
 name|negate
 argument_list|()
@@ -3865,8 +3886,6 @@ argument_list|)
 return|;
 block|}
 specifier|private
-annotation|@
-name|Nonnull
 name|RexNode
 name|simplifyIs
 parameter_list|(
@@ -3924,6 +3943,8 @@ name|simplified
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyIs1
 parameter_list|(
@@ -4092,6 +4113,8 @@ argument_list|)
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyIsPredicate
 parameter_list|(
@@ -4182,6 +4205,8 @@ literal|null
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyIs2
 parameter_list|(
@@ -4495,6 +4520,8 @@ return|;
 comment|// cannot be simplified
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyIsNotNull
 parameter_list|(
@@ -4758,6 +4785,8 @@ return|;
 block|}
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyIsNull
 parameter_list|(
@@ -6684,6 +6713,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyBooleanCase
 parameter_list|(
@@ -8478,6 +8509,15 @@ argument_list|(
 name|clazz
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|constant
+operator|==
+literal|null
+condition|)
+block|{
+break|break;
+block|}
 specifier|final
 name|RexNode
 name|result
@@ -9040,6 +9080,17 @@ argument_list|(
 name|clazz
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|v0
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|e
+return|;
+block|}
 specifier|final
 name|RangeSet
 argument_list|<
@@ -9430,6 +9481,15 @@ argument_list|(
 name|clazz
 argument_list|)
 decl_stmt|;
+assert|assert
+name|c1
+operator|!=
+literal|null
+operator|:
+literal|"value must not be null in "
+operator|+
+name|literal
+assert|;
 switch|switch
 condition|(
 name|predicate
@@ -10067,11 +10127,14 @@ specifier|final
 name|Comparable
 name|comparable2
 init|=
+name|castNonNull
+argument_list|(
 name|Comparison
 operator|.
 name|of
 argument_list|(
 name|prevNotEquals
+argument_list|)
 argument_list|)
 operator|.
 name|literal
@@ -10082,6 +10145,14 @@ decl_stmt|;
 comment|//noinspection unchecked
 if|if
 condition|(
+name|comparable1
+operator|!=
+literal|null
+operator|&&
+name|comparable2
+operator|!=
+literal|null
+operator|&&
 name|comparable1
 operator|.
 name|compareTo
@@ -10419,11 +10490,13 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|v
+name|Boolean
+operator|.
+name|TRUE
 operator|.
 name|equals
 argument_list|(
-literal|true
+name|v
 argument_list|)
 condition|)
 block|{
@@ -10672,6 +10745,8 @@ specifier|final
 name|Sarg
 name|sarg
 init|=
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -10680,7 +10755,9 @@ name|Sarg
 operator|.
 name|class
 argument_list|)
+argument_list|)
 decl_stmt|;
+comment|// Remove null from sarg if the left-hand side is never null
 if|if
 condition|(
 name|sarg
@@ -11217,8 +11294,6 @@ name|reducedValues
 argument_list|)
 expr_stmt|;
 return|return
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|Iterables
@@ -11701,6 +11776,8 @@ argument_list|<
 name|C
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|RexNode
 name|processRange
 parameter_list|(
@@ -12897,6 +12974,8 @@ name|Predicate
 block|{
 comment|/** Wraps an expression in a Predicate or returns null. */
 specifier|static
+annotation|@
+name|Nullable
 name|Predicate
 name|of
 parameter_list|(
@@ -12986,8 +13065,6 @@ name|this
 operator|.
 name|ref
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|ref
@@ -12997,8 +13074,6 @@ name|this
 operator|.
 name|kind
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|kind
@@ -13008,8 +13083,6 @@ name|this
 operator|.
 name|literal
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|literal
@@ -13018,6 +13091,8 @@ expr_stmt|;
 block|}
 comment|/** Creates a comparison, between a {@link RexInputRef} or {@link RexFieldAccess} or      * deterministic {@link RexCall} and a literal. */
 specifier|static
+annotation|@
+name|Nullable
 name|Comparison
 name|of
 parameter_list|(
@@ -13052,6 +13127,8 @@ return|;
 block|}
 comment|/** Creates a comparison, or returns null. */
 specifier|static
+annotation|@
+name|Nullable
 name|Comparison
 name|of
 parameter_list|(
@@ -13290,8 +13367,6 @@ name|this
 operator|.
 name|ref
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|ref
@@ -13301,8 +13376,6 @@ name|this
 operator|.
 name|kind
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|kind
@@ -13311,6 +13384,8 @@ expr_stmt|;
 block|}
 comment|/** Creates an IS predicate, or returns null. */
 specifier|static
+annotation|@
+name|Nullable
 name|IsPredicate
 name|of
 parameter_list|(
@@ -13639,6 +13714,8 @@ block|}
 block|}
 comment|/**    * Combines predicates AND, optimizes, and returns null if the result is    * always false.    *    *<p>The expression is simplified on the assumption that an UNKNOWN value    * is always treated as FALSE. Therefore the simplified expression may    * sometimes evaluate to FALSE where the original expression would evaluate to    * UNKNOWN.    *    * @param predicates Filter condition predicates    * @return simplified conjunction of predicates for the filter, null if always false    */
 specifier|public
+annotation|@
+name|Nullable
 name|RexNode
 name|simplifyFilterPredicates
 parameter_list|(
@@ -13718,6 +13795,11 @@ name|E
 name|newVal
 parameter_list|)
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"argument.type.incompatible"
+argument_list|)
 specifier|final
 name|int
 name|index
@@ -14142,7 +14224,7 @@ name|SqlKind
 name|kind
 parameter_list|,
 annotation|@
-name|Nonnull
+name|Nullable
 name|RexLiteral
 name|literal
 parameter_list|,
@@ -14198,7 +14280,12 @@ specifier|final
 name|Comparable
 name|value
 init|=
+name|requireNonNull
+argument_list|(
 name|literal
+argument_list|,
+literal|"literal"
+argument_list|)
 operator|.
 name|getValueAs
 argument_list|(
@@ -14223,7 +14310,12 @@ name|Range
 operator|.
 name|lessThan
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14246,7 +14338,12 @@ name|Range
 operator|.
 name|atMost
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14269,7 +14366,12 @@ name|Range
 operator|.
 name|greaterThan
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14292,7 +14394,12 @@ name|Range
 operator|.
 name|atLeast
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14315,7 +14422,12 @@ name|Range
 operator|.
 name|singleton
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14338,7 +14450,12 @@ name|Range
 operator|.
 name|lessThan
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14355,7 +14472,12 @@ name|Range
 operator|.
 name|greaterThan
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -14442,7 +14564,12 @@ name|b
 operator|.
 name|addSarg
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|sarg
+argument_list|,
+literal|"sarg"
+argument_list|)
 argument_list|,
 name|negate
 argument_list|,
@@ -14686,6 +14813,7 @@ argument_list|)
 return|;
 block|}
 comment|/** If a term is a call to {@code SEARCH} on a {@link RexSargBuilder},      * converts it to a {@code SEARCH} on a {@link Sarg}. */
+specifier|static
 name|RexNode
 name|fix
 parameter_list|(
@@ -14861,8 +14989,6 @@ name|this
 operator|.
 name|ref
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|ref
@@ -14872,8 +14998,6 @@ name|this
 operator|.
 name|rexBuilder
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rexBuilder
@@ -15061,8 +15185,6 @@ name|types
 argument_list|)
 decl_stmt|;
 return|return
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rexBuilder
@@ -15139,6 +15261,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

@@ -377,6 +377,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -404,6 +420,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -582,7 +610,8 @@ argument_list|(
 name|getCluster
 argument_list|()
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|,
 name|tuples
 argument_list|,
@@ -593,6 +622,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|passThrough
 parameter_list|(
@@ -704,7 +735,12 @@ comment|// Check whether the tuples are sorted by required collations.
 if|if
 condition|(
 operator|!
+name|requireNonNull
+argument_list|(
 name|ordering
+argument_list|,
+literal|"ordering"
+argument_list|)
 operator|.
 name|isOrdered
 argument_list|(
@@ -834,7 +870,8 @@ name|RelDataTypeField
 argument_list|>
 name|fields
 init|=
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldList
 argument_list|()

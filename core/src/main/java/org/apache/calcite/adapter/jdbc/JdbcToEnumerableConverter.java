@@ -487,6 +487,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -591,6 +607,34 @@ name|DataSource
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression representing a scan of a table in a JDBC data source.  */
 end_comment
@@ -666,6 +710,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -676,7 +722,9 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-return|return
+name|RelOptCost
+name|cost
+init|=
 name|super
 operator|.
 name|computeSelfCost
@@ -685,6 +733,20 @@ name|planner
 argument_list|,
 name|mq
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|cost
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|cost
 operator|.
 name|multiplyBy
 argument_list|(
@@ -760,10 +822,19 @@ init|=
 operator|(
 name|JdbcConvention
 operator|)
+name|requireNonNull
+argument_list|(
 name|child
 operator|.
 name|getConvention
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"child.getConvention() is null for "
+operator|+
+name|child
+argument_list|)
 decl_stmt|;
 name|SqlString
 name|sqlString
@@ -1409,10 +1480,19 @@ name|sqlString
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|sqlString
 operator|.
 name|getDynamicParameters
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"sqlString.getDynamicParameters() is null for "
+operator|+
+name|sqlString
+argument_list|)
 operator|.
 name|stream
 argument_list|()
@@ -1493,6 +1573,8 @@ parameter_list|,
 name|Expression
 name|target
 parameter_list|,
+annotation|@
+name|Nullable
 name|Expression
 name|calendar_
 parameter_list|,
@@ -1585,6 +1667,13 @@ block|{
 case|case
 name|LOCAL
 case|:
+assert|assert
+name|calendar_
+operator|!=
+literal|null
+operator|:
+literal|"calendar must not be null"
+assert|;
 name|dateTimeArgs
 operator|.
 name|add
@@ -2019,6 +2108,8 @@ specifier|private
 name|String
 name|jdbcGetMethod
 parameter_list|(
+annotation|@
+name|Nullable
 name|Primitive
 name|primitive
 parameter_list|)
@@ -2036,9 +2127,12 @@ name|SqlFunctions
 operator|.
 name|initcap
 argument_list|(
+name|castNonNull
+argument_list|(
 name|primitive
 operator|.
 name|primitiveName
+argument_list|)
 argument_list|)
 return|;
 block|}

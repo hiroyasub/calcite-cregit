@@ -78,6 +78,11 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Constructs nested block builders starting of a given code block.    * @param block root code block    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|public
 name|NestedBlockBuilderImpl
 parameter_list|(

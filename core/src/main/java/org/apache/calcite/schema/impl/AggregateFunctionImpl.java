@@ -153,6 +153,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -241,11 +257,15 @@ name|addMethod
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|Method
 name|mergeMethod
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|Method
 name|resultMethod
 decl_stmt|;
@@ -336,9 +356,13 @@ parameter_list|,
 name|Method
 name|addMethod
 parameter_list|,
+annotation|@
+name|Nullable
 name|Method
 name|mergeMethod
 parameter_list|,
+annotation|@
+name|Nullable
 name|Method
 name|resultMethod
 parameter_list|)
@@ -439,6 +463,8 @@ block|}
 comment|/** Creates an aggregate function, or returns null. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|AggregateFunctionImpl
 name|create
 parameter_list|(

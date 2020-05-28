@@ -439,6 +439,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -454,6 +470,28 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Optional
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -595,6 +633,8 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|postProject
 parameter_list|,
@@ -618,7 +658,10 @@ name|getPlanner
 argument_list|()
 decl_stmt|;
 specifier|final
+name|Optional
+argument_list|<
 name|CalciteConnectionConfig
+argument_list|>
 name|config
 init|=
 name|planner
@@ -626,7 +669,7 @@ operator|.
 name|getContext
 argument_list|()
 operator|.
-name|unwrap
+name|maybeUnwrap
 argument_list|(
 name|CalciteConnectionConfig
 operator|.
@@ -635,15 +678,21 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|config
-operator|==
-literal|null
-operator|||
 operator|!
+operator|(
 name|config
+operator|.
+name|isPresent
+argument_list|()
+operator|&&
+name|config
+operator|.
+name|get
+argument_list|()
 operator|.
 name|createMaterializations
 argument_list|()
+operator|)
 condition|)
 block|{
 comment|// Disable this rule if we if materializations are disabled - in
@@ -673,10 +722,19 @@ specifier|final
 name|RelOptLattice
 name|lattice
 init|=
+name|requireNonNull
+argument_list|(
 name|planner
 operator|.
 name|getLattice
 argument_list|(
+name|table
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"planner.getLattice(table) is null for "
+operator|+
 name|table
 argument_list|)
 decl_stmt|;
@@ -1291,6 +1349,8 @@ expr_stmt|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|AggregateCall
 name|rollUp
 parameter_list|(

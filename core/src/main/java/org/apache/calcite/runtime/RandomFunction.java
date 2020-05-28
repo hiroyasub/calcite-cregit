@@ -49,6 +49,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -72,6 +88,8 @@ class|class
 name|RandomFunction
 block|{
 specifier|private
+annotation|@
+name|MonotonicNonNull
 name|Random
 name|random
 decl_stmt|;

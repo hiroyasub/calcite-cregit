@@ -49,6 +49,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -83,28 +99,34 @@ block|{
 comment|/**    * Returns the record type of the table yielded by this function when    * applied to given arguments. Only literal arguments are passed,    * non-literal are replaced with default values (null, 0, false, etc).    *    * @param typeFactory Type factory    * @param arguments arguments of a function call (only literal arguments    *                  are passed, nulls for non-literal ones)    * @return row type of the table    */
 name|RelDataType
 name|getRowType
-parameter_list|(
+argument_list|(
 name|RelDataTypeFactory
 name|typeFactory
-parameter_list|,
+argument_list|,
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
-function_decl|;
+argument_list|)
+decl_stmt|;
 comment|/**    * Returns the row type of the table yielded by this function when    * applied to given arguments. Only literal arguments are passed,    * non-literal are replaced with default values (null, 0, false, etc).    *    * @param arguments arguments of a function call (only literal arguments    *                  are passed, nulls for non-literal ones)    * @return element type of the table (e.g. {@code Object[].class})    */
 name|Type
 name|getElementType
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
-function_decl|;
+argument_list|)
+decl_stmt|;
 block|}
 end_interface
 

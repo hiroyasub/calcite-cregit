@@ -800,10 +800,19 @@ modifier|...
 name|others
 parameter_list|)
 block|{
-name|Object
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
+name|E
 index|[]
 name|array
 init|=
+operator|(
+name|E
+index|[]
+operator|)
 operator|new
 name|Object
 index|[
@@ -887,16 +896,11 @@ operator|.
 name|length
 argument_list|)
 expr_stmt|;
-comment|//noinspection unchecked
 return|return
 operator|new
 name|ImmutableNullableList
 argument_list|<>
 argument_list|(
-operator|(
-name|E
-index|[]
-operator|)
 name|array
 argument_list|)
 return|;

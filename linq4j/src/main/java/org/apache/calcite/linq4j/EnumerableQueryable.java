@@ -289,6 +289,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -373,6 +389,8 @@ name|enumerable
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Expression
 name|expression
 decl_stmt|;
@@ -387,6 +405,8 @@ name|T
 argument_list|>
 name|elementType
 parameter_list|,
+annotation|@
+name|Nullable
 name|Expression
 name|expression
 parameter_list|,
@@ -1002,6 +1022,8 @@ name|Override
 specifier|public
 name|Queryable
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|>
 name|defaultIfEmpty
@@ -1069,6 +1091,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Expression
 name|getExpression
 parameter_list|()
@@ -1092,6 +1116,8 @@ comment|// .............
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|aggregate
 parameter_list|(
@@ -1099,6 +1125,8 @@ name|FunctionExpression
 argument_list|<
 name|Function2
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|,
 name|T
@@ -1696,6 +1724,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|firstOrDefault
 parameter_list|(
@@ -2684,6 +2714,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|lastOrDefault
 parameter_list|(
@@ -2754,6 +2786,8 @@ argument_list|<
 name|TResult
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|TResult
 name|max
 parameter_list|(
@@ -2795,6 +2829,8 @@ argument_list|<
 name|TResult
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|TResult
 name|min
 parameter_list|(
@@ -3365,6 +3401,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|singleOrDefault
 parameter_list|(
@@ -3992,11 +4030,15 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|T
 name|aggregate
 parameter_list|(
 name|Function2
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|,
 name|T

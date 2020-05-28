@@ -247,6 +247,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -417,6 +433,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Nullable
 name|String
 name|line
 decl_stmt|;
@@ -653,9 +671,13 @@ parameter_list|,
 name|SqlCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|CalciteConnectionConfig
 name|config
 parameter_list|)

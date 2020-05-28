@@ -303,6 +303,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -324,6 +340,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -473,6 +501,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|argType
 parameter_list|,
@@ -621,12 +651,16 @@ specifier|public
 name|SqlCall
 name|createCall
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -675,6 +709,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getSignatureTemplate
 parameter_list|(
@@ -947,6 +983,8 @@ return|return
 operator|(
 name|E
 operator|)
+name|requireNonNull
+argument_list|(
 operator|(
 operator|(
 name|SqlLiteral
@@ -956,6 +994,9 @@ operator|)
 operator|.
 name|getValue
 argument_list|()
+argument_list|,
+literal|"operand.value"
+argument_list|)
 return|;
 block|}
 block|}

@@ -89,6 +89,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -117,16 +133,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/** Visitor that looks for an aggregate function inside a tree of  * {@link SqlNode} objects and throws {@link Util.FoundOne} when it finds  * one. */
 end_comment
@@ -152,6 +158,8 @@ parameter_list|,
 name|boolean
 name|group
 parameter_list|,
+annotation|@
+name|Nullable
 name|AggFinder
 name|delegate
 parameter_list|,
@@ -178,6 +186,8 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Finds an aggregate.    *    * @param node Parse tree to search    * @return First aggregate function in parse tree, or null if not found    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlCall
 name|findAgg
 parameter_list|(
@@ -229,6 +239,8 @@ block|}
 comment|// SqlNodeList extends SqlNode and implements List<SqlNode>, so this method
 comment|// disambiguates
 specifier|public
+annotation|@
+name|Nullable
 name|SqlCall
 name|findAgg
 parameter_list|(
@@ -250,6 +262,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|SqlCall
 name|findAgg
 parameter_list|(
@@ -425,6 +439,8 @@ parameter_list|,
 name|boolean
 name|group
 parameter_list|,
+annotation|@
+name|Nullable
 name|AggFinder
 name|delegate
 parameter_list|,
@@ -471,8 +487,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Iterator
 argument_list|<

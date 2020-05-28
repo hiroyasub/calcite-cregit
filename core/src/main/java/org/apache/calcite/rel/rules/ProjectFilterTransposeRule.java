@@ -295,6 +295,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -1159,7 +1175,7 @@ argument_list|<
 name|RexNode
 argument_list|>
 name|visitList
-parameter_list|(
+argument_list|(
 name|List
 argument_list|<
 name|?
@@ -1167,11 +1183,13 @@ extends|extends
 name|RexNode
 argument_list|>
 name|exprs
-parameter_list|,
+argument_list|,
 name|boolean
+expr|@
+name|Nullable
 index|[]
 name|update
-parameter_list|)
+argument_list|)
 block|{
 name|ImmutableList
 operator|.

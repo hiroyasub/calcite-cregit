@@ -255,6 +255,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -300,6 +316,18 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -452,6 +480,8 @@ block|}
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RelNode
 name|apply
 parameter_list|(
@@ -756,9 +786,27 @@ operator|.
 name|asList
 argument_list|()
 argument_list|,
+name|key
+lambda|->
+name|requireNonNull
+argument_list|(
 name|map
-operator|::
+operator|.
 name|get
+argument_list|(
+name|key
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no value found for key "
+operator|+
+name|key
+operator|+
+literal|" in "
+operator|+
+name|map
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if

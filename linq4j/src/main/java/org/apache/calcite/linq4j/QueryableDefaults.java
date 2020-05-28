@@ -321,6 +321,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -358,6 +374,18 @@ operator|.
 name|util
 operator|.
 name|Iterator
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -2907,10 +2935,13 @@ name|Expressions
 operator|.
 name|call
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|source
 operator|.
 name|getExpression
 argument_list|()
+argument_list|)
 argument_list|,
 literal|"select"
 argument_list|,
@@ -2947,9 +2978,14 @@ name|selector
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|selector
 operator|.
 name|body
+argument_list|,
+literal|"selector.body"
+argument_list|)
 operator|.
 name|getType
 argument_list|()
@@ -4661,6 +4697,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Expression
 name|getExpression
 parameter_list|()

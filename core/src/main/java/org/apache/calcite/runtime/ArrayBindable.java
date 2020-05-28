@@ -15,6 +15,22 @@ name|runtime
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Extension to {@link Bindable} that returns rows that are arrays of objects.  *  *<p>It also implements {@link Typed}; the {@link #getElementType()} method  * must return {@code Object[].class}.  */
 end_comment
@@ -26,6 +42,8 @@ name|ArrayBindable
 extends|extends
 name|Bindable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>

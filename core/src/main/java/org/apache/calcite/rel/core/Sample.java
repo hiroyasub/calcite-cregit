@@ -271,11 +271,11 @@ return|return
 operator|new
 name|RelOptSamplingParameters
 argument_list|(
-name|mode
+literal|"bernoulli"
 operator|.
 name|equals
 argument_list|(
-literal|"bernoulli"
+name|mode
 argument_list|)
 argument_list|,
 name|percentage
@@ -283,6 +283,10 @@ argument_list|,
 name|repeatable
 argument_list|,
 name|repeatable
+operator|&&
+name|repeatableSeed
+operator|!=
+literal|null
 condition|?
 operator|(
 operator|(

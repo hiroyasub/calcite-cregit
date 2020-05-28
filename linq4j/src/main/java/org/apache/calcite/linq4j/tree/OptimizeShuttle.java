@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -1187,6 +1203,8 @@ argument_list|)
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|Expression
 name|visit0
 parameter_list|(
@@ -1914,6 +1932,8 @@ parameter_list|(
 name|MethodCallExpression
 name|methodCallExpression
 parameter_list|,
+annotation|@
+name|Nullable
 name|Expression
 name|targetExpression
 parameter_list|,
@@ -2006,6 +2026,8 @@ block|}
 comment|/**    * Returns whether an expression always evaluates to true or false.    * Assumes that expression has already been optimized.    */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Boolean
 name|always
 parameter_list|(

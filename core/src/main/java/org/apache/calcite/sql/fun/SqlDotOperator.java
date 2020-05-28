@@ -421,6 +421,36 @@ name|Arrays
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNonNullableAccessors
+operator|.
+name|getOperandLiteralValueOrThrow
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * The dot operator {@code .}, used to access a field of a  * record. For example, {@code a.b}.  */
 end_comment
@@ -514,12 +544,22 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|left
+argument_list|,
+literal|"left"
+argument_list|)
 operator|.
 name|getParserPosition
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|right
+argument_list|,
+literal|"right"
+argument_list|)
 operator|.
 name|getParserPosition
 argument_list|()
@@ -1018,10 +1058,19 @@ return|;
 block|}
 if|else if
 condition|(
+name|requireNonNull
+argument_list|(
 name|type
 operator|.
 name|getSqlIdentifier
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"type.getSqlIdentifier() is null for "
+operator|+
+name|type
+argument_list|)
 operator|.
 name|isStar
 argument_list|()
@@ -1193,10 +1242,10 @@ specifier|final
 name|String
 name|fieldName
 init|=
-name|opBinding
-operator|.
-name|getOperandLiteralValue
+name|getOperandLiteralValueOrThrow
 argument_list|(
+name|opBinding
+argument_list|,
 literal|1
 argument_list|,
 name|String
@@ -1208,12 +1257,9 @@ specifier|final
 name|RelDataType
 name|type
 init|=
-name|opBinding
-operator|.
-name|getOperandType
+name|requireNonNull
 argument_list|(
-literal|0
-argument_list|)
+name|recordType
 operator|.
 name|getField
 argument_list|(
@@ -1222,6 +1268,17 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"field "
+operator|+
+name|fieldName
+operator|+
+literal|" is not found in "
+operator|+
+name|recordType
 argument_list|)
 operator|.
 name|getType

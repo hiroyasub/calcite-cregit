@@ -141,6 +141,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -148,6 +164,16 @@ operator|.
 name|reflect
 operator|.
 name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -169,6 +195,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -193,17 +221,22 @@ block|}
 annotation|@
 name|Override
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
+expr|@
+name|Nullable
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -211,8 +244,8 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|Class
 argument_list|<
 name|?
@@ -220,7 +253,7 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -257,6 +290,10 @@ specifier|final
 name|RelMetadataProvider
 name|provider
 init|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|rel
 operator|.
 name|getCluster
@@ -264,6 +301,9 @@ argument_list|()
 operator|.
 name|getMetadataProvider
 argument_list|()
+argument_list|,
+literal|"metadataProvider"
+argument_list|)
 decl_stmt|;
 comment|// REVIEW jvs 29-Mar-2006: I'm not sure what the correct precedence
 comment|// should be here.  Letting the current best plan take the first shot is
@@ -281,6 +321,13 @@ operator|!=
 literal|null
 condition|)
 block|{
+name|RelNode
+name|best
+init|=
+name|subset
+operator|.
+name|best
+decl_stmt|;
 specifier|final
 name|UnboundMetadata
 argument_list|<
@@ -292,8 +339,6 @@ name|provider
 operator|.
 name|apply
 argument_list|(
-name|subset
-operator|.
 name|best
 operator|.
 name|getClass
@@ -317,8 +362,6 @@ name|function
 operator|.
 name|bind
 argument_list|(
-name|subset
-operator|.
 name|best
 argument_list|,
 name|mq
@@ -454,6 +497,9 @@ return|;
 block|}
 return|;
 block|}
+end_class
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -487,8 +533,8 @@ name|of
 argument_list|()
 return|;
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

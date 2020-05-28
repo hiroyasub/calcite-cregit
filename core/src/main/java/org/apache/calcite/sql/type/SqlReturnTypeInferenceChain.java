@@ -75,6 +75,22 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Strategy to infer the type of an operator call from the type of the operands  * by using a series of {@link SqlReturnTypeInference} rules in a given order.  * If a rule fails to find a return type (by returning NULL), next rule is tried  * until there are no more rules in which case NULL will be returned.  */
 end_comment
@@ -131,6 +147,8 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|inferReturnType
 parameter_list|(

@@ -485,6 +485,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -612,6 +628,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.AllPredicates#getAllPredicates()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getAllPredicates(RelNode)    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -627,6 +645,8 @@ literal|null
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -650,6 +670,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -660,11 +682,9 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-return|return
-name|mq
-operator|.
-name|getAllPredicates
-argument_list|(
+name|RelNode
+name|bestOrOriginal
+init|=
 name|Util
 operator|.
 name|first
@@ -679,11 +699,31 @@ operator|.
 name|getOriginal
 argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|bestOrOriginal
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|mq
+operator|.
+name|getAllPredicates
+argument_list|(
+name|bestOrOriginal
 argument_list|)
 return|;
 block|}
 comment|/**    * Extracts predicates for a table scan.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -744,6 +784,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for a project.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -768,6 +810,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for a Filter.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -797,6 +841,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for a Calc.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -871,6 +917,8 @@ block|}
 block|}
 comment|/**    * Add the Filter condition to the list obtained from the input.    * The pred comes from the parent of rel.    */
 specifier|private
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllFilterPredicates
 parameter_list|(
@@ -1095,6 +1143,8 @@ return|;
 block|}
 comment|/**    * Add the Join condition to the list obtained from the input.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -1215,6 +1265,17 @@ argument_list|(
 name|input
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|tableRefs
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 if|if
 condition|(
 name|input
@@ -1621,6 +1682,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for an Aggregate.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -1645,6 +1708,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for an TableModify.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -1669,6 +1734,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for a SetOp.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -1785,6 +1852,17 @@ argument_list|(
 name|input
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|tableRefs
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 if|if
 condition|(
 name|i
@@ -1994,6 +2072,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for a Sort.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
@@ -2018,6 +2098,8 @@ return|;
 block|}
 comment|/**    * Extracts predicates for an Exchange.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(

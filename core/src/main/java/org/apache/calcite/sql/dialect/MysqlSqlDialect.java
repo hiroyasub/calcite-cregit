@@ -450,20 +450,18 @@ import|;
 end_import
 
 begin_import
-import|import static
+import|import
 name|org
 operator|.
-name|apache
+name|checkerframework
 operator|.
-name|calcite
+name|checker
 operator|.
-name|sql
+name|nullness
 operator|.
-name|type
+name|qual
 operator|.
-name|SqlTypeName
-operator|.
-name|TIMESTAMP
+name|Nullable
 import|;
 end_import
 
@@ -694,9 +692,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -714,6 +716,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|emulateNullDirection
 parameter_list|(
@@ -829,6 +833,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getCastSpec
 parameter_list|(
@@ -1273,13 +1279,14 @@ decl_stmt|;
 name|TimeUnitRange
 name|unit
 init|=
-operator|(
-name|TimeUnitRange
-operator|)
 name|node
 operator|.
-name|getValue
-argument_list|()
+name|getValueAs
+argument_list|(
+name|TimeUnitRange
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

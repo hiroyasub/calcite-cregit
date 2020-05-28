@@ -725,6 +725,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Subclass of {@link org.apache.calcite.plan.RelImplementor} for relational  * operators of {@link EnumerableConvention} calling convention.  */
 end_comment
@@ -778,6 +790,11 @@ name|IdentityHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"methodref.receiver.bound.invalid"
+argument_list|)
 specifier|protected
 specifier|final
 name|Function1
@@ -1014,6 +1031,8 @@ name|append
 argument_list|(
 literal|"v"
 argument_list|,
+name|requireNonNull
+argument_list|(
 operator|(
 operator|(
 name|GotoStatement
@@ -1022,6 +1041,9 @@ name|statement
 operator|)
 operator|.
 name|expression
+argument_list|,
+literal|"expression"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

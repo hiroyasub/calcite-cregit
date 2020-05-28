@@ -301,6 +301,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -478,6 +494,8 @@ name|SqlCall
 name|call
 parameter_list|)
 block|{
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
@@ -489,9 +507,11 @@ argument_list|()
 operator|.
 name|toArray
 argument_list|(
+operator|new
 name|SqlNode
-operator|.
-name|EMPTY_ARRAY
+index|[
+literal|0
+index|]
 argument_list|)
 decl_stmt|;
 if|if
@@ -631,6 +651,8 @@ specifier|static
 name|boolean
 name|hasExplicitTypeSpec
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
@@ -657,6 +679,8 @@ specifier|static
 name|boolean
 name|isReturningTypeSymbol
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|)

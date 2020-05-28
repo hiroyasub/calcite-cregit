@@ -275,7 +275,7 @@ name|sql
 operator|.
 name|type
 operator|.
-name|BasicSqlType
+name|AbstractSqlType
 import|;
 end_import
 
@@ -366,6 +366,36 @@ operator|.
 name|collect
 operator|.
 name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
 import|;
 end_import
 
@@ -478,26 +508,6 @@ operator|.
 name|function
 operator|.
 name|Supplier
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -905,16 +915,22 @@ decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 decl_stmt|;
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|identifierEndQuoteString
 decl_stmt|;
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|identifierEscapedQuote
 decl_stmt|;
@@ -1784,6 +1800,14 @@ operator|==
 literal|null
 comment|// quoting is not supported
 operator|||
+name|identifierEndQuoteString
+operator|==
+literal|null
+operator|||
+name|identifierEscapedQuote
+operator|==
+literal|null
+operator|||
 operator|!
 name|identifierNeedsQuote
 argument_list|(
@@ -1945,6 +1969,8 @@ parameter_list|(
 name|StringBuilder
 name|buf
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|charsetName
 parameter_list|,
@@ -2649,12 +2675,9 @@ name|literal
 argument_list|(
 literal|"'"
 operator|+
-name|literal
+name|interval
 operator|.
-name|getValue
-argument_list|()
-operator|.
-name|toString
+name|getIntervalLiteral
 argument_list|()
 operator|+
 literal|"'"
@@ -2955,9 +2978,13 @@ block|,   }
 decl_stmt|;
 comment|/**    * Converts a string literal back into a string. For example,<code>'can''t    * run'</code> becomes<code>can't run</code>.    */
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|unquoteStringLiteral
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|val
 parameter_list|)
@@ -3093,6 +3120,8 @@ name|databaseProduct
 return|;
 block|}
 comment|/**    * Returns whether the dialect supports character set names as part of a    * data type, for instance {@code VARCHAR(30) CHARACTER SET `ISO-8859-1`}.    */
+annotation|@
+name|Pure
 specifier|public
 name|boolean
 name|supportsCharSet
@@ -3303,6 +3332,8 @@ return|;
 block|}
 comment|/** Returns SqlNode for type in "cast(column as type)", which might be   * different between databases by type name, precision etc.   *   *<p>If this method returns null, the cast will be omitted. In the default   * implementation, this is the case for the NULL type, and therefore   * {@code CAST(NULL AS<nulltype>)} is rendered as {@code NULL}. */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getCastSpec
 parameter_list|(
@@ -3310,19 +3341,36 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-if|if
-condition|(
-name|type
-operator|instanceof
-name|BasicSqlType
-condition|)
-block|{
 name|int
 name|maxPrecision
 init|=
 operator|-
 literal|1
 decl_stmt|;
+if|if
+condition|(
+name|type
+operator|instanceof
+name|AbstractSqlType
+condition|)
+block|{
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+literal|"type.getSqlTypeName() = "
+operator|+
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
 switch|switch
 condition|(
 name|type
@@ -3425,8 +3473,10 @@ return|return
 name|aggCall
 return|;
 block|}
-comment|/**    * Returns the SqlNode for emulating the null direction for the given field    * or<code>null</code> if no emulation needs to be done.    *    * @param node The SqlNode representing the expression    * @param nullsFirst Whether nulls should come first    * @param desc Whether the sort direction is    * {@link org.apache.calcite.rel.RelFieldCollation.Direction#DESCENDING} or    * {@link org.apache.calcite.rel.RelFieldCollation.Direction#STRICTLY_DESCENDING}    * @return A SqlNode for null direction emulation or<code>null</code> if not required    */
+comment|/**    * Returns the SqlNode for emulating the null direction for the given field    * or<code>null</code> if no emulation needs to be done.    *    * @param node The SqlNode representing the expression    * @param nullsFirst Whether nulls should come first    * @param desc Whether the sort direction is    * {@link RelFieldCollation.Direction#DESCENDING} or    * {@link RelFieldCollation.Direction#STRICTLY_DESCENDING}    * @return A SqlNode for null direction emulation or<code>null</code> if not required    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|emulateNullDirection
 parameter_list|(
@@ -3456,6 +3506,8 @@ name|COMMA
 return|;
 block|}
 specifier|protected
+annotation|@
+name|Nullable
 name|SqlNode
 name|emulateNullDirectionWithIsNull
 parameter_list|(
@@ -3547,9 +3599,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -3572,9 +3628,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -3589,9 +3649,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -3761,9 +3825,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -3804,6 +3872,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -3874,6 +3944,8 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|)
@@ -3978,8 +4050,6 @@ return|;
 block|}
 comment|/** Returns whether NULL values are sorted first or last, in this dialect,    * in an ORDER BY item of a given direction. */
 specifier|public
-annotation|@
-name|Nonnull
 name|RelFieldCollation
 operator|.
 name|NullDirection
@@ -4126,8 +4196,6 @@ return|;
 block|}
 comment|/**    * Copies settings from this dialect into a parser configuration.    *    *<p>{@code SqlDialect}, {@link SqlParser.Config} and {@link SqlConformance}    * cover different aspects of the same thing - the dialect of SQL spoken by a    * database - and this method helps to bridge between them. (The aspects are,    * respectively, generating SQL to send to a source database, parsing SQL    * sent to Calcite, and validating queries sent to Calcite. It makes sense to    * keep them as separate interfaces because they are used by different    * modules.)    *    *<p>The settings copied may differ among dialects, and may change over time,    * but currently include the following:    *    *<ul>    *<li>{@link #getQuoting()}    *<li>{@link #getQuotedCasing()}    *<li>{@link #getUnquotedCasing()}    *<li>{@link #isCaseSensitive()}    *<li>{@link #getConformance()}    *</ul>    *    * @param config Parser configuration builder    *    * @return The configuration builder    */
 specifier|public
-annotation|@
-name|Nonnull
 name|SqlParser
 operator|.
 name|Config
@@ -4195,8 +4263,6 @@ annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
 specifier|public
-annotation|@
-name|Nonnull
 name|SqlParser
 operator|.
 name|ConfigBuilder
@@ -4224,8 +4290,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Returns the {@link SqlConformance} that matches this dialect.    *    *<p>The base implementation returns its best guess, based upon    * {@link #databaseProduct}; sub-classes may override. */
-annotation|@
-name|Nonnull
 specifier|public
 name|SqlConformance
 name|getConformance
@@ -4289,6 +4353,8 @@ block|}
 block|}
 comment|/** Returns the quoting scheme, or null if the combination of    * {@link #identifierQuoteString} and {@link #identifierEndQuoteString}    * does not correspond to any known quoting scheme. */
 specifier|protected
+annotation|@
+name|Nullable
 name|Quoting
 name|getQuoting
 parameter_list|()
@@ -4993,11 +5059,18 @@ name|SqlDialect
 argument_list|>
 name|dialect
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"argument.type.incompatible"
+argument_list|)
 name|DatabaseProduct
 parameter_list|(
 name|String
 name|databaseProductName
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|quoteString
 parameter_list|,
@@ -5019,6 +5092,8 @@ argument_list|(
 name|nullCollation
 argument_list|)
 expr_stmt|;
+comment|// Note: below lambda accesses uninitialized DatabaseProduct.this, so it might be
+comment|// worth refactoring
 name|dialect
 operator|=
 name|Suppliers
@@ -5108,8 +5183,6 @@ specifier|public
 interface|interface
 name|Context
 block|{
-annotation|@
-name|Nonnull
 name|DatabaseProduct
 name|databaseProduct
 parameter_list|()
@@ -5117,12 +5190,12 @@ function_decl|;
 name|Context
 name|withDatabaseProduct
 parameter_list|(
-annotation|@
-name|Nonnull
 name|DatabaseProduct
 name|databaseProduct
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|String
 name|databaseProductName
 parameter_list|()
@@ -5134,6 +5207,8 @@ name|String
 name|databaseProductName
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|String
 name|databaseVersion
 parameter_list|()
@@ -5167,14 +5242,10 @@ name|int
 name|databaseMinorVersion
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|String
 name|literalQuoteString
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withLiteralQuoteString
 parameter_list|(
@@ -5182,14 +5253,10 @@ name|String
 name|literalQuoteString
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|String
 name|literalEscapedQuoteString
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withLiteralEscapedQuoteString
 parameter_list|(
@@ -5197,27 +5264,25 @@ name|String
 name|literalEscapedQuoteString
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withIdentifierQuoteString
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|Casing
 name|unquotedCasing
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withUnquotedCasing
 parameter_list|(
@@ -5225,14 +5290,10 @@ name|Casing
 name|unquotedCasing
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|Casing
 name|quotedCasing
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withQuotedCasing
 parameter_list|(
@@ -5244,8 +5305,6 @@ name|boolean
 name|caseSensitive
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withCaseSensitive
 parameter_list|(
@@ -5253,14 +5312,10 @@ name|boolean
 name|caseSensitive
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|SqlConformance
 name|conformance
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withConformance
 parameter_list|(
@@ -5268,25 +5323,17 @@ name|SqlConformance
 name|conformance
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|NullCollation
 name|nullCollation
 parameter_list|()
 function_decl|;
-annotation|@
-name|Nonnull
 name|Context
 name|withNullCollation
 parameter_list|(
-annotation|@
-name|Nonnull
 name|NullCollation
 name|nullCollation
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nonnull
 name|RelDataTypeSystem
 name|dataTypeSystem
 parameter_list|()
@@ -5294,8 +5341,6 @@ function_decl|;
 name|Context
 name|withDataTypeSystem
 parameter_list|(
-annotation|@
-name|Nonnull
 name|RelDataTypeSystem
 name|dataTypeSystem
 parameter_list|)
@@ -5331,11 +5376,15 @@ name|databaseProduct
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|databaseProductName
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|databaseVersion
 decl_stmt|;
@@ -5361,6 +5410,8 @@ name|literalEscapedQuoteString
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 decl_stmt|;
@@ -5407,9 +5458,13 @@ parameter_list|(
 name|DatabaseProduct
 name|databaseProduct
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|databaseProductName
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|databaseVersion
 parameter_list|,
@@ -5425,6 +5480,8 @@ parameter_list|,
 name|String
 name|literalEscapedQuoteString
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 parameter_list|,
@@ -5580,8 +5637,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|DatabaseProduct
 name|databaseProduct
@@ -5597,8 +5652,6 @@ specifier|public
 name|Context
 name|withDatabaseProduct
 parameter_list|(
-annotation|@
-name|Nonnull
 name|DatabaseProduct
 name|databaseProduct
 parameter_list|)
@@ -5642,6 +5695,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|databaseProductName
 parameter_list|()
@@ -5699,6 +5754,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|databaseVersion
 parameter_list|()
@@ -5984,6 +6041,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 parameter_list|()
@@ -5994,12 +6053,12 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Context
 name|withIdentifierQuoteString
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|identifierQuoteString
 parameter_list|)
@@ -6042,8 +6101,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Casing
 name|unquotedCasing
@@ -6055,8 +6112,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Context
 name|withUnquotedCasing
@@ -6103,8 +6158,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Casing
 name|quotedCasing
@@ -6116,8 +6169,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Context
 name|withQuotedCasing
@@ -6175,8 +6226,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Context
 name|withCaseSensitive
@@ -6223,8 +6272,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|SqlConformance
 name|conformance
@@ -6236,8 +6283,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Context
 name|withConformance
@@ -6284,8 +6329,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|NullCollation
 name|nullCollation
@@ -6297,14 +6340,10 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Context
 name|withNullCollation
 parameter_list|(
-annotation|@
-name|Nonnull
 name|NullCollation
 name|nullCollation
 parameter_list|)
@@ -6347,8 +6386,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|RelDataTypeSystem
 name|dataTypeSystem
@@ -6364,8 +6401,6 @@ specifier|public
 name|Context
 name|withDataTypeSystem
 parameter_list|(
-annotation|@
-name|Nonnull
 name|RelDataTypeSystem
 name|dataTypeSystem
 parameter_list|)
@@ -6408,8 +6443,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|JethroDataSqlDialect
 operator|.

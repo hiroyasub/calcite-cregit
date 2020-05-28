@@ -369,6 +369,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -437,6 +453,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implements the logic for determining the optimal  * semi-joins to be used in processing joins in a query.  */
 end_comment
@@ -475,6 +503,7 @@ name|chosenSemiJoins
 decl_stmt|;
 comment|/**    * Associates potential semijoins with each fact table factor. The first    * parameter in the map corresponds to the fact table. The second    * corresponds to the dimension table and a SemiJoin that captures all    * the necessary semijoin data between that fact and dimension table    */
 specifier|private
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -487,6 +516,11 @@ name|LogicalJoin
 argument_list|>
 argument_list|>
 name|possibleSemiJoins
+init|=
+operator|new
+name|HashMap
+argument_list|<>
+argument_list|()
 decl_stmt|;
 specifier|private
 specifier|final
@@ -589,10 +623,8 @@ name|multiJoin
 parameter_list|)
 block|{
 name|possibleSemiJoins
-operator|=
-operator|new
-name|HashMap
-argument_list|<>
+operator|.
+name|clear
 argument_list|()
 expr_stmt|;
 comment|// semijoins can't be used with any type of outer join, including full
@@ -1012,6 +1044,8 @@ return|;
 block|}
 comment|/**    * Given a list of possible filters on a fact table, determine if there is    * an index that can be used, provided all the fact table keys originate    * from the same underlying table.    *    * @param multiJoin join factors being optimized    * @param joinFilters filters to be used on the fact table    * @param factIdx index in join factors corresponding to the fact table    * @param dimIdx index in join factors corresponding to the dimension table    *    * @return SemiJoin containing information regarding the semijoin that    * can be used to filter the fact table    */
 specifier|private
+annotation|@
+name|Nullable
 name|LogicalJoin
 name|findSemiJoinIndexByCost
 parameter_list|(
@@ -1042,8 +1076,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|joinFilters
-argument_list|,
-literal|true
 argument_list|)
 decl_stmt|;
 name|int
@@ -1399,7 +1431,12 @@ operator|.
 name|of
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|semiJoinCondition
+argument_list|,
+literal|"semiJoinCondition"
+argument_list|)
 argument_list|,
 name|ImmutableSet
 operator|.
@@ -1625,6 +1662,8 @@ return|;
 block|}
 comment|/**    * Validates the candidate semijoin keys corresponding to the fact table.    * Ensure the keys all originate from the same underlying table, and they    * all correspond to simple column references. If unsuitable keys are found,    * they're removed from the key list and a new list corresponding to the    * remaining valid keys is returned.    *    * @param factRel fact table RelNode    * @param leftKeys fact table semijoin keys    * @param rightKeys dimension table semijoin keys    * @param actualLeftKeys the remaining valid fact table semijoin keys    *    * @return the underlying fact table if the semijoin keys are valid;    * otherwise null    */
 specifier|private
+annotation|@
+name|Nullable
 name|LcsTable
 name|validateKeys
 parameter_list|(
@@ -1785,6 +1824,10 @@ block|}
 block|}
 if|if
 condition|(
+name|colOrigin
+operator|!=
+literal|null
+operator|&&
 operator|!
 name|removeKey
 condition|)
@@ -1845,6 +1888,8 @@ block|}
 block|}
 comment|/**    * Removes from an expression any sub-expressions that reference key values    * that aren't contained in a key list passed in. The keys represent join    * keys on one side of a join. The subexpressions are all assumed to be of    * the form "tab1.col1 = tab2.col2".    *    * @param keys join keys from one side of the join    * @param nFields number of fields in the side of the join for which the    * keys correspond    * @param condition original expression    *    * @return modified expression with filters that don't reference specified    * keys removed    */
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|removeExtraFilters
 parameter_list|(
@@ -2300,14 +2345,30 @@ operator|-
 literal|1
 condition|)
 block|{
+name|int
+name|bestDimIdxFinal
+init|=
+name|bestDimIdx
+decl_stmt|;
 name|LogicalJoin
 name|semiJoin
 init|=
+name|requireNonNull
+argument_list|(
 name|possibleDimensions
 operator|.
 name|get
 argument_list|(
-name|bestDimIdx
+name|bestDimIdxFinal
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"possibleDimensions.get("
+operator|+
+name|bestDimIdxFinal
+operator|+
+literal|") is null"
 argument_list|)
 decl_stmt|;
 name|LogicalJoin
@@ -2944,6 +3005,8 @@ specifier|private
 name|void
 name|removePossibleSemiJoin
 parameter_list|(
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|Integer
@@ -3148,6 +3211,8 @@ parameter_list|)
 block|{
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|FemLocalIndex
 name|findSemiJoinIndexByCost
 parameter_list|(

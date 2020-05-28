@@ -75,11 +75,33 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|List
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|Initialized
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
@@ -89,7 +111,19 @@ name|java
 operator|.
 name|util
 operator|.
+name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -118,6 +152,8 @@ name|endCol
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|alias
 decl_stmt|;
@@ -140,6 +176,8 @@ parameter_list|(
 name|LatticeSpace
 name|space
 parameter_list|,
+annotation|@
+name|Nullable
 name|LatticeNode
 name|parent
 parameter_list|,
@@ -151,8 +189,6 @@ name|this
 operator|.
 name|table
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|mutableNode
@@ -244,9 +280,14 @@ control|(
 name|IntPair
 name|p
 range|:
+name|requireNonNull
+argument_list|(
 name|mutableNode
 operator|.
 name|step
+argument_list|,
+literal|"mutableNode.step"
+argument_list|)
 operator|.
 name|keys
 control|)
@@ -361,7 +402,18 @@ literal|' '
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"argument.type.incompatible"
+block|,
+literal|"assignment.type.incompatible"
+block|}
+argument_list|)
 specifier|final
+annotation|@
+name|Initialized
 name|LatticeChildNode
 name|node
 init|=

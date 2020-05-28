@@ -505,6 +505,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -533,6 +565,34 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link QueryableFactory}  * that builds a tree of {@link RelNode} planner nodes. Used by  * {@link LixToRelTranslator}.  *  *<p>Each of the methods that implements a {@code Replayer} method creates  * a tree of {@code RelNode}s equivalent to the arguments, and calls  * {@link #setRel} to assign the root of that tree to the {@link #rel} member  * variable.</p>  *  *<p>To comply with the {@link org.apache.calcite.linq4j.QueryableFactory}  * interface, which is after all a factory, each method returns a dummy result  * such as {@code null} or {@code 0}.  * The caller will not use the result.  * The real effect of the method is to  * call {@link #setRel} with a {@code RelNode}.</p>  *  *<p>NOTE: Many methods currently throw {@link UnsupportedOperationException}.  * These method need to be implemented.</p>  *  * @param<T> Element type  */
 end_comment
@@ -555,6 +615,8 @@ name|LixToRelTranslator
 name|translator
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|RelNode
 name|rel
 decl_stmt|;
@@ -606,7 +668,12 @@ name|this
 argument_list|)
 expr_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|rel
+argument_list|,
+literal|"rel"
+argument_list|)
 return|;
 block|}
 if|if
@@ -735,10 +802,19 @@ name|translator
 operator|.
 name|translate
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|queryable
 operator|.
 name|getExpression
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"null expression from "
+operator|+
+name|queryable
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -826,6 +902,8 @@ name|FunctionExpression
 argument_list|<
 name|Function2
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|,
 name|T
@@ -1365,6 +1443,8 @@ name|Override
 specifier|public
 name|Queryable
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|>
 name|defaultIfEmpty
@@ -1387,6 +1467,8 @@ name|Override
 specifier|public
 name|Queryable
 argument_list|<
+annotation|@
+name|PolyNull
 name|T
 argument_list|>
 name|defaultIfEmpty
@@ -1397,6 +1479,8 @@ name|T
 argument_list|>
 name|source
 parameter_list|,
+annotation|@
+name|PolyNull
 name|T
 name|value
 parameter_list|)
@@ -3211,7 +3295,10 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 return|;
 block|}
 annotation|@

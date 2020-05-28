@@ -187,6 +187,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -1322,21 +1338,29 @@ begin_comment
 comment|//~ Methods ----------------------------------------------------------------
 end_comment
 
-begin_function
+begin_annotation
 annotation|@
 name|Override
+end_annotation
+
+begin_expr_stmt
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
+expr|@
+name|Nullable
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -1344,7 +1368,7 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|,
+argument_list|,
 name|Class
 argument_list|<
 name|?
@@ -1352,7 +1376,7 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -1368,17 +1392,19 @@ name|relClass
 argument_list|)
 return|;
 block|}
+end_expr_stmt
+
+begin_if_stmt
 else|else
 block|{
 return|return
 literal|null
 return|;
 block|}
-block|}
-end_function
+end_if_stmt
 
-begin_function
-annotation|@
+begin_expr_stmt
+unit|}    @
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -1388,17 +1414,22 @@ literal|"SuspiciousMethodCalls"
 block|}
 argument_list|)
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
+expr|@
+name|Nullable
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -1406,7 +1437,7 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|)
+argument_list|)
 block|{
 name|List
 argument_list|<
@@ -1418,12 +1449,12 @@ name|RelNode
 argument_list|>
 argument_list|>
 name|newSources
-init|=
+operator|=
 operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
-decl_stmt|;
+block|;
 for|for
 control|(
 init|;
@@ -1473,11 +1504,16 @@ name|function
 argument_list|)
 expr_stmt|;
 block|}
+end_expr_stmt
+
+begin_return
 return|return
 name|function
 return|;
-block|}
-else|else
+end_return
+
+begin_block
+unit|} else
 block|{
 name|newSources
 operator|.
@@ -1487,6 +1523,9 @@ name|relClass
 argument_list|)
 expr_stmt|;
 block|}
+end_block
+
+begin_for
 for|for
 control|(
 name|Class
@@ -1563,18 +1602,36 @@ return|;
 block|}
 block|}
 block|}
+end_for
+
+begin_decl_stmt
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|superclass
+init|=
+name|relClass
+operator|.
+name|getSuperclass
+argument_list|()
+decl_stmt|;
+end_decl_stmt
+
+begin_if_stmt
 if|if
 condition|(
+name|superclass
+operator|!=
+literal|null
+operator|&&
 name|RelNode
 operator|.
 name|class
 operator|.
 name|isAssignableFrom
 argument_list|(
-name|relClass
-operator|.
-name|getSuperclass
-argument_list|()
+name|superclass
 argument_list|)
 condition|)
 block|{
@@ -1586,10 +1643,7 @@ argument_list|<
 name|RelNode
 argument_list|>
 operator|)
-name|relClass
-operator|.
-name|getSuperclass
-argument_list|()
+name|superclass
 expr_stmt|;
 block|}
 else|else
@@ -1598,11 +1652,10 @@ return|return
 literal|null
 return|;
 block|}
-block|}
-block|}
-end_function
+end_if_stmt
 
 begin_comment
+unit|}   }
 comment|/** Workspace for computing which methods can act as handlers for    * given metadata methods. */
 end_comment
 

@@ -443,6 +443,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -493,6 +509,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/** Base class for EnumerableAggregate and EnumerableSortedAggregate. */
 end_comment
@@ -526,6 +554,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -936,9 +966,14 @@ name|BASIC_LAZY_ACCUMULATOR
 operator|.
 name|constructor
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|accumulatorAdder
+argument_list|,
+literal|"agg.accumulatorAdder"
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -999,9 +1034,14 @@ name|SOURCE_SORTER
 operator|.
 name|constructor
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|accumulatorAdder
+argument_list|,
+literal|"agg.accumulatorAdder"
+argument_list|)
 argument_list|,
 name|pair
 operator|.
@@ -1119,9 +1159,14 @@ name|COLLECTION_ADD
 operator|.
 name|method
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|accumulatorAdder
+argument_list|,
+literal|"agg.accumulatorAdder"
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1476,9 +1521,14 @@ specifier|final
 name|int
 name|stateSize
 init|=
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|state
+argument_list|,
+literal|"agg.state"
+argument_list|)
 operator|.
 name|size
 argument_list|()
@@ -1620,6 +1670,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RexNode
 name|rexFilterArgument
 parameter_list|()
@@ -1704,9 +1756,14 @@ name|implementor
 operator|.
 name|implementAdd
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|context
+argument_list|,
+literal|"agg.context"
+argument_list|)
 argument_list|,
 name|addContext
 argument_list|)

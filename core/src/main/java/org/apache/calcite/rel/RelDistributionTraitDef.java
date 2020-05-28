@@ -89,6 +89,22 @@ name|LogicalExchange
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the distribution trait.  *  *<p>Distribution is a physical property (i.e. a trait) because it can be  * changed without loss of information. The converter to do this is the  * {@link Exchange} operator.  */
 end_comment
@@ -161,6 +177,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(

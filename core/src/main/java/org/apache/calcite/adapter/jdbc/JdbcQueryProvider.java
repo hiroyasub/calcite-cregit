@@ -73,6 +73,22 @@ name|Queryable
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link QueryProvider} that talks to JDBC databases.  */
 end_comment
@@ -120,7 +136,10 @@ name|queryable
 parameter_list|)
 block|{
 return|return
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 return|;
 block|}
 block|}

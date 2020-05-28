@@ -119,6 +119,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -130,7 +146,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Implementation of {@link MetadataFactory} that gets providers from a  * {@link RelMetadataProvider} and stores them in a cache.  *  *<p>The cache does not store metadata. It remembers which providers can  * provide which kinds of metadata, for which kinds of relational  * expressions.</p>  */
+comment|/**  * Implementation of {@link MetadataFactory} that gets providers from a  * {@link RelMetadataProvider} and stores them in a cache.  *  *<p>The cache does not store metadata. It remembers which providers can  * provide which kinds of metadata, for which kinds of relational  * expressions.</p>  */
 end_comment
 
 begin_class
@@ -150,6 +166,8 @@ specifier|static
 specifier|final
 name|UnboundMetadata
 argument_list|<
+annotation|@
+name|Nullable
 name|Metadata
 argument_list|>
 name|DUMMY
@@ -181,6 +199,8 @@ argument_list|>
 argument_list|,
 name|UnboundMetadata
 argument_list|<
+annotation|@
+name|Nullable
 name|Metadata
 argument_list|>
 argument_list|>
@@ -230,6 +250,8 @@ argument_list|>
 argument_list|,
 name|UnboundMetadata
 argument_list|<
+annotation|@
+name|Nullable
 name|Metadata
 argument_list|>
 argument_list|>
@@ -240,9 +262,31 @@ name|RelMetadataProvider
 name|provider
 parameter_list|)
 block|{
+comment|//noinspection RedundantTypeArguments
 return|return
 name|CacheLoader
 operator|.
+expr|<
+name|Pair
+argument_list|<
+name|Class
+argument_list|<
+name|RelNode
+argument_list|>
+argument_list|,
+name|Class
+argument_list|<
+name|Metadata
+argument_list|>
+argument_list|>
+operator|,
+name|UnboundMetadata
+argument_list|<
+annotation|@
+name|Nullable
+name|Metadata
+argument_list|>
+operator|>
 name|from
 argument_list|(
 name|key
@@ -251,6 +295,8 @@ block|{
 specifier|final
 name|UnboundMetadata
 argument_list|<
+annotation|@
+name|Nullable
 name|Metadata
 argument_list|>
 name|function
@@ -285,26 +331,29 @@ block|}
 annotation|@
 name|Override
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
 name|M
 name|query
-parameter_list|(
+argument_list|(
 name|RelNode
 name|rel
-parameter_list|,
+argument_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|,
+argument_list|,
 name|Class
 argument_list|<
 name|M
 argument_list|>
 name|metadataClazz
-parameter_list|)
+argument_list|)
 block|{
 try|try
 block|{
@@ -324,18 +373,27 @@ argument_list|>
 argument_list|>
 name|key
 init|=
-operator|(
-name|Pair
-operator|)
 name|Pair
 operator|.
 name|of
 argument_list|(
+operator|(
+name|Class
+argument_list|<
+name|RelNode
+argument_list|>
+operator|)
 name|rel
 operator|.
 name|getClass
 argument_list|()
 argument_list|,
+operator|(
+name|Class
+argument_list|<
+name|Metadata
+argument_list|>
+operator|)
 name|metadataClazz
 argument_list|)
 decl_stmt|;
@@ -389,8 +447,8 @@ argument_list|)
 throw|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

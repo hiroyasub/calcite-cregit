@@ -105,6 +105,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -136,6 +152,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -192,10 +220,29 @@ parameter_list|,
 name|boolean
 name|throwOnFailure
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCallBinding
 name|callBinding
 parameter_list|)
 block|{
+if|if
+condition|(
+name|throwOnFailure
+operator|&&
+name|callBinding
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"callBinding must be non-null in case throwOnFailure=true"
+argument_list|)
+throw|;
+block|}
 name|int
 name|nOperandsActual
 init|=
@@ -217,18 +264,6 @@ name|getOperandCount
 argument_list|()
 expr_stmt|;
 block|}
-assert|assert
-operator|!
-operator|(
-name|throwOnFailure
-operator|&&
-operator|(
-name|callBinding
-operator|==
-literal|null
-operator|)
-operator|)
-assert|;
 name|RelDataType
 index|[]
 name|types
@@ -276,7 +311,12 @@ condition|)
 block|{
 if|if
 condition|(
+name|requireNonNull
+argument_list|(
 name|callBinding
+argument_list|,
+literal|"callBinding"
+argument_list|)
 operator|.
 name|isTypeCoercionEnabled
 argument_list|()
@@ -418,7 +458,12 @@ comment|// REVIEW jvs 5-June-2005: Why don't we use
 comment|// newValidationSignatureError() here?  It gives more
 comment|// specific diagnostics.
 throw|throw
+name|requireNonNull
+argument_list|(
 name|callBinding
+argument_list|,
+literal|"callBinding"
+argument_list|)
 operator|.
 name|newValidationError
 argument_list|(

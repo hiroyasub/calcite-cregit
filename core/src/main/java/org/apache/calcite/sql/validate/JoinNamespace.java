@@ -77,6 +77,22 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Namespace representing the row type produced by joining two relations.  */
 end_comment
@@ -133,7 +149,7 @@ name|leftType
 init|=
 name|validator
 operator|.
-name|getNamespace
+name|getNamespaceOrThrow
 argument_list|(
 name|join
 operator|.
@@ -149,7 +165,7 @@ name|rightType
 init|=
 name|validator
 operator|.
-name|getNamespace
+name|getNamespaceOrThrow
 argument_list|(
 name|join
 operator|.
@@ -250,6 +266,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()

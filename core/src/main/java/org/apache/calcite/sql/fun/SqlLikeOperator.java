@@ -255,6 +255,22 @@ name|Litmus
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * An operator describing the<code>LIKE</code> and<code>SIMILAR</code>  * operators.  *  *<p>Syntax of the two operators:  *  *<ul>  *<li><code>src-value [NOT] LIKE pattern-value [ESCAPE  * escape-value]</code></li>  *<li><code>src-value [NOT] SIMILAR pattern-value [ESCAPE  * escape-value]</code></li>  *</ul>  *  *<p><b>NOTE</b> If the<code>NOT</code> clause is present the  * {@link org.apache.calcite.sql.parser.SqlParser parser} will generate a  * equivalent to<code>NOT (src LIKE pattern ...)</code>  */
 end_comment
@@ -761,6 +777,8 @@ block|}
 block|}
 block|}
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands

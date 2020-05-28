@@ -32,6 +32,22 @@ import|;
 end_import
 
 begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -2407,6 +2423,8 @@ name|SqlValidatorException
 argument_list|>
 name|fromAliasDuplicate
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|a0
 parameter_list|)
@@ -3985,6 +4003,8 @@ name|CalciteException
 argument_list|>
 name|failedToAccessField
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|fieldName
 parameter_list|,
@@ -4423,6 +4443,8 @@ parameter_list|(
 name|String
 name|xpath
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|namespace
 parameter_list|)
@@ -4441,6 +4463,8 @@ parameter_list|(
 name|String
 name|xpath
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|namespace
 parameter_list|)

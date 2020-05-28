@@ -191,6 +191,18 @@ name|Litmus
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A relational operator that performs nested-loop joins.  *  *<p>It behaves like a kind of {@link org.apache.calcite.rel.core.Join},  * but works by setting variables in its environment and restarting its  * right-hand input.  *  *<p>A LogicalCorrelate is used to represent a correlated query. One  * implementation strategy is to de-correlate the expression.  *  * @see org.apache.calcite.rel.core.CorrelationId  */
 end_comment
@@ -313,10 +325,15 @@ argument_list|(
 operator|(
 name|Integer
 operator|)
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|get
 argument_list|(
+literal|"correlation"
+argument_list|)
+argument_list|,
 literal|"correlation"
 argument_list|)
 argument_list|)
@@ -328,6 +345,8 @@ argument_list|(
 literal|"requiredColumns"
 argument_list|)
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getEnum
@@ -337,6 +356,9 @@ argument_list|,
 name|JoinRelType
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"joinType"
 argument_list|)
 argument_list|)
 expr_stmt|;

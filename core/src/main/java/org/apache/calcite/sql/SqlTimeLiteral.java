@@ -75,6 +75,16 @@ name|Preconditions
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SQL literal representing a TIME value, for example<code>TIME  * '14:33:44.567'</code>.  *  *<p>Create values using {@link SqlLiteral#createTime}.  */
 end_comment
@@ -140,7 +150,14 @@ return|return
 operator|(
 name|TimeString
 operator|)
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|,
+literal|"value"
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -157,10 +174,8 @@ return|return
 operator|new
 name|SqlTimeLiteral
 argument_list|(
-operator|(
-name|TimeString
-operator|)
-name|value
+name|getTime
+argument_list|()
 argument_list|,
 name|precision
 argument_list|,

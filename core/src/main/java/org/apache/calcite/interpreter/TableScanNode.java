@@ -407,6 +407,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -452,16 +468,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -474,6 +480,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -540,6 +558,8 @@ name|RexNode
 argument_list|>
 name|filters
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|projects
 parameter_list|)
@@ -763,6 +783,8 @@ name|RexNode
 argument_list|>
 name|filters
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|projects
 parameter_list|,
@@ -826,6 +848,8 @@ name|RexNode
 argument_list|>
 name|filters
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|projects
 parameter_list|,
@@ -884,6 +908,24 @@ argument_list|()
 argument_list|)
 control|)
 block|{
+name|requireNonNull
+argument_list|(
+name|schema
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"schema is null while resolving "
+operator|+
+name|name
+operator|+
+literal|" for table"
+operator|+
+name|relOptTable
+operator|.
+name|getQualifiedName
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|schema
 operator|=
 name|schema
@@ -1020,6 +1062,8 @@ name|o
 lambda|->
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -1157,6 +1201,8 @@ name|RexNode
 argument_list|>
 name|filters
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|projects
 parameter_list|,
@@ -1190,6 +1236,8 @@ decl_stmt|;
 specifier|final
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1287,6 +1335,8 @@ name|RexNode
 argument_list|>
 name|filters
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|projects
 parameter_list|,
@@ -1374,6 +1424,8 @@ block|}
 specifier|final
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1530,13 +1582,15 @@ name|rejectedProjects
 decl_stmt|;
 if|if
 condition|(
-name|Objects
+name|originalProjects
+operator|==
+literal|null
+operator|||
+name|originalProjects
 operator|.
 name|equals
 argument_list|(
 name|projects
-argument_list|,
-name|originalProjects
 argument_list|)
 condition|)
 block|{
@@ -1598,6 +1652,8 @@ argument_list|>
 name|enumerable
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|acceptedProjects
 parameter_list|,
@@ -1608,6 +1664,8 @@ argument_list|>
 name|rejectedFilters
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableIntList
 name|rejectedProjects
 parameter_list|)
@@ -1859,6 +1917,8 @@ argument_list|>
 argument_list|()
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -1883,6 +1943,8 @@ name|row
 parameter_list|)
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|inValues

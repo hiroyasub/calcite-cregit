@@ -231,6 +231,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -572,6 +588,8 @@ block|}
 comment|/**    * Creates {@link org.apache.calcite.schema.ScalarFunction} from given class.    *    *<p>If a method of the given name is not found or it does not suit,    * returns {@code null}.    *    * @param clazz class that is used to implement the function    * @param methodName Method name (typically "eval")    * @return created {@link ScalarFunction} or null    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|ScalarFunction
 name|create
 parameter_list|(

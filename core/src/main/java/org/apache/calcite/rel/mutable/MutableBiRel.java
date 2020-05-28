@@ -90,6 +90,11 @@ specifier|protected
 name|MutableRel
 name|right
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"initialization.invalid.field.write.initialized"
+argument_list|)
 specifier|protected
 name|MutableBiRel
 parameter_list|(

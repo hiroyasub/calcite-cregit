@@ -1708,16 +1708,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -7755,8 +7745,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Nonnull
 specifier|private
 name|Function
 argument_list|<

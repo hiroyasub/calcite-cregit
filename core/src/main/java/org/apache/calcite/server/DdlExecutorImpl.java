@@ -91,6 +91,15 @@ parameter_list|()
 block|{
 block|}
 comment|/** Dispatches calls to the appropriate method based on the type of the    * first argument. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"method.invocation.invalid"
+block|,
+literal|"argument.type.incompatible"
+block|}
+argument_list|)
 specifier|private
 specifier|final
 name|ReflectUtil

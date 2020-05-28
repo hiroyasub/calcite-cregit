@@ -165,6 +165,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -190,16 +206,6 @@ operator|.
 name|util
 operator|.
 name|TimeZone
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -876,10 +882,10 @@ argument_list|)
 return|;
 block|}
 comment|/** Translates a CAST expression to a Druid Time extraction function, or null    * when can not translate the cast.    *    * @param rexNode CAST RexNode    * @param timeZone Timezone    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|TimeExtractionFunction
 name|translateCastToTimeExtract
 parameter_list|(

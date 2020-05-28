@@ -219,6 +219,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -259,21 +275,23 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
 name|javax
 operator|.
 name|sql
 operator|.
 name|DataSource
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -306,6 +324,11 @@ name|String
 name|catalog
 decl_stmt|;
 comment|/** Sub-schemas by name, lazily initialized. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|final
 name|Supplier
 argument_list|<
@@ -344,8 +367,6 @@ name|this
 operator|.
 name|dataSource
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|dataSource
@@ -355,8 +376,6 @@ name|this
 operator|.
 name|dialect
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|dialect
@@ -366,8 +385,6 @@ name|this
 operator|.
 name|convention
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|convention
@@ -385,6 +402,8 @@ specifier|static
 name|JdbcCatalogSchema
 name|create
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -420,6 +439,8 @@ specifier|static
 name|JdbcCatalogSchema
 name|create
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -583,11 +604,18 @@ specifier|final
 name|String
 name|schemaName
 init|=
+name|requireNonNull
+argument_list|(
 name|resultSet
 operator|.
 name|getString
 argument_list|(
 literal|1
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"got null schemaName from the database"
 argument_list|)
 decl_stmt|;
 name|builder

@@ -114,6 +114,15 @@ literal|831683113957131387L
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new SqlValidatorException object.    *    * @param message error message    * @param cause   underlying cause    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"argument.type.incompatible"
+block|,
+literal|"method.invocation.invalid"
+block|}
+argument_list|)
 specifier|public
 name|SqlValidatorException
 parameter_list|(

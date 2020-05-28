@@ -249,6 +249,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -263,17 +279,19 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Set
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -358,8 +376,6 @@ name|this
 operator|.
 name|joinType
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|joinType
@@ -369,8 +385,6 @@ name|this
 operator|.
 name|correlationId
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|correlationId
@@ -380,8 +394,6 @@ name|this
 operator|.
 name|requiredColumns
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|requiredColumns
@@ -431,6 +443,8 @@ argument_list|,
 operator|new
 name|CorrelationId
 argument_list|(
+name|requireNonNull
+argument_list|(
 operator|(
 name|Integer
 operator|)
@@ -438,6 +452,9 @@ name|input
 operator|.
 name|get
 argument_list|(
+literal|"correlation"
+argument_list|)
+argument_list|,
 literal|"correlation"
 argument_list|)
 argument_list|)
@@ -449,6 +466,8 @@ argument_list|(
 literal|"requiredColumns"
 argument_list|)
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getEnum
@@ -458,6 +477,9 @@ argument_list|,
 name|JoinRelType
 operator|.
 name|class
+argument_list|)
+argument_list|,
+literal|"joinType"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -472,6 +494,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)
@@ -800,6 +824,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -880,6 +906,23 @@ name|getLeft
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|restartCount
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|planner
+operator|.
+name|getCostFactory
+argument_list|()
+operator|.
+name|makeInfiniteCost
+argument_list|()
+return|;
+block|}
 comment|// RelMetadataQuery.getCumulativeCost(getRight()); does not work for
 comment|// RelSubset, so we ask planner to cost-estimate right relation
 name|RelOptCost
@@ -895,6 +938,23 @@ argument_list|,
 name|mq
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|rightCost
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|planner
+operator|.
+name|getCostFactory
+argument_list|()
+operator|.
+name|makeInfiniteCost
+argument_list|()
+return|;
+block|}
 name|RelOptCost
 name|rescanCost
 init|=

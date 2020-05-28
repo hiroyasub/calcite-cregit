@@ -143,6 +143,38 @@ name|ImmutableSet
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|NotOnlyInitialized
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnderInitialization
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rewrites relations to ensure the same correlation is referenced by the same  * correlation variable.  */
 end_comment
@@ -154,6 +186,8 @@ name|DeduplicateCorrelateVariables
 extends|extends
 name|RelHomogeneousShuttle
 block|{
+annotation|@
+name|NotOnlyInitialized
 specifier|private
 specifier|final
 name|RexShuttle
@@ -292,6 +326,8 @@ name|CorrelationId
 argument_list|>
 name|alternateIds
 decl_stmt|;
+annotation|@
+name|NotOnlyInitialized
 specifier|private
 specifier|final
 name|DeduplicateCorrelateVariables
@@ -312,6 +348,8 @@ name|CorrelationId
 argument_list|>
 name|alternateIds
 parameter_list|,
+annotation|@
+name|UnderInitialization
 name|DeduplicateCorrelateVariables
 name|shuttle
 parameter_list|)

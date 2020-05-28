@@ -245,6 +245,24 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|NonNullableAccessors
+operator|.
+name|getComponentTypeOrThrow
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.core.Uncollect} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
 end_comment
@@ -570,10 +588,10 @@ specifier|final
 name|RelDataType
 name|elementType
 init|=
+name|getComponentTypeOrThrow
+argument_list|(
 name|type
-operator|.
-name|getComponentType
-argument_list|()
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

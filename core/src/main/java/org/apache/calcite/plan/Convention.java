@@ -45,6 +45,22 @@ name|RelFactories
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Calling convention trait.  */
 end_comment
@@ -80,6 +96,8 @@ parameter_list|()
 function_decl|;
 comment|/**    * Given an input and required traits, returns the corresponding    * enforcer rel nodes, like physical Sort, Exchange etc.    *    * @param input The input RelNode    * @param required The required traits    * @return Physical enforcer that satisfies the required traitSet,    * or {@code null} if trait enforcement is not allowed or the    * required traitSet can't be satisfied.    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelNode
 name|enforce
 parameter_list|(
@@ -273,6 +291,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|enforce
 parameter_list|(

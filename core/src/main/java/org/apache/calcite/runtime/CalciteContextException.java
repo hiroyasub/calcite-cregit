@@ -27,6 +27,38 @@ begin_comment
 comment|// dependencies on other Calcite code.
 end_comment
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnknownInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Exception which contains information about the textual context of the causing  * exception.  */
 end_comment
@@ -67,6 +99,8 @@ name|int
 name|endPosColumn
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|originalStatement
 decl_stmt|;
@@ -224,6 +258,11 @@ specifier|public
 name|void
 name|setPosition
 parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|CalciteContextException
+name|this
+parameter_list|,
 name|int
 name|posLine
 parameter_list|,
@@ -304,6 +343,8 @@ return|;
 block|}
 comment|/**    * Returns the input string that is associated with the context.    */
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getOriginalStatement
 parameter_list|()
@@ -317,6 +358,8 @@ specifier|public
 name|void
 name|setOriginalStatement
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|originalStatement
 parameter_list|)
@@ -331,12 +374,35 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getMessage
 parameter_list|()
 block|{
 comment|// The superclass' message is the textual context information
 comment|// for this exception, so we add in the underlying cause to the message
+name|Throwable
+name|cause
+init|=
+name|getCause
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|cause
+operator|==
+literal|null
+condition|)
+block|{
+comment|// It would be sad to get NPE from getMessage
+return|return
+name|super
+operator|.
+name|getMessage
+argument_list|()
+return|;
+block|}
 return|return
 name|super
 operator|.
@@ -345,8 +411,7 @@ argument_list|()
 operator|+
 literal|": "
 operator|+
-name|getCause
-argument_list|()
+name|cause
 operator|.
 name|getMessage
 argument_list|()

@@ -273,6 +273,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
@@ -930,6 +946,8 @@ name|Pair
 argument_list|<
 name|RexInputRef
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -953,6 +971,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -974,6 +994,8 @@ name|Pair
 argument_list|<
 name|RexInputRef
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1006,6 +1028,8 @@ name|Pair
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|pair
@@ -1060,6 +1084,8 @@ name|Pair
 argument_list|<
 name|RexInputRef
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1084,6 +1110,8 @@ name|Pair
 argument_list|<
 name|RexInputRef
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1141,6 +1169,8 @@ parameter_list|(
 name|RexNode
 name|second
 parameter_list|,
+annotation|@
+name|Nullable
 name|DataContext
 name|dataValues
 parameter_list|)
@@ -1184,6 +1214,8 @@ argument_list|,
 name|rowType
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|result
@@ -1279,6 +1311,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1297,6 +1331,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1318,6 +1354,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1334,6 +1372,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|secondUsage
@@ -1350,6 +1390,8 @@ name|Pair
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1390,6 +1432,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|firstUsage
@@ -1439,6 +1483,8 @@ name|Pair
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1495,14 +1541,9 @@ specifier|final
 name|SqlKind
 name|fKind2
 init|=
-operator|(
-name|firstUsageList
-operator|.
-name|size
-argument_list|()
+name|firstLen
 operator|==
 literal|2
-operator|)
 condition|?
 name|firstUsageList
 operator|.
@@ -1523,14 +1564,9 @@ specifier|final
 name|SqlKind
 name|sKind2
 init|=
-operator|(
-name|secondUsageList
-operator|.
-name|size
-argument_list|()
+name|secondLen
 operator|==
 literal|2
-operator|)
 condition|?
 name|secondUsageList
 operator|.
@@ -1547,6 +1583,9 @@ argument_list|()
 else|:
 literal|null
 decl_stmt|;
+comment|// Note: arguments to isEquivalentOp are never null, however checker-framework's
+comment|// dataflow is not strong enough, so the first parameter is marked as nullable
+comment|//noinspection ConstantConditions
 if|if
 condition|(
 name|firstLen
@@ -1556,6 +1595,14 @@ operator|&&
 name|secondLen
 operator|==
 literal|2
+operator|&&
+name|fKind2
+operator|!=
+literal|null
+operator|&&
+name|sKind2
+operator|!=
+literal|null
 operator|&&
 operator|!
 operator|(
@@ -1668,8 +1715,13 @@ comment|// x< 30 and x< 40 implies x< 70
 comment|// x> 30 and x< 40 implies x< 70
 comment|// But disallow cases like
 comment|// x> 30 and x> 40 implies x< 70
+comment|//noinspection ConstantConditions
 if|if
 condition|(
+name|fKind2
+operator|!=
+literal|null
+operator|&&
 operator|!
 name|isOppositeOp
 argument_list|(
@@ -1744,6 +1796,8 @@ specifier|private
 name|boolean
 name|isEquivalentOp
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlKind
 name|fKind
 parameter_list|,
@@ -1959,6 +2013,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1992,6 +2048,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|inputRefUse
@@ -2305,6 +2363,8 @@ parameter_list|,
 name|RexInputRef
 name|inputRef
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|literal
 parameter_list|)
@@ -2314,6 +2374,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|inputRefUse
@@ -2327,6 +2389,8 @@ name|Pair
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|use
@@ -2355,6 +2419,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|getUsageMap
@@ -2367,6 +2433,8 @@ name|InputRefUsage
 argument_list|<
 name|SqlOperator
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|inputRefUse

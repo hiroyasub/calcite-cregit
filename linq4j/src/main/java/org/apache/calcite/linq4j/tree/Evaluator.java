@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -60,6 +76,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|values
@@ -79,6 +97,8 @@ parameter_list|(
 name|ParameterExpression
 name|parameter
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -141,6 +161,8 @@ name|n
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Nullable
 name|Object
 name|peek
 parameter_list|(
@@ -202,6 +224,8 @@ literal|" not on stack"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Nullable
 name|Object
 name|evaluate
 parameter_list|(

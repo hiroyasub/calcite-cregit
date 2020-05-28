@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -52,6 +68,8 @@ name|RelOptSchema
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Retrieves a {@link RelOptTable} based upon a member access.    *    *<p>For example, the Saffron expression<code>salesSchema.emps</code>    * would be resolved using a call to<code>salesSchema.getTableForMember(new    * String[]{"emps" })</code>.</p>    *    *<p>Note that name.length is only greater than 1 for queries originating    * from JDBC.</p>    *    * @param names Qualified name    */
+annotation|@
+name|Nullable
 name|RelOptTable
 name|getTableForMember
 parameter_list|(

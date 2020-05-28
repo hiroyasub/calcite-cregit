@@ -191,6 +191,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -216,6 +232,18 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -266,6 +294,8 @@ specifier|public
 name|Expression
 name|getExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -273,6 +303,13 @@ name|String
 name|name
 parameter_list|)
 block|{
+name|requireNonNull
+argument_list|(
+name|parentSchema
+argument_list|,
+literal|"parentSchema"
+argument_list|)
+expr_stmt|;
 return|return
 name|Schemas
 operator|.
@@ -316,7 +353,14 @@ argument_list|>
 name|getTableNames
 parameter_list|()
 block|{
+comment|//noinspection RedundantCast
 return|return
+operator|(
+name|Set
+argument_list|<
+name|String
+argument_list|>
+operator|)
 name|getTableMap
 argument_list|()
 operator|.
@@ -328,6 +372,8 @@ annotation|@
 name|Override
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|Table
 name|getTable
 parameter_list|(
@@ -366,6 +412,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelProtoDataType
 name|getType
 parameter_list|(
@@ -393,7 +441,14 @@ argument_list|>
 name|getTypeNames
 parameter_list|()
 block|{
+comment|//noinspection RedundantCast
 return|return
+operator|(
+name|Set
+argument_list|<
+name|String
+argument_list|>
+operator|)
 name|getTypeMap
 argument_list|()
 operator|.
@@ -492,7 +547,14 @@ argument_list|>
 name|getSubSchemaNames
 parameter_list|()
 block|{
+comment|//noinspection RedundantCast
 return|return
+operator|(
+name|Set
+argument_list|<
+name|String
+argument_list|>
+operator|)
 name|getSubSchemaMap
 argument_list|()
 operator|.
@@ -504,6 +566,8 @@ annotation|@
 name|Override
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|Schema
 name|getSubSchema
 parameter_list|(

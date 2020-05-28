@@ -31,6 +31,22 @@ name|SqlParserPos
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Base class for an ALTER statements parse tree nodes. The portion of the  * statement covered by this class is "ALTER&lt;SCOPE&gt;. Subclasses handle  * whatever comes after the scope.  */
 end_comment
@@ -44,6 +60,8 @@ extends|extends
 name|SqlCall
 block|{
 comment|/** Scope of the operation. Values "SYSTEM" and "SESSION" are typical. */
+annotation|@
+name|Nullable
 name|String
 name|scope
 decl_stmt|;
@@ -68,6 +86,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|scope
 parameter_list|)
@@ -101,6 +121,13 @@ name|int
 name|rightPrec
 parameter_list|)
 block|{
+name|String
+name|scope
+init|=
+name|this
+operator|.
+name|scope
+decl_stmt|;
 if|if
 condition|(
 name|scope
@@ -149,6 +176,8 @@ name|rightPrec
 parameter_list|)
 function_decl|;
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getScope
 parameter_list|()
@@ -161,6 +190,8 @@ specifier|public
 name|void
 name|setScope
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|scope
 parameter_list|)

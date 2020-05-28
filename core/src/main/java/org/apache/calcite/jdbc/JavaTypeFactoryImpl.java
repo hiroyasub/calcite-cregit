@@ -343,6 +343,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -443,19 +459,21 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|stream
+operator|.
+name|Collectors
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|stream
+name|Objects
 operator|.
-name|Collectors
+name|requireNonNull
 import|;
 end_import
 
@@ -813,9 +831,18 @@ operator|)
 name|type
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|syntheticRecordType
 operator|.
 name|relType
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"relType for "
+operator|+
+name|syntheticRecordType
+argument_list|)
 return|;
 block|}
 if|if
@@ -999,12 +1026,10 @@ name|createJavaType
 argument_list|(
 name|Primitive
 operator|.
-name|ofBox
+name|box
 argument_list|(
 name|clazz
 argument_list|)
-operator|.
-name|boxClass
 argument_list|)
 return|;
 default|default:
@@ -1504,7 +1529,9 @@ default|default:
 break|break;
 block|}
 return|return
-literal|null
+name|Object
+operator|.
+name|class
 return|;
 block|}
 annotation|@
@@ -1749,6 +1776,8 @@ specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type
 parameter_list|)
@@ -2174,6 +2203,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|RelDataType
 name|relType
 decl_stmt|;
@@ -2185,6 +2216,8 @@ decl_stmt|;
 specifier|private
 name|SyntheticRecordType
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|relType
 parameter_list|,
@@ -2320,8 +2353,6 @@ name|this
 operator|.
 name|syntheticType
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|syntheticType
@@ -2331,8 +2362,6 @@ name|this
 operator|.
 name|name
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|name
@@ -2342,8 +2371,6 @@ name|this
 operator|.
 name|type
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|type
@@ -2428,9 +2455,13 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|get
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

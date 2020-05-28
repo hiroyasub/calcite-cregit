@@ -35,6 +35,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -90,6 +106,8 @@ name|Shuttle
 block|{
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|ClassDeclarationFinder
 name|parent
 decl_stmt|;
@@ -433,6 +451,8 @@ name|Expression
 argument_list|>
 name|arguments
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|MemberDeclaration
@@ -713,6 +733,8 @@ return|;
 block|}
 comment|/**    * Finds if there exists ready for reuse declaration for given expression.    * This method should be overridden in sub-classes.    *    * @param expression input expression    * @return always returns null    */
 specifier|protected
+annotation|@
+name|Nullable
 name|ParameterExpression
 name|findDeclaredExpression
 parameter_list|(

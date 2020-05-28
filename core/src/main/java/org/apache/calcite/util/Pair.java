@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -117,30 +133,34 @@ name|BiConsumer
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Pair of objects.  *  *<p>Because a pair implements {@link #equals(Object)}, {@link #hashCode()} and  * {@link #compareTo(Pair)}, it can be used in any kind of  * {@link java.util.Collection}.  *  * @param<T1> Left-hand type  * @param<T2> Right-hand type  */
 end_comment
 
-begin_class
+begin_annotation
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"type.argument.type.incompatible"
+argument_list|)
+end_annotation
+
+begin_expr_stmt
 specifier|public
-class|class
+name|class
 name|Pair
-parameter_list|<
+operator|<
 name|T1
-parameter_list|,
+expr|extends @
+name|Nullable
+name|Object
+operator|,
 name|T2
-parameter_list|>
-implements|implements
+expr|extends @
+name|Nullable
+name|Object
+operator|>
+expr|implements
 name|Comparable
 argument_list|<
 name|Pair
@@ -150,7 +170,7 @@ argument_list|,
 name|T2
 argument_list|>
 argument_list|>
-implements|,
+operator|,
 name|Map
 operator|.
 name|Entry
@@ -159,10 +179,9 @@ name|T1
 argument_list|,
 name|T2
 argument_list|>
-implements|,
+operator|,
 name|Serializable
-block|{
-annotation|@
+block|{    @
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -173,10 +192,10 @@ block|}
 argument_list|)
 specifier|private
 specifier|static
-specifier|final
+name|final
 name|Comparator
 name|NULLS_FIRST_COMPARATOR
-init|=
+operator|=
 name|Comparator
 operator|.
 name|nullsFirst
@@ -189,51 +208,50 @@ operator|.
 name|naturalOrder
 argument_list|()
 argument_list|)
-decl_stmt|;
+block|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|public
-specifier|final
+name|final
 name|T1
 name|left
-decl_stmt|;
+block|;
 specifier|public
-specifier|final
+name|final
 name|T2
 name|right
-decl_stmt|;
+block|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a Pair.    *    * @param left  left value    * @param right right value    */
 specifier|public
 name|Pair
-parameter_list|(
+argument_list|(
 name|T1
 name|left
-parameter_list|,
+argument_list|,
 name|T2
 name|right
-parameter_list|)
+argument_list|)
 block|{
 name|this
 operator|.
 name|left
 operator|=
 name|left
-expr_stmt|;
+block|;
 name|this
 operator|.
 name|right
 operator|=
 name|right
-expr_stmt|;
-block|}
+block|;   }
 comment|/**    * Creates a Pair of appropriate type.    *    *<p>This is a shorthand that allows you to omit implicit types. For    * example, you can write:    *<blockquote>return Pair.of(s, n);</blockquote>    * instead of    *<blockquote>return new Pair&lt;String, Integer&gt;(s, n);</blockquote>    *    * @param left  left value    * @param right right value    * @return A Pair    */
 specifier|public
 specifier|static
-parameter_list|<
+operator|<
 name|T1
-parameter_list|,
+block|,
 name|T2
-parameter_list|>
+operator|>
 name|Pair
 argument_list|<
 name|T1
@@ -241,13 +259,13 @@ argument_list|,
 name|T2
 argument_list|>
 name|of
-parameter_list|(
+argument_list|(
 name|T1
 name|left
-parameter_list|,
+argument_list|,
 name|T2
 name|right
-parameter_list|)
+argument_list|)
 block|{
 return|return
 operator|new
@@ -263,11 +281,11 @@ block|}
 comment|/** Creates a {@code Pair} from a {@link java.util.Map.Entry}. */
 specifier|public
 specifier|static
-parameter_list|<
+operator|<
 name|K
-parameter_list|,
+operator|,
 name|V
-parameter_list|>
+operator|>
 name|Pair
 argument_list|<
 name|K
@@ -275,17 +293,21 @@ argument_list|,
 name|V
 argument_list|>
 name|of
-parameter_list|(
+argument_list|(
 name|Map
 operator|.
 name|Entry
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|,
+name|?
+extends|extends
 name|V
 argument_list|>
 name|entry
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|of
@@ -302,13 +324,21 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_expr_stmt
+
+begin_comment
 comment|//~ Methods ----------------------------------------------------------------
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -361,7 +391,13 @@ name|right
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** {@inheritDoc}    *    *<p>Computes hash code consistent with    * {@link java.util.Map.Entry#hashCode()}. */
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -403,14 +439,15 @@ operator|^
 name|valueHash
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
 name|int
 name|compareTo
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Pair
 argument_list|<
 name|T1
@@ -465,6 +502,9 @@ return|return
 name|c
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -484,6 +524,9 @@ operator|+
 literal|">"
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -495,6 +538,9 @@ return|return
 name|left
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -506,6 +552,9 @@ return|return
 name|right
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -522,7 +571,13 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts a collection of Pairs into a Map.    *    *<p>This is an obvious thing to do because Pair is similar in structure to    * {@link java.util.Map.Entry}.    *    *<p>The map contains a copy of the collection of Pairs; if you change the    * collection, the map does not change.    *    * @param pairs Collection of Pair objects    * @return map with the same contents as the collection    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -540,10 +595,16 @@ name|toMap
 parameter_list|(
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|Pair
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|,
+name|?
+extends|extends
 name|V
 argument_list|>
 argument_list|>
@@ -568,8 +629,12 @@ for|for
 control|(
 name|Pair
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|,
+name|?
+extends|extends
 name|V
 argument_list|>
 name|pair
@@ -595,7 +660,13 @@ return|return
 name|map
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts two lists into a list of {@link Pair}s,    * whose length is the lesser of the lengths of the    * source lists.    *    * @param ks Left list    * @param vs Right list    * @return List of pairs    * @see org.apache.calcite.linq4j.Ord#zip(java.util.List)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -616,12 +687,16 @@ name|zip
 parameter_list|(
 name|List
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|>
 name|ks
 parameter_list|,
 name|List
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vs
@@ -638,7 +713,13 @@ literal|false
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts two lists into a list of {@link Pair}s.    *    *<p>The length of the combined list is the lesser of the lengths of the    * source lists. But typically the source lists will be the same length.</p>    *    * @param ks     Left list    * @param vs     Right list    * @param strict Whether to fail if lists have different size    * @return List of pairs    * @see org.apache.calcite.linq4j.Ord#zip(java.util.List)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -660,6 +741,8 @@ parameter_list|(
 specifier|final
 name|List
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|>
 name|ks
@@ -667,6 +750,8 @@ parameter_list|,
 specifier|final
 name|List
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vs
@@ -744,7 +829,13 @@ name|size
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts two iterables into an iterable of {@link Pair}s.    *    *<p>The resulting iterator ends whenever the first of the input iterators    * ends. But typically the source iterators will be the same length.</p>    *    * @param ks Left iterable    * @param vs Right iterable    * @return Iterable over pairs    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -827,7 +918,13 @@ return|;
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts two arrays into a list of {@link Pair}s.    *    *<p>The length of the combined list is the lesser of the lengths of the    * source arrays. But typically the source arrays will be the same    * length.</p>    *    * @param ks Left array    * @param vs Right array    * @return List of pairs    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -927,7 +1024,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns a mutable list of pairs backed by a pair of mutable lists.    *    *<p>Modifications to this list are reflected in the backing lists, and vice    * versa.    *    * @param<K> Key (left) value type    * @param<V> Value (right) value type */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -972,7 +1075,13 @@ name|vs
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Applies an action to every element of a pair of iterables.    *    *<p>Calls to the action stop whenever the first of the input iterators    * ends. But typically the source iterators will be the same length.    *    * @see Map#forEach(java.util.function.BiConsumer)    * @see org.apache.calcite.linq4j.Ord#forEach(Iterable, java.util.function.ObjIntConsumer)    *    * @param ks Left iterable    * @param vs Right iterable    * @param consumer The action to be performed for each element    *    * @param<K> Left type    * @param<V> Right type    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1003,8 +1112,12 @@ name|vs
 parameter_list|,
 name|BiConsumer
 argument_list|<
+name|?
+super|super
 name|K
 argument_list|,
+name|?
+super|super
 name|V
 argument_list|>
 name|consumer
@@ -1068,7 +1181,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Applies an action to every element of an iterable of pairs.    *    * @see Map#forEach(java.util.function.BiConsumer)    *    * @param entries Pairs    * @param consumer The action to be performed for each element    *    * @param<K> Left type    * @param<V> Right type    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1101,8 +1220,12 @@ name|entries
 parameter_list|,
 name|BiConsumer
 argument_list|<
+name|?
+super|super
 name|K
 argument_list|,
+name|?
+super|super
 name|V
 argument_list|>
 name|consumer
@@ -1144,7 +1267,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an iterable over the left slice of an iterable.    *    * @param iterable Iterable over pairs    * @param<L>      Left type    * @param<R>      Right type    * @return Iterable over the left elements    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1194,7 +1323,13 @@ name|getKey
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an iterable over the right slice of an iterable.    *    * @param iterable Iterable over pairs    * @param<L>      right type    * @param<R>      Right type    * @return Iterable over the right elements    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1244,6 +1379,9 @@ name|getValue
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1293,6 +1431,9 @@ name|getKey
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1342,7 +1483,13 @@ name|getValue
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an iterator that iterates over (i, i + 1) pairs in an iterable.    *    *<p>For example, {@code adjacents([3, 5, 7])} returns [(3, 5), (5, 7)].</p>    *    * @param iterable Source collection    * @param<T> Element type    * @return Iterable over adjacent element pairs    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1362,6 +1509,8 @@ parameter_list|(
 specifier|final
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|T
 argument_list|>
 name|iterable
@@ -1374,6 +1523,8 @@ block|{
 specifier|final
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|T
 argument_list|>
 name|iterator
@@ -1410,7 +1561,13 @@ return|;
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an iterator that iterates over (0, i) pairs in an iterable for    * i&gt; 0.    *    *<p>For example, {@code firstAnd([3, 5, 7])} returns [(3, 5), (3, 7)].</p>    *    * @param iterable Source collection    * @param<T> Element type    * @return Iterable over pairs of the first element and all other elements    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -1430,6 +1587,8 @@ parameter_list|(
 specifier|final
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|T
 argument_list|>
 name|iterable
@@ -1442,6 +1601,8 @@ block|{
 specifier|final
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|T
 argument_list|>
 name|iterator
@@ -1489,7 +1650,13 @@ return|;
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Iterator that returns the first element of a collection paired with every    * other element.    *    * @param<E> Element type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1512,6 +1679,8 @@ specifier|private
 specifier|final
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|E
 argument_list|>
 name|iterator
@@ -1525,6 +1694,8 @@ name|FirstAndIterator
 parameter_list|(
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|E
 argument_list|>
 name|iterator
@@ -1605,7 +1776,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Iterator that pairs elements from two iterators.    *    * @param<L> Left-hand type    * @param<R> Right-hand type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1755,7 +1932,13 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Iterator that returns consecutive pairs of elements from an underlying    * iterator.    *    * @param<E> Element type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1783,6 +1966,8 @@ specifier|private
 specifier|final
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|E
 argument_list|>
 name|iterator
@@ -1794,6 +1979,8 @@ name|AdjacentIterator
 parameter_list|(
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|E
 argument_list|>
 name|iterator
@@ -1899,7 +2086,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Unmodifiable list of pairs, backed by a pair of lists.    *    *<p>Though it is unmodifiable, it is mutable: if the contents of one    * of the backing lists changes, the contents of this list will appear to    * change. The length, however, is fixed on creation.    *    * @param<K> Left-hand type    * @param<V> Right-hand type    *    * @see MutableZipList */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1924,6 +2117,8 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|>
 name|ks
@@ -1932,6 +2127,8 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vs
@@ -1945,12 +2142,16 @@ name|ZipList
 parameter_list|(
 name|List
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|>
 name|ks
 parameter_list|,
 name|List
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vs
@@ -2026,7 +2227,13 @@ name|size
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** A mutable list of pairs backed by a pair of mutable lists.    *    *<p>Modifications to this list are reflected in the backing lists, and vice    * versa.    *    * @param<K> Key (left) value type    * @param<V> Value (right) value type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -2314,8 +2521,8 @@ name|previous
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

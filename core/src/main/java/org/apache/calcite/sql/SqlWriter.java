@@ -49,6 +49,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -312,6 +342,8 @@ name|toSqlString
 parameter_list|()
 function_decl|;
 comment|/**    * Prints a literal, exactly as provided. Does not attempt to indent or    * convert to upper or lower case. Does not add quotation marks. Adds    * preceding whitespace if necessary.    */
+annotation|@
+name|Pure
 name|void
 name|literal
 parameter_list|(
@@ -320,6 +352,8 @@ name|s
 parameter_list|)
 function_decl|;
 comment|/**    * Prints a sequence of keywords. Must not start or end with space, but may    * contain a space. For example,<code>keyword("SELECT")</code>,<code>    * keyword("CHARACTER SET")</code>.    */
+annotation|@
+name|Pure
 name|void
 name|keyword
 parameter_list|(
@@ -328,6 +362,8 @@ name|s
 parameter_list|)
 function_decl|;
 comment|/**    * Prints a string, preceded by whitespace if necessary.    */
+annotation|@
+name|Pure
 name|void
 name|print
 parameter_list|(
@@ -336,6 +372,8 @@ name|s
 parameter_list|)
 function_decl|;
 comment|/**    * Prints an integer.    *    * @param x Integer    */
+annotation|@
+name|Pure
 name|void
 name|print
 parameter_list|(
@@ -366,9 +404,13 @@ comment|/**    * Prints the OFFSET/FETCH clause.    */
 name|void
 name|fetchOffset
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|)
@@ -377,9 +419,13 @@ comment|/**    * Prints the TOP(n) clause.    *    * @see #fetchOffset    */
 name|void
 name|topN
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|)
@@ -410,6 +456,8 @@ name|isKeywordsLowerCase
 parameter_list|()
 function_decl|;
 comment|/**    * Starts a list which is a call to a function.    *    * @see #endFunCall(Frame)    */
+annotation|@
+name|Pure
 name|Frame
 name|startFunCall
 parameter_list|(
@@ -418,6 +466,8 @@ name|funName
 parameter_list|)
 function_decl|;
 comment|/**    * Ends a list which is a call to a function.    *    * @param frame Frame    * @see #startFunCall(String)    */
+annotation|@
+name|Pure
 name|void
 name|endFunCall
 parameter_list|(
@@ -426,6 +476,8 @@ name|frame
 parameter_list|)
 function_decl|;
 comment|/**    * Starts a list.    */
+annotation|@
+name|Pure
 name|Frame
 name|startList
 parameter_list|(
@@ -437,6 +489,8 @@ name|close
 parameter_list|)
 function_decl|;
 comment|/**    * Starts a list with no opening string.    *    * @param frameType Type of list. For example, a SELECT list will be    * governed according to SELECT-list formatting preferences.    */
+annotation|@
+name|Pure
 name|Frame
 name|startList
 parameter_list|(
@@ -445,6 +499,8 @@ name|frameType
 parameter_list|)
 function_decl|;
 comment|/**    * Starts a list.    *    * @param frameType Type of list. For example, a SELECT list will be    *                  governed according to SELECT-list formatting preferences.    * @param open      String to start the list; typically "(" or the empty    *                  string.    * @param close     String to close the list    */
+annotation|@
+name|Pure
 name|Frame
 name|startList
 parameter_list|(
@@ -459,14 +515,20 @@ name|close
 parameter_list|)
 function_decl|;
 comment|/**    * Ends a list.    *    * @param frame The frame which was created by {@link #startList}.    */
+annotation|@
+name|Pure
 name|void
 name|endList
 parameter_list|(
+annotation|@
+name|Nullable
 name|Frame
 name|frame
 parameter_list|)
 function_decl|;
 comment|/**    * Writes a list.    */
+annotation|@
+name|Pure
 name|SqlWriter
 name|list
 parameter_list|(
@@ -481,6 +543,8 @@ name|action
 parameter_list|)
 function_decl|;
 comment|/**    * Writes a list separated by a binary operator    * ({@link SqlStdOperatorTable#AND AND},    * {@link SqlStdOperatorTable#OR OR}, or    * {@link #COMMA COMMA}).    */
+annotation|@
+name|Pure
 name|SqlWriter
 name|list
 parameter_list|(
@@ -495,6 +559,8 @@ name|list
 parameter_list|)
 function_decl|;
 comment|/**    * Writes a list separator, unless the separator is "," and this is the    * first occurrence in the list.    *    * @param sep List separator, typically ",".    */
+annotation|@
+name|Pure
 name|void
 name|sep
 parameter_list|(
@@ -503,6 +569,8 @@ name|sep
 parameter_list|)
 function_decl|;
 comment|/**    * Writes a list separator.    *    * @param sep        List separator, typically ","    * @param printFirst Whether to print the first occurrence of the separator    */
+annotation|@
+name|Pure
 name|void
 name|sep
 parameter_list|(
@@ -514,6 +582,8 @@ name|printFirst
 parameter_list|)
 function_decl|;
 comment|/**    * Sets whether whitespace is needed before the next token.    */
+annotation|@
+name|Pure
 name|void
 name|setNeedWhitespace
 parameter_list|(

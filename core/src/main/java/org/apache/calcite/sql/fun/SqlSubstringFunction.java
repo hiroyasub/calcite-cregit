@@ -349,6 +349,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the "SUBSTRING" builtin SQL function.  */
 end_comment
@@ -965,6 +975,10 @@ name|SqlMonotonicity
 operator|.
 name|CONSTANT
 operator|&&
+name|Objects
+operator|.
+name|equals
+argument_list|(
 name|call
 operator|.
 name|getOperandLiteralValue
@@ -975,9 +989,7 @@ name|BigDecimal
 operator|.
 name|class
 argument_list|)
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|BigDecimal
 operator|.
 name|ZERO

@@ -47,6 +47,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -83,17 +113,26 @@ name|EXPLAIN
 argument_list|)
 block|{
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"argument.type.incompatible"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|SqlCall
 name|createCall
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -282,6 +321,11 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"assignment.type.incompatible"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|void
@@ -290,6 +334,8 @@ parameter_list|(
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -351,6 +397,8 @@ throw|;
 block|}
 block|}
 comment|/**    * Returns the underlying SQL statement to be explained.    */
+annotation|@
+name|Pure
 specifier|public
 name|SqlNode
 name|getExplicandum
@@ -361,6 +409,8 @@ name|explicandum
 return|;
 block|}
 comment|/**    * Return the detail level to be generated.    */
+annotation|@
+name|Pure
 specifier|public
 name|SqlExplainLevel
 name|getDetailLevel
@@ -369,7 +419,7 @@ block|{
 return|return
 name|detailLevel
 operator|.
-name|symbolValue
+name|getValueAs
 argument_list|(
 name|SqlExplainLevel
 operator|.
@@ -378,6 +428,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns the level of abstraction at which this plan should be displayed.    */
+annotation|@
+name|Pure
 specifier|public
 name|Depth
 name|getDepth
@@ -386,7 +438,7 @@ block|{
 return|return
 name|depth
 operator|.
-name|symbolValue
+name|getValueAs
 argument_list|(
 name|Depth
 operator|.
@@ -395,6 +447,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns the number of dynamic parameters in the statement.    */
+annotation|@
+name|Pure
 specifier|public
 name|int
 name|getDynamicParamCount
@@ -405,6 +459,8 @@ name|dynamicParameterCount
 return|;
 block|}
 comment|/**    * Returns whether physical plan implementation should be returned.    */
+annotation|@
+name|Pure
 specifier|public
 name|boolean
 name|withImplementation
@@ -420,6 +476,8 @@ name|PHYSICAL
 return|;
 block|}
 comment|/**    * Returns whether type should be returned.    */
+annotation|@
+name|Pure
 specifier|public
 name|boolean
 name|withType
@@ -435,6 +493,8 @@ name|TYPE
 return|;
 block|}
 comment|/**    * Returns the desired output format.    */
+annotation|@
+name|Pure
 specifier|public
 name|SqlExplainFormat
 name|getFormat
@@ -443,7 +503,7 @@ block|{
 return|return
 name|format
 operator|.
-name|symbolValue
+name|getValueAs
 argument_list|(
 name|SqlExplainFormat
 operator|.

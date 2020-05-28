@@ -437,6 +437,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|EnsuresNonNullIf
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -475,6 +507,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression that computes a set of  * 'select expressions' from its input relational expression.  *  * @see org.apache.calcite.rel.logical.LogicalProject  */
 end_comment
@@ -508,6 +552,11 @@ name|hints
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a Project.    *    * @param cluster  Cluster that this relational expression belongs to    * @param traits   Traits of this relational expression    * @param hints    Hints of this relation expression    * @param input    Input relational expression    * @param projects List of expressions for the input columns    * @param rowType  Output row type    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Project
 parameter_list|(
@@ -723,10 +772,15 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getExpressionList
 argument_list|(
+literal|"exprs"
+argument_list|)
+argument_list|,
 literal|"exprs"
 argument_list|)
 argument_list|,
@@ -771,7 +825,8 @@ argument_list|)
 argument_list|,
 name|exps
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -912,9 +967,8 @@ argument_list|()
 argument_list|,
 name|exps
 argument_list|,
-name|this
-operator|.
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldNames
 argument_list|()
@@ -1034,6 +1088,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)
@@ -1151,7 +1207,8 @@ name|Util
 operator|.
 name|isDistinct
 argument_list|(
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldNames
 argument_list|()
@@ -1219,6 +1276,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -1474,7 +1533,8 @@ name|item
 argument_list|(
 literal|"fields"
 argument_list|,
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldNames
 argument_list|()
@@ -1504,7 +1564,8 @@ name|Ord
 operator|.
 name|zip
 argument_list|(
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldList
 argument_list|()
@@ -1574,10 +1635,23 @@ name|Status
 operator|.
 name|INTERNAL
 argument_list|)
+annotation|@
+name|EnsuresNonNullIf
+argument_list|(
+name|expression
+operator|=
+literal|"#1"
+argument_list|,
+name|result
+operator|=
+literal|true
+argument_list|)
 specifier|protected
 name|boolean
 name|deepEquals0
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -1711,9 +1785,11 @@ comment|/**    * Returns a mapping, or null if this projection is not a mapping.
 specifier|public
 name|Mappings
 operator|.
+expr|@
+name|Nullable
 name|TargetMapping
 name|getMapping
-parameter_list|()
+argument_list|()
 block|{
 return|return
 name|getMapping
@@ -1736,12 +1812,14 @@ specifier|public
 specifier|static
 name|Mappings
 operator|.
+expr|@
+name|Nullable
 name|TargetMapping
 name|getMapping
-parameter_list|(
+argument_list|(
 name|int
 name|inputFieldCount
-parameter_list|,
+argument_list|,
 name|List
 argument_list|<
 name|?
@@ -1749,7 +1827,7 @@ extends|extends
 name|RexNode
 argument_list|>
 name|projects
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -1770,7 +1848,7 @@ name|Mappings
 operator|.
 name|TargetMapping
 name|mapping
-init|=
+operator|=
 name|Mappings
 operator|.
 name|create
@@ -1786,7 +1864,7 @@ operator|.
 name|size
 argument_list|()
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 for|for
 control|(
 name|Ord
@@ -1870,7 +1948,13 @@ return|return
 name|mapping
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/**    * Returns a partial mapping of a set of project expressions.    *    *<p>The mapping is an inverse function.    * Every target has a source field, but    * a source might have 0, 1 or more targets.    * Project expressions that do not consist of    * a mapping are ignored.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    * @return Mapping of a set of project expressions, never null    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|Mappings
@@ -1966,8 +2050,16 @@ return|return
 name|mapping
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields; otherwise null.    *    * @return Permutation, if this projection is merely a permutation of its    *   input fields; otherwise null    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|Permutation
 name|getPermutation
 parameter_list|()
@@ -1988,9 +2080,17 @@ name|exps
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields; otherwise null.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Permutation
 name|getPermutation
 parameter_list|(
@@ -2133,7 +2233,13 @@ return|return
 name|permutation
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Checks whether this is a functional mapping.    * Every output is a source field, but    * a source field may appear as zero, one, or more output fields.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isMapping
@@ -2166,8 +2272,17 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/** No longer used. */
+end_comment
+
+begin_class
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -2201,8 +2316,8 @@ init|=
 literal|0
 decl_stmt|;
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

@@ -77,6 +77,22 @@ name|SqlReturnTypeInference
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * A generalization of a binary operator to involve several (two or more)  * arguments, and keywords between each pair of arguments.  *  *<p>For example, the<code>BETWEEN</code> operator is ternary, and has syntax  *<code><i>exp1</i> BETWEEN<i>exp2</i> AND<i>exp3</i></code>.  */
 end_comment
@@ -109,12 +125,18 @@ parameter_list|,
 name|int
 name|precedence
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|)

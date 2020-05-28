@@ -247,6 +247,52 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|EnsuresNonNullIf
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -280,11 +326,17 @@ name|Cloneable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Return the CallingConvention trait from this RelNode's    * {@link #getTraitSet() trait set}.    *    * @return this RelNode's CallingConvention    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|Convention
 name|getConvention
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the name of the variable which is to be implicitly set at runtime    * each time a row is returned from the first input of this relational    * expression; or null if there is no variable.    *    * @return Name of correlating variable, or null    */
+annotation|@
+name|Nullable
 name|String
 name|getCorrelVariable
 parameter_list|()
@@ -369,6 +421,8 @@ name|visitor
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the cost of this plan (not including children). The base    * implementation throws an error; derived classes should override.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getNonCumulativeCost}, which gives plugins a    * chance to override the rel's default ideas about cost.    *    * @param planner Planner for cost calculation    * @param mq Metadata query    * @return Cost of this plan (not including children)    */
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -380,25 +434,28 @@ name|mq
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a metadata interface.    *    * @param<M> Type of metadata being requested    * @param metadataClass Metadata interface    * @param mq Metadata query    *    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
 name|M
 name|metadata
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|,
+argument_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|)
-function_decl|;
-comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    */
+argument_list|)
+expr_stmt|;
+comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link RelWriter#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    */
 name|void
 name|explain
 parameter_list|(
@@ -486,9 +543,22 @@ name|recomputeDigest
 parameter_list|()
 function_decl|;
 comment|/**    * Deep equality check for RelNode digest.    *    *<p>By default this method collects digest attributes from    * explain terms, then compares each attribute pair.</p>    *    * @return Whether the 2 RelNodes are equivalent or have the same digest.    * @see #deepHashCode()    */
+annotation|@
+name|EnsuresNonNullIf
+argument_list|(
+name|expression
+operator|=
+literal|"#1"
+argument_list|,
+name|result
+operator|=
+literal|true
+argument_list|)
 name|boolean
 name|deepEquals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -510,6 +580,8 @@ name|p
 parameter_list|)
 function_decl|;
 comment|/**    * If this relational expression represents an access to a table, returns    * that table, otherwise returns null.    *    * @return If this relational expression represents an access to a table,    *   returns that table, otherwise returns null    */
+annotation|@
+name|Nullable
 name|RelOptTable
 name|getTable
 parameter_list|()
@@ -526,6 +598,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)

@@ -100,6 +100,15 @@ argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new CalciteException object.    *    * @param message error message    * @param cause   underlying cause    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"argument.type.incompatible"
+block|,
+literal|"method.invocation.invalid"
+block|}
+argument_list|)
 specifier|public
 name|CalciteException
 parameter_list|(

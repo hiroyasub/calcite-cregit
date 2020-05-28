@@ -63,21 +63,27 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|Objects
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
 begin_import
 import|import
-name|javax
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|Objects
 import|;
 end_import
 
@@ -98,6 +104,8 @@ name|predicate
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|HintOptionChecker
 name|hintOptionChecker
 decl_stmt|;
@@ -124,6 +132,8 @@ parameter_list|(
 name|HintPredicate
 name|predicate
 parameter_list|,
+annotation|@
+name|Nullable
 name|HintOptionChecker
 name|hintOptionChecker
 parameter_list|,
@@ -195,9 +205,9 @@ specifier|final
 name|HintPredicate
 name|predicate
 decl_stmt|;
+specifier|private
 annotation|@
 name|Nullable
-specifier|private
 name|HintOptionChecker
 name|optionChecker
 decl_stmt|;

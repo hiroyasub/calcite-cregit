@@ -75,6 +75,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -100,6 +116,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -187,6 +213,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -231,6 +259,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -286,6 +316,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|pair
@@ -440,6 +472,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -481,6 +515,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|value
@@ -507,12 +543,14 @@ name|value
 operator|.
 name|left
 argument_list|,
+name|Objects
+operator|.
+name|toString
+argument_list|(
 name|value
 operator|.
 name|right
-operator|.
-name|toString
-argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

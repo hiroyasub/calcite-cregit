@@ -131,6 +131,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -160,6 +176,8 @@ name|SqlShuttle
 extends|extends
 name|SqlBasicVisitor
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 block|{
@@ -167,6 +185,8 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -181,6 +201,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -195,6 +217,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -209,6 +233,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -223,6 +249,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -237,6 +265,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -247,10 +277,7 @@ parameter_list|)
 block|{
 comment|// Handler creates a new copy of 'call' only if one or more operands
 comment|// change.
-name|ArgHandler
-argument_list|<
-name|SqlNode
-argument_list|>
+name|CallCopyingArgHandler
 name|argHandler
 init|=
 operator|new
@@ -287,6 +314,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visit
 parameter_list|(
@@ -302,6 +331,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 name|newList
@@ -405,12 +436,16 @@ name|CallCopyingArgHandler
 implements|implements
 name|ArgHandler
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 block|{
 name|boolean
 name|update
 decl_stmt|;
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|clonedOperands
@@ -450,10 +485,20 @@ expr_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 name|operands
 init|=
+operator|(
+name|List
+argument_list|<
+annotation|@
+name|Nullable
+name|SqlNode
+argument_list|>
+operator|)
 name|call
 operator|.
 name|getOperandList
@@ -527,11 +572,15 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|visitChild
 parameter_list|(
 name|SqlVisitor
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 name|visitor
@@ -542,6 +591,8 @@ parameter_list|,
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)

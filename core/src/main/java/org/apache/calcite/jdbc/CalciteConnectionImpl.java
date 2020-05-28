@@ -761,6 +761,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -867,16 +883,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Properties
 import|;
 end_import
@@ -902,6 +908,34 @@ operator|.
 name|atomic
 operator|.
 name|AtomicBoolean
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -969,9 +1003,13 @@ parameter_list|,
 name|Properties
 name|info
 parameter_list|,
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|rootSchema
 parameter_list|,
+annotation|@
+name|Nullable
 name|JavaTypeFactory
 name|typeFactory
 parameter_list|)
@@ -1084,8 +1122,6 @@ name|this
 operator|.
 name|rootSchema
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rootSchema
@@ -1826,7 +1862,10 @@ name|type
 parameter_list|)
 block|{
 return|return
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 return|;
 comment|// TODO:
 block|}
@@ -1850,7 +1889,10 @@ name|type
 parameter_list|)
 block|{
 return|return
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 return|;
 comment|// TODO:
 block|}
@@ -2162,6 +2204,8 @@ name|Object
 argument_list|>
 name|parameterValues
 parameter_list|,
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|rootSchema
 parameter_list|)
@@ -2426,6 +2470,8 @@ specifier|public
 name|Expression
 name|getExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -2470,6 +2516,8 @@ name|map
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|rootSchema
 decl_stmt|;
@@ -2496,6 +2544,8 @@ name|Object
 argument_list|>
 name|parameters
 parameter_list|,
+annotation|@
+name|Nullable
 name|CalciteSchema
 name|rootSchema
 parameter_list|)
@@ -2888,6 +2938,8 @@ annotation|@
 name|Override
 specifier|public
 specifier|synchronized
+annotation|@
+name|Nullable
 name|Object
 name|get
 parameter_list|(
@@ -3025,7 +3077,12 @@ argument_list|,
 operator|new
 name|CalciteCatalogReader
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|rootSchema
+argument_list|,
+literal|"rootSchema"
+argument_list|)
 argument_list|,
 name|schemaPath
 argument_list|,
@@ -3120,6 +3177,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getRootSchema
 parameter_list|()
@@ -3194,8 +3253,6 @@ name|this
 operator|.
 name|connection
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|connection
@@ -3332,6 +3389,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -3478,6 +3537,8 @@ block|{
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getRootSchema
 parameter_list|()
@@ -3489,6 +3550,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()
@@ -3500,6 +3563,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|QueryProvider
 name|getQueryProvider
 parameter_list|()
@@ -3511,6 +3576,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|get
 parameter_list|(
@@ -3536,6 +3603,8 @@ name|CalciteConnectionImpl
 name|connection
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|Iterator
 argument_list|<
 name|Object
@@ -3545,9 +3614,11 @@ decl_stmt|;
 specifier|private
 name|Meta
 operator|.
+expr|@
+name|Nullable
 name|Signature
 name|signature
-decl_stmt|;
+expr_stmt|;
 specifier|private
 specifier|final
 name|AtomicBoolean
@@ -3567,8 +3638,6 @@ name|this
 operator|.
 name|connection
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|connection
@@ -3624,9 +3693,11 @@ name|Override
 specifier|public
 name|Meta
 operator|.
+expr|@
+name|Nullable
 name|Signature
 name|getSignature
-parameter_list|()
+argument_list|()
 block|{
 return|return
 name|signature
@@ -3635,6 +3706,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Iterator
 argument_list|<
 name|Object

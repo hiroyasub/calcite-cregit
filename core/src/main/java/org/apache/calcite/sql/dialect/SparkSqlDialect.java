@@ -236,6 +236,22 @@ import|;
 end_import
 
 begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -423,9 +439,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)

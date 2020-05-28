@@ -87,6 +87,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -109,24 +125,26 @@ name|AvaticaStatement
 block|{
 comment|/**    * Creates a CalciteStatement.    *    * @param connection Connection    * @param h Statement handle    * @param resultSetType Result set type    * @param resultSetConcurrency Result set concurrency    * @param resultSetHoldability Result set holdability    */
 name|CalciteStatement
-parameter_list|(
+argument_list|(
 name|CalciteConnectionImpl
 name|connection
-parameter_list|,
+argument_list|,
 name|Meta
 operator|.
+expr|@
+name|Nullable
 name|StatementHandle
 name|h
-parameter_list|,
+argument_list|,
 name|int
 name|resultSetType
-parameter_list|,
+argument_list|,
 name|int
 name|resultSetConcurrency
-parameter_list|,
+argument_list|,
 name|int
 name|resultSetHoldability
-parameter_list|)
+argument_list|)
 block|{
 name|super
 argument_list|(
@@ -140,24 +158,23 @@ name|resultSetConcurrency
 argument_list|,
 name|resultSetHoldability
 argument_list|)
-expr_stmt|;
-block|}
+block|;   }
 comment|// implement Statement
-annotation|@
+expr|@
 name|Override
 specifier|public
-parameter_list|<
+operator|<
 name|T
-parameter_list|>
+operator|>
 name|T
 name|unwrap
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|T
 argument_list|>
 name|iface
-parameter_list|)
+argument_list|)
 throws|throws
 name|SQLException
 block|{
@@ -223,6 +240,9 @@ name|iface
 argument_list|)
 return|;
 block|}
+end_class
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -237,6 +257,9 @@ operator|)
 name|connection
 return|;
 block|}
+end_function
+
+begin_function
 specifier|protected
 parameter_list|<
 name|T
@@ -330,6 +353,9 @@ name|queryable
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|protected
@@ -364,8 +390,8 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

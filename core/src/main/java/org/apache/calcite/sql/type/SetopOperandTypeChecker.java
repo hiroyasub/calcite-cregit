@@ -203,6 +203,18 @@ name|RESOURCE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Parameter type-checking strategy for a set operator (UNION, INTERSECT,  * EXCEPT).  *  *<p>Both arguments must be records with the same number of fields, and the  * fields must be union-compatible.  */
 end_comment
@@ -422,7 +434,12 @@ name|validator
 operator|.
 name|newValidationError
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|node
+argument_list|,
+literal|"node"
+argument_list|)
 argument_list|,
 name|RESOURCE
 operator|.

@@ -59,6 +59,22 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * A relational expression implements the interface<code>Converter</code> to  * indicate that it converts a physical attribute, or  * {@link org.apache.calcite.plan.RelTrait trait}, of a relational expression  * from one value to another.  *  *<p>Sometimes this conversion is expensive; for example, to convert a  * non-distinct to a distinct object stream, we have to clone every object in  * the input.</p>  *  *<p>A converter does not change the logical expression being evaluated; after  * conversion, the number of rows and the values of those rows will still be the  * same. By declaring itself to be a converter, a relational expression is  * telling the planner about this equivalence, and the planner groups  * expressions which are logically equivalent but have different physical traits  * into groups called<code>RelSet</code>s.  *  *<p>In principle one could devise converters which change multiple traits  * simultaneously (say change the sort-order and the physical location of a  * relational expression). In which case, the method {@link #getInputTraits()}  * would return a {@link org.apache.calcite.plan.RelTraitSet}. But for  * simplicity, this class only allows one trait to be converted at a  * time; all other traits are assumed to be preserved.</p>  */
 end_comment
@@ -77,6 +93,8 @@ name|getInputTraits
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the definition of trait which this converter works on.    *    *<p>The input relational expression (matched by the rule) must possess    * this trait and have the value given by {@link #getInputTraits()}, and the    * traits of the output of this converter given by {@link #getTraitSet()} will    * have one trait altered and the other orthogonal traits will be the same.    *    * @return trait which this converter modifies    */
+annotation|@
+name|Nullable
 name|RelTraitDef
 name|getTraitDef
 parameter_list|()

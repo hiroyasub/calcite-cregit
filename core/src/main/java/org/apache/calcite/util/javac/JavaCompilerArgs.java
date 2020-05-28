@@ -47,6 +47,18 @@ name|StringTokenizer
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>JavaCompilerArgs</code> holds the arguments for a  * {@link JavaCompiler}.  *  *<p>Specific implementations of {@link JavaCompiler} may override<code>  * set<i>Argument</i></code> methods to store arguments in a different fashion,  * or may throw {@link UnsupportedOperationException} to indicate that the  * compiler does not support that argument.  */
 end_comment
@@ -89,11 +101,21 @@ parameter_list|()
 block|{
 name|classLoader
 operator|=
+name|requireNonNull
+argument_list|(
 name|getClass
 argument_list|()
 operator|.
 name|getClassLoader
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getClassLoader is null for "
+operator|+
+name|getClass
+argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

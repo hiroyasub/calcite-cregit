@@ -318,16 +318,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -409,6 +399,30 @@ name|Collections
 operator|.
 name|emptyMap
 argument_list|()
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testJsonNullExpression
+parameter_list|()
+block|{
+name|assertJsonValueExpression
+argument_list|(
+literal|"null"
+argument_list|,
+name|is
+argument_list|(
+name|JsonFunctions
+operator|.
+name|JsonValueContext
+operator|.
+name|withJavaObj
+argument_list|(
+literal|null
 argument_list|)
 argument_list|)
 argument_list|)
@@ -4991,8 +5005,6 @@ block|}
 block|}
 return|;
 block|}
-annotation|@
-name|Nonnull
 specifier|private
 name|BaseMatcher
 argument_list|<

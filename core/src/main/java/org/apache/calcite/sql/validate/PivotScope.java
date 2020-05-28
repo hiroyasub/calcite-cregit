@@ -31,6 +31,18 @@ name|SqlPivot
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Scope for expressions in a {@code PIVOT} clause.  */
 end_comment
@@ -78,10 +90,21 @@ name|getChild
 parameter_list|()
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|validator
 operator|.
 name|getNamespace
 argument_list|(
+name|pivot
+operator|.
+name|query
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"namespace for pivot.query "
+operator|+
 name|pivot
 operator|.
 name|query

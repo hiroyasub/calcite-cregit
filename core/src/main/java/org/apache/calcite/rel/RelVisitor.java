@@ -15,6 +15,22 @@ name|rel
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelVisitor</code> is a Visitor role in the  * {@link org.apache.calcite.util.Glossary#VISITOR_PATTERN visitor pattern} and  * visits {@link RelNode} objects as the role of Element. Other components in  * the pattern: {@link RelNode#childrenAccept(RelVisitor)}.  */
 end_comment
@@ -27,6 +43,8 @@ name|RelVisitor
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+annotation|@
+name|Nullable
 name|RelNode
 name|root
 decl_stmt|;
@@ -42,6 +60,8 @@ parameter_list|,
 name|int
 name|ordinal
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|parent
 parameter_list|)
@@ -59,6 +79,8 @@ specifier|public
 name|void
 name|replaceRoot
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelNode
 name|node
 parameter_list|)
@@ -72,6 +94,8 @@ expr_stmt|;
 block|}
 comment|/**    * Starts an iteration.    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|go
 parameter_list|(

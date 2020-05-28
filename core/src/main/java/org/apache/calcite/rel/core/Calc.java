@@ -379,6 +379,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -417,6 +433,11 @@ name|program
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a Calc.    *    * @param cluster Cluster    * @param traits Traits    * @param hints Hints of this relational expression    * @param child Input relation    * @param program Calc program    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Calc
 parameter_list|(
@@ -684,6 +705,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)
@@ -828,6 +851,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -1055,9 +1080,8 @@ argument_list|()
 argument_list|,
 name|projects
 argument_list|,
-name|this
-operator|.
-name|rowType
+name|getRowType
+argument_list|()
 operator|.
 name|getFieldNames
 argument_list|()

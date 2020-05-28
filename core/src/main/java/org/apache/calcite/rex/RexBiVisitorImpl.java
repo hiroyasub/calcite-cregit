@@ -15,6 +15,22 @@ name|rex
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementation of {@link RexBiVisitor}, which visits each node but  * does nothing while it's there.  *  * @param<R> Return type from each {@code visitXxx} method  * @param<P> Payload type  */
 end_comment
@@ -24,6 +40,8 @@ specifier|public
 class|class
 name|RexBiVisitorImpl
 parameter_list|<
+annotation|@
+name|Nullable
 name|R
 parameter_list|,
 name|P

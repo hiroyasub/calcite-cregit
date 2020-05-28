@@ -27,16 +27,6 @@ name|Locale
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * A strategy by which Druid rolls up rows into sub-totals based on their  * timestamp values.  *  *<p>Typical granularities are based upon time units (e.g. 1 day or  * 15 minutes). A special granularity, all, combines all rows into a single  * total.  *  *<p>A Granularity instance is immutable, and generates a JSON string as  * part of a Druid query.  *  * @see Granularities  */
 end_comment
@@ -87,8 +77,6 @@ name|ROOT
 argument_list|)
 decl_stmt|;
 block|}
-annotation|@
-name|Nonnull
 name|Type
 name|getType
 parameter_list|()

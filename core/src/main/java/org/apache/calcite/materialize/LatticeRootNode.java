@@ -90,6 +90,11 @@ name|Path
 argument_list|>
 name|paths
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 name|LatticeRootNode
 parameter_list|(
 name|LatticeSpace

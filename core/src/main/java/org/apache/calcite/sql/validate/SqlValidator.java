@@ -485,6 +485,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -515,16 +545,6 @@ name|UnaryOperator
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
-import|;
-end_import
-
 begin_comment
 comment|/**  * Validates the parse tree of a SQL statement, and provides semantic  * information about the parse tree.  *  *<p>To create an instance of the default validator implementation, call  * {@link SqlValidatorUtil#newValidator}.  *  *<h2>Visitor pattern</h2>  *  *<p>The validator interface is an instance of the  * {@link org.apache.calcite.util.Glossary#VISITOR_PATTERN visitor pattern}.  * Implementations  * of the {@link SqlNode#validate} method call the<code>validateXxx</code>  * method appropriate to the kind of node:  *<ul>  *<li>{@link SqlLiteral#validate(SqlValidator, SqlValidatorScope)}  *     calls  *     {@link #validateLiteral(org.apache.calcite.sql.SqlLiteral)};  *<li>{@link SqlCall#validate(SqlValidator, SqlValidatorScope)}  *     calls  *     {@link #validateCall(SqlCall, SqlValidatorScope)};  *<li>and so forth.</ul>  *  *<p>The {@link SqlNode#validateExpr(SqlValidator, SqlValidatorScope)} method  * is as {@link SqlNode#validate(SqlValidator, SqlValidatorScope)} but is called  * when the node is known to be a scalar expression.  *  *<h2>Scopes and namespaces</h2>  *  *<p>In order to resolve names to objects, the validator builds a map of the  * structure of the query. This map consists of two types of objects. A  * {@link SqlValidatorScope} describes the tables and columns accessible at a  * particular point in the query; and a {@link SqlValidatorNamespace} is a  * description of a data source used in a query.  *  *<p>There are different kinds of namespace for different parts of the query.  * for example {@link IdentifierNamespace} for table names,  * {@link SelectNamespace} for SELECT queries,  * {@link SetopNamespace} for UNION, EXCEPT  * and INTERSECT. A validator is allowed to wrap namespaces in other objects  * which implement {@link SqlValidatorNamespace}, so don't try to cast your  * namespace or use<code>instanceof</code>; use  * {@link SqlValidatorNamespace#unwrap(Class)} and  * {@link SqlValidatorNamespace#isWrapperFor(Class)} instead.</p>  *  *<p>The validator builds the map by making a quick scan over the query when  * the root {@link SqlNode} is first provided. Thereafter, it supplies the  * correct scope or namespace object when it calls validation methods.</p>  *  *<p>The methods {@link #getSelectScope}, {@link #getFromScope},  * {@link #getWhereScope}, {@link #getGroupScope}, {@link #getHavingScope},  * {@link #getOrderScope} and {@link #getJoinScope} get the correct scope  * to resolve  * names in a particular clause of a SQL statement.</p>  */
 end_comment
@@ -536,11 +556,15 @@ name|SqlValidator
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the catalog reader used by this validator.    *    * @return catalog reader    */
+annotation|@
+name|Pure
 name|SqlValidatorCatalogReader
 name|getCatalogReader
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the operator table used by this validator.    *    * @return operator table    */
+annotation|@
+name|Pure
 name|SqlOperatorTable
 name|getOperatorTable
 parameter_list|()
@@ -576,6 +600,8 @@ parameter_list|(
 name|SqlNode
 name|node
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
@@ -592,6 +618,8 @@ name|node
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the type assigned to a node by validation, or null if unknown.    * This allows for queries against nodes such as aliases, which have no type    * of their own. If you want to assert that the node of interest must have a    * type, use {@link #getValidatedNodeType} instead.    *    * @param node the node of interest    * @return validated type, or null if unknown or not applicable    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getValidatedNodeTypeIfKnown
 parameter_list|(
@@ -697,6 +725,8 @@ parameter_list|,
 name|SqlValidatorScope
 name|scope
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCall
 name|call
 parameter_list|)
@@ -727,9 +757,13 @@ parameter_list|(
 name|SqlCall
 name|aggCall
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|orderList
 parameter_list|,
@@ -853,6 +887,8 @@ return|;
 block|}
 empty_stmt|;
 comment|/**    * Finds the namespace corresponding to a given node.    *    *<p>For example, in the query<code>SELECT * FROM (SELECT * FROM t), t1 AS    * alias</code>, the both items in the FROM clause have a corresponding    * namespace.    *    * @param node Parse tree node    * @return namespace of node    */
+annotation|@
+name|Nullable
 name|SqlValidatorNamespace
 name|getNamespace
 parameter_list|(
@@ -861,6 +897,8 @@ name|node
 parameter_list|)
 function_decl|;
 comment|/**    * Derives an alias for an expression. If no alias can be derived, returns    * null if<code>ordinal</code> is less than zero, otherwise generates an    * alias<code>EXPR$<i>ordinal</i></code>.    *    * @param node    Expression    * @param ordinal Ordinal of expression    * @return derived alias, or null if no alias can be derived and ordinal is    * less than zero    */
+annotation|@
+name|Nullable
 name|String
 name|deriveAlias
 parameter_list|(
@@ -894,6 +932,8 @@ name|select
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the type factory used by this validator.    *    * @return type factory    */
+annotation|@
+name|Pure
 name|RelDataTypeFactory
 name|getTypeFactory
 parameter_list|()
@@ -946,6 +986,8 @@ name|select
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the scope for resolving the SELECT, GROUP BY and HAVING clauses.    * Always a {@link SelectScope}; if this is an aggregation query, the    * {@link AggregatingScope} is stripped away.    *    * @param select SELECT statement    * @return naming scope for SELECT statement, sans any aggregating scope    */
+annotation|@
+name|Nullable
 name|SelectScope
 name|getRawSelectScope
 parameter_list|(
@@ -954,6 +996,8 @@ name|select
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a scope containing the objects visible from the FROM clause of a    * query.    *    * @param select SELECT statement    * @return naming scope for FROM clause    */
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|getFromScope
 parameter_list|(
@@ -962,6 +1006,8 @@ name|select
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a scope containing the objects visible from the ON and USING    * sections of a JOIN clause.    *    * @param node The item in the FROM clause which contains the ON or USING    *             expression    * @return naming scope for JOIN clause    * @see #getFromScope    */
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|getJoinScope
 parameter_list|(
@@ -1023,6 +1069,8 @@ name|popFunctionCall
 parameter_list|()
 function_decl|;
 comment|/**    * Retrieves the name of the parent cursor referenced by a column list    * parameter.    *    * @param columnListParamName name of the column list parameter    * @return name of the parent cursor    */
+annotation|@
+name|Nullable
 name|String
 name|getParentCursor
 parameter_list|(
@@ -1043,6 +1091,8 @@ parameter_list|,
 name|SqlFunction
 name|unresolvedConstructor
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlFunction
 name|resolvedConstructor
 parameter_list|,
@@ -1069,6 +1119,8 @@ name|RelDataType
 argument_list|>
 name|argTypes
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -1109,6 +1161,8 @@ function_decl|;
 comment|/**    * Returns a description of how each field in the row type maps to a    * catalog, schema, table and column in the schema.    *    *<p>The returned list is never null, and has one element for each field    * in the row type. Each element is a list of four elements (catalog,    * schema, table, column), or may be null if the column is an expression.    *    * @param sqlQuery Query    * @return Description of how each field in the row type maps to a schema    * object    */
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -1177,6 +1231,8 @@ name|SqlIdentifier
 name|id
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|getWithScope
 parameter_list|(

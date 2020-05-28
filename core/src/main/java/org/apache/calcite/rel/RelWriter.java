@@ -45,6 +45,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -75,6 +91,8 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 argument_list|>
@@ -114,6 +132,8 @@ parameter_list|(
 name|String
 name|term
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -126,6 +146,8 @@ parameter_list|(
 name|String
 name|term
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|,

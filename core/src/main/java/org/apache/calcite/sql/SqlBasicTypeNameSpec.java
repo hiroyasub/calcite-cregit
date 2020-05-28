@@ -127,6 +127,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -144,16 +160,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -182,6 +188,8 @@ name|int
 name|scale
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|charSetName
 decl_stmt|;
@@ -382,6 +390,8 @@ name|precision
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getCharSetName
 parameter_list|()
@@ -744,17 +754,6 @@ operator|.
 name|getTypeFactory
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|sqlTypeName
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 name|RelDataType
 name|type
 decl_stmt|;

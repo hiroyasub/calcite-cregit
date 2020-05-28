@@ -331,6 +331,18 @@ name|RESOURCE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Defines the BETWEEN operator.  *  *<p>Syntax:  *  *<blockquote><code>X [NOT] BETWEEN [ASYMMETRIC | SYMMETRIC] Y AND  * Z</code></blockquote>  *  *<p>If the asymmetric/symmetric keywords are left out ASYMMETRIC is default.  *  *<p>This operator is always expanded (into something like<code>Y&lt;= X AND  * X&lt;= Z</code>) before being converted into Rex nodes.  */
 end_comment
@@ -561,7 +573,9 @@ name|collectOperandTypes
 argument_list|()
 argument_list|)
 decl_stmt|;
-return|return
+name|RelDataType
+name|type
+init|=
 name|ReturnTypes
 operator|.
 name|BOOLEAN_NULLABLE
@@ -569,6 +583,14 @@ operator|.
 name|inferReturnType
 argument_list|(
 name|newOpBinding
+argument_list|)
+decl_stmt|;
+return|return
+name|requireNonNull
+argument_list|(
+name|type
+argument_list|,
+literal|"inferred BETWEEN element type"
 argument_list|)
 return|;
 block|}

@@ -89,6 +89,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -150,16 +166,6 @@ operator|.
 name|function
 operator|.
 name|Predicate
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -278,6 +284,8 @@ comment|/** Casts this configuration to another type, usually a sub-class. */
 specifier|default
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
 name|T
 name|as
@@ -421,8 +429,6 @@ name|R
 argument_list|>
 name|trait
 parameter_list|(
-annotation|@
-name|Nonnull
 name|RelTrait
 name|trait
 parameter_list|)
@@ -669,6 +675,8 @@ name|OperandBuilderImpl
 argument_list|()
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|RelTrait
 name|trait
 decl_stmt|;
@@ -729,8 +737,6 @@ name|R
 argument_list|>
 name|trait
 parameter_list|(
-annotation|@
-name|Nonnull
 name|RelTrait
 name|trait
 parameter_list|)

@@ -161,6 +161,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.core.Union} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
 end_comment
@@ -397,7 +409,12 @@ name|builder
 operator|.
 name|add
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|unionExp
+argument_list|,
+literal|"unionExp"
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final

@@ -171,6 +171,24 @@ name|SqlTypeName
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNonNullableAccessors
+operator|.
+name|getOperandLiteralValueOrThrow
+import|;
+end_import
+
 begin_comment
 comment|/**  * The<code>TIMESTAMPADD</code> function, which adds an interval to a  * datetime (TIMESTAMP, TIME or DATE).  *  *<p>The SQL syntax is  *  *<blockquote>  *<code>TIMESTAMPADD(<i>timestamp interval</i>,<i>quantity</i>,  *<i>datetime</i>)</code>  *</blockquote>  *  *<p>The interval time unit can one of the following literals:<ul>  *<li>NANOSECOND (and synonym SQL_TSI_FRAC_SECOND)  *<li>MICROSECOND (and synonyms SQL_TSI_MICROSECOND, FRAC_SECOND)  *<li>SECOND (and synonym SQL_TSI_SECOND)  *<li>MINUTE (and synonym  SQL_TSI_MINUTE)  *<li>HOUR (and synonym  SQL_TSI_HOUR)  *<li>DAY (and synonym SQL_TSI_DAY)  *<li>WEEK (and synonym  SQL_TSI_WEEK)  *<li>MONTH (and synonym SQL_TSI_MONTH)  *<li>QUARTER (and synonym SQL_TSI_QUARTER)  *<li>YEAR (and synonym  SQL_TSI_YEAR)  *</ul>  *  *<p>Returns modified datetime.  */
 end_comment
@@ -221,10 +239,10 @@ name|deduceType
 argument_list|(
 name|typeFactory
 argument_list|,
-name|opBinding
-operator|.
-name|getOperandLiteralValue
+name|getOperandLiteralValueOrThrow
 argument_list|(
+name|opBinding
+argument_list|,
 literal|0
 argument_list|,
 name|TimeUnit

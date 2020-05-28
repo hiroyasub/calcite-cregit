@@ -175,6 +175,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -211,11 +227,15 @@ name|name
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|attributeDefs
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlDataTypeSpec
 name|dataType
 decl_stmt|;
@@ -247,9 +267,13 @@ parameter_list|,
 name|SqlIdentifier
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|attributeDefs
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlDataTypeSpec
 name|dataType
 parameter_list|)
@@ -291,6 +315,11 @@ name|dataType
 expr_stmt|;
 comment|// may be null
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullness"
+argument_list|)
 annotation|@
 name|Override
 specifier|public

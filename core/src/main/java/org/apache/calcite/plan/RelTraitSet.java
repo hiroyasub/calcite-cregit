@@ -103,6 +103,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -204,6 +220,8 @@ index|[]
 name|traits
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|string
 decl_stmt|;
@@ -393,6 +411,8 @@ name|T
 extends|extends
 name|RelTrait
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|getTrait
 parameter_list|(
@@ -440,6 +460,8 @@ name|T
 extends|extends
 name|RelMultipleTrait
 parameter_list|>
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|T
@@ -761,29 +783,32 @@ return|;
 block|}
 comment|/** If a given multiple trait is enabled, replaces it by calling the given    * function. */
 specifier|public
-parameter_list|<
+argument_list|<
 name|T
 extends|extends
 name|RelMultipleTrait
-parameter_list|>
+argument_list|>
 name|RelTraitSet
 name|replaceIfs
-parameter_list|(
+argument_list|(
 name|RelTraitDef
 argument_list|<
 name|T
 argument_list|>
 name|def
-parameter_list|,
+argument_list|,
 name|Supplier
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|List
 argument_list|<
 name|T
 argument_list|>
-argument_list|>
+operator|>
 name|traitSupplier
-parameter_list|)
+argument_list|)
 block|{
 name|int
 name|index
@@ -854,26 +879,29 @@ return|;
 block|}
 comment|/** If a given trait is enabled, replaces it by calling the given function. */
 specifier|public
-parameter_list|<
+argument_list|<
 name|T
 extends|extends
 name|RelTrait
-parameter_list|>
+argument_list|>
 name|RelTraitSet
 name|replaceIf
-parameter_list|(
+argument_list|(
 name|RelTraitDef
 argument_list|<
 name|T
 argument_list|>
 name|def
-parameter_list|,
+argument_list|,
 name|Supplier
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|T
-argument_list|>
+operator|>
 name|traitSupplier
-parameter_list|)
+argument_list|)
 block|{
 name|int
 name|index
@@ -1347,6 +1375,8 @@ return|;
 block|}
 comment|/**    * Returns {@link Convention} trait defined by    * {@link ConventionTraitDef#INSTANCE}, or null if the    * {@link ConventionTraitDef#INSTANCE} is not registered    * in this traitSet.    */
 specifier|public
+annotation|@
+name|Nullable
 name|Convention
 name|getConvention
 parameter_list|()
@@ -1361,19 +1391,27 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns {@link RelDistribution} trait defined by    * {@link RelDistributionTraitDef#INSTANCE}, or null if the    * {@link RelDistributionTraitDef#INSTANCE} is not registered    * in this traitSet.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|public
 parameter_list|<
 name|T
 extends|extends
 name|RelDistribution
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|getDistribution
 parameter_list|()
 block|{
-comment|//noinspection unchecked
 return|return
 operator|(
+expr|@
+name|Nullable
 name|T
 operator|)
 name|getTrait
@@ -1385,19 +1423,27 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns {@link RelCollation} trait defined by    * {@link RelCollationTraitDef#INSTANCE}, or null if the    * {@link RelCollationTraitDef#INSTANCE} is not registered    * in this traitSet.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|public
 parameter_list|<
 name|T
 extends|extends
 name|RelCollation
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|getCollation
 parameter_list|()
 block|{
-comment|//noinspection unchecked
 return|return
 operator|(
+expr|@
+name|Nullable
 name|T
 operator|)
 name|getTrait
@@ -1443,8 +1489,10 @@ operator|==
 literal|null
 condition|)
 block|{
+comment|// Return "trait" makes the input type to be the same as the output type,
+comment|// so checkerframework is happy
 return|return
-literal|null
+name|trait
 return|;
 block|}
 if|if
@@ -1483,6 +1531,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

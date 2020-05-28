@@ -203,6 +203,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -369,6 +385,8 @@ parameter_list|,
 name|int
 name|field
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|fromType
 parameter_list|,
@@ -574,6 +592,8 @@ parameter_list|,
 name|int
 name|field
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|fromType
 parameter_list|,
@@ -890,6 +910,8 @@ parameter_list|,
 name|int
 name|field
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|fromType
 parameter_list|,
@@ -1036,6 +1058,8 @@ parameter_list|,
 name|int
 name|field
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|fromType
 parameter_list|,
@@ -1200,6 +1224,8 @@ parameter_list|,
 name|int
 name|field
 parameter_list|,
+annotation|@
+name|Nullable
 name|Type
 name|fromType
 parameter_list|,
@@ -1342,6 +1368,8 @@ name|expressions
 argument_list|)
 decl_stmt|;
 specifier|public
+annotation|@
+name|Nullable
 name|Expression
 name|comparer
 parameter_list|()
@@ -1362,6 +1390,8 @@ argument_list|,
 name|int
 name|field
 argument_list|,
+annotation|@
+name|Nullable
 name|Type
 name|fromType
 argument_list|,

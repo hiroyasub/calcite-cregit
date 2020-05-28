@@ -95,6 +95,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -157,6 +173,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -263,6 +281,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|ImmutableBitSet
@@ -325,6 +345,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

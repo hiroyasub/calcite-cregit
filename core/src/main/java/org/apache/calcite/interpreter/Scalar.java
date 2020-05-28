@@ -15,6 +15,22 @@ name|interpreter
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Compiled scalar expression.  */
 end_comment
@@ -24,6 +40,8 @@ specifier|public
 interface|interface
 name|Scalar
 block|{
+annotation|@
+name|Nullable
 name|Object
 name|execute
 parameter_list|(
@@ -37,6 +55,8 @@ parameter_list|(
 name|Context
 name|context
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|results

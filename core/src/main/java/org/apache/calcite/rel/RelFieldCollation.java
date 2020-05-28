@@ -33,21 +33,27 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|Objects
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
 begin_import
 import|import
-name|javax
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nonnull
+name|Objects
 import|;
 end_import
 
@@ -66,9 +72,13 @@ specifier|static
 name|int
 name|compare
 parameter_list|(
+annotation|@
+name|Nullable
 name|Comparable
 name|c1
 parameter_list|,
+annotation|@
+name|Nullable
 name|Comparable
 name|c2
 parameter_list|,
@@ -299,8 +309,6 @@ block|}
 block|}
 comment|/** Returns the null direction if not specified. Consistent with Oracle,      * NULLS are sorted as if they were positive infinity. */
 specifier|public
-annotation|@
-name|Nonnull
 name|NullDirection
 name|defaultNullDirection
 parameter_list|()
@@ -367,8 +375,6 @@ return|;
 block|}
 block|}
 comment|/**      * Returns the reverse of this direction.      *      * @return reverse of the input direction      */
-annotation|@
-name|Nonnull
 specifier|public
 name|Direction
 name|reverse
@@ -410,8 +416,6 @@ return|;
 block|}
 block|}
 comment|/** Removes strictness. */
-annotation|@
-name|Nonnull
 specifier|public
 name|Direction
 name|lax
@@ -716,6 +720,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

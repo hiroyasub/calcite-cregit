@@ -65,6 +65,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -129,6 +145,8 @@ argument_list|>
 parameter_list|,
 name|V
 parameter_list|>
+annotation|@
+name|Nullable
 name|V
 name|get
 parameter_list|(
@@ -159,6 +177,8 @@ name|bestString
 parameter_list|()
 function_decl|;
 comment|/** Finds a field with a given name, using the current case-sensitivity,    * returning null if not found.    *    * @param rowType    Row type    * @param fieldName Field name    * @return Field, or null if not found    */
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|field
 parameter_list|(

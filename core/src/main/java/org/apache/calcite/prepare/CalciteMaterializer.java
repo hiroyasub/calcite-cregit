@@ -593,6 +593,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Context for populating a {@link Prepare.Materialization}.  */
 end_comment
@@ -776,21 +788,40 @@ argument_list|,
 name|materialization
 argument_list|)
 expr_stmt|;
-name|RelOptTable
-name|table
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|tableName
 init|=
-name|this
-operator|.
-name|catalogReader
-operator|.
-name|getTable
-argument_list|(
 name|materialization
 operator|.
 name|materializedTable
 operator|.
 name|path
 argument_list|()
+decl_stmt|;
+name|RelOptTable
+name|table
+init|=
+name|requireNonNull
+argument_list|(
+name|this
+operator|.
+name|catalogReader
+operator|.
+name|getTable
+argument_list|(
+name|tableName
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"table "
+operator|+
+name|tableName
+operator|+
+literal|" is not found"
 argument_list|)
 decl_stmt|;
 name|materialization
@@ -822,6 +853,18 @@ name|Materialization
 name|materialization
 parameter_list|)
 block|{
+name|RelNode
+name|queryRel
+init|=
+name|requireNonNull
+argument_list|(
+name|materialization
+operator|.
+name|queryRel
+argument_list|,
+literal|"materialization.queryRel"
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|Callback
@@ -831,8 +874,6 @@ name|useStar
 argument_list|(
 name|schema
 argument_list|,
-name|materialization
-operator|.
 name|queryRel
 argument_list|)
 control|)
@@ -885,8 +926,6 @@ name|RelOptUtil
 operator|.
 name|toString
 argument_list|(
-name|materialization
-operator|.
 name|queryRel
 argument_list|)
 argument_list|)

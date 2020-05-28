@@ -73,6 +73,22 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Allows multiple  * {@link org.apache.calcite.sql.type.SqlSingleOperandTypeChecker} rules to be  * combined into one rule.  */
 end_comment
@@ -103,6 +119,8 @@ name|SqlSingleOperandTypeChecker
 argument_list|>
 name|allowedRules
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|allowedSignatures
 parameter_list|)

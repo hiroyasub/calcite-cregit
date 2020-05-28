@@ -265,6 +265,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -400,6 +416,11 @@ name|tuples
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new Values.    *    *<p>Note that tuples passed in become owned by    * this rel (without a deep copy), so caller must not modify them after this    * call, otherwise bad things will happen.    *    * @param cluster Cluster that this relational expression belongs to    * @param rowType Row type for tuples produced by this rel    * @param tuples  2-dimensional array of tuple values to be produced; outer    *                list contains tuples; each inner list is one tuple; all    *                tuples must be of same length, conforming to rowType    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Values
 parameter_list|(
@@ -566,6 +587,12 @@ name|boolean
 name|assertRowType
 parameter_list|()
 block|{
+name|RelDataType
+name|rowType
+init|=
+name|getRowType
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|List
@@ -677,6 +704,15 @@ name|RelDataType
 name|deriveRowType
 parameter_list|()
 block|{
+assert|assert
+name|rowType
+operator|!=
+literal|null
+operator|:
+literal|"rowType must not be null for "
+operator|+
+name|this
+assert|;
 return|return
 name|rowType
 return|;
@@ -684,6 +720,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -763,6 +801,12 @@ block|{
 comment|// A little adapter just to get the tuples to come out
 comment|// with curly brackets instead of square brackets.  Plus
 comment|// more whitespace for readability.
+name|RelDataType
+name|rowType
+init|=
+name|getRowType
+argument_list|()
+decl_stmt|;
 name|RelWriter
 name|relWriter
 init|=

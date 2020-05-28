@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -73,6 +89,8 @@ name|catchBlocks
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|Statement
 name|fynally
 decl_stmt|;
@@ -88,6 +106,8 @@ name|CatchBlock
 argument_list|>
 name|catchBlocks
 parameter_list|,
+annotation|@
+name|Nullable
 name|Statement
 name|fynally
 parameter_list|)
@@ -377,6 +397,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

@@ -55,16 +55,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Description of the physical distribution of a relational expression.  *  *<p>TBD:</p>  *<ul>  *<li>Can we shorten {@link Type#HASH_DISTRIBUTED} to HASH, etc.</li>  *<li>Do we need {@link RelDistributions}.DEFAULT?</li>  *<li>{@link RelDistributionTraitDef#convert}  *       does not create specific physical operators as it does in Drill. Drill  *       will need to create rules; or we could allow "converters" to be  *       registered with the planner that are not trait-defs.  *</ul>  */
 end_comment
@@ -77,15 +67,11 @@ extends|extends
 name|RelMultipleTrait
 block|{
 comment|/** Returns the type of distribution. */
-annotation|@
-name|Nonnull
 name|Type
 name|getType
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the ordinals of the key columns.    *    *<p>Order is important for some types (RANGE); other types (HASH) consider    * it unimportant but impose an arbitrary order; other types (BROADCAST,    * SINGLETON) never have keys.    */
-annotation|@
-name|Nonnull
 name|List
 argument_list|<
 name|Integer

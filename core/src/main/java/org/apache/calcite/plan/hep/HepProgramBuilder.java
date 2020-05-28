@@ -61,6 +61,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -90,12 +106,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -125,9 +143,11 @@ decl_stmt|;
 specifier|private
 name|HepInstruction
 operator|.
+expr|@
+name|Nullable
 name|BeginGroup
 name|group
-decl_stmt|;
+expr_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new HepProgramBuilder with an initially empty program. The    * program under construction has an initial match order of    * {@link HepMatchOrder#DEPTH_FIRST}, and an initial match limit of    * {@link HepProgram#MATCH_UNTIL_FIXPOINT}.    */
 specifier|public
@@ -263,8 +283,6 @@ name|instruction
 operator|.
 name|rule
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rule
@@ -384,7 +402,12 @@ argument_list|(
 name|instruction
 argument_list|)
 expr_stmt|;
+name|requireNonNull
+argument_list|(
 name|group
+argument_list|,
+literal|"group"
+argument_list|)
 operator|.
 name|endGroup
 operator|=

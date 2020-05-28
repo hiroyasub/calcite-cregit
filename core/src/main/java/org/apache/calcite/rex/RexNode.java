@@ -47,11 +47,55 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|Collection
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -68,6 +112,8 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 comment|// Effectively final. Set in each sub-class constructor, and never re-set.
 specifier|protected
+annotation|@
+name|MonotonicNonNull
 name|String
 name|digest
 decl_stmt|;
@@ -154,7 +200,12 @@ name|toString
 parameter_list|()
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|digest
+argument_list|,
+literal|"digest"
+argument_list|)
 return|;
 block|}
 comment|/** Returns the number of nodes in this expression.    *    *<p>Leaf nodes, such as {@link RexInputRef} or {@link RexLiteral}, have    * a count of 1. Calls have a count of 1 plus the sum of their operands.    *    *<p>Node count is a measure of expression complexity that is used by some    * planner rules to prevent deeply nested expressions.    */
@@ -214,6 +265,8 @@ specifier|abstract
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

@@ -355,6 +355,22 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdMaxRowCount supplies a default implementation of  * {@link RelMetadataQuery#getMaxRowCount} for the standard logical algebra.  */
 end_comment
@@ -414,6 +430,8 @@ name|DEF
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -471,6 +489,8 @@ name|rowCount
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -534,6 +554,8 @@ name|rowCount
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -559,6 +581,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -597,6 +621,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -620,6 +646,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -643,6 +671,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -892,6 +922,8 @@ name|rowCount
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -949,9 +981,13 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+operator|!
+name|RelOptPredicateList
+operator|.
+name|isEmpty
+argument_list|(
 name|predicateList
-operator|!=
-literal|null
+argument_list|)
 operator|&&
 name|allGroupKeysAreConstant
 argument_list|(
@@ -1071,6 +1107,8 @@ literal|true
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -1213,6 +1251,8 @@ argument_list|()
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -1316,6 +1356,8 @@ return|;
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMaxRowCount
 parameter_list|(

@@ -47,6 +47,34 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link SqlValidatorNamespace} for a field of a record.  *  *<p>A field is not a very interesting namespace - except if the field has a  * record or multiset type - but this class exists to make fields behave  * similarly to other records for purposes of name resolution.  */
 end_comment
@@ -115,12 +143,19 @@ name|targetRowType
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
+argument_list|)
 return|;
 block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()
@@ -132,6 +167,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlValidatorNamespace
 name|lookupChild
 parameter_list|(
@@ -141,7 +178,12 @@ parameter_list|)
 block|{
 if|if
 condition|(
+name|requireNonNull
+argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
+argument_list|)
 operator|.
 name|isStruct
 argument_list|()

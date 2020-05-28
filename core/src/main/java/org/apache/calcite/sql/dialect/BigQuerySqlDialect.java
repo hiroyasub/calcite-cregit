@@ -431,6 +431,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -472,12 +488,14 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nonnull
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -845,6 +863,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|emulateNullDirection
 parameter_list|(
@@ -940,8 +960,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-annotation|@
-name|Nonnull
 name|SqlParser
 operator|.
 name|Config
@@ -980,9 +998,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -1364,23 +1386,15 @@ literal|"-"
 argument_list|)
 expr_stmt|;
 block|}
-name|Long
-name|intervalValueInLong
-decl_stmt|;
 try|try
 block|{
-name|intervalValueInLong
-operator|=
 name|Long
 operator|.
 name|parseLong
 argument_list|(
-name|literal
+name|interval
 operator|.
-name|getValue
-argument_list|()
-operator|.
-name|toString
+name|getIntervalLiteral
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1403,9 +1417,9 @@ name|writer
 operator|.
 name|literal
 argument_list|(
-name|intervalValueInLong
+name|interval
 operator|.
-name|toString
+name|getIntervalLiteral
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1603,13 +1617,23 @@ expr_stmt|;
 comment|// If the trimmed character is a non-space character, add it to the target SQL.
 comment|// eg: TRIM(BOTH 'A' from 'ABCD'
 comment|// Output Query: TRIM('ABC', 'A')
-if|if
-condition|(
-operator|!
+name|String
+name|value
+init|=
+name|requireNonNull
+argument_list|(
 name|valueToTrim
 operator|.
 name|toValue
 argument_list|()
+argument_list|,
+literal|"valueToTrim.toValue()"
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|value
 operator|.
 name|matches
 argument_list|(
@@ -1716,6 +1740,8 @@ comment|/** {@inheritDoc}    *    *<p>BigQuery data type reference:    *<a href=
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getCastSpec
 parameter_list|(

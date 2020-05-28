@@ -159,6 +159,22 @@ name|ExecutionException
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * This class defines some utilities to build type mapping matrix  * which would then use to construct the {@link SqlTypeMappingRule} rules.  */
 end_comment
@@ -416,11 +432,14 @@ argument_list|()
 operator|.
 name|addAll
 argument_list|(
+name|castNonNull
+argument_list|(
 name|map
 operator|.
 name|get
 argument_list|(
 name|typeName
+argument_list|)
 argument_list|)
 argument_list|)
 return|;

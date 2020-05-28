@@ -105,6 +105,22 @@ name|LogicalAggregate
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalAggregate}  * to an {@link EnumerableAggregate}.  *  * @see EnumerableRules#ENUMERABLE_AGGREGATE_RULE  */
 end_comment
@@ -166,6 +182,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(

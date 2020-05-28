@@ -89,6 +89,22 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Table.  *  *<p>The typical way for a table to be created is when Calcite interrogates a  * user-defined schema in order to validate names appearing in a SQL query.  * Calcite finds the schema by calling {@link Schema#getSubSchema(String)} on  * the connection's root schema, then gets a table by calling  * {@link Schema#getTable(String)}.</p>  *  *<p>Note that a table does not know its name. It is in fact possible for  * a table to be used more than once, perhaps under multiple names or under  * multiple schemas. (Compare with the  *<a href="http://en.wikipedia.org/wiki/Inode">i-node</a> concept in the UNIX  * filesystem.)</p>  *  *<p>A particular table instance may also implement {@link Wrapper},  * to give access to sub-objects.  *  * @see TableMacro  */
 end_comment
@@ -136,9 +152,13 @@ parameter_list|,
 name|SqlCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|CalciteConnectionConfig
 name|config
 parameter_list|)

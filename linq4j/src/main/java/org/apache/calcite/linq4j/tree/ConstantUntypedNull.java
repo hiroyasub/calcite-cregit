@@ -17,6 +17,22 @@ name|tree
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a constant null of unknown type  * Java allows type inference for such nulls, thus "null" cannot always be  * replaced to (Object)null and vise versa.  *  *<p>{@code ConstantExpression(null, Object.class)} is not equal to  * {@code ConstantUntypedNull} However, optimizers might treat all the nulls  * equal (e.g. in case of comparison).  */
 end_comment
@@ -81,6 +97,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

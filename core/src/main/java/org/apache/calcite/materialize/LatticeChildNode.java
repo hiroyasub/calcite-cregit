@@ -56,12 +56,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -114,11 +116,11 @@ name|this
 operator|.
 name|parent
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|parent
+argument_list|,
+literal|"parent"
 argument_list|)
 expr_stmt|;
 name|this
@@ -129,9 +131,14 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|mutableNode
 operator|.
 name|step
+argument_list|,
+literal|"step"
+argument_list|)
 operator|.
 name|keys
 argument_list|)

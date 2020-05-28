@@ -134,13 +134,22 @@ comment|// It's likely that we're just about to give a validation error.
 comment|// Don't make a fuss, just give up.
 return|return;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"all"
+argument_list|)
+name|RelDataType
+index|[]
+name|unused
+init|=
 name|paramTypes
 operator|.
 name|toArray
 argument_list|(
 name|operandTypes
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 block|}
 block|}
 end_class

@@ -133,6 +133,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -158,16 +174,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -610,6 +616,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -683,8 +691,6 @@ block|}
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Type
 name|getType
@@ -696,8 +702,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|List
 argument_list|<
@@ -966,8 +970,6 @@ specifier|public
 name|int
 name|compareTo
 parameter_list|(
-annotation|@
-name|Nonnull
 name|RelMultipleTrait
 name|o
 parameter_list|)

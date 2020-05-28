@@ -49,6 +49,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -77,6 +93,8 @@ name|rexArguments
 parameter_list|()
 function_decl|;
 comment|/**    * Returns {@link org.apache.calcite.rex.RexNode} representation of the    * filter, or null.    */
+annotation|@
+name|Nullable
 name|RexNode
 name|rexFilterArgument
 parameter_list|()

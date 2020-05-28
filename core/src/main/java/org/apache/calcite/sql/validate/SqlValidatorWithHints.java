@@ -63,6 +63,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -97,7 +113,9 @@ name|SqlParserPos
 name|pos
 parameter_list|)
 function_decl|;
-comment|/**    * Looks up the fully qualified name for a {@link SqlIdentifier} at a given    * Parser Position in a parsed expression tree Note: call this only after    * {@link #validate} has been called.    *    * @param topNode top of expression tree in which to lookup the qualified    *                name for the SqlIdentifier    * @param pos indicates the position of the {@link SqlIdentifier} in    *                the SQL statement we want to get the qualified    *                name for    * @return a string of the fully qualified name of the {@link SqlIdentifier}    * if the Parser position represents a valid {@link SqlIdentifier}. Else    * return an empty string    */
+comment|/**    * Looks up the fully qualified name for a {@link SqlIdentifier} at a given    * Parser Position in a parsed expression tree Note: call this only after    * {@link #validate} has been called.    *    * @param topNode top of expression tree in which to lookup the qualified    *                name for the SqlIdentifier    * @param pos indicates the position of the {@link SqlIdentifier} in    *                the SQL statement we want to get the qualified    *                name for    * @return a string of the fully qualified name of the {@link SqlIdentifier}    * if the Parser position represents a valid {@link SqlIdentifier}. Else    * return null    */
+annotation|@
+name|Nullable
 name|SqlMoniker
 name|lookupQualifiedName
 parameter_list|(

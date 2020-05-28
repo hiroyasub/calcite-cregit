@@ -147,6 +147,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -192,6 +208,8 @@ name|getInputs
 parameter_list|()
 function_decl|;
 comment|/**    * Returns an expression.    */
+annotation|@
+name|Nullable
 name|RexNode
 name|getExpression
 parameter_list|(
@@ -206,6 +224,8 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -226,6 +246,8 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|Object
 name|get
 parameter_list|(
@@ -234,6 +256,8 @@ name|tag
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a {@code string} value. Throws if wrong type.    */
+annotation|@
+name|Nullable
 name|String
 name|getString
 parameter_list|(
@@ -258,6 +282,8 @@ argument_list|<
 name|E
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|E
 name|getEnum
 parameter_list|(
@@ -271,6 +297,8 @@ argument_list|>
 name|enumClass
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -281,6 +309,8 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -291,6 +321,8 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Integer
@@ -301,6 +333,8 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|List

@@ -81,6 +81,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -103,6 +119,8 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|sqlIdentifier
 decl_stmt|;
@@ -112,6 +130,8 @@ name|RelDataTypeComparability
 name|comparability
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|RelDataTypeFamily
 name|family
 decl_stmt|;
@@ -123,6 +143,8 @@ parameter_list|(
 name|SqlTypeName
 name|typeName
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|sqlIdentifier
 parameter_list|,
@@ -196,6 +218,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|getSqlIdentifier
 parameter_list|()
@@ -257,9 +281,6 @@ operator|.
 name|append
 argument_list|(
 name|sqlIdentifier
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|sb

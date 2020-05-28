@@ -15,16 +15,6 @@ name|rex
 package|;
 end_package
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/** Policy for whether a simplified expression may instead return another  * value.  *  *<p>In particular, it deals with converting three-valued logic (TRUE, FALSE,  * UNKNOWN) to two-valued logic (TRUE, FALSE) for callers that treat the UNKNOWN  * value the same as TRUE or FALSE.  *  *<p>Sometimes the three-valued version of the expression is simpler (has a  * smaller expression tree) than the two-valued version. In these cases,  * favor simplicity over reduction to two-valued logic.  *  * @see RexSimplify */
 end_comment
@@ -46,8 +36,6 @@ block|;
 comment|/** Returns {@link #FALSE} if {@code unknownAsFalse} is true,    * {@link #UNKNOWN} otherwise. */
 specifier|public
 specifier|static
-annotation|@
-name|Nonnull
 name|RexUnknownAs
 name|falseIf
 parameter_list|(

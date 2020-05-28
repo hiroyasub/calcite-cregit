@@ -143,6 +143,22 @@ name|SqlValidatorScope
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Generic operator for nodes with internal syntax.  *  *<p>If you do not override {@link #getSyntax()} or  * {@link #unparse(SqlWriter, SqlCall, int, int)}, they will be unparsed using  * function syntax, {@code F(arg1, arg2, ...)}. This may be OK for operators  * that never appear in SQL, only as structural elements in an abstract syntax  * tree.  *  *<p>You can use this operator, without creating a sub-class, for  * non-expression nodes. Validate will validate the arguments, but will not  * attempt to deduce a type.  */
 end_comment
@@ -228,6 +244,8 @@ parameter_list|,
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,

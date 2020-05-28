@@ -31,6 +31,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -111,6 +127,8 @@ name|EventObject
 block|{
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RelNode
 name|rel
 decl_stmt|;
@@ -120,6 +138,8 @@ parameter_list|(
 name|Object
 name|eventSource
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|rel
 parameter_list|)
@@ -137,6 +157,8 @@ name|rel
 expr_stmt|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|getRel
 parameter_list|()
@@ -158,6 +180,8 @@ parameter_list|(
 name|Object
 name|eventSource
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|rel
 parameter_list|)

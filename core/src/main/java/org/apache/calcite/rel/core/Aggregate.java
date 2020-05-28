@@ -487,6 +487,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -731,6 +747,11 @@ name|groupSets
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an Aggregate.    *    *<p>All members of {@code groupSets} must be sub-sets of {@code groupSet}.    * For a simple {@code GROUP BY}, {@code groupSets} is a singleton list    * containing {@code groupSet}.    *    *<p>If {@code GROUP BY} is not specified,    * or equivalently if {@code GROUP BY ()} is specified,    * {@code groupSet} will be the empty set,    * and {@code groupSets} will have one element, that empty set.    *    *<p>If {@code CUBE}, {@code ROLLUP} or {@code GROUPING SETS} are    * specified, {@code groupSets} will have additional elements,    * but they must each be a subset of {@code groupSet},    * and they must be sorted by inclusion:    * {@code (0, 1, 2), (1), (0, 2), (0), ()}.    *    * @param cluster  Cluster    * @param traitSet Trait set    * @param hints    Hints of this relational expression    * @param input    Input relational expression    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Aggregate
 parameter_list|(
@@ -752,6 +773,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -1072,6 +1095,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isPredicate
 parameter_list|(
@@ -1223,6 +1247,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -1568,6 +1594,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -1707,6 +1735,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -1971,6 +2001,8 @@ parameter_list|(
 name|Litmus
 name|litmus
 parameter_list|,
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|)
@@ -2363,6 +2395,13 @@ operator|=
 name|bitSet
 expr_stmt|;
 block|}
+assert|assert
+name|g
+operator|!=
+literal|null
+operator|:
+literal|"groupSet must not be empty"
+assert|;
 assert|assert
 name|g
 operator|.

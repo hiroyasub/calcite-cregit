@@ -129,6 +129,22 @@ name|SqlNodeList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Basic implementation of {@link SqlVisitor} which does nothing at each node.  *  *<p>This class is useful as a base class for classes which implement the  * {@link SqlVisitor} interface. The derived class can override whichever  * methods it chooses.  *  * @param<R> Return type  */
 end_comment
@@ -138,6 +154,8 @@ specifier|public
 class|class
 name|SqlBasicVisitor
 parameter_list|<
+annotation|@
+name|Nullable
 name|R
 parameter_list|>
 implements|implements
@@ -328,6 +346,8 @@ parameter_list|,
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -340,6 +360,8 @@ specifier|static
 class|class
 name|ArgHandlerImpl
 parameter_list|<
+annotation|@
+name|Nullable
 name|R
 parameter_list|>
 implements|implements
@@ -352,10 +374,14 @@ specifier|private
 specifier|static
 specifier|final
 name|ArgHandler
+argument_list|<
+name|?
+argument_list|>
 name|INSTANCE
 init|=
 operator|new
 name|ArgHandlerImpl
+argument_list|<>
 argument_list|()
 decl_stmt|;
 annotation|@
@@ -376,6 +402,12 @@ name|instance
 parameter_list|()
 block|{
 return|return
+operator|(
+name|ArgHandler
+argument_list|<
+name|R
+argument_list|>
+operator|)
 name|INSTANCE
 return|;
 block|}
@@ -408,6 +440,8 @@ parameter_list|,
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)

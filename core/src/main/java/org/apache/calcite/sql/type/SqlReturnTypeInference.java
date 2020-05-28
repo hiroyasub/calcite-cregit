@@ -61,6 +61,22 @@ name|SqlOperatorBinding
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  * This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.  *  * @see ReturnTypes  */
 end_comment
@@ -74,6 +90,8 @@ name|SqlReturnTypeInference
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Infers the return type of a call to an {@link SqlOperator}.    *    * @param opBinding description of operator binding    * @return inferred type; may be null    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|inferReturnType
 parameter_list|(

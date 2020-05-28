@@ -49,6 +49,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|NotOnlyInitialized
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnderInitialization
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -87,6 +119,8 @@ class|class
 name|LoptJoinTree
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+annotation|@
+name|NotOnlyInitialized
 specifier|private
 specifier|final
 name|BinaryTree
@@ -104,6 +138,11 @@ name|removableSelfJoin
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a join-tree consisting of a single node.    *    * @param joinTree RelNode corresponding to the single node    * @param factorId factor id of the node    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"argument.type.incompatible"
+argument_list|)
 specifier|public
 name|LoptJoinTree
 parameter_list|(
@@ -415,6 +454,8 @@ specifier|static
 class|class
 name|BinaryTree
 block|{
+annotation|@
+name|NotOnlyInitialized
 specifier|private
 specifier|final
 name|LoptJoinTree
@@ -423,6 +464,8 @@ decl_stmt|;
 specifier|protected
 name|BinaryTree
 parameter_list|(
+annotation|@
+name|UnderInitialization
 name|LoptJoinTree
 name|parent
 parameter_list|)
@@ -431,12 +474,7 @@ name|this
 operator|.
 name|parent
 operator|=
-name|Objects
-operator|.
-name|requireNonNull
-argument_list|(
 name|parent
-argument_list|)
 expr_stmt|;
 block|}
 specifier|public
@@ -480,6 +518,8 @@ parameter_list|(
 name|int
 name|rootId
 parameter_list|,
+annotation|@
+name|UnderInitialization
 name|LoptJoinTree
 name|parent
 parameter_list|)
@@ -555,6 +595,8 @@ parameter_list|,
 name|BinaryTree
 name|right
 parameter_list|,
+annotation|@
+name|UnderInitialization
 name|LoptJoinTree
 name|parent
 parameter_list|)

@@ -139,6 +139,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -198,16 +214,6 @@ operator|.
 name|stream
 operator|.
 name|Collectors
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -327,8 +333,6 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -364,6 +368,11 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullness"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|void
@@ -372,6 +381,8 @@ parameter_list|(
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -683,6 +694,8 @@ name|forEachAgg
 parameter_list|(
 name|BiConsumer
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|,
 name|SqlNode

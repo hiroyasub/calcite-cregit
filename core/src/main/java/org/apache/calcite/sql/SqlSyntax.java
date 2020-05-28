@@ -47,11 +47,33 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|Objects
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|NotOnlyInitialized
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
@@ -490,6 +512,8 @@ block|}
 block|}
 block|;
 comment|/** Syntax to treat this syntax as equivalent to when resolving operators. */
+annotation|@
+name|NotOnlyInitialized
 specifier|public
 specifier|final
 name|SqlSyntax
@@ -506,6 +530,8 @@ expr_stmt|;
 block|}
 name|SqlSyntax
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlSyntax
 name|family
 parameter_list|)
@@ -514,10 +540,6 @@ name|this
 operator|.
 name|family
 operator|=
-name|Objects
-operator|.
-name|requireNonNull
-argument_list|(
 name|family
 operator|==
 literal|null
@@ -525,7 +547,6 @@ condition|?
 name|this
 else|:
 name|family
-argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Converts a call to an operator of this syntax into a string.    */

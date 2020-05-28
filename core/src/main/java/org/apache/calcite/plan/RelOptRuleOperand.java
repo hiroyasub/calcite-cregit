@@ -45,6 +45,70 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|NotOnlyInitialized
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnknownInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -86,10 +150,14 @@ name|RelOptRuleOperand
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+annotation|@
+name|Nullable
 name|RelOptRuleOperand
 name|parent
 decl_stmt|;
 specifier|private
+annotation|@
+name|NotOnlyInitialized
 name|RelOptRule
 name|rule
 decl_stmt|;
@@ -105,7 +173,9 @@ comment|// REVIEW jvs 29-Aug-2004: some of these are Volcano-specific and should
 comment|// factored out
 specifier|public
 name|int
-index|[]
+annotation|@
+name|MonotonicNonNull
+type|[]
 name|solveOrder
 decl_stmt|;
 specifier|public
@@ -118,6 +188,8 @@ name|ordinalInRule
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|RelTrait
 name|trait
 decl_stmt|;
@@ -198,6 +270,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Private constructor.    *    *<p>Do not call from outside package, and do not create a sub-class.    *    *<p>The other constructor is deprecated; when it is removed, make fields    * {@link #parent}, {@link #ordinalInParent} and {@link #solveOrder} final,    * and add constructor parameters for them. See    *<a href="https://issues.apache.org/jira/browse/CALCITE-1166">[CALCITE-1166]    * Disallow sub-classes of RelOptRuleOperand</a>. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"initialization.fields.uninitialized"
+block|,
+literal|"initialization.invalid.field.write.initialized"
+block|}
+argument_list|)
 parameter_list|<
 name|R
 extends|extends
@@ -211,6 +292,8 @@ name|R
 argument_list|>
 name|clazz
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelTrait
 name|trait
 parameter_list|,
@@ -354,6 +437,8 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the parent operand.    *    * @return parent operand    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptRuleOperand
 name|getParent
 parameter_list|()
@@ -367,6 +452,8 @@ specifier|public
 name|void
 name|setParent
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelOptRuleOperand
 name|parent
 parameter_list|)
@@ -389,10 +476,17 @@ name|rule
 return|;
 block|}
 comment|/**    * Sets the rule this operand belongs to.    *    * @param rule containing rule    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"initialization.invalid.field.write.initialized"
+argument_list|)
 specifier|public
 name|void
 name|setRule
 parameter_list|(
+annotation|@
+name|UnknownInitialization
 name|RelOptRule
 name|rule
 parameter_list|)
@@ -430,6 +524,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)

@@ -403,6 +403,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -502,6 +518,8 @@ name|validator
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 decl_stmt|;
@@ -518,6 +536,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
@@ -683,6 +703,8 @@ return|;
 block|}
 comment|/**    * Returns the scope of the call.    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|getScope
 parameter_list|()
@@ -895,6 +917,8 @@ specifier|final
 name|SqlOperandMetadata
 name|operandMetadata
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|SqlOperandMetadata
 operator|)
@@ -905,6 +929,20 @@ argument_list|()
 operator|.
 name|getOperandTypeChecker
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"operandTypeChecker is null for "
+operator|+
+name|call
+operator|+
+literal|", operator "
+operator|+
+name|call
+operator|.
+name|getOperator
+argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|final
 name|List
@@ -1273,6 +1311,8 @@ argument_list|)
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getStringLiteralOperand
 parameter_list|(
@@ -1418,7 +1458,11 @@ name|Override
 specifier|public
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|getOperandLiteralValue
 parameter_list|(
@@ -1453,6 +1497,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|getOperandLiteralValue
 parameter_list|(
@@ -1575,7 +1621,11 @@ block|}
 specifier|private
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|valueAs
 parameter_list|(
@@ -1607,6 +1657,8 @@ case|:
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -2088,6 +2140,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getCursorOperand
 parameter_list|(
@@ -2159,6 +2213,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getColumnListParamInfo
 parameter_list|(

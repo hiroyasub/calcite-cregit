@@ -307,6 +307,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -375,6 +391,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -404,6 +422,8 @@ return|return
 operator|new
 name|AbstractEnumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -414,6 +434,8 @@ name|Override
 specifier|public
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -640,10 +662,14 @@ name|SqlCall
 name|call
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 name|parent
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|CalciteConnectionConfig
 name|config
 parameter_list|)

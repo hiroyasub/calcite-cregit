@@ -15,16 +15,6 @@ name|schema
 package|;
 end_package
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Table that is temporal.  */
 end_comment
@@ -37,15 +27,11 @@ extends|extends
 name|Table
 block|{
 comment|/** Returns the name of the system column that contains the start effective    * time of each row. */
-annotation|@
-name|Nonnull
 name|String
 name|getSysStartFieldName
 parameter_list|()
 function_decl|;
 comment|/** Returns the name of the system column that contains the end effective    * time of each row. */
-annotation|@
-name|Nonnull
 name|String
 name|getSysEndFieldName
 parameter_list|()

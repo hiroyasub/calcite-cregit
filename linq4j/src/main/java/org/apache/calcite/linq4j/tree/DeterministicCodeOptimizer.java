@@ -65,6 +65,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -686,6 +702,8 @@ parameter_list|(
 name|MethodCallExpression
 name|methodCallExpression
 parameter_list|,
+annotation|@
+name|Nullable
 name|Expression
 name|targetExpression
 parameter_list|,
@@ -733,6 +751,8 @@ parameter_list|(
 name|MemberExpression
 name|memberExpression
 parameter_list|,
+annotation|@
+name|Nullable
 name|Expression
 name|expression
 parameter_list|)
@@ -792,6 +812,8 @@ parameter_list|(
 name|FieldDeclaration
 name|fieldDeclaration
 parameter_list|,
+annotation|@
+name|Nullable
 name|Expression
 name|initializer
 parameter_list|)
@@ -936,6 +958,8 @@ comment|/**    * Finds if there exists ready for reuse declaration for given exp
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nullable
 name|ParameterExpression
 name|findDeclaredExpression
 parameter_list|(
@@ -1215,6 +1239,8 @@ specifier|protected
 name|boolean
 name|isConstant
 parameter_list|(
+annotation|@
+name|Nullable
 name|Expression
 name|expression
 parameter_list|)
@@ -1346,6 +1372,8 @@ specifier|private
 parameter_list|<
 name|C
 parameter_list|>
+annotation|@
+name|Nullable
 name|Constructor
 argument_list|<
 name|C
@@ -1396,14 +1424,14 @@ argument_list|(
 name|klass
 argument_list|)
 operator|||
+literal|"org.apache.calcite.avatica.util.DateTimeUtils"
+operator|.
+name|equals
+argument_list|(
 name|klass
 operator|.
 name|getCanonicalName
 argument_list|()
-operator|.
-name|equals
-argument_list|(
-literal|"org.apache.calcite.avatica.util.DateTimeUtils"
 argument_list|)
 operator|||
 name|klass

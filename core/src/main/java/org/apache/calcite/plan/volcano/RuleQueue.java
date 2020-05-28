@@ -243,7 +243,7 @@ name|subset
 init|=
 name|planner
 operator|.
-name|getSubset
+name|getSubsetNonNull
 argument_list|(
 name|rels
 index|[

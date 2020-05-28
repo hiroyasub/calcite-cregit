@@ -65,6 +65,22 @@ name|SqlTypeName
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Default implementation of  * {@link org.apache.calcite.rel.type.RelDataTypeSystem},  * providing parameters from the SQL standard.  *  *<p>To implement other type systems, create a derived class and override  * values as needed.  *  *<table border='1'>  *<caption>Parameter values</caption>  *<tr><th>Parameter</th><th>Value</th></tr>  *<tr><td>MAX_NUMERIC_SCALE</td><td>19</td></tr>  *</table>  */
 end_comment
@@ -449,6 +465,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getLiteral
 parameter_list|(

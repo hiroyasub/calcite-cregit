@@ -105,6 +105,22 @@ name|ModifiableTable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableModify} to  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_MODIFICATION_RULE */
 end_comment
@@ -168,6 +184,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(

@@ -75,6 +75,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -260,6 +276,8 @@ block|}
 comment|/** Looks up a value.    * Returns null if not found.    * You can use upper- or lower-case name. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|SqlLibrary
 name|of
 parameter_list|(
@@ -316,9 +334,12 @@ literal|","
 argument_list|)
 control|)
 block|{
-name|list
+name|SqlLibrary
+name|library
+init|=
+name|Objects
 operator|.
-name|add
+name|requireNonNull
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -326,6 +347,19 @@ name|of
 argument_list|(
 name|libraryName
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"library does not exist: "
+operator|+
+name|libraryName
+argument_list|)
+decl_stmt|;
+name|list
+operator|.
+name|add
+argument_list|(
+name|library
 argument_list|)
 expr_stmt|;
 block|}

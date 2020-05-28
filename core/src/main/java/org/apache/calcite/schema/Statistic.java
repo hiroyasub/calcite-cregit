@@ -73,6 +73,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -92,6 +108,8 @@ name|Statistic
 block|{
 comment|/** Returns the approximate number of rows in the table. */
 specifier|default
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|()
@@ -115,6 +133,8 @@ return|;
 block|}
 comment|/** Returns a list of unique keys, or null if no key exist. */
 specifier|default
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -128,6 +148,8 @@ return|;
 block|}
 comment|/** Returns the collection of referential constraints (foreign-keys)    * for this table. */
 specifier|default
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelReferentialConstraint
@@ -141,6 +163,8 @@ return|;
 block|}
 comment|/** Returns the collections of columns on which this table is sorted. */
 specifier|default
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -154,6 +178,8 @@ return|;
 block|}
 comment|/** Returns the distribution of the data in this table. */
 specifier|default
+annotation|@
+name|Nullable
 name|RelDistribution
 name|getDistribution
 parameter_list|()

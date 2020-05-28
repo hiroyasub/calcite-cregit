@@ -77,6 +77,11 @@ name|types
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a cartesian product type. This should only be called from a    * factory method.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|public
 name|RelCrossType
 parameter_list|(

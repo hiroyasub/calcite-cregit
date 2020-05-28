@@ -237,6 +237,22 @@ name|RelToSqlConverterUtil
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlDialect</code> implementation for the Apache Hive database.  */
 end_comment
@@ -367,9 +383,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -387,6 +407,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|emulateNullDirection
 parameter_list|(
@@ -781,6 +803,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getCastSpec
 parameter_list|(

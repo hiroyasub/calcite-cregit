@@ -219,6 +219,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -292,6 +308,8 @@ name|DEF
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -320,6 +338,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -348,6 +368,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -376,6 +398,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -404,6 +428,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -466,6 +492,8 @@ name|population
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -493,6 +521,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -571,6 +601,8 @@ literal|2
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -740,6 +772,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.PopulationSize#getPopulationSize(ImmutableBitSet)},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getPopulationSize(RelNode, ImmutableBitSet)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getPopulationSize
 parameter_list|(

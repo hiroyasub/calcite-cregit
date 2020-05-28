@@ -125,6 +125,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Miscellaneous graph utilities.  */
 end_comment
@@ -481,10 +493,19 @@ name|int
 index|[]
 name|arc2Distance
 init|=
+name|requireNonNull
+argument_list|(
 name|shortestDistances
 operator|.
 name|get
 argument_list|(
+name|edge2
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"shortestDistances.get(edge2) for "
+operator|+
 name|edge2
 argument_list|)
 decl_stmt|;
@@ -567,6 +588,8 @@ class|class
 name|FrozenGraph
 parameter_list|<
 name|V
+extends|extends
+name|Object
 parameter_list|,
 name|E
 extends|extends

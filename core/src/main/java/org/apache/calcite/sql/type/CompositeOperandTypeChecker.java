@@ -151,6 +151,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -195,16 +211,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|stream
 operator|.
 name|Collectors
@@ -212,12 +218,14 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -234,6 +242,8 @@ name|SqlOperandTypeChecker
 block|{
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlOperandCountRange
 name|range
 decl_stmt|;
@@ -269,6 +279,8 @@ name|composition
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|allowedSignatures
 decl_stmt|;
@@ -302,8 +314,6 @@ name|this
 operator|.
 name|allowedRules
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|allowedRules
@@ -313,8 +323,6 @@ name|this
 operator|.
 name|composition
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|composition
@@ -568,7 +576,12 @@ case|case
 name|REPEAT
 case|:
 return|return
+name|requireNonNull
+argument_list|(
 name|range
+argument_list|,
+literal|"range"
+argument_list|)
 return|;
 case|case
 name|SEQUENCE
@@ -1073,7 +1086,12 @@ case|:
 if|if
 condition|(
 operator|!
+name|requireNonNull
+argument_list|(
 name|range
+argument_list|,
+literal|"range"
+argument_list|)
 operator|.
 name|isValidCount
 argument_list|(
@@ -1638,10 +1656,10 @@ literal|false
 return|;
 block|}
 annotation|@
-name|Nullable
-annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|typeInference
 parameter_list|()

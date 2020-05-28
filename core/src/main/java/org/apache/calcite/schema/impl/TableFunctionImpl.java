@@ -287,6 +287,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -381,6 +397,18 @@ name|RESOURCE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link org.apache.calcite.schema.TableFunction} based on a  * method. */
 end_comment
@@ -427,6 +455,8 @@ block|}
 comment|/** Creates a {@link TableFunctionImpl} from a class, looking for an "eval"    * method. Returns null if there is no such method. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|TableFunction
 name|create
 parameter_list|(
@@ -449,6 +479,8 @@ block|}
 comment|/** Creates a {@link TableFunctionImpl} from a class, looking for a method    * with a given name. Returns null if there is no such method. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|TableFunction
 name|create
 parameter_list|(
@@ -494,6 +526,8 @@ block|}
 comment|/** Creates a {@link TableFunctionImpl} from a method. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|TableFunction
 name|create
 parameter_list|(
@@ -611,16 +645,19 @@ name|Override
 specifier|public
 name|RelDataType
 name|getRowType
-parameter_list|(
+argument_list|(
 name|RelDataTypeFactory
 name|typeFactory
-parameter_list|,
+argument_list|,
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|apply
@@ -639,13 +676,16 @@ name|Override
 specifier|public
 name|Type
 name|getElementType
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
+argument_list|)
 block|{
 specifier|final
 name|Table
@@ -921,13 +961,16 @@ block|}
 specifier|private
 name|Table
 name|apply
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
+argument_list|)
 block|{
 try|try
 block|{
@@ -973,11 +1016,12 @@ name|newInstance
 argument_list|()
 expr_stmt|;
 block|}
-comment|//noinspection unchecked
-specifier|final
-name|Object
-name|table
-init|=
+return|return
+operator|(
+name|Table
+operator|)
+name|requireNonNull
+argument_list|(
 name|method
 operator|.
 name|invoke
@@ -989,12 +1033,17 @@ operator|.
 name|toArray
 argument_list|()
 argument_list|)
-decl_stmt|;
-return|return
-operator|(
-name|Table
-operator|)
-name|table
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"got null from "
+operator|+
+name|method
+operator|+
+literal|" with arguments "
+operator|+
+name|arguments
+argument_list|)
 return|;
 block|}
 catch|catch

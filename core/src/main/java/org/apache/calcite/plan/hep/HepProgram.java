@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -73,14 +89,18 @@ decl_stmt|;
 name|int
 name|matchLimit
 decl_stmt|;
+annotation|@
+name|Nullable
 name|HepMatchOrder
 name|matchOrder
 decl_stmt|;
 name|HepInstruction
 operator|.
+expr|@
+name|Nullable
 name|EndGroup
 name|group
-decl_stmt|;
+expr_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new empty HepProgram. The program has an initial match order of    * {@link org.apache.calcite.plan.hep.HepMatchOrder#DEPTH_FIRST}, and an initial    * match limit of {@link #MATCH_UNTIL_FIXPOINT}.    */
 name|HepProgram

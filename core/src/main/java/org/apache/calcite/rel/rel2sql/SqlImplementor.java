@@ -1095,6 +1095,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnknownInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -1249,16 +1281,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -1288,22 +1310,30 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1461,8 +1491,6 @@ name|this
 operator|.
 name|dialect
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|dialect
@@ -2061,6 +2089,19 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+assert|assert
+name|node
+operator|!=
+literal|null
+operator|:
+literal|"set op must have at least one input, operator = "
+operator|+
+name|operator
+operator|+
+literal|", rel = "
+operator|+
+name|rel
+assert|;
 specifier|final
 name|List
 argument_list|<
@@ -3088,6 +3129,8 @@ parameter_list|,
 name|RelNode
 name|rel
 parameter_list|,
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -3289,9 +3332,13 @@ name|Clause
 argument_list|>
 name|clauses
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|neededAlias
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|neededType
 parameter_list|,
@@ -4090,6 +4137,8 @@ specifier|public
 name|SqlNode
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -4139,7 +4188,12 @@ name|toSql
 argument_list|(
 name|program
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|program
+argument_list|,
+literal|"program"
+argument_list|)
 operator|.
 name|getExprList
 argument_list|()
@@ -4875,6 +4929,8 @@ specifier|final
 name|Sarg
 name|sarg
 init|=
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -4882,6 +4938,7 @@ argument_list|(
 name|Sarg
 operator|.
 name|class
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|//noinspection unchecked
@@ -5097,6 +5154,8 @@ specifier|private
 name|SqlNode
 name|callToSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -5199,16 +5258,30 @@ condition|(
 name|not
 condition|)
 block|{
-name|op
-operator|=
-name|NOT_KIND_OPERATORS
-operator|.
-name|get
-argument_list|(
+name|SqlKind
+name|kind
+init|=
 name|op
 operator|.
 name|getKind
 argument_list|()
+decl_stmt|;
+name|op
+operator|=
+name|requireNonNull
+argument_list|(
+name|NOT_KIND_OPERATORS
+operator|.
+name|get
+argument_list|(
+name|kind
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"unable to negate "
+operator|+
+name|kind
 argument_list|)
 expr_stmt|;
 block|}
@@ -5348,6 +5421,8 @@ name|nodeList
 operator|.
 name|add
 argument_list|(
+name|castNonNull
+argument_list|(
 name|dialect
 operator|.
 name|getCastSpec
@@ -5356,6 +5431,7 @@ name|call
 operator|.
 name|getType
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5399,6 +5475,8 @@ parameter_list|>
 name|SqlNode
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -6126,6 +6204,8 @@ specifier|private
 name|SqlCall
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -6437,6 +6517,8 @@ specifier|private
 name|SqlNode
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -6701,6 +6783,8 @@ name|SqlNode
 argument_list|>
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -6920,6 +7004,8 @@ name|SqlNode
 argument_list|>
 name|orderByList
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -8088,6 +8174,8 @@ specifier|static
 name|SqlNode
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -8139,6 +8227,8 @@ name|RexLiteral
 argument_list|>
 name|list
 init|=
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8146,6 +8236,7 @@ argument_list|(
 name|List
 operator|.
 name|class
+argument_list|)
 argument_list|)
 decl_stmt|;
 return|return
@@ -8229,12 +8320,17 @@ name|RexLiteral
 name|literal
 parameter_list|)
 block|{
-switch|switch
-condition|(
+name|SqlTypeName
+name|typeName
+init|=
 name|literal
 operator|.
 name|getTypeName
 argument_list|()
+decl_stmt|;
+switch|switch
+condition|(
+name|typeName
 condition|)
 block|{
 case|case
@@ -8273,6 +8369,8 @@ name|RexLiteral
 argument_list|>
 name|list
 init|=
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8280,6 +8378,7 @@ argument_list|(
 name|List
 operator|.
 name|class
+argument_list|)
 argument_list|)
 decl_stmt|;
 return|return
@@ -8345,15 +8444,30 @@ throw|;
 default|default:
 break|break;
 block|}
-switch|switch
-condition|(
-name|literal
-operator|.
-name|getTypeName
-argument_list|()
+name|SqlTypeFamily
+name|family
+init|=
+name|requireNonNull
+argument_list|(
+name|typeName
 operator|.
 name|getFamily
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"literal "
+operator|+
+name|literal
+operator|+
+literal|" has null SqlTypeFamily, and is SqlTypeName is "
+operator|+
+name|typeName
+argument_list|)
+decl_stmt|;
+switch|switch
+condition|(
+name|family
 condition|)
 block|{
 case|case
@@ -8367,10 +8481,13 @@ argument_list|(
 operator|(
 name|String
 operator|)
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValue2
 argument_list|()
+argument_list|)
 argument_list|,
 name|POS
 argument_list|)
@@ -8386,6 +8503,8 @@ name|SqlLiteral
 operator|.
 name|createExactNumeric
 argument_list|(
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8393,6 +8512,7 @@ argument_list|(
 name|BigDecimal
 operator|.
 name|class
+argument_list|)
 argument_list|)
 operator|.
 name|toPlainString
@@ -8409,6 +8529,8 @@ name|SqlLiteral
 operator|.
 name|createApproxNumeric
 argument_list|(
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8416,6 +8538,7 @@ argument_list|(
 name|BigDecimal
 operator|.
 name|class
+argument_list|)
 argument_list|)
 operator|.
 name|toPlainString
@@ -8432,6 +8555,8 @@ name|SqlLiteral
 operator|.
 name|createBoolean
 argument_list|(
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8439,6 +8564,7 @@ argument_list|(
 name|Boolean
 operator|.
 name|class
+argument_list|)
 argument_list|)
 argument_list|,
 name|POS
@@ -8454,6 +8580,8 @@ specifier|final
 name|boolean
 name|negative
 init|=
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8461,6 +8589,7 @@ argument_list|(
 name|Boolean
 operator|.
 name|class
+argument_list|)
 argument_list|)
 decl_stmt|;
 return|return
@@ -8475,6 +8604,8 @@ literal|1
 else|:
 literal|1
 argument_list|,
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8483,7 +8614,10 @@ name|String
 operator|.
 name|class
 argument_list|)
+argument_list|)
 argument_list|,
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getType
@@ -8491,6 +8625,7 @@ argument_list|()
 operator|.
 name|getIntervalQualifier
 argument_list|()
+argument_list|)
 argument_list|,
 name|POS
 argument_list|)
@@ -8503,6 +8638,8 @@ name|SqlLiteral
 operator|.
 name|createDate
 argument_list|(
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8510,6 +8647,7 @@ argument_list|(
 name|DateString
 operator|.
 name|class
+argument_list|)
 argument_list|)
 argument_list|,
 name|POS
@@ -8523,6 +8661,8 @@ name|SqlLiteral
 operator|.
 name|createTime
 argument_list|(
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8530,6 +8670,7 @@ argument_list|(
 name|TimeString
 operator|.
 name|class
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -8551,6 +8692,8 @@ name|SqlLiteral
 operator|.
 name|createTimestamp
 argument_list|(
+name|castNonNull
+argument_list|(
 name|literal
 operator|.
 name|getValueAs
@@ -8558,6 +8701,7 @@ argument_list|(
 name|TimestampString
 operator|.
 name|class
+argument_list|)
 argument_list|)
 argument_list|,
 name|literal
@@ -8579,10 +8723,7 @@ name|NULL
 case|:
 switch|switch
 condition|(
-name|literal
-operator|.
-name|getTypeName
-argument_list|()
+name|typeName
 condition|)
 block|{
 case|case
@@ -8609,10 +8750,7 @@ name|literal
 operator|+
 literal|": "
 operator|+
-name|literal
-operator|.
-name|getTypeName
-argument_list|()
+name|typeName
 argument_list|)
 throw|;
 block|}
@@ -8625,8 +8763,6 @@ name|SimpleContext
 extends|extends
 name|Context
 block|{
-annotation|@
-name|Nonnull
 specifier|private
 specifier|final
 name|IntFunction
@@ -8733,6 +8869,8 @@ name|variable
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|correlTableMap
 operator|.
 name|get
@@ -8740,6 +8878,17 @@ argument_list|(
 name|variable
 operator|.
 name|id
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"variable "
+operator|+
+name|variable
+operator|.
+name|id
+operator|+
+literal|" is not found"
 argument_list|)
 return|;
 block|}
@@ -8934,6 +9083,8 @@ specifier|public
 name|SqlNode
 name|toSql
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexProgram
 name|program
 parameter_list|,
@@ -8981,11 +9132,14 @@ return|return
 operator|new
 name|SqlIdentifier
 argument_list|(
+name|castNonNull
+argument_list|(
 name|RexLiteral
 operator|.
 name|stringValue
 argument_list|(
 name|literal
+argument_list|)
 argument_list|)
 argument_list|,
 name|POS
@@ -9369,11 +9523,15 @@ name|SqlNode
 name|node
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|neededAlias
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RelDataType
 name|neededType
 decl_stmt|;
@@ -9416,6 +9574,8 @@ name|expectedClauses
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RelNode
 name|expectedRel
 decl_stmt|;
@@ -9436,9 +9596,13 @@ name|Clause
 argument_list|>
 name|clauses
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|neededAlias
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|neededType
 parameter_list|,
@@ -9488,9 +9652,13 @@ name|Clause
 argument_list|>
 name|clauses
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|neededAlias
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|neededType
 parameter_list|,
@@ -9514,6 +9682,8 @@ name|Clause
 argument_list|>
 name|expectedClauses
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|expectedRel
 parameter_list|)
@@ -10214,6 +10384,11 @@ specifier|private
 name|boolean
 name|needNewSubQuery
 parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|Result
+name|this
+parameter_list|,
 name|RelNode
 name|rel
 parameter_list|,
@@ -10442,6 +10617,11 @@ specifier|private
 name|boolean
 name|hasNestedAggregations
 parameter_list|(
+annotation|@
+name|UnknownInitialization
+name|Result
+name|this
+parameter_list|,
 name|Aggregate
 name|rel
 parameter_list|)
@@ -10637,6 +10817,11 @@ name|SqlCall
 operator|)
 name|node
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"assignment.type.incompatible"
+argument_list|)
 name|SqlNode
 index|[]
 name|operands
@@ -10648,9 +10833,11 @@ argument_list|()
 operator|.
 name|toArray
 argument_list|(
+operator|new
 name|SqlNode
-operator|.
-name|EMPTY_ARRAY
+index|[
+literal|0
+index|]
 argument_list|)
 decl_stmt|;
 name|operands
@@ -11137,7 +11324,10 @@ name|of
 argument_list|(
 name|neededAlias
 argument_list|,
+name|castNonNull
+argument_list|(
 name|neededType
+argument_list|)
 argument_list|)
 argument_list|,
 name|anon
@@ -11338,6 +11528,8 @@ name|anon
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -11382,8 +11574,6 @@ name|this
 operator|.
 name|rel
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rel
@@ -11404,8 +11594,6 @@ name|this
 operator|.
 name|select
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|select
@@ -11415,8 +11603,6 @@ name|this
 operator|.
 name|context
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context

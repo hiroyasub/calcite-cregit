@@ -163,6 +163,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -178,6 +210,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -212,6 +254,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|SqlNode
@@ -222,12 +266,16 @@ literal|null
 decl_stmt|;
 comment|/**    * List of column names which sort this scope. Empty if this scope is not    * sorted. Null if has not been computed yet.    */
 specifier|private
+annotation|@
+name|MonotonicNonNull
 name|SqlNodeList
 name|orderList
 decl_stmt|;
 comment|/** Scope to use to resolve windows. */
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|windowParent
 decl_stmt|;
@@ -238,6 +286,8 @@ parameter_list|(
 name|SqlValidatorScope
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|winParent
 parameter_list|,
@@ -265,6 +315,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
+annotation|@
+name|Nullable
 name|SqlValidatorTable
 name|getTable
 parameter_list|()
@@ -287,6 +339,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlWindow
 name|lookupWindow
 parameter_list|(
@@ -338,10 +392,21 @@ specifier|final
 name|SqlIdentifier
 name|declId
 init|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|window
 operator|.
 name|getDeclName
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"declName of window "
+operator|+
+name|window
+argument_list|)
 decl_stmt|;
 assert|assert
 name|declId
@@ -735,6 +800,8 @@ literal|false
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|SqlNode
@@ -750,6 +817,8 @@ specifier|public
 name|void
 name|setExpandedSelectList
 parameter_list|(
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|SqlNode

@@ -29,6 +29,22 @@ name|SqlNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Converts a {@link RexNode} expression into a {@link SqlNode} expression.  */
 end_comment
@@ -40,6 +56,8 @@ name|RexSqlConvertlet
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Converts a {@link RexCall} to a {@link SqlNode} expression.    *    * @param converter to use in translating    * @param call      RexCall to translate    * @return SqlNode, or null if translation was unavailable    */
+annotation|@
+name|Nullable
 name|SqlNode
 name|convertCall
 parameter_list|(

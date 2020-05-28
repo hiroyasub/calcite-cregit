@@ -93,6 +93,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -164,10 +196,12 @@ name|NullCollation
 name|defaultNullCollation
 parameter_list|()
 function_decl|;
-comment|/** Returns the value of {@link CalciteConnectionProperty#FUN}. */
+comment|/** Returns the value of {@link CalciteConnectionProperty#FUN},    * or a default operator table if not set. If {@code defaultOperatorTable}    * is not null, the result is never null. */
 parameter_list|<
 name|T
 parameter_list|>
+annotation|@
+name|PolyNull
 name|T
 name|fun
 parameter_list|(
@@ -177,11 +211,15 @@ name|T
 argument_list|>
 name|operatorTableClass
 parameter_list|,
+annotation|@
+name|PolyNull
 name|T
 name|defaultOperatorTable
 parameter_list|)
 function_decl|;
 comment|/** Returns the value of {@link CalciteConnectionProperty#MODEL}. */
+annotation|@
+name|Nullable
 name|String
 name|model
 parameter_list|()
@@ -211,10 +249,12 @@ name|boolean
 name|caseSensitive
 parameter_list|()
 function_decl|;
-comment|/** Returns the value of {@link CalciteConnectionProperty#PARSER_FACTORY}. */
+comment|/** Returns the value of {@link CalciteConnectionProperty#PARSER_FACTORY},    * or a default parser if not set. If {@code defaultParserFactory}    * is not null, the result is never null. */
 parameter_list|<
 name|T
 parameter_list|>
+annotation|@
+name|PolyNull
 name|T
 name|parserFactory
 parameter_list|(
@@ -224,14 +264,18 @@ name|T
 argument_list|>
 name|parserFactoryClass
 parameter_list|,
+annotation|@
+name|PolyNull
 name|T
 name|defaultParserFactory
 parameter_list|)
 function_decl|;
-comment|/** Returns the value of {@link CalciteConnectionProperty#SCHEMA_FACTORY}. */
+comment|/** Returns the value of {@link CalciteConnectionProperty#SCHEMA_FACTORY},    * or a default schema factory if not set. If {@code defaultSchemaFactory}    * is not null, the result is never null. */
 parameter_list|<
 name|T
 parameter_list|>
+annotation|@
+name|PolyNull
 name|T
 name|schemaFactory
 parameter_list|(
@@ -241,6 +285,8 @@ name|T
 argument_list|>
 name|schemaFactoryClass
 parameter_list|,
+annotation|@
+name|PolyNull
 name|T
 name|defaultSchemaFactory
 parameter_list|)
@@ -262,10 +308,12 @@ name|boolean
 name|forceDecorrelate
 parameter_list|()
 function_decl|;
-comment|/** Returns the value of {@link CalciteConnectionProperty#TYPE_SYSTEM}. */
+comment|/** Returns the value of {@link CalciteConnectionProperty#TYPE_SYSTEM},    * or a default type system if not set. If {@code defaultTypeSystem}    * is not null, the result is never null. */
 parameter_list|<
 name|T
 parameter_list|>
+annotation|@
+name|PolyNull
 name|T
 name|typeSystem
 parameter_list|(
@@ -275,6 +323,8 @@ name|T
 argument_list|>
 name|typeSystemClass
 parameter_list|,
+annotation|@
+name|PolyNull
 name|T
 name|defaultTypeSystem
 parameter_list|)

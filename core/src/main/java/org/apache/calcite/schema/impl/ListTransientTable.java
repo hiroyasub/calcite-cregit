@@ -367,6 +367,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -418,6 +434,18 @@ operator|.
 name|atomic
 operator|.
 name|AtomicBoolean
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -523,12 +551,16 @@ operator|.
 name|Operation
 name|operation
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|updateColumnList
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -576,6 +608,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -586,10 +620,15 @@ name|root
 parameter_list|)
 block|{
 comment|// add the table into the schema, so that it is accessible by any potential operator
+name|requireNonNull
+argument_list|(
 name|root
 operator|.
 name|getRootSchema
 argument_list|()
+argument_list|,
+literal|"root.getRootSchema()"
+argument_list|)
 operator|.
 name|add
 argument_list|(
@@ -617,6 +656,8 @@ return|return
 operator|new
 name|AbstractEnumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -627,6 +668,8 @@ name|Override
 specifier|public
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -637,6 +680,8 @@ return|return
 operator|new
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>

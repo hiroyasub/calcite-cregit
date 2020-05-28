@@ -47,6 +47,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -126,9 +142,13 @@ block|}
 comment|/**    * MySql Compression is based on zlib.    *<a href="https://docs.oracle.com/javase/8/docs/api/java/util/zip/Deflater.html">Deflater</a>    * is used to implement compression.    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|ByteString
 name|compress
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|data
 parameter_list|)

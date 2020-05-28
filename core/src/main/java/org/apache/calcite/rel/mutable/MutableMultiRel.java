@@ -114,6 +114,11 @@ name|MutableRel
 argument_list|>
 name|inputs
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"initialization.invalid.field.write.initialized"
+argument_list|)
 specifier|protected
 name|MutableMultiRel
 parameter_list|(

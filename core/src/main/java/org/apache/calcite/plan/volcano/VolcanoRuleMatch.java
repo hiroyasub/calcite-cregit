@@ -96,6 +96,11 @@ name|digest
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a<code>VolcanoRuleMatch</code>.    *    * @param operand0 Primary operand    * @param rels     List of targets; copied by the constructor, so the client    *                 can modify it later    * @param nodeInputs Map from relational expressions to their inputs    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 name|VolcanoRuleMatch
 parameter_list|(
 name|VolcanoPlanner

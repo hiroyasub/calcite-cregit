@@ -165,6 +165,18 @@ name|Collectors
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utilities concerning {@link org.apache.calcite.rel.RelCollation}  * and {@link org.apache.calcite.rel.RelFieldCollation}.  */
 end_comment
@@ -1233,6 +1245,8 @@ name|fc
 operator|.
 name|withFieldIndex
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|mapping
 operator|.
 name|get
@@ -1241,6 +1255,20 @@ name|fc
 operator|.
 name|getFieldIndex
 argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no entry for "
+operator|+
+name|fc
+operator|.
+name|getFieldIndex
+argument_list|()
+operator|+
+literal|" in "
+operator|+
+name|mapping
 argument_list|)
 argument_list|)
 argument_list|)

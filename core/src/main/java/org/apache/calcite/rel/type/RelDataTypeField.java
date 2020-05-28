@@ -49,6 +49,11 @@ comment|/**    * Function to transform a set of {@link RelDataTypeField} to    *
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullability"
+argument_list|)
 class|class
 name|ToFieldIndex
 implements|implements
@@ -89,6 +94,11 @@ comment|/**    * Function to transform a set of {@link RelDataTypeField} to    *
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullability"
+argument_list|)
 class|class
 name|ToFieldName
 implements|implements

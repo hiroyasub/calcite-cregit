@@ -75,6 +75,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -152,12 +168,30 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -226,17 +260,22 @@ comment|//~ Methods ------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public
-parameter_list|<
+operator|<
+expr|@
+name|Nullable
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
+expr|@
+name|Nullable
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|apply
-parameter_list|(
+argument_list|(
 name|Class
 argument_list|<
 name|?
@@ -244,8 +283,8 @@ extends|extends
 name|RelNode
 argument_list|>
 name|relClass
-parameter_list|,
-specifier|final
+argument_list|,
+name|final
 name|Class
 argument_list|<
 name|?
@@ -253,15 +292,15 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
-parameter_list|)
+argument_list|)
 block|{
-specifier|final
+name|final
 name|UnboundMetadata
 argument_list|<
 name|M
 argument_list|>
 name|function
-init|=
+operator|=
 name|underlyingProvider
 operator|.
 name|apply
@@ -270,7 +309,7 @@ name|relClass
 argument_list|,
 name|metadataClass
 argument_list|)
-decl_stmt|;
+block|;
 if|if
 condition|(
 name|function
@@ -296,6 +335,8 @@ specifier|final
 name|Metadata
 name|metadata
 init|=
+name|requireNonNull
+argument_list|(
 name|function
 operator|.
 name|bind
@@ -303,6 +344,17 @@ argument_list|(
 name|rel
 argument_list|,
 name|mq
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"metadata must not be null, relClass="
+operator|+
+name|relClass
+operator|+
+literal|", metadataClass="
+operator|+
+name|metadataClass
 argument_list|)
 decl_stmt|;
 return|return
@@ -332,17 +384,12 @@ argument_list|(
 name|metadata
 argument_list|)
 block_content|)
-block_content|)
-function|;
-block|}
+block|)
+class|;
 end_class
 
-begin_empty_stmt
-empty_stmt|;
-end_empty_stmt
-
 begin_function
-unit|}    @
+unit|};   }    @
 name|Override
 specifier|public
 argument_list|<
@@ -396,6 +443,8 @@ block|{
 name|long
 name|timestamp
 decl_stmt|;
+annotation|@
+name|Nullable
 name|Object
 name|result
 decl_stmt|;
@@ -428,8 +477,6 @@ name|this
 operator|.
 name|metadata
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|metadata
@@ -439,6 +486,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|invoke
 parameter_list|(
@@ -448,6 +497,8 @@ parameter_list|,
 name|Method
 name|method
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|args
@@ -636,10 +687,13 @@ name|e
 parameter_list|)
 block|{
 throw|throw
+name|castNonNull
+argument_list|(
 name|e
 operator|.
 name|getCause
 argument_list|()
+argument_list|)
 throw|;
 block|}
 block|}

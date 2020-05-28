@@ -135,6 +135,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnderInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -172,16 +204,6 @@ operator|.
 name|function
 operator|.
 name|Predicate
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -278,6 +300,8 @@ parameter_list|,
 name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|description
 parameter_list|)
@@ -362,7 +386,9 @@ name|operand
 argument_list|)
 expr_stmt|;
 name|assignSolveOrder
-argument_list|()
+argument_list|(
+name|operands
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods for creating operands ------------------------------------------
@@ -981,6 +1007,11 @@ name|RelOptRuleOperand
 argument_list|>
 name|flattenOperands
 parameter_list|(
+annotation|@
+name|UnderInitialization
+name|RelOptRule
+name|this
+parameter_list|,
 name|RelOptRuleOperand
 name|rootOperand
 parameter_list|)
@@ -1055,6 +1086,11 @@ specifier|private
 name|void
 name|flattenRecurse
 parameter_list|(
+annotation|@
+name|UnderInitialization
+name|RelOptRule
+name|this
+parameter_list|,
 name|List
 argument_list|<
 name|RelOptRuleOperand
@@ -1129,9 +1165,16 @@ block|}
 block|}
 comment|/**    * Builds each operand's solve-order. Start with itself, then its parent, up    * to the root, then the remaining operands in prefix order.    */
 specifier|private
+specifier|static
 name|void
 name|assignSolveOrder
-parameter_list|()
+parameter_list|(
+name|List
+argument_list|<
+name|RelOptRuleOperand
+argument_list|>
+name|operands
+parameter_list|)
 block|{
 for|for
 control|(
@@ -1329,6 +1372,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -1359,8 +1404,6 @@ specifier|protected
 name|boolean
 name|equals
 parameter_list|(
-annotation|@
-name|Nonnull
 name|RelOptRule
 name|that
 parameter_list|)
@@ -1430,6 +1473,8 @@ parameter_list|)
 function_decl|;
 comment|/**    * Returns the convention of the result of firing this rule, null if    * not known.    *    * @return Convention of the result of firing this rule, null if    *   not known    */
 specifier|public
+annotation|@
+name|Nullable
 name|Convention
 name|getOutConvention
 parameter_list|()
@@ -1440,6 +1485,8 @@ return|;
 block|}
 comment|/**    * Returns the trait which will be modified as a result of firing this rule,    * or null if the rule is not a converter rule.    *    * @return Trait which will be modified as a result of firing this rule,    *   or null if the rule is not a converter rule    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelTrait
 name|getOutTrait
 parameter_list|()
@@ -1578,6 +1625,8 @@ parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelTrait
 name|toTrait
 parameter_list|)

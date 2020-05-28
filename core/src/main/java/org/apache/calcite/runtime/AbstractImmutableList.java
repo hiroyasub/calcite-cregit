@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -56,12 +72,18 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -93,8 +115,6 @@ parameter_list|()
 function_decl|;
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Iterator
 argument_list|<
@@ -113,8 +133,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|ListIterator
 argument_list|<
@@ -164,8 +182,6 @@ specifier|public
 name|boolean
 name|addAll
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Collection
 argument_list|<
 name|?
@@ -190,8 +206,6 @@ parameter_list|(
 name|int
 name|index
 parameter_list|,
-annotation|@
-name|Nonnull
 name|Collection
 argument_list|<
 name|?
@@ -213,8 +227,6 @@ specifier|public
 name|boolean
 name|removeAll
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Collection
 argument_list|<
 name|?
@@ -234,8 +246,6 @@ specifier|public
 name|boolean
 name|retainAll
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Collection
 argument_list|<
 name|?
@@ -318,8 +328,6 @@ throw|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|ListIterator
 argument_list|<
@@ -343,8 +351,6 @@ return|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|List
 argument_list|<
@@ -377,6 +383,8 @@ specifier|public
 name|boolean
 name|contains
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -384,7 +392,10 @@ block|{
 return|return
 name|indexOf
 argument_list|(
+name|castNonNull
+argument_list|(
 name|o
+argument_list|)
 argument_list|)
 operator|>=
 literal|0
@@ -396,8 +407,6 @@ specifier|public
 name|boolean
 name|containsAll
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Collection
 argument_list|<
 name|?
@@ -437,6 +446,8 @@ specifier|public
 name|boolean
 name|remove
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

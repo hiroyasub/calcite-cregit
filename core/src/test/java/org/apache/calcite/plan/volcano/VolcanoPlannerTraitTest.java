@@ -401,6 +401,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|jupiter
@@ -1685,6 +1701,8 @@ name|ALT_TRAIT
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(
@@ -1991,6 +2009,8 @@ return|;
 block|}
 comment|// implement RelNode
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -2174,6 +2194,8 @@ expr_stmt|;
 block|}
 comment|// implement RelNode
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -2230,6 +2252,8 @@ expr_stmt|;
 block|}
 comment|// implement RelNode
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -2399,6 +2423,8 @@ expr_stmt|;
 block|}
 comment|// implement RelNode
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -2677,6 +2703,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -3590,6 +3618,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(

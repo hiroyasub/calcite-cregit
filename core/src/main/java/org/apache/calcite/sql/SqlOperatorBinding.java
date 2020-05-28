@@ -109,6 +109,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -220,6 +236,8 @@ annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getStringLiteralOperand
 parameter_list|(
@@ -255,7 +273,11 @@ comment|/**    * Gets the value of a literal operand.    *    *<p>Cases:    *<ul
 specifier|public
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|getOperandLiteralValue
 parameter_list|(
@@ -277,6 +299,8 @@ throw|;
 block|}
 comment|/**    * Gets the value of a literal operand as a Calcite type.    *    * @param ordinal zero-based ordinal of operand of interest    * @param type Desired valued type    *    * @return value of operand    */
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 name|getOperandLiteralValue
 parameter_list|(
@@ -297,6 +321,8 @@ annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
 specifier|public
+annotation|@
+name|Nullable
 name|Comparable
 name|getOperandLiteralValue
 parameter_list|(
@@ -434,6 +460,8 @@ return|;
 block|}
 comment|/**    * Returns the rowtype of the<code>ordinal</code>th operand, which is a    * cursor.    *    *<p>This is only implemented for {@link SqlCallBinding}.    *    * @param ordinal Ordinal of the operand    * @return Rowtype of the query underlying the cursor    */
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getCursorOperand
 parameter_list|(
@@ -449,6 +477,8 @@ throw|;
 block|}
 comment|/**    * Retrieves information about a column list parameter.    *    * @param ordinal    ordinal position of the column list parameter    * @param paramName  name of the column list parameter    * @param columnList returns a list of the column names that are referenced    *                   in the column list parameter    * @return the name of the parent cursor referenced by the column list    * parameter if it is a column list parameter; otherwise, null is returned    */
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getColumnListParamInfo
 parameter_list|(

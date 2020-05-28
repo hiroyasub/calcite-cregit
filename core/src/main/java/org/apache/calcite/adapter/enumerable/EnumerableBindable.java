@@ -259,11 +259,39 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -364,6 +392,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -451,12 +481,23 @@ specifier|final
 name|Sink
 name|sink
 init|=
+name|requireNonNull
+argument_list|(
 name|implementor
 operator|.
 name|relSinks
 operator|.
 name|get
 argument_list|(
+name|EnumerableBindable
+operator|.
+name|this
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"relSinks.get is null for "
+operator|+
 name|EnumerableBindable
 operator|.
 name|this
@@ -470,6 +511,8 @@ decl_stmt|;
 specifier|final
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -485,6 +528,8 @@ decl_stmt|;
 specifier|final
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>

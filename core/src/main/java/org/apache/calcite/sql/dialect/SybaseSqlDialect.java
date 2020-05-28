@@ -59,6 +59,34 @@ name|SqlWriter
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlDialect</code> implementation for the Sybase database.  */
 end_comment
@@ -126,9 +154,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -145,9 +177,13 @@ parameter_list|(
 name|SqlWriter
 name|writer
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -168,6 +204,13 @@ operator|.
 name|keyword
 argument_list|(
 literal|"("
+argument_list|)
+expr_stmt|;
+name|requireNonNull
+argument_list|(
+name|fetch
+argument_list|,
+literal|"fetch"
 argument_list|)
 expr_stmt|;
 name|fetch

@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -38,23 +54,29 @@ name|RelOptSchema
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Retrieves a {@link RelOptTable} based upon a member access, using a    * sample dataset if it exists.    *    * @param names       Compound name of table    * @param datasetName Name of sample dataset to substitute, if it exists;    *                    null to not look for a sample    * @param usedDataset Output parameter which is set to true if a sample    *                    dataset is found; may be null    * @return Table, or null if not found    */
+annotation|@
+name|Nullable
 name|RelOptTable
 name|getTableForMember
-parameter_list|(
+argument_list|(
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|names
-parameter_list|,
+argument_list|,
+annotation|@
+name|Nullable
 name|String
 name|datasetName
-parameter_list|,
+argument_list|,
 name|boolean
+expr|@
+name|Nullable
 index|[]
 name|usedDataset
-parameter_list|)
-function_decl|;
+argument_list|)
+decl_stmt|;
 block|}
 end_interface
 

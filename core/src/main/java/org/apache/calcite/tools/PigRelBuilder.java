@@ -193,6 +193,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -211,6 +227,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Extension to {@link RelBuilder} for Pig relational operators.  */
 end_comment
@@ -223,6 +251,8 @@ extends|extends
 name|RelBuilder
 block|{
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|lastAlias
 decl_stmt|;
@@ -235,6 +265,8 @@ parameter_list|,
 name|RelOptCluster
 name|cluster
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelOptSchema
 name|relOptSchema
 parameter_list|)
@@ -602,7 +634,12 @@ condition|)
 block|{
 name|push
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|r
+argument_list|,
+literal|"r"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|List
@@ -744,6 +781,8 @@ block|}
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getAlias
 parameter_list|()
@@ -774,12 +813,20 @@ operator|instanceof
 name|TableScan
 condition|)
 block|{
+name|TableScan
+name|scan
+init|=
+operator|(
+name|TableScan
+operator|)
+name|top
+decl_stmt|;
 return|return
 name|Util
 operator|.
 name|last
 argument_list|(
-name|top
+name|scan
 operator|.
 name|getTable
 argument_list|()

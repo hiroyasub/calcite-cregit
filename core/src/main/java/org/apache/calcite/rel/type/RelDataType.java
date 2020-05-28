@@ -89,6 +89,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -133,6 +163,8 @@ literal|1
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Queries whether this is a structured type.    *    * @return whether this type has fields; examples include rows and    * user-defined structured types in SQL, and classes in Java    */
+annotation|@
+name|Pure
 name|boolean
 name|isStruct
 parameter_list|()
@@ -169,6 +201,8 @@ name|getStructKind
 parameter_list|()
 function_decl|;
 comment|/**    * Looks up a field by name.    *    *<p>NOTE: Be careful choosing the value of {@code caseSensitive}:</p>    *<ul>    *<li>If the field name was supplied by an end-user (e.g. as a column alias    * in SQL), use your session's case-sensitivity setting.</li>    *<li>Only hard-code {@code true} if you are sure that the field name is    * internally generated.</li>    *<li>Hard-coding {@code false} is almost certainly wrong.</li>    *</ul>    *    * @param fieldName Name of field to find    * @param caseSensitive Whether match is case-sensitive    * @param elideRecord Whether to find fields nested within records    * @return named field, or null if not found    */
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|getField
 parameter_list|(
@@ -183,36 +217,58 @@ name|elideRecord
 parameter_list|)
 function_decl|;
 comment|/**    * Queries whether this type allows null values.    *    * @return whether type allows null values    */
+annotation|@
+name|Pure
 name|boolean
 name|isNullable
 parameter_list|()
 function_decl|;
 comment|/**    * Gets the component type if this type is a collection, otherwise null.    *    * @return canonical type descriptor for components    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|RelDataType
 name|getComponentType
 parameter_list|()
 function_decl|;
 comment|/**    * Gets the key type if this type is a map, otherwise null.    *    * @return canonical type descriptor for key    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getKeyType
 parameter_list|()
 function_decl|;
 comment|/**    * Gets the value type if this type is a map, otherwise null.    *    * @return canonical type descriptor for value    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|getValueType
 parameter_list|()
 function_decl|;
 comment|/**    * Gets this type's character set, or null if this type cannot carry a    * character set or has no character set defined.    *    * @return charset of type    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|Charset
 name|getCharset
 parameter_list|()
 function_decl|;
 comment|/**    * Gets this type's collation, or null if this type cannot carry a collation    * or has no collation defined.    *    * @return collation of type    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|SqlCollation
 name|getCollation
 parameter_list|()
 function_decl|;
 comment|/**    * Gets this type's interval qualifier, or null if this is not an interval    * type.    *    * @return interval qualifier    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|SqlIntervalQualifier
 name|getIntervalQualifier
 parameter_list|()
@@ -233,6 +289,10 @@ name|getSqlTypeName
 parameter_list|()
 function_decl|;
 comment|/**    * Gets the {@link SqlIdentifier} associated with this type. For a    * predefined type, this is a simple identifier based on    * {@link #getSqlTypeName}. For a user-defined type, this is a compound    * identifier which uniquely names the type.    *    * @return SqlIdentifier, or null if this is not an SQL type    */
+annotation|@
+name|Pure
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|getSqlIdentifier
 parameter_list|()
@@ -289,6 +349,8 @@ specifier|default
 name|boolean
 name|equalsSansFieldNames
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|that
 parameter_list|)

@@ -68,12 +68,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -134,8 +136,6 @@ name|this
 operator|.
 name|kind
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|kind
@@ -320,7 +320,12 @@ name|Ord
 operator|.
 name|zip
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|fieldList
+argument_list|,
+literal|"fieldList"
+argument_list|)
 argument_list|)
 control|)
 block|{
@@ -419,7 +424,12 @@ return|return
 operator|new
 name|SerializableRelRecordType
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|fieldList
+argument_list|,
+literal|"fieldList"
+argument_list|)
 argument_list|)
 return|;
 block|}

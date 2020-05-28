@@ -327,6 +327,22 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdMinRowCount supplies a default implementation of  * {@link RelMetadataQuery#getMinRowCount} for the standard logical algebra.  */
 end_comment
@@ -509,6 +525,8 @@ return|;
 comment|// no lower bound
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(
@@ -553,6 +571,8 @@ return|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(
@@ -576,6 +596,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(
@@ -599,6 +621,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(
@@ -1046,6 +1070,8 @@ return|;
 block|}
 comment|// Catch-all rule when none of the others apply.
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getMinRowCount
 parameter_list|(

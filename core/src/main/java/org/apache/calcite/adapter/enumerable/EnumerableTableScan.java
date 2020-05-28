@@ -505,6 +505,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -532,6 +548,36 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Types
+operator|.
+name|toClass
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -613,6 +659,8 @@ comment|/**    * Code snippet to demonstrate how to generate IndexScan on demand
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|passThrough
 parameter_list|(
@@ -939,6 +987,8 @@ specifier|static
 name|Class
 name|deduceElementType
 parameter_list|(
+annotation|@
+name|Nullable
 name|Table
 name|table
 parameter_list|)
@@ -1044,7 +1094,7 @@ name|deduceElementType
 argument_list|(
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|Table
 operator|.
@@ -1184,8 +1234,8 @@ condition|)
 block|{
 if|if
 condition|(
-name|Types
-operator|.
+name|requireNonNull
+argument_list|(
 name|toClass
 argument_list|(
 name|type
@@ -1193,6 +1243,7 @@ argument_list|)
 operator|.
 name|getComponentType
 argument_list|()
+argument_list|)
 operator|.
 name|isPrimitive
 argument_list|()
@@ -1415,7 +1466,8 @@ operator|&&
 operator|!
 name|hasCollectionField
 argument_list|(
-name|rowType
+name|getRowType
+argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -1603,10 +1655,19 @@ specifier|final
 name|RelDataType
 name|fieldType
 init|=
+name|requireNonNull
+argument_list|(
 name|relFieldType
 operator|.
 name|getComponentType
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"relFieldType.getComponentType() for "
+operator|+
+name|relFieldType
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

@@ -391,6 +391,22 @@ name|Multimap
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdNodeTypeCount supplies a default implementation of  * {@link RelMetadataQuery#getNodeTypes} for the standard logical algebra.  */
 end_comment
@@ -451,6 +467,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.NodeTypes#getNodeTypes()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getNodeTypes(RelNode)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -485,6 +503,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -518,6 +538,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -538,11 +560,9 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-return|return
-name|mq
-operator|.
-name|getNodeTypes
-argument_list|(
+name|RelNode
+name|bestOrOriginal
+init|=
 name|Util
 operator|.
 name|first
@@ -557,10 +577,30 @@ operator|.
 name|getOriginal
 argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|bestOrOriginal
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|mq
+operator|.
+name|getNodeTypes
+argument_list|(
+name|bestOrOriginal
 argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -595,6 +635,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -629,6 +671,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -663,6 +707,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -697,6 +743,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -731,6 +779,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -765,6 +815,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -799,6 +851,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -833,6 +887,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -867,6 +923,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -901,6 +959,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -935,6 +995,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -969,6 +1031,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -1003,6 +1067,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -1037,6 +1103,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -1071,6 +1139,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -1105,6 +1175,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class
@@ -1140,6 +1212,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Class

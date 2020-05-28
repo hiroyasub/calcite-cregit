@@ -125,21 +125,27 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|checkerframework
 operator|.
-name|TimeZone
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
 begin_import
 import|import
-name|javax
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|TimeZone
 import|;
 end_import
 
@@ -168,10 +174,10 @@ name|FLOOR
 return|;
 block|}
 annotation|@
-name|Nullable
-annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|toDruidExpression
 parameter_list|(

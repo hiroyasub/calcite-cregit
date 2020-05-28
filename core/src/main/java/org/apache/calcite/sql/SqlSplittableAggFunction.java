@@ -227,6 +227,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -277,6 +293,8 @@ name|mapping
 parameter_list|)
 function_decl|;
 comment|/** Called to generate an aggregate for the other side of the join    * than the side aggregate call's arguments come from. Returns null if    * no aggregate is required. */
+annotation|@
+name|Nullable
 name|AggregateCall
 name|other
 parameter_list|(
@@ -331,6 +349,8 @@ name|aggregateCall
 parameter_list|)
 function_decl|;
 comment|/**    * Merge top and bottom aggregate calls into a single aggregate call,    * if they are legit to merge.    *    *<p>SUM of SUM becomes SUM; SUM of COUNT becomes COUNT;    * MAX of MAX becomes MAX; MIN of MIN becomes MIN.    * AVG of AVG would not match, nor would COUNT of COUNT.    *    * @param top top aggregate call    * @param bottom bottom aggregate call    * @return Merged aggregate call, null if fails to merge aggregate calls    */
+annotation|@
+name|Nullable
 name|AggregateCall
 name|merge
 parameter_list|(
@@ -399,6 +419,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|AggregateCall
 name|other
 parameter_list|(
@@ -810,6 +832,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|AggregateCall
 name|merge
 parameter_list|(
@@ -1018,6 +1042,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|AggregateCall
 name|other
 parameter_list|(
@@ -1124,6 +1150,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|AggregateCall
 name|merge
 parameter_list|(
@@ -1331,6 +1359,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|AggregateCall
 name|other
 parameter_list|(
@@ -1624,6 +1654,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|AggregateCall
 name|merge
 parameter_list|(

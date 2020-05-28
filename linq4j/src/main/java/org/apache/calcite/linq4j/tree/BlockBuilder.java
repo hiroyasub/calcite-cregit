@@ -19,6 +19,38 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -111,6 +143,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Builder for {@link BlockStatement}.  *  *<p>Has methods that help ensure that variable names are unique.</p>  */
 end_comment
@@ -166,6 +210,8 @@ name|optimizing
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|BlockBuilder
 name|parent
 decl_stmt|;
@@ -213,6 +259,8 @@ parameter_list|(
 name|boolean
 name|optimizing
 parameter_list|,
+annotation|@
+name|Nullable
 name|BlockBuilder
 name|parent
 parameter_list|)
@@ -659,6 +707,8 @@ name|append_
 argument_list|(
 name|name
 argument_list|,
+name|requireNonNull
+argument_list|(
 operator|(
 operator|(
 name|GotoStatement
@@ -667,6 +717,9 @@ name|statement
 operator|)
 operator|.
 name|expression
+argument_list|,
+literal|"expression"
+argument_list|)
 argument_list|,
 name|optimize
 argument_list|)
@@ -725,7 +778,20 @@ block|}
 block|}
 block|}
 return|return
+name|requireNonNull
+argument_list|(
 name|result
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"empty result when appending name="
+operator|+
+name|name
+operator|+
+literal|", "
+operator|+
+name|block
+argument_list|)
 return|;
 block|}
 comment|/**    * Appends an expression to a list of statements, and returns an expression    * (possibly a variable) that represents the result of the newly added    * block.    */
@@ -751,14 +817,18 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Appends an expression to a list of statements, if it is not null.    */
+comment|/**    * Appends an expression to a list of statements if it is not null,    * and returns the expression.    */
 specifier|public
+annotation|@
+name|PolyNull
 name|Expression
 name|appendIfNotNull
 parameter_list|(
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|PolyNull
 name|Expression
 name|expression
 parameter_list|)
@@ -966,6 +1036,8 @@ specifier|protected
 name|boolean
 name|isSimpleExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|Expression
 name|expr
 parameter_list|)
@@ -1180,6 +1252,8 @@ return|;
 block|}
 comment|/**    * Returns the reference to ParameterExpression if given expression was    * already computed and stored to local variable.    *    * @param expr expression to test    * @return existing ParameterExpression or null    */
 specifier|public
+annotation|@
+name|Nullable
 name|DeclarationStatement
 name|getComputedExpression
 parameter_list|(

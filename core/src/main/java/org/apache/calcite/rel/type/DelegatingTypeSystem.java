@@ -33,6 +33,22 @@ name|SqlTypeName
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.type.RelDataTypeSystem}  * that sends all methods to an underlying object. */
 end_comment
@@ -152,6 +168,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getLiteral
 parameter_list|(

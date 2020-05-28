@@ -381,6 +381,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -795,9 +811,13 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Object
 name|convert
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|string
 parameter_list|,
@@ -1037,6 +1057,8 @@ operator|)
 operator|new
 name|AbstractTableQueryable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1055,6 +1077,8 @@ name|Override
 specifier|public
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1110,12 +1134,16 @@ name|List
 argument_list|<
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 argument_list|>
 argument_list|,
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1137,6 +1165,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1146,6 +1176,8 @@ name|List
 argument_list|<
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 argument_list|>
@@ -1155,6 +1187,8 @@ block|{
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1169,6 +1203,8 @@ for|for
 control|(
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|strings
@@ -1177,6 +1213,8 @@ name|inRows
 control|)
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values

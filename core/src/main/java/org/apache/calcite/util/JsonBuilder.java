@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -86,6 +102,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -103,6 +121,8 @@ comment|/**    * Creates a JSON object (represented by a {@link List}).    */
 specifier|public
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -124,6 +144,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -131,6 +153,8 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -157,6 +181,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -164,6 +190,8 @@ parameter_list|,
 name|String
 name|name
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -232,6 +260,8 @@ parameter_list|,
 name|int
 name|indent
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -279,7 +309,6 @@ operator|instanceof
 name|List
 condition|)
 block|{
-comment|//noinspection unchecked
 name|appendList
 argument_list|(
 name|buf
@@ -288,6 +317,9 @@ name|indent
 argument_list|,
 operator|(
 name|List
+argument_list|<
+name|?
+argument_list|>
 operator|)
 name|o
 argument_list|)
@@ -371,6 +403,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -422,6 +456,8 @@ name|Entry
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|entry
@@ -546,7 +582,7 @@ name|indent
 parameter_list|,
 name|List
 argument_list|<
-name|Object
+name|?
 argument_list|>
 name|list
 parameter_list|)

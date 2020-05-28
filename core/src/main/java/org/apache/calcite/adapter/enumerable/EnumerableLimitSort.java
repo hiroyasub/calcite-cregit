@@ -252,6 +252,22 @@ import|;
 end_import
 
 begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -298,9 +314,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -352,9 +372,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -419,9 +443,13 @@ parameter_list|,
 name|RelCollation
 name|newCollation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -741,6 +769,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -883,6 +913,8 @@ specifier|private
 name|double
 name|getValue
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|r
 parameter_list|,

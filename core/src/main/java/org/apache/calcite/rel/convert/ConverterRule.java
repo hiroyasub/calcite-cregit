@@ -145,6 +145,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -184,6 +200,22 @@ operator|.
 name|function
 operator|.
 name|Predicate
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -289,7 +321,10 @@ name|Convention
 operator|)
 name|outTrait
 else|:
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a<code>ConverterRule</code>.    *    * @param clazz       Type of relational expression to consider converting    * @param in          Trait of relational expression to consider converting    * @param out         Trait which is converted to    * @param descriptionPrefix Description prefix of rule    *    * @deprecated Use {@link #ConverterRule(Config)}    */
@@ -655,6 +690,8 @@ block|}
 comment|/** Converts a relational expression to the target trait(s) of this rule.    *    *<p>Returns null if conversion is not possible. */
 specifier|public
 specifier|abstract
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(

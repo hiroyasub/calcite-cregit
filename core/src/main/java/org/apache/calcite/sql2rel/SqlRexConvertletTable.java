@@ -29,6 +29,22 @@ name|SqlCall
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Collection of {@link SqlRexConvertlet}s.  */
 end_comment
@@ -40,6 +56,8 @@ name|SqlRexConvertletTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the convertlet applicable to a given expression.    */
+annotation|@
+name|Nullable
 name|SqlRexConvertlet
 name|get
 parameter_list|(

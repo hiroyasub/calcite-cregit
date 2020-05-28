@@ -59,6 +59,22 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Extension to the {@link Schema} interface.  *  *<p>Given a user-defined schema that implements the {@link Schema} interface,  * Calcite creates a wrapper that implements the {@code SchemaPlus} interface.  * This provides extra functionality, such as access to tables that have been  * added explicitly.  *  *<p>A user-defined schema does not need to implement this interface, but by  * the time a schema is passed to a method in a user-defined schema or  * user-defined table, it will have been wrapped in this interface.  *  *<p>SchemaPlus is intended to be used by users but not instantiated by them.  * Users should only use the SchemaPlus they are given by the system.  * The purpose of SchemaPlus is to expose to user code, in a read only manner,  * some of the extra information about schemas that Calcite builds up when a  * schema is registered. It appears in several SPI calls as context; for example  * {@link SchemaFactory#create(SchemaPlus, String, java.util.Map)} contains a  * parent schema that might be a wrapped instance of a user-defined  * {@link Schema}, or indeed might not.  */
 end_comment
@@ -71,6 +87,8 @@ extends|extends
 name|Schema
 block|{
 comment|/**    * Returns the parent schema, or null if this schema has no parent.    */
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getParentSchema
 parameter_list|()
@@ -83,6 +101,8 @@ function_decl|;
 comment|// override with stricter return
 annotation|@
 name|Override
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getSubSchema
 parameter_list|(
@@ -154,7 +174,11 @@ function_decl|;
 comment|/** Returns an underlying object. */
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|unwrap
 parameter_list|(

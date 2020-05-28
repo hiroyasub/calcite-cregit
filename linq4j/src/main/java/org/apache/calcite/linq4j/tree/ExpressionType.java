@@ -17,6 +17,22 @@ name|tree
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  *<p>Analogous to LINQ's System.Linq.Expressions.ExpressionType.</p>  */
 end_comment
@@ -857,10 +873,14 @@ comment|/**    * While loop.    */
 name|While
 block|;
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|op
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|op2
 decl_stmt|;
@@ -897,6 +917,8 @@ expr_stmt|;
 block|}
 name|ExpressionType
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|op
 parameter_list|,
@@ -926,9 +948,13 @@ expr_stmt|;
 block|}
 name|ExpressionType
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|op
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|op2
 parameter_list|,
@@ -960,9 +986,13 @@ expr_stmt|;
 block|}
 name|ExpressionType
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|op
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|op2
 parameter_list|,

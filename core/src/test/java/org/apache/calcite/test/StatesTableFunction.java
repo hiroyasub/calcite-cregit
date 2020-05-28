@@ -229,6 +229,22 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** A table function that returns states and their boundaries; also national  * parks.  *  *<p>Has same content as  *<code>file/src/test/resources/geo/states.json</code>. */
 end_comment
@@ -435,6 +451,8 @@ block|{
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -554,9 +572,13 @@ parameter_list|,
 name|SqlCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|CalciteConnectionConfig
 name|config
 parameter_list|)

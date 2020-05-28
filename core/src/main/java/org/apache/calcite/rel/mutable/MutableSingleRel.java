@@ -72,6 +72,11 @@ specifier|protected
 name|MutableRel
 name|input
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"initialization.invalid.field.write.initialized"
+argument_list|)
 specifier|protected
 name|MutableSingleRel
 parameter_list|(

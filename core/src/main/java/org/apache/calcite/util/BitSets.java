@@ -99,6 +99,18 @@ name|TreeMap
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utility functions for {@link BitSet}.  */
 end_comment
@@ -1252,7 +1264,11 @@ decl_stmt|;
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"JdkObsolete"
+block|,
+literal|"method.invocation.invalid"
+block|}
 argument_list|)
 name|Closure
 parameter_list|(
@@ -1337,10 +1353,19 @@ block|}
 name|BitSet
 name|b
 init|=
+name|requireNonNull
+argument_list|(
 name|equivalence
 operator|.
 name|get
 argument_list|(
+name|pos
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"equivalence.get(pos) for "
+operator|+
 name|pos
 argument_list|)
 decl_stmt|;

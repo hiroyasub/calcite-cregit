@@ -93,6 +93,18 @@ name|TimestampString
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A SQL literal representing a DATE, TIME or TIMESTAMP value.  *  *<p>Examples:  *  *<ul>  *<li>DATE '2004-10-22'</li>  *<li>TIME '14:33:44.567'</li>  *<li><code>TIMESTAMP '1969-07-21 03:15 GMT'</code></li>  *</ul>  */
 end_comment
@@ -170,7 +182,10 @@ return|return
 operator|(
 name|TimestampString
 operator|)
+name|requireNonNull
+argument_list|(
 name|value
+argument_list|)
 return|;
 block|}
 specifier|public

@@ -2451,6 +2451,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -2637,6 +2653,18 @@ name|util
 operator|.
 name|function
 operator|.
+name|BiFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
 name|Supplier
 import|;
 end_import
@@ -2666,22 +2694,18 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
+name|calcite
 operator|.
-name|annotation
+name|linq4j
 operator|.
-name|Nullable
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -2698,6 +2722,18 @@ operator|.
 name|SqlUtil
 operator|.
 name|stripAs
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -2792,6 +2828,8 @@ decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidator
 name|validator
 decl_stmt|;
@@ -2835,6 +2873,8 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlDynamicParam
 argument_list|>
 name|dynamicParamSqlNodes
@@ -3044,6 +3084,8 @@ operator|.
 name|ViewExpander
 name|viewExpander
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidator
 name|validator
 parameter_list|,
@@ -3146,8 +3188,6 @@ name|this
 operator|.
 name|config
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|config
@@ -3199,8 +3239,6 @@ name|this
 operator|.
 name|cluster
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|cluster
@@ -3208,6 +3246,88 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|private
+name|SqlValidator
+name|validator
+parameter_list|()
+block|{
+return|return
+name|requireNonNull
+argument_list|(
+name|validator
+argument_list|,
+literal|"validator"
+argument_list|)
+return|;
+block|}
+specifier|private
+parameter_list|<
+name|T
+extends|extends
+name|SqlValidatorNamespace
+parameter_list|>
+name|T
+name|getNamespace
+parameter_list|(
+name|SqlNode
+name|node
+parameter_list|)
+block|{
+comment|//noinspection unchecked
+return|return
+operator|(
+name|T
+operator|)
+name|requireNonNull
+argument_list|(
+name|getNamespaceOrNull
+argument_list|(
+name|node
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"Namespace is not found for "
+operator|+
+name|node
+argument_list|)
+return|;
+block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
+specifier|private
+parameter_list|<
+name|T
+extends|extends
+name|SqlValidatorNamespace
+parameter_list|>
+annotation|@
+name|Nullable
+name|T
+name|getNamespaceOrNull
+parameter_list|(
+name|SqlNode
+name|node
+parameter_list|)
+block|{
+return|return
+operator|(
+expr|@
+name|Nullable
+name|T
+operator|)
+name|validator
+argument_list|()
+operator|.
+name|getNamespace
+argument_list|(
+name|node
+argument_list|)
+return|;
+block|}
 comment|/** Returns the RelOptCluster in use. */
 specifier|public
 name|RelOptCluster
@@ -3278,6 +3398,7 @@ throw|;
 block|}
 return|return
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -3423,6 +3544,7 @@ argument_list|>
 name|validatedFields
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -3437,6 +3559,7 @@ name|RelDataType
 name|validatedRowType
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -3501,6 +3624,7 @@ name|RelDataType
 name|convertedRowType
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -3854,6 +3978,7 @@ block|{
 name|query
 operator|=
 name|validator
+argument_list|()
 operator|.
 name|validate
 argument_list|(
@@ -3985,6 +4110,7 @@ name|RelDataType
 name|validatedRowType
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -4134,7 +4260,9 @@ block|{
 case|case
 name|SELECT
 case|:
-return|return
+name|SqlNodeList
+name|orderList
+init|=
 operator|(
 operator|(
 name|SqlSelect
@@ -4144,18 +4272,13 @@ operator|)
 operator|.
 name|getOrderList
 argument_list|()
+decl_stmt|;
+return|return
+name|orderList
 operator|!=
 literal|null
 operator|&&
-operator|(
-operator|(
-name|SqlSelect
-operator|)
-name|query
-operator|)
-operator|.
-name|getOrderList
-argument_list|()
+name|orderList
 operator|.
 name|size
 argument_list|()
@@ -4295,6 +4418,7 @@ name|SqlValidatorScope
 name|selectScope
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getWhereScope
 argument_list|(
@@ -4322,9 +4446,12 @@ name|select
 argument_list|)
 expr_stmt|;
 return|return
+name|castNonNull
+argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|)
 return|;
 block|}
 comment|/**    * Factory method for creating translation workspace.    */
@@ -4332,9 +4459,13 @@ specifier|protected
 name|Blackboard
 name|createBlackboard
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -4454,6 +4585,7 @@ decl_stmt|;
 if|if
 condition|(
 name|validator
+argument_list|()
 operator|.
 name|isAggregate
 argument_list|(
@@ -4555,6 +4687,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 operator|.
 name|accept
 argument_list|(
@@ -4643,6 +4776,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 literal|true
 argument_list|)
@@ -4952,6 +5086,7 @@ operator|=
 name|bb
 operator|.
 name|root
+argument_list|()
 expr_stmt|;
 comment|// Create the expressions to reverse the mapping.
 comment|// Project($0, $1, $0, $2).
@@ -5022,11 +5157,14 @@ argument_list|(
 operator|new
 name|RexInputRef
 argument_list|(
+name|castNonNull
+argument_list|(
 name|squished
 operator|.
 name|get
 argument_list|(
 name|origin
+argument_list|)
 argument_list|)
 argument_list|,
 name|field
@@ -5082,6 +5220,17 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+assert|assert
+name|rel
+operator|!=
+literal|null
+operator|:
+literal|"rel must not be null, root = "
+operator|+
+name|bb
+operator|.
+name|root
+assert|;
 comment|// Usual case: all of the expressions in the SELECT clause are
 comment|// different.
 specifier|final
@@ -5152,9 +5301,13 @@ name|SqlNode
 argument_list|>
 name|orderExprList
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|fetch
 parameter_list|)
@@ -5212,6 +5365,10 @@ name|offset
 operator|instanceof
 name|SqlLiteral
 operator|&&
+name|Objects
+operator|.
+name|equals
+argument_list|(
 operator|(
 operator|(
 name|SqlLiteral
@@ -5221,9 +5378,7 @@ operator|)
 operator|.
 name|bigDecimalValue
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|BigDecimal
 operator|.
 name|ZERO
@@ -5251,6 +5406,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|collation
 argument_list|,
@@ -5319,6 +5475,7 @@ init|=
 name|bb
 operator|.
 name|root
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
@@ -5363,6 +5520,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -5380,6 +5538,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.
@@ -5753,10 +5912,17 @@ block|}
 name|SqlNode
 name|elseOperand
 init|=
+name|requireNonNull
+argument_list|(
 name|caseNode
 operator|.
 name|getElseOperand
 argument_list|()
+argument_list|,
+literal|"getElseOperand for "
+operator|+
+name|caseNode
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -6105,6 +6271,8 @@ name|Blackboard
 name|bb
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 name|where
 parameter_list|)
@@ -6126,6 +6294,7 @@ argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 argument_list|,
 name|where
 argument_list|)
@@ -6199,6 +6368,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|convertedWhere2
 argument_list|,
@@ -6691,6 +6861,7 @@ argument_list|(
 name|typeFactory
 argument_list|,
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -6894,6 +7065,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|aggregate
 argument_list|,
@@ -7088,6 +7260,7 @@ name|SqlSelect
 operator|)
 condition|?
 name|validator
+argument_list|()
 operator|.
 name|getSelectScope
 argument_list|(
@@ -7125,6 +7298,17 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|seekRel
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"seelkRel is null for query "
+operator|+
+name|query
+argument_list|)
+expr_stmt|;
 comment|// An EXIST sub-query whose inner child has at least 1 tuple
 comment|// (e.g. an Aggregate with no grouping columns or non-empty Values
 comment|// node) should be simplified to a Boolean constant expression.
@@ -7438,6 +7622,8 @@ operator|.
 name|Logic
 name|logic
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|root
 parameter_list|,
@@ -7607,7 +7793,12 @@ init|=
 operator|(
 name|Join
 operator|)
+name|requireNonNull
+argument_list|(
 name|root
+argument_list|,
+literal|"root"
+argument_list|)
 decl_stmt|;
 specifier|final
 name|Project
@@ -8104,10 +8295,15 @@ decl_stmt|;
 name|SqlNodeList
 name|selectList
 init|=
+name|requireNonNull
+argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
+argument_list|,
+literal|"selectList"
+argument_list|)
 decl_stmt|;
 name|SqlNodeList
 name|groupList
@@ -8188,29 +8384,9 @@ block|}
 block|}
 comment|// If there is a limit with 0 or 1,
 comment|// it is ensured to produce a single value
-if|if
-condition|(
-name|select
-operator|.
-name|getFetch
-argument_list|()
-operator|!=
-literal|null
-operator|&&
-name|select
-operator|.
-name|getFetch
-argument_list|()
-operator|instanceof
-name|SqlNumericLiteral
-condition|)
-block|{
-name|SqlNumericLiteral
-name|limitNum
+name|SqlNode
+name|fetch
 init|=
-operator|(
-name|SqlNumericLiteral
-operator|)
 name|select
 operator|.
 name|getFetch
@@ -8218,18 +8394,31 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+name|fetch
+operator|instanceof
+name|SqlNumericLiteral
+condition|)
+block|{
+name|long
+name|value
+init|=
 operator|(
 operator|(
-name|BigDecimal
+name|SqlNumericLiteral
 operator|)
-name|limitNum
-operator|.
-name|getValue
-argument_list|()
+name|fetch
 operator|)
 operator|.
-name|intValue
-argument_list|()
+name|getValueAs
+argument_list|(
+name|Long
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|value
 operator|<
 literal|2
 condition|)
@@ -8295,6 +8484,8 @@ return|;
 block|}
 comment|/**    * Converts "x IN (1, 2, ...)" to "x=1 OR x=2 OR ...".    *    * @param leftKeys   LHS    * @param valuesList RHS    * @param op         The operator (IN, NOT IN,&gt; SOME, ...)    * @return converted expression    */
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|convertInToOr
 parameter_list|(
@@ -8499,11 +8690,17 @@ name|pair
 operator|.
 name|left
 argument_list|,
+comment|// TODO: remove requireNonNull when checkerframework issue resolved
 name|ensureSqlType
+argument_list|(
+name|requireNonNull
 argument_list|(
 name|pair
 operator|.
 name|left
+argument_list|,
+literal|"pair.left"
+argument_list|)
 operator|.
 name|getType
 argument_list|()
@@ -8571,8 +8768,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|comparisons
-argument_list|,
-literal|true
 argument_list|)
 argument_list|)
 return|;
@@ -8709,6 +8904,8 @@ parameter_list|,
 name|boolean
 name|notIn
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|targetDataType
 parameter_list|)
@@ -8724,6 +8921,7 @@ name|SqlSelect
 operator|)
 condition|?
 name|validator
+argument_list|()
 operator|.
 name|getSelectScope
 argument_list|(
@@ -8760,6 +8958,17 @@ argument_list|,
 name|targetDataType
 argument_list|)
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|seekRel
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"seelkRel is null for query "
+operator|+
+name|seek
+argument_list|)
+expr_stmt|;
 return|return
 name|RelOptUtil
 operator|.
@@ -8778,6 +8987,8 @@ argument_list|)
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RelNode
 name|convertQueryOrInList
 parameter_list|(
@@ -8787,6 +8998,8 @@ parameter_list|,
 name|SqlNode
 name|seek
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|targetRowType
 parameter_list|)
@@ -8840,6 +9053,8 @@ return|;
 block|}
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RelNode
 name|convertRowValues
 parameter_list|(
@@ -8858,6 +9073,8 @@ parameter_list|,
 name|boolean
 name|allowLiteralsOnly
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|targetRowType
 parameter_list|)
@@ -8911,6 +9128,7 @@ argument_list|(
 name|typeFactory
 argument_list|,
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -8976,6 +9194,8 @@ for|for
 control|(
 name|Ord
 argument_list|<
+annotation|@
+name|Nullable
 name|SqlNode
 argument_list|>
 name|operand
@@ -9255,9 +9475,13 @@ name|resultRel
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexLiteral
 name|convertLiteralInValuesList
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|sqlNode
 parameter_list|,
@@ -9864,6 +10088,7 @@ name|RelDataType
 name|type
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeTypeIfKnown
 argument_list|(
@@ -9947,6 +10172,7 @@ operator|(
 name|SqlValidatorImpl
 operator|)
 name|validator
+argument_list|()
 argument_list|,
 name|nameToTypeMap
 argument_list|)
@@ -10052,6 +10278,7 @@ operator|(
 name|SqlValidatorImpl
 operator|)
 name|validator
+argument_list|()
 argument_list|,
 name|nameToTypeMap
 argument_list|)
@@ -10080,6 +10307,8 @@ return|;
 block|}
 comment|/**    * Converts a non-standard expression.    *    *<p>This method is an extension-point that derived classes can override. If    * this method returns a null result, the normal expression translation    * process will proceed. The default implementation always returns null.    *    * @param node Expression    * @param bb   Blackboard    * @return null to proceed with the usual expression translation process    */
 specifier|protected
+annotation|@
+name|Nullable
 name|RexNode
 name|convertExtendedExpression
 parameter_list|(
@@ -10175,6 +10404,7 @@ name|SqlWindow
 name|window
 init|=
 name|validator
+argument_list|()
 operator|.
 name|resolveWindow
 argument_list|(
@@ -10183,6 +10413,7 @@ argument_list|,
 name|bb
 operator|.
 name|scope
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|SqlNode
@@ -10430,7 +10661,12 @@ name|bb
 operator|.
 name|convertExpression
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|sqlLowerBound
+argument_list|,
+literal|"sqlLowerBound"
+argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -10441,7 +10677,12 @@ name|bb
 operator|.
 name|convertExpression
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|sqlUpperBound
+argument_list|,
+literal|"sqlUpperBound"
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -10465,6 +10706,7 @@ operator|=
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|getOrderList
 argument_list|()
@@ -10572,6 +10814,7 @@ operator|.
 name|ensureType
 argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -10685,6 +10928,8 @@ parameter_list|(
 name|Blackboard
 name|bb
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|from
 parameter_list|)
@@ -10710,6 +10955,8 @@ parameter_list|(
 name|Blackboard
 name|bb
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|from
 parameter_list|,
@@ -10750,6 +10997,8 @@ name|SqlCall
 name|call
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|SqlNode
 index|[]
 name|operands
@@ -10912,10 +11161,19 @@ name|SqlLiteral
 operator|.
 name|sampleValue
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|operands
 index|[
 literal|1
 index|]
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"operand[1] of "
+operator|+
+name|from
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -11035,6 +11293,7 @@ argument_list|,
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|params
 argument_list|)
@@ -11287,6 +11546,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|)
 operator|.
 name|rename
@@ -11381,6 +11641,8 @@ parameter_list|,
 name|SqlCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -11480,6 +11742,7 @@ name|e
 argument_list|)
 argument_list|,
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
@@ -11523,6 +11786,7 @@ decl_stmt|;
 if|if
 condition|(
 name|validator
+argument_list|()
 operator|.
 name|config
 argument_list|()
@@ -11550,7 +11814,12 @@ argument_list|)
 operator|.
 name|uncollect
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|fieldNames
+argument_list|,
+literal|"fieldNames"
+argument_list|)
 argument_list|,
 name|operator
 operator|.
@@ -11638,8 +11907,6 @@ specifier|final
 name|SqlValidatorNamespace
 name|ns
 init|=
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|matchRecognize
@@ -11650,6 +11917,7 @@ name|SqlValidatorScope
 name|scope
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getMatchRecognizeScope
 argument_list|(
@@ -11701,6 +11969,7 @@ init|=
 name|matchBb
 operator|.
 name|root
+argument_list|()
 decl_stmt|;
 comment|// PARTITION BY
 specifier|final
@@ -11856,6 +12125,7 @@ name|NullDirection
 name|nullDirection
 init|=
 name|validator
+argument_list|()
 operator|.
 name|config
 argument_list|()
@@ -11960,6 +12230,8 @@ decl_stmt|;
 specifier|final
 name|SqlBasicVisitor
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|patternVarVisitor
@@ -11967,6 +12239,8 @@ init|=
 operator|new
 name|SqlBasicVisitor
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|()
@@ -12011,9 +12285,10 @@ range|:
 name|operands
 control|)
 block|{
-name|newOperands
-operator|.
-name|add
+name|RexNode
+name|arg
+init|=
+name|requireNonNull
 argument_list|(
 name|node
 operator|.
@@ -12021,6 +12296,17 @@ name|accept
 argument_list|(
 name|this
 argument_list|)
+argument_list|,
+name|node
+operator|::
+name|toString
+argument_list|)
+decl_stmt|;
+name|newOperands
+operator|.
+name|add
+argument_list|(
+name|arg
 argument_list|)
 expr_stmt|;
 block|}
@@ -12030,6 +12316,7 @@ operator|.
 name|makeCall
 argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|getUnknownType
 argument_list|()
@@ -12145,6 +12432,15 @@ argument_list|(
 name|patternVarVisitor
 argument_list|)
 decl_stmt|;
+assert|assert
+name|patternNode
+operator|!=
+literal|null
+operator|:
+literal|"pattern is not found in "
+operator|+
+name|pattern
+assert|;
 name|SqlLiteral
 name|interval
 init|=
@@ -12279,9 +12575,6 @@ operator|.
 name|simpleNames
 argument_list|(
 name|rights
-operator|.
-name|getList
-argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -12428,6 +12721,7 @@ operator|.
 name|makeCall
 argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|getUnknownType
 argument_list|()
@@ -12776,6 +13070,7 @@ name|SqlValidatorScope
 name|scope
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getJoinScope
 argument_list|(
@@ -12812,6 +13107,7 @@ init|=
 name|pivotBb
 operator|.
 name|root
+argument_list|()
 decl_stmt|;
 specifier|final
 name|RelDataType
@@ -12927,6 +13223,8 @@ expr_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|aggAliasList
@@ -13289,9 +13587,13 @@ parameter_list|,
 name|SqlIdentifier
 name|id
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|extendedColumns
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|tableHints
 parameter_list|)
@@ -13300,8 +13602,6 @@ specifier|final
 name|SqlValidatorNamespace
 name|fromNamespace
 init|=
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|id
@@ -13373,6 +13673,15 @@ argument_list|,
 name|usedDataset
 argument_list|)
 decl_stmt|;
+assert|assert
+name|table
+operator|!=
+literal|null
+operator|:
+literal|"getRelOptTable returned null for "
+operator|+
+name|fromNamespace
+assert|;
 if|if
 condition|(
 name|extendedColumns
@@ -13387,18 +13696,13 @@ operator|>
 literal|0
 condition|)
 block|{
-assert|assert
-name|table
-operator|!=
-literal|null
-assert|;
 specifier|final
 name|SqlValidatorTable
 name|validatorTable
 init|=
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|SqlValidatorTable
 operator|.
@@ -13643,6 +13947,7 @@ argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|getValidator
 argument_list|()
@@ -13821,6 +14126,7 @@ argument_list|,
 name|elementType
 argument_list|,
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -13927,6 +14233,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|)
 operator|.
 name|snapshot
@@ -13948,6 +14255,8 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -14418,6 +14727,8 @@ name|node
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|CorrelationUse
 name|getCorrelationUse
 parameter_list|(
@@ -14498,10 +14809,19 @@ block|{
 name|DeferredLookup
 name|lookup
 init|=
+name|requireNonNull
+argument_list|(
 name|mapCorrelToDeferred
 operator|.
 name|get
 argument_list|(
+name|correlName
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"correlation variable is not found: "
+operator|+
 name|correlName
 argument_list|)
 decl_stmt|;
@@ -14566,6 +14886,7 @@ operator|.
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|resolve
 argument_list|(
@@ -14651,6 +14972,7 @@ init|=
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|isWithin
 argument_list|(
@@ -14847,20 +15169,6 @@ operator|!=
 operator|-
 literal|1
 assert|;
-if|if
-condition|(
-name|bb
-operator|.
-name|mapRootRelToFieldProjection
-operator|.
-name|containsKey
-argument_list|(
-name|bb
-operator|.
-name|root
-argument_list|)
-condition|)
-block|{
 comment|// bb.root is an aggregate and only projects group by
 comment|// keys.
 name|Map
@@ -14882,26 +15190,35 @@ operator|.
 name|root
 argument_list|)
 decl_stmt|;
-comment|// sub-query can reference group by keys projected from
-comment|// the root of the outer relation.
 if|if
 condition|(
 name|exprProjection
-operator|.
-name|containsKey
-argument_list|(
-name|pos
-argument_list|)
+operator|!=
+literal|null
 condition|)
 block|{
-name|pos
-operator|=
+comment|// sub-query can reference group by keys projected from
+comment|// the root of the outer relation.
+name|Integer
+name|projection
+init|=
 name|exprProjection
 operator|.
 name|get
 argument_list|(
 name|pos
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|projection
+operator|!=
+literal|null
+condition|)
+block|{
+name|pos
+operator|=
+name|projection
 expr_stmt|;
 block|}
 else|else
@@ -15067,10 +15384,19 @@ block|{
 name|DeferredLookup
 name|lookup
 init|=
+name|requireNonNull
+argument_list|(
 name|mapCorrelToDeferred
 operator|.
 name|get
 argument_list|(
+name|correlName
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"correlation variable is not found: "
+operator|+
 name|correlName
 argument_list|)
 decl_stmt|;
@@ -15091,6 +15417,7 @@ operator|.
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|getValidator
 argument_list|()
@@ -15118,6 +15445,7 @@ operator|.
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|resolve
 argument_list|(
@@ -15231,6 +15559,12 @@ name|SqlJoin
 name|join
 parameter_list|)
 block|{
+name|SqlValidator
+name|validator
+init|=
+name|validator
+argument_list|()
+decl_stmt|;
 specifier|final
 name|SqlValidatorScope
 name|scope
@@ -15293,6 +15627,7 @@ operator|)
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|)
 operator|.
 name|getParent
@@ -15334,6 +15669,7 @@ operator|)
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|)
 operator|.
 name|getParent
@@ -15364,9 +15700,14 @@ specifier|final
 name|RelNode
 name|leftRel
 init|=
+name|requireNonNull
+argument_list|(
 name|leftBlackboard
 operator|.
 name|root
+argument_list|,
+literal|"leftBlackboard.root"
+argument_list|)
 decl_stmt|;
 name|convertFrom
 argument_list|(
@@ -15379,9 +15720,14 @@ specifier|final
 name|RelNode
 name|tempRightRel
 init|=
+name|requireNonNull
+argument_list|(
 name|rightBlackboard
 operator|.
 name|root
+argument_list|,
+literal|"rightBlackboard.root"
+argument_list|)
 decl_stmt|;
 specifier|final
 name|JoinConditionType
@@ -15412,15 +15758,11 @@ name|condition
 operator|=
 name|convertNaturalCondition
 argument_list|(
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|left
 argument_list|)
 argument_list|,
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|right
@@ -15465,15 +15807,11 @@ name|convertUsingCondition
 argument_list|(
 name|join
 argument_list|,
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|left
 argument_list|)
 argument_list|,
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|right
@@ -15634,10 +15972,19 @@ init|=
 operator|(
 name|SqlNodeList
 operator|)
+name|requireNonNull
+argument_list|(
 name|join
 operator|.
 name|getCondition
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getCondition for join "
+operator|+
+name|join
+argument_list|)
 decl_stmt|;
 return|return
 name|convertUsing
@@ -15686,10 +16033,19 @@ block|{
 name|SqlNode
 name|condition
 init|=
+name|requireNonNull
+argument_list|(
 name|join
 operator|.
 name|getCondition
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getCondition for join "
+operator|+
+name|join
+argument_list|)
 decl_stmt|;
 name|bb
 operator|.
@@ -15783,8 +16139,6 @@ return|;
 block|}
 comment|/**    * Returns an expression for matching columns of a USING clause or inferred    * from NATURAL JOIN. "a JOIN b USING (x, y)" becomes "a.x = b.x AND a.y =    * b.y". Returns null if the column list is empty.    *    * @param leftNamespace Namespace of left input to join    * @param rightNamespace Namespace of right input to join    * @param nameList List of column names to join on    * @return Expression to match columns from name list, or true if name list    * is empty    */
 specifier|private
-annotation|@
-name|Nonnull
 name|RexNode
 name|convertUsing
 parameter_list|(
@@ -15883,6 +16237,23 @@ argument_list|,
 name|name
 argument_list|)
 decl_stmt|;
+assert|assert
+name|field
+operator|!=
+literal|null
+operator|:
+literal|"field "
+operator|+
+name|name
+operator|+
+literal|" is not found in "
+operator|+
+name|rowType
+operator|+
+literal|" with "
+operator|+
+name|nameMatcher
+assert|;
 name|operands
 operator|.
 name|add
@@ -16050,6 +16421,15 @@ operator|.
 name|getSelectList
 argument_list|()
 decl_stmt|;
+assert|assert
+name|selectList
+operator|!=
+literal|null
+operator|:
+literal|"selectList must not be null for "
+operator|+
+name|select
+assert|;
 name|SqlNode
 name|having
 init|=
@@ -16101,9 +16481,13 @@ parameter_list|,
 name|SqlNodeList
 name|selectList
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|groupList
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|having
 parameter_list|,
@@ -16232,9 +16616,14 @@ specifier|final
 name|AggregatingSelectScope
 name|scope
 init|=
+name|requireNonNull
+argument_list|(
 name|aggConverter
 operator|.
 name|aggregatingSelectScope
+argument_list|,
+literal|"aggregatingSelectScope"
+argument_list|)
 decl_stmt|;
 specifier|final
 name|AggregatingSelectScope
@@ -16375,6 +16764,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 argument_list|>
@@ -16435,6 +16826,7 @@ init|=
 name|bb
 operator|.
 name|root
+argument_list|()
 decl_stmt|;
 comment|// Project the expressions required by agg and having.
 name|bb
@@ -16482,6 +16874,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|r
 operator|.
@@ -16516,6 +16909,7 @@ argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|getMonotonicity
 argument_list|(
@@ -16562,6 +16956,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|,
 name|r
 operator|.
@@ -16585,6 +16980,7 @@ argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 argument_list|,
 name|having
 argument_list|)
@@ -16677,9 +17073,7 @@ specifier|final
 name|SqlValidatorNamespace
 name|selectNamespace
 init|=
-name|validator
-operator|.
-name|getNamespace
+name|getNamespaceOrNull
 argument_list|(
 name|selectScope
 operator|.
@@ -16687,6 +17081,15 @@ name|getNode
 argument_list|()
 argument_list|)
 decl_stmt|;
+assert|assert
+name|selectNamespace
+operator|!=
+literal|null
+operator|:
+literal|"selectNamespace must not be null for "
+operator|+
+name|selectScope
+assert|;
 specifier|final
 name|List
 argument_list|<
@@ -16742,7 +17145,10 @@ name|k
 operator|<
 name|sysFieldCount
 condition|?
+name|castNonNull
+argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
@@ -16750,6 +17156,7 @@ name|expr
 argument_list|,
 name|k
 operator|++
+argument_list|)
 argument_list|)
 else|:
 name|names
@@ -16788,7 +17195,10 @@ argument_list|(
 name|expr
 argument_list|)
 argument_list|,
+name|castNonNull
+argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
@@ -16796,6 +17206,7 @@ name|expr
 argument_list|,
 name|k
 operator|++
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -16819,6 +17230,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|)
 expr_stmt|;
 if|if
@@ -16903,6 +17315,7 @@ argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 operator|.
 name|getMonotonicity
 argument_list|(
@@ -16943,6 +17356,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -17057,6 +17471,8 @@ parameter_list|,
 name|SqlSelect
 name|select
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|orderList
 parameter_list|,
@@ -17127,6 +17543,10 @@ name|offset
 operator|instanceof
 name|SqlLiteral
 operator|&&
+name|Objects
+operator|.
+name|equals
+argument_list|(
 operator|(
 operator|(
 name|SqlLiteral
@@ -17136,9 +17556,7 @@ operator|)
 operator|.
 name|bigDecimalValue
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|BigDecimal
 operator|.
 name|ZERO
@@ -17334,6 +17752,7 @@ name|SqlNode
 name|converted
 init|=
 name|validator
+argument_list|()
 operator|.
 name|expandOrderExpr
 argument_list|(
@@ -17353,6 +17772,7 @@ case|:
 name|nullDirection
 operator|=
 name|validator
+argument_list|()
 operator|.
 name|config
 argument_list|()
@@ -17389,10 +17809,20 @@ specifier|final
 name|SelectScope
 name|selectScope
 init|=
+name|requireNonNull
+argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|getRawSelectScope
 argument_list|(
+name|select
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"getRawSelectScope is not found for "
+operator|+
 name|select
 argument_list|)
 decl_stmt|;
@@ -17402,15 +17832,28 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+name|List
+argument_list|<
+name|SqlNode
+argument_list|>
+name|expandedSelectList
+init|=
+name|selectScope
+operator|.
+name|getExpandedSelectList
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|SqlNode
 name|selectItem
 range|:
-name|selectScope
-operator|.
-name|getExpandedSelectList
-argument_list|()
+name|requireNonNull
+argument_list|(
+name|expandedSelectList
+argument_list|,
+literal|"expandedSelectList"
+argument_list|)
 control|)
 block|{
 operator|++
@@ -17601,6 +18044,8 @@ parameter_list|,
 name|boolean
 name|top
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|targetRowType
 parameter_list|)
@@ -17974,6 +18419,7 @@ name|RelDataType
 name|targetRowType
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -18516,8 +18962,6 @@ specifier|final
 name|RelOptTable
 name|table
 parameter_list|,
-annotation|@
-name|Nonnull
 specifier|final
 name|List
 argument_list|<
@@ -18544,19 +18988,17 @@ specifier|final
 name|InitializerExpressionFactory
 name|ief
 init|=
-name|Util
-operator|.
-name|first
-argument_list|(
 name|table
 operator|.
-name|unwrap
+name|maybeUnwrap
 argument_list|(
 name|InitializerExpressionFactory
 operator|.
 name|class
 argument_list|)
-argument_list|,
+operator|.
+name|orElse
+argument_list|(
 name|NullInitializerExpressionFactory
 operator|.
 name|INSTANCE
@@ -18752,21 +19194,30 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
+name|BiFunction
+argument_list|<
+name|InitializerContext
+argument_list|,
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|postConversionHook
+init|=
 name|ief
 operator|.
 name|postExpressionConversionHook
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|postConversionHook
 operator|!=
 literal|null
 condition|)
 block|{
 return|return
-name|ief
-operator|.
-name|postExpressionConversionHook
-argument_list|()
+name|postConversionHook
 operator|.
 name|apply
 argument_list|(
@@ -18799,12 +19250,13 @@ specifier|final
 name|SqlValidatorNamespace
 name|targetNs
 init|=
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|call
 argument_list|)
+decl_stmt|;
+name|SqlValidatorNamespace
+name|namespace
 decl_stmt|;
 if|if
 condition|(
@@ -18820,12 +19272,8 @@ name|class
 argument_list|)
 condition|)
 block|{
-specifier|final
-name|SqlValidatorImpl
-operator|.
-name|DmlNamespace
-name|dmlNamespace
-init|=
+name|namespace
+operator|=
 name|targetNs
 operator|.
 name|unwrap
@@ -18836,13 +19284,26 @@ name|DmlNamespace
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-return|return
+expr_stmt|;
+block|}
+else|else
+block|{
+name|namespace
+operator|=
+name|targetNs
+operator|.
+name|resolve
+argument_list|()
+expr_stmt|;
+block|}
+name|RelOptTable
+name|table
+init|=
 name|SqlValidatorUtil
 operator|.
 name|getRelOptTable
 argument_list|(
-name|dmlNamespace
+name|namespace
 argument_list|,
 name|catalogReader
 argument_list|,
@@ -18850,29 +19311,15 @@ literal|null
 argument_list|,
 literal|null
 argument_list|)
-return|;
-block|}
-specifier|final
-name|SqlValidatorNamespace
-name|resolvedNamespace
-init|=
-name|targetNs
-operator|.
-name|resolve
-argument_list|()
 decl_stmt|;
 return|return
-name|SqlValidatorUtil
-operator|.
-name|getRelOptTable
+name|requireNonNull
 argument_list|(
-name|resolvedNamespace
+name|table
 argument_list|,
-name|catalogReader
-argument_list|,
-literal|null
-argument_list|,
-literal|null
+literal|"no table found for "
+operator|+
+name|call
 argument_list|)
 return|;
 block|}
@@ -18982,6 +19429,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|sourceExps
@@ -19006,6 +19455,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|fieldNames
@@ -19033,8 +19484,6 @@ name|initializerFactory
 init|=
 name|getInitializerFactory
 argument_list|(
-name|validator
-operator|.
 name|getNamespace
 argument_list|(
 name|call
@@ -19187,23 +19636,23 @@ argument_list|,
 name|fieldName
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
+name|RexNode
+name|sourceExpression
+init|=
 name|sourceExps
 operator|.
 name|get
 argument_list|(
 name|i
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|sourceExpression
 operator|==
 literal|null
 operator|||
-name|sourceExps
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|sourceExpression
 operator|.
 name|getKind
 argument_list|()
@@ -19213,12 +19662,8 @@ operator|.
 name|DEFAULT
 condition|)
 block|{
-name|sourceExps
-operator|.
-name|set
-argument_list|(
-name|i
-argument_list|,
+name|sourceExpression
+operator|=
 name|initializerFactory
 operator|.
 name|newColumnDefaultValue
@@ -19232,33 +19677,45 @@ operator|.
 name|get
 argument_list|()
 argument_list|)
-argument_list|)
 expr_stmt|;
 comment|// bare nulls are dangerous in the wrong hands
-name|sourceExps
-operator|.
-name|set
-argument_list|(
-name|i
-argument_list|,
+name|sourceExpression
+operator|=
 name|castNullLiteralIfNeeded
 argument_list|(
-name|sourceExps
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|sourceExpression
 argument_list|,
 name|field
 operator|.
 name|getType
 argument_list|()
 argument_list|)
+expr_stmt|;
+name|sourceExps
+operator|.
+name|set
+argument_list|(
+name|i
+argument_list|,
+name|sourceExpression
 argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|// sourceExps should not contain nulls (see the loop above)
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"assignment.type.incompatible"
+argument_list|)
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|nonNullExprs
+init|=
+name|sourceExps
+decl_stmt|;
 return|return
 name|relBuilder
 operator|.
@@ -19269,7 +19726,7 @@ argument_list|)
 operator|.
 name|projectNamed
 argument_list|(
-name|sourceExps
+name|nonNullExprs
 argument_list|,
 name|fieldNames
 argument_list|,
@@ -19416,6 +19873,8 @@ specifier|private
 name|InitializerExpressionFactory
 name|getInitializerFactory
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorTable
 name|validatorTable
 parameter_list|)
@@ -19475,10 +19934,16 @@ specifier|private
 specifier|static
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|unwrap
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|,
@@ -19613,6 +20078,7 @@ block|{
 if|if
 condition|(
 name|validator
+argument_list|()
 operator|.
 name|config
 argument_list|()
@@ -19822,19 +20288,17 @@ specifier|final
 name|InitializerExpressionFactory
 name|f
 init|=
-name|Util
-operator|.
-name|first
-argument_list|(
 name|targetTable
 operator|.
-name|unwrap
+name|maybeUnwrap
 argument_list|(
 name|InitializerExpressionFactory
 operator|.
 name|class
 argument_list|)
-argument_list|,
+operator|.
+name|orElse
+argument_list|(
 name|NullInitializerExpressionFactory
 operator|.
 name|INSTANCE
@@ -19865,9 +20329,14 @@ break|break;
 default|default:
 name|expr
 operator|=
+name|requireNonNull
+argument_list|(
 name|bb
 operator|.
 name|nameToNodeMap
+argument_list|,
+literal|"nameToNodeMap"
+argument_list|)
 operator|.
 name|get
 argument_list|(
@@ -19875,11 +20344,15 @@ name|columnName
 argument_list|)
 expr_stmt|;
 block|}
+comment|// expr is nullable, however, all the nulls will be removed in the loop below
 name|columnExprs
 operator|.
 name|add
 argument_list|(
+name|castNonNull
+argument_list|(
 name|expr
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -19955,10 +20428,19 @@ name|sourceRel
 init|=
 name|convertSelect
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|call
 operator|.
 name|getSourceSelect
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"sourceSelect for "
+operator|+
+name|call
+argument_list|)
 argument_list|,
 literal|false
 argument_list|)
@@ -20001,13 +20483,23 @@ name|SqlValidatorScope
 name|scope
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getWhereScope
+argument_list|(
+name|requireNonNull
 argument_list|(
 name|call
 operator|.
 name|getSourceSelect
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"sourceSelect for "
+operator|+
+name|call
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|Blackboard
@@ -20132,10 +20624,19 @@ name|sourceRel
 init|=
 name|convertSelect
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|call
 operator|.
 name|getSourceSelect
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"sourceSelect for "
+operator|+
+name|call
+argument_list|)
 argument_list|,
 literal|false
 argument_list|)
@@ -20348,10 +20849,19 @@ name|mergeSourceRel
 init|=
 name|convertSelect
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|call
 operator|.
 name|getSourceSelect
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"sourceSelect for "
+operator|+
+name|call
+argument_list|)
 argument_list|,
 literal|false
 argument_list|)
@@ -20528,6 +21038,13 @@ name|level1Idx
 operator|++
 control|)
 block|{
+name|requireNonNull
+argument_list|(
+name|level1InsertExprs
+argument_list|,
+literal|"level1InsertExprs"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|(
@@ -20793,6 +21310,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -20802,10 +21321,19 @@ argument_list|>
 argument_list|>
 name|e0
 init|=
+name|requireNonNull
+argument_list|(
 name|bb
 operator|.
 name|lookupExp
 argument_list|(
+name|qualified
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"no expression found for "
+operator|+
 name|qualified
 argument_list|)
 decl_stmt|;
@@ -20842,15 +21370,24 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|int
+name|Integer
 name|i
 init|=
+name|requireNonNull
+argument_list|(
 name|e0
 operator|.
 name|right
 operator|.
 name|get
 argument_list|(
+name|name
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"e0.right.get(name) produced null for "
+operator|+
 name|name
 argument_list|)
 decl_stmt|;
@@ -21358,12 +21895,7 @@ decl_stmt|;
 name|CollectNamespace
 name|nss
 init|=
-operator|(
-name|CollectNamespace
-operator|)
-name|validator
-operator|.
-name|getNamespace
+name|getNamespaceOrNull
 argument_list|(
 name|call
 argument_list|)
@@ -21405,6 +21937,7 @@ argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 argument_list|)
 block|{
 annotation|@
@@ -21430,6 +21963,7 @@ name|RelDataType
 name|multisetType
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getValidatedNodeType
 argument_list|(
@@ -21437,15 +21971,25 @@ name|call
 argument_list|)
 decl_stmt|;
 name|validator
+argument_list|()
 operator|.
 name|setValidatedNodeType
 argument_list|(
 name|list
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|multisetType
 operator|.
 name|getComponentType
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"componentType for multisetType "
+operator|+
+name|multisetType
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|input
@@ -21543,15 +22087,24 @@ operator|.
 name|NONE
 argument_list|)
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 argument_list|,
+literal|"input"
+argument_list|)
+argument_list|,
+name|castNonNull
+argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
 name|call
 argument_list|,
 name|i
+argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -21858,14 +22411,24 @@ block|{
 name|SqlNodeList
 name|selectList
 init|=
+name|requireNonNull
+argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"null selectList for "
+operator|+
+name|select
+argument_list|)
 decl_stmt|;
 name|selectList
 operator|=
 name|validator
+argument_list|()
 operator|.
 name|expandStar
 argument_list|(
@@ -22014,6 +22577,7 @@ name|SqlNode
 name|expr2
 init|=
 name|validator
+argument_list|()
 operator|.
 name|expandOrderExpr
 argument_list|(
@@ -22073,6 +22637,7 @@ argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|()
 argument_list|)
 operator|.
 name|projectNamed
@@ -22199,6 +22764,7 @@ name|String
 name|alias
 init|=
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
@@ -22313,6 +22879,8 @@ parameter_list|(
 name|SqlCall
 name|values
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|targetRowType
 parameter_list|)
@@ -22322,6 +22890,7 @@ name|SqlValidatorScope
 name|scope
 init|=
 name|validator
+argument_list|()
 operator|.
 name|getOverScope
 argument_list|(
@@ -22359,6 +22928,7 @@ return|return
 name|bb
 operator|.
 name|root
+argument_list|()
 return|;
 block|}
 comment|/**    * Converts a values clause (as in "INSERT INTO T(x,y) VALUES (1,2)") into a    * relational expression.    *    * @param bb            Blackboard    * @param values        Call to SQL VALUES operator    * @param targetRowType Target row type    */
@@ -22372,6 +22942,8 @@ parameter_list|,
 name|SqlCall
 name|values
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|targetRowType
 parameter_list|)
@@ -22514,7 +23086,10 @@ operator|.
 name|e
 argument_list|)
 argument_list|,
+name|castNonNull
+argument_list|(
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
@@ -22525,6 +23100,7 @@ argument_list|,
 name|operand
 operator|.
 name|i
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -22619,6 +23195,8 @@ name|JoinRelType
 name|joinType
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -22633,6 +23211,8 @@ parameter_list|,
 name|JoinRelType
 name|joinType
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -22677,11 +23257,15 @@ block|{
 comment|/**      * Collection of {@link RelNode} objects which correspond to a SELECT      * statement.      */
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -22691,10 +23275,14 @@ argument_list|>
 name|nameToNodeMap
 decl_stmt|;
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|root
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelNode
@@ -22761,10 +23349,14 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**      * Workspace for building aggregates.      */
+annotation|@
+name|Nullable
 name|AggConverter
 name|agg
 decl_stmt|;
 comment|/**      * When converting window aggregate, we need to know if the window is      * guaranteed to be non-empty.      */
+annotation|@
+name|Nullable
 name|SqlWindow
 name|window
 decl_stmt|;
@@ -22832,9 +23424,13 @@ comment|/**      * Creates a Blackboard.      *      * @param scope         Name
 specifier|protected
 name|Blackboard
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -22865,6 +23461,34 @@ name|top
 operator|=
 name|top
 expr_stmt|;
+block|}
+specifier|public
+name|RelNode
+name|root
+parameter_list|()
+block|{
+return|return
+name|requireNonNull
+argument_list|(
+name|root
+argument_list|,
+literal|"root"
+argument_list|)
+return|;
+block|}
+specifier|public
+name|SqlValidatorScope
+name|scope
+parameter_list|()
+block|{
+return|return
+name|requireNonNull
+argument_list|(
+name|scope
+argument_list|,
+literal|"scope"
+argument_list|)
+return|;
 block|}
 specifier|public
 name|void
@@ -22914,6 +23538,8 @@ parameter_list|,
 name|JoinRelType
 name|joinType
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -22921,11 +23547,13 @@ argument_list|>
 name|leftKeys
 parameter_list|)
 block|{
-assert|assert
+name|requireNonNull
+argument_list|(
 name|joinType
-operator|!=
-literal|null
-assert|;
+argument_list|,
+literal|"joinType"
+argument_list|)
+expr_stmt|;
 name|registered
 operator|.
 name|add
@@ -22952,6 +23580,8 @@ assert|assert
 name|leftKeys
 operator|==
 literal|null
+operator|:
+literal|"leftKeys must be null"
 assert|;
 name|setRoot
 argument_list|(
@@ -22966,6 +23596,7 @@ operator|.
 name|makeRangeReference
 argument_list|(
 name|root
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
@@ -23034,6 +23665,7 @@ operator|.
 name|makeInputRef
 argument_list|(
 name|root
+argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -23114,6 +23746,7 @@ operator|.
 name|push
 argument_list|(
 name|root
+argument_list|()
 argument_list|)
 operator|.
 name|project
@@ -23125,14 +23758,27 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|// maintain the group by mapping in the new LogicalProject
-if|if
-condition|(
+name|Map
+argument_list|<
+name|Integer
+argument_list|,
+name|Integer
+argument_list|>
+name|currentProjection
+init|=
 name|mapRootRelToFieldProjection
 operator|.
-name|containsKey
+name|get
 argument_list|(
 name|root
+argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|currentProjection
+operator|!=
+literal|null
 condition|)
 block|{
 name|mapRootRelToFieldProjection
@@ -23141,12 +23787,7 @@ name|put
 argument_list|(
 name|newLeftInput
 argument_list|,
-name|mapRootRelToFieldProjection
-operator|.
-name|get
-argument_list|(
-name|root
-argument_list|)
+name|currentProjection
 argument_list|)
 expr_stmt|;
 block|}
@@ -23163,6 +23804,7 @@ name|int
 name|rightOffset
 init|=
 name|root
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
@@ -23233,6 +23875,7 @@ name|int
 name|leftFieldCount
 init|=
 name|root
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
@@ -23249,6 +23892,7 @@ argument_list|(
 name|this
 argument_list|,
 name|root
+argument_list|()
 argument_list|,
 name|rel
 argument_list|,
@@ -23472,9 +24116,14 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|requireNonNull
+argument_list|(
 name|this
 operator|.
 name|root
+argument_list|,
+literal|"root"
+argument_list|)
 return|;
 block|}
 comment|/**      * Sets a new root relational expression, as the translation process      * backs its way further up the tree.      *      * @param root New root relational expression      * @param leaf Whether the relational expression is a leaf, that is,      *             derived from an atomic relational expression such as a table      *             name in the from clause, or the projection on top of a      *             select-sub-query. In particular, relational expressions      *             derived from JOIN operators are not leaves, but set      *             expressions are.      */
@@ -23544,6 +24193,8 @@ name|RelNode
 argument_list|>
 name|inputs
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|root
 parameter_list|,
@@ -23592,6 +24243,8 @@ specifier|public
 name|void
 name|setDataset
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|datasetName
 parameter_list|)
@@ -23618,10 +24271,14 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Returns an expression with which to reference a from-list item.      *      * @param qualified the alias of the from item      * @return a {@link RexFieldAccess} or {@link RexRangeRef}, or null if      * not found      */
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -23704,6 +24361,7 @@ name|SqlNameMatcher
 name|nameMatcher
 init|=
 name|scope
+argument_list|()
 operator|.
 name|getValidator
 argument_list|()
@@ -23727,6 +24385,7 @@ name|ResolvedImpl
 argument_list|()
 decl_stmt|;
 name|scope
+argument_list|()
 operator|.
 name|resolve
 argument_list|(
@@ -24050,9 +24709,14 @@ init|=
 operator|(
 name|ListScope
 operator|)
+name|requireNonNull
+argument_list|(
 name|resolve
 operator|.
 name|scope
+argument_list|,
+literal|"resolve.scope"
+argument_list|)
 decl_stmt|;
 specifier|final
 name|ImmutableMap
@@ -24251,6 +24915,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|getRootField
 parameter_list|(
@@ -24258,6 +24924,16 @@ name|RexInputRef
 name|inputRef
 parameter_list|)
 block|{
+name|List
+argument_list|<
+name|RelNode
+argument_list|>
+name|inputs
+init|=
+name|this
+operator|.
+name|inputs
+decl_stmt|;
 if|if
 condition|(
 name|inputs
@@ -24528,6 +25204,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Nullable
 name|SubQuery
 name|getSubQuery
 parameter_list|(
@@ -24602,6 +25280,13 @@ parameter_list|)
 block|{
 comment|// If we're in aggregation mode and this is an expression in the
 comment|// GROUP BY clause, return a reference to the field.
+name|AggConverter
+name|agg
+init|=
+name|this
+operator|.
+name|agg
+decl_stmt|;
 if|if
 condition|(
 name|agg
@@ -24614,12 +25299,14 @@ name|SqlNode
 name|expandedGroupExpr
 init|=
 name|validator
+argument_list|()
 operator|.
 name|expand
 argument_list|(
 name|expr
 argument_list|,
 name|scope
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -24646,6 +25333,7 @@ operator|.
 name|makeInputRef
 argument_list|(
 name|root
+argument_list|()
 argument_list|,
 name|ref
 argument_list|)
@@ -25190,8 +25878,6 @@ name|NOT_IN
 case|:
 name|subQuery
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|getSubQuery
@@ -25202,8 +25888,6 @@ argument_list|)
 expr_stmt|;
 name|rex
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|subQuery
@@ -25221,6 +25905,7 @@ argument_list|,
 name|rex
 argument_list|,
 name|validator
+argument_list|()
 argument_list|,
 name|rexBuilder
 argument_list|)
@@ -25374,8 +26059,6 @@ name|this
 argument_list|)
 expr_stmt|;
 return|return
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rex
@@ -25543,6 +26226,7 @@ name|NullDirection
 name|nullDefaultDirection
 init|=
 name|validator
+argument_list|()
 operator|.
 name|config
 argument_list|()
@@ -25584,6 +26268,7 @@ name|SqlKind
 name|nullDirectionSqlKind
 init|=
 name|validator
+argument_list|()
 operator|.
 name|config
 argument_list|()
@@ -25867,9 +26552,18 @@ return|return
 operator|(
 name|RexRangeRef
 operator|)
+name|requireNonNull
+argument_list|(
 name|subQuery
 operator|.
 name|expr
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"subQuery.expr for "
+operator|+
+name|call
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -25903,6 +26597,7 @@ parameter_list|()
 block|{
 return|return
 name|validator
+argument_list|()
 return|;
 block|}
 annotation|@
@@ -26025,10 +26720,19 @@ operator|)
 condition|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|agg
 operator|.
 name|lookupAggregates
 argument_list|(
+name|call
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"agg.lookupAggregates for call "
+operator|+
 name|call
 argument_list|)
 return|;
@@ -26045,6 +26749,7 @@ operator|new
 name|SqlCallBinding
 argument_list|(
 name|validator
+argument_list|()
 argument_list|,
 name|scope
 argument_list|,
@@ -26231,6 +26936,8 @@ return|return
 operator|(
 name|RexFieldAccess
 operator|)
+name|requireNonNull
+argument_list|(
 name|bb
 operator|.
 name|mapCorrelateToRex
@@ -26238,6 +26945,15 @@ operator|.
 name|get
 argument_list|(
 name|name
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"Correlation "
+operator|+
+name|name
+operator|+
+literal|" is not found"
 argument_list|)
 return|;
 block|}
@@ -26313,6 +27029,8 @@ name|bb
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|AggregatingSelectScope
 name|aggregatingSelectScope
 decl_stmt|;
@@ -26373,6 +27091,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 argument_list|>
@@ -26439,6 +27159,8 @@ parameter_list|(
 name|Blackboard
 name|bb
 parameter_list|,
+annotation|@
+name|Nullable
 name|AggregatingSelectScope
 name|aggregatingSelectScope
 parameter_list|)
@@ -26491,10 +27213,19 @@ specifier|final
 name|SqlNodeList
 name|selectList
 init|=
+name|requireNonNull
+argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"selectList must not be null in "
+operator|+
+name|select
+argument_list|)
 decl_stmt|;
 for|for
 control|(
@@ -26584,6 +27315,7 @@ block|{
 name|name
 operator|=
 name|validator
+argument_list|()
 operator|.
 name|deriveAlias
 argument_list|(
@@ -26592,6 +27324,19 @@ argument_list|,
 name|i
 argument_list|)
 expr_stmt|;
+assert|assert
+name|name
+operator|!=
+literal|null
+operator|:
+literal|"alias must not be null for "
+operator|+
+name|selectItem
+operator|+
+literal|", i="
+operator|+
+name|i
+assert|;
 block|}
 name|nameMap
 operator|.
@@ -26798,6 +27543,8 @@ parameter_list|(
 name|RexNode
 name|expr
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -26836,6 +27583,7 @@ operator|=
 name|bb
 operator|.
 name|root
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
@@ -27238,9 +27986,13 @@ parameter_list|(
 name|SqlCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|orderList
 parameter_list|,
@@ -27856,12 +28608,14 @@ name|RelDataType
 name|type
 init|=
 name|validator
+argument_list|()
 operator|.
 name|deriveType
 argument_list|(
 name|bb
 operator|.
 name|scope
+argument_list|()
 argument_list|,
 name|call
 argument_list|)
@@ -28215,6 +28969,8 @@ literal|1
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RexNode
 name|lookupAggregates
 parameter_list|(
@@ -28309,9 +29065,12 @@ name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
+name|castNonNull
+argument_list|(
 name|bb
 operator|.
 name|root
+argument_list|)
 argument_list|,
 name|groupOrdinal
 argument_list|)
@@ -28335,6 +29094,8 @@ name|Pair
 argument_list|<
 name|RexNode
 argument_list|,
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 argument_list|>
@@ -28961,6 +29722,8 @@ return|;
 block|}
 block|}
 comment|/**      * Returns the histogram operator corresponding to a given aggregate      * function.      *      *<p>For example,<code>getHistogramOp      *({@link SqlStdOperatorTable#MIN}}</code> returns      * {@link SqlStdOperatorTable#HISTOGRAM_MIN}.      *      * @param aggFunction An aggregate function      * @return Its histogram function, or null      */
+annotation|@
+name|Nullable
 name|SqlFunction
 name|getHistogramOp
 parameter_list|(
@@ -29128,6 +29891,8 @@ operator|.
 name|Logic
 name|logic
 decl_stmt|;
+annotation|@
+name|Nullable
 name|RexNode
 name|expr
 decl_stmt|;

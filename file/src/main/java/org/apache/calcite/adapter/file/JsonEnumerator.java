@@ -151,6 +151,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -220,13 +236,18 @@ name|JsonEnumerator
 implements|implements
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
 block|{
 specifier|private
+specifier|final
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -234,29 +255,31 @@ name|enumerator
 decl_stmt|;
 specifier|public
 name|JsonEnumerator
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|list
-parameter_list|)
+argument_list|)
 block|{
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
 name|objs
-init|=
+operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Object
-index|[]
-argument_list|>
+argument_list|<>
 argument_list|()
-decl_stmt|;
+block|;
 for|for
 control|(
 name|Object
@@ -340,6 +363,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_expr_stmt
 name|enumerator
 operator|=
 name|Linq4j
@@ -349,9 +375,15 @@ argument_list|(
 name|objs
 argument_list|)
 expr_stmt|;
-block|}
+end_expr_stmt
+
+begin_comment
+unit|}
 comment|/** Deduces the names and types of a table's columns by reading the first line    * of a JSON file. */
-specifier|static
+end_comment
+
+begin_function
+unit|static
 name|JsonDataConverter
 name|deduceRowType
 parameter_list|(
@@ -815,6 +847,9 @@ name|list
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -830,6 +865,9 @@ name|current
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -844,6 +882,9 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -857,6 +898,9 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -870,7 +914,13 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Json data and relDataType Converter.    */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|JsonDataConverter
@@ -934,8 +984,8 @@ name|dataList
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

@@ -459,6 +459,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|PolyNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -504,6 +536,22 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|NumberUtil
+operator|.
+name|multiply
 import|;
 end_import
 
@@ -663,7 +711,14 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-return|return
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unboxing.of.nullable"
+argument_list|)
+name|double
+name|doubleValue
+init|=
 operator|(
 operator|(
 name|RexLiteral
@@ -677,6 +732,9 @@ name|Double
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+return|return
+name|doubleValue
 return|;
 block|}
 comment|/**    * Computes the selectivity of a semijoin filter if it is applied on a fact    * table. The computation is based on the selectivity of the dimension    * table/columns and the number of distinct values in the fact table    * columns.    *    * @param factRel fact table participating in the semijoin    * @param dimRel  dimension table participating in the semijoin    * @param rel     semijoin rel    * @return calculated selectivity    */
@@ -994,6 +1052,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1131,6 +1191,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUniqueWhenNullsFiltered
 parameter_list|(
@@ -1290,15 +1352,21 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Returns the number of distinct values provided numSelected are selected    * where there are domainSize distinct values.    *    *<p>Note that in the case where domainSize == numSelected, it's not true    * that the return value should be domainSize. If you pick 100 random values    * between 1 and 100, you'll most likely end up with fewer than 100 distinct    * values, because you'll pick some values more than once.    *    * The implementation is an unbiased estimation of the number of distinct values    * by performing a number of selections (with replacement) from a universe set.    *    * @param domainSize size of the universe set.    * @param numSelected the number of selections.    * @return the expected number of distinct values.    */
+comment|/**    * Returns the number of distinct values provided numSelected are selected    * where there are domainSize distinct values.    *    *<p>Note that in the case where domainSize == numSelected, it's not true    * that the return value should be domainSize. If you pick 100 random values    * between 1 and 100, you'll most likely end up with fewer than 100 distinct    * values, because you'll pick some values more than once.    *    *<p>The implementation is an unbiased estimation of the number of distinct    * values by performing a number of selections (with replacement) from a    * universe set.    *    * @param domainSize Size of the universe set    * @param numSelected The number of selections    *    * @return the expected number of distinct values, or null if either argument    * is null    */
 specifier|public
 specifier|static
+annotation|@
+name|PolyNull
 name|Double
 name|numDistinctVals
 parameter_list|(
+annotation|@
+name|PolyNull
 name|Double
 name|domainSize
 parameter_list|,
+annotation|@
+name|PolyNull
 name|Double
 name|numSelected
 parameter_list|)
@@ -1319,7 +1387,7 @@ operator|)
 condition|)
 block|{
 return|return
-literal|null
+name|domainSize
 return|;
 block|}
 comment|// Cap the input sizes at MAX_VALUE to ensure that the calculations
@@ -1476,6 +1544,8 @@ specifier|static
 name|double
 name|guessSelectivity
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1495,6 +1565,8 @@ specifier|static
 name|double
 name|guessSelectivity
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|,
@@ -1658,15 +1730,21 @@ block|}
 comment|/**    * AND's two predicates together, either of which may be null, removing    * redundant filters.    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return AND'd predicate or individual predicates if one is null    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|unionPreds
 parameter_list|(
 name|RexBuilder
 name|rexBuilder
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|pred1
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|pred2
 parameter_list|)
@@ -1723,15 +1801,21 @@ block|}
 comment|/**    * Takes the difference between two predicates, removing from the first any    * predicates also in the second.    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return MINUS'd predicate list    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|minusPreds
 parameter_list|(
 name|RexBuilder
 name|rexBuilder
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|pred1
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|pred2
 parameter_list|)
@@ -1960,6 +2044,8 @@ block|}
 comment|/**    * Computes the cardinality of a particular expression from the projection    * list.    *    * @param rel  RelNode corresponding to the project    * @param expr projection expression    * @return cardinality    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|cardOfProjExpr
 parameter_list|(
@@ -1991,6 +2077,8 @@ block|}
 comment|/**    * Computes the population size for a set of keys returned from a join.    *    * @param join_  Join relational operator    * @param groupKey Keys to compute the population for    * @return computed population size    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|getJoinPopulationSize
 parameter_list|(
@@ -2097,8 +2185,6 @@ expr_stmt|;
 name|Double
 name|population
 init|=
-name|NumberUtil
-operator|.
 name|multiply
 argument_list|(
 name|mq
@@ -2213,6 +2299,8 @@ block|}
 comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * semi-join.    *    * @param semiJoinRel RelNode representing the semi-join    * @param mq          metadata query    * @param groupKey    keys that the distinct row count will be computed for    * @param predicate   join predicate    * @return number of distinct rows    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|getSemiJoinDistinctRowCount
 parameter_list|(
@@ -2225,6 +2313,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -2321,6 +2411,8 @@ block|}
 comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * join. Also known as NDV (number of distinct values).    *    * @param joinRel   RelNode representing the join    * @param joinType  type of join    * @param groupKey  keys that the distinct row count will be computed for    * @param predicate join predicate    * @param useMaxNdv If true use formula<code>max(left NDV, right NDV)</code>,    *                  otherwise use<code>left NDV * right NDV</code>.    * @return number of distinct rows    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|getJoinDistinctRowCount
 parameter_list|(
@@ -2336,6 +2428,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|,
@@ -2613,7 +2707,7 @@ condition|)
 block|{
 name|distRowCount
 operator|=
-name|Math
+name|NumberUtil
 operator|.
 name|max
 argument_list|(
@@ -2651,8 +2745,6 @@ else|else
 block|{
 name|distRowCount
 operator|=
-name|NumberUtil
-operator|.
 name|multiply
 argument_list|(
 name|mq
@@ -2839,6 +2931,8 @@ block|}
 comment|/** Returns an estimate of the number of rows returned by a {@link Join}. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|getJoinRowCount
 parameter_list|(
@@ -2893,11 +2987,19 @@ argument_list|,
 name|semiJoinSelectivity
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|selectivity
+operator|==
+literal|null
+condition|)
+block|{
 return|return
-name|NumberUtil
-operator|.
-name|multiply
-argument_list|(
+literal|null
+return|;
+block|}
+return|return
+operator|(
 name|join
 operator|.
 name|getJoinType
@@ -2909,16 +3011,12 @@ name|SEMI
 condition|?
 name|selectivity
 else|:
-name|NumberUtil
-operator|.
-name|subtract
-argument_list|(
 literal|1D
-argument_list|,
+operator|-
 name|selectivity
-argument_list|)
-argument_list|,
+operator|)
 comment|// ANTI join
+operator|*
 name|mq
 operator|.
 name|getRowCount
@@ -2927,7 +3025,6 @@ name|join
 operator|.
 name|getLeft
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -3189,6 +3286,8 @@ parameter_list|(
 name|RelNode
 name|child
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|,
@@ -3196,14 +3295,23 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-return|return
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unboxing.of.nullable"
+argument_list|)
+name|double
+name|result
+init|=
+name|multiply
+argument_list|(
 name|mq
 operator|.
 name|getRowCount
 argument_list|(
 name|child
 argument_list|)
-operator|*
+argument_list|,
 name|mq
 operator|.
 name|getSelectivity
@@ -3212,6 +3320,10 @@ name|child
 argument_list|,
 name|condition
 argument_list|)
+argument_list|)
+decl_stmt|;
+return|return
+name|result
 return|;
 block|}
 comment|/** Returns a point on a line.    *    *<p>The result is always a value between {@code minY} and {@code maxY},    * even if {@code x} is not between {@code minX} and {@code maxX}.    *    *<p>Examples:<ul>    *<li>{@code linear(0, 0, 10, 100, 200}} returns 100 because 0 is minX    *<li>{@code linear(5, 0, 10, 100, 200}} returns 150 because 5 is    *   mid-way between minX and maxX    *<li>{@code linear(5, 0, 10, 100, 200}} returns 160    *<li>{@code linear(10, 0, 10, 100, 200}} returns 200 because 10 is maxX    *<li>{@code linear(-2, 0, 10, 100, 200}} returns 100 because -2 is    *   less than minX and is therefore treated as minX    *<li>{@code linear(12, 0, 10, 100, 200}} returns 100 because 12 is    *   greater than maxX and is therefore treated as maxX    *</ul>    */
@@ -3313,6 +3425,8 @@ name|CardOfProjExpr
 extends|extends
 name|RexVisitorImpl
 argument_list|<
+annotation|@
+name|Nullable
 name|Double
 argument_list|>
 block|{
@@ -3355,6 +3469,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|visitInputRef
 parameter_list|(
@@ -3428,6 +3544,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|visitLiteral
 parameter_list|(
@@ -3452,6 +3570,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|visitCall
 parameter_list|(
@@ -3622,8 +3742,6 @@ condition|)
 block|{
 name|distinctRowCount
 operator|=
-name|NumberUtil
-operator|.
 name|multiply
 argument_list|(
 name|cardOfProjExpr
@@ -3735,9 +3853,13 @@ parameter_list|,
 name|RelCollation
 name|collation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -3860,9 +3982,13 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)
@@ -3943,12 +4069,16 @@ operator|>=
 name|rowCount
 return|;
 block|}
-comment|/**    * Validate the {@code result} represents a percentage number,    * e.g. the value interval is [0.0, 1.0].    *    * @return true if the {@code result} is a percentage number    * @throws AssertionError if the validation fails    */
+comment|/**    * Validates whether a value represents a percentage number    * (that is, a value in the interval [0.0, 1.0]) and returns the value.    *    *<p>Returns null if and only if {@code result} is null.    *    *<p>Throws if {@code result} is not null, not in range 0 to 1,    * and assertions are enabled.    */
 specifier|public
 specifier|static
+annotation|@
+name|PolyNull
 name|Double
 name|validatePercentage
 parameter_list|(
+annotation|@
+name|PolyNull
 name|Double
 name|result
 parameter_list|)
@@ -3970,6 +4100,8 @@ specifier|static
 name|boolean
 name|isPercentage
 parameter_list|(
+annotation|@
+name|Nullable
 name|Double
 name|result
 parameter_list|,
@@ -4025,12 +4157,16 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Validates the {@code result} is valid.    *    *<p>Never let the result go below 1, as it will result in incorrect    * calculations if the row-count is used as the denominator in a    * division expression.  Also, cap the value at the max double value    * to avoid calculations using infinity.    *    * @return the corrected value from the {@code result}    * @throws AssertionError if the {@code result} is negative    */
+comment|/**    * Validates the {@code result} is valid.    *    *<p>Never let the result go below 1, as it will result in incorrect    * calculations if the row-count is used as the denominator in a    * division expression.  Also, cap the value at the max double value    * to avoid calculations using infinity.    *    *<p>Returns null if and only if {@code result} is null.    *    *<p>Throws if {@code result} is not null, is negative,    * and assertions are enabled.    *    * @return the corrected value from the {@code result}    * @throws AssertionError if the {@code result} is negative    */
 specifier|public
 specifier|static
+annotation|@
+name|PolyNull
 name|Double
 name|validateResult
 parameter_list|(
+annotation|@
+name|PolyNull
 name|Double
 name|result
 parameter_list|)
@@ -4090,6 +4226,8 @@ specifier|static
 name|boolean
 name|isNonNegative
 parameter_list|(
+annotation|@
+name|Nullable
 name|Double
 name|result
 parameter_list|,

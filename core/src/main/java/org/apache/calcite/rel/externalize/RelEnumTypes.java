@@ -233,6 +233,38 @@ name|ImmutableMap
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/** Registry of {@link Enum} classes that can be serialized to JSON.  *  *<p>Suppose you want to serialize the value  * {@link SqlTrimFunction.Flag#LEADING} to JSON.  * First, make sure that {@link SqlTrimFunction.Flag} is registered.  * The type will be serialized as "SYMBOL".  * The value will be serialized as the string "LEADING".  *  *<p>When we deserialize, we rely on the fact that the registered  * {@code enum} classes have distinct values. Therefore, knowing that  * {@code (type="SYMBOL", value="LEADING")} we can convert the string "LEADING"  * to the enum {@code Flag.LEADING}. */
 end_comment
@@ -469,10 +501,13 @@ control|(
 name|Enum
 name|enumConstant
 range|:
+name|castNonNull
+argument_list|(
 name|aClass
 operator|.
 name|getEnumConstants
 argument_list|()
+argument_list|)
 control|)
 block|{
 name|builder
@@ -492,9 +527,13 @@ block|}
 comment|/** Converts a literal into a value that can be serialized to JSON.    * In particular, if is an enum, converts it to its name. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Object
 name|fromEnum
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)

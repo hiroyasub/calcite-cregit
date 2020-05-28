@@ -57,6 +57,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -76,28 +92,32 @@ name|ProjectableFilterableTable
 extends|extends
 name|Table
 block|{
-comment|/** Returns an enumerable over the rows in this Table.    *    *<p>Each row is represented as an array of its column values.    *    *<p>The list of filters is mutable.    * If the table can implement a particular filter, it should remove that    * filter from the list.    * If it cannot implement a filter, it should leave it in the list.    * Any filters remaining will be implemented by the consuming Calcite    * operator.    *    *<p>The projects are zero-based.</p>    *    * @param root Execution context    * @param filters Mutable list of filters. The method should keep in the    *                list any filters that it cannot apply.    * @param projects List of projects. Each is the 0-based ordinal of the column    *                 to project.    * @return Enumerable over all rows that match the accepted filters, returning    * for each row an array of column values, one value for each ordinal in    * {@code projects}.    */
+comment|/** Returns an enumerable over the rows in this Table.    *    *<p>Each row is represented as an array of its column values.    *    *<p>The list of filters is mutable.    * If the table can implement a particular filter, it should remove that    * filter from the list.    * If it cannot implement a filter, it should leave it in the list.    * Any filters remaining will be implemented by the consuming Calcite    * operator.    *    *<p>The projects are zero-based.</p>    *    * @param root Execution context    * @param filters Mutable list of filters. The method should keep in the    *                list any filters that it cannot apply.    * @param projects List of projects. Each is the 0-based ordinal of the column    *                 to project. Null means "project all columns".    * @return Enumerable over all rows that match the accepted filters, returning    * for each row an array of column values, one value for each ordinal in    * {@code projects}.    */
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
 name|scan
-parameter_list|(
+argument_list|(
 name|DataContext
 name|root
-parameter_list|,
+argument_list|,
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|filters
-parameter_list|,
+argument_list|,
 name|int
+expr|@
+name|Nullable
 index|[]
 name|projects
-parameter_list|)
-function_decl|;
+argument_list|)
+decl_stmt|;
 block|}
 end_interface
 

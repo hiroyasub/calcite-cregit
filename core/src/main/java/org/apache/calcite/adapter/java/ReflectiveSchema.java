@@ -527,6 +527,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -615,6 +647,18 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link org.apache.calcite.schema.Schema} that exposes the  * public fields and methods in a Java object.  */
 end_comment
@@ -632,10 +676,13 @@ name|Class
 name|clazz
 decl_stmt|;
 specifier|private
+specifier|final
 name|Object
 name|target
 decl_stmt|;
 specifier|private
+annotation|@
+name|MonotonicNonNull
 name|Map
 argument_list|<
 name|String
@@ -645,6 +692,8 @@ argument_list|>
 name|tableMap
 decl_stmt|;
 specifier|private
+annotation|@
+name|MonotonicNonNull
 name|Multimap
 argument_list|<
 name|String
@@ -893,6 +942,17 @@ name|e
 argument_list|)
 throw|;
 block|}
+name|requireNonNull
+argument_list|(
+name|rc
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"field must not be null: "
+operator|+
+name|field
+argument_list|)
+expr_stmt|;
 name|FieldTable
 name|table
 init|=
@@ -1128,6 +1188,8 @@ comment|/** Returns an expression for the object wrapped by this schema (not the
 name|Expression
 name|getTargetExpression
 parameter_list|(
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|parentSchema
 parameter_list|,
@@ -1179,6 +1241,8 @@ specifier|private
 parameter_list|<
 name|T
 parameter_list|>
+annotation|@
+name|Nullable
 name|Table
 name|fieldRelation
 parameter_list|(
@@ -1243,6 +1307,21 @@ name|e
 argument_list|)
 throw|;
 block|}
+name|requireNonNull
+argument_list|(
+name|o
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"field "
+operator|+
+name|field
+operator|+
+literal|" is null for "
+operator|+
+name|target
+argument_list|)
+expr_stmt|;
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1276,6 +1355,8 @@ block|}
 comment|/** Deduces the element type of a collection;    * same logic as {@link #toEnumerable}. */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Type
 name|getElementType
 parameter_list|(
@@ -1494,6 +1575,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1751,6 +1834,19 @@ argument_list|(
 literal|null
 argument_list|)
 expr_stmt|;
+name|requireNonNull
+argument_list|(
+name|target
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"method "
+operator|+
+name|method
+operator|+
+literal|" returns null"
+argument_list|)
+expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -1896,14 +1992,17 @@ name|Override
 specifier|public
 name|TranslatableTable
 name|apply
-parameter_list|(
-specifier|final
+argument_list|(
+name|final
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|Object
-argument_list|>
+operator|>
 name|arguments
-parameter_list|)
+argument_list|)
 block|{
 try|try
 block|{
@@ -1911,6 +2010,8 @@ specifier|final
 name|Object
 name|o
 init|=
+name|requireNonNull
+argument_list|(
 name|method
 operator|.
 name|invoke
@@ -1924,6 +2025,17 @@ name|arguments
 operator|.
 name|toArray
 argument_list|()
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"method "
+operator|+
+name|method
+operator|+
+literal|" returned null for arguments "
+operator|+
+name|arguments
 argument_list|)
 decl_stmt|;
 return|return
@@ -2083,10 +2195,10 @@ name|Class
 name|clazz
 parameter_list|)
 block|{
-return|return
-name|Expressions
-operator|.
-name|field
+name|ReflectiveSchema
+name|reflectiveSchema
+init|=
+name|requireNonNull
 argument_list|(
 name|schema
 operator|.
@@ -2096,6 +2208,20 @@ name|ReflectiveSchema
 operator|.
 name|class
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"schema.unwrap(ReflectiveSchema.class) for "
+operator|+
+name|schema
+argument_list|)
+decl_stmt|;
+return|return
+name|Expressions
+operator|.
+name|field
+argument_list|(
+name|reflectiveSchema
 operator|.
 name|getTargetExpression
 argument_list|(
@@ -2125,6 +2251,8 @@ name|Function1
 argument_list|<
 name|Object
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -2154,6 +2282,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|apply
@@ -2165,6 +2295,8 @@ block|{
 try|try
 block|{
 specifier|final
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|objects

@@ -16423,7 +16423,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"All values of field 'b' are null; cannot deduce type"
+literal|"All values of field 'b' (field index 1) are null; cannot deduce type"
 argument_list|)
 argument_list|)
 expr_stmt|;

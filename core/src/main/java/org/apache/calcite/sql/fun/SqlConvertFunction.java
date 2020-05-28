@@ -232,12 +232,15 @@ return|;
 default|default:
 break|break;
 block|}
-assert|assert
-literal|false
-assert|;
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"operandsCount should be 2, got "
+operator|+
+name|operandsCount
+argument_list|)
+throw|;
 block|}
 block|}
 end_class

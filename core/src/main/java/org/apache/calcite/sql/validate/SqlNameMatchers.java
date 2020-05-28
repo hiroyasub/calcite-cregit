@@ -93,6 +93,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -138,6 +154,18 @@ operator|.
 name|util
 operator|.
 name|TreeSet
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -384,6 +412,8 @@ argument_list|>
 parameter_list|,
 name|V
 parameter_list|>
+annotation|@
+name|Nullable
 name|V
 name|get
 parameter_list|(
@@ -600,6 +630,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|field
 parameter_list|(
@@ -709,6 +741,8 @@ name|LiberalNameMatcher
 extends|extends
 name|BaseMatcher
 block|{
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -836,7 +870,12 @@ name|bestMatch
 parameter_list|()
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 name|matchedNames
+argument_list|,
+literal|"matchedNames"
+argument_list|)
 return|;
 block|}
 block|}

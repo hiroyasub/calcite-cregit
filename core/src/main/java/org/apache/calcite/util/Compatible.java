@@ -75,6 +75,18 @@ name|Proxy
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/** Compatibility layer.  *  *<p>Allows to use advanced functionality if the latest JDK or Guava version  * is present.  */
 end_comment
@@ -184,10 +196,15 @@ init|=
 operator|(
 name|Class
 operator|)
+name|requireNonNull
+argument_list|(
 name|args
 index|[
 literal|0
 index|]
+argument_list|,
+literal|"args[0]"
+argument_list|)
 decl_stmt|;
 try|try
 block|{

@@ -217,6 +217,22 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Interface that describes how to configure planning sessions generated  * using the Frameworks tools.  *  * @see Frameworks#newConfigBuilder()  */
 end_comment
@@ -248,11 +264,15 @@ name|getSqlToRelConverterConfig
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the default schema that should be checked before looking at the    * root schema.  Returns null to only consult the root schema.    */
+annotation|@
+name|Nullable
 name|SchemaPlus
 name|getDefaultSchema
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the executor used to evaluate constant expressions.    */
+annotation|@
+name|Nullable
 name|RexExecutor
 name|getExecutor
 parameter_list|()
@@ -271,11 +291,15 @@ name|getOperatorTable
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the cost factory that should be used when creating the planner.    * If null, use the default cost factory for that planner.    */
+annotation|@
+name|Nullable
 name|RelOptCostFactory
 name|getCostFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a list of trait definitions.    *    *<p>If the list is not null, the planner first de-registers any    * existing {@link RelTraitDef}s, then registers the {@code RelTraitDef}s in    * this list.</p>    *    *<p>The order of {@code RelTraitDef}s in the list matters if the    * planner is VolcanoPlanner. The planner calls {@link RelTraitDef#convert} in    * the order of this list. The most important trait comes first in the list,    * followed by the second most important one, etc.</p>    */
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelTraitDef
@@ -311,10 +335,12 @@ function_decl|;
 comment|/**    * Returns a view expander.    */
 name|RelOptTable
 operator|.
+expr|@
+name|Nullable
 name|ViewExpander
 name|getViewExpander
-parameter_list|()
-function_decl|;
+argument_list|()
+expr_stmt|;
 block|}
 end_interface
 

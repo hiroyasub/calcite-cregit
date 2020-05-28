@@ -75,6 +75,22 @@ name|Preconditions
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Access to a field of a row-expression.  *  *<p>You might expect to use a<code>RexFieldAccess</code> to access columns of  * relational tables, for example, the expression<code>emp.empno</code> in the  * query  *  *<blockquote>  *<pre>SELECT emp.empno FROM emp</pre>  *</blockquote>  *  *<p>but there is a specialized expression {@link RexInputRef} for this  * purpose. So in practice,<code>RexFieldAccess</code> is usually used to  * access fields of correlating variables, for example the expression  *<code>emp.deptno</code> in  *  *<blockquote>  *<pre>SELECT ename  * FROM dept  * WHERE EXISTS (  *     SELECT NULL  *     FROM emp  *     WHERE emp.deptno = dept.deptno  *     AND gender = 'F')</pre>  *</blockquote>  */
 end_comment
@@ -319,6 +335,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

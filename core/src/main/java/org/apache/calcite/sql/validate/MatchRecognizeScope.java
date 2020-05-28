@@ -400,7 +400,7 @@ literal|null
 argument_list|,
 literal|0
 argument_list|,
-literal|null
+literal|""
 argument_list|,
 name|StructKind
 operator|.

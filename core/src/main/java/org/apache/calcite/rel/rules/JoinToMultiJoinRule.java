@@ -279,6 +279,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -314,6 +330,18 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -500,6 +528,8 @@ comment|// for the new MultiJoin
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 argument_list|>
 name|projFieldsList
@@ -552,6 +582,8 @@ name|Pair
 argument_list|<
 name|JoinRelType
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -580,6 +612,8 @@ comment|// combine them with the join filter associated with this LogicalJoin to
 comment|// form the join filter for the new MultiJoin
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|newJoinFilters
@@ -626,6 +660,8 @@ argument_list|)
 decl_stmt|;
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|newPostJoinFilters
@@ -744,6 +780,8 @@ name|right
 parameter_list|,
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|ImmutableBitSet
 argument_list|>
 name|projFieldsList
@@ -1059,6 +1097,8 @@ name|Pair
 argument_list|<
 name|JoinRelType
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1144,6 +1184,8 @@ operator|.
 name|INNER
 argument_list|,
 operator|(
+expr|@
+name|Nullable
 name|RexNode
 operator|)
 literal|null
@@ -1375,6 +1417,8 @@ name|Pair
 argument_list|<
 name|JoinRelType
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1383,12 +1427,16 @@ parameter_list|,
 name|int
 name|adjustmentAmount
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelDataTypeField
 argument_list|>
 name|srcFields
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelDataTypeField
@@ -1403,6 +1451,8 @@ name|Pair
 argument_list|<
 name|JoinRelType
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 argument_list|>
@@ -1497,6 +1547,8 @@ name|Pair
 argument_list|<
 name|JoinRelType
 argument_list|,
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|src
@@ -1560,6 +1612,8 @@ comment|/**    * Combines the join filters from the left and right inputs (if th
 specifier|private
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|combineJoinFilters
@@ -1588,6 +1642,8 @@ comment|// separately
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|filters
@@ -1748,6 +1804,8 @@ return|;
 block|}
 comment|/**    * Shifts a filter originating from the right child of the LogicalJoin to the    * right, to reflect the filter now being applied on the resulting    * MultiJoin.    *    * @param joinRel     the original LogicalJoin    * @param left        the left child of the LogicalJoin    * @param right       the right child of the LogicalJoin    * @param rightFilter the filter originating from the right child    * @return the adjusted right filter    */
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|shiftRightFilter
 parameter_list|(
@@ -1760,6 +1818,8 @@ parameter_list|,
 name|MultiJoin
 name|right
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|rightFilter
 parameter_list|)
@@ -2068,15 +2128,30 @@ name|getFieldCount
 argument_list|()
 expr_stmt|;
 block|}
+specifier|final
+name|int
+name|key
+init|=
+name|currInput
+decl_stmt|;
 name|int
 index|[]
 name|refCounts
 init|=
+name|requireNonNull
+argument_list|(
 name|refCountsMap
 operator|.
 name|get
 argument_list|(
-name|currInput
+name|key
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"refCountsMap.get(currInput) for "
+operator|+
+name|key
 argument_list|)
 decl_stmt|;
 name|refCounts
@@ -2159,6 +2234,8 @@ comment|/**    * Combines the post-join filters from the left and right inputs (
 specifier|private
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|combinePostJoinFilters
@@ -2176,6 +2253,8 @@ block|{
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|RexNode
 argument_list|>
 name|filters

@@ -221,6 +221,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -276,16 +292,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -354,10 +360,10 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    * Converts a {@link RexNode} to a Druid JSON filter.    *    * @param rexNode    RexNode to translate to Druid Json Filter    * @param rowType    Row type associated to rexNode    * @param druidQuery Druid query    *    * @return Druid JSON filter, or null if it cannot translate    */
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toEqualityKindDruidFilter
 parameter_list|(
@@ -731,10 +737,10 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Converts a {@link RexNode} to a Druid JSON bound filter.    *    * @param rexNode    RexNode to translate    * @param rowType    Row type associated to Filter    * @param druidQuery Druid query    *    * @return valid Druid JSON Bound Filter, or null if it cannot translate the    * RexNode    */
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toBoundDruidFilter
 parameter_list|(
@@ -1164,10 +1170,10 @@ return|;
 block|}
 block|}
 comment|/**    * Converts a {@link RexNode} to a Druid literal.    *    * @param rexNode    RexNode to translate to Druid literal equivalant    * @param rowType    Row type associated to rexNode    * @param druidQuery Druid query    *    * @return non null string, or null if it cannot translate to valid Druid    * equivalent    */
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|String
 name|toDruidLiteral
 parameter_list|(
@@ -1355,10 +1361,10 @@ return|return
 name|val
 return|;
 block|}
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toIsNullKindDruidFilter
 parameter_list|(
@@ -1519,10 +1525,10 @@ name|extractionFunction
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toInKindDruidFilter
 parameter_list|(
@@ -1754,10 +1760,10 @@ argument_list|)
 return|;
 block|}
 block|}
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toNotDruidFilter
 parameter_list|(
@@ -1788,10 +1794,10 @@ name|druidJsonFilter
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toBetweenDruidFilter
 parameter_list|(
@@ -2026,10 +2032,10 @@ name|extractionFunction
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toSimpleDruidFilter
 parameter_list|(
@@ -2422,10 +2428,10 @@ else|:
 name|simpleLeafFilter
 return|;
 block|}
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|DruidJsonFilter
 name|toDruidExpressionFilter
 parameter_list|(

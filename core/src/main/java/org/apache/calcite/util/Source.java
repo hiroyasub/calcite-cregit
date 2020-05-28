@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -111,6 +127,8 @@ name|suffix
 parameter_list|)
 function_decl|;
 comment|/** Looks for a suffix on a path and returns    * either the path with the suffix removed    * or null. */
+annotation|@
+name|Nullable
 name|Source
 name|trimOrNull
 parameter_list|(

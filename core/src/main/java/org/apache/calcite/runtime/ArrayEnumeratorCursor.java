@@ -29,6 +29,22 @@ name|Enumerator
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link org.apache.calcite.avatica.util.Cursor} on top of an  * {@link org.apache.calcite.linq4j.Enumerator} that  * returns an array of {@link Object} for each row.  */
 end_comment
@@ -40,6 +56,8 @@ name|ArrayEnumeratorCursor
 extends|extends
 name|EnumeratorCursor
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -50,6 +68,8 @@ name|ArrayEnumeratorCursor
 parameter_list|(
 name|Enumerator
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>

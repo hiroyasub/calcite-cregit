@@ -173,6 +173,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A relational expression that collapses multiple rows into one.  *  *<p>Rules:</p>  *  *<ul>  *<li>{@code net.sf.farrago.fennel.rel.FarragoMultisetSplitterRule}  * creates a Collect from a call to  * {@link org.apache.calcite.sql.fun.SqlMultisetValueConstructor} or to  * {@link org.apache.calcite.sql.fun.SqlMultisetQueryConstructor}.</li>  *</ul>  */
 end_comment
@@ -249,10 +261,15 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|input
 operator|.
 name|getString
 argument_list|(
+literal|"field"
+argument_list|)
+argument_list|,
 literal|"field"
 argument_list|)
 argument_list|)

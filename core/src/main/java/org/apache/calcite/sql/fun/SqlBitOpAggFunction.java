@@ -133,6 +133,22 @@ name|Preconditions
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the<code>BIT_AND</code> and<code>BIT_OR</code> aggregate functions,  * returning the bitwise AND/OR of all non-null input values, or null if none.  *  *<p>INTEGER and BINARY types are supported:  * tinyint, smallint, int, bigint, binary, varbinary  */
 end_comment
@@ -225,7 +241,11 @@ name|Override
 specifier|public
 parameter_list|<
 name|T
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|T
 name|unwrap
 parameter_list|(

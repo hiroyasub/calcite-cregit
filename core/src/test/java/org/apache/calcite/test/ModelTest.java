@@ -427,6 +427,8 @@ literal|"         {\n"
 operator|+
 literal|"           name: 'time_by_day',\n"
 operator|+
+literal|"           factory: 'com.test',\n"
+operator|+
 literal|"           columns: [\n"
 operator|+
 literal|"             {\n"
@@ -442,6 +444,8 @@ operator|+
 literal|"         {\n"
 operator|+
 literal|"           name: 'sales_fact_1997',\n"
+operator|+
+literal|"           factory: 'com.test',\n"
 operator|+
 literal|"           columns: [\n"
 operator|+
@@ -807,11 +811,11 @@ literal|"       operand: {a: 'foo', b: [1, 3.5] },\n"
 operator|+
 literal|"       tables: [\n"
 operator|+
-literal|"         { type: 'custom', name: 'T1' },\n"
+literal|"         { type: 'custom', name: 'T1', factory: 'com.test' },\n"
 operator|+
-literal|"         { type: 'custom', name: 'T2', operand: {} },\n"
+literal|"         { type: 'custom', name: 'T2', factory: 'com.test', operand: {} },\n"
 operator|+
-literal|"         { type: 'custom', name: 'T3', operand: {a: 'foo'} }\n"
+literal|"         { type: 'custom', name: 'T3', factory: 'com.test', operand: {a: 'foo'} }\n"
 operator|+
 literal|"       ]\n"
 operator|+
@@ -820,6 +824,8 @@ operator|+
 literal|"     {\n"
 operator|+
 literal|"       type: 'custom',\n"
+operator|+
+literal|"       factory: 'com.acme.MySchemaFactory',\n"
 operator|+
 literal|"       name: 'has-no-operand'\n"
 operator|+
@@ -1148,7 +1154,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Field 'name' is required in JsonMapSchema"
+literal|"Missing required creator property 'name'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1189,7 +1195,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Field 'factory' is required in JsonCustomSchema"
+literal|"Missing required creator property 'factory'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1232,6 +1238,8 @@ literal|"         {\n"
 operator|+
 literal|"           name: 'time_by_day',\n"
 operator|+
+literal|"           factory: 'com.test',\n"
+operator|+
 literal|"           columns: [\n"
 operator|+
 literal|"             {\n"
@@ -1247,6 +1255,8 @@ operator|+
 literal|"         {\n"
 operator|+
 literal|"           name: 'sales_fact_1997',\n"
+operator|+
+literal|"           factory: 'com.test',\n"
 operator|+
 literal|"           columns: [\n"
 operator|+

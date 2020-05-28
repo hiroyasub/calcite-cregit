@@ -325,6 +325,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes  * a {@link Join#isSemiJoin semi-join} down in a tree past  * a {@link org.apache.calcite.rel.core.Project}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalProject(X), Y)&rarr; LogicalProject(SemiJoin(X, Y))  *  * @see org.apache.calcite.rel.rules.SemiJoinFilterTransposeRule  */
 end_comment
@@ -801,10 +813,19 @@ name|mergedProgram
 operator|.
 name|expandLocalRef
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|mergedProgram
 operator|.
 name|getCondition
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"mergedProgram.getCondition() for "
+operator|+
+name|mergedProgram
+argument_list|)
 argument_list|)
 return|;
 block|}

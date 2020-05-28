@@ -89,6 +89,22 @@ name|LogicalSort
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the ordering trait.  *  *<p>Ordering is a physical property (i.e. a trait) because it can be changed  * without loss of information. The converter to do this is the  * {@link org.apache.calcite.rel.core.Sort} operator.  *  *<p>Unlike other current traits, a {@link RelNode} can have more than one  * value of this trait simultaneously. For example,  *<code>LogicalTableScan(table=TIME_BY_DAY)</code> might be sorted by  *<code>{the_year, the_month, the_date}</code> and also by  *<code>{time_id}</code>. We have to allow a RelNode to belong to more than  * one RelSubset (these RelSubsets are always in the same set).</p>  */
 end_comment
@@ -172,6 +188,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|convert
 parameter_list|(

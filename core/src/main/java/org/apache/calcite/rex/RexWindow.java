@@ -59,6 +59,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -130,6 +146,11 @@ name|nodeCount
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a window.    *    *<p>If you need to create a window from outside this package, use    * {@link RexBuilder#makeOver}.    *    *<p>If {@code orderKeys} is empty the bracket will usually be    * "BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING".    *    *<p>The digest assumes 'default' brackets, and does not print brackets or    * bounds that are the default.    *    *<p>If {@code orderKeys} is empty, assumes the bracket is "RANGE BETWEEN    * UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING" and does not print the    * bracket.    *    *<li>If {@code orderKeys} is not empty, the default top is "CURRENT ROW".    * The default bracket is "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",    * which will be printed as blank.    * "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW" is different, and is    * printed as "ROWS UNBOUNDED PRECEDING".    * "ROWS BETWEEN 5 PRECEDING AND CURRENT ROW" is printed as    * "ROWS 5 PRECEDING".    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 name|RexWindow
 parameter_list|(
 name|List
@@ -283,6 +304,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|that
 parameter_list|)

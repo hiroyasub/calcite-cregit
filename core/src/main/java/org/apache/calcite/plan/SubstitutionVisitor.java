@@ -415,20 +415,6 @@ name|calcite
 operator|.
 name|rex
 operator|.
-name|RexExecutorImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rex
-operator|.
 name|RexInputRef
 import|;
 end_import
@@ -835,6 +821,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -919,16 +921,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -972,6 +964,18 @@ operator|.
 name|RexUtil
 operator|.
 name|removeAll
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1352,6 +1356,8 @@ expr_stmt|;
 specifier|final
 name|Set
 argument_list|<
+annotation|@
+name|Nullable
 name|MutableRel
 argument_list|>
 name|parents
@@ -1387,10 +1393,19 @@ specifier|public
 name|void
 name|visit
 parameter_list|(
+annotation|@
+name|Nullable
 name|MutableRel
 name|node
 parameter_list|)
 block|{
+name|requireNonNull
+argument_list|(
+name|node
+argument_list|,
+literal|"node"
+argument_list|)
+expr_stmt|;
 name|parents
 operator|.
 name|add
@@ -1494,6 +1509,8 @@ annotation|@
 name|VisibleForTesting
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|splitFilter
 parameter_list|(
@@ -1933,7 +1950,10 @@ return|return
 name|call
 return|;
 block|}
-return|return
+specifier|final
+name|RexNode
+name|result
+init|=
 name|RexUtil
 operator|.
 name|invert
@@ -1942,6 +1962,26 @@ name|rexBuilder
 argument_list|,
 name|call
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|result
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|NullPointerException
+argument_list|(
+literal|"RexUtil.invert returned null for "
+operator|+
+name|call
+argument_list|)
+throw|;
+block|}
+return|return
+name|result
 return|;
 block|}
 case|case
@@ -2108,6 +2148,8 @@ block|}
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|RexNode
 name|splitOr
 parameter_list|(
@@ -2468,6 +2510,8 @@ literal|true
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelNode
 name|go0
 parameter_list|(
@@ -3531,6 +3575,8 @@ block|}
 comment|/** Within a relational expression {@code query}, replaces occurrences of    * {@code find} with {@code replace}.    *    *<p>Assumes relational expressions (and their descendants) are not null.    * Does not handle cycles. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Replacement
 name|replace
 parameter_list|(
@@ -3589,6 +3635,8 @@ block|}
 comment|/** Helper for {@link #replace}. */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|Replacement
 name|replaceRecurse
 parameter_list|(
@@ -3899,6 +3947,8 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|UnifyResult
 name|matchRecurse
 parameter_list|(
@@ -4204,9 +4254,6 @@ operator|+
 literal|"\nQuery:\n"
 operator|+
 name|queryParent
-operator|.
-name|toString
-argument_list|()
 operator|+
 literal|"\nTarget:\n"
 operator|+
@@ -4224,6 +4271,8 @@ literal|null
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -4520,6 +4569,8 @@ block|}
 comment|/**      *<p>Applies this rule to a particular node in a query. The goal is      * to convert {@code query} into {@code target}. Before the rule is      * invoked, Calcite has made sure that query's children are equivalent      * to target's children.      *      *<p>There are 3 possible outcomes:</p>      *      *<ul>      *      *<li>{@code query} already exactly matches {@code target}; returns      * {@code target}</li>      *      *<li>{@code query} is sufficiently close to a match for      * {@code target}; returns {@code target}</li>      *      *<li>{@code query} cannot be made to match {@code target}; returns      * null</li>      *      *</ul>      *      *<p>REVIEW: Is possible that we match query PLUS one or more of its      * ancestors?</p>      *      * @param call Input parameters      */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -4528,6 +4579,8 @@ name|call
 parameter_list|)
 function_decl|;
 specifier|protected
+annotation|@
+name|Nullable
 name|UnifyRuleCall
 name|match
 parameter_list|(
@@ -4710,8 +4763,6 @@ name|this
 operator|.
 name|rule
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rule
@@ -4721,8 +4772,6 @@ name|this
 operator|.
 name|query
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|query
@@ -4732,8 +4781,6 @@ name|this
 operator|.
 name|target
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|target
@@ -4743,8 +4790,6 @@ name|this
 operator|.
 name|slots
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|slots
@@ -4978,6 +5023,11 @@ name|AbstractUnifyRule
 extends|extends
 name|UnifyRule
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|AbstractUnifyRule
 parameter_list|(
@@ -5210,6 +5260,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -5299,6 +5351,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -5429,12 +5483,6 @@ try|try
 block|{
 name|compenProjs
 operator|=
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|shuttle
 operator|.
 name|apply
@@ -5585,6 +5633,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -5977,6 +6027,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -6138,12 +6190,6 @@ name|RexNode
 argument_list|>
 name|identityProjects
 init|=
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|rexBuilder
 operator|.
 name|identityProjects
@@ -6545,6 +6591,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -6706,12 +6754,6 @@ name|RexNode
 argument_list|>
 name|identityProjects
 init|=
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|rexBuilder
 operator|.
 name|identityProjects
@@ -7121,6 +7163,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -7738,6 +7782,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -8283,6 +8329,17 @@ operator|)
 name|unifiedAggregate
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|newCompenCalc
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 return|return
 name|tryMergeParentCalcAndGenResult
 argument_list|(
@@ -8372,6 +8429,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -8527,6 +8586,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -8669,6 +8730,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -8729,6 +8792,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -8871,6 +8936,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|UnifyResult
 name|apply
 parameter_list|(
@@ -8889,6 +8956,8 @@ block|}
 comment|/**    * Applies a AbstractUnifyRule to a particular node in a query. We try to pull up the    * {@link MutableCalc} to top of {@link MutableUnion} or {@link MutableIntersect}, this    * method not suit for {@link MutableMinus}.    *    * @param call Input parameters    */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|UnifyResult
 name|setOpApply
 parameter_list|(
@@ -9124,9 +9193,9 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Matching fails when filtering conditions are not equal or projects are not equal.
-if|if
-condition|(
-operator|!
+name|RexNode
+name|residue
+init|=
 name|splitFilter
 argument_list|(
 name|call
@@ -9142,6 +9211,15 @@ name|queryInputExplained
 operator|.
 name|left
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|residue
+operator|==
+literal|null
+operator|||
+operator|!
+name|residue
 operator|.
 name|isAlwaysTrue
 argument_list|()
@@ -9586,6 +9664,8 @@ block|}
 comment|/** Merge two MutableCalc together. */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|MutableCalc
 name|mergeCalc
 parameter_list|(
@@ -9718,12 +9798,13 @@ name|RelDataType
 name|rowType
 parameter_list|)
 block|{
-name|RexExecutorImpl
+name|RexExecutor
 name|rexImpl
 init|=
-operator|(
-name|RexExecutorImpl
-operator|)
+name|Util
+operator|.
+name|first
+argument_list|(
 name|cluster
 operator|.
 name|getPlanner
@@ -9731,6 +9812,11 @@ argument_list|()
 operator|.
 name|getExecutor
 argument_list|()
+argument_list|,
+name|RexUtil
+operator|.
+name|EXECUTOR
+argument_list|)
 decl_stmt|;
 name|RexImplicationChecker
 name|rexImplicationChecker
@@ -9893,6 +9979,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|JoinRelType
 name|sameJoinType
 parameter_list|(
@@ -10008,12 +10096,16 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|MutableRel
 name|unifyAggregates
 parameter_list|(
 name|MutableAggregate
 name|query
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|targetCond
 parameter_list|,
@@ -10270,7 +10362,12 @@ condition|)
 block|{
 name|projOffset
 operator|=
+name|requireNonNull
+argument_list|(
 name|compenGroupSet
+argument_list|,
+literal|"compenGroupSet"
+argument_list|)
 operator|.
 name|size
 argument_list|()
@@ -10889,6 +10986,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|SqlAggFunction
 name|getRollup
 parameter_list|(

@@ -129,6 +129,38 @@ name|RexSubQuery
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|NotOnlyInitialized
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnderInitialization
+import|;
+end_import
+
 begin_comment
 comment|/**  * Shuttle that finds references to a given {@link CorrelationId} within a tree  * of {@link RelNode}s.  */
 end_comment
@@ -141,6 +173,8 @@ name|CorrelationReferenceFinder
 extends|extends
 name|RelHomogeneousShuttle
 block|{
+annotation|@
+name|NotOnlyInitialized
 specifier|private
 specifier|final
 name|MyRexVisitor
@@ -206,6 +240,8 @@ name|MyRexVisitor
 extends|extends
 name|RexShuttle
 block|{
+annotation|@
+name|NotOnlyInitialized
 specifier|private
 specifier|final
 name|CorrelationReferenceFinder
@@ -214,6 +250,8 @@ decl_stmt|;
 specifier|private
 name|MyRexVisitor
 parameter_list|(
+annotation|@
+name|UnderInitialization
 name|CorrelationReferenceFinder
 name|finder
 parameter_list|)

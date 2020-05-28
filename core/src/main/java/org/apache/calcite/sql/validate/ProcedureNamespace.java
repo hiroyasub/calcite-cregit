@@ -135,6 +135,34 @@ name|SqlTypeName
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Namespace whose contents are defined by the result of a call to a  * user-defined procedure.  */
 end_comment
@@ -319,17 +347,31 @@ name|getRowTypeInference
 argument_list|()
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|rowTypeInference
 operator|.
 name|inferReturnType
 argument_list|(
 name|callBinding
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"got null from inferReturnType for call "
+operator|+
+name|callBinding
+operator|.
+name|getCall
+argument_list|()
+argument_list|)
 return|;
 block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()

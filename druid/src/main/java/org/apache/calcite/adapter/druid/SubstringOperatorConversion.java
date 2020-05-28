@@ -121,9 +121,15 @@ end_import
 
 begin_import
 import|import
-name|javax
+name|org
 operator|.
-name|annotation
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
 operator|.
 name|Nullable
 import|;
@@ -154,10 +160,10 @@ name|SUBSTRING
 return|;
 block|}
 annotation|@
-name|Nullable
-annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|toDruidExpression
 parameter_list|(

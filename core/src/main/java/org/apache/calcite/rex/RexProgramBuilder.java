@@ -121,6 +121,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -160,12 +176,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -252,6 +270,8 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|projectNameList
@@ -268,10 +288,14 @@ literal|"unused"
 argument_list|)
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RexSimplify
 name|simplify
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|RexLocalRef
 name|conditionRef
 init|=
@@ -304,6 +328,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a program-builder.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|private
 name|RexProgramBuilder
 parameter_list|(
@@ -313,6 +342,8 @@ parameter_list|,
 name|RexBuilder
 name|rexBuilder
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexSimplify
 name|simplify
 parameter_list|)
@@ -321,8 +352,6 @@ name|this
 operator|.
 name|inputRowType
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|inputRowType
@@ -332,8 +361,6 @@ name|this
 operator|.
 name|rexBuilder
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rexBuilder
@@ -410,6 +437,11 @@ block|}
 block|}
 block|}
 comment|/**    * Creates a program builder with the same contents as a program.    *    * @param rexBuilder     Rex builder    * @param inputRowType   Input row type    * @param exprList       Common expressions    * @param projectList    Projections    * @param condition      Condition, or null    * @param outputRowType  Output row type    * @param normalize      Whether to normalize    * @param simplify       Simplifier, or null to not simplify    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|private
 name|RexProgramBuilder
 parameter_list|(
@@ -436,6 +468,8 @@ name|RexNode
 argument_list|>
 name|projectList
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|,
@@ -446,6 +480,8 @@ parameter_list|,
 name|boolean
 name|normalize
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexSimplify
 name|simplify
 parameter_list|)
@@ -912,6 +948,8 @@ parameter_list|(
 name|RexNode
 name|expr
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -946,6 +984,8 @@ name|int
 name|ordinal
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -1071,6 +1111,13 @@ name|expr
 operator|!=
 literal|null
 assert|;
+name|RexLocalRef
+name|conditionRef
+init|=
+name|this
+operator|.
+name|conditionRef
+decl_stmt|;
 if|if
 condition|(
 name|conditionRef
@@ -1078,6 +1125,10 @@ operator|==
 literal|null
 condition|)
 block|{
+name|this
+operator|.
+name|conditionRef
+operator|=
 name|conditionRef
 operator|=
 name|registerInput
@@ -1109,6 +1160,8 @@ name|conditionRef
 argument_list|)
 condition|)
 block|{
+name|this
+operator|.
 name|conditionRef
 operator|=
 name|registerInput
@@ -1330,7 +1383,12 @@ name|exprMap
 operator|.
 name|put
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|key
+argument_list|,
+literal|"key"
+argument_list|)
 argument_list|,
 name|ref
 argument_list|)
@@ -1764,6 +1822,8 @@ argument_list|>
 name|projectList
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|,
@@ -1774,6 +1834,8 @@ parameter_list|,
 name|boolean
 name|normalize
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexSimplify
 name|simplify
 parameter_list|)
@@ -1832,6 +1894,8 @@ argument_list|>
 name|projectList
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|,
@@ -1927,6 +1991,8 @@ argument_list|>
 name|projectList
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|,
@@ -1987,6 +2053,8 @@ argument_list|>
 name|projectRefList
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|RexLocalRef
 name|conditionRef
 parameter_list|,
@@ -2079,6 +2147,8 @@ name|RexLocalRef
 argument_list|>
 name|projectRefList
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexLocalRef
 name|conditionRef
 parameter_list|,

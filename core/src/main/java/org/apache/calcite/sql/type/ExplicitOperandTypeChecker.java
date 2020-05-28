@@ -121,6 +121,18 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Parameter type-checking strategy for Explicit Type.  */
 end_comment
@@ -289,16 +301,19 @@ name|families
 operator|.
 name|add
 argument_list|(
-name|field
-operator|.
-name|getType
-argument_list|()
-operator|.
-name|getSqlTypeName
-argument_list|()
+name|requireNonNull
+argument_list|(
+name|sqlTypeName
 operator|.
 name|getFamily
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"keyType.getSqlTypeName().getFamily() null, type is "
+operator|+
+name|sqlTypeName
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

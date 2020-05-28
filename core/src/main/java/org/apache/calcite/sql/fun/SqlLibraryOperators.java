@@ -349,6 +349,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -621,6 +637,10 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+name|type
+operator|!=
+literal|null
+operator|&&
 name|opBinding
 operator|.
 name|getOperandCount
@@ -809,6 +829,8 @@ decl_stmt|;
 comment|/** Infers the return type of {@code IF(b, x, y)},    * namely the least restrictive of the types of x and y.    * Similar to {@link ReturnTypes#LEAST_RESTRICTIVE}. */
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|RelDataType
 name|inferIfReturnType
 parameter_list|(

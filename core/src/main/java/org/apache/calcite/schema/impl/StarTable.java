@@ -279,6 +279,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -304,6 +336,22 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -337,6 +385,8 @@ name|tables
 decl_stmt|;
 comment|/** Number of fields in each table's row type. */
 specifier|public
+annotation|@
+name|MonotonicNonNull
 name|ImmutableIntList
 name|fieldCounts
 decl_stmt|;
@@ -628,7 +678,10 @@ name|zip
 argument_list|(
 name|tables
 argument_list|,
+name|castNonNull
+argument_list|(
 name|fieldCounts
+argument_list|)
 argument_list|)
 control|)
 block|{
@@ -709,6 +762,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(

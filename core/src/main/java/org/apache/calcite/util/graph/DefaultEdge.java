@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -106,6 +122,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -152,6 +170,8 @@ specifier|public
 specifier|static
 parameter_list|<
 name|V
+extends|extends
+name|Object
 parameter_list|>
 name|DirectedGraph
 operator|.
@@ -164,10 +184,22 @@ argument_list|>
 name|factory
 parameter_list|()
 block|{
+comment|// see https://github.com/typetools/checker-framework/issues/3637
+comment|//noinspection Convert2MethodRef
 return|return
-name|DefaultEdge
-operator|::
+parameter_list|(
+name|source1
+parameter_list|,
+name|target1
+parameter_list|)
+lambda|->
 operator|new
+name|DefaultEdge
+argument_list|(
+name|source1
+argument_list|,
+name|target1
+argument_list|)
 return|;
 block|}
 block|}

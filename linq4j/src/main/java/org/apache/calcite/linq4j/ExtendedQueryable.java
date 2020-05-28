@@ -273,6 +273,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|framework
+operator|.
+name|qual
+operator|.
+name|Covariant
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -296,6 +326,11 @@ comment|/**  * Extension methods in Queryable.  *  * @param<TSource> Element typ
 end_comment
 
 begin_interface
+annotation|@
+name|Covariant
+argument_list|(
+literal|0
+argument_list|)
 interface|interface
 name|ExtendedQueryable
 parameter_list|<
@@ -308,6 +343,8 @@ name|TSource
 argument_list|>
 block|{
 comment|/**    * Applies an accumulator function over a sequence.    */
+annotation|@
+name|Nullable
 name|TSource
 name|aggregate
 parameter_list|(
@@ -315,6 +352,8 @@ name|FunctionExpression
 argument_list|<
 name|Function2
 argument_list|<
+annotation|@
+name|Nullable
 name|TSource
 argument_list|,
 name|TSource
@@ -589,6 +628,8 @@ annotation|@
 name|Override
 name|Queryable
 argument_list|<
+annotation|@
+name|Nullable
 name|TSource
 argument_list|>
 name|defaultIfEmpty
@@ -717,6 +758,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the first element of a sequence that    * satisfies a specified condition or a default value if no such    * element is found.    */
+annotation|@
+name|Nullable
 name|TSource
 name|firstOrDefault
 parameter_list|(
@@ -1413,6 +1456,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the last element of a sequence that    * satisfies a condition or a default value if no such element is    * found.    */
+annotation|@
+name|Nullable
 name|TSource
 name|lastOrDefault
 parameter_list|(
@@ -1449,6 +1494,8 @@ argument_list|<
 name|TResult
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|TResult
 name|max
 parameter_list|(
@@ -1473,6 +1520,8 @@ argument_list|<
 name|TResult
 argument_list|>
 parameter_list|>
+annotation|@
+name|Nullable
 name|TResult
 name|min
 parameter_list|(
@@ -1836,11 +1885,15 @@ function_decl|;
 comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
 annotation|@
 name|Override
+annotation|@
+name|Nullable
 name|TSource
 name|singleOrDefault
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition or a default value if no such    * element exists; this method throws an exception if more than    * one element satisfies the condition.    */
+annotation|@
+name|Nullable
 name|TSource
 name|singleOrDefault
 parameter_list|(

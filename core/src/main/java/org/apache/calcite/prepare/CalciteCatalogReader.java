@@ -727,6 +727,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -1047,16 +1063,18 @@ name|Override
 specifier|public
 name|Prepare
 operator|.
+expr|@
+name|Nullable
 name|PreparingTable
 name|getTable
-parameter_list|(
-specifier|final
+argument_list|(
+name|final
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|names
-parameter_list|)
+argument_list|)
 block|{
 comment|// First look in the default schema, if any.
 comment|// If not found, look in the root schema.
@@ -1064,7 +1082,7 @@ name|CalciteSchema
 operator|.
 name|TableEntry
 name|entry
-init|=
+operator|=
 name|SqlValidatorUtil
 operator|.
 name|getTableEntry
@@ -1073,7 +1091,7 @@ name|this
 argument_list|,
 name|names
 argument_list|)
-decl_stmt|;
+block|;
 if|if
 condition|(
 name|entry
@@ -1131,6 +1149,9 @@ name|relOptTable
 return|;
 block|}
 block|}
+end_class
+
+begin_return
 return|return
 name|RelOptTableImpl
 operator|.
@@ -1150,12 +1171,16 @@ argument_list|,
 literal|null
 argument_list|)
 return|;
-block|}
-return|return
+end_return
+
+begin_expr_stmt
+unit|}     return
 literal|null
-return|;
-block|}
-annotation|@
+expr_stmt|;
+end_expr_stmt
+
+begin_function
+unit|}    @
 name|Override
 specifier|public
 name|CalciteConnectionConfig
@@ -1166,6 +1191,9 @@ return|return
 name|config
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|Collection
 argument_list|<
@@ -1399,9 +1427,14 @@ return|return
 name|functions2
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|getNamedType
 parameter_list|(
@@ -1450,6 +1483,9 @@ literal|null
 return|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1657,6 +1693,9 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|SqlMonikerImpl
 name|moniker
@@ -1664,6 +1703,8 @@ parameter_list|(
 name|CalciteSchema
 name|schema
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|,
@@ -1731,6 +1772,9 @@ name|type
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1748,20 +1792,28 @@ return|return
 name|schemaPaths
 return|;
 block|}
+end_function
+
+begin_annotation
 annotation|@
 name|Override
+end_annotation
+
+begin_expr_stmt
 specifier|public
 name|Prepare
 operator|.
+expr|@
+name|Nullable
 name|PreparingTable
 name|getTableForMember
-parameter_list|(
+argument_list|(
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|names
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|getTable
@@ -1770,14 +1822,19 @@ name|names
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
+end_expr_stmt
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataTypeField
 name|field
 parameter_list|(
@@ -1799,6 +1856,9 @@ name|alias
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1828,6 +1888,9 @@ name|name
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1864,6 +1927,9 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1874,6 +1940,8 @@ specifier|final
 name|SqlIdentifier
 name|opName
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlFunctionCategory
 name|category
 parameter_list|,
@@ -2004,7 +2072,13 @@ name|add
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an operator table that contains functions in the given class    * or classes.    *    * @see ModelHandler#addFunctions */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|SqlOperatorTable
@@ -2128,7 +2202,13 @@ return|return
 name|table
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Converts a function to a {@link org.apache.calcite.sql.SqlOperator}. */
+end_comment
+
+begin_function
 specifier|private
 specifier|static
 name|SqlOperator
@@ -2550,7 +2630,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Deduces the {@link org.apache.calcite.sql.SqlKind} of a user-defined    * function based on a {@link Hints} annotation, if present. */
+end_comment
+
+begin_function
 specifier|private
 specifier|static
 name|SqlKind
@@ -2648,6 +2734,9 @@ operator|.
 name|OTHER_FUNCTION
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|SqlReturnTypeInference
@@ -2722,6 +2811,9 @@ return|;
 block|}
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|SqlReturnTypeInference
@@ -2767,6 +2859,9 @@ return|;
 block|}
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|RelDataType
@@ -2833,6 +2928,9 @@ name|type
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -2944,6 +3042,9 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -2955,6 +3056,9 @@ return|return
 name|rootSchema
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -2966,6 +3070,9 @@ return|return
 name|typeFactory
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -2977,6 +3084,9 @@ name|planner
 parameter_list|)
 block|{
 block|}
+end_function
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -2996,6 +3106,9 @@ name|isCaseSensitive
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -3007,12 +3120,19 @@ return|return
 name|nameMatcher
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
 parameter_list|<
 name|C
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|C
 name|unwrap
 parameter_list|(
@@ -3046,8 +3166,8 @@ return|return
 literal|null
 return|;
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

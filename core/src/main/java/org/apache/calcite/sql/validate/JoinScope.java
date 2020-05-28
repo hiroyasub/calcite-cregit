@@ -59,6 +59,34 @@ name|SqlWindow
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * The name-resolution context for expression inside a JOIN clause. The objects  * visible are the joined table expressions, and those inherited from the parent  * scope.  *  *<p>Consider "SELECT * FROM (A JOIN B ON {exp1}) JOIN C ON {exp2}". {exp1} is  * resolved in the join scope for "A JOIN B", which contains A and B but not  * C.</p>  */
 end_comment
@@ -73,6 +101,8 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|usingScope
 decl_stmt|;
@@ -88,6 +118,8 @@ parameter_list|(
 name|SqlValidatorScope
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|usingScope
 parameter_list|,
@@ -193,6 +225,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlWindow
 name|lookupWindow
 parameter_list|(
@@ -226,6 +260,8 @@ block|}
 block|}
 comment|/**    * Returns the scope which is used for resolving USING clause.    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|getUsingScope
 parameter_list|()
@@ -240,6 +276,8 @@ specifier|public
 name|boolean
 name|isWithin
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope2
 parameter_list|)
@@ -257,7 +295,12 @@ return|;
 block|}
 comment|// go from the JOIN to the enclosing SELECT
 return|return
+name|requireNonNull
+argument_list|(
 name|usingScope
+argument_list|,
+literal|"usingScope"
+argument_list|)
 operator|.
 name|isWithin
 argument_list|(

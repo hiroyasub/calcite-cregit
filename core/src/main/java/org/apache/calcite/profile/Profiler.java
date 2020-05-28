@@ -115,6 +115,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -204,12 +220,14 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nonnull
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -355,6 +373,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -386,8 +406,6 @@ specifier|public
 name|int
 name|compareTo
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Column
 name|column
 parameter_list|)
@@ -468,6 +486,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -550,6 +570,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -651,6 +673,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -702,6 +726,8 @@ specifier|private
 specifier|static
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|getObjects
@@ -719,6 +745,8 @@ block|{
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -795,6 +823,8 @@ argument_list|>
 name|columns
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|NavigableSet
 argument_list|<
 name|Comparable
@@ -827,6 +857,8 @@ name|Column
 argument_list|>
 name|columns
 parameter_list|,
+annotation|@
+name|Nullable
 name|SortedSet
 argument_list|<
 name|Comparable
@@ -914,6 +946,8 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|map
@@ -957,6 +991,8 @@ condition|)
 block|{
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 argument_list|>
 name|list
@@ -1303,9 +1339,16 @@ name|i
 operator|++
 control|)
 block|{
+name|int
+name|key
+init|=
+name|i
+decl_stmt|;
 name|b
 operator|.
 name|add
+argument_list|(
+name|requireNonNull
 argument_list|(
 name|distributionMap
 operator|.
@@ -1317,6 +1360,13 @@ name|of
 argument_list|(
 name|i
 argument_list|)
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"distributionMap.get(ImmutableBitSet.of(i)) for "
+operator|+
+name|key
 argument_list|)
 argument_list|)
 expr_stmt|;

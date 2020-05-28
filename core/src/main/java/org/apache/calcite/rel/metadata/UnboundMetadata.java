@@ -31,34 +31,53 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Metadata that needs to be bound to a {@link RelNode} and  * {@link RelMetadataQuery} before it can be used.  *  * @param<M> Metadata type  */
 end_comment
 
-begin_interface
+begin_annotation
 annotation|@
 name|FunctionalInterface
+end_annotation
+
+begin_expr_stmt
 specifier|public
-interface|interface
+expr|interface
 name|UnboundMetadata
-parameter_list|<
+operator|<
 name|M
-extends|extends
+expr|extends @
+name|Nullable
 name|Metadata
-parameter_list|>
+operator|>
 block|{
 name|M
 name|bind
-parameter_list|(
+argument_list|(
 name|RelNode
 name|rel
-parameter_list|,
+argument_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|)
-function_decl|;
-block|}
-end_interface
+argument_list|)
+block|; }
+end_expr_stmt
 
 end_unit
 

@@ -727,6 +727,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -825,6 +841,34 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that converts a {@link org.apache.calcite.rel.core.Project}  * followed by {@link org.apache.calcite.rel.core.Aggregate} or an  * {@link org.apache.calcite.rel.core.Aggregate} to a scan (and possibly  * other operations) over a materialized view.  *  * @param<C> Configuration type  */
 end_comment
@@ -893,6 +937,8 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|topProject
 parameter_list|,
@@ -1772,7 +1818,22 @@ name|RexTableInputRef
 operator|.
 name|of
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|queryTableRef
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"queryTableRef is null for tableRef "
+operator|+
+name|e
+operator|.
+name|getKey
+argument_list|()
+operator|.
+name|getTableRef
+argument_list|()
+argument_list|)
 argument_list|,
 name|e
 operator|.
@@ -2423,6 +2484,8 @@ comment|// This is useful in case some of the columns can be folded to same valu
 comment|// filter is added.
 name|Pair
 argument_list|<
+annotation|@
+name|Nullable
 name|RelNode
 argument_list|,
 name|RelNode
@@ -2532,6 +2595,8 @@ specifier|abstract
 name|boolean
 name|isValidPlan
 parameter_list|(
+annotation|@
+name|Nullable
 name|Project
 name|topProject
 parameter_list|,
@@ -2542,9 +2607,11 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
-comment|/**    * It checks whether the query can be rewritten using the view even though the    * query uses additional tables.    *    *<p>Rules implementing the method should follow different approaches depending on the    * operators they rewrite.    */
+comment|/**    * It checks whether the query can be rewritten using the view even though the    * query uses additional tables.    *    *<p>Rules implementing the method should follow different approaches depending on the    * operators they rewrite.    * @return ViewPartialRewriting, or null if the rewrite can't be done    */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|ViewPartialRewriting
 name|compensateViewPartial
 parameter_list|(
@@ -2560,6 +2627,8 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|topProject
 parameter_list|,
@@ -2575,6 +2644,8 @@ parameter_list|,
 name|EquivalenceClasses
 name|queryEC
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|topViewProject
 parameter_list|,
@@ -2591,6 +2662,8 @@ function_decl|;
 comment|/**    * If the view will be used in a union rewriting, this method is responsible for    * rewriting the query branch of the union using the given compensation predicate.    *    *<p>If a rewriting can be produced, we return that rewriting. If it cannot    * be produced, we will return null.    */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|RelNode
 name|rewriteQuery
 parameter_list|(
@@ -2612,6 +2685,8 @@ parameter_list|,
 name|RexNode
 name|otherCompensationPred
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|topProject
 parameter_list|,
@@ -2636,6 +2711,8 @@ function_decl|;
 comment|/**    * If the view will be used in a union rewriting, this method is responsible for    * generating the union and any other operator needed on top of it, e.g., a Project    * operator.    */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|RelNode
 name|createUnion
 parameter_list|(
@@ -2645,6 +2722,8 @@ parameter_list|,
 name|RexBuilder
 name|rexBuilder
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|topProject
 parameter_list|,
@@ -2658,6 +2737,8 @@ function_decl|;
 comment|/**    * Rewrites the query using the given view query.    *    *<p>The input node is a Scan on the view table and possibly a compensation Filter    * on top. If a rewriting can be produced, we return that rewriting. If it cannot    * be produced, we will return null.    */
 specifier|protected
 specifier|abstract
+annotation|@
+name|Nullable
 name|RelNode
 name|rewriteView
 parameter_list|(
@@ -2682,12 +2763,16 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|topProject
 parameter_list|,
 name|RelNode
 name|node
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|topViewProject
 parameter_list|,
@@ -2711,6 +2796,8 @@ specifier|protected
 specifier|abstract
 name|Pair
 argument_list|<
+annotation|@
+name|Nullable
 name|RelNode
 argument_list|,
 name|RelNode
@@ -2720,6 +2807,8 @@ parameter_list|(
 name|RelBuilder
 name|builder
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelNode
 name|topViewProject
 parameter_list|,
@@ -3474,6 +3563,8 @@ name|RelTableRef
 argument_list|>
 name|targetTableRefs
 parameter_list|,
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|RexTableInputRef
@@ -3803,6 +3894,8 @@ argument_list|(
 name|uniqueKeyColumnRef
 argument_list|)
 operator|&&
+name|castNonNull
+argument_list|(
 name|sourceEC
 operator|.
 name|getEquivalenceClassesMap
@@ -3811,6 +3904,7 @@ operator|.
 name|get
 argument_list|(
 name|uniqueKeyColumnRef
+argument_list|)
 argument_list|)
 operator|.
 name|contains
@@ -3875,7 +3969,10 @@ name|parentTRef
 argument_list|)
 expr_stmt|;
 block|}
+name|castNonNull
+argument_list|(
 name|edge
+argument_list|)
 operator|.
 name|equiColumns
 operator|.
@@ -4048,6 +4145,8 @@ return|;
 block|}
 comment|/**    * We check whether the predicates in the source are contained in the predicates    * in the target. The method treats separately the equi-column predicates, the    * range predicates, and the rest of predicates.    *    *<p>If the containment is confirmed, we produce compensation predicates that    * need to be added to the target to produce the results in the source. Thus,    * if source and target expressions are equivalent, those predicates will be the    * true constant.    *    *<p>In turn, if containment cannot be confirmed, the method returns null.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RexNode
@@ -4212,6 +4311,8 @@ return|;
 block|}
 comment|/**    * Given the equi-column predicates of the source and the target and the    * computed equivalence classes, it extracts possible mappings between    * the equivalence classes.    *    *<p>If there is no mapping, it returns null. If there is a exact match,    * it will return a compensation predicate that evaluates to true.    * Finally, if a compensation predicate needs to be enforced on top of    * the target to make the equivalences classes match, it returns that    * compensation predicate.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|RexNode
 name|generateEquivalenceClasses
 parameter_list|(
@@ -4554,6 +4655,8 @@ return|;
 block|}
 comment|/**    * Given the source and target equivalence classes, it extracts the possible mappings    * from each source equivalence class to each target equivalence class.    *    *<p>If any of the source equivalence classes cannot be mapped to a target equivalence    * class, it returns null.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Integer
@@ -4709,6 +4812,8 @@ return|;
 block|}
 comment|/**    * First, the method takes the node expressions {@code nodeExprs} and swaps the table    * and column references using the table mapping and the equivalence classes.    * If {@code swapTableColumn} is true, it swaps the table reference and then the column reference,    * otherwise it swaps the column reference and then the table reference.    *    *<p>Then, the method will rewrite the input expression {@code exprToRewrite}, replacing the    * {@link RexTableInputRef} by references to the positions in {@code nodeExprs}.    *    *<p>The method will return the rewritten expression. If any of the expressions in the input    * expression cannot be mapped, it will return null.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|RexNode
 name|rewriteExpression
 parameter_list|(
@@ -4810,6 +4915,8 @@ return|;
 block|}
 comment|/**    * First, the method takes the node expressions {@code nodeExprs} and swaps the table    * and column references using the table mapping and the equivalence classes.    * If {@code swapTableColumn} is true, it swaps the table reference and then the column reference,    * otherwise it swaps the column reference and then the table reference.    *    *<p>Then, the method will rewrite the input expressions {@code exprsToRewrite}, replacing the    * {@link RexTableInputRef} by references to the positions in {@code nodeExprs}.    *    *<p>The method will return the rewritten expressions. If any of the subexpressions in the input    * expressions cannot be mapped, it will return null.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode
@@ -5465,6 +5572,8 @@ argument_list|)
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|RexNode
 name|replace
 parameter_list|(
@@ -5560,6 +5669,8 @@ return|;
 block|}
 comment|/**    * Replaces all the input references by the position in the    * input column set. If a reference index cannot be found in    * the input set, then we return null.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|RexNode
 name|shuttleReferences
 parameter_list|(
@@ -5674,6 +5785,8 @@ block|}
 block|}
 comment|/**    * Replaces all the possible sub-expressions by input references    * to the input node.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|RexNode
 name|shuttleReferences
 parameter_list|(
@@ -5712,6 +5825,8 @@ return|;
 block|}
 comment|/**    * Replaces all the possible sub-expressions by input references    * to the input node. If available, it uses the rewriting mapping    * to change the position to reference. Takes the reference type    * from the input node.    */
 specifier|protected
+annotation|@
+name|Nullable
 name|RexNode
 name|shuttleReferences
 parameter_list|(
@@ -5733,10 +5848,14 @@ argument_list|>
 name|exprsLineage
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|RelNode
 name|node
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|Multimap
 argument_list|<
 name|Integer
@@ -6189,6 +6308,8 @@ argument_list|>
 name|nodeToEquivalenceClass
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|RexTableInputRef
@@ -6201,6 +6322,8 @@ argument_list|>
 name|cacheEquivalenceClassesMap
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Set
@@ -6804,6 +6927,8 @@ name|newView
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Project
 name|newTopViewProject
 decl_stmt|;
@@ -6818,6 +6943,8 @@ parameter_list|(
 name|RelNode
 name|newView
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|newTopViewProject
 parameter_list|,
@@ -6852,6 +6979,8 @@ parameter_list|(
 name|RelNode
 name|newView
 parameter_list|,
+annotation|@
+name|Nullable
 name|Project
 name|newTopViewProject
 parameter_list|,
@@ -6914,6 +7043,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|HepProgram
 name|unionRewritingPullProgram
 parameter_list|()
@@ -6922,6 +7053,8 @@ comment|/** Sets {@link #unionRewritingPullProgram()}. */
 name|Config
 name|withUnionRewritingPullProgram
 parameter_list|(
+annotation|@
+name|Nullable
 name|HepProgram
 name|program
 parameter_list|)

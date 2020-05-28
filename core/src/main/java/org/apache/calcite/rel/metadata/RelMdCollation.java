@@ -663,6 +663,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -829,6 +845,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Collation#collations()},    * invoked using reflection, for any relational expression not    * handled by a more specific method.    *    *<p>{@link org.apache.calcite.rel.core.Union},    * {@link org.apache.calcite.rel.core.Intersect},    * {@link org.apache.calcite.rel.core.Minus},    * {@link org.apache.calcite.rel.core.Join},    * {@link org.apache.calcite.rel.core.Correlate}    * do not in general return sorted results    * (but implementations using particular algorithms may).    *    * @param rel Relational expression    * @return Relational expression's collations    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#collations(RelNode)    */
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -851,12 +869,16 @@ specifier|static
 parameter_list|<
 name|E
 parameter_list|>
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|E
 argument_list|>
 name|copyOf
 parameter_list|(
+annotation|@
+name|Nullable
 name|Collection
 argument_list|<
 name|?
@@ -882,6 +904,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -915,6 +939,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1004,6 +1030,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1030,6 +1058,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1056,6 +1086,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1083,6 +1115,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1140,6 +1174,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1181,6 +1217,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1222,6 +1260,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1263,6 +1303,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1292,6 +1334,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1321,6 +1365,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1355,6 +1401,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1389,6 +1437,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1423,6 +1473,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1449,6 +1501,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1475,6 +1529,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -1514,6 +1570,8 @@ comment|// Helper methods
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.TableScan}'s collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -1534,6 +1592,8 @@ block|}
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Snapshot}'s collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -1581,6 +1641,8 @@ block|}
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Filter}'s collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -1606,6 +1668,8 @@ block|}
 comment|/** Helper method to determine a    * limit's collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -1631,6 +1695,8 @@ block|}
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Calc}'s collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -1691,6 +1757,8 @@ block|}
 comment|/** Helper method to determine a {@link Project}'s collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2127,6 +2195,8 @@ block|}
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Window}'s collation.    *    *<p>A Window projects the fields of its input first, followed by the output    * from each of its windows. Assuming (quite reasonably) that the    * implementation does not re-order its input rows, then any collations of its    * input are preserved. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2160,6 +2230,8 @@ block|}
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Match}'s collation. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2225,6 +2297,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|interval
 parameter_list|)
@@ -2715,6 +2789,8 @@ name|Deprecated
 comment|// to be removed before 2.0
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2759,6 +2835,8 @@ block|}
 comment|/** Helper method to determine a {@link Join}'s collation assuming that it    * uses a merge-join algorithm.    *    *<p>If the inputs are sorted on other keys<em>in addition to</em> the join    * key, the result preserves those collations too. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2823,6 +2901,42 @@ return|return
 name|leftCollations
 return|;
 block|}
+if|if
+condition|(
+name|leftCollations
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+specifier|final
+name|ImmutableList
+argument_list|<
+name|RelCollation
+argument_list|>
+name|rightCollations
+init|=
+name|mq
+operator|.
+name|collations
+argument_list|(
+name|right
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|rightCollations
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|leftCollations
+return|;
+block|}
 specifier|final
 name|ImmutableList
 operator|.
@@ -2844,20 +2958,6 @@ argument_list|(
 name|leftCollations
 argument_list|)
 expr_stmt|;
-specifier|final
-name|ImmutableList
-argument_list|<
-name|RelCollation
-argument_list|>
-name|rightCollations
-init|=
-name|mq
-operator|.
-name|collations
-argument_list|(
-name|right
-argument_list|)
-decl_stmt|;
 specifier|final
 name|int
 name|leftFieldCount
@@ -2903,6 +3003,8 @@ block|}
 comment|/**    * Returns the collation of {@link EnumerableHashJoin} based on its inputs and the join type.    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2961,6 +3063,8 @@ block|}
 comment|/**    * Returns the collation of {@link EnumerableNestedLoopJoin}    * based on its inputs and the join type.    */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -2995,6 +3099,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -3026,6 +3132,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -3059,6 +3167,8 @@ literal|"unused"
 argument_list|)
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -3095,6 +3205,8 @@ literal|"unused"
 argument_list|)
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation

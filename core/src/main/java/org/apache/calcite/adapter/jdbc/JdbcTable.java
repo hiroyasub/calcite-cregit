@@ -563,6 +563,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -602,12 +618,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -629,6 +647,8 @@ implements|,
 name|ModifiableTable
 block|{
 specifier|private
+annotation|@
+name|Nullable
 name|RelProtoDataType
 name|protoRowType
 decl_stmt|;
@@ -691,8 +711,6 @@ name|this
 operator|.
 name|jdbcSchema
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|jdbcSchema
@@ -714,8 +732,6 @@ name|this
 operator|.
 name|jdbcTableName
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|jdbcTableName
@@ -725,8 +741,6 @@ name|this
 operator|.
 name|jdbcTableType
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|jdbcTableType
@@ -766,7 +780,11 @@ name|Override
 specifier|public
 parameter_list|<
 name|C
+extends|extends
+name|Object
 parameter_list|>
+annotation|@
+name|Nullable
 name|C
 name|unwrap
 parameter_list|(
@@ -923,7 +941,12 @@ specifier|final
 name|RelDataType
 name|rowType
 init|=
+name|requireNonNull
+argument_list|(
 name|protoRowType
+argument_list|,
+literal|"protoRowType"
+argument_list|)
 operator|.
 name|apply
 argument_list|(
@@ -1260,6 +1283,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -1269,14 +1294,18 @@ name|DataContext
 name|root
 parameter_list|)
 block|{
-specifier|final
 name|JavaTypeFactory
 name|typeFactory
 init|=
+name|requireNonNull
+argument_list|(
 name|root
 operator|.
 name|getTypeFactory
 argument_list|()
+argument_list|,
+literal|"root.getTypeFactory"
+argument_list|)
 decl_stmt|;
 specifier|final
 name|SqlString
@@ -1317,6 +1346,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Collection
 name|getModifiableCollection
 parameter_list|()
@@ -1346,12 +1377,16 @@ parameter_list|,
 name|Operation
 name|operation
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|updateColumnList
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RexNode

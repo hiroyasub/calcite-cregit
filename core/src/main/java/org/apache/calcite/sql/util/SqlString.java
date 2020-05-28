@@ -45,6 +45,36 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
 begin_comment
 comment|/**  * String that represents a kocher SQL statement, expression, or fragment.  *  *<p>A SqlString just contains a regular Java string, but the SqlString wrapper  * indicates that the string has been created carefully guarding against all SQL  * dialect and injection issues.  *  *<p>The easiest way to do build a SqlString is to use a {@link SqlBuilder}.  */
 end_comment
@@ -64,6 +94,8 @@ name|SqlDialect
 name|dialect
 decl_stmt|;
 specifier|private
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|Integer
@@ -104,6 +136,8 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|Integer
@@ -164,6 +198,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -215,7 +251,11 @@ name|sql
 return|;
 block|}
 comment|/**    * Returns indices of dynamic parameters.    *    * @return indices of dynamic parameters    */
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|Integer

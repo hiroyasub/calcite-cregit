@@ -413,6 +413,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -498,16 +514,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -4574,6 +4580,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|SqlKind
@@ -4585,6 +4593,8 @@ comment|/** Sets {@link #functionsToReduce}. */
 name|Config
 name|withFunctionsToReduce
 parameter_list|(
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|SqlKind
@@ -4594,7 +4604,7 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the validated set of functions to reduce, or the default set      * if not specified. */
 annotation|@
-name|Nonnull
+name|NonNull
 specifier|default
 name|Set
 argument_list|<

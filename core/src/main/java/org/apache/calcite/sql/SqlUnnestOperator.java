@@ -157,6 +157,18 @@ name|Util
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * The<code>UNNEST</code> operator.  */
 end_comment
@@ -382,13 +394,21 @@ operator|instanceof
 name|MapSqlType
 condition|)
 block|{
+name|MapSqlType
+name|mapType
+init|=
+operator|(
+name|MapSqlType
+operator|)
+name|type
+decl_stmt|;
 name|builder
 operator|.
 name|add
 argument_list|(
 name|MAP_KEY_COLUMN_NAME
 argument_list|,
-name|type
+name|mapType
 operator|.
 name|getKeyType
 argument_list|()
@@ -400,7 +420,7 @@ name|add
 argument_list|(
 name|MAP_VALUE_COLUMN_NAME
 argument_list|,
-name|type
+name|mapType
 operator|.
 name|getValueType
 argument_list|()
@@ -409,6 +429,19 @@ expr_stmt|;
 block|}
 else|else
 block|{
+name|RelDataType
+name|componentType
+init|=
+name|requireNonNull
+argument_list|(
+name|type
+operator|.
+name|getComponentType
+argument_list|()
+argument_list|,
+literal|"componentType"
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -417,10 +450,7 @@ argument_list|(
 name|opBinding
 argument_list|)
 operator|&&
-name|type
-operator|.
-name|getComponentType
-argument_list|()
+name|componentType
 operator|.
 name|isStruct
 argument_list|()
@@ -430,10 +460,7 @@ name|builder
 operator|.
 name|addAll
 argument_list|(
-name|type
-operator|.
-name|getComponentType
-argument_list|()
+name|componentType
 operator|.
 name|getFieldList
 argument_list|()
@@ -453,10 +480,7 @@ argument_list|(
 name|operand
 argument_list|)
 argument_list|,
-name|type
-operator|.
-name|getComponentType
-argument_list|()
+name|componentType
 argument_list|)
 expr_stmt|;
 block|}

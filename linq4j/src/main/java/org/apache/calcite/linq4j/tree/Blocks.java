@@ -17,6 +17,18 @@ name|tree
 package|;
 end_package
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  *<p>Helper methods concerning {@link BlockStatement}s.</p>  *  * @see BlockBuilder  */
 end_comment
@@ -275,6 +287,8 @@ name|GotoStatement
 condition|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 operator|(
 operator|(
 name|GotoStatement
@@ -283,6 +297,7 @@ name|statement
 operator|)
 operator|.
 name|expression
+argument_list|)
 return|;
 block|}
 block|}

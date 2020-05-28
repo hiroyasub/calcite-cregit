@@ -68,16 +68,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -124,8 +114,6 @@ name|INSTANCE
 return|;
 block|}
 comment|/** Creates a Granularity based on a time unit.    *    *<p>When used in a query, Druid will rollup and round time values based on    * specified period and timezone. */
-annotation|@
-name|Nonnull
 specifier|public
 specifier|static
 name|Granularity
@@ -328,8 +316,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Type
 name|getType
@@ -464,8 +450,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-annotation|@
-name|Nonnull
 specifier|public
 name|Type
 name|getType

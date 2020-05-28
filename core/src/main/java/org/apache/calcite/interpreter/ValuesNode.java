@@ -163,6 +163,8 @@ name|createRows
 argument_list|(
 name|compiler
 argument_list|,
+name|fieldCount
+argument_list|,
 name|rel
 operator|.
 name|getTuples
@@ -171,6 +173,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|ImmutableList
 argument_list|<
 name|Row
@@ -179,6 +182,9 @@ name|createRows
 parameter_list|(
 name|Compiler
 name|compiler
+parameter_list|,
+name|int
+name|fieldCount
 parameter_list|,
 name|ImmutableList
 argument_list|<

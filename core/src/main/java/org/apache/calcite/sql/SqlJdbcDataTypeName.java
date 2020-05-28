@@ -63,6 +63,22 @@ name|SqlTypeName
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Defines the name of the types which can occur as a type argument  * in a JDBC<code>{fn CONVERT(value, type)}</code> function.  * (This function has similar functionality to {@code CAST}, and is not to be  * confused with the SQL standard  * {@link org.apache.calcite.sql.fun.SqlConvertFunction CONVERT} function.)  *  * @see SqlJdbcFunctionCall  */
 end_comment
@@ -300,11 +316,15 @@ argument_list|)
 block|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|TimeUnitRange
 name|range
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlTypeName
 name|typeName
 decl_stmt|;
@@ -338,9 +358,13 @@ expr_stmt|;
 block|}
 name|SqlJdbcDataTypeName
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlTypeName
 name|typeName
 parameter_list|,
+annotation|@
+name|Nullable
 name|TimeUnitRange
 name|range
 parameter_list|)

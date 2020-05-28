@@ -17,6 +17,22 @@ name|metadata
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Placeholder for null values. */
 end_comment
@@ -50,6 +66,8 @@ specifier|static
 name|Comparable
 name|mask
 parameter_list|(
+annotation|@
+name|Nullable
 name|Comparable
 name|value
 parameter_list|)
@@ -74,6 +92,8 @@ specifier|static
 name|Object
 name|mask
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)

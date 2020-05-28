@@ -207,6 +207,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -262,16 +278,6 @@ operator|.
 name|util
 operator|.
 name|TimeZone
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -491,10 +497,10 @@ parameter_list|()
 block|{
 block|}
 comment|/**    * Translates a Calcite {@link RexNode} to a Druid expression, if possible;    * returns null if not possible.    *    * @param rexNode RexNode to convert to a Druid Expression    * @param inputRowType Input row type of the rexNode to translate    * @param druidRel Druid query    *    * @return Druid Expression, or null when can not convert the RexNode    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|String
 name|toDruidExpression
 parameter_list|(
@@ -1375,10 +1381,10 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Translate a list of Calcite {@code RexNode} to Druid expressions.    *    * @param rexNodes list of Calcite expressions meant to be applied on top of the rows    *    * @return list of Druid expressions in the same order as rexNodes, or null if not possible.    * If a non-null list is returned, all elements will be non-null.    */
-annotation|@
-name|Nullable
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String

@@ -77,6 +77,18 @@ name|SqlTypeUtil
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the SQL:2003 standard ARRAY constructor,<code>ARRAY  * [&lt;expr&gt;, ...]</code>.  */
 end_comment
@@ -128,17 +140,13 @@ name|collectOperandTypes
 argument_list|()
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-literal|null
-operator|==
+name|requireNonNull
+argument_list|(
 name|type
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
+argument_list|,
+literal|"inferred array element type"
+argument_list|)
+expr_stmt|;
 return|return
 name|SqlTypeUtil
 operator|.

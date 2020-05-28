@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -34,6 +50,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -80,6 +108,8 @@ name|ExpressionType
 operator|.
 name|ArrayIndex
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|Types
 operator|.
 name|getComponentType
@@ -89,15 +119,15 @@ operator|.
 name|getType
 argument_list|()
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"component type for "
+operator|+
+name|array
+argument_list|)
 argument_list|)
 expr_stmt|;
-assert|assert
-name|array
-operator|!=
-literal|null
-operator|:
-literal|"array should not be null"
-assert|;
 assert|assert
 name|indexExpressions
 operator|!=
@@ -261,6 +291,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

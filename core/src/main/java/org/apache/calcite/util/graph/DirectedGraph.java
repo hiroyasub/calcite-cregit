@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -70,6 +86,8 @@ name|vertex
 parameter_list|)
 function_decl|;
 comment|/** Adds an edge to this graph.    *    * @param vertex Source vertex    * @param targetVertex Target vertex    * @return New edge, if added, otherwise null    * @throws IllegalArgumentException if either vertex is not already in graph    */
+annotation|@
+name|Nullable
 name|E
 name|addEdge
 parameter_list|(
@@ -80,6 +98,8 @@ name|V
 name|targetVertex
 parameter_list|)
 function_decl|;
+annotation|@
+name|Nullable
 name|E
 name|getEdge
 parameter_list|(
@@ -102,6 +122,8 @@ parameter_list|)
 function_decl|;
 name|Set
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vertexSet

@@ -45,6 +45,22 @@ name|ImmutableBeans
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Configuration for {@link SqlWriter} and {@link SqlPrettyWriter}. */
 end_comment
@@ -59,6 +75,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|SqlDialect
 name|dialect
 parameter_list|()
@@ -67,6 +85,8 @@ comment|/** Sets {@link #dialect()}. */
 name|SqlWriterConfig
 name|withDialect
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlDialect
 name|dialect
 parameter_list|)
@@ -220,6 +240,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|()
@@ -228,6 +250,8 @@ comment|/** Sets {@link #lineFolding()}. */
 name|SqlWriterConfig
 name|withLineFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -237,6 +261,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|selectFolding
 parameter_list|()
@@ -245,6 +271,8 @@ comment|/** Sets {@link #selectFolding()}. */
 name|SqlWriterConfig
 name|withSelectFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -278,6 +306,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|whereFolding
 parameter_list|()
@@ -286,6 +316,8 @@ comment|/** Sets {@link #whereFolding()}. */
 name|SqlWriterConfig
 name|withWhereFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -295,6 +327,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|groupByFolding
 parameter_list|()
@@ -303,6 +337,8 @@ comment|/** Sets {@link #groupByFolding()}. */
 name|SqlWriterConfig
 name|withGroupByFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -312,6 +348,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|havingFolding
 parameter_list|()
@@ -320,6 +358,8 @@ comment|/** Sets {@link #havingFolding()}. */
 name|SqlWriterConfig
 name|withHavingFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -329,6 +369,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|windowFolding
 parameter_list|()
@@ -337,6 +379,8 @@ comment|/** Sets {@link #windowFolding()}. */
 name|SqlWriterConfig
 name|withWindowFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -346,6 +390,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|matchFolding
 parameter_list|()
@@ -354,6 +400,8 @@ comment|/** Sets {@link #matchFolding()}. */
 name|SqlWriterConfig
 name|withMatchFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -363,6 +411,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|orderByFolding
 parameter_list|()
@@ -371,6 +421,8 @@ comment|/** Sets {@link #orderByFolding()}. */
 name|SqlWriterConfig
 name|withOrderByFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -380,6 +432,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|overFolding
 parameter_list|()
@@ -388,6 +442,8 @@ comment|/** Sets {@link #overFolding()}. */
 name|SqlWriterConfig
 name|withOverFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -397,6 +453,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|valuesFolding
 parameter_list|()
@@ -405,6 +463,8 @@ comment|/** Sets {@link #valuesFolding()}. */
 name|SqlWriterConfig
 name|withValuesFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)
@@ -414,6 +474,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|LineFolding
 name|updateSetFolding
 parameter_list|()
@@ -422,6 +484,8 @@ comment|/** Sets {@link #updateSetFolding()}. */
 name|SqlWriterConfig
 name|withUpdateSetFolding
 parameter_list|(
+annotation|@
+name|Nullable
 name|LineFolding
 name|lineFolding
 parameter_list|)

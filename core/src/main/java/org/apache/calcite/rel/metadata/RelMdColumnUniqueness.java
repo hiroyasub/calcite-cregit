@@ -553,6 +553,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -685,6 +701,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -730,6 +748,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(ImmutableBitSet, boolean)},    * invoked using reflection, for any relational expression not    * handled by a more specific method.    *    * @param rel Relational expression    * @param mq Metadata query    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return whether the columns are unique, or    * null if not enough information is available to make that determination    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#areColumnsUnique(RelNode, ImmutableBitSet, boolean)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -896,6 +916,8 @@ literal|false
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -963,6 +985,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1007,6 +1031,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1051,6 +1077,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1095,6 +1123,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1311,6 +1341,8 @@ throw|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1364,6 +1396,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -1427,6 +1461,8 @@ argument_list|)
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|Boolean
 name|areProjectColumnsUnique
 parameter_list|(
@@ -1671,6 +1707,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2070,6 +2108,8 @@ argument_list|()
 throw|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2244,19 +2284,9 @@ argument_list|(
 name|column
 argument_list|)
 decl_stmt|;
-name|values
-operator|.
-name|add
-argument_list|(
-name|literal
-operator|.
-name|isNull
-argument_list|()
-condition|?
-name|NullSentinel
-operator|.
-name|INSTANCE
-else|:
+name|Comparable
+name|value
+init|=
 name|literal
 operator|.
 name|getValueAs
@@ -2265,6 +2295,20 @@ name|Comparable
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+name|values
+operator|.
+name|add
+argument_list|(
+name|value
+operator|==
+literal|null
+condition|?
+name|NullSentinel
+operator|.
+name|INSTANCE
+else|:
+name|value
 argument_list|)
 expr_stmt|;
 block|}
@@ -2299,6 +2343,8 @@ literal|true
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2343,6 +2389,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2387,6 +2435,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -2751,9 +2801,13 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+operator|!
+name|RelOptPredicateList
+operator|.
+name|isEmpty
+argument_list|(
 name|predicates
-operator|!=
-literal|null
+argument_list|)
 condition|)
 block|{
 specifier|final
@@ -2765,6 +2819,7 @@ name|constantIndexes
 init|=
 operator|new
 name|HashSet
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|predicates

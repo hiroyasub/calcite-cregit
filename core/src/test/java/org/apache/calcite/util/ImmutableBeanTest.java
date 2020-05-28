@@ -61,6 +61,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|NonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|Matcher
@@ -168,16 +184,6 @@ operator|.
 name|util
 operator|.
 name|TreeSet
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
 import|;
 end_import
 
@@ -3516,7 +3522,7 @@ name|ImmutableBeans
 operator|.
 name|Property
 annotation|@
-name|Nonnull
+name|NonNull
 name|String
 name|getNonnullString
 parameter_list|()
@@ -3540,7 +3546,7 @@ argument_list|(
 literal|"abc"
 argument_list|)
 annotation|@
-name|Nonnull
+name|NonNull
 name|String
 name|getStringWithDefault
 parameter_list|()
@@ -3583,7 +3589,7 @@ argument_list|(
 literal|"RED"
 argument_list|)
 annotation|@
-name|Nonnull
+name|NonNull
 name|Color
 name|getColorWithDefault
 parameter_list|()

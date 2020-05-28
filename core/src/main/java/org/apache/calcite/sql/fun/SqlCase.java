@@ -133,6 +133,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -152,6 +168,8 @@ name|SqlCase
 extends|extends
 name|SqlCall
 block|{
+annotation|@
+name|Nullable
 name|SqlNode
 name|value
 decl_stmt|;
@@ -161,6 +179,8 @@ decl_stmt|;
 name|SqlNodeList
 name|thenList
 decl_stmt|;
+annotation|@
+name|Nullable
 name|SqlNode
 name|elseExpr
 decl_stmt|;
@@ -172,6 +192,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|value
 parameter_list|,
@@ -181,6 +203,8 @@ parameter_list|,
 name|SqlNodeList
 name|thenList
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|elseExpr
 parameter_list|)
@@ -224,6 +248,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|value
 parameter_list|,
@@ -233,6 +259,8 @@ parameter_list|,
 name|SqlNodeList
 name|thenList
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|elseClause
 parameter_list|)
@@ -389,6 +417,11 @@ name|CASE
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullness"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|List
@@ -414,6 +447,11 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"assignment.type.incompatible"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|void
@@ -422,6 +460,8 @@ parameter_list|(
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -480,6 +520,8 @@ throw|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getValueOperand
 parameter_list|()
@@ -507,6 +549,8 @@ name|thenList
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getElseOperand
 parameter_list|()

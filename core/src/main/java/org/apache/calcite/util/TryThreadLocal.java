@@ -15,6 +15,22 @@ name|util
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Thread-local variable that returns a handle that can be closed.  *  * @param<T> Value type  */
 end_comment
@@ -24,6 +40,8 @@ specifier|public
 class|class
 name|TryThreadLocal
 parameter_list|<
+annotation|@
+name|Nullable
 name|T
 parameter_list|>
 extends|extends

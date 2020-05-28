@@ -147,6 +147,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -246,16 +276,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -334,8 +354,6 @@ specifier|public
 name|String
 name|load
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Pair
 argument_list|<
 name|ByteString
@@ -438,26 +456,36 @@ argument_list|)
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|stringValue
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|ByteString
 name|bytesValue
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|charsetName
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Charset
 name|charset
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 decl_stmt|;
@@ -472,6 +500,8 @@ parameter_list|,
 name|String
 name|charsetName
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 parameter_list|)
@@ -505,9 +535,13 @@ parameter_list|(
 name|String
 name|stringValue
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|charsetName
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 parameter_list|)
@@ -533,15 +567,23 @@ comment|/** Internal constructor; other constructors must call it. */
 specifier|private
 name|NlsString
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|stringValue
 parameter_list|,
+annotation|@
+name|Nullable
 name|ByteString
 name|bytesValue
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|charsetName
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlCollation
 name|collation
 parameter_list|)
@@ -625,7 +667,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|charsetName
+name|charset
 operator|==
 literal|null
 condition|)
@@ -650,6 +692,14 @@ expr_stmt|;
 block|}
 else|else
 block|{
+comment|//noinspection ConstantConditions
+assert|assert
+name|stringValue
+operator|!=
+literal|null
+operator|:
+literal|"stringValue must not be null"
+assert|;
 comment|// Java string can be malformed if LATIN1 is required.
 if|if
 condition|(
@@ -680,6 +730,14 @@ argument_list|)
 operator|)
 condition|)
 block|{
+comment|//noinspection ConstantConditions
+assert|assert
+name|charset
+operator|!=
+literal|null
+operator|:
+literal|"charset must not be null"
+assert|;
 if|if
 condition|(
 operator|!
@@ -790,6 +848,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -923,7 +983,11 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getCharsetName
 parameter_list|()
@@ -932,7 +996,11 @@ return|return
 name|charsetName
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|Charset
 name|getCharset
 parameter_list|()
@@ -941,7 +1009,11 @@ return|return
 name|charset
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|SqlCollation
 name|getCollation
 parameter_list|()
@@ -966,6 +1038,15 @@ assert|assert
 name|bytesValue
 operator|!=
 literal|null
+operator|:
+literal|"bytesValue must not be null"
+assert|;
+assert|assert
+name|charset
+operator|!=
+literal|null
+operator|:
+literal|"charset must not be null"
 assert|;
 return|return
 name|DECODE_MAP
@@ -1395,7 +1476,11 @@ argument_list|)
 return|;
 block|}
 comment|/** Returns the value as a {@link ByteString}. */
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|ByteString
 name|getValueBytes
 parameter_list|()

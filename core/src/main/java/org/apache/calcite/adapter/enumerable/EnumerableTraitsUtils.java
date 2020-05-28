@@ -323,6 +323,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -547,6 +563,8 @@ literal|true
 return|;
 block|}
 specifier|static
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet
@@ -690,6 +708,8 @@ argument_list|)
 return|;
 block|}
 specifier|static
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet
@@ -1009,6 +1029,8 @@ block|}
 block|}
 comment|/**    * This function can be reused when a Join's traits pass-down shall only    * pass through collation to left input.    *    * @param required required trait set for the join    * @param joinType the join type    * @param leftInputFieldCount number of field count of left join input    * @param joinTraitSet trait set of the join    */
 specifier|static
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet
@@ -1134,6 +1156,8 @@ return|;
 block|}
 comment|/**    * This function can be reused when a Join's traits derivation shall only    * derive collation from left input.    *    * @param childTraits trait set of the child    * @param childId id of the child (0 is left join input)    * @param joinType the join type    * @param joinTraitSet trait set of the join    * @param rightTraitSet trait set of the right join input    */
 specifier|static
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|RelTraitSet

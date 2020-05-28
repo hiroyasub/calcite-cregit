@@ -159,6 +159,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -189,11 +219,27 @@ end_import
 
 begin_import
 import|import
-name|javax
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nonnull
+name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -242,6 +288,8 @@ parameter_list|(
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -267,25 +315,26 @@ name|getKind
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
 specifier|abstract
-annotation|@
-name|Nonnull
 name|SqlOperator
 name|getOperator
 parameter_list|()
 function_decl|;
+comment|/**    * Returns the list of operands. The set and order of operands is call-specific.    *<p>Note: the proper type would be {@code List<@Nullable SqlNode>}, however,    * it would trigger too many changes to the current codebase.</p>    * @return the list of call operands, never null, the operands can be null    */
 specifier|public
 specifier|abstract
-annotation|@
-name|Nonnull
 name|List
 argument_list|<
+comment|/*Nullable*/
 name|SqlNode
 argument_list|>
 name|getOperandList
 parameter_list|()
 function_decl|;
+comment|/**    * Returns i-th operand (0-based).    *<p>Note: the result might be null, so the proper signature would be    * {@code<S extends @Nullable SqlNode>}, however, it would trigger to many changes to the current    * codebase.</p>    * @param i operand index (0-based)    * @param<S> type of the result    * @return i-th operand (0-based), the result might be null    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -295,6 +344,7 @@ specifier|public
 parameter_list|<
 name|S
 extends|extends
+comment|/*Nullable*/
 name|SqlNode
 parameter_list|>
 name|S
@@ -304,16 +354,21 @@ name|int
 name|i
 parameter_list|)
 block|{
+comment|// Note: in general, null elements exist in the list, however, the code
+comment|// assumes operand(..) is non-nullable, so we add a cast here
 return|return
 operator|(
 name|S
 operator|)
+name|castNonNull
+argument_list|(
 name|getOperandList
 argument_list|()
 operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -629,6 +684,8 @@ specifier|public
 name|boolean
 name|equalsDeep
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node
 parameter_list|,
@@ -774,6 +831,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|)
@@ -807,7 +866,14 @@ name|validator
 operator|.
 name|deriveType
 argument_list|(
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|scope
+argument_list|,
+literal|"scope"
+argument_list|)
 argument_list|,
 name|operand
 argument_list|)
@@ -850,10 +916,21 @@ specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|)
 block|{
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|scope
+argument_list|,
+literal|"scope"
+argument_list|)
+expr_stmt|;
 comment|// Delegate to operator.
 specifier|final
 name|SqlCallBinding
@@ -963,7 +1040,11 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|getFunctionQuantifier
 parameter_list|()

@@ -703,10 +703,12 @@ block|{
 name|int
 name|h
 init|=
-name|x
+name|Objects
 operator|.
 name|hashCode
-argument_list|()
+argument_list|(
+name|x
+argument_list|)
 decl_stmt|;
 name|a
 operator|+=

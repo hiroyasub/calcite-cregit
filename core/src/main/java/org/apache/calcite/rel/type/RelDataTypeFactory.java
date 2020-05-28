@@ -111,6 +111,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -333,6 +349,8 @@ name|getDefaultCharset
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the most general of a set of types (that is, one type to which    * they can all be cast), or null if conversion is not possible. The result    * may be a new type that is less restrictive than any of the input types,    * e.g.<code>leastRestrictive(INT, NUMERIC(3, 2))</code> could be    * {@code NUMERIC(12, 2)}.    *    * @param types input types to be combined using union (not null, not empty)    * @return canonical union type descriptor    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|leastRestrictive
 parameter_list|(
@@ -393,6 +411,8 @@ comment|/**    * Infers the return type of a decimal multiplication. Decimal    
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|Nullable
 name|RelDataType
 name|createDecimalProduct
 parameter_list|(
@@ -421,6 +441,8 @@ comment|/**    * Infers the return type of a decimal division. Decimal division 
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|Nullable
 name|RelDataType
 name|createDecimalQuotient
 parameter_list|(

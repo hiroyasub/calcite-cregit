@@ -177,6 +177,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -196,22 +212,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
 operator|.
-name|annotation
-operator|.
-name|Nonnull
+name|requireNonNull
 import|;
 end_import
 
@@ -259,6 +267,8 @@ literal|0
 decl_stmt|;
 comment|/**    * Cache of normalized variables used for #equals and #hashCode.    */
 specifier|private
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|SqlOperator
@@ -293,8 +303,6 @@ name|this
 operator|.
 name|type
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|type
@@ -306,8 +314,6 @@ name|this
 operator|.
 name|op
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|op
@@ -554,19 +560,13 @@ operator|instanceof
 name|RexLiteral
 operator|)
 operator|||
-operator|(
+name|digestSkipsType
+argument_list|(
 operator|(
 name|RexLiteral
 operator|)
 name|otherArg
-operator|)
-operator|.
-name|digestIncludesType
-argument_list|()
-operator|==
-name|RexDigestIncludeType
-operator|.
-name|NO_TYPE
+argument_list|)
 operator|)
 operator|&&
 name|SqlTypeUtil
@@ -597,15 +597,13 @@ name|operandDigests
 operator|.
 name|add
 argument_list|(
-operator|(
+name|computeDigest
+argument_list|(
 operator|(
 name|RexLiteral
 operator|)
 name|operand
-operator|)
-operator|.
-name|computeDigest
-argument_list|(
+argument_list|,
 name|includeType
 argument_list|)
 argument_list|)
@@ -706,9 +704,52 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+specifier|private
+specifier|static
+name|boolean
+name|digestSkipsType
+parameter_list|(
+name|RexLiteral
+name|literal
+parameter_list|)
+block|{
+comment|// This seems trivial, however, this method
+comment|// workarounds https://github.com/typetools/checker-framework/issues/3631
+return|return
+name|literal
+operator|.
+name|digestIncludesType
+argument_list|()
+operator|==
+name|RexDigestIncludeType
+operator|.
+name|NO_TYPE
+return|;
+block|}
+specifier|private
+specifier|static
+name|String
+name|computeDigest
+parameter_list|(
+name|RexLiteral
+name|literal
+parameter_list|,
+name|RexDigestIncludeType
+name|includeType
+parameter_list|)
+block|{
+comment|// This seems trivial, however, this method
+comment|// workarounds https://github.com/typetools/checker-framework/issues/3631
+return|return
+name|literal
+operator|.
+name|computeDigest
+argument_list|(
+name|includeType
+argument_list|)
+return|;
+block|}
 specifier|protected
-annotation|@
-name|Nonnull
 name|String
 name|computeDigest
 parameter_list|(
@@ -813,8 +854,6 @@ annotation|@
 name|Override
 specifier|public
 specifier|final
-annotation|@
-name|Nonnull
 name|String
 name|toString
 parameter_list|()
@@ -1018,7 +1057,12 @@ name|class
 argument_list|)
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|sarg
+argument_list|,
+literal|"sarg"
+argument_list|)
 operator|.
 name|isAll
 argument_list|()
@@ -1147,7 +1191,12 @@ name|class
 argument_list|)
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|sarg
+argument_list|,
+literal|"sarg"
+argument_list|)
 operator|.
 name|isNone
 argument_list|()
@@ -1303,6 +1352,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

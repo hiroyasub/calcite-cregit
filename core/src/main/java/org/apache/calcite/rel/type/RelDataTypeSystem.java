@@ -63,6 +63,22 @@ name|Glossary
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Type system.  *  *<p>Provides behaviors concerning type limits and behaviors. For example,  * in the default system, a DECIMAL can have maximum precision 19, but Hive  * overrides to 38.  *  *<p>The default implementation is {@link #DEFAULT}.  */
 end_comment
@@ -116,6 +132,8 @@ name|getMaxNumericPrecision
 parameter_list|()
 function_decl|;
 comment|/** Returns the LITERAL string for the type, either PREFIX/SUFFIX. */
+annotation|@
+name|Nullable
 name|String
 name|getLiteral
 parameter_list|(
@@ -245,6 +263,8 @@ return|;
 block|}
 comment|/**    * Infers the return type of a decimal addition. Decimal addition involves    * at least one decimal operand and requires both operands to have exact    * numeric types.    *    *<p>Rules:    *    *<ul>    *<li>Let p1, s1 be the precision and scale of the first operand</li>    *<li>Let p2, s2 be the precision and scale of the second operand</li>    *<li>Let p, s be the precision and scale of the result</li>    *<li>Let d be the number of whole digits in the result</li>    *<li>Then the result type is a decimal with:    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>    *</ul>    *</li>    *<li>p and s are capped at their maximum values</li>    *</ul>    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    *    * @param typeFactory TypeFactory used to create output type    * @param type1       Type of the first operand    * @param type2       Type of the second operand    * @return Result type for a decimal addition    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelDataType
 name|deriveDecimalPlusType
 parameter_list|(
@@ -439,6 +459,8 @@ return|;
 block|}
 comment|/**    * Infers the return type of a decimal multiplication. Decimal    * multiplication involves at least one decimal operand and requires both    * operands to have exact numeric types.    *    *<p>The default implementation is SQL:2003 compliant.    *    *<p>Rules:    *    *<ul>    *<li>Let p1, s1 be the precision and scale of the first operand</li>    *<li>Let p2, s2 be the precision and scale of the second operand</li>    *<li>Let p, s be the precision and scale of the result</li>    *<li>Let d be the number of whole digits in the result</li>    *<li>Then the result type is a decimal with:    *<ul>    *<li>p = p1 + p2)</li>    *<li>s = s1 + s2</li>    *</ul>    *</li>    *<li>p and s are capped at their maximum values</li>    *</ul>    *    *<p>p and s are capped at their maximum values    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    *    * @param typeFactory TypeFactory used to create output type    * @param type1       Type of the first operand    * @param type2       Type of the second operand    * @return Result type for a decimal multiplication, or null if decimal    * multiplication should not be applied to the operands    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelDataType
 name|deriveDecimalMultiplyType
 parameter_list|(
@@ -623,6 +645,8 @@ return|;
 block|}
 comment|/**    * Infers the return type of a decimal division. Decimal division involves    * at least one decimal operand and requires both operands to have exact    * numeric types.    *    *<p>The default implementation is SQL:2003 compliant.    *    *<p>Rules:    *    *<ul>    *<li>Let p1, s1 be the precision and scale of the first operand</li>    *<li>Let p2, s2 be the precision and scale of the second operand</li>    *<li>Let p, s be the precision and scale of the result</li>    *<li>Let d be the number of whole digits in the result</li>    *<li>Then the result type is a decimal with:    *<ul>    *<li>d = p1 - s1 + s2</li>    *<li>s&lt; max(6, s1 + p2 + 1)</li>    *<li>p = d + s</li>    *</ul>    *</li>    *<li>p and s are capped at their maximum values</li>    *</ul>    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    *    * @param typeFactory TypeFactory used to create output type    * @param type1       Type of the first operand    * @param type2       Type of the second operand    * @return Result type for a decimal division, or null if decimal    * division should not be applied to the operands    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelDataType
 name|deriveDecimalDivideType
 parameter_list|(
@@ -850,6 +874,8 @@ return|;
 block|}
 comment|/**    * Infers the return type of a decimal modulus operation. Decimal modulus    * involves at least one decimal operand.    *    *<p>The default implementation is SQL:2003 compliant: the declared type of    * the result is the declared type of the second operand (expression divisor).    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.27    *    *<p>Rules:    *    *<ul>    *<li>Let p1, s1 be the precision and scale of the first operand</li>    *<li>Let p2, s2 be the precision and scale of the second operand</li>    *<li>Let p, s be the precision and scale of the result</li>    *<li>Let d be the number of whole digits in the result</li>    *<li>Then the result type is a decimal with:    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = min(p1 - s1, p2 - s2) + max(s1, s2)</li>    *</ul>    *</li>    *<li>p and s are capped at their maximum values</li>    *</ul>    *    * @param typeFactory TypeFactory used to create output type    * @param type1       Type of the first operand    * @param type2       Type of the second operand    * @return Result type for a decimal modulus, or null if decimal    * modulus should not be applied to the operands    */
 specifier|default
+annotation|@
+name|Nullable
 name|RelDataType
 name|deriveDecimalModType
 parameter_list|(

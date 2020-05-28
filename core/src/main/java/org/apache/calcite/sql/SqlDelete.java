@@ -95,6 +95,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -133,12 +149,18 @@ decl_stmt|;
 name|SqlNode
 name|targetTable
 decl_stmt|;
+annotation|@
+name|Nullable
 name|SqlNode
 name|condition
 decl_stmt|;
+annotation|@
+name|Nullable
 name|SqlSelect
 name|sourceSelect
 decl_stmt|;
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|alias
 decl_stmt|;
@@ -152,12 +174,18 @@ parameter_list|,
 name|SqlNode
 name|targetTable
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|condition
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlSelect
 name|sourceSelect
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|alias
 parameter_list|)
@@ -218,6 +246,11 @@ name|OPERATOR
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"nullness"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|List
@@ -241,6 +274,11 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"assignment.type.incompatible"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|void
@@ -249,6 +287,8 @@ parameter_list|(
 name|int
 name|i
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 name|operand
 parameter_list|)
@@ -318,6 +358,8 @@ return|;
 block|}
 comment|/**    * Returns the alias for the target table of the deletion.    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlIdentifier
 name|getAlias
 parameter_list|()
@@ -328,6 +370,8 @@ return|;
 block|}
 comment|/**    * Gets the filter condition for rows to be deleted.    *    * @return the condition expression for the data to be deleted, or null for    * all rows in the table    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getCondition
 parameter_list|()
@@ -338,6 +382,8 @@ return|;
 block|}
 comment|/**    * Gets the source SELECT expression for the data to be deleted. This    * returns null before the condition has been expanded by    * {@link SqlValidatorImpl#performUnconditionalRewrites(SqlNode, boolean)}.    *    * @return the source SELECT for the data to be inserted    */
 specifier|public
+annotation|@
+name|Nullable
 name|SqlSelect
 name|getSourceSelect
 parameter_list|()
@@ -414,6 +460,13 @@ argument_list|,
 name|opRight
 argument_list|)
 expr_stmt|;
+name|SqlIdentifier
+name|alias
+init|=
+name|this
+operator|.
+name|alias
+decl_stmt|;
 if|if
 condition|(
 name|alias
@@ -440,6 +493,13 @@ name|opRight
 argument_list|)
 expr_stmt|;
 block|}
+name|SqlNode
+name|condition
+init|=
+name|this
+operator|.
+name|condition
+decl_stmt|;
 if|if
 condition|(
 name|condition

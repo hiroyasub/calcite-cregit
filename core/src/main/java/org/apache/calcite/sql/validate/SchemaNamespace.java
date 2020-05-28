@@ -93,6 +93,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -108,6 +124,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -217,6 +245,8 @@ specifier|final
 name|SqlValidatorTable
 name|table
 init|=
+name|requireNonNull
+argument_list|(
 name|validator
 operator|.
 name|catalogReader
@@ -224,6 +254,17 @@ operator|.
 name|getTable
 argument_list|(
 name|names1
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"table "
+operator|+
+name|names1
+operator|+
+literal|" is not found in scope "
+operator|+
+name|names
 argument_list|)
 decl_stmt|;
 name|builder
@@ -254,6 +295,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|SqlNode
 name|getNode
 parameter_list|()

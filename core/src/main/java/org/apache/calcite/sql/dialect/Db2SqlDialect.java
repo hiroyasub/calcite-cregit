@@ -342,12 +342,9 @@ name|writer
 operator|.
 name|literal
 argument_list|(
-name|literal
+name|interval
 operator|.
-name|getValue
-argument_list|()
-operator|.
-name|toString
+name|getIntervalLiteral
 argument_list|()
 argument_list|)
 expr_stmt|;

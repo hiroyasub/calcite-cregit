@@ -195,6 +195,18 @@ name|ExecutionException
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Factory that creates operator tables that consist of functions and operators  * for particular named libraries. For example, the following code will return  * an operator table that contains operators for both Oracle and MySQL:  *  *<blockquote>  *<pre>SqlOperatorTable opTab =  *     SqlLibraryOperatorTableFactory.INSTANCE.getOperatorTable(  *         EnumSet.of(SqlLibrary.ORACLE, SqlLibrary.MYSQL))</pre>  *</blockquote>  *  *<p>To define a new library, add a value to enum {@link SqlLibrary}.  *  *<p>To add functions to a library, add the {@link LibraryOperator} annotation  * to fields that of type {@link SqlOperator}, and the library name to its  * {@link LibraryOperator#libraries()} field.  */
 end_comment
@@ -250,6 +262,11 @@ expr_stmt|;
 block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|/** A cache that returns an operator table for a given library (or set of    * libraries). */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"methodref.receiver.bound.invalid"
+argument_list|)
 specifier|private
 specifier|final
 name|LoadingCache
@@ -412,10 +429,23 @@ init|=
 operator|(
 name|SqlOperator
 operator|)
+name|requireNonNull
+argument_list|(
 name|field
 operator|.
 name|get
 argument_list|(
+name|this
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"null value of "
+operator|+
+name|field
+operator|+
+literal|" for "
+operator|+
 name|this
 argument_list|)
 decl_stmt|;

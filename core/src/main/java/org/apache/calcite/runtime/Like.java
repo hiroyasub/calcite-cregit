@@ -15,6 +15,22 @@ name|runtime
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utilities for converting SQL {@code LIKE} and {@code SIMILAR} operators  * to regular expressions.  */
 end_comment
@@ -118,6 +134,8 @@ parameter_list|(
 name|String
 name|sqlPattern
 parameter_list|,
+annotation|@
+name|Nullable
 name|CharSequence
 name|escapeStr
 parameter_list|)
@@ -988,6 +1006,8 @@ parameter_list|(
 name|String
 name|sqlPattern
 parameter_list|,
+annotation|@
+name|Nullable
 name|CharSequence
 name|escapeStr
 parameter_list|)

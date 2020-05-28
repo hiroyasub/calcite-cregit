@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -141,6 +157,15 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"method.invocation.invalid"
+block|,
+literal|"methodref.receiver.bound.invalid"
+block|}
+argument_list|)
 specifier|public
 name|SimpleNamespaceContext
 parameter_list|(
@@ -234,6 +259,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getPrefix
 parameter_list|(

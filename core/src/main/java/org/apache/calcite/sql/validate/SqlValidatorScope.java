@@ -191,6 +191,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -363,6 +379,8 @@ name|nullable
 parameter_list|)
 function_decl|;
 comment|/**    * Finds a window with a given name. Returns null if not found.    */
+annotation|@
+name|Nullable
 name|SqlWindow
 name|lookupWindow
 parameter_list|(
@@ -379,11 +397,15 @@ name|expr
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the expressions by which the rows in this scope are sorted. If    * the rows are unsorted, returns null.    */
+annotation|@
+name|Nullable
 name|SqlNodeList
 name|getOrderList
 parameter_list|()
 function_decl|;
 comment|/**    * Resolves a single identifier to a column, and returns the datatype of    * that column.    *    *<p>If it cannot find the column, returns null. If the column is    * ambiguous, throws an error with context<code>ctx</code>.    *    * @param name Name of column    * @param ctx  Context for exception    * @return Type of column, if found and unambiguous; null if not found    */
+annotation|@
+name|Nullable
 name|RelDataType
 name|resolveColumn
 parameter_list|(
@@ -415,6 +437,8 @@ comment|/** @deprecated Use    * {@link #resolveTable(List, SqlNameMatcher, Path
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|Nullable
 name|SqlValidatorNamespace
 name|getTableNamespace
 parameter_list|(
@@ -461,6 +485,8 @@ specifier|default
 name|boolean
 name|isWithin
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope2
 parameter_list|)
@@ -484,12 +510,16 @@ parameter_list|,
 name|boolean
 name|nullable
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
 name|Path
 name|path
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -528,6 +558,8 @@ specifier|public
 name|Step
 name|plus
 parameter_list|(
+annotation|@
+name|Nullable
 name|RelDataType
 name|rowType
 parameter_list|,
@@ -674,6 +706,8 @@ name|Path
 name|parent
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|RelDataType
 name|rowType
 decl_stmt|;
@@ -696,6 +730,8 @@ parameter_list|(
 name|Path
 name|parent
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|rowType
 parameter_list|,
@@ -828,12 +864,16 @@ parameter_list|,
 name|boolean
 name|nullable
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
 name|Path
 name|path
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -968,6 +1008,8 @@ name|nullable
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 decl_stmt|;
@@ -993,12 +1035,16 @@ parameter_list|,
 name|boolean
 name|nullable
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
 name|Path
 name|path
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String

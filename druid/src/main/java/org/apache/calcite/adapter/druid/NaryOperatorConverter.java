@@ -77,6 +77,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -92,16 +108,6 @@ operator|.
 name|util
 operator|.
 name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -171,10 +177,10 @@ name|operator
 return|;
 block|}
 annotation|@
-name|Nullable
-annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|toDruidExpression
 parameter_list|(

@@ -107,11 +107,45 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNonNullableAccessors
+operator|.
+name|getSelectList
 import|;
 end_import
 
@@ -215,7 +249,7 @@ name|ns
 init|=
 name|validator
 operator|.
-name|getNamespace
+name|getNamespaceOrThrow
 argument_list|(
 name|select
 argument_list|)
@@ -277,7 +311,7 @@ name|selectNs
 init|=
 name|validator
 operator|.
-name|getNamespace
+name|getNamespaceOrThrow
 argument_list|(
 name|select
 argument_list|)
@@ -415,10 +449,10 @@ control|(
 name|SqlNode
 name|s
 range|:
-name|select
-operator|.
 name|getSelectList
-argument_list|()
+argument_list|(
+name|select
+argument_list|)
 control|)
 block|{
 specifier|final
@@ -463,6 +497,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelDataType
 name|resolveColumn
 parameter_list|(
@@ -479,7 +515,7 @@ name|selectNs
 init|=
 name|validator
 operator|.
-name|getNamespace
+name|getNamespaceOrThrow
 argument_list|(
 name|select
 argument_list|)

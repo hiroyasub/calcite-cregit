@@ -327,11 +327,37 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
 operator|.
 name|BigDecimal
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -472,8 +498,6 @@ annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
-literal|"UnnecessaryUnboxing"
-block|,
 literal|"WeakerAccess"
 block|,
 literal|"unused"
@@ -538,6 +562,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_GeomFromText
 parameter_list|(
@@ -556,6 +582,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_GeomFromText
 parameter_list|(
@@ -570,9 +598,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|s
 argument_list|,
@@ -588,6 +614,12 @@ name|Unknown
 argument_list|)
 decl_stmt|;
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -598,6 +630,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_LineFromText
 parameter_list|(
@@ -616,6 +650,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_LineFromText
 parameter_list|(
@@ -630,9 +666,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|wkt
 argument_list|,
@@ -648,6 +682,12 @@ name|Line
 argument_list|)
 decl_stmt|;
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -658,6 +698,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_MPointFromText
 parameter_list|(
@@ -676,6 +718,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_MPointFromText
 parameter_list|(
@@ -690,9 +734,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|wkt
 argument_list|,
@@ -708,6 +750,12 @@ name|MultiPoint
 argument_list|)
 decl_stmt|;
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -718,6 +766,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_PointFromText
 parameter_list|(
@@ -736,6 +786,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_PointFromText
 parameter_list|(
@@ -750,9 +802,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|wkt
 argument_list|,
@@ -768,6 +818,12 @@ name|Point
 argument_list|)
 decl_stmt|;
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -778,6 +834,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_PolyFromText
 parameter_list|(
@@ -796,6 +854,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_PolyFromText
 parameter_list|(
@@ -810,9 +870,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|wkt
 argument_list|,
@@ -828,6 +886,12 @@ name|Polygon
 argument_list|)
 decl_stmt|;
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -838,6 +902,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_MLineFromText
 parameter_list|(
@@ -856,6 +922,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_MLineFromText
 parameter_list|(
@@ -870,9 +938,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|wkt
 argument_list|,
@@ -889,6 +955,12 @@ argument_list|)
 decl_stmt|;
 comment|// NOTE: there is no Geometry.Type.MultiLine
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -899,6 +971,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_MPolyFromText
 parameter_list|(
@@ -917,6 +991,8 @@ return|;
 block|}
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Geom
 name|ST_MPolyFromText
 parameter_list|(
@@ -931,9 +1007,7 @@ specifier|final
 name|Geometry
 name|g
 init|=
-name|GeometryEngine
-operator|.
-name|geometryFromWkt
+name|fromWkt
 argument_list|(
 name|wkt
 argument_list|,
@@ -950,6 +1024,12 @@ argument_list|)
 decl_stmt|;
 comment|// NOTE: there is no Geometry.Type.MultiPolygon
 return|return
+name|g
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|bind
 argument_list|(
 name|g
@@ -1027,7 +1107,9 @@ name|int
 name|srid
 parameter_list|)
 block|{
-return|return
+name|Geom
+name|geom
+init|=
 name|ST_GeomFromText
 argument_list|(
 literal|"POLYGON(("
@@ -1073,6 +1155,14 @@ operator|+
 literal|"))"
 argument_list|,
 name|srid
+argument_list|)
+decl_stmt|;
+return|return
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|geom
 argument_list|)
 return|;
 block|}
@@ -1480,6 +1570,8 @@ block|}
 comment|/** Returns the x-value of the first coordinate of {@code geom}. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|ST_X
 parameter_list|(
@@ -1514,6 +1606,8 @@ block|}
 comment|/** Returns the y-value of the first coordinate of {@code geom}. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|ST_Y
 parameter_list|(
@@ -1548,6 +1642,8 @@ block|}
 comment|/** Returns the z-value of the first coordinate of {@code geom}. */
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Double
 name|ST_Z
 parameter_list|(
@@ -2468,7 +2564,7 @@ name|quadSegCount
 operator|=
 name|Integer
 operator|.
-name|valueOf
+name|parseInt
 argument_list|(
 name|value
 argument_list|)
@@ -2741,6 +2837,8 @@ block|}
 argument_list|)
 specifier|public
 specifier|static
+annotation|@
+name|Nullable
 name|Long
 name|hilbert
 parameter_list|(
@@ -2849,6 +2947,39 @@ name|y
 operator|.
 name|doubleValue
 argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** Creates a geometry from a WKT.    * If the engine returns a null, throws; never returns null. */
+specifier|private
+specifier|static
+annotation|@
+name|Nullable
+name|Geometry
+name|fromWkt
+parameter_list|(
+name|String
+name|wkt
+parameter_list|,
+name|int
+name|importFlags
+parameter_list|,
+name|Geometry
+operator|.
+name|Type
+name|geometryType
+parameter_list|)
+block|{
+return|return
+name|GeometryEngine
+operator|.
+name|geometryFromWkt
+argument_list|(
+name|wkt
+argument_list|,
+name|importFlags
+argument_list|,
+name|geometryType
 argument_list|)
 return|;
 block|}

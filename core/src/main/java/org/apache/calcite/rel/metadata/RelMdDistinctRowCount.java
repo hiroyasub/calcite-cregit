@@ -333,6 +333,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -437,6 +453,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.DistinctRowCount#getDistinctRowCount(ImmutableBitSet, RexNode)},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getDistinctRowCount(RelNode, ImmutableBitSet, RexNode)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -449,6 +467,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -503,6 +523,8 @@ literal|null
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -515,6 +537,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -643,6 +667,8 @@ name|rowCount
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -655,6 +681,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -676,6 +704,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -688,6 +718,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -709,6 +741,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -721,6 +755,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -742,6 +778,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -754,6 +792,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -826,6 +866,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -838,6 +880,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -865,6 +909,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -877,6 +923,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1080,6 +1128,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1173,19 +1223,9 @@ argument_list|(
 name|column
 argument_list|)
 decl_stmt|;
-name|values
-operator|.
-name|add
-argument_list|(
-name|literal
-operator|.
-name|isNull
-argument_list|()
-condition|?
-name|NullSentinel
-operator|.
-name|INSTANCE
-else|:
+name|Comparable
+name|value
+init|=
 name|literal
 operator|.
 name|getValueAs
@@ -1194,6 +1234,20 @@ name|Comparable
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+name|values
+operator|.
+name|add
+argument_list|(
+name|value
+operator|==
+literal|null
+condition|?
+name|NullSentinel
+operator|.
+name|INSTANCE
+else|:
+name|value
 argument_list|)
 expr_stmt|;
 block|}
@@ -1268,6 +1322,8 @@ return|;
 block|}
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -1280,6 +1336,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)
@@ -1603,6 +1661,8 @@ argument_list|)
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -1615,6 +1675,8 @@ parameter_list|,
 name|ImmutableBitSet
 name|groupKey
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|predicate
 parameter_list|)

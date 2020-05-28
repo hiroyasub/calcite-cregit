@@ -35,16 +35,6 @@ name|Objects
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Extension to {@link StringReader} that allows the original string to be  * recovered.  */
 end_comment
@@ -65,8 +55,6 @@ comment|/**    * Creates a source string reader.    *    * @param s String provi
 specifier|public
 name|SourceStringReader
 parameter_list|(
-annotation|@
-name|Nonnull
 name|String
 name|s
 parameter_list|)
@@ -90,8 +78,6 @@ expr_stmt|;
 block|}
 comment|/** Returns the source string. */
 specifier|public
-annotation|@
-name|Nonnull
 name|String
 name|getSourceString
 parameter_list|()

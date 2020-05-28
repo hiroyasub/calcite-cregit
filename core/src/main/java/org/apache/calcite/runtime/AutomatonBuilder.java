@@ -231,6 +231,11 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|private
 specifier|final
 name|State
@@ -239,6 +244,11 @@ init|=
 name|createState
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|private
 specifier|final
 name|State

@@ -331,6 +331,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -421,6 +437,34 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Manages the collection of materialized tables known to the system,  * and the process by which they become valid and invalid.  */
 end_comment
@@ -446,6 +490,8 @@ specifier|static
 specifier|final
 name|ThreadLocal
 argument_list|<
+annotation|@
+name|Nullable
 name|MaterializationService
 argument_list|>
 name|THREAD_INSTANCE
@@ -505,13 +551,9 @@ operator|.
 name|getTable
 argument_list|()
 decl_stmt|;
-name|int
-name|c
-init|=
 name|Double
-operator|.
-name|compare
-argument_list|(
+name|rowCount0
+init|=
 name|t0
 operator|.
 name|getStatistic
@@ -519,7 +561,10 @@ argument_list|()
 operator|.
 name|getRowCount
 argument_list|()
-argument_list|,
+decl_stmt|;
+name|Double
+name|rowCount1
+init|=
 name|t1
 operator|.
 name|getStatistic
@@ -527,6 +572,28 @@ argument_list|()
 operator|.
 name|getRowCount
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|rowCount0
+operator|!=
+literal|null
+operator|&&
+name|rowCount1
+operator|!=
+literal|null
+condition|)
+block|{
+name|int
+name|c
+init|=
+name|Double
+operator|.
+name|compare
+argument_list|(
+name|rowCount0
+argument_list|,
+name|rowCount1
 argument_list|)
 decl_stmt|;
 if|if
@@ -538,6 +605,27 @@ condition|)
 block|{
 return|return
 name|c
+return|;
+block|}
+block|}
+if|else if
+condition|(
+name|rowCount0
+operator|==
+literal|null
+condition|)
+block|{
+comment|// Unknown is worse than known
+return|return
+literal|1
+return|;
+block|}
+else|else
+block|{
+comment|// rowCount1 == null => Unknown is worse than known
+return|return
+operator|-
+literal|1
 return|;
 block|}
 comment|// Tie-break based on table name.
@@ -584,6 +672,8 @@ block|{
 block|}
 comment|/** Defines a new materialization. Returns its key. */
 specifier|public
+annotation|@
+name|Nullable
 name|MaterializationKey
 name|defineMaterialization
 parameter_list|(
@@ -591,12 +681,16 @@ specifier|final
 name|CalciteSchema
 name|schema
 parameter_list|,
+annotation|@
+name|Nullable
 name|TileKey
 name|tileKey
 parameter_list|,
 name|String
 name|viewSql
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -604,6 +698,8 @@ argument_list|>
 name|viewSchemaPath
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|suggestedTableName
 parameter_list|,
@@ -637,6 +733,8 @@ return|;
 block|}
 comment|/** Defines a new materialization. Returns its key. */
 specifier|public
+annotation|@
+name|Nullable
 name|MaterializationKey
 name|defineMaterialization
 parameter_list|(
@@ -644,18 +742,24 @@ specifier|final
 name|CalciteSchema
 name|schema
 parameter_list|,
+annotation|@
+name|Nullable
 name|TileKey
 name|tileKey
 parameter_list|,
 name|String
 name|viewSql
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
 argument_list|>
 name|viewSchemaPath
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|suggestedTableName
 parameter_list|,
@@ -749,6 +853,13 @@ condition|(
 name|existing
 condition|)
 block|{
+name|requireNonNull
+argument_list|(
+name|suggestedTableName
+argument_list|,
+literal|"suggestedTableName"
+argument_list|)
+expr_stmt|;
 name|tableEntry
 operator|=
 name|schema
@@ -1014,19 +1125,21 @@ comment|/** Checks whether a materialization is valid, and if so, returns the ta
 specifier|public
 name|CalciteSchema
 operator|.
+expr|@
+name|Nullable
 name|TableEntry
 name|checkValid
-parameter_list|(
+argument_list|(
 name|MaterializationKey
 name|key
-parameter_list|)
+argument_list|)
 block|{
-specifier|final
+name|final
 name|MaterializationActor
 operator|.
 name|Materialization
 name|materialization
-init|=
+operator|=
 name|actor
 operator|.
 name|keyMap
@@ -1035,7 +1148,7 @@ name|get
 argument_list|(
 name|key
 argument_list|)
-decl_stmt|;
+block|;
 if|if
 condition|(
 name|materialization
@@ -1053,8 +1166,16 @@ return|return
 literal|null
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/**    * Defines a tile.    *    *<p>Setting the {@code create} flag to false prevents a materialization    * from being created if one does not exist. Critically, it is set to false    * during the recursive SQL that populates a materialization. Otherwise a    * materialization would try to create itself to populate itself!    */
+end_comment
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|CalciteSchema
@@ -1112,7 +1233,12 @@ name|tableFactory
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|CalciteSchema
@@ -1726,6 +1852,9 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|boolean
 name|allSatisfiable
@@ -1790,7 +1919,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Gathers a list of all materialized tables known within a given root    * schema. (Each root schema defines a disconnected namespace, with no overlap    * with the current schema. Especially in a test run, the contents of two    * root schemas may look similar.) */
+end_comment
+
+begin_function
 specifier|public
 name|List
 argument_list|<
@@ -1869,9 +2004,20 @@ name|materialization
 operator|.
 name|sql
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|materialization
 operator|.
 name|viewSchemaPath
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"materialization.viewSchemaPath is null for "
+operator|+
+name|materialization
+operator|.
+name|materializedTable
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1881,7 +2027,13 @@ return|return
 name|list
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** De-registers all materialized tables in the system. */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|clear
@@ -1895,7 +2047,13 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Used by tests, to ensure that they see their own service. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|void
@@ -1912,7 +2070,13 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the instance of the materialization service. Usually the global    * one, but returns a thread-local one during testing (when    * {@link #setThreadLocal()} has been called by the current thread). */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|MaterializationService
@@ -1942,6 +2106,9 @@ return|return
 name|INSTANCE
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|void
 name|removeMaterialization
@@ -1960,7 +2127,13 @@ name|key
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates tables that represent a materialized view.    */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|TableFactory
@@ -1974,6 +2147,8 @@ parameter_list|,
 name|String
 name|viewSql
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -1982,7 +2157,13 @@ name|viewSchemaPath
 parameter_list|)
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/**    * Default implementation of {@link TableFactory}.    * Creates a table using {@link CloneSchema}.    */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -2002,6 +2183,8 @@ parameter_list|,
 name|String
 name|viewSql
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2083,9 +2266,12 @@ name|RelDataTypeImpl
 operator|.
 name|proto
 argument_list|(
+name|castNonNull
+argument_list|(
 name|calciteSignature
 operator|.
 name|rowType
+argument_list|)
 argument_list|)
 argument_list|,
 name|calciteSignature
@@ -2136,9 +2322,14 @@ name|createDataContext
 argument_list|(
 name|connection
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|calciteSignature
 operator|.
 name|rootSchema
+argument_list|,
+literal|"rootSchema"
+argument_list|)
 operator|.
 name|plus
 argument_list|()
@@ -2212,9 +2403,14 @@ name|createDataContext
 argument_list|(
 name|connection
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|calciteSignature
 operator|.
 name|rootSchema
+argument_list|,
+literal|"rootSchema"
+argument_list|)
 operator|.
 name|plus
 argument_list|()
@@ -2237,8 +2433,8 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

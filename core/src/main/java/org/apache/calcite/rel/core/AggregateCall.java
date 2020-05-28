@@ -197,6 +197,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -252,6 +268,8 @@ name|type
 decl_stmt|;
 specifier|public
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|name
 decl_stmt|;
@@ -358,6 +376,8 @@ parameter_list|,
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -497,9 +517,13 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -563,9 +587,13 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -631,9 +659,13 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -702,9 +734,13 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -772,9 +808,13 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -900,6 +940,8 @@ parameter_list|,
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -958,6 +1000,8 @@ parameter_list|,
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -1019,6 +1063,8 @@ parameter_list|,
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -1079,6 +1125,8 @@ parameter_list|,
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -1205,6 +1253,8 @@ return|;
 block|}
 comment|/**    * Returns the name.    *    * @return name    */
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getName
 parameter_list|()
@@ -1218,6 +1268,8 @@ specifier|public
 name|AggregateCall
 name|rename
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|name
 parameter_list|)
@@ -1462,6 +1514,8 @@ specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|o
 parameter_list|)

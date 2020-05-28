@@ -73,6 +73,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -113,7 +129,8 @@ specifier|static
 name|Statistic
 name|of
 parameter_list|(
-specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelReferentialConstraint
@@ -145,6 +162,8 @@ name|double
 name|rowCount
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -176,6 +195,8 @@ name|double
 name|rowCount
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -183,6 +204,8 @@ argument_list|>
 name|keys
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -210,10 +233,14 @@ name|Statistic
 name|of
 parameter_list|(
 specifier|final
+annotation|@
+name|Nullable
 name|Double
 name|rowCount
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -221,6 +248,8 @@ argument_list|>
 name|keys
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelReferentialConstraint
@@ -228,6 +257,8 @@ argument_list|>
 name|referentialConstraints
 parameter_list|,
 specifier|final
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation
@@ -303,6 +334,8 @@ block|{
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|Double
 name|getRowCount
 parameter_list|()
@@ -351,6 +384,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|ImmutableBitSet
@@ -365,6 +400,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelReferentialConstraint
@@ -379,6 +416,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|RelCollation

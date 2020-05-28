@@ -15,6 +15,22 @@ name|rex
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Collection of {@link RexSqlConvertlet}s.  */
 end_comment
@@ -26,6 +42,8 @@ name|RexSqlConvertletTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the convertlet applicable to a given expression.    */
+annotation|@
+name|Nullable
 name|RexSqlConvertlet
 name|get
 parameter_list|(

@@ -1417,6 +1417,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|MonotonicNonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -1602,12 +1634,18 @@ import|;
 end_import
 
 begin_import
-import|import
-name|javax
+import|import static
+name|org
 operator|.
-name|annotation
+name|apache
 operator|.
-name|Nonnull
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
 import|;
 end_import
 
@@ -1643,6 +1681,18 @@ name|RESOURCE
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Builder for relational expressions.  *  *<p>{@code RelBuilder} does not make possible anything that you could not  * also accomplish by calling the factory methods of the particular relational  * expression. But it makes common tasks more straightforward and concise.  *  *<p>{@code RelBuilder} uses factories to create relational expressions.  * By default, it uses the default factories, which create logical relational  * expressions ({@link LogicalFilter},  * {@link LogicalProject} and so forth).  * But you could override those factories so that, say, {@code filter} creates  * instead a {@code HiveFilter}.  *  *<p>It is not thread-safe.  */
 end_comment
@@ -1659,6 +1709,8 @@ name|cluster
 decl_stmt|;
 specifier|protected
 specifier|final
+annotation|@
+name|Nullable
 name|RelOptSchema
 name|relOptSchema
 decl_stmt|;
@@ -1701,12 +1753,16 @@ decl_stmt|;
 specifier|protected
 name|RelBuilder
 parameter_list|(
+annotation|@
+name|Nullable
 name|Context
 name|context
 parameter_list|,
 name|RelOptCluster
 name|cluster
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelOptSchema
 name|relOptSchema
 parameter_list|)
@@ -1761,8 +1817,6 @@ name|this
 operator|.
 name|struct
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|RelFactories
@@ -1779,19 +1833,17 @@ specifier|final
 name|RexExecutor
 name|executor
 init|=
-name|Util
-operator|.
-name|first
-argument_list|(
 name|context
 operator|.
-name|unwrap
+name|maybeUnwrap
 argument_list|(
 name|RexExecutor
 operator|.
 name|class
 argument_list|)
-argument_list|,
+operator|.
+name|orElse
+argument_list|(
 name|Util
 operator|.
 name|first
@@ -1838,6 +1890,7 @@ expr_stmt|;
 block|}
 comment|/**    * Derives the view expander    * {@link org.apache.calcite.plan.RelOptTable.ViewExpander}    * to be used for this RelBuilder.    *    *<p>The ViewExpander instance is used for expanding views in the default    * table scan factory {@code RelFactories.TableScanFactoryImpl}.    * You can also define a new table scan factory in the {@code struct}    * to override the whole table scan creation.    *    *<p>The default view expander does not support expanding views.    */
 specifier|private
+specifier|static
 name|RelOptTable
 operator|.
 name|ViewExpander
@@ -1851,13 +1904,9 @@ name|context
 parameter_list|)
 block|{
 return|return
-name|Util
-operator|.
-name|first
-argument_list|(
 name|context
 operator|.
-name|unwrap
+name|maybeUnwrap
 argument_list|(
 name|RelOptTable
 operator|.
@@ -1865,7 +1914,11 @@ name|ViewExpander
 operator|.
 name|class
 argument_list|)
-argument_list|,
+operator|.
+name|orElseGet
+argument_list|(
+parameter_list|()
+lambda|->
 name|ViewExpanders
 operator|.
 name|simpleContext
@@ -1877,6 +1930,7 @@ return|;
 block|}
 comment|/** Derives the Config to be used for this RelBuilder.    *    *<p>Overrides {@link RelBuilder.Config#simplify} if    * {@link Hook#REL_BUILDER_SIMPLIFY} is set.    */
 specifier|private
+specifier|static
 name|Config
 name|getConfig
 parameter_list|(
@@ -1888,19 +1942,17 @@ specifier|final
 name|Config
 name|config
 init|=
-name|Util
-operator|.
-name|first
-argument_list|(
 name|context
 operator|.
-name|unwrap
+name|maybeUnwrap
 argument_list|(
 name|Config
 operator|.
 name|class
 argument_list|)
-argument_list|,
+operator|.
+name|orElse
+argument_list|(
 name|Config
 operator|.
 name|DEFAULT
@@ -2189,6 +2241,8 @@ name|cluster
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptSchema
 name|getRelOptSchema
 parameter_list|()
@@ -2323,13 +2377,18 @@ name|peek
 parameter_list|()
 block|{
 return|return
+name|castNonNull
+argument_list|(
 name|peek_
 argument_list|()
+argument_list|)
 operator|.
 name|rel
 return|;
 block|}
 specifier|private
+annotation|@
+name|Nullable
 name|Frame
 name|peek_
 parameter_list|()
@@ -2481,6 +2540,8 @@ specifier|public
 name|RexNode
 name|literal
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|value
 parameter_list|)
@@ -3111,15 +3172,11 @@ name|String
 name|fieldName
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|alias
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|fieldName
@@ -3692,7 +3749,7 @@ name|fields
 argument_list|(
 name|Mappings
 operator|.
-name|asList
+name|asListNonNull
 argument_list|(
 name|mapping
 argument_list|)
@@ -3767,8 +3824,6 @@ return|;
 block|}
 comment|/** Creates a call to a scalar operator. */
 specifier|public
-annotation|@
-name|Nonnull
 name|RexNode
 name|call
 parameter_list|(
@@ -3796,8 +3851,6 @@ return|;
 block|}
 comment|/** Creates a call to a scalar operator. */
 specifier|private
-annotation|@
-name|Nonnull
 name|RexCall
 name|call
 parameter_list|(
@@ -3969,8 +4022,6 @@ return|;
 block|}
 comment|/** Creates a call to a scalar operator. */
 specifier|public
-annotation|@
-name|Nonnull
 name|RexNode
 name|call
 parameter_list|(
@@ -4441,6 +4492,8 @@ parameter_list|(
 name|RexNode
 name|expr
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -4883,8 +4936,6 @@ specifier|public
 name|GroupKey
 name|groupKey
 parameter_list|(
-annotation|@
-name|Nonnull
 name|ImmutableBitSet
 name|groupSet
 parameter_list|)
@@ -4911,8 +4962,6 @@ parameter_list|(
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
-annotation|@
-name|Nonnull
 name|Iterable
 argument_list|<
 name|?
@@ -4948,6 +4997,8 @@ parameter_list|(
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|ImmutableBitSet
@@ -4995,6 +5046,8 @@ parameter_list|,
 name|boolean
 name|indicator
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|ImmutableBitSet
@@ -5041,8 +5094,6 @@ parameter_list|(
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
-annotation|@
-name|Nonnull
 name|ImmutableList
 argument_list|<
 name|ImmutableBitSet
@@ -5077,8 +5128,6 @@ name|groupSet
 argument_list|)
 throw|;
 block|}
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|groupSets
@@ -5130,6 +5179,8 @@ parameter_list|,
 name|RexNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5186,6 +5237,8 @@ parameter_list|,
 name|RexNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5239,6 +5292,8 @@ parameter_list|,
 name|RexNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5299,6 +5354,8 @@ parameter_list|,
 name|RexNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5605,6 +5662,8 @@ parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|filter
 parameter_list|,
@@ -5614,6 +5673,8 @@ name|RexNode
 argument_list|>
 name|orderKeys
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5700,6 +5761,8 @@ parameter_list|(
 name|boolean
 name|distinct
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5747,6 +5810,8 @@ parameter_list|(
 name|boolean
 name|distinct
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5795,6 +5860,8 @@ specifier|public
 name|AggCall
 name|countStar
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -5836,6 +5903,8 @@ parameter_list|(
 name|boolean
 name|distinct
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5902,6 +5971,8 @@ parameter_list|(
 name|boolean
 name|distinct
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -5963,6 +6034,8 @@ specifier|public
 name|AggCall
 name|min
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -6024,6 +6097,8 @@ specifier|public
 name|AggCall
 name|max
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -6489,6 +6564,13 @@ argument_list|(
 name|tableNames
 argument_list|)
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|relOptSchema
+argument_list|,
+literal|"relOptSchema"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelOptTable
 name|relOptTable
@@ -6674,6 +6756,8 @@ return|;
 block|}
 comment|/**    * Gets column mappings of the operator.    *    * @param op operator instance    * @return column mappings associated with this function    */
 specifier|private
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|RelColumnMapping
@@ -7186,7 +7270,7 @@ comment|/** Creates a {@link Project} of the given list    * of expressions and 
 specifier|public
 name|RelBuilder
 name|project
-parameter_list|(
+argument_list|(
 name|Iterable
 argument_list|<
 name|?
@@ -7194,13 +7278,16 @@ extends|extends
 name|RexNode
 argument_list|>
 name|nodes
-parameter_list|,
+argument_list|,
 name|Iterable
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|String
-argument_list|>
+operator|>
 name|fieldNames
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|project
@@ -7217,7 +7304,7 @@ comment|/** Creates a {@link Project} of the given list    * of expressions, usi
 specifier|public
 name|RelBuilder
 name|project
-parameter_list|(
+argument_list|(
 name|Iterable
 argument_list|<
 name|?
@@ -7225,16 +7312,19 @@ extends|extends
 name|RexNode
 argument_list|>
 name|nodes
-parameter_list|,
+argument_list|,
 name|Iterable
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|String
-argument_list|>
+operator|>
 name|fieldNames
-parameter_list|,
+argument_list|,
 name|boolean
 name|force
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|project_
@@ -7431,7 +7521,7 @@ comment|/** Creates a {@link Project} of the given list    * of expressions, usi
 specifier|private
 name|RelBuilder
 name|project_
-parameter_list|(
+argument_list|(
 name|Iterable
 argument_list|<
 name|?
@@ -7439,31 +7529,37 @@ extends|extends
 name|RexNode
 argument_list|>
 name|nodes
-parameter_list|,
+argument_list|,
 name|Iterable
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|String
-argument_list|>
+operator|>
 name|fieldNames
-parameter_list|,
+argument_list|,
 name|Iterable
 argument_list|<
 name|RelHint
 argument_list|>
 name|hints
-parameter_list|,
+argument_list|,
 name|boolean
 name|force
-parameter_list|)
+argument_list|)
 block|{
 specifier|final
 name|Frame
 name|frame
 init|=
-name|stack
-operator|.
-name|peek
+name|requireNonNull
+argument_list|(
+name|peek_
 argument_list|()
+argument_list|,
+literal|"frame stack is empty"
+argument_list|)
 decl_stmt|;
 specifier|final
 name|RelDataType
@@ -7521,6 +7617,8 @@ block|}
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|fieldNameList
@@ -8457,7 +8555,12 @@ name|typeBuilder
 operator|.
 name|add
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|name
+argument_list|,
+literal|"name"
+argument_list|)
 argument_list|,
 name|expr
 operator|.
@@ -8579,11 +8682,11 @@ begin_comment
 comment|/** Creates a {@link Project} of the given    * expressions and field names, and optionally optimizing.    *    *<p>If {@code fieldNames} is null, or if a particular entry in    * {@code fieldNames} is null, derives field names from the input    * expressions.    *    *<p>If {@code force} is false,    * and the input is a {@code Project},    * and the expressions  make the trivial projection ($0, $1, ...),    * modifies the input.    *    * @param nodes       Expressions    * @param fieldNames  Suggested field names, or null to generate    * @param force       Whether to create a renaming Project if the    *                    projections are trivial    */
 end_comment
 
-begin_function
+begin_decl_stmt
 specifier|public
 name|RelBuilder
 name|projectNamed
-parameter_list|(
+argument_list|(
 name|Iterable
 argument_list|<
 name|?
@@ -8591,16 +8694,21 @@ extends|extends
 name|RexNode
 argument_list|>
 name|nodes
-parameter_list|,
+argument_list|,
+annotation|@
+name|Nullable
 name|Iterable
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|String
-argument_list|>
+operator|>
 name|fieldNames
-parameter_list|,
+argument_list|,
 name|boolean
 name|force
-parameter_list|)
+argument_list|)
 block|{
 annotation|@
 name|SuppressWarnings
@@ -8635,6 +8743,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|fieldNameList
@@ -8652,6 +8762,8 @@ condition|?
 operator|(
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 operator|)
@@ -8799,7 +8911,7 @@ name|input
 operator|instanceof
 name|Values
 operator|&&
-name|fieldNames
+name|fieldNameList
 operator|!=
 literal|null
 condition|)
@@ -8858,7 +8970,12 @@ name|typeBuilder
 operator|.
 name|add
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|name
+argument_list|,
+literal|"name"
+argument_list|)
 argument_list|,
 name|field
 operator|.
@@ -8931,7 +9048,7 @@ return|return
 name|this
 return|;
 block|}
-end_function
+end_decl_stmt
 
 begin_comment
 comment|/**    * Creates an {@link Uncollect} with given item aliases.    *    * @param itemAliases   Operand item aliases, never null    * @param withOrdinality If {@code withOrdinality}, the output contains an extra    * {@code ORDINALITY} column    */
@@ -8987,8 +9104,6 @@ name|rel
 argument_list|,
 name|withOrdinality
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|itemAliases
@@ -9007,17 +9122,20 @@ begin_comment
 comment|/** Ensures that the field names match those given.    *    *<p>If all fields have the same name, adds nothing;    * if any fields do not have the same name, adds a {@link Project}.    *    *<p>Note that the names can be short-lived. Other {@code RelBuilder}    * operations make no guarantees about the field names of the rows they    * produce.    *    * @param fieldNames List of desired field names; may contain null values or    * have fewer fields than the current row type    */
 end_comment
 
-begin_function
+begin_decl_stmt
 specifier|public
 name|RelBuilder
 name|rename
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|String
-argument_list|>
+operator|>
 name|fieldNames
-parameter_list|)
+argument_list|)
 block|{
 specifier|final
 name|List
@@ -9227,7 +9345,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-end_function
+end_decl_stmt
 
 begin_comment
 comment|/** Infers the alias of an expression.    *    *<p>If the expression was created by {@link #alias}, replaces the expression    * in the project list.    */
@@ -9235,6 +9353,8 @@ end_comment
 
 begin_function
 specifier|private
+annotation|@
+name|Nullable
 name|String
 name|inferAlias
 parameter_list|(
@@ -9272,10 +9392,15 @@ operator|)
 name|expr
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|stack
 operator|.
 name|peek
 argument_list|()
+argument_list|,
+literal|"empty frame stack"
+argument_list|)
 operator|.
 name|fields
 operator|.
@@ -9357,8 +9482,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-return|return
-operator|(
+name|NlsString
+name|value
+init|=
 operator|(
 name|NlsString
 operator|)
@@ -9379,7 +9505,12 @@ operator|)
 operator|.
 name|getValue
 argument_list|()
-operator|)
+decl_stmt|;
+return|return
+name|castNonNull
+argument_list|(
+name|value
+argument_list|)
 operator|.
 name|getValue
 argument_list|()
@@ -10440,6 +10571,8 @@ name|Pair
 argument_list|<
 name|Integer
 argument_list|,
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 argument_list|>
@@ -11218,11 +11351,14 @@ name|groupKey
 argument_list|(
 name|groupSet
 argument_list|,
+name|castNonNull
+argument_list|(
 name|groupIdToGroupSets
 operator|.
 name|get
 argument_list|(
 name|groupId
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
@@ -11553,14 +11689,12 @@ name|Values
 argument_list|)
 condition|)
 block|{
+name|List
+argument_list|<
 name|RelDataType
-name|rowType
+argument_list|>
+name|inputTypes
 operator|=
-name|getTypeFactory
-argument_list|()
-operator|.
-name|leastRestrictive
-argument_list|(
 name|Util
 operator|.
 name|transform
@@ -11571,9 +11705,32 @@ name|RelNode
 operator|::
 name|getRowType
 argument_list|)
-argument_list|)
 block|;
-name|final
+name|RelDataType
+name|rowType
+operator|=
+name|getTypeFactory
+argument_list|()
+operator|.
+name|leastRestrictive
+argument_list|(
+name|inputTypes
+argument_list|)
+empty_stmt|;
+name|requireNonNull
+argument_list|(
+name|rowType
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"leastRestrictive("
+operator|+
+name|inputTypes
+operator|+
+literal|")"
+argument_list|)
+expr_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|List
@@ -11582,12 +11739,12 @@ name|RexLiteral
 argument_list|>
 argument_list|>
 name|tuples
-operator|=
+init|=
 operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
-empty_stmt|;
+decl_stmt|;
 for|for
 control|(
 name|RelNode
@@ -11890,6 +12047,13 @@ argument_list|,
 name|rowType
 argument_list|)
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|relOptSchema
+argument_list|,
+literal|"relOptSchema"
+argument_list|)
+expr_stmt|;
 name|RelOptTable
 name|relOptTable
 init|=
@@ -12220,6 +12384,8 @@ extends|extends
 name|RelHomogeneousShuttle
 block|{
 specifier|private
+annotation|@
+name|MonotonicNonNull
 name|RelOptTable
 name|relOptTable
 init|=
@@ -13379,10 +13545,14 @@ specifier|public
 name|RelBuilder
 name|values
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 index|[]
 name|fieldNames
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 modifier|...
 name|values
@@ -13443,6 +13613,8 @@ for|for
 control|(
 name|Ord
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|fieldName
@@ -13481,7 +13653,15 @@ name|fieldName
 operator|.
 name|e
 operator|+
-literal|"' are null; cannot deduce type"
+literal|"' (field index "
+operator|+
+name|fieldName
+operator|.
+name|i
+operator|+
+literal|")"
+operator|+
+literal|" are null; cannot deduce type"
 argument_list|)
 throw|;
 block|}
@@ -13530,6 +13710,8 @@ control|(
 specifier|final
 name|Ord
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|fieldName
@@ -13620,6 +13802,23 @@ block|}
 block|}
 argument_list|)
 decl_stmt|;
+assert|assert
+name|type
+operator|!=
+literal|null
+operator|:
+literal|"can't infer type for field "
+operator|+
+name|fieldName
+operator|.
+name|i
+operator|+
+literal|", "
+operator|+
+name|fieldName
+operator|.
+name|e
+assert|;
 name|builder
 operator|.
 name|add
@@ -13664,6 +13863,8 @@ parameter_list|(
 name|int
 name|columnCount
 parameter_list|,
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -13786,6 +13987,8 @@ specifier|private
 name|boolean
 name|allNull
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|values
@@ -14935,31 +15138,33 @@ return|;
 block|}
 end_function
 
-begin_function
+begin_decl_stmt
 specifier|private
 specifier|static
 name|RelFieldCollation
 name|collation
-parameter_list|(
+argument_list|(
 name|RexNode
 name|node
-parameter_list|,
+argument_list|,
 name|RelFieldCollation
 operator|.
 name|Direction
 name|direction
-parameter_list|,
+argument_list|,
 name|RelFieldCollation
 operator|.
+expr|@
+name|Nullable
 name|NullDirection
 name|nullDirection
-parameter_list|,
+argument_list|,
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|extraNodes
-parameter_list|)
+argument_list|)
 block|{
 switch|switch
 condition|(
@@ -15137,7 +15342,7 @@ argument_list|)
 return|;
 block|}
 block|}
-end_function
+end_decl_stmt
 
 begin_comment
 comment|/**    * Creates a projection that converts the current relational expression's    * output to a desired row type.    *    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    */
@@ -15965,8 +16170,6 @@ argument_list|>
 name|hints
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|hints
@@ -16090,6 +16293,8 @@ comment|/** Returns a copy of this AggCall that applies a filter before aggregat
 name|AggCall
 name|filter
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|)
@@ -16134,6 +16339,8 @@ comment|/** Returns a copy of this AggCall with a given alias. */
 name|AggCall
 name|as
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -16171,6 +16378,8 @@ name|op
 parameter_list|()
 function_decl|;
 comment|/** Returns the alias. */
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|()
@@ -16218,6 +16427,8 @@ comment|/** Assigns an alias to this group key.      *      *<p>Used to assign f
 name|GroupKey
 name|alias
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -16249,6 +16460,8 @@ argument_list|>
 name|nodes
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|ImmutableList
@@ -16259,6 +16472,8 @@ argument_list|>
 name|nodeLists
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|alias
 decl_stmt|;
@@ -16270,6 +16485,8 @@ name|RexNode
 argument_list|>
 name|nodes
 parameter_list|,
+annotation|@
+name|Nullable
 name|ImmutableList
 argument_list|<
 name|ImmutableList
@@ -16279,6 +16496,8 @@ argument_list|>
 argument_list|>
 name|nodeLists
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -16287,8 +16506,6 @@ name|this
 operator|.
 name|nodes
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|nodes
@@ -16351,6 +16568,8 @@ specifier|public
 name|GroupKey
 name|alias
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -16433,12 +16652,16 @@ name|ignoreNulls
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|RexNode
 name|filter
 decl_stmt|;
 comment|// may be null
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|String
 name|alias
 decl_stmt|;
@@ -16475,9 +16698,13 @@ parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|filter
 parameter_list|,
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|,
@@ -16498,8 +16725,6 @@ name|this
 operator|.
 name|aggFunction
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|aggFunction
@@ -16544,8 +16769,6 @@ name|this
 operator|.
 name|operands
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|operands
@@ -16555,8 +16778,6 @@ name|this
 operator|.
 name|orderKeys
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|orderKeys
@@ -16773,6 +16994,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|()
@@ -16809,9 +17032,19 @@ argument_list|,
 operator|-
 literal|1
 argument_list|,
+name|requireNonNull
+argument_list|(
 literal|null
 argument_list|,
+literal|"CALCITE-4234: collation is null"
+argument_list|)
+argument_list|,
+name|requireNonNull
+argument_list|(
 literal|null
+argument_list|,
+literal|"CALCITE-4234: type is null"
+argument_list|)
 argument_list|,
 name|alias
 argument_list|)
@@ -17159,6 +17392,8 @@ specifier|public
 name|AggCall
 name|filter
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|)
@@ -17204,6 +17439,8 @@ specifier|public
 name|AggCall
 name|as
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -17367,8 +17604,6 @@ name|this
 operator|.
 name|aggregateCall
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|aggregateCall
@@ -17406,6 +17641,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|()
@@ -17517,6 +17754,8 @@ specifier|public
 name|AggCall
 name|filter
 parameter_list|(
+annotation|@
+name|Nullable
 name|RexNode
 name|condition
 parameter_list|)
@@ -17533,6 +17772,8 @@ specifier|public
 name|AggCall
 name|as
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -17618,6 +17859,8 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
+annotation|@
+name|Nullable
 name|String
 argument_list|>
 name|names
@@ -18122,6 +18365,8 @@ return|;
 block|}
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|String
 name|deriveAlias
 parameter_list|(
@@ -18136,6 +18381,14 @@ operator|instanceof
 name|TableScan
 condition|)
 block|{
+name|TableScan
+name|scan
+init|=
+operator|(
+name|TableScan
+operator|)
+name|rel
+decl_stmt|;
 specifier|final
 name|List
 argument_list|<
@@ -18143,7 +18396,7 @@ name|String
 argument_list|>
 name|names
 init|=
-name|rel
+name|scan
 operator|.
 name|getTable
 argument_list|()
@@ -18714,8 +18967,6 @@ decl_stmt|;
 specifier|private
 name|ConfigBuilder
 parameter_list|(
-annotation|@
-name|Nonnull
 name|Config
 name|config
 parameter_list|)

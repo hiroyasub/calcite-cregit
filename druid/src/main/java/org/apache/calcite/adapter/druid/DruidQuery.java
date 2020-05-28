@@ -821,6 +821,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|joda
 operator|.
 name|time
@@ -938,26 +954,6 @@ operator|.
 name|regex
 operator|.
 name|Pattern
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nullable
 import|;
 end_import
 
@@ -2838,10 +2834,10 @@ literal|false
 return|;
 block|}
 comment|/**    * Returns Druid column name or null when it is not possible to translate.    *    * @param rexNode Druid input ref node    * @param rowType Row type    * @param query Druid query    */
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|String
 name|extractColumnName
 parameter_list|(
@@ -3870,6 +3866,8 @@ block|}
 annotation|@
 name|Override
 specifier|public
+annotation|@
+name|Nullable
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -4142,6 +4140,8 @@ name|Override
 specifier|public
 name|Enumerable
 argument_list|<
+annotation|@
+name|Nullable
 name|Object
 index|[]
 argument_list|>
@@ -4154,7 +4154,7 @@ block|{
 return|return
 name|table
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|ScannableTable
 operator|.
@@ -4741,7 +4741,7 @@ operator|.
 name|getContext
 argument_list|()
 operator|.
-name|unwrap
+name|unwrapOrThrow
 argument_list|(
 name|CalciteConnectionConfig
 operator|.
@@ -4750,9 +4750,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Translates Filter rel to Druid Filter Json object if possible.    * Currently Filter rel input has to be Druid Table scan    *    * @param filterRel input filter rel    *    * @return DruidJson Filter or null if cannot translate one of filters    */
+specifier|private
 annotation|@
 name|Nullable
-specifier|private
 name|DruidJsonFilter
 name|computeFilter
 parameter_list|(
@@ -4825,10 +4825,10 @@ literal|null
 return|;
 block|}
 comment|/**    * Translates a list of projects to Druid Column names and Virtual Columns if    * any.    *    *<p>We cannot use {@link Pair#zip(Object[], Object[])}, since size may be    * different.    *    * @param projectRel Project    *    * @param druidQuery Druid query    *    * @return Pair of list of Druid Columns and Expression Virtual Columns, or    * null when cannot translate one of the projects    */
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|List
@@ -5223,10 +5223,10 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Computes the project group set.    *    * @param projectNode Project under the Aggregates if any    * @param groupSet Ids of grouping keys as they are listed in {@code projects} list    * @param inputRowType Input row type under the project    * @param druidQuery Druid query    *    * @return A list of {@link DimensionSpec} containing the group by dimensions,    * and a list of {@link VirtualColumn} containing Druid virtual column    * projections; or null, if translation is not possible.    * Note that the size of lists can be different.    */
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|Pair
 argument_list|<
 name|List
@@ -5706,10 +5706,10 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Translates aggregate calls to Druid {@link JsonAggregation}s when    * possible.    *    * @param aggCalls List of AggregateCalls to translate    * @param aggNames List of aggregate names    * @param project Input project under the aggregate calls,    *               or null if we have {@link TableScan} immediately under the    *               {@link Aggregate}    * @param druidQuery Druid query    *    * @return List of valid Druid {@link JsonAggregation}s, or null if any of the    * aggregates is not supported    */
-annotation|@
-name|Nullable
 specifier|protected
 specifier|static
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|JsonAggregation
@@ -7051,8 +7051,6 @@ return|;
 block|}
 comment|/**    * Converts a sort specification to a {@link JsonLimit} (never null).    *    * @param fetch limit to fetch    * @param collationIndexes index of fields as listed in query row output    * @param collationDirections direction of sort    * @param numericCollationIndexes flag of to determine sort comparator    * @param queryOutputFieldNames query output fields    */
 specifier|private
-annotation|@
-name|Nonnull
 name|JsonLimit
 name|computeSort
 parameter_list|(
@@ -7212,9 +7210,9 @@ name|collations
 argument_list|)
 return|;
 block|}
+specifier|private
 annotation|@
 name|Nullable
-specifier|private
 name|String
 name|planAsTimeSeries
 parameter_list|(
@@ -7719,9 +7717,9 @@ name|toString
 argument_list|()
 return|;
 block|}
+specifier|private
 annotation|@
 name|Nullable
-specifier|private
 name|String
 name|planAsTopN
 parameter_list|(
@@ -8077,9 +8075,9 @@ name|toString
 argument_list|()
 return|;
 block|}
+specifier|private
 annotation|@
 name|Nullable
-specifier|private
 name|String
 name|planAsGroupBy
 parameter_list|(
@@ -8423,8 +8421,6 @@ operator|=
 name|fetchLimit
 expr_stmt|;
 block|}
-annotation|@
-name|Nonnull
 specifier|public
 name|String
 name|toQuery
@@ -8586,10 +8582,10 @@ argument_list|()
 return|;
 block|}
 block|}
-annotation|@
-name|Nullable
 specifier|private
 specifier|static
+annotation|@
+name|Nullable
 name|JsonAggregation
 name|getJsonAggregation
 parameter_list|(

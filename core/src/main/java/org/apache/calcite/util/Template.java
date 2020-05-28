@@ -31,6 +31,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|text
@@ -770,6 +786,8 @@ argument_list|>
 name|argMap
 parameter_list|)
 block|{
+annotation|@
+name|Nullable
 name|Object
 index|[]
 name|args
@@ -823,6 +841,8 @@ return|;
 block|}
 comment|/**    * Returns the value of the {@code ordinal}th argument.    *    * @param argMap  Map of argument values    * @param ordinal Ordinal of argument    * @return Value of argument    */
 specifier|private
+annotation|@
+name|Nullable
 name|Object
 name|getArg
 parameter_list|(

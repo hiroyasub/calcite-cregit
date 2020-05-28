@@ -59,6 +59,22 @@ name|BuiltInMethod
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdExplainVisibility supplies a default implementation of  * {@link RelMetadataQuery#isVisibleInExplain} for the standard logical algebra.  */
 end_comment
@@ -125,6 +141,8 @@ return|;
 block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.ExplainVisibility#isVisibleInExplain(SqlExplainLevel)},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isVisibleInExplain(RelNode, SqlExplainLevel)    */
 specifier|public
+annotation|@
+name|Nullable
 name|Boolean
 name|isVisibleInExplain
 parameter_list|(

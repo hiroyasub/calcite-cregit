@@ -223,6 +223,24 @@ name|SqlTypeTransforms
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNonNullableAccessors
+operator|.
+name|getOperandLiteralValueOrThrow
+import|;
+end_import
+
 begin_comment
 comment|/** Interval expression.  *  *<p>Syntax:  *  *<blockquote><pre>INTERVAL numericExpression timeUnit  *  * timeUnit: YEAR | MONTH | DAY | HOUR | MINUTE | SECOND</pre></blockquote>  *  *<p>Compare with interval literal, whose syntax is  * {@code INTERVAL characterLiteral timeUnit [ TO timeUnit ]}.  */
 end_comment
@@ -296,10 +314,10 @@ specifier|final
 name|SqlIntervalQualifier
 name|intervalQualifier
 init|=
-name|opBinding
-operator|.
-name|getOperandLiteralValue
+name|getOperandLiteralValueOrThrow
 argument_list|(
+name|opBinding
+argument_list|,
 literal|1
 argument_list|,
 name|SqlIntervalQualifier

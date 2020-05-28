@@ -137,6 +137,24 @@ name|Sarg
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNonNullableAccessors
+operator|.
+name|getOperandLiteralValueOrThrow
+import|;
+end_import
+
 begin_comment
 comment|/** Operator that tests whether its left operand is included in the range of  * values covered by search arguments. */
 end_comment
@@ -211,10 +229,10 @@ name|isNullable
 argument_list|()
 operator|&&
 operator|!
-name|binding
-operator|.
-name|getOperandLiteralValue
+name|getOperandLiteralValueOrThrow
 argument_list|(
+name|binding
+argument_list|,
 literal|1
 argument_list|,
 name|Sarg

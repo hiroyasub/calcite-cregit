@@ -45,6 +45,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -60,6 +76,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -133,6 +161,7 @@ name|JsonTable
 block|{
 comment|/** Name of this table.    *    *<p>Required. Must be unique within the schema.    */
 specifier|public
+specifier|final
 name|String
 name|name
 decl_stmt|;
@@ -152,9 +181,42 @@ argument_list|()
 decl_stmt|;
 comment|/** Information about whether the table can be streamed, and if so, whether    * the history of the table is also available. */
 specifier|public
+specifier|final
+annotation|@
+name|Nullable
 name|JsonStream
 name|stream
 decl_stmt|;
+specifier|protected
+name|JsonTable
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+annotation|@
+name|Nullable
+name|JsonStream
+name|stream
+parameter_list|)
+block|{
+name|this
+operator|.
+name|name
+operator|=
+name|requireNonNull
+argument_list|(
+name|name
+argument_list|,
+literal|"name"
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|stream
+operator|=
+name|stream
+expr_stmt|;
+block|}
 specifier|public
 specifier|abstract
 name|void

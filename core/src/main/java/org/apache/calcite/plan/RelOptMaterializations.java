@@ -1082,7 +1082,7 @@ if|if
 condition|(
 name|materialization
 operator|.
-name|starTable
+name|starRelOptTable
 operator|!=
 literal|null
 condition|)

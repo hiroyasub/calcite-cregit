@@ -341,6 +341,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|dataflow
+operator|.
+name|qual
+operator|.
+name|Pure
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -389,11 +419,39 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -458,18 +516,24 @@ decl_stmt|;
 comment|/** Used to infer the return type of a call to this operator. */
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|returnTypeInference
 decl_stmt|;
 comment|/** Used to infer types of unknown operands. */
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 decl_stmt|;
 comment|/** Used to validate operand types. */
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 decl_stmt|;
@@ -490,12 +554,18 @@ parameter_list|,
 name|int
 name|rightPrecedence
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|)
@@ -583,12 +653,18 @@ parameter_list|,
 name|boolean
 name|leftAssoc
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|returnTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|operandTypeInference
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|operandTypeChecker
 parameter_list|)
@@ -692,6 +768,8 @@ name|prec
 return|;
 block|}
 specifier|public
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|getOperandTypeChecker
 parameter_list|()
@@ -759,6 +837,8 @@ name|ZERO
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Pure
 specifier|public
 name|SqlKind
 name|getKind
@@ -809,21 +889,24 @@ specifier|public
 specifier|final
 name|SqlCall
 name|createCall
-parameter_list|(
+argument_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
-parameter_list|,
+argument_list|,
 name|SqlParserPos
 name|pos
-parameter_list|,
+argument_list|,
 name|Iterable
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|SqlNode
-argument_list|>
+operator|>
 name|operands
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|createCall
@@ -850,12 +933,16 @@ specifier|public
 name|SqlCall
 name|createCall
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -899,6 +986,8 @@ specifier|final
 name|SqlCall
 name|createCall
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlLiteral
 name|functionQualifier
 parameter_list|,
@@ -924,6 +1013,8 @@ parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlNode
 modifier|...
 name|operands
@@ -978,18 +1069,19 @@ specifier|public
 specifier|final
 name|SqlCall
 name|createCall
-parameter_list|(
+argument_list|(
 name|SqlParserPos
 name|pos
-parameter_list|,
+argument_list|,
 name|List
-argument_list|<
-name|?
-extends|extends
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|SqlNode
-argument_list|>
+operator|>
 name|operandList
-parameter_list|)
+argument_list|)
 block|{
 return|return
 name|createCall
@@ -1147,6 +1239,8 @@ parameter_list|,
 name|SqlNode
 name|clause
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlKind
 name|sepKind
 parameter_list|)
@@ -1240,13 +1334,14 @@ name|nodeList
 argument_list|)
 expr_stmt|;
 block|}
-comment|// override Object
 annotation|@
 name|Override
 specifier|public
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nullable
 name|Object
 name|obj
 parameter_list|)
@@ -1415,6 +1510,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
@@ -1492,6 +1589,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlValidatorScope
 name|scope
 parameter_list|,
@@ -1823,7 +1922,10 @@ operator|)
 operator|.
 name|setOperator
 argument_list|(
+name|castNonNull
+argument_list|(
 name|sqlOperator
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|RelDataType
@@ -1871,6 +1973,8 @@ end_function
 
 begin_function
 specifier|protected
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2004,6 +2108,8 @@ parameter_list|,
 name|SqlCall
 name|call
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -2524,6 +2630,8 @@ parameter_list|(
 name|SqlValidator
 name|validator
 parameter_list|,
+annotation|@
+name|Nullable
 name|SqlOperandTypeChecker
 name|argType
 parameter_list|,
@@ -2644,6 +2752,8 @@ end_comment
 
 begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|String
 name|getSignatureTemplate
 parameter_list|(
@@ -2691,15 +2801,15 @@ name|String
 name|opNameToUse
 parameter_list|)
 block|{
-assert|assert
+name|requireNonNull
+argument_list|(
 name|operandTypeChecker
-operator|!=
-literal|null
-operator|:
+argument_list|,
 literal|"If you see this, assign operandTypeChecker a value "
 operator|+
 literal|"or override this function"
-assert|;
+argument_list|)
+expr_stmt|;
 return|return
 name|operandTypeChecker
 operator|.
@@ -2718,6 +2828,8 @@ end_function
 
 begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|SqlOperandTypeInference
 name|getOperandTypeInference
 parameter_list|()
@@ -2733,6 +2845,8 @@ comment|/**    * Returns whether this operator is an aggregate function. By defa
 end_comment
 
 begin_function
+annotation|@
+name|Pure
 specifier|public
 name|boolean
 name|isAggregator
@@ -2833,6 +2947,8 @@ specifier|public
 parameter_list|<
 name|R
 parameter_list|>
+annotation|@
+name|Nullable
 name|R
 name|acceptCall
 parameter_list|(
@@ -2970,6 +3086,8 @@ end_comment
 
 begin_function
 specifier|public
+annotation|@
+name|Nullable
 name|SqlReturnTypeInference
 name|getReturnTypeInference
 parameter_list|()
@@ -2985,7 +3103,11 @@ comment|/**    * Returns the {@link Strong.Policy} strategy for this operator, o
 end_comment
 
 begin_function
+annotation|@
+name|Pure
 specifier|public
+annotation|@
+name|Nullable
 name|Supplier
 argument_list|<
 name|Strong

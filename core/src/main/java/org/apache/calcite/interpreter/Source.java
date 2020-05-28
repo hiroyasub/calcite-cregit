@@ -15,6 +15,22 @@ name|interpreter
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Source of rows.  *  *<p>Corresponds to an input of a relational expression.  */
 end_comment
@@ -27,6 +43,8 @@ extends|extends
 name|AutoCloseable
 block|{
 comment|/** Reads a row. Null means end of data. */
+annotation|@
+name|Nullable
 name|Row
 name|receive
 parameter_list|()
