@@ -184,7 +184,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A collections of {@link HintStrategy}s.  *  *<p>Every supported hint should register a {@link HintPredicate}  * into this collection. For example, {@link HintPredicates#JOIN} implies that this hint  * would be propagated and attached to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>Match of hint name is case in-sensitive.  *  * @see HintPredicate  */
+comment|/**  * A collection of {@link HintStrategy}s.  *  *<p>Every hint must register a {@link HintStrategy} into the collection.  * With a hint strategies mapping, the hint strategy table is used as a tool  * to decide i) if the given hint was registered; ii) which hints are suitable for the rel with  * a given hints collection; iii) if the hint options are valid.  *  *<p>Once built, the hint strategy table is immutable during the planning phrase.  *  *<p>Match of hint name is case in-sensitive.  *  * @see HintPredicate  */
 end_comment
 
 begin_class
@@ -194,7 +194,6 @@ name|HintStrategyTable
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/** Empty strategies. */
-comment|// Need to replace the EMPTY with DEFAULT if we have any hint implementations.
 specifier|public
 specifier|static
 specifier|final
@@ -688,38 +687,53 @@ name|boolean
 name|equals
 parameter_list|(
 name|Object
-name|obj
+name|o
 parameter_list|)
 block|{
 if|if
 condition|(
-operator|!
-operator|(
-name|obj
-operator|instanceof
-name|Key
-operator|)
+name|this
+operator|==
+name|o
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+if|if
+condition|(
+name|o
+operator|==
+literal|null
+operator|||
+name|getClass
+argument_list|()
+operator|!=
+name|o
+operator|.
+name|getClass
+argument_list|()
 condition|)
 block|{
 return|return
 literal|false
 return|;
 block|}
-return|return
-name|Objects
-operator|.
-name|equals
-argument_list|(
-name|this
-operator|.
-name|name
-argument_list|,
-operator|(
+name|Key
+name|key
+init|=
 operator|(
 name|Key
 operator|)
-name|obj
-operator|)
+name|o
+decl_stmt|;
+return|return
+name|name
+operator|.
+name|equals
+argument_list|(
+name|key
 operator|.
 name|name
 argument_list|)

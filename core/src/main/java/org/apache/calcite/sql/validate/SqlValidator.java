@@ -535,14 +535,6 @@ interface|interface
 name|SqlValidator
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformanceEnum#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    *    * @deprecated Use {@link Config#sqlConformance}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|SqlConformance
-name|getConformance
-parameter_list|()
-function_decl|;
 comment|/**    * Returns the catalog reader used by this validator.    *    * @return catalog reader    */
 name|SqlValidatorCatalogReader
 name|getCatalogReader
@@ -1010,74 +1002,6 @@ name|String
 name|columnListParamName
 parameter_list|)
 function_decl|;
-comment|/**    * Enables or disables expansion of identifiers other than column    * references.    *    * @param expandIdentifiers new setting    *    * @deprecated Use {@link Config#withIdentifierExpansion}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|void
-name|setIdentifierExpansion
-parameter_list|(
-name|boolean
-name|expandIdentifiers
-parameter_list|)
-function_decl|;
-comment|/**    * Enables or disables expansion of column references. (Currently this does    * not apply to the ORDER BY clause; may be fixed in the future.)    *    * @param expandColumnReferences new setting    *    * @deprecated Use {@link Config#columnReferenceExpansion}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|void
-name|setColumnReferenceExpansion
-parameter_list|(
-name|boolean
-name|expandColumnReferences
-parameter_list|)
-function_decl|;
-comment|/**    * @return whether column reference expansion is enabled    *    * @deprecated  Use {@link Config#columnReferenceExpansion}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|boolean
-name|getColumnReferenceExpansion
-parameter_list|()
-function_decl|;
-comment|/**    * Sets how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST.    *    * @deprecated Use {@link Config#defaultNullCollation}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|void
-name|setDefaultNullCollation
-parameter_list|(
-name|NullCollation
-name|nullCollation
-parameter_list|)
-function_decl|;
-comment|/**    * Returns how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST.    *    * @deprecated Use {@link Config#defaultNullCollation}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|NullCollation
-name|getDefaultNullCollation
-parameter_list|()
-function_decl|;
-comment|/**    * Returns expansion of identifiers.    *    * @return whether this validator should expand identifiers    *    * @deprecated Use {@link Config#identifierExpansion}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|boolean
-name|shouldExpandIdentifiers
-parameter_list|()
-function_decl|;
-comment|/**    * Enables or disables rewrite of "macro-like" calls such as COALESCE.    *    * @param rewriteCalls new setting    *    * @deprecated Use {@link Config#callRewrite}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|void
-name|setCallRewrite
-parameter_list|(
-name|boolean
-name|rewriteCalls
-parameter_list|)
-function_decl|;
 comment|/**    * Derives the type of a constructor.    *    * @param scope                 Scope    * @param call                  Call    * @param unresolvedConstructor TODO    * @param resolvedConstructor   TODO    * @param argTypes              Types of arguments    * @return Resolved type of constructor    */
 name|RelDataType
 name|deriveConstructorType
@@ -1232,70 +1156,10 @@ name|SqlNode
 name|withItem
 parameter_list|)
 function_decl|;
-comment|/**    * Sets whether this validator should be lenient upon encountering an unknown    * function.    *    * @param lenient Whether to be lenient when encountering an unknown function    *    * @deprecated Use {@link Config#withLenientOperatorLookup}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|SqlValidator
-name|setLenientOperatorLookup
-parameter_list|(
-name|boolean
-name|lenient
-parameter_list|)
-function_decl|;
-comment|/** Returns whether this validator should be lenient upon encountering an    * unknown function.    *    *<p>If true, if a statement contains a call to a function that is not    * present in the operator table, or if the call does not have the required    * number or types of operands, the validator nevertheless regards the    * statement as valid. The type of the function call will be    * {@link #getUnknownType() UNKNOWN}.    *    *<p>If false (the default behavior), an unknown function call causes a    * validation error to be thrown.    *    * @deprecated Use {@link Config#lenientOperatorLookup}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|boolean
-name|isLenientOperatorLookup
-parameter_list|()
-function_decl|;
-comment|/**    * Sets enable or disable implicit type coercion when the validator does validation.    *    * @param enabled if enable the type coercion, default is true    *    * @see org.apache.calcite.sql.validate.implicit.TypeCoercionImpl TypeCoercionImpl    *    * @deprecated Use {@link Config#withTypeCoercionEnabled}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|SqlValidator
-name|setEnableTypeCoercion
-parameter_list|(
-name|boolean
-name|enabled
-parameter_list|)
-function_decl|;
-comment|/**    * Returns if this validator supports implicit type coercion.    *    * @deprecated Use {@link Config#typeCoercionEnabled}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|boolean
-name|isTypeCoercionEnabled
-parameter_list|()
-function_decl|;
-comment|/**    * Sets an instance of type coercion, you can customize the coercion rules to    * override the default ones defined in    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.    *    * @param typeCoercion {@link TypeCoercion} instance    *    * @deprecated Use {@link Config#withTypeCoercionFactory}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|void
-name|setTypeCoercion
-parameter_list|(
-name|TypeCoercion
-name|typeCoercion
-parameter_list|)
-function_decl|;
 comment|/** Get the type coercion instance. */
 name|TypeCoercion
 name|getTypeCoercion
 parameter_list|()
-function_decl|;
-comment|/**    * Sets the {@link SqlTypeCoercionRule} instance which defines the type conversion matrix    * for the explicit type coercion.    *    *<p>The {@code typeCoercionRules} setting should be thread safe.    * In the default implementation,    * the {@code typeCoercionRules} is set to a ThreadLocal variable.    *    * @param typeCoercionRules The {@link SqlTypeCoercionRule} instance, see its documentation    *                          for how to customize the rules.    *    * @deprecated Use {@link Config#withTypeCoercionRules}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-name|void
-name|setSqlTypeCoercionRules
-parameter_list|(
-name|SqlTypeCoercionRule
-name|typeCoercionRules
-parameter_list|)
 function_decl|;
 comment|/** Returns the config of the validator. */
 name|Config

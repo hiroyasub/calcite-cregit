@@ -837,7 +837,10 @@ name|toString
 argument_list|(
 name|sub
 argument_list|)
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\n"
 argument_list|)
 expr_stmt|;
@@ -962,7 +965,10 @@ name|toString
 argument_list|(
 name|res
 argument_list|)
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"\n"
 argument_list|)
 expr_stmt|;
@@ -994,10 +1000,7 @@ name|sql
 operator|!=
 literal|null
 assert|;
-specifier|final
-name|TestConfig
-name|result
-init|=
+return|return
 name|Frameworks
 operator|.
 name|withPlanner
@@ -1320,9 +1323,6 @@ throw|;
 block|}
 block|}
 argument_list|)
-decl_stmt|;
-return|return
-name|result
 return|;
 block|}
 end_function
@@ -1538,6 +1538,7 @@ end_comment
 
 begin_class
 specifier|private
+specifier|static
 class|class
 name|ValidatorForTest
 extends|extends
@@ -1566,7 +1567,14 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withSqlConformance
+argument_list|(
 name|conformance
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1579,6 +1587,7 @@ end_comment
 
 begin_class
 specifier|protected
+specifier|static
 class|class
 name|TestConfig
 block|{

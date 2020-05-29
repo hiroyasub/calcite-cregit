@@ -1691,7 +1691,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// For numeric types: promote to highest type.
-comment|// i.e. SQL-SERVER/MYSQL supports numeric types cast from/to each other.
+comment|// i.e. MS-SQL/MYSQL supports numeric types cast from/to each other.
 if|if
 condition|(
 name|SqlTypeUtil
@@ -2128,7 +2128,7 @@ block|}
 comment|// 1. Do not distinguish CHAR and VARCHAR, i.e. (INTEGER + CHAR(3))
 comment|//    and (INTEGER + VARCHAR(5)) would both deduce VARCHAR type.
 comment|// 2. VARCHAR has 65536 as default precision.
-comment|// 3. Following SQL-SERVER: BINARY or BOOLEAN can be casted to VARCHAR.
+comment|// 3. Following MS-SQL: BINARY or BOOLEAN can be casted to VARCHAR.
 if|if
 condition|(
 name|SqlTypeUtil
@@ -2404,7 +2404,7 @@ name|factory
 argument_list|)
 return|;
 block|}
-comment|// Keep sync with SQL-SERVER:
+comment|// Keep sync with MS-SQL:
 comment|// 1. BINARY/VARBINARY can not cast to FLOAT/REAL/DOUBLE
 comment|// because of precision loss,
 comment|// 2. CHARACTER to TIMESTAMP need explicit cast because of TimeZone.
@@ -2911,7 +2911,7 @@ return|return
 name|partitioned
 return|;
 block|}
-comment|/**    * Check if the types and families can have implicit type coercion.    * We will check the type one by one, that means the 1th type and 1th family,    * 2th type and 2th family, and the like.    *    * @param types    Data type need to check    * @param families Desired type families list    */
+comment|/**    * Checks if the types and families can have implicit type coercion.    * We will check the type one by one, that means the 1th type and 1th family,    * 2th type and 2th family, and the like.    *    * @param types    Data type need to check    * @param families Desired type families list    */
 name|boolean
 name|canImplicitTypeCast
 parameter_list|(
@@ -3226,7 +3226,7 @@ return|;
 block|}
 comment|// If the function accepts any NUMERIC type and the input is a STRING,
 comment|// returns the expected type family's default type.
-comment|// REVIEW Danny 2018-05-22: same with SQL-SERVER and MYSQL.
+comment|// REVIEW Danny 2018-05-22: same with MS-SQL and MYSQL.
 if|if
 condition|(
 name|SqlTypeUtil

@@ -227,38 +227,6 @@ name|T
 name|toTrait
 parameter_list|)
 function_decl|;
-comment|/**    * Tests whether the given RelTrait can be converted to another RelTrait.    *    * @param planner   the planner requesting the conversion test    * @param fromTrait the RelTrait to convert from    * @param toTrait   the RelTrait to convert to    * @param fromRel   the RelNode to convert from (with fromTrait)    * @return true if fromTrait can be converted to toTrait    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-specifier|public
-name|boolean
-name|canConvert
-parameter_list|(
-name|RelOptPlanner
-name|planner
-parameter_list|,
-name|T
-name|fromTrait
-parameter_list|,
-name|T
-name|toTrait
-parameter_list|,
-name|RelNode
-name|fromRel
-parameter_list|)
-block|{
-return|return
-name|canConvert
-argument_list|(
-name|planner
-argument_list|,
-name|fromTrait
-argument_list|,
-name|toTrait
-argument_list|)
-return|;
-block|}
 comment|/**    * Provides notification of the registration of a particular    * {@link ConverterRule} with a {@link RelOptPlanner}. The default    * implementation does nothing.    *    * @param planner       the planner registering the rule    * @param converterRule the registered converter rule    */
 specifier|public
 name|void

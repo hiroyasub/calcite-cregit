@@ -82,7 +82,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a hint strategy entry of {@link HintStrategyTable}.  *  *<p>A {@code HintStrategy} includes:  *  *<ul>  *<li>{@link HintPredicate}: tests whether a hint should apply to  *   a relational expression;</li>  *<li>{@link HintOptionChecker}: validates the hint options;</li>  *<li>{@code excludedRules}: rules to exclude when a relational expression  *   is going to apply a planner rule;</li>  *<li>{@code converterRules}: fallback rules to apply when there are  *   no proper implementations after excluding the {@code excludedRules}.</li>  *</ul>  *  *<p>The {@link HintPredicate} is required, all the other items are optional.  *  *<p>A {@link HintStrategy} is immutable.  */
+comment|/**  * Represents a hint strategy entry of {@link HintStrategyTable}.  *  *<p>A {@code HintStrategy} defines:  *  *<ul>  *<li>{@link HintPredicate}: tests whether a hint should apply to  *   a relational expression;</li>  *<li>{@link HintOptionChecker}: validates the hint options;</li>  *<li>{@code excludedRules}: rules to exclude when a relational expression  *   is going to apply a planner rule;</li>  *<li>{@code converterRules}: fallback rules to apply when there are  *   no proper implementations after excluding the {@code excludedRules}.</li>  *</ul>  *  *<p>The {@link HintPredicate} is required, all the other items are optional.  *  *<p>{@link HintStrategy} is immutable.  */
 end_comment
 
 begin_class

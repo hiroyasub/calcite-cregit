@@ -504,6 +504,7 @@ comment|//~ Constructors -------------------------------------------------------
 comment|/**    * Creates a SqlAdvisor with a validator instance    *    * @param validator Validator    * @deprecated use {@link #SqlAdvisor(SqlValidatorWithHints, SqlParser.Config)}    */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|SqlAdvisor
 parameter_list|(

@@ -282,7 +282,7 @@ literal|"Guava"
 argument_list|)
 annotation|@
 name|Deprecated
-comment|// to be removed in 2.0
+comment|// to be removed before 2.0
 specifier|public
 parameter_list|<
 name|T
@@ -385,7 +385,7 @@ literal|"Guava"
 argument_list|)
 annotation|@
 name|Deprecated
-comment|// to be removed in 2.0
+comment|// to be removed before 2.0
 specifier|public
 parameter_list|<
 name|T

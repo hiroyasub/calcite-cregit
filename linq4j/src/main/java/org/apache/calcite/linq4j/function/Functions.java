@@ -149,6 +149,18 @@ name|RandomAccess
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|IntFunction
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utilities relating to functions.  */
 end_comment
@@ -1610,10 +1622,8 @@ name|int
 name|size
 parameter_list|,
 specifier|final
-name|Function1
+name|IntFunction
 argument_list|<
-name|Integer
-argument_list|,
 name|E
 argument_list|>
 name|fn
@@ -2463,10 +2473,8 @@ name|size
 decl_stmt|;
 specifier|private
 specifier|final
-name|Function1
+name|IntFunction
 argument_list|<
-name|Integer
-argument_list|,
 name|E
 argument_list|>
 name|fn
@@ -2476,10 +2484,8 @@ parameter_list|(
 name|int
 name|size
 parameter_list|,
-name|Function1
+name|IntFunction
 argument_list|<
-name|Integer
-argument_list|,
 name|E
 argument_list|>
 name|fn

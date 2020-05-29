@@ -317,20 +317,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|DateString
 import|;
 end_import
@@ -1617,15 +1603,6 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|timeUnit
-argument_list|)
-expr_stmt|;
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"Change type to Map<RexNode, RangeSet<Calendar>> when"
-operator|+
-literal|" [CALCITE-1367] is fixed"
 argument_list|)
 expr_stmt|;
 name|this

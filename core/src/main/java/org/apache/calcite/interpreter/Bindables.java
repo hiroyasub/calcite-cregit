@@ -3134,31 +3134,6 @@ argument_list|)
 return|;
 block|}
 block|}
-annotation|@
-name|Deprecated
-comment|// Use BindableSetOpRule instead, to be removed before 1.24.0
-specifier|public
-specifier|static
-class|class
-name|BindableUnionRule
-extends|extends
-name|BindableSetOpRule
-block|{
-comment|/**      * Creates a BindableUnionRule.      *      * @param relBuilderFactory Builder for relational expressions      */
-specifier|public
-name|BindableUnionRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|relBuilderFactory
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 comment|/**    * Rule to convert an {@link SetOp} to a {@link BindableUnion}    * or {@link BindableIntersect} or {@link BindableMinus}.    */
 specifier|public
 specifier|static

@@ -244,6 +244,7 @@ comment|//~ Constructors -------------------------------------------------------
 comment|/**    * Creates a SqlSimpleParser    *    * @param hintToken Hint token    * @deprecated    */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|SqlSimpleParser
 parameter_list|(
@@ -989,6 +990,7 @@ literal|0
 decl_stmt|;
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|Tokenizer
 parameter_list|(

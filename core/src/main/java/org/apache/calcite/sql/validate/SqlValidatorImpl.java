@@ -1933,14 +1933,6 @@ specifier|private
 name|SqlNode
 name|top
 decl_stmt|;
-specifier|private
-name|NullCollation
-name|nullCollation
-init|=
-name|NullCollation
-operator|.
-name|HIGH
-decl_stmt|;
 comment|// TODO jvs 11-Dec-2008:  make this local to performUnconditionalRewrites
 comment|// if it's OK to expand the signature of that method.
 specifier|private
@@ -2188,45 +2180,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-comment|/**    * Creates a validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.24
-specifier|protected
-name|SqlValidatorImpl
-parameter_list|(
-name|SqlOperatorTable
-name|opTab
-parameter_list|,
-name|SqlValidatorCatalogReader
-name|catalogReader
-parameter_list|,
-name|RelDataTypeFactory
-name|typeFactory
-parameter_list|,
-name|SqlConformance
-name|conformance
-parameter_list|)
-block|{
-name|this
-argument_list|(
-name|opTab
-argument_list|,
-name|catalogReader
-argument_list|,
-name|typeFactory
-argument_list|,
-name|Config
-operator|.
-name|DEFAULT
-operator|.
-name|withSqlConformance
-argument_list|(
-name|conformance
-argument_list|)
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

@@ -8455,7 +8455,7 @@ literal|"Guava"
 argument_list|)
 annotation|@
 name|Deprecated
-comment|// to be removed in 2.0
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|com

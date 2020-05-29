@@ -203,7 +203,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Widen a SqlNode ith column type to target type, mainly used for set    * operations like UNION, INTERSECT and EXCEPT.    *    * @param scope       scope to query    * @param query       SqlNode which have children nodes as columns    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if we add any cast in successfully    */
+comment|/**    * Widen a SqlNode ith column type to target type, mainly used for set    * operations like UNION, INTERSECT and EXCEPT.    *    * @param scope       Scope to query    * @param query       SqlNode which have children nodes as columns    * @param columnIndex Target column index    * @param targetType  Target type to cast to    */
 name|boolean
 name|rowTypeCoercion
 parameter_list|(
@@ -228,7 +228,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/** Coerce operand of binary arithmetic expressions to Numeric type.*/
+comment|/** Coerces operand of binary arithmetic expressions to Numeric type.*/
 name|boolean
 name|binaryArithmeticCoercion
 parameter_list|(
@@ -236,7 +236,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/** Coerce operands in binary comparison expressions. */
+comment|/** Coerces operands in binary comparison expressions. */
 name|boolean
 name|binaryComparisonCoercion
 parameter_list|(
@@ -244,7 +244,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/**    * Coerce CASE WHEN statement branches to one common type.    *    *<p>Rules: Find common type for all the then operands and else operands,    * then try to coerce the then/else operands to the type if needed.    */
+comment|/**    * Coerces CASE WHEN statement branches to one common type.    *    *<p>Rules: Find common type for all the then operands and else operands,    * then try to coerce the then/else operands to the type if needed.    */
 name|boolean
 name|caseWhenCoercion
 parameter_list|(
@@ -252,7 +252,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/**    * Type coercion with inferred type from passed in arguments and the    * {@link SqlTypeFamily} defined in the checkers, e.g. the    * {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC if desired type family is also    * {@link SqlTypeFamily#NUMERIC}.    *    *<p>If the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}s are    * subsumed in a    * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker}, check them    * based on their combination order. i.e. If we allow a NUMERIC_NUMERIC OR    * STRING_NUMERIC family combination and are with arguments (op1: VARCHAR(20), op2: BOOLEAN),    * try to coerce both op1 and op2 to NUMERIC if the type coercion rules allow it,    * or else try to coerce op2 to NUMERIC and keep op1 the type as it is.    *    *<p>This is also very interrelated to the composition predicate for the    * checkers: if the predicate is AND, we would fail fast if the first family    * type coercion fails.    *    * @param binding          Call binding    * @param operandTypes     Types of the operands passed in    * @param expectedFamilies Expected SqlTypeFamily list by user specified    * @return true if we successfully do any implicit cast    */
+comment|/**    * Type coercion with inferred type from passed in arguments and the    * {@link SqlTypeFamily} defined in the checkers, e.g. the    * {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC if desired type family is also    * {@link SqlTypeFamily#NUMERIC}.    *    *<p>If the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}s are    * subsumed in a    * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker}, check them    * based on their combination order. i.e. If we allow a NUMERIC_NUMERIC OR    * STRING_NUMERIC family combination and are with arguments (op1: VARCHAR(20), op2: BOOLEAN),    * try to coerce both op1 and op2 to NUMERIC if the type coercion rules allow it,    * or else try to coerce op2 to NUMERIC and keep op1 the type as it is.    *    *<p>This is also very interrelated to the composition predicate for the    * checkers: if the predicate is AND, we would fail fast if the first family    * type coercion fails.    *    * @param binding          Call binding    * @param operandTypes     Types of the operands passed in    * @param expectedFamilies Expected SqlTypeFamily list by user specified    */
 name|boolean
 name|builtinFunctionCoercion
 parameter_list|(
@@ -272,7 +272,7 @@ argument_list|>
 name|expectedFamilies
 parameter_list|)
 function_decl|;
-comment|/**    * Non built-in functions (UDFs) type coercion, compare the types of arguments    * with rules:    *    *<ol>    *<li>named param: find the desired type by the passed in operand's name    *<li>non-named param: find the desired type by formal parameter ordinal    *</ol>    *    *<p>Try to make type coercion only of the desired type is found.    *    * @return true if any operands is coerced    */
+comment|/**    * Non built-in functions (UDFs) type coercion, compare the types of arguments    * with rules:    *    *<ol>    *<li>Named param: find the desired type by the passed in operand's name    *<li>Non-named param: find the desired type by formal parameter ordinal    *</ol>    *    *<p>Try to make type coercion only if the desired type is found.    */
 name|boolean
 name|userDefinedFunctionCoercion
 parameter_list|(
@@ -286,7 +286,7 @@ name|SqlFunction
 name|function
 parameter_list|)
 function_decl|;
-comment|/**    * Coerces the source row expression to target type in an INSERT or UPDATE query.    *    *<p>If the source and target fields in the same ordinal do not equal sans nullability,    * try to coerce the source field to target field type.    *    * @param scope         Source scope    * @param sourceRowType Source row type    * @param targetRowType Target row type    * @param query         The query, either an INSERT or UPDATE    *    * @return True if any type coercion happens    */
+comment|/**    * Coerces the source row expression to target type in an INSERT or UPDATE query.    *    *<p>If the source and target fields in the same ordinal do not equal sans nullability,    * try to coerce the source field to target field type.    *    * @param scope         Source scope    * @param sourceRowType Source row type    * @param targetRowType Target row type    * @param query         The query, either an INSERT or UPDATE    */
 name|boolean
 name|querySourceCoercion
 parameter_list|(

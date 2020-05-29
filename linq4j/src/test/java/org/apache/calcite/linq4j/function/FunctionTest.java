@@ -62,6 +62,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|IntFunction
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -499,19 +511,15 @@ name|testGenerate
 parameter_list|()
 block|{
 specifier|final
-name|Function1
+name|IntFunction
 argument_list|<
-name|Integer
-argument_list|,
 name|String
 argument_list|>
 name|xx
 init|=
 operator|new
-name|Function1
+name|IntFunction
 argument_list|<
-name|Integer
-argument_list|,
 name|String
 argument_list|>
 argument_list|()
@@ -520,7 +528,7 @@ specifier|public
 name|String
 name|apply
 parameter_list|(
-name|Integer
+name|int
 name|a0
 parameter_list|)
 block|{
