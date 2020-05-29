@@ -7949,6 +7949,7 @@ annotation|@
 name|Experimental
 annotation|@
 name|Deprecated
+comment|// to be removed before 1.25
 specifier|protected
 name|boolean
 name|shouldMergeProject

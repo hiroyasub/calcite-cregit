@@ -2874,8 +2874,6 @@ expr_stmt|;
 return|return
 name|inputFinder
 operator|.
-name|inputBitSet
-operator|.
 name|build
 argument_list|()
 return|;

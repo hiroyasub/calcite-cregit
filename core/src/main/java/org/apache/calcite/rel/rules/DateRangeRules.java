@@ -1318,6 +1318,9 @@ class|class
 name|ExtractFinder
 extends|extends
 name|RexVisitorImpl
+argument_list|<
+name|Void
+argument_list|>
 implements|implements
 name|AutoCloseable
 block|{
@@ -1386,7 +1389,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Object
+name|Void
 name|visitCall
 parameter_list|(
 name|RexCall

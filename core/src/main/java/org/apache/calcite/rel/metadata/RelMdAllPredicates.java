@@ -825,8 +825,6 @@ name|inputFieldsUsed
 init|=
 name|inputFinder
 operator|.
-name|inputBitSet
-operator|.
 name|build
 argument_list|()
 decl_stmt|;
@@ -1307,8 +1305,6 @@ name|ImmutableBitSet
 name|inputFieldsUsed
 init|=
 name|inputFinder
-operator|.
-name|inputBitSet
 operator|.
 name|build
 argument_list|()

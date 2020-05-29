@@ -911,6 +911,18 @@ name|java
 operator|.
 name|util
 operator|.
+name|function
+operator|.
+name|UnaryOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|jar
 operator|.
 name|JarFile
@@ -9216,7 +9228,7 @@ return|return
 name|calendar
 return|;
 block|}
-comment|/**    * Returns a {@code Collector} that accumulates the input elements into a    * Guava {@link ImmutableList} via a {@link ImmutableList.Builder}.    *    *<p>It will be obsolete when we move to {@link Bug#upgrade Guava 21.0},    * which has {@code ImmutableList.toImmutableList()}.    *    * @param<T> Type of the input elements    *    * @return a {@code Collector} that collects all the input elements into an    * {@link ImmutableList}, in encounter order    */
+comment|/**    * Returns a {@code Collector} that accumulates the input elements into a    * Guava {@link ImmutableList} via a {@link ImmutableList.Builder}.    *    *<p>It will be obsolete when we move to {@link Bug#upgrade Guava 28.0-jre}.    * Guava 21.0 introduced {@code ImmutableList.toImmutableList()}, but it had    * a {@link com.google.common.annotations.Beta} tag until 28.0-jre.    *    *<p>In {@link Bug#upgrade Guava 21.0}, change this method to call    * {@code ImmutableList.toImmutableList()}, ignoring the {@code @Beta} tag.    *    * @param<T> Type of the input elements    *    * @return a {@code Collector} that collects all the input elements into an    * {@link ImmutableList}, in encounter order    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -9284,6 +9296,42 @@ name|Builder
 operator|::
 name|build
 argument_list|)
+return|;
+block|}
+comment|/** Returns an operator that applies {@code op1} and then {@code op2}.    *    *<p>As {@link Function#andThen(Function)} but for {@link UnaryOperator}. */
+specifier|public
+specifier|static
+parameter_list|<
+name|X
+parameter_list|>
+name|UnaryOperator
+argument_list|<
+name|X
+argument_list|>
+name|andThen
+parameter_list|(
+name|UnaryOperator
+argument_list|<
+name|X
+argument_list|>
+name|op1
+parameter_list|,
+name|UnaryOperator
+argument_list|<
+name|X
+argument_list|>
+name|op2
+parameter_list|)
+block|{
+return|return
+name|op1
+operator|.
+name|andThen
+argument_list|(
+name|op2
+argument_list|)
+operator|::
+name|apply
 return|;
 block|}
 comment|/** Transforms a list, applying a function to each element. */

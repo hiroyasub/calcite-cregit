@@ -281,20 +281,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -752,10 +738,6 @@ argument_list|()
 decl_stmt|;
 name|topChildExprs
 operator|=
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
 name|RexUtil
 operator|.
 name|apply
@@ -763,7 +745,6 @@ argument_list|(
 name|mapping
 argument_list|,
 name|topChildExprs
-argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Create new Project-Union-Project sequences

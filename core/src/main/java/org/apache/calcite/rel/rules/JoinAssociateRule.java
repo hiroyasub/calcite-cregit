@@ -643,11 +643,6 @@ argument_list|>
 name|newBottomList
 init|=
 operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
-decl_stmt|;
-operator|new
 name|RexPermuteInputsShuttle
 argument_list|(
 name|bottomMapping
@@ -660,10 +655,8 @@ operator|.
 name|visitList
 argument_list|(
 name|bottom
-argument_list|,
-name|newBottomList
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|RexNode
 name|newBottomCondition
 init|=

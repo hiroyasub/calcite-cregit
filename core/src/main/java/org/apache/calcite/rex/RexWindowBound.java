@@ -127,7 +127,7 @@ operator|-
 literal|1
 return|;
 block|}
-comment|/**    * Transforms the bound via {@link org.apache.calcite.rex.RexVisitor}.    * @param visitor visitor to accept    * @param<R> return type of the visitor    * @return transformed bound    */
+comment|/**    * Transforms the bound via {@link org.apache.calcite.rex.RexVisitor}.    *    * @param visitor visitor to accept    * @param<R> return type of the visitor    * @return transformed bound    */
 specifier|public
 parameter_list|<
 name|R
@@ -140,6 +140,32 @@ argument_list|<
 name|R
 argument_list|>
 name|visitor
+parameter_list|)
+block|{
+return|return
+name|this
+return|;
+block|}
+comment|/**    * Transforms the bound via {@link org.apache.calcite.rex.RexBiVisitor}.    *    * @param visitor visitor to accept    * @param arg Payload    * @param<R> return type of the visitor    * @return transformed bound    */
+specifier|public
+parameter_list|<
+name|R
+parameter_list|,
+name|P
+parameter_list|>
+name|RexWindowBound
+name|accept
+parameter_list|(
+name|RexBiVisitor
+argument_list|<
+name|R
+argument_list|,
+name|P
+argument_list|>
+name|visitor
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 block|{
 return|return

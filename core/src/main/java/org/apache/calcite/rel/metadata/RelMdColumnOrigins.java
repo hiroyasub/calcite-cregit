@@ -1538,7 +1538,11 @@ name|HashSet
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|RexVisitor
+argument_list|<
+name|Void
+argument_list|>
 name|visitor
 init|=
 operator|new

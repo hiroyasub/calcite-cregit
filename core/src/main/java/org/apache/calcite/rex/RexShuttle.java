@@ -685,48 +685,6 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Visits a list and writes the results to another list.    */
-specifier|public
-name|void
-name|visitList
-parameter_list|(
-name|List
-argument_list|<
-name|?
-extends|extends
-name|RexNode
-argument_list|>
-name|exprs
-parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|outExprs
-parameter_list|)
-block|{
-for|for
-control|(
-name|RexNode
-name|expr
-range|:
-name|exprs
-control|)
-block|{
-name|outExprs
-operator|.
-name|add
-argument_list|(
-name|expr
-operator|.
-name|accept
-argument_list|(
-name|this
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 comment|/**    * Visits each of a list of field collations and returns a list of the    * results.    *    * @param collations List of field collations    * @param update     If not null, sets this to true if any of the expressions    *                   was modified    * @return Array of visited field collations    */
 specifier|protected
 name|List
@@ -1111,7 +1069,10 @@ name|exprList
 return|;
 block|}
 block|}
-comment|/**    * Applies this shuttle to each expression in an iterable.    */
+comment|/** @deprecated Use {@link RexVisitor#visitList(Iterable)} if possible. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|final
 name|Iterable
