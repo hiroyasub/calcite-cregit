@@ -9364,6 +9364,94 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3975">[CALCITE-3975]    * ProjectFilterTransposeRule should succeed for project that happens to    * reference all input columns</a>. */
+annotation|@
+name|Test
+name|void
+name|testPushProjectPastFilter3
+parameter_list|()
+block|{
+name|checkPushProjectPastFilter3
+argument_list|(
+name|ProjectFilterTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testPushProjectPastFilter3()} but pushes down project and    * filter expressions whole. */
+annotation|@
+name|Test
+name|void
+name|testPushProjectPastFilter3b
+parameter_list|()
+block|{
+name|checkPushProjectPastFilter3
+argument_list|(
+name|ProjectFilterTransposeRule
+operator|.
+name|EXPRESSION_INSTANCE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testPushProjectPastFilter3()} but pushes down project    * expressions whole. */
+annotation|@
+name|Test
+name|void
+name|testPushProjectPastFilter3c
+parameter_list|()
+block|{
+name|checkPushProjectPastFilter3
+argument_list|(
+name|ProjectFilterTransposeRule
+operator|.
+name|PROJECT_EXPRESSION_INSTANCE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+specifier|private
+name|Sql
+name|checkPushProjectPastFilter3
+parameter_list|(
+name|ProjectFilterTransposeRule
+name|rule
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno + deptno as x, ename, job, mgr,\n"
+operator|+
+literal|"  hiredate, sal, comm, slacker\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where sal = 10 * comm\n"
+operator|+
+literal|"and upper(ename) = 'FOO'"
+decl_stmt|;
+return|return
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|rule
+argument_list|)
+return|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -32347,6 +32435,22 @@ argument_list|()
 expr_stmt|;
 block|}
 end_function
+
+begin_comment
+comment|// TODO: obsolete this method;
+end_comment
+
+begin_comment
+comment|// move the code into a new method Sql.withTopDownPlanner() so that you can
+end_comment
+
+begin_comment
+comment|// write sql.withTopDownPlanner();
+end_comment
+
+begin_comment
+comment|// withTopDownPlanner should call Sql.withTester and should be documented.
+end_comment
 
 begin_function
 name|Sql
