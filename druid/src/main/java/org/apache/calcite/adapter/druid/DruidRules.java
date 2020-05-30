@@ -840,6 +840,9 @@ operator|.
 name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
@@ -984,8 +987,6 @@ argument_list|,
 name|FILTER_AGGREGATE_TRANSPOSE
 argument_list|,
 name|FILTER_PROJECT_TRANSPOSE
-argument_list|,
-name|PROJECT_SORT_TRANSPOSE
 argument_list|,
 name|SORT
 argument_list|,
@@ -4330,6 +4331,9 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Rule to push back {@link org.apache.calcite.rel.core.Project} through a    * {@link org.apache.calcite.rel.core.Sort}. Useful if after pushing Sort,    * we could not push it inside DruidQuery.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 class|class

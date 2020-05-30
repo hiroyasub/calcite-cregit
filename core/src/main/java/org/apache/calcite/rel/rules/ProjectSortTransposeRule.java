@@ -154,6 +154,9 @@ comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 class|class
 name|ProjectSortTransposeRule
