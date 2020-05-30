@@ -48,7 +48,7 @@ name|boolean
 name|replace
 decl_stmt|;
 comment|/** Whether "IF NOT EXISTS" was specified. */
-specifier|protected
+specifier|public
 specifier|final
 name|boolean
 name|ifNotExists

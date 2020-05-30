@@ -1699,9 +1699,14 @@ name|CalciteConnectionProperty
 operator|.
 name|PARSER_FACTORY
 argument_list|,
-literal|"org.apache.calcite.sql.parser.parserextensiontesting"
+name|ExtensionDdlExecutor
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
 operator|+
-literal|".ExtensionSqlParserImpl#FACTORY"
+literal|"#PARSER_FACTORY"
 argument_list|)
 operator|.
 name|with

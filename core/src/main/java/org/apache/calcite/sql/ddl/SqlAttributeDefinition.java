@@ -210,10 +210,12 @@ operator|.
 name|ATTRIBUTE_DEF
 argument_list|)
 decl_stmt|;
+specifier|public
 specifier|final
 name|SqlIdentifier
 name|name
 decl_stmt|;
+specifier|public
 specifier|final
 name|SqlDataTypeSpec
 name|dataType

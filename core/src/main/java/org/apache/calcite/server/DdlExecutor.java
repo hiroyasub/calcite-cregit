@@ -11,7 +11,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|server
 package|;
 end_package
 
@@ -37,35 +37,54 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|linq4j
+name|sql
 operator|.
-name|function
-operator|.
-name|Experimental
+name|SqlNode
 import|;
 end_import
 
 begin_comment
-comment|/**  * Mix-in interface for {@link SqlNode} that allows DDL commands to be  * executed directly.  *  *<p>NOTE: Subject to change without notice.  */
+comment|/**  * Executes DDL commands.  */
 end_comment
 
 begin_interface
-annotation|@
-name|Experimental
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
 specifier|public
 interface|interface
-name|SqlExecutableStatement
+name|DdlExecutor
 block|{
+comment|/** DDL executor that cannot handle any DDL. */
+name|DdlExecutor
+name|USELESS
+init|=
+parameter_list|(
+name|context
+parameter_list|,
+name|node
+parameter_list|)
+lambda|->
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"DDL not supported: "
+operator|+
+name|node
+argument_list|)
+throw|;
+block|}
+decl_stmt|;
+comment|/** Executes a DDL statement.    *    *<p>The statement identified itself as DDL in the    * {@link org.apache.calcite.jdbc.CalcitePrepare.ParseResult#kind} field. */
 name|void
-name|execute
+name|executeDdl
 parameter_list|(
 name|CalcitePrepare
 operator|.
 name|Context
 name|context
+parameter_list|,
+name|SqlNode
+name|node
 parameter_list|)
 function_decl|;
 block|}

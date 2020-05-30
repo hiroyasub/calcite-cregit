@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Calcite query provider that reads from web tables (HTML).  *  *<p>A Calcite schema that maps onto multiple URLs / HTML Tables.  * Each HTML table appears as a table.  * Full select SQL operations are available on those tables.  */
+comment|/**  * Query provider that reads from files and web pages in various formats.  *  *<p>A Calcite schema that maps onto multiple URLs / HTML Tables.  Each HTML  * table appears as a table.  Full select SQL operations are available on those  * tables.  */
 end_comment
 
 begin_package

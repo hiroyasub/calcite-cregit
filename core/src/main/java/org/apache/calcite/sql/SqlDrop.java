@@ -44,7 +44,7 @@ extends|extends
 name|SqlDdl
 block|{
 comment|/** Whether "IF EXISTS" was specified. */
-specifier|protected
+specifier|public
 specifier|final
 name|boolean
 name|ifExists
