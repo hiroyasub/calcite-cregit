@@ -89,10 +89,7 @@ comment|/**    * Returns the ordinals of the key columns.    */
 specifier|default
 annotation|@
 name|Nonnull
-name|List
-argument_list|<
-name|Integer
-argument_list|>
+name|ImmutableIntList
 name|getKeys
 parameter_list|()
 block|{

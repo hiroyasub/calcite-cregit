@@ -2790,18 +2790,6 @@ argument_list|(
 name|left
 argument_list|)
 decl_stmt|;
-assert|assert
-name|RelCollations
-operator|.
-name|contains
-argument_list|(
-name|leftCollations
-argument_list|,
-name|leftKeys
-argument_list|)
-operator|:
-literal|"cannot merge join: left input is not sorted on left keys"
-assert|;
 if|if
 condition|(
 operator|!
@@ -2850,18 +2838,6 @@ argument_list|(
 name|right
 argument_list|)
 decl_stmt|;
-assert|assert
-name|RelCollations
-operator|.
-name|contains
-argument_list|(
-name|rightCollations
-argument_list|,
-name|rightKeys
-argument_list|)
-operator|:
-literal|"cannot merge join: right input is not sorted on right keys"
-assert|;
 specifier|final
 name|int
 name|leftFieldCount
