@@ -161,6 +161,38 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|SortJoinCopyRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|SortJoinTransposeRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|SortProjectTransposeRule
 import|;
 end_import
@@ -1041,6 +1073,779 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|// Not push down sort for hash join in full outer join case.
+annotation|@
+name|Test
+name|void
+name|testHashJoinFullOuterJoinNotPushDownSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r full outer join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by r.job desc nulls last, r.ename nulls first"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Push down sort to left input.
+annotation|@
+name|Test
+name|void
+name|testHashJoinLeftOuterJoinPushDownSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select contactno, email from customer.contact_peek) r left outer join\n"
+operator|+
+literal|"(select acctno, type from customer.account) s\n"
+operator|+
+literal|"on r.contactno=s.acctno and r.email=s.type\n"
+operator|+
+literal|"order by r.contactno desc, r.email desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Push down sort to left input.
+annotation|@
+name|Test
+name|void
+name|testHashJoinLeftOuterJoinPushDownSort2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"customer.contact_peek r left outer join\n"
+operator|+
+literal|"customer.account s\n"
+operator|+
+literal|"on r.contactno=s.acctno and r.email=s.type\n"
+operator|+
+literal|"order by r.fname desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Push down sort to left input.
+annotation|@
+name|Test
+name|void
+name|testHashJoinInnerJoinPushDownSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select contactno, email from customer.contact_peek) r inner join\n"
+operator|+
+literal|"(select acctno, type from customer.account) s\n"
+operator|+
+literal|"on r.contactno=s.acctno and r.email=s.type\n"
+operator|+
+literal|"order by r.contactno desc, r.email desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// do not push down sort.
+annotation|@
+name|Test
+name|void
+name|testHashJoinRightOuterJoinPushDownSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select contactno, email from customer.contact_peek) r right outer join\n"
+operator|+
+literal|"(select acctno, type from customer.account) s\n"
+operator|+
+literal|"on r.contactno=s.acctno and r.email=s.type\n"
+operator|+
+literal|"order by s.acctno desc, s.type desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// push sort to left input
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinLeftOuterJoinPushDownSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|" customer.contact_peek r left outer join\n"
+operator|+
+literal|"customer.account s\n"
+operator|+
+literal|"on r.contactno>s.acctno and r.email<s.type\n"
+operator|+
+literal|"order by r.contactno desc, r.email desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// push sort to left input
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinLeftOuterJoinPushDownSort2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|" customer.contact_peek r left outer join\n"
+operator|+
+literal|"customer.account s\n"
+operator|+
+literal|"on r.contactno>s.acctno and r.email<s.type\n"
+operator|+
+literal|"order by r.fname desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// do not push sort to left input cause sort keys are on right input.
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinLeftOuterJoinSortKeyOnRightInput
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|" customer.contact_peek r left outer join\n"
+operator|+
+literal|"customer.account s\n"
+operator|+
+literal|"on r.contactno>s.acctno and r.email<s.type\n"
+operator|+
+literal|"order by s.acctno desc, s.type desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// do not push down sort to right input because traits propagation does not work
+comment|// for right/full outer join.
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinRightOuterJoinSortPushDown
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select r.contactno, r.email, s.acctno, s.type from\n"
+operator|+
+literal|" customer.contact_peek r right outer join\n"
+operator|+
+literal|"customer.account s\n"
+operator|+
+literal|"on r.contactno>s.acctno and r.email<s.type\n"
+operator|+
+literal|"order by s.acctno desc, s.type desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Collation can be derived from left input so that top Sort is removed.
+annotation|@
+name|Test
+name|void
+name|testHashJoinTraitDerivation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select ename, job, mgr from sales.emp order by ename desc, job desc, mgr limit 10) r\n"
+operator|+
+literal|"join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by r.ename desc, r.job desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Collation can be derived from left input so that top Sort is removed.
+annotation|@
+name|Test
+name|void
+name|testHashJoinTraitDerivation2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select ename, job, mgr from sales.emp order by mgr desc limit 10) r\n"
+operator|+
+literal|"join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by r.mgr desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Collation derived from left input is not what the top Sort needs.
+annotation|@
+name|Test
+name|void
+name|testHashJoinTraitDerivationNegativeCase
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select ename, job, mgr from sales.emp order by mgr desc limit 10) r\n"
+operator|+
+literal|"join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by r.mgr"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Collation can be derived from left input so that top Sort is removed.
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinTraitDerivation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select ename, job, mgr from sales.emp order by ename desc, job desc, mgr limit 10) r\n"
+operator|+
+literal|"join sales.bonus s on r.ename>s.ename and r.job<s.job\n"
+operator|+
+literal|"order by r.ename desc, r.job desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Collation can be derived from left input so that top Sort is removed.
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinTraitDerivation2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select ename, job, mgr from sales.emp order by mgr limit 10) r\n"
+operator|+
+literal|"join sales.bonus s on r.ename>s.ename and r.job<s.job\n"
+operator|+
+literal|"order by r.mgr"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|// Collation derived from left input is not what the top Sort needs.
+annotation|@
+name|Test
+name|void
+name|testNestedLoopJoinTraitDerivationNegativeCase
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select ename, job, mgr from sales.emp order by mgr limit 10) r\n"
+operator|+
+literal|"join sales.bonus s on r.ename>s.ename and r.job<s.job\n"
+operator|+
+literal|"order by r.mgr desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE
+argument_list|)
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SORT_RULE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 end_class
 
@@ -1187,6 +1992,25 @@ operator|.
 name|removeRule
 argument_list|(
 name|SortProjectTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
+comment|// Sort will only be pushed down by traits propagation.
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|SortJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|SortJoinCopyRule
 operator|.
 name|INSTANCE
 argument_list|)

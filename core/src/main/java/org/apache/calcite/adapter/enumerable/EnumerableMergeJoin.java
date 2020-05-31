@@ -784,12 +784,8 @@ name|collation
 init|=
 name|required
 operator|.
-name|getTrait
-argument_list|(
-name|RelCollationTraitDef
-operator|.
-name|INSTANCE
-argument_list|)
+name|getCollation
+argument_list|()
 decl_stmt|;
 name|List
 argument_list|<
@@ -1063,7 +1059,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|// TODO: support subset keys and superset keys
+comment|// TODO: support subset keys and superset keys (CALCITE-4015).
 return|return
 literal|null
 return|;
