@@ -588,7 +588,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract class to provide testing environment& utils for extensions.  */
+comment|/**  * Abstract class to provide testing environment and utilities for extensions.  */
 end_comment
 
 begin_class
