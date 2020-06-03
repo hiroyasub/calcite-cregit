@@ -1658,7 +1658,7 @@ comment|/** Aggregation query at coarser level of aggregation than aggregation  
 annotation|@
 name|Test
 name|void
-name|testAggregateRollUp
+name|testAggregateRollUp1
 parameter_list|()
 block|{
 name|sql
@@ -1687,6 +1687,48 @@ argument_list|)
 argument_list|)
 operator|.
 name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * stddev_pop aggregate function does not support roll up.    */
+annotation|@
+name|Test
+name|void
+name|testAggregateRollUp2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"empid\", stddev_pop(\"deptno\") "
+operator|+
+literal|"from \"emps\" "
+operator|+
+literal|"group by \"empid\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"empid\", stddev_pop(\"deptno\") "
+operator|+
+literal|"from \"emps\" "
+operator|+
+literal|"group by \"empid\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
 argument_list|()
 expr_stmt|;
 block|}
@@ -4622,6 +4664,7 @@ name|void
 name|testSubQuery
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|q
 init|=
@@ -4639,15 +4682,6 @@ name|m
 init|=
 literal|"select \"empid\", \"deptno\" from \"emps\"\n"
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"hello"
-argument_list|)
-expr_stmt|;
 name|sql
 argument_list|(
 name|m

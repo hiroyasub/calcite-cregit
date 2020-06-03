@@ -10351,6 +10351,31 @@ return|return
 literal|null
 return|;
 block|}
+comment|// When an SqlAggFunction does not support roll up, it will return null, which means that
+comment|// it cannot do secondary aggregation and the materialization recognition will fail.
+specifier|final
+name|SqlAggFunction
+name|aggFunction
+init|=
+name|getRollup
+argument_list|(
+name|aggregateCall
+operator|.
+name|getAggregation
+argument_list|()
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|aggFunction
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 name|aggregateCalls
 operator|.
 name|add
@@ -10359,13 +10384,7 @@ name|AggregateCall
 operator|.
 name|create
 argument_list|(
-name|getRollup
-argument_list|(
-name|aggregateCall
-operator|.
-name|getAggregation
-argument_list|()
-argument_list|)
+name|aggFunction
 argument_list|,
 name|aggregateCall
 operator|.
