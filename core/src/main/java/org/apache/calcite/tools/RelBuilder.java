@@ -3160,7 +3160,17 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"no aliased field found; fields are: "
+literal|"{alias="
+operator|+
+name|alias
+operator|+
+literal|",fieldName="
+operator|+
+name|fieldName
+operator|+
+literal|"} "
+operator|+
+literal|"field not found; fields are: "
 operator|+
 name|fields
 argument_list|)
