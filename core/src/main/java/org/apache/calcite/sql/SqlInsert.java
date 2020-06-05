@@ -212,28 +212,6 @@ argument_list|>
 name|getOperandList
 parameter_list|()
 block|{
-if|if
-condition|(
-name|columnList
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-name|ImmutableNullableList
-operator|.
-name|of
-argument_list|(
-name|keywords
-argument_list|,
-name|targetTable
-argument_list|,
-name|source
-argument_list|)
-return|;
-block|}
-else|else
-block|{
 return|return
 name|ImmutableNullableList
 operator|.
@@ -248,7 +226,6 @@ argument_list|,
 name|columnList
 argument_list|)
 return|;
-block|}
 block|}
 comment|/** Returns whether this is an UPSERT statement.    *    *<p>In SQL, this is represented using the {@code UPSERT} keyword rather than    * {@code INSERT}; in the abstract syntax tree, an UPSERT is indicated by the    * presence of a {@link SqlInsertKeyword#UPSERT} keyword. */
 specifier|public
