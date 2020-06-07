@@ -343,6 +343,87 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testSortMergeJoinSubsetKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by r.job desc nulls last"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSortMergeJoinSubsetKey2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job and r.sal = s.sal\n"
+operator|+
+literal|"order by r.sal, r.ename desc nulls last"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSortMergeJoinSupersetKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by r.job desc nulls last, r.ename, r.sal desc"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSortMergeJoinRight
 parameter_list|()
 block|{
@@ -355,6 +436,87 @@ operator|+
 literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
 operator|+
 literal|"order by s.job desc nulls last, s.ename nulls first"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSortMergeJoinRightSubsetKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by s.job desc nulls last"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSortMergeJoinRightSubsetKey2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job and r.sal = s.sal\n"
+operator|+
+literal|"order by s.sal, s.ename desc nulls last"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSortMergeJoinRightSupersetKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"sales.emp r join sales.bonus s on r.ename=s.ename and r.job=s.job\n"
+operator|+
+literal|"order by s.job desc nulls last, s.ename, s.sal desc"
 decl_stmt|;
 name|Query
 operator|.
