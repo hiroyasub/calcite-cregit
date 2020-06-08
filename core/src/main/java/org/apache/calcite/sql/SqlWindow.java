@@ -3320,6 +3320,8 @@ block|}
 comment|/**    * An enumeration of types of bounds in a window:<code>CURRENT ROW</code>,    *<code>UNBOUNDED PRECEDING</code>, and<code>UNBOUNDED FOLLOWING</code>.    */
 enum|enum
 name|Bound
+implements|implements
+name|Symbolizable
 block|{
 name|CURRENT_ROW
 argument_list|(
@@ -3361,26 +3363,6 @@ parameter_list|()
 block|{
 return|return
 name|sql
-return|;
-block|}
-comment|/**      * Creates a parse-tree node representing an occurrence of this bound      * type at a particular position in the parsed text.      */
-specifier|public
-name|SqlNode
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
 return|;
 block|}
 block|}

@@ -15,22 +15,6 @@ name|sql
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
-name|SqlParserPos
-import|;
-end_import
-
 begin_comment
 comment|/**  * Enumerates the types of condition in a join expression.  */
 end_comment
@@ -39,6 +23,8 @@ begin_enum
 specifier|public
 enum|enum
 name|JoinConditionType
+implements|implements
+name|Symbolizable
 block|{
 comment|/**    * Join clause has no condition, for example "FROM EMP, DEPT"    */
 name|NONE
@@ -48,27 +34,6 @@ name|ON
 block|,
 comment|/**    * Join clause has a USING condition, for example "FROM EMP JOIN DEPT    * USING (DEPTNO)"    */
 name|USING
-block|;
-comment|/**    * Creates a parse-tree node representing an occurrence of this join    * type at a particular position in the parsed text.    */
-specifier|public
-name|SqlLiteral
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
-return|;
-block|}
 block|}
 end_enum
 

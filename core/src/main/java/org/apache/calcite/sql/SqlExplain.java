@@ -145,33 +145,14 @@ comment|/**    * The level of abstraction with which to display the plan.    */
 specifier|public
 enum|enum
 name|Depth
+implements|implements
+name|Symbolizable
 block|{
 name|TYPE
 block|,
 name|LOGICAL
 block|,
 name|PHYSICAL
-block|;
-comment|/**      * Creates a parse-tree node representing an occurrence of this symbol      * at a particular position in the parsed text.      */
-specifier|public
-name|SqlLiteral
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
-return|;
-block|}
 block|}
 comment|//~ Instance fields --------------------------------------------------------
 name|SqlNode

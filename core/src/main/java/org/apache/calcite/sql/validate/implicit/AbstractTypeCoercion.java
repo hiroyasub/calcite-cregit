@@ -1327,11 +1327,6 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Update inferred type for a SqlNode.    */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
 specifier|protected
 name|void
 name|updateInferredType

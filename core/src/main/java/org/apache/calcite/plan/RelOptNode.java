@@ -55,7 +55,7 @@ name|int
 name|getId
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if    * their digests and {@link #getRowType()} are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    *    * @return Digest of this {@code RelNode}    */
+comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if    * their digests and {@link #getRowType()} (except the field names) are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    *    * @return Digest of this {@code RelNode}    */
 name|String
 name|getDigest
 parameter_list|()

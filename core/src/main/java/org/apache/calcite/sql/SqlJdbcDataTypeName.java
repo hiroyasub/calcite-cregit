@@ -71,6 +71,8 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlJdbcDataTypeName
+implements|implements
+name|Symbolizable
 block|{
 name|SQL_CHAR
 argument_list|(
@@ -368,26 +370,6 @@ name|range
 operator|=
 name|range
 expr_stmt|;
-block|}
-comment|/**    * Creates a parse-tree node representing an occurrence of this keyword    * at a particular position in the parsed text.    */
-specifier|public
-name|SqlLiteral
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
-return|;
 block|}
 comment|/** Creates a parse tree node for a type identifier of this name. */
 specifier|public

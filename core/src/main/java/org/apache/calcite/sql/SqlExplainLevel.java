@@ -15,22 +15,6 @@ name|sql
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
-name|SqlParserPos
-import|;
-end_import
-
 begin_comment
 comment|/**  * SqlExplainLevel defines detail levels for EXPLAIN PLAN.  */
 end_comment
@@ -39,6 +23,8 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlExplainLevel
+implements|implements
+name|Symbolizable
 block|{
 comment|/**    * Suppress all attributes.    */
 name|NO_ATTRIBUTES
@@ -54,27 +40,6 @@ name|NON_COST_ATTRIBUTES
 block|,
 comment|/**    * Display all attributes, including cost.    */
 name|ALL_ATTRIBUTES
-block|;
-comment|/**    * Creates a parse-tree node representing an occurrence of this symbol at    * a particular position in the parsed text.    */
-specifier|public
-name|SqlLiteral
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
-return|;
-block|}
 block|}
 end_enum
 

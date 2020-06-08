@@ -1027,6 +1027,8 @@ comment|/**    * Options for {@code AFTER MATCH} clause.    */
 specifier|public
 enum|enum
 name|AfterOption
+implements|implements
+name|Symbolizable
 block|{
 name|SKIP_TO_NEXT_ROW
 argument_list|(
@@ -1065,26 +1067,6 @@ parameter_list|()
 block|{
 return|return
 name|sql
-return|;
-block|}
-comment|/**      * Creates a parse-tree node representing an occurrence of this symbol      * at a particular position in the parsed text.      */
-specifier|public
-name|SqlLiteral
-name|symbol
-parameter_list|(
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-return|return
-name|SqlLiteral
-operator|.
-name|createSymbol
-argument_list|(
-name|this
-argument_list|,
-name|pos
-argument_list|)
 return|;
 block|}
 block|}
