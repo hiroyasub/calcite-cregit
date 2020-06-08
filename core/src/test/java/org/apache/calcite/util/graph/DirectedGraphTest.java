@@ -1165,9 +1165,14 @@ argument_list|>
 name|createDag
 parameter_list|()
 block|{
-comment|// A - B - C - D
-comment|//  \     /
-comment|//   +- E - F
+comment|//    D         F
+comment|//    ^         ^
+comment|//    |         |
+comment|//    C<------ +
+comment|//    ^         |
+comment|//    |         |
+comment|//    |         |
+comment|//    B<- A -> E
 specifier|final
 name|DefaultDirectedGraph
 argument_list|<
@@ -1282,18 +1287,24 @@ return|return
 name|graph
 return|;
 block|}
-comment|/** Unit test for    * {@link org.apache.calcite.util.graph.Graphs.FrozenGraph}. */
-annotation|@
-name|Test
-name|void
-name|testPaths
+specifier|private
+name|DefaultDirectedGraph
+argument_list|<
+name|String
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|createDag1
 parameter_list|()
 block|{
-comment|//       B -> C
-comment|//      /      \
-comment|//     A        E
-comment|//      \      /
-comment|//       D -->
+comment|//    +--> E<--+
+comment|//    |         |
+comment|//    C         |
+comment|//    ^         D
+comment|//    |         ^
+comment|//    |         |
+comment|//    |         |
+comment|//    B<-- A --+
 specifier|final
 name|DefaultDirectedGraph
 argument_list|<
@@ -1395,6 +1406,29 @@ argument_list|,
 literal|"E"
 argument_list|)
 expr_stmt|;
+return|return
+name|graph
+return|;
+block|}
+comment|/** Unit test for    * {@link org.apache.calcite.util.graph.Graphs.FrozenGraph}. */
+annotation|@
+name|Test
+name|void
+name|testPaths
+parameter_list|()
+block|{
+specifier|final
+name|DefaultDirectedGraph
+argument_list|<
+name|String
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|graph
+init|=
+name|createDag1
+argument_list|()
+decl_stmt|;
 specifier|final
 name|Graphs
 operator|.
@@ -1537,6 +1571,129 @@ argument_list|)
 operator|.
 name|toString
 argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testDistances
+parameter_list|()
+block|{
+specifier|final
+name|DefaultDirectedGraph
+argument_list|<
+name|String
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|graph
+init|=
+name|createDag1
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Graphs
+operator|.
+name|FrozenGraph
+argument_list|<
+name|String
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|frozenGraph
+init|=
+name|Graphs
+operator|.
+name|makeImmutable
+argument_list|(
+name|graph
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|frozenGraph
+operator|.
+name|getShortestDistance
+argument_list|(
+literal|"A"
+argument_list|,
+literal|"B"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|2
+argument_list|,
+name|frozenGraph
+operator|.
+name|getShortestDistance
+argument_list|(
+literal|"A"
+argument_list|,
+literal|"E"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+operator|-
+literal|1
+argument_list|,
+name|frozenGraph
+operator|.
+name|getShortestDistance
+argument_list|(
+literal|"B"
+argument_list|,
+literal|"A"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+operator|-
+literal|1
+argument_list|,
+name|frozenGraph
+operator|.
+name|getShortestDistance
+argument_list|(
+literal|"D"
+argument_list|,
+literal|"C"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|frozenGraph
+operator|.
+name|getShortestDistance
+argument_list|(
+literal|"D"
+argument_list|,
+literal|"E"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|0
+argument_list|,
+name|frozenGraph
+operator|.
+name|getShortestDistance
+argument_list|(
+literal|"B"
+argument_list|,
+literal|"B"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
