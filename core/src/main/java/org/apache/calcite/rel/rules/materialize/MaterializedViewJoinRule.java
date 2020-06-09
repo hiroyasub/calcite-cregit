@@ -1364,7 +1364,7 @@ argument_list|)
 else|:
 name|topProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 decl_stmt|;
 name|List
@@ -1473,7 +1473,7 @@ argument_list|)
 else|:
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 decl_stmt|;
 name|List

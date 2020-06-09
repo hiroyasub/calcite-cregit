@@ -50,7 +50,7 @@ end_comment
 begin_class
 annotation|@
 name|Deprecated
-comment|// Kept for backward compatibility and to be removed before 2.0
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|MaterializedViewSubstitutionVisitor

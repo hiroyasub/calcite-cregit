@@ -1466,11 +1466,11 @@ name|equalTo
 argument_list|(
 name|sort
 argument_list|(
-literal|"NoneSingleRel:Subset#0.NONE.[]"
+literal|"NoneSingleRel:RelSubset#0.NONE.[]"
 argument_list|,
-literal|"PhysSingleRel:Subset#0.PHYS.[0]"
+literal|"PhysSingleRel:RelSubset#0.PHYS.[0]"
 argument_list|,
-literal|"PhysSingleRel:Subset#0.PHYS.[]"
+literal|"PhysSingleRel:RelSubset#0.PHYS.[]"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1716,9 +1716,9 @@ name|equalTo
 argument_list|(
 name|sort
 argument_list|(
-literal|"PhysSingleRel:Subset#0.PHYS.[]"
+literal|"PhysSingleRel:RelSubset#0.PHYS.[]"
 argument_list|,
-literal|"PhysSingleRel:Subset#0.PHYS_3.[]"
+literal|"PhysSingleRel:RelSubset#0.PHYS_3.[]"
 argument_list|)
 argument_list|)
 argument_list|)

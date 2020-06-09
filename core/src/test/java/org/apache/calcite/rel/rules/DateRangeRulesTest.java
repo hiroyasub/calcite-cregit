@@ -5617,7 +5617,7 @@ name|assertThat
 argument_list|(
 name|e
 operator|.
-name|toStringRaw
+name|toString
 argument_list|()
 argument_list|,
 name|matcher
@@ -5640,7 +5640,7 @@ name|assertThat
 argument_list|(
 name|e2
 operator|.
-name|toStringRaw
+name|toString
 argument_list|()
 argument_list|,
 name|simplifyMatcher

@@ -32974,7 +32974,7 @@ name|input
 argument_list|,
 name|logicalProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|,
 name|logicalProject

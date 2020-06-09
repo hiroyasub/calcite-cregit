@@ -1887,7 +1887,7 @@ argument_list|)
 argument_list|,
 name|rel
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|,
 name|rel
@@ -1914,7 +1914,7 @@ name|input
 argument_list|,
 name|rel
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|,
 name|rel

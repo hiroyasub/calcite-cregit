@@ -2188,7 +2188,7 @@ name|inputExpr
 init|=
 name|rel
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get

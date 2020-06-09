@@ -989,7 +989,7 @@ name|containsOver
 argument_list|(
 name|leftProj
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|,
 literal|null
@@ -1020,7 +1020,7 @@ name|containsOver
 argument_list|(
 name|rightProj
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|,
 literal|null

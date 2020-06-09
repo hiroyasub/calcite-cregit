@@ -12854,7 +12854,7 @@ name|pulledUpPredicates
 argument_list|,
 name|sortsAs
 argument_list|(
-literal|"[=($0, 1), OR(AND(=($2, 3), =($1, 2)), =($1, 4))]"
+literal|"[=($0, 1), OR(AND(=($1, 2), =($2, 3)), =($1, 4))]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -20745,19 +20745,6 @@ argument_list|,
 name|item
 lambda|->
 block|{
-try|try
-init|(
-name|RexNode
-operator|.
-name|Closeable
-name|ignored
-init|=
-name|RexNode
-operator|.
-name|skipNormalize
-argument_list|()
-init|)
-block|{
 specifier|final
 name|List
 argument_list|<
@@ -20802,7 +20789,6 @@ operator|.
 name|toString
 argument_list|()
 return|;
-block|}
 block|}
 argument_list|)
 return|;

@@ -39,6 +39,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|Digest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptCost
 import|;
 end_import
@@ -456,7 +470,7 @@ name|planner
 parameter_list|)
 function_decl|;
 comment|/**    * Computes the digest, assigns it, and returns it. For planner use only.    *    * @return Digest of this relational expression    */
-name|String
+name|Digest
 name|recomputeDigest
 parameter_list|()
 function_decl|;

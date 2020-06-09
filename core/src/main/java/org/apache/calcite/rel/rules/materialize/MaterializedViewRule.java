@@ -2250,7 +2250,7 @@ argument_list|)
 else|:
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 decl_stmt|;
 comment|// For compensationColumnsEquiPred, we use the view equivalence classes,

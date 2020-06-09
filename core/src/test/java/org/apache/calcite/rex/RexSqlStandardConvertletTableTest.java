@@ -297,7 +297,7 @@ name|rex
 init|=
 name|project
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -360,7 +360,7 @@ name|rex
 init|=
 name|project
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -423,7 +423,7 @@ name|rex
 init|=
 name|project
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get

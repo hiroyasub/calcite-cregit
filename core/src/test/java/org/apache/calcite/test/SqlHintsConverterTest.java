@@ -879,20 +879,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|junit
@@ -3112,10 +3098,6 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-literal|1
-argument_list|,
-name|is
-argument_list|(
 name|join
 operator|.
 name|getHints
@@ -3123,6 +3105,10 @@ argument_list|()
 operator|.
 name|size
 argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3144,9 +3130,9 @@ operator|.
 name|getRight
 argument_list|()
 argument_list|,
-name|ImmutableList
+name|join
 operator|.
-name|of
+name|getHints
 argument_list|()
 argument_list|,
 name|join

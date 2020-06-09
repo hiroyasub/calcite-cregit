@@ -753,6 +753,9 @@ name|best
 operator|.
 name|getDigest
 argument_list|()
+operator|.
+name|toString
+argument_list|()
 argument_list|,
 literal|"LogicalUnion"
 argument_list|)

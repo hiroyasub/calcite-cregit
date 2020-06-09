@@ -1642,7 +1642,7 @@ name|i
 operator|<
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|size
@@ -1658,7 +1658,7 @@ name|add
 argument_list|(
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -2819,7 +2819,7 @@ name|visitEach
 argument_list|(
 name|topProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -3838,7 +3838,7 @@ name|k
 operator|<
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|size
@@ -3856,7 +3856,7 @@ name|n
 init|=
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -4009,7 +4009,7 @@ name|k
 operator|<
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|size
@@ -4027,7 +4027,7 @@ name|n
 init|=
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -4231,7 +4231,7 @@ name|k
 operator|<
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|size
@@ -4249,7 +4249,7 @@ name|n
 init|=
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -4719,7 +4719,7 @@ name|addAll
 argument_list|(
 name|topProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4805,7 +4805,7 @@ name|viewExpr
 range|:
 name|topViewProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 control|)
 block|{

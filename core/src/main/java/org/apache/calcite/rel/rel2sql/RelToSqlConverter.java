@@ -2624,7 +2624,7 @@ name|isStar
 argument_list|(
 name|e
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|,
 name|e
@@ -2680,7 +2680,7 @@ name|ref
 range|:
 name|e
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 control|)
 block|{

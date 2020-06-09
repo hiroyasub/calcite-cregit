@@ -2491,7 +2491,7 @@ name|assertThat
 argument_list|(
 name|leftInput
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -2837,7 +2837,7 @@ name|assertThat
 argument_list|(
 name|leftInput
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -3239,7 +3239,7 @@ name|assertThat
 argument_list|(
 name|leftInput
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -3670,7 +3670,7 @@ name|assertThat
 argument_list|(
 name|leftInput
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get

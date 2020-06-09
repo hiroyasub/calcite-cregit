@@ -442,7 +442,7 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
+literal|"PLAN=EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
 literal|"  EnumerableCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+
@@ -450,7 +450,7 @@ literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor1], expr#6=[$t5.deptno], expr#7=[=($t1, $t6)], proj#0..2=[{exprs}], $condition=[$t7])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor1], expr#6=[$t5.deptno], expr#7=[=($t6, $t1)], proj#0..2=[{exprs}], $condition=[$t7])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, emps]])"
 argument_list|)
@@ -549,7 +549,7 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
+literal|"PLAN=EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
 literal|"  EnumerableCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+
@@ -557,7 +557,7 @@ literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor1], expr#6=[$t5.deptno], expr#7=[=($t1, $t6)], expr#8=[100], expr#9=[>($t0, $t8)], expr#10=[AND($t7, $t9)], proj#0..2=[{exprs}], $condition=[$t10])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor1], expr#6=[$t5.deptno], expr#7=[=($t6, $t1)], expr#8=[100], expr#9=[>($t0, $t8)], expr#10=[AND($t7, $t9)], proj#0..2=[{exprs}], $condition=[$t10])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, emps]])"
 argument_list|)

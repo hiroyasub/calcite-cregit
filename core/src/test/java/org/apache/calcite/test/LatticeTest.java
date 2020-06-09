@@ -1262,7 +1262,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|10
+literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1277,7 +1277,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|18
+literal|8
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1292,7 +1292,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|0
+literal|23
 argument_list|)
 argument_list|)
 expr_stmt|;

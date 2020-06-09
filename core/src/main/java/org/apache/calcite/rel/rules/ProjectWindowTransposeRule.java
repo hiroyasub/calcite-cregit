@@ -1066,7 +1066,7 @@ name|visitList
 argument_list|(
 name|project
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -1216,7 +1216,7 @@ name|visitEach
 argument_list|(
 name|project
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 argument_list|)
 expr_stmt|;

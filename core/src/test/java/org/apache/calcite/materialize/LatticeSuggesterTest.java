@@ -3715,7 +3715,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"sales_fact_1997 (customer:+(2, $2)):[MIN(customer.fname)]"
+literal|"sales_fact_1997 (customer:+($2, 2)):[MIN(customer.fname)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3740,7 +3740,7 @@ literal|" [foodmart, sales_fact_1997]], "
 operator|+
 literal|"edges: [Step([foodmart, sales_fact_1997],"
 operator|+
-literal|" [foodmart, customer], +(2, $2):+(1, $0))])"
+literal|" [foodmart, customer], +($2, 2):+($0, 1))])"
 argument_list|)
 argument_list|)
 expr_stmt|;

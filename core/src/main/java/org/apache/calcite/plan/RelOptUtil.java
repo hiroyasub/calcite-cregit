@@ -1816,8 +1816,7 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-if|if
-condition|(
+return|return
 operator|(
 name|rel
 operator|instanceof
@@ -1834,14 +1833,6 @@ operator|.
 name|fetch
 operator|!=
 literal|null
-condition|)
-block|{
-return|return
-literal|true
-return|;
-block|}
-return|return
-literal|false
 return|;
 block|}
 comment|/**    * Whether this node contains a sort specification.    */
@@ -1854,8 +1845,7 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-if|if
-condition|(
+return|return
 operator|(
 name|rel
 operator|instanceof
@@ -1878,14 +1868,6 @@ argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
-condition|)
-block|{
-return|return
-literal|true
-return|;
-block|}
-return|return
-literal|false
 return|;
 block|}
 comment|/**    * Returns a set of tables used by this expression or its children    */
@@ -2049,15 +2031,16 @@ name|rel
 parameter_list|)
 block|{
 return|return
-name|Lists
-operator|.
-name|transform
-argument_list|(
 name|findAllTables
 argument_list|(
 name|rel
 argument_list|)
-argument_list|,
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|map
+argument_list|(
 name|table
 lambda|->
 name|table
@@ -2066,6 +2049,14 @@ name|getQualifiedName
 argument_list|()
 operator|.
 name|toString
+argument_list|()
+argument_list|)
+operator|.
+name|collect
+argument_list|(
+name|Collectors
+operator|.
+name|toList
 argument_list|()
 argument_list|)
 return|;
@@ -17958,9 +17949,6 @@ name|RexImplicationChecker
 argument_list|(
 name|rexBuilder
 argument_list|,
-operator|(
-name|RexExecutorImpl
-operator|)
 name|executor
 argument_list|,
 name|rowType
@@ -19460,13 +19448,6 @@ class|class
 name|TypeDumper
 block|{
 specifier|private
-specifier|final
-name|String
-name|extraIndent
-init|=
-literal|"  "
-decl_stmt|;
-specifier|private
 name|String
 name|indent
 decl_stmt|;
@@ -19535,6 +19516,11 @@ name|String
 name|prevIndent
 init|=
 name|indent
+decl_stmt|;
+name|String
+name|extraIndent
+init|=
+literal|"  "
 decl_stmt|;
 name|this
 operator|.

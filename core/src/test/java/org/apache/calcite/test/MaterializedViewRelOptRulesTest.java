@@ -2197,9 +2197,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):JavaType(int) NOT NULL], "
 operator|+
-literal|"expr#2=[1], expr#3=[CAST($t1):INTEGER NOT NULL], expr#4=[=($t2, $t3)], "
-operator|+
-literal|"EXPR$0=[$t1], $condition=[$t4])\n"
+literal|"expr#2=[1], expr#3=[=($t2, $t0)], EXPR$0=[$t1], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|)

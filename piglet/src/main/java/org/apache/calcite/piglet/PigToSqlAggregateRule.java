@@ -1127,7 +1127,7 @@ name|add
 argument_list|(
 name|oldBottomProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get
@@ -1367,7 +1367,7 @@ name|RexCall
 operator|)
 name|oldBottomProject
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 operator|.
 name|get

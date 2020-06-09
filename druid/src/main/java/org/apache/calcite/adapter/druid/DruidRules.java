@@ -2621,7 +2621,7 @@ name|rexNode
 range|:
 name|project
 operator|.
-name|getChildExps
+name|getProjects
 argument_list|()
 control|)
 block|{
