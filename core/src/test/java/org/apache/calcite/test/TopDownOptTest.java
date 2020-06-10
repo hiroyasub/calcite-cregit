@@ -294,6 +294,56 @@ block|{
 annotation|@
 name|Test
 name|void
+name|testValuesTraitRequest
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * from (values (1, 1), (2, 1), (1, 2), (2, 2))\n"
+operator|+
+literal|"as t(a, b) order by b, a"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testValuesTraitRequestNeg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * from (values (1, 1), (2, 1), (3, 2), (2, 2))\n"
+operator|+
+literal|"as t(a, b) order by b, a"
+decl_stmt|;
+name|Query
+operator|.
+name|create
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSortAgg
 parameter_list|()
 block|{

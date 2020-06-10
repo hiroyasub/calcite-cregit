@@ -227,6 +227,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|DeriveMode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptCluster
 import|;
 end_import
@@ -594,6 +608,36 @@ name|table
 operator|+
 literal|", see EnumerableTableScan#canHandle"
 assert|;
+block|}
+comment|/**    * Code snippet to demonstrate how to generate IndexScan on demand    * by passing required collation through TableScan.    *    * @return IndexScan if there is index available on collation keys    */
+annotation|@
+name|Override
+specifier|public
+name|RelNode
+name|passThrough
+parameter_list|(
+specifier|final
+name|RelTraitSet
+name|required
+parameter_list|)
+block|{
+comment|/*     keys = required.getCollation().getKeys();     if (table has index on keys) {       direction = forward or backward;       return new IndexScan(table, indexInfo, direction);     } */
+return|return
+literal|null
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|DeriveMode
+name|getDeriveMode
+parameter_list|()
+block|{
+return|return
+name|DeriveMode
+operator|.
+name|PROHIBITED
+return|;
 block|}
 comment|/** Creates an EnumerableTableScan. */
 specifier|public

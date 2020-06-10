@@ -2483,7 +2483,7 @@ return|return
 name|list
 return|;
 block|}
-specifier|private
+specifier|public
 specifier|static
 name|Ordering
 argument_list|<
