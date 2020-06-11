@@ -154,6 +154,26 @@ literal|"from (values (true, true, true))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testNotInOperation
+parameter_list|()
+block|{
+name|checkPlanEquals
+argument_list|(
+literal|"select\n"
+operator|+
+literal|"1 not in ('1', '2', '3') as f0,\n"
+operator|+
+literal|"(1, 2) not in (('1', '2')) as f1,\n"
+operator|+
+literal|"(1, 2) not in (('1', '2'), ('3', '4')) as f2\n"
+operator|+
+literal|"from (values (false, false, false))"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test cases for {@link TypeCoercion#inOperationCoercion}. */
 annotation|@
 name|Test

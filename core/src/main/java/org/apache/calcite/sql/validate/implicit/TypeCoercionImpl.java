@@ -2120,6 +2120,15 @@ operator|==
 name|SqlKind
 operator|.
 name|IN
+operator|||
+name|operator
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|NOT_IN
 condition|)
 block|{
 assert|assert
