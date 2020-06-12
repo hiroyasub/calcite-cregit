@@ -1475,7 +1475,7 @@ return|return
 name|orderKeys
 return|;
 block|}
-comment|/**      * Returns if the window is guaranteed to have rows.      * This is useful to refine data type of window aggregates.      * For instance sum(non-nullable) over (empty window) is NULL.      * @return true when the window is non-empty      * @see org.apache.calcite.sql.SqlWindow#isAlwaysNonEmpty()      * @see org.apache.calcite.sql.SqlOperatorBinding#getGroupCount()      * @see org.apache.calcite.sql.validate.SqlValidatorImpl#resolveWindow(org.apache.calcite.sql.SqlNode, org.apache.calcite.sql.validate.SqlValidatorScope, boolean)      */
+comment|/**      * Returns if the window is guaranteed to have rows.      * This is useful to refine data type of window aggregates.      * For instance sum(non-nullable) over (empty window) is NULL.      * @return true when the window is non-empty      * @see org.apache.calcite.sql.SqlWindow#isAlwaysNonEmpty()      * @see org.apache.calcite.sql.SqlOperatorBinding#getGroupCount()      * @see org.apache.calcite.sql.validate.SqlValidatorImpl#resolveWindow(org.apache.calcite.sql.SqlNode, org.apache.calcite.sql.validate.SqlValidatorScope)      */
 specifier|public
 name|boolean
 name|isAlwaysNonEmpty

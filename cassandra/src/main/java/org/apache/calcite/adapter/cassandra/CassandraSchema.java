@@ -983,6 +983,24 @@ name|this
 operator|.
 name|hook
 operator|=
+name|prepareHook
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+specifier|private
+name|Hook
+operator|.
+name|Closeable
+name|prepareHook
+parameter_list|()
+block|{
+comment|// It adds a global hook, so it should probably be replaced with a thread-local hook
+return|return
 name|Hook
 operator|.
 name|TRIMMED
@@ -1001,7 +1019,7 @@ argument_list|()
 expr_stmt|;
 block|}
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 name|RelProtoDataType
 name|getRelDataType

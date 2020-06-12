@@ -2270,8 +2270,6 @@ argument_list|(
 name|this
 argument_list|,
 name|operandScope
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 name|partitionList

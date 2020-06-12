@@ -427,8 +427,6 @@ argument_list|(
 name|window
 argument_list|,
 name|scope
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final

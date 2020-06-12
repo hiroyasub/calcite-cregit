@@ -330,14 +330,6 @@ argument_list|)
 expr_stmt|;
 name|connector
 operator|.
-name|setSoLingerTime
-argument_list|(
-operator|-
-literal|1
-argument_list|)
-expr_stmt|;
-name|connector
-operator|.
 name|setPort
 argument_list|(
 literal|0
