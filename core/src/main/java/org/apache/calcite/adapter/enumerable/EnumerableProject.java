@@ -484,7 +484,7 @@ name|required
 parameter_list|)
 block|{
 return|return
-name|EnumTraitsUtils
+name|EnumerableTraitsUtils
 operator|.
 name|passThroughTraitsForProject
 argument_list|(
@@ -533,7 +533,7 @@ name|childId
 parameter_list|)
 block|{
 return|return
-name|EnumTraitsUtils
+name|EnumerableTraitsUtils
 operator|.
 name|deriveTraitsForProject
 argument_list|(
