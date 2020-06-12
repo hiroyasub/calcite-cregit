@@ -15,6 +15,18 @@ name|util
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
+import|;
+end_import
+
 begin_comment
 comment|/**  * A mutable slot that can contain one object.  *  *<p>A holder is useful for implementing OUT or IN-OUT parameters.</p>  *  *<p>It is possible to sub-class to receive events on get or set.</p>  *  * @param<E> Element type  */
 end_comment
@@ -70,6 +82,34 @@ parameter_list|()
 block|{
 return|return
 name|e
+return|;
+block|}
+comment|/** Applies a transform to the value. */
+specifier|public
+name|Holder
+argument_list|<
+name|E
+argument_list|>
+name|accept
+parameter_list|(
+name|UnaryOperator
+argument_list|<
+name|E
+argument_list|>
+name|transform
+parameter_list|)
+block|{
+name|e
+operator|=
+name|transform
+operator|.
+name|apply
+argument_list|(
+name|e
+argument_list|)
+expr_stmt|;
+return|return
+name|this
 return|;
 block|}
 comment|/** Creates a holder containing a given value. */

@@ -600,6 +600,23 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/**    * Whether to run InnoDB tests.    */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|TEST_INNODB
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.test.innodb"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
 comment|/**    * Whether to run Redis tests.    */
 specifier|public
 specifier|static

@@ -141,6 +141,9 @@ block|,
 comment|/** Called with the generated Java plan, just before it is compiled by    * Janino. */
 name|JAVA_PLAN
 block|,
+comment|/** Called before SqlToRelConverter is built. */
+name|SQL2REL_CONVERTER_CONFIG_BUILDER
+block|,
 comment|/** Called with the output of sql-to-rel-converter. */
 name|CONVERTED
 block|,
