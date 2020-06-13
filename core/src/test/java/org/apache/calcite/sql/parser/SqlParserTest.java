@@ -29635,7 +29635,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (UNNEST(`X`))"
+literal|"FROM UNNEST(`X`)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -29647,7 +29647,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (UNNEST(`X`)) AS `T`"
+literal|"FROM UNNEST(`X`) AS `T`"
 argument_list|)
 expr_stmt|;
 comment|// UNNEST cannot be first word in query
@@ -29678,7 +29678,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `DEPT`,\n"
 operator|+
-literal|"(UNNEST(`DEPT`.`EMPLOYEES`, `DEPT`.`MANAGERS`))"
+literal|"UNNEST(`DEPT`.`EMPLOYEES`, `DEPT`.`MANAGERS`)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -29701,6 +29701,52 @@ argument_list|(
 literal|"(?s)Encountered \"unnest\" at .*"
 argument_list|)
 expr_stmt|;
+comment|// Does not generate extra parentheses around UNNEST because UNNEST is
+comment|// a table expression.
+specifier|final
+name|String
+name|sql1
+init|=
+literal|""
+operator|+
+literal|"SELECT\n"
+operator|+
+literal|"  item.name,\n"
+operator|+
+literal|"  relations.*\n"
+operator|+
+literal|"FROM dfs.tmp item\n"
+operator|+
+literal|"JOIN (\n"
+operator|+
+literal|"  SELECT * FROM UNNEST(item.related) i(rels)\n"
+operator|+
+literal|") relations\n"
+operator|+
+literal|"ON TRUE"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT `ITEM`.`NAME`, `RELATIONS`.*\n"
+operator|+
+literal|"FROM `DFS`.`TMP` AS `ITEM`\n"
+operator|+
+literal|"INNER JOIN (SELECT *\n"
+operator|+
+literal|"FROM UNNEST(`ITEM`.`RELATED`) AS `I` (`RELS`)) AS `RELATIONS` ON TRUE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -29717,7 +29763,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (UNNEST(`X`) WITH ORDINALITY)"
+literal|"FROM UNNEST(`X`) WITH ORDINALITY"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -29729,7 +29775,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (UNNEST(`X`) WITH ORDINALITY) AS `T`"
+literal|"FROM UNNEST(`X`) WITH ORDINALITY AS `T`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -29741,7 +29787,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (UNNEST(`X`) WITH ORDINALITY) AS `T` (`C`, `O`)"
+literal|"FROM UNNEST(`X`) WITH ORDINALITY AS `T` (`C`, `O`)"
 argument_list|)
 expr_stmt|;
 name|sql

@@ -1072,7 +1072,7 @@ argument_list|,
 name|EXPLICIT_TABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Category consisting of all expression operators.    *    *<p>A node is an expression if it is NOT one of the following:    * {@link #AS},    * {@link #ARGUMENT_ASSIGNMENT},    * {@link #DEFAULT},    * {@link #DESCENDING},    * {@link #SELECT},    * {@link #JOIN},    * {@link #OTHER_FUNCTION},    * {@link #CAST},    * {@link #TRIM},    * {@link #LITERAL_CHAIN},    * {@link #JDBC_FN},    * {@link #PRECEDING},    * {@link #FOLLOWING},    * {@link #ORDER_BY},    * {@link #COLLECTION_TABLE},    * {@link #TABLESAMPLE},    * or an aggregate function, DML or DDL.    */
+comment|/**    * Category consisting of all expression operators.    *    *<p>A node is an expression if it is NOT one of the following:    * {@link #AS},    * {@link #ARGUMENT_ASSIGNMENT},    * {@link #DEFAULT},    * {@link #DESCENDING},    * {@link #SELECT},    * {@link #JOIN},    * {@link #OTHER_FUNCTION},    * {@link #CAST},    * {@link #TRIM},    * {@link #LITERAL_CHAIN},    * {@link #JDBC_FN},    * {@link #PRECEDING},    * {@link #FOLLOWING},    * {@link #ORDER_BY},    * {@link #COLLECTION_TABLE},    * {@link #TABLESAMPLE},    * {@link #UNNEST}    * or an aggregate function, DML or DDL.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1183,6 +1183,8 @@ argument_list|,
 name|SKIP_TO_LAST
 argument_list|,
 name|JSON_VALUE_EXPRESSION
+argument_list|,
+name|UNNEST
 argument_list|)
 argument_list|,
 name|AGGREGATE
