@@ -2903,6 +2903,15 @@ operator|.
 expr|class
 argument_list|)
 block|,
+name|FLAT_LIST
+argument_list|(
+name|SqlFunctions
+operator|.
+name|class
+argument_list|,
+literal|"flatList"
+argument_list|)
+block|,
 name|LIST_N
 argument_list|(
 name|FlatLists
