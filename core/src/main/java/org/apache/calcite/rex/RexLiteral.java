@@ -4287,6 +4287,17 @@ name|Object
 name|obj
 parameter_list|)
 block|{
+if|if
+condition|(
+name|this
+operator|==
+name|obj
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
 return|return
 operator|(
 name|obj

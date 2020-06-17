@@ -10329,6 +10329,9 @@ name|FILTER_INSTANCE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 name|StringBuilder

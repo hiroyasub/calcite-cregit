@@ -550,6 +550,9 @@ argument_list|,
 name|p
 argument_list|)
 expr_stmt|;
+name|recomputeDigest
+argument_list|()
+expr_stmt|;
 block|}
 annotation|@
 name|Override

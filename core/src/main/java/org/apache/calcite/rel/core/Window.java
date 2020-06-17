@@ -1865,7 +1865,15 @@ name|int
 name|hashCode
 parameter_list|()
 block|{
-return|return
+if|if
+condition|(
+name|hash
+operator|==
+literal|0
+condition|)
+block|{
+name|hash
+operator|=
 name|Objects
 operator|.
 name|hash
@@ -1881,6 +1889,10 @@ name|distinct
 argument_list|,
 name|ignoreNulls
 argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|hash
 return|;
 block|}
 annotation|@
