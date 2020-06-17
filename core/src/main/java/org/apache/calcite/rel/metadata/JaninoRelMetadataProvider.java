@@ -2938,25 +2938,7 @@ name|t
 operator|.
 name|e
 argument_list|)
-condition|)
-block|{
-name|buff
-operator|.
-name|append
-argument_list|(
-literal|", a"
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|t
-operator|.
-name|i
-argument_list|)
-expr_stmt|;
-block|}
-if|else if
-condition|(
+operator|||
 name|RexNode
 operator|.
 name|class
@@ -2969,8 +2951,6 @@ name|e
 argument_list|)
 condition|)
 block|{
-comment|// For RexNode, convert to string, because equals does not look deep.
-comment|//   a1 == null ? "" : a1.toString()
 name|buff
 operator|.
 name|append
@@ -2983,23 +2963,6 @@ argument_list|(
 name|t
 operator|.
 name|i
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|" == null ? \"\" : a"
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|t
-operator|.
-name|i
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|".toString()"
 argument_list|)
 expr_stmt|;
 block|}
