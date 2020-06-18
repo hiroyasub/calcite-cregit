@@ -39,7 +39,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelDigest
+name|Digest
 import|;
 end_import
 
@@ -244,18 +244,6 @@ operator|.
 name|util
 operator|.
 name|Litmus
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apiguardian
-operator|.
-name|api
-operator|.
-name|API
 import|;
 end_import
 
@@ -482,22 +470,7 @@ name|planner
 parameter_list|)
 function_decl|;
 comment|/**    * Computes the digest, assigns it, and returns it. For planner use only.    *    * @return Digest of this relational expression    */
-annotation|@
-name|API
-argument_list|(
-name|since
-operator|=
-literal|"1.24"
-argument_list|,
-name|status
-operator|=
-name|API
-operator|.
-name|Status
-operator|.
-name|INTERNAL
-argument_list|)
-name|RelDigest
+name|Digest
 name|recomputeDigest
 parameter_list|()
 function_decl|;

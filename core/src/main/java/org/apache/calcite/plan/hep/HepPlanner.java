@@ -101,7 +101,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelDigest
+name|Digest
 import|;
 end_import
 
@@ -697,7 +697,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|RelDigest
+name|Digest
 argument_list|,
 name|HepRelVertex
 argument_list|>
@@ -3588,7 +3588,7 @@ name|get
 argument_list|(
 name|rel
 operator|.
-name|getRelDigest
+name|getDigest
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -3971,7 +3971,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|RelDigest
+name|Digest
 name|oldKey
 init|=
 name|vertex
@@ -3979,7 +3979,7 @@ operator|.
 name|getCurrentRel
 argument_list|()
 operator|.
-name|getRelDigest
+name|getDigest
 argument_list|()
 decl_stmt|;
 if|if
@@ -4015,7 +4015,7 @@ name|put
 argument_list|(
 name|rel
 operator|.
-name|getRelDigest
+name|getDigest
 argument_list|()
 argument_list|,
 name|vertex
@@ -4331,7 +4331,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|RelDigest
+name|Digest
 argument_list|,
 name|HepRelVertex
 argument_list|>

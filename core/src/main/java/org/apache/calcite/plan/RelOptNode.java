@@ -33,18 +33,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apiguardian
-operator|.
-name|api
-operator|.
-name|API
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -67,38 +55,9 @@ name|int
 name|getId
 parameter_list|()
 function_decl|;
-comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if    * their digests and {@link #getRowType()} (except the field names) are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    *    * @return Digest string of this {@code RelNode}    */
-specifier|default
-name|String
+comment|/**    * Returns a string which concisely describes the definition of this    * relational expression. Two relational expressions are equivalent if    * their digests and {@link #getRowType()} (except the field names) are the same.    *    *<p>The digest does not contain the relational expression's identity --    * that would prevent similar relational expressions from ever comparing    * equal -- but does include the identity of children (on the assumption    * that children have already been normalized).    *    *<p>If you want a descriptive string which contains the identity, call    * {@link Object#toString()}, which always returns "rel#{id}:{digest}".    *    * @return Digest of this {@code RelNode}    */
+name|Digest
 name|getDigest
-parameter_list|()
-block|{
-return|return
-name|getRelDigest
-argument_list|()
-operator|.
-name|toString
-argument_list|()
-return|;
-block|}
-comment|/**    * Digest of the {@code RelNode}, for planner internal use only.    *    * @return Digest of this {@code RelNode}    * @see #getDigest()    */
-annotation|@
-name|API
-argument_list|(
-name|since
-operator|=
-literal|"1.24"
-argument_list|,
-name|status
-operator|=
-name|API
-operator|.
-name|Status
-operator|.
-name|INTERNAL
-argument_list|)
-name|RelDigest
-name|getRelDigest
 parameter_list|()
 function_decl|;
 comment|/**    * Retrieves this RelNode's traits. Note that although the RelTraitSet    * returned is modifiable, it<b>must not</b> be modified during    * optimization. It is legal to modify the traits of a RelNode before or    * after optimization, although doing so could render a tree of RelNodes    * unimplementable. If a RelNode's traits need to be modified during    * optimization, clone the RelNode and change the clone's traits.    *    * @return this RelNode's trait set    */

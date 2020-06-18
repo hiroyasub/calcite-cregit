@@ -806,15 +806,7 @@ name|int
 name|hashCode
 parameter_list|()
 block|{
-if|if
-condition|(
-name|hash
-operator|==
-literal|0
-condition|)
-block|{
-name|hash
-operator|=
+return|return
 name|Objects
 operator|.
 name|hash
@@ -835,10 +827,6 @@ operator|.
 name|allowsFraming
 argument_list|()
 argument_list|)
-expr_stmt|;
-block|}
-return|return
-name|hash
 return|;
 block|}
 block|}

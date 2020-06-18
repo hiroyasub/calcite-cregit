@@ -265,9 +265,6 @@ name|input
 operator|=
 name|rel
 expr_stmt|;
-name|recomputeDigest
-argument_list|()
-expr_stmt|;
 block|}
 specifier|protected
 name|RelDataType

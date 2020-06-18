@@ -128,13 +128,6 @@ specifier|protected
 name|String
 name|digest
 decl_stmt|;
-comment|/**    * Cache of hash code.    */
-specifier|protected
-name|int
-name|hash
-init|=
-literal|0
-decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 specifier|abstract
