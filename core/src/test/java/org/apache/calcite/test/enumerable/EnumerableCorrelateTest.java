@@ -442,7 +442,7 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"PLAN=EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
 literal|"  EnumerableCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+
@@ -549,7 +549,7 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"PLAN=EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
 literal|"  EnumerableCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+

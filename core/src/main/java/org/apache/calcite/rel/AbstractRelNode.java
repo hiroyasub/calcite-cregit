@@ -552,7 +552,7 @@ name|digest
 operator|=
 name|Digest
 operator|.
-name|initial
+name|create
 argument_list|(
 name|this
 argument_list|)

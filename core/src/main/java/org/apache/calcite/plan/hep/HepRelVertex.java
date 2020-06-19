@@ -331,10 +331,7 @@ name|create
 argument_list|(
 name|this
 argument_list|,
-name|getRelTypeName
-argument_list|()
-operator|+
-literal|'#'
+literal|"HepRelVertex#"
 operator|+
 name|getCurrentRel
 argument_list|()

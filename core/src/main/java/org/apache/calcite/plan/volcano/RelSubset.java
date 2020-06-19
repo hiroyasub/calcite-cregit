@@ -1004,8 +1004,7 @@ init|=
 operator|new
 name|StringBuilder
 argument_list|(
-name|getRelTypeName
-argument_list|()
+literal|"RelSubset"
 argument_list|)
 decl_stmt|;
 name|digest
