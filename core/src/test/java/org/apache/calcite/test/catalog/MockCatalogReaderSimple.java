@@ -623,7 +623,7 @@ literal|"ENAME"
 argument_list|,
 name|fixture
 operator|.
-name|varchar20Type
+name|varchar20TypeNull
 argument_list|)
 expr_stmt|;
 name|empNullablesTable
@@ -2461,7 +2461,7 @@ literal|"ENAME"
 argument_list|,
 name|fixture
 operator|.
-name|varchar20Type
+name|varchar20TypeNull
 argument_list|)
 expr_stmt|;
 name|empNullables20View

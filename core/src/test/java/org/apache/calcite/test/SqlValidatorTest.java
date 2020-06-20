@@ -36661,7 +36661,7 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"insert into ^empnullables^ (ename) values ('Kevin')"
+literal|"insert into ^emp^ (ename) values ('Kevin')"
 argument_list|)
 operator|.
 name|fails
@@ -36671,7 +36671,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into ^empnullables^ (empno) values (10)"
+literal|"insert into ^emp^ (empno) values (10)"
 argument_list|)
 operator|.
 name|fails
@@ -36681,7 +36681,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into empnullables (empno, ename, deptno) ^values (5, null, 5)^"
+literal|"insert into emp (empno, ename, deptno) ^values (5, null, 5)^"
 argument_list|)
 operator|.
 name|fails
@@ -36716,7 +36716,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into ^empnullables^ values (1)"
+literal|"insert into ^emp^ values (1)"
 argument_list|)
 operator|.
 name|fails
@@ -36728,7 +36728,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into empnullables ^values (null, 'Liam')^"
+literal|"insert into emp ^values (null, 'Liam')^"
 argument_list|)
 operator|.
 name|fails
@@ -36740,7 +36740,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into empnullables ^values (45, null, 5)^"
+literal|"insert into emp ^values (45, null, 5)^"
 argument_list|)
 operator|.
 name|fails
@@ -36757,7 +36757,7 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"insert into ^empnullables_20^ (ename) values ('Jake')"
+literal|"insert into ^emp_20^ (ename) values ('Jake')"
 argument_list|)
 operator|.
 name|fails
@@ -36767,7 +36767,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into ^empnullables_20^ (empno) values (9)"
+literal|"insert into ^emp_20^ (empno) values (9)"
 argument_list|)
 operator|.
 name|fails
@@ -36777,7 +36777,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into empnullables_20 (empno, ename, mgr) ^values (5, null, 5)^"
+literal|"insert into emp_20 (empno, ename, mgr) ^values (5, null, 5)^"
 argument_list|)
 operator|.
 name|fails
@@ -36812,7 +36812,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into ^empnullables_20^ values (1)"
+literal|"insert into ^EMP_20^ values (1)"
 argument_list|)
 operator|.
 name|fails
@@ -36824,7 +36824,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into empnullables_20 ^values (null, 'Liam')^"
+literal|"insert into EMP_20 ^values (null, 'Liam')^"
 argument_list|)
 operator|.
 name|fails
@@ -36836,7 +36836,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into empnullables_20 ^values (45, null)^"
+literal|"insert into EMP_20 ^values (45, null)^"
 argument_list|)
 operator|.
 name|fails
@@ -36908,7 +36908,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into ^empnullables^ values (?)"
+literal|"insert into ^emp^ values (?)"
 argument_list|)
 operator|.
 name|fails
@@ -36920,7 +36920,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into empnullables ^values (null, ?)^"
+literal|"insert into emp ^values (null, ?)^"
 argument_list|)
 operator|.
 name|fails
@@ -36932,7 +36932,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"insert into empnullables ^values (?, null)^"
+literal|"insert into emp ^values (?, null)^"
 argument_list|)
 operator|.
 name|fails
