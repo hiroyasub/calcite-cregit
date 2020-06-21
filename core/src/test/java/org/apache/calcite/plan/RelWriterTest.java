@@ -815,6 +815,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -1460,6 +1470,66 @@ operator|+
 literal|"          0\n"
 operator|+
 literal|"        ]\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      \"collation\": [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"field\": 0,\n"
+operator|+
+literal|"          \"direction\": \"ASCENDING\",\n"
+operator|+
+literal|"          \"nulls\": \"LAST\"\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ]\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|HASH_DIST_WITHOUT_KEYS
+init|=
+literal|"{\n"
+operator|+
+literal|"  \"rels\": [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"0\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalTableScan\",\n"
+operator|+
+literal|"      \"table\": [\n"
+operator|+
+literal|"        \"scott\",\n"
+operator|+
+literal|"        \"EMP\"\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"inputs\": []\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"1\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalSortExchange\",\n"
+operator|+
+literal|"      \"distribution\": {\n"
+operator|+
+literal|"        \"type\": \"HASH_DISTRIBUTED\"\n"
 operator|+
 literal|"      },\n"
 operator|+
@@ -4605,6 +4675,96 @@ decl_stmt|;
 return|return
 name|rel
 return|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testHashDistributionWithoutKeys
+parameter_list|()
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|createSortPlan
+argument_list|(
+name|RelDistributions
+operator|.
+name|hash
+argument_list|(
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelJsonWriter
+name|writer
+init|=
+operator|new
+name|RelJsonWriter
+argument_list|()
+decl_stmt|;
+name|root
+operator|.
+name|explain
+argument_list|(
+name|writer
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|json
+init|=
+name|writer
+operator|.
+name|asString
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|json
+argument_list|,
+name|is
+argument_list|(
+name|HASH_DIST_WITHOUT_KEYS
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|s
+init|=
+name|deserializeAndDumpToTextFormat
+argument_list|(
+name|getSchema
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|json
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalSortExchange(distribution=[hash], collation=[[0]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|isLinux
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
