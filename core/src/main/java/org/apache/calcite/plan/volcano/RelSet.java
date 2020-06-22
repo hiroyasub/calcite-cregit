@@ -643,8 +643,11 @@ name|subset
 operator|.
 name|getTraitSet
 argument_list|()
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|traits
+argument_list|)
 condition|)
 block|{
 return|return

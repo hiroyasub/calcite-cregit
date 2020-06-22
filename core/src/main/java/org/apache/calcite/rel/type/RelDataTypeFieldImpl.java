@@ -43,6 +43,16 @@ name|Serializable
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementation of {@link RelDataTypeField}.  */
 end_comment
@@ -125,17 +135,16 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
+name|Objects
+operator|.
+name|hash
+argument_list|(
 name|index
-operator|^
+argument_list|,
 name|name
-operator|.
-name|hashCode
-argument_list|()
-operator|^
+argument_list|,
 name|type
-operator|.
-name|hashCode
-argument_list|()
+argument_list|)
 return|;
 block|}
 annotation|@
