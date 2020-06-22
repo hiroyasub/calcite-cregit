@@ -45272,6 +45272,74 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testAccessingNestedFieldsOfNullableRecord
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ROW_COLUMN_ARRAY[0].NOT_NULL_FIELD from NULLABLEROWS.NR_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(BIGINT EXPR$0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ROW_COLUMN_ARRAY[0]['NOT_NULL_FIELD'] from NULLABLEROWS.NR_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(BIGINT EXPR$0) NOT NULL"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|MockSqlOperatorTable
+name|operatorTable
+init|=
+operator|new
+name|MockSqlOperatorTable
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|MockSqlOperatorTable
+operator|.
+name|addRamp
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * FROM TABLE(ROW_FUNC()) AS T(a, b)"
+argument_list|)
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTable
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(BIGINT A, BIGINT B) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

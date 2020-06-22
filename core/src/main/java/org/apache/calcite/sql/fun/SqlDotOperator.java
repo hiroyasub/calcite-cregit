@@ -842,6 +842,29 @@ operator|.
 name|getType
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|nodeType
+operator|.
+name|isNullable
+argument_list|()
+condition|)
+block|{
+name|type
+operator|=
+name|validator
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|type
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 comment|// Validate and determine coercibility and resulting collation
 comment|// name of binary operator if needed.
 name|type
