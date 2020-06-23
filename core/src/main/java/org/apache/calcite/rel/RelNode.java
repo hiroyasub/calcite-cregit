@@ -481,7 +481,21 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**    * Computes the digest, assigns it, and returns it. For planner use only.    *    * @return Digest of this relational expression    */
+comment|/**    * @return Digest string of this {@code RelNode}    */
+specifier|default
+name|String
+name|getDigest
+parameter_list|()
+block|{
+return|return
+name|getRelDigest
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
+comment|/**    * Digest of the {@code RelNode}, for planner internal use only.    *    *<p>INTERNAL USE ONLY.</p>    *    * @return Digest of this {@code RelNode}    * @see #getDigest()    */
 annotation|@
 name|API
 argument_list|(
@@ -498,6 +512,26 @@ operator|.
 name|INTERNAL
 argument_list|)
 name|RelDigest
+name|getRelDigest
+parameter_list|()
+function_decl|;
+comment|/**    * Recomputes the digest. For planner internal use only.    *    * @see #getDigest()    */
+annotation|@
+name|API
+argument_list|(
+name|since
+operator|=
+literal|"1.24"
+argument_list|,
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|INTERNAL
+argument_list|)
+name|void
 name|recomputeDigest
 parameter_list|()
 function_decl|;

@@ -1594,7 +1594,7 @@ name|r
 return|;
 block|}
 specifier|public
-name|RelDigest
+name|void
 name|recomputeDigest
 parameter_list|()
 block|{
@@ -1603,9 +1603,6 @@ operator|.
 name|clear
 argument_list|()
 expr_stmt|;
-return|return
-name|digest
-return|;
 block|}
 specifier|public
 name|void
@@ -1730,8 +1727,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/**    * Equality check for RelNode digest    */
-specifier|private
+comment|/**    * Equality check for RelNode digest.    *    *<p>By default this method collects digest attributes from    * {@link #explainTerms(RelWriter)}, then compares each attribute pair.    * This should work well for most cases. If this method is a performance    * bottleneck for your project, or the default behavior can't handle    * your scenario properly, you can choose to override this method and    * {@link #digestHash()}. See {@code LogicalJoin} as an example.</p>    *    * @return Whether the 2 RelNodes are equivalent or have the same digest.    * @see #digestHash()    */
+specifier|protected
 name|boolean
 name|digestEquals
 parameter_list|(
@@ -1802,36 +1799,22 @@ name|getDigestItems
 argument_list|()
 argument_list|)
 operator|&&
-name|Pair
+name|this
 operator|.
-name|right
-argument_list|(
 name|getRowType
 argument_list|()
 operator|.
-name|getFieldList
-argument_list|()
-argument_list|)
-operator|.
-name|equals
-argument_list|(
-name|Pair
-operator|.
-name|right
+name|equalsSansFieldNames
 argument_list|(
 name|that
 operator|.
 name|getRowType
 argument_list|()
-operator|.
-name|getFieldList
-argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Compute hash code for RelNode digest    */
-specifier|private
+comment|/**    * Compute hash code for RelNode digest.    *    * @see #digestEquals(Object)    */
+specifier|protected
 name|int
 name|digestHash
 parameter_list|()
