@@ -10997,6 +10997,141 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4090">[CALCITE-4090]    * DB2 aliasing breaks with a complex SELECT above a sub-query</a>. */
+annotation|@
+name|Test
+name|void
+name|testDb2SubQueryAlias
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select count(foo), \"units_per_case\"\n"
+operator|+
+literal|"from (select \"units_per_case\", \"cases_per_pallet\",\n"
+operator|+
+literal|"      \"product_id\", 1 as foo\n"
+operator|+
+literal|"  from \"product\")\n"
+operator|+
+literal|"where \"cases_per_pallet\"> 100\n"
+operator|+
+literal|"group by \"product_id\", \"units_per_case\"\n"
+operator|+
+literal|"order by \"units_per_case\" desc"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*), t.units_per_case\n"
+operator|+
+literal|"FROM (SELECT product.units_per_case, product.cases_per_pallet, "
+operator|+
+literal|"product.product_id, 1 AS FOO\n"
+operator|+
+literal|"FROM foodmart.product AS product) AS t\n"
+operator|+
+literal|"WHERE t.cases_per_pallet> 100\n"
+operator|+
+literal|"GROUP BY t.product_id, t.units_per_case\n"
+operator|+
+literal|"ORDER BY t.units_per_case DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withDb2
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testDb2SubQueryFromUnion
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select count(foo), \"units_per_case\"\n"
+operator|+
+literal|"from (select \"units_per_case\", \"cases_per_pallet\",\n"
+operator|+
+literal|"      \"product_id\", 1 as foo\n"
+operator|+
+literal|"  from \"product\"\n"
+operator|+
+literal|"  where \"cases_per_pallet\"> 100\n"
+operator|+
+literal|"  union all\n"
+operator|+
+literal|"  select \"units_per_case\", \"cases_per_pallet\",\n"
+operator|+
+literal|"      \"product_id\", 1 as foo\n"
+operator|+
+literal|"  from \"product\"\n"
+operator|+
+literal|"  where \"cases_per_pallet\"< 100)\n"
+operator|+
+literal|"where \"cases_per_pallet\"> 100\n"
+operator|+
+literal|"group by \"product_id\", \"units_per_case\"\n"
+operator|+
+literal|"order by \"units_per_case\" desc"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*), t3.units_per_case\n"
+operator|+
+literal|"FROM (SELECT product.units_per_case, product.cases_per_pallet, "
+operator|+
+literal|"product.product_id, 1 AS FOO\n"
+operator|+
+literal|"FROM foodmart.product AS product\n"
+operator|+
+literal|"WHERE product.cases_per_pallet> 100\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT product0.units_per_case, product0.cases_per_pallet, "
+operator|+
+literal|"product0.product_id, 1 AS FOO\n"
+operator|+
+literal|"FROM foodmart.product AS product0\n"
+operator|+
+literal|"WHERE product0.cases_per_pallet< 100) AS t3\n"
+operator|+
+literal|"WHERE t3.cases_per_pallet> 100\n"
+operator|+
+literal|"GROUP BY t3.product_id, t3.units_per_case\n"
+operator|+
+literal|"ORDER BY t3.units_per_case DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withDb2
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
