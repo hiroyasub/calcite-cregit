@@ -129,6 +129,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlNode
 import|;
 end_import
@@ -300,6 +314,20 @@ operator|.
 name|test
 operator|.
 name|DiffTestCase
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|Hoist
 import|;
 end_import
 
@@ -35656,6 +35684,227 @@ argument_list|(
 literal|"(?s).*Encountered \"a .\" at .*"
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Tests {@link Hoist}. */
+annotation|@
+name|Test
+specifier|protected
+name|void
+name|testHoist
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select 1 as x,\n"
+operator|+
+literal|"  'ab' || 'c' as y\n"
+operator|+
+literal|"from emp /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< 40\n"
+operator|+
+literal|"and hiredate> date '2010-05-06'"
+decl_stmt|;
+specifier|final
+name|Hoist
+operator|.
+name|Hoisted
+name|hoisted
+init|=
+name|Hoist
+operator|.
+name|create
+argument_list|(
+name|Hoist
+operator|.
+name|config
+argument_list|()
+argument_list|)
+operator|.
+name|hoist
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+comment|// Simple toString converts each variable to '?N'
+specifier|final
+name|String
+name|expected
+init|=
+literal|"select ?0 as x,\n"
+operator|+
+literal|"  ?1 || ?2 as y\n"
+operator|+
+literal|"from emp /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< ?3\n"
+operator|+
+literal|"and hiredate> ?4"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|hoisted
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// As above, using the function explicitly.
+name|assertThat
+argument_list|(
+name|hoisted
+operator|.
+name|substitute
+argument_list|(
+name|Hoist
+operator|::
+name|ordinalString
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Simple toString converts each variable to '?N'
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"select 1 as x,\n"
+operator|+
+literal|"  ?1 || ?2 as y\n"
+operator|+
+literal|"from emp /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< 40\n"
+operator|+
+literal|"and hiredate> date '2010-05-06'"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|hoisted
+operator|.
+name|substitute
+argument_list|(
+name|Hoist
+operator|::
+name|ordinalStringIfChar
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected1
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Custom function converts variables to '[N:TYPE:VALUE]'
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"select [0:DECIMAL:1] as x,\n"
+operator|+
+literal|"  [1:CHAR:ab] || [2:CHAR:c] as y\n"
+operator|+
+literal|"from emp /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< [3:DECIMAL:40]\n"
+operator|+
+literal|"and hiredate> [4:DATE:2010-05-06]"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|hoisted
+operator|.
+name|substitute
+argument_list|(
+name|SqlParserTest
+operator|::
+name|varToStr
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+specifier|static
+name|String
+name|varToStr
+parameter_list|(
+name|Hoist
+operator|.
+name|Variable
+name|v
+parameter_list|)
+block|{
+if|if
+condition|(
+name|v
+operator|.
+name|node
+operator|instanceof
+name|SqlLiteral
+condition|)
+block|{
+name|SqlLiteral
+name|literal
+init|=
+operator|(
+name|SqlLiteral
+operator|)
+name|v
+operator|.
+name|node
+decl_stmt|;
+return|return
+literal|"["
+operator|+
+name|v
+operator|.
+name|ordinal
+operator|+
+literal|":"
+operator|+
+name|literal
+operator|.
+name|getTypeName
+argument_list|()
+operator|+
+literal|":"
+operator|+
+name|literal
+operator|.
+name|toValue
+argument_list|()
+operator|+
+literal|"]"
+return|;
+block|}
+else|else
+block|{
+return|return
+literal|"["
+operator|+
+name|v
+operator|.
+name|ordinal
+operator|+
+literal|"]"
+return|;
+block|}
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback to control how test actions are performed.    */

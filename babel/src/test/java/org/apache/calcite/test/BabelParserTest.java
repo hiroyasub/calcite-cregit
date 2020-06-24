@@ -25,9 +25,55 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlDialect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|dialect
+operator|.
+name|MysqlSqlDialect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|parser
 operator|.
 name|SqlAbstractParserImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParser
 import|;
 end_import
 
@@ -94,6 +140,20 @@ operator|.
 name|babel
 operator|.
 name|SqlBabelParserImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|Hoist
 import|;
 end_import
 
@@ -1496,6 +1556,142 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testHoist()} but using custom parser. */
+annotation|@
+name|Test
+name|void
+name|testHoistMySql
+parameter_list|()
+block|{
+comment|// SQL contains back-ticks, which require MySQL's quoting,
+comment|// and DATEADD, which requires Babel.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select 1 as x,\n"
+operator|+
+literal|"  'ab' || 'c' as y\n"
+operator|+
+literal|"from `my emp` /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< 40\n"
+operator|+
+literal|"and DATEADD(day, 1, hiredate)> date '2010-05-06'"
+decl_stmt|;
+specifier|final
+name|SqlDialect
+name|dialect
+init|=
+name|MysqlSqlDialect
+operator|.
+name|DEFAULT
+decl_stmt|;
+specifier|final
+name|Hoist
+operator|.
+name|Hoisted
+name|hoisted
+init|=
+name|Hoist
+operator|.
+name|create
+argument_list|(
+name|Hoist
+operator|.
+name|config
+argument_list|()
+operator|.
+name|withParserConfig
+argument_list|(
+name|dialect
+operator|.
+name|configureParser
+argument_list|(
+name|SqlParser
+operator|.
+name|configBuilder
+argument_list|()
+argument_list|)
+operator|.
+name|setParserFactory
+argument_list|(
+name|SqlBabelParserImpl
+operator|::
+operator|new
+argument_list|)
+operator|.
+name|build
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|hoist
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+comment|// Simple toString converts each variable to '?N'
+specifier|final
+name|String
+name|expected
+init|=
+literal|"select ?0 as x,\n"
+operator|+
+literal|"  ?1 || ?2 as y\n"
+operator|+
+literal|"from `my emp` /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< ?3\n"
+operator|+
+literal|"and DATEADD(day, ?4, hiredate)> ?5"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|hoisted
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Custom string converts variables to '[N:TYPE:VALUE]'
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"select [0:DECIMAL:1] as x,\n"
+operator|+
+literal|"  [1:CHAR:ab] || [2:CHAR:c] as y\n"
+operator|+
+literal|"from `my emp` /* comment with 'quoted string'? */ as e\n"
+operator|+
+literal|"where deptno< [3:DECIMAL:40]\n"
+operator|+
+literal|"and DATEADD(day, [4:DECIMAL:1], hiredate)> [5:DATE:2010-05-06]"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|hoisted
+operator|.
+name|substitute
+argument_list|(
+name|SqlParserTest
+operator|::
+name|varToStr
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected2
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
