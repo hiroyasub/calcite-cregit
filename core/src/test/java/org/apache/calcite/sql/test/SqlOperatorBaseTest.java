@@ -1779,10 +1779,41 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-specifier|protected
+specifier|private
 name|SqlTester
 name|oracleTester
 parameter_list|()
+block|{
+return|return
+name|libraryTester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+return|;
+block|}
+specifier|private
+name|SqlTester
+name|bigQueryTester
+parameter_list|()
+block|{
+return|return
+name|libraryTester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+return|;
+block|}
+specifier|protected
+name|SqlTester
+name|libraryTester
+parameter_list|(
+name|SqlLibrary
+name|library
+parameter_list|)
 block|{
 return|return
 name|tester
@@ -1799,9 +1830,7 @@ name|SqlLibrary
 operator|.
 name|STANDARD
 argument_list|,
-name|SqlLibrary
-operator|.
-name|ORACLE
+name|library
 argument_list|)
 argument_list|)
 operator|.
@@ -1832,7 +1861,9 @@ name|CalciteConnectionProperty
 operator|.
 name|FUN
 argument_list|,
-literal|"oracle"
+name|library
+operator|.
+name|fun
 argument_list|)
 argument_list|)
 return|;
@@ -24737,6 +24768,124 @@ argument_list|,
 literal|1
 argument_list|,
 literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests {@code UNIX_SECONDS} and other datetime functions from BigQuery. */
+annotation|@
+name|Test
+name|void
+name|testUnixSecondsFunc
+parameter_list|()
+block|{
+name|SqlTester
+name|tester
+init|=
+name|bigQueryTester
+argument_list|()
+decl_stmt|;
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|UNIX_SECONDS
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"unix_seconds(timestamp '1970-01-01 00:00:00')"
+argument_list|,
+literal|0
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"unix_seconds(cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"unix_millis(cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"unix_micros(cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_seconds(0)"
+argument_list|,
+literal|"1970-01-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestamp_seconds(cast(null as bigint))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestamp_millis(cast(null as bigint))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestamp_micros(cast(null as bigint))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_from_unix_date(0)"
+argument_list|,
+literal|"1970-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Have to quote the "DATE" function because we're not using the Babel
+comment|// parser. In the regular parser, DATE is a reserved keyword.
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"\"DATE\"(null)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"\"DATE\"('1985-12-06')"
+argument_list|,
+literal|"1985-12-06"
+argument_list|,
+literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

@@ -739,7 +739,7 @@ operator|.
 name|FORCE_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is Boolean    * not null.    */
+comment|/**    * Type-inference strategy whereby the result type of a call is BOOLEAN    * NOT NULL.    */
 specifier|public
 specifier|static
 specifier|final
@@ -755,7 +755,7 @@ operator|.
 name|TO_NOT_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is Date.    */
+comment|/**    * Type-inference strategy whereby the result type of a call is DATE.    */
 specifier|public
 specifier|static
 specifier|final
@@ -769,7 +769,7 @@ operator|.
 name|DATE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * Date.    */
+comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * DATE.    */
 specifier|public
 specifier|static
 specifier|final
@@ -785,7 +785,7 @@ operator|.
 name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is Time(0).    */
+comment|/**    * Type-inference strategy whereby the result type of a call is TIME(0).    */
 specifier|public
 specifier|static
 specifier|final
@@ -801,7 +801,7 @@ argument_list|,
 literal|0
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * Time(0).    */
+comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * TIME(0).    */
 specifier|public
 specifier|static
 specifier|final
@@ -811,6 +811,36 @@ init|=
 name|cascade
 argument_list|(
 name|TIME
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_NULLABLE
+argument_list|)
+decl_stmt|;
+comment|/**    * Type-inference strategy whereby the result type of a call is TIMESTAMP.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|TIMESTAMP
+init|=
+name|explicit
+argument_list|(
+name|SqlTypeName
+operator|.
+name|TIMESTAMP
+argument_list|)
+decl_stmt|;
+comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * TIMESTAMP.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|TIMESTAMP_NULLABLE
+init|=
+name|cascade
+argument_list|(
+name|TIMESTAMP
 argument_list|,
 name|SqlTypeTransforms
 operator|.

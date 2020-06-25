@@ -346,7 +346,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Collection of built-in functions and operators. Valid values include    * "standard", "mysql", "oracle", "postgresql" and "spatial", and also    * comma-separated lists, for example "oracle,spatial". */
+comment|/** Collection of built-in functions and operators. Valid values include    * "standard", "bigquery", "mysql", "oracle", "postgresql" and "spatial",    * and also comma-separated lists, for example "oracle,spatial". */
 name|FUN
 argument_list|(
 literal|"fun"

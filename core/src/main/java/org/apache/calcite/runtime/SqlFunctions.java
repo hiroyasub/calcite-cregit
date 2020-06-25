@@ -279,6 +279,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|NumberUtil
@@ -9396,10 +9412,12 @@ name|RESOURCE
 operator|.
 name|cannotConvert
 argument_list|(
-name|o
+name|String
 operator|.
-name|toString
-argument_list|()
+name|valueOf
+argument_list|(
+name|o
+argument_list|)
 argument_list|,
 name|toType
 operator|.
@@ -11235,6 +11253,132 @@ argument_list|()
 operator|.
 name|getMillisOfDay
 argument_list|()
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#TIMESTAMP_SECONDS}. */
+specifier|public
+specifier|static
+name|long
+name|timestampSeconds
+parameter_list|(
+name|long
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+operator|*
+literal|1000
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#TIMESTAMP_MILLIS}. */
+specifier|public
+specifier|static
+name|long
+name|timestampMillis
+parameter_list|(
+name|long
+name|v
+parameter_list|)
+block|{
+comment|// translation is trivial, because Calcite represents TIMESTAMP values as
+comment|// millis since epoch
+return|return
+name|v
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#TIMESTAMP_MICROS}. */
+specifier|public
+specifier|static
+name|long
+name|timestampMicros
+parameter_list|(
+name|long
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+operator|/
+literal|1000
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#UNIX_SECONDS}. */
+specifier|public
+specifier|static
+name|long
+name|unixSeconds
+parameter_list|(
+name|long
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+operator|/
+literal|1000
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#UNIX_MILLIS}. */
+specifier|public
+specifier|static
+name|long
+name|unixMillis
+parameter_list|(
+name|long
+name|v
+parameter_list|)
+block|{
+comment|// translation is trivial, because Calcite represents TIMESTAMP values as
+comment|// millis since epoch
+return|return
+name|v
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#UNIX_MICROS}. */
+specifier|public
+specifier|static
+name|long
+name|unixMicros
+parameter_list|(
+name|long
+name|v
+parameter_list|)
+block|{
+return|return
+name|v
+operator|*
+literal|1000
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#DATE_FROM_UNIX_DATE}. */
+specifier|public
+specifier|static
+name|int
+name|dateFromUnixDate
+parameter_list|(
+name|int
+name|v
+parameter_list|)
+block|{
+comment|// translation is trivial, because Calcite represents dates as Unix integers
+return|return
+name|v
+return|;
+block|}
+comment|/** For {@link SqlLibraryOperators#UNIX_DATE}. */
+specifier|public
+specifier|static
+name|int
+name|unixDate
+parameter_list|(
+name|int
+name|v
+parameter_list|)
+block|{
+comment|// translation is trivial, because Calcite represents dates as Unix integers
+return|return
+name|v
 return|;
 block|}
 specifier|public

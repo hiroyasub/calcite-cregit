@@ -39,6 +39,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -112,30 +126,48 @@ comment|/** The standard operators. */
 name|STANDARD
 argument_list|(
 literal|""
+argument_list|,
+literal|"standard"
 argument_list|)
 block|,
 comment|/** Geospatial operators. */
 name|SPATIAL
 argument_list|(
 literal|"s"
+argument_list|,
+literal|"spatial"
+argument_list|)
+block|,
+comment|/** A collection of operators that are in Google BigQuery but not in standard    * SQL. */
+name|BIG_QUERY
+argument_list|(
+literal|"b"
+argument_list|,
+literal|"bigquery"
 argument_list|)
 block|,
 comment|/** A collection of operators that are in MySQL but not in standard SQL. */
 name|MYSQL
 argument_list|(
 literal|"m"
+argument_list|,
+literal|"mysql"
 argument_list|)
 block|,
 comment|/** A collection of operators that are in Oracle but not in standard SQL. */
 name|ORACLE
 argument_list|(
 literal|"o"
+argument_list|,
+literal|"oracle"
 argument_list|)
 block|,
 comment|/** A collection of operators that are in PostgreSQL but not in standard    * SQL. */
 name|POSTGRESQL
 argument_list|(
 literal|"p"
+argument_list|,
+literal|"postgresql"
 argument_list|)
 block|;
 comment|/** Abbreviation for the library used in SQL reference. */
@@ -154,6 +186,9 @@ name|SqlLibrary
 parameter_list|(
 name|String
 name|abbrev
+parameter_list|,
+name|String
+name|fun
 parameter_list|)
 block|{
 name|this
@@ -171,6 +206,21 @@ name|this
 operator|.
 name|fun
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|fun
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|fun
+operator|.
+name|equals
+argument_list|(
 name|name
 argument_list|()
 operator|.
@@ -179,6 +229,15 @@ argument_list|(
 name|Locale
 operator|.
 name|ROOT
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+literal|"_"
+argument_list|,
+literal|""
+argument_list|)
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
