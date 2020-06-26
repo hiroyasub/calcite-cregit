@@ -23971,6 +23971,32 @@ literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating S
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4092">[CALCITE-4092]    * NPE using WITH clause without a corresponding SELECT FROM</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithNotSelected
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp2 as (select max(empno) as empno from emp)\n"
+operator|+
+literal|"select * from emp where empno< ^emp2^.empno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'EMP2' not found"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tests a large scalar expression, which will expose any O(n^2) algorithms    * lurking in the validation process.    */
 annotation|@
 name|Test
