@@ -4259,9 +4259,6 @@ operator|.
 name|policy
 argument_list|(
 name|a
-operator|.
-name|getKind
-argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -4523,9 +4520,6 @@ operator|.
 name|policy
 argument_list|(
 name|a
-operator|.
-name|getKind
-argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -4667,9 +4661,6 @@ operator|.
 name|policy
 argument_list|(
 name|rexNode
-operator|.
-name|getKind
-argument_list|()
 argument_list|)
 condition|)
 block|{
