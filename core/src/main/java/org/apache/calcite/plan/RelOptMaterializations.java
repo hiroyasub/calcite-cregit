@@ -1636,7 +1636,7 @@ if|if
 condition|(
 name|usesGraph
 operator|.
-name|getShortestPath
+name|getShortestDistance
 argument_list|(
 name|queryTable
 operator|.
@@ -1646,7 +1646,8 @@ argument_list|,
 name|qualifiedName
 argument_list|)
 operator|!=
-literal|null
+operator|-
+literal|1
 condition|)
 block|{
 return|return
