@@ -7319,7 +7319,7 @@ argument_list|)
 expr_stmt|;
 comment|// This is used when converting window table functions:
 comment|//
-comment|// select * from table(table emps, descriptor(deptno), interval '3' DAY)
+comment|// select * from table(tumble(table emps, descriptor(deptno), interval '3' DAY))
 comment|//
 name|bb
 operator|.

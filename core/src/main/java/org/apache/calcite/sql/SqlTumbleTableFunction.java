@@ -96,7 +96,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTumbleTableFunction implements an operator for tumbling. It allows three parameters:  * 1. a table.  * 2. a descriptor to provide a watermarked column name from the input table.  * 3. an interval parameter to specify the length of window size.  */
+comment|/**  * SqlTumbleTableFunction implements an operator for tumbling.  *  *<p>It allows three parameters:  * 1. a table;  * 2. a descriptor to provide a watermarked column name from the input table;  * 3. an interval parameter to specify the length of window size.  */
 end_comment
 
 begin_class

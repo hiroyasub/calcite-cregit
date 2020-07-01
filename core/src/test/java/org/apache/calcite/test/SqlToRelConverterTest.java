@@ -6935,6 +6935,33 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+name|void
+name|testTableFunctionTumbleWithInnerJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(tumble(table Shipments, descriptor(rowtime), INTERVAL '1' MINUTE)) a\n"
+operator|+
+literal|"join table(tumble(table Shipments, descriptor(rowtime), INTERVAL '1' MINUTE)) b\n"
+operator|+
+literal|"on a.orderid = b.orderid"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTableFunctionHop

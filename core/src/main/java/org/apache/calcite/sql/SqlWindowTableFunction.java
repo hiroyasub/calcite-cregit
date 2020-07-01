@@ -338,7 +338,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**    * The first parameter of table-value function windowing is a TABLE parameter,    * which is not scalar. So need to override SqlOperator.argumentMustBeScalar.    */
+comment|/**    * Overrides SqlOperator.argumentMustBeScalar because the first parameter of    * table-value function windowing is an explicit TABLE parameter,    * which is not scalar.    */
 annotation|@
 name|Override
 specifier|public
@@ -355,7 +355,7 @@ operator|!=
 literal|0
 return|;
 block|}
-comment|/**    * Type-inference strategy whereby the result type of a table function call is a ROW,    * which is combined from the operand #0(TABLE parameter)'s schema and two    * additional fields:    *    *<ol>    *<li>window_start. TIMESTAMP type to indicate a window's start.</li>    *<li>window_end. TIMESTAMP type to indicate a window's end.</li>    *</ol>    */
+comment|/**    * Type-inference strategy whereby the result type of a table function call is a ROW,    * which is combined from the operand #0(TABLE parameter)'s schema and two    * additional fields:    *    *<ol>    *<li>window_start: TIMESTAMP type to indicate a window's start.</li>    *<li>window_end: TIMESTAMP type to indicate a window's end.</li>    *</ol>    */
 specifier|public
 specifier|static
 specifier|final
