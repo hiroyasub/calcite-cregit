@@ -561,6 +561,13 @@ name|triggerRule
 init|=
 literal|false
 decl_stmt|;
+comment|/**    * When the subset state is REQUIRED, whether enable property enforcing    * between this subset and other delivered subsets. When it is true,    * no enforcer operators will be added even if the other subset can't    * satisfy current subset's required traitSet.    */
+specifier|private
+name|boolean
+name|enforceDisabled
+init|=
+literal|false
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 name|RelSubset
 parameter_list|(
@@ -761,6 +768,27 @@ name|REQUIRED
 operator|)
 operator|==
 name|REQUIRED
+return|;
+block|}
+name|void
+name|disableEnforcing
+parameter_list|()
+block|{
+assert|assert
+name|isDelivered
+argument_list|()
+assert|;
+name|enforceDisabled
+operator|=
+literal|true
+expr_stmt|;
+block|}
+name|boolean
+name|isEnforceDisabled
+parameter_list|()
+block|{
+return|return
+name|enforceDisabled
 return|;
 block|}
 specifier|public

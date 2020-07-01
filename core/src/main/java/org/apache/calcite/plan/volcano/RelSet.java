@@ -958,6 +958,11 @@ name|from
 operator|==
 name|to
 operator|||
+name|to
+operator|.
+name|isEnforceDisabled
+argument_list|()
+operator|||
 name|useAbstractConverter
 operator|&&
 operator|!

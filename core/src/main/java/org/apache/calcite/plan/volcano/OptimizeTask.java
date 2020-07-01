@@ -690,7 +690,6 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|// TODO: should use matching type to determine
 comment|// Ideally we should stop deriving new relnodes when the
 comment|// subset's traitSet equals with input traitSet, but
 comment|// in case someone manually builds a physical relnode
@@ -764,6 +763,57 @@ name|newRel
 argument_list|)
 condition|)
 block|{
+name|RelNode
+name|newInput
+init|=
+name|newRel
+operator|.
+name|getInput
+argument_list|(
+name|childId
+argument_list|)
+decl_stmt|;
+assert|assert
+name|newInput
+operator|instanceof
+name|RelSubset
+assert|;
+if|if
+condition|(
+name|newInput
+operator|==
+name|subset
+condition|)
+block|{
+comment|// If the child subset is used to derive new traits for
+comment|// current relnode, the subset will be marked REQUIRED
+comment|// when registering the new derived relnode and later
+comment|// will add enforcers between other delivered subsets.
+comment|// e.g. a MergeJoin request both inputs hash distributed
+comment|// by [a,b] sorted by [a,b]. If the left input R1 happens to
+comment|// be distributed by [a], the MergeJoin can derive new
+comment|// traits from this input and request both input to be
+comment|// distributed by [a] sorted by [a,b]. In case there is a
+comment|// alternative R2 with ANY distribution in the left input's
+comment|// RelSet, we may end up with requesting hash distribution
+comment|// [a] on alternative R2, which is unnecessary and waste,
+comment|// because we request distribution by [a] because of R1 can
+comment|// deliver the exact same distribution and we don't need to
+comment|// enforce properties on other subsets that can't satisfy
+comment|// the specific trait requirement.
+comment|// Here we add a constraint that {@code newInput == subset},
+comment|// because if the delivered child subset is HASH[a], but
+comment|// we require HASH[a].SORT[a,b], we still need to enable
+comment|// property enforcement on the required subset. Otherwise,
+comment|// we need to restrict enforcement between HASH[a].SORT[a,b]
+comment|// and HASH[a] only, which will make things a little bit
+comment|// complicated. We might optimize it in the future.
+name|subset
+operator|.
+name|disableEnforcing
+argument_list|()
+expr_stmt|;
+block|}
 name|RelSubset
 name|relSubset
 init|=
