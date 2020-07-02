@@ -7594,6 +7594,7 @@ operator|-
 literal|1
 return|;
 block|}
+comment|// we use HashMap here, because it is more efficient than HashSet.
 specifier|final
 name|Map
 argument_list|<
