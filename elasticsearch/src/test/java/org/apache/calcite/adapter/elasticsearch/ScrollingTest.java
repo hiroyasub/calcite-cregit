@@ -289,6 +289,11 @@ end_comment
 
 begin_class
 annotation|@
+name|Disabled
+argument_list|(
+literal|"RestClient often timeout in PR CI"
+argument_list|)
+annotation|@
 name|ResourceLock
 argument_list|(
 literal|"elasticsearch-scrolls"

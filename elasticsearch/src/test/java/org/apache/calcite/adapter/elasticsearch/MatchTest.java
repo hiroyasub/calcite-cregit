@@ -425,6 +425,20 @@ name|jupiter
 operator|.
 name|api
 operator|.
+name|Disabled
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -628,6 +642,11 @@ comment|/**  * Testing Elasticsearch match query.  */
 end_comment
 
 begin_class
+annotation|@
+name|Disabled
+argument_list|(
+literal|"RestClient often timeout in PR CI"
+argument_list|)
 annotation|@
 name|ResourceLock
 argument_list|(
