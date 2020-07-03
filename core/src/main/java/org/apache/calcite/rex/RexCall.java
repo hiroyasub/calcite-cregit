@@ -1668,11 +1668,6 @@ operator|==
 literal|0
 condition|)
 block|{
-assert|assert
-name|digest
-operator|==
-literal|null
-assert|;
 name|hash
 operator|=
 name|Objects
