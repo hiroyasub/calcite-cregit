@@ -2368,6 +2368,13 @@ name|VolcanoTimeoutException
 name|e
 parameter_list|)
 block|{
+name|LOGGER
+operator|.
+name|warn
+argument_list|(
+literal|"Volcano planning times out, cancels the subsequent optimization."
+argument_list|)
+expr_stmt|;
 name|root
 operator|=
 name|canonize
