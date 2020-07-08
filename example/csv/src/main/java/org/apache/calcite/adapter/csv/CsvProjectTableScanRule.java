@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -91,20 +91,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -114,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that projects from a {@link CsvTableScan} scan just the columns  * needed to satisfy a projection. If the projection's expressions are trivial,  * the projection is removed.  */
+comment|/**  * Planner rule that projects from a {@link CsvTableScan} scan just the columns  * needed to satisfy a projection. If the projection's expressions are trivial,  * the projection is removed.  *  * @see CsvRules#PROJECT_SCAN  */
 end_comment
 
 begin_class
@@ -122,52 +108,24 @@ specifier|public
 class|class
 name|CsvProjectTableScanRule
 extends|extends
-name|RelOptRule
-block|{
-comment|/** @deprecated Use {@link CsvRules#PROJECT_SCAN}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
+name|RelRule
+argument_list|<
 name|CsvProjectTableScanRule
-name|INSTANCE
-init|=
-name|CsvRules
 operator|.
-name|PROJECT_SCAN
-decl_stmt|;
-comment|/**    * Creates a CsvProjectTableScanRule.    *    * @param relBuilderFactory Builder for relational expressions    */
-specifier|public
+name|Config
+argument_list|>
+block|{
+comment|/** Creates a CsvProjectTableScanRule. */
+specifier|protected
 name|CsvProjectTableScanRule
 parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
+name|Config
+name|config
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
-argument_list|(
-name|LogicalProject
-operator|.
-name|class
-argument_list|,
-name|operand
-argument_list|(
-name|CsvTableScan
-operator|.
-name|class
-argument_list|,
-name|none
-argument_list|()
-argument_list|)
-argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|"CsvProjectTableScanRule"
+name|config
 argument_list|)
 expr_stmt|;
 block|}
@@ -340,6 +298,74 @@ block|}
 return|return
 name|fields
 return|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b0
+lambda|->
+name|b0
+operator|.
+name|operand
+argument_list|(
+name|LogicalProject
+operator|.
+name|class
+argument_list|)
+operator|.
+name|oneInput
+argument_list|(
+name|b1
+lambda|->
+name|b1
+operator|.
+name|operand
+argument_list|(
+name|CsvTableScan
+operator|.
+name|class
+argument_list|)
+operator|.
+name|noInputs
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|CsvProjectTableScanRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|CsvProjectTableScanRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

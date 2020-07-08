@@ -55,7 +55,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -69,7 +69,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -432,7 +432,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ReduceDecimalsRule is a rule which reduces decimal operations (such as casts  * or arithmetic) into operations involving more primitive types (such as longs  * and doubles). The rule allows Calcite implementations to deal with decimals  * in a consistent manner, while saving the effort of implementing them.  *  *<p>The rule can be applied to a  * {@link org.apache.calcite.rel.logical.LogicalCalc} with a program for which  * {@link RexUtil#requiresDecimalExpansion} returns true. The rule relies on a  * {@link RexShuttle} to walk over relational expressions and replace them.  *  *<p>While decimals are generally not implemented by the Calcite runtime, the  * rule is optionally applied, in order to support the situation in which we  * would like to push down decimal operations to an external database.  */
+comment|/**  * Rule that reduces decimal operations (such as casts  * or arithmetic) into operations involving more primitive types (such as longs  * and doubles). The rule allows Calcite implementations to deal with decimals  * in a consistent manner, while saving the effort of implementing them.  *  *<p>The rule can be applied to a  * {@link org.apache.calcite.rel.logical.LogicalCalc} with a program for which  * {@link RexUtil#requiresDecimalExpansion} returns true. The rule relies on a  * {@link RexShuttle} to walk over relational expressions and replace them.  *  *<p>While decimals are generally not implemented by the Calcite runtime, the  * rule is optionally applied, in order to support the situation in which we  * would like to push down decimal operations to an external database.  *  * @see CoreRules#CALC_REDUCE_DECIMALS  */
 end_comment
 
 begin_class
@@ -440,26 +440,32 @@ specifier|public
 class|class
 name|ReduceDecimalsRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|ReduceDecimalsRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#CALC_REDUCE_DECIMALS}. */
+comment|/** Creates a ReduceDecimalsRule. */
+specifier|protected
+name|ReduceDecimalsRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|ReduceDecimalsRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|CALC_REDUCE_DECIMALS
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ReduceDecimalsRule.    */
+comment|// to be removed before 2.0
 specifier|public
 name|ReduceDecimalsRule
 parameter_list|(
@@ -467,26 +473,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|LogicalCalc
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getOutConvention
@@ -498,7 +507,8 @@ operator|.
 name|NONE
 return|;
 block|}
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -642,6 +652,7 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * A shuttle which converts decimal expressions to expressions based on    * longs.    */
 specifier|public
+specifier|static
 class|class
 name|DecimalShuttle
 extends|extends
@@ -682,7 +693,6 @@ specifier|final
 name|ExpanderMap
 name|expanderMap
 decl_stmt|;
-specifier|public
 name|DecimalShuttle
 parameter_list|(
 name|RexBuilder
@@ -967,8 +977,9 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Maps a RexCall to a RexExpander    */
+comment|/**    * Maps a RexCall to a RexExpander.    */
 specifier|private
+specifier|static
 class|class
 name|ExpanderMap
 block|{
@@ -1295,7 +1306,6 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|RexExpander
 name|getExpander
 parameter_list|(
@@ -1332,23 +1342,26 @@ block|}
 comment|/**    * Rewrites a decimal expression for a specific set of SqlOperator's. In    * general, most expressions are rewritten in such a way that SqlOperator's    * do not have to deal with decimals. Decimals are represented by their    * unscaled integer representations, similar to    * {@link BigDecimal#unscaledValue()} (i.e. 10^scale). Once decimals are    * decoded, SqlOperators can then operate on the integer representations. The    * value can later be recoded as a decimal.    *    *<p>For example, suppose one casts 2.0 as a decima(10,4). The value is    * decoded (20), multiplied by a scale factor (1000), for a result of    * (20000) which is encoded as a decimal(10,4), in this case 2.0000    *    *<p>To avoid the lengthy coding of RexNode expressions, this base class    * provides succinct methods for building expressions used in rewrites.    */
 specifier|public
 specifier|abstract
+specifier|static
 class|class
 name|RexExpander
 block|{
 comment|/**      * Factory for constructing new relational expressions      */
+specifier|final
 name|RexBuilder
 name|builder
 decl_stmt|;
 comment|/**      * Type for the internal representation of decimals. This type is a      * non-nullable type and requires extra work to make it nullable.      */
+specifier|final
 name|RelDataType
 name|int8
 decl_stmt|;
 comment|/**      * Type for doubles. This type is a non-nullable type and requires extra      * work to make it nullable.      */
+specifier|final
 name|RelDataType
 name|real8
 decl_stmt|;
 comment|/**      * Constructs a RexExpander      */
-specifier|public
 name|RexExpander
 parameter_list|(
 name|RexBuilder
@@ -2504,8 +2517,9 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expands a decimal cast expression    */
+comment|/**    * Expands a decimal cast expression.    */
 specifier|private
+specifier|static
 class|class
 name|CastExpander
 extends|extends
@@ -2950,8 +2964,9 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**    * Expands a decimal arithmetic expression    */
+comment|/**    * Expands a decimal arithmetic expression.    */
 specifier|private
+specifier|static
 class|class
 name|BinaryArithmeticExpander
 extends|extends
@@ -2982,7 +2997,8 @@ name|builder
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RexExpander
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -3938,6 +3954,7 @@ block|}
 block|}
 comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<blockquote><pre>    * if (value&lt; 0)    *     (value - 0.99...) / (10^scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
 specifier|private
+specifier|static
 class|class
 name|FloorExpander
 extends|extends
@@ -4132,6 +4149,7 @@ block|}
 block|}
 comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<blockquote><pre>    * if (value&gt; 0)    *     (value + 0.99...) / (10 ^ scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
 specifier|private
+specifier|static
 class|class
 name|CeilExpander
 extends|extends
@@ -4325,6 +4343,7 @@ block|}
 block|}
 comment|/**    * Expander that rewrites case expressions, in place. Starting from:    *    *<blockquote><pre>(when $cond then $val)+ else $default</pre></blockquote>    *    *<p>this expander casts all values to the return type. If the target type is    * a decimal, then the values are then decoded. The result of expansion is    * that the case operator no longer deals with decimals args. (The return    * value is encoded if necessary.)    *    *<p>Note: a decimal type is returned iff arguments have decimals.    */
 specifier|private
+specifier|static
 class|class
 name|CaseExpander
 extends|extends
@@ -4529,6 +4548,7 @@ block|}
 block|}
 comment|/**    * An expander that substitutes decimals with their integer representations.    * If the output is decimal, the output is reinterpreted from the integer    * representation into a decimal.    */
 specifier|private
+specifier|static
 class|class
 name|PassThroughExpander
 extends|extends
@@ -4547,6 +4567,8 @@ name|builder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|canExpand
@@ -4688,8 +4710,9 @@ return|;
 block|}
 block|}
 block|}
-comment|/**    * An expander which casts decimal arguments as doubles    */
+comment|/**    * An expander that casts decimal arguments as doubles    */
 specifier|private
+specifier|static
 class|class
 name|CastArgAsDoubleExpander
 extends|extends
@@ -4762,9 +4785,10 @@ name|type
 return|;
 block|}
 block|}
-comment|/**    * An expander which casts decimal arguments as another type    */
+comment|/**    * An expander that casts decimal arguments as another type    */
 specifier|private
 specifier|abstract
+specifier|static
 class|class
 name|CastArgAsTypeExpander
 extends|extends
@@ -4795,6 +4819,8 @@ name|int
 name|ordinal
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -4933,8 +4959,9 @@ name|ret
 return|;
 block|}
 block|}
-comment|/**    * This expander simplifies reinterpret calls. Consider (1.0+1)*1. The inner    * operation encodes a decimal (Reinterpret(...)) which the outer operation    * immediately decodes: (Reinterpret(Reinterpret(...))). Arithmetic overflow    * is handled by underlying integer operations, so we don't have to consider    * it. Simply remove the nested Reinterpret.    */
+comment|/**    * An expander that simplifies reinterpret calls.    *    *<p>Consider (1.0+1)*1. The inner    * operation encodes a decimal (Reinterpret(...)) which the outer operation    * immediately decodes: (Reinterpret(Reinterpret(...))). Arithmetic overflow    * is handled by underlying integer operations, so we don't have to consider    * it. Simply remove the nested Reinterpret.    */
 specifier|private
+specifier|static
 class|class
 name|ReinterpretExpander
 extends|extends
@@ -4953,6 +4980,8 @@ name|builder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|canExpand
@@ -4988,6 +5017,8 @@ name|REINTERPRET
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -5230,6 +5261,60 @@ return|;
 block|}
 return|return
 literal|true
+return|;
+block|}
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|LogicalCalc
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|ReduceDecimalsRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|ReduceDecimalsRule
+argument_list|(
+name|this
+argument_list|)
 return|;
 block|}
 block|}

@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a  * {@link org.apache.calcite.rel.logical.LogicalIntersect} to an  * {@link EnumerableIntersect}.  */
+comment|/**  * Rule to convert a  * {@link org.apache.calcite.rel.logical.LogicalIntersect} to an  * {@link EnumerableIntersect}.  *  * @see EnumerableRules#ENUMERABLE_INTERSECT_RULE  */
 end_comment
 
 begin_class
@@ -101,10 +101,18 @@ name|EnumerableIntersectRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableIntersectRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|public
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalIntersect
 operator|.
@@ -120,8 +128,30 @@ name|INSTANCE
 argument_list|,
 literal|"EnumerableIntersectRule"
 argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableIntersectRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableIntersectRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert

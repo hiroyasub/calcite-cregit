@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that converts a  * {@link LogicalMatch} to the result  * of calling {@link LogicalMatch#copy}.  */
+comment|/**  * Planner rule that converts a  * {@link LogicalMatch} to the result  * of calling {@link LogicalMatch#copy}.  *  * @see CoreRules#MATCH  */
 end_comment
 
 begin_class
@@ -84,44 +84,32 @@ specifier|public
 class|class
 name|MatchRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|MatchRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** @deprecated Use {@link CoreRules#MATCH}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
+comment|/** Creates a MatchRule. */
+specifier|protected
 name|MatchRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|MATCH
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-name|MatchRule
-parameter_list|()
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
-argument_list|(
-name|LogicalMatch
-operator|.
-name|class
-argument_list|,
-name|any
-argument_list|()
-argument_list|)
+name|config
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -232,6 +220,60 @@ argument_list|(
 name|match
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|LogicalMatch
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|MatchRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|MatchRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

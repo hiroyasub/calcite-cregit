@@ -1105,7 +1105,7 @@ specifier|public
 interface|interface
 name|ExchangeFactory
 block|{
-comment|/** Creates a Exchange. */
+comment|/** Creates an Exchange. */
 name|RelNode
 name|createExchange
 parameter_list|(

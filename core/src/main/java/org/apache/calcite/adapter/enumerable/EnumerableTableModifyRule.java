@@ -105,34 +105,8 @@ name|ModifiableTable
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
-import|;
-end_import
-
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableModify}  * relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
+comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableModify} to  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_MODIFICATION_RULE */
 end_comment
 
 begin_class
@@ -142,29 +116,22 @@ name|EnumerableTableModifyRule
 extends|extends
 name|ConverterRule
 block|{
-comment|/**    * Creates an EnumerableTableModifyRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|/** Default configuration. */
 specifier|public
-name|EnumerableTableModifyRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalTableModify
 operator|.
 name|class
-argument_list|,
-operator|(
-name|Predicate
-argument_list|<
-name|RelNode
-argument_list|>
-operator|)
-name|r
-lambda|->
-literal|true
 argument_list|,
 name|Convention
 operator|.
@@ -174,9 +141,27 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-name|relBuilderFactory
-argument_list|,
 literal|"EnumerableTableModificationRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableTableModifyRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Creates an EnumerableTableModifyRule. */
+specifier|protected
+name|EnumerableTableModifyRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

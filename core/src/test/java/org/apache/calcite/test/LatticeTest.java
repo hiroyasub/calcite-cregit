@@ -479,7 +479,7 @@ name|api
 operator|.
 name|Assertions
 operator|.
-name|assertFalse
+name|assertNotEquals
 import|;
 end_import
 
@@ -1753,13 +1753,10 @@ name|CREATE_MATERIALIZATION
 argument_list|,
 name|materializationName
 lambda|->
-block|{
 name|counter
 operator|.
 name|incrementAndGet
 argument_list|()
-expr_stmt|;
-block|}
 argument_list|)
 operator|.
 name|returnsCount
@@ -2730,8 +2727,6 @@ name|Test
 name|void
 name|testAllFoodmartQueries
 parameter_list|()
-throws|throws
-name|IOException
 block|{
 comment|// Test ids that had bugs in them until recently. Useful for a sanity check.
 specifier|final
@@ -3437,14 +3432,11 @@ argument_list|,
 literal|"rowCountEstimate: 4074070,"
 argument_list|)
 decl_stmt|;
-name|assertFalse
+name|assertNotEquals
 argument_list|(
 name|lattice
-operator|.
-name|equals
-argument_list|(
+argument_list|,
 name|INVENTORY_LATTICE
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|modelWithLattices

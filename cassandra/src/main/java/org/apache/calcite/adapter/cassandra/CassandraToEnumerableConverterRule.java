@@ -77,34 +77,8 @@ name|ConverterRule
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
-import|;
-end_import
-
 begin_comment
-comment|/**  * Rule to convert a relational expression from  * {@link CassandraRel#CONVENTION} to {@link EnumerableConvention}.  */
+comment|/**  * Rule to convert a relational expression from  * {@link CassandraRel#CONVENTION} to {@link EnumerableConvention}.  *  * @see CassandraRules#TO_ENUMERABLE  */
 end_comment
 
 begin_class
@@ -114,43 +88,22 @@ name|CassandraToEnumerableConverterRule
 extends|extends
 name|ConverterRule
 block|{
-comment|/** @deprecated Use {@link CassandraRules#TO_ENUMERABLE}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
+comment|/** Default configuration. */
 specifier|public
 specifier|static
 specifier|final
-name|ConverterRule
-name|INSTANCE
+name|Config
+name|DEFAULT_CONFIG
 init|=
-name|CassandraRules
+name|Config
 operator|.
-name|TO_ENUMERABLE
-decl_stmt|;
-comment|/**    * Creates a CassandraToEnumerableConverterRule.    *    * @param relBuilderFactory Builder for relational expressions    */
-specifier|public
-name|CassandraToEnumerableConverterRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|RelNode
 operator|.
 name|class
-argument_list|,
-operator|(
-name|Predicate
-argument_list|<
-name|RelNode
-argument_list|>
-operator|)
-name|r
-lambda|->
-literal|true
 argument_list|,
 name|CassandraRel
 operator|.
@@ -160,9 +113,27 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-name|relBuilderFactory
-argument_list|,
 literal|"CassandraToEnumerableConverterRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|CassandraToEnumerableConverterRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Creates a CassandraToEnumerableConverterRule. */
+specifier|protected
+name|CassandraToEnumerableConverterRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

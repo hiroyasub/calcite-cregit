@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that,  * given a {@link org.apache.calcite.rel.core.Project} node that  * merely returns its input, converts the node into its child.  *  *<p>For example,<code>Project(ArrayReader(a), {$input0})</code> becomes  *<code>ArrayReader(a)</code>.</p>  *  * @see CalcRemoveRule  * @see ProjectMergeRule  */
+comment|/**  * Planner rule that,  * given a {@link org.apache.calcite.rel.core.Project} node that  * merely returns its input, converts the node into its child.  *  *<p>For example,<code>Project(ArrayReader(a), {$input0})</code> becomes  *<code>ArrayReader(a)</code>.</p>  *  * @see CalcRemoveRule  * @see ProjectMergeRule  * @see CoreRules#PROJECT_REMOVE  */
 end_comment
 
 begin_class
@@ -112,26 +112,32 @@ specifier|public
 class|class
 name|ProjectRemoveRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|ProjectRemoveRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|SubstitutionRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#PROJECT_REMOVE}. */
+comment|/** Creates a ProjectRemoveRule. */
+specifier|protected
+name|ProjectRemoveRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|ProjectRemoveRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|PROJECT_REMOVE
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ProjectRemoveRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|ProjectRemoveRule
 parameter_list|(
@@ -139,33 +145,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-comment|// Create a specialized operand to detect non-matches early. This keeps
-comment|// the rule queue short.
-name|super
+name|this
 argument_list|(
-name|operandJ
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|Project
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-literal|null
-argument_list|,
-name|ProjectRemoveRule
-operator|::
-name|isTrivial
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -325,6 +327,69 @@ block|{
 return|return
 literal|true
 return|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|Project
+operator|.
+name|class
+argument_list|)
+comment|// Use a predicate to detect non-matches early.
+comment|// This keeps the rule queue short.
+operator|.
+name|predicate
+argument_list|(
+name|ProjectRemoveRule
+operator|::
+name|isTrivial
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|ProjectRemoveRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|ProjectRemoveRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

@@ -17,22 +17,6 @@ name|csv
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
 begin_comment
 comment|/** Planner rules relating to the CSV adapter. */
 end_comment
@@ -55,13 +39,14 @@ specifier|final
 name|CsvProjectTableScanRule
 name|PROJECT_SCAN
 init|=
-operator|new
 name|CsvProjectTableScanRule
-argument_list|(
-name|RelFactories
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|toRule
+argument_list|()
 decl_stmt|;
 block|}
 end_class

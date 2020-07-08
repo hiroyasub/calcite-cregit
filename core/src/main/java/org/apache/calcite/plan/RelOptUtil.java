@@ -1633,9 +1633,13 @@ name|Filter
 argument_list|>
 name|FILTER_PREDICATE
 init|=
-name|RelOptUtil
-operator|::
-name|notContainsWindowedAgg
+name|f
+lambda|->
+operator|!
+name|f
+operator|.
+name|containsOver
+argument_list|()
 decl_stmt|;
 annotation|@
 name|SuppressWarnings
@@ -13864,17 +13868,10 @@ argument_list|,
 literal|null
 argument_list|)
 operator|&&
-name|RexOver
-operator|.
-name|containsOver
-argument_list|(
 name|project
 operator|.
-name|getProjects
+name|containsOver
 argument_list|()
-argument_list|,
-literal|null
-argument_list|)
 condition|)
 block|{
 comment|// Is it valid relational algebra to apply windowed function to a windowed
@@ -16069,10 +16066,7 @@ return|return
 operator|!
 name|calc
 operator|.
-name|getProgram
-argument_list|()
-operator|.
-name|containsAggs
+name|containsOver
 argument_list|()
 return|;
 block|}
@@ -16088,15 +16082,10 @@ parameter_list|)
 block|{
 return|return
 operator|!
-name|RexOver
-operator|.
-name|containsOver
-argument_list|(
 name|filter
 operator|.
-name|getCondition
+name|containsOver
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/** Predicate for if a {@link Project} does not contain windowed aggregates. */
@@ -16111,17 +16100,10 @@ parameter_list|)
 block|{
 return|return
 operator|!
-name|RexOver
-operator|.
-name|containsOver
-argument_list|(
 name|project
 operator|.
-name|getProjects
+name|containsOver
 argument_list|()
-argument_list|,
-literal|null
-argument_list|)
 return|;
 block|}
 comment|/** Policies for handling two- and three-valued boolean logic. */

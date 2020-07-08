@@ -41,20 +41,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptRuleCall
 import|;
 end_import
@@ -70,6 +56,20 @@ operator|.
 name|plan
 operator|.
 name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelRule
 import|;
 end_import
 
@@ -304,7 +304,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pulls up constants through a Union operator.  */
+comment|/**  * Planner rule that pulls up constants through a Union operator.  *  * @see CoreRules#UNION_PULL_UP_CONSTANTS  */
 end_comment
 
 begin_class
@@ -312,25 +312,32 @@ specifier|public
 class|class
 name|UnionPullUpConstantsRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|UnionPullUpConstantsRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#UNION_PULL_UP_CONSTANTS}. */
+comment|/** Creates a UnionPullUpConstantsRule. */
+specifier|protected
+name|UnionPullUpConstantsRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|UnionPullUpConstantsRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|UNION_PULL_UP_CONSTANTS
-decl_stmt|;
-comment|/** Creates a UnionPullUpConstantsRule. */
+comment|// to be removed before 2.0
 specifier|public
 name|UnionPullUpConstantsRule
 parameter_list|(
@@ -346,37 +353,28 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-comment|// If field count is 1, then there's no room for
-comment|// optimization since we cannot create an empty Project
-comment|// operator. If we created a Project with one column, this rule would
-comment|// cycle.
-name|super
+name|this
 argument_list|(
-name|operandJ
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
+argument_list|(
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
 argument_list|(
 name|unionClass
-argument_list|,
-literal|null
-argument_list|,
-name|union
-lambda|->
-name|union
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldCount
-argument_list|()
-operator|>
-literal|1
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -919,6 +917,107 @@ name|build
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
+argument_list|(
+name|Union
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|UnionPullUpConstantsRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|UnionPullUpConstantsRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+comment|/** Defines an operand tree for the given classes. */
+specifier|default
+name|Config
+name|withOperandFor
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Union
+argument_list|>
+name|unionClass
+parameter_list|)
+block|{
+return|return
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|unionClass
+argument_list|)
+comment|// If field count is 1, then there's no room for
+comment|// optimization since we cannot create an empty Project
+comment|// operator. If we created a Project with one column,
+comment|// this rule would cycle.
+operator|.
+name|predicate
+argument_list|(
+name|union
+lambda|->
+name|union
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+operator|>
+literal|1
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

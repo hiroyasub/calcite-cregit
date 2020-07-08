@@ -12339,7 +12339,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3866">[CALCITE-3866]    * "numeric field overflow" when running the generated SQL in PostgreSQL</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumReturnType
 parameter_list|()
@@ -12465,7 +12464,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRankFunctionForPrintingOfFrameBoundary
 parameter_list|()

@@ -27,20 +27,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptRuleCall
 import|;
 end_import
@@ -56,6 +42,20 @@ operator|.
 name|plan
 operator|.
 name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelRule
 import|;
 end_import
 
@@ -204,7 +204,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that replaces {@code IS NOT DISTINCT FROM}  * in a {@link Filter} with logically equivalent operations.  *  * @see org.apache.calcite.sql.fun.SqlStdOperatorTable#IS_NOT_DISTINCT_FROM  */
+comment|/**  * Planner rule that replaces {@code IS NOT DISTINCT FROM}  * in a {@link Filter} with logically equivalent operations.  *  * @see org.apache.calcite.sql.fun.SqlStdOperatorTable#IS_NOT_DISTINCT_FROM  * @see CoreRules#FILTER_EXPAND_IS_NOT_DISTINCT_FROM  */
 end_comment
 
 begin_class
@@ -213,27 +213,32 @@ specifier|final
 class|class
 name|FilterRemoveIsNotDistinctFromRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|FilterRemoveIsNotDistinctFromRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** @deprecated Use {@link CoreRules#FILTER_EXPAND_IS_NOT_DISTINCT_FROM}. */
+comment|/** Creates a FilterRemoveIsNotDistinctFromRule. */
+specifier|protected
+name|FilterRemoveIsNotDistinctFromRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|FilterRemoveIsNotDistinctFromRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|FILTER_EXPAND_IS_NOT_DISTINCT_FROM
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a FilterRemoveIsNotDistinctFromRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|FilterRemoveIsNotDistinctFromRule
 parameter_list|(
@@ -241,25 +246,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|Filter
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -369,11 +378,13 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/** Shuttle that removes 'x IS NOT DISTINCT FROM y' and converts it    * to 'CASE WHEN x IS NULL THEN y IS NULL WHEN y IS NULL THEN x IS    * NULL ELSE x = y END'. */
 specifier|private
+specifier|static
 class|class
 name|RemoveIsNotDistinctFromRexShuttle
 extends|extends
 name|RexShuttle
 block|{
+specifier|final
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
@@ -390,7 +401,8 @@ operator|=
 name|rexBuilder
 expr_stmt|;
 block|}
-comment|// override RexShuttle
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -461,6 +473,60 @@ expr_stmt|;
 block|}
 return|return
 name|newCall
+return|;
+block|}
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|Filter
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|FilterRemoveIsNotDistinctFromRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|FilterRemoveIsNotDistinctFromRule
+argument_list|(
+name|this
+argument_list|)
 return|;
 block|}
 block|}

@@ -71,20 +71,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptRuleCall
 import|;
 end_import
@@ -99,7 +85,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleOperand
+name|RelOptUtil
 import|;
 end_import
 
@@ -113,7 +99,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptUtil
+name|RelRule
 import|;
 end_import
 
@@ -497,9 +483,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|tools
+name|util
 operator|.
-name|RelBuilderFactory
+name|ImmutableBeans
 import|;
 end_import
 
@@ -820,7 +806,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that converts a {@link org.apache.calcite.rel.core.Project}  * followed by {@link org.apache.calcite.rel.core.Aggregate} or an  * {@link org.apache.calcite.rel.core.Aggregate} to a scan (and possibly  * other operations) over a materialized view.  */
+comment|/**  * Planner rule that converts a {@link org.apache.calcite.rel.core.Project}  * followed by {@link org.apache.calcite.rel.core.Aggregate} or an  * {@link org.apache.calcite.rel.core.Aggregate} to a scan (and possibly  * other operations) over a materialized view.  *  * @param<C> Configuration type  */
 end_comment
 
 begin_class
@@ -828,78 +814,31 @@ specifier|public
 specifier|abstract
 class|class
 name|MaterializedViewRule
+parameter_list|<
+name|C
 extends|extends
-name|RelOptRule
+name|MaterializedViewRule
+operator|.
+name|Config
+parameter_list|>
+extends|extends
+name|RelRule
+argument_list|<
+name|C
+argument_list|>
 block|{
-comment|//~ Instance fields --------------------------------------------------------
-comment|/** Whether to generate rewritings containing union if the query results    * are contained within the view results. */
-specifier|protected
-specifier|final
-name|boolean
-name|generateUnionRewriting
-decl_stmt|;
-comment|/** If we generate union rewriting, we might want to pull up projections    * from the query itself to maximize rewriting opportunities. */
-specifier|protected
-specifier|final
-name|HepProgram
-name|unionRewritingPullProgram
-decl_stmt|;
-comment|/** Whether we should create the rewriting in the minimal subtree of plan    * operators. */
-specifier|protected
-specifier|final
-name|boolean
-name|fastBailOut
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a AbstractMaterializedViewRule. */
-specifier|protected
+comment|/** Creates a MaterializedViewRule. */
 name|MaterializedViewRule
 parameter_list|(
-name|RelOptRuleOperand
-name|operand
-parameter_list|,
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|,
-name|String
-name|description
-parameter_list|,
-name|boolean
-name|generateUnionRewriting
-parameter_list|,
-name|HepProgram
-name|unionRewritingPullProgram
-parameter_list|,
-name|boolean
-name|fastBailOut
+name|C
+name|config
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-name|description
+name|config
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|generateUnionRewriting
-operator|=
-name|generateUnionRewriting
-expr_stmt|;
-name|this
-operator|.
-name|unionRewritingPullProgram
-operator|=
-name|unionRewritingPullProgram
-expr_stmt|;
-name|this
-operator|.
-name|fastBailOut
-operator|=
-name|fastBailOut
 expr_stmt|;
 block|}
 annotation|@
@@ -1994,7 +1933,10 @@ name|compensationPreds
 operator|==
 literal|null
 operator|&&
+name|config
+operator|.
 name|generateUnionRewriting
+argument_list|()
 condition|)
 block|{
 comment|// Attempt partial rewriting using union operator. This rewriting
@@ -6898,6 +6840,67 @@ block|,
 name|VIEW_PARTIAL
 block|,
 name|QUERY_PARTIAL
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+comment|/** Whether to generate rewritings containing union if the query results      * are contained within the view results. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+name|boolean
+name|generateUnionRewriting
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #generateUnionRewriting()}. */
+name|Config
+name|withGenerateUnionRewriting
+parameter_list|(
+name|boolean
+name|b
+parameter_list|)
+function_decl|;
+comment|/** If we generate union rewriting, we might want to pull up projections      * from the query itself to maximize rewriting opportunities. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+name|HepProgram
+name|unionRewritingPullProgram
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #unionRewritingPullProgram()}. */
+name|Config
+name|withUnionRewritingPullProgram
+parameter_list|(
+name|HepProgram
+name|program
+parameter_list|)
+function_decl|;
+comment|/** Whether we should create the rewriting in the minimal subtree of plan      * operators. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+name|boolean
+name|fastBailOut
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #fastBailOut()}. */
+name|Config
+name|withFastBailOut
+parameter_list|(
+name|boolean
+name|b
+parameter_list|)
+function_decl|;
 block|}
 block|}
 end_class

@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -151,6 +151,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBeans
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -170,7 +184,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalProject}  * past a {@link org.apache.calcite.rel.core.SetOp}.  *  *<p>The children of the {@code SetOp} will project  * only the {@link RexInputRef}s referenced in the original  * {@code LogicalProject}.  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalProject}  * past a {@link org.apache.calcite.rel.core.SetOp}.  *  *<p>The children of the {@code SetOp} will project  * only the {@link RexInputRef}s referenced in the original  * {@code LogicalProject}.  *  * @see CoreRules#PROJECT_SET_OP_TRANSPOSE  */
 end_comment
 
 begin_class
@@ -178,34 +192,32 @@ specifier|public
 class|class
 name|ProjectSetOpTransposeRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|ProjectSetOpTransposeRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#PROJECT_SET_OP_TRANSPOSE}. */
+comment|/** Creates a ProjectSetOpTransposeRule. */
+specifier|protected
+name|ProjectSetOpTransposeRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|ProjectSetOpTransposeRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|PROJECT_SET_OP_TRANSPOSE
-decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * Expressions that should be preserved in the projection    */
-specifier|private
-name|PushProjector
-operator|.
-name|ExprCondition
-name|preserveExprCondition
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ProjectSetOpTransposeRule with an explicit condition whether    * to preserve expressions.    *    * @param preserveExprCondition Condition whether to preserve expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|ProjectSetOpTransposeRule
 parameter_list|(
@@ -218,39 +230,34 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
-argument_list|(
-name|operand
-argument_list|(
-name|LogicalProject
-operator|.
-name|class
-argument_list|,
-name|operand
-argument_list|(
-name|SetOp
-operator|.
-name|class
-argument_list|,
-name|any
-argument_list|()
-argument_list|)
-argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
-argument_list|)
-expr_stmt|;
 name|this
+argument_list|(
+name|Config
 operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
+argument_list|(
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withPreserveExprCondition
+argument_list|(
 name|preserveExprCondition
-operator|=
-name|preserveExprCondition
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -259,8 +266,9 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
+specifier|final
 name|LogicalProject
-name|origProj
+name|origProject
 init|=
 name|call
 operator|.
@@ -269,6 +277,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+specifier|final
 name|SetOp
 name|setOp
 init|=
@@ -291,19 +300,23 @@ block|{
 return|return;
 block|}
 comment|// locate all fields referenced in the projection
+specifier|final
 name|PushProjector
-name|pushProject
+name|pushProjector
 init|=
 operator|new
 name|PushProjector
 argument_list|(
-name|origProj
+name|origProject
 argument_list|,
 literal|null
 argument_list|,
 name|setOp
 argument_list|,
+name|config
+operator|.
 name|preserveExprCondition
+argument_list|()
 argument_list|,
 name|call
 operator|.
@@ -311,11 +324,12 @@ name|builder
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|pushProject
+name|pushProjector
 operator|.
 name|locateAllRefs
 argument_list|()
 expr_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -327,11 +341,12 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|int
 index|[]
 name|adjustments
 init|=
-name|pushProject
+name|pushProjector
 operator|.
 name|getAdjustments
 argument_list|()
@@ -342,20 +357,13 @@ name|node
 decl_stmt|;
 if|if
 condition|(
-name|RexOver
+name|origProject
 operator|.
 name|containsOver
-argument_list|(
-name|origProj
-operator|.
-name|getProjects
 argument_list|()
-argument_list|,
-literal|null
-argument_list|)
 condition|)
 block|{
-comment|// should not push over past setop but can push its operand down.
+comment|// should not push over past set-op but can push its operand down.
 for|for
 control|(
 name|RelNode
@@ -370,7 +378,7 @@ block|{
 name|Project
 name|p
 init|=
-name|pushProject
+name|pushProjector
 operator|.
 name|createProjectRefsAndExprs
 argument_list|(
@@ -408,6 +416,7 @@ name|p
 argument_list|)
 expr_stmt|;
 block|}
+specifier|final
 name|SetOp
 name|newSetOp
 init|=
@@ -425,7 +434,7 @@ argument_list|)
 decl_stmt|;
 name|node
 operator|=
-name|pushProject
+name|pushProjector
 operator|.
 name|createNewProject
 argument_list|(
@@ -437,7 +446,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// push some expressions below the setop; this
+comment|// push some expressions below the set-op; this
 comment|// is different from pushing below a join, where we decompose
 comment|// to try to keep expensive expressions above the join,
 comment|// because UNION ALL does not have any filtering effect,
@@ -455,11 +464,11 @@ name|newSetOpInputs
 operator|.
 name|add
 argument_list|(
-name|pushProject
+name|pushProjector
 operator|.
 name|createNewProject
 argument_list|(
-name|pushProject
+name|pushProjector
 operator|.
 name|createProjectRefsAndExprs
 argument_list|(
@@ -497,6 +506,107 @@ argument_list|(
 name|node
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b0
+lambda|->
+name|b0
+operator|.
+name|operand
+argument_list|(
+name|LogicalProject
+operator|.
+name|class
+argument_list|)
+operator|.
+name|oneInput
+argument_list|(
+name|b1
+lambda|->
+name|b1
+operator|.
+name|operand
+argument_list|(
+name|SetOp
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withPreserveExprCondition
+argument_list|(
+name|expr
+lambda|->
+operator|!
+operator|(
+name|expr
+operator|instanceof
+name|RexOver
+operator|)
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|ProjectSetOpTransposeRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|ProjectSetOpTransposeRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+comment|/** Defines when an expression should not be pushed. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+name|PushProjector
+operator|.
+name|ExprCondition
+name|preserveExprCondition
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #preserveExprCondition()}. */
+name|Config
+name|withPreserveExprCondition
+parameter_list|(
+name|PushProjector
+operator|.
+name|ExprCondition
+name|condition
+parameter_list|)
+function_decl|;
 block|}
 block|}
 end_class

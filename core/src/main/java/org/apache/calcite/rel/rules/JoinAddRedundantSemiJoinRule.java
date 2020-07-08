@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to add a semi-join into a join. Transformation is as follows:  *  *<p>LogicalJoin(X, Y)&rarr; LogicalJoin(SemiJoin(X, Y), Y)  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.  */
+comment|/**  * Rule to add a semi-join into a join. Transformation is as follows:  *  *<p>LogicalJoin(X, Y)&rarr; LogicalJoin(SemiJoin(X, Y), Y)  *  *<p>Can be configured to match any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.  *  * @see CoreRules#JOIN_ADD_REDUNDANT_SEMI_JOIN  */
 end_comment
 
 begin_class
@@ -174,26 +174,32 @@ specifier|public
 class|class
 name|JoinAddRedundantSemiJoinRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|JoinAddRedundantSemiJoinRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#JOIN_ADD_REDUNDANT_SEMI_JOIN}. */
+comment|/** Creates a JoinAddRedundantSemiJoinRule. */
+specifier|protected
+name|JoinAddRedundantSemiJoinRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|JoinAddRedundantSemiJoinRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|JOIN_ADD_REDUNDANT_SEMI_JOIN
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an JoinAddRedundantSemiJoinRule.    */
+comment|// to be removed before 2.0
 specifier|public
 name|JoinAddRedundantSemiJoinRule
 parameter_list|(
@@ -209,23 +215,34 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
+argument_list|(
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
 argument_list|(
 name|clazz
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -254,7 +271,7 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// can't process outer joins using semijoins
+comment|// can't process outer joins using semi-joins
 if|if
 condition|(
 name|origJoinRel
@@ -368,6 +385,88 @@ argument_list|(
 name|newJoinRel
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
+argument_list|(
+name|LogicalJoin
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|JoinAddRedundantSemiJoinRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|JoinAddRedundantSemiJoinRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+comment|/** Defines an operand tree for the given classes. */
+specifier|default
+name|Config
+name|withOperandFor
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Join
+argument_list|>
+name|joinClass
+parameter_list|)
+block|{
+return|return
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|joinClass
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

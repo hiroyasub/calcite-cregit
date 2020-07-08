@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalRepeatUnion} into an {@link EnumerableRepeatUnion}.  */
+comment|/**  * Rule to convert a {@link LogicalRepeatUnion} into an  * {@link EnumerableRepeatUnion}.  *  * @see EnumerableRules#ENUMERABLE_REPEAT_UNION_RULE  */
 end_comment
 
 begin_class
@@ -102,10 +102,18 @@ name|EnumerableRepeatUnionRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableRepeatUnionRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|public
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalRepeatUnion
 operator|.
@@ -120,6 +128,26 @@ operator|.
 name|INSTANCE
 argument_list|,
 literal|"EnumerableRepeatUnionRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableRepeatUnionRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableRepeatUnionRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

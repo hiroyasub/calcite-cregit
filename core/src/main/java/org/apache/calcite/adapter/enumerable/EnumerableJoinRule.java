@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalJoin} relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
+comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalJoin} relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_JOIN_RULE */
 end_comment
 
 begin_class
@@ -175,10 +175,18 @@ name|EnumerableJoinRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableJoinRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|public
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalJoin
 operator|.
@@ -193,6 +201,26 @@ operator|.
 name|INSTANCE
 argument_list|,
 literal|"EnumerableJoinRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableJoinRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableJoinRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

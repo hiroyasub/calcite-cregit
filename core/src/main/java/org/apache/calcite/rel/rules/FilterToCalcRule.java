@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -164,7 +164,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalFilter} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does<em>NOT</em> fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalFilter} or a  * {@link org.apache.calcite.rel.logical.LogicalProject} (we assume they they  * will be converted using {@link FilterToCalcRule} or  * {@link ProjectToCalcRule}) or a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. This  * {@link org.apache.calcite.rel.logical.LogicalFilter} will eventually be  * converted by {@link FilterCalcMergeRule}.  */
+comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalFilter} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does<em>NOT</em> fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalFilter} or a  * {@link org.apache.calcite.rel.logical.LogicalProject} (we assume they they  * will be converted using {@link FilterToCalcRule} or  * {@link ProjectToCalcRule}) or a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. This  * {@link org.apache.calcite.rel.logical.LogicalFilter} will eventually be  * converted by {@link FilterCalcMergeRule}.  *  * @see CoreRules#FILTER_TO_CALC  */
 end_comment
 
 begin_class
@@ -172,27 +172,32 @@ specifier|public
 class|class
 name|FilterToCalcRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|FilterToCalcRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** @deprecated Use {@link CoreRules#FILTER_TO_CALC}. */
+comment|/** Creates a FilterToCalcRule. */
+specifier|protected
+name|FilterToCalcRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|FilterToCalcRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|FILTER_TO_CALC
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a FilterToCalcRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|FilterToCalcRule
 parameter_list|(
@@ -200,25 +205,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|LogicalFilter
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -325,6 +334,60 @@ argument_list|(
 name|calc
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|LogicalFilter
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|FilterToCalcRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|FilterToCalcRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

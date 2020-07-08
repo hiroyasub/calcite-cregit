@@ -89,6 +89,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * HepProgramBuilder creates instances of {@link HepProgram}.  */
 end_comment
@@ -253,7 +263,12 @@ name|instruction
 operator|.
 name|rule
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|rule
+argument_list|)
 expr_stmt|;
 name|instructions
 operator|.

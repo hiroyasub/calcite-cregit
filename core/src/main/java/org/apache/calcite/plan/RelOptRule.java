@@ -161,6 +161,16 @@ name|Predicate
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>RelOptRule</code> transforms an expression into another. It has a  * list of {@link RelOptRuleOperand}s, which determine whether the rule can be  * applied to a particular section of the tree.  *  *<p>The optimizer figures out which rules are applicable, then calls  * {@link #onMatch} on each of them.</p>  */
 end_comment
@@ -342,7 +352,10 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods for creating operands ------------------------------------------
-comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has no    *   children    */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has no    *   children    *    * @deprecated Use {@link RelRule.OperandBuilder#operand(Class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -385,7 +398,10 @@ name|operands
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has no    *   children    */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has no    *   children    *    * @deprecated Use {@link RelRule.OperandBuilder#operand(Class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -431,7 +447,10 @@ name|operands
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression that has a    * particular trait and predicate.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param predicate Additional match predicate    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has a    *   particular trait and predicate    */
+comment|/**    * Creates an operand that matches a relational expression that has a    * particular trait and predicate.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param predicate Additional match predicate    * @param operandList Child operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression that has a    *   particular trait and predicate    *    * @deprecated Use {@link RelRule.OperandBuilder#operand(Class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -554,7 +573,10 @@ name|operandList
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param predicate Additional match predicate    * @param first First operand    * @param rest Rest operands    * @param<R> Class of relational expression to match    * @return Operand    */
+comment|/**    * Creates an operand that matches a relational expression that has no    * children.    *    * @param clazz Class of relational expression to match (must not be null)    * @param trait Trait to match, or null to match any trait    * @param predicate Additional match predicate    * @param first First operand    * @param rest Rest operands    * @param<R> Class of relational expression to match    * @return Operand    *    * @deprecated Use {@link RelRule.OperandBuilder#operand(Class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -684,7 +706,10 @@ name|rest
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an operand that matches a relational expression with a given    * list of children.    *    *<p>Shorthand for<code>operand(clazz, some(...))</code>.    *    *<p>If you wish to match a relational expression that has no children    * (that is, a leaf node), write<code>operand(clazz, none())</code></p>.    *    *<p>If you wish to match a relational expression that has any number of    * children, write<code>operand(clazz, any())</code></p>.    *    * @param clazz Class of relational expression to match (must not be null)    * @param first First operand    * @param rest Rest operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression with a given    *   list of children    */
+comment|/**    * Creates an operand that matches a relational expression with a given    * list of children.    *    *<p>Shorthand for<code>operand(clazz, some(...))</code>.    *    *<p>If you wish to match a relational expression that has no children    * (that is, a leaf node), write<code>operand(clazz, none())</code></p>.    *    *<p>If you wish to match a relational expression that has any number of    * children, write<code>operand(clazz, any())</code></p>.    *    * @param clazz Class of relational expression to match (must not be null)    * @param first First operand    * @param rest Rest operands    * @param<R> Class of relational expression to match    * @return Operand that matches a relational expression with a given    *   list of children    *    * @deprecated Use {@link RelRule.OperandBuilder#operand(Class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -724,6 +749,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates an operand for a converter rule.    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param predicate Predicate to apply to relational expression    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 specifier|static
 parameter_list|<
@@ -824,7 +852,10 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods for creating lists of child operands ---------------------------
-comment|/**    * Creates a list of child operands that matches child relational    * expressions in the order they appear.    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    * @return List of child operands that matches child relational    *   expressions in the order    */
+comment|/**    * Creates a list of child operands that matches child relational    * expressions in the order they appear.    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    * @return List of child operands that matches child relational    *   expressions in the order    *    * @deprecated Use {@link RelRule.OperandDetailBuilder#inputs}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -858,6 +889,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a list of child operands that matches child relational    * expressions in any order.    *    *<p>This is useful when matching a relational expression which    * can have a variable number of children. For example, the rule to    * eliminate empty children of a Union would have operands</p>    *    *<blockquote>Operand(Union, true, Operand(Empty))</blockquote>    *    *<p>and given the relational expressions</p>    *    *<blockquote>Union(LogicalFilter, Empty, LogicalProject)</blockquote>    *    *<p>would fire the rule with arguments</p>    *    *<blockquote>{Union, Empty}</blockquote>    *    *<p>It is up to the rule to deduce the other children, or indeed the    * position of the matched child.</p>    *    * @param first First child operand    * @param rest  Remaining child operands (may be empty)    * @return List of child operands that matches child relational    *   expressions in any order    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -890,7 +924,10 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates an empty list of child operands.    *    * @return Empty list of child operands    */
+comment|/**    * Creates an empty list of child operands.    *    * @return Empty list of child operands    *    * @deprecated Use {@link RelRule.OperandDetailBuilder#noInputs()}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -903,7 +940,10 @@ operator|.
 name|LEAF_CHILDREN
 return|;
 block|}
-comment|/**    * Creates a list of child operands that signifies that the operand matches    * any number of child relational expressions.    *    * @return List of child operands that signifies that the operand matches    *   any number of child relational expressions    */
+comment|/**    * Creates a list of child operands that signifies that the operand matches    * any number of child relational expressions.    *    * @return List of child operands that signifies that the operand matches    *   any number of child relational expressions    *    * @deprecated Use {@link RelRule.OperandDetailBuilder#anyInputs()}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelOptRuleOperandChildren
@@ -1294,6 +1334,8 @@ specifier|protected
 name|boolean
 name|equals
 parameter_list|(
+annotation|@
+name|Nonnull
 name|RelOptRule
 name|that
 parameter_list|)
@@ -1710,7 +1752,7 @@ name|description
 return|;
 block|}
 comment|/**    * Operand to an instance of the converter rule.    */
-specifier|private
+specifier|protected
 specifier|static
 class|class
 name|ConverterRelOptRuleOperand

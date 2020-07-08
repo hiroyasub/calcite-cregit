@@ -41,6 +41,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|tools
 operator|.
 name|RelBuilderFactory
@@ -48,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an  * {@link org.apache.calcite.rel.logical.LogicalJoin inner join} to a  * {@link org.apache.calcite.rel.logical.LogicalFilter filter} on top of a  * {@link org.apache.calcite.rel.logical.LogicalJoin cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.</p>  */
+comment|/**  * Rule to convert an  * {@link org.apache.calcite.rel.logical.LogicalJoin inner join} to a  * {@link org.apache.calcite.rel.logical.LogicalFilter filter} on top of a  * {@link org.apache.calcite.rel.logical.LogicalJoin cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  *  *<p>Can be configured to match any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.  *  * @see CoreRules#JOIN_EXTRACT_FILTER  */
 end_comment
 
 begin_class
@@ -59,23 +75,23 @@ name|JoinExtractFilterRule
 extends|extends
 name|AbstractJoinExtractFilterRule
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** @deprecated Use {@link CoreRules#JOIN_EXTRACT_FILTER}. */
+comment|/** Creates a JoinExtractFilterRule. */
+specifier|protected
+name|JoinExtractFilterRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|JoinExtractFilterRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|JOIN_EXTRACT_FILTER
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a JoinExtractFilterRule.    */
+comment|// to be removed before 2.0
 specifier|public
 name|JoinExtractFilterRule
 parameter_list|(
@@ -91,23 +107,95 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
+argument_list|(
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
 name|operand
 argument_list|(
 name|clazz
-argument_list|,
-name|any
+argument_list|)
+operator|.
+name|anyInputs
 argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|//~ Methods ----------------------------------------------------------------
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|AbstractJoinExtractFilterRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|LogicalJoin
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|JoinExtractFilterRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|JoinExtractFilterRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+block|}
 block|}
 end_class
 

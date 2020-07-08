@@ -656,7 +656,7 @@ name|strategy
 argument_list|)
 return|;
 block|}
-comment|/** Creates a attribute definition. */
+comment|/** Creates an attribute definition. */
 specifier|public
 specifier|static
 name|SqlNode

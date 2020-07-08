@@ -1492,8 +1492,9 @@ name|ruleSet
 operator|.
 name|add
 argument_list|(
-operator|new
 name|TraitMatchingRule
+operator|.
+name|config
 argument_list|(
 name|converter
 argument_list|,
@@ -1501,6 +1502,9 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|)
+operator|.
+name|toRule
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

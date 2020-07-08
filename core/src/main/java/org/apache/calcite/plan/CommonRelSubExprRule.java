@@ -19,16 +19,41 @@ begin_comment
 comment|/**  * A<code>CommonRelSubExprRule</code> is an abstract base class for rules  * that are fired only on relational expressions that appear more than once  * in a query tree.  */
 end_comment
 
+begin_comment
+comment|// TODO: obsolete this?
+end_comment
+
 begin_class
 specifier|public
 specifier|abstract
 class|class
 name|CommonRelSubExprRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|CommonRelSubExprRule
+operator|.
+name|Config
+argument_list|>
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>CommonRelSubExprRule</code>.    *    * @param operand root operand, must not be null    */
+comment|/** Creates a CommonRelSubExprRule. */
+specifier|protected
+name|CommonRelSubExprRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|CommonRelSubExprRule
 parameter_list|(
@@ -36,12 +61,42 @@ name|RelOptRuleOperand
 name|operand
 parameter_list|)
 block|{
-name|super
+name|this
+argument_list|(
+name|Config
+operator|.
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|exactly
 argument_list|(
 name|operand
 argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{   }
 block|}
 end_class
 

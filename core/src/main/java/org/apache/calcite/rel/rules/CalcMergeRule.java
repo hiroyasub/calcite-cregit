@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -118,7 +118,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalCalc} onto a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The resulting {@link org.apache.calcite.rel.logical.LogicalCalc} has the  * same project list as the upper  * {@link org.apache.calcite.rel.logical.LogicalCalc}, but expressed in terms of  * the lower {@link org.apache.calcite.rel.logical.LogicalCalc}'s inputs.  */
+comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalCalc} onto a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The resulting {@link org.apache.calcite.rel.logical.LogicalCalc} has the  * same project list as the upper  * {@link org.apache.calcite.rel.logical.LogicalCalc}, but expressed in terms of  * the lower {@link org.apache.calcite.rel.logical.LogicalCalc}'s inputs.  *  * @see CoreRules#CALC_MERGE  */
 end_comment
 
 begin_class
@@ -126,27 +126,32 @@ specifier|public
 class|class
 name|CalcMergeRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|CalcMergeRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** @deprecated Use {@link CoreRules#CALC_MERGE}. */
+comment|/** Creates a CalcMergeRule. */
+specifier|protected
+name|CalcMergeRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|CalcMergeRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|CALC_MERGE
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a CalcMergeRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|CalcMergeRule
 parameter_list|(
@@ -154,32 +159,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
-argument_list|(
-name|Calc
+name|Config
 operator|.
-name|class
-argument_list|,
-name|operand
-argument_list|(
-name|Calc
+name|DEFAULT
 operator|.
-name|class
-argument_list|,
-name|any
-argument_list|()
-argument_list|)
-argument_list|)
-argument_list|,
+name|withRelBuilderFactory
+argument_list|(
 name|relBuilderFactory
-argument_list|,
-literal|null
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -341,6 +343,76 @@ argument_list|(
 name|newCalc
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|Config
+operator|.
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b0
+lambda|->
+name|b0
+operator|.
+name|operand
+argument_list|(
+name|Calc
+operator|.
+name|class
+argument_list|)
+operator|.
+name|oneInput
+argument_list|(
+name|b1
+lambda|->
+name|b1
+operator|.
+name|operand
+argument_list|(
+name|Calc
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|CalcMergeRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|CalcMergeRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

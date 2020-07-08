@@ -2794,7 +2794,7 @@ end_empty_stmt
 
 begin_comment
 unit|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3228">[CALCITE-3228]    * Error while applying rule ProjectScanRule:interpreter</a>    *    *<p>This bug appears under the following conditions:    * 1) have an aggregate with group by and multi aggregate calls.    * 2) the aggregate can be removed during optimization.    * 3) all aggregate calls are simplified to the same reference.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3228">[CALCITE-3228]    * Error while applying rule ProjectScanRule:interpreter</a>    *    *<p>This bug appears under the following conditions:    * 1) have an aggregate with group by and multi aggregate calls.    * 2) the aggregate can be removed during optimization.    * 3) all aggregate calls are simplified to the same reference.    * */
 end_comment
 
 begin_function
@@ -2958,11 +2958,19 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select min(id) as mi, max(id) as ma\n"
+operator|+
+literal|"from mytable where id=1 group by id"
+decl_stmt|;
 name|executeQuery
 argument_list|(
 name|config
 argument_list|,
-literal|"select min(id) as mi, max(id) as ma from mytable where id=1 group by id"
+name|sql
 argument_list|,
 name|CalciteSystemProperty
 operator|.

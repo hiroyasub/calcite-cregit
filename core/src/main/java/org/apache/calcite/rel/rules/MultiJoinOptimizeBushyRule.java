@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -55,7 +55,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -404,7 +404,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that finds an approximately optimal ordering for join operators  * using a heuristic algorithm.  *  *<p>It is triggered by the pattern  * {@link org.apache.calcite.rel.logical.LogicalProject} ({@link MultiJoin}).  *  *<p>It is similar to  * {@link org.apache.calcite.rel.rules.LoptOptimizeJoinRule}.  * {@code LoptOptimizeJoinRule} is only capable of producing left-deep joins;  * this rule is capable of producing bushy joins.  *  *<p>TODO:  *<ol>  *<li>Join conditions that touch 1 factor.  *<li>Join conditions that touch 3 factors.  *<li>More than 1 join conditions that touch the same pair of factors,  *       e.g. {@code t0.c1 = t1.c1 and t1.c2 = t0.c3}  *</ol>  */
+comment|/**  * Planner rule that finds an approximately optimal ordering for join operators  * using a heuristic algorithm.  *  *<p>It is triggered by the pattern  * {@link org.apache.calcite.rel.logical.LogicalProject} ({@link MultiJoin}).  *  *<p>It is similar to  * {@link org.apache.calcite.rel.rules.LoptOptimizeJoinRule}  * ({@link CoreRules#MULTI_JOIN_OPTIMIZE}).  * {@code LoptOptimizeJoinRule} is only capable of producing left-deep joins;  * this rule is capable of producing bushy joins.  *  *<p>TODO:  *<ol>  *<li>Join conditions that touch 1 factor.  *<li>Join conditions that touch 3 factors.  *<li>More than 1 join conditions that touch the same pair of factors,  *       e.g. {@code t0.c1 = t1.c1 and t1.c2 = t0.c3}  *</ol>  *  * @see CoreRules#MULTI_JOIN_OPTIMIZE_BUSHY  */
 end_comment
 
 begin_class
@@ -412,24 +412,15 @@ specifier|public
 class|class
 name|MultiJoinOptimizeBushyRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|MultiJoinOptimizeBushyRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#MULTI_JOIN_OPTIMIZE_BUSHY}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|MultiJoinOptimizeBushyRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|MULTI_JOIN_OPTIMIZE_BUSHY
-decl_stmt|;
 specifier|private
 specifier|final
 name|PrintWriter
@@ -453,7 +444,23 @@ argument_list|)
 else|:
 literal|null
 decl_stmt|;
-comment|/** Creates an MultiJoinOptimizeBushyRule. */
+comment|/** Creates a MultiJoinOptimizeBushyRule. */
+specifier|protected
+name|MultiJoinOptimizeBushyRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|MultiJoinOptimizeBushyRule
 parameter_list|(
@@ -461,21 +468,23 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|MultiJoin
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -2288,6 +2297,60 @@ operator|+
 name|rightFactor
 operator|+
 literal|")"
+return|;
+block|}
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|MultiJoin
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|MultiJoinOptimizeBushyRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|MultiJoinOptimizeBushyRule
+argument_list|(
+name|this
+argument_list|)
 return|;
 block|}
 block|}

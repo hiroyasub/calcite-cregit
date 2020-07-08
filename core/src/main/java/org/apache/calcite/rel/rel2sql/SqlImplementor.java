@@ -9163,10 +9163,6 @@ name|rel
 operator|instanceof
 name|Project
 operator|&&
-name|RexOver
-operator|.
-name|containsOver
-argument_list|(
 operator|(
 operator|(
 name|Project
@@ -9174,11 +9170,8 @@ operator|)
 name|rel
 operator|)
 operator|.
-name|getProjects
+name|containsOver
 argument_list|()
-argument_list|,
-literal|null
-argument_list|)
 operator|&&
 name|maxClause
 operator|==

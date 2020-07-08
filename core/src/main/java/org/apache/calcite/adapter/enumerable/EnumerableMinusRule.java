@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link org.apache.calcite.rel.logical.LogicalMinus} to an  * {@link EnumerableMinus}.  */
+comment|/**  * Rule to convert an {@link org.apache.calcite.rel.logical.LogicalMinus} to an  * {@link EnumerableMinus}.  *  * @see EnumerableRules#ENUMERABLE_MINUS_RULE  */
 end_comment
 
 begin_class
@@ -101,10 +101,17 @@ name|EnumerableMinusRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableMinusRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalMinus
 operator|.
@@ -120,8 +127,30 @@ name|INSTANCE
 argument_list|,
 literal|"EnumerableMinusRule"
 argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableMinusRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableMinusRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert

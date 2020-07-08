@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -148,7 +148,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that converts a {@link Calc}  * to a {@link org.apache.calcite.rel.core.Project}  * and {@link Filter}.  *  *<p>Not enabled by default, as it works against the usual flow, which is to  * convert {@code Project} and {@code Filter} to {@code Calc}. But useful for  * specific tasks, such as optimizing before calling an  * {@link org.apache.calcite.interpreter.Interpreter}.  */
+comment|/**  * Planner rule that converts a {@link Calc}  * to a {@link org.apache.calcite.rel.core.Project}  * and {@link Filter}.  *  *<p>Not enabled by default, as it works against the usual flow, which is to  * convert {@code Project} and {@code Filter} to {@code Calc}. But useful for  * specific tasks, such as optimizing before calling an  * {@link org.apache.calcite.interpreter.Interpreter}.  *  * @see CoreRules#CALC_SPLIT  */
 end_comment
 
 begin_class
@@ -156,25 +156,32 @@ specifier|public
 class|class
 name|CalcSplitRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|CalcSplitRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#CALC_SPLIT}. */
+comment|/** Creates a CalcSplitRule. */
+specifier|protected
+name|CalcSplitRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|CalcSplitRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|CALC_SPLIT
-decl_stmt|;
-comment|/**    * Creates a CalcSplitRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|CalcSplitRule
 parameter_list|(
@@ -182,21 +189,23 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|Calc
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -299,6 +308,60 @@ name|build
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|Calc
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|CalcSplitRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|CalcSplitRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

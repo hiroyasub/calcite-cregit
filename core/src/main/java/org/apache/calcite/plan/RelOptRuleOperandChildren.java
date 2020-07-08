@@ -40,10 +40,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Children of a {@link org.apache.calcite.plan.RelOptRuleOperand} and the  * policy for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered},</p>  */
+comment|/**  * Children of a {@link org.apache.calcite.plan.RelOptRuleOperand} and the  * policy for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered}.  *  * @deprecated Use {@link RelRule.OperandBuilder}  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|RelOptRuleOperandChildren

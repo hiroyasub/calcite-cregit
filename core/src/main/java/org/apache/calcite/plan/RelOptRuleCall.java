@@ -482,7 +482,7 @@ name|rel
 argument_list|)
 return|;
 block|}
-comment|/** Assigns the input relational expressions of a given relational expression,    * as seen by this particular call. Is only called when the operand is    * {@link RelOptRule#any()}. */
+comment|/** Assigns the input relational expressions of a given relational expression,    * as seen by this particular call. Is only called when the operand is    * {@link RelRule.OperandDetailBuilder#anyInputs() any}. */
 specifier|protected
 name|void
 name|setChildRels

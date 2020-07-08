@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -132,7 +132,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Variant of {@link org.apache.calcite.rel.rules.FilterToCalcRule} for  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
+comment|/** Variant of {@link org.apache.calcite.rel.rules.FilterToCalcRule} for  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_FILTER_TO_CALC_RULE */
 end_comment
 
 begin_class
@@ -140,9 +140,30 @@ specifier|public
 class|class
 name|EnumerableFilterToCalcRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|EnumerableFilterToCalcRule
+operator|.
+name|Config
+argument_list|>
 block|{
-comment|/**    * Creates an EnumerableFilterToCalcRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|/** Creates an EnumerableFilterToCalcRule. */
+specifier|protected
+name|EnumerableFilterToCalcRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|EnumerableFilterToCalcRule
 parameter_list|(
@@ -150,24 +171,28 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|EnumerableFilter
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -274,6 +299,60 @@ argument_list|(
 name|calc
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|EnumerableFilter
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|EnumerableFilterToCalcRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|EnumerableFilterToCalcRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -104,6 +104,22 @@ operator|.
 name|core
 operator|.
 name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalAggregate
 import|;
 end_import
 
@@ -266,7 +282,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.core.Aggregate}  * if it computes no aggregate functions  * (that is, it is implementing {@code SELECT DISTINCT}),  * or all the aggregate functions are splittable,  * and the underlying relational expression is already distinct.  */
+comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.core.Aggregate}  * if it computes no aggregate functions  * (that is, it is implementing {@code SELECT DISTINCT}),  * or all the aggregate functions are splittable,  * and the underlying relational expression is already distinct.  *  * @see CoreRules#AGGREGATE_REMOVE  */
 end_comment
 
 begin_class
@@ -274,25 +290,29 @@ specifier|public
 class|class
 name|AggregateRemoveRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|AggregateRemoveRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|SubstitutionRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#AGGREGATE_REMOVE}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
+comment|/** Creates an AggregateRemoveRule. */
+specifier|protected
 name|AggregateRemoveRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|AGGREGATE_REMOVE
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -318,7 +338,9 @@ name|LOGICAL_BUILDER
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates an AggregateRemoveRule.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|AggregateRemoveRule
 parameter_list|(
@@ -334,28 +356,28 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operandJ
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
+argument_list|(
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
 argument_list|(
 name|aggregateClass
-argument_list|,
-literal|null
-argument_list|,
-name|agg
-lambda|->
-name|isAggregateSupported
-argument_list|(
-name|agg
 argument_list|)
-argument_list|,
-name|any
-argument_list|()
-argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -438,6 +460,8 @@ literal|true
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -724,6 +748,102 @@ name|build
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withRelBuilderFactory
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
+argument_list|(
+name|LogicalAggregate
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|AggregateRemoveRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|AggregateRemoveRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+comment|/** Defines an operand tree for the given classes. */
+specifier|default
+name|Config
+name|withOperandFor
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Aggregate
+argument_list|>
+name|aggregateClass
+parameter_list|)
+block|{
+return|return
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|aggregateClass
+argument_list|)
+operator|.
+name|predicate
+argument_list|(
+name|AggregateRemoveRule
+operator|::
+name|isAggregateSupported
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

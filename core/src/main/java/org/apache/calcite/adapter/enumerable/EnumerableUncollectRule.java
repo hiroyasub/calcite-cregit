@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link org.apache.calcite.rel.core.Uncollect} to an  * {@link EnumerableUncollect}.  */
+comment|/**  * Rule to convert an {@link org.apache.calcite.rel.core.Uncollect} to an  * {@link EnumerableUncollect}.  *  * @see EnumerableRules#ENUMERABLE_UNCOLLECT_RULE  */
 end_comment
 
 begin_class
@@ -101,10 +101,17 @@ name|EnumerableUncollectRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableUncollectRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|Uncollect
 operator|.
@@ -120,8 +127,30 @@ name|INSTANCE
 argument_list|,
 literal|"EnumerableUncollectRule"
 argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableUncollectRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableUncollectRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert

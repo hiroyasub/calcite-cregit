@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link org.apache.calcite.rel.logical.LogicalUnion} to an  * {@link EnumerableUnion}.  */
+comment|/**  * Rule to convert an {@link org.apache.calcite.rel.logical.LogicalUnion} to an  * {@link EnumerableUnion}.  *  * @see EnumerableRules#ENUMERABLE_UNION_RULE  */
 end_comment
 
 begin_class
@@ -125,10 +125,17 @@ name|EnumerableUnionRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableUnionRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalUnion
 operator|.
@@ -144,8 +151,30 @@ name|INSTANCE
 argument_list|,
 literal|"EnumerableUnionRule"
 argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableUnionRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableUnionRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert

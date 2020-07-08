@@ -800,7 +800,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates an ResultSetEnumerable. */
+comment|/** Creates a ResultSetEnumerable. */
 specifier|public
 specifier|static
 name|ResultSetEnumerable
@@ -827,7 +827,7 @@ name|AUTO_ROW_BUILDER_FACTORY
 argument_list|)
 return|;
 block|}
-comment|/** Creates an ResultSetEnumerable that retrieves columns as specific    * Java types. */
+comment|/** Creates a ResultSetEnumerable that retrieves columns as specific    * Java types. */
 specifier|public
 specifier|static
 name|ResultSetEnumerable

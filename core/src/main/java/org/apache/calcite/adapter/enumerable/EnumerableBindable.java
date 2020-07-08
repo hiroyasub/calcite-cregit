@@ -245,20 +245,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -278,18 +264,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
 import|;
 end_import
 
@@ -542,7 +516,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Rule that converts any enumerable relational expression to bindable.    */
+comment|/**    * Rule that converts any enumerable relational expression to bindable.    *    * @see EnumerableRules#TO_BINDABLE    */
 specifier|public
 specifier|static
 class|class
@@ -550,43 +524,22 @@ name|EnumerableToBindableConverterRule
 extends|extends
 name|ConverterRule
 block|{
-comment|/** @deprecated Use {@link EnumerableRules#TO_BINDABLE}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
+comment|/** Default configuration. */
 specifier|public
 specifier|static
 specifier|final
-name|EnumerableToBindableConverterRule
-name|INSTANCE
+name|Config
+name|DEFAULT_CONFIG
 init|=
-name|EnumerableRules
+name|Config
 operator|.
-name|TO_BINDABLE
-decl_stmt|;
-comment|/**      * Creates an EnumerableToBindableConverterRule.      *      * @param relBuilderFactory Builder for relational expressions      */
-specifier|public
-name|EnumerableToBindableConverterRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|EnumerableRel
 operator|.
 name|class
-argument_list|,
-operator|(
-name|Predicate
-argument_list|<
-name|RelNode
-argument_list|>
-operator|)
-name|r
-lambda|->
-literal|true
 argument_list|,
 name|EnumerableConvention
 operator|.
@@ -596,9 +549,26 @@ name|BindableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-name|relBuilderFactory
-argument_list|,
 literal|"EnumerableToBindableConverterRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableToBindableConverterRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+specifier|protected
+name|EnumerableToBindableConverterRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

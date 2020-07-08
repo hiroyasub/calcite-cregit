@@ -94,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalTableSpool} into an  * {@link EnumerableTableSpool}.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
+comment|/**  * Rule to convert a {@link LogicalTableSpool} into an  * {@link EnumerableTableSpool}.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  *  * @see EnumerableRules#ENUMERABLE_TABLE_SPOOL_RULE  */
 end_comment
 
 begin_class
@@ -106,10 +106,18 @@ name|EnumerableTableSpoolRule
 extends|extends
 name|ConverterRule
 block|{
-name|EnumerableTableSpoolRule
-parameter_list|()
-block|{
-name|super
+comment|/** Default configuration. */
+specifier|public
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalTableSpool
 operator|.
@@ -124,6 +132,26 @@ operator|.
 name|INSTANCE
 argument_list|,
 literal|"EnumerableTableSpoolRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableTableSpoolRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|EnumerableTableSpoolRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

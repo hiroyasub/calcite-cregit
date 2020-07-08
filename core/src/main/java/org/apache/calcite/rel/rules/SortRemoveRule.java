@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -118,7 +118,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.core.Sort} if its input is already sorted.  *  *<p>Requires {@link RelCollationTraitDef}.  */
+comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.core.Sort} if its input is already sorted.  *  *<p>Requires {@link RelCollationTraitDef}.  *  * @see CoreRules#SORT_REMOVE  */
 end_comment
 
 begin_class
@@ -126,25 +126,32 @@ specifier|public
 class|class
 name|SortRemoveRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|SortRemoveRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#SORT_REMOVE}. */
+comment|/** Creates a SortRemoveRule. */
+specifier|protected
+name|SortRemoveRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|SortRemoveRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|SORT_REMOVE
-decl_stmt|;
-comment|/**    * Creates a SortRemoveRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|SortRemoveRule
 parameter_list|(
@@ -152,21 +159,23 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|Sort
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|"SortRemoveRule"
 argument_list|)
 expr_stmt|;
 block|}
@@ -298,6 +307,60 @@ name|traits
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|Sort
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|SortRemoveRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|SortRemoveRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

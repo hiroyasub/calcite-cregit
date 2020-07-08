@@ -77,34 +77,8 @@ name|LogicalValues
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
-import|;
-end_import
-
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalValues}  * relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
+comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalValues}  * relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_VALUES_RULE */
 end_comment
 
 begin_class
@@ -114,29 +88,22 @@ name|EnumerableValuesRule
 extends|extends
 name|ConverterRule
 block|{
-comment|/**    * Creates an EnumerableValuesRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|/** Default configuration. */
 specifier|public
-name|EnumerableValuesRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
+specifier|static
+specifier|final
+name|Config
+name|DEFAULT_CONFIG
+init|=
+name|Config
+operator|.
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|LogicalValues
 operator|.
 name|class
-argument_list|,
-operator|(
-name|Predicate
-argument_list|<
-name|RelNode
-argument_list|>
-operator|)
-name|r
-lambda|->
-literal|true
 argument_list|,
 name|Convention
 operator|.
@@ -146,9 +113,27 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-name|relBuilderFactory
-argument_list|,
 literal|"EnumerableValuesRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableValuesRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Creates an EnumerableValuesRule. */
+specifier|protected
+name|EnumerableValuesRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

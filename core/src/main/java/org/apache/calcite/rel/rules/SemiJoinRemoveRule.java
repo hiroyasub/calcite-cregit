@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that removes a {@code SemiJoin}s from a join tree.  *  *<p>It is invoked after attempts have been made to convert a SemiJoin to an  * indexed scan on a join factor have failed. Namely, if the join factor does  * not reduce to a single table that can be scanned using an index.  *  *<p>It should only be enabled if all SemiJoins in the plan are advisory; that  * is, they can be safely dropped without affecting the semantics of the query.  */
+comment|/**  * Planner rule that removes a {@link Join#isSemiJoin semi-join} from a join  * tree.  *  *<p>It is invoked after attempts have been made to convert a SemiJoin to an  * indexed scan on a join factor have failed. Namely, if the join factor does  * not reduce to a single table that can be scanned using an index.  *  *<p>It should only be enabled if all SemiJoins in the plan are advisory; that  * is, they can be safely dropped without affecting the semantics of the query.  *  * @see CoreRules#SEMI_JOIN_REMOVE  */
 end_comment
 
 begin_class
@@ -100,26 +100,32 @@ specifier|public
 class|class
 name|SemiJoinRemoveRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|SemiJoinRemoveRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|/** @deprecated Use {@link CoreRules#SEMI_JOIN_REMOVE}. */
+comment|/** Creates a SemiJoinRemoveRule. */
+specifier|protected
+name|SemiJoinRemoveRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|SemiJoinRemoveRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|SEMI_JOIN_REMOVE
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a SemiJoinRemoveRule. */
+comment|// to be removed before 2.0
 specifier|public
 name|SemiJoinRemoveRule
 parameter_list|(
@@ -127,31 +133,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operandJ
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|LogicalJoin
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-literal|null
-argument_list|,
-name|Join
-operator|::
-name|isSemiJoin
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -177,6 +181,95 @@ literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withOperandFor
+argument_list|(
+name|LogicalJoin
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|SemiJoinRemoveRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|SemiJoinRemoveRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
+comment|/** Defines an operand tree for the given classes. */
+specifier|default
+name|Config
+name|withOperandFor
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Join
+argument_list|>
+name|joinClass
+parameter_list|)
+block|{
+return|return
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|joinClass
+argument_list|)
+operator|.
+name|predicate
+argument_list|(
+name|Join
+operator|::
+name|isSemiJoin
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

@@ -61,34 +61,8 @@ name|ConverterRule
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
-import|;
-end_import
-
 begin_comment
-comment|/**  * Planner rule that converts {@link org.apache.calcite.interpreter.BindableRel}  * to {@link org.apache.calcite.adapter.enumerable.EnumerableRel} by creating  * an {@link org.apache.calcite.adapter.enumerable.EnumerableInterpreter}.  */
+comment|/**  * Planner rule that converts {@link org.apache.calcite.interpreter.BindableRel}  * to {@link org.apache.calcite.adapter.enumerable.EnumerableRel} by creating  * an {@link org.apache.calcite.adapter.enumerable.EnumerableInterpreter}.  *  * @see EnumerableRules#TO_INTERPRETER  */
 end_comment
 
 begin_class
@@ -98,43 +72,22 @@ name|EnumerableInterpreterRule
 extends|extends
 name|ConverterRule
 block|{
-comment|/** @deprecated Use {@link EnumerableRules#TO_INTERPRETER}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
+comment|/** Default configuration. */
 specifier|public
 specifier|static
 specifier|final
-name|EnumerableInterpreterRule
-name|INSTANCE
+name|Config
+name|DEFAULT_CONFIG
 init|=
-name|EnumerableRules
+name|Config
 operator|.
-name|TO_INTERPRETER
-decl_stmt|;
-comment|/**    * Creates an EnumerableInterpreterRule.    *    * @param relBuilderFactory Builder for relational expressions    */
-specifier|public
-name|EnumerableInterpreterRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|RelNode
 operator|.
 name|class
-argument_list|,
-operator|(
-name|Predicate
-argument_list|<
-name|RelNode
-argument_list|>
-operator|)
-name|r
-lambda|->
-literal|true
 argument_list|,
 name|BindableConvention
 operator|.
@@ -144,9 +97,26 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-name|relBuilderFactory
-argument_list|,
 literal|"EnumerableInterpreterRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|EnumerableInterpreterRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+specifier|protected
+name|EnumerableInterpreterRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}

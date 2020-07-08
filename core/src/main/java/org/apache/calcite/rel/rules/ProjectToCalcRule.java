@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRule
+name|RelOptRuleCall
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptRuleCall
+name|RelRule
 import|;
 end_import
 
@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a  * {@link org.apache.calcite.rel.logical.LogicalProject} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}  *  *<p>The rule does not fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalProject},  * {@link org.apache.calcite.rel.logical.LogicalFilter} or  * {@link org.apache.calcite.rel.logical.LogicalCalc}. If it did, then the same  * {@link org.apache.calcite.rel.logical.LogicalCalc} would be formed via  * several transformation paths, which is a waste of effort.</p>  *  * @see FilterToCalcRule  */
+comment|/**  * Rule to convert a  * {@link org.apache.calcite.rel.logical.LogicalProject} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does not fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalProject},  * {@link org.apache.calcite.rel.logical.LogicalFilter} or  * {@link org.apache.calcite.rel.logical.LogicalCalc}. If it did, then the same  * {@link org.apache.calcite.rel.logical.LogicalCalc} would be formed via  * several transformation paths, which is a waste of effort.  *  * @see FilterToCalcRule  * @see CoreRules#PROJECT_TO_CALC  */
 end_comment
 
 begin_class
@@ -128,27 +128,32 @@ specifier|public
 class|class
 name|ProjectToCalcRule
 extends|extends
-name|RelOptRule
+name|RelRule
+argument_list|<
+name|ProjectToCalcRule
+operator|.
+name|Config
+argument_list|>
 implements|implements
 name|TransformationRule
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** @deprecated Use {@link CoreRules#PROJECT_TO_CALC}. */
+comment|/** Creates a ProjectToCalcRule. */
+specifier|protected
+name|ProjectToCalcRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|ProjectToCalcRule
-name|INSTANCE
-init|=
-name|CoreRules
-operator|.
-name|PROJECT_TO_CALC
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ProjectToCalcRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+comment|// to be removed before 2.0
 specifier|public
 name|ProjectToCalcRule
 parameter_list|(
@@ -156,25 +161,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withRelBuilderFactory
 argument_list|(
-name|LogicalProject
+name|relBuilderFactory
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
 operator|.
 name|class
-argument_list|,
-name|any
-argument_list|()
 argument_list|)
-argument_list|,
-name|relBuilderFactory
-argument_list|,
-literal|null
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onMatch
@@ -257,6 +266,60 @@ argument_list|(
 name|calc
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Rule configuration. */
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RelRule
+operator|.
+name|Config
+block|{
+name|Config
+name|DEFAULT
+init|=
+name|EMPTY
+operator|.
+name|withOperandSupplier
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|operand
+argument_list|(
+name|LogicalProject
+operator|.
+name|class
+argument_list|)
+operator|.
+name|anyInputs
+argument_list|()
+argument_list|)
+operator|.
+name|as
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+annotation|@
+name|Override
+specifier|default
+name|ProjectToCalcRule
+name|toRule
+parameter_list|()
+block|{
+return|return
+operator|new
+name|ProjectToCalcRule
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class

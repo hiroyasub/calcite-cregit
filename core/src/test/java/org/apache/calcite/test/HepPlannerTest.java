@@ -145,22 +145,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalIntersect
@@ -378,8 +362,6 @@ name|Test
 name|void
 name|testRuleClass
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify that an entire class of rules can be applied.
 name|HepProgramBuilder
@@ -415,38 +397,58 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-operator|new
 name|CoerceInputsRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withCoerceNames
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withConsumerRelClass
 argument_list|(
 name|LogicalUnion
 operator|.
 name|class
-argument_list|,
-literal|false
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
 argument_list|)
+operator|.
+name|toRule
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|planner
 operator|.
 name|addRule
 argument_list|(
-operator|new
 name|CoerceInputsRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withCoerceNames
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withConsumerRelClass
 argument_list|(
 name|LogicalIntersect
 operator|.
 name|class
-argument_list|,
-literal|false
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
 argument_list|)
+operator|.
+name|withDescription
+argument_list|(
+literal|"CoerceInputsRule:Intersection"
+argument_list|)
+comment|// TODO
+operator|.
+name|toRule
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -476,8 +478,6 @@ name|Test
 name|void
 name|testRuleDescription
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify that a rule can be applied via its description.
 name|HepProgramBuilder
@@ -761,8 +761,6 @@ name|Test
 name|void
 name|testMatchLimitOneTopDown
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify that only the top union gets rewritten.
 name|HepProgramBuilder
@@ -820,8 +818,6 @@ name|Test
 name|void
 name|testMatchLimitOneBottomUp
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify that only the bottom union gets rewritten.
 name|HepProgramBuilder
@@ -879,8 +875,6 @@ name|Test
 name|void
 name|testMatchUntilFixpoint
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify that both unions get rewritten.
 name|HepProgramBuilder
@@ -931,8 +925,6 @@ name|Test
 name|void
 name|testReplaceCommonSubexpression
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Note that here it may look like the rule is firing
 comment|// twice, but actually it's only firing once on the
@@ -1099,8 +1091,6 @@ name|Test
 name|void
 name|testSubprogram
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify that subprogram gets re-executed until fixpoint.
 comment|// In this case, the first time through we limit it to generate
@@ -1205,8 +1195,6 @@ name|Test
 name|void
 name|testGroup
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// Verify simultaneous application of a group of rules.
 comment|// Intentionally add them in the wrong order to make sure
@@ -1284,8 +1272,6 @@ name|Test
 name|void
 name|testGC
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|HepProgramBuilder
 name|programBuilder
@@ -1505,8 +1491,6 @@ name|Test
 name|void
 name|testMaterialization
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|HepPlanner
 name|planner
@@ -1715,6 +1699,7 @@ return|;
 block|}
 comment|/** Listener for HepPlannerTest; counts how many times rules fire. */
 specifier|private
+specifier|static
 class|class
 name|HepTestListener
 implements|implements

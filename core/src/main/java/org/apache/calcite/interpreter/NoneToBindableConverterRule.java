@@ -73,34 +73,8 @@ name|ConverterRule
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
-name|RelBuilderFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
-import|;
-end_import
-
 begin_comment
-comment|/**  * Rule to convert a relational expression from  * {@link org.apache.calcite.plan.Convention#NONE}  * to {@link org.apache.calcite.interpreter.BindableConvention}.  */
+comment|/**  * Rule to convert a relational expression from  * {@link org.apache.calcite.plan.Convention#NONE}  * to {@link org.apache.calcite.interpreter.BindableConvention}.  *  * @see Bindables#FROM_NONE_RULE  */
 end_comment
 
 begin_class
@@ -110,43 +84,22 @@ name|NoneToBindableConverterRule
 extends|extends
 name|ConverterRule
 block|{
-comment|/** @deprecated Use {@link Bindables#FROM_NONE_RULE}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
+comment|/** Default configuration. */
 specifier|public
 specifier|static
 specifier|final
-name|ConverterRule
-name|INSTANCE
+name|Config
+name|DEFAULT_CONFIG
 init|=
-name|Bindables
+name|Config
 operator|.
-name|FROM_NONE_RULE
-decl_stmt|;
-comment|/**    * Creates a NoneToBindableConverterRule.    *    * @param relBuilderFactory Builder for relational expressions    */
-specifier|public
-name|NoneToBindableConverterRule
-parameter_list|(
-name|RelBuilderFactory
-name|relBuilderFactory
-parameter_list|)
-block|{
-name|super
+name|INSTANCE
+operator|.
+name|withConversion
 argument_list|(
 name|RelNode
 operator|.
 name|class
-argument_list|,
-operator|(
-name|Predicate
-argument_list|<
-name|RelNode
-argument_list|>
-operator|)
-name|r
-lambda|->
-literal|true
 argument_list|,
 name|Convention
 operator|.
@@ -156,9 +109,27 @@ name|BindableConvention
 operator|.
 name|INSTANCE
 argument_list|,
-name|relBuilderFactory
-argument_list|,
 literal|"NoneToBindableConverterRule"
+argument_list|)
+operator|.
+name|withRuleFactory
+argument_list|(
+name|NoneToBindableConverterRule
+operator|::
+operator|new
+argument_list|)
+decl_stmt|;
+comment|/** Called from the Config. */
+specifier|protected
+name|NoneToBindableConverterRule
+parameter_list|(
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|config
 argument_list|)
 expr_stmt|;
 block|}
