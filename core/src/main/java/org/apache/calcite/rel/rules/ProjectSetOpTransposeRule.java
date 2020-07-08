@@ -87,22 +87,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|SetOp
 import|;
 end_import
@@ -198,28 +182,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#PROJECT_SET_OP_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectSetOpTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|ProjectSetOpTransposeRule
-argument_list|(
-name|expr
-lambda|->
-operator|!
-operator|(
-name|expr
-operator|instanceof
-name|RexOver
-operator|)
-argument_list|,
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_SET_OP_TRANSPOSE
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Expressions that should be preserved in the projection    */

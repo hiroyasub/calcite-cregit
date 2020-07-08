@@ -89,22 +89,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Values
 import|;
 end_import
@@ -224,7 +208,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule that applies {@link Aggregate} to a {@link Values} (currently just an  * empty {@code Value}s).  *  *<p>This is still useful because {@link PruneEmptyRules#AGGREGATE_INSTANCE}  * doesn't handle {@code Aggregate}, which is in turn because {@code Aggregate}  * of empty relations need some special handling: a single row will be  * generated, where each column's value depends on the specific aggregate calls  * (e.g. COUNT is 0, SUM is NULL).  *  *<p>Sample query where this matters:  *  *<blockquote><code>SELECT COUNT(*) FROM s.foo WHERE 1 = 0</code></blockquote>  *  *<p>This rule only applies to "grand totals", that is, {@code GROUP BY ()}.  * Any non-empty {@code GROUP BY} clause will return one row per group key  * value, and each group will consist of at least one row.  */
+comment|/**  * Rule that applies {@link Aggregate} to a {@link Values} (currently just an  * empty {@code Value}s).  *  *<p>This is still useful because {@link PruneEmptyRules#AGGREGATE_INSTANCE}  * doesn't handle {@code Aggregate}, which is in turn because {@code Aggregate}  * of empty relations need some special handling: a single row will be  * generated, where each column's value depends on the specific aggregate calls  * (e.g. COUNT is 0, SUM is NULL).  *  *<p>Sample query where this matters:  *  *<blockquote><code>SELECT COUNT(*) FROM s.foo WHERE 1 = 0</code></blockquote>  *  *<p>This rule only applies to "grand totals", that is, {@code GROUP BY ()}.  * Any non-empty {@code GROUP BY} clause will return one row per group key  * value, and each group will consist of at least one row.  *  * @see CoreRules#AGGREGATE_VALUES  */
 end_comment
 
 begin_class
@@ -236,19 +220,19 @@ name|RelOptRule
 implements|implements
 name|SubstitutionRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_VALUES}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateValuesRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateValuesRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|AGGREGATE_VALUES
 decl_stmt|;
 comment|/**    * Creates an AggregateValuesRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

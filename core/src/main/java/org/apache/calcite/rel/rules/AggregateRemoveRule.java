@@ -117,22 +117,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
-operator|.
-name|LogicalAggregate
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|metadata
 operator|.
 name|RelMetadataQuery
@@ -294,23 +278,19 @@ name|RelOptRule
 implements|implements
 name|SubstitutionRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_REMOVE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateRemoveRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateRemoveRule
-argument_list|(
-name|LogicalAggregate
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|AGGREGATE_REMOVE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 annotation|@

@@ -45,22 +45,6 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableInterpreterRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|adapter
-operator|.
-name|enumerable
-operator|.
 name|EnumerableRules
 import|;
 end_import
@@ -135,7 +119,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|ProjectToWindowRule
+name|CoreRules
 import|;
 end_import
 
@@ -456,9 +440,9 @@ name|ImmutableSet
 operator|.
 name|of
 argument_list|(
-name|ProjectToWindowRule
+name|CoreRules
 operator|.
-name|PROJECT
+name|PROJECT_TO_LOGICAL_PROJECT_AND_WINDOW
 argument_list|,
 name|EnumerableRules
 operator|.
@@ -520,9 +504,9 @@ name|EnumerableRules
 operator|.
 name|ENUMERABLE_TABLE_SCAN_RULE
 argument_list|,
-name|EnumerableInterpreterRule
+name|EnumerableRules
 operator|.
-name|INSTANCE
+name|TO_INTERPRETER
 argument_list|)
 decl_stmt|;
 specifier|private

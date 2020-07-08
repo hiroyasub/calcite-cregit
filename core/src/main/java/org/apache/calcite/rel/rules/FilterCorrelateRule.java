@@ -238,19 +238,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#FILTER_CORRELATE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterCorrelateRule
 name|INSTANCE
 init|=
-operator|new
-name|FilterCorrelateRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FILTER_CORRELATE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a FilterCorrelateRule.    */

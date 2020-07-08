@@ -132,19 +132,19 @@ name|RelOptRule
 implements|implements
 name|SubstitutionRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#FILTER_MERGE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterMergeRule
 name|INSTANCE
 init|=
-operator|new
-name|FilterMergeRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FILTER_MERGE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a FilterMergeRule.    */

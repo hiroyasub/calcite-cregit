@@ -212,17 +212,28 @@ name|RelOptRule
 implements|implements
 name|SubstitutionRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#SORT_REMOVE_CONSTANT_KEYS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SortRemoveConstantKeysRule
 name|INSTANCE
 init|=
-operator|new
-name|SortRemoveConstantKeysRule
-argument_list|()
+name|CoreRules
+operator|.
+name|SORT_REMOVE_CONSTANT_KEYS
 decl_stmt|;
-specifier|private
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"DeprecatedIsStillUsed"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 name|SortRemoveConstantKeysRule
 parameter_list|()
 block|{

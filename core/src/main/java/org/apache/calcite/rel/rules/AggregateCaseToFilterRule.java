@@ -131,22 +131,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|type
 operator|.
 name|RelDataType
@@ -384,21 +368,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_CASE_TO_FILTER}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateCaseToFilterRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateCaseToFilterRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-literal|null
-argument_list|)
+name|AGGREGATE_CASE_TO_FILTER
 decl_stmt|;
 comment|/** Creates an AggregateCaseToFilterRule. */
 specifier|protected

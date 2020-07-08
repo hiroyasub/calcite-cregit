@@ -69,22 +69,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalCalc
@@ -149,19 +133,19 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
+comment|/** @deprecated Use {@link CoreRules#PROJECT_TO_CALC}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectToCalcRule
 name|INSTANCE
 init|=
-operator|new
-name|ProjectToCalcRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_TO_CALC
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a ProjectToCalcRule.    *    * @param relBuilderFactory Builder for relational expressions    */

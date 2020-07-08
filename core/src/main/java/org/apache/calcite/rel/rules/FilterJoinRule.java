@@ -366,60 +366,62 @@ parameter_list|)
 lambda|->
 literal|true
 decl_stmt|;
-comment|/** Rule that pushes predicates from a Filter into the Join below them. */
+comment|/** @deprecated Use {@link CoreRules#FILTER_INTO_JOIN}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"StaticInitializerReferencesSubClass"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterJoinRule
 name|FILTER_ON_JOIN
 init|=
-operator|new
-name|FilterIntoJoinRule
-argument_list|(
-literal|true
-argument_list|,
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-name|TRUE_PREDICATE
-argument_list|)
+name|FILTER_INTO_JOIN
 decl_stmt|;
-comment|/** Dumber version of {@link #FILTER_ON_JOIN}. Not intended for production    * use, but keeps some tests working for which {@code FILTER_ON_JOIN} is too    * smart. */
+comment|/** @deprecated Use {@link CoreRules#FILTER_INTO_JOIN_DUMB}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"StaticInitializerReferencesSubClass"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterJoinRule
 name|DUMB_FILTER_ON_JOIN
 init|=
-operator|new
-name|FilterIntoJoinRule
-argument_list|(
-literal|false
-argument_list|,
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-name|TRUE_PREDICATE
-argument_list|)
+name|FILTER_INTO_JOIN_DUMB
 decl_stmt|;
-comment|/** Rule that pushes predicates in a Join into the inputs to the join. */
+comment|/** @deprecated Use {@link CoreRules#JOIN_CONDITION_PUSH}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"StaticInitializerReferencesSubClass"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterJoinRule
 name|JOIN
 init|=
-operator|new
-name|JoinConditionPushRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-name|TRUE_PREDICATE
-argument_list|)
+name|JOIN_CONDITION_PUSH
 decl_stmt|;
 comment|/** Whether to try to strengthen join-type. */
 specifier|private

@@ -99,22 +99,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Sort
 import|;
 end_import
@@ -146,19 +130,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#SORT_REMOVE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SortRemoveRule
 name|INSTANCE
 init|=
-operator|new
-name|SortRemoveRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|SORT_REMOVE
 decl_stmt|;
 comment|/**    * Creates a SortRemoveRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

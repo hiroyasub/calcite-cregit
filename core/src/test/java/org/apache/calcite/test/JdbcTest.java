@@ -597,7 +597,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|IntersectToDistinctRule
+name|CoreRules
 import|;
 end_import
 
@@ -14414,9 +14414,9 @@ name|planner
 operator|.
 name|removeRule
 argument_list|(
-name|IntersectToDistinctRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|INTERSECT_TO_DISTINCT
 argument_list|)
 argument_list|)
 operator|.

@@ -57,39 +57,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Union
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalUnion
 import|;
 end_import
 
@@ -120,23 +88,19 @@ name|RelOptRule
 implements|implements
 name|SubstitutionRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#UNION_REMOVE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|UnionEliminatorRule
 name|INSTANCE
 init|=
-operator|new
-name|UnionEliminatorRule
-argument_list|(
-name|LogicalUnion
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|UNION_REMOVE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a UnionEliminatorRule.    */

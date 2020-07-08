@@ -571,7 +571,7 @@ decl_stmt|;
 comment|/** @deprecated Use {@link AnsiSqlDialect#DEFAULT} instead. */
 annotation|@
 name|Deprecated
-comment|// to be removed before 2.0
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
@@ -585,7 +585,7 @@ decl_stmt|;
 comment|/** @deprecated Use {@link CalciteSqlDialect#DEFAULT} instead. */
 annotation|@
 name|Deprecated
-comment|// to be removed before 2.0
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final

@@ -161,22 +161,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rex
 operator|.
 name|RexBuilder
@@ -222,20 +206,6 @@ operator|.
 name|rex
 operator|.
 name|RexNode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rex
-operator|.
-name|RexOver
 import|;
 end_import
 
@@ -352,28 +322,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#PROJECT_CORRELATE_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectCorrelateTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|ProjectCorrelateTransposeRule
-argument_list|(
-name|expr
-lambda|->
-operator|!
-operator|(
-name|expr
-operator|instanceof
-name|RexOver
-operator|)
-argument_list|,
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_CORRELATE_TRANSPOSE
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * preserveExprCondition to define the condition for a expression not to be pushed    */

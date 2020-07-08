@@ -240,19 +240,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#FILTER_SET_OP_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterSetOpTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|FilterSetOpTransposeRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FILTER_SET_OP_TRANSPOSE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a FilterSetOpTransposeRule.    */

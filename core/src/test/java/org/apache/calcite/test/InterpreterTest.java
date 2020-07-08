@@ -159,7 +159,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|SemiJoinRule
+name|CoreRules
 import|;
 end_import
 
@@ -1966,9 +1966,9 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|SemiJoinRule
+name|CoreRules
 operator|.
-name|PROJECT
+name|PROJECT_TO_SEMI_JOIN
 argument_list|)
 operator|.
 name|build

@@ -105,7 +105,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|ProjectToCalcRule
+name|CoreRules
 import|;
 end_import
 
@@ -549,9 +549,9 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|ProjectToCalcRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|PROJECT_TO_CALC
 argument_list|)
 operator|.
 name|build

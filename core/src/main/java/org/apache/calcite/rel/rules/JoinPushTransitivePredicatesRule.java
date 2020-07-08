@@ -190,24 +190,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
-comment|/** The singleton. */
+comment|/** @deprecated Use {@link CoreRules#JOIN_PUSH_TRANSITIVE_PREDICATES}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinPushTransitivePredicatesRule
 name|INSTANCE
 init|=
-operator|new
-name|JoinPushTransitivePredicatesRule
-argument_list|(
-name|Join
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|JOIN_PUSH_TRANSITIVE_PREDICATES
 decl_stmt|;
 comment|/** Creates a JoinPushTransitivePredicatesRule. */
 specifier|public

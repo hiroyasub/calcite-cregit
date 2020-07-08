@@ -99,22 +99,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Window
 import|;
 end_import
@@ -342,20 +326,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
-comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.ProjectWindowTransposeRule}. */
+comment|/** @deprecated Use {@link CoreRules#PROJECT_WINDOW_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectWindowTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|ProjectWindowTransposeRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_WINDOW_TRANSPOSE
 decl_stmt|;
 comment|/**    * Creates ProjectWindowTransposeRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

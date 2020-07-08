@@ -389,7 +389,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|ProjectTableScanRule
+name|CoreRules
 import|;
 end_import
 
@@ -2784,7 +2784,7 @@ end_empty_stmt
 
 begin_comment
 unit|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3228">[CALCITE-3228]    * Error while applying rule ProjectScanRule:interpreter</a>    *    *<p>This bug appears under the following conditions:    * 1) have an aggregate with group by and multi aggregate calls.    * 2) the aggregate can be removed during optimization.    * 3) all aggregate calls are simplified to the same reference.    * */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3228">[CALCITE-3228]    * Error while applying rule ProjectScanRule:interpreter</a>    *    *<p>This bug appears under the following conditions:    * 1) have an aggregate with group by and multi aggregate calls.    * 2) the aggregate can be removed during optimization.    * 3) all aggregate calls are simplified to the same reference.    */
 end_comment
 
 begin_function
@@ -2927,9 +2927,9 @@ name|ExpandConversionRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|ProjectTableScanRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|PROJECT_TABLE_SCAN
 argument_list|)
 argument_list|)
 operator|.

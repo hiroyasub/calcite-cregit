@@ -770,6 +770,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDistinct
@@ -803,6 +805,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKey
@@ -876,6 +880,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelOptQuery
@@ -995,6 +1001,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isValid
@@ -1107,6 +1115,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|double
@@ -1138,6 +1148,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Set
@@ -1291,10 +1303,10 @@ name|this
 return|;
 block|}
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
+name|Deprecated
+comment|// to be removed before 1.25
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelOptCost

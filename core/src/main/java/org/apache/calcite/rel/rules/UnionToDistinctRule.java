@@ -85,22 +85,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalUnion
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|tools
 operator|.
 name|RelBuilder
@@ -134,23 +118,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#UNION_TO_DISTINCT}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|UnionToDistinctRule
 name|INSTANCE
 init|=
-operator|new
-name|UnionToDistinctRule
-argument_list|(
-name|LogicalUnion
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|UNION_TO_DISTINCT
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a UnionToDistinctRule.    */

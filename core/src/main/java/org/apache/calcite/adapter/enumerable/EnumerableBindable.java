@@ -223,22 +223,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|runtime
 operator|.
 name|ArrayBindable
@@ -566,19 +550,19 @@ name|EnumerableToBindableConverterRule
 extends|extends
 name|ConverterRule
 block|{
+comment|/** @deprecated Use {@link EnumerableRules#TO_BINDABLE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|EnumerableToBindableConverterRule
 name|INSTANCE
 init|=
-operator|new
-name|EnumerableToBindableConverterRule
-argument_list|(
-name|RelFactories
+name|EnumerableRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|TO_BINDABLE
 decl_stmt|;
 comment|/**      * Creates an EnumerableToBindableConverterRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public

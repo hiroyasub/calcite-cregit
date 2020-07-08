@@ -201,38 +201,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
-operator|.
-name|LogicalExchange
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalSortExchange
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|metadata
 operator|.
 name|RelMetadataQuery
@@ -318,41 +286,42 @@ name|RelOptRule
 implements|implements
 name|SubstitutionRule
 block|{
-comment|/**    * Singleton rule that removes constants inside a    * {@link LogicalExchange}.    */
+comment|/** @deprecated Use {@link CoreRules#EXCHANGE_REMOVE_CONSTANT_KEYS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ExchangeRemoveConstantKeysRule
 name|EXCHANGE_INSTANCE
 init|=
-operator|new
-name|ExchangeRemoveConstantKeysRule
-argument_list|(
-name|LogicalExchange
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-literal|"ExchangeRemoveConstantKeysRule"
-argument_list|)
+name|EXCHANGE_REMOVE_CONSTANT_KEYS
 decl_stmt|;
-comment|/**    * Singleton rule that removes constants inside a    * {@link LogicalSortExchange}.    */
+comment|/** @deprecated Use {@link CoreRules#SORT_EXCHANGE_REMOVE_CONSTANT_KEYS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ExchangeRemoveConstantKeysRule
 name|SORT_EXCHANGE_INSTANCE
 init|=
-operator|new
-name|SortExchangeRemoveConstantKeysRule
-argument_list|(
-name|LogicalSortExchange
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-literal|"SortExchangeRemoveConstantKeysRule"
-argument_list|)
+name|SORT_EXCHANGE_REMOVE_CONSTANT_KEYS
 decl_stmt|;
-specifier|private
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"DeprecatedIsStillUsed"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 name|ExchangeRemoveConstantKeysRule
 parameter_list|(
 name|Class
@@ -687,7 +656,14 @@ name|SortExchangeRemoveConstantKeysRule
 extends|extends
 name|ExchangeRemoveConstantKeysRule
 block|{
-specifier|private
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"DeprecatedIsStillUsed"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 name|SortExchangeRemoveConstantKeysRule
 parameter_list|(
 name|Class

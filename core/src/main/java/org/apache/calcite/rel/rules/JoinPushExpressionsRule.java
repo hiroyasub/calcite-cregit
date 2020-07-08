@@ -160,23 +160,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#JOIN_PUSH_EXPRESSIONS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinPushExpressionsRule
 name|INSTANCE
 init|=
-operator|new
-name|JoinPushExpressionsRule
-argument_list|(
-name|Join
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|JOIN_PUSH_EXPRESSIONS
 decl_stmt|;
 comment|/** Creates a JoinPushExpressionsRule. */
 specifier|public

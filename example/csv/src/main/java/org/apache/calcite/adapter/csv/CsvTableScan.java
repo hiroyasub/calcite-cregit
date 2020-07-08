@@ -572,9 +572,9 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|CsvProjectTableScanRule
+name|CsvRules
 operator|.
-name|INSTANCE
+name|PROJECT_SCAN
 argument_list|)
 expr_stmt|;
 block|}

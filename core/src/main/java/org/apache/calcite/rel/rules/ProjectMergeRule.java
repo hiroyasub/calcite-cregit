@@ -102,22 +102,6 @@ operator|.
 name|core
 operator|.
 name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
 operator|.
 name|ProjectFactory
 import|;
@@ -225,23 +209,19 @@ name|DEFAULT_BLOAT
 init|=
 literal|100
 decl_stmt|;
+comment|/** @deprecated Use {@link CoreRules#PROJECT_MERGE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectMergeRule
 name|INSTANCE
 init|=
-operator|new
-name|ProjectMergeRule
-argument_list|(
-literal|true
-argument_list|,
-name|DEFAULT_BLOAT
-argument_list|,
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_MERGE
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/** Whether to always merge projects. */

@@ -531,7 +531,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|SortRemoveRule
+name|CoreRules
 import|;
 end_import
 
@@ -983,9 +983,9 @@ name|PhysSortRule
 operator|.
 name|INSTANCE
 argument_list|,
-name|SortRemoveRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|SORT_REMOVE
 argument_list|,
 name|ExpandConversionRule
 operator|.

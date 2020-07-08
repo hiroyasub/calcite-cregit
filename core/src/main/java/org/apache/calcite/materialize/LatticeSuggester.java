@@ -259,7 +259,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|FilterJoinRule
+name|CoreRules
 import|;
 end_import
 
@@ -722,16 +722,16 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|FilterJoinRule
+name|CoreRules
 operator|.
-name|FILTER_ON_JOIN
+name|FILTER_INTO_JOIN
 argument_list|)
 operator|.
 name|addRuleInstance
 argument_list|(
-name|FilterJoinRule
+name|CoreRules
 operator|.
-name|JOIN
+name|JOIN_CONDITION_PUSH
 argument_list|)
 operator|.
 name|build

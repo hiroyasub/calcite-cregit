@@ -416,19 +416,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#MULTI_JOIN_OPTIMIZE_BUSHY}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|MultiJoinOptimizeBushyRule
 name|INSTANCE
 init|=
-operator|new
-name|MultiJoinOptimizeBushyRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|MULTI_JOIN_OPTIMIZE_BUSHY
 decl_stmt|;
 specifier|private
 specifier|final

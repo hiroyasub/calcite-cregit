@@ -181,7 +181,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|FilterAggregateTransposeRule
+name|CoreRules
 import|;
 end_import
 
@@ -197,7 +197,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|FilterJoinRule
+name|FilterAggregateTransposeRule
 import|;
 end_import
 
@@ -1764,18 +1764,18 @@ name|planner
 operator|.
 name|removeRule
 argument_list|(
-name|FilterAggregateTransposeRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|FILTER_AGGREGATE_TRANSPOSE
 argument_list|)
 expr_stmt|;
 name|planner
 operator|.
 name|removeRule
 argument_list|(
-name|FilterJoinRule
+name|CoreRules
 operator|.
-name|FILTER_ON_JOIN
+name|FILTER_INTO_JOIN
 argument_list|)
 expr_stmt|;
 name|planner

@@ -332,17 +332,20 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_FILTER_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateFilterTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateFilterTransposeRule
-argument_list|()
+name|CoreRules
+operator|.
+name|AGGREGATE_FILTER_TRANSPOSE
 decl_stmt|;
-specifier|private
 name|AggregateFilterTransposeRule
 parameter_list|()
 block|{

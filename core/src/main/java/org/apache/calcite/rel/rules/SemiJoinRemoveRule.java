@@ -71,22 +71,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalJoin
@@ -120,19 +104,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#SEMI_JOIN_REMOVE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SemiJoinRemoveRule
 name|INSTANCE
 init|=
-operator|new
-name|SemiJoinRemoveRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|SEMI_JOIN_REMOVE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/** Creates a SemiJoinRemoveRule. */

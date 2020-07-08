@@ -279,35 +279,19 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */
-specifier|public
-specifier|static
-specifier|final
-name|JoinToCorrelateRule
-name|INSTANCE
-init|=
-operator|new
-name|JoinToCorrelateRule
-argument_list|(
-name|LogicalJoin
-operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-literal|"JoinToCorrelateRule"
-argument_list|)
-decl_stmt|;
-comment|/** Synonym for {@link #INSTANCE};    * {@code JOIN} is not deprecated, but {@code INSTANCE} is preferred. */
+comment|/** @deprecated Use {@link CoreRules#JOIN_TO_CORRELATE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinToCorrelateRule
 name|JOIN
 init|=
-name|INSTANCE
+name|CoreRules
+operator|.
+name|JOIN_TO_CORRELATE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a rule that converts a {@link org.apache.calcite.rel.logical.LogicalJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */
@@ -359,7 +343,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a JoinToCorrelateRule for a certain sub-class of    * {@link org.apache.calcite.rel.core.Join} to be transformed into a    * {@link org.apache.calcite.rel.logical.LogicalCorrelate}.    *    * @param clazz Class of relational expression to match (must not be null)    * @param relBuilderFactory Builder for relational expressions    * @param description Description, or null to guess description    */
-specifier|private
 name|JoinToCorrelateRule
 parameter_list|(
 name|Class

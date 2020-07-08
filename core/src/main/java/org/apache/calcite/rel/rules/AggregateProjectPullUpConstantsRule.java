@@ -115,38 +115,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalAggregate
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalProject
@@ -353,55 +321,33 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** The singleton. */
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_PROJECT_PULL_UP_CONSTANTS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateProjectPullUpConstantsRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateProjectPullUpConstantsRule
-argument_list|(
-name|LogicalAggregate
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|LogicalProject
-operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-literal|"AggregateProjectPullUpConstantsRule"
-argument_list|)
+name|AGGREGATE_PROJECT_PULL_UP_CONSTANTS
 decl_stmt|;
-comment|/** More general instance that matches any relational expression. */
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_ANY_PULL_UP_CONSTANTS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateProjectPullUpConstantsRule
 name|INSTANCE2
 init|=
-operator|new
-name|AggregateProjectPullUpConstantsRule
-argument_list|(
-name|LogicalAggregate
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelNode
-operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-literal|"AggregatePullUpConstantsRule"
-argument_list|)
+name|AGGREGATE_ANY_PULL_UP_CONSTANTS
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an AggregateProjectPullUpConstantsRule.    *    * @param aggregateClass Aggregate class    * @param inputClass Input class, such as {@link LogicalProject}    * @param relBuilderFactory Builder for relational expressions    * @param description Description, or null to guess description    */

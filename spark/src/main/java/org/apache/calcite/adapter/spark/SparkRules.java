@@ -487,23 +487,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|FilterToCalcRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|rules
-operator|.
-name|ProjectToCalcRule
+name|CoreRules
 import|;
 end_import
 
@@ -846,6 +830,17 @@ name|SparkRules
 parameter_list|()
 block|{
 block|}
+comment|/** Rule that converts from enumerable to Spark convention. */
+specifier|public
+specifier|static
+specifier|final
+name|EnumerableToSparkConverterRule
+name|ENUMERABLE_TO_SPARK
+init|=
+operator|new
+name|EnumerableToSparkConverterRule
+argument_list|()
+decl_stmt|;
 specifier|public
 specifier|static
 name|List
@@ -862,13 +857,13 @@ name|of
 argument_list|(
 comment|// TODO: add SparkProjectRule, SparkFilterRule, SparkProjectToCalcRule,
 comment|// SparkFilterToCalcRule, and remove the following 2 rules.
-name|ProjectToCalcRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|PROJECT_TO_CALC
 argument_list|,
-name|FilterToCalcRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|FILTER_TO_CALC
 argument_list|,
 name|EnumerableToSparkConverterRule
 operator|.

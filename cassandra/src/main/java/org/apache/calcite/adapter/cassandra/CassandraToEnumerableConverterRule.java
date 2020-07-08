@@ -85,22 +85,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|tools
 operator|.
 name|RelBuilderFactory
@@ -130,19 +114,19 @@ name|CassandraToEnumerableConverterRule
 extends|extends
 name|ConverterRule
 block|{
+comment|/** @deprecated Use {@link CassandraRules#TO_ENUMERABLE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ConverterRule
 name|INSTANCE
 init|=
-operator|new
-name|CassandraToEnumerableConverterRule
-argument_list|(
-name|RelFactories
+name|CassandraRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|TO_ENUMERABLE
 decl_stmt|;
 comment|/**    * Creates a CassandraToEnumerableConverterRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

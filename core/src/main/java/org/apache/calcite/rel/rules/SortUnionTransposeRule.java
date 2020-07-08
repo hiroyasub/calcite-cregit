@@ -186,31 +186,33 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
-comment|/** Rule instance for Union implementation that does not preserve the    * ordering of its inputs. Thus, it makes no sense to match this rule    * if the Sort does not have a limit, i.e., {@link Sort#fetch} is null. */
+comment|/** @deprecated Use {@link CoreRules#SORT_UNION_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SortUnionTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|SortUnionTransposeRule
-argument_list|(
-literal|false
-argument_list|)
+name|CoreRules
+operator|.
+name|SORT_UNION_TRANSPOSE
 decl_stmt|;
-comment|/** Rule instance for Union implementation that preserves the ordering    * of its inputs. It is still worth applying this rule even if the Sort    * does not have a limit, for the merge of already sorted inputs that    * the Union can do is usually cheap. */
+comment|/** @deprecated Use    * {@link CoreRules#SORT_UNION_TRANSPOSE_MATCH_NULL_FETCH}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SortUnionTransposeRule
 name|MATCH_NULL_FETCH
 init|=
-operator|new
-name|SortUnionTransposeRule
-argument_list|(
-literal|true
-argument_list|)
+name|CoreRules
+operator|.
+name|SORT_UNION_TRANSPOSE_MATCH_NULL_FETCH
 decl_stmt|;
 comment|/** Whether to match a Sort whose {@link Sort#fetch} is null. Generally    * this only makes sense if the Union preserves order (and merges). */
 specifier|private
@@ -219,7 +221,14 @@ name|boolean
 name|matchNullFetch
 decl_stmt|;
 comment|// ~ Constructors -----------------------------------------------------------
-specifier|private
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"DeprecatedIsStillUsed"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 name|SortUnionTransposeRule
 parameter_list|(
 name|boolean

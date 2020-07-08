@@ -41,6 +41,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptPredicateList
 import|;
 end_import
@@ -1416,7 +1430,7 @@ operator|.
 name|method
 argument_list|)
 decl_stmt|;
-comment|/**      * Estimates the cost of executing a relational expression, not counting the      * cost of its inputs. (However, the non-cumulative cost is still usually      * dependent on the row counts of the inputs.) The default implementation      * for this query asks the rel itself via {@link RelNode#computeSelfCost},      * but metadata providers can override this with their own cost models.      *      * @return estimated cost, or null if no reliable estimate can be      * determined      */
+comment|/**      * Estimates the cost of executing a relational expression, not counting the      * cost of its inputs. (However, the non-cumulative cost is still usually      * dependent on the row counts of the inputs.)      *      *<p>The default implementation for this query asks the rel itself via      * {@link RelNode#computeSelfCost(RelOptPlanner, RelMetadataQuery)},      * but metadata providers can override this with their own cost models.      *      * @return estimated cost, or null if no reliable estimate can be      * determined      */
 name|RelOptCost
 name|getNonCumulativeCost
 parameter_list|()

@@ -159,7 +159,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|AggregateExpandDistinctAggregatesRule
+name|CoreRules
 import|;
 end_import
 
@@ -437,9 +437,9 @@ name|planner
 operator|.
 name|removeRule
 argument_list|(
-name|AggregateExpandDistinctAggregatesRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|AGGREGATE_EXPAND_DISTINCT_AGGREGATES
 argument_list|)
 expr_stmt|;
 block|}

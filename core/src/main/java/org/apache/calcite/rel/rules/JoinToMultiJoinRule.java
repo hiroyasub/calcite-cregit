@@ -131,22 +131,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
-operator|.
-name|LogicalJoin
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|type
 operator|.
 name|RelDataTypeField
@@ -346,23 +330,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#JOIN_TO_MULTI_JOIN}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinToMultiJoinRule
 name|INSTANCE
 init|=
-operator|new
-name|JoinToMultiJoinRule
-argument_list|(
-name|LogicalJoin
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|JOIN_TO_MULTI_JOIN
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 annotation|@

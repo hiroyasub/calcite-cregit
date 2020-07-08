@@ -55,22 +55,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalProject
@@ -140,19 +124,19 @@ name|CsvProjectTableScanRule
 extends|extends
 name|RelOptRule
 block|{
+comment|/** @deprecated Use {@link CsvRules#PROJECT_SCAN}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|CsvProjectTableScanRule
 name|INSTANCE
 init|=
-operator|new
-name|CsvProjectTableScanRule
-argument_list|(
-name|RelFactories
+name|CsvRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_SCAN
 decl_stmt|;
 comment|/**    * Creates a CsvProjectTableScanRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

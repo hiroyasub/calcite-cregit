@@ -89,18 +89,21 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
+comment|/** @deprecated Use {@link CoreRules#MATCH}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|MatchRule
 name|INSTANCE
 init|=
-operator|new
-name|MatchRule
-argument_list|()
+name|CoreRules
+operator|.
+name|MATCH
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|private
 name|MatchRule
 parameter_list|()
 block|{

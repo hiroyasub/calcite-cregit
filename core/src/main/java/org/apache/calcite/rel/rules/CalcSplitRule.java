@@ -85,22 +85,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rex
 operator|.
 name|RexNode
@@ -176,19 +160,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#CALC_SPLIT}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|CalcSplitRule
 name|INSTANCE
 init|=
-operator|new
-name|CalcSplitRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|CALC_SPLIT
 decl_stmt|;
 comment|/**    * Creates a CalcSplitRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

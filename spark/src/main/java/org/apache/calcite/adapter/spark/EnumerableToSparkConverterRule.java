@@ -120,10 +120,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a relational expression from  * {@link org.apache.calcite.adapter.jdbc.JdbcConvention} to  * {@link SparkRel#CONVENTION Spark convention}.  */
+comment|/**  * Rule to convert a relational expression from  * {@link org.apache.calcite.adapter.jdbc.JdbcConvention} to  * {@link SparkRel#CONVENTION Spark convention}.  *  * @deprecated Use {@link SparkRules#ENUMERABLE_TO_SPARK}.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 class|class
 name|EnumerableToSparkConverterRule

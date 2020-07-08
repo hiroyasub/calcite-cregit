@@ -101,22 +101,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalJoin
@@ -352,23 +336,30 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#SEMI_JOIN_PROJECT_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SemiJoinProjectTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|SemiJoinProjectTransposeRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|SEMI_JOIN_PROJECT_TRANSPOSE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a SemiJoinProjectTransposeRule.    */
-specifier|private
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"DeprecatedIsStillUsed"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 name|SemiJoinProjectTransposeRule
 parameter_list|(
 name|RelBuilderFactory

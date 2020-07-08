@@ -69,22 +69,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalCalc
@@ -133,19 +117,19 @@ implements|implements
 name|SubstitutionRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
+comment|/** @deprecated Use {@link CoreRules#CALC_REMOVE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|CalcRemoveRule
 name|INSTANCE
 init|=
-operator|new
-name|CalcRemoveRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|CALC_REMOVE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a CalcRemoveRule.    *    * @param relBuilderFactory Builder for relational expressions    */

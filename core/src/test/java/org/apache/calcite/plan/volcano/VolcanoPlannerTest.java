@@ -311,7 +311,7 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|ProjectRemoveRule
+name|CoreRules
 import|;
 end_import
 
@@ -1874,9 +1874,9 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|ProjectRemoveRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|PROJECT_REMOVE
 argument_list|)
 expr_stmt|;
 block|}

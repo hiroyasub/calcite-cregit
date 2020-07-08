@@ -282,32 +282,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
-comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.FilterProjectTransposeRule}.    *    *<p>It does not allow a Filter to be pushed past the Project if    * {@link RexUtil#containsCorrelation there is a correlation condition})    * anywhere in the Filter, since in some cases it can prevent a    * {@link org.apache.calcite.rel.core.Correlate} from being de-correlated.    */
+comment|/** @deprecated Use {@link CoreRules#FILTER_PROJECT_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterProjectTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|FilterProjectTransposeRule
-argument_list|(
-name|Filter
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|Project
-operator|.
-name|class
-argument_list|,
-literal|true
-argument_list|,
-literal|true
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FILTER_PROJECT_TRANSPOSE
 decl_stmt|;
 specifier|private
 specifier|final

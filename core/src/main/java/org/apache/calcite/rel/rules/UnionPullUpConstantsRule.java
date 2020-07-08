@@ -99,22 +99,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Union
 import|;
 end_import
@@ -332,23 +316,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#UNION_PULL_UP_CONSTANTS}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|UnionPullUpConstantsRule
 name|INSTANCE
 init|=
-operator|new
-name|UnionPullUpConstantsRule
-argument_list|(
-name|Union
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|UNION_PULL_UP_CONSTANTS
 decl_stmt|;
 comment|/** Creates a UnionPullUpConstantsRule. */
 specifier|public

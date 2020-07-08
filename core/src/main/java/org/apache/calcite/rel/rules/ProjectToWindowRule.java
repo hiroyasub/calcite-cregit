@@ -143,22 +143,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalCalc
@@ -558,36 +542,44 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
+comment|/** @deprecated Use {@link CoreRules#CALC_TO_WINDOW}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectToWindowRule
 name|INSTANCE
 init|=
-operator|new
-name|CalcToWindowRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|CALC_TO_WINDOW
 decl_stmt|;
+comment|/** @deprecated Use    * {@link CoreRules#PROJECT_TO_LOGICAL_PROJECT_AND_WINDOW}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ProjectToWindowRule
 name|PROJECT
 init|=
-operator|new
-name|ProjectToLogicalProjectAndWindowRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_TO_LOGICAL_PROJECT_AND_WINDOW
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a ProjectToWindowRule.    *    * @param operand           Root operand, must not be null    * @param description       Description, or null to guess description    * @param relBuilderFactory Builder for relational expressions    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"DeprecatedIsStillUsed"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 name|ProjectToWindowRule
 parameter_list|(

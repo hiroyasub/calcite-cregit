@@ -41,38 +41,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalJoin
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|tools
 operator|.
 name|RelBuilderFactory
@@ -92,24 +60,19 @@ extends|extends
 name|AbstractJoinExtractFilterRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** The singleton. */
+comment|/** @deprecated Use {@link CoreRules#JOIN_EXTRACT_FILTER}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinExtractFilterRule
 name|INSTANCE
 init|=
-operator|new
-name|JoinExtractFilterRule
-argument_list|(
-name|LogicalJoin
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|JOIN_EXTRACT_FILTER
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a JoinExtractFilterRule.    */

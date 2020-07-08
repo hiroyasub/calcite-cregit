@@ -81,22 +81,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|tools
 operator|.
 name|RelBuilderFactory
@@ -126,19 +110,19 @@ name|NoneToBindableConverterRule
 extends|extends
 name|ConverterRule
 block|{
+comment|/** @deprecated Use {@link Bindables#FROM_NONE_RULE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|ConverterRule
 name|INSTANCE
 init|=
-operator|new
-name|NoneToBindableConverterRule
-argument_list|(
-name|RelFactories
+name|Bindables
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FROM_NONE_RULE
 decl_stmt|;
 comment|/**    * Creates a NoneToBindableConverterRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

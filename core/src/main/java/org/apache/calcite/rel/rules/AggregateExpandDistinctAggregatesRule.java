@@ -592,47 +592,33 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** The default instance of the rule; operates only on logical expressions. */
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_EXPAND_DISTINCT_AGGREGATES}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateExpandDistinctAggregatesRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateExpandDistinctAggregatesRule
-argument_list|(
-name|LogicalAggregate
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-literal|true
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|AGGREGATE_EXPAND_DISTINCT_AGGREGATES
 decl_stmt|;
-comment|/** Instance of the rule that operates only on logical expressions and    * generates a join. */
+comment|/** @deprecated Use    * {@link CoreRules#AGGREGATE_EXPAND_DISTINCT_AGGREGATES_TO_JOIN}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateExpandDistinctAggregatesRule
 name|JOIN
 init|=
-operator|new
-name|AggregateExpandDistinctAggregatesRule
-argument_list|(
-name|LogicalAggregate
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-literal|false
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|AGGREGATE_EXPAND_DISTINCT_AGGREGATES_TO_JOIN
 decl_stmt|;
 specifier|public
 specifier|final

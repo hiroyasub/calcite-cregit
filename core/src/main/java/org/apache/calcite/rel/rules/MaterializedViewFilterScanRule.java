@@ -205,7 +205,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
+name|TableScan
 import|;
 end_import
 
@@ -219,9 +219,11 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
+name|rules
 operator|.
-name|TableScan
+name|materialize
+operator|.
+name|MaterializedViewRules
 import|;
 end_import
 
@@ -272,19 +274,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link MaterializedViewRules#FILTER_SCAN}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|MaterializedViewFilterScanRule
 name|INSTANCE
 init|=
-operator|new
-name|MaterializedViewFilterScanRule
-argument_list|(
-name|RelFactories
+name|MaterializedViewRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FILTER_SCAN
 decl_stmt|;
 specifier|private
 specifier|final
@@ -297,16 +299,16 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|FilterProjectTransposeRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|FILTER_PROJECT_TRANSPOSE
 argument_list|)
 operator|.
 name|addRuleInstance
 argument_list|(
-name|ProjectMergeRule
+name|CoreRules
 operator|.
-name|INSTANCE
+name|PROJECT_MERGE
 argument_list|)
 operator|.
 name|build

@@ -298,9 +298,9 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|CassandraToEnumerableConverterRule
+name|CassandraRules
 operator|.
-name|INSTANCE
+name|TO_ENUMERABLE
 argument_list|)
 expr_stmt|;
 for|for

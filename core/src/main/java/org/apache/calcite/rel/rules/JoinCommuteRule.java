@@ -321,31 +321,33 @@ implements|implements
 name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** Instance of the rule that only swaps inner joins. */
+comment|/** @deprecated Use {@link CoreRules#JOIN_COMMUTE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinCommuteRule
 name|INSTANCE
 init|=
-operator|new
-name|JoinCommuteRule
-argument_list|(
-literal|false
-argument_list|)
+name|CoreRules
+operator|.
+name|JOIN_COMMUTE
 decl_stmt|;
-comment|/** Instance of the rule that swaps outer joins as well as inner joins. */
+comment|/** @deprecated Use {@link CoreRules#JOIN_COMMUTE_OUTER}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|JoinCommuteRule
 name|SWAP_OUTER
 init|=
-operator|new
-name|JoinCommuteRule
-argument_list|(
-literal|true
-argument_list|)
+name|CoreRules
+operator|.
+name|JOIN_COMMUTE_OUTER
 decl_stmt|;
 specifier|private
 specifier|final
@@ -429,7 +431,6 @@ operator|=
 name|swapOuter
 expr_stmt|;
 block|}
-specifier|private
 name|JoinCommuteRule
 parameter_list|(
 name|boolean

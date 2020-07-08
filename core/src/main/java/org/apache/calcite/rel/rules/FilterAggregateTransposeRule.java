@@ -300,28 +300,19 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
-comment|/** The default instance of    * {@link FilterAggregateTransposeRule}.    *    *<p>It matches any kind of agg. or filter */
+comment|/** @deprecated Use {@link CoreRules#FILTER_AGGREGATE_TRANSPOSE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|FilterAggregateTransposeRule
 name|INSTANCE
 init|=
-operator|new
-name|FilterAggregateTransposeRule
-argument_list|(
-name|Filter
+name|CoreRules
 operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-name|Aggregate
-operator|.
-name|class
-argument_list|)
+name|FILTER_AGGREGATE_TRANSPOSE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a FilterAggregateTransposeRule.    *    *<p>If {@code filterFactory} is null, creates the same kind of filter as    * matched in the rule. Similarly {@code aggregateFactory}.</p>    */

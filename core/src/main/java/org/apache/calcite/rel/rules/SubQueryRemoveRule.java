@@ -193,22 +193,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|RelFactories
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|metadata
 operator|.
 name|RelMetadataQuery
@@ -541,47 +525,47 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#PROJECT_SUB_QUERY_TO_CORRELATE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SubQueryRemoveRule
 name|PROJECT
 init|=
-operator|new
-name|SubQueryProjectRemoveRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|PROJECT_SUB_QUERY_TO_CORRELATE
 decl_stmt|;
+comment|/** @deprecated Use {@link CoreRules#FILTER_SUB_QUERY_TO_CORRELATE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SubQueryRemoveRule
 name|FILTER
 init|=
-operator|new
-name|SubQueryFilterRemoveRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|FILTER_SUB_QUERY_TO_CORRELATE
 decl_stmt|;
+comment|/** @deprecated Use {@link CoreRules#JOIN_SUB_QUERY_TO_CORRELATE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|SubQueryRemoveRule
 name|JOIN
 init|=
-operator|new
-name|SubQueryJoinRemoveRule
-argument_list|(
-name|RelFactories
+name|CoreRules
 operator|.
-name|LOGICAL_BUILDER
-argument_list|)
+name|JOIN_SUB_QUERY_TO_CORRELATE
 decl_stmt|;
 comment|/**    * Creates a SubQueryRemoveRule.    *    * @param operand     root operand, must not be null    * @param description Description, or null to guess description    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

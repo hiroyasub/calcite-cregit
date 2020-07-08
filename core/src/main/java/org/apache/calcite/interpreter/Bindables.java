@@ -1167,6 +1167,21 @@ operator|.
 name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
+comment|/** Rule that converts a relational expression from    * {@link org.apache.calcite.plan.Convention#NONE}    * to {@link org.apache.calcite.interpreter.BindableConvention}. */
+specifier|public
+specifier|static
+specifier|final
+name|ConverterRule
+name|FROM_NONE_RULE
+init|=
+operator|new
+name|NoneToBindableConverterRule
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+decl_stmt|;
 comment|/** All rules that convert logical relational expression to bindable. */
 specifier|public
 specifier|static
@@ -1181,9 +1196,7 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|NoneToBindableConverterRule
-operator|.
-name|INSTANCE
+name|FROM_NONE_RULE
 argument_list|,
 name|BINDABLE_TABLE_SCAN_RULE
 argument_list|,

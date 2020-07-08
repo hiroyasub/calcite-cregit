@@ -260,17 +260,20 @@ name|RelOptRule
 implements|implements
 name|TransformationRule
 block|{
+comment|/** @deprecated Use {@link CoreRules#AGGREGATE_MERGE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.25
 specifier|public
 specifier|static
 specifier|final
 name|AggregateMergeRule
 name|INSTANCE
 init|=
-operator|new
-name|AggregateMergeRule
-argument_list|()
+name|CoreRules
+operator|.
+name|AGGREGATE_MERGE
 decl_stmt|;
-specifier|private
 name|AggregateMergeRule
 parameter_list|()
 block|{
