@@ -91,6 +91,16 @@ name|SqlConformance
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
+import|;
+end_import
+
 begin_comment
 comment|/** Interface for reading connection properties within Calcite code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
 end_comment
@@ -102,6 +112,18 @@ name|CalciteConnectionConfig
 extends|extends
 name|ConnectionConfig
 block|{
+comment|/** Default configuration. */
+name|CalciteConnectionConfigImpl
+name|DEFAULT
+init|=
+operator|new
+name|CalciteConnectionConfigImpl
+argument_list|(
+operator|new
+name|Properties
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|/** @see CalciteConnectionProperty#APPROXIMATE_DISTINCT_COUNT */
 name|boolean
 name|approximateDistinctCount

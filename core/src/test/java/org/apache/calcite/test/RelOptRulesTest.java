@@ -57,7 +57,7 @@ name|calcite
 operator|.
 name|config
 operator|.
-name|CalciteConnectionConfigImpl
+name|CalciteConnectionConfig
 import|;
 end_import
 
@@ -1524,16 +1524,6 @@ operator|.
 name|util
 operator|.
 name|Locale
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Properties
 import|;
 end_import
 
@@ -29947,13 +29937,9 @@ name|Contexts
 operator|.
 name|of
 argument_list|(
-operator|new
-name|CalciteConnectionConfigImpl
-argument_list|(
-operator|new
-name|Properties
-argument_list|()
-argument_list|)
+name|CalciteConnectionConfig
+operator|.
+name|DEFAULT
 argument_list|)
 decl_stmt|;
 name|sql
@@ -30006,13 +29992,9 @@ name|Contexts
 operator|.
 name|of
 argument_list|(
-operator|new
-name|CalciteConnectionConfigImpl
-argument_list|(
-operator|new
-name|Properties
-argument_list|()
-argument_list|)
+name|CalciteConnectionConfig
+operator|.
+name|DEFAULT
 argument_list|)
 decl_stmt|;
 name|sql
