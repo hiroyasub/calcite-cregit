@@ -195,38 +195,6 @@ name|sql
 operator|.
 name|dialect
 operator|.
-name|AnsiSqlDialect
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|dialect
-operator|.
-name|CalciteSqlDialect
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|dialect
-operator|.
 name|JethroDataSqlDialect
 import|;
 end_import
@@ -567,34 +535,6 @@ name|EMPTY_CONTEXT
 init|=
 name|emptyContext
 argument_list|()
-decl_stmt|;
-comment|/** @deprecated Use {@link AnsiSqlDialect#DEFAULT} instead. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|SqlDialect
-name|DUMMY
-init|=
-name|AnsiSqlDialect
-operator|.
-name|DEFAULT
-decl_stmt|;
-comment|/** @deprecated Use {@link CalciteSqlDialect#DEFAULT} instead. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-specifier|final
-name|SqlDialect
-name|CALCITE
-init|=
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
 decl_stmt|;
 comment|/** Built-in scalar functions and operators common for every dialect. */
 specifier|protected

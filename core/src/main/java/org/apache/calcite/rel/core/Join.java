@@ -457,11 +457,7 @@ name|JoinInfo
 name|joinInfo
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|// Next time we need to change the constructor of Join, let's change the
-comment|// "Set<String> variablesStopped" parameter to
-comment|// "Set<CorrelationId> variablesSet". At that point we would deprecate
-comment|// RelNode.getVariablesStopped().
-comment|/**    * Creates a Join.    *    *<p>Note: We plan to change the {@code variablesStopped} parameter to    * {@code Set&lt;CorrelationId&gt; variablesSet}    * {@link org.apache.calcite.util.Bug#upgrade(String) before version 2.0},    * because {@link #getVariablesSet()}    * is preferred over {@link #getVariablesStopped()}.    * This constructor is not deprecated, for now, because maintaining overloaded    * constructors in multiple sub-classes would be onerous.    *    * @param cluster          Cluster    * @param traitSet         Trait set    * @param hints            Hints    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesSet     Set variables that are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this Join in the tree    */
+comment|/**    * Creates a Join.    *    * @param cluster          Cluster    * @param traitSet         Trait set    * @param hints            Hints    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesSet     variables that are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this Join in the tree    */
 specifier|protected
 name|Join
 parameter_list|(
@@ -681,25 +677,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Override
-specifier|public
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|getChildExps
-parameter_list|()
-block|{
-return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|condition
-argument_list|)
-return|;
-block|}
 annotation|@
 name|Override
 specifier|public

@@ -95,20 +95,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptQuery
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptTable
 import|;
 end_import
@@ -229,20 +215,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableBitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Litmus
 import|;
 end_import
@@ -293,17 +265,6 @@ extends|,
 name|Cloneable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns a list of this relational expression's child expressions.    * (These are scalar expressions, and so do not include the relational    * inputs that are returned by {@link #getInputs}.    *    *<p>The caller should treat the list as unmodifiable; typical    * implementations will return an immutable list. If there are no    * child expressions, returns an empty list, not<code>null</code>.    *    * @deprecated use {@link }#accept(org.apache.calcite.rex.RexShuttle)}    *    * @return List of this relational expression's child expressions    * @see #accept(org.apache.calcite.rex.RexShuttle)    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|getChildExps
-parameter_list|()
-function_decl|;
 comment|/**    * Return the CallingConvention trait from this RelNode's    * {@link #getTraitSet() trait set}.    *    * @return this RelNode's CallingConvention    */
 name|Convention
 name|getConvention
@@ -314,14 +275,6 @@ name|String
 name|getCorrelVariable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns whether the same value will not come out twice. Default value is    *<code>false</code>, derived classes should override.    *    * @return Whether the same value will not come out twice    *    * @deprecated Use {@link RelMetadataQuery#areRowsUnique(RelNode)}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|boolean
-name|isDistinct
-parameter_list|()
-function_decl|;
 comment|/**    * Returns the<code>i</code><sup>th</sup> input relational expression.    *    * @param i Ordinal of input    * @return<code>i</code><sup>th</sup> input    */
 name|RelNode
 name|getInput
@@ -329,14 +282,6 @@ parameter_list|(
 name|int
 name|i
 parameter_list|)
-function_decl|;
-comment|/**    * Returns the sub-query this relational expression belongs to.    *    * @deprecated With no replacement    *    * @return Sub-query    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|RelOptQuery
-name|getQuery
-parameter_list|()
 function_decl|;
 comment|/**    * Returns the type of the rows returned by this relational expression.    */
 name|RelDataType
@@ -366,25 +311,6 @@ parameter_list|(
 name|RelMetadataQuery
 name|mq
 parameter_list|)
-function_decl|;
-comment|/**    * @deprecated Call {@link RelMetadataQuery#getRowCount(RelNode)};    * if you wish to override the default row count formula, override the    * {@link #estimateRowCount(RelMetadataQuery)} method.    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|double
-name|getRows
-parameter_list|()
-function_decl|;
-comment|/**    * Returns the names of variables that are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>Note: only {@link org.apache.calcite.rel.core.Correlate} should set    * variables.    *    *<p>Note: {@link #getVariablesSet()} is equivalent but returns    * {@link CorrelationId} rather than their names. It is preferable except for    * calling old methods that require a set of strings.    *    * @return Names of variables which are set in this relational    *   expression    *    * @deprecated Use {@link #getVariablesSet()}    * and {@link CorrelationId#names(Set)}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|Set
-argument_list|<
-name|String
-argument_list|>
-name|getVariablesStopped
-parameter_list|()
 function_decl|;
 comment|/**    * Returns the variables that are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>Note: only {@link org.apache.calcite.rel.core.Correlate} should set    * variables.    *    * @return Names of variables which are set in this relational    *   expression    */
 name|Set
@@ -433,17 +359,6 @@ name|planner
 parameter_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|)
-function_decl|;
-comment|/**    * @deprecated Call {@link RelMetadataQuery#getNonCumulativeCost(RelNode)};    * if you wish to override the default cost formula, override the    * {@link #computeSelfCost(RelOptPlanner, RelMetadataQuery)} method.    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|RelOptCost
-name|computeSelfCost
-parameter_list|(
-name|RelOptPlanner
-name|planner
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a metadata interface.    *    * @param<M> Type of metadata being requested    * @param metadataClass Metadata interface    * @param mq Metadata query    *    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
@@ -580,28 +495,7 @@ name|Context
 name|context
 parameter_list|)
 function_decl|;
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|boolean
-name|isValid
-parameter_list|(
-name|boolean
-name|fail
-parameter_list|)
-function_decl|;
-comment|/**    * Returns a description of the physical ordering (or orderings) of this    * relational expression. Never null.    *    * @return Description of the physical ordering (or orderings) of this    *   relational expression. Never null    *    * @deprecated Use {@link RelMetadataQuery#distribution(RelNode)}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|List
-argument_list|<
-name|RelCollation
-argument_list|>
-name|getCollationList
-parameter_list|()
-function_decl|;
-comment|/**    * Creates a copy of this relational expression, perhaps changing traits and    * inputs.    *    *<p>Sub-classes with other important attributes are encouraged to create    * variants of this method with more parameters.</p>    *    * @param traitSet Trait set    * @param inputs   Inputs    * @return Copy of this relational expression, substituting traits and    * inputs    */
+comment|/**    * Creates a copy of this relational expression, perhaps changing traits and    * inputs.    *    *<p>Sub-classes with other important attributes are encouraged to create    * variants of this method with more parameters.    *    * @param traitSet Trait set    * @param inputs   Inputs    * @return Copy of this relational expression, substituting traits and    * inputs    */
 name|RelNode
 name|copy
 parameter_list|(
@@ -633,17 +527,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a LogicalTableScan to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    *    * @deprecated Use {@link RelMetadataQuery#areColumnsUnique(RelNode, ImmutableBitSet)}    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-name|boolean
-name|isKey
-parameter_list|(
-name|ImmutableBitSet
-name|columns
-parameter_list|)
-function_decl|;
 comment|/**    * Accepts a visit from a shuttle.    *    * @param shuttle Shuttle    * @return A copy of this node incorporating changes made by the shuttle to    * this node's children    */
 name|RelNode
 name|accept

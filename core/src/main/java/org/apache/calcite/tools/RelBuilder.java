@@ -7944,21 +7944,6 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Whether to attempt to merge consecutive {@link Project} operators.    *    *<p>The default implementation returns {@code true};    * sub-classes may disable merge by overriding to return {@code false}. */
-annotation|@
-name|Experimental
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|protected
-name|boolean
-name|shouldMergeProject
-parameter_list|()
-block|{
-return|return
-literal|true
-return|;
-block|}
 comment|/** Creates a {@link Project} of the given    * expressions and field names, and optionally optimizing.    *    *<p>If {@code fieldNames} is null, or if a particular entry in    * {@code fieldNames} is null, derives field names from the input    * expressions.    *    *<p>If {@code force} is false,    * and the input is a {@code Project},    * and the expressions  make the trivial projection ($0, $1, ...),    * modifies the input.    *    * @param nodes       Expressions    * @param fieldNames  Suggested field names, or null to generate    * @param force       Whether to create a renaming Project if the    *                    projections are trivial    */
 specifier|public
 name|RelBuilder

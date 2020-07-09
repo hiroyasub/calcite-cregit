@@ -10267,53 +10267,6 @@ name|FILTER_REDUCE_EXPRESSIONS
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|static
-name|StringBuilder
-name|appendRelDescription
-parameter_list|(
-name|StringBuilder
-name|sb
-parameter_list|,
-name|RelNode
-name|rel
-parameter_list|)
-block|{
-name|sb
-operator|.
-name|append
-argument_list|(
-literal|"rel#"
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|rel
-operator|.
-name|getId
-argument_list|()
-argument_list|)
-operator|.
-name|append
-argument_list|(
-literal|':'
-argument_list|)
-operator|.
-name|append
-argument_list|(
-name|rel
-operator|.
-name|getDigest
-argument_list|()
-argument_list|)
-expr_stmt|;
-return|return
-name|sb
-return|;
-block|}
 comment|/**    * Dumps a plan as a string.    *    * @param header      Header to print before the plan. Ignored if the format    *                    is XML    * @param rel         Relational expression to explain    * @param format      Output format    * @param detailLevel Detail level    * @return Plan    */
 specifier|public
 specifier|static
@@ -19649,17 +19602,6 @@ argument_list|<
 name|Void
 argument_list|>
 block|{
-comment|/** @deprecated Being replaced by private field {@link #bitBuilder}.      * Use {@link #build}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.25
-specifier|public
-specifier|final
-name|ImmutableBitSet
-operator|.
-name|Builder
-name|inputBitSet
-decl_stmt|;
 specifier|private
 specifier|final
 name|ImmutableBitSet
@@ -19701,13 +19643,6 @@ name|bitBuilder
 operator|=
 name|bitBuilder
 expr_stmt|;
-name|this
-operator|.
-name|inputBitSet
-operator|=
-name|bitBuilder
-expr_stmt|;
-comment|// deprecated field mirrors private field
 name|this
 operator|.
 name|extraFields
