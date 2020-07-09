@@ -194,7 +194,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"POWER\" at line 1, column 14..*"
+literal|"(?s)Incorrect syntax near the keyword 'POWER' at line 1, column 14.*"
 argument_list|)
 expr_stmt|;
 block|}
