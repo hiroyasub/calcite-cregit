@@ -377,12 +377,6 @@ name|rowTranslator
 argument_list|(
 name|rowIndex
 argument_list|)
-operator|.
-name|setNullable
-argument_list|(
-name|currentNullables
-argument_list|()
-argument_list|)
 return|;
 block|}
 specifier|public

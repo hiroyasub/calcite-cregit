@@ -33,32 +33,8 @@ name|BlockBuilder
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rex
-operator|.
-name|RexNode
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
 begin_comment
-comment|/**  * Allows to build nested code blocks with tracking of current context and the  * nullability of particular {@link org.apache.calcite.rex.RexNode} expressions.  *  * @see org.apache.calcite.adapter.enumerable.StrictAggImplementor#implementAdd(AggContext, AggAddContext)  */
+comment|/**  * Allows to build nested code blocks with tracking of current context.  *  * @see org.apache.calcite.adapter.enumerable.StrictAggImplementor#implementAdd(AggContext, AggAddContext)  */
 end_comment
 
 begin_interface
@@ -79,35 +55,9 @@ name|BlockBuilder
 name|block
 parameter_list|)
 function_decl|;
-comment|/**    * Uses given block as the new code context and the map of nullability.    * The current block will be restored after {@link #exitBlock()} call.    * @param block new code block    * @param nullables map of expression to its nullability state    * @see #exitBlock()    */
-name|void
-name|nestBlock
-parameter_list|(
-name|BlockBuilder
-name|block
-parameter_list|,
-name|Map
-argument_list|<
-name|RexNode
-argument_list|,
-name|Boolean
-argument_list|>
-name|nullables
-parameter_list|)
-function_decl|;
 comment|/**    * Returns the current code block    * @return current code block    */
 name|BlockBuilder
 name|currentBlock
-parameter_list|()
-function_decl|;
-comment|/**    * Returns the current nullability state of rex nodes.    * The resulting value is the summary of all the maps in the block hierarchy.    * @return current nullability state of rex nodes    */
-name|Map
-argument_list|<
-name|RexNode
-argument_list|,
-name|Boolean
-argument_list|>
-name|currentNullables
 parameter_list|()
 function_decl|;
 comment|/**    * Leaves the current code block.    * @see #nestBlock()    */
