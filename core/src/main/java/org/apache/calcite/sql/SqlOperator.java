@@ -37,6 +37,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|Strong
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|type
@@ -338,6 +352,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Supplier
 import|;
 end_import
 
@@ -2585,6 +2611,21 @@ parameter_list|()
 block|{
 return|return
 name|returnTypeInference
+return|;
+block|}
+comment|/**    * Returns the {@link Strong.Policy} strategy for this operator, or null if there is no particular    * strategy, in which case this policy will be deducted from the operator's {@link SqlKind}.    *    * @see Strong    */
+specifier|public
+name|Supplier
+argument_list|<
+name|Strong
+operator|.
+name|Policy
+argument_list|>
+name|getStrongPolicyInference
+parameter_list|()
+block|{
+return|return
+literal|null
 return|;
 block|}
 comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    *    * @deprecated Use {@link #getMonotonicity(SqlOperatorBinding)}    */

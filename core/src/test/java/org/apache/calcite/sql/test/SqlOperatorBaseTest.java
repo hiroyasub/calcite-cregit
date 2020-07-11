@@ -69,6 +69,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|Strong
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|type
@@ -132,6 +146,20 @@ operator|.
 name|runtime
 operator|.
 name|Hook
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlAggFunction
 import|;
 end_import
 
@@ -40205,32 +40233,151 @@ condition|)
 block|{
 continue|continue;
 block|}
-comment|// TODO this part is deactivated because it uses a deprecated method
-comment|//          final Strong.Policy policy = Strong.policy(op.kind);
-comment|//          try {
-comment|//            if (nullCount> 0&& policy == Strong.Policy.ANY) {
-comment|//              tester.checkNull(s);
-comment|//            } else {
-comment|//              final String query;
-comment|//              if (op instanceof SqlAggFunction) {
-comment|//                if (op.requiresOrder()) {
-comment|//                  query = "SELECT " + s + " OVER () FROM (VALUES (1))";
-comment|//                } else {
-comment|//                  query = "SELECT " + s + " FROM (VALUES (1))";
-comment|//                }
-comment|//              } else {
-comment|//                query = AbstractSqlTester.buildQuery(s);
-comment|//              }
-comment|//              tester.check(query, SqlTests.ANY_TYPE_CHECKER,
-comment|//                  SqlTests.ANY_PARAMETER_CHECKER, result -> { });
-comment|//            }
-comment|//          } catch (Throwable e) {
-comment|//            // Logging the top-level throwable directly makes the message
-comment|//            // difficult to read since it either contains too much information
-comment|//            // or very few details.
-comment|//            Throwable cause = findMostDescriptiveCause(e);
-comment|//            LOGGER.info("Failed: " + s + ": " + cause);
-comment|//          }
+specifier|final
+name|Strong
+operator|.
+name|Policy
+name|policy
+init|=
+name|Strong
+operator|.
+name|policy
+argument_list|(
+name|op
+argument_list|)
+decl_stmt|;
+try|try
+block|{
+if|if
+condition|(
+name|nullCount
+operator|>
+literal|0
+operator|&&
+name|policy
+operator|==
+name|Strong
+operator|.
+name|Policy
+operator|.
+name|ANY
+condition|)
+block|{
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+specifier|final
+name|String
+name|query
+decl_stmt|;
+if|if
+condition|(
+name|op
+operator|instanceof
+name|SqlAggFunction
+condition|)
+block|{
+if|if
+condition|(
+name|op
+operator|.
+name|requiresOrder
+argument_list|()
+condition|)
+block|{
+name|query
+operator|=
+literal|"SELECT "
+operator|+
+name|s
+operator|+
+literal|" OVER () FROM (VALUES (1))"
+expr_stmt|;
+block|}
+else|else
+block|{
+name|query
+operator|=
+literal|"SELECT "
+operator|+
+name|s
+operator|+
+literal|" FROM (VALUES (1))"
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+name|query
+operator|=
+name|AbstractSqlTester
+operator|.
+name|buildQuery
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
+block|}
+name|tester
+operator|.
+name|check
+argument_list|(
+name|query
+argument_list|,
+name|SqlTests
+operator|.
+name|ANY_TYPE_CHECKER
+argument_list|,
+name|SqlTests
+operator|.
+name|ANY_PARAMETER_CHECKER
+argument_list|,
+name|result
+lambda|->
+block|{
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|Throwable
+name|e
+parameter_list|)
+block|{
+comment|// Logging the top-level throwable directly makes the message
+comment|// difficult to read since it either contains too much information
+comment|// or very few details.
+name|Throwable
+name|cause
+init|=
+name|findMostDescriptiveCause
+argument_list|(
+name|e
+argument_list|)
+decl_stmt|;
+name|LOGGER
+operator|.
+name|info
+argument_list|(
+literal|"Failed: "
+operator|+
+name|s
+operator|+
+literal|": "
+operator|+
+name|cause
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 block|}

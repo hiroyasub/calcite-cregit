@@ -532,6 +532,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Supplier
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -17423,10 +17435,6 @@ class|class
 name|SqlSpecialOperatorWithPolicy
 extends|extends
 name|SqlSpecialOperator
-implements|implements
-name|Strong
-operator|.
-name|PolicySupplier
 block|{
 specifier|private
 specifier|final
@@ -17492,13 +17500,18 @@ block|}
 annotation|@
 name|Override
 specifier|public
+name|Supplier
+argument_list|<
 name|Strong
 operator|.
 name|Policy
-name|get
+argument_list|>
+name|getStrongPolicyInference
 parameter_list|()
 block|{
 return|return
+parameter_list|()
+lambda|->
 name|policy
 return|;
 block|}

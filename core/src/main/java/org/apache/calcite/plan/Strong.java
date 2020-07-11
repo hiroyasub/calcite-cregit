@@ -171,18 +171,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apiguardian
-operator|.
-name|api
-operator|.
-name|API
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -218,18 +206,6 @@ operator|.
 name|util
 operator|.
 name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Supplier
 import|;
 end_import
 
@@ -355,10 +331,10 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns how to deduce whether a particular kind of expression is null,    * given whether its arguments are null.    *    * @deprecated Use {@link Strong#policy(RexNode)}    */
+comment|/**    * Returns how to deduce whether a particular kind of expression is null,    * given whether its arguments are null.    *    * @deprecated Use {@link Strong#policy(RexNode)} or {@link Strong#policy(SqlOperator)}    */
 annotation|@
 name|Deprecated
-comment|// to be removed before 1.25
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|Policy
@@ -396,27 +372,11 @@ condition|(
 name|rexNode
 operator|instanceof
 name|RexCall
-operator|&&
-operator|(
-operator|(
-name|RexCall
-operator|)
-name|rexNode
-operator|)
-operator|.
-name|getOperator
-argument_list|()
-operator|instanceof
-name|PolicySupplier
 condition|)
 block|{
-specifier|final
-name|PolicySupplier
-name|supplier
-init|=
-operator|(
-name|PolicySupplier
-operator|)
+return|return
+name|policy
+argument_list|(
 operator|(
 operator|(
 name|RexCall
@@ -426,9 +386,50 @@ operator|)
 operator|.
 name|getOperator
 argument_list|()
-decl_stmt|;
+argument_list|)
+return|;
+block|}
 return|return
-name|supplier
+name|MAP
+operator|.
+name|getOrDefault
+argument_list|(
+name|rexNode
+operator|.
+name|getKind
+argument_list|()
+argument_list|,
+name|Policy
+operator|.
+name|AS_IS
+argument_list|)
+return|;
+block|}
+comment|/**    * Returns how to deduce whether a particular {@link SqlOperator} expression is null,    * given whether its arguments are null.    */
+specifier|public
+specifier|static
+name|Policy
+name|policy
+parameter_list|(
+name|SqlOperator
+name|operator
+parameter_list|)
+block|{
+if|if
+condition|(
+name|operator
+operator|.
+name|getStrongPolicyInference
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+return|return
+name|operator
+operator|.
+name|getStrongPolicyInference
+argument_list|()
 operator|.
 name|get
 argument_list|()
@@ -439,7 +440,7 @@ name|MAP
 operator|.
 name|getOrDefault
 argument_list|(
-name|rexNode
+name|operator
 operator|.
 name|getKind
 argument_list|()
@@ -1646,36 +1647,6 @@ block|,
 comment|/** This kind of expression may be null. There is no way to rewrite. */
 name|AS_IS
 block|,   }
-comment|/**    * Interface to allow {@link SqlOperator}s to define their own {@link Policy}.    * For example, a UDF in a downstream project can implement it and have a specific policy.    *    * @see Strong    */
-annotation|@
-name|API
-argument_list|(
-name|status
-operator|=
-name|API
-operator|.
-name|Status
-operator|.
-name|EXPERIMENTAL
-argument_list|,
-name|since
-operator|=
-literal|"1.24"
-argument_list|)
-specifier|public
-interface|interface
-name|PolicySupplier
-extends|extends
-name|Supplier
-argument_list|<
-name|Policy
-argument_list|>
-block|{
-name|Policy
-name|get
-parameter_list|()
-function_decl|;
-block|}
 block|}
 end_class
 
