@@ -13501,7 +13501,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3310">[CALCITE-3310]    * Approximate and exact aggregate calls are recognized as the same    * during sql-to-rel conversion.</a>.    */
+comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3310">[CALCITE-3310]    * Approximate and exact aggregate calls are recognized as the same    * during sql-to-rel conversion</a>.    */
 annotation|@
 name|Test
 name|void

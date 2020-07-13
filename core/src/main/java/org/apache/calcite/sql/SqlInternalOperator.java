@@ -254,6 +254,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -262,7 +264,7 @@ block|{
 return|return
 name|SqlSyntax
 operator|.
-name|FUNCTION
+name|INTERNAL
 return|;
 block|}
 annotation|@

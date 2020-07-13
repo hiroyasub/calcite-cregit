@@ -83,6 +83,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -182,31 +192,15 @@ comment|// because SqlAdvisorValidator produces
 comment|// unknown types for incomplete expressions.
 comment|// Maybe we need to distinguish the two kinds of unknown.
 comment|//assert !knownType.equals(unknownType);
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|operandTypes
+name|Arrays
 operator|.
-name|length
-condition|;
-operator|++
-name|i
-control|)
-block|{
+name|fill
+argument_list|(
 name|operandTypes
-index|[
-name|i
-index|]
-operator|=
+argument_list|,
 name|knownType
+argument_list|)
 expr_stmt|;
-block|}
 block|}
 decl_stmt|;
 comment|/**    * Operand type-inference strategy where an unknown operand type is derived    * from the call's return type. If the return type is a record, it must have    * the same number of fields as the number of operands.    */
