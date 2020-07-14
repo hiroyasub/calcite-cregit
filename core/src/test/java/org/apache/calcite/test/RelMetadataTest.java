@@ -12921,9 +12921,23 @@ argument_list|)
 operator|.
 name|pulledUpPredicates
 argument_list|,
+comment|// Because the hashCode for
+comment|// OR(AND(=($1, 2), =($2, 3)) and
+comment|// OR(AND(=($2, 3), =($1, 2)) are the same, the result is flipped and not stable,
+comment|// but they both are correct.
+name|CoreMatchers
+operator|.
+name|anyOf
+argument_list|(
 name|sortsAs
 argument_list|(
 literal|"[=($0, 1), OR(AND(=($1, 2), =($2, 3)), =($1, 4))]"
+argument_list|)
+argument_list|,
+name|sortsAs
+argument_list|(
+literal|"[=($0, 1), OR(AND(=($2, 3), =($1, 2)), =($1, 4))]"
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -985,7 +985,7 @@ literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
 literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], GRADE=[$3])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(>=($2, $4),<=($2, $5))], joinType=[inner])\n"
+literal|"    JdbcJoin(condition=[AND(<=($4, $2),>=($5, $2))], joinType=[inner])\n"
 operator|+
 literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], SAL=[$5])\n"
 operator|+
@@ -1129,7 +1129,7 @@ literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
 literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], EMPNO0=[$0], ENAME0=[$1])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(=($2, $5), OR(>($4, $7),<($3, $6)))], joinType=[inner])\n"
+literal|"    JdbcJoin(condition=[AND(=($2, $5), OR(>($4, $7),>($6, $3)))], joinType=[inner])\n"
 operator|+
 literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], HIREDATE=[$4], SAL=[$5])\n"
 operator|+

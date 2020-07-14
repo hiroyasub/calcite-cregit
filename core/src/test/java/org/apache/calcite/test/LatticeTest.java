@@ -1172,7 +1172,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|0
+literal|10
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1187,7 +1187,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|8
+literal|18
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1202,7 +1202,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|23
+literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;

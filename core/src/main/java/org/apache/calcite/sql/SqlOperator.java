@@ -2686,6 +2686,23 @@ return|return
 literal|true
 return|;
 block|}
+comment|/**    * Returns whether a call to this operator is not sensitive to the operands input order.    * An operator is symmetrical if the call returns the same result when    * the operands are shuffled.    *    *<p>By default, returns true for {@link SqlKind#SYMMETRICAL}.    */
+specifier|public
+name|boolean
+name|isSymmetrical
+parameter_list|()
+block|{
+return|return
+name|SqlKind
+operator|.
+name|SYMMETRICAL
+operator|.
+name|contains
+argument_list|(
+name|kind
+argument_list|)
+return|;
+block|}
 comment|/**    * Returns whether it is unsafe to cache query plans referencing this    * operator; false is assumed by default    */
 specifier|public
 name|boolean

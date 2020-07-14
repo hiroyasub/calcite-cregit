@@ -23,20 +23,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|config
-operator|.
-name|CalciteSystemProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rel
 operator|.
 name|type
@@ -61,18 +47,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apiguardian
-operator|.
-name|api
-operator|.
-name|API
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -91,37 +65,6 @@ specifier|abstract
 class|class
 name|RexNode
 block|{
-comment|/**    * The digest of {@code RexNode} is normalized by default, however, sometimes a non-normalized    * representation is required.    * This method enables subclasses to identify if normalization is required.    * @return true if the digest needs to be normalized    */
-annotation|@
-name|API
-argument_list|(
-name|since
-operator|=
-literal|"1.22"
-argument_list|,
-name|status
-operator|=
-name|API
-operator|.
-name|Status
-operator|.
-name|EXPERIMENTAL
-argument_list|)
-specifier|protected
-specifier|static
-name|boolean
-name|needNormalize
-parameter_list|()
-block|{
-return|return
-name|CalciteSystemProperty
-operator|.
-name|ENABLE_REX_DIGEST_NORMALIZE
-operator|.
-name|value
-argument_list|()
-return|;
-block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|// Effectively final. Set in each sub-class constructor, and never re-set.
 specifier|protected

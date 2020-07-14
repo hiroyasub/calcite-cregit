@@ -10938,7 +10938,7 @@ literal|""
 operator|+
 literal|"LogicalJoin(condition=[OR(null:NULL, "
 operator|+
-literal|"AND(=($7, 1), =($7, 2), =($7, $8)))], joinType=[inner])\n"
+literal|"AND(=($7, 1), =($7, 2), =($8, $7)))], joinType=[inner])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
@@ -11950,7 +11950,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[AND(=($7, $16), =($3, $8))])\n"
+literal|"LogicalFilter(condition=[AND(=($7, $16), =($8, $3))])\n"
 operator|+
 literal|"  LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
