@@ -666,17 +666,6 @@ literal|0
 index|]
 argument_list|)
 decl_stmt|;
-name|rels
-index|[
-literal|0
-index|]
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|invalidateMetadataQuery
-argument_list|()
-expr_stmt|;
 if|if
 condition|(
 name|volcanoPlanner
