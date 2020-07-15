@@ -564,6 +564,7 @@ name|Join
 implements|implements
 name|EnumerableRel
 block|{
+specifier|protected
 name|EnumerableMergeJoin
 parameter_list|(
 name|RelOptCluster
