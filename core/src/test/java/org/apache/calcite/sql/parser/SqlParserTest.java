@@ -31543,13 +31543,8 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-comment|// Cannot enable this test yet, because the parser's list of SQL:92
-comment|// reserved words is not consistent with keywords("92").
+comment|// Check that the parser's list of SQL:92
+comment|// reserved words is consistent with keywords("92").
 name|assertThat
 argument_list|(
 name|s
@@ -31572,7 +31567,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 specifier|final
 name|String
