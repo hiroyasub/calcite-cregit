@@ -839,7 +839,7 @@ throw|throw
 operator|new
 name|AssertionError
 argument_list|(
-literal|"Materialized view failed to be matched by optmized results:\n"
+literal|"Materialized view failed to be matched by optimized results:\n"
 operator|+
 name|substituteMessages
 operator|.
@@ -934,7 +934,7 @@ name|errMsgBuilder
 operator|.
 name|append
 argument_list|(
-literal|"Optmization succeeds out of expectation: "
+literal|"Optimization succeeds out of expectation: "
 argument_list|)
 expr_stmt|;
 for|for
