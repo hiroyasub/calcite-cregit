@@ -942,8 +942,8 @@ name|planner
 argument_list|)
 expr_stmt|;
 block|}
+comment|// It is not recommended to override this method, but sub-classes can do it at their own risk.
 specifier|public
-specifier|final
 name|String
 name|getRelTypeName
 parameter_list|()
