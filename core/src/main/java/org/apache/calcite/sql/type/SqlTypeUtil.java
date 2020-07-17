@@ -4631,6 +4631,17 @@ name|RelDataType
 name|type2
 parameter_list|)
 block|{
+if|if
+condition|(
+name|type1
+operator|==
+name|type2
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
 name|String
 name|x
 init|=
