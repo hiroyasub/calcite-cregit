@@ -243,6 +243,10 @@ name|Predicate
 import|;
 end_import
 
+begin_comment
+comment|/**  * A rule driver that apply rules in a Top-Down manner.  * By ensuring rule applying orders, there could be ways for  * space pruning and rule mutual exclusivity check.  *  *<p>This implementation use tasks to manage rule matches.  * A Task is a piece of work to be executed, it may apply some rules  * or schedule other tasks</p>  */
+end_comment
+
 begin_class
 class|class
 name|TopDownRuleDriver
@@ -341,6 +345,7 @@ operator|new
 name|TaskDescriptor
 argument_list|()
 decl_stmt|;
+comment|// Starting from the root's OptimizeGroup task.
 name|tasks
 operator|.
 name|push
@@ -358,9 +363,15 @@ name|infCost
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// ensure materialized view roots get explored.
+comment|// Note that implementation rules or enforcement rules are not applied
+comment|// unless the mv is matched
 name|exploreMaterializationRoots
 argument_list|()
 expr_stmt|;
+try|try
+block|{
+comment|// Iterates until the root is fully optimized
 while|while
 condition|(
 operator|!
@@ -389,6 +400,21 @@ name|task
 operator|.
 name|perform
 argument_list|()
+expr_stmt|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|VolcanoTimeoutException
+name|ex
+parameter_list|)
+block|{
+name|LOGGER
+operator|.
+name|warn
+argument_list|(
+literal|"Volcano planning times out, cancels the subsequent optimization."
+argument_list|)
 expr_stmt|;
 block|}
 block|}
@@ -570,6 +596,9 @@ name|RelSet
 name|set
 parameter_list|)
 block|{
+comment|// When RelSets get merged, an optimized group may get extra opportunities.
+comment|// Clear the OPTIMISED state for the RelSubsets and all theirs ancestors
+comment|// so that they will be optimized again
 name|applyGenerator
 argument_list|(
 literal|null
@@ -684,6 +713,9 @@ block|}
 block|}
 block|}
 block|}
+comment|// a callback invoked when a RelNode is going to be added into a RelSubset,
+comment|// either by Register or Reregister. The task driver should need to schedule
+comment|// tasks for the new nodes.
 specifier|public
 name|void
 name|onProduce
@@ -695,6 +727,8 @@ name|RelSubset
 name|subset
 parameter_list|)
 block|{
+comment|// if the RelNode is added to another RelSubset, just ignore it.
+comment|// It should be schedule in the later OptimizeGroup task
 if|if
 condition|(
 name|applying
@@ -720,6 +754,7 @@ condition|)
 block|{
 return|return;
 block|}
+comment|// extra callback from each task
 if|if
 condition|(
 operator|!
@@ -744,6 +779,10 @@ name|node
 argument_list|)
 condition|)
 block|{
+comment|// For a physical node, schedule tasks to optimize its inputs.
+comment|// The upper bound depends on all optimizing RelSubsets that this Rel belongs to.
+comment|// If there are optimizing subsets that comes from the same RelSet,
+comment|// invoke the passThrough method to generate a candidate for that Subset.
 name|RelSubset
 name|optimizingGroup
 init|=
@@ -1228,7 +1267,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**    * O_GROUP.    */
+comment|/**    * Optimize a RelSubset.    * It schedule optimization tasks for RelNodes in the RelSet.    */
 specifier|private
 class|class
 name|OptimizeGroup
@@ -1308,7 +1347,7 @@ name|upperBound
 argument_list|)
 condition|)
 block|{
-comment|// this group failed to optimize before or it is a ring
+comment|// either this group failed to optimize before or it is a ring
 return|return;
 block|}
 name|group
@@ -1476,7 +1515,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Mark the group optimized.    */
+comment|/**    * Mark the RelSubset optimized.    * When GroupOptimized returns, the group is either fully    * optimized and has a winner or failed to optimized    */
 specifier|private
 specifier|static
 class|class
@@ -1536,7 +1575,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * O_EXPR.    */
+comment|/**    * Optimize a logical node, including exploring its input and applying rules for it.    */
 specifier|private
 class|class
 name|OptimizeMExpr
@@ -1553,6 +1592,7 @@ specifier|final
 name|RelSubset
 name|group
 decl_stmt|;
+comment|// when true, only apply transformation rules for mExpr
 specifier|private
 specifier|final
 name|boolean
@@ -1691,7 +1731,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Ensure ExploreInput are working on the correct input group since calcite    * may merge sets.    */
+comment|/**    * Ensure that ExploreInputs are working on the correct input group.    * Currently, a RelNode's input may change since calcite may merge RelSets.    */
 specifier|private
 class|class
 name|EnsureGroupExplored
@@ -1840,7 +1880,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * E_GROUP.    */
+comment|/**    * Explore an input for a RelNode    */
 specifier|private
 class|class
 name|ExploreInput
@@ -2158,7 +2198,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * APPLY_RULE.    */
+comment|/**    * Apply a rule match    */
 specifier|private
 class|class
 name|ApplyRule
@@ -2278,6 +2318,7 @@ name|exploring
 return|;
 block|}
 block|}
+comment|// Decide how to optimize a physical node.
 specifier|private
 name|Task
 name|getOptimizeInputTask
@@ -2289,6 +2330,8 @@ name|RelSubset
 name|group
 parameter_list|)
 block|{
+comment|// If the physical does not in current optimizing RelSubset, it firstly tries to
+comment|// convert the physical node either by converter rule or traits pass though.
 if|if
 condition|(
 operator|!
@@ -2406,6 +2449,7 @@ expr_stmt|;
 break|break;
 block|}
 block|}
+comment|// If the inputs are all processed, only DeriveTrait is required.
 if|if
 condition|(
 operator|!
@@ -2422,6 +2466,8 @@ name|group
 argument_list|)
 return|;
 block|}
+comment|// If part of the inputs are not optimized, schedule for the node an OptimizeInput task,
+comment|// which tried to optimize the inputs first and derive traits for further execution.
 if|if
 condition|(
 name|rel
@@ -2455,6 +2501,8 @@ name|group
 argument_list|)
 return|;
 block|}
+comment|// Try converting the physical node to another trait sets
+comment|// either by converter rule or traits pass though.
 specifier|private
 name|RelNode
 name|convert
@@ -2603,6 +2651,7 @@ return|return
 literal|null
 return|;
 block|}
+comment|// check whether a node's lower bound is less than a RelSubset's upper bound
 specifier|private
 name|boolean
 name|checkLowerBound
@@ -2653,7 +2702,7 @@ name|lb
 argument_list|)
 return|;
 block|}
-comment|/**    * O_INPUT when there is only one input.    */
+comment|/**    * A task that optimize input for physical nodes who has only one input.    * This task can be replaced by OptimizeInputs but simplify lots of logic.    */
 specifier|private
 class|class
 name|OptimizeInput1
@@ -2833,7 +2882,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * O_INPUT.    */
+comment|/**    * Optimize a physical node's inputs.    * This task calculates a proper upper bound for the input and invoke    * the OptimizeGroup task. Group pruning mainly happens here when    * the upper bound for an input is less than the input's lower bound    */
 specifier|private
 class|class
 name|OptimizeInputs
@@ -2991,6 +3040,7 @@ name|isInfinite
 argument_list|()
 condition|)
 block|{
+comment|// calculate the upper bound for inputs
 if|if
 condition|(
 name|bestCost
@@ -3151,7 +3201,7 @@ operator|==
 literal|0
 condition|)
 block|{
-comment|// Apply enforcing rules
+comment|// derive traits after all inputs are optimized successfully
 name|tasks
 operator|.
 name|push
@@ -3220,6 +3270,9 @@ name|isInfinite
 argument_list|()
 condition|)
 block|{
+comment|// UB(one input)
+comment|//  = UB(current subset) - Parent's NonCumulativeCost - LB(other inputs)
+comment|//  = UB(current subset) - Parent's NonCumulativeCost - LB(all inputs) + LB(current input)
 name|upper
 operator|=
 name|upperForInput
@@ -3258,6 +3311,17 @@ name|upperBound
 argument_list|)
 condition|)
 block|{
+name|LOGGER
+operator|.
+name|debug
+argument_list|(
+literal|"Failed to optimize because of upper bound. LB = {}, UP = {}"
+argument_list|,
+name|lowerBoundSum
+argument_list|,
+name|upperForInput
+argument_list|)
+expr_stmt|;
 return|return;
 block|}
 if|if
@@ -3442,6 +3506,7 @@ name|i
 argument_list|)
 condition|)
 block|{
+comment|// The input has chnaged. So reschedule the optimize task.
 name|input
 operator|=
 operator|(
@@ -3476,6 +3541,7 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+comment|// Optimize input completed. Update the context for other inputs
 if|if
 condition|(
 name|context
@@ -3483,6 +3549,7 @@ operator|==
 literal|null
 condition|)
 block|{
+comment|// If there is no other input, just return (no need to optimize other inputs)
 return|return;
 block|}
 name|RelOptCost
@@ -3500,7 +3567,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// the input fail to optimize due to group pruning
+comment|// The input fail to optimize due to group pruning
+comment|// Then there's no need to optimize other inputs.
 name|context
 operator|.
 name|lowerBoundSum
@@ -3511,6 +3579,7 @@ name|infCost
 expr_stmt|;
 return|return;
 block|}
+comment|// Update the context.
 if|if
 condition|(
 name|context
@@ -3575,6 +3644,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|/**    * Derive traits for already optimized physical nodes.    */
 specifier|private
 class|class
 name|DeriveTrait
@@ -3658,6 +3728,8 @@ comment|// fail to optimize input, then no need to deliver traits
 return|return;
 block|}
 block|}
+comment|// In case some implementations use rules to convert between different physical conventions.
+comment|// Note that this is deprecated and will be removed in the future.
 name|tasks
 operator|.
 name|push
@@ -3673,6 +3745,7 @@ literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// Derive traits from inputs
 if|if
 condition|(
 operator|!
