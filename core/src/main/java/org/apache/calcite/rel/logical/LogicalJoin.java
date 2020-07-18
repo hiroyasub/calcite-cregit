@@ -1020,9 +1020,9 @@ return|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|boolean
-name|digestEquals
+name|deepEquals
 parameter_list|(
 name|Object
 name|obj
@@ -1040,7 +1040,7 @@ literal|true
 return|;
 block|}
 return|return
-name|digestEquals0
+name|deepEquals0
 argument_list|(
 name|obj
 argument_list|)
@@ -1073,9 +1073,9 @@ return|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|int
-name|digestHash
+name|deepHashCode
 parameter_list|()
 block|{
 return|return
@@ -1083,7 +1083,7 @@ name|Objects
 operator|.
 name|hash
 argument_list|(
-name|digestHash0
+name|deepHashCode0
 argument_list|()
 argument_list|,
 name|semiJoinDone

@@ -1045,9 +1045,9 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|boolean
-name|digestEquals
+name|deepEquals
 parameter_list|(
 name|Object
 name|obj
@@ -1061,9 +1061,9 @@ return|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|int
-name|digestHash
+name|deepHashCode
 parameter_list|()
 block|{
 return|return

@@ -481,7 +481,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**    * @return Digest string of this {@code RelNode}    */
+comment|/**    * Returns digest string of this {@code RelNode}. It will create new digest    * string on each call, so don't forget to cache the result if necessary.    *    * @return Digest string of this {@code RelNode}    */
 specifier|default
 name|String
 name|getDigest
@@ -533,6 +533,19 @@ name|INTERNAL
 argument_list|)
 name|void
 name|recomputeDigest
+parameter_list|()
+function_decl|;
+comment|/**    * Deep equality check for RelNode digest.    *    *<p>By default this method collects digest attributes from    * explain terms, then compares each attribute pair.</p>    *    * @return Whether the 2 RelNodes are equivalent or have the same digest.    * @see #deepHashCode()    */
+name|boolean
+name|deepEquals
+parameter_list|(
+name|Object
+name|obj
+parameter_list|)
+function_decl|;
+comment|/**    * Compute deep hash code for RelNode digest.    *    * @see #deepEquals(Object)    */
+name|int
+name|deepHashCode
 parameter_list|()
 function_decl|;
 comment|/**    * Replaces the<code>ordinalInParent</code><sup>th</sup> input. You must    * override this method if you override {@link #getInputs}.    *    * @param ordinalInParent Position of the child input, 0 is the first    * @param p New node that should be put at position {@code ordinalInParent}    */

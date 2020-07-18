@@ -835,7 +835,7 @@ name|INTERNAL
 argument_list|)
 specifier|protected
 name|boolean
-name|digestEquals0
+name|deepEquals0
 parameter_list|(
 name|Object
 name|obj
@@ -891,7 +891,7 @@ argument_list|)
 operator|&&
 name|input
 operator|.
-name|equals
+name|deepEquals
 argument_list|(
 name|o
 operator|.
@@ -936,7 +936,7 @@ name|INTERNAL
 argument_list|)
 specifier|protected
 name|int
-name|digestHash0
+name|deepHashCode0
 parameter_list|()
 block|{
 return|return
@@ -947,6 +947,9 @@ argument_list|(
 name|traitSet
 argument_list|,
 name|input
+operator|.
+name|deepHashCode
+argument_list|()
 argument_list|,
 name|condition
 argument_list|)
