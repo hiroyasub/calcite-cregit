@@ -58,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/***  *<p>The algorithm executes repeatedly in a series of phases. In each phase  * the exact rules that may be fired varies. The mapping of phases to rule  * sets is maintained in the {@link #ruleQueue}.  *  *<p>In each phase, the planner then iterates over the rule matches presented  * by the rule queue until the rule queue becomes empty.  */
+comment|/***  *<p>The algorithm executes repeatedly. The exact rules  * that may be fired varies.  *  *<p>The planner iterates over the rule matches presented  * by the rule queue until the rule queue becomes empty.  */
 end_comment
 
 begin_class
@@ -127,19 +127,6 @@ name|void
 name|drive
 parameter_list|()
 block|{
-name|PLANNING
-label|:
-for|for
-control|(
-name|VolcanoPlannerPhase
-name|phase
-range|:
-name|VolcanoPlannerPhase
-operator|.
-name|values
-argument_list|()
-control|)
-block|{
 while|while
 condition|(
 literal|true
@@ -149,14 +136,9 @@ name|LOGGER
 operator|.
 name|debug
 argument_list|(
-literal|"PLANNER = {}; PHASE = {}; COST = {}"
+literal|"PLANNER = {}; COST = {}"
 argument_list|,
 name|this
-argument_list|,
-name|phase
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|planner
 operator|.
@@ -171,9 +153,7 @@ init|=
 name|ruleQueue
 operator|.
 name|popMatch
-argument_list|(
-name|phase
-argument_list|)
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -221,16 +201,7 @@ operator|.
 name|canonize
 argument_list|()
 expr_stmt|;
-name|ruleQueue
-operator|.
-name|phaseCompleted
-argument_list|(
-name|phase
-argument_list|)
-expr_stmt|;
-break|break
-name|PLANNING
-break|;
+break|break;
 block|}
 comment|// The root may have been merged with another
 comment|// subset. Find the new root subset.
@@ -238,14 +209,6 @@ name|planner
 operator|.
 name|canonize
 argument_list|()
-expr_stmt|;
-block|}
-name|ruleQueue
-operator|.
-name|phaseCompleted
-argument_list|(
-name|phase
-argument_list|)
 expr_stmt|;
 block|}
 block|}

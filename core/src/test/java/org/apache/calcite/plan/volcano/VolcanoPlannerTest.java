@@ -2715,11 +2715,7 @@ name|ruleQueue
 operator|)
 operator|.
 name|popMatch
-argument_list|(
-name|VolcanoPlannerPhase
-operator|.
-name|OPTIMIZE
-argument_list|)
+argument_list|()
 expr_stmt|;
 block|}
 else|else
