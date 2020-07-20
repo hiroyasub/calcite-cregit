@@ -1290,7 +1290,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Returns the number of distinct values provided numSelected are selected    * where there are domainSize distinct values.    *    *<p>Note that in the case where domainSize == numSelected, it's not true    * that the return value should be domainSize. If you pick 100 random values    * between 1 and 100, you'll most likely end up with fewer than 100 distinct    * values, because you'll pick some values more than once.    *    * @param domainSize  number of distinct values in the domain    * @param numSelected number selected from the domain    * @return number of distinct values for subset selected    */
+comment|/**    * Returns the number of distinct values provided numSelected are selected    * where there are domainSize distinct values.    *    *<p>Note that in the case where domainSize == numSelected, it's not true    * that the return value should be domainSize. If you pick 100 random values    * between 1 and 100, you'll most likely end up with fewer than 100 distinct    * values, because you'll pick some values more than once.    *    * The implementation is an unbiased estimation of the number of distinct values    * by performing a number of selections (with replacement) from a universe set.    *    * @param domainSize size of the universe set.    * @param numSelected the number of selections.    * @return the expected number of distinct values.    */
 specifier|public
 specifier|static
 name|Double
@@ -1340,32 +1340,58 @@ argument_list|(
 name|numSelected
 argument_list|)
 decl_stmt|;
-comment|// The formula for this is:
-comment|// 1. Assume we pick 80 random values between 1 and 100.
-comment|// 2. The chance we skip any given value is .99 ^ 80
-comment|// 3. Thus on average we will skip .99 ^ 80 percent of the values
-comment|//    in the domain
-comment|// 4. Generalized, we skip ( (n-1)/n ) ^ k values where n is the
-comment|//    number of possible values and k is the number we are selecting
-comment|// 5. This can be rewritten via approximation (if you want to
-comment|//    know why approximation is called for here, ask Bill Keese):
-comment|//  ((n-1)/n) ^ k
-comment|//  = e ^ ln( ((n-1)/n) ^ k )
-comment|//  = e ^ (k * ln ((n-1)/n))
-comment|//  = e ^ (k * ln (1-1/n))
-comment|// ~= e ^ (k * (-1/n))  because ln(1+x) ~= x for small x
-comment|//  = e ^ (-k/n)
-comment|// 6. Flipping it from number skipped to number visited, we get:
+comment|// The formula is derived as follows:
+comment|//
+comment|// Suppose we have N distinct values, and we select n from them (with replacement).
+comment|// For any value i, we use C(i) = k to express the event that the value is selected exactly
+comment|// k times in the n selections.
+comment|//
+comment|// It can be seen that, for any one selection, the probability of the value being selected
+comment|// is 1/N. So the probability of being selected exactly k times is
+comment|//
+comment|// Pr{C(i) = k} = C(n, k) * (1 / N)^k * (1 - 1 / N)^(n - k),
+comment|// where C(n, k) = n! / [k! * (n - k)!]
+comment|//
+comment|// The probability that the value is never selected is
+comment|// Pr{C(i) = 0} = C(n, 0) * (1/N)^0 * (1 - 1 / N)^n = (1 - 1 / N)^n
+comment|//
+comment|// We define indicator random variable I(i), so that I(i) = 1 iff
+comment|// value i is selected in at least one of the selections. We have
+comment|// E[I(i)] = 1 * Pr{I(i) = 1} + 0 * Pr{I(i) = 0) = Pr{I(i) = 1}
+comment|// = Pr{C(i)> 0} = 1 - Pr{C(i) = 0} = 1 - (1 - 1 / N)^n
+comment|//
+comment|// The expected number of distinct values in the overall n selections is:
+comment|// E(I(1)] + E(I(2)] + ... + E(I(N)] = N * [1 - (1 - 1 / N)^n]
 name|double
 name|res
 init|=
-operator|(
+literal|0
+decl_stmt|;
+if|if
+condition|(
 name|dSize
 operator|>
 literal|0
-operator|)
-condition|?
-operator|(
+condition|)
+block|{
+name|double
+name|expo
+init|=
+name|numSel
+operator|*
+name|Math
+operator|.
+name|log
+argument_list|(
+literal|1.0
+operator|-
+literal|1.0
+operator|/
+name|dSize
+argument_list|)
+decl_stmt|;
+name|res
+operator|=
 operator|(
 literal|1.0
 operator|-
@@ -1373,20 +1399,13 @@ name|Math
 operator|.
 name|exp
 argument_list|(
-operator|-
-literal|1
-operator|*
-name|numSel
-operator|/
-name|dSize
+name|expo
 argument_list|)
 operator|)
 operator|*
 name|dSize
-operator|)
-else|:
-literal|0
-decl_stmt|;
+expr_stmt|;
+block|}
 comment|// fix the boundary cases
 if|if
 condition|(
