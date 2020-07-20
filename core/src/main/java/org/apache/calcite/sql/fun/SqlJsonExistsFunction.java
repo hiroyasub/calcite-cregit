@@ -176,12 +176,10 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
-name|cascade
-argument_list|(
-name|ReturnTypes
-operator|.
 name|BOOLEAN
-argument_list|,
+operator|.
+name|andThen
+argument_list|(
 name|SqlTypeTransforms
 operator|.
 name|FORCE_NULLABLE

@@ -268,10 +268,6 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
-name|cascade
-argument_list|(
-name|ReturnTypes
-operator|.
 name|explicit
 argument_list|(
 name|SqlTypeName
@@ -280,7 +276,9 @@ name|VARCHAR
 argument_list|,
 literal|20
 argument_list|)
-argument_list|,
+operator|.
+name|andThen
+argument_list|(
 name|SqlTypeTransforms
 operator|.
 name|FORCE_NULLABLE

@@ -236,12 +236,10 @@ name|COALESCE
 argument_list|,
 name|ReturnTypes
 operator|.
-name|cascade
-argument_list|(
-name|ReturnTypes
-operator|.
 name|LEAST_RESTRICTIVE
-argument_list|,
+operator|.
+name|andThen
+argument_list|(
 name|SqlTypeTransforms
 operator|.
 name|LEAST_NULLABLE

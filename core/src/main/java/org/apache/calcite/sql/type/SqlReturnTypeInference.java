@@ -66,6 +66,8 @@ comment|/**  * Strategy interface to infer the type of an operator call from the
 end_comment
 
 begin_interface
+annotation|@
+name|FunctionalInterface
 specifier|public
 interface|interface
 name|SqlReturnTypeInference
@@ -79,6 +81,46 @@ name|SqlOperatorBinding
 name|opBinding
 parameter_list|)
 function_decl|;
+comment|/** Returns a return-type inference that applies this rule then a    * transform. */
+specifier|default
+name|SqlReturnTypeInference
+name|andThen
+parameter_list|(
+name|SqlTypeTransform
+name|transform
+parameter_list|)
+block|{
+return|return
+name|ReturnTypes
+operator|.
+name|cascade
+argument_list|(
+name|this
+argument_list|,
+name|transform
+argument_list|)
+return|;
+block|}
+comment|/** Returns a return-type inference that applies this rule then another    * rule, until one of them returns a not-null result. */
+specifier|default
+name|SqlReturnTypeInference
+name|orElse
+parameter_list|(
+name|SqlReturnTypeInference
+name|transform
+parameter_list|)
+block|{
+return|return
+name|ReturnTypes
+operator|.
+name|chain
+argument_list|(
+name|this
+argument_list|,
+name|transform
+argument_list|)
+return|;
+block|}
 block|}
 end_interface
 
