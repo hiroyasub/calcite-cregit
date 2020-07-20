@@ -37,6 +37,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|adapter
+operator|.
+name|file
+operator|.
+name|CsvEnumerator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|linq4j
 operator|.
 name|AbstractEnumerable
@@ -225,6 +241,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|ImmutableIntList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Source
 import|;
 end_import
@@ -297,7 +327,13 @@ return|return
 literal|"CsvTranslatableTable"
 return|;
 block|}
-comment|/** Returns an enumerable over a given projection of the fields.    *    *<p>Called from generated code. */
+comment|/** Returns an enumerable over a given projection of the fields. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+comment|// called from generated code
 specifier|public
 name|Enumerable
 argument_list|<
@@ -363,7 +399,12 @@ name|getTypeFactory
 argument_list|()
 argument_list|)
 argument_list|,
+name|ImmutableIntList
+operator|.
+name|of
+argument_list|(
 name|fields
+argument_list|)
 argument_list|)
 return|;
 block|}

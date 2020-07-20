@@ -119,14 +119,6 @@ name|CsvSchemaFactory
 implements|implements
 name|SchemaFactory
 block|{
-comment|/** Name of the column that is implicitly created in a CSV stream table    * to hold the data arrival time. */
-specifier|static
-specifier|final
-name|String
-name|ROWTIME_COLUMN_NAME
-init|=
-literal|"ROWTIME"
-decl_stmt|;
 comment|/** Public singleton, per factory contract. */
 specifier|public
 specifier|static

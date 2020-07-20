@@ -13,7 +13,7 @@ name|calcite
 operator|.
 name|adapter
 operator|.
-name|csv
+name|file
 package|;
 end_package
 

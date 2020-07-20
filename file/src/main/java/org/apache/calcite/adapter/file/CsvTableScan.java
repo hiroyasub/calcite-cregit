@@ -13,7 +13,7 @@ name|calcite
 operator|.
 name|adapter
 operator|.
-name|csv
+name|file
 package|;
 end_package
 
@@ -94,22 +94,6 @@ operator|.
 name|enumerable
 operator|.
 name|PhysTypeImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|adapter
-operator|.
-name|file
-operator|.
-name|JsonTable
 import|;
 end_import
 
@@ -380,6 +364,7 @@ specifier|final
 name|CsvTranslatableTable
 name|csvTable
 decl_stmt|;
+specifier|private
 specifier|final
 name|int
 index|[]
@@ -588,7 +573,7 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|CsvRules
+name|FileRules
 operator|.
 name|PROJECT_SCAN
 argument_list|)

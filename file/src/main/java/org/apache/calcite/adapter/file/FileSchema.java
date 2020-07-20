@@ -25,38 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
-operator|.
-name|csv
-operator|.
-name|CsvFilterableTable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|adapter
-operator|.
-name|csv
-operator|.
-name|JsonScannableTable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|schema
 operator|.
 name|SchemaPlus
@@ -231,7 +199,7 @@ specifier|final
 name|File
 name|baseDirectory
 decl_stmt|;
-comment|/**    * Creates an HTML tables schema.    *    * @param parentSchema  Parent schema    * @param name          Schema name    * @param baseDirectory Base directory to look for relative files, or null    * @param tables        List containing HTML table identifiers    */
+comment|/**    * Creates an HTML tables schema.    *    * @param parentSchema  Parent schema    * @param name          Schema name    * @param baseDirectory Base directory to look for relative files, or null    * @param tables        List containing HTML table identifiers, or null    */
 name|FileSchema
 parameter_list|(
 name|SchemaPlus
@@ -259,6 +227,15 @@ name|this
 operator|.
 name|tables
 operator|=
+name|tables
+operator|==
+literal|null
+condition|?
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+else|:
 name|ImmutableList
 operator|.
 name|copyOf
@@ -432,6 +409,13 @@ block|}
 block|}
 comment|// Look for files in the directory ending in ".csv", ".csv.gz", ".json",
 comment|// ".json.gz".
+if|if
+condition|(
+name|baseDirectory
+operator|!=
+literal|null
+condition|)
+block|{
 specifier|final
 name|Source
 name|baseSource
@@ -620,6 +604,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 return|return
@@ -853,7 +838,7 @@ name|Table
 name|table
 init|=
 operator|new
-name|CsvFilterableTable
+name|CsvTranslatableTable
 argument_list|(
 name|source
 argument_list|,

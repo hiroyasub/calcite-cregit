@@ -13,7 +13,7 @@ name|calcite
 operator|.
 name|adapter
 operator|.
-name|csv
+name|file
 package|;
 end_package
 
@@ -90,6 +90,7 @@ comment|/**  * Type of a field in a CSV file.  *  *<p>Usually, and unless specif
 end_comment
 
 begin_enum
+specifier|public
 enum|enum
 name|CsvFieldType
 block|{
