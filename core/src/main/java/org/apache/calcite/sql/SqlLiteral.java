@@ -713,6 +713,7 @@ return|return
 name|value
 return|;
 block|}
+comment|/**    * Returns the value of this literal as a particular type.    *    *<p>The type might be the internal type, or other convenient types.    * For example, numeric literals' values are stored internally as    * {@link BigDecimal}, but other numeric types such as {@link Long} and    * {@link Double} are also allowed.    *    * @param clazz Desired value type    * @param<T> Value type    * @return Value of the literal    *    * @throws AssertionError if the value type is not supported    */
 specifier|public
 parameter_list|<
 name|T
@@ -1214,6 +1215,27 @@ name|timeUnitRange
 argument_list|)
 return|;
 block|}
+if|else if
+condition|(
+name|clazz
+operator|==
+name|SqlIntervalQualifier
+operator|.
+name|class
+condition|)
+block|{
+return|return
+name|clazz
+operator|.
+name|cast
+argument_list|(
+name|valMonth
+operator|.
+name|getIntervalQualifier
+argument_list|()
+argument_list|)
+return|;
+block|}
 break|break;
 case|case
 name|INTERVAL_DAY
@@ -1334,6 +1356,27 @@ name|getIntervalQualifier
 argument_list|()
 operator|.
 name|timeUnitRange
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
+name|clazz
+operator|==
+name|SqlIntervalQualifier
+operator|.
+name|class
+condition|)
+block|{
+return|return
+name|clazz
+operator|.
+name|cast
+argument_list|(
+name|valTime
+operator|.
+name|getIntervalQualifier
+argument_list|()
 argument_list|)
 return|;
 block|}

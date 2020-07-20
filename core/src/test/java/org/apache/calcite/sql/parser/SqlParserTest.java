@@ -29405,6 +29405,115 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testIntervalExpression
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"interval 0 day"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL 0 DAY"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval 0 days"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL 0 DAY"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval -10 days"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL (- 10) DAY"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval -10 days"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL (- 10) DAY"
+argument_list|)
+expr_stmt|;
+comment|// parser requires parentheses for expressions other than numeric
+comment|// literal or identifier
+name|expr
+argument_list|(
+literal|"interval 1 ^+^ x.y days"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\+\" at .*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval (1 + x.y) days"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL (1 + `X`.`Y`) DAY"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval -x second(3)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL (- `X`) SECOND(3)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval -x.y second(3)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL (- `X`.`Y`) SECOND(3)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval 1 day ^to^ hour"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"to\" at .*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"interval '1 1' day to hour"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL '1 1' DAY TO HOUR"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testIntervalOperators
 parameter_list|()
 block|{

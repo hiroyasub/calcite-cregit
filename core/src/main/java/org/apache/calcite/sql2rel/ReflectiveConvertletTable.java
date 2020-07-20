@@ -623,7 +623,7 @@ name|getOperator
 argument_list|()
 decl_stmt|;
 comment|// Is there a convertlet for this operator
-comment|// (e.g. SqlStdOperatorTable.plusOperator)?
+comment|// (e.g. SqlStdOperatorTable.PLUS)?
 name|convertlet
 operator|=
 operator|(

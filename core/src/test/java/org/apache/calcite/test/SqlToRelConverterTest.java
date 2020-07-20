@@ -955,6 +955,21 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testIntervalExpression
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select interval mgr hour as h from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testAliasList
 parameter_list|()
 block|{

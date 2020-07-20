@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  * This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.</p>  */
+comment|/**  * Strategy interface to infer the type of an operator call from the type of the  * operands.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  * This makes  * sense because many operators have similar, straightforward strategies, such  * as to take the type of the first operand.  *  * @see ReturnTypes  */
 end_comment
 
 begin_interface

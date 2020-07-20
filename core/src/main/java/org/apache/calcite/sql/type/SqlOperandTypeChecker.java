@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  */
+comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  *  * @see OperandTypes  */
 end_comment
 
 begin_interface

@@ -2075,6 +2075,17 @@ operator|new
 name|SqlDatetimePlusOperator
 argument_list|()
 decl_stmt|;
+comment|/**    * Interval expression, '<code>INTERVAL n timeUnit</code>'.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlSpecialOperator
+name|INTERVAL
+init|=
+operator|new
+name|SqlIntervalOperator
+argument_list|()
+decl_stmt|;
 comment|/**    * Multiset {@code MEMBER OF}, which returns whether a element belongs to a    * multiset.    *    *<p>For example, the following returns<code>false</code>:    *    *<blockquote>    *<code>'green' MEMBER OF MULTISET ['red','almost green','blue']</code>    *</blockquote>    */
 specifier|public
 specifier|static

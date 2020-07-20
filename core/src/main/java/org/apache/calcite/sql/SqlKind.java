@@ -341,6 +341,9 @@ block|,
 comment|/** {@code CASE} expression. */
 name|CASE
 block|,
+comment|/** {@code INTERVAL} expression. */
+name|INTERVAL
+block|,
 comment|/** {@code NULLIF} operator. */
 name|NULLIF
 block|,
@@ -1160,6 +1163,8 @@ argument_list|,
 name|TIMESTAMP_DIFF
 argument_list|,
 name|EXTRACT
+argument_list|,
+name|INTERVAL
 argument_list|,
 name|LITERAL_CHAIN
 argument_list|,
