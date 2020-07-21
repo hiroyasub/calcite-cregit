@@ -143,6 +143,11 @@ name|boolean
 name|isLiberal
 parameter_list|()
 function_decl|;
+comment|/**    * Whether this dialect allows character literals as column aliases.    *    *<p>For example,    *    *<blockquote><pre>    *   SELECT empno, sal + comm AS 'remuneration'    *   FROM Emp</pre></blockquote>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+name|boolean
+name|allowCharLiteralAlias
+parameter_list|()
+function_decl|;
 comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code GROUP BY} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|isGroupByAlias

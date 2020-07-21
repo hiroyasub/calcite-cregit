@@ -1370,6 +1370,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Expecting alias, found character literal"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|charLiteralAliasNotValid
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"List of column aliases must have same degree as table; table has {0,number,#} columns {1}, whereas alias list has {2,number,#} columns"
 argument_list|)
 name|ExInst
