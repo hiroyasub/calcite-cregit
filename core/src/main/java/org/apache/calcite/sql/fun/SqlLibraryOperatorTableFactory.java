@@ -383,6 +383,13 @@ name|class
 operator|.
 name|getName
 argument_list|()
+argument_list|,
+name|SqlGeoFunctions
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
 argument_list|)
 operator|.
 name|getOperatorList

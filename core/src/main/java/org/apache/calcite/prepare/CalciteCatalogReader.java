@@ -1969,14 +1969,15 @@ name|add
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates an operator table that contains functions in the given class.    *    * @see ModelHandler#addFunctions */
+comment|/** Creates an operator table that contains functions in the given class    * or classes.    *    * @see ModelHandler#addFunctions */
 specifier|public
 specifier|static
 name|SqlOperatorTable
 name|operatorTable
 parameter_list|(
 name|String
-name|className
+modifier|...
+name|classNames
 parameter_list|)
 block|{
 comment|// Dummy schema to collect the functions
@@ -1993,6 +1994,14 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+for|for
+control|(
+name|String
+name|className
+range|:
+name|classNames
+control|)
+block|{
 name|ModelHandler
 operator|.
 name|addFunctions
@@ -2016,6 +2025,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// The following is technical debt; see [CALCITE-2082] Remove
 comment|// RelDataTypeFactory argument from SqlUserDefinedAggFunction constructor
 specifier|final
