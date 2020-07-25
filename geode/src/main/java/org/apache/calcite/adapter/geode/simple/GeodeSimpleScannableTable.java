@@ -172,7 +172,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Geode Simple Scannable Table Abstraction  */
+comment|/**  * Geode Simple Scannable Table abstraction.  */
 end_comment
 
 begin_class

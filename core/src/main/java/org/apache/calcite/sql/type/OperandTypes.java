@@ -196,7 +196,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategies for checking operand types.  *  *<p>This class defines singleton instances of strategy objects for operand  * type checking. {@link org.apache.calcite.sql.type.ReturnTypes}  * and {@link org.apache.calcite.sql.type.InferTypes} provide similar strategies  * for operand type inference and operator return type inference.  *  *<p>Note to developers: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  *  * @see org.apache.calcite.sql.type.SqlOperandTypeChecker  * @see org.apache.calcite.sql.type.ReturnTypes  * @see org.apache.calcite.sql.type.InferTypes  */
+comment|/**  * Strategies for checking operand types.  *  *<p>This class defines singleton instances of strategy objects for operand  * type-checking. {@link org.apache.calcite.sql.type.ReturnTypes}  * and {@link org.apache.calcite.sql.type.InferTypes} provide similar strategies  * for operand type inference and operator return type inference.  *  *<p>Note to developers: avoid anonymous inner classes here except for unique,  * non-generalizable strategies; anything else belongs in a reusable top-level  * class. If you find yourself copying and pasting an existing strategy's  * anonymous inner class, you're making a mistake.  *  * @see org.apache.calcite.sql.type.SqlOperandTypeChecker  * @see org.apache.calcite.sql.type.ReturnTypes  * @see org.apache.calcite.sql.type.InferTypes  */
 end_comment
 
 begin_class
@@ -1731,7 +1731,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/**    * Parameter type-checking strategy type must a nullable time interval,    * nullable time interval    */
+comment|/**    * Parameter type-checking strategy where type must a nullable time interval,    * nullable time interval.    */
 end_comment
 
 begin_decl_stmt
@@ -1957,7 +1957,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/**    * Type checking strategy for the "*" operator    */
+comment|/**    * Type-checking strategy for the "*" operator.    */
 end_comment
 
 begin_decl_stmt
@@ -1981,7 +1981,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/**    * Type checking strategy for the "/" operator    */
+comment|/**    * Type-checking strategy for the "/" operator.    */
 end_comment
 
 begin_decl_stmt
@@ -2727,7 +2727,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/** Operand type checker that accepts period types:    * PERIOD (DATETIME, DATETIME)    * PERIOD (DATETIME, INTERVAL)    * [ROW] (DATETIME, DATETIME)    * [ROW] (DATETIME, INTERVAL) */
+comment|/** Operand type-checker that accepts period types. Examples:    *    *<ul>    *<li>PERIOD (DATETIME, DATETIME)    *<li>PERIOD (DATETIME, INTERVAL)    *<li>[ROW] (DATETIME, DATETIME)    *<li>[ROW] (DATETIME, INTERVAL)    *</ul> */
 end_comment
 
 begin_class

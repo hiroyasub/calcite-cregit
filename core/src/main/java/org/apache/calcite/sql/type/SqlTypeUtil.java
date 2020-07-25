@@ -1375,7 +1375,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * @return true if type is DATE, TIME, or TIMESTAMP    */
+comment|/** Returns whether a type is DATE, TIME, or TIMESTAMP. */
 specifier|public
 specifier|static
 name|boolean
@@ -1396,7 +1396,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is DATE    */
+comment|/** Returns whether a type is DATE. */
 specifier|public
 specifier|static
 name|boolean
@@ -1436,7 +1436,7 @@ operator|.
 name|DATE
 return|;
 block|}
-comment|/**    * @return true if type is TIMESTAMP    */
+comment|/** Returns whether a type is TIMESTAMP. */
 specifier|public
 specifier|static
 name|boolean
@@ -1457,7 +1457,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is some kind of INTERVAL    */
+comment|/** Returns whether a type is some kind of INTERVAL. */
 specifier|public
 specifier|static
 name|boolean
@@ -1478,7 +1478,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is in SqlTypeFamily.Character    */
+comment|/** Returns whether a type is in SqlTypeFamily.Character. */
 specifier|public
 specifier|static
 name|boolean
@@ -1499,7 +1499,7 @@ operator|.
 name|CHARACTER
 return|;
 block|}
-comment|/**    * @return true if type is in SqlTypeFamily.Character    */
+comment|/** Returns whether a type name is in SqlTypeFamily.Character. */
 specifier|public
 specifier|static
 name|boolean
@@ -1520,7 +1520,7 @@ operator|.
 name|CHARACTER
 return|;
 block|}
-comment|/**    * @return true if type is in SqlTypeFamily.Boolean    */
+comment|/** Returns whether a type is in SqlTypeFamily.Boolean. */
 specifier|public
 specifier|static
 name|boolean
@@ -1541,7 +1541,7 @@ operator|.
 name|BOOLEAN
 return|;
 block|}
-comment|/**    * @return true if two types are in same type family    */
+comment|/** Returns whether two types are in same type family. */
 specifier|public
 specifier|static
 name|boolean
@@ -1566,7 +1566,7 @@ name|getFamily
 argument_list|()
 return|;
 block|}
-comment|/**    * @return true if two types are in same type family, or one or the other is    * of type {@link SqlTypeName#NULL}.    */
+comment|/** Returns whether two types are in same type family, or one or the other is    * of type {@link SqlTypeName#NULL}. */
 specifier|public
 specifier|static
 name|boolean
@@ -1615,7 +1615,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/**    * @return true if type family is either character or binary    */
+comment|/** Returns whether a type family is either character or binary. */
 specifier|public
 specifier|static
 name|boolean
@@ -1649,7 +1649,7 @@ name|BINARY
 operator|)
 return|;
 block|}
-comment|/**    * @return true if type is a LOB of some kind    */
+comment|/** Returns whether a type is a LOB of some kind. */
 specifier|public
 specifier|static
 name|boolean
@@ -1664,7 +1664,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * @return true if type is variable width with bounded precision    */
+comment|/** Returns whether a type is variable width with bounded precision. */
 specifier|public
 specifier|static
 name|boolean
@@ -1717,7 +1717,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * @return true if type is one of the integer types    */
+comment|/** Returns whether a type is one of the integer types. */
 specifier|public
 specifier|static
 name|boolean
@@ -1772,7 +1772,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * @return true if type is decimal    */
+comment|/** Returns whether a type is DECIMAL. */
 specifier|public
 specifier|static
 name|boolean
@@ -1809,7 +1809,7 @@ operator|.
 name|DECIMAL
 return|;
 block|}
-comment|/**    * @return true if type is double    */
+comment|/** Returns whether a type is DOUBLE. */
 specifier|public
 specifier|static
 name|boolean
@@ -1846,7 +1846,7 @@ operator|.
 name|DOUBLE
 return|;
 block|}
-comment|/**    * @return true if type is bigint    */
+comment|/** Returns whether a type is BIGINT. */
 specifier|public
 specifier|static
 name|boolean
@@ -1883,7 +1883,7 @@ operator|.
 name|BIGINT
 return|;
 block|}
-comment|/**    * @return true if type is numeric with exact precision    */
+comment|/** Returns whether a type is numeric with exact precision. */
 specifier|public
 specifier|static
 name|boolean
@@ -1962,7 +1962,7 @@ operator|.
 name|MIN_VALUE
 return|;
 block|}
-comment|/**    * Returns the maximum value of an integral type, as a long value    */
+comment|/** Returns the maximum value of an integral type, as a long value. */
 specifier|public
 specifier|static
 name|long
@@ -2034,7 +2034,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return true if type is numeric with approximate precision    */
+comment|/** Returns whether a type is numeric with approximate precision. */
 specifier|public
 specifier|static
 name|boolean
@@ -2086,7 +2086,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * @return true if type is numeric    */
+comment|/** Returns whether a type is numeric. */
 specifier|public
 specifier|static
 name|boolean
@@ -2108,7 +2108,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is null.    */
+comment|/** Returns whether a type is null. */
 specifier|public
 specifier|static
 name|boolean
@@ -2459,7 +2459,7 @@ literal|0
 return|;
 block|}
 block|}
-comment|/**    * Determines the minimum unscaled value of a numeric type    *    * @param type a numeric type    */
+comment|/** Returns the minimum unscaled value of a numeric type.    *    * @param type a numeric type    */
 specifier|public
 specifier|static
 name|long
@@ -2540,7 +2540,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Determines the maximum unscaled value of a numeric type    *    * @param type a numeric type    */
+comment|/** Returns the maximum unscaled value of a numeric type.    *    * @param type a numeric type    */
 specifier|public
 specifier|static
 name|long
@@ -2621,7 +2621,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return true if type has a representation as a Java primitive (ignoring    * nullability)    */
+comment|/** Returns whether a type has a representation as a Java primitive (ignoring    * nullability). */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -2694,7 +2694,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * @return class name of the wrapper for the primitive data type.    */
+comment|/** Returns the class name of the wrapper for the primitive data type. */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -2758,7 +2758,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * @return class name of the numeric data type.    */
+comment|/** Returns the class name of a numeric data type. */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -6173,7 +6173,7 @@ name|p1
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is ARRAY    */
+comment|/** Returns whether a type is ARRAY. */
 specifier|public
 specifier|static
 name|boolean
@@ -6194,7 +6194,7 @@ operator|.
 name|ARRAY
 return|;
 block|}
-comment|/**    * @return true if type is ROW    */
+comment|/** Returns whether a type is ROW. */
 specifier|public
 specifier|static
 name|boolean
@@ -6234,7 +6234,7 @@ operator|.
 name|ROW
 return|;
 block|}
-comment|/**    * @return true if type is MAP    */
+comment|/** Returns whether a type is MAP. */
 specifier|public
 specifier|static
 name|boolean
@@ -6274,7 +6274,7 @@ operator|.
 name|MAP
 return|;
 block|}
-comment|/**    * @return true if type is MULTISET    */
+comment|/** Returns whether a type is MULTISET. */
 specifier|public
 specifier|static
 name|boolean
@@ -6314,7 +6314,7 @@ operator|.
 name|MULTISET
 return|;
 block|}
-comment|/**    * @return true if type is ARRAY/MULTISET    */
+comment|/** Returns whether a type is ARRAY or MULTISET. */
 specifier|public
 specifier|static
 name|boolean
@@ -6363,7 +6363,7 @@ operator|.
 name|MULTISET
 return|;
 block|}
-comment|/**    * @return true if type is CHARACTER    */
+comment|/** Returns whether a type is CHARACTER. */
 specifier|public
 specifier|static
 name|boolean
@@ -6403,7 +6403,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if the type is a CHARACTER or contains a CHARACTER type    */
+comment|/** Returns whether a type is a CHARACTER or contains a CHARACTER type. */
 specifier|public
 specifier|static
 name|boolean
@@ -6447,7 +6447,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * @return true if type is STRING    */
+comment|/** Returns whether a type is STRING. */
 specifier|public
 specifier|static
 name|boolean
@@ -6487,7 +6487,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is BOOLEAN    */
+comment|/** Returns whether a type is BOOLEAN. */
 specifier|public
 specifier|static
 name|boolean
@@ -6527,7 +6527,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is BINARY    */
+comment|/** Returns whether a type is BINARY. */
 specifier|public
 specifier|static
 name|boolean
@@ -6567,7 +6567,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return true if type is Atomic    */
+comment|/** Returns whether a type is atomic (datetime, numeric, string or    * BOOLEAN). */
 specifier|public
 specifier|static
 name|boolean
@@ -6626,7 +6626,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Get decimal with max precision/scale for the current type system. */
+comment|/** Returns a DECIMAL type with the maximum precision/scale for the current    * type system. */
 specifier|public
 specifier|static
 name|RelDataType

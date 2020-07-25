@@ -2099,7 +2099,7 @@ return|return
 name|special
 return|;
 block|}
-comment|/**    * @return the ordinal from {@link java.sql.Types} corresponding to this    * SqlTypeName    */
+comment|/** Returns the ordinal from {@link java.sql.Types} corresponding to this    * SqlTypeName. */
 specifier|public
 name|int
 name|getJdbcOrdinal
@@ -2153,7 +2153,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * @return default scale for this type if supported, otherwise -1 if scale    * is either unsupported or must be specified explicitly    */
+comment|/** Returns the default scale for this type if supported, otherwise -1 if    * scale is either unsupported or must be specified explicitly. */
 specifier|public
 name|int
 name|getDefaultScale
@@ -4232,7 +4232,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return name of this type    */
+comment|/** Returns the name of this type. */
 specifier|public
 name|String
 name|getName

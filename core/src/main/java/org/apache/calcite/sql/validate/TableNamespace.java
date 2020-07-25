@@ -641,7 +641,7 @@ name|extendedFields
 argument_list|)
 return|;
 block|}
-comment|/**    * Gets the data-type of all columns in a table (for a view table: including    * columns of the underlying table)    */
+comment|/**    * Gets the data-type of all columns in a table. For a view table, includes    * columns of the underlying table.    */
 specifier|private
 name|RelDataType
 name|getBaseRowType

@@ -993,7 +993,7 @@ literal|"}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * @see java.sql.DatabaseMetaData#getNumericFunctions    */
+comment|/**    * As {@link java.sql.DatabaseMetaData#getNumericFunctions}.    */
 specifier|public
 specifier|static
 name|String
@@ -1004,7 +1004,7 @@ return|return
 name|NUMERIC_FUNCTIONS
 return|;
 block|}
-comment|/**    * @see java.sql.DatabaseMetaData#getStringFunctions    */
+comment|/**    * As {@link java.sql.DatabaseMetaData#getStringFunctions}.    */
 specifier|public
 specifier|static
 name|String
@@ -1015,7 +1015,7 @@ return|return
 name|STRING_FUNCTIONS
 return|;
 block|}
-comment|/**    * @see java.sql.DatabaseMetaData#getTimeDateFunctions    */
+comment|/**    * As {@link java.sql.DatabaseMetaData#getTimeDateFunctions}.    */
 specifier|public
 specifier|static
 name|String
@@ -1026,7 +1026,7 @@ return|return
 name|TIME_DATE_FUNCTIONS
 return|;
 block|}
-comment|/**    * @see java.sql.DatabaseMetaData#getSystemFunctions    */
+comment|/**    * As {@link java.sql.DatabaseMetaData#getSystemFunctions}.    */
 specifier|public
 specifier|static
 name|String
@@ -1413,7 +1413,7 @@ name|newOrder
 return|;
 block|}
 block|}
-comment|/**    * Lookup table between JDBC functions and internal representation    */
+comment|/**    * Lookup table between JDBC functions and internal representation.    */
 specifier|private
 specifier|static
 class|class

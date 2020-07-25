@@ -749,7 +749,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Registers a convertlet for a given operator instance    *    * @param op         Operator instance, say    * {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#MINUS}    * @param convertlet Convertlet    */
+comment|/**    * Registers a convertlet for a given operator instance.    *    * @param op         Operator instance, say    * {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#MINUS}    * @param convertlet Convertlet    */
 specifier|protected
 name|void
 name|registerOp

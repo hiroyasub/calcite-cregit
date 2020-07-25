@@ -105,7 +105,7 @@ class|class
 name|RexMultisetUtil
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * A set defining all implementable multiset calls    */
+comment|/**    * A set defining all implementable multiset calls.    */
 specifier|private
 specifier|static
 specifier|final
@@ -430,7 +430,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Returns a reference to the first found multiset call or null if none was    * found    */
+comment|/**    * Returns a reference to the first found multiset call or null if none was    * found.    */
 specifier|public
 specifier|static
 name|RexCall

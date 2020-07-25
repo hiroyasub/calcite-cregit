@@ -913,7 +913,7 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Gets a user defined config and appends default connection values */
+comment|/** Gets a user-defined config and appends default connection values. */
 specifier|private
 name|CalciteConnectionConfig
 name|connConfig
@@ -1642,9 +1642,11 @@ return|return
 name|root
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 2
 comment|/** @deprecated Now {@link PlannerImpl} implements {@link ViewExpander}    * directly. */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|ViewExpanderImpl

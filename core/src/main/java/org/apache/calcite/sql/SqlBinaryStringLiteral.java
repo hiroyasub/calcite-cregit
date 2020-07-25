@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A binary (or hexadecimal) string literal.  *  *<p>The {@link #value} field is a {@link BitString} and {@link #typeName} is  * {@link SqlTypeName#BINARY}.  */
+comment|/**  * A binary (or hexadecimal) string literal.  *  *<p>The {@link #value} field is a {@link BitString} and {@link #getTypeName()}  * is {@link SqlTypeName#BINARY}.  */
 end_comment
 
 begin_class
@@ -120,7 +120,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return the underlying BitString    */
+comment|/** Returns the underlying {@link BitString}.    *    * @deprecated Use {@link SqlLiteral#getValueAs getValueAs(BitString.class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|BitString
 name|getBitString
@@ -222,15 +225,14 @@ name|literals
 argument_list|,
 name|literal
 lambda|->
-operator|(
-operator|(
-name|SqlBinaryStringLiteral
-operator|)
 name|literal
-operator|)
 operator|.
-name|getBitString
-argument_list|()
+name|getValueAs
+argument_list|(
+name|BitString
+operator|.
+name|class
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,

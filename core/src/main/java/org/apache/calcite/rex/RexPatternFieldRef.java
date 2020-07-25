@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Variable which references a field of an input relational expression  */
+comment|/**  * Variable that references a field of an input relational expression.  */
 end_comment
 
 begin_class

@@ -1388,7 +1388,7 @@ name|ret
 return|;
 block|}
 block|}
-comment|/***/
+comment|/** Plan information. */
 specifier|private
 specifier|static
 class|class

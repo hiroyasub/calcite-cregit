@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Tests for the {@link DeterministicAutomaton} */
+comment|/** Tests for the {@link DeterministicAutomaton}. */
 end_comment
 
 begin_class

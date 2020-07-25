@@ -443,7 +443,7 @@ literal|"} is not a subtype of Types.RecordType"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/***/
+comment|/** Struct with one field. */
 specifier|private
 specifier|static
 class|class
@@ -454,7 +454,7 @@ name|Integer
 name|intField
 decl_stmt|;
 block|}
-comment|/***/
+comment|/** Struct with two fields. */
 specifier|private
 specifier|static
 class|class

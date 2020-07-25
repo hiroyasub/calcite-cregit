@@ -934,7 +934,7 @@ name|type
 return|;
 block|}
 comment|//~ Tools ------------------------------------------------------------------
-comment|/**    * @return true if this type name has "local time zone" definition.    */
+comment|/**    * Returns whether this type name has "local time zone" definition.    */
 specifier|private
 specifier|static
 name|boolean

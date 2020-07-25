@@ -905,7 +905,7 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns this RexBuilder's type factory    *    * @return type factory    */
+comment|/**    * Returns this RexBuilder's type factory.    *    * @return type factory    */
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -915,7 +915,7 @@ return|return
 name|typeFactory
 return|;
 block|}
-comment|/**    * Returns this RexBuilder's operator table    *    * @return operator table    */
+comment|/**    * Returns this RexBuilder's operator table.    *    * @return operator table    */
 specifier|public
 name|SqlStdOperatorTable
 name|getOpTab
@@ -3165,7 +3165,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Retrieves an interval or decimal node's integer representation    *    * @param node the interval or decimal value as an opaque type    * @return an integer representation of the decimal value    */
+comment|/**    * Retrieves an INTERVAL or DECIMAL node's integer representation.    *    * @param node the interval or decimal value as an opaque type    * @return an integer representation of the decimal value    */
 specifier|public
 name|RexNode
 name|decodeIntervalOrDecimal
@@ -4541,6 +4541,7 @@ name|CHAR
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #makeDateLiteral(DateString)}. */
 annotation|@
 name|Deprecated
@@ -4599,6 +4600,7 @@ name|DATE
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #makeTimeLiteral(TimeString, int)}. */
 annotation|@
 name|Deprecated
@@ -4706,6 +4708,7 @@ name|TIME_WITH_LOCAL_TIME_ZONE
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #makeTimestampLiteral(TimestampString, int)}. */
 annotation|@
 name|Deprecated
@@ -4867,7 +4870,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a reference to a dynamic parameter    *    * @param type  Type of dynamic parameter    * @param index Index of dynamic parameter    * @return Expression referencing dynamic parameter    */
+comment|/**    * Creates a reference to a dynamic parameter.    *    * @param type  Type of dynamic parameter    * @param index Index of dynamic parameter    * @return Expression referencing dynamic parameter    */
 specifier|public
 name|RexDynamicParam
 name|makeDynamicParam
@@ -4931,6 +4934,7 @@ name|constantNull
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #makeNullLiteral(RelDataType)} */
 annotation|@
 name|Deprecated
@@ -4960,6 +4964,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #makeNullLiteral(RelDataType)} */
 annotation|@
 name|Deprecated
@@ -6832,7 +6837,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** Returns a byte-string padded with zero bytes to make it at least a given    * length, */
+comment|/** Returns a byte-string padded with zero bytes to make it at least a given    * length. */
 specifier|private
 specifier|static
 name|ByteString

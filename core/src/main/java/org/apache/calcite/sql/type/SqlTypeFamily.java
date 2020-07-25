@@ -511,7 +511,7 @@ name|jdbcType
 argument_list|)
 return|;
 block|}
-comment|/**    * @return collection of {@link SqlTypeName}s included in this family    */
+comment|/** Returns the collection of {@link SqlTypeName}s included in this family. */
 specifier|public
 name|Collection
 argument_list|<
@@ -788,7 +788,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**    * @return Default {@link RelDataType} belongs to this family.    */
+comment|/** Return the default {@link RelDataType} that belongs to this family. */
 specifier|public
 name|RelDataType
 name|getDefaultConcreteType

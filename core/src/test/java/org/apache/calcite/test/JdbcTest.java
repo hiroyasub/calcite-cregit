@@ -5510,7 +5510,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests driver's implementation of {@link DatabaseMetaData#getColumns},    * and also    *<a href="https://issues.apache.org/jira/browse/CALCITE-1222">[CALCITE-1222]    * DatabaseMetaData.getColumnLabel returns null when query has ORDER    * BY</a>, */
+comment|/** Tests driver's implementation of {@link DatabaseMetaData#getColumns},    * and also    *<a href="https://issues.apache.org/jira/browse/CALCITE-1222">[CALCITE-1222]    * DatabaseMetaData.getColumnLabel returns null when query has ORDER    * BY</a>. */
 annotation|@
 name|Test
 name|void
@@ -6444,6 +6444,85 @@ argument_list|(
 literal|"c0=1997\n"
 operator|+
 literal|"c0=1998\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2894">[CALCITE-2894]    * NullPointerException thrown by RelMdPercentageOriginalRows when explaining    * plan with all attributes</a>. */
+annotation|@
+name|Test
+name|void
+name|testExplainAllAttributesSemiJoinUnionCorrelate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, name from depts where deptno in (\n"
+operator|+
+literal|"  select e.deptno from emps e where exists (\n"
+operator|+
+literal|"     select 1 from depts d where d.deptno = e.deptno)\n"
+operator|+
+literal|"   union\n"
+operator|+
+literal|"   select e.deptno from emps e where e.salary> 10000)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|LEX
+argument_list|,
+name|Lex
+operator|.
+name|JAVA
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|FORCE_DECORRELATE
+argument_list|,
+literal|false
+argument_list|)
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|ReflectiveSchema
+argument_list|(
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|"including all attributes "
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCorrelate"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15154,7 +15233,7 @@ literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for RANK with same values */
+comment|/** Tests for RANK with same values. */
 annotation|@
 name|Test
 name|void
@@ -15193,7 +15272,7 @@ argument_list|)
 expr_stmt|;
 comment|// 4 for rank and 2 for dense_rank
 block|}
-comment|/** Tests for RANK with same values */
+comment|/** Tests for RANK with same values. */
 annotation|@
 name|Test
 name|void
@@ -15231,7 +15310,7 @@ literal|"deptno=20; R=1"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for DENSE_RANK with same values */
+comment|/** Tests for DENSE_RANK with same values. */
 annotation|@
 name|Test
 name|void
@@ -15269,7 +15348,7 @@ literal|"deptno=20; R=2"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for DENSE_RANK with same values */
+comment|/** Tests for DENSE_RANK with same values. */
 annotation|@
 name|Test
 name|void
@@ -15307,7 +15386,7 @@ literal|"deptno=20; R=1"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for DATE +- INTERVAL window frame */
+comment|/** Tests for DATE +- INTERVAL window frame. */
 annotation|@
 name|Test
 name|void
@@ -16133,7 +16212,7 @@ literal|"Cannot apply 'NTILE' to arguments of type 'NTILE(<DECIMAL(10, 9)>)'"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for FIRST_VALUE */
+comment|/** Tests for FIRST_VALUE. */
 annotation|@
 name|Test
 name|void
@@ -16175,7 +16254,7 @@ literal|"deptno=20; empid=200; commission=500; R=500"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for FIRST_VALUE desc */
+comment|/** Tests for FIRST_VALUE desc. */
 annotation|@
 name|Test
 name|void
@@ -16217,7 +16296,7 @@ literal|"deptno=20; empid=200; commission=500; R=500"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for FIRST_VALUE empty window */
+comment|/** Tests for FIRST_VALUE empty window. */
 annotation|@
 name|Test
 name|void
@@ -16259,7 +16338,7 @@ literal|"deptno=20; empid=200; commission=500; R=null"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests for ROW_NUMBER */
+comment|/** Tests for ROW_NUMBER. */
 annotation|@
 name|Test
 name|void
@@ -16946,7 +17025,7 @@ literal|"DEPTNO=null; G=2; C=14"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests CALCITE-980: Not (C='a' or C='b') causes NPE */
+comment|/** Tests    *<a href="https://issues.apache.org/jira/browse/CALCITE-980">[CALCITE-980]    * Not (C='a' or C='b') causes NPE</a>. */
 annotation|@
 name|Test
 name|void

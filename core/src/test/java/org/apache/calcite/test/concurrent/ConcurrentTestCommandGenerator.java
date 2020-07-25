@@ -319,7 +319,7 @@ name|String
 argument_list|>
 name|threadNameMap
 decl_stmt|;
-comment|/**    * Describes a thread that failed    */
+comment|/**    * Describes a thread that failed.    */
 specifier|static
 class|class
 name|FailedThread
@@ -1202,7 +1202,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**    * @return the list of failed threads (unmodifiable)    */
+comment|/** Returns the list of failed threads (unmodifiable). */
 specifier|public
 name|List
 argument_list|<
@@ -1762,7 +1762,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * abstract base to handle SQLExceptions    */
+comment|/** Abstract base to handle {@link SQLException}s. */
 specifier|protected
 specifier|abstract
 specifier|static

@@ -37,7 +37,7 @@ specifier|abstract
 class|class
 name|ConcurrentTestPlugin
 block|{
-comment|/**    * Should containing test be disabled?    *    * @return true if containing test should be disabled    */
+comment|/**    * Returns whether the containing test should be disabled.    *    * @return true if containing test should be disabled    */
 specifier|public
 name|boolean
 name|isTestDisabled

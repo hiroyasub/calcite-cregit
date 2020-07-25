@@ -869,7 +869,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Returns whether the aggregate call is a reducible function    */
+comment|/**    * Returns whether the aggregate call is a reducible function.    */
 specifier|private
 name|boolean
 name|isReducible

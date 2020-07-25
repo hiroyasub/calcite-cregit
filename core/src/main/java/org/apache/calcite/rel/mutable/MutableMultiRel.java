@@ -96,7 +96,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Base Class for relations with three or more inputs */
+comment|/** Base Class for relations with three or more inputs. */
 end_comment
 
 begin_class

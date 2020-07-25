@@ -1280,7 +1280,7 @@ parameter_list|)
 block|{
 block|}
 block|}
-comment|/**    * Dummy distribution trait def for test (handles conversion of SimpleDistribution)    */
+comment|/** Dummy distribution trait def for test (handles conversion of    * SimpleDistribution). */
 specifier|private
 specifier|static
 class|class

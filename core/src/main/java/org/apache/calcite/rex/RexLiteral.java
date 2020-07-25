@@ -702,7 +702,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/**    * @return whether value is appropriate for its type (we have rules about    * these things)    */
+comment|/** Returns whether a value is appropriate for its type. (We have rules about    * these things!) */
 specifier|public
 specifier|static
 name|boolean

@@ -159,6 +159,10 @@ name|Consumer
 import|;
 end_import
 
+begin_comment
+comment|/** Test for  * {@link org.apache.calcite.adapter.enumerable.EnumerableSortedAggregate}. */
+end_comment
+
 begin_class
 specifier|public
 class|class

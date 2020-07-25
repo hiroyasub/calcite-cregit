@@ -487,7 +487,7 @@ operator|=
 name|fields
 expr_stmt|;
 block|}
-comment|/**      * Returns id of this hit (usually document id)      * @return unique id      */
+comment|/**      * Returns the id of this hit (usually document id).      *      * @return unique id      */
 specifier|public
 name|String
 name|id
@@ -497,7 +497,7 @@ return|return
 name|id
 return|;
 block|}
-comment|/**      * Finds specific attribute from ES search result      * @param name attribute name      * @return value from result (_source or fields)      */
+comment|/**      * Finds a specific attribute from ES search result.      *      * @param name attribute name      * @return value from result (_source or fields)      */
 name|Object
 name|value
 parameter_list|(

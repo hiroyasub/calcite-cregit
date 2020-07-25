@@ -2212,7 +2212,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/** Is the method reading or writing? */
+comment|/** Whether the method is reading or writing. */
 specifier|private
 enum|enum
 name|Mode

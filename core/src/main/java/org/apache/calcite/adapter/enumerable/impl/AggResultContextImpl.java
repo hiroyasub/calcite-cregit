@@ -126,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.AggResultContext}  */
+comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.AggResultContext}.  */
 end_comment
 
 begin_class

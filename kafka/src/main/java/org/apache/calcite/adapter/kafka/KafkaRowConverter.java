@@ -79,7 +79,7 @@ parameter_list|,
 name|V
 parameter_list|>
 block|{
-comment|/**    * Generates row type for a given Kafka topic.    *    * @param topicName, Kafka topic name;    * @return row type    */
+comment|/**    * Generates the row type for a given Kafka topic.    *    * @param topicName Kafka topic name    * @return row type    */
 name|RelDataType
 name|rowDataType
 parameter_list|(
@@ -87,7 +87,7 @@ name|String
 name|topicName
 parameter_list|)
 function_decl|;
-comment|/**    * Parses and reformats Kafka message from consumer,    * to align with row type defined as {@link #rowDataType(String)}.    *    * @param message, the raw Kafka message record;    * @return fields in the row    */
+comment|/**    * Parses and reformats a Kafka message from the consumer,    * to align with row type defined as {@link #rowDataType(String)}.    *    * @param message Raw Kafka message record    * @return fields in the row    */
 name|Object
 index|[]
 name|toRow

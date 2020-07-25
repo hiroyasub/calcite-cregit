@@ -836,11 +836,11 @@ name|alias
 argument_list|)
 return|;
 block|}
-comment|/** Partitioner for group and join */
+comment|/** Partitioner for group and join. */
 interface|interface
 name|Partitioner
 block|{   }
-comment|/** Option for performing group efficiently if data set is already sorted */
+comment|/** Option for performing group efficiently if data set is already sorted. */
 specifier|public
 enum|enum
 name|GroupOption

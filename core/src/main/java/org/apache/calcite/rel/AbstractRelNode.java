@@ -497,13 +497,13 @@ specifier|final
 name|RelOptCluster
 name|cluster
 decl_stmt|;
-comment|/**    * unique id of this object -- for debugging    */
+comment|/** Unique id of this object, for debugging. */
 specifier|protected
 specifier|final
 name|int
 name|id
 decl_stmt|;
-comment|/**    * The RelTraitSet that describes the traits of this RelNode.    */
+comment|/** RelTraitSet that describes the traits of this RelNode. */
 specifier|protected
 name|RelTraitSet
 name|traitSet
@@ -1359,7 +1359,7 @@ name|this
 argument_list|)
 throw|;
 block|}
-comment|/** Description, consists of id plus digest */
+comment|/** Description; consists of id plus digest. */
 specifier|public
 name|String
 name|toString
@@ -1376,7 +1376,6 @@ name|getDigest
 argument_list|()
 return|;
 block|}
-comment|/** Description, consists of id plus digest */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1901,13 +1900,14 @@ operator|.
 name|attrs
 return|;
 block|}
+comment|/** Implementation of {@link RelDigest}. */
 specifier|private
 class|class
 name|InnerRelDigest
 implements|implements
 name|RelDigest
 block|{
-comment|/**      * Cache of hash code.      */
+comment|/** Cached hash code. */
 specifier|private
 name|int
 name|hash

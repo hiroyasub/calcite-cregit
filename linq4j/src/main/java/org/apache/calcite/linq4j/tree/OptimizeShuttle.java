@@ -2097,7 +2097,7 @@ argument_list|)
 operator|)
 return|;
 block|}
-comment|/**    * Treats two expressions equal even if they represent different null types    */
+comment|/** Compares two expressions for equality, treating them as equal even if they    * represent different null types. */
 specifier|private
 specifier|static
 name|boolean

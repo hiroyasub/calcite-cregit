@@ -1932,7 +1932,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * A function that adds a number to the first column of input cursor    */
+comment|/** Table function that adds a number to the first column of input cursor. */
 specifier|public
 specifier|static
 name|QueryableTable
@@ -3489,7 +3489,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** for Overloaded user-defined functions that have Double and BigDecimal      * arguments will goes wrong      * */
+comment|/** For overloaded user-defined functions that have {@code double} and      * {@code BigDecimal} arguments will go wrong. */
 specifier|public
 specifier|static
 name|double
@@ -3740,7 +3740,7 @@ name|accumulator
 return|;
 block|}
 block|}
-comment|/** A generic interface for defining user defined aggregate functions    *    * @param<A> accumulator type    * @param<V> value type    * @param<R> result type */
+comment|/** A generic interface for defining user-defined aggregate functions.    *    * @param<A> accumulator type    * @param<V> value type    * @param<R> result type */
 specifier|private
 interface|interface
 name|MyGenericAggFunction

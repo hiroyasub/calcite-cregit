@@ -188,7 +188,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Time extract operator conversion for expressions like EXTRACT(timeUnit FROM arg)  * Unit can be SECOND, MINUTE, HOUR, DAY (day of month),  * DOW (day of week), DOY (day of year), WEEK (week of week year),  * MONTH (1 through 12), QUARTER (1 through 4), or YEAR  **/
+comment|/**  * Time extract operator conversion for expressions like  * {@code EXTRACT(timeUnit FROM arg)}.  *  *<p>Unit can be SECOND, MINUTE, HOUR, DAY (day of month), DOW (day of week),  * DOY (day of year), WEEK (week of week year), MONTH (1 through 12), QUARTER (1  * through 4), or YEAR.  */
 end_comment
 
 begin_class

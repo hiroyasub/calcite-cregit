@@ -205,7 +205,7 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Constructs a TableAccessMap for a single table    *    * @param table fully qualified name of the table, represented as a list    * @param mode  access mode for the table    */
+comment|/**    * Constructs a TableAccessMap for a single table.    *    * @param table fully qualified name of the table, represented as a list    * @param mode  access mode for the table    */
 specifier|public
 name|TableAccessMap
 parameter_list|(
@@ -237,7 +237,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return set of qualified names for all tables accessed    */
+comment|/**    * Returns a set of qualified names for all tables accessed.    */
 specifier|public
 name|Set
 argument_list|<

@@ -124,7 +124,7 @@ class|class
 name|SqlTypeTransforms
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * Parameter type-inference transform strategy where a derived type is    * transformed into the same type but nullable if any of a calls operands is    * nullable    */
+comment|/**    * Parameter type-inference transform strategy where a derived type is    * transformed into the same type but nullable if any of a calls operands is    * nullable.    */
 specifier|public
 specifier|static
 specifier|final

@@ -120,7 +120,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * @return the specific RelTrait type associated with this RelTraitDef.    */
+comment|/** Returns the specific RelTrait type associated with this RelTraitDef. */
 specifier|public
 specifier|abstract
 name|Class
@@ -130,7 +130,7 @@ argument_list|>
 name|getTraitClass
 parameter_list|()
 function_decl|;
-comment|/**    * @return a simple name for this RelTraitDef (for use in    * {@link org.apache.calcite.rel.RelNode#explain}).    */
+comment|/** Returns a simple name for this RelTraitDef (for use in    * {@link org.apache.calcite.rel.RelNode#explain}). */
 specifier|public
 specifier|abstract
 name|String

@@ -204,7 +204,7 @@ name|SqlDynamicParam
 name|param
 parameter_list|)
 function_decl|;
-comment|/**    * Visits an interval qualifier    *    * @param intervalQualifier Interval qualifier    * @see SqlIntervalQualifier#accept(SqlVisitor)    */
+comment|/**    * Visits an interval qualifier.    *    * @param intervalQualifier Interval qualifier    * @see SqlIntervalQualifier#accept(SqlVisitor)    */
 name|R
 name|visit
 parameter_list|(

@@ -133,7 +133,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Return RelFactories struct for the convention which can be used to build RelNode    */
+comment|/** Return RelFactories struct for this convention. It can can be used to    * build RelNode. */
 specifier|default
 name|RelFactories
 operator|.

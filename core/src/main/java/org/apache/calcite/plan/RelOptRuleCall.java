@@ -601,7 +601,7 @@ name|getMetadataQuery
 argument_list|()
 return|;
 block|}
-comment|/**    * @return list of parents of the first relational expression    */
+comment|/**    * Returns a list of parents of the first relational expression.    */
 specifier|public
 name|List
 argument_list|<

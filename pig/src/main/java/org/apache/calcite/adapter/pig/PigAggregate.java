@@ -1069,7 +1069,7 @@ name|inputField
 operator|)
 return|;
 block|}
-comment|/**    * A agg function call like<code>COUNT(DISTINCT COL)</code> in Pig is    * achieved via two statements in a FOREACH that follows a GROUP statement:    *    *<blockquote>    *<code>    * TABLE = GROUP TABLE ALL;<br>    * TABLE = FOREACH TABLE {<br>    *&nbsp;&nbsp;<b>COL.DISTINCT = DISTINCT COL;<br>    *&nbsp;&nbsp;GENERATE COUNT(COL.DISTINCT) AS C;</b><br>    * }</code>    *</blockquote>    */
+comment|/**    * Returns the calls to aggregate functions that have the {@code DISTINT} flag.    *    *<p>An aggregate function call like<code>COUNT(DISTINCT COL)</code> in Pig    * is achieved via two statements in a {@code FOREACH} that follows a    * {@code GROUP} statement:    *    *<blockquote>    *<code>    * TABLE = GROUP TABLE ALL;<br>    * TABLE = FOREACH TABLE {<br>    *&nbsp;&nbsp;<b>COL.DISTINCT = DISTINCT COL;<br>    *&nbsp;&nbsp;GENERATE COUNT(COL.DISTINCT) AS C;</b><br>    * }</code>    *</blockquote>    */
 specifier|private
 name|List
 argument_list|<

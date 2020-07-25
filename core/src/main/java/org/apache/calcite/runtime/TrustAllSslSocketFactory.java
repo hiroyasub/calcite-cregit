@@ -367,7 +367,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * @see javax.net.SocketFactory#getDefault()    */
+comment|/**    * Returns a copy of the environment's default socket factory.    *    * @see javax.net.SocketFactory#getDefault()    */
 specifier|public
 specifier|static
 name|TrustAllSslSocketFactory

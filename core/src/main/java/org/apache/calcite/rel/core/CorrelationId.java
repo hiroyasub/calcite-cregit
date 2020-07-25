@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Describes the necessary parameters for an implementation in order to  * identify and set dynamic variables  */
+comment|/**  * Describes the necessary parameters for an implementation in order to  * identify and set dynamic variables.  */
 end_comment
 
 begin_class

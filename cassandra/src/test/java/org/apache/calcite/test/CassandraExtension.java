@@ -672,7 +672,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Register cassandra resource in root context so it can be shared with other tests    */
+comment|/** Registers a Cassandra resource in root context so it can be shared with    * other tests. */
 specifier|private
 specifier|static
 name|CassandraResource
@@ -774,6 +774,7 @@ literal|"Cassandra tests disabled"
 argument_list|)
 return|;
 block|}
+comment|/** Cassandra resource. */
 specifier|private
 specifier|static
 class|class

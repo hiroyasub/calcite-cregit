@@ -4751,7 +4751,7 @@ name|getObject
 parameter_list|()
 function_decl|;
 block|}
-comment|/** What kind of type? */
+comment|/** Whether a type is primitive (e.g. {@code int}),    * a box type for a primitive (e.g. {@code java.lang.Integer}),    * or something else. */
 specifier|public
 enum|enum
 name|Flavor

@@ -87,7 +87,7 @@ extends|extends
 name|FilterWriter
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * directive for increasing the indentation level    */
+comment|/**    * Directive for increasing the indentation level.    */
 specifier|public
 specifier|static
 specifier|final
@@ -96,7 +96,7 @@ name|INDENT
 init|=
 literal|0xF0000001
 decl_stmt|;
-comment|/**    * directive for decreasing the indentation level    */
+comment|/**    * Directive for decreasing the indentation level.    */
 specifier|public
 specifier|static
 specifier|final
@@ -105,7 +105,7 @@ name|OUTDENT
 init|=
 literal|0xF0000002
 decl_stmt|;
-comment|/**    * directive for beginning an SQL string literal    */
+comment|/**    * Directive for beginning an SQL string literal.    */
 specifier|public
 specifier|static
 specifier|final
@@ -114,7 +114,7 @@ name|OPEN_SQL_STRING_LITERAL
 init|=
 literal|0xF0000003
 decl_stmt|;
-comment|/**    * directive for ending an SQL string literal    */
+comment|/**    * Directive for ending an SQL string literal.    */
 specifier|public
 specifier|static
 specifier|final
@@ -123,7 +123,7 @@ name|CLOSE_SQL_STRING_LITERAL
 init|=
 literal|0xF0000004
 decl_stmt|;
-comment|/**    * directive for beginning an SQL identifier    */
+comment|/**    * Directive for beginning an SQL identifier.    */
 specifier|public
 specifier|static
 specifier|final
@@ -132,7 +132,7 @@ name|OPEN_SQL_IDENTIFIER
 init|=
 literal|0xF0000005
 decl_stmt|;
-comment|/**    * directive for ending an SQL identifier    */
+comment|/**    * Directive for ending an SQL identifier.    */
 specifier|public
 specifier|static
 specifier|final
@@ -141,7 +141,7 @@ name|CLOSE_SQL_IDENTIFIER
 init|=
 literal|0xF0000006
 decl_stmt|;
-comment|/**    * tab indentation    */
+comment|/**    * Tab indentation.    */
 specifier|public
 specifier|static
 specifier|final
@@ -150,7 +150,7 @@ name|INDENT_TAB
 init|=
 literal|"\t"
 decl_stmt|;
-comment|/**    * four-space indentation    */
+comment|/**    * Four-space indentation.    */
 specifier|public
 specifier|static
 specifier|final

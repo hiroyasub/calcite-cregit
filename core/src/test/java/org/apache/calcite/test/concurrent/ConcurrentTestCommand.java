@@ -59,7 +59,7 @@ name|markToFail
 parameter_list|()
 function_decl|;
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * Indicates that a command should have failed, but instead succeeded, which    * is a test error    */
+comment|/**    * Indicates that a command should have failed, but instead succeeded, which    * is a test error.    */
 class|class
 name|ShouldHaveFailedException
 extends|extends

@@ -55,7 +55,7 @@ name|BlockBuilder
 name|block
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the current code block    * @return current code block    */
+comment|/**    * Returns the current code block.    */
 name|BlockBuilder
 name|currentBlock
 parameter_list|()

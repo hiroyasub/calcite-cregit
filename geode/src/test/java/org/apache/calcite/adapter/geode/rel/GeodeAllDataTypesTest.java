@@ -236,7 +236,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Test with different types of data like boolean, time, timestamp  */
+comment|/** Test with different types of data, like BOOLEAN, TIME, TIMESTAMP. */
 end_comment
 
 begin_class

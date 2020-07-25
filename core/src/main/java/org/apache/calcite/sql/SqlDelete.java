@@ -302,7 +302,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return the identifier for the target table of the deletion    */
+comment|/**    * Returns the identifier for the target table of the deletion.    */
 specifier|public
 name|SqlNode
 name|getTargetTable
@@ -312,7 +312,7 @@ return|return
 name|targetTable
 return|;
 block|}
-comment|/**    * @return the alias for the target table of the deletion    */
+comment|/**    * Returns the alias for the target table of the deletion.    */
 specifier|public
 name|SqlIdentifier
 name|getAlias

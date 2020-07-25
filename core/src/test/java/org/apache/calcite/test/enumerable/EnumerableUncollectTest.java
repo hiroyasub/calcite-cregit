@@ -87,6 +87,10 @@ name|Test
 import|;
 end_import
 
+begin_comment
+comment|/** Test for {@link EnumerableUncollect}. */
+end_comment
+
 begin_class
 class|class
 name|EnumerableUncollectTest

@@ -1701,7 +1701,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Takes the difference between two predicates, removing from the first any    * predicates also in the second    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return MINUS'd predicate list    */
+comment|/**    * Takes the difference between two predicates, removing from the first any    * predicates also in the second.    *    * @param rexBuilder rexBuilder used to construct AND'd RexNode    * @param pred1      first predicate    * @param pred2      second predicate    * @return MINUS'd predicate list    */
 specifier|public
 specifier|static
 name|RexNode
@@ -1858,7 +1858,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**    * Forms two bitmaps by splitting the columns in a bitmap according to    * whether or not the column references the child input or is an expression    * @param projExprs Project expressions    * @param groupKey  Bitmap whose columns will be split    * @param baseCols  Bitmap representing columns from the child input    * @param projCols  Bitmap representing non-child columns    */
+comment|/**    * Forms two bitmaps by splitting the columns in a bitmap according to    * whether or not the column references the child input or is an expression.    *    * @param projExprs Project expressions    * @param groupKey  Bitmap whose columns will be split    * @param baseCols  Bitmap representing columns from the child input    * @param projCols  Bitmap representing non-child columns    */
 specifier|public
 specifier|static
 name|void
@@ -1969,7 +1969,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Computes the population size for a set of keys returned from a join    *    * @param joinRel  the join rel    * @param groupKey keys to compute the population for    * @return computed population size    */
+comment|/**    * Computes the population size for a set of keys returned from a join.    *    * @param join_  Join relational operator    * @param groupKey Keys to compute the population for    * @return computed population size    */
 specifier|public
 specifier|static
 name|Double
@@ -1979,7 +1979,7 @@ name|RelMetadataQuery
 name|mq
 parameter_list|,
 name|RelNode
-name|joinRel
+name|join_
 parameter_list|,
 name|ImmutableBitSet
 name|groupKey
@@ -1991,7 +1991,7 @@ init|=
 operator|(
 name|Join
 operator|)
-name|joinRel
+name|join_
 decl_stmt|;
 if|if
 condition|(
@@ -2042,28 +2042,18 @@ decl_stmt|;
 name|RelNode
 name|left
 init|=
-name|joinRel
+name|join
 operator|.
-name|getInputs
+name|getLeft
 argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
 decl_stmt|;
 name|RelNode
 name|right
 init|=
-name|joinRel
+name|join
 operator|.
-name|getInputs
+name|getRight
 argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|1
-argument_list|)
 decl_stmt|;
 comment|// separate the mask into masks for the left and right
 name|RelMdUtil
@@ -2126,7 +2116,7 @@ name|mq
 operator|.
 name|getRowCount
 argument_list|(
-name|joinRel
+name|join
 argument_list|)
 argument_list|)
 return|;
@@ -2201,7 +2191,7 @@ return|return
 name|d
 return|;
 block|}
-comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * semi-join    *    * @param semiJoinRel RelNode representing the semi-join    * @param mq          metadata query    * @param groupKey    keys that the distinct row count will be computed for    * @param predicate   join predicate    * @return number of distinct rows    */
+comment|/**    * Computes the number of distinct rows for a set of keys returned from a    * semi-join.    *    * @param semiJoinRel RelNode representing the semi-join    * @param mq          metadata query    * @param groupKey    keys that the distinct row count will be computed for    * @param predicate   join predicate    * @return number of distinct rows    */
 specifier|public
 specifier|static
 name|Double

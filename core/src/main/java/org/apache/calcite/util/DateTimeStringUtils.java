@@ -75,7 +75,7 @@ name|DateTimeStringUtils
 parameter_list|()
 block|{
 block|}
-comment|/** The SimpleDateFormat string for ISO timestamps, "yyyy-MM-dd'T'HH:mm:ss'Z'"*/
+comment|/** The SimpleDateFormat string for ISO timestamps,    * "yyyy-MM-dd'T'HH:mm:ss'Z'". */
 specifier|public
 specifier|static
 specifier|final

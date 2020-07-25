@@ -618,7 +618,7 @@ name|SqlLiteral
 name|literal
 parameter_list|)
 function_decl|;
-comment|/**    * Validates a {@link SqlIntervalQualifier}    *    * @param qualifier Interval qualifier    */
+comment|/**    * Validates a {@link SqlIntervalQualifier}.    *    * @param qualifier Interval qualifier    */
 name|void
 name|validateIntervalQualifier
 parameter_list|(
@@ -724,7 +724,7 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
-comment|/**    * Validates a COLUMN_LIST parameter    *    * @param function function containing COLUMN_LIST parameter    * @param argTypes function arguments    * @param operands operands passed into the function call    */
+comment|/**    * Validates a COLUMN_LIST parameter.    *    * @param function function containing COLUMN_LIST parameter    * @param argTypes function arguments    * @param operands operands passed into the function call    */
 name|void
 name|validateColumnListParams
 parameter_list|(
@@ -811,7 +811,7 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
-comment|/** @deprecated Use {@link #resolveWindow(SqlNode, SqlValidatorScope)}, which    * does not have the deprecated {@code populateBounds} parameter.    *    * @param populateBounds Whether to populate bounds. Doing so may alter the    *                       definition of the window. It is recommended that    *                       populate bounds when translating to physical algebra,    *                       but not when validating.    */
+comment|/**    * Converts a window specification or window name into a fully-resolved    * window specification.    *    * @deprecated Use {@link #resolveWindow(SqlNode, SqlValidatorScope)}, which    * does not have the deprecated {@code populateBounds} parameter.    *    * @param populateBounds Whether to populate bounds. Doing so may alter the    *                       definition of the window. It is recommended that    *                       populate bounds when translating to physical algebra,    *                       but not when validating.    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -911,7 +911,7 @@ name|RelDataType
 name|type
 parameter_list|)
 function_decl|;
-comment|/**    * Removes a node from the set of validated nodes    *    * @param node node to be removed    */
+comment|/**    * Removes a node from the set of validated nodes.    *    * @param node node to be removed    */
 name|void
 name|removeValidatedNodeType
 parameter_list|(
@@ -1285,7 +1285,7 @@ name|NullCollation
 name|nullCollation
 parameter_list|)
 function_decl|;
-comment|/**      * Returns whether column reference expansion is enabled      */
+comment|/** Returns whether column reference expansion is enabled. */
 annotation|@
 name|ImmutableBeans
 operator|.

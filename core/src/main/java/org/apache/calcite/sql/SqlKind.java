@@ -107,40 +107,40 @@ block|,
 comment|/**    * JOIN operator or compound FROM clause.    *    *<p>A FROM clause with more than one table is represented as if it were a    * join. For example, "FROM x, y, z" is represented as    * "JOIN(x, JOIN(x, y))".</p>    */
 name|JOIN
 block|,
-comment|/**    * Identifier    */
+comment|/** An identifier. */
 name|IDENTIFIER
 block|,
-comment|/**    * A literal.    */
+comment|/** A literal. */
 name|LITERAL
 block|,
 comment|/**    * Function that is not a special function.    *    * @see #FUNCTION    */
 name|OTHER_FUNCTION
 block|,
-comment|/**    * POSITION Function    */
+comment|/** POSITION function. */
 name|POSITION
 block|,
-comment|/**    * EXPLAIN statement    */
+comment|/** EXPLAIN statement. */
 name|EXPLAIN
 block|,
-comment|/**    * DESCRIBE SCHEMA statement    */
+comment|/** DESCRIBE SCHEMA statement. */
 name|DESCRIBE_SCHEMA
 block|,
-comment|/**    * DESCRIBE TABLE statement    */
+comment|/** DESCRIBE TABLE statement. */
 name|DESCRIBE_TABLE
 block|,
-comment|/**    * INSERT statement    */
+comment|/** INSERT statement. */
 name|INSERT
 block|,
-comment|/**    * DELETE statement    */
+comment|/** DELETE statement. */
 name|DELETE
 block|,
-comment|/**    * UPDATE statement    */
+comment|/** UPDATE statement. */
 name|UPDATE
 block|,
-comment|/**    * "ALTER scope SET option = value" statement.    */
+comment|/** "{@code ALTER scope SET option = value}" statement. */
 name|SET_OPTION
 block|,
-comment|/**    * A dynamic parameter.    */
+comment|/** A dynamic parameter. */
 name|DYNAMIC_PARAM
 block|,
 comment|/**    * ORDER BY clause.    *    * @see #DESCENDING    * @see #NULLS_FIRST    * @see #NULLS_LAST    */
@@ -152,239 +152,239 @@ block|,
 comment|/** Item in WITH clause. */
 name|WITH_ITEM
 block|,
-comment|/** Item expression */
+comment|/** Item expression. */
 name|ITEM
 block|,
-comment|/**    * Union    */
+comment|/** {@code UNION} relational operator. */
 name|UNION
 block|,
-comment|/**    * Except    */
+comment|/** {@code EXCEPT} relational operator (known as {@code MINUS} in some SQL    * dialects). */
 name|EXCEPT
 block|,
-comment|/**    * Intersect    */
+comment|/** {@code INTERSECT} relational operator. */
 name|INTERSECT
 block|,
-comment|/**    * AS operator    */
+comment|/** {@code AS} operator. */
 name|AS
 block|,
-comment|/**    * ARGUMENT_ASSIGNMENT operator, {@code =>}    */
+comment|/** Argument assignment operator, {@code =>}. */
 name|ARGUMENT_ASSIGNMENT
 block|,
-comment|/**    * DEFAULT operator    */
+comment|/** {@code DEFAULT} operator. */
 name|DEFAULT
 block|,
-comment|/**    * OVER operator    */
+comment|/** {@code OVER} operator. */
 name|OVER
 block|,
-comment|/**    * RESPECT NULLS operator    */
+comment|/** {@code RESPECT NULLS} operator. */
 name|RESPECT_NULLS
 argument_list|(
 literal|"RESPECT NULLS"
 argument_list|)
 block|,
-comment|/**    * IGNORE NULLS operator    */
+comment|/** {@code IGNORE NULLS} operator. */
 name|IGNORE_NULLS
 argument_list|(
 literal|"IGNORE NULLS"
 argument_list|)
 block|,
-comment|/**    * FILTER operator    */
+comment|/** {@code FILTER} operator. */
 name|FILTER
 block|,
-comment|/**    * WITHIN_GROUP operator    */
+comment|/** {@code WITHIN GROUP} operator. */
 name|WITHIN_GROUP
 block|,
-comment|/**    * Window specification    */
+comment|/** Window specification. */
 name|WINDOW
 block|,
-comment|/**    * MERGE statement    */
+comment|/** MERGE statement. */
 name|MERGE
 block|,
-comment|/**    * TABLESAMPLE operator    */
+comment|/** TABLESAMPLE relational operator. */
 name|TABLESAMPLE
 block|,
-comment|/**    * MATCH_RECOGNIZE clause    */
+comment|/** MATCH_RECOGNIZE clause. */
 name|MATCH_RECOGNIZE
 block|,
-comment|/**    * SNAPSHOT operator    */
+comment|/** SNAPSHOT operator. */
 name|SNAPSHOT
 block|,
 comment|// binary operators
-comment|/**    * The arithmetic multiplication operator, "*".    */
+comment|/** Arithmetic multiplication operator, "*". */
 name|TIMES
 block|,
-comment|/**    * The arithmetic division operator, "/".    */
+comment|/** Arithmetic division operator, "/". */
 name|DIVIDE
 block|,
-comment|/**    * The arithmetic remainder operator, "MOD" (and "%" in some dialects).    */
+comment|/** Arithmetic remainder operator, "MOD" (and "%" in some dialects). */
 name|MOD
 block|,
-comment|/**    * The arithmetic plus operator, "+".    *    * @see #PLUS_PREFIX    */
+comment|/**    * Arithmetic plus operator, "+".    *    * @see #PLUS_PREFIX    */
 name|PLUS
 block|,
-comment|/**    * The arithmetic minus operator, "-".    *    * @see #MINUS_PREFIX    */
+comment|/**    * Arithmetic minus operator, "-".    *    * @see #MINUS_PREFIX    */
 name|MINUS
 block|,
-comment|/**    * the alternation operator in a pattern expression within a match_recognize clause    */
+comment|/**    * Alternation operator in a pattern expression within a    * {@code MATCH_RECOGNIZE} clause.    */
 name|PATTERN_ALTER
 block|,
-comment|/**    * the concatenation operator in a pattern expression within a match_recognize clause    */
+comment|/**    * Concatenation operator in a pattern expression within a    * {@code MATCH_RECOGNIZE} clause.    */
 name|PATTERN_CONCAT
 block|,
 comment|// comparison operators
-comment|/**    * The "IN" operator.    */
+comment|/** {@code IN} operator. */
 name|IN
 block|,
-comment|/**    * The "NOT IN" operator.    *    *<p>Only occurs in SqlNode trees. Is expanded to NOT(IN ...) before    * entering RelNode land.    */
+comment|/**    * {@code NOT IN} operator.    *    *<p>Only occurs in SqlNode trees. Is expanded to NOT(IN ...) before    * entering RelNode land.    */
 name|NOT_IN
 argument_list|(
 literal|"NOT IN"
 argument_list|)
 block|,
-comment|/**    * The less-than operator, "&lt;".    */
+comment|/** Less-than operator, "&lt;". */
 name|LESS_THAN
 argument_list|(
 literal|"<"
 argument_list|)
 block|,
-comment|/**    * The greater-than operator, "&gt;".    */
+comment|/** Greater-than operator, "&gt;". */
 name|GREATER_THAN
 argument_list|(
 literal|">"
 argument_list|)
 block|,
-comment|/**    * The less-than-or-equal operator, "&lt;=".    */
+comment|/** Less-than-or-equal operator, "&lt;=". */
 name|LESS_THAN_OR_EQUAL
 argument_list|(
 literal|"<="
 argument_list|)
 block|,
-comment|/**    * The greater-than-or-equal operator, "&gt;=".    */
+comment|/** Greater-than-or-equal operator, "&gt;=". */
 name|GREATER_THAN_OR_EQUAL
 argument_list|(
 literal|">="
 argument_list|)
 block|,
-comment|/**    * The equals operator, "=".    */
+comment|/** Equals operator, "=". */
 name|EQUALS
 argument_list|(
 literal|"="
 argument_list|)
 block|,
-comment|/**    * The not-equals operator, "&#33;=" or "&lt;&gt;".    * The latter is standard, and preferred.    */
+comment|/**    * Not-equals operator, "&#33;=" or "&lt;&gt;".    * The latter is standard, and preferred.    */
 name|NOT_EQUALS
 argument_list|(
 literal|"<>"
 argument_list|)
 block|,
-comment|/**    * The is-distinct-from operator.    */
+comment|/** {@code IS DISTINCT FROM} operator. */
 name|IS_DISTINCT_FROM
 block|,
-comment|/**    * The is-not-distinct-from operator.    */
+comment|/** {@code IS NOT DISTINCT FROM} operator. */
 name|IS_NOT_DISTINCT_FROM
 block|,
-comment|/**    * The logical "OR" operator.    */
+comment|/** Logical "OR" operator. */
 name|OR
 block|,
-comment|/**    * The logical "AND" operator.    */
+comment|/** Logical "AND" operator. */
 name|AND
 block|,
 comment|// other infix
-comment|/**    * Dot    */
+comment|/** Dot. */
 name|DOT
 block|,
-comment|/**    * The "OVERLAPS" operator for periods.    */
+comment|/** {@code OVERLAPS} operator for periods. */
 name|OVERLAPS
 block|,
-comment|/**    * The "CONTAINS" operator for periods.    */
+comment|/** {@code CONTAINS} operator for periods. */
 name|CONTAINS
 block|,
-comment|/**    * The "PRECEDES" operator for periods.    */
+comment|/** {@code PRECEDES} operator for periods. */
 name|PRECEDES
 block|,
-comment|/**    * The "IMMEDIATELY PRECEDES" operator for periods.    */
+comment|/** {@code IMMEDIATELY PRECEDES} operator for periods. */
 name|IMMEDIATELY_PRECEDES
 argument_list|(
 literal|"IMMEDIATELY PRECEDES"
 argument_list|)
 block|,
-comment|/**    * The "SUCCEEDS" operator for periods.    */
+comment|/** {@code SUCCEEDS} operator for periods. */
 name|SUCCEEDS
 block|,
-comment|/**    * The "IMMEDIATELY SUCCEEDS" operator for periods.    */
+comment|/** {@code IMMEDIATELY SUCCEEDS} operator for periods. */
 name|IMMEDIATELY_SUCCEEDS
 argument_list|(
 literal|"IMMEDIATELY SUCCEEDS"
 argument_list|)
 block|,
-comment|/**    * The "EQUALS" operator for periods.    */
+comment|/** {@code EQUALS} operator for periods. */
 name|PERIOD_EQUALS
 argument_list|(
 literal|"EQUALS"
 argument_list|)
 block|,
-comment|/**    * The "LIKE" operator.    */
+comment|/** {@code LIKE} operator. */
 name|LIKE
 block|,
-comment|/**    * The "SIMILAR" operator.    */
+comment|/** {@code SIMILAR} operator. */
 name|SIMILAR
 block|,
-comment|/**    * The "~" operator.    */
+comment|/** {@code ~} operator (for POSIX-style regular expressions). */
 name|POSIX_REGEX_CASE_SENSITIVE
 block|,
-comment|/**    * The "~*" operator.    */
+comment|/** {@code ~*} operator (for case-insensitive POSIX-style regular    * expressions). */
 name|POSIX_REGEX_CASE_INSENSITIVE
 block|,
-comment|/**    * The "BETWEEN" operator.    */
+comment|/** {@code BETWEEN} operator. */
 name|BETWEEN
 block|,
-comment|/**    * A "CASE" expression.    */
+comment|/** {@code CASE} expression. */
 name|CASE
 block|,
-comment|/**    * The "NULLIF" operator.    */
+comment|/** {@code NULLIF} operator. */
 name|NULLIF
 block|,
-comment|/**    * The "COALESCE" operator.    */
+comment|/** {@code COALESCE} operator. */
 name|COALESCE
 block|,
-comment|/**    * The "DECODE" function (Oracle).    */
+comment|/** {@code DECODE} function (Oracle). */
 name|DECODE
 block|,
-comment|/**    * The "NVL" function (Oracle).    */
+comment|/** {@code NVL} function (Oracle). */
 name|NVL
 block|,
-comment|/**    * The "GREATEST" function (Oracle).    */
+comment|/** {@code GREATEST} function (Oracle). */
 name|GREATEST
 block|,
-comment|/**    * The "LEAST" function (Oracle).    */
+comment|/** {@code LEAST} function (Oracle). */
 name|LEAST
 block|,
-comment|/**    * The "TIMESTAMP_ADD" function (ODBC, SQL Server, MySQL).    */
+comment|/** {@code TIMESTAMP_ADD} function (ODBC, SQL Server, MySQL). */
 name|TIMESTAMP_ADD
 block|,
-comment|/**    * The "TIMESTAMP_DIFF" function (ODBC, SQL Server, MySQL).    */
+comment|/** {@code TIMESTAMP_DIFF} function (ODBC, SQL Server, MySQL). */
 name|TIMESTAMP_DIFF
 block|,
 comment|// prefix operators
-comment|/**    * The logical "NOT" operator.    */
+comment|/** Logical {@code NOT} operator. */
 name|NOT
 block|,
-comment|/**    * The unary plus operator, as in "+1".    *    * @see #PLUS    */
+comment|/**    * Unary plus operator, as in "+1".    *    * @see #PLUS    */
 name|PLUS_PREFIX
 block|,
-comment|/**    * The unary minus operator, as in "-1".    *    * @see #MINUS    */
+comment|/**    * Unary minus operator, as in "-1".    *    * @see #MINUS    */
 name|MINUS_PREFIX
 block|,
-comment|/**    * The "EXISTS" operator.    */
+comment|/** {@code EXISTS} operator. */
 name|EXISTS
 block|,
-comment|/**    * The "SOME" quantification operator (also called "ANY").    */
+comment|/** {@code SOME} quantification operator (also called {@code ANY}). */
 name|SOME
 block|,
-comment|/**    * The "ALL" quantification operator.    */
+comment|/** {@code ALL} quantification operator. */
 name|ALL
 block|,
-comment|/**    * The "VALUES" operator.    */
+comment|/** {@code VALUES} relational operator. */
 name|VALUES
 block|,
 comment|/**    * Explicit table, e.g.<code>select * from (TABLE t)</code> or<code>TABLE    * t</code>. See also {@link #COLLECTION_TABLE}.    */
@@ -393,70 +393,78 @@ block|,
 comment|/**    * Scalar query; that is, a sub-query used in an expression context, and    * returning one row and one column.    */
 name|SCALAR_QUERY
 block|,
-comment|/**    * ProcedureCall    */
+comment|/** Procedure call. */
 name|PROCEDURE_CALL
 block|,
-comment|/**    * NewSpecification    */
+comment|/** New specification. */
 name|NEW_SPECIFICATION
 block|,
-comment|/**    * Special functions in MATCH_RECOGNIZE.    */
+comment|// special functions in MATCH_RECOGNIZE
+comment|/** {@code FINAL} operator in {@code MATCH_RECOGNIZE}. */
 name|FINAL
 block|,
+comment|/** {@code FINAL} operator in {@code MATCH_RECOGNIZE}. */
 name|RUNNING
 block|,
+comment|/** {@code PREV} operator in {@code MATCH_RECOGNIZE}. */
 name|PREV
 block|,
+comment|/** {@code NEXT} operator in {@code MATCH_RECOGNIZE}. */
 name|NEXT
 block|,
+comment|/** {@code FIRST} operator in {@code MATCH_RECOGNIZE}. */
 name|FIRST
 block|,
+comment|/** {@code LAST} operator in {@code MATCH_RECOGNIZE}. */
 name|LAST
 block|,
+comment|/** {@code CLASSIFIER} operator in {@code MATCH_RECOGNIZE}. */
 name|CLASSIFIER
 block|,
+comment|/** {@code MATCH_NUMBER} operator in {@code MATCH_RECOGNIZE}. */
 name|MATCH_NUMBER
 block|,
-comment|/**    * The "SKIP TO FIRST" qualifier of restarting point in a MATCH_RECOGNIZE    * clause.    */
+comment|/** {@code SKIP TO FIRST} qualifier of restarting point in a    * {@code MATCH_RECOGNIZE} clause. */
 name|SKIP_TO_FIRST
 block|,
-comment|/**    * The "SKIP TO LAST" qualifier of restarting point in a MATCH_RECOGNIZE    * clause.    */
+comment|/** {@code SKIP TO LAST} qualifier of restarting point in a    * {@code MATCH_RECOGNIZE} clause. */
 name|SKIP_TO_LAST
 block|,
 comment|// postfix operators
-comment|/**    * DESC in ORDER BY. A parse tree, not a true expression.    */
+comment|/** {@code DESC} operator in {@code ORDER BY}. A parse tree, not a true    * expression. */
 name|DESCENDING
 block|,
-comment|/**    * NULLS FIRST clause in ORDER BY. A parse tree, not a true expression.    */
+comment|/** {@code NULLS FIRST} clause in {@code ORDER BY}. A parse tree, not a true    * expression. */
 name|NULLS_FIRST
 block|,
-comment|/**    * NULLS LAST clause in ORDER BY. A parse tree, not a true expression.    */
+comment|/** {@code NULLS LAST} clause in {@code ORDER BY}. A parse tree, not a true    * expression. */
 name|NULLS_LAST
 block|,
-comment|/**    * The "IS TRUE" operator.    */
+comment|/** {@code IS TRUE} operator. */
 name|IS_TRUE
 block|,
-comment|/**    * The "IS FALSE" operator.    */
+comment|/** {@code IS FALSE} operator. */
 name|IS_FALSE
 block|,
-comment|/**    * The "IS NOT TRUE" operator.    */
+comment|/** {@code IS NOT TRUE} operator. */
 name|IS_NOT_TRUE
 block|,
-comment|/**    * The "IS NOT FALSE" operator.    */
+comment|/** {@code IS NOT FALSE} operator. */
 name|IS_NOT_FALSE
 block|,
-comment|/**    * The "IS UNKNOWN" operator.    */
+comment|/** {@code IS UNKNOWN} operator. */
 name|IS_UNKNOWN
 block|,
-comment|/**    * The "IS NULL" operator.    */
+comment|/** {@code IS NULL} operator. */
 name|IS_NULL
 block|,
-comment|/**    * The "IS NOT NULL" operator.    */
+comment|/** {@code IS NOT NULL} operator. */
 name|IS_NOT_NULL
 block|,
-comment|/**    * The "PRECEDING" qualifier of an interval end-point in a window    * specification.    */
+comment|/** {@code PRECEDING} qualifier of an interval end-point in a window    * specification. */
 name|PRECEDING
 block|,
-comment|/**    * The "FOLLOWING" qualifier of an interval end-point in a window    * specification.    */
+comment|/** {@code FOLLOWING} qualifier of an interval end-point in a window    * specification. */
 name|FOLLOWING
 block|,
 comment|/**    * The field access operator, ".".    *    *<p>(Only used at the RexNode level; at    * SqlNode level, a field-access is part of an identifier.)</p>    */
@@ -465,10 +473,10 @@ block|,
 comment|/**    * Reference to an input field.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|INPUT_REF
 block|,
-comment|/**    * Reference to an input field, with a qualified name and an identifier    *    *<p>(Only used at the RexNode level.)</p>    */
+comment|/**    * Reference to an input field, with a qualified name and an identifier.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|TABLE_INPUT_REF
 block|,
-comment|/**    * Reference to an input field, with pattern var as modifier    *    *<p>(Only used at the RexNode level.)</p>    */
+comment|/**    * Reference to an input field, with pattern var as modifier.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|PATTERN_INPUT_REF
 block|,
 comment|/**    * Reference to a sub-expression computed within the current relational    * operator.    *    *<p>(Only used at the RexNode level.)</p>    */
@@ -496,46 +504,46 @@ block|,
 comment|/**    * The "CURRENT VALUE OF sequence" operator.    */
 name|CURRENT_VALUE
 block|,
-comment|/**    * The "FLOOR" function    */
+comment|/** {@code FLOOR} function. */
 name|FLOOR
 block|,
-comment|/**    * The "CEIL" function    */
+comment|/** {@code CEIL} function. */
 name|CEIL
 block|,
-comment|/**    * The "TRIM" function.    */
+comment|/** {@code TRIM} function. */
 name|TRIM
 block|,
-comment|/**    * The "LTRIM" function (Oracle).    */
+comment|/** {@code LTRIM} function (Oracle). */
 name|LTRIM
 block|,
-comment|/**    * The "RTRIM" function (Oracle).    */
+comment|/** {@code RTRIM} function (Oracle). */
 name|RTRIM
 block|,
-comment|/**    * The "EXTRACT" function.    */
+comment|/** {@code EXTRACT} function. */
 name|EXTRACT
 block|,
-comment|/**    * The "REVERSE" function (SQL Server, MySQL).    */
+comment|/** {@code REVERSE} function (SQL Server, MySQL). */
 name|REVERSE
 block|,
-comment|/**    * Call to a function using JDBC function syntax.    */
+comment|/** Call to a function using JDBC function syntax. */
 name|JDBC_FN
 block|,
-comment|/**    * The MULTISET value constructor.    */
+comment|/** {@code MULTISET} value constructor. */
 name|MULTISET_VALUE_CONSTRUCTOR
 block|,
-comment|/**    * The MULTISET query constructor.    */
+comment|/** {@code MULTISET} query constructor. */
 name|MULTISET_QUERY_CONSTRUCTOR
 block|,
-comment|/**    * The JSON value expression.    */
+comment|/** {@code JSON} value expression. */
 name|JSON_VALUE_EXPRESSION
 block|,
-comment|/**    * The {@code JSON_ARRAYAGG} aggregate function.    */
+comment|/** {@code JSON_ARRAYAGG} aggregate function. */
 name|JSON_ARRAYAGG
 block|,
-comment|/**    * The {@code JSON_OBJECTAGG} aggregate function.    */
+comment|/** {@code JSON_OBJECTAGG} aggregate function. */
 name|JSON_OBJECTAGG
 block|,
-comment|/**    * The "UNNEST" operator.    */
+comment|/** {@code UNNEST} operator. */
 name|UNNEST
 block|,
 comment|/**    * The "LATERAL" qualifier to relations in the FROM clause.    */
@@ -550,13 +558,13 @@ block|,
 comment|/**    * Array Query Constructor, e.g. {@code Array(select deptno from dept)}.    */
 name|ARRAY_QUERY_CONSTRUCTOR
 block|,
-comment|/**    * Map Value Constructor, e.g. {@code Map['washington', 1, 'obama', 44]}.    */
+comment|/** MAP value constructor, e.g. {@code MAP ['washington', 1, 'obama', 44]}. */
 name|MAP_VALUE_CONSTRUCTOR
 block|,
-comment|/**    * Map Query Constructor, e.g. {@code MAP (SELECT empno, deptno FROM emp)}.    */
+comment|/** MAP query constructor,    * e.g. {@code MAP (SELECT empno, deptno FROM emp)}. */
 name|MAP_QUERY_CONSTRUCTOR
 block|,
-comment|/**    * CURSOR constructor, for example,<code>select * from    * TABLE(udx(CURSOR(select ...), x, y, z))</code>    */
+comment|/** {@code CURSOR} constructor, for example,<code>SELECT * FROM    * TABLE(udx(CURSOR(SELECT ...), x, y, z))</code>. */
 name|CURSOR
 block|,
 comment|// internal operators (evaluated in validator) 200-299
@@ -584,6 +592,7 @@ block|,
 comment|/** The {@code GROUPING(e, ...)} function. */
 name|GROUPING
 block|,
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #GROUPING}. */
 block|@
 name|Deprecated

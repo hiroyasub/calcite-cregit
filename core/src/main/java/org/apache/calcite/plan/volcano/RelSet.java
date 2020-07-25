@@ -482,7 +482,7 @@ return|return
 name|parents
 return|;
 block|}
-comment|/**    * Returns the child Relset for current set    */
+comment|/**    * Returns the child RelSet for the current set.    */
 specifier|public
 name|Set
 argument_list|<
@@ -578,7 +578,7 @@ return|return
 name|childSets
 return|;
 block|}
-comment|/**    * @return all of the {@link RelNode}s contained by any subset of this set    * (does not include the subset objects themselves)    */
+comment|/**    * Returns all of the {@link RelNode}s contained by any subset of this set    * (does not include the subset objects themselves).    */
 specifier|public
 name|List
 argument_list|<

@@ -281,7 +281,7 @@ name|ImmutableBitSet
 name|columns
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a list of unique keys, empty list if no key exist,    * the result should be consistent with {@code isKey}    */
+comment|/**    * Returns a list of unique keys, empty list if no key exist,    * the result should be consistent with {@code isKey}.    */
 name|List
 argument_list|<
 name|ImmutableBitSet

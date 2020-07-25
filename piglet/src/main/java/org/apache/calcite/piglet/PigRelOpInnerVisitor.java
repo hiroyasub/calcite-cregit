@@ -415,7 +415,7 @@ name|ArrayDeque
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**    *    * @param plan Pig inner logical plan    * @param walker The walker over Pig logical plan    * @param builder Relational algebra builder    * @throws FrontendException Exception during processing Pig operators    */
+comment|/**    * Creates a PigRelOpInnerVisitor.    *    * @param plan Pig inner logical plan    * @param walker The walker over Pig logical plan    * @param builder Relational algebra builder    * @throws FrontendException Exception during processing Pig operators    */
 name|PigRelOpInnerVisitor
 parameter_list|(
 name|OperatorPlan

@@ -125,6 +125,10 @@ name|assertEquals
 import|;
 end_import
 
+begin_comment
+comment|/** Base class for tests of {@link RexProgram}. */
+end_comment
+
 begin_class
 class|class
 name|RexProgramTestBase
@@ -304,7 +308,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Asserts that given node has expected string representation with account of node type    * @param message extra message that clarifies where the node came from    * @param expected expected string representation of the node    * @param node node to check    */
+comment|/**    * Asserts that a given node has expected string representation with account    * of node type.    *    * @param message extra message that clarifies where the node came from    * @param expected expected string representation of the node    * @param node node to check    */
 specifier|protected
 name|void
 name|assertNode

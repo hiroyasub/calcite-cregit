@@ -3087,7 +3087,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Do not use */
+comment|/** Do not use. */
 annotation|@
 name|Experimental
 specifier|public

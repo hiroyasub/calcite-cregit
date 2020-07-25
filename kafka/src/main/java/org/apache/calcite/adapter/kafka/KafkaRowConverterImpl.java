@@ -131,7 +131,7 @@ name|byte
 index|[]
 argument_list|>
 block|{
-comment|/**    * Generate row schema for a given Kafka topic.    *    * @param topicName, Kafka topic name;    * @return row type    */
+comment|/**    * Generates the row schema for a given Kafka topic.    *    * @param topicName Kafka topic name    * @return row type    */
 annotation|@
 name|Override
 specifier|public
@@ -278,7 +278,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Parse and reformat Kafka message from consumer, to align with row schema    * defined as {@link #rowDataType(String)}.    * @param message, the raw Kafka message record;    * @return fields in the row    */
+comment|/**    * Parses and reformats a Kafka message from the consumer, to align with the    * row schema defined as {@link #rowDataType(String)}.    *    * @param message Raw Kafka message record    * @return fields in the row    */
 annotation|@
 name|Override
 specifier|public

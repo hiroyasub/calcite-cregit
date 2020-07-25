@@ -130,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumerator to read data from {@link Consumer},  * and converted into SQL rows with {@link KafkaRowConverter}.  * @param<K>: type for Kafka message key,  *           refer to {@link ConsumerConfig#KEY_DESERIALIZER_CLASS_CONFIG};  * @param<V>: type for Kafka message value,  *           refer to {@link ConsumerConfig#VALUE_DESERIALIZER_CLASS_CONFIG};  */
+comment|/**  * Enumerator to read data from {@link Consumer},  * and converted into SQL rows with {@link KafkaRowConverter}.  *  * @param<K> Type for Kafka message key,  *           refer to {@link ConsumerConfig#KEY_DESERIALIZER_CLASS_CONFIG};  * @param<V> Type for Kafka message value,  *           refer to {@link ConsumerConfig#VALUE_DESERIALIZER_CLASS_CONFIG};  */
 end_comment
 
 begin_class

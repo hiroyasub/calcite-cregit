@@ -395,7 +395,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return the identifier for the target table of the merge    */
+comment|/** Return the identifier for the target table of this MERGE. */
 specifier|public
 name|SqlNode
 name|getTargetTable
@@ -405,7 +405,7 @@ return|return
 name|targetTable
 return|;
 block|}
-comment|/**    * @return the alias for the target table of the merge    */
+comment|/** Returns the alias for the target table of this MERGE. */
 specifier|public
 name|SqlIdentifier
 name|getAlias
@@ -415,7 +415,7 @@ return|return
 name|alias
 return|;
 block|}
-comment|/**    * @return the source for the merge    */
+comment|/** Returns the source query of this MERGE. */
 specifier|public
 name|SqlNode
 name|getSourceTableRef
@@ -440,7 +440,7 @@ operator|=
 name|tableRef
 expr_stmt|;
 block|}
-comment|/**    * @return the update statement for the merge    */
+comment|/** Returns the UPDATE statement for this MERGE. */
 specifier|public
 name|SqlUpdate
 name|getUpdateCall
@@ -450,7 +450,7 @@ return|return
 name|updateCall
 return|;
 block|}
-comment|/**    * @return the insert statement for the merge    */
+comment|/** Returns the INSERT statement for this MERGE. */
 specifier|public
 name|SqlInsert
 name|getInsertCall
@@ -460,7 +460,7 @@ return|return
 name|insertCall
 return|;
 block|}
-comment|/**    * @return the condition expression to determine whether to update or insert    */
+comment|/** Returns the condition expression to determine whether to UPDATE or    * INSERT. */
 specifier|public
 name|SqlNode
 name|getCondition

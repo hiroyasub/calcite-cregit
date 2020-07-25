@@ -1553,7 +1553,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT    */
+comment|/**    * Tests {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT.    */
 annotation|@
 name|Test
 name|void
@@ -1708,7 +1708,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT using CASE    */
+comment|/**    * Tests {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT    * using CASE.    */
 annotation|@
 name|Test
 name|void
@@ -1826,7 +1826,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT using CASE    */
+comment|/**    * Tests {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT    * using CASE.    */
 annotation|@
 name|Test
 name|void
@@ -2105,7 +2105,7 @@ name|actRightKeys
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
+comment|/**    * Tests {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression.    */
 annotation|@
 name|Test
 name|void
@@ -2451,7 +2451,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
+comment|/**    * Tests {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression.    */
 annotation|@
 name|Test
 name|void
@@ -2797,7 +2797,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
+comment|/**    * Tests {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression.    */
 annotation|@
 name|Test
 name|void
@@ -3199,7 +3199,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
+comment|/**    * Tests {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression.    */
 annotation|@
 name|Test
 name|void

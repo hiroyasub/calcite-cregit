@@ -5786,7 +5786,7 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Remote PreparedStatement insert WITHOUT bind variables    */
+comment|/**    * Remote PreparedStatement insert WITHOUT bind variables.    */
 annotation|@
 name|Test
 name|void
@@ -5907,7 +5907,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Remote PreparedStatement insert WITH bind variables    */
+comment|/**    * Remote PreparedStatement insert WITH bind variables.    */
 annotation|@
 name|Test
 name|void

@@ -1093,7 +1093,7 @@ literal|"Sortedness was not propagated"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Materialized anonymous class for simplicity    */
+comment|/**    * Materialized anonymous class for simplicity.    */
 specifier|private
 specifier|static
 class|class
@@ -2081,7 +2081,7 @@ parameter_list|)
 function_decl|;
 block|}
 block|}
-comment|/** Rule for PhysSort */
+comment|/** Rule for PhysSort. */
 specifier|private
 specifier|static
 class|class
@@ -2357,14 +2357,14 @@ block|}
 block|}
 block|}
 comment|/* RELS */
-comment|/** Market interface for Phys nodes */
+comment|/** Market interface for Phys nodes. */
 specifier|private
 interface|interface
 name|Phys
 extends|extends
 name|RelNode
 block|{ }
-comment|/** Physical Aggregate RelNode */
+comment|/** Physical Aggregate RelNode. */
 specifier|private
 specifier|static
 class|class
@@ -2495,7 +2495,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Physical Project RelNode */
+comment|/** Physical Project RelNode. */
 specifier|private
 specifier|static
 class|class
@@ -2698,7 +2698,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Physical Sort RelNode */
+comment|/** Physical Sort RelNode. */
 specifier|private
 specifier|static
 class|class
@@ -2812,7 +2812,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Physical Table RelNode */
+comment|/** Physical Table RelNode. */
 specifier|private
 specifier|static
 class|class

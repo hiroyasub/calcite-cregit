@@ -174,7 +174,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * DruidSqlOperatorConverter implementation that handles Ceil operations conversions  */
+comment|/**  * DruidSqlOperatorConverter implementation that handles Ceil operations  * conversions.  */
 end_comment
 
 begin_class

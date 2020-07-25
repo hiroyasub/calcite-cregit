@@ -304,7 +304,7 @@ literal|"node"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates an instance with existing settings    * @param settings configuration parameters of ES instance    * @return instance which needs to be explicitly started (using {@link #start()})    */
+comment|/**    * Creates an instance with existing settings.    *    * @param settings Configuration parameters of ES instance    *    * @return instance that needs to be explicitly started (using    * {@link #start()})    */
 specifier|private
 specifier|static
 name|EmbeddedElasticsearchNode
@@ -453,7 +453,7 @@ name|settings
 argument_list|)
 return|;
 block|}
-comment|/**    * Starts current node    */
+comment|/** Starts the current node. */
 specifier|public
 name|void
 name|start

@@ -8015,7 +8015,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Remove correlated variables from the tree at root corRel    *    * @param correlate Correlate    */
+comment|/**    * Removes correlated variables from the tree at root corRel.    *    * @param correlate Correlate    */
 specifier|private
 name|void
 name|removeCorVarFromTree

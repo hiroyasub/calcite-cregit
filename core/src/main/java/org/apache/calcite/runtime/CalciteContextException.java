@@ -262,7 +262,7 @@ operator|=
 name|endPosColumn
 expr_stmt|;
 block|}
-comment|/**    * @return 1-based line number, or 0 for missing position information    */
+comment|/**    * Returns the 1-based line number, or 0 for missing position information.    */
 specifier|public
 name|int
 name|getPosLine
@@ -272,7 +272,7 @@ return|return
 name|posLine
 return|;
 block|}
-comment|/**    * @return 1-based column number, or 0 for missing position information    */
+comment|/**    * Returns the 1-based column number, or 0 for missing position information.    */
 specifier|public
 name|int
 name|getPosColumn
@@ -282,7 +282,7 @@ return|return
 name|posColumn
 return|;
 block|}
-comment|/**    * @return 1-based ending line number, or 0 for missing position information    */
+comment|/**    * Returns the 1-based ending line number, or 0 for missing position    * information.    */
 specifier|public
 name|int
 name|getEndPosLine
@@ -292,7 +292,7 @@ return|return
 name|endPosLine
 return|;
 block|}
-comment|/**    * @return 1-based ending column number, or 0 for missing position    * information    */
+comment|/**    * Returns the 1-based ending column number, or 0 for missing position    * information.    */
 specifier|public
 name|int
 name|getEndPosColumn
@@ -302,7 +302,7 @@ return|return
 name|endPosColumn
 return|;
 block|}
-comment|/**    * @return the input string that is associated with the context    */
+comment|/**    * Returns the input string that is associated with the context.    */
 specifier|public
 name|String
 name|getOriginalStatement
@@ -312,7 +312,7 @@ return|return
 name|originalStatement
 return|;
 block|}
-comment|/**    * @param originalStatement - String to associate with the current context    */
+comment|/**    * Sets the input string to associate with the current context.    */
 specifier|public
 name|void
 name|setOriginalStatement

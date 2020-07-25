@@ -110,7 +110,7 @@ operator|=
 name|sqlType
 expr_stmt|;
 block|}
-comment|/**    * Returns true if and only if this enum should be used inside of a {@link ComplexMetric}    * */
+comment|/** Returns whether this type should be used inside a    * {@link ComplexMetric}. */
 specifier|public
 name|boolean
 name|isComplex
@@ -130,7 +130,7 @@ operator|==
 name|COMPLEX
 return|;
 block|}
-comment|/**    * Returns a DruidType matching the given String type from a Druid metric    * */
+comment|/** Returns a DruidType matching the given String type from a Druid metric. */
 specifier|protected
 specifier|static
 name|DruidType
@@ -232,7 +232,7 @@ name|type
 argument_list|)
 throw|;
 block|}
-comment|/**    * Returns a DruidType matching the String from a meta data query    * */
+comment|/** Returns a DruidType matching the String from a meta data query. */
 specifier|protected
 specifier|static
 name|DruidType

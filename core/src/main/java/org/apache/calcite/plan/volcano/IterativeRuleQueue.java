@@ -582,7 +582,7 @@ specifier|static
 class|class
 name|MatchList
 block|{
-comment|/**      * Rule match queue for SubstitutionRule      */
+comment|/**      * Rule match queue for SubstitutionRule.      */
 specifier|private
 specifier|final
 name|Queue

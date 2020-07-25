@@ -1087,7 +1087,7 @@ name|program
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a program, depending on variant:    *    *<ol>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + (x + 1)) as b    * from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where ((x + y)&gt; 1) and ((x + y)&gt; 1)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where not case    *           when x + 1&gt; 5 then true    *           when y is null then null    *           else false    *           end</code>    *</ol>    */
+comment|/**    * Creates one of several programs. The program generated depends on the    * {@code variant} parameter, as follows:    *    *<ol>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + (x + 1)) as b    * from t(x, y)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where ((x + y)&gt; 1) and ((x + y)&gt; 1)</code>    *<li><code>select (x + y) + (x + 1) as a, (x + x) as b from t(x, y)    * where not case    *           when x + 1&gt; 5 then true    *           when y is null then null    *           else false    *           end</code>    *</ol>    */
 specifier|private
 name|RexProgramBuilder
 name|createProg
@@ -10516,7 +10516,7 @@ name|caseNode
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a CASE condition that contains division, */
+comment|/** Tests a CASE condition that contains division. */
 annotation|@
 name|Test
 name|void
@@ -17429,6 +17429,7 @@ name|expr
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** An operator that overrides the {@link #getStrongPolicyInference}    * method. */
 specifier|private
 specifier|static
 class|class

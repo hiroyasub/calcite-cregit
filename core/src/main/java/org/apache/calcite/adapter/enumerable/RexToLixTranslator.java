@@ -5695,7 +5695,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * For {@code PREV} operator, the offset of {@code inputGetter}    * should be set first    */
+comment|/**    * For {@code PREV} operator, the offset of {@code inputGetter}    * should be set first.    */
 specifier|private
 name|Result
 name|implementPrev

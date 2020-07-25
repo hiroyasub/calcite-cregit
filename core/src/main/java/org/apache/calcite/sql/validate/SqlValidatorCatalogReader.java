@@ -171,6 +171,7 @@ argument_list|>
 name|getSchemaPaths
 parameter_list|()
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#field(RelDataType, String)} */
 annotation|@
 name|Deprecated
@@ -190,6 +191,7 @@ name|SqlNameMatcher
 name|nameMatcher
 parameter_list|()
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#matches(String, String)} */
 annotation|@
 name|Deprecated
@@ -217,6 +219,7 @@ argument_list|>
 name|columnNameList
 parameter_list|)
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#isCaseSensitive()} */
 annotation|@
 name|Deprecated
@@ -230,7 +233,7 @@ name|CalciteSchema
 name|getRootSchema
 parameter_list|()
 function_decl|;
-comment|/** Returns Config settings */
+comment|/** Returns Config settings. */
 name|CalciteConnectionConfig
 name|getConfig
 parameter_list|()

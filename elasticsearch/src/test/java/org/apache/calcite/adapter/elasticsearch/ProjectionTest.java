@@ -266,7 +266,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Checks renaming of fields (also upper, lower cases) during projections  */
+comment|/**  * Checks renaming of fields (also upper, lower cases) during projections.  */
 end_comment
 
 begin_class

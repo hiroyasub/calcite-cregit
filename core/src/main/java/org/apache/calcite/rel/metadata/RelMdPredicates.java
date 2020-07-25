@@ -2635,6 +2635,7 @@ name|input
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @see RelMetadataQuery#getPulledUpPredicates(RelNode) */
 specifier|public
 name|RelOptPredicateList

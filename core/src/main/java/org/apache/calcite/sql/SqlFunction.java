@@ -282,7 +282,7 @@ argument_list|>
 name|paramTypes
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new SqlFunction for a call to a builtin function.    *    * @param name                 Name of builtin function    * @param kind                 kind of operator implemented by function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param category             categorization for function    */
+comment|/**    * Creates a new SqlFunction for a call to a built-in function.    *    * @param name                 Name of built-in function    * @param kind                 kind of operator implemented by function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param category             categorization for function    */
 specifier|public
 name|SqlFunction
 parameter_list|(
@@ -306,7 +306,7 @@ name|category
 parameter_list|)
 block|{
 comment|// We leave sqlIdentifier as null to indicate
-comment|// that this is a builtin.  Same for paramTypes.
+comment|// that this is a built-in.  Same for paramTypes.
 name|this
 argument_list|(
 name|name
@@ -345,7 +345,7 @@ operator|)
 operator|)
 assert|;
 block|}
-comment|/**    * Creates a placeholder SqlFunction for an invocation of a function with a    * possibly qualified name. This name must be resolved into either a builtin    * function or a user-defined function.    *    * @param sqlIdentifier        possibly qualified identifier for function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param paramTypes           array of parameter types    * @param funcType             function category    */
+comment|/**    * Creates a placeholder SqlFunction for an invocation of a function with a    * possibly qualified name. This name must be resolved into either a built-in    * function or a user-defined function.    *    * @param sqlIdentifier        possibly qualified identifier for function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param paramTypes           array of parameter types    * @param funcType             function category    */
 specifier|public
 name|SqlFunction
 parameter_list|(
@@ -496,7 +496,7 @@ operator|.
 name|FUNCTION
 return|;
 block|}
-comment|/**    * @return fully qualified name of function, or null for a builtin function    */
+comment|/**    * Returns the fully-qualified name of function, or null for a built-in    * function.    */
 specifier|public
 name|SqlIdentifier
 name|getSqlIdentifier
@@ -531,7 +531,7 @@ name|getNameAsId
 argument_list|()
 return|;
 block|}
-comment|/**    * @return array of parameter types, or null for builtin function    */
+comment|/**    * Return array of parameter types, or null for built-in function.    */
 specifier|public
 name|List
 argument_list|<
@@ -605,7 +605,7 @@ name|rightPrec
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * @return function category    */
+comment|/**    * Return function category.    */
 annotation|@
 name|Nonnull
 specifier|public

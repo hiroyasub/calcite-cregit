@@ -1284,6 +1284,7 @@ name|transforms
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #withHook(Hook, Consumer)}. */
 annotation|@
 name|SuppressWarnings

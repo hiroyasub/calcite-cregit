@@ -965,7 +965,7 @@ expr_stmt|;
 return|return;
 block|}
 block|}
-comment|/**    * Converts an SqlNode array to a SqlNodeList    */
+comment|/** Converts a SqlNode array to a SqlNodeList. */
 specifier|public
 specifier|static
 name|SqlNodeList
@@ -2531,7 +2531,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B    */
+comment|/**    * Filters an iterator of routines, keeping only those that have the required    * argument types and names.    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B    */
 specifier|private
 specifier|static
 name|Iterator
@@ -2910,7 +2910,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**    * @see Glossary#SQL99 SQL:1999 Part 2 Section 9.4    */
+comment|/**    * Filters an iterator of routines, keeping only those with the best match for    * the actual argument types.    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 9.4    */
 specifier|private
 specifier|static
 name|Iterator

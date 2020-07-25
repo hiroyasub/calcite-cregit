@@ -92,6 +92,7 @@ name|Utilities
 parameter_list|()
 block|{
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link java.util.Objects#equals}. */
 annotation|@
 name|Deprecated

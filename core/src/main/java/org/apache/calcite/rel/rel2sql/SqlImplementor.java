@@ -1320,9 +1320,11 @@ argument_list|)
 block|{     }
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use either {@link #visitRoot(RelNode)} or    * {@link #visitInput(RelNode, int)}. */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|final
 name|Result
@@ -7736,7 +7738,7 @@ name|inputSqlNodes
 argument_list|)
 return|;
 block|}
-comment|/**    * Context for translating MATCH_RECOGNIZE clause    */
+comment|/** Context for translating MATCH_RECOGNIZE clause. */
 specifier|public
 class|class
 name|MatchRecognizeContext
@@ -8472,6 +8474,7 @@ name|expectedClauses
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 3
 comment|/** @deprecated Provide the expected clauses up-front, when you call      * {@link #visitInput(RelNode, int, Set)}, then create a builder using      * {@link #builder(RelNode)}. */
 annotation|@
 name|Deprecated

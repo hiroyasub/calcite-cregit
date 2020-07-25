@@ -722,7 +722,7 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Rewrites a call in place, from bottom up, as follows:      *      *<ol>      *<li>visit operands      *<li>visit call node      *      *<ol>      *<li>rewrite call      *<li>visit the rewritten call      *</ol>      *</ol>      */
+comment|/**      * Rewrites a call in place, from bottom up. Algorithm is as follows:      *      *<ol>      *<li>visit operands      *<li>visit call node      *      *<ol>      *<li>rewrite call      *<li>visit the rewritten call      *</ol>      *</ol>      */
 specifier|public
 name|RexNode
 name|visitCall
@@ -791,7 +791,7 @@ return|return
 name|newCall
 return|;
 block|}
-comment|/**      * Registers node so it will not be computed again      */
+comment|/**      * Registers node so it will not be computed again.      */
 specifier|private
 name|void
 name|register
@@ -848,7 +848,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**      * Lookup registered node      */
+comment|/**      * Looks up a registered node.      */
 specifier|private
 name|RexNode
 name|lookup
@@ -897,7 +897,7 @@ name|key
 argument_list|)
 return|;
 block|}
-comment|/**      * Rewrites a call, if required, or returns the original call      */
+comment|/**      * Rewrites a call, if required, or returns the original call.      */
 specifier|private
 name|RexNode
 name|rewriteCall
@@ -958,7 +958,7 @@ return|return
 name|call
 return|;
 block|}
-comment|/**      * Returns a {@link RexExpander} for a call      */
+comment|/**      * Returns a {@link RexExpander} for a call.      */
 specifier|private
 name|RexExpander
 name|getExpander
@@ -1346,7 +1346,7 @@ specifier|static
 class|class
 name|RexExpander
 block|{
-comment|/**      * Factory for constructing new relational expressions      */
+comment|/**      * Factory for creating relational expressions.      */
 specifier|final
 name|RexBuilder
 name|builder
@@ -1361,7 +1361,7 @@ specifier|final
 name|RelDataType
 name|real8
 decl_stmt|;
-comment|/**      * Constructs a RexExpander      */
+comment|/**      * Creates a RexExpander.      */
 name|RexExpander
 parameter_list|(
 name|RexBuilder
@@ -1433,7 +1433,7 @@ name|RexCall
 name|call
 parameter_list|)
 function_decl|;
-comment|/**      * Makes an exact numeric literal to be used for scaling      *      * @param scale a scale from one to max precision - 1      * @return 10^scale as an exact numeric value      */
+comment|/**      * Makes an exact numeric literal to be used for scaling.      *      * @param scale a scale from one to max precision - 1      * @return 10^scale as an exact numeric value      */
 specifier|protected
 name|RexNode
 name|makeScaleFactor
@@ -1471,7 +1471,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Makes an approximate literal to be used for scaling      *      * @param scale a scale from -99 to 99      * @return 10^scale as an approximate value      */
+comment|/**      * Makes an approximate literal to be used for scaling.      *      * @param scale a scale from -99 to 99      * @return 10^scale as an approximate value      */
 specifier|protected
 name|RexNode
 name|makeApproxScaleFactor
@@ -1585,7 +1585,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/**      * Calculates a power of ten, as a long value      */
+comment|/**      * Calculates a power of ten, as a long value.      */
 specifier|protected
 name|long
 name|powerOfTen
@@ -1627,7 +1627,7 @@ name|longValue
 argument_list|()
 return|;
 block|}
-comment|/**      * Makes an exact, non-nullable literal of Bigint type      */
+comment|/**      * Makes an exact, non-nullable literal of Bigint type.      */
 specifier|protected
 name|RexNode
 name|makeExactLiteral
@@ -1657,7 +1657,7 @@ name|int8
 argument_list|)
 return|;
 block|}
-comment|/**      * Makes an approximate literal of double precision      */
+comment|/**      * Makes an approximate literal of double precision.      */
 specifier|protected
 name|RexNode
 name|makeApproxLiteral
@@ -2113,7 +2113,7 @@ name|scaleDiff
 argument_list|)
 return|;
 block|}
-comment|/**      * Retrieves a decimal node's integer representation      *      * @param decimalNode the decimal value as an opaque type      * @return an integer representation of the decimal value      */
+comment|/**      * Retrieves a decimal node's integer representation.      *      * @param decimalNode the decimal value as an opaque type      * @return an integer representation of the decimal value      */
 specifier|protected
 name|RexNode
 name|decodeValue
@@ -3952,7 +3952,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<blockquote><pre>    * if (value&lt; 0)    *     (value - 0.99...) / (10^scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
+comment|/**    * Expander that rewrites {@code FLOOR(DECIMAL)} expressions.    * Rewrite is as follows:    *    *<blockquote><pre>    * if (value&lt; 0)    *     (value - 0.99...) / (10^scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
 specifier|private
 specifier|static
 class|class
@@ -4147,7 +4147,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<blockquote><pre>    * if (value&gt; 0)    *     (value + 0.99...) / (10 ^ scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
+comment|/**    * Expander that rewrites {@code CEILING(DECIMAL)} expressions.    * Rewrite is as follows:    *    *<blockquote><pre>    * if (value&gt; 0)    *     (value + 0.99...) / (10 ^ scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
 specifier|private
 specifier|static
 class|class
@@ -4710,7 +4710,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**    * An expander that casts decimal arguments as doubles    */
+comment|/**    * Expander that casts DECIMAL arguments as DOUBLE.    */
 specifier|private
 specifier|static
 class|class
@@ -4785,7 +4785,7 @@ name|type
 return|;
 block|}
 block|}
-comment|/**    * An expander that casts decimal arguments as another type    */
+comment|/**    * Expander that casts DECIMAL arguments as another type.    */
 specifier|private
 specifier|abstract
 specifier|static

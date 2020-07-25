@@ -2807,7 +2807,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the rowtype of the input to the program    */
+comment|/**    * Returns the row type of the input to the program.    */
 specifier|public
 name|RelDataType
 name|getInputRowType
@@ -3513,7 +3513,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Shuttle which rewires {@link RexLocalRef} using a list of updated    * references    */
+comment|/**    * Shuttle that rewires {@link RexLocalRef} using a list of updated    * references.    */
 specifier|private
 class|class
 name|UpdateRefShuttle

@@ -81,7 +81,7 @@ name|RelTraitDef
 name|getTraitDef
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the sole input relational expression    *    * @return child relational expression    */
+comment|/**    * Returns the sole input relational expression.    *    * @return child relational expression    */
 name|RelNode
 name|getInput
 parameter_list|()

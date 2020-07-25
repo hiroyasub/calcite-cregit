@@ -11977,7 +11977,7 @@ literal|")) AS t (EXPR$0)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2625">[CALCITE-2625]    * Removing Window Boundaries from SqlWindow of Aggregate Function which do not allow Framing</a>    * */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2625">[CALCITE-2625]    * Removing Window Boundaries from SqlWindow of Aggregate Function which do    * not allow Framing</a>. */
 annotation|@
 name|Test
 name|void
@@ -17093,7 +17093,7 @@ name|expectedPostgresql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case fo    *<a href="https://issues.apache.org/jira/browse/CALCITE-3840">[CALCITE-3840]    * Re-aliasing of VALUES that has column aliases produces wrong SQL in the JDBC adapter</a>*/
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3840">[CALCITE-3840]    * Re-aliasing of VALUES that has column aliases produces wrong SQL in the    * JDBC adapter</a>. */
 annotation|@
 name|Test
 name|void

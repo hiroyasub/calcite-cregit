@@ -1140,7 +1140,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Helper method to return a list of SqlTypeFamily for a given list of relational operands    *    * @param operands List of relational operands    * @return List of SqlTypeFamilies    */
+comment|/**    * Helper method to return a list of SqlTypeFamily for a given list of    * relational operands.    *    * @param operands List of relational operands    * @return List of SqlTypeFamily objects    */
 specifier|private
 specifier|static
 name|List
@@ -1209,7 +1209,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Helper method to return a list of RelDataType for a given list of relational operands    *    * @param operands List of relational operands    * @return List of RelDataTypes    */
+comment|/**    * Helper method to return a list of RelDataType for a given list of    * relational operands.    *    * @param operands List of relational operands    * @return List of RelDataTypes    */
 specifier|private
 specifier|static
 name|List

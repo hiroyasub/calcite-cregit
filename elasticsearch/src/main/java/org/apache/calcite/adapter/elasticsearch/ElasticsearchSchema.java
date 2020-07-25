@@ -525,7 +525,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Queries {@code _alias} definition to automatically detect all indices    *    * @return list of indices    * @throws IOException for any IO related issues    * @throws IllegalStateException if reply is not understood    */
+comment|/**    * Queries {@code _alias} definition to automatically detect all indices.    *    * @return list of indices    * @throws IOException for any IO related issues    * @throws IllegalStateException if reply is not understood    */
 specifier|private
 name|Set
 argument_list|<

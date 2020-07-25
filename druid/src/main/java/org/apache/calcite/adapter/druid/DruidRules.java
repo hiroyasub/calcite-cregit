@@ -2127,7 +2127,7 @@ return|;
 block|}
 block|}
 block|}
-comment|/**    * Rule to Push a Having {@link Filter} into a {@link DruidQuery}    */
+comment|/** Rule to Push a Having {@link Filter} into a {@link DruidQuery}. */
 specifier|public
 specifier|static
 class|class
@@ -3789,7 +3789,7 @@ name|query2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns an array of unique filter references from      * the given list of {@link org.apache.calcite.rel.core.AggregateCall}      * */
+comment|/** Returns an array of unique filter references from the given list of      * {@link org.apache.calcite.rel.core.AggregateCall}s. */
 specifier|private
 name|Set
 argument_list|<

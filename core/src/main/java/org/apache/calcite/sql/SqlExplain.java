@@ -346,7 +346,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return the underlying SQL statement to be explained    */
+comment|/**    * Returns the underlying SQL statement to be explained.    */
 specifier|public
 name|SqlNode
 name|getExplicandum
@@ -356,7 +356,7 @@ return|return
 name|explicandum
 return|;
 block|}
-comment|/**    * @return detail level to be generated    */
+comment|/**    * Return the detail level to be generated.    */
 specifier|public
 name|SqlExplainLevel
 name|getDetailLevel
@@ -390,7 +390,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**    * @return the number of dynamic parameters in the statement    */
+comment|/**    * Returns the number of dynamic parameters in the statement.    */
 specifier|public
 name|int
 name|getDynamicParamCount
@@ -400,7 +400,7 @@ return|return
 name|dynamicParameterCount
 return|;
 block|}
-comment|/**    * @return whether physical plan implementation should be returned    */
+comment|/**    * Returns whether physical plan implementation should be returned.    */
 specifier|public
 name|boolean
 name|withImplementation
@@ -415,7 +415,7 @@ operator|.
 name|PHYSICAL
 return|;
 block|}
-comment|/**    * @return whether type should be returned    */
+comment|/**    * Returns whether type should be returned.    */
 specifier|public
 name|boolean
 name|withType

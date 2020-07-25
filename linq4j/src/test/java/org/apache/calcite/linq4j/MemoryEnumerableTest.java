@@ -110,7 +110,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Tests for {@link org.apache.calcite.linq4j.MemoryEnumerable} */
+comment|/** Tests for {@link org.apache.calcite.linq4j.MemoryEnumerable}. */
 end_comment
 
 begin_class

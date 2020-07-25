@@ -1412,7 +1412,7 @@ name|SEMI
 argument_list|)
 return|;
 block|}
-comment|/**    * Modifies the semijoin condition to reflect the fact that the RHS is now    * the second factor into a join and the LHS is the first    *    * @param multiJoin join factors being optimized    * @param leftAdjustment amount the left RexInputRefs need to be adjusted by    * @param semiJoinCondition condition to be adjusted    * @param leftIdx index of the join factor corresponding to the LHS of the    * semijoin,    * @param rightIdx index of the join factor corresponding to the RHS of the    * semijoin    *    * @return modified semijoin condition    */
+comment|/**    * Modifies the semijoin condition to reflect the fact that the RHS is now    * the second factor into a join and the LHS is the first.    *    * @param multiJoin join factors being optimized    * @param leftAdjustment amount the left RexInputRefs need to be adjusted by    * @param semiJoinCondition condition to be adjusted    * @param leftIdx index of the join factor corresponding to the LHS of the    * semijoin,    * @param rightIdx index of the join factor corresponding to the RHS of the    * semijoin    *    * @return modified semijoin condition    */
 specifier|private
 name|RexNode
 name|adjustSemiJoinCondition
@@ -2933,7 +2933,7 @@ operator|--
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Removes a dimension table from a fact table's list of possible semijoins    *    * @param possibleDimensions possible dimension tables associated with the    * fact table    * @param factIdx index corresponding to fact table    * @param dimIdx index corresponding to dimension table    */
+comment|/**    * Removes a dimension table from a fact table's list of possible semi-joins.    *    * @param possibleDimensions possible dimension tables associated with the    * fact table    * @param factIdx index corresponding to fact table    * @param dimIdx index corresponding to dimension table    */
 specifier|private
 name|void
 name|removePossibleSemiJoin
@@ -3000,7 +3000,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * @param factIdx index corresponding to the desired factor    *    * @return optimal semijoin for the specified factor; may be the factor    * itself if semijoins are not chosen for the factor    */
+comment|/**    * Returns the optimal semijoin for the specified factor; may be the factor    * itself if semijoins are not chosen for the factor.    *    * @param factIdx Index corresponding to the desired factor    */
 specifier|public
 name|RelNode
 name|getChosenSemiJoin

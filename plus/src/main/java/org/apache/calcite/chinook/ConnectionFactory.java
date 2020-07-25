@@ -64,7 +64,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Wrapping connection factory for quidem  */
+comment|/**  * Wrapping connection factory for Quidem.  */
 end_comment
 
 begin_class
@@ -111,7 +111,7 @@ name|connection
 argument_list|()
 return|;
 block|}
-comment|/**    * Wrapping with Fairy environmental decoration    */
+comment|/**    * Wrapping with Fairy environmental decoration.    */
 specifier|public
 enum|enum
 name|DatabaseWrapper

@@ -1147,7 +1147,7 @@ literal|"cat1=b; cat3=z; EXPR$2=7.0; EXPR$3=42.0"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Testing {@link org.apache.calcite.sql.SqlKind#ANY_VALUE} aggregate function    */
+comment|/** Tests the {@link org.apache.calcite.sql.SqlKind#ANY_VALUE} aggregate    * function. */
 annotation|@
 name|Test
 name|void
@@ -1511,7 +1511,7 @@ literal|"cat1=null; EXPR$1=1"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * {@code select max(cast(_MAP['foo'] as integer)) from tbl}    */
+comment|/** Tests aggregation with cast,    * {@code select max(cast(_MAP['foo'] as integer)) from tbl}. */
 annotation|@
 name|Test
 name|void

@@ -638,7 +638,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Schema mapped onto a Cassandra column family  */
+comment|/**  * Schema mapped onto a Cassandra column family.  */
 end_comment
 
 begin_class
@@ -1513,7 +1513,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Get all primary key columns from the underlying CQL table    *    * @return A list of field names that are part of the partition and clustering keys    */
+comment|/**    * Returns all primary key columns from the underlying CQL table.    *    * @return A list of field names that are part of the partition and clustering keys    */
 name|Pair
 argument_list|<
 name|List
@@ -1825,7 +1825,7 @@ return|return
 name|keyCollations
 return|;
 block|}
-comment|/** Add all materialized views defined in the schema to this column family    */
+comment|/** Adds all materialized views defined in the schema to this column family. */
 specifier|private
 name|void
 name|addMaterializedViews

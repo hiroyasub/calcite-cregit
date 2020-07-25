@@ -2170,7 +2170,7 @@ name|groupSets
 argument_list|)
 return|;
 block|}
-comment|/** What kind of roll-up is it? */
+comment|/** Describes the kind of roll-up. */
 specifier|public
 enum|enum
 name|Group
@@ -2523,7 +2523,7 @@ specifier|final
 name|boolean
 name|filter
 decl_stmt|;
-comment|/**      * Creates an AggCallBinding      *      * @param typeFactory  Type factory      * @param aggFunction  Aggregate function      * @param operands     Data types of operands      * @param groupCount   Number of columns in the GROUP BY clause      * @param filter       Whether the aggregate function has a FILTER clause      */
+comment|/**      * Creates an AggCallBinding.      *      * @param typeFactory  Type factory      * @param aggFunction  Aggregate function      * @param operands     Data types of operands      * @param groupCount   Number of columns in the GROUP BY clause      * @param filter       Whether the aggregate function has a FILTER clause      */
 specifier|public
 name|AggCallBinding
 parameter_list|(

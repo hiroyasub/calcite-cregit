@@ -388,7 +388,7 @@ return|return
 name|rule
 return|;
 block|}
-comment|/**    * Sets the rule this operand belongs to    *    * @param rule containing rule    */
+comment|/**    * Sets the rule this operand belongs to.    *    * @param rule containing rule    */
 specifier|public
 name|void
 name|setRule
@@ -697,7 +697,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**    * @return relational expression class matched by this operand    */
+comment|/**    * Returns relational expression class matched by this operand.    */
 specifier|public
 name|Class
 argument_list|<

@@ -1172,6 +1172,7 @@ return|return
 name|windowCall
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @see Util#deprecated(Object, boolean) */
 specifier|static
 name|void

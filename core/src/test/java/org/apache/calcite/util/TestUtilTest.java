@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for TestUtil  */
+comment|/**  * Tests for TestUtil.  */
 end_comment
 
 begin_class

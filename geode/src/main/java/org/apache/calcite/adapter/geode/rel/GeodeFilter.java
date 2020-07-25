@@ -850,7 +850,7 @@ literal|""
 argument_list|)
 return|;
 block|}
-comment|/**      *  Get the field name for the left node to use for IN SET query      */
+comment|/** Returns the field name for the left node to use for {@code IN SET}      * query. */
 specifier|private
 name|String
 name|getLeftNodeFieldName
@@ -940,7 +940,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      *  Check if we can use IN SET Query clause to improve query performance      */
+comment|/** Returns whether we can use the {@code IN SET} query clause to      * improve query performance. */
 specifier|private
 name|boolean
 name|useInSetQueryClause
@@ -1072,7 +1072,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**      * Creates OQL IN SET predicate string      */
+comment|/** Creates OQL {@code IN SET} predicate string. */
 specifier|private
 name|String
 name|translateInSet

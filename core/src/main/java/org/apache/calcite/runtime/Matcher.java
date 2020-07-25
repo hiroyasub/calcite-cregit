@@ -1820,7 +1820,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Represents a Tuple of a symbol and a row    *    * @param<E> Type of Row    */
+comment|/**    * A 2-tuple consisting of a symbol and a row.    *    * @param<E> Type of Row    */
 specifier|static
 class|class
 name|Tuple

@@ -627,7 +627,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return the character-set prefix of an sql string literal; returns null    * if there is none    */
+comment|/** Returns the character-set prefix of a SQL string literal; returns null if    * there is none. */
 specifier|public
 specifier|static
 name|String
@@ -790,7 +790,8 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**    * @deprecated this method is not localized for Farrago standards    */
+comment|// CHECKSTYLE: IGNORE 1
+comment|/** @deprecated this method is not localized for Farrago standards */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -820,7 +821,8 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**    * @deprecated Does not parse SQL:99 milliseconds    */
+comment|// CHECKSTYLE: IGNORE 1
+comment|/** @deprecated Does not parse SQL:99 milliseconds */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -850,7 +852,8 @@ name|s
 argument_list|)
 return|;
 block|}
-comment|/**    * @deprecated this method is not localized for Farrago standards    */
+comment|// CHECKSTYLE: IGNORE 1
+comment|/** @deprecated this method is not localized for Farrago standards */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1356,7 +1359,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**    * Checks if the date/time format is valid    *    * @param pattern {@link SimpleDateFormat}  pattern    */
+comment|/**    * Checks if the date/time format is valid, throws if not.    *    * @param pattern {@link SimpleDateFormat}  pattern    */
 specifier|public
 specifier|static
 name|void

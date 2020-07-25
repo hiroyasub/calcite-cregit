@@ -694,7 +694,7 @@ return|return
 literal|0.1d
 return|;
 block|}
-comment|/**    * Generates a cast from one row type to another    *    * @param rexBuilder RexBuilder to use for constructing casts    * @param lhsRowType target row type    * @param rhsRowType source row type; fields must be 1-to-1 with lhsRowType,    *                   in same order    * @return cast expressions    */
+comment|/**    * Generates a cast from one row type to another.    *    * @param rexBuilder RexBuilder to use for constructing casts    * @param lhsRowType target row type    * @param rhsRowType source row type; fields must be 1-to-1 with lhsRowType,    *                   in same order    * @return cast expressions    */
 specifier|public
 specifier|static
 name|List
@@ -2963,7 +2963,7 @@ return|return
 name|conjuctions
 return|;
 block|}
-comment|/**    * Returns whether a given node contains a RexCall with a specified operator    *    * @param operator Operator to look for    * @param node     a RexNode tree    */
+comment|/**    * Returns whether a given node contains a RexCall with a specified operator.    *    * @param operator Operator to look for    * @param node     a RexNode tree    */
 specifier|public
 specifier|static
 name|RexCall
@@ -3475,7 +3475,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Determines whether any operand of a set requires decimal expansion    */
+comment|/**    * Determines whether any operand of a set requires decimal expansion.    */
 specifier|public
 specifier|static
 name|boolean

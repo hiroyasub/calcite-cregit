@@ -26,13 +26,13 @@ name|JoinConditionType
 implements|implements
 name|Symbolizable
 block|{
-comment|/**    * Join clause has no condition, for example "FROM EMP, DEPT"    */
+comment|/**    * Join clause has no condition, for example "{@code FROM EMP, DEPT}".    */
 name|NONE
 block|,
-comment|/**    * Join clause has an ON condition, for example "FROM EMP JOIN DEPT ON    * EMP.DEPTNO = DEPT.DEPTNO"    */
+comment|/**    * Join clause has an {@code ON} condition,    * for example "{@code FROM EMP JOIN DEPT ON EMP.DEPTNO = DEPT.DEPTNO}".    */
 name|ON
 block|,
-comment|/**    * Join clause has a USING condition, for example "FROM EMP JOIN DEPT    * USING (DEPTNO)"    */
+comment|/**    * Join clause has a {@code USING} condition,    * for example "{@code FROM EMP JOIN DEPT USING (DEPTNO)}".    */
 name|USING
 block|}
 end_enum

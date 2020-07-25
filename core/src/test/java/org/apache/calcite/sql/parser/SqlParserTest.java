@@ -8165,7 +8165,7 @@ name|expected2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Should fail since the first statement lacks semicolon */
+comment|/** Should fail since the first statement lacks semicolon. */
 annotation|@
 name|Test
 name|void
@@ -8185,7 +8185,7 @@ literal|"(?s).*Encountered \"delete\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Should fail since the third statement lacks semicolon */
+comment|/** Should fail since the third statement lacks semicolon. */
 annotation|@
 name|Test
 name|void
@@ -31057,7 +31057,7 @@ literal|"(?s).*Encountered \"from\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that applying member function of a specific type as a suffix function    */
+comment|/** Tests applying a member function of a specific type as a suffix    * function. */
 annotation|@
 name|Test
 name|void

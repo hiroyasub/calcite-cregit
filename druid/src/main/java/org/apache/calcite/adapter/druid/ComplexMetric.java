@@ -48,7 +48,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to store information about available complex metrics in the Druid Adapter  * */
+comment|/**  * Stores information about available complex metrics in the Druid Adapter.  */
 end_comment
 
 begin_class
@@ -56,13 +56,13 @@ specifier|public
 class|class
 name|ComplexMetric
 block|{
-comment|/**    * The underlying metric column this complex metric represents    * */
+comment|/** The underlying metric column that this complex metric represents. */
 specifier|private
 specifier|final
 name|String
 name|metricName
 decl_stmt|;
-comment|/**    * The type of this metric    * */
+comment|/** The type of this metric. */
 specifier|private
 specifier|final
 name|DruidType

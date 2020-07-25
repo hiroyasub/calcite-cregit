@@ -5540,7 +5540,7 @@ argument_list|()
 operator|)
 return|;
 block|}
-comment|/** Object to describe a Case branch */
+comment|/** Object to describe a CASE branch. */
 specifier|static
 specifier|final
 class|class
@@ -5804,7 +5804,7 @@ name|ret
 return|;
 block|}
 block|}
-comment|/**    * Decides whether it is safe to flatten the given case part into AND/ORs    */
+comment|/**    * Decides whether it is safe to flatten the given CASE part into ANDs/ORs.    */
 enum|enum
 name|SafeRexVisitor
 implements|implements

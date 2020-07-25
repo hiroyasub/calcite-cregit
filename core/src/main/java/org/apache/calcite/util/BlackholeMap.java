@@ -344,7 +344,7 @@ name|of
 argument_list|()
 return|;
 block|}
-comment|/**    * Gets an instance of {@code BlackholeMap}    *    * @param<K> type of the keys for the map    * @param<V> type of the values for the map    * @return a blackhole map    */
+comment|/**    * Gets an instance of {@code BlackholeMap}.    *    * @param<K> type of the keys for the map    * @param<V> type of the values for the map    * @return a blackhole map    */
 annotation|@
 name|SuppressWarnings
 argument_list|(

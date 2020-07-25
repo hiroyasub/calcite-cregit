@@ -355,7 +355,7 @@ begin_class
 class|class
 name|DeterministicTest
 block|{
-comment|/**    * Class to test @Deterministic annotation    */
+comment|/** Class to test {@code @Deterministic} annotation. */
 specifier|public
 specifier|static
 class|class
@@ -394,7 +394,7 @@ literal|2
 return|;
 block|}
 block|}
-comment|/**    * Class to test @NonDeterministic annotation    */
+comment|/** Class to test {@code @NonDeterministic} annotation. */
 annotation|@
 name|Deterministic
 specifier|public

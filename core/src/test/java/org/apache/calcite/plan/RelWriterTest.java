@@ -4458,7 +4458,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**    * Mock a {@link RelNode} for sql:    * select count(*) over (partition by {@code partitionKeyNames}    * order by {@code orderKeyNames}) from {@code table}    * @param table Table name    * @param partitionKeyNames Partition by column names, may empty, can not be null    * @param orderKeyNames Order by column names, may empty, can not be null    * @return RelNode for the sql    */
+comment|/**    * Creates a mock {@link RelNode} that contains OVER. The SQL is as follows:    *    *<blockquote>    * select count(*) over (partition by {@code partitionKeyNames}<br>    * order by {@code orderKeyNames}) from {@code table}    *</blockquote>    *    * @param table Table name    * @param partitionKeyNames Partition by column names, may empty, can not be    * null    * @param orderKeyNames Order by column names, may empty, can not be null    * @return RelNode for the SQL    */
 specifier|private
 name|RelNode
 name|mockCountOver

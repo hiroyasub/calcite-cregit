@@ -190,7 +190,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Class to represent Pig UDF objects  */
+comment|/** Pig user-defined function. */
 end_comment
 
 begin_class

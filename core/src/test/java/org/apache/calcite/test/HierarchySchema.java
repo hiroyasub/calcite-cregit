@@ -251,7 +251,7 @@ literal|4
 argument_list|)
 block|,   }
 decl_stmt|;
-comment|/**    * Hierarchy representing manager - subordinate    */
+comment|/** Hierarchy representing manager - subordinate. */
 specifier|public
 specifier|static
 class|class

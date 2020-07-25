@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link KafkaRowConverter} for test, both key and value are saved as byte[].  */
+comment|/**  * Implementation of {@link KafkaRowConverter} for testing. Both key and value  * are saved as {@code byte[]}.  */
 end_comment
 
 begin_class
@@ -128,7 +128,7 @@ argument_list|,
 name|String
 argument_list|>
 block|{
-comment|/**    * Generate row schema for a given Kafka topic.    *    * @param topicName, Kafka topic name;    * @return row type    */
+comment|/**    * Generates a row schema for a given Kafka topic.    *    * @param topicName Kafka topic name    * @return row type    */
 annotation|@
 name|Override
 specifier|public
@@ -233,7 +233,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Parse and reformat Kafka message from consumer, to fit with row schema    * defined as {@link #rowDataType(String)}.    * @param message, the raw Kafka message record;    * @return fields in the row    */
+comment|/**    * Parses and reformats Kafka messages from consumer, to fit with row schema    * defined as {@link #rowDataType(String)}.    *    * @param message Raw Kafka message record    * @return fields in the row    */
 annotation|@
 name|Override
 specifier|public

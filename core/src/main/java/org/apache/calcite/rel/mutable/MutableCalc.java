@@ -88,7 +88,7 @@ operator|=
 name|program
 expr_stmt|;
 block|}
-comment|/**    * Creates a MutableCalc    *    * @param input   Input relational expression    * @param program Calc program    */
+comment|/**    * Creates a MutableCalc.    *    * @param input   Input relational expression    * @param program Calc program    */
 specifier|public
 specifier|static
 name|MutableCalc

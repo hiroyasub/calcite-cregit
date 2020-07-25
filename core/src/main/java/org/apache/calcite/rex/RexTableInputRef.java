@@ -350,7 +350,7 @@ operator|.
 name|TABLE_INPUT_REF
 return|;
 block|}
-comment|/** Identifies uniquely a table by its qualified name and its entity number (occurrence) */
+comment|/** Identifies uniquely a table by its qualified name and its entity number    * (occurrence). */
 specifier|public
 specifier|static
 class|class

@@ -1099,6 +1099,7 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #BINDABLE_SET_OP_RULE}. */
 specifier|public
 specifier|static

@@ -2557,7 +2557,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/** @see Matchers#returnsUnordered(String...) */
+comment|/** Checks that the {@link ResultSet} returns the given set of lines, in no    * particular order.    *    * @see Matchers#returnsUnordered(String...) */
 specifier|static
 name|Consumer
 argument_list|<
@@ -2582,7 +2582,7 @@ name|lines
 argument_list|)
 return|;
 block|}
-comment|/** @see Matchers#returnsUnordered(String...) */
+comment|/** Checks that the {@link ResultSet} returns the given set of lines,    * optionally sorting.    *    * @see Matchers#returnsUnordered(String...) */
 specifier|static
 name|Consumer
 argument_list|<
@@ -6216,7 +6216,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Creates a copy of this AssertThat, adding more schemas */
+comment|/** Creates a copy of this AssertThat, adding more schemas. */
 specifier|public
 name|AssertThat
 name|with
@@ -6409,7 +6409,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Sets Lex property **/
+comment|/** Sets the Lex property. **/
 specifier|public
 name|AssertThat
 name|with
@@ -7325,7 +7325,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/** Connection post processor */
+comment|/** Connection post-processor. */
 annotation|@
 name|FunctionalInterface
 specifier|public
@@ -8686,7 +8686,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**      * Utility method so that one doesn't have to call      * {@link #failsAtValidation} with {@code null}      * */
+comment|/** Utility method so that one doesn't have to call      * {@link #failsAtValidation} with {@code null}. */
 specifier|public
 name|AssertQuery
 name|failsAtValidation
@@ -9565,6 +9565,7 @@ block|}
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #queryContains(Consumer)}. */
 annotation|@
 name|SuppressWarnings
@@ -10877,7 +10878,7 @@ name|properties
 return|;
 block|}
 block|}
-comment|/**    * We want a consumer which can throw SqlException    */
+comment|/** We want a consumer that can throw SqlException. */
 specifier|public
 interface|interface
 name|PreparedStatementConsumer

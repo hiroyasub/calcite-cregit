@@ -841,6 +841,7 @@ name|root
 argument_list|)
 expr_stmt|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #addFunctions}. */
 annotation|@
 name|Deprecated

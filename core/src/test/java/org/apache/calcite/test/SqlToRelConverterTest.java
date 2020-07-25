@@ -4989,7 +4989,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasUnnestArrayPlanWithSingleColumn
 parameter_list|()
@@ -5023,7 +5022,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasUnnestArrayPlanWithDoubleColumn
 parameter_list|()
@@ -6987,7 +6985,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionHop
 parameter_list|()
@@ -7013,7 +7010,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionHopWithOffset
 parameter_list|()
@@ -7039,7 +7035,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionSession
 parameter_list|()
@@ -7088,7 +7083,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionHopWithSubQueryParam
 parameter_list|()
@@ -7114,7 +7108,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionSessionWithSubQueryParam
 parameter_list|()
@@ -7140,7 +7133,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionSessionCompoundSessionKey
 parameter_list|()
@@ -7987,9 +7979,6 @@ block|{
 return|return
 name|ImmutableList
 operator|.
-expr|<
-name|RelTraitDef
-operator|>
 name|of
 argument_list|(
 name|RelCollationTraitDef
@@ -8503,7 +8492,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test group-by CASE expression involving a non-query IN    */
+comment|/** Tests group-by CASE expression involving a non-query IN. */
 annotation|@
 name|Test
 name|void
@@ -8529,7 +8518,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test aggregate function on a CASE expression involving a non-query IN    */
+comment|/** Tests an aggregate function on a CASE expression involving a non-query    * IN. */
 annotation|@
 name|Test
 name|void
@@ -10860,14 +10849,12 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Dynamic Table / Dynamic Star support</a>    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Dynamic Table / Dynamic Star support</a>. */
 annotation|@
 name|Test
 name|void
 name|testSelectFromDynamicTable
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -10890,14 +10877,12 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
+comment|/** As {@link #testSelectFromDynamicTable} but "SELECT *". */
 annotation|@
 name|Test
 name|void
 name|testSelectStarFromDynamicTable
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -10956,14 +10941,12 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
+comment|/** As {@link #testSelectFromDynamicTable} but with ORDER BY. */
 annotation|@
 name|Test
 name|void
 name|testReferDynamicStarInSelectOB
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -10990,14 +10973,12 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
+comment|/** As {@link #testSelectFromDynamicTable} but with join. */
 annotation|@
 name|Test
 name|void
 name|testDynamicStarInTableJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11059,7 +11040,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-2900">[CALCITE-2900]    * RelStructuredTypeFlattener generates wrong types on nested columns</a>.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2900">[CALCITE-2900]    * RelStructuredTypeFlattener generates wrong types on nested columns</a>. */
 annotation|@
 name|Test
 name|void
@@ -11070,7 +11051,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select empa.home_address.zip from sales.emp_address empa where empa.home_address.city = 'abc'"
+literal|"select empa.home_address.zip\n"
+operator|+
+literal|"from sales.emp_address empa\n"
+operator|+
+literal|"where empa.home_address.city = 'abc'"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11626,14 +11611,11 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
 name|void
 name|testReferDynamicStarInSelectWhereGB
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11660,14 +11642,11 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
 name|void
 name|testDynamicStarInJoinAndSubQ
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11694,14 +11673,11 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
 name|void
 name|testStarJoinStaticDynTable
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11726,14 +11702,11 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
 name|void
 name|testGrpByColFromStarInSubQuery
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11760,14 +11733,11 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
 name|void
 name|testDynStarInExistSubQ
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11798,8 +11768,6 @@ name|Test
 name|void
 name|testSelectDynamicStarOrderBy
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11892,8 +11860,6 @@ name|Test
 name|void
 name|testWindowOnDynamicStar
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -11985,8 +11951,6 @@ name|Test
 name|void
 name|testAnyValueAggregateFunctionNoGroupBy
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -12008,8 +11972,6 @@ name|Test
 name|void
 name|testAnyValueAggregateFunctionGroupBy
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -12031,8 +11993,6 @@ name|Test
 name|void
 name|testSomeAndEveryAggregateFunctions
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -13273,7 +13233,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests left join lateral with using    */
+comment|/** Tests LEFT JOIN LATERAL with USING. */
 annotation|@
 name|Test
 name|void
@@ -13301,7 +13261,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests left join lateral with natural join    */
+comment|/** Tests LEFT JOIN LATERAL with NATURAL JOIN. */
 annotation|@
 name|Test
 name|void
@@ -13327,7 +13287,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests left join lateral with on condition    */
+comment|/** Tests LEFT JOIN LATERAL with ON condition. */
 annotation|@
 name|Test
 name|void
@@ -13355,7 +13315,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests left join lateral with multiple columns from outer    */
+comment|/** Tests LEFT JOIN LATERAL with multiple columns from outer. */
 annotation|@
 name|Test
 name|void
@@ -13383,7 +13343,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests left join lateral with correlate variable coming    * from one level up join scope    */
+comment|/** Tests LEFT JOIN LATERAL with correlating variable coming    * from one level up join scope. */
 annotation|@
 name|Test
 name|void
@@ -13417,7 +13377,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests cross join lateral with multiple columns from outer    */
+comment|/** Tests CROSS JOIN LATERAL with multiple columns from outer. */
 annotation|@
 name|Test
 name|void
@@ -13445,7 +13405,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests cross join lateral with correlate variable coming    * from one level up join scope    */
+comment|/** Tests CROSS JOIN LATERAL with correlating variable coming    * from one level up join scope. */
 annotation|@
 name|Test
 name|void

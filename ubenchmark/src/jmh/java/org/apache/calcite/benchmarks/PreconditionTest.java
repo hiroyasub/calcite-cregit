@@ -174,7 +174,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Checks if silent precondition has noticeable overhead  */
+comment|/**  * Checks if silent precondition has noticeable overhead.  */
 end_comment
 
 begin_class

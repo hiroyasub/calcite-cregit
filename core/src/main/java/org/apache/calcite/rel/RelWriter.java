@@ -81,7 +81,7 @@ argument_list|>
 name|valueList
 parameter_list|)
 function_decl|;
-comment|/**    * @return detail level at which plan should be generated    */
+comment|/** Returns detail level at which plan should be generated. */
 name|SqlExplainLevel
 name|getDetailLevel
 parameter_list|()

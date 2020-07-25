@@ -129,6 +129,7 @@ class|class
 name|SqlSimpleParser
 block|{
 comment|//~ Enums ------------------------------------------------------------------
+comment|/** Token. */
 enum|enum
 name|TokenType
 block|{
@@ -161,7 +162,7 @@ name|EXCEPT
 block|,
 name|MINUS
 block|,
-comment|/**      * left parenthesis      */
+comment|/** Left parenthesis. */
 name|LPAREN
 block|{
 specifier|public
@@ -175,7 +176,7 @@ return|;
 block|}
 block|}
 block|,
-comment|/**      * right parenthesis      */
+comment|/** Right parenthesis. */
 name|RPAREN
 block|{
 specifier|public
@@ -189,7 +190,7 @@ return|;
 block|}
 block|}
 block|,
-comment|/**      * identifier, or indeed any miscellaneous sequence of characters      */
+comment|/** Identifier, or indeed any miscellaneous sequence of characters. */
 name|ID
 block|,
 comment|/**      * double-quoted identifier, e.g. "FOO""BAR"      */
@@ -241,7 +242,7 @@ name|Config
 name|parserConfig
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlSimpleParser    *    * @param hintToken Hint token    * @deprecated    */
+comment|/**    * Creates a SqlSimpleParser.    *    * @param hintToken Hint token    * @deprecated Use {@link #SqlSimpleParser(String, SqlParser.Config)}    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -264,7 +265,7 @@ name|DEFAULT
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a SqlSimpleParser    *    * @param hintToken Hint token    * @param parserConfig parser configuration    */
+comment|/**    * Creates a SqlSimpleParser.    *    * @param hintToken Hint token    * @param parserConfig parser configuration    */
 specifier|public
 name|SqlSimpleParser
 parameter_list|(
@@ -367,7 +368,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be validated    *    * @param sql A partial or syntactically incorrect sql statement    * @return a completed, valid (and possibly simplified) SQL statement    */
+comment|/**    * Turns a partially completed or syntactically incorrect SQL statement into a    * simplified, valid one that can be validated.    *    * @param sql A partial or syntactically incorrect sql statement    * @return a completed, valid (and possibly simplified) SQL statement    */
 specifier|public
 name|String
 name|simplifySql
@@ -917,6 +918,7 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
+comment|/** Tokenizer. */
 specifier|public
 specifier|static
 class|class
@@ -1780,6 +1782,7 @@ name|i
 return|;
 block|}
 block|}
+comment|/** Token. */
 specifier|public
 specifier|static
 class|class
@@ -1897,6 +1900,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|/** Token representing an identifier. */
 specifier|public
 specifier|static
 class|class
@@ -1940,6 +1944,7 @@ operator|)
 assert|;
 block|}
 block|}
+comment|/** Token representing a query. */
 specifier|static
 class|class
 name|Query

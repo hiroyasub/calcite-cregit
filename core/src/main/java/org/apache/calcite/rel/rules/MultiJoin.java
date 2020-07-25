@@ -1033,7 +1033,7 @@ name|postJoinFilter
 argument_list|)
 return|;
 block|}
-comment|/**    * @return join filters associated with this MultiJoin    */
+comment|/**    * Returns join filters associated with this MultiJoin.    */
 specifier|public
 name|RexNode
 name|getJoinFilter
@@ -1043,7 +1043,7 @@ return|return
 name|joinFilter
 return|;
 block|}
-comment|/**    * @return true if the MultiJoin corresponds to a full outer join.    */
+comment|/**    * Returns true if the MultiJoin corresponds to a full outer join.    */
 specifier|public
 name|boolean
 name|isFullOuterJoin
@@ -1053,7 +1053,7 @@ return|return
 name|isFullOuterJoin
 return|;
 block|}
-comment|/**    * @return outer join conditions for null-generating inputs    */
+comment|/**    * Returns outer join conditions for null-generating inputs.    */
 specifier|public
 name|List
 argument_list|<
@@ -1066,7 +1066,7 @@ return|return
 name|outerJoinConditions
 return|;
 block|}
-comment|/**    * @return join types of each input    */
+comment|/**    * Returns join types of each input.    */
 specifier|public
 name|List
 argument_list|<
@@ -1079,7 +1079,7 @@ return|return
 name|joinTypes
 return|;
 block|}
-comment|/**    * @return bitmaps representing the fields projected from each input; if an    * entry is null, all fields are projected    */
+comment|/**    * Returns bitmaps representing the fields projected from each input; if an    * entry is null, all fields are projected.    */
 specifier|public
 name|List
 argument_list|<
@@ -1092,7 +1092,7 @@ return|return
 name|projFields
 return|;
 block|}
-comment|/**    * @return the map of reference counts for each input, representing the    * fields accessed in join conditions    */
+comment|/**    * Returns the map of reference counts for each input, representing the fields    * accessed in join conditions.    */
 specifier|public
 name|ImmutableMap
 argument_list|<
@@ -1107,7 +1107,7 @@ return|return
 name|joinFieldRefCountsMap
 return|;
 block|}
-comment|/**    * @return a copy of the map of reference counts for each input,    * representing the fields accessed in join conditions    */
+comment|/**    * Returns a copy of the map of reference counts for each input, representing    * the fields accessed in join conditions.    */
 specifier|public
 name|Map
 argument_list|<
@@ -1124,7 +1124,7 @@ name|cloneJoinFieldRefCountsMap
 argument_list|()
 return|;
 block|}
-comment|/**    * @return post-join filter associated with this MultiJoin    */
+comment|/**    * Returns post-join filter associated with this MultiJoin.    */
 specifier|public
 name|RexNode
 name|getPostJoinFilter

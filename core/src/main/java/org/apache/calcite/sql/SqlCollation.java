@@ -941,7 +941,7 @@ return|return
 name|locale
 return|;
 block|}
-comment|/**    * @return the {@link Collator} to compare values having the current collation,    * or {@code null} if no specific {@link Collator} is needed, in which case    * {@link String#compareTo} will be used.    */
+comment|/**    * Returns the {@link Collator} to compare values having the current    * collation, or {@code null} if no specific {@link Collator} is needed, in    * which case {@link String#compareTo} will be used.    */
 specifier|public
 name|Collator
 name|getCollator

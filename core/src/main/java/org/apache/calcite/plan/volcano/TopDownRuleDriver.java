@@ -509,6 +509,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
+comment|/** Procedure. */
 specifier|private
 interface|interface
 name|Procedure
@@ -1212,6 +1213,7 @@ name|this
 return|;
 block|}
 block|}
+comment|/** Task for generator. */
 specifier|private
 interface|interface
 name|GeneratorTask
@@ -1852,7 +1854,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Explore an input for a RelNode    */
+comment|/**    * Explore an input for a RelNode.    */
 specifier|private
 class|class
 name|ExploreInput
@@ -2170,7 +2172,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Apply a rule match    */
+comment|/**    * Apply a rule match.    */
 specifier|private
 class|class
 name|ApplyRule

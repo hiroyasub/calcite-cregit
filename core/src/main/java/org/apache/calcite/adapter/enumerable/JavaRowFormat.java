@@ -933,7 +933,7 @@ return|;
 block|}
 block|}
 block|,
-comment|/**    * See {@link org.apache.calcite.interpreter.Row}    */
+comment|/**    * See {@link org.apache.calcite.interpreter.Row}.    */
 name|ROW
 block|{
 annotation|@

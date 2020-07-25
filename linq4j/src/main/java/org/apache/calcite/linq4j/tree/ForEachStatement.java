@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a "for-each" loop, "for (T v : iterable) { f(v); }"  */
+comment|/**  * Represents a "for-each" loop, "for (T v : iterable) { f(v); }".  */
 end_comment
 
 begin_class
@@ -53,7 +53,7 @@ specifier|final
 name|Statement
 name|body
 decl_stmt|;
-comment|/** Cache the hash code for the expression */
+comment|/** Cached hash code for the expression. */
 specifier|private
 name|int
 name|hash

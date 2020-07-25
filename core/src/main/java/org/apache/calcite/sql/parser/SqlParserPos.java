@@ -380,7 +380,7 @@ operator|.
 name|endColumnNumber
 return|;
 block|}
-comment|/**    * @return 1-based starting line number    */
+comment|/** Returns 1-based starting line number. */
 specifier|public
 name|int
 name|getLineNum
@@ -390,7 +390,7 @@ return|return
 name|lineNumber
 return|;
 block|}
-comment|/**    * @return 1-based starting column number    */
+comment|/** Returns 1-based starting column number. */
 specifier|public
 name|int
 name|getColumnNum
@@ -400,7 +400,7 @@ return|return
 name|columnNumber
 return|;
 block|}
-comment|/**    * @return 1-based end line number (same as starting line number if the    * ParserPos is a point, not a range)    */
+comment|/** Returns 1-based end line number (same as starting line number if the    * ParserPos is a point, not a range). */
 specifier|public
 name|int
 name|getEndLineNum
@@ -410,7 +410,7 @@ return|return
 name|endLineNumber
 return|;
 block|}
-comment|/**    * @return 1-based end column number (same as starting column number if the    * ParserPos is a point, not a range)    */
+comment|/** Returns 1-based end column number (same as starting column number if the    * ParserPos is a point, not a range). */
 specifier|public
 name|int
 name|getEndColumnNum
@@ -477,7 +477,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** @return true if this SqlParserPos is quoted. **/
+comment|/** Returns whether this SqlParserPos is quoted. */
 specifier|public
 name|boolean
 name|isQuoted

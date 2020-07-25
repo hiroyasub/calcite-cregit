@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unary suffix operator conversion, used to convert function like: expression Unary_Operator  */
+comment|/**  * Unary suffix operator conversion; used to convert function likes expression  * Unary_Operator.  */
 end_comment
 
 begin_class

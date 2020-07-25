@@ -496,7 +496,7 @@ operator|=
 name|rootId
 expr_stmt|;
 block|}
-comment|/**      * @return the id associated with a leaf node in a binary tree      */
+comment|/** Returns the id associated with a leaf node in a binary tree. */
 specifier|public
 name|int
 name|getId

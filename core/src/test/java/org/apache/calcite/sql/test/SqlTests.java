@@ -477,7 +477,7 @@ argument_list|(
 literal|"(?s)From line ([0-9]+), column ([0-9]+) to line ([0-9]+), column ([0-9]+): (.*)"
 argument_list|)
 decl_stmt|;
-comment|/**    * Helper function to get the string representation of a RelDataType    * (include precision/scale but no charset or collation)    *    * @param sqlType Type    * @return String representation of type    */
+comment|/**    * Helper function to get the string representation of a RelDataType    * (include precision/scale but no charset or collation).    *    * @param sqlType Type    * @return String representation of type    */
 specifier|public
 specifier|static
 name|String
@@ -2691,7 +2691,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Stage of query processing */
+comment|/** Stage of query processing. */
 specifier|public
 enum|enum
 name|Stage

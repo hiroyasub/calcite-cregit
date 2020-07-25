@@ -72,7 +72,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines how to convert RexNode with a given calcite SQL operator to Druid expressions  */
+comment|/**  * Defines how to convert a {@link RexNode} with a given Calcite SQL operator to  * a Druid expression.  */
 end_comment
 
 begin_interface

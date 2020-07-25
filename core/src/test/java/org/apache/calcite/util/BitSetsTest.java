@@ -1278,7 +1278,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the method {@link BitSets#closure(java.util.SortedMap)}    */
+comment|/** Tests the method {@link BitSets#closure(java.util.SortedMap)}. */
 annotation|@
 name|Test
 name|void

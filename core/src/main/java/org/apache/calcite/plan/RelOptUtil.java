@@ -1810,7 +1810,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns a set of tables used by this expression or its children    */
+comment|/**    * Returns a set of tables used by this expression or its children.    */
 specifier|public
 specifier|static
 name|Set
@@ -1835,7 +1835,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns a list of all tables used by this expression or its children    */
+comment|/**    * Returns a list of all tables used by this expression or its children.    */
 specifier|public
 specifier|static
 name|List
@@ -4999,6 +4999,7 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link RelBuilder#distinct()}. */
 annotation|@
 name|Deprecated
@@ -13244,7 +13245,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Splits a filter into two lists, depending on whether or not the filter    * only references its child input    *    * @param childBitmap Fields in the child    * @param predicate   filters that will be split    * @param pushable    returns the list of filters that can be pushed to the    *                    child input    * @param notPushable returns the list of filters that cannot be pushed to    *                    the child input    */
+comment|/**    * Splits a filter into two lists, depending on whether or not the filter    * only references its child input.    *    * @param childBitmap Fields in the child    * @param predicate   filters that will be split    * @param pushable    returns the list of filters that can be pushed to the    *                    child input    * @param notPushable returns the list of filters that cannot be pushed to    *                    the child input    */
 specifier|public
 specifier|static
 name|void
@@ -15025,6 +15026,7 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use    * {@link RelBuilder#projectNamed(Iterable, Iterable, boolean)} */
 annotation|@
 name|Deprecated
@@ -18864,7 +18866,7 @@ block|}
 end_class
 
 begin_comment
-comment|/**    * A {@code RelShuttle} which resets all the hints of a relational expression to    * what they are originally like.    *    *<p>This would trigger a reverse transformation of what    * {@link RelHintPropagateShuttle} does.    *    *<p>Transformation rules:    *    *<ul>    *<li>Project: remove the hints that have non-empty inherit path    *   (which means the hint was not originally declared from it);</li>    *<li>Aggregate: remove the hints that have non-empty inherit path;</>    *<li>Join: remove all the hints;</li>    *<li>TableScan: remove the hints that have non-empty inherit path.</li>    *</ul>    *    */
+comment|/**    * A {@code RelShuttle} which resets all the hints of a relational expression to    * what they are originally like.    *    *<p>This would trigger a reverse transformation of what    * {@link RelHintPropagateShuttle} does.    *    *<p>Transformation rules:    *    *<ul>    *<li>Project: remove the hints that have non-empty inherit path    *   (which means the hint was not originally declared from it);    *<li>Aggregate: remove the hints that have non-empty inherit path;    *<li>Join: remove all the hints;    *<li>TableScan: remove the hints that have non-empty inherit path.    *</ul>    */
 end_comment
 
 begin_class
@@ -19967,7 +19969,7 @@ name|int
 index|[]
 name|adjustments
 decl_stmt|;
-comment|/**      * @param rexBuilder      builder for creating new RexInputRefs      * @param srcFields       fields where the RexInputRefs originated      *                        from; if null, a new RexInputRef is always      *                        created, referencing the input from destFields      *                        corresponding to its current index value      * @param destFields      fields that the new RexInputRefs will be      *                        referencing; if null, use the type information      *                        from the source field when creating the new      *                        RexInputRef      * @param leftDestFields  in the case where the destination is a join,      *                        these are the fields from the left join input      * @param rightDestFields in the case where the destination is a join,      *                        these are the fields from the right join input      * @param adjustments     the amount to adjust each field by      */
+comment|/**      * Creates a RexInputConverter.      *      * @param rexBuilder      builder for creating new RexInputRefs      * @param srcFields       fields where the RexInputRefs originated      *                        from; if null, a new RexInputRef is always      *                        created, referencing the input from destFields      *                        corresponding to its current index value      * @param destFields      fields that the new RexInputRefs will be      *                        referencing; if null, use the type information      *                        from the source field when creating the new      *                        RexInputRef      * @param leftDestFields  in the case where the destination is a join,      *                        these are the fields from the left join input      * @param rightDestFields in the case where the destination is a join,      *                        these are the fields from the right join input      * @param adjustments     the amount to adjust each field by      */
 specifier|private
 name|RexInputConverter
 parameter_list|(
@@ -20557,7 +20559,7 @@ block|}
 end_class
 
 begin_comment
-comment|/** Result of calling    * {@link org.apache.calcite.plan.RelOptUtil#createExistsPlan} */
+comment|/** Result of calling    * {@link org.apache.calcite.plan.RelOptUtil#createExistsPlan}. */
 end_comment
 
 begin_class

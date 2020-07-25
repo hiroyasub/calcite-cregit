@@ -602,7 +602,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Obtains a proxy pointing to an existing Region on the server    *    * @param cache {@link GemFireCache} instance to interact with the Geode server    * @param regionName  Name of the region to create proxy for.    * @return Returns a Region proxy to a remote (on the Server) regions.    */
+comment|/**    * Obtains a proxy pointing to an existing Region on the server.    *    * @param cache {@link GemFireCache} instance to interact with the Geode server    * @param regionName  Name of the region to create proxy for.    * @return Returns a Region proxy to a remote (on the Server) regions.    */
 specifier|public
 specifier|static
 specifier|synchronized

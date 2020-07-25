@@ -429,13 +429,13 @@ name|MatchAllQueryBuilder
 argument_list|()
 return|;
 block|}
-comment|/**    * Base class to build ES queries    */
+comment|/**    * Base class to build Elasticsearch queries.    */
 specifier|abstract
 specifier|static
 class|class
 name|QueryBuilder
 block|{
-comment|/**      * Convert existing query to JSON format using jackson API.      * @param generator used to generate JSON elements      * @throws IOException if IO error occurred      */
+comment|/**      * Converts an existing query to JSON format using jackson API.      *      * @param generator used to generate JSON elements      * @throws IOException if IO error occurred      */
 specifier|abstract
 name|void
 name|writeJson
@@ -447,7 +447,7 @@ throws|throws
 name|IOException
 function_decl|;
 block|}
-comment|/**    * Query for boolean logic    */
+comment|/**    * Query for boolean logic.    */
 specifier|static
 class|class
 name|BoolQueryBuilder

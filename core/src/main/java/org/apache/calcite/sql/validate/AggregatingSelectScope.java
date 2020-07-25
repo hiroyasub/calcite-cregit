@@ -362,7 +362,7 @@ operator|::
 name|get
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an AggregatingSelectScope    *    * @param selectScope Parent scope    * @param select      Enclosing SELECT node    * @param distinct    Whether SELECT is DISTINCT    */
+comment|/**    * Creates an AggregatingSelectScope.    *    * @param selectScope Parent scope    * @param select      Enclosing SELECT node    * @param distinct    Whether SELECT is DISTINCT    */
 name|AggregatingSelectScope
 parameter_list|(
 name|SqlValidatorScope

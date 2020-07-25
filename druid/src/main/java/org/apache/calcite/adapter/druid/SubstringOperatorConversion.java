@@ -130,7 +130,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Converts Calcite SUBSTRING call to Druid Expression when possible  */
+comment|/**  * Converts Calcite SUBSTRING call to Druid Expression when possible.  */
 end_comment
 
 begin_class

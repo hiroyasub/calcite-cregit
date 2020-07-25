@@ -4040,6 +4040,10 @@ return|;
 block|}
 end_function
 
+begin_comment
+comment|/** Enumerator that evaluates aggregate functions over an input that is sorted    * by the group key.    *    * @param<TSource> left input record type    * @param<TKey> key type    * @param<TAccumulate> accumulator type    * @param<TResult> result type */
+end_comment
+
 begin_class
 specifier|private
 specifier|static
@@ -6909,7 +6913,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Implementation of join that builds the right input and probes with the    * left */
+comment|/** Implementation of join that builds the right input and probes with the    * left. */
 end_comment
 
 begin_function
@@ -20212,7 +20216,7 @@ return|return
 name|rightEnumerator
 return|;
 block|}
-comment|/**      * @return {@code true} if the left enumerator was successfully advanced to the next element,      * and it does not have a null key; {@code false} otherwise.      */
+comment|/** Returns whether the left enumerator was successfully advanced to the next      * element, and it does not have a null key. */
 specifier|private
 name|boolean
 name|leftMoveNext
@@ -20239,7 +20243,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/**      * @return {@code true} if the right enumerator was successfully advanced to the next element,      * and it does not have a null key; {@code false} otherwise.      */
+comment|/** Returns whether the right enumerator was successfully advanced to the      * next element, and it does not have a null key. */
 specifier|private
 name|boolean
 name|rightMoveNext
@@ -21312,6 +21316,10 @@ block|}
 block|}
 end_class
 
+begin_comment
+comment|/** Enumerates the elements of a cartesian product of two inputs.    *    * @param<TResult> result type    * @param<TOuter> left input record type    * @param<TInner> right input record type */
+end_comment
+
 begin_class
 specifier|private
 specifier|static
@@ -21471,7 +21479,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/**    * Repeat Union enumerable: it will evaluate the seed enumerable once, and then    * it will start to evaluate the iteration enumerable over and over until either it returns    * no results, or an optional maximum numbers of iterations is reached    * @param seed seed enumerable    * @param iteration iteration enumerable    * @param iterationLimit maximum numbers of repetitions for the iteration enumerable    *                       (negative value means no limit)    * @param all whether duplicates will be considered or not    * @param comparer {@link EqualityComparer} to control duplicates,    *                 only used if {@code all} is {@code false}    * @param<TSource> record type    */
+comment|/**    * Repeat Union enumerable. Evaluates the seed enumerable once, and then starts    * to evaluate the iteration enumerable over and over, until either it returns    * no results, or it reaches an optional maximum number of iterations.    *    * @param seed seed enumerable    * @param iteration iteration enumerable    * @param iterationLimit maximum numbers of repetitions for the iteration enumerable    *                       (negative value means no limit)    * @param all whether duplicates will be considered or not    * @param comparer {@link EqualityComparer} to control duplicates,    *                 only used if {@code all} is {@code false}    * @param<TSource> record type    */
 end_comment
 
 begin_function
@@ -21947,7 +21955,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Lazy read and lazy write spool that stores data into a collection    */
+comment|/** Lazy read and lazy write spool that stores data into a collection. */
 end_comment
 
 begin_function

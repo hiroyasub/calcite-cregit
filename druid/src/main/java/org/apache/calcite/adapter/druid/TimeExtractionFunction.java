@@ -875,7 +875,7 @@ name|timeUnit
 argument_list|)
 return|;
 block|}
-comment|/**    * @param rexNode cast RexNode    * @param timeZone timezone    *    * @return Druid Time extraction function or null when can not translate the cast.    */
+comment|/** Translates a CAST expression to a Druid Time extraction function, or null    * when can not translate the cast.    *    * @param rexNode CAST RexNode    * @param timeZone Timezone    */
 annotation|@
 name|Nullable
 specifier|public

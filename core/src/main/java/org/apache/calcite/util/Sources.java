@@ -433,7 +433,7 @@ literal|"file"
 argument_list|)
 return|;
 block|}
-comment|/**    * Adapter for {@link CharSource}    */
+comment|/** Adapter for {@link CharSource}. */
 specifier|private
 specifier|static
 class|class
@@ -665,7 +665,7 @@ literal|"}"
 return|;
 block|}
 block|}
-comment|/** Implementation of {@link Source} on the top of a {@link File} or {@link URL} */
+comment|/** Implementation of {@link Source} on the top of a {@link File} or    * {@link URL}. */
 specifier|private
 specifier|static
 class|class

@@ -209,7 +209,7 @@ name|CALCITE_2400_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2401">[CALCITE-2401]    * Improve RelMdPredicates performance</a>    */
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2401">[CALCITE-2401]    * Improve RelMdPredicates performance</a> is fixed. */
 specifier|public
 specifier|static
 specifier|final

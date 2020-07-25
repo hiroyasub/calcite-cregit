@@ -184,7 +184,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests {@link ExtendedEnumerable#correlateJoin(JoinType, Function1, Function2)}  */
+comment|/**  * Tests {@link ExtendedEnumerable#correlateJoin(JoinType, Function1, Function2)}.  */
 end_comment
 
 begin_class

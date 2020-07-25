@@ -369,7 +369,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return the identifier for the target table of the insertion    */
+comment|/**    * Return the identifier for the target table of the insertion.    */
 specifier|public
 name|SqlNode
 name|getTargetTable
@@ -379,7 +379,7 @@ return|return
 name|targetTable
 return|;
 block|}
-comment|/**    * @return the source expression for the data to be inserted    */
+comment|/**    * Returns the source expression for the data to be inserted.    */
 specifier|public
 name|SqlNode
 name|getSource
@@ -404,7 +404,7 @@ operator|=
 name|source
 expr_stmt|;
 block|}
-comment|/**    * @return the list of target column names, or null for all columns in the    * target table    */
+comment|/**    * Returns the list of target column names, or null for all columns in the    * target table.    */
 specifier|public
 name|SqlNodeList
 name|getTargetColumnList

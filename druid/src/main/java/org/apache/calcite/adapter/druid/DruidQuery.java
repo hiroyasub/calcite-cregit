@@ -1722,7 +1722,7 @@ name|requireNonNull
 argument_list|(
 name|converterOperatorMap
 argument_list|,
-literal|"Operator map can not be null"
+literal|"Operator map cannot be null"
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -2144,7 +2144,7 @@ operator|.
 name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 return|;
 block|}
-comment|/**    * @param rexNode    leaf Input Ref to Druid Column    * @param rowType    row type    * @param druidQuery druid query    *    * @return {@link Pair} of Column name and Extraction Function on the top of the input ref or    * {@link Pair of(null, null)} when can not translate to valid Druid column    */
+comment|/**    * Converts a {@link RexNode} to a Druid column.    *    * @param rexNode    leaf Input Ref to Druid Column    * @param rowType    row type    * @param druidQuery Druid query    *    * @return {@link Pair} of Column name and Extraction Function on the top of    * the input ref, or {@code Pair.of(null, null)} when cannot translate to a    * valid Druid column    */
 specifier|protected
 specifier|static
 name|Pair
@@ -2696,7 +2696,7 @@ name|extractionFunction
 argument_list|)
 return|;
 block|}
-comment|/**    * @param rexNode rexNode    *    * @return true if the operand is an inputRef and it is a valid Druid Cast operation    */
+comment|/**    * Returns whether a {@link RexNode} is a valid Druid cast operation.    *    * @param rexNode RexNode    *    * @return whether the operand is an inputRef and it is a valid Druid Cast    * operation    */
 specifier|private
 specifier|static
 name|boolean
@@ -2851,7 +2851,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * @param rexNode Druid input ref node    * @param rowType rowType    * @param query Druid Query    *    * @return Druid column name or null when not possible to translate.    */
+comment|/**    * Returns Druid column name or null when it is not possible to translate.    *    * @param rexNode Druid input ref node    * @param rowType Row type    * @param query Druid query    */
 annotation|@
 name|Nullable
 specifier|protected
@@ -4754,7 +4754,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**    * Translates Filter rel to Druid Filter Json object if possible.    * Currently Filter rel input has to be Druid Table scan    *    * @param filterRel input filter rel    * @param druidQuery Druid query    *    * @return DruidJson Filter or null if can not translate one of filters    */
+comment|/**    * Translates Filter rel to Druid Filter Json object if possible.    * Currently Filter rel input has to be Druid Table scan    *    * @param filterRel input filter rel    * @param druidQuery Druid query    *    * @return DruidJson Filter or null if cannot translate one of filters    */
 annotation|@
 name|Nullable
 specifier|private
@@ -4827,7 +4827,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Translates list of projects to Druid Column names and Virtual Columns if any    * We can not use {@link Pair#zip(Object[], Object[])}, since size can be different    *    * @param projectRel       Project Rel    *    * @param druidQuery Druid query    *    * @return Pair of list of Druid Columns and Expression Virtual Columns or null when can not    * translate one of the projects.    */
+comment|/**    * Translates a list of projects to Druid Column names and Virtual Columns if    * any.    *    *<p>We cannot use {@link Pair#zip(Object[], Object[])}, since size may be    * different.    *    * @param projectRel Project    *    * @param druidQuery Druid query    *    * @return Pair of list of Druid Columns and Expression Virtual Columns, or    * null when cannot translate one of the projects    */
 annotation|@
 name|Nullable
 specifier|protected
@@ -5225,7 +5225,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Computes the project group set.    *    * @param projectNode Project under the Aggregates if any    * @param groupSet Ids of grouping keys as they are listed in {@code projects} list    * @param inputRowType Input row type under the project    * @param druidQuery Druid Query    *    * @return A list of {@link DimensionSpec} containing the group by dimensions,    * and a list of {@link VirtualColumn} containing Druid virtual column    * projections; or null, if translation is not possible.    * Note that the size of lists can be different.    */
+comment|/**    * Computes the project group set.    *    * @param projectNode Project under the Aggregates if any    * @param groupSet Ids of grouping keys as they are listed in {@code projects} list    * @param inputRowType Input row type under the project    * @param druidQuery Druid query    *    * @return A list of {@link DimensionSpec} containing the group by dimensions,    * and a list of {@link VirtualColumn} containing Druid virtual column    * projections; or null, if translation is not possible.    * Note that the size of lists can be different.    */
 annotation|@
 name|Nullable
 specifier|protected
@@ -5708,7 +5708,7 @@ name|virtualColumnList
 argument_list|)
 return|;
 block|}
-comment|/**    * Translates aggregate calls to Druid {@link JsonAggregation}s when    * possible.    *    * @param aggCalls List of AggregateCalls to translate    * @param aggNames List of aggregate names    * @param project Input project under the aggregate calls,    *               or null if we have {@link TableScan} immediately under the    *               {@link Aggregate}    * @param druidQuery Druid Query Rel    *    * @return List of valid Druid {@link JsonAggregation}s, or null if any of the    * aggregates is not supported    */
+comment|/**    * Translates aggregate calls to Druid {@link JsonAggregation}s when    * possible.    *    * @param aggCalls List of AggregateCalls to translate    * @param aggNames List of aggregate names    * @param project Input project under the aggregate calls,    *               or null if we have {@link TableScan} immediately under the    *               {@link Aggregate}    * @param druidQuery Druid query    *    * @return List of valid Druid {@link JsonAggregation}s, or null if any of the    * aggregates is not supported    */
 annotation|@
 name|Nullable
 specifier|protected
@@ -7030,7 +7030,7 @@ throw|throw
 operator|new
 name|IllegalStateException
 argument_list|(
-literal|"Can not plan Druid Query"
+literal|"Cannot plan Druid Query"
 argument_list|)
 throw|;
 block|}
@@ -7048,8 +7048,10 @@ name|queryOutputFieldNames
 argument_list|)
 return|;
 block|}
-comment|/**    * @param fetch limit to fetch    * @param collationIndexes index of fields as listed in query row output    * @param collationDirections direction of sort    * @param numericCollationIndexes flag of to determine sort comparator    * @param queryOutputFieldNames query output fields    *    * @return always an non null Json Limit object    */
+comment|/**    * Converts a sort specification to a {@link JsonLimit} (never null).    *    * @param fetch limit to fetch    * @param collationIndexes index of fields as listed in query row output    * @param collationDirections direction of sort    * @param numericCollationIndexes flag of to determine sort comparator    * @param queryOutputFieldNames query output fields    */
 specifier|private
+annotation|@
+name|Nonnull
 name|JsonLimit
 name|computeSort
 parameter_list|(
@@ -7426,7 +7428,8 @@ argument_list|(
 name|dimensionSpec
 argument_list|)
 decl_stmt|;
-comment|// case we have project expression on the top of the time extract then can not use timeseries
+comment|// case we have project expression on the top of the time extract then
+comment|// cannot use timeseries
 name|boolean
 name|hasExpressionOnTopOfTimeExtract
 init|=
@@ -7489,7 +7492,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// can not extract granularity bailout
+comment|// cannot extract granularity bailout
 return|return
 literal|null
 return|;
@@ -8313,7 +8316,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Druid Scan Query Body    */
+comment|/** Druid Scan Query body. */
 specifier|private
 specifier|static
 class|class
@@ -9081,7 +9084,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// can not translate filter
+comment|// cannot translate filter
 return|return
 literal|null
 return|;
@@ -10573,7 +10576,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Aggregation element that contains a filter */
+comment|/** Aggregation element that contains a filter. */
 specifier|private
 specifier|static
 class|class
@@ -10680,7 +10683,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Post-Aggregator Post aggregator abstract writer */
+comment|/** Post-aggregator abstract writer. */
 specifier|protected
 specifier|abstract
 specifier|static
@@ -10770,7 +10773,7 @@ name|name
 expr_stmt|;
 block|}
 block|}
-comment|/**    * @return index of the timestamp ref or -1 if not present    */
+comment|/** Returns the index of the timestamp ref, or -1 if not present. */
 specifier|protected
 name|int
 name|getTimestampFieldIndex

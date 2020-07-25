@@ -235,6 +235,7 @@ parameter_list|)
 throws|throws
 name|RelConversionException
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #rel}. */
 annotation|@
 name|Deprecated

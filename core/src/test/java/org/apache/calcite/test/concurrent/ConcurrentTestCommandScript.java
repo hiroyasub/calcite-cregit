@@ -1860,7 +1860,7 @@ return|return
 name|status
 return|;
 block|}
-comment|/**    * Gets ready to execute: loads script FILENAME applying external variable    * BINDINGS    */
+comment|/**    * Gets ready to execute: loads script FILENAME applying external variable    * BINDINGS.    */
 specifier|private
 name|void
 name|prepare
@@ -1956,7 +1956,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Executes the script    */
+comment|/**    * Executes the script.    */
 specifier|public
 name|void
 name|execute
@@ -2576,7 +2576,7 @@ name|timeout
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Identifies the start of a comment line; same rules as sqlline    */
+comment|/**    * Identifies the start of a comment line; same rules as sqlline.    */
 specifier|private
 name|boolean
 name|isComment

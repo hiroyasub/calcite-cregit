@@ -310,7 +310,7 @@ name|NAME
 init|=
 literal|"booleanlogic"
 decl_stmt|;
-comment|/**    * Used to create {@code zips} index and insert some data    * @throws Exception when ES node setup failed    */
+comment|/**    * Creates {@code zips} index and inserts some data.    *    * @throws Exception when ES node setup failed    */
 annotation|@
 name|BeforeAll
 specifier|public

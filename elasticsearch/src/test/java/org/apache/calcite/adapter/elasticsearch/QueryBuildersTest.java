@@ -178,7 +178,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Check that internal queries are correctly converted to ES search query (as JSON)  */
+comment|/**  * Check that internal queries are correctly converted to ES search query (as  * JSON).  */
 end_comment
 
 begin_class

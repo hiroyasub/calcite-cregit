@@ -315,7 +315,7 @@ argument_list|(
 name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
 argument_list|)
 decl_stmt|;
-comment|/**    * @param rexNode    rexNode to translate to Druid Json Filter    * @param rowType    rowType associated to rexNode    * @param druidQuery druid query    *    * @return Druid Json filter or null if it can not translate    */
+comment|/**    * Converts a {@link RexNode} to a Druid JSON filter.    *    * @param rexNode    RexNode to translate to Druid Json Filter    * @param rowType    Row type associated to rexNode    * @param druidQuery Druid query    *    * @return Druid JSON filter, or null if it cannot translate    */
 annotation|@
 name|Nullable
 specifier|private
@@ -542,7 +542,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// can not translate literal better bail out
+comment|// cannot translate literal; better bail out
 return|return
 literal|null
 return|;
@@ -692,7 +692,7 @@ name|partialFilter
 argument_list|)
 return|;
 block|}
-comment|/**    * @param rexNode    rexNode to translate    * @param rowType    row type associated to Filter    * @param druidQuery druid query    *    * @return valid Druid Json Bound Filter or null if it can not translate the rexNode.    */
+comment|/**    * Converts a {@link RexNode} to a Druid JSON bound filter.    *    * @param rexNode    RexNode to translate    * @param rowType    Row type associated to Filter    * @param druidQuery Druid query    *    * @return valid Druid JSON Bound Filter, or null if it cannot translate the    * RexNode    */
 annotation|@
 name|Nullable
 specifier|private
@@ -867,7 +867,8 @@ name|rexLiteral
 argument_list|)
 condition|)
 block|{
-comment|// we are not handling is NULL filter here thus we bail out if Literal is null
+comment|// we are not handling is NULL filter here; thus we bail out if Literal is
+comment|// null
 return|return
 literal|null
 return|;
@@ -894,7 +895,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// can not translate literal better bail out
+comment|// cannot translate literal; better bail out
 return|return
 literal|null
 return|;
@@ -1124,7 +1125,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**    * @param rexNode    rexNode to translate to Druid literal equivalante    * @param rowType    rowType associated to rexNode    * @param druidQuery druid Query    *    * @return non null string or null if it can not translate to valid Druid equivalent    */
+comment|/**    * Converts a {@link RexNode} to a Druid literal.    *    * @param rexNode    RexNode to translate to Druid literal equivalant    * @param rowType    Row type associated to rexNode    * @param druidQuery Druid query    *    * @return non null string, or null if it cannot translate to valid Druid    * equivalent    */
 annotation|@
 name|Nullable
 specifier|private
@@ -2093,7 +2094,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**    * @param rexNode    rexNode to translate to Druid Filter    * @param rowType    rowType of filter input    * @param druidQuery Druid query    *    * @return Druid Json Filters or null when can not translate to valid Druid Filters.    */
+comment|/**    * Converts a {@link RexNode} to a Druid filter.    *    * @param rexNode    RexNode to translate to Druid Filter    * @param rowType    Row type of filter input    * @param druidQuery Druid query    *    * @return Druid Json filters, or null when cannot translate to valid Druid    * filters    */
 annotation|@
 name|Nullable
 specifier|static
@@ -2398,7 +2399,7 @@ name|expression
 argument_list|)
 return|;
 block|}
-comment|/**    * Supported filter types    */
+comment|/** Supported filter types. */
 specifier|protected
 enum|enum
 name|Type
@@ -3258,7 +3259,7 @@ name|extractionFunction
 argument_list|)
 return|;
 block|}
-comment|/**    * Druid Having Filter spec    */
+comment|/** Druid Having Filter spec. */
 specifier|protected
 specifier|static
 class|class

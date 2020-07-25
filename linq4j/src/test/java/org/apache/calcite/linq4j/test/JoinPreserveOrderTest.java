@@ -2497,7 +2497,7 @@ name|isPreserved
 return|;
 block|}
 block|}
-comment|/** Department */
+comment|/** Department. */
 specifier|private
 specifier|static
 class|class
@@ -2577,7 +2577,7 @@ name|name
 return|;
 block|}
 block|}
-comment|/** Employee */
+comment|/** Employee. */
 specifier|private
 specifier|static
 class|class

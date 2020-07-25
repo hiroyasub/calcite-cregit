@@ -942,7 +942,7 @@ name|mutableRel2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Verifies equivalence of {@link MutableScan} */
+comment|/** Verifies equivalence of {@link MutableScan}. */
 annotation|@
 name|Test
 specifier|public

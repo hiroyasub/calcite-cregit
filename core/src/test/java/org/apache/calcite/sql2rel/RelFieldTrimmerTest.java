@@ -447,6 +447,10 @@ name|assertTrue
 import|;
 end_import
 
+begin_comment
+comment|/** Test for {@link RelFieldTrimmer}. */
+end_comment
+
 begin_class
 class|class
 name|RelFieldTrimmerTest

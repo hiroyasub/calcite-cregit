@@ -553,28 +553,28 @@ init|=
 literal|2
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * Optimization task state    */
+comment|/** Optimization task state. */
 name|OptimizeState
 name|taskState
 decl_stmt|;
-comment|/**    * cost of best known plan (it may have improved since)    */
+comment|/** Cost of best known plan (it may have improved since). */
 name|RelOptCost
 name|bestCost
 decl_stmt|;
-comment|/**    * The set this subset belongs to.    */
+comment|/** The set this subset belongs to. */
 specifier|final
 name|RelSet
 name|set
 decl_stmt|;
-comment|/**    * best known plan    */
+comment|/** Best known plan. */
 name|RelNode
 name|best
 decl_stmt|;
-comment|/**    * Timestamp for metadata validity    */
+comment|/** Timestamp for metadata validity. */
 name|long
 name|timestamp
 decl_stmt|;
-comment|/**    * Physical property state of current subset    * 0: logical operators, NONE convention is neither DELIVERED nor REQUIRED    * 1: traitSet DELIVERED from child operators or itself    * 2: traitSet REQUIRED from parent operators    * 3: both DELIVERED and REQUIRED    */
+comment|/**    * Physical property state of current subset. Values:    *    *<ul>    *<li>0: logical operators, NONE convention is neither DELIVERED nor REQUIRED    *<li>1: traitSet DELIVERED from child operators or itself    *<li>2: traitSet REQUIRED from parent operators    *<li>3: both DELIVERED and REQUIRED    *</ul>    */
 specifier|private
 name|int
 name|state
@@ -3653,6 +3653,7 @@ name|p
 return|;
 block|}
 block|}
+comment|/** State of optimizer. */
 enum|enum
 name|OptimizeState
 block|{

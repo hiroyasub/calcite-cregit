@@ -514,7 +514,7 @@ specifier|final
 name|ElasticsearchMapping
 name|mapping
 decl_stmt|;
-comment|/**    * Default batch size    * @see<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">Scrolling API</a>    */
+comment|/**    * Default batch size.    *    * @see<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">Scrolling API</a>    */
 specifier|final
 name|int
 name|fetchSize

@@ -856,7 +856,7 @@ name|binding
 argument_list|)
 return|;
 block|}
-comment|/**    * Test to see if it is the function COUNT(*)    *    * @return boolean true if function call to COUNT(*)    */
+comment|/**    * Returns whether it is the function {@code COUNT(*)}.    *    * @return true if function call to COUNT(*)    */
 specifier|public
 name|boolean
 name|isCountStar

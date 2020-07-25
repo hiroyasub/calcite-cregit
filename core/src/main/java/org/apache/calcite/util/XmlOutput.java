@@ -130,21 +130,19 @@ specifier|private
 name|int
 name|tagsWritten
 decl_stmt|;
-comment|// This flag is set to true if the output should be compacted.
-comment|// Compacted output is free of extraneous whitespace and is designed
-comment|// for easier transport.
+comment|/** Whehter output should be compacted.  Compacted output is free of    * extraneous whitespace and is designed for easier transport. */
 specifier|private
 name|boolean
 name|compact
 decl_stmt|;
-comment|/** @see #setIndentString */
+comment|/** String to write for each indent level; see {@link #setIndentString}. */
 specifier|private
 name|String
 name|indentString
 init|=
 literal|"\t"
 decl_stmt|;
-comment|/** @see #setGlob */
+comment|/** Whether to detect that tags are empty; see {@link #setGlob}. */
 specifier|private
 name|boolean
 name|glob
@@ -154,17 +152,17 @@ specifier|private
 name|boolean
 name|inTag
 decl_stmt|;
-comment|/** @see #setAlwaysQuoteCData */
+comment|/** Whether to always quote CDATA segments (even if they don't contain    * special characters); see {@link #setAlwaysQuoteCData}. */
 specifier|private
 name|boolean
 name|alwaysQuoteCData
 decl_stmt|;
-comment|/** @see #setIgnorePcdata */
+comment|/** Whether to ignore unquoted text, such as whitespace; see    * {@link #setIgnorePcdata}. */
 specifier|private
 name|boolean
 name|ignorePcdata
 decl_stmt|;
-comment|/**    * Private helper function to display a degree of indentation    * @param out the PrintWriter to which to display output.    * @param indent the degree of indentation.    */
+comment|/**    * Private helper function to display a degree of indentation.    *    * @param out the PrintWriter to which to display output.    * @param indent the degree of indentation.    */
 specifier|private
 name|void
 name|displayIndent
@@ -1280,7 +1278,7 @@ name|tagsWritten
 operator|++
 expr_stmt|;
 block|}
-comment|/**    * Get the total number of tags written    * @return the total number of tags written to the XML stream.    */
+comment|/**    * Returns the total number of tags written.    *    * @return the total number of tags written to the XML stream.    */
 specifier|public
 name|int
 name|numTagsWritten
@@ -1290,7 +1288,7 @@ return|return
 name|tagsWritten
 return|;
 block|}
-comment|/** Print an XML attribute name and value for string val */
+comment|/** Prints an XML attribute name and value for string {@code val}. */
 specifier|private
 specifier|static
 name|void
@@ -1595,7 +1593,7 @@ specifier|final
 name|StringEscaper
 name|URL_ESCAPER
 decl_stmt|;
-comment|/**      * Identity transform      */
+comment|/** Identity transform. */
 name|StringEscaper
 parameter_list|()
 block|{
@@ -1607,7 +1605,7 @@ argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**      * Map character "from" to escape sequence "to"      */
+comment|/**      * Map character "from" to escape sequence "to".      */
 specifier|public
 name|void
 name|defineEscape

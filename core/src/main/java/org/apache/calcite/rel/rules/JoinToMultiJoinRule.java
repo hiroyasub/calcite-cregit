@@ -1551,7 +1551,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Combines the join filters from the left and right inputs (if they are    * MultiJoinRels) with the join filter in the joinrel into a single AND'd    * join filter, unless the inputs correspond to null generating inputs in an    * outer join    *    * @param joinRel join rel    * @param left    left child of the join    * @param right   right child of the join    * @return combined join filters AND-ed together    */
+comment|/**    * Combines the join filters from the left and right inputs (if they are    * MultiJoinRels) with the join filter in the joinrel into a single AND'd    * join filter, unless the inputs correspond to null generating inputs in an    * outer join.    *    * @param join    Join    * @param left    Left input of the join    * @param right   Right input of the join    * @return combined join filters AND-ed together    */
 specifier|private
 name|List
 argument_list|<
@@ -1560,7 +1560,7 @@ argument_list|>
 name|combineJoinFilters
 parameter_list|(
 name|Join
-name|joinRel
+name|join
 parameter_list|,
 name|RelNode
 name|left
@@ -1572,7 +1572,7 @@ block|{
 name|JoinRelType
 name|joinType
 init|=
-name|joinRel
+name|join
 operator|.
 name|getJoinType
 argument_list|()
@@ -1615,7 +1615,7 @@ name|filters
 operator|.
 name|add
 argument_list|(
-name|joinRel
+name|join
 operator|.
 name|getCondition
 argument_list|()
@@ -1680,7 +1680,7 @@ name|add
 argument_list|(
 name|shiftRightFilter
 argument_list|(
-name|joinRel
+name|join
 argument_list|,
 name|left
 argument_list|,

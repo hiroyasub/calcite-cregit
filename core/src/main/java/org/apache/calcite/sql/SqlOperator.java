@@ -441,19 +441,19 @@ specifier|final
 name|int
 name|rightPrec
 decl_stmt|;
-comment|/**    * used to infer the return type of a call to this operator    */
+comment|/** Used to infer the return type of a call to this operator. */
 specifier|private
 specifier|final
 name|SqlReturnTypeInference
 name|returnTypeInference
 decl_stmt|;
-comment|/**    * used to infer types of unknown operands    */
+comment|/** Used to infer types of unknown operands. */
 specifier|private
 specifier|final
 name|SqlOperandTypeInference
 name|operandTypeInference
 decl_stmt|;
-comment|/**    * used to validate operand types    */
+comment|/** Used to validate operand types. */
 specifier|private
 specifier|final
 name|SqlOperandTypeChecker
@@ -2603,7 +2603,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * @return the return type inference strategy for this operator, or null if    * return type inference is implemented by a subclass override    */
+comment|/** Returns the return type inference strategy for this operator, or null if    * return type inference is implemented by a subclass override. */
 specifier|public
 name|SqlReturnTypeInference
 name|getReturnTypeInference
@@ -2613,7 +2613,7 @@ return|return
 name|returnTypeInference
 return|;
 block|}
-comment|/**    * Returns the {@link Strong.Policy} strategy for this operator, or null if there is no particular    * strategy, in which case this policy will be deducted from the operator's {@link SqlKind}.    *    * @see Strong    */
+comment|/**    * Returns the {@link Strong.Policy} strategy for this operator, or null if    * there is no particular strategy, in which case this policy will be deducted    * from the operator's {@link SqlKind}.    *    * @see Strong    */
 specifier|public
 name|Supplier
 argument_list|<
@@ -2676,7 +2676,7 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
-comment|/**    * Returns whether a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default    */
+comment|/**    * Returns whether a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default.    */
 specifier|public
 name|boolean
 name|isDeterministic
@@ -2703,7 +2703,7 @@ name|kind
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether it is unsafe to cache query plans referencing this    * operator; false is assumed by default    */
+comment|/**    * Returns whether it is unsafe to cache query plans referencing this    * operator; false is assumed by default.    */
 specifier|public
 name|boolean
 name|isDynamicFunction

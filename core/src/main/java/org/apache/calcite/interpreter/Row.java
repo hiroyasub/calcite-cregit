@@ -343,7 +343,7 @@ name|size
 index|]
 expr_stmt|;
 block|}
-comment|/**      * Set the value of a particular column.      * @param index Zero-indexed position of value.      * @param value Desired column value.      */
+comment|/**      * Sets the value of a particular column.      *      * @param index Zero-indexed position of value.      * @param value Desired column value.      */
 specifier|public
 name|void
 name|set
@@ -363,7 +363,7 @@ operator|=
 name|value
 expr_stmt|;
 block|}
-comment|/** Return a Row object **/
+comment|/** Returns a Row. */
 specifier|public
 name|Row
 name|build

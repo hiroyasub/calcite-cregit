@@ -921,7 +921,7 @@ operator|.
 name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is a Bigint    */
+comment|/**    * Type-inference strategy whereby the result type of a call is a BIGINT.    */
 specifier|public
 specifier|static
 specifier|final
@@ -935,7 +935,7 @@ operator|.
 name|BIGINT
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is a nullable    * Bigint    */
+comment|/**    * Type-inference strategy whereby the result type of a call is a nullable    * BIGINT.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1031,7 +1031,7 @@ operator|.
 name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy for Histogram agg support    */
+comment|/**    * Type-inference strategy for Histogram agg support.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1194,7 +1194,7 @@ argument_list|)
 return|;
 block|}
 decl_stmt|;
-comment|/**    * Returns a multiset type.    *    *<p>For example, given<code>INTEGER</code>, returns    *<code>INTEGER MULTISET</code>.    */
+comment|/**    * Returns a MULTISET type.    *    *<p>For example, given<code>INTEGER</code>, returns    *<code>INTEGER MULTISET</code>.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1210,7 +1210,7 @@ operator|.
 name|TO_MULTISET
 argument_list|)
 decl_stmt|;
-comment|/**    * Returns the element type of a multiset    */
+comment|/**    * Returns the element type of a MULTISET.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1449,7 +1449,7 @@ argument_list|)
 return|;
 block|}
 decl_stmt|;
-comment|/**    * Same as {@link #DECIMAL_PRODUCT} but returns with nullability if any of    * the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}    */
+comment|/**    * Same as {@link #DECIMAL_PRODUCT} but returns with nullability if any of    * the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1536,7 +1536,7 @@ argument_list|)
 return|;
 block|}
 decl_stmt|;
-comment|/**    * Same as {@link #DECIMAL_QUOTIENT} but returns with nullability if any of    * the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}    */
+comment|/**    * Same as {@link #DECIMAL_QUOTIENT} but returns with nullability if any of    * the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1738,7 +1738,7 @@ argument_list|,
 name|ARG1_NULLABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is    *    *<ul>    *<li>the same type as the input types but with the combined length of the    * two first types</li>    *<li>if types are of char type the type with the highest coercibility will    * be used</li>    *<li>result is varying if either input is; otherwise fixed    *</ul>    *    *<p>Pre-requisites:    *    *<ul>    *<li>input types must be of the same string type    *<li>types must be comparable without casting    *</ul>    */
+comment|/**    * Type-inference strategy for concatenating two string arguments. The result    * type of a call is:    *    *<ul>    *<li>the same type as the input types but with the combined length of the    * two first types</li>    *<li>if types are of char type the type with the highest coercibility will    * be used</li>    *<li>result is varying if either input is; otherwise fixed    *</ul>    *    *<p>Pre-requisites:    *    *<ul>    *<li>input types must be of the same string type    *<li>types must be comparable without casting    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -2386,7 +2386,7 @@ operator|.
 name|TO_VARYING
 argument_list|)
 decl_stmt|;
-comment|/**    * Same as {@link #DYADIC_STRING_SUM_PRECISION} and using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}    */
+comment|/**    * Same as {@link #DYADIC_STRING_SUM_PRECISION} and using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}.    */
 specifier|public
 specifier|static
 specifier|final

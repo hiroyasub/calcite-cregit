@@ -165,7 +165,7 @@ begin_class
 class|class
 name|LogicalProjectDigestTest
 block|{
-comment|/**    * Planner does not compare    */
+comment|/** Planner does not compare. */
 annotation|@
 name|Test
 name|void

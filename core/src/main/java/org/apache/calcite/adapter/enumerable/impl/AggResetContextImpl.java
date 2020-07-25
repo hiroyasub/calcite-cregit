@@ -110,7 +110,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.AggResetContext}  */
+comment|/**  * Implementation of  * {@link org.apache.calcite.adapter.enumerable.AggResetContext}.  */
 end_comment
 
 begin_class

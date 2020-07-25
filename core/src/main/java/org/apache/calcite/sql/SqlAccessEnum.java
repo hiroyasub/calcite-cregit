@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration representing different access types  */
+comment|/**  * Access type.  */
 end_comment
 
 begin_enum

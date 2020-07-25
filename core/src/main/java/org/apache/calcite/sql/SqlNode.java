@@ -302,6 +302,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Please use {@link #clone(SqlNode)}; this method brings    * along too much baggage from early versions of Java */
 annotation|@
 name|Deprecated

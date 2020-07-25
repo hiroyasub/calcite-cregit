@@ -396,7 +396,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**    * Returns digest string of this {@code RelNode}. It will create new digest    * string on each call, so don't forget to cache the result if necessary.    *    * @return Digest string of this {@code RelNode}    */
+comment|/**    * Returns a digest string of this {@code RelNode}.    *    *<p>Each call creates a new digest string,    * so don't forget to cache the result if necessary.    *    * @return Digest string of this {@code RelNode}    *    * @see #getRelDigest()    */
 specifier|default
 name|String
 name|getDigest
@@ -410,7 +410,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Digest of the {@code RelNode}, for planner internal use only.    *    *<p>INTERNAL USE ONLY.</p>    *    * @return Digest of this {@code RelNode}    * @see #getDigest()    */
+comment|/**    * Returns a digest of this {@code RelNode}.    *    *<p>INTERNAL USE ONLY. For use by the planner.    *    * @return Digest of this {@code RelNode}    * @see #getDigest()    */
 annotation|@
 name|API
 argument_list|(
@@ -430,7 +430,7 @@ name|RelDigest
 name|getRelDigest
 parameter_list|()
 function_decl|;
-comment|/**    * Recomputes the digest. For planner internal use only.    *    * @see #getDigest()    */
+comment|/**    * Recomputes the digest.    *    *<p>INTERNAL USE ONLY. For use by the planner.    *    * @see #getDigest()    */
 annotation|@
 name|API
 argument_list|(

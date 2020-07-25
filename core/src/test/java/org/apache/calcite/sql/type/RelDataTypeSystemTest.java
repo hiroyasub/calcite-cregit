@@ -126,7 +126,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests return type inference using {@code RelDataTypeSystem}  */
+comment|/**  * Tests the inference of return types using {@code RelDataTypeSystem}.  */
 end_comment
 
 begin_class

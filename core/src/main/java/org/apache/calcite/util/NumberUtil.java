@@ -544,7 +544,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * @return whether a BigDecimal is a valid Farrago decimal. If a    * BigDecimal's unscaled value overflows a long, then it is not a valid    * Farrago decimal.    */
+comment|/** Returns whether a {@link BigDecimal} is a valid Farrago decimal. If a    * BigDecimal's unscaled value overflows a long, then it is not a valid    * Farrago decimal. */
 specifier|public
 specifier|static
 name|boolean

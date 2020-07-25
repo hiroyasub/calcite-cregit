@@ -360,7 +360,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Checks renaming of fields (also upper, lower cases) during projections  */
+comment|/**  * Checks renaming of fields (also upper, lower cases) during projections.  */
 end_comment
 
 begin_class
@@ -1057,7 +1057,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Avoid using scripting for simple projections    *    *<p> When projecting simple fields (without expression) no    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html">scripting</a>    * should be used just    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html">_source</a>    */
+comment|/**    * Avoid using scripting for simple projections.    *    *<p> When projecting simple fields (without expression) no    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html">scripting</a>    * should be used just    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html">_source</a>.    */
 annotation|@
 name|Test
 name|void

@@ -90,7 +90,7 @@ name|isDerived
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return table of origin    */
+comment|/** Returns table of origin. */
 specifier|public
 name|RelOptTable
 name|getOriginTable
@@ -100,7 +100,7 @@ return|return
 name|originTable
 return|;
 block|}
-comment|/**    * @return 0-based index of column in origin table; whether this ordinal is    * flattened or unflattened depends on whether UDT flattening has already    * been performed on the relational expression which produced this    * description    */
+comment|/** Returns the 0-based index of column in origin table; whether this ordinal    * is flattened or unflattened depends on whether UDT flattening has already    * been performed on the relational expression which produced this    * description. */
 specifier|public
 name|int
 name|getOriginColumnOrdinal

@@ -1672,7 +1672,7 @@ specifier|final
 name|SqlValidatorCatalogReader
 name|catalogReader
 decl_stmt|;
-comment|/**    * Maps ParsePosition strings to the {@link SqlIdentifier} identifier    * objects at these positions    */
+comment|/**    * Maps {@link SqlParserPos} strings to the {@link SqlIdentifier} identifier    * objects at these positions.    */
 specifier|protected
 specifier|final
 name|Map
@@ -1768,7 +1768,7 @@ name|IdentityHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**    * Maps a {@link SqlSelect} node that is the argument to a CURSOR    * constructor to the scope of the result of that select node    */
+comment|/**    * Maps a {@link SqlSelect} node that is the argument to a CURSOR    * constructor to the scope of the result of that select node.    */
 specifier|private
 specifier|final
 name|Map
@@ -27851,7 +27851,7 @@ name|node
 return|;
 block|}
 block|}
-comment|/**    * retrieve pattern variables defined    */
+comment|/** Visitor that retrieves pattern variables defined. */
 specifier|private
 specifier|static
 class|class
@@ -30864,7 +30864,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Within one navigation function, the pattern var should be same    */
+comment|/** Validates that within one navigation function, the pattern var is the    * same. */
 specifier|private
 class|class
 name|PatternValidator

@@ -1615,7 +1615,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** BigQuery data type reference:    *<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types">    * BigQuery Standard SQL Data Types</a>    */
+comment|/** {@inheritDoc}    *    *<p>BigQuery data type reference:    *<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types">    * BigQuery Standard SQL Data Types</a>.    */
 annotation|@
 name|Override
 specifier|public

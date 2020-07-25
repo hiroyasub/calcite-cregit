@@ -193,7 +193,7 @@ specifier|final
 name|boolean
 name|all
 decl_stmt|;
-comment|/**    * Maximum number of times to repeat the iterative relational expression;    * negative value means no limit, 0 means only seed will be evaluated    */
+comment|/**    * Maximum number of times to repeat the iterative relational expression;    * negative value means no limit, 0 means only seed will be evaluated.    */
 specifier|public
 specifier|final
 name|int

@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An interface of an object identifier that represents a SqlIdentifier  */
+comment|/**  * An interface of an object identifier that represents a SqlIdentifier.  */
 end_comment
 
 begin_interface

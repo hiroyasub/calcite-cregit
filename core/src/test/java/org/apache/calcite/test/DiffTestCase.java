@@ -338,8 +338,7 @@ specifier|protected
 name|OutputStream
 name|logOutputStream
 decl_stmt|;
-comment|/**    * Diff masks defined so far    */
-comment|// private List diffMasks;
+comment|/** Diff masks defined so far. */
 specifier|private
 name|String
 name|diffMasks
@@ -538,7 +537,7 @@ name|UTF_8
 argument_list|)
 return|;
 block|}
-comment|/**    * @return the root under which testlogs should be written    */
+comment|/** Returns the root directory under which testlogs should be written. */
 specifier|protected
 specifier|abstract
 name|File

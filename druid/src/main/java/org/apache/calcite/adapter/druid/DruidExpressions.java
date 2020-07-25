@@ -284,7 +284,7 @@ specifier|public
 class|class
 name|DruidExpressions
 block|{
-comment|/**    * Type mapping between Calcite SQL family types and native Druid expression types    */
+comment|/** Type mapping between Calcite SQL family types and native Druid expression    * types. */
 specifier|static
 specifier|final
 name|Map
@@ -490,7 +490,7 @@ name|DruidExpressions
 parameter_list|()
 block|{
 block|}
-comment|/**    * Translates Calcite rexNode to Druid Expression when possible    * @param rexNode rexNode to convert to a Druid Expression    * @param inputRowType input row type of the rexNode to translate    * @param druidRel Druid query    *    * @return Druid Expression or null when can not convert the RexNode    */
+comment|/**    * Translates a Calcite {@link RexNode} to a Druid expression, if possible;    * returns null if not possible.    *    * @param rexNode RexNode to convert to a Druid Expression    * @param inputRowType Input row type of the rexNode to translate    * @param druidRel Druid query    *    * @return Druid Expression, or null when can not convert the RexNode    */
 annotation|@
 name|Nullable
 specifier|public

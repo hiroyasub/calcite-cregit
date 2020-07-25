@@ -6270,7 +6270,7 @@ argument_list|()
 return|;
 block|}
 comment|//&
-comment|/** Helper function for implementing<code>BIT_AND</code> */
+comment|/** Helper function for implementing<code>BIT_AND</code>. */
 specifier|public
 specifier|static
 name|long
@@ -6290,7 +6290,7 @@ name|b1
 return|;
 block|}
 comment|// |
-comment|/** Helper function for implementing<code>BIT_OR</code> */
+comment|/** Helper function for implementing<code>BIT_OR</code>. */
 specifier|public
 specifier|static
 name|long
@@ -6310,7 +6310,7 @@ name|b1
 return|;
 block|}
 comment|// ^
-comment|/** Helper function for implementing<code>BIT_XOR</code> */
+comment|/** Helper function for implementing<code>BIT_XOR</code>. */
 specifier|public
 specifier|static
 name|long

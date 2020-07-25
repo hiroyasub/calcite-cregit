@@ -144,7 +144,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * DruidSqlOperatorConverter implementation that handles Floor operations conversions  */
+comment|/**  * DruidSqlOperatorConverter implementation that handles Floor operations  * conversions.  */
 end_comment
 
 begin_class

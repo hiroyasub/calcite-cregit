@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Example UDF for where clause to check pushing to JDBC  */
+comment|/**  * Example UDF for WHERE clause to check pushing to JDBC.  */
 end_comment
 
 begin_class

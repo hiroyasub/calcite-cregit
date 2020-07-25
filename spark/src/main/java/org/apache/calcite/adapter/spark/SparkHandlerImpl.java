@@ -283,7 +283,7 @@ argument_list|,
 literal|"calcite"
 argument_list|)
 decl_stmt|;
-comment|/** Thread-safe holder */
+comment|/** Thread-safe holder. */
 specifier|private
 specifier|static
 class|class

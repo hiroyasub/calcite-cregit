@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unary prefix Operator conversion class used to convert expression like Unary NOT and Minus  */
+comment|/**  * Unary prefix Operator conversion class; used to convert expressions like  * Unary NOT and Minus.  */
 end_comment
 
 begin_class

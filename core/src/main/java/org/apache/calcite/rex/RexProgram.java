@@ -1712,7 +1712,7 @@ return|return
 name|inputRowType
 return|;
 block|}
-comment|/**    * Returns whether this program contains windowed aggregate functions    *    * @return whether this program contains windowed aggregate functions    */
+comment|/**    * Returns whether this program contains windowed aggregate functions.    *    * @return whether this program contains windowed aggregate functions    */
 specifier|public
 name|boolean
 name|containsAggs

@@ -160,7 +160,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Druid cast converter operator used to translates calcite casts to Druid expression cast  */
+comment|/**  * Druid cast converter operator; used to translates Calcite casts to Druid  * expression casts.  */
 end_comment
 
 begin_class

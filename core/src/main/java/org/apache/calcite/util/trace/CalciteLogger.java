@@ -65,7 +65,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// WARN
-comment|/**    * Logs a WARN message with two Object parameters    */
+comment|/**    * Logs a WARN message with two Object parameters.    */
 specifier|public
 name|void
 name|warn
@@ -93,7 +93,7 @@ name|arg2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Conditionally logs a WARN message with three Object parameters    */
+comment|/**    * Conditionally logs a WARN message with three Object parameters.    */
 specifier|public
 name|void
 name|warn
@@ -134,7 +134,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Conditionally logs a WARN message with four Object parameters    */
+comment|/**    * Conditionally logs a WARN message with four Object parameters.    */
 specifier|public
 name|void
 name|warn
@@ -212,7 +212,7 @@ expr_stmt|;
 block|}
 block|}
 comment|// INFO
-comment|/**    * Logs an INFO message with two Object parameters    */
+comment|/**    * Logs an INFO message with two Object parameters.    */
 specifier|public
 name|void
 name|info
@@ -240,7 +240,7 @@ name|arg2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Conditionally logs an INFO message with three Object parameters    */
+comment|/**    * Conditionally logs an INFO message with three Object parameters.    */
 specifier|public
 name|void
 name|info
@@ -281,7 +281,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Conditionally logs an INFO message with four Object parameters    */
+comment|/**    * Conditionally logs an INFO message with four Object parameters.    */
 specifier|public
 name|void
 name|info
@@ -359,7 +359,7 @@ expr_stmt|;
 block|}
 block|}
 comment|// DEBUG
-comment|/**    * Logs a DEBUG message with two Object parameters    */
+comment|/**    * Logs a DEBUG message with two Object parameters.    */
 specifier|public
 name|void
 name|debug
@@ -387,7 +387,7 @@ name|arg2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Conditionally logs a DEBUG message with three Object parameters    */
+comment|/**    * Conditionally logs a DEBUG message with three Object parameters.    */
 specifier|public
 name|void
 name|debug
@@ -428,7 +428,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Conditionally logs a DEBUG message with four Object parameters    */
+comment|/**    * Conditionally logs a DEBUG message with four Object parameters.    */
 specifier|public
 name|void
 name|debug
@@ -506,7 +506,7 @@ expr_stmt|;
 block|}
 block|}
 comment|// TRACE
-comment|/**    * Logs a TRACE message with two Object parameters    */
+comment|/**    * Logs a TRACE message with two Object parameters.    */
 specifier|public
 name|void
 name|trace
@@ -534,7 +534,7 @@ name|arg2
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Conditionally logs a TRACE message with three Object parameters    */
+comment|/**    * Conditionally logs a TRACE message with three Object parameters.    */
 specifier|public
 name|void
 name|trace
@@ -575,7 +575,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Conditionally logs a TRACE message with four Object parameters    */
+comment|/**    * Conditionally logs a TRACE message with four Object parameters.    */
 specifier|public
 name|void
 name|trace

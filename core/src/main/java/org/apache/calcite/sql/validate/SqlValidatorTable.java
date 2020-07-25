@@ -116,7 +116,7 @@ name|String
 name|columnName
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the access type of the table    */
+comment|/**    * Returns the access type of the table.    */
 name|SqlAccessType
 name|getAllowedAccess
 parameter_list|()

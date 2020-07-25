@@ -252,7 +252,7 @@ return|return
 name|outputType
 return|;
 block|}
-comment|/**    * Virtual Column Builder    */
+comment|/**    * Virtual Column builder.    */
 specifier|public
 specifier|static
 class|class

@@ -403,6 +403,10 @@ name|assertThat
 import|;
 end_import
 
+begin_comment
+comment|/** Tests trimming unused fields before materialized view matching. */
+end_comment
+
 begin_class
 specifier|public
 class|class
@@ -525,7 +529,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMVTrimUnusedFiled
 parameter_list|()

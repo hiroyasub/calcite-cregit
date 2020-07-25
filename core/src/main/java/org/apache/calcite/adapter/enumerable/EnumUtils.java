@@ -3347,7 +3347,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**    * Handle decimal type specifically with explicit type conversion    */
+comment|/**    * Handles decimal type specifically with explicit type conversion.    */
 specifier|private
 specifier|static
 name|Expression
@@ -3772,7 +3772,7 @@ return|return
 name|typeMatchedArguments
 return|;
 block|}
-comment|/**    * Match an argument expression to method parameter type with best effort    * @param argument Argument Expression    * @param parameter Parameter type    * @return Converted argument expression that matches the parameter type.    *         Returns null if it is impossible to match.    */
+comment|/**    * Matches an argument expression to method parameter type with best effort.    *    * @param argument Argument Expression    * @param parameter Parameter type    * @return Converted argument expression that matches the parameter type.    *         Returns null if it is impossible to match.    */
 specifier|private
 specifier|static
 name|Expression
@@ -4466,6 +4466,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Enumerator that converts rows into sessions separated by gaps. */
 specifier|private
 specifier|static
 class|class
@@ -5329,6 +5330,7 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Enumerator that computes HOP. */
 specifier|private
 specifier|static
 class|class

@@ -542,7 +542,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Checks if current node represents item access as in {@code _MAP['foo']} or    * {@code cast(_MAP['foo'] as integer)}    *    * @return true if expression is item, false otherwise    */
+comment|/**    * Checks if current node represents item access as in {@code _MAP['foo']} or    * {@code cast(_MAP['foo'] as integer)}.    *    * @return whether expression is item    */
 specifier|static
 name|boolean
 name|isItem

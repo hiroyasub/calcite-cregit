@@ -114,7 +114,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base methods and constant for simplified Expression testing  */
+comment|/**  * Base methods and constants for simplified Expression testing.  */
 end_comment
 
 begin_class

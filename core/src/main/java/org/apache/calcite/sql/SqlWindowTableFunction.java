@@ -355,7 +355,7 @@ operator|!=
 literal|0
 return|;
 block|}
-comment|/**    * Type-inference strategy whereby the result type of a table function call is a ROW,    * which is combined from the operand #0(TABLE parameter)'s schema and two    * additional fields:    *    *<ol>    *<li>window_start: TIMESTAMP type to indicate a window's start.</li>    *<li>window_end: TIMESTAMP type to indicate a window's end.</li>    *</ol>    */
+comment|/**    * Type-inference strategy whereby the result type of a table function call is    * a ROW, which is combined from the operand #0(TABLE parameter)'s schema and    * two additional fields. The fields are as follows:    *    *<ol>    *<li>window_start: TIMESTAMP type to indicate a window's start.</li>    *<li>window_end: TIMESTAMP type to indicate a window's end.</li>    *</ol>    */
 specifier|public
 specifier|static
 specifier|final

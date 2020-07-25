@@ -172,7 +172,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Example Table Function for lateral join checks  */
+comment|/**  * Example Table Function for lateral join checks.  */
 end_comment
 
 begin_class

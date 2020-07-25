@@ -502,7 +502,7 @@ specifier|final
 name|RelBuilder
 name|relBuilder
 decl_stmt|;
-comment|/**    * Original projection expressions    */
+comment|/**    * Original projection expressions.    */
 specifier|final
 name|List
 argument_list|<
@@ -510,7 +510,7 @@ name|RexNode
 argument_list|>
 name|origProjExprs
 decl_stmt|;
-comment|/**    * Fields from the RelNode that the projection is being pushed past    */
+comment|/**    * Fields from the RelNode that the projection is being pushed past.    */
 specifier|final
 name|List
 argument_list|<
@@ -518,12 +518,12 @@ name|RelDataTypeField
 argument_list|>
 name|childFields
 decl_stmt|;
-comment|/**    * Number of fields in the RelNode that the projection is being pushed past    */
+comment|/**    * Number of fields in the RelNode that the projection is being pushed past.    */
 specifier|final
 name|int
 name|nChildFields
 decl_stmt|;
-comment|/**    * Bitmap containing the references in the original projection    */
+comment|/**    * Bitmap containing the references in the original projection.    */
 specifier|final
 name|BitSet
 name|projRefs
@@ -2115,7 +2115,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Determines how much each input reference needs to be adjusted as a result    * of projection    *    * @return array indicating how much each input needs to be adjusted by    */
+comment|/**    * Determines how much each input reference needs to be adjusted as a result    * of projection.    *    * @return array indicating how much each input needs to be adjusted by    */
 specifier|public
 name|int
 index|[]

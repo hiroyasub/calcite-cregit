@@ -4371,6 +4371,7 @@ name|nodeLists
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Now that indicator is deprecated, use    * {@link #groupKey(Iterable, Iterable)}, which has the same behavior as    * calling this method with {@code indicator = false}. */
 annotation|@
 name|Deprecated
@@ -4617,6 +4618,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #groupKey(ImmutableBitSet)}    * or {@link #groupKey(ImmutableBitSet, Iterable)}. */
 annotation|@
 name|Deprecated
@@ -4660,6 +4662,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #groupKey(ImmutableBitSet, Iterable)}. */
 annotation|@
 name|Deprecated
@@ -10919,7 +10922,7 @@ name|repeatUnion
 argument_list|)
 return|;
 block|}
-comment|/**    * Auxiliary class to find a certain RelOptTable based on its name    */
+comment|/**    * Auxiliary class to find a certain RelOptTable based on its name.    */
 specifier|private
 specifier|static
 specifier|final

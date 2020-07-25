@@ -421,7 +421,7 @@ literal|"FROM \"foodmart\".\"sales_fact_1998\""
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3115">[CALCITE-3115]    * Cannot add JdbcRules which have different JdbcConvention    * to same VolcanoPlanner's RuleSet.</a>*/
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3115">[CALCITE-3115]    * Cannot add JdbcRules which have different JdbcConvention    * to same VolcanoPlanner's RuleSet</a>. */
 annotation|@
 name|Test
 name|void

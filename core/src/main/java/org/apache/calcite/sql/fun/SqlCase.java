@@ -215,7 +215,7 @@ operator|=
 name|elseExpr
 expr_stmt|;
 block|}
-comment|/**    * Creates a call to the switched form of the case operator, viz:    *    *<blockquote><code>CASE value<br>    * WHEN whenList[0] THEN thenList[0]<br>    * WHEN whenList[1] THEN thenList[1]<br>    * ...<br>    * ELSE elseClause<br>    * END</code></blockquote>    */
+comment|/**    * Creates a call to the switched form of the CASE operator. For example:    *    *<blockquote><code>CASE value<br>    * WHEN whenList[0] THEN thenList[0]<br>    * WHEN whenList[1] THEN thenList[1]<br>    * ...<br>    * ELSE elseClause<br>    * END</code></blockquote>    */
 specifier|public
 specifier|static
 name|SqlCase

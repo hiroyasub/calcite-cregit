@@ -225,7 +225,7 @@ specifier|private
 name|SqlNodeList
 name|orderList
 decl_stmt|;
-comment|/**    * Scope to use to resolve windows    */
+comment|/** Scope to use to resolve windows. */
 specifier|private
 specifier|final
 name|SqlValidatorScope

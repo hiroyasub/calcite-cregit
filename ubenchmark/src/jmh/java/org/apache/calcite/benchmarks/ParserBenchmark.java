@@ -326,7 +326,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Benchmarks JavaCC-generated SQL parser  */
+comment|/**  * Benchmarks JavaCC-generated SQL parser.  */
 end_comment
 
 begin_class

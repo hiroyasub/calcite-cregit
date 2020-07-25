@@ -588,7 +588,7 @@ name|of
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**    * A bounded variation of {@link PriorityQueue}    *    * @param<E> the type of elements held in this collection    */
+comment|/**    * A bounded variation of {@link PriorityQueue}.    *    * @param<E> the type of elements held in this collection    */
 specifier|private
 specifier|static
 class|class

@@ -496,7 +496,7 @@ comment|/** Current result row. Null if no row is ready. */
 name|TResult
 name|resultRow
 decl_stmt|;
-comment|/** Match counter is 1 based in Oracle */
+comment|/** Match counter is 1-based in Oracle. */
 specifier|final
 name|AtomicInteger
 name|matchCounter

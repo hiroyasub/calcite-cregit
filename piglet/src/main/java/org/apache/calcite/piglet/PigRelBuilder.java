@@ -1538,7 +1538,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**    * Makes a table scan operator for a given row type and names    *    * @param rowType Row type    * @param tableNames Table names    * @return This builder    */
+comment|/**    * Makes a table scan operator for a given row type and names.    *    * @param rowType Row type    * @param tableNames Table names    * @return This builder    */
 specifier|public
 name|RelBuilder
 name|scan
@@ -1565,7 +1565,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Makes a table scan operator for a given row type and names    *    * @param rowType Row type    * @param tableNames Table names    * @return This builder    */
+comment|/**    * Makes a table scan operator for a given row type and names.    *    * @param rowType Row type    * @param tableNames Table names    * @return This builder    */
 specifier|public
 name|RelBuilder
 name|scan
@@ -3246,7 +3246,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Save the store alias with the corresponding relational algebra node    *    * @param storeAlias alias of the Pig store operator    * @return This builder    */
+comment|/**    * Saves the store alias with the corresponding relational algebra node.    *    * @param storeAlias alias of the Pig store operator    * @return This builder    */
 name|RelBuilder
 name|store
 parameter_list|(

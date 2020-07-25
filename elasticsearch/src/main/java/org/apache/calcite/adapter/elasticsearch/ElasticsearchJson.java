@@ -930,7 +930,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Identifies a calcite row (as in relational algebra)    */
+comment|/**    * Identifies a Calcite row (as in relational algebra).    */
 end_comment
 
 begin_class
@@ -1375,7 +1375,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Response from Elastic    */
+comment|/**    * Response from Elastic.    */
 end_comment
 
 begin_class
@@ -1630,7 +1630,7 @@ block|}
 end_class
 
 begin_comment
-comment|/**    * Container for total hits    */
+comment|/**    * Container for total hits.    */
 end_comment
 
 begin_class
@@ -1814,7 +1814,7 @@ specifier|static
 class|class
 name|SearchHit
 block|{
-comment|/**      * ID of the document (not available in aggregations)      */
+comment|/**      * ID of the document (not available in aggregations).      */
 specifier|private
 specifier|final
 name|String
@@ -1984,7 +1984,7 @@ operator|=
 name|fields
 expr_stmt|;
 block|}
-comment|/**      * Returns id of this hit (usually document id)      * @return unique id      */
+comment|/**      * Returns id of this hit (usually document id).      *      * @return unique id      */
 specifier|public
 name|String
 name|id
@@ -2567,14 +2567,14 @@ block|}
 end_class
 
 begin_comment
-comment|/**    * Identifies all aggregations    */
+comment|/**    * Identifies all aggregations.    */
 end_comment
 
 begin_interface
 interface|interface
 name|Aggregation
 block|{
-comment|/**      * @return The name of this aggregation.      */
+comment|/**      * Returns the name of this aggregation.      */
 name|String
 name|getName
 parameter_list|()
@@ -2583,7 +2583,7 @@ block|}
 end_interface
 
 begin_comment
-comment|/**    * Allows traversing aggregations tree    */
+comment|/**    * Allows traversing aggregations tree.    */
 end_comment
 
 begin_interface
@@ -2598,7 +2598,7 @@ block|}
 end_interface
 
 begin_comment
-comment|/**    * An aggregation that returns multiple buckets    */
+comment|/**    * An aggregation that returns multiple buckets.    */
 end_comment
 
 begin_class
@@ -2648,7 +2648,7 @@ operator|=
 name|buckets
 expr_stmt|;
 block|}
-comment|/**      * @return  The buckets of this aggregation.      */
+comment|/**      * Returns the buckets of this aggregation.      */
 name|List
 argument_list|<
 name|Bucket
@@ -2751,7 +2751,7 @@ literal|"aggregations"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * @return The key associated with the bucket      */
+comment|/**      * Returns the key associated with the bucket.      */
 name|Object
 name|key
 parameter_list|()
@@ -2760,7 +2760,7 @@ return|return
 name|key
 return|;
 block|}
-comment|/**      * @return The key associated with the bucket as a string      */
+comment|/**      * Returns the key associated with the bucket as a string.      */
 name|String
 name|keyAsString
 parameter_list|()
@@ -2790,7 +2790,7 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
-comment|/**      * @return  The sub-aggregations of this bucket      */
+comment|/**      * Returns the sub-aggregations of this bucket.      */
 annotation|@
 name|Override
 specifier|public
@@ -2817,7 +2817,7 @@ block|}
 end_class
 
 begin_comment
-comment|/**    * Multi value aggregatoin like    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html">Stats</a>    */
+comment|/**    * Multi-value aggregation, like    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html">Stats</a>.    */
 end_comment
 
 begin_class

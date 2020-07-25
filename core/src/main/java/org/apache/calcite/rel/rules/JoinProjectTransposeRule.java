@@ -1508,7 +1508,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * @param call RelOptRuleCall    * @return true if the rule was invoked with a left project child    */
+comment|/** Returns whether the rule was invoked with a left project child. */
 specifier|protected
 name|boolean
 name|hasLeftChild
@@ -1528,7 +1528,7 @@ operator|instanceof
 name|Project
 return|;
 block|}
-comment|/**    * @param call RelOptRuleCall    * @return true if the rule was invoked with 2 children    */
+comment|/** Returns whether the rule was invoked with 2 children. */
 specifier|protected
 name|boolean
 name|hasRightChild
@@ -1547,7 +1547,7 @@ operator|==
 literal|3
 return|;
 block|}
-comment|/**    * @param call RelOptRuleCall    * @return LogicalProject corresponding to the right child    */
+comment|/** Returns the Project corresponding to the right child. */
 specifier|protected
 name|Project
 name|getRightChild

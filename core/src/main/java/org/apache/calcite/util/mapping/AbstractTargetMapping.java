@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Simple implementation of  * {@link org.apache.calcite.util.mapping.Mappings.TargetMapping} where the  * number of sources and targets are specified as constructor parameters and you  * just need to implement one method,  */
+comment|/**  * Simple implementation of  * {@link org.apache.calcite.util.mapping.Mappings.TargetMapping} where the  * number of sources and targets are specified as constructor parameters, and you  * just need to implement one method.  */
 end_comment
 
 begin_class

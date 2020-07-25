@@ -888,6 +888,7 @@ extends|extends
 name|SqlValidatorTestCase
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
+comment|// CHECKSTYLE: IGNORE 1
 comment|/**    * @deprecated Deprecated so that usages of this constant will show up in    * yellow in Intellij and maybe someone will fix them.    */
 specifier|protected
 specifier|static

@@ -459,7 +459,7 @@ begin_class
 class|class
 name|PredicateAnalyzer
 block|{
-comment|/**    * Internal exception    */
+comment|/**    * Internal exception.    */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -498,7 +498,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Thrown when {@link org.apache.calcite.rel.RelNode} expression can't be processed    * (or converted into ES query)    */
+comment|/**    * Exception that is thrown when a {@link org.apache.calcite.rel.RelNode}    * expression cannot be processed (or converted into an Elasticsearch query).    */
 specifier|static
 class|class
 name|ExpressionNotAnalyzableException
@@ -2762,7 +2762,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Empty interface; exists only to define type hierarchy    */
+comment|/**    * Empty interface; exists only to define the type hierarchy.    */
 interface|interface
 name|Expression
 block|{   }
@@ -2959,7 +2959,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**    * Builds conjunctions / disjunctions based on existing expressions    */
+comment|/**    * Builds conjunctions / disjunctions based on existing expressions.    */
 specifier|static
 class|class
 name|CompoundQueryExpression
@@ -3020,7 +3020,7 @@ return|return
 name|bqe
 return|;
 block|}
-comment|/**      * if partial expression, we will need to complete it with a full filter      * @param partial whether we partially converted a and for push down purposes.      * @param expressions list of expressions to join with {@code and} boolean      * @return new instance of expression      */
+comment|/**      * If partial expression, we will need to complete it with a full filter.      *      * @param partial whether we partially converted a and for push down purposes      * @param expressions list of expressions to join with {@code and} boolean      * @return new instance of expression      */
 specifier|public
 specifier|static
 name|CompoundQueryExpression
@@ -4081,13 +4081,13 @@ return|return
 name|rangeQueryBuilder
 return|;
 block|}
-comment|/**    * Empty interface; exists only to define type hierarchy    */
+comment|/**    * Empty interface; exists only to define the type hierarchy.    */
 interface|interface
 name|TerminalExpression
 extends|extends
 name|Expression
 block|{   }
-comment|/**    * SQL cast: {@code cast(col as INTEGER)}    */
+comment|/**    * SQL cast. For example, {@code cast(col as INTEGER)}.    */
 specifier|static
 specifier|final
 class|class
@@ -4187,7 +4187,7 @@ name|CastExpression
 return|;
 block|}
 block|}
-comment|/**    * Used for bind variables    */
+comment|/**    * Used for bind variables.    */
 specifier|static
 specifier|final
 class|class
@@ -4539,7 +4539,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**    * If one operand in a binary operator is a DateTime type, but the other isn't,    * we should not push down the predicate    * @param call current node being evaluated    */
+comment|/**    * If one operand in a binary operator is a DateTime type, but the other isn't,    * we should not push down the predicate.    *    * @param call Current node being evaluated    */
 specifier|private
 specifier|static
 name|void

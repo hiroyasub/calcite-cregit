@@ -2139,7 +2139,7 @@ name|collationList
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/** Column resolver*/
+comment|/** Column resolver. */
 specifier|public
 interface|interface
 name|ColumnResolver

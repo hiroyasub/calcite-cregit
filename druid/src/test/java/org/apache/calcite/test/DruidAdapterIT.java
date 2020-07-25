@@ -471,7 +471,7 @@ literal|"Druid tests disabled. Add -Dcalcite.test.druid to enable it"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a query against FOODMART with approximate parameters    * */
+comment|/** Creates a query against FOODMART with approximate parameters. */
 specifier|private
 name|CalciteAssert
 operator|.
@@ -491,7 +491,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a query against WIKI with approximate parameters    * */
+comment|/** Creates a query against WIKI with approximate parameters. */
 specifier|private
 name|CalciteAssert
 operator|.
@@ -2217,7 +2217,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2804">[CALCITE-2804]</a>    * Cast does not work in Druid when casting to timestamp    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2804">[CALCITE-2804]    * Cast does not work in Druid when casting to timestamp</a>. */
 annotation|@
 name|Test
 name|void
@@ -7250,7 +7250,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Turn on now count(distinct )    */
+comment|/** Turn on now {@code count(distinct ...)}. */
 annotation|@
 name|Test
 name|void
@@ -8106,7 +8106,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests whether an aggregate with a filter clause has it's filter factored out    * when there is no outer filter    */
+comment|/** Tests whether an aggregate with a filter clause has its filter factored out    * when there is no outer filter. */
 annotation|@
 name|Test
 name|void
@@ -8150,7 +8150,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests whether filter clauses with filters that are always true disappear or not    */
+comment|/** Tests whether filter clauses with filters that are always true    * disappear. */
 annotation|@
 name|Test
 name|void
@@ -8190,7 +8190,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests whether filter clauses with filters that are always true disappear in the presence    * of another aggregate without a filter clause    */
+comment|/** Tests whether filter clauses with filters that are always true disappear    * in the presence of another aggregate without a filter clause. */
 annotation|@
 name|Test
 name|void
@@ -8234,7 +8234,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests whether filter clauses with filters that are always true disappear in the presence    * of another aggregate with a filter clause    */
+comment|/** Tests whether filter clauses with filters that are always true disappear    * in the presence of another aggregate with a filter clause. */
 annotation|@
 name|Test
 name|void
@@ -8285,7 +8285,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests whether an existing outer filter is untouched when an aggregate has a filter clause    * that is always true    */
+comment|/** Tests whether an existing outer filter is untouched when an aggregate has    * a filter clause that is always true. */
 annotation|@
 name|Test
 name|void
@@ -8333,7 +8333,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that an aggregate with a filter clause that is always false does not get pushed in    */
+comment|/** Tests that an aggregate with a filter clause that is always false does not    * get pushed in. */
 annotation|@
 name|Test
 name|void
@@ -8389,7 +8389,7 @@ name|expectedSubExplain
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that an aggregate with a filter clause that is always false does not get pushed when    * there is already an outer filter    */
+comment|/** Tests that an aggregate with a filter clause that is always false does not    * get pushed when there is already an outer filter. */
 annotation|@
 name|Test
 name|void
@@ -8440,7 +8440,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that an aggregate with a filter clause that is the same as the outer filter has no    * references to that filter, and that the original outer filter remains    */
+comment|/** Tests that an aggregate with a filter clause that is the same as the outer    * filter has no references to that filter, and that the original outer filter    * remains. */
 annotation|@
 name|Test
 name|void
@@ -8489,7 +8489,7 @@ literal|"EXPR$0=52644.07000000001"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that an aggregate with a filter clause in the presence of another aggregate    * without a filter clause does not have it's filter factored out into the outer filter    */
+comment|/** Tests that an aggregate with a filter clause in the presence of another    * aggregate without a filter clause does not have its filter factored out    * into the outer filter. */
 annotation|@
 name|Test
 name|void
@@ -8533,7 +8533,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that an aggregate with a filter clause in the presence of another aggregate    * without a filter clause, and an outer filter does not have it's    * filter factored out into the outer filter    */
+comment|/** Tests that an aggregate with a filter clause in the presence of another    * aggregate without a filter clause, and an outer filter does not have its    * filter factored out into the outer filter. */
 annotation|@
 name|Test
 name|void
@@ -8581,7 +8581,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that multiple aggregates with filter clauses have their filters extracted to    * the outer filter field for data pruning    */
+comment|/** Tests that multiple aggregates with filter clauses have their filters    * extracted to the outer filter field for data pruning. */
 annotation|@
 name|Test
 name|void
@@ -8642,7 +8642,7 @@ literal|"EXPR$0=159167.83999999994; EXPR$1=263793.2200000001"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that multiple aggregates with filter clauses have their filters extracted to    * the outer filter field for data pruning in the presence of an outer filter    */
+comment|/** Tests that multiple aggregates with filter clauses have their filters    * extracted to the outer filter field for data pruning in the presence of an    * outer filter. */
 annotation|@
 name|Test
 name|void
@@ -8705,7 +8705,7 @@ literal|"EXPR$0=2600.01; EXPR$1=4486.4400000000005"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that multiple aggregates with the same filter clause have them factored    * out in the presence of an outer filter, and that they no longer refer to those filters    */
+comment|/** Tests that multiple aggregates with the same filter clause have them    * factored out in the presence of an outer filter, and that they no longer    * refer to those filters. */
 annotation|@
 name|Test
 name|void
@@ -8776,7 +8776,7 @@ literal|"EXPR$0=2600.01; EXPR$1=1013.162"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that when the resulting filter from factoring filter clauses out is always false,    * that they are still pushed to Druid to handle.    */
+comment|/** Tests that when the resulting filter from factoring filter clauses out is    * always false, that they are still pushed to Druid to handle. */
 annotation|@
 name|Test
 name|void
@@ -8827,7 +8827,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that aggregates with filter clauses that Druid cannot handle are not pushed in    * as filtered aggregates.    */
+comment|/** Tests that aggregates with filter clauses that Druid cannot handle are not    * pushed in as filtered aggregates. */
 annotation|@
 name|Test
 name|void
@@ -9042,7 +9042,7 @@ literal|"EXPR$0=13.25; product_id=1556"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that an aggregate with a nested filter clause has it's filter factored out    */
+comment|/** Tests that an aggregate with a nested filter clause has its filter    * factored out. */
 annotation|@
 name|Test
 name|void
@@ -9103,7 +9103,7 @@ literal|"EXPR$0=301444.9099999999"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that aggregates with nested filters have their filters factored out    * into the outer filter for data pruning while still holding a reference to the filter clause    */
+comment|/** Tests that aggregates with nested filters have their filters factored out    * into the outer filter for data pruning while still holding a reference to    * the filter clause. */
 annotation|@
 name|Test
 name|void
@@ -9398,7 +9398,7 @@ literal|"EXPR$0=11"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that count(distinct ...) gets pushed to Druid when approximate results are    * acceptable    * */
+comment|/** Tests that {@code count(distinct ...)} gets pushed to Druid when    * approximate results are acceptable. */
 annotation|@
 name|Test
 name|void
@@ -9436,7 +9436,7 @@ name|expectedAggregate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that count(distinct ...) doesn't get pushed to Druid when approximate results    * are not acceptable    */
+comment|/** Tests that {@code count(distinct ...)} doesn't get pushed to Druid when    * approximate results are not acceptable. */
 annotation|@
 name|Test
 name|void
@@ -9532,7 +9532,7 @@ literal|"'queryType':'groupBy'"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that a count on a metric does not get pushed into Druid    */
+comment|/** Tests that a count on a metric does not get pushed into Druid. */
 annotation|@
 name|Test
 name|void
@@ -9576,7 +9576,7 @@ literal|"\"queryType\":\"groupBy\""
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that count(*) is pushed into Druid    */
+comment|/** Tests that {@code count(*)} is pushed into Druid. */
 annotation|@
 name|Test
 name|void
@@ -9803,7 +9803,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the use of count(distinct ...) on a complex metric column in SELECT    * */
+comment|/** Tests the use of count(distinct ...) on a complex metric column in    * SELECT. */
 annotation|@
 name|Test
 name|void
@@ -9827,7 +9827,7 @@ name|foodmartApprox
 argument_list|(
 literal|"select count(distinct \"customer_id\") from \"foodmart\""
 argument_list|)
-comment|// customer_id gets transformed into it's actual underlying sketch column,
+comment|// customer_id gets transformed into its actual underlying sketch column,
 comment|// customer_id_ts. The thetaSketch aggregation is used to compute the count distinct.
 operator|.
 name|queryContains
@@ -9881,7 +9881,7 @@ literal|"EXPR$0=42342.26999999995; EXPR$1=459"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests the use of other aggregations with complex columns    * */
+comment|/** Tests the use of other aggregations with complex columns. */
 annotation|@
 name|Test
 name|void
@@ -9943,7 +9943,7 @@ literal|"Rolled up column 'user_id' is not allowed in MIN"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test post aggregation support with +, -, /, * operators    * */
+comment|/** Tests post-aggregation support with +, -, /, * operators. */
 annotation|@
 name|Test
 name|void

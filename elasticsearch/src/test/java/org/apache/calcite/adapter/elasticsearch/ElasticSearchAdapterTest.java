@@ -446,7 +446,7 @@ operator|.
 name|create
 argument_list|()
 decl_stmt|;
-comment|/** Default index/type name */
+comment|/** Default index/type name. */
 specifier|private
 specifier|static
 specifier|final
@@ -790,7 +790,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Tests using calcite view    */
+comment|/** Tests using a Calcite view. */
 annotation|@
 name|Test
 name|void
@@ -1622,7 +1622,7 @@ literal|"EXPR$0=111396.0; EXPR$1=88241.0; EXPR$2=NY\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Sort by multiple fields (in different direction: asc/desc)    */
+comment|/** Tests sorting by multiple fields (in different direction: asc/desc). */
 annotation|@
 name|Test
 name|void
@@ -2615,7 +2615,7 @@ literal|"EXPR$0=51008; EXPR$1=57187; state=WI"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Testing {@code NOT} operator    */
+comment|/** Tests the {@code NOT} operator. */
 annotation|@
 name|Test
 name|void

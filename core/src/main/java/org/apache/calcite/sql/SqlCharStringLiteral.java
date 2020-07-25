@@ -134,7 +134,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return the underlying NlsString    */
+comment|/**    * Returns the underlying NlsString.    *    * @deprecated Use {@link #getValueAs getValueAs(NlsString.class)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|NlsString
 name|getNlsString
@@ -147,15 +150,19 @@ operator|)
 name|value
 return|;
 block|}
-comment|/**    * @return the collation    */
+comment|/**    * Returns the collation.    */
 specifier|public
 name|SqlCollation
 name|getCollation
 parameter_list|()
 block|{
 return|return
-name|getNlsString
-argument_list|()
+operator|(
+operator|(
+name|NlsString
+operator|)
+name|value
+operator|)
 operator|.
 name|getCollation
 argument_list|()
@@ -299,15 +306,14 @@ name|literals
 argument_list|,
 name|literal
 lambda|->
-operator|(
-operator|(
-name|SqlCharStringLiteral
-operator|)
 name|literal
-operator|)
 operator|.
-name|getNlsString
-argument_list|()
+name|getValueAs
+argument_list|(
+name|NlsString
+operator|.
+name|class
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Example query for checking query projections  */
+comment|/**  * Example query for checking query projections.  */
 end_comment
 
 begin_class

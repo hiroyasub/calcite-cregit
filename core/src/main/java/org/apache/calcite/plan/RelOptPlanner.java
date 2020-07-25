@@ -328,7 +328,8 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
-comment|/**    * @deprecated Use {@link #getCost(RelNode, RelMetadataQuery)}    * or, better, call {@link RelMetadataQuery#getCumulativeCost(RelNode)}.    */
+comment|// CHECKSTYLE: IGNORE 2
+comment|/** @deprecated Use {@link #getCost(RelNode, RelMetadataQuery)}    * or, better, call {@link RelMetadataQuery#getCumulativeCost(RelNode)}. */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -449,6 +450,7 @@ name|RelNode
 name|newRel
 parameter_list|)
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link RexExecutor} */
 annotation|@
 name|Deprecated

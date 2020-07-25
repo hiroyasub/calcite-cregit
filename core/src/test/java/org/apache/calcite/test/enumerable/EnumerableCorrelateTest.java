@@ -215,7 +215,7 @@ begin_class
 class|class
 name|EnumerableCorrelateTest
 block|{
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2605">[CALCITE-2605]    * NullPointerException when left outer join implemented with EnumerableCorrelate</a> */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2605">[CALCITE-2605]    * NullPointerException when left outer join implemented with    * EnumerableCorrelate</a>. */
 annotation|@
 name|Test
 name|void
@@ -352,7 +352,7 @@ literal|"empid=150; name=Sebastian"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2621">[CALCITE-2621]    * Add rule to execute semi joins with correlation</a> */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2621">[CALCITE-2621]    * Add rule to execute semi joins with correlation</a>. */
 annotation|@
 name|Test
 name|void
@@ -449,7 +449,7 @@ literal|"empid=150; name=Sebastian"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2930">[CALCITE-2930]    * FilterCorrelateRule on a Correlate with SemiJoinType SEMI (or ANTI)    * throws IllegalStateException</a> */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2930">[CALCITE-2930]    * FilterCorrelateRule on a Correlate with SemiJoinType SEMI (or ANTI) throws    * IllegalStateException</a>. */
 annotation|@
 name|Test
 name|void
@@ -990,7 +990,7 @@ literal|"name=Eric; salary=8000.0"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2920">[CALCITE-2920]    * RelBuilder: new method to create an antijoin</a> */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2920">[CALCITE-2920]    * RelBuilder: new method to create an antijoin</a>. */
 annotation|@
 name|Test
 name|void

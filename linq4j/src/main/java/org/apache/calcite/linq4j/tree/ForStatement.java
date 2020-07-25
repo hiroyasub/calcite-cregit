@@ -85,7 +85,7 @@ specifier|final
 name|Statement
 name|body
 decl_stmt|;
-comment|/**    * Cache the hash code for the expression    */
+comment|/** Cached hash code for the expression. */
 specifier|private
 name|int
 name|hash

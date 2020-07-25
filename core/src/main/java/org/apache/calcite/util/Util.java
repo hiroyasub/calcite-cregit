@@ -3553,7 +3553,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**    * @return true if s==null or if s.length()==0    */
+comment|/**    * Returns whether s == null or if s.length() == 0.    */
 specifier|public
 specifier|static
 name|boolean
@@ -3717,7 +3717,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Returns the {@link Charset} object representing the value of    * {@link CalciteSystemProperty#DEFAULT_CHARSET}    *    * @throws java.nio.charset.IllegalCharsetNameException If the given charset    *                                                      name is illegal    * @throws java.nio.charset.UnsupportedCharsetException If no support for    *                                                      the named charset is    *                                                      available in this    *                                                      instance of the Java    *                                                      virtual machine    */
+comment|/**    * Returns the {@link Charset} object representing the value of    * {@link CalciteSystemProperty#DEFAULT_CHARSET}.    *    * @throws java.nio.charset.IllegalCharsetNameException If the given charset    *                                                      name is illegal    * @throws java.nio.charset.UnsupportedCharsetException If no support for    *                                                      the named charset is    *                                                      available in this    *                                                      instance of the Java    *                                                      virtual machine    */
 specifier|public
 specifier|static
 name|Charset
@@ -3728,6 +3728,7 @@ return|return
 name|DEFAULT_CHARSET
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Throw new {@link AssertionError} */
 annotation|@
 name|Deprecated
@@ -3746,6 +3747,7 @@ literal|"(unknown cause)"
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Throw new {@link AssertionError} */
 annotation|@
 name|Deprecated
@@ -3767,6 +3769,7 @@ name|s
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Throw new {@link RuntimeException} if checked; throw raw    * exception if unchecked or {@link Error} */
 annotation|@
 name|Deprecated
@@ -3788,6 +3791,7 @@ name|e
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Throw new {@link AssertionError} if applicable;    * or {@link RuntimeException} if e is checked;    * or raw exception if e is unchecked or {@link Error}. */
 specifier|public
 specifier|static
@@ -4047,6 +4051,7 @@ name|toString
 argument_list|()
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link Preconditions#checkArgument}    * or {@link Objects#requireNonNull(Object)} */
 annotation|@
 name|Deprecated
@@ -4080,6 +4085,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link Preconditions#checkArgument}    * or {@link Objects#requireNonNull(Object)} */
 annotation|@
 name|Deprecated
@@ -4113,6 +4119,7 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link Preconditions#checkArgument} */
 annotation|@
 name|Deprecated

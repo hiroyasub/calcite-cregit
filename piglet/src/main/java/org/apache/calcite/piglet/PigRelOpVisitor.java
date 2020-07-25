@@ -969,7 +969,7 @@ specifier|private
 name|Operator
 name|currentRoot
 decl_stmt|;
-comment|/**    * Type of Pig groups    */
+comment|/** Type of Pig groups. */
 specifier|private
 enum|enum
 name|GroupType
@@ -2179,7 +2179,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Projects out group key and the row for each relation    *    * @param loCogroup Pig logical group operator    * @throws FrontendException Exception during processing Pig operator    */
+comment|/**    * Projects out group key and the row for each relation.    *    * @param loCogroup Pig logical group operator    * @throws FrontendException Exception during processing Pig operator    */
 specifier|private
 name|void
 name|preprocessCogroup

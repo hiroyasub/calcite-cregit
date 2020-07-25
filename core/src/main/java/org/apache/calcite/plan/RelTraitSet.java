@@ -207,7 +207,7 @@ specifier|private
 name|String
 name|string
 decl_stmt|;
-comment|/** Cache the hash code for the traits */
+comment|/** Caches the hash code for the traits. */
 specifier|private
 name|int
 name|hash

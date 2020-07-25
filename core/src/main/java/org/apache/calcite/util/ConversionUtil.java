@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility functions for converting from one type to another  */
+comment|/**  * Utility functions for converting from one type to another.  */
 end_comment
 
 begin_class
@@ -401,7 +401,7 @@ name|d
 argument_list|)
 return|;
 block|}
-comment|/**    * Converts a string into a boolean    */
+comment|/**    * Converts a string into a BOOLEAN.    */
 specifier|public
 specifier|static
 name|Boolean

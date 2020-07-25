@@ -44,7 +44,7 @@ name|SqlAdvisorHint2
 extends|extends
 name|SqlAdvisorHint
 block|{
-comment|/** Replacement string */
+comment|/** Replacement string. */
 specifier|public
 specifier|final
 name|String

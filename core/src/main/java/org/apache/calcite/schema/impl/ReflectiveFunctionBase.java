@@ -188,7 +188,7 @@ name|FunctionParameter
 argument_list|>
 name|parameters
 decl_stmt|;
-comment|/**    * {@code ReflectiveFunctionBase} constructor    * @param method method that is used to get type information from    */
+comment|/**    * Creates a ReflectiveFunctionBase.    *    * @param method Method that is used to get type information from    */
 specifier|public
 name|ReflectiveFunctionBase
 parameter_list|(

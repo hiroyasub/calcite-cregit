@@ -260,7 +260,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Test for {@link org.apache.calcite.adapter.enumerable.EnumerableRelImplementor.TypeFinder}  */
+comment|/**  * Test for  * {@link org.apache.calcite.adapter.enumerable.EnumerableRelImplementor.TypeFinder}.  */
 end_comment
 
 begin_class

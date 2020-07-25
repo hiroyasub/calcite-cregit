@@ -333,7 +333,7 @@ name|writeEndObject
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * @param dimensionSpec Druid Dimesion spec object    *    * @return valid {@link Granularity} of floor extract or null when not possible.    */
+comment|/** Returns a valid {@link Granularity} of floor extract, or null when not    * possible.    *    * @param dimensionSpec Druid Dimension specification    */
 annotation|@
 name|Nullable
 specifier|public

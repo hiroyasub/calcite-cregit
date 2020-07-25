@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests against parameters in prepared statement when using underlying jdbc subschema  */
+comment|/**  * Tests against parameters in prepared statement when using underlying JDBC  * sub-schema.  */
 end_comment
 
 begin_class

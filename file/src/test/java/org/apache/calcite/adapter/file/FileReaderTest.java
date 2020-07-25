@@ -1104,7 +1104,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link FileReader} iterator with static file, */
+comment|/** Tests {@link FileReader} iterator with a static file. */
 annotation|@
 name|Test
 name|void

@@ -3156,7 +3156,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return the RelOptCluster in use.    */
+comment|/** Returns the RelOptCluster in use. */
 specifier|public
 name|RelOptCluster
 name|getCluster
@@ -3260,7 +3260,7 @@ return|return
 name|retVal
 return|;
 block|}
-comment|/**    * @return mapping of non-correlated sub-queries that have been converted to    * the constants that they evaluate to    */
+comment|/** Returns the mapping of non-correlated sub-queries that have been converted    * to the constants that they evaluate to. */
 specifier|public
 name|Map
 argument_list|<
@@ -26132,7 +26132,7 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/** Are we directly inside a windowed aggregate? */
+comment|/** Whether we are directly inside a windowed aggregate. */
 specifier|private
 name|boolean
 name|inOver

@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Indicating that how do Json constructors handle null  */
+comment|/**  * Indicating how JSON constructors handle null.  */
 end_comment
 
 begin_enum

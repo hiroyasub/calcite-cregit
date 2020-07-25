@@ -53,7 +53,7 @@ interface|interface
 name|SubQueryConverter
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return Whether the sub-query can be converted    */
+comment|/** Returns whether the sub-query can be converted. */
 name|boolean
 name|canConvertSubQuery
 parameter_list|()

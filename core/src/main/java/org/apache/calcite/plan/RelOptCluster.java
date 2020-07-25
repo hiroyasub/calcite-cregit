@@ -827,6 +827,7 @@ return|return
 name|emptyTraitSet
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 2
 comment|/** @deprecated For {@code traitSetOf(t1, t2)},    * use {@link #traitSet}().replace(t1).replace(t2). */
 annotation|@
 name|Deprecated

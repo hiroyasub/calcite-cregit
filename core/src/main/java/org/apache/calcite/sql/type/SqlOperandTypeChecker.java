@@ -80,7 +80,7 @@ name|boolean
 name|throwOnFailure
 parameter_list|)
 function_decl|;
-comment|/**    * @return range of operand counts allowed in a call    */
+comment|/** Returns the range of operand counts allowed in a call. */
 name|SqlOperandCountRange
 name|getOperandCountRange
 parameter_list|()

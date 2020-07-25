@@ -262,7 +262,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * DataContext for evaluating an RexExpression  */
+comment|/**  * DataContext for evaluating a RexExpression.  */
 end_comment
 
 begin_class

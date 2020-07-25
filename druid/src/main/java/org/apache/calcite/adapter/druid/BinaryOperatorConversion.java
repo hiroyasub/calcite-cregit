@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Binary operator conversion utility class used to convert expression like exp1 Operator exp2  */
+comment|/**  * Binary operator conversion utility class; used to convert expressions like  * {@code exp1 Operator exp2}.  */
 end_comment
 
 begin_class

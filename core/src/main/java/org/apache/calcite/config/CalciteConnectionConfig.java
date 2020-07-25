@@ -124,47 +124,47 @@ name|Properties
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/** @see CalciteConnectionProperty#APPROXIMATE_DISTINCT_COUNT */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#APPROXIMATE_DISTINCT_COUNT}. */
 name|boolean
 name|approximateDistinctCount
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#APPROXIMATE_TOP_N */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#APPROXIMATE_TOP_N}. */
 name|boolean
 name|approximateTopN
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#APPROXIMATE_DECIMAL */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#APPROXIMATE_DECIMAL}. */
 name|boolean
 name|approximateDecimal
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#NULL_EQUAL_TO_EMPTY */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#NULL_EQUAL_TO_EMPTY}. */
 name|boolean
 name|nullEqualToEmpty
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#AUTO_TEMP */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#AUTO_TEMP}. */
 name|boolean
 name|autoTemp
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#MATERIALIZATIONS_ENABLED */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#MATERIALIZATIONS_ENABLED}. */
 name|boolean
 name|materializationsEnabled
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#CREATE_MATERIALIZATIONS */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#CREATE_MATERIALIZATIONS}. */
 name|boolean
 name|createMaterializations
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#DEFAULT_NULL_COLLATION */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#DEFAULT_NULL_COLLATION}. */
 name|NullCollation
 name|defaultNullCollation
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#FUN */
+comment|/** Returns the value of {@link CalciteConnectionProperty#FUN}. */
 parameter_list|<
 name|T
 parameter_list|>
@@ -181,37 +181,37 @@ name|T
 name|defaultOperatorTable
 parameter_list|)
 function_decl|;
-comment|/** @see CalciteConnectionProperty#MODEL */
+comment|/** Returns the value of {@link CalciteConnectionProperty#MODEL}. */
 name|String
 name|model
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#LEX */
+comment|/** Returns the value of {@link CalciteConnectionProperty#LEX}. */
 name|Lex
 name|lex
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#QUOTING */
+comment|/** Returns the value of {@link CalciteConnectionProperty#QUOTING}. */
 name|Quoting
 name|quoting
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#UNQUOTED_CASING */
+comment|/** Returns the value of {@link CalciteConnectionProperty#UNQUOTED_CASING}. */
 name|Casing
 name|unquotedCasing
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#QUOTED_CASING */
+comment|/** Returns the value of {@link CalciteConnectionProperty#QUOTED_CASING}. */
 name|Casing
 name|quotedCasing
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#CASE_SENSITIVE */
+comment|/** Returns the value of {@link CalciteConnectionProperty#CASE_SENSITIVE}. */
 name|boolean
 name|caseSensitive
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#PARSER_FACTORY */
+comment|/** Returns the value of {@link CalciteConnectionProperty#PARSER_FACTORY}. */
 parameter_list|<
 name|T
 parameter_list|>
@@ -228,7 +228,7 @@ name|T
 name|defaultParserFactory
 parameter_list|)
 function_decl|;
-comment|/** @see CalciteConnectionProperty#SCHEMA_FACTORY */
+comment|/** Returns the value of {@link CalciteConnectionProperty#SCHEMA_FACTORY}. */
 parameter_list|<
 name|T
 parameter_list|>
@@ -245,24 +245,24 @@ name|T
 name|defaultSchemaFactory
 parameter_list|)
 function_decl|;
-comment|/** @see CalciteConnectionProperty#SCHEMA_TYPE */
+comment|/** Returns the value of {@link CalciteConnectionProperty#SCHEMA_TYPE}. */
 name|JsonSchema
 operator|.
 name|Type
 name|schemaType
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#SPARK */
+comment|/** Returns the value of {@link CalciteConnectionProperty#SPARK}. */
 name|boolean
 name|spark
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#FORCE_DECORRELATE */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#FORCE_DECORRELATE}. */
 name|boolean
 name|forceDecorrelate
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#TYPE_SYSTEM */
+comment|/** Returns the value of {@link CalciteConnectionProperty#TYPE_SYSTEM}. */
 parameter_list|<
 name|T
 parameter_list|>
@@ -279,34 +279,34 @@ name|T
 name|defaultTypeSystem
 parameter_list|)
 function_decl|;
-comment|/** @see CalciteConnectionProperty#CONFORMANCE */
+comment|/** Returns the value of {@link CalciteConnectionProperty#CONFORMANCE}. */
 name|SqlConformance
 name|conformance
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#TIME_ZONE */
+comment|/** Returns the value of {@link CalciteConnectionProperty#TIME_ZONE}. */
 annotation|@
 name|Override
 name|String
 name|timeZone
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#LOCALE */
+comment|/** Returns the value of {@link CalciteConnectionProperty#LOCALE}. */
 name|String
 name|locale
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#TYPE_COERCION */
+comment|/** Returns the value of {@link CalciteConnectionProperty#TYPE_COERCION}. */
 name|boolean
 name|typeCoercion
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#LENIENT_OPERATOR_LOOKUP */
+comment|/** Returns the value of    * {@link CalciteConnectionProperty#LENIENT_OPERATOR_LOOKUP}. */
 name|boolean
 name|lenientOperatorLookup
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#TOPDOWN_OPT */
+comment|/** Returns the value of {@link CalciteConnectionProperty#TOPDOWN_OPT}. */
 name|boolean
 name|topDownOpt
 parameter_list|()

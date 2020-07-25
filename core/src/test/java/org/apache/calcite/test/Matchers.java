@@ -1314,7 +1314,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Is the numeric value within a given difference another value?    *    * @param<T> Value type    */
+comment|/** Matcher that tests whether the numeric value is within a given difference    * another value.    *    * @param<T> Value type    */
 specifier|public
 specifier|static
 class|class

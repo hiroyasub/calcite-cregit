@@ -103,7 +103,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return whether a cancellation has been requested    */
+comment|/** Returns whether a cancellation has been requested. */
 specifier|public
 name|boolean
 name|isCancelRequested

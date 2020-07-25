@@ -327,7 +327,7 @@ name|SqlCollation
 name|collation
 parameter_list|)
 function_decl|;
-comment|/**    * @return the default {@link Charset} for string types    */
+comment|/** Returns the default {@link Charset} (valid if this is a string type). */
 name|Charset
 name|getDefaultCharset
 parameter_list|()

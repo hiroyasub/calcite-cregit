@@ -4460,7 +4460,7 @@ literal|"-73786976294838206464"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link RexCopier#visitOver(RexOver)} */
+comment|/** Tests {@link RexCopier#visitOver(RexOver)}. */
 annotation|@
 name|Test
 name|void
@@ -4821,7 +4821,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Tests {@link RexCopier#visitCorrelVariable(RexCorrelVariable)} */
+comment|/** Tests {@link RexCopier#visitCorrelVariable(RexCorrelVariable)}. */
 annotation|@
 name|Test
 name|void
@@ -4972,7 +4972,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link RexCopier#visitLocalRef(RexLocalRef)} */
+comment|/** Tests {@link RexCopier#visitLocalRef(RexLocalRef)}. */
 annotation|@
 name|Test
 name|void
@@ -5117,7 +5117,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link RexCopier#visitDynamicParam(RexDynamicParam)} */
+comment|/** Tests {@link RexCopier#visitDynamicParam(RexDynamicParam)}. */
 annotation|@
 name|Test
 name|void
@@ -5263,7 +5263,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link RexCopier#visitRangeRef(RexRangeRef)} */
+comment|/** Tests {@link RexCopier#visitRangeRef(RexRangeRef)}. */
 annotation|@
 name|Test
 name|void

@@ -502,6 +502,7 @@ name|operands
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #operandJ} */
 annotation|@
 name|SuppressWarnings
@@ -792,6 +793,7 @@ name|predicate
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #convertOperand(Class, Predicate, RelTrait)}. */
 annotation|@
 name|SuppressWarnings
@@ -1261,7 +1263,7 @@ argument_list|()
 assert|;
 block|}
 block|}
-comment|/**    * Returns the root operand of this rule    *    * @return the root operand of this rule    */
+comment|/**    * Returns the root operand of this rule.    *    * @return the root operand of this rule    */
 specifier|public
 name|RelOptRuleOperand
 name|getOperand

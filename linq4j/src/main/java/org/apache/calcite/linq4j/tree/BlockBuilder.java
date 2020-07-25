@@ -1107,7 +1107,7 @@ operator|instanceof
 name|NewExpression
 return|;
 block|}
-comment|/**    * Prepares declaration for inlining: adds cast    * @param decl inlining candidate    * @return normalized expression    */
+comment|/**    * Prepares declaration for inlining, adds cast.    *    * @param decl inlining candidate    * @return normalized expression    */
 specifier|private
 name|Expression
 name|normalizeDeclaration
@@ -1178,7 +1178,7 @@ return|return
 name|expr
 return|;
 block|}
-comment|/**    * Returns the reference to ParameterExpression if given expression was    * already computed and stored to local variable    * @param expr expression to test    * @return existing ParameterExpression or null    */
+comment|/**    * Returns the reference to ParameterExpression if given expression was    * already computed and stored to local variable.    *    * @param expr expression to test    * @return existing ParameterExpression or null    */
 specifier|public
 name|DeclarationStatement
 name|getComputedExpression

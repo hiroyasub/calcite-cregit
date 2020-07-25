@@ -474,7 +474,7 @@ specifier|private
 name|boolean
 name|closed
 decl_stmt|;
-comment|/**      * Keeps last value of {@code scrollId} in memory so scroll can be released upon termination      */
+comment|/** Keeps last value of {@code scrollId} in memory so scroll can be released      * upon termination. */
 specifier|private
 name|String
 name|scrollId

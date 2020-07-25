@@ -283,7 +283,7 @@ argument_list|>
 name|getTraitDefs
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the convertlet table that should be used when converting from SQL    * to row expressions    */
+comment|/**    * Returns the convertlet table that should be used when converting from SQL    * to row expressions.    */
 name|SqlRexConvertletTable
 name|getConvertletTable
 parameter_list|()

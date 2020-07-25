@@ -3072,7 +3072,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/** Currently we only support TableScan - Project - Filter - Inner Join */
+comment|/** Returns whether a RelNode is a valid tree. Currently we only support    * TableScan - Project - Filter - Inner Join. */
 specifier|protected
 name|boolean
 name|isValidRelNodePlan
@@ -6692,7 +6692,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Edge for graph */
+comment|/** Edge for graph. */
 specifier|protected
 specifier|static
 class|class
@@ -6749,7 +6749,7 @@ literal|"}"
 return|;
 block|}
 block|}
-comment|/** View partitioning result */
+comment|/** View partitioning result. */
 specifier|protected
 specifier|static
 class|class

@@ -1670,7 +1670,7 @@ literal|"C=6\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Local Statement insert    */
+comment|/** Local Statement insert. */
 annotation|@
 name|Test
 name|void
@@ -1753,7 +1753,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Local PreparedStatement insert WITHOUT bind variables    */
+comment|/** Local PreparedStatement insert WITHOUT bind variables. */
 annotation|@
 name|Test
 name|void
@@ -1852,7 +1852,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Local PreparedStatement insert WITH bind variables    */
+comment|/** Local PreparedStatement insert WITH bind variables. */
 annotation|@
 name|Test
 name|void

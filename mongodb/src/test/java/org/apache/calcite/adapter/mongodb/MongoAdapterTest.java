@@ -580,7 +580,7 @@ argument_list|(
 literal|"/mongo-model.json"
 argument_list|)
 decl_stmt|;
-comment|/** Number of records in local file */
+comment|/** Number of records in local file. */
 specifier|protected
 specifier|static
 specifier|final

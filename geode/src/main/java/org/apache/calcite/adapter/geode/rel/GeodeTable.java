@@ -490,7 +490,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Table based on a Geode Region  */
+comment|/**  * Table based on a Geode Region.  */
 end_comment
 
 begin_class

@@ -382,7 +382,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * @return the identifier for the target table of the update    */
+comment|/** Returns the identifier for the target table of this UPDATE. */
 specifier|public
 name|SqlNode
 name|getTargetTable
@@ -392,7 +392,7 @@ return|return
 name|targetTable
 return|;
 block|}
-comment|/**    * @return the alias for the target table of the update    */
+comment|/** Returns the alias for the target table of this UPDATE. */
 specifier|public
 name|SqlIdentifier
 name|getAlias
@@ -417,7 +417,7 @@ operator|=
 name|alias
 expr_stmt|;
 block|}
-comment|/**    * @return the list of target column names    */
+comment|/** Returns the list of target column names. */
 specifier|public
 name|SqlNodeList
 name|getTargetColumnList
@@ -427,7 +427,7 @@ return|return
 name|targetColumnList
 return|;
 block|}
-comment|/**    * @return the list of source expressions    */
+comment|/** Returns the list of source expressions. */
 specifier|public
 name|SqlNodeList
 name|getSourceExpressionList

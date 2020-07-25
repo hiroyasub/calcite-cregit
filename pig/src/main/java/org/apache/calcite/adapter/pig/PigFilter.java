@@ -353,7 +353,7 @@ name|getTable
 argument_list|()
 return|;
 block|}
-comment|/**    * Generates Pig Latin filtering statements, for example    *    *<blockquote>    *<pre>table = FILTER table BY score&gt; 2.0;</pre>    *</blockquote>    */
+comment|/**    * Generates Pig Latin filtering statements. For example    *    *<blockquote>    *<pre>table = FILTER table BY score&gt; 2.0;</pre>    *</blockquote>    */
 specifier|private
 name|String
 name|getPigFilterStatement
@@ -774,7 +774,7 @@ operator|==
 literal|1
 return|;
 block|}
-comment|/**    * TODO: do proper literal to string conversion + escaping    */
+comment|/**    * Converts a literal to a Pig Latin string literal.    *    *<p>TODO: do proper literal to string conversion + escaping    */
 specifier|private
 name|String
 name|getLiteralAsString

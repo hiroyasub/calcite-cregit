@@ -4,13 +4,8 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * The Redis adapter contains various table functions that let you query data  * sources in your operating system and environment.  */
+comment|/**  * Redis adapter.  */
 end_comment
-
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
 
 begin_package
 package|package
@@ -25,22 +20,6 @@ operator|.
 name|redis
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 end_unit
 

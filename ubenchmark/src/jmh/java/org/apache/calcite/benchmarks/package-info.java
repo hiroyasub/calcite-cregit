@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * JMH benchmarks for Calcite  */
+comment|/**  * JMH benchmarks for Calcite.  */
 end_comment
 
 begin_package

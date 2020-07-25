@@ -747,7 +747,7 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|/**    * Returns the rule with a given description    *    * @param description Description    * @return Rule with given description, or null if not found    */
+comment|/**    * Returns the rule with a given description.    *    * @param description Description    * @return Rule with given description, or null if not found    */
 specifier|protected
 name|RelOptRule
 name|getRuleByDescription
@@ -1585,7 +1585,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Takes care of tracing and listener notification when a rel is discarded    *    * @param rel discarded rel    */
+comment|/**    * Takes care of tracing and listener notification when a rel is discarded.    *    * @param rel Discarded rel    */
 specifier|protected
 name|void
 name|notifyDiscard

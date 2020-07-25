@@ -113,7 +113,7 @@ specifier|final
 name|Method
 name|method
 decl_stmt|;
-comment|/**    * Constructor of {@link ReflectiveCallNotNullImplementor}    * @param method method that is used to implement the call    */
+comment|/**    * Constructor of {@link ReflectiveCallNotNullImplementor}.    *    * @param method Method that is used to implement the call    */
 specifier|public
 name|ReflectiveCallNotNullImplementor
 parameter_list|(

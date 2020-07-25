@@ -86,7 +86,7 @@ name|SocketFactoryImpl
 extends|extends
 name|SocketFactory
 block|{
-comment|/**    * should keep alives be sent    */
+comment|/**    * Whether keep-alives should be sent.    */
 specifier|public
 specifier|static
 specifier|final
@@ -95,7 +95,7 @@ name|SO_KEEPALIVE
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * is out of band in-line enabled    */
+comment|/**    * Whether out-of-band in-line is enabled.    */
 specifier|public
 specifier|static
 specifier|final
@@ -104,7 +104,7 @@ name|OOBINLINE
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * should the address be reused    */
+comment|/**    * Whether the address should be reused.    */
 specifier|public
 specifier|static
 specifier|final
@@ -113,7 +113,7 @@ name|SO_REUSEADDR
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * do not buffer send(s) iff true    */
+comment|/**    * Whether to not buffer send(s).    */
 specifier|public
 specifier|static
 specifier|final
@@ -122,7 +122,7 @@ name|TCP_NODELAY
 init|=
 literal|true
 decl_stmt|;
-comment|/**    * size of receiving buffer    */
+comment|/**    * Size of receiving buffer.    */
 specifier|public
 specifier|static
 specifier|final
@@ -131,7 +131,7 @@ name|SO_RCVBUF
 init|=
 literal|8192
 decl_stmt|;
-comment|/**    * size of sending buffer iff needed    */
+comment|/**    * Size of sending buffer iff needed.    */
 specifier|public
 specifier|static
 specifier|final
@@ -140,7 +140,7 @@ name|SO_SNDBUF
 init|=
 literal|1024
 decl_stmt|;
-comment|/**    * read timeout in milliseconds    */
+comment|/**    * Read timeout in milliseconds.    */
 specifier|public
 specifier|static
 specifier|final
@@ -149,7 +149,7 @@ name|SO_TIMEOUT
 init|=
 literal|12000
 decl_stmt|;
-comment|/**    * connect timeout in milliseconds    */
+comment|/**    * Connect timeout in milliseconds.    */
 specifier|public
 specifier|static
 specifier|final
@@ -158,7 +158,7 @@ name|SO_CONNECT_TIMEOUT
 init|=
 literal|5000
 decl_stmt|;
-comment|/**    * enabling lingering with 0-timeout will cause the socket to be    * closed forcefully upon execution of close()    */
+comment|/**    * Enabling lingering with 0-timeout will cause the socket to be    * closed forcefully upon execution of {@code close()}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -167,7 +167,7 @@ name|SO_LINGER
 init|=
 literal|true
 decl_stmt|;
-comment|/**    * amount of time to linger    */
+comment|/**    * Amount of time to linger.    */
 specifier|public
 specifier|static
 specifier|final
@@ -492,7 +492,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**    * @see javax.net.SocketFactory#getDefault()    */
+comment|/**    * Returns a copy of the environment's default socket factory.    *    * @see javax.net.SocketFactory#getDefault()    */
 specifier|public
 specifier|static
 name|SocketFactory

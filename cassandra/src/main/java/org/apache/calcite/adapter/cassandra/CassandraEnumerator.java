@@ -344,7 +344,7 @@ name|getFieldList
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Produce the next row from the results    *    * @return A new row from the results    */
+comment|/** Produces the next row from the results.    *    * @return A new row from the results    */
 specifier|public
 name|Object
 name|current

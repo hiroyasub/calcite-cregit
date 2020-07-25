@@ -120,7 +120,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Parameter type-checking strategy types must be [nullable] Multiset,  * [nullable] Multiset and the two types must have the same element type  *  * @see MultisetSqlType#getComponentType  */
+comment|/**  * Parameter type-checking strategy where types must be ([nullable] Multiset,  * [nullable] Multiset), and the two types must have the same element type.  *  * @see MultisetSqlType#getComponentType  */
 end_comment
 
 begin_class

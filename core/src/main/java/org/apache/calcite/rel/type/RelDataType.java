@@ -252,22 +252,22 @@ name|RelDataTypeFamily
 name|getFamily
 parameter_list|()
 function_decl|;
-comment|/**    * @return precedence list for this type    */
+comment|/** Returns the precedence list for this type. */
 name|RelDataTypePrecedenceList
 name|getPrecedenceList
 parameter_list|()
 function_decl|;
-comment|/**    * @return the category of comparison operators which make sense when    * applied to values of this type    */
+comment|/** Returns the category of comparison operators that make sense when applied    * to values of this type. */
 name|RelDataTypeComparability
 name|getComparability
 parameter_list|()
 function_decl|;
-comment|/**    * @return whether it has dynamic structure (for "schema-on-read" table)    */
+comment|/** Returns whether this type has dynamic structure (for "schema-on-read"    * table). */
 name|boolean
 name|isDynamicStruct
 parameter_list|()
 function_decl|;
-comment|/**    * @return whether the field types are equal with each other by ignoring    * the field names. If it is not a struct, just return the result of    * {@code #equals(Object)}.    */
+comment|/** Returns whether the field types are equal with each other by ignoring the    * field names. If it is not a struct, just return the result of {@code    * #equals(Object)}. */
 annotation|@
 name|API
 argument_list|(

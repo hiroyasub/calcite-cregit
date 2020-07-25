@@ -410,7 +410,7 @@ literal|"Unsupported operation system detected. Both / and c:/ produce relative 
 argument_list|)
 throw|;
 block|}
-comment|/**    * Read lines from {@link CharSource}    */
+comment|/**    * Read lines from {@link CharSource}.    */
 annotation|@
 name|Test
 name|void

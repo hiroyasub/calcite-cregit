@@ -127,7 +127,7 @@ argument_list|,
 literal|0
 argument_list|)
 block|,
-comment|/** Anchor for start "^" */
+comment|/** Anchor for start "^". */
 name|ANCHOR_START
 argument_list|(
 literal|0
@@ -135,7 +135,7 @@ argument_list|,
 literal|0
 argument_list|)
 block|,
-comment|/** Anchor for end "$" */
+comment|/** Anchor for end "$". */
 name|ANCHOR_END
 argument_list|(
 literal|0
@@ -185,7 +185,7 @@ argument_list|,
 literal|1
 argument_list|)
 block|,
-comment|/** Pattern that machtes a pattern one time or zero times */
+comment|/** Pattern that matches a pattern one time or zero times. */
 name|OPTIONAL
 argument_list|(
 literal|1

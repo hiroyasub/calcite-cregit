@@ -1404,7 +1404,7 @@ name|findBestExp
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Tests a rule that is fired once per subset (whereas most rules are fired    * once per rel in a set or rel in a subset)    */
+comment|/**    * Tests a rule that is fired once per subset. (Whereas most rules are fired    * once per rel in a set or rel in a subset.)    */
 annotation|@
 name|Test
 name|void
@@ -3550,6 +3550,7 @@ parameter_list|)
 function_decl|;
 block|}
 block|}
+comment|/** Rule that matches a PhysSingle on a RelSubset. */
 specifier|public
 specifier|static
 class|class
@@ -3757,7 +3758,7 @@ parameter_list|)
 function_decl|;
 block|}
 block|}
-comment|/**    * Create an artificial RelSet merge in the PhysSingleRel's input RelSet    */
+comment|/** Creates an artificial RelSet merge in the PhysSingleRel's input RelSet. */
 specifier|public
 specifier|static
 class|class
@@ -4726,6 +4727,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Rule that converts a physical RelNode to an iterator. */
 specifier|private
 specifier|static
 class|class

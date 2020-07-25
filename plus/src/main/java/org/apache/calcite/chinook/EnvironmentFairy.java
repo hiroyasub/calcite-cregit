@@ -79,7 +79,7 @@ name|user
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Who is emulated to being logged in?    */
+comment|/**    * Describes who is emulated to being logged in.    */
 specifier|public
 enum|enum
 name|User

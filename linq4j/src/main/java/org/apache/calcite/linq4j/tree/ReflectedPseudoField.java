@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a PseudoField that is implemented via java reflection Field  */
+comment|/**  * Represents a PseudoField that is implemented via a Java reflection  * {@link Field}.  */
 end_comment
 
 begin_class

@@ -1249,7 +1249,7 @@ name|enumerable
 argument_list|)
 return|;
 block|}
-comment|/** Deduces the element type of a collection;    * same logic as {@link #toEnumerable} */
+comment|/** Deduces the element type of a collection;    * same logic as {@link #toEnumerable}. */
 specifier|private
 specifier|static
 name|Type

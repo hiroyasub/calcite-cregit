@@ -17646,7 +17646,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests filter builder with correlation variables */
+comment|/** Tests filter builder with correlation variables. */
 annotation|@
 name|Test
 name|void
@@ -17939,7 +17939,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Checks if simplification is run in {@link org.apache.calcite.rex.RexUnknownAs#FALSE} mode for filter conditions */
+comment|/** Checks if simplification is run in    * {@link org.apache.calcite.rex.RexUnknownAs#FALSE} mode for filter    * conditions. */
 annotation|@
 name|Test
 name|void

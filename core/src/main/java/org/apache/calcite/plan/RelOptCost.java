@@ -25,22 +25,22 @@ interface|interface
 name|RelOptCost
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return number of rows processed; this should not be confused with the    * row count produced by a relational expression    * ({@link org.apache.calcite.rel.RelNode#estimateRowCount})    */
+comment|/** Returns the number of rows processed; this should not be    * confused with the row count produced by a relational expression    * ({@link org.apache.calcite.rel.RelNode#estimateRowCount}). */
 name|double
 name|getRows
 parameter_list|()
 function_decl|;
-comment|/**    * @return usage of CPU resources    */
+comment|/** Returns usage of CPU resources. */
 name|double
 name|getCpu
 parameter_list|()
 function_decl|;
-comment|/**    * @return usage of I/O resources    */
+comment|/** Returns usage of I/O resources. */
 name|double
 name|getIo
 parameter_list|()
 function_decl|;
-comment|/**    * @return true iff this cost represents an expression that hasn't actually    * been implemented (e.g. a pure relational algebra expression) or can't    * actually be implemented, e.g. a transfer of data between two disconnected    * sites    */
+comment|/** Returns whether this cost represents an expression that hasn't actually    * been implemented (e.g. a pure relational algebra expression) or can't    * actually be implemented, e.g. a transfer of data between two disconnected    * sites. */
 name|boolean
 name|isInfinite
 parameter_list|()

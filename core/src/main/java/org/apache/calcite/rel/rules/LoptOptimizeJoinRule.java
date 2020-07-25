@@ -2952,7 +2952,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**    * Generates a join tree with a specific factor as the first factor in the    * join tree    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param firstFactor first factor in the tree    *    * @return constructed join tree or null if it is not possible for    * firstFactor to appear as the first factor in the join    */
+comment|/**    * Generates a join tree with a specific factor as the first factor in the    * join tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param firstFactor first factor in the tree    *    * @return constructed join tree or null if it is not possible for    * firstFactor to appear as the first factor in the join    */
 specifier|private
 name|LoptJoinTree
 name|createOrdering
@@ -4000,7 +4000,7 @@ return|return
 name|width
 return|;
 block|}
-comment|/**    * Creates a join tree where the new factor is pushed down one of the    * operands of the current join tree    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param factorsNeeded factors that must precede the factor to be added    * @param filtersToAdd filters remaining to be added; filters that are added    * to the join tree are removed from the list    * @param selfJoin true if the factor being added is part of a removable    * self-join    *    * @return optimal join tree with the new factor pushed down the current    * join tree if it is possible to do the pushdown; otherwise, null is    * returned    */
+comment|/**    * Creates a join tree where the new factor is pushed down one of the    * operands of the current join tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param factorsNeeded factors that must precede the factor to be added    * @param filtersToAdd filters remaining to be added; filters that are added    * to the join tree are removed from the list    * @param selfJoin true if the factor being added is part of a removable    * self-join    *    * @return optimal join tree with the new factor pushed down the current    * join tree if it is possible to do the pushdown; otherwise, null is    * returned    */
 specifier|private
 name|LoptJoinTree
 name|pushDownFactor
@@ -4479,7 +4479,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a join tree with the new factor added to the top of the tree    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param filtersToAdd filters remaining to be added; modifies the list to    * remove filters that can be added to the join tree    * @param selfJoin true if the join being created is a self-join that's    * removable    *    * @return new join tree    */
+comment|/**    * Creates a join tree with the new factor added to the top of the tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param filtersToAdd filters remaining to be added; modifies the list to    * remove filters that can be added to the join tree    * @param selfJoin true if the join being created is a self-join that's    * removable    *    * @return new join tree    */
 specifier|private
 name|LoptJoinTree
 name|addToTop
@@ -5009,7 +5009,7 @@ return|return
 name|condition
 return|;
 block|}
-comment|/**    * Adjusts a filter to reflect a newly added factor in the middle of an    * existing join tree    *    * @param multiJoin join factors being optimized    * @param left left subtree of the join    * @param right right subtree of the join    * @param condition current join condition    * @param factorAdded index corresponding to the newly added factor    * @param origJoinOrder original join order, before factor was pushed into    * the tree    * @param origFields fields from the original join before the factor was    * added    *    * @return modified join condition reflecting addition of the new factor    */
+comment|/**    * Adjusts a filter to reflect a newly added factor in the middle of an    * existing join tree.    *    * @param multiJoin join factors being optimized    * @param left left subtree of the join    * @param right right subtree of the join    * @param condition current join condition    * @param factorAdded index corresponding to the newly added factor    * @param origJoinOrder original join order, before factor was pushed into    * the tree    * @param origFields fields from the original join before the factor was    * added    *    * @return modified join condition reflecting addition of the new factor    */
 specifier|private
 name|RexNode
 name|adjustFilter
@@ -6854,7 +6854,7 @@ return|return
 name|swap
 return|;
 block|}
-comment|/**    * Adjusts a filter to reflect swapping of join inputs    *    * @param rexBuilder rexBuilder    * @param multiJoin join factors being optimized    * @param origLeft original LHS of the join tree (before swap)    * @param origRight original RHS of the join tree (before swap)    * @param condition original join condition    *    * @return join condition reflect swap of join inputs    */
+comment|/**    * Adjusts a filter to reflect swapping of join inputs.    *    * @param rexBuilder rexBuilder    * @param multiJoin join factors being optimized    * @param origLeft original LHS of the join tree (before swap)    * @param origRight original RHS of the join tree (before swap)    * @param condition original join condition    *    * @return join condition reflect swap of join inputs    */
 specifier|private
 name|RexNode
 name|swapFilter
@@ -7005,7 +7005,7 @@ return|return
 name|condition
 return|;
 block|}
-comment|/**    * Sets an array indicating how much each factor in a join tree needs to be    * adjusted to reflect the tree's join ordering    *    * @param multiJoin join factors being optimized    * @param adjustments array to be filled out    * @param joinTree join tree    * @param otherTree null unless joinTree only represents the left side of    * the join tree    * @param selfJoin true if no adjustments need to be made for self-joins    *    * @return true if some adjustment is required; false otherwise    */
+comment|/**    * Sets an array indicating how much each factor in a join tree needs to be    * adjusted to reflect the tree's join ordering.    *    * @param multiJoin join factors being optimized    * @param adjustments array to be filled out    * @param joinTree join tree    * @param otherTree null unless joinTree only represents the left side of    * the join tree    * @param selfJoin true if no adjustments need to be made for self-joins    *    * @return true if some adjustment is required; false otherwise    */
 specifier|private
 name|boolean
 name|needsAdjustment

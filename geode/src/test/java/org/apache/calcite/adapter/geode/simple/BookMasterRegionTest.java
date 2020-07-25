@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *  */
+comment|/**  * Test based on BookMaster region.  */
 end_comment
 
 begin_class

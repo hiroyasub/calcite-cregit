@@ -501,7 +501,7 @@ argument_list|>
 name|reservedWordsList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlAdvisor with a validator instance    *    * @param validator Validator    * @deprecated use {@link #SqlAdvisor(SqlValidatorWithHints, SqlParser.Config)}    */
+comment|/**    * Creates a SqlAdvisor with a validator instance.    *    * @param validator Validator    * @deprecated use {@link #SqlAdvisor(SqlValidatorWithHints, SqlParser.Config)}    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -524,7 +524,7 @@ name|DEFAULT
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a SqlAdvisor with a validator instance and given parser configuration    *    * @param validator Validator    * @param parserConfig parser config    */
+comment|/**    * Creates a SqlAdvisor with a validator instance and given parser    * configuration.    *    * @param validator Validator    * @param parserConfig parser config    */
 specifier|public
 name|SqlAdvisor
 parameter_list|(
@@ -1480,7 +1480,7 @@ name|casing
 argument_list|)
 return|;
 block|}
-comment|/**    * Gets completion hints for a syntactically correct sql statement with dummy    * SqlIdentifier    *    * @param sql A syntactically correct sql statement for which to retrieve    *            completion hints    * @param pos to indicate the line and column position in the query at which    *            completion hints need to be retrieved. For example, "select    *            a.ename, b.deptno from sales.emp a join sales.dept b "on    *            a.deptno=b.deptno where empno=1"; setting pos to 'Line 1, Column    *            17' returns all the possible column names that can be selected    *            from sales.dept table setting pos to 'Line 1, Column 31' returns    *            all the possible table names in 'sales' schema    * @return an array of hints ({@link SqlMoniker}) that can fill in at the    * indicated position    */
+comment|/**    * Gets completion hints for a syntactically correct SQL statement with dummy    * {@link SqlIdentifier}.    *    * @param sql A syntactically correct sql statement for which to retrieve    *            completion hints    * @param pos to indicate the line and column position in the query at which    *            completion hints need to be retrieved. For example, "select    *            a.ename, b.deptno from sales.emp a join sales.dept b "on    *            a.deptno=b.deptno where empno=1"; setting pos to 'Line 1, Column    *            17' returns all the possible column names that can be selected    *            from sales.dept table setting pos to 'Line 1, Column 31' returns    *            all the possible table names in 'sales' schema    * @return an array of hints ({@link SqlMoniker}) that can fill in at the    * indicated position    */
 specifier|public
 name|List
 argument_list|<
@@ -2217,7 +2217,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be passed into getCompletionHints()    *    * @param sql    A partial or syntactically incorrect sql statement    * @param cursor to indicate column position in the query at which    *               completion hints need to be retrieved.    * @return a completed, valid (and possibly simplified SQL statement    */
+comment|/**    * Turns a partially completed or syntactically incorrect sql statement into    * a simplified, valid one that can be passed into    * {@link #getCompletionHints(String, SqlParserPos)}.    *    * @param sql    A partial or syntactically incorrect SQL statement    * @param cursor Indicates the position in the query at which    *               completion hints need to be retrieved    * @return a completed, valid (and possibly simplified SQL statement    */
 specifier|public
 name|String
 name|simplifySql
@@ -2251,7 +2251,7 @@ name|cursor
 argument_list|)
 return|;
 block|}
-comment|/**    * Return an array of SQL reserved and keywords    *    * @return an of SQL reserved and keywords    */
+comment|/**    * Returns an array of SQL reserved and keywords.    *    * @return an of SQL reserved and keywords    */
 specifier|public
 name|List
 argument_list|<
@@ -2495,7 +2495,7 @@ return|;
 block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * An inner class that represents error message text and position info of a    * validator or parser exception    */
+comment|/** Text and position info of a validator or parser exception. */
 specifier|public
 class|class
 name|ValidateErrorInfo
@@ -2682,7 +2682,7 @@ operator|=
 name|errorMsg
 expr_stmt|;
 block|}
-comment|/**      * @return 1-based starting line number      */
+comment|/** Returns 1-based starting line number. */
 specifier|public
 name|int
 name|getStartLineNum
@@ -2692,7 +2692,7 @@ return|return
 name|startLineNum
 return|;
 block|}
-comment|/**      * @return 1-based starting column number      */
+comment|/** Returns 1-based starting column number. */
 specifier|public
 name|int
 name|getStartColumnNum
@@ -2702,7 +2702,7 @@ return|return
 name|startColumnNum
 return|;
 block|}
-comment|/**      * @return 1-based end line number      */
+comment|/** Returns 1-based end line number. */
 specifier|public
 name|int
 name|getEndLineNum
@@ -2712,7 +2712,7 @@ return|return
 name|endLineNum
 return|;
 block|}
-comment|/**      * @return 1-based end column number      */
+comment|/** Returns 1-based end column number. */
 specifier|public
 name|int
 name|getEndColumnNum
@@ -2722,7 +2722,7 @@ return|return
 name|endColumnNum
 return|;
 block|}
-comment|/**      * @return error message      */
+comment|/** Returns the error message. */
 specifier|public
 name|String
 name|getMessage

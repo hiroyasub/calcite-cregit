@@ -139,6 +139,7 @@ name|typeFactory
 argument_list|)
 expr_stmt|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @see #dispatch */
 specifier|public
 name|Result

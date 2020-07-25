@@ -11181,7 +11181,7 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Tests to see if the final branch of union is missed */
+comment|/** Tests to see if the final branch of union is missed. */
 annotation|@
 name|Test
 name|void
@@ -20802,7 +20802,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3111">[CALCITE-3111]    * Allow custom implementations of Correlate in RelDecorrelator</a>    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3111">[CALCITE-3111]    * Allow custom implementations of Correlate in RelDecorrelator</a>. */
 end_comment
 
 begin_function
@@ -21509,7 +21509,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for DX-11490    * Make sure the planner doesn't fail over wrong push down    * of is null */
+comment|/** Test case for DX-11490:    * Make sure the planner doesn't fail over wrong push down    * of is null. */
 end_comment
 
 begin_function
@@ -21857,7 +21857,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by on non-join keys, group by on non-null generating side only */
+comment|/** Test case for outer join, group by on non-join keys, group by on    * non-null generating side only. */
 end_comment
 
 begin_function
@@ -21921,7 +21921,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by on non-join keys, on null generating side only */
+comment|/** Test case for outer join, group by on non-join keys, on null    * generating side only. */
 end_comment
 
 begin_function
@@ -21985,7 +21985,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by on both side on non-join keys */
+comment|/** Test case for outer join, group by on both side on non-join    * keys. */
 end_comment
 
 begin_function
@@ -22049,7 +22049,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by on key same as join key, group by on non-null generating side */
+comment|/** Test case for outer join, group by on key same as join key,    * group by on non-null generating side. */
 end_comment
 
 begin_function
@@ -22113,7 +22113,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by on key same as join key, group by on null generating side */
+comment|/** Test case for outer join, group by on key same as join key,    * group by on null generating side. */
 end_comment
 
 begin_function
@@ -22177,7 +22177,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by on key same as join key, group by on both side */
+comment|/** Test case for outer join, group by on key same as join key,    * group by on both side. */
 end_comment
 
 begin_function
@@ -22241,7 +22241,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by key is susbset of join keys, group by on non-null generating side */
+comment|/** Test case for outer join, group by key is susbset of join keys,    * group by on non-null generating side. */
 end_comment
 
 begin_function
@@ -22307,7 +22307,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by key is susbset of join keys, group by on null generating side */
+comment|/** Test case for outer join, group by key is susbset of join keys,    * group by on null generating side. */
 end_comment
 
 begin_function
@@ -22373,7 +22373,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, group by key is susbset of join keys, group by on both sides */
+comment|/** Test case for outer join, group by key is susbset of join keys,    * group by on both sides. */
 end_comment
 
 begin_function
@@ -22439,7 +22439,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * outer join, with aggregate functions */
+comment|/** Test case for outer join, with aggregate functions. */
 end_comment
 
 begin_function
@@ -22503,7 +22503,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * non-equi outer join */
+comment|/** Test case for non-equi outer join. */
 end_comment
 
 begin_function
@@ -22567,7 +22567,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * right outer join, group by on key same as join key, group by on (left)null generating side */
+comment|/** Test case for right outer join, group by on key same as join    * key, group by on (left)null generating side. */
 end_comment
 
 begin_function
@@ -22631,7 +22631,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * full outer join, group by on key same as join key, group by on one side */
+comment|/** Test case for full outer join, group by on key same as join key,    * group by on one side. */
 end_comment
 
 begin_function
@@ -22695,7 +22695,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * full outer join, group by on key same as join key, group by on both side */
+comment|/** Test case for full outer join, group by on key same as join key,    * group by on both side. */
 end_comment
 
 begin_function
@@ -22759,7 +22759,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * full outer join, group by on both side on non-join keys */
+comment|/** Test case for full outer join, group by on both side on non-join    * keys. */
 end_comment
 
 begin_function
@@ -22823,7 +22823,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * full outer join, group by key is susbset of join keys */
+comment|/** Test case for full outer join, group by key is susbset of join    * keys. */
 end_comment
 
 begin_function
@@ -25153,7 +25153,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * The top Aggregate should be removed -- given "deptno=100",    * the input of top Aggregate must be already distinct by "mgr"    */
+comment|/** Tests that top Aggregate is removed. Given "deptno=100", the    * input of top Aggregate must be already distinct by "mgr". */
 end_comment
 
 begin_function
@@ -31100,7 +31100,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3151">[CALCITE-3151]    * RexCall's Monotonicity is not considered in determining a Calc's collation</a>    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3151">[CALCITE-3151]    * RexCall's Monotonicity is not considered in determining a Calc's    * collation</a>. */
 end_comment
 
 begin_function
@@ -31382,7 +31382,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3997">[CALCITE-3997]    * Logical rules applied on physical operator but failed handle traits</a>    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3997">[CALCITE-3997]    * Logical rules applied on physical operator but failed handle    * traits</a>. */
 end_comment
 
 begin_function
@@ -31540,7 +31540,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Custom implementation of {@link Filter} for use    * in test case to verify that {@link FilterMultiJoinMergeRule}    * can be created with any {@link Filter} and not limited to    * {@link org.apache.calcite.rel.logical.LogicalFilter}    */
+comment|/**    * Custom implementation of {@link Filter} for use    * in test case to verify that {@link FilterMultiJoinMergeRule}    * can be created with any {@link Filter} and not limited to    * {@link org.apache.calcite.rel.logical.LogicalFilter}.    */
 end_comment
 
 begin_class
@@ -31768,7 +31768,7 @@ block|}
 end_class
 
 begin_comment
-comment|/**    * Custom implementation of {@link Project} for use    * in test case to verify that {@link ProjectMultiJoinMergeRule}    * can be created with any {@link Project} and not limited to    * {@link org.apache.calcite.rel.logical.LogicalProject}    */
+comment|/**    * Custom implementation of {@link Project} for use    * in test case to verify that {@link ProjectMultiJoinMergeRule}    * can be created with any {@link Project} and not limited to    * {@link org.apache.calcite.rel.logical.LogicalProject}.    */
 end_comment
 
 begin_class
@@ -32382,7 +32382,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3296">[CALCITE-3296]    * Decorrelator gives empty result    * after decorrelating sort rel with null offset and fetch</a>    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3296">[CALCITE-3296]    * Decorrelator gives empty result after decorrelating sort rel with    * null offset and fetch</a>.    */
 end_comment
 
 begin_function
@@ -32434,7 +32434,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3319">[CALCITE-3319]    * AssertionError for ReduceDecimalsRule</a>    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3319">[CALCITE-3319]    * AssertionError for ReduceDecimalsRule</a>. */
 end_comment
 
 begin_function
@@ -32707,7 +32707,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3404">[CALCITE-3404]    * Treat agg expressions that can ignore distinct constraint as distinct    * in AggregateExpandDistinctAggregatesRule    * when all the other agg expressions are distinct and have same arguments</a>    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3404">[CALCITE-3404]    * Treat agg expressions that can ignore distinct constraint as    * distinct in AggregateExpandDistinctAggregatesRule when all the    * other agg expressions are distinct and have same arguments</a>. */
 end_comment
 
 begin_function

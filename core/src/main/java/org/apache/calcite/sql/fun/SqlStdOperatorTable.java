@@ -6748,7 +6748,7 @@ name|FORBIDDEN
 argument_list|)
 block|{       }
 decl_stmt|;
-comment|/**    * The sequence next value function:<code>NEXT VALUE FOR sequence</code>    */
+comment|/** The sequence next value function:<code>NEXT VALUE FOR sequence</code>. */
 specifier|public
 specifier|static
 specifier|final
@@ -6763,7 +6763,7 @@ operator|.
 name|NEXT_VALUE
 argument_list|)
 decl_stmt|;
-comment|/**    * The sequence current value function:<code>CURRENT VALUE FOR    * sequence</code>    */
+comment|/** The sequence current value function:<code>CURRENT VALUE FOR    * sequence</code>. */
 specifier|public
 specifier|static
 specifier|final

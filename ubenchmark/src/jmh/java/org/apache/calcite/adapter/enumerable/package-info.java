@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Benchmarks for Enumerable adapter  */
+comment|/**  * Benchmarks for Enumerable adapter.  */
 end_comment
 
 begin_package

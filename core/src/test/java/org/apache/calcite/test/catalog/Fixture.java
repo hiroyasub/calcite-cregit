@@ -1132,7 +1132,7 @@ block|}
 end_class
 
 begin_comment
-comment|/**  * Just a little trick to store factory ref before field init in fixture  */
+comment|/**  * Just a little trick to store factory ref before field init in fixture.  */
 end_comment
 
 begin_class

@@ -195,7 +195,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * @return bound operator    */
+comment|/** Returns the bound operator. */
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -205,7 +205,7 @@ return|return
 name|sqlOperator
 return|;
 block|}
-comment|/**    * @return factory for type creation    */
+comment|/** Returns the factory for type creation. */
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -333,7 +333,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**    * @return the number of bound operands    */
+comment|/** Returns the number of bound operands. */
 specifier|public
 specifier|abstract
 name|int

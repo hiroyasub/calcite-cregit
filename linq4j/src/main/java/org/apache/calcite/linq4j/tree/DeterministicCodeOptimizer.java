@@ -344,7 +344,7 @@ name|parent
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Optimizes {@code new Type()} constructs,    *    * @param newExpression expression to optimize    * @return optimized expression    */
+comment|/**    * Optimizes {@code new Type()} constructs.    *    * @param newExpression expression to optimize    * @return optimized expression    */
 annotation|@
 name|Override
 specifier|protected

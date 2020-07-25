@@ -194,7 +194,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Internal util methods for ElasticSearch tests  */
+comment|/**  * Internal utility methods for Elasticsearch tests.  */
 end_comment
 
 begin_class

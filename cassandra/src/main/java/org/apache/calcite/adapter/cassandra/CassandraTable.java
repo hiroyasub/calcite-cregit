@@ -416,7 +416,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Table based on a Cassandra column family  */
+comment|/**  * Table based on a Cassandra column family.  */
 end_comment
 
 begin_class

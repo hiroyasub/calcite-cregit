@@ -280,7 +280,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit tests for {@link RexShuttle}  */
+comment|/**  * Unit tests for {@link RexShuttle}.  */
 end_comment
 
 begin_class

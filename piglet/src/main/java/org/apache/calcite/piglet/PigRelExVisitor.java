@@ -875,7 +875,7 @@ name|PigRelExVisitor
 extends|extends
 name|LogicalExpressionVisitor
 block|{
-comment|/** Stack used during post order walking process when processing a Pig    * expression plan */
+comment|/** Stack used during post-order walking process when processing a Pig    * expression plan. */
 specifier|private
 specifier|final
 name|Deque
@@ -897,13 +897,13 @@ name|builder
 decl_stmt|;
 comment|// inputCount and inputOrdinal are used to select which relation in the builder
 comment|// stack to build the projection
-comment|/** Number of inputs */
+comment|/** Number of inputs. */
 specifier|private
 specifier|final
 name|int
 name|inputCount
 decl_stmt|;
-comment|/** Input ordinal */
+comment|/** Input ordinal. */
 specifier|private
 specifier|final
 name|int

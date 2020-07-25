@@ -478,7 +478,7 @@ argument_list|)
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return value of {@link #typeName}    */
+comment|/** Returns the value of {@link #typeName}. */
 specifier|public
 name|SqlTypeName
 name|getTypeName
@@ -488,7 +488,7 @@ return|return
 name|typeName
 return|;
 block|}
-comment|/**    * @return whether value is appropriate for its type (we have rules about    * these things)    */
+comment|/** Returns whether value is appropriate for its type. (We have rules about    * these things!) */
 specifier|public
 specifier|static
 name|boolean
@@ -2002,7 +2002,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * For calc program builder - value may be different than {@link #unparse}    * Typical values:    *    *<ul>    *<li>Hello, world!</li>    *<li>12.34</li>    *<li>{null}</li>    *<li>1969-04-29</li>    *</ul>    *    * @return string representation of the value    */
+comment|/**    * For calc program builder - value may be different than {@link #unparse}.    * Typical values:    *    *<ul>    *<li>Hello, world!</li>    *<li>12.34</li>    *<li>{null}</li>    *<li>1969-04-29</li>    *</ul>    *    * @return string representation of the value    */
 specifier|public
 name|String
 name|toValue

@@ -1848,7 +1848,7 @@ literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primiti
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests NOT for nullable columns    * @see CatchallSchema#everyTypes */
+comment|/** Tests NOT for nullable columns.    *    * @see CatchallSchema#everyTypes */
 annotation|@
 name|Test
 name|void
@@ -1888,7 +1888,7 @@ literal|"wrapperByte=0"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests NOT for nullable columns    * @see CatchallSchema#everyTypes */
+comment|/** Tests NOT for nullable columns.    *    * @see CatchallSchema#everyTypes */
 annotation|@
 name|Test
 name|void
@@ -4040,7 +4040,7 @@ literal|"empid=4; deptno=10; name=Abd; salary=0.0; commission=null\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Table with single field as Integer[] */
+comment|/** Table with single field as Integer[]. */
 annotation|@
 name|Disabled
 argument_list|(
@@ -4079,7 +4079,7 @@ literal|"value=7"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Table with single field as int[] */
+comment|/** Table with single field as int[]. */
 annotation|@
 name|Disabled
 argument_list|(
@@ -4962,7 +4962,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 block|}
-comment|/** Table that has integer and string fields */
+comment|/** Table that has integer and string fields. */
 specifier|public
 specifier|static
 class|class
@@ -5534,7 +5534,7 @@ comment|// 1970-04-11
 block|}
 decl_stmt|;
 block|}
-comment|/** CALCITE-2611 unknown on one side of an or may lead to uncompilable code */
+comment|/** Tests    *<a href="https://issues.apache.org/jira/browse/CALCITE-2611">[CALCITE-2611]    * UNKNOWN on one side of an OR may lead to uncompilable code</a>. */
 annotation|@
 name|Test
 name|void

@@ -137,7 +137,7 @@ name|block
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Returns the current code block    * @return current code block    */
+comment|/**    * Returns the current code block.    */
 specifier|public
 specifier|final
 name|BlockBuilder

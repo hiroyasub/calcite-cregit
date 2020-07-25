@@ -1529,7 +1529,7 @@ name|parent
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a RelNode; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -1713,7 +1713,7 @@ name|id
 return|;
 block|}
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Join; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -2339,7 +2339,7 @@ name|isAlwaysTrue
 argument_list|()
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Correlate; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -2489,7 +2489,7 @@ name|rightResult
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Filter; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -2665,7 +2665,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Project; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -2874,7 +2874,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Window; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -3061,7 +3061,7 @@ name|result
 argument_list|()
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits an Aggregate; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -3778,7 +3778,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a TableScan; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -3816,7 +3816,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Union; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -3844,7 +3844,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits an Intersect; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -3872,7 +3872,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Minus; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -3900,7 +3900,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Calc; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -4095,7 +4095,7 @@ name|result
 argument_list|()
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Values; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -4877,7 +4877,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Sort; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -5596,7 +5596,7 @@ return|return
 name|sqlTargetTable
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a TableModify; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit
@@ -5948,7 +5948,7 @@ name|POS
 argument_list|)
 return|;
 block|}
-comment|/** @see #dispatch */
+comment|/** Visits a Match; called by {@link #dispatch} via reflection. */
 specifier|public
 name|Result
 name|visit

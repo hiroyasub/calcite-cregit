@@ -316,7 +316,7 @@ operator|=
 name|newRel
 expr_stmt|;
 block|}
-comment|/**    * @return current implementation chosen for this vertex    */
+comment|/**    * Returns current implementation chosen for this vertex.    */
 specifier|public
 name|RelNode
 name|getCurrentRel

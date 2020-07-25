@@ -674,7 +674,7 @@ operator|.
 name|create
 argument_list|()
 decl_stmt|;
-comment|/** Default index/type name */
+comment|/** Default index/type name. */
 specifier|private
 specifier|static
 specifier|final

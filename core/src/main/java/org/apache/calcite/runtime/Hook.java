@@ -274,6 +274,7 @@ name|handler
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #add(Consumer)}. */
 annotation|@
 name|SuppressWarnings
@@ -377,6 +378,7 @@ name|handler
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #addThread(Consumer)}. */
 annotation|@
 name|SuppressWarnings
@@ -449,6 +451,7 @@ name|handler
 argument_list|)
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #propertyJ}. */
 annotation|@
 name|SuppressWarnings

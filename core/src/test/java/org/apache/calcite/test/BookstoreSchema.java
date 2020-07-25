@@ -245,7 +245,7 @@ argument_list|()
 argument_list|)
 block|}
 decl_stmt|;
-comment|/**    */
+comment|/** Author. */
 specifier|public
 specifier|static
 class|class
@@ -338,7 +338,7 @@ name|books
 expr_stmt|;
 block|}
 block|}
-comment|/**    */
+comment|/** Place. */
 specifier|public
 specifier|static
 class|class
@@ -392,7 +392,7 @@ name|country
 expr_stmt|;
 block|}
 block|}
-comment|/**    */
+comment|/** Coordinate. */
 specifier|public
 specifier|static
 class|class
@@ -432,7 +432,7 @@ name|longtitude
 expr_stmt|;
 block|}
 block|}
-comment|/**    */
+comment|/** Book. */
 specifier|public
 specifier|static
 class|class
@@ -511,7 +511,7 @@ name|pages
 expr_stmt|;
 block|}
 block|}
-comment|/**    */
+comment|/** Page. */
 specifier|public
 specifier|static
 class|class

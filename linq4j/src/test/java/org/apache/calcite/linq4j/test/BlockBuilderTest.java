@@ -789,7 +789,7 @@ literal|"x in the second block should be renamed to avoid name clash"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * CALCITE-2413: RexToLixTranslator does not generate correct declaration of Methods with    * generic return types    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2413">[CALCITE-2413]    * RexToLixTranslator does not generate correct declaration of Methods with    * generic return types</a>. */
 annotation|@
 name|Test
 name|void
@@ -868,7 +868,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** CALCITE-2611: unknown on one side of an or may lead to uncompilable code */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2611">[CALCITE-2611]    * Linq4j code generation failure if one side of an OR contains    * UNKNOWN</a>. */
 annotation|@
 name|Test
 name|void

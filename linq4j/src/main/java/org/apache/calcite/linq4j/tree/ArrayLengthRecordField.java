@@ -52,7 +52,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a length field of a RecordType  */
+comment|/**  * Length field of a RecordType.  */
 end_comment
 
 begin_class

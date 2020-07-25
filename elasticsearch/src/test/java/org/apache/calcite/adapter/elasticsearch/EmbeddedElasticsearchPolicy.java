@@ -238,6 +238,7 @@ specifier|private
 name|RestClient
 name|client
 decl_stmt|;
+comment|/** Holds the singleton policy instance. */
 specifier|static
 class|class
 name|Singleton

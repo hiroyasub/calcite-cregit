@@ -71,7 +71,7 @@ name|T
 argument_list|>
 name|enumerator
 decl_stmt|;
-comment|/**    * Creates a {@code EnumeratorCursor}    * @param enumerator input enumerator    */
+comment|/**    * Creates an {@code EnumeratorCursor}.    *    * @param enumerator input enumerator    */
 specifier|protected
 name|EnumeratorCursor
 parameter_list|(

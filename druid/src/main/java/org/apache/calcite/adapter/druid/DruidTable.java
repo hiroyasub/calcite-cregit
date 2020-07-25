@@ -1179,7 +1179,7 @@ operator|.
 name|TIMES
 return|;
 block|}
-comment|/**    * Returns the list of {@link ComplexMetric} that match the given<code>alias</code> if it exists,    * otherwise returns an empty list, never<code>null</code>    * */
+comment|/** Returns the list of {@link ComplexMetric} that match the given    *<code>alias</code> if it exists, otherwise returns an empty list, never    *<code>null</code>. */
 specifier|public
 name|List
 argument_list|<
@@ -1212,7 +1212,7 @@ argument_list|<>
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns true if and only if the given<code>alias</code> is a reference to a registered    * {@link ComplexMetric}    * */
+comment|/** Returns whether the given<code>alias</code> is a reference to a    * registered {@link ComplexMetric}. */
 specifier|public
 name|boolean
 name|isComplexMetric

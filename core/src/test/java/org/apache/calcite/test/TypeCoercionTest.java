@@ -3812,7 +3812,7 @@ literal|"RecordType(TIMESTAMP(0) NOT NULL EXPR$0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for {@link AbstractTypeCoercion#implicitCast} */
+comment|/** Test for {@link AbstractTypeCoercion#implicitCast}. */
 annotation|@
 name|Test
 name|void

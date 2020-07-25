@@ -5878,7 +5878,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Visitor for checking whether part of projection is a user defined function or not    */
+comment|/** Visitor that checks whether part of a projection is a user-defined    * function (UDF). */
 specifier|private
 specifier|static
 class|class

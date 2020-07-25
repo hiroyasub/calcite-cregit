@@ -213,7 +213,7 @@ name|RelOptRules
 parameter_list|()
 block|{
 block|}
-comment|/**    * The calc rule set is public for use from {@link org.apache.calcite.tools.Programs}    */
+comment|/** Calc rule set; public so that {@link org.apache.calcite.tools.Programs} can    * use it. */
 specifier|public
 specifier|static
 specifier|final

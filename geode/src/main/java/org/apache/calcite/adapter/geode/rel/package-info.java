@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Query provider based on Apache Geode (Gemfire) In Memory Data Grid  */
+comment|/**  * Query provider based on Apache Geode (Gemfire) in-memory data grid.  */
 end_comment
 
 begin_package

@@ -334,6 +334,7 @@ operator|)
 name|a0
 return|;
 block|}
+comment|/** Returns a function that projects a single field. */
 specifier|static
 name|Function1
 argument_list|<
@@ -368,7 +369,7 @@ name|fieldClass
 argument_list|)
 return|;
 block|}
-comment|/**    * @param fields List of fields to project; or null to return map    */
+comment|/** Returns a function that projects fields.    *    * @param fields List of fields to project; or null to return map    */
 specifier|static
 name|Function1
 argument_list|<

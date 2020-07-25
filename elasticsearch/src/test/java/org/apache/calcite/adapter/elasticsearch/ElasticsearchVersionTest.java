@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Basic tests for parsing ES version in different formats  */
+comment|/**  * Basic tests for parsing Elasticsearch version in different formats.  */
 end_comment
 
 begin_class

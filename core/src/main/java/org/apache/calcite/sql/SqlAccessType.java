@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlAccessType is represented by a set of allowed access types  */
+comment|/**  * SqlAccessType is represented by a set of allowed access types.  *  * @see SqlAccessEnum  */
 end_comment
 
 begin_class

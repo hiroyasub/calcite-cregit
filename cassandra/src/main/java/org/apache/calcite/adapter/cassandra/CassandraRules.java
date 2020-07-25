@@ -1154,7 +1154,6 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** @see org.apache.calcite.rel.convert.ConverterRule */
 annotation|@
 name|Override
 specifier|public
@@ -1960,7 +1959,6 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** @see org.apache.calcite.rel.convert.ConverterRule */
 annotation|@
 name|Override
 specifier|public
@@ -2213,7 +2211,6 @@ name|fetch
 argument_list|)
 return|;
 block|}
-comment|/** @see org.apache.calcite.rel.convert.ConverterRule */
 annotation|@
 name|Override
 specifier|public

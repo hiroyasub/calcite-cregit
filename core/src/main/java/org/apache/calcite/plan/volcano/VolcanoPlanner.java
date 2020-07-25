@@ -4266,7 +4266,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Find the new root subset in case the root is merged with another subset    */
+comment|/**    * Find the new root subset in case the root is merged with another subset.    */
 name|void
 name|canonize
 parameter_list|()

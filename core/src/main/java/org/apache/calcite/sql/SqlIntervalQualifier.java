@@ -1162,7 +1162,7 @@ operator|.
 name|yearMonth
 return|;
 block|}
-comment|/**    * @return 1 or -1    */
+comment|/**    * Returns 1 or -1.    */
 specifier|public
 name|int
 name|getIntervalSign

@@ -292,7 +292,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Benchmarks for {@link org.apache.calcite.util.graph.DefaultDirectedGraph}  */
+comment|/**  * Benchmarks for {@link org.apache.calcite.util.graph.DefaultDirectedGraph}.  */
 end_comment
 
 begin_class
@@ -300,6 +300,7 @@ specifier|public
 class|class
 name|DefaultDirectedGraphBenchmark
 block|{
+comment|/** Node in the graph. */
 specifier|private
 specifier|static
 class|class

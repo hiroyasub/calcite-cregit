@@ -3179,7 +3179,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that parses, validates, converts and    * plans for query using order by */
+comment|/** Unit test that parses, validates, converts and    * plans for query using ORDER BY. */
 annotation|@
 name|Test
 name|void
@@ -3559,7 +3559,7 @@ literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that outer order by is not removed since window function    * might reorder the rows in-between */
+comment|/** Tests that outer order by is not removed since window function    * might reorder the rows in-between. */
 annotation|@
 name|Test
 name|void
@@ -4313,7 +4313,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that calls {@link Planner#transform} twice with    * rule name conflicts */
+comment|/** Unit test that calls {@link Planner#transform} twice with    * rule name conflicts. */
 annotation|@
 name|Test
 name|void
@@ -5753,6 +5753,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Rule that matches a Project on a Filter. */
 specifier|public
 specifier|static
 class|class
@@ -5886,6 +5887,7 @@ return|;
 block|}
 block|}
 block|}
+comment|/** Rule that matches a Filter on a Project. */
 specifier|public
 specifier|static
 class|class

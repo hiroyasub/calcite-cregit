@@ -279,6 +279,7 @@ name|Resolved
 name|resolved
 parameter_list|)
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use    * {@link #findQualifyingTableNames(String, SqlNode, SqlNameMatcher)} */
 annotation|@
 name|Deprecated
@@ -409,6 +410,7 @@ name|SqlNode
 name|expr
 parameter_list|)
 function_decl|;
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use    * {@link #resolveTable(List, SqlNameMatcher, Path, Resolved)}. */
 annotation|@
 name|Deprecated

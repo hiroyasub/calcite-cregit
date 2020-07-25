@@ -179,6 +179,7 @@ return|return
 literal|null
 return|;
 block|}
+comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #addEdge(Object, Object, Object...)}. */
 annotation|@
 name|Deprecated

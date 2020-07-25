@@ -106,7 +106,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Converts Calcite n-ary operators to druid expression eg (arg1 Op arg2 Op arg3)  */
+comment|/**  * Converts Calcite n-ary operators to Druid expressions, for example  * {@code arg1 Op arg2 Op arg3}.  */
 end_comment
 
 begin_class

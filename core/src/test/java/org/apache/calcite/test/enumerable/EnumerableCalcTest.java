@@ -92,7 +92,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.EnumerableCalc}  */
+comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.EnumerableCalc}.  */
 end_comment
 
 begin_class

@@ -145,7 +145,7 @@ specifier|final
 name|PrintStream
 name|debugPrintStream
 decl_stmt|;
-comment|/**    * Command throwing error *    */
+comment|/**    * Command throwing error.    */
 specifier|private
 name|ConcurrentTestCommand
 name|errorCommand
