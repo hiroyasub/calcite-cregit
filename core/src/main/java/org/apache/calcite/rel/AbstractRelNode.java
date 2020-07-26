@@ -1746,6 +1746,21 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Equality check for RelNode digest.    *    *<p>By default this method collects digest attributes from    * {@link #explainTerms(RelWriter)}, then compares each attribute pair.    * This should work well for most cases. If this method is a performance    * bottleneck for your project, or the default behavior can't handle    * your scenario properly, you can choose to override this method and    * {@link #deepHashCode()}. See {@code LogicalJoin} as an example.</p>    *    * @return Whether the 2 RelNodes are equivalent or have the same digest.    * @see #deepHashCode()    */
+annotation|@
+name|API
+argument_list|(
+name|since
+operator|=
+literal|"1.25"
+argument_list|,
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|MAINTAINED
+argument_list|)
 specifier|public
 name|boolean
 name|deepEquals
@@ -1974,6 +1989,21 @@ name|result
 return|;
 block|}
 comment|/**    * Compute hash code for RelNode digest.    *    * @see #deepEquals(Object)    */
+annotation|@
+name|API
+argument_list|(
+name|since
+operator|=
+literal|"1.25"
+argument_list|,
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|MAINTAINED
+argument_list|)
 specifier|public
 name|int
 name|deepHashCode
