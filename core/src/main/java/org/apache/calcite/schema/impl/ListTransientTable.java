@@ -679,6 +679,10 @@ argument_list|)
 decl_stmt|;
 return|return
 name|current
+operator|!=
+literal|null
+operator|&&
+name|current
 operator|.
 name|getClass
 argument_list|()
