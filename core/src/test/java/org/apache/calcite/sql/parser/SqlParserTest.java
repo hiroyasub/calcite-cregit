@@ -18886,7 +18886,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Incorrect syntax near the keyword 'NOT' at line 1, column 27.*"
+literal|"(?s).*Encountered \"NOT\" at line 1, column 27.*"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -19257,7 +19257,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Incorrect syntax near the keyword 'INTERVAL' at.*"
+literal|"(?s)Encountered \"INTERVAL\" at.*"
 argument_list|)
 expr_stmt|;
 name|expr
@@ -19267,7 +19267,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Incorrect syntax near the keyword 'INTERVAL' at.*"
+literal|"(?s)Encountered \"INTERVAL\" at.*"
 argument_list|)
 expr_stmt|;
 block|}

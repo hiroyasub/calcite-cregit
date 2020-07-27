@@ -7659,7 +7659,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Incorrect syntax near the keyword 'FROM' at .*"
+literal|"(?s).*Encountered \"FROM\" at .*"
 argument_list|)
 expr_stmt|;
 comment|// Without the "FROM" noise word, TRIM is parsed as a regular

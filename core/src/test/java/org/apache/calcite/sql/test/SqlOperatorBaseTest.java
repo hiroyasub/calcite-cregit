@@ -35349,7 +35349,7 @@ literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
 literal|"timestamp '2614-02-24 12:42:25')"
 argument_list|,
-literal|"(?s)Incorrect syntax near the keyword 'CENTURY' at .*"
+literal|"(?s)Encountered \"CENTURY\" at .*"
 argument_list|,
 literal|false
 argument_list|)
