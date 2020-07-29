@@ -13656,6 +13656,30 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4145">[CALCITE-4145]    * Exception when query from UDF field with structured type</a>.    */
+annotation|@
+name|Test
+name|void
+name|testUdfWithStructuredReturnType
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno, tmp.r.f0, tmp.r.f1 FROM\n"
+operator|+
+literal|"(SELECT deptno, STRUCTURED_FUNC() AS r from dept)tmp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3826">[CALCITE-3826]    * UPDATE assigns wrong type to bind variables</a>.    */
 annotation|@
 name|Test

@@ -5056,7 +5056,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Returns the ordinal of a given field in a record type, or -1 if the field    * is not found.    *    * @param type      Record type    * @param fieldName Name of field    * @return Ordinal of field    */
+comment|/**    * Returns the ordinal of a given field in a record type, or -1 if the field    * is not found.    *    *<p>The {@code fieldName} is always simple, if the field is nested within a record field,    * returns index of the outer field instead. i.g. for row type    * (a int, b (b1 bigint, b2 varchar(20) not null)), returns 1 for both simple name "b1" and "b2".    *    * @param type      Record type    * @param fieldName Name of field    * @return Ordinal of field    */
 specifier|public
 specifier|static
 name|int
@@ -5119,6 +5119,37 @@ name|equals
 argument_list|(
 name|fieldName
 argument_list|)
+condition|)
+block|{
+return|return
+name|i
+return|;
+block|}
+specifier|final
+name|RelDataType
+name|fieldType
+init|=
+name|field
+operator|.
+name|getType
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|fieldType
+operator|.
+name|isStruct
+argument_list|()
+operator|&&
+name|findField
+argument_list|(
+name|fieldType
+argument_list|,
+name|fieldName
+argument_list|)
+operator|!=
+operator|-
+literal|1
 condition|)
 block|{
 return|return
