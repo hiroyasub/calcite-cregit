@@ -19377,6 +19377,59 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testCastDecimalOverflow
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT CAST('11111111111111111111111111111111.111111' AS DECIMAL(38,6)) AS \"num\" from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST('11111111111111111111111111111111.111111' AS DECIMAL(19, 6)) AS \"num\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|query2
+init|=
+literal|"SELECT CAST(1111111 AS DECIMAL(5,2)) AS \"num\" from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT CAST(1111111 AS DECIMAL(5, 2)) AS \"num\"\nFROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testCastInStringIntegerComparison
 parameter_list|()
 block|{

@@ -9996,7 +9996,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select sum(case when 'y' = 'n' then ename else 1 end) from emp"
+literal|"select sum(case when 'y' = 'n' then ename else 0.1 end) from emp"
 decl_stmt|;
 name|sql
 argument_list|(
