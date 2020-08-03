@@ -3348,7 +3348,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Returns SqlNode for type in "cast(column as type)", which might be   * different between databases by type name, precision etc. */
+comment|/** Returns SqlNode for type in "cast(column as type)", which might be   * different between databases by type name, precision etc.   *   *<p>If this method returns null, the cast will be omitted. In the default   * implementation, this is the case for the NULL type, and therefore   * {@code CAST(NULL AS<nulltype>)} is rendered as {@code NULL}. */
 specifier|public
 name|SqlNode
 name|getCastSpec
@@ -3378,6 +3378,12 @@ name|getSqlTypeName
 argument_list|()
 condition|)
 block|{
+case|case
+name|NULL
+case|:
+return|return
+literal|null
+return|;
 case|case
 name|VARCHAR
 case|:

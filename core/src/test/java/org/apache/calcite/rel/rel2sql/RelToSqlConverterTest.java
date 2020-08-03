@@ -19072,12 +19072,76 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4150">[CALCITE-4150]    * JDBC adapter throws UnsupportedOperationException when generating SQL    * for untyped NULL literal</a>. */
 annotation|@
 name|Test
 name|void
-name|testSelectNull
+name|testSelectRawNull
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT NULL FROM \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT NULL\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSelectRawNullWithAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT NULL AS DUMMY FROM \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT NULL AS \"DUMMY\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSelectNullWithCast
+parameter_list|()
+block|{
+specifier|final
 name|String
 name|query
 init|=
@@ -19117,6 +19181,7 @@ name|void
 name|testSelectNullWithCount
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|query
 init|=
@@ -19156,12 +19221,15 @@ name|void
 name|testSelectNullWithGroupByNull
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|query
 init|=
-literal|"SELECT COUNT(CAST(NULL AS INT)) FROM (VALUES  (0))\n"
+literal|"SELECT COUNT(CAST(NULL AS INT))\n"
 operator|+
-literal|"AS \"t\" GROUP BY CAST(NULL AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
+literal|"FROM (VALUES  (0))AS \"t\"\n"
+operator|+
+literal|"GROUP BY CAST(NULL AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
 decl_stmt|;
 specifier|final
 name|String
@@ -19199,12 +19267,15 @@ name|void
 name|testSelectNullWithGroupByVar
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|query
 init|=
-literal|"SELECT COUNT(CAST(NULL AS INT)) FROM \"account\"\n"
+literal|"SELECT COUNT(CAST(NULL AS INT))\n"
 operator|+
-literal|"AS \"t\" GROUP BY \"account_type\""
+literal|"FROM \"account\" AS \"t\"\n"
+operator|+
+literal|"GROUP BY \"account_type\""
 decl_stmt|;
 specifier|final
 name|String
@@ -19242,6 +19313,7 @@ name|void
 name|testSelectNullWithInsert
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|query
 init|=
@@ -19299,6 +19371,7 @@ name|void
 name|testSelectNullWithInsertFromJoin
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|query
 init|=

@@ -2118,7 +2118,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Returns whether a type is null. */
+comment|/** Returns whether a type is the NULL type. */
 specifier|public
 specifier|static
 name|boolean
@@ -4059,6 +4059,11 @@ decl_stmt|;
 if|if
 condition|(
 name|isAtomic
+argument_list|(
+name|type
+argument_list|)
+operator|||
+name|isNull
 argument_list|(
 name|type
 argument_list|)
@@ -6444,11 +6449,31 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Returns whether a type is a CHARACTER or contains a CHARACTER type. */
+comment|/** Returns whether a type is a CHARACTER or contains a CHARACTER type.    *    * @deprecated Use {@link #hasCharacter(RelDataType)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean
 name|hasCharactor
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
+block|{
+return|return
+name|hasCharacter
+argument_list|(
+name|type
+argument_list|)
+return|;
+block|}
+comment|/** Returns whether a type is a CHARACTER or contains a CHARACTER type. */
+specifier|public
+specifier|static
+name|boolean
+name|hasCharacter
 parameter_list|(
 name|RelDataType
 name|type
@@ -6475,7 +6500,7 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|hasCharactor
+name|hasCharacter
 argument_list|(
 name|type
 operator|.

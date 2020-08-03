@@ -2852,7 +2852,7 @@ if|if
 condition|(
 name|SqlTypeUtil
 operator|.
-name|hasCharactor
+name|hasCharacter
 argument_list|(
 name|tp
 argument_list|)
