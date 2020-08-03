@@ -1001,7 +1001,7 @@ operator|.
 name|value
 argument_list|()
 decl_stmt|;
-specifier|protected
+specifier|public
 specifier|static
 specifier|final
 name|ImmutableList
@@ -4532,7 +4532,7 @@ argument_list|()
 decl_stmt|;
 block|}
 comment|/** Rule that attempts to match a query relational expression    * against a target relational expression.    *    *<p>The rule declares the query and target types; this allows the    * engine to fire only a few rules in a given context.</p>    */
-specifier|protected
+specifier|public
 specifier|abstract
 specifier|static
 class|class
@@ -4732,7 +4732,7 @@ block|}
 block|}
 block|}
 comment|/**    * Arguments to an application of a {@link UnifyRule}.    */
-specifier|protected
+specifier|public
 class|class
 name|UnifyRuleCall
 block|{
@@ -4971,7 +4971,7 @@ return|;
 block|}
 block|}
 comment|/**    * Result of an application of a {@link UnifyRule} indicating that the    * rule successfully matched {@code query} against {@code target} and    * generated a {@code result} that is equivalent to {@code query} and    * contains {@code target}. {@code stopTrying} indicates whether there's    * no need to do matching for the same query node again.    */
-specifier|protected
+specifier|public
 specifier|static
 class|class
 name|UnifyResult
@@ -5042,7 +5042,7 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Abstract base class for implementing {@link UnifyRule}. */
-specifier|protected
+specifier|public
 specifier|abstract
 specifier|static
 class|class
@@ -9434,7 +9434,7 @@ argument_list|()
 return|;
 block|}
 comment|/** Explain filtering condition and projections from MutableCalc. */
-specifier|private
+specifier|public
 specifier|static
 name|Pair
 argument_list|<
@@ -11650,7 +11650,7 @@ literal|false
 return|;
 block|}
 comment|/** Operand to a {@link UnifyRule}. */
-specifier|protected
+specifier|public
 specifier|abstract
 specifier|static
 class|class
