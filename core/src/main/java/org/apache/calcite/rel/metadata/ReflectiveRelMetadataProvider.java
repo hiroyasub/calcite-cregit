@@ -137,6 +137,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -415,15 +429,21 @@ argument_list|>
 name|handlerMap
 parameter_list|)
 block|{
-assert|assert
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
 operator|!
 name|map
 operator|.
 name|isEmpty
 argument_list|()
-operator|:
-literal|"are your methods named wrong?"
-assert|;
+argument_list|,
+literal|"ReflectiveRelMetadataProvider "
+operator|+
+literal|"methods map is empty; are your methods named wrong?"
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|map
