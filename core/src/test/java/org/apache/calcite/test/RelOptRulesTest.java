@@ -9140,7 +9140,7 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2343">[CALCITE-2343]    * Should not push over whose columns are all from left child past join since    * join will affect row count.</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2343">[CALCITE-2343]    * Should not push over whose columns are all from left child past join since    * join will affect row count</a>. */
 annotation|@
 name|Test
 name|void
@@ -21106,7 +21106,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2249">[CALCITE-2249]    * AggregateJoinTransposeRule generates inequivalent nodes if Aggregate relNode contains    * distinct aggregate function.</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2249">[CALCITE-2249]    * AggregateJoinTransposeRule generates non-equivalent nodes if Aggregate    * contains DISTINCT aggregate function</a>. */
 end_comment
 
 begin_function
@@ -21120,7 +21120,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select count(distinct sal) from sales.emp join sales.dept on job = name"
+literal|"select count(distinct sal) from sales.emp\n"
+operator|+
+literal|" join sales.dept on job = name"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -21651,6 +21653,60 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3957">[CALCITE-3957]    * AggregateMergeRule should merge SUM0 into COUNT even if GROUP BY is    * empty</a>. (It is not valid to merge a SUM onto a SUM0 if the top GROUP BY    * is empty.) */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAggregateMergeSum0
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select coalesce(sum(count_comm), 0)\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select deptno, count(comm) as count_comm\n"
+operator|+
+literal|"  from sales.emp\n"
+operator|+
+literal|"  group by deptno, mgr) t"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPreRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_AGGREGATE_MERGE
+argument_list|,
+name|CoreRules
+operator|.
+name|AGGREGATE_PROJECT_MERGE
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_MERGE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for AggregateMergeRule, should not merge 2 aggregates    * into a single aggregate, since top agg contains empty grouping set,    * and lower agg function is COUNT.    */
 end_comment
 
@@ -22058,7 +22114,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2712">[CALCITE-2712]    * Should remove the left join since the aggregate has no call and    * only uses column in the left input of the bottom join as group key.</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2712">[CALCITE-2712]    * Should remove the left join since the aggregate has no call and    * only uses column in the left input of the bottom join as group key</a>. */
 end_comment
 
 begin_function

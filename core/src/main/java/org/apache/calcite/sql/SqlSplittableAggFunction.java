@@ -824,6 +824,7 @@ name|SqlKind
 operator|.
 name|COUNT
 operator|&&
+operator|(
 name|top
 operator|.
 name|getAggregation
@@ -835,6 +836,19 @@ operator|==
 name|SqlKind
 operator|.
 name|SUM
+operator|||
+name|top
+operator|.
+name|getAggregation
+argument_list|()
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|SUM0
+operator|)
 condition|)
 block|{
 return|return
