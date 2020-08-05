@@ -21141,6 +21141,174 @@ block|}
 end_function
 
 begin_comment
+comment|/** Tests that ProjectAggregateMergeRule removes unused aggregate calls but    * not group keys. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testProjectAggregateMerge
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno + ss\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select job, deptno, min(sal) as ms, sum(sal) as ss\n"
+operator|+
+literal|"  from sales.emp\n"
+operator|+
+literal|"  group by job, deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_AGGREGATE_MERGE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests that ProjectAggregateMergeRule does nothing when all aggregate calls    * are referenced. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testProjectAggregateMergeNoOp
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno + ss + ms\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select job, deptno, min(sal) as ms, sum(sal) as ss\n"
+operator|+
+literal|"  from sales.emp\n"
+operator|+
+literal|"  group by job, deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_AGGREGATE_MERGE
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests that ProjectAggregateMergeRule converts {@code COALESCE(SUM(x), 0)}    * into {@code SUM0(x)}. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testProjectAggregateMergeSum0
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select coalesce(sum_sal, 0) as ss0\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select sum(sal) as sum_sal\n"
+operator|+
+literal|"  from sales.emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_AGGREGATE_MERGE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** As {@link #testProjectAggregateMergeSum0()} but there is another use of    * {@code SUM} that cannot be converted to {@code SUM0}. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testProjectAggregateMergeSum0AndSum
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum_sal * 2, coalesce(sum_sal, 0) as ss0\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select sum(sal) as sum_sal\n"
+operator|+
+literal|"  from sales.emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_AGGREGATE_MERGE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for AggregateMergeRule, should merge 2 aggregates    * into a single aggregate.    */
 end_comment
 

@@ -1302,6 +1302,22 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
+comment|/** Rule that matches a {@link Project} on an {@link Aggregate},    * projecting away aggregate calls that are not used. */
+specifier|public
+specifier|static
+specifier|final
+name|ProjectAggregateMergeRule
+name|PROJECT_AGGREGATE_MERGE
+init|=
+name|ProjectAggregateMergeRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|toRule
+argument_list|()
+decl_stmt|;
 comment|/** Rule that merges a {@link LogicalProject} and a {@link LogicalCalc}.    *    * @see #FILTER_CALC_MERGE */
 specifier|public
 specifier|static

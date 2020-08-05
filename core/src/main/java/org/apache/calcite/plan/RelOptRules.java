@@ -536,6 +536,10 @@ name|PROJECT_REMOVE
 argument_list|,
 name|CoreRules
 operator|.
+name|PROJECT_AGGREGATE_MERGE
+argument_list|,
+name|CoreRules
+operator|.
 name|AGGREGATE_JOIN_TRANSPOSE
 argument_list|,
 name|CoreRules
