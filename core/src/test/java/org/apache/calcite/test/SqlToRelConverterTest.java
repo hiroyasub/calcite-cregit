@@ -13823,6 +13823,32 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4167">[CALCITE-4167]    * Group by COALESCE IN throws NullPointerException</a>.    */
+annotation|@
+name|Test
+name|void
+name|testGroupByCoalesceIn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select case when coalesce(ename, 'a') in ('1', '2')\n"
+operator|+
+literal|"then 'CKA' else 'QT' END, count(distinct deptno) from emp\n"
+operator|+
+literal|"group by case when coalesce(ename, 'a') in ('1', '2') then 'CKA' else 'QT' END"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
