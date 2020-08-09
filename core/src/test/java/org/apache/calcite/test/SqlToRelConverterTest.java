@@ -7092,9 +7092,9 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"from table(tumble(table Shipments, descriptor(rowtime), INTERVAL '10' MINUTE, \n"
+literal|"from table(tumble(table Shipments, descriptor(rowtime),\n"
 operator|+
-literal|"INTERVAL '1' MINUTE))"
+literal|"  INTERVAL '10' MINUTE, INTERVAL '1' MINUTE))"
 decl_stmt|;
 name|sql
 argument_list|(
