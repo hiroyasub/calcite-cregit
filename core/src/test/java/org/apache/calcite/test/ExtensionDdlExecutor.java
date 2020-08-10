@@ -1376,8 +1376,6 @@ specifier|static
 class|class
 name|MutableArrayTable
 extends|extends
-name|JdbcTest
-operator|.
 name|AbstractModifiableTable
 block|{
 specifier|final

@@ -83,6 +83,24 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|schemata
+operator|.
+name|foodmart
+operator|.
+name|FoodmartSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Smalls
@@ -325,7 +343,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -380,7 +398,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -526,7 +544,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -588,7 +606,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -1511,7 +1529,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -1984,7 +2002,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2031,7 +2049,7 @@ specifier|final
 name|String
 name|model
 init|=
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 operator|.
@@ -2134,7 +2152,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2206,7 +2224,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2256,7 +2274,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2331,7 +2349,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2406,7 +2424,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2493,7 +2511,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2596,7 +2614,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -2633,7 +2651,7 @@ specifier|final
 name|String
 name|model
 init|=
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 operator|.
@@ -3171,7 +3189,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -3318,7 +3336,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -3415,7 +3433,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -3558,7 +3576,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -3684,7 +3702,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)
@@ -3804,7 +3822,7 @@ name|CalciteAssert
 operator|.
 name|model
 argument_list|(
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
 argument_list|)

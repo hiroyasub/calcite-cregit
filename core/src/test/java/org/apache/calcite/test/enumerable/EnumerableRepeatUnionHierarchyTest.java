@@ -131,6 +131,10 @@ name|calcite
 operator|.
 name|test
 operator|.
+name|schemata
+operator|.
+name|hr
+operator|.
 name|HierarchySchema
 import|;
 end_import

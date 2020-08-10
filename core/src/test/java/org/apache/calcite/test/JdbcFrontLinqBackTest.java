@@ -217,6 +217,24 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|schemata
+operator|.
+name|hr
+operator|.
+name|Employee
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|TestUtil
@@ -817,8 +835,6 @@ block|{
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -922,8 +938,6 @@ block|{
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -1078,8 +1092,6 @@ block|{
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -1191,8 +1203,6 @@ parameter_list|(
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|initialData
@@ -1243,8 +1253,6 @@ init|=
 literal|"bar"
 decl_stmt|;
 specifier|final
-name|JdbcTest
-operator|.
 name|AbstractModifiableTable
 name|table
 init|=
@@ -1279,8 +1287,6 @@ parameter_list|(
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|initialData
@@ -1323,7 +1329,7 @@ return|return
 name|connection
 return|;
 block|}
-comment|/**    * Creates a connection with an empty modifiable table with    * {@link JdbcTest.Employee} schema.    */
+comment|/**    * Creates a connection with an empty modifiable table with    * {@link Employee} schema.    */
 specifier|public
 specifier|static
 name|Connection
@@ -1338,8 +1344,6 @@ argument_list|(
 operator|new
 name|ArrayList
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 argument_list|()
@@ -1355,8 +1359,6 @@ parameter_list|(
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -1367,8 +1369,6 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|(
 literal|0
@@ -1406,8 +1406,6 @@ argument_list|)
 return|;
 block|}
 specifier|static
-name|JdbcTest
-operator|.
 name|AbstractModifiableTable
 name|mutable
 parameter_list|(
@@ -1417,8 +1415,6 @@ parameter_list|,
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -1426,8 +1422,6 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|JdbcTest
-operator|.
 name|AbstractModifiableTable
 argument_list|(
 name|tableName
@@ -1451,8 +1445,6 @@ operator|)
 operator|.
 name|createType
 argument_list|(
-name|JdbcTest
-operator|.
 name|Employee
 operator|.
 name|class
@@ -1528,8 +1520,6 @@ name|getElementType
 parameter_list|()
 block|{
 return|return
-name|JdbcTest
-operator|.
 name|Employee
 operator|.
 name|class
@@ -1586,8 +1576,6 @@ block|{
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -1687,8 +1675,6 @@ argument_list|(
 operator|new
 name|ArrayList
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 argument_list|()
@@ -1770,8 +1756,6 @@ argument_list|(
 operator|new
 name|ArrayList
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 argument_list|()
@@ -1872,8 +1856,6 @@ block|{
 specifier|final
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees

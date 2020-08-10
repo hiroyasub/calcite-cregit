@@ -73,7 +73,7 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|RexImplicationCheckerTest
+name|RexImplicationCheckerFixtures
 operator|.
 name|Fixture
 import|;

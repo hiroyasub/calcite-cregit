@@ -205,7 +205,11 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
+operator|.
+name|Employee
 import|;
 end_import
 
@@ -3509,8 +3513,6 @@ name|Exception
 block|{
 name|List
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 name|employees
@@ -3518,8 +3520,6 @@ init|=
 operator|new
 name|ArrayList
 argument_list|<
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|>
 argument_list|()
@@ -3544,8 +3544,6 @@ operator|.
 name|add
 argument_list|(
 operator|new
-name|JdbcTest
-operator|.
 name|Employee
 argument_list|(
 name|i

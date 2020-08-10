@@ -87,7 +87,11 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
+operator|.
+name|HrSchema
 import|;
 end_import
 
@@ -133,8 +137,6 @@ operator|new
 name|ReflectiveSchema
 argument_list|(
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)
@@ -368,8 +370,6 @@ operator|new
 name|ReflectiveSchema
 argument_list|(
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)

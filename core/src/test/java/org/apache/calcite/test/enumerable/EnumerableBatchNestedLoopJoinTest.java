@@ -177,7 +177,29 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
+operator|.
+name|HrSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|schemata
+operator|.
+name|hr
+operator|.
+name|HrSchemaBig
 import|;
 end_import
 
@@ -226,8 +248,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)
@@ -372,8 +392,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)
@@ -440,8 +458,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)
@@ -510,8 +526,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -574,8 +588,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -638,8 +650,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -711,8 +721,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -798,8 +806,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -880,8 +886,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -1042,8 +1046,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)
@@ -1243,8 +1245,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchemaBig
 argument_list|()
 argument_list|)
@@ -1308,8 +1308,6 @@ argument_list|(
 literal|false
 argument_list|,
 operator|new
-name|JdbcTest
-operator|.
 name|HrSchema
 argument_list|()
 argument_list|)

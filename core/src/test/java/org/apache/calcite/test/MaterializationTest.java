@@ -197,7 +197,9 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
 operator|.
 name|Department
 import|;
@@ -213,7 +215,9 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
 operator|.
 name|DepartmentPlus
 import|;
@@ -229,7 +233,9 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
 operator|.
 name|Dependent
 import|;
@@ -245,7 +251,9 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
 operator|.
 name|Employee
 import|;
@@ -261,7 +269,9 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
 operator|.
 name|Event
 import|;
@@ -277,7 +287,9 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|JdbcTest
+name|schemata
+operator|.
+name|hr
 operator|.
 name|Location
 import|;

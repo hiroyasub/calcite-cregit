@@ -167,6 +167,24 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|schemata
+operator|.
+name|foodmart
+operator|.
+name|FoodmartSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -826,7 +844,7 @@ literal|"  version: '1.0',\n"
 operator|+
 literal|"   schemas: [\n"
 operator|+
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_SCHEMA
 operator|+
@@ -3307,7 +3325,7 @@ literal|"  version: '1.0',\n"
 operator|+
 literal|"   schemas: [\n"
 operator|+
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_SCHEMA
 operator|+
@@ -3488,7 +3506,7 @@ literal|"  version: '1.0',\n"
 operator|+
 literal|"   schemas: [\n"
 operator|+
-name|JdbcTest
+name|FoodmartSchema
 operator|.
 name|FOODMART_SCHEMA
 operator|+
