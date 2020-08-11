@@ -2199,7 +2199,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|boolean
@@ -2207,6 +2207,9 @@ name|value
 parameter_list|)
 block|{
 return|return
+operator|(
+name|RexLiteral
+operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -2220,7 +2223,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|Boolean
@@ -2254,7 +2257,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|int
@@ -2262,6 +2265,9 @@ name|value
 parameter_list|)
 block|{
 return|return
+operator|(
+name|RexLiteral
+operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -2275,7 +2281,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|BigDecimal
@@ -2292,7 +2298,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|BigDecimal
@@ -2314,7 +2320,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|Integer
@@ -2348,7 +2354,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|String
@@ -2372,6 +2378,9 @@ argument_list|)
 return|;
 block|}
 return|return
+operator|(
+name|RexLiteral
+operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral

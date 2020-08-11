@@ -1971,8 +1971,8 @@ name|RelNode
 argument_list|>
 name|inputs
 parameter_list|,
-name|RexNode
-name|rexCall
+name|RexCall
+name|call
 parameter_list|,
 name|Type
 name|elementType
@@ -2008,8 +2008,8 @@ name|RelNode
 argument_list|>
 name|inputs
 parameter_list|,
-name|RexNode
-name|rexCall
+name|RexCall
+name|call
 parameter_list|,
 name|Type
 name|elementType
@@ -2021,15 +2021,6 @@ argument_list|>
 name|columnMappings
 parameter_list|)
 block|{
-specifier|final
-name|RexCall
-name|call
-init|=
-operator|(
-name|RexCall
-operator|)
-name|rexCall
-decl_stmt|;
 specifier|final
 name|SqlOperatorBinding
 name|callBinding
@@ -2098,7 +2089,7 @@ name|cluster
 argument_list|,
 name|inputs
 argument_list|,
-name|rexCall
+name|call
 argument_list|,
 name|elementType
 argument_list|,

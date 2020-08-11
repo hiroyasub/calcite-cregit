@@ -1498,7 +1498,7 @@ argument_list|,
 name|TIMES
 argument_list|)
 decl_stmt|;
-comment|/**    * Simple binary operators are those operators which expects operands from the same Domain.    *    *<p>Example: simple comparisions ({@code =}, {@code<}).    *    *<p>Note: it does not contain {@code IN} because that is defined on D x D^n.    */
+comment|/**    * Simple binary operators are those operators which expects operands from the same Domain.    *    *<p>Example: simple comparisons ({@code =}, {@code<}).    *    *<p>Note: it does not contain {@code IN} because that is defined on D x D^n.    */
 annotation|@
 name|API
 argument_list|(

@@ -51,11 +51,23 @@ interface|interface
 name|RelReferentialConstraint
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the number of columns in the keys.    */
+comment|/** Returns the number of columns in the keys.    *    * @deprecated Use {@code getColumnPairs().size()} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|default
 name|int
 name|getNumColumns
 parameter_list|()
-function_decl|;
+block|{
+return|return
+name|getColumnPairs
+argument_list|()
+operator|.
+name|size
+argument_list|()
+return|;
+block|}
 comment|/**The qualified name of the referencing table, e.g. DEPT. */
 name|List
 argument_list|<

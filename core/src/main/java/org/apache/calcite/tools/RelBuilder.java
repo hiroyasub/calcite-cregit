@@ -3691,7 +3691,7 @@ comment|/** Creates a call to a scalar operator. */
 specifier|private
 annotation|@
 name|Nonnull
-name|RexNode
+name|RexCall
 name|call
 parameter_list|(
 name|SqlOperator
@@ -3727,6 +3727,9 @@ name|operandList
 argument_list|)
 decl_stmt|;
 return|return
+operator|(
+name|RexCall
+operator|)
 name|builder
 operator|.
 name|makeCall
@@ -6423,7 +6426,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|final
-name|RexNode
+name|RexCall
 name|call
 init|=
 name|call
