@@ -179,6 +179,20 @@ name|Pair
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link org.apache.calcite.rel.core.Sort} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
 end_comment
@@ -245,6 +259,24 @@ operator|.
 name|getConvention
 argument_list|()
 assert|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|fetch
+operator|==
+literal|null
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|offset
+operator|==
+literal|null
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Creates an EnumerableSort. */
 specifier|public
