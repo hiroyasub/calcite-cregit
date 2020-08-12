@@ -273,6 +273,15 @@ operator|.
 name|ENUMERABLE_JOIN_RULE
 argument_list|)
 expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+expr_stmt|;
 block|}
 argument_list|)
 operator|.

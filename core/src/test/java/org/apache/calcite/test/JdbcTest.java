@@ -17791,15 +17791,19 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..4=[{exprs}], I=[$t6])\n"
 operator|+
-literal|"  EnumerableHashJoin(condition=[=($1, $5)], joinType=[left])\n"
+literal|"  EnumerableMergeJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[true], proj#0..1=[{exprs}])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"      EnumerableAggregate(group=[{0}])\n"
+literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"        EnumerableTableScan(table=[[hr, depts]])"
+literal|"      EnumerableCalc(expr#0=[{inputs}], expr#1=[true], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"        EnumerableAggregate(group=[{0}])\n"
+operator|+
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|CalciteAssert
 operator|.
