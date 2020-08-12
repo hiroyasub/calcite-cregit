@@ -19687,15 +19687,6 @@ argument_list|(
 name|select
 argument_list|)
 decl_stmt|;
-name|inferUnknownTypes
-argument_list|(
-name|unknownType
-argument_list|,
-name|groupScope
-argument_list|,
-name|groupList
-argument_list|)
-expr_stmt|;
 comment|// expand the expression in group list.
 name|List
 argument_list|<
@@ -19755,6 +19746,15 @@ name|select
 operator|.
 name|setGroupBy
 argument_list|(
+name|groupList
+argument_list|)
+expr_stmt|;
+name|inferUnknownTypes
+argument_list|(
+name|unknownType
+argument_list|,
+name|groupScope
+argument_list|,
 name|groupList
 argument_list|)
 expr_stmt|;
