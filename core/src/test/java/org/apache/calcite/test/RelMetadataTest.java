@@ -12928,7 +12928,7 @@ name|pulledUpPredicates
 argument_list|,
 name|sortsAs
 argument_list|(
-literal|"[OR(=($0, 1), =($1, 2), =($0, 3), =($1, 4))]"
+literal|"[OR(SEARCH($0, Sarg[1, 3]), SEARCH($1, Sarg[2, 4]))]"
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -4227,9 +4227,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM \"scott\".\"EMP\"\n"
 operator|+
-literal|"WHERE (\"EMPNO\" = 0 OR \"EMPNO\" = 1 OR (\"EMPNO\" = 2 OR \"EMPNO\" = 3))"
-operator|+
-literal|" AND (\"DEPTNO\" = 5 OR (\"DEPTNO\" = 6 OR \"DEPTNO\" = 7))"
+literal|"WHERE \"EMPNO\" IN (0, 1, 2, 3) AND \"DEPTNO\" IN (5, 6, 7)"
 decl_stmt|;
 name|relFn
 argument_list|(
@@ -6435,12 +6433,8 @@ name|filter
 argument_list|(
 name|b
 operator|.
-name|call
+name|in
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IN
-argument_list|,
 name|b
 operator|.
 name|field
@@ -6468,7 +6462,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM \"scott\".\"EMP\"\n"
 operator|+
-literal|"WHERE \"DEPTNO\" IN (21)"
+literal|"WHERE \"DEPTNO\" = 21"
 decl_stmt|;
 name|relFn
 argument_list|(
@@ -6509,12 +6503,8 @@ name|filter
 argument_list|(
 name|b
 operator|.
-name|call
+name|in
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IN
-argument_list|,
 name|b
 operator|.
 name|field
@@ -6590,12 +6580,8 @@ name|filter
 argument_list|(
 name|b
 operator|.
-name|call
+name|in
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IN
-argument_list|,
 name|b
 operator|.
 name|call
@@ -6655,7 +6641,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM \"scott\".\"EMP\"\n"
 operator|+
-literal|"WHERE ROW(\"DEPTNO\", \"JOB\") IN (ROW(1, 'PRESIDENT'))"
+literal|"WHERE ROW(\"DEPTNO\", \"JOB\") = ROW(1, 'PRESIDENT')"
 decl_stmt|;
 name|relFn
 argument_list|(
@@ -6696,12 +6682,8 @@ name|filter
 argument_list|(
 name|b
 operator|.
-name|call
+name|in
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IN
-argument_list|,
 name|b
 operator|.
 name|call

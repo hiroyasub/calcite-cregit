@@ -2654,6 +2654,17 @@ name|values
 argument_list|()
 control|)
 block|{
+if|if
+condition|(
+name|sqlTypeName
+operator|.
+name|isSpecial
+argument_list|()
+condition|)
+block|{
+comment|// Skip internal types (NULL, ANY, SYMBOL, SARG).
+continue|continue;
+block|}
 name|allTypeList
 operator|.
 name|add

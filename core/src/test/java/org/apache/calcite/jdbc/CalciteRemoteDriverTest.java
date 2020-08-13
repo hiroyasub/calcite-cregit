@@ -1861,9 +1861,8 @@ name|Test
 name|void
 name|testRemoteTypeInfo
 parameter_list|()
-throws|throws
-name|Exception
 block|{
+comment|// TypeInfo does not include internal types (NULL, SYMBOL, ANY, etc.)
 name|CalciteAssert
 operator|.
 name|hr
@@ -1887,7 +1886,7 @@ name|checkResultCount
 argument_list|(
 name|is
 argument_list|(
-literal|45
+literal|41
 argument_list|)
 argument_list|)
 argument_list|)

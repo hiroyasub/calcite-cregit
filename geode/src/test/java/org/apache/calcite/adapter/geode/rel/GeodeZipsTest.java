@@ -285,16 +285,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedHashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Locale
 import|;
 end_import
@@ -306,6 +296,16 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
 import|;
 end_import
 
@@ -1089,7 +1089,7 @@ name|Collectors
 operator|.
 name|toCollection
 argument_list|(
-name|LinkedHashSet
+name|TreeSet
 operator|::
 operator|new
 argument_list|)

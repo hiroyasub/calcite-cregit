@@ -1466,7 +1466,7 @@ name|plan
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[3], expr#3=[>=($t0, $t2)], expr#4=[4], expr#5=[<=($t0, $t4)], expr#6=[AND($t3, $t5)], proj#0..1=[{exprs}], $condition=[$t6])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[Sarg[[3\u20254]]], expr#3=[SEARCH($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }, { 3, 'b' }, { 4, 'c' }, { 2, 'c' }]])\n\n"
 decl_stmt|;
@@ -1520,7 +1520,7 @@ name|plan
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[3], expr#3=[=($t0, $t2)], expr#4=[4], expr#5=[=($t0, $t4)], expr#6=[OR($t3, $t5)], proj#0..1=[{exprs}], $condition=[$t6])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[Sarg[3, 4]], expr#3=[SEARCH($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }, { 3, 'b' }, { 4, 'c' }, { 2, 'c' }]])\n\n"
 decl_stmt|;
@@ -1682,7 +1682,7 @@ name|plan
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[=($t0, $t2)], expr#4=[2], expr#5=[=($t0, $t4)], expr#6=[OR($t3, $t5)], proj#0..1=[{exprs}], $condition=[$t6])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[Sarg[1, 2]], expr#3=[SEARCH($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }, { 1, 'b' }, { 2, 'c' }, { 2, 'c' }]])\n\n"
 decl_stmt|;

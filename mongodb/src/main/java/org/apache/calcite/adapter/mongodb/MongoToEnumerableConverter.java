@@ -523,7 +523,13 @@ operator|new
 name|MongoRel
 operator|.
 name|Implementor
+argument_list|(
+name|getCluster
 argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
+argument_list|)
 decl_stmt|;
 name|mongoImplementor
 operator|.

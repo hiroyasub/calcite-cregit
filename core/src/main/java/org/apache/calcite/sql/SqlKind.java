@@ -244,6 +244,12 @@ argument_list|(
 literal|"NOT IN"
 argument_list|)
 block|,
+comment|/** Variant of {@code IN} for the Druid adapter. */
+name|DRUID_IN
+block|,
+comment|/** Variant of {@code NOT_IN} for the Druid adapter. */
+name|DRUID_NOT_IN
+block|,
 comment|/** Less-than operator, "&lt;". */
 name|LESS_THAN
 argument_list|(
@@ -285,6 +291,9 @@ name|IS_DISTINCT_FROM
 block|,
 comment|/** {@code IS NOT DISTINCT FROM} operator. */
 name|IS_NOT_DISTINCT_FROM
+block|,
+comment|/** {@code SEARCH} operator. (Analogous to scalar {@code IN}, used only in    * RexNode, not SqlNode.) */
+name|SEARCH
 block|,
 comment|/** Logical "OR" operator. */
 name|OR
@@ -340,6 +349,9 @@ name|POSIX_REGEX_CASE_INSENSITIVE
 block|,
 comment|/** {@code BETWEEN} operator. */
 name|BETWEEN
+block|,
+comment|/** Variant of {@code BETWEEN} for the Druid adapter. */
+name|DRUID_BETWEEN
 block|,
 comment|/** {@code CASE} expression. */
 name|CASE

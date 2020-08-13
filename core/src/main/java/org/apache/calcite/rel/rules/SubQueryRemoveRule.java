@@ -2051,7 +2051,7 @@ name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|isNullOpperands
+name|isNullOperands
 init|=
 name|fields
 operator|.
@@ -2074,7 +2074,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// uses keyIsNulls conditions in the filter to avoid empty results
-name|isNullOpperands
+name|isNullOperands
 operator|.
 name|addAll
 argument_list|(
@@ -2100,7 +2100,7 @@ name|builder
 operator|.
 name|or
 argument_list|(
-name|isNullOpperands
+name|isNullOperands
 argument_list|)
 argument_list|)
 argument_list|)

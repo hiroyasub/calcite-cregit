@@ -1265,7 +1265,7 @@ literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#5=[10], expr#6=[>($t0, $t5)], expr#7=[11], expr#8=[>=($t7, $t0)]"
+literal|"expr#5=[Sarg[(10\u202511]]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.
@@ -1363,7 +1363,7 @@ literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#13=[OR($t10, $t12)], expr#14=[AND($t6, $t8, $t13)]"
+literal|"expr#5=[Sarg[(10\u202511], [19\u202520)]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.
@@ -1883,9 +1883,9 @@ name|withChecker
 argument_list|(
 name|resultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], "
 operator|+
-literal|"empid=[$t0], EXPR$1=[$t3])\n"
+literal|"expr#3=[+($t1, $t2)], empid=[$t0], EXPR$1=[$t3])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{0}], agg#0=[$SUM0($1)])"
 argument_list|,
@@ -1897,7 +1897,7 @@ literal|"EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#13=[OR($t10, $t12)], expr#14=[AND($t6, $t8, $t13)]"
+literal|"expr#5=[Sarg[(10\u202511], [19\u202520)]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.
@@ -2369,7 +2369,7 @@ literal|"EnumerableUnion(all=[true])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#5=[10], expr#6=[>($t0, $t5)], expr#7=[30], expr#8=[>=($t7, $t0)]"
+literal|"expr#5=[Sarg[(10\u202530]]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.

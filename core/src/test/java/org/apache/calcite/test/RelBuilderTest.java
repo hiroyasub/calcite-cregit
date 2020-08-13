@@ -3114,7 +3114,7 @@ name|expected2
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[AND(>($7, 20),<($7, 30))])\n"
+literal|"LogicalFilter(condition=[SEARCH($7, Sarg[(20\u202530)])])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -3729,13 +3729,13 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(DEPTNO=[$7], COMM=[CAST($6):SMALLINT NOT NULL],"
+literal|"LogicalProject(DEPTNO=[$7], COMM=[CAST($6):SMALLINT NOT NULL], "
 operator|+
-literal|" $f2=[OR(=($7, 20), AND(null:NULL, =($7, 10), IS NULL($6),"
+literal|"$f2=[OR(SEARCH($7, Sarg[20, 30]), AND(null:NULL, =($7, 10), "
 operator|+
-literal|" IS NULL($7)), =($7, 30))], n2=[IS NULL($2)],"
+literal|"IS NULL($6), IS NULL($7)))], n2=[IS NULL($2)], "
 operator|+
-literal|" nn2=[IS NOT NULL($3)], $f5=[20], COMM0=[$6], C=[$6])\n"
+literal|"nn2=[IS NOT NULL($3)], $f5=[20], COMM0=[$6], C=[$6])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -17854,13 +17854,17 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{7}])\n"
+literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], "
+operator|+
+literal|"requiredColumns=[{7}])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"  LogicalFilter(condition=[=($cor0.SAL, 1000)])\n"
 operator|+
-literal|"    LogicalFilter(condition=[OR(AND(<($cor0.DEPTNO, 30),>($cor0.DEPTNO, 20)), "
+literal|"    LogicalFilter(condition=[OR("
+operator|+
+literal|"SEARCH($cor0.DEPTNO, Sarg[(20\u202530)]), "
 operator|+
 literal|"IS NULL($2))], variablesSet=[[$cor0]])\n"
 operator|+
@@ -19728,7 +19732,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3747">[CALCITE-3747]    * Constructing BETWEEN with RelBuilder throws class cast exception</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3747">[CALCITE-3747]    * Constructing BETWEEN with RelBuilder throws class cast exception</a>.    *    *<p>BETWEEN is no longer allowed in RexCall. 'a BETWEEN b AND c' is expanded    * 'a>= b AND a<= c', whether created via    * {@link RelBuilder#call(SqlOperator, RexNode...)} or    * {@link RelBuilder#between(RexNode, RexNode, RexNode)}.*/
 annotation|@
 name|Test
 name|void
@@ -19749,17 +19753,23 @@ operator|.
 name|build
 argument_list|()
 argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SEARCH($0, Sarg[[1\u20255]])"
 decl_stmt|;
 specifier|final
 name|RexNode
 name|call
 init|=
 name|builder
-operator|.
-name|scan
-argument_list|(
-literal|"EMP"
-argument_list|)
 operator|.
 name|call
 argument_list|(
@@ -19798,7 +19808,280 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"BETWEEN ASYMMETRIC($0, 1, 5)"
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RexNode
+name|call2
+init|=
+name|builder
+operator|.
+name|between
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|call2
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|filter
+argument_list|(
+name|call2
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRel
+init|=
+literal|""
+operator|+
+literal|"LogicalFilter(condition=[SEARCH($0, Sarg[[1\u20255]])])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expectedRel
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Consecutive filters are not merged. (For now, anyway.)
+name|builder
+operator|.
+name|push
+argument_list|(
+name|root
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|not
+argument_list|(
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelNode
+name|root2
+init|=
+name|builder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRel2
+init|=
+literal|""
+operator|+
+literal|"LogicalFilter(condition=[AND(<>($0, 3), =($7, 10))])\n"
+operator|+
+literal|"  LogicalFilter(condition=[SEARCH($0, Sarg[[1\u20255]])])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|root2
+argument_list|,
+name|hasTree
+argument_list|(
+name|expectedRel2
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// The conditions in one filter are simplified.
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|between
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|not
+argument_list|(
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelNode
+name|root3
+init|=
+name|builder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRel3
+init|=
+literal|""
+operator|+
+literal|"LogicalFilter(condition=[AND(SEARCH($0, Sarg[[1\u20253), (3\u20255]]), "
+operator|+
+literal|"SEARCH($7, Sarg[10]))])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|root3
+argument_list|,
+name|hasTree
+argument_list|(
+name|expectedRel3
 argument_list|)
 argument_list|)
 expr_stmt|;

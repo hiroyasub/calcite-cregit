@@ -1811,7 +1811,7 @@ return|return
 name|rexNode
 return|;
 block|}
-comment|/**    * Generates {@code x IN (y, z)} expression when called as {@code in(x, y, z)}.    * @param node left side of the IN expression    * @param nodes nodes in the right side of IN expression    * @return IN expression    */
+comment|/**    * Generates {@code x IN (y, z)} expression when called as    * {@code in(x, y, z)}.    *    * @param node left side of the IN expression    * @param nodes nodes in the right side of IN expression    * @return IN expression    */
 specifier|protected
 name|RexNode
 name|in
@@ -1827,32 +1827,16 @@ block|{
 return|return
 name|rexBuilder
 operator|.
-name|makeCall
+name|makeIn
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IN
+name|node
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
-name|builder
-argument_list|()
-operator|.
-name|add
-argument_list|(
-name|node
-argument_list|)
-operator|.
-name|add
+name|copyOf
 argument_list|(
 name|nodes
 argument_list|)
-operator|.
-name|build
-argument_list|()
 argument_list|)
 return|;
 block|}

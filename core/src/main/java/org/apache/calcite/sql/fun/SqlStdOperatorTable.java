@@ -1614,6 +1614,17 @@ operator|.
 name|NOT_IN
 argument_list|)
 decl_stmt|;
+comment|/** Operator that tests whether its left operand is included in the range of    * values covered by search arguments. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|SEARCH
+init|=
+operator|new
+name|SqlSearchOperator
+argument_list|()
+decl_stmt|;
 comment|/**    * The<code>&lt; SOME</code> operator (synonymous with    *<code>&lt; ANY</code>).    */
 specifier|public
 specifier|static

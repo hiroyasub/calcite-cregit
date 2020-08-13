@@ -7549,7 +7549,7 @@ argument_list|,
 literal|"<(5, ?0.a)"
 argument_list|)
 expr_stmt|;
-comment|// condition "1< a&& a< 5" is unchanged
+comment|// condition "1< a&& a< 5" is converted to a Sarg
 name|checkSimplifyFilter
 argument_list|(
 name|and
@@ -7579,7 +7579,7 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|"AND(<(1, ?0.a),<(?0.a, 5))"
+literal|"SEARCH(?0.a, Sarg[(1\u20255)])"
 argument_list|)
 expr_stmt|;
 comment|// condition "1> a&& 5> x" yields "1> a"
@@ -7689,7 +7689,7 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|"AND(>(?0.a, 1),<(?0.a, 5))"
+literal|"SEARCH(?0.a, Sarg[(1\u20255)])"
 argument_list|)
 expr_stmt|;
 comment|// condition "a> 1&& a< 10&& a< 5"
@@ -7889,7 +7889,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(>(?0.a, 1),<(?0.a, 5))"
+literal|"SEARCH(?0.a, Sarg[(1\u20255)])"
 argument_list|)
 expr_stmt|;
 comment|// condition "a> 1"
@@ -8955,7 +8955,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥2], [3â¥3], (5â¥+â)]"
+literal|"[[0\u20252], [3\u20253], (5\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -8980,7 +8980,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[(-ââ¥1), (1â¥+â)]"
+literal|"[(-\u221e\u20251), (1\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9093,7 +9093,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[(0â¥1), (1â¥+â)]"
+literal|"[(0\u20251), (1\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9118,7 +9118,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥1), (1â¥2], [3â¥3], (5â¥+â)]"
+literal|"[[0\u20251), (1\u20252], [3\u20253], (5\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9143,7 +9143,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥2), [3â¥3], (5â¥+â)]"
+literal|"[[0\u20252), [3\u20253], (5\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9168,7 +9168,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥2], (5â¥+â)]"
+literal|"[[0\u20252], (5\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9195,7 +9195,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥2], [3â¥3], (5â¥+â)]"
+literal|"[[0\u20252], [3\u20253], (5\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9222,7 +9222,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥2), (5â¥+â)]"
+literal|"[[0\u20252), (5\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9249,7 +9249,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[[0â¥2), (7â¥+â)]"
+literal|"[[0\u20252), (7\u2025+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10227,9 +10227,30 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSimplifyUnchanged
+specifier|final
+name|String
+name|simplified
+init|=
+literal|"SEARCH($0, Sarg[(0\u20256), (6\u202510], [15\u2025+\u221e)])"
+decl_stmt|;
+specifier|final
+name|String
+name|expanded
+init|=
+literal|"OR(AND(>($0, 0),<($0, 6)), AND(>($0, 6),"
+operator|+
+literal|"<=($0, 10)),>=($0, 15))"
+decl_stmt|;
+name|checkSimplify
 argument_list|(
 name|expr
+argument_list|,
+name|simplified
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+name|expanded
 argument_list|)
 expr_stmt|;
 block|}
@@ -10275,9 +10296,16 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSimplifyUnchanged
+name|checkSimplify
 argument_list|(
 name|expr
+argument_list|,
+literal|"SEARCH($0, Sarg[[15\u2025+\u221e), null])"
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+literal|"OR(IS NULL($0),>=($0, 15))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10373,21 +10401,184 @@ decl_stmt|;
 comment|// [CALCITE-4190] causes "or a>= 15" to disappear from the simplified form.
 specifier|final
 name|String
+name|simplified
+init|=
+literal|"SEARCH($0, Sarg[(0\u202512), [15\u2025+\u221e), null])"
+decl_stmt|;
+specifier|final
+name|String
+name|expanded
+init|=
+literal|"OR(IS NULL($0), AND(>($0, 0),<($0, 12)),>=($0, 15))"
+decl_stmt|;
+name|checkSimplify
+argument_list|(
+name|expr
+argument_list|,
+name|simplified
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+name|expanded
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSimplifyRange4
+parameter_list|()
+block|{
+specifier|final
+name|RexNode
+name|aRef
+init|=
+name|input
+argument_list|(
+name|tInt
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+literal|0
+argument_list|)
+decl_stmt|;
+comment|// not (a = 3 or a = 5)
+name|RexNode
+name|expr
+init|=
+name|not
+argument_list|(
+name|or
+argument_list|(
+name|eq
+argument_list|(
+name|aRef
+argument_list|,
+name|literal
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|aRef
+argument_list|,
+name|literal
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
 name|expected
 init|=
-literal|"OR(IS NULL($0),"
-operator|+
-literal|" AND(<(0, $0),<=($0, 10)),"
-operator|+
-literal|" AND(<(8, $0),<($0, 12)),"
-operator|+
-literal|">=($0, 15))"
+literal|"SEARCH($0, Sarg[(-\u221e\u20253), (3\u20255), (5\u2025+\u221e)])"
+decl_stmt|;
+specifier|final
+name|String
+name|expanded
+init|=
+literal|"AND(<>($0, 3),<>($0, 5))"
 decl_stmt|;
 name|checkSimplify
 argument_list|(
 name|expr
 argument_list|,
 name|expected
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+name|expanded
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSimplifyRange5
+parameter_list|()
+block|{
+specifier|final
+name|RexNode
+name|aRef
+init|=
+name|input
+argument_list|(
+name|tInt
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+literal|0
+argument_list|)
+decl_stmt|;
+comment|// not (a = 3 or a = 5) or a is null
+name|RexNode
+name|expr
+init|=
+name|or
+argument_list|(
+name|not
+argument_list|(
+name|or
+argument_list|(
+name|eq
+argument_list|(
+name|aRef
+argument_list|,
+name|literal
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|aRef
+argument_list|,
+name|literal
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNull
+argument_list|(
+name|aRef
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|simplified
+init|=
+literal|"SEARCH($0, Sarg[(-\u221e\u20253), (3\u20255), (5\u2025+\u221e), null])"
+decl_stmt|;
+specifier|final
+name|String
+name|expanded
+init|=
+literal|"OR(IS NULL($0), AND(<>($0, 3),<>($0, 5)))"
+decl_stmt|;
+name|checkSimplify
+argument_list|(
+name|expr
+argument_list|,
+name|simplified
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+name|expanded
 argument_list|)
 expr_stmt|;
 block|}
@@ -10493,7 +10684,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(=(?0.int0, 1), =(?0.int0, 2))"
+literal|"SEARCH(?0.int0, Sarg[1, 2])"
 argument_list|)
 expr_stmt|;
 name|simplify
@@ -11454,7 +11645,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testSimplifyCaseAndNotSimplicationIsInAction
+name|testSimplifyCaseAndNotSimplificationIsInAction
 parameter_list|()
 block|{
 name|RexNode
@@ -15254,7 +15445,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2421">[CALCITE-2421]    * to-be-filled</a>. */
+comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2421">[CALCITE-2421]    * RexSimplify#simplifyAnds foregoes some simplifications if unknownAsFalse    * set to true</a>. */
 annotation|@
 name|Test
 name|void
@@ -17482,6 +17673,73 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testSimplifyOrIsNull
+parameter_list|()
+block|{
+comment|// x = 10 OR x IS NULL
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|eq
+argument_list|(
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNull
+argument_list|(
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"SEARCH(?0.int0, Sarg[10, null])"
+argument_list|)
+expr_stmt|;
+comment|// 10 = x OR x IS NULL
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|eq
+argument_list|(
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNull
+argument_list|(
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"SEARCH(?0.int0, Sarg[10, null])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSimplifyOrNot
 parameter_list|()
 block|{
@@ -18200,7 +18458,57 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"IN(?0.int0, 1, 2)"
+literal|"SEARCH(?0.int0, Sarg[1, 2])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@link #in} does not generate SEARCH if any of the arguments    * are not literals. */
+annotation|@
+name|Test
+name|void
+name|testInDigest2
+parameter_list|()
+block|{
+name|RexNode
+name|e
+init|=
+name|in
+argument_list|(
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|plus
+argument_list|(
+name|literal
+argument_list|(
+literal|2
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"OR(=(?0.int0, 1), =(?0.int0, +(2, ?0.int1)))"
 argument_list|)
 argument_list|)
 expr_stmt|;

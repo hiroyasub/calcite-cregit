@@ -297,6 +297,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -318,7 +332,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines the BETWEEN operator.  *  *<p>Syntax:  *  *<blockquote><code>X [NOT] BETWEEN [ASYMMETRIC | SYMMETRIC] Y AND  * Z</code></blockquote>  *  *<p>If the asymmetric/symmeteric keywords are left out ASYMMETRIC is default.  *  *<p>This operator is always expanded (into something like<code>Y&lt;= X AND  * X&lt;= Z</code>) before being converted into Rex nodes.  */
+comment|/**  * Defines the BETWEEN operator.  *  *<p>Syntax:  *  *<blockquote><code>X [NOT] BETWEEN [ASYMMETRIC | SYMMETRIC] Y AND  * Z</code></blockquote>  *  *<p>If the asymmetric/symmetric keywords are left out ASYMMETRIC is default.  *  *<p>This operator is always expanded (into something like<code>Y&lt;= X AND  * X&lt;= Z</code>) before being converted into Rex nodes.  */
 end_comment
 
 begin_class
@@ -492,6 +506,28 @@ name|negated
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|validRexOperands
+parameter_list|(
+name|int
+name|count
+parameter_list|,
+name|Litmus
+name|litmus
+parameter_list|)
+block|{
+return|return
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"not a rex operator"
+argument_list|)
+return|;
+block|}
 specifier|public
 name|boolean
 name|isNegated

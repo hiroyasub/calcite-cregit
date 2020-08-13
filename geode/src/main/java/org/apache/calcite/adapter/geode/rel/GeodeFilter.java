@@ -229,6 +229,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlKind
@@ -745,6 +759,24 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
+comment|// Remove SEARCH calls because current translation logic cannot handle it.
+comment|// However, it would efficient to handle SEARCH explicitly; a Geode
+comment|// 'IN SET' would always manifest as a SEARCH.
+specifier|final
+name|RexNode
+name|condition2
+init|=
+name|RexUtil
+operator|.
+name|expandSearch
+argument_list|(
+name|rexBuilder
+argument_list|,
+literal|null
+argument_list|,
+name|condition
+argument_list|)
+decl_stmt|;
 comment|// Returns condition decomposed by OR
 name|List
 argument_list|<
@@ -756,7 +788,7 @@ name|RelOptUtil
 operator|.
 name|disjunctions
 argument_list|(
-name|condition
+name|condition2
 argument_list|)
 decl_stmt|;
 if|if

@@ -737,9 +737,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(>=($8, 2014-01-01),<($8, 2015-01-01),"
-operator|+
-literal|">=($8, 2014-06-01),<($8, 2014-07-01))"
+literal|"SEARCH($8, Sarg[[2014-06-01\u20252014-07-01)])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -779,15 +777,9 @@ specifier|final
 name|String
 name|s2
 init|=
-literal|"AND(>=($8, 2000-01-01),<($8, 2001-01-01),"
+literal|"SEARCH($8, Sarg[[2000-02-01\u20252000-04-01),"
 operator|+
-literal|" OR("
-operator|+
-literal|"AND(>=($8, 2000-02-01),<($8, 2000-03-01)), "
-operator|+
-literal|"AND(>=($8, 2000-03-01),<($8, 2000-04-01)), "
-operator|+
-literal|"AND(>=($8, 2000-05-01),<($8, 2000-06-01))))"
+literal|" [2000-05-01\u20252000-06-01)])"
 decl_stmt|;
 specifier|final
 name|RexNode

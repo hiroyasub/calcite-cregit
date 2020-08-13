@@ -354,6 +354,19 @@ argument_list|)
 operator|:
 name|this
 assert|;
+assert|assert
+name|op
+operator|.
+name|kind
+operator|!=
+name|SqlKind
+operator|.
+name|IN
+operator|||
+name|this
+operator|instanceof
+name|RexSubQuery
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Appends call operands without parenthesis.    * {@link RexLiteral} might omit data type depending on the context.    * For instance, {@code null:BOOLEAN} vs {@code =(true, null)}.    * The idea here is to omit "obvious" types for readability purposes while    * still maintain {@link RelNode#getDigest()} contract.    *    * @see RexLiteral#computeDigest(RexDigestIncludeType)    * @param sb destination    */

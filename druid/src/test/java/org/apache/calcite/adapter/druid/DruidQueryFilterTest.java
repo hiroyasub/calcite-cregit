@@ -117,7 +117,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlStdOperatorTable
+name|SqlInternalOperators
 import|;
 end_import
 
@@ -323,7 +323,6 @@ name|druidQuery
 decl_stmt|;
 annotation|@
 name|BeforeEach
-specifier|public
 name|void
 name|testSetup
 parameter_list|()
@@ -515,9 +514,9 @@ name|rexBuilder
 operator|.
 name|makeCall
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlInternalOperators
 operator|.
-name|IN
+name|DRUID_IN
 argument_list|,
 name|listRexNodes
 argument_list|)
@@ -694,9 +693,9 @@ name|makeCall
 argument_list|(
 name|relDataType
 argument_list|,
-name|SqlStdOperatorTable
+name|SqlInternalOperators
 operator|.
-name|BETWEEN
+name|DRUID_BETWEEN
 argument_list|,
 name|listRexNodes
 argument_list|)

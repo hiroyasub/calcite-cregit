@@ -1570,6 +1570,15 @@ operator|.
 name|getKind
 argument_list|()
 argument_list|)
+operator|&&
+name|node
+operator|.
+name|getKind
+argument_list|()
+operator|!=
+name|SqlKind
+operator|.
+name|SEARCH
 condition|)
 block|{
 return|return
