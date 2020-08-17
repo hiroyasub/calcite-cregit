@@ -223,6 +223,20 @@ name|rightPrec
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|argumentMustBeScalar
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_class
 

@@ -40074,18 +40074,6 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"select * from table(\n"
-operator|+
-literal|"^tumble(table orders, descriptor(rowtime))^)"
-argument_list|)
-operator|.
-name|fails
-argument_list|(
-literal|"Invalid number of arguments to function 'TUMBLE'. Was expecting 3 arguments"
-argument_list|)
-expr_stmt|;
-name|sql
-argument_list|(
 literal|"select rowtime, productid, orderid, 'window_start', 'window_end' from table(\n"
 operator|+
 literal|"tumble(table orders, descriptor(rowtime), interval '2' hour))"
@@ -40103,6 +40091,96 @@ argument_list|)
 operator|.
 name|ok
 argument_list|()
+expr_stmt|;
+comment|// test named params.
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end'\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"tumble(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"size => interval '2' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end'\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"tumble(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"size => interval '2' hour,\n"
+operator|+
+literal|"\"OFFSET\" => interval '1' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// negative tests.
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end'\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"tumble(\n"
+operator|+
+literal|"^\"data\"^ => table orders,\n"
+operator|+
+literal|"TIMECOL => descriptor(rowtime),\n"
+operator|+
+literal|"SIZE => interval '2' hour))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Param 'data' not found in function 'TUMBLE'; did you mean 'DATA'\\?"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end'\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"^tumble(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"SIZE => interval '2' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'TUMBLE'. Was expecting 3 arguments"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^tumble(table orders, descriptor(rowtime))^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'TUMBLE'. Was expecting 3 arguments"
+argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
@@ -40206,6 +40284,84 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
+comment|// test named params.
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"hop(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"slide => interval '2' hour,\n"
+operator|+
+literal|"size => interval '1' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"hop(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"slide => interval '2' hour,\n"
+operator|+
+literal|"size => interval '1' hour,\n"
+operator|+
+literal|"\"OFFSET\" => interval '20' minute))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// negative tests.
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"hop(\n"
+operator|+
+literal|"^\"data\"^ => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"slide => interval '2' hour,\n"
+operator|+
+literal|"size => interval '1' hour))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Param 'data' not found in function 'HOP'; did you mean 'DATA'\\?"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^hop(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"slide => interval '2' hour,\n"
+operator|+
+literal|"size => interval '1' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'HOP'. Was expecting 4 arguments"
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from table(\n"
@@ -40233,7 +40389,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<INTERVAL
 operator|+
 literal|"<CHAR\\(4\\)>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
+literal|"timecol\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40251,7 +40407,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<CHAR\\(4
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
+literal|"timecol\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40269,7 +40425,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR\\(4\\)>,<INTERVAL
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
+literal|"timecol\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40287,7 +40443,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<INTERVAL
 operator|+
 literal|"<INTERVAL HOUR>,<CHAR\\(4\\)>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, "
 operator|+
-literal|"DESCRIPTOR\\(col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
+literal|"DESCRIPTOR\\(timecol\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40320,6 +40476,64 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
+comment|// test named params.
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"session(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"key => descriptor(productid),\n"
+operator|+
+literal|"size => interval '1' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// negative tests.
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"session(\n"
+operator|+
+literal|"^\"data\"^ => table orders,\n"
+operator|+
+literal|"timecol => descriptor(rowtime),\n"
+operator|+
+literal|"key => descriptor(productid),\n"
+operator|+
+literal|"size => interval '1' hour))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Param 'data' not found in function 'SESSION'; did you mean 'DATA'\\?"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^session(\n"
+operator|+
+literal|"data => table orders,\n"
+operator|+
+literal|"key => descriptor(productid),\n"
+operator|+
+literal|"size => interval '1' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'SESSION'. Was expecting 4 arguments"
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from table(\n"
@@ -40347,7 +40561,7 @@ literal|"0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<COL
 operator|+
 literal|"<CHAR\\(4\\)>\\)'. Supported form\\(s\\): SESSION\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), DESCRIPTOR\\(col\\), datetime interval\\)"
+literal|"timecol\\), DESCRIPTOR\\(key\\), datetime interval\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40365,7 +40579,7 @@ literal|"0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<CHA
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): SESSION\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), DESCRIPTOR\\(col\\), datetime interval\\)"
+literal|"timecol\\), DESCRIPTOR\\(key\\), datetime interval\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40383,7 +40597,7 @@ literal|"0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR\\(4\\)>,<COL
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): SESSION\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), DESCRIPTOR\\(col\\), datetime interval\\)"
+literal|"timecol\\), DESCRIPTOR\\(key\\), datetime interval\\)"
 argument_list|)
 expr_stmt|;
 name|sql

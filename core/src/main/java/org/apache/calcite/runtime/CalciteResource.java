@@ -1064,6 +1064,27 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Param ''{0}'' not found in function ''{1}''; did you mean ''{2}''?"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|paramNotFoundInFunctionDidYouMean
+parameter_list|(
+name|String
+name|a0
+parameter_list|,
+name|String
+name|a1
+parameter_list|,
+name|String
+name|a2
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Operand {0} must be a query"
 argument_list|)
 name|ExInst

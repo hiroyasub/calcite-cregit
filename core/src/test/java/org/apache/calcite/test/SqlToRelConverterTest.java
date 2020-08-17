@@ -6994,6 +6994,68 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testTableFunctionTumbleWithParamNames
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"tumble(\n"
+operator|+
+literal|"  DATA => table Shipments,\n"
+operator|+
+literal|"  TIMECOL => descriptor(rowtime),\n"
+operator|+
+literal|"  SIZE => INTERVAL '1' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionTumbleWithParamReordered
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"tumble(\n"
+operator|+
+literal|"  DATA => table Shipments,\n"
+operator|+
+literal|"  SIZE => INTERVAL '1' MINUTE,\n"
+operator|+
+literal|"  TIMECOL => descriptor(rowtime)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testTableFunctionTumbleWithInnerJoin
 parameter_list|()
 block|{
@@ -7096,6 +7158,72 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testTableFunctionHopWithParamNames
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"hop(\n"
+operator|+
+literal|"  DATA => table Shipments,\n"
+operator|+
+literal|"  TIMECOL => descriptor(rowtime),\n"
+operator|+
+literal|"  SLIDE => INTERVAL '1' MINUTE,\n"
+operator|+
+literal|"  SIZE => INTERVAL '2' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionHopWithParamReordered
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"hop(\n"
+operator|+
+literal|"  DATA => table Shipments,\n"
+operator|+
+literal|"  SLIDE => INTERVAL '1' MINUTE,\n"
+operator|+
+literal|"  TIMECOL => descriptor(rowtime),\n"
+operator|+
+literal|"  SIZE => INTERVAL '2' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testTableFunctionSession
 parameter_list|()
 block|{
@@ -7108,6 +7236,72 @@ operator|+
 literal|"from table(session(table Shipments, descriptor(rowtime), "
 operator|+
 literal|"descriptor(orderId), INTERVAL '10' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionSessionWithParamNames
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"session(\n"
+operator|+
+literal|"  DATA => table Shipments,\n"
+operator|+
+literal|"  TIMECOL => descriptor(rowtime),\n"
+operator|+
+literal|"  KEY => descriptor(orderId),\n"
+operator|+
+literal|"  SIZE => INTERVAL '10' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionSessionWithParamReordered
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"session(\n"
+operator|+
+literal|"  DATA => table Shipments,\n"
+operator|+
+literal|"  KEY => descriptor(orderId),\n"
+operator|+
+literal|"  TIMECOL => descriptor(rowtime),\n"
+operator|+
+literal|"  SIZE => INTERVAL '10' MINUTE))"
 decl_stmt|;
 name|sql
 argument_list|(

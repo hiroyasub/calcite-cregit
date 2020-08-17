@@ -4421,21 +4421,6 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-specifier|final
-name|Expression
-name|shiftExpr
-init|=
-name|Expressions
-operator|.
-name|constant
-argument_list|(
-literal|1
-argument_list|,
-name|long
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
 comment|// Find the fixed window for a timestamp given a window size and an offset, and return the
 comment|// window start.
 comment|// wmColExprToLong - (wmColExprToLong + windowSizeMillis - offsetMillis) % windowSizeMillis
