@@ -1540,6 +1540,11 @@ operator|.
 name|getOperatorTable
 argument_list|()
 argument_list|,
+name|validator
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
 name|getNameAsId
 argument_list|()
 argument_list|,

@@ -55,6 +55,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|parser
@@ -76,6 +92,22 @@ operator|.
 name|type
 operator|.
 name|OperandTypes
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlOperandMetadata
 import|;
 end_import
 
@@ -193,20 +225,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -273,14 +291,6 @@ specifier|final
 name|SqlIdentifier
 name|sqlIdentifier
 decl_stmt|;
-specifier|private
-specifier|final
-name|List
-argument_list|<
-name|RelDataType
-argument_list|>
-name|paramTypes
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a new SqlFunction for a call to a built-in function.    *    * @param name                 Name of built-in function    * @param kind                 kind of operator implemented by function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param category             categorization for function    */
 specifier|public
@@ -306,7 +316,7 @@ name|category
 parameter_list|)
 block|{
 comment|// We leave sqlIdentifier as null to indicate
-comment|// that this is a built-in.  Same for paramTypes.
+comment|// that this is a built-in.
 name|this
 argument_list|(
 name|name
@@ -320,8 +330,6 @@ argument_list|,
 name|operandTypeInference
 argument_list|,
 name|operandTypeChecker
-argument_list|,
-literal|null
 argument_list|,
 name|category
 argument_list|)
@@ -400,7 +408,9 @@ name|funcType
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Internal constructor.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|SqlFunction
 parameter_list|(
@@ -427,6 +437,50 @@ argument_list|<
 name|RelDataType
 argument_list|>
 name|paramTypes
+parameter_list|,
+name|SqlFunctionCategory
+name|category
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|name
+argument_list|,
+name|sqlIdentifier
+argument_list|,
+name|kind
+argument_list|,
+name|returnTypeInference
+argument_list|,
+name|operandTypeInference
+argument_list|,
+name|operandTypeChecker
+argument_list|,
+name|category
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Internal constructor.    */
+specifier|protected
+name|SqlFunction
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|SqlIdentifier
+name|sqlIdentifier
+parameter_list|,
+name|SqlKind
+name|kind
+parameter_list|,
+name|SqlReturnTypeInference
+name|returnTypeInference
+parameter_list|,
+name|SqlOperandTypeInference
+name|operandTypeInference
+parameter_list|,
+name|SqlOperandTypeChecker
+name|operandTypeChecker
 parameter_list|,
 name|SqlFunctionCategory
 name|category
@@ -464,23 +518,6 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|category
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|paramTypes
-operator|=
-name|paramTypes
-operator|==
-literal|null
-condition|?
-literal|null
-else|:
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
-name|paramTypes
 argument_list|)
 expr_stmt|;
 block|}
@@ -531,7 +568,10 @@ name|getNameAsId
 argument_list|()
 return|;
 block|}
-comment|/**    * Return array of parameter types, or null for built-in function.    */
+comment|/** Use {@link SqlOperandMetadata#paramTypes(RelDataTypeFactory)} on the    * result of {@link #getOperandTypeChecker()}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|List
 argument_list|<
@@ -541,10 +581,13 @@ name|getParamTypes
 parameter_list|()
 block|{
 return|return
-name|paramTypes
+literal|null
 return|;
 block|}
-comment|/**    * Returns a list of parameter names.    *    *<p>The default implementation returns {@code [arg0, arg1, ..., argN]}.    */
+comment|/** Use {@link SqlOperandMetadata#paramNames()} on the result of    * {@link #getOperandTypeChecker()}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|List
 argument_list|<
@@ -558,7 +601,8 @@ name|Functions
 operator|.
 name|generate
 argument_list|(
-name|paramTypes
+name|getParamTypes
+argument_list|()
 operator|.
 name|size
 argument_list|()
@@ -853,6 +897,11 @@ operator|.
 name|getOperatorTable
 argument_list|()
 argument_list|,
+name|validator
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
 name|getNameAsId
 argument_list|()
 argument_list|,
@@ -1057,6 +1106,11 @@ argument_list|(
 name|validator
 operator|.
 name|getOperatorTable
+argument_list|()
+argument_list|,
+name|validator
+operator|.
+name|getTypeFactory
 argument_list|()
 argument_list|,
 name|getNameAsId

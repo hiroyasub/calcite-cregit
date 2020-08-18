@@ -778,8 +778,6 @@ name|OperandTypes
 operator|.
 name|NUMERIC
 argument_list|,
-literal|null
-argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|USER_DEFINED_FUNCTION
@@ -908,8 +906,6 @@ name|SqlTypeFamily
 operator|.
 name|STRING
 argument_list|)
-argument_list|,
-literal|null
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -1170,8 +1166,6 @@ argument_list|,
 name|OperandTypes
 operator|.
 name|NILADIC
-argument_list|,
-literal|null
 argument_list|,
 name|SqlFunctionCategory
 operator|.

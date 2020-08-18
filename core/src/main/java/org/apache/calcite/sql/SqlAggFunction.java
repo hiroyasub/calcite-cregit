@@ -432,8 +432,6 @@ name|operandTypeInference
 argument_list|,
 name|operandTypeChecker
 argument_list|,
-literal|null
-argument_list|,
 name|funcType
 argument_list|)
 expr_stmt|;

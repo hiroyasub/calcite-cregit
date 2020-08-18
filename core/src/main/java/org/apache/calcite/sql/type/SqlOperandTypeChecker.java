@@ -109,6 +109,16 @@ name|int
 name|i
 parameter_list|)
 function_decl|;
+comment|/** Returns whether the list of parameters is fixed-length. In standard SQL,    * user-defined functions are fixed-length.    *    *<p>If true, the validator should expand calls, supplying a {@code DEFAULT}    * value for each parameter for which an argument is not supplied. */
+specifier|default
+name|boolean
+name|isFixedParameters
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Strategy used to make arguments consistent. */
 enum|enum
 name|Consistency

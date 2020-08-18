@@ -111,6 +111,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Parameter type-checking strategy for Explicit Type.  */
 end_comment
@@ -124,6 +134,7 @@ name|SqlOperandTypeChecker
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 specifier|private
+specifier|final
 name|RelDataType
 name|type
 decl_stmt|;
@@ -138,7 +149,12 @@ name|this
 operator|.
 name|type
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|type
+argument_list|)
 expr_stmt|;
 block|}
 specifier|public
