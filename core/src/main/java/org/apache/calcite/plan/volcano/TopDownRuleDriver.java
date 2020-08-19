@@ -2475,8 +2475,8 @@ name|group
 argument_list|)
 return|;
 block|}
-comment|// Try converting the physical node to another trait sets
-comment|// either by converter rule or traits pass though.
+comment|// Try to convert the physical node to another trait sets,
+comment|// either by converter rule or traits pass through.
 specifier|private
 name|RelNode
 name|convert
@@ -2526,6 +2526,17 @@ operator|!=
 literal|null
 condition|)
 block|{
+assert|assert
+name|passThrough
+operator|.
+name|getConvention
+argument_list|()
+operator|==
+name|rel
+operator|.
+name|getConvention
+argument_list|()
+assert|;
 name|passThroughCache
 operator|.
 name|add
