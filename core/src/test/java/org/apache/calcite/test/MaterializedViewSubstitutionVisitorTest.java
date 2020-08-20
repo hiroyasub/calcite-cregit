@@ -2903,6 +2903,253 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testConstantFilterInAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", count(distinct \"deptno\") as cnt\n"
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select count(distinct \"deptno\") as cnt\n"
+operator|+
+literal|"from \"emps\" where \"name\" = 'hello'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"LogicalCalc(expr#0..1=[{inputs}], expr#2=['hello':VARCHAR], expr#3=[CAST($t0)"
+operator|+
+literal|":VARCHAR], expr#4=[=($t2, $t3)], CNT=[$t1], $condition=[$t4])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testConstantFilterInAgg2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", count(distinct \"commission\") as cnt\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|" group by \"name\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", count(distinct \"commission\") as cnt\n"
+operator|+
+literal|"from \"emps\" where \"name\" = 'hello'\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"LogicalCalc(expr#0..2=[{inputs}], expr#3=['hello':VARCHAR], expr#4=[CAST($t0)"
+operator|+
+literal|":VARCHAR], expr#5=[=($t3, $t4)], deptno=[$t1], CNT=[$t2], $condition=[$t5])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testConstantFilterInAgg3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", count(distinct \"commission\") as cnt\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|" group by \"name\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", count(distinct \"commission\") as cnt\n"
+operator|+
+literal|"from \"emps\" where \"name\" = 'hello' and \"deptno\" = 1\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"LogicalCalc(expr#0..2=[{inputs}], expr#3=['hello':VARCHAR], expr#4=[CAST($t0)"
+operator|+
+literal|":VARCHAR], expr#5=[=($t3, $t4)], expr#6=[1], expr#7=[CAST($t1):INTEGER NOT NULL], "
+operator|+
+literal|"expr#8=[=($t6, $t7)], expr#9=[AND($t5, $t8)], deptno=[$t1], CNT=[$t2], "
+operator|+
+literal|"$condition=[$t9])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testConstantFilterInAgg4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", count(distinct \"commission\") as cnt\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|" group by \"name\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"commission\", count(distinct \"commission\") as cnt\n"
+operator|+
+literal|"from \"emps\" where \"name\" = 'hello' and \"deptno\" = 1\n"
+operator|+
+literal|"group by \"deptno\", \"commission\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testConstantFilterInAggUsingSubquery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", count(distinct \"deptno\") as cnt "
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select cnt from(\n"
+operator|+
+literal|" select \"name\", count(distinct \"deptno\") as cnt "
+operator|+
+literal|" from \"emps\" group by \"name\") t\n"
+operator|+
+literal|"where \"name\" = 'hello'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link RexUtil#simplify}. */
 annotation|@
 name|Test
