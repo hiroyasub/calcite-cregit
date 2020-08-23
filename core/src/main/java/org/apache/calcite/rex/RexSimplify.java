@@ -441,6 +441,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|BitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collection
 import|;
 end_import
@@ -2789,6 +2799,19 @@ name|simplify
 init|=
 name|this
 decl_stmt|;
+comment|// 'doneTerms' prevents us from visiting a term in both first and second
+comment|// loops. If we did this, the second visit would have a predicate saying
+comment|// that 'term' is false. Effectively, we sort terms: visiting
+comment|// 'allowedAsPredicate' terms in the first loop, and
+comment|// non-'allowedAsPredicate' in the second. Each term is visited once.
+specifier|final
+name|BitSet
+name|doneTerms
+init|=
+operator|new
+name|BitSet
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|int
@@ -2831,6 +2854,13 @@ condition|)
 block|{
 continue|continue;
 block|}
+name|doneTerms
+operator|.
+name|set
+argument_list|(
+name|i
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RexNode
 name|t2
@@ -2945,13 +2975,16 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|allowedAsPredicateDuringOrSimplification
+name|doneTerms
+operator|.
+name|get
 argument_list|(
-name|t
+name|i
 argument_list|)
 condition|)
 block|{
 continue|continue;
+comment|// we visited this term in the first loop
 block|}
 name|terms
 operator|.
