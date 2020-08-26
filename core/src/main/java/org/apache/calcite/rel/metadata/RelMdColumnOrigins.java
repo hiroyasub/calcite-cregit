@@ -448,7 +448,7 @@ name|getGroupCount
 argument_list|()
 condition|)
 block|{
-comment|// Group columns pass through directly.
+comment|// get actual index of Group columns.
 return|return
 name|mq
 operator|.
@@ -459,7 +459,18 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
+name|rel
+operator|.
+name|getGroupSet
+argument_list|()
+operator|.
+name|asList
+argument_list|()
+operator|.
+name|get
+argument_list|(
 name|iOutputColumn
+argument_list|)
 argument_list|)
 return|;
 block|}
