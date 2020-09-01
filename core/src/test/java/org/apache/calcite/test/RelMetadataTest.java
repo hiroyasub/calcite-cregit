@@ -6934,6 +6934,62 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testUniqueKeysMinus
+parameter_list|()
+block|{
+name|checkGetUniqueKeys
+argument_list|(
+literal|"select distinct deptno from emp\n"
+operator|+
+literal|"except all\n"
+operator|+
+literal|"select deptno from dept"
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|(
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUniqueKeysIntersect
+parameter_list|()
+block|{
+name|checkGetUniqueKeys
+argument_list|(
+literal|"select distinct deptno from emp\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select deptno from dept"
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|(
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSingleKeyTableScanUniqueKeys
 parameter_list|()
 block|{
