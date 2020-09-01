@@ -182,7 +182,8 @@ operator|=
 name|family
 expr_stmt|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeComparability
 name|getComparability
@@ -192,7 +193,8 @@ return|return
 name|comparability
 return|;
 block|}
-comment|// override AbstractSqlType
+annotation|@
+name|Override
 specifier|public
 name|SqlIdentifier
 name|getSqlIdentifier
@@ -202,7 +204,8 @@ return|return
 name|sqlIdentifier
 return|;
 block|}
-comment|// override AbstractSqlType
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFamily
 name|getFamily
@@ -211,11 +214,25 @@ block|{
 comment|// each UDT is in its own lonely family, until one day when
 comment|// we support inheritance (at which time also need to implement
 comment|// getPrecedenceList).
+name|RelDataTypeFamily
+name|family
+init|=
+name|this
+operator|.
+name|family
+decl_stmt|;
 return|return
 name|family
+operator|!=
+literal|null
+condition|?
+name|family
+else|:
+name|this
 return|;
 block|}
-comment|// implement RelDataTypeImpl
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString

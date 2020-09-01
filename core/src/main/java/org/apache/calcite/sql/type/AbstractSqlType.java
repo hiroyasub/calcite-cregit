@@ -205,7 +205,8 @@ operator|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|SqlTypeName
 name|getSqlTypeName
@@ -215,7 +216,8 @@ return|return
 name|typeName
 return|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isNullable
@@ -225,20 +227,34 @@ return|return
 name|isNullable
 return|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFamily
 name|getFamily
 parameter_list|()
 block|{
-return|return
+name|SqlTypeFamily
+name|family
+init|=
 name|typeName
 operator|.
 name|getFamily
 argument_list|()
+decl_stmt|;
+comment|// If typename does not have family, treat the current type as the only member its family
+return|return
+name|family
+operator|!=
+literal|null
+condition|?
+name|family
+else|:
+name|this
 return|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypePrecedenceList
 name|getPrecedenceList

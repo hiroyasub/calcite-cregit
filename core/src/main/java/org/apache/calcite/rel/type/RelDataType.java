@@ -247,7 +247,7 @@ name|String
 name|getFullTypeString
 parameter_list|()
 function_decl|;
-comment|/**    * Gets a canonical object representing the family of this type. Two values    * can be compared if and only if their types are in the same family.    *    * @return canonical object representing type family    */
+comment|/**    * Gets a canonical object representing the family of this type. Two values    * can be compared if and only if their types are in the same family.    *    * @return canonical object representing type family, never null    */
 name|RelDataTypeFamily
 name|getFamily
 parameter_list|()
