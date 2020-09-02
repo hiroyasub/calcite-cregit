@@ -245,6 +245,33 @@ name|CALCITE_3243_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-4204">[CALCITE-4204]    * Intermittent precision in Druid results when using aggregation functions over columns of type    * DOUBLE</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_4204_FIXED
+init|=
+literal|false
+decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-4205">[CALCITE-4205]    * DruidAdapterIT#testDruidTimeFloorAndTimeParseExpressions2 fails</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_4205_FIXED
+init|=
+literal|false
+decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-4213">[CALCITE-4213]    * Druid plans with small intervals should be chosen over full interval scan plus filter</a> is    * fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_4213_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

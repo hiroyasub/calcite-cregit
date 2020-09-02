@@ -147,6 +147,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TestUtil
 import|;
 end_import
@@ -190,6 +204,20 @@ operator|.
 name|collect
 operator|.
 name|Multimap
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
 import|;
 end_import
 
@@ -350,7 +378,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Before calling this test, you need to populate Druid, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Druid and test data set.  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  *<p>These tests use TIMESTAMP WITH LOCAL TIME ZONE type for the  * Druid timestamp column, instead of TIMESTAMP type as  * {@link DruidAdapter2IT}.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Druid must be up and running with foodmart and wikipedia datasets loaded. Follow the  * instructions on<a href="https://github.com/zabetak/calcite-druid-dataset">calcite-druid-dataset  *</a> to setup Druid before launching these tests.</p>  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  *<p>These tests use TIMESTAMP WITH LOCAL TIME ZONE type for the  * Druid timestamp column, instead of TIMESTAMP type as  * {@link DruidAdapter2IT}.  */
 end_comment
 
 begin_class
@@ -650,7 +678,7 @@ literal|"  DruidQuery(table=[[wiki, wiki]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($13, 'Jeremy Corbyn')], groups=[{5}], aggs=[[]])\n"
+literal|"filter=[=($13, 'Jeremy Corbyn')], projects=[[$5]], groups=[{0}], aggs=[[]])\n"
 decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
@@ -683,7 +711,7 @@ literal|"  DruidQuery(table=[[wiki, wiki]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($16, 'Jeremy Corbyn')], groups=[{6}], aggs=[[]])\n"
+literal|"filter=[=($16, 'Jeremy Corbyn')], projects=[[$6]], groups=[{0}], aggs=[[]])\n"
 decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
@@ -730,7 +758,7 @@ literal|"  DruidQuery(table=[[wiki, wikipedia]], "
 operator|+
 literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($16, 'Jeremy Corbyn')], groups=[{6}], aggs=[[]])\n"
+literal|"filter=[=($16, 'Jeremy Corbyn')], projects=[[$6]], groups=[{0}], aggs=[[]])\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -816,9 +844,9 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], EXPR$0=[$t1])\n"
 operator|+
-literal|"  BindableProject(EXPR$0=[$1])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]])\n"
 decl_stmt|;
@@ -1577,7 +1605,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{30}], aggs=[[]])"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$30]], groups=[{0}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -3323,13 +3351,15 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"EnumerableUnion(all=[true])\n"
 operator|+
-literal|"  BindableUnion(all=[true])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{39}], aggs=[[]])\n"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$39]], groups=[{0}], aggs=[[]])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{37}], aggs=[[]])"
+literal|"  EnumerableInterpreter\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$37]], groups=[{0}], aggs=[[]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3385,9 +3415,9 @@ literal|"  BindableFilter(condition=[=($0, 'M')])\n"
 operator|+
 literal|"    BindableUnion(all=[true])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{39}], aggs=[[]])\n"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$39]], groups=[{0}], aggs=[[]])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{37}], aggs=[[]])"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$37]], groups=[{0}], aggs=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3435,7 +3465,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], projects=[[0]], groups=[{}], aggs=[[COUNT()]])"
+literal|"2992-01-10T00:00:00.000Z]], groups=[{}], aggs=[[COUNT()]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -4464,13 +4494,13 @@ literal|"  BindableSort(sort0=[$1], dir0=[DESC], fetch=[2])\n"
 operator|+
 literal|"    BindableProject(state_province=[$0], CDC=[FLOOR($1)])\n"
 operator|+
-literal|"      BindableAggregate(group=[{1}], agg#0=[COUNT($0)])\n"
+literal|"      BindableAggregate(group=[{0}], agg#0=[COUNT($1)])\n"
 operator|+
 literal|"        DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{29, 30}], "
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"aggs=[[]])"
+literal|"projects=[[$30, $29]], groups=[{0, 1}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -4478,11 +4508,11 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'city','outputName':'city'"
+literal|"'granularity':'all','dimensions':["
 operator|+
-literal|",'outputType':'STRING'},"
+literal|"{'type':'default','dimension':'state_province','outputName':'state_province','outputType':'STRING'},"
 operator|+
-literal|"{'type':'default','dimension':'state_province','outputName':'state_province','outputType':'STRING'}],"
+literal|"{'type':'default','dimension':'city','outputName':'city','outputType':'STRING'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},'aggregations':[],"
 operator|+
@@ -4536,9 +4566,9 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN=EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -4823,6 +4853,11 @@ literal|"1997-05-01T00:00:00.000Z, 1997-06-01T00:00:00.000Z/1997-07-01T00:00:00.
 operator|+
 literal|" projects=[[0]], groups=[{}], aggs=[[COUNT()]])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
@@ -4832,6 +4867,19 @@ name|returnsUnordered
 argument_list|(
 literal|"C=13500"
 argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4213_FIXED
+argument_list|,
+literal|"CALCITE-4213"
+argument_list|)
+expr_stmt|;
+name|q
 operator|.
 name|explainContains
 argument_list|(
@@ -5561,9 +5609,7 @@ literal|"intervals=[[1997-01-01T00:00:00.000Z/1998-01-01T00:00:00.000Z]], "
 operator|+
 literal|"filter=[AND(>=(CAST($11):INTEGER, 8),<=(CAST($11):INTEGER, 10), "
 operator|+
-literal|"<(CAST($10):INTEGER, 15))], groups=[{}], "
-operator|+
-literal|"aggs=[[SUM($90)]])\n"
+literal|"<(CAST($10):INTEGER, 15))], projects=[[$90]], groups=[{}], aggs=[[SUM($0)]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -6469,9 +6515,11 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  BindableAggregate(group=[{0}])\n"
+literal|"EnumerableAggregate(group=[{0}])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    BindableProject(EXPR$0=[EXTRACT(FLAG(CENTURY), $0)])\n"
 operator|+
@@ -6899,20 +6947,16 @@ literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90, $91]], groups=[{0}], "
 operator|+
 literal|"aggs=[[SUM($1), SUM($2)]], post_projects=[[+($1, $2), $0]], sort0=[0], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"A=369117.52790000016; store_state=WA"
-argument_list|,
-literal|"A=222698.26509999996; store_state=CA"
-argument_list|,
-literal|"A=199049.57059999998; store_state=OR"
 argument_list|)
 operator|.
 name|explainContains
@@ -6927,6 +6971,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"A=369117.52790000016; store_state=WA"
+argument_list|,
+literal|"A=222698.26509999996; store_state=CA"
+argument_list|,
+literal|"A=199049.57059999998; store_state=OR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6961,20 +7027,16 @@ literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90, $91]], groups=[{0}], "
 operator|+
 literal|"aggs=[[SUM($1), SUM($2)]], post_projects=[[$0, /($1, $2)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=OR; A=2.506091302943239"
-argument_list|,
-literal|"store_state=CA; A=2.505379741272971"
-argument_list|,
-literal|"store_state=WA; A=2.5045806163801996"
 argument_list|)
 operator|.
 name|explainContains
@@ -6989,6 +7051,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; A=2.506091302943239"
+argument_list|,
+literal|"store_state=CA; A=2.505379741272971"
+argument_list|,
+literal|"store_state=WA; A=2.5045806163801996"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7023,20 +7107,16 @@ literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90, $91]], groups=[{0}], a
 operator|+
 literal|" SUM($2)]], post_projects=[[$0, *($1, $2)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=WA; A=2.7783838325212463E10"
-argument_list|,
-literal|"store_state=CA; A=1.0112000537448784E10"
-argument_list|,
-literal|"store_state=OR; A=8.077425041941243E9"
 argument_list|)
 operator|.
 name|explainContains
@@ -7051,6 +7131,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=2.7783838325212463E10"
+argument_list|,
+literal|"store_state=CA; A=1.0112000537448784E10"
+argument_list|,
+literal|"store_state=OR; A=8.077425041941243E9"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7087,20 +7189,16 @@ literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90, $91]], groups=[{0}], a
 operator|+
 literal|"SUM($2)]], post_projects=[[$0, -($1, $2)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=WA; A=158468.91210000002"
-argument_list|,
-literal|"store_state=CA; A=95637.41489999992"
-argument_list|,
-literal|"store_state=OR; A=85504.56939999988"
 argument_list|)
 operator|.
 name|explainContains
@@ -7115,6 +7213,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=158468.91210000002"
+argument_list|,
+literal|"store_state=CA; A=95637.41489999992"
+argument_list|,
+literal|"store_state=OR; A=85504.56939999988"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7149,20 +7269,16 @@ literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90]], groups=[{0}], aggs=[
 operator|+
 literal|"post_projects=[[$0, +($1, 100)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=WA; A=263893.2200000001"
-argument_list|,
-literal|"store_state=CA; A=159267.83999999994"
-argument_list|,
-literal|"store_state=OR; A=142377.06999999992"
 argument_list|)
 operator|.
 name|explainContains
@@ -7177,6 +7293,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=263893.2200000001"
+argument_list|,
+literal|"store_state=CA; A=159267.83999999994"
+argument_list|,
+literal|"store_state=OR; A=142377.06999999992"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7213,9 +7351,9 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $89, $90, $91]], groups=[{0}], "
+literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90, $91, $89]], groups=[{0}], "
 operator|+
-literal|"aggs=[[SUM($2), SUM($3), COUNT(), SUM($1)]], post_projects=[[$0, *(-1, +(/(-($1, $2), "
+literal|"aggs=[[SUM($1), SUM($2), COUNT(), SUM($3)]], post_projects=[[$0, *(-1, +(/(-($1, $2), "
 operator|+
 literal|"*($3, 3)), $4))]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
@@ -7281,9 +7419,9 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], projects=[[$2, $63, $91]], groups=[{1}], aggs=[[SUM($2), "
+literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $91, $2]], groups=[{0}], aggs=[[SUM($1), "
 operator|+
-literal|"COUNT(DISTINCT $0)]], post_projects=[[$0, /($1, $2)]], sort0=[1], dir0=[DESC])"
+literal|"COUNT(DISTINCT $2)]], post_projects=[[$0, /($1, $2)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
 name|foodmartApprox
 argument_list|(
@@ -7477,20 +7615,16 @@ literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $91]], groups=[{0}], "
 operator|+
 literal|"aggs=[[SUM($1), COUNT()]], post_projects=[[$0, /($1, $2)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=OR; A=2.6271402406293403"
-argument_list|,
-literal|"store_state=CA; A=2.599338206292706"
-argument_list|,
-literal|"store_state=WA; A=2.5828708592868717"
 argument_list|)
 operator|.
 name|explainContains
@@ -7505,6 +7639,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; A=2.6271402406293403"
+argument_list|,
+literal|"store_state=CA; A=2.599338206292706"
+argument_list|,
+literal|"store_state=WA; A=2.5828708592868717"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7540,26 +7696,22 @@ name|plan
 init|=
 literal|"DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $89, $90, $91]], groups=[{0}], "
+literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $90, $91, $89]], groups=[{0}], "
 operator|+
-literal|"aggs=[[SUM($2), SUM($3), SUM($1)]], post_projects=[[$0, /($1, $2), "
+literal|"aggs=[[SUM($1), SUM($2), SUM($3)]], post_projects=[[$0, /($1, $2), "
 operator|+
 literal|"CASE(=($3, 0), 1.0:DECIMAL(19, 0), CAST($3):DECIMAL(19, 0))]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=OR; A=2.506091302943239; B=67659.0"
-argument_list|,
-literal|"store_state=CA; A=2.505379741272971; B=74748.0"
-argument_list|,
-literal|"store_state=WA; A=2.5045806163801996; B=124366.0"
 argument_list|)
 operator|.
 name|explainContains
@@ -7574,6 +7726,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; A=2.506091302943239; B=67659.0"
+argument_list|,
+literal|"store_state=CA; A=2.505379741272971; B=74748.0"
+argument_list|,
+literal|"store_state=WA; A=2.5045806163801996; B=124366.0"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7614,20 +7788,16 @@ literal|"projects=[[$63, $90, $91]], groups=[{0}], aggs=[[SUM($1), SUM($2)]], "
 operator|+
 literal|"post_projects=[[$0, +($1, 100), -(+($1, 100), $2)]], sort0=[1], dir0=[DESC])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=WA; A=263893.2200000001; C=158568.91210000002"
-argument_list|,
-literal|"store_state=CA; A=159267.83999999994; C=95737.41489999992"
-argument_list|,
-literal|"store_state=OR; A=142377.06999999992; C=85604.56939999988"
 argument_list|)
 operator|.
 name|explainContains
@@ -7642,6 +7812,28 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=263893.2200000001; C=158568.91210000002"
+argument_list|,
+literal|"store_state=CA; A=159267.83999999994; C=95737.41489999992"
+argument_list|,
+literal|"store_state=OR; A=142377.06999999992; C=85604.56939999988"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7922,28 +8114,22 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], groups=[{2, 63}], aggs=[[SUM($90), SUM($91)]], "
+literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $2, $90, $91]], groups=[{0, 1}], "
 operator|+
-literal|"post_projects=[[$1, $0, -($2, $3)]], sort0=[2], dir0=[ASC], fetch=[5])"
+literal|"aggs=[[SUM($2), SUM($3)]], post_projects=[[$0, $1, -($2, $3)]], sort0=[2], dir0=[ASC], "
+operator|+
+literal|"fetch=[5])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=CA; brand_name=King; A=21.4632"
-argument_list|,
-literal|"store_state=OR; brand_name=Symphony; A=32.176"
-argument_list|,
-literal|"store_state=CA; brand_name=Toretti; A=32.24650000000001"
-argument_list|,
-literal|"store_state=WA; brand_name=King; A=34.6104"
-argument_list|,
-literal|"store_state=OR; brand_name=Toretti; A=36.3"
 argument_list|)
 operator|.
 name|explainContains
@@ -7958,6 +8144,32 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; brand_name=King; A=21.4632"
+argument_list|,
+literal|"store_state=OR; brand_name=Symphony; A=32.176"
+argument_list|,
+literal|"store_state=CA; brand_name=Toretti; A=32.24650000000001"
+argument_list|,
+literal|"store_state=WA; brand_name=King; A=34.6104"
+argument_list|,
+literal|"store_state=OR; brand_name=Toretti; A=36.3"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7995,28 +8207,22 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], groups=[{2, 63}], aggs=[[SUM($90), SUM($91)]], post_projects"
+literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $2, $90, $91]], groups=[{0, 1}], "
 operator|+
-literal|"=[[$1, $0, +($2, $3)]], sort0=[1], sort1=[0], dir0=[ASC], dir1=[ASC], fetch=[5])"
+literal|"aggs=[[SUM($2), SUM($3)]], post_projects=[[$0, $1, +($2, $3)]], "
+operator|+
+literal|"sort0=[1], sort1=[0], dir0=[ASC], dir1=[ASC], fetch=[5])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sqlQuery
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"store_state=CA; brand_name=ADJ; A=222.1524"
-argument_list|,
-literal|"store_state=OR; brand_name=ADJ; A=186.60359999999997"
-argument_list|,
-literal|"store_state=WA; brand_name=ADJ; A=216.9912"
-argument_list|,
-literal|"store_state=CA; brand_name=Akron; A=250.349"
-argument_list|,
-literal|"store_state=OR; brand_name=Akron; A=278.69720000000007"
 argument_list|)
 operator|.
 name|explainContains
@@ -8031,6 +8237,32 @@ name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; brand_name=ADJ; A=222.1524"
+argument_list|,
+literal|"store_state=OR; brand_name=ADJ; A=186.60359999999997"
+argument_list|,
+literal|"store_state=WA; brand_name=ADJ; A=216.9912"
+argument_list|,
+literal|"store_state=CA; brand_name=Akron; A=250.349"
+argument_list|,
+literal|"store_state=OR; brand_name=Akron; A=278.69720000000007"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8948,16 +9180,23 @@ decl_stmt|;
 name|String
 name|expectedSubExplain
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  BindableProject(EXPR$0=[$1], product_id=[$0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], EXPR$0=[$t1], product_id=[$t0])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[AND(>"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00"
 operator|+
-literal|"(CAST($1):INTEGER, 1553),>($91, 5))], groups=[{1}], aggs=[[SUM($90)]])"
+literal|".000Z/2992-01-10T00:00:00.000Z]], filter=[AND(>(CAST($1):INTEGER, 1553),>($91, 5))], "
+operator|+
+literal|"projects=[[$1, $90]], groups=[{0}], aggs=[[SUM($1)]])"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
@@ -8982,6 +9221,19 @@ operator|+
 literal|"\"ordering\":\"numeric\"}"
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
 operator|.
 name|returnsUnordered
 argument_list|(
@@ -9451,13 +9703,15 @@ decl_stmt|;
 name|String
 name|expectedSubExplain
 init|=
-literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
+literal|"PLAN="
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"groups=[{63}], aggs=[[]])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00"
+operator|+
+literal|".000Z/2992-01-10T00:00:00.000Z]], projects=[[$63]], groups=[{0}], aggs=[[]])\n"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9487,15 +9741,17 @@ specifier|final
 name|String
 name|expectedSubExplainNoApprox
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
+literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=($63, 'WA')"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00"
 operator|+
-literal|"], groups=[{90}], aggs=[[]])"
+literal|".000Z/2992-01-10T00:00:00.000Z]], filter=[=($63, 'WA')], projects=[[$90]], "
+operator|+
+literal|"groups=[{0}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -9503,11 +9759,11 @@ name|expectedSubPlanWithApprox
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], filter=[=($63, 'WA')], groups=[{}], "
+literal|".000Z/2992-01-10T00:00:00.000Z]], filter=[=($63, 'WA')], projects=[[$90]], "
 operator|+
-literal|"aggs=[[COUNT(DISTINCT $90)]])"
+literal|"groups=[{}], aggs=[[COUNT(DISTINCT $0)]])"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9551,7 +9807,7 @@ name|expectedSubExplain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{2}], aggs=[[COUNT($90)]])"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$2, $90]], groups=[{0}], aggs=[[COUNT($1)]])"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9595,7 +9851,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], projects=[[0]], groups=[{}], aggs=[[COUNT()]])"
+literal|"2992-01-10T00:00:00.000Z]], groups=[{}], aggs=[[COUNT()]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9630,7 +9886,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], groups=[{63}], aggs=[[COUNT($89)]])"
+literal|"2992-01-10T00:00:00.000Z]], projects=[[$63, $89]], groups=[{0}], aggs=[[COUNT($1)]])"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9671,9 +9927,11 @@ specifier|final
 name|String
 name|expectedSubExplainNoApprox
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
+literal|"EnumerableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
@@ -9683,11 +9941,15 @@ specifier|final
 name|String
 name|expectedPlanWithApprox
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
+literal|"EnumerableInterpreter\n"
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], groups=[{63}], aggs=[[COUNT(DISTINCT $89)]])"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00"
+operator|+
+literal|".000Z/2992-01-10T00:00:00.000Z]], projects=[[$63, $89]], groups=[{0}], aggs=[[COUNT"
+operator|+
+literal|"(DISTINCT $1)]])\n"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -10244,7 +10506,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=(CAST($1):DOUBLE, 1016.0)], groups=[{}], aggs=[[SUM($91)]])"
+literal|"filter=[=(CAST($1):DOUBLE, 1016.0)], projects=[[$91]], groups=[{}], aggs=[[SUM($0)]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10337,7 +10599,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[<>(CAST($1):DOUBLE, 1016.0)], groups=[{}], aggs=[[SUM($91)]])"
+literal|"filter=[<>(CAST($1):DOUBLE, 1016.0)], projects=[[$91]], groups=[{}], aggs=[[SUM($0)]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -11540,7 +11802,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"projects=[[0]], groups=[{}], aggs=[[COUNT()]])"
+literal|"groups=[{}], aggs=[[COUNT()]])"
 argument_list|)
 operator|.
 name|queryContains
@@ -12531,9 +12793,7 @@ name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\""
 operator|+
-literal|"(timestamp_floor(timestamp_parse(concat(concat("
-argument_list|,
-literal|"== timestamp_floor("
+literal|"(852076800000 == timestamp_floor(timestamp_parse(timestamp_format("
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -12544,6 +12804,17 @@ name|void
 name|testDruidTimeFloorAndTimeParseExpressions2
 parameter_list|()
 block|{
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4205_FIXED
+argument_list|,
+literal|"CALCITE-4205"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -13074,21 +13345,21 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  BindableProject(C=[$1], EXPR$1=[$0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], C=[$t1], EXPR$1=[$t0])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00"
 operator|+
-literal|"filter=[AND(LIKE(SUBSTRING($1, 1, 4), '12%'), =(CHAR_LENGTH($1), 4), "
+literal|".000Z/2992-01-10T00:00:00.000Z]], filter=[AND(LIKE(SUBSTRING($1, 1, 4), '12%'), ="
 operator|+
-literal|"=(SUBSTRING($1, 3, 1), '2'), =(CAST(SUBSTRING($1, 2, 1)):INTEGER, 2), "
+literal|"(CHAR_LENGTH($1), 4), =(SUBSTRING($1, 3, 1), '2'), =(CAST(SUBSTRING($1, 2, 1))"
 operator|+
-literal|"=(CAST(SUBSTRING($1, 4, 1)):INTEGER, 7), =(CAST(SUBSTRING($1, 4)):INTEGER, 7))], "
+literal|":INTEGER, 2), =(CAST(SUBSTRING($1, 4, 1)):INTEGER, 7), =(CAST(SUBSTRING($1, 4))"
 operator|+
-literal|"projects=[[SUBSTRING($1, 1, 4)]], groups=[{0}], aggs=[[COUNT()]])"
+literal|":INTEGER, 7))], projects=[[SUBSTRING($1, 1, 4)]], groups=[{0}], aggs=[[COUNT()]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -13361,7 +13632,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[AND(>(SIN($91), SIN(20)),>(COS($90), COS(20)), =(FLOOR(TAN($91)), 2), "
+literal|"filter=[AND(>(SIN($91), 9.129452507276277E-1),>(COS($90), 4.08082061813392E-1), =(FLOOR(TAN($91)), 2), "
 operator|+
 literal|"<(ABS(-(TAN($91), /(SIN($91), COS($91)))), 1.0E-6))], "
 operator|+
@@ -13469,7 +13740,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[AND(IS NOT TRUE(=(CAST($1):INTEGER, 1020)),<>(CAST($1):INTEGER, 1020))],"
+literal|"filter=[<>(CAST($1):INTEGER, 1020)],"
 operator|+
 literal|" groups=[{}], aggs=[[COUNT()]])"
 argument_list|)
@@ -14234,16 +14505,16 @@ name|extract_expression
 init|=
 literal|"\"expression\":\"(((timestamp_extract(\\\"__time\\\","
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"QR_TIMESTAMP_OK=1; SUM_STORE_SALES=139628.34999999971; YR_TIMESTAMP_OK=1997"
 argument_list|)
 operator|.
 name|queryContains
@@ -14270,6 +14541,24 @@ operator|+
 literal|"2992-01-10T00:00:00.000Z]], projects=[[+(/(-(EXTRACT(FLAG(MONTH), $0), 1), 3), 1), "
 operator|+
 literal|"EXTRACT(FLAG(YEAR), $0), $90]], groups=[{0, 1}], aggs=[[SUM($2)]], fetch=[1])"
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"QR_TIMESTAMP_OK=1; SUM_STORE_SALES=139628.34999999971; YR_TIMESTAMP_OK=1997"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14356,18 +14645,16 @@ literal|" CAST(SUBSTRING(CAST(CAST(\"foodmart\".\"timestamp\" AS TIMESTAMP) AS V
 operator|+
 literal|"  MINUTE(\"foodmart\".\"timestamp\"), EXTRACT(HOUR FROM \"timestamp\")) LIMIT 1"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"HR_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; "
-operator|+
-literal|"SUM_T_OTHER_OK=565238.1299999986; HR_T_TIMESTAMP_OK2=0"
 argument_list|)
 operator|.
 name|explainContains
@@ -14395,6 +14682,26 @@ argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"HR_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; "
+operator|+
+literal|"SUM_T_OTHER_OK=565238.1299999986; HR_T_TIMESTAMP_OK2=0"
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -14415,16 +14722,16 @@ literal|" FROM \"foodmart\" GROUP BY SECOND(\"timestamp\"), MINUTE(\"timestamp\"
 operator|+
 literal|" LIMIT_ZERO LIMIT 1"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"SC_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; SUM_STORE_SALES=565238.1299999986"
 argument_list|)
 operator|.
 name|explainContains
@@ -14445,6 +14752,24 @@ name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"SC_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; SUM_STORE_SALES=565238.1299999986"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14569,18 +14894,16 @@ literal|"SELECT \"product_id\" AS P, SUM(\"store_sales\") AS S FROM \"foodmart\"
 operator|+
 literal|" GROUP BY  \"product_id\" HAVING  SUM(\"store_sales\")> 220  ORDER BY P LIMIT 2"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"P=1; S=236.55"
-argument_list|,
-literal|"P=10; S=230.04"
 argument_list|)
 operator|.
 name|explainContains
@@ -14604,6 +14927,26 @@ operator|+
 literal|"'dimension':'S','lower':'220','lowerStrict':true,'ordering':'numeric'}}"
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"P=1; S=236.55"
+argument_list|,
+literal|"P=10; S=230.04"
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -14622,18 +14965,16 @@ literal|" GROUP BY  \"product_id\" HAVING  SUM(\"store_sales\")> 220 AND \"produ
 operator|+
 literal|"  ORDER BY P LIMIT 2"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"P=100; S=343.19999999999993"
-argument_list|,
-literal|"P=1000; S=532.62"
 argument_list|)
 operator|.
 name|explainContains
@@ -14654,6 +14995,26 @@ name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all'"
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"P=100; S=343.19999999999993"
+argument_list|,
+literal|"P=1000; S=532.62"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14844,16 +15205,16 @@ literal|"SELECT SUM(\"store_sales\") FROM \"foodmart\" "
 operator|+
 literal|"GROUP BY 1 HAVING (COUNT(1)> 0)"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"EXPR$0=565238.1299999986"
 argument_list|)
 operator|.
 name|queryContains
@@ -14877,6 +15238,24 @@ literal|"{'type':'filter','filter':{'type':'bound','dimension':'$f2','lower':'0'
 operator|+
 literal|"'lowerStrict':true,'ordering':'numeric'}}}"
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"XLAKY"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=565238.1299999986"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14977,22 +15356,16 @@ literal|" WHERE \"product_id\" = 1"
 operator|+
 literal|" GROUP BY EXTRACT(quarter from \"timestamp\"), \"product_id\""
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"EXPR$0=1; product_id=1; EXPR$2=37.050000000000004\n"
-operator|+
-literal|"EXPR$0=2; product_id=1; EXPR$2=62.7\n"
-operator|+
-literal|"EXPR$0=3; product_id=1; EXPR$2=88.35\n"
-operator|+
-literal|"EXPR$0=4; product_id=1; EXPR$2=48.45"
 argument_list|)
 operator|.
 name|queryContains
@@ -15011,6 +15384,30 @@ argument_list|,
 literal|"QUARTER"
 argument_list|)
 argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=1; product_id=1; EXPR$2=37.050000000000004\n"
+operator|+
+literal|"EXPR$0=2; product_id=1; EXPR$2=62.7\n"
+operator|+
+literal|"EXPR$0=3; product_id=1; EXPR$2=88.35\n"
+operator|+
+literal|"EXPR$0=4; product_id=1; EXPR$2=48.45"
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -15028,22 +15425,16 @@ name|FOODMART_TABLE
 operator|+
 literal|" GROUP BY EXTRACT(quarter from \"timestamp\")"
 decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|q
+init|=
 name|sql
 argument_list|(
 name|sql
 argument_list|,
 name|FOODMART
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|"EXPR$0=1; EXPR$1=139628.34999999971\n"
-operator|+
-literal|"EXPR$0=2; EXPR$1=132666.26999999944\n"
-operator|+
-literal|"EXPR$0=3; EXPR$1=140271.88999999964\n"
-operator|+
-literal|"EXPR$0=4; EXPR$1=152671.61999999985"
 argument_list|)
 operator|.
 name|queryContains
@@ -15059,6 +15450,30 @@ literal|"\"virtualColumns\":[{\"type\":\"expression\",\"name\":\"vc\",\"expressi
 argument_list|,
 literal|"QUARTER"
 argument_list|)
+argument_list|)
+decl_stmt|;
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4204_FIXED
+argument_list|,
+literal|"CALCITE-4204"
+argument_list|)
+expr_stmt|;
+name|q
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=1; EXPR$1=139628.34999999971\n"
+operator|+
+literal|"EXPR$0=2; EXPR$1=132666.26999999944\n"
+operator|+
+literal|"EXPR$0=3; EXPR$1=140271.88999999964\n"
+operator|+
+literal|"EXPR$0=4; EXPR$1=152671.61999999985"
 argument_list|)
 expr_stmt|;
 block|}
