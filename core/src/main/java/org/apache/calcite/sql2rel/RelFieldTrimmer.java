@@ -1258,6 +1258,13 @@ argument_list|(
 name|input
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|collations
+operator|!=
+literal|null
+condition|)
+block|{
 for|for
 control|(
 name|RelCollation
@@ -1287,6 +1294,7 @@ name|getFieldIndex
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 comment|// Correlating variables are a means for other relational expressions to use
