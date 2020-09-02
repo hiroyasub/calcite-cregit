@@ -91,47 +91,77 @@ interface|interface
 name|Statistic
 block|{
 comment|/** Returns the approximate number of rows in the table. */
+specifier|default
 name|Double
 name|getRowCount
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|null
+return|;
+block|}
 comment|/** Returns whether the given set of columns is a unique key, or a superset    * of a unique key, of the table.    */
+specifier|default
 name|boolean
 name|isKey
 parameter_list|(
 name|ImmutableBitSet
 name|columns
 parameter_list|)
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Returns a list of unique keys, or null if no key exist. */
+specifier|default
 name|List
 argument_list|<
 name|ImmutableBitSet
 argument_list|>
 name|getKeys
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|null
+return|;
+block|}
 comment|/** Returns the collection of referential constraints (foreign-keys)    * for this table. */
+specifier|default
 name|List
 argument_list|<
 name|RelReferentialConstraint
 argument_list|>
 name|getReferentialConstraints
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|null
+return|;
+block|}
 comment|/** Returns the collections of columns on which this table is sorted. */
+specifier|default
 name|List
 argument_list|<
 name|RelCollation
 argument_list|>
 name|getCollations
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|null
+return|;
+block|}
 comment|/** Returns the distribution of the data in this table. */
+specifier|default
 name|RelDistribution
 name|getDistribution
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 end_interface
 
