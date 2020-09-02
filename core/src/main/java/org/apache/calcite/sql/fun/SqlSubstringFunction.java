@@ -934,13 +934,15 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|(
+name|mono0
+operator|!=
+literal|null
+operator|&&
 name|mono0
 operator|!=
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
-operator|)
 operator|&&
 name|call
 operator|.
