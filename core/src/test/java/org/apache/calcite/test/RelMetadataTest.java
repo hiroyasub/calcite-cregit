@@ -3683,15 +3683,13 @@ name|checkRowCount
 argument_list|(
 name|sql
 argument_list|,
-literal|1D
+literal|4D
 argument_list|,
-comment|// 0, rounded up to row count's minimum 1
 literal|0D
 argument_list|,
 literal|4D
 argument_list|)
 expr_stmt|;
-comment|// 1 * 4
 block|}
 annotation|@
 name|Test
@@ -3722,6 +3720,64 @@ literal|0D
 argument_list|)
 expr_stmt|;
 comment|// 7 * 0
+block|}
+annotation|@
+name|Test
+name|void
+name|testRowCountLeftJoinFiniteEmpty
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (select * from emp limit 4) as emp\n"
+operator|+
+literal|"left join (select * from dept limit 0) as dept\n"
+operator|+
+literal|"on emp.deptno = dept.deptno"
+decl_stmt|;
+name|checkRowCount
+argument_list|(
+name|sql
+argument_list|,
+literal|4D
+argument_list|,
+literal|0D
+argument_list|,
+literal|4D
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRowCountRightJoinFiniteEmpty
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (select * from emp limit 4) as emp\n"
+operator|+
+literal|"right join (select * from dept limit 0) as dept\n"
+operator|+
+literal|"on emp.deptno = dept.deptno"
+decl_stmt|;
+name|checkRowCount
+argument_list|(
+name|sql
+argument_list|,
+literal|1D
+argument_list|,
+comment|// 0, rounded up to row count's minimum 1
+literal|0D
+argument_list|,
+literal|0D
+argument_list|)
+expr_stmt|;
+comment|// 0 * 4
 block|}
 annotation|@
 name|Test
