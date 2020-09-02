@@ -638,8 +638,13 @@ name|getFieldList
 parameter_list|()
 block|{
 assert|assert
-name|isStruct
-argument_list|()
+name|fieldList
+operator|!=
+literal|null
+operator|:
+literal|"fieldList must not be null, type = "
+operator|+
+name|this
 assert|;
 return|return
 name|fieldList
@@ -653,6 +658,15 @@ argument_list|>
 name|getFieldNames
 parameter_list|()
 block|{
+assert|assert
+name|fieldList
+operator|!=
+literal|null
+operator|:
+literal|"fieldList must not be null, type = "
+operator|+
+name|this
+assert|;
 return|return
 name|Pair
 operator|.
@@ -668,9 +682,12 @@ name|getFieldCount
 parameter_list|()
 block|{
 assert|assert
-name|isStruct
-argument_list|()
+name|fieldList
+operator|!=
+literal|null
 operator|:
+literal|"fieldList must not be null, type = "
+operator|+
 name|this
 assert|;
 return|return
