@@ -237,11 +237,9 @@ specifier|final
 name|RelDataType
 name|varcharTypeNull
 init|=
-name|sqlType
+name|nullable
 argument_list|(
-name|SqlTypeName
-operator|.
-name|VARCHAR
+name|varcharType
 argument_list|)
 decl_stmt|;
 specifier|final

@@ -3980,7 +3980,7 @@ name|lookupGroupExpr
 argument_list|(
 name|groupAnalyzer
 argument_list|,
-name|groupExpr
+name|expandedGroupExpr
 argument_list|)
 decl_stmt|;
 if|if
