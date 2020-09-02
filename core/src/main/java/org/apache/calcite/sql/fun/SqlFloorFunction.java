@@ -330,13 +330,24 @@ name|call
 parameter_list|)
 block|{
 comment|// Monotonic iff its first argument is, but not strict.
-return|return
+name|SqlMonotonicity
+name|monotonicity
+init|=
 name|call
 operator|.
 name|getOperandMonotonicity
 argument_list|(
 literal|0
 argument_list|)
+decl_stmt|;
+return|return
+name|monotonicity
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|monotonicity
 operator|.
 name|unstrict
 argument_list|()
