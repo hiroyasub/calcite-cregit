@@ -1299,6 +1299,10 @@ if|if
 condition|(
 name|monotonicity
 operator|!=
+literal|null
+operator|&&
+name|monotonicity
+operator|!=
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
