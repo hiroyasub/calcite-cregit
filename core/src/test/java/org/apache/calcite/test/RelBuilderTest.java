@@ -9014,6 +9014,290 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testAggregateOneRow
+parameter_list|()
+block|{
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|builder
+lambda|->
+name|builder
+operator|.
+name|values
+argument_list|(
+operator|new
+name|String
+index|[]
+block|{
+literal|"a"
+block|,
+literal|"b"
+block|}
+argument_list|,
+literal|1
+argument_list|,
+literal|2
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|builder
+operator|.
+name|groupKey
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"LogicalProject(b=[$1])\n"
+operator|+
+literal|"  LogicalValues(tuples=[[{ 1, 2 }]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|plan
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|plan2
+init|=
+literal|"LogicalAggregate(group=[{1}])\n"
+operator|+
+literal|"  LogicalValues(tuples=[[{ 1, 2 }]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withAggregateUnique
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|plan2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that we do not convert an Aggregate to a Project if there are    * multiple group sets. */
+annotation|@
+name|Test
+name|void
+name|testAggregateGroupingSetsOneRow
+parameter_list|()
+block|{
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|builder
+lambda|->
+block|{
+specifier|final
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|list01
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|0
+argument_list|,
+literal|1
+argument_list|)
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|list0
+init|=
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|list1
+init|=
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
+return|return
+name|builder
+operator|.
+name|values
+argument_list|(
+operator|new
+name|String
+index|[]
+block|{
+literal|"a"
+operator|,
+literal|"b"
+block|}
+operator|,
+literal|1
+operator|,
+literal|2
+block_content|)
+block|.aggregate(               builder.groupKey(builder.fields(list01
+init|)
+decl_stmt|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|builder
+operator|.
+name|fields
+argument_list|(
+name|list0
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|fields
+argument_list|(
+name|list1
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|fields
+argument_list|(
+name|list01
+argument_list|)
+argument_list|)
+decl_stmt|)
+block_content|)
+block|.build(
+block|)
+class|;
+end_class
+
+begin_decl_stmt
+unit|};
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{0, 1}], groups=[[{0, 1}, {0}, {1}]])\n"
+operator|+
+literal|"  LogicalValues(tuples=[[{ 1, 2 }]])\n"
+decl_stmt|;
+end_decl_stmt
+
+begin_expr_stmt
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|plan
+argument_list|)
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withAggregateUnique
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|plan
+argument_list|)
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_function
+unit|}    @
+name|Test
+name|void
 name|testDistinct
 parameter_list|()
 block|{
@@ -9082,6 +9366,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9137,6 +9424,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9261,6 +9551,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9384,7 +9677,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1522">[CALCITE-1522]    * Fix error message for SetOp with incompatible args</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9502,6 +9801,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9620,6 +9922,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9726,6 +10031,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9867,6 +10175,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10065,6 +10376,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10189,6 +10503,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10307,6 +10624,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10431,6 +10751,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10556,7 +10879,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Same as {@link #testJoin} using USING. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10650,6 +10979,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10804,7 +11136,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that simplification is run in    * {@link org.apache.calcite.rex.RexUnknownAs#FALSE} mode for join    * conditions. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11027,6 +11365,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11218,6 +11559,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11287,6 +11631,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11414,6 +11761,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11570,6 +11920,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11665,6 +12018,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11838,6 +12194,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11989,6 +12348,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12068,6 +12430,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12155,7 +12520,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1551">[CALCITE-1551]    * RelBuilder's project() doesn't preserve alias</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12245,7 +12616,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that table aliases are propagated even when there is a project on    * top of a project. (Aliases tend to get lost when projects are merged). */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12373,7 +12750,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that table aliases are propagated and are available to a filter,    * even when there is a project on top of a project. (Aliases tend to get lost    * when projects are merged). */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12507,7 +12890,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that the {@link RelBuilder#alias(RexNode, String)} function is    * idempotent. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12729,7 +13118,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests that project field name aliases are suggested incrementally.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12876,6 +13271,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13012,7 +13410,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that a projection retains field names after a join. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13147,7 +13551,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that a projection after a projection. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13279,7 +13689,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13352,7 +13768,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13425,7 +13847,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13507,7 +13935,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13584,7 +14018,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13665,7 +14105,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13767,6 +14213,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13959,6 +14408,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14126,7 +14578,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1523">[CALCITE-1523]    * Add RelBuilder field() method to reference aliased relations not on top of    * stack</a>, accessing tables aliased that are not accessible in the top    * RelNode. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14260,7 +14718,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** As {@link #testAliasPastTop()}. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14457,6 +14921,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14554,7 +15021,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3172">[CALCITE-3172]    * RelBuilder#empty does not keep aliases</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14800,6 +15273,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14891,7 +15367,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests creating Values with some field names and some values null. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14988,6 +15470,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15058,6 +15543,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15130,6 +15618,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15199,6 +15690,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15278,6 +15772,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15355,6 +15852,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15470,6 +15970,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15604,7 +16107,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1015">[CALCITE-1015]    * OFFSET 0 causes AssertionError</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15674,6 +16183,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15772,6 +16284,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15882,6 +16397,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -15947,6 +16465,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16025,6 +16546,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16101,7 +16625,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1610">[CALCITE-1610]    * RelBuilder sort-combining optimization treats aliases incorrectly</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16235,7 +16765,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that a sort on a field followed by a limit gives the same    * effect as calling sortLimit.    *    *<p>In general a relational operator cannot rely on the order of its input,    * but it is reasonable to merge sort and limit if they were created by    * consecutive builder operations. And clients such as Piglet rely on it. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16359,7 +16895,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that a sort on an expression followed by a limit gives the same    * effect as calling sortLimit. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16517,7 +17059,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests {@link org.apache.calcite.tools.RelRunner} for a VALUES query. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16618,7 +17166,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Tests {@link org.apache.calcite.tools.RelRunner} for a table scan + filter    * query. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16735,7 +17289,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1595">[CALCITE-1595]    * RelBuilder.call throws NullPointerException if argument types are    * invalid</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -16869,6 +17429,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -17439,6 +18002,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -17535,6 +18101,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -17646,7 +18215,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests filter builder with correlation variables. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -17881,6 +18456,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -17943,7 +18521,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Checks if simplification is run in    * {@link org.apache.calcite.rex.RexUnknownAs#FALSE} mode for filter    * conditions. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18048,6 +18632,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18189,7 +18776,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Ensures that relational algebra ({@link RelBuilder}) works with SQL views.    *    *<p>This test currently fails (thus ignored).    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18337,6 +18930,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18475,6 +19071,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18543,6 +19142,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 specifier|private
 name|void
 name|checkExpandTable
@@ -18607,6 +19209,9 @@ name|matcher
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18676,6 +19281,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18752,6 +19360,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18887,6 +19498,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19054,6 +19668,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19173,6 +19790,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19299,6 +19919,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19540,6 +20163,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19616,6 +20242,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19732,7 +20361,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3747">[CALCITE-3747]    * Constructing BETWEEN with RelBuilder throws class cast exception</a>.    *    *<p>BETWEEN is no longer allowed in RexCall. 'a BETWEEN b AND c' is expanded    * 'a>= b AND a<= c', whether created via    * {@link RelBuilder#call(SqlOperator, RexNode...)} or    * {@link RelBuilder#between(RexNode, RexNode, RexNode)}.*/
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20086,7 +20721,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3926">[CALCITE-3926]    * CannotPlanException when an empty LogicalValues requires a certain collation</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20189,8 +20830,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

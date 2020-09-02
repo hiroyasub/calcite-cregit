@@ -1966,15 +1966,10 @@ argument_list|>
 name|groupKeys
 parameter_list|)
 block|{
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unchecked"
-argument_list|)
 specifier|final
 name|List
 argument_list|<
-name|GroupKeyImpl
+name|GroupKey
 argument_list|>
 name|groupKeyList
 init|=
@@ -1982,9 +1977,6 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
-operator|(
-name|Iterable
-operator|)
 name|groupKeys
 argument_list|)
 decl_stmt|;
@@ -1999,9 +1991,7 @@ argument_list|(
 literal|0
 argument_list|)
 operator|.
-name|nodes
-operator|.
-name|size
+name|groupKeyCount
 argument_list|()
 decl_stmt|;
 comment|// Pull out all relations needed for the group

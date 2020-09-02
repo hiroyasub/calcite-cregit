@@ -2242,6 +2242,31 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testGroupingSetsRepeated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, group_id()\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by grouping sets (deptno, (), deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testGroupingSetsWith
 parameter_list|()
 block|{

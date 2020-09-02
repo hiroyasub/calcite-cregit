@@ -1082,6 +1082,11 @@ name|b
 lambda|->
 name|b
 operator|.
+name|withAggregateUnique
+argument_list|(
+literal|true
+argument_list|)
+operator|.
 name|withPruneInputOfAggregate
 argument_list|(
 literal|false
