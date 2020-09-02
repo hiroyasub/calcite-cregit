@@ -831,10 +831,42 @@ name|mq
 parameter_list|)
 block|{
 return|return
+literal|null
+return|;
+block|}
+specifier|private
+specifier|static
+parameter_list|<
+name|E
+parameter_list|>
+name|ImmutableList
+argument_list|<
+name|E
+argument_list|>
+name|copyOf
+parameter_list|(
+name|Collection
+argument_list|<
+name|?
+extends|extends
+name|E
+argument_list|>
+name|values
+parameter_list|)
+block|{
+return|return
+name|values
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|ImmutableList
 operator|.
-name|of
-argument_list|()
+name|copyOf
+argument_list|(
+name|values
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -852,8 +884,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|window
@@ -887,8 +917,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|match
@@ -1030,8 +1058,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|table
@@ -1061,8 +1087,6 @@ block|{
 comment|// In general a join is not sorted. But a merge join preserves the sort
 comment|// order of the left and right sides.
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|RelMdCollation
@@ -1118,8 +1142,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|RelMdCollation
@@ -1161,8 +1183,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|RelMdCollation
@@ -1204,8 +1224,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|RelMdCollation
@@ -1247,8 +1265,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|RelMdCollation
@@ -1278,8 +1294,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|RelMdCollation
@@ -1309,8 +1323,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|project
@@ -1345,8 +1357,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|calc
@@ -1381,8 +1391,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|values
@@ -1469,8 +1477,6 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|Objects
@@ -2100,8 +2106,6 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|ImmutableList
-operator|.
 name|copyOf
 argument_list|(
 name|collations
