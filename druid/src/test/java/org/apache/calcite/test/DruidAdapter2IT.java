@@ -463,28 +463,6 @@ name|sql
 parameter_list|)
 block|{
 return|return
-name|approxQuery
-argument_list|(
-name|FOODMART
-argument_list|,
-name|sql
-argument_list|)
-return|;
-block|}
-specifier|private
-name|CalciteAssert
-operator|.
-name|AssertQuery
-name|approxQuery
-parameter_list|(
-name|URL
-name|url
-parameter_list|,
-name|String
-name|sql
-parameter_list|)
-block|{
-return|return
 name|CalciteAssert
 operator|.
 name|that
@@ -498,7 +476,7 @@ argument_list|)
 operator|.
 name|withModel
 argument_list|(
-name|url
+name|FOODMART
 argument_list|)
 operator|.
 name|with
@@ -543,7 +521,7 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Creates a query against a data set given by a map. */
+comment|/** Creates a query against the {@link #FOODMART} data set. */
 specifier|private
 name|CalciteAssert
 operator|.
@@ -552,9 +530,6 @@ name|sql
 parameter_list|(
 name|String
 name|sql
-parameter_list|,
-name|URL
-name|url
 parameter_list|)
 block|{
 return|return
@@ -571,7 +546,7 @@ argument_list|)
 operator|.
 name|withModel
 argument_list|(
-name|url
+name|FOODMART
 argument_list|)
 operator|.
 name|query
@@ -580,33 +555,11 @@ name|sql
 argument_list|)
 return|;
 block|}
-comment|/** Creates a query against the {@link #FOODMART} data set. */
-specifier|private
-name|CalciteAssert
-operator|.
-name|AssertQuery
-name|sql
-parameter_list|(
-name|String
-name|sql
-parameter_list|)
-block|{
-return|return
-name|sql
-argument_list|(
-name|sql
-argument_list|,
-name|FOODMART
-argument_list|)
-return|;
-block|}
 annotation|@
 name|Test
 name|void
 name|testMetadataColumns
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|sql
 argument_list|(
@@ -6042,8 +5995,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6122,8 +6073,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6202,8 +6151,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6284,8 +6231,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6364,8 +6309,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6441,8 +6384,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -6560,8 +6501,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6633,8 +6572,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -6702,8 +6639,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6787,8 +6722,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6873,8 +6806,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -6948,8 +6879,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -7014,8 +6943,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -7079,8 +7006,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -7138,8 +7063,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -7201,8 +7124,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -7288,8 +7209,6 @@ init|=
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -7373,8 +7292,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -8543,7 +8460,7 @@ name|sql
 init|=
 literal|"select count(distinct \"the_month\") from "
 operator|+
-literal|"\"foodmart\" where \"the_month\"<> \'October\'"
+literal|"\"foodmart\" where \"the_month\"<> 'October'"
 decl_stmt|;
 name|String
 name|druidFilter
@@ -8556,8 +8473,6 @@ comment|// Check that the filter actually worked, and that druid was responsible
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9096,8 +9011,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -9134,8 +9047,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery2
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -9185,8 +9096,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -9223,8 +9132,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sqlQuery2
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -9266,8 +9173,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9323,8 +9228,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9372,8 +9275,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -9426,8 +9327,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -9472,8 +9371,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -9511,8 +9408,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|runs
@@ -9612,8 +9507,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9648,8 +9541,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9682,8 +9573,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9716,8 +9605,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9752,8 +9639,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9792,8 +9677,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9830,8 +9713,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9868,8 +9749,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9906,8 +9785,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9944,8 +9821,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -9984,8 +9859,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10022,8 +9895,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10062,8 +9933,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -10111,8 +9980,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10151,8 +10018,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10193,8 +10058,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10235,8 +10098,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10271,8 +10132,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10311,8 +10170,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -10366,8 +10223,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10404,8 +10259,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -10455,8 +10308,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10639,8 +10490,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -10679,8 +10528,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -10732,8 +10579,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10780,8 +10625,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -10819,8 +10662,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -10872,8 +10713,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -10929,8 +10768,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -11098,8 +10935,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11185,8 +11020,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -11243,8 +11076,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11298,8 +11129,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11349,8 +11178,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11444,8 +11271,6 @@ comment|// seems correct.
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|runs
@@ -11462,7 +11287,7 @@ literal|"\"filter\":{"
 operator|+
 literal|"\"type\":\"expression\","
 operator|+
-literal|"\"expression\":\"(CAST(\\\"product_id\\\", \'DOUBLE\') == 16.0)\""
+literal|"\"expression\":\"(CAST(\\\"product_id\\\", 'DOUBLE') == 16.0)\""
 operator|+
 literal|"}"
 argument_list|)
@@ -11494,8 +11319,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11538,8 +11361,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11600,8 +11421,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11631,8 +11450,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql2
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11661,8 +11478,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|runs
@@ -11710,8 +11525,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|runs
@@ -11757,8 +11570,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|limit
@@ -11809,8 +11620,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11860,8 +11669,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11917,8 +11724,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -11982,8 +11787,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12041,8 +11844,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12096,8 +11897,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -12136,8 +11935,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12202,8 +11999,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12238,8 +12033,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12278,8 +12071,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|limit
@@ -12346,8 +12137,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -12422,8 +12211,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12486,8 +12273,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12563,8 +12348,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12625,8 +12408,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -12670,8 +12451,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12741,8 +12520,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12807,8 +12584,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12868,8 +12643,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12934,8 +12707,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|explainContains
@@ -12999,8 +12770,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -13063,8 +12832,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -13101,8 +12868,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -13150,8 +12915,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -13219,8 +12982,6 @@ init|=
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|queryContains
@@ -13280,8 +13041,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered
@@ -13316,8 +13075,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|,
-name|FOODMART
 argument_list|)
 operator|.
 name|returnsOrdered

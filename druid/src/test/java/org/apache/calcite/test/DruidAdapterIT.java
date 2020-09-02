@@ -683,8 +683,6 @@ decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
 name|WIKI
-argument_list|,
-literal|"wiki"
 argument_list|)
 operator|.
 name|explainContains
@@ -716,8 +714,6 @@ decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
 name|WIKI_AUTO
-argument_list|,
-literal|"wiki"
 argument_list|)
 operator|.
 name|explainContains
@@ -913,20 +909,6 @@ operator|+
 literal|"  DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/"
 operator|+
 literal|"3000-01-01T00:00:00.000Z]], projects=[[CAST($0):TIMESTAMP(0) NOT NULL]], fetch=[1])"
-decl_stmt|;
-specifier|final
-name|String
-name|druidQuery
-init|=
-literal|"{'queryType':'scan',"
-operator|+
-literal|"'dataSource':'wikipedia',"
-operator|+
-literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
-operator|+
-literal|"'columns':['__time'],'granularity':'all',"
-operator|+
-literal|"'resultFormat':'compactedList','limit':1}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1151,9 +1133,6 @@ name|checkSelectDistinctWiki
 parameter_list|(
 name|URL
 name|url
-parameter_list|,
-name|String
-name|tableName
 parameter_list|)
 block|{
 specifier|final
@@ -1162,11 +1141,7 @@ name|sql
 init|=
 literal|"select distinct \"countryName\"\n"
 operator|+
-literal|"from \""
-operator|+
-name|tableName
-operator|+
-literal|"\"\n"
+literal|"from \"wiki\"\n"
 operator|+
 literal|"where \"page\" = 'Jeremy Corbyn'"
 decl_stmt|;
@@ -1369,8 +1344,6 @@ name|Test
 name|void
 name|testMetadataColumns
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|sql
 argument_list|(
@@ -9618,7 +9591,7 @@ name|sql
 init|=
 literal|"select count(distinct \"the_month\") from "
 operator|+
-literal|"\"foodmart\" where \"the_month\"<> \'October\'"
+literal|"\"foodmart\" where \"the_month\"<> 'October'"
 decl_stmt|;
 name|String
 name|druidFilter
@@ -13583,7 +13556,7 @@ literal|"\"filter\":{"
 operator|+
 literal|"\"type\":\"expression\","
 operator|+
-literal|"\"expression\":\"(CAST(\\\"product_id\\\", \'DOUBLE\') == 16.0)\""
+literal|"\"expression\":\"(CAST(\\\"product_id\\\", 'DOUBLE') == 16.0)\""
 operator|+
 literal|"}"
 argument_list|)
