@@ -227,7 +227,7 @@ name|int
 name|getScale
 parameter_list|()
 function_decl|;
-comment|/**    * Gets the {@link SqlTypeName} of this type.    *    * @return SqlTypeName, or null if this is not an SQL predefined type    */
+comment|/**    * Gets the {@link SqlTypeName} of this type.    *    * @return SqlTypeName, never null    */
 name|SqlTypeName
 name|getSqlTypeName
 parameter_list|()

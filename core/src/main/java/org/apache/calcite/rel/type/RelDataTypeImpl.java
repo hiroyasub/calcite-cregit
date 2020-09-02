@@ -869,6 +869,7 @@ return|return
 name|SCALE_NOT_SPECIFIED
 return|;
 block|}
+comment|/**    * Gets the {@link SqlTypeName} of this type.    * Sub-classes must override the method to ensure the resulting value is non-nullable.    *    * @return SqlTypeName, never null    */
 specifier|public
 name|SqlTypeName
 name|getSqlTypeName
