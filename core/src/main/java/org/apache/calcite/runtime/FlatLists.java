@@ -5935,7 +5935,7 @@ name|e
 parameter_list|)
 block|{
 return|return
-name|ImmutableList
+name|ImmutableNullableList
 operator|.
 name|of
 argument_list|(
