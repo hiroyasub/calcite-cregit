@@ -5109,7 +5109,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|removeSortInSubquery
+name|removeSortInSubQuery
 argument_list|(
 name|bb
 operator|.
@@ -5136,7 +5136,7 @@ argument_list|()
 condition|)
 block|{
 assert|assert
-name|removeSortInSubquery
+name|removeSortInSubQuery
 argument_list|(
 name|bb
 operator|.
@@ -5357,23 +5357,23 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Returns whether we should remove the sort for the subsequent query conversion.    *    * @param topQuery Whether the query is in the top level.    */
+comment|/**    * Returns whether we should remove the sort for the subsequent query conversion.    *    * @param top Whether the rel to convert is the root of the query    */
 specifier|private
 name|boolean
-name|removeSortInSubquery
+name|removeSortInSubQuery
 parameter_list|(
 name|boolean
-name|topQuery
+name|top
 parameter_list|)
 block|{
 return|return
 name|config
 operator|.
-name|isRemoveSortInSubquery
+name|isRemoveSortInSubQuery
 argument_list|()
 operator|&&
 operator|!
-name|topQuery
+name|top
 return|;
 block|}
 comment|/**    * Returns whether a given node contains a {@link SqlInOperator}.    *    * @param node a RexNode tree    */
@@ -16988,7 +16988,7 @@ return|return;
 block|}
 if|if
 condition|(
-name|removeSortInSubquery
+name|removeSortInSubQuery
 argument_list|(
 name|bb
 operator|.
@@ -29033,7 +29033,7 @@ parameter_list|()
 function_decl|;
 comment|/**      * Returns whether to remove sort operator for a sub-query      * if the sort has no offset and fetch limit attributes.      * Because the remove does not change the semantics, in many cases, this is a promotion.      *      *<p> Default is true.      */
 name|boolean
-name|isRemoveSortInSubquery
+name|isRemoveSortInSubQuery
 parameter_list|()
 function_decl|;
 block|}
@@ -29073,7 +29073,7 @@ literal|true
 decl_stmt|;
 specifier|private
 name|boolean
-name|removeSortInSubquery
+name|removeSortInSubQuery
 init|=
 literal|true
 decl_stmt|;
@@ -29178,11 +29178,11 @@ argument_list|()
 expr_stmt|;
 name|this
 operator|.
-name|removeSortInSubquery
+name|removeSortInSubQuery
 operator|=
 name|config
 operator|.
-name|isRemoveSortInSubquery
+name|isRemoveSortInSubQuery
 argument_list|()
 expr_stmt|;
 name|this
@@ -29320,14 +29320,14 @@ name|ConfigBuilder
 name|withRemoveSortInSubQuery
 parameter_list|(
 name|boolean
-name|removeSortInSubquery
+name|removeSortInSubQuery
 parameter_list|)
 block|{
 name|this
 operator|.
-name|removeSortInSubquery
+name|removeSortInSubQuery
 operator|=
-name|removeSortInSubquery
+name|removeSortInSubQuery
 expr_stmt|;
 return|return
 name|this
@@ -29478,7 +29478,7 @@ name|explain
 argument_list|,
 name|expand
 argument_list|,
-name|removeSortInSubquery
+name|removeSortInSubQuery
 argument_list|,
 name|inSubQueryThreshold
 argument_list|,
@@ -29527,7 +29527,7 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|boolean
-name|removeSortInSubquery
+name|removeSortInSubQuery
 decl_stmt|;
 specifier|private
 specifier|final
@@ -29573,7 +29573,7 @@ name|boolean
 name|expand
 parameter_list|,
 name|boolean
-name|removeSortInSubquery
+name|removeSortInSubQuery
 parameter_list|,
 name|int
 name|inSubQueryThreshold
@@ -29625,9 +29625,9 @@ name|expand
 expr_stmt|;
 name|this
 operator|.
-name|removeSortInSubquery
+name|removeSortInSubQuery
 operator|=
-name|removeSortInSubquery
+name|removeSortInSubQuery
 expr_stmt|;
 name|this
 operator|.
@@ -29839,11 +29839,11 @@ return|;
 block|}
 specifier|public
 name|boolean
-name|isRemoveSortInSubquery
+name|isRemoveSortInSubQuery
 parameter_list|()
 block|{
 return|return
-name|removeSortInSubquery
+name|removeSortInSubQuery
 return|;
 block|}
 specifier|public
