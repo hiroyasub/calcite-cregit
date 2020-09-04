@@ -930,24 +930,17 @@ block|{
 comment|// visit methods aren't allowed to have throws clauses,
 comment|// so the only exceptions which should come
 comment|// to us are RuntimeExceptions and Errors
+throw|throw
 name|Util
 operator|.
-name|throwIfUnchecked
+name|throwAsRuntime
+argument_list|(
+name|Util
+operator|.
+name|causeOrSelf
 argument_list|(
 name|ex
-operator|.
-name|getTargetException
-argument_list|()
 argument_list|)
-expr_stmt|;
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|ex
-operator|.
-name|getTargetException
-argument_list|()
 argument_list|)
 throw|;
 block|}
