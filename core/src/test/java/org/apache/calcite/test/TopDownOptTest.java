@@ -3102,11 +3102,17 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
+specifier|final
+name|Sql
+name|sql
+init|=
 operator|new
 name|Sql
 argument_list|(
 name|tester
 argument_list|,
+name|this
+operator|.
 name|sql
 argument_list|,
 literal|null
@@ -3123,6 +3129,8 @@ operator|.
 name|of
 argument_list|()
 argument_list|)
+decl_stmt|;
+name|sql
 operator|.
 name|check
 argument_list|()

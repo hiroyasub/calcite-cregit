@@ -1391,12 +1391,12 @@ expr_stmt|;
 specifier|final
 name|SqlToRelConverter
 operator|.
-name|ConfigBuilder
-name|builder
+name|Config
+name|config
 init|=
 name|SqlToRelConverter
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
 name|withTrimUnusedFields
@@ -1434,10 +1434,7 @@ name|validator
 argument_list|,
 name|catalogReader
 argument_list|,
-name|builder
-operator|.
-name|build
-argument_list|()
+name|config
 argument_list|)
 decl_stmt|;
 name|SqlExplain
@@ -1985,7 +1982,7 @@ name|config
 init|=
 name|SqlToRelConverter
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
 name|withTrimUnusedFields
@@ -2005,9 +2002,6 @@ operator|.
 name|get
 argument_list|()
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 specifier|final
 name|SqlToRelConverter

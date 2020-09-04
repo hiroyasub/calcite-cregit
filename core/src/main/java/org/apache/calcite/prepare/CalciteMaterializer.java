@@ -716,16 +716,13 @@ name|config
 init|=
 name|SqlToRelConverter
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
 name|withTrimUnusedFields
 argument_list|(
 literal|true
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 name|SqlToRelConverter
 name|sqlToRelConverter2

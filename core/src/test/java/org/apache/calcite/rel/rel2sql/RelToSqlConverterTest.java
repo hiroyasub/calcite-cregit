@@ -1074,16 +1074,13 @@ name|DEFAULT_REL_CONFIG
 init|=
 name|SqlToRelConverter
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
 name|withTrimUnusedFields
 argument_list|(
 literal|false
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 specifier|static
 specifier|final
@@ -1094,7 +1091,7 @@ name|NO_EXPAND_CONFIG
 init|=
 name|SqlToRelConverter
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
 name|withTrimUnusedFields
@@ -1106,9 +1103,6 @@ name|withExpand
 argument_list|(
 literal|false
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 comment|/** Initiates a test case with a given SQL query. */
 specifier|private

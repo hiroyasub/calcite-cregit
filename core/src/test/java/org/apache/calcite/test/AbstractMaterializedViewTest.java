@@ -1440,7 +1440,7 @@ name|config
 init|=
 name|SqlToRelConverter
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
 name|withTrimUnusedFields
@@ -1457,9 +1457,6 @@ name|withDecorrelationEnabled
 argument_list|(
 literal|true
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 specifier|final
 name|SqlToRelConverter

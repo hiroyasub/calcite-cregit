@@ -16448,7 +16448,7 @@ name|boolean
 name|pruneInputOfAggregate
 parameter_list|)
 function_decl|;
-comment|/** Whether to push down join conditions; default false (but see      * {@link SqlToRelConverter.ConfigBuilder#withPushJoinCondition(boolean)},      * default true). */
+comment|/** Whether to push down join conditions; default false (but      * {@link SqlToRelConverter#config()} by default sets this to true). */
 annotation|@
 name|ImmutableBeans
 operator|.

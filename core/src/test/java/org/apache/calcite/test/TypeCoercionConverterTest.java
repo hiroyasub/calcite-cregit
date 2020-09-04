@@ -191,7 +191,7 @@ literal|"from t1"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test cases for    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl#booleanEquality}. */
+comment|/** Test case for    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.{@code booleanEquality}. */
 annotation|@
 name|Test
 name|void

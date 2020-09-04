@@ -1101,9 +1101,8 @@ name|sqlToRelConverterConfig
 operator|=
 name|SqlToRelConverter
 operator|.
-name|Config
-operator|.
-name|DEFAULT
+name|config
+argument_list|()
 expr_stmt|;
 name|typeSystem
 operator|=

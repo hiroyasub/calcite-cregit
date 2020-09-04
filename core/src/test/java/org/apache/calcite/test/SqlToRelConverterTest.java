@@ -81,20 +81,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptPlanner
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptUtil
 import|;
 end_import
@@ -823,14 +809,10 @@ name|tester
 argument_list|,
 literal|false
 argument_list|,
-name|b
-lambda|->
-name|b
+name|UnaryOperator
 operator|.
-name|withExpand
-argument_list|(
-literal|true
-argument_list|)
+name|identity
+argument_list|()
 argument_list|,
 name|tester
 operator|.
@@ -8227,30 +8209,17 @@ name|TesterImpl
 argument_list|(
 name|getDiffRepos
 argument_list|()
-argument_list|,
-literal|false
-argument_list|,
-literal|true
-argument_list|,
-literal|true
-argument_list|,
-literal|false
-argument_list|,
-literal|true
-argument_list|,
-literal|null
-argument_list|,
-literal|null
 argument_list|)
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelOptPlanner
-name|createPlanner
-parameter_list|()
-block|{
-return|return
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withPlannerFactory
+argument_list|(
+name|context
+lambda|->
 operator|new
 name|MockRelOptPlanner
 argument_list|(
@@ -8260,15 +8229,8 @@ name|empty
 argument_list|()
 argument_list|)
 block|{
-annotation|@
-name|Override
-specifier|public
-name|List
-argument_list|<
-name|RelTraitDef
-argument_list|>
-name|getRelTraitDefs
-parameter_list|()
+block_content|@Override public List<RelTraitDef> getRelTraitDefs(
+argument_list|)
 block|{
 return|return
 name|ImmutableList
@@ -8306,11 +8268,15 @@ argument_list|)
 return|;
 block|}
 block|}
-return|;
-block|}
-block|}
-decl_stmt|;
+block|)
+class|;
+end_class
+
+begin_comment
 comment|// Run query and save plan after trimming
+end_comment
+
+begin_decl_stmt
 specifier|final
 name|String
 name|sql
@@ -8321,6 +8287,9 @@ literal|"from (select * from emp order by sal limit 3) a\n"
 operator|+
 literal|"where a.EMPNO> 10 group by 2"
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 name|RelNode
 name|afterTrim
 init|=
@@ -8333,7 +8302,13 @@ argument_list|)
 operator|.
 name|rel
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|// Get Sort and Filter operators
+end_comment
+
+begin_decl_stmt
 specifier|final
 name|List
 argument_list|<
@@ -8346,6 +8321,9 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|final
 name|RelShuttleImpl
 name|visitor
@@ -8408,6 +8386,9 @@ return|;
 block|}
 block|}
 decl_stmt|;
+end_decl_stmt
+
+begin_expr_stmt
 name|visitor
 operator|.
 name|visit
@@ -8415,7 +8396,13 @@ argument_list|(
 name|afterTrim
 argument_list|)
 expr_stmt|;
+end_expr_stmt
+
+begin_comment
 comment|// Ensure sort and filter operators have consistent traitSet after trimming
+end_comment
+
+begin_expr_stmt
 name|assertThat
 argument_list|(
 name|rels
@@ -8429,6 +8416,9 @@ literal|2
 argument_list|)
 argument_list|)
 expr_stmt|;
+end_expr_stmt
+
+begin_decl_stmt
 name|RelTrait
 name|filterCollation
 init|=
@@ -8449,6 +8439,9 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 name|RelTrait
 name|sortCollation
 init|=
@@ -8469,6 +8462,9 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_expr_stmt
 name|assertTrue
 argument_list|(
 name|filterCollation
@@ -8479,8 +8475,10 @@ name|sortCollation
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
-annotation|@
+end_expr_stmt
+
+begin_function
+unit|}    @
 name|Test
 name|void
 name|testRelShuttleForLogicalCalc
@@ -8646,6 +8644,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8765,6 +8766,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8786,7 +8790,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests group-by CASE expression involving a non-query IN. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8812,7 +8822,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests an aggregate function on a CASE expression involving a non-query    * IN. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8834,7 +8850,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-753">[CALCITE-753]    * Test aggregate operators do not derive row types with duplicate column    * names</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8862,6 +8884,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8883,7 +8908,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-551">[CALCITE-551]    * Sub-query inside aggregate function</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8914,6 +8945,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8946,7 +8980,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-614">[CALCITE-614]    * IN within CASE within GROUP BY gives AssertionError</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8974,6 +9014,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -8997,6 +9040,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9027,6 +9073,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9048,6 +9097,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9076,6 +9128,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9099,6 +9154,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9129,6 +9187,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9150,6 +9211,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9178,6 +9242,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9208,6 +9275,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9233,6 +9303,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9258,6 +9331,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9289,6 +9365,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9320,6 +9399,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9343,6 +9425,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9366,6 +9451,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9387,6 +9475,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9408,6 +9499,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9429,6 +9523,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9450,6 +9547,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9477,6 +9577,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9506,6 +9609,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9527,6 +9633,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9552,7 +9661,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3229">[CALCITE-3229]    * UnsupportedOperationException for UPDATE with IN query</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9578,7 +9693,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3292">[CALCITE-3292]    * NPE for UPDATE with IN query</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9604,7 +9725,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Similar to {@link #testUpdateSubQueryWithIn()} but with not in instead of in. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9630,6 +9757,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9651,6 +9781,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9680,6 +9813,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9705,6 +9841,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9736,6 +9875,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9759,6 +9901,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9782,6 +9927,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -9810,6 +9958,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -9838,6 +9989,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -9878,6 +10032,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9900,6 +10057,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9923,6 +10083,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9952,6 +10115,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -9988,6 +10154,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10017,6 +10186,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10053,6 +10225,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10074,6 +10249,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10097,6 +10275,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10122,6 +10303,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10143,7 +10327,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2936">[CALCITE-2936]    * Existential sub-query that has aggregate without grouping key    * should be simplified to constant boolean expression</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10174,6 +10364,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10204,7 +10397,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2936">[CALCITE-2936]    * Existential sub-query that has Values with at least 1 tuple    * should be simplified to constant boolean expression</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10235,6 +10434,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10265,6 +10467,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10286,7 +10491,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10312,7 +10523,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1799">[CALCITE-1799]    * "OR .. IN" sub-query conversion wrong</a>.    *    *<p>The problem is only fixed if you have {@code expand = false}.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10341,7 +10558,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10367,7 +10590,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10395,7 +10624,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up sub-queries, perform the same logic as the way when ones were    * registered</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10421,7 +10656,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-694">[CALCITE-694]    * Scan HAVING clause for sub-queries and IN-lists</a> relating to IN.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10451,7 +10692,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-694">[CALCITE-694]    * Scan HAVING clause for sub-queries and IN-lists</a>, with a sub-query in    * the HAVING clause.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10487,7 +10734,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-716">[CALCITE-716]    * Scalar sub-query and aggregate function in SELECT or HAVING clause gives    * AssertionError</a>; variant involving HAVING clause.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10515,7 +10768,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-716">[CALCITE-716]    * Scalar sub-query and aggregate function in SELECT or HAVING clause gives    * AssertionError</a>; variant involving SELECT clause.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10543,7 +10802,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * window aggregate and ranking functions with grouped aggregates</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10569,7 +10834,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-847">[CALCITE-847]    * AVG window function in GROUP BY gives AssertionError</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10595,7 +10866,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving joins</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10625,7 +10902,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving HAVING clause</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10653,7 +10936,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with sub-query that contains window function and    * GROUP BY</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10687,7 +10976,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1313">[CALCITE-1313]    * Validator should derive type of expression in ORDER BY</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10710,7 +11005,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case (correlated scalar aggregate sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10748,7 +11049,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1543">[CALCITE-1543]    * Correlated scalar sub-query with multiple aggregates gives    * AssertionError</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10788,6 +11095,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10825,7 +11135,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case (correlated EXISTS sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10863,6 +11179,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10895,7 +11214,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** A theta join condition, unlike the equi-join condition in    * {@link #testCorrelationExistsAndFilterRex()}, requires a value    * generator. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10928,7 +11253,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case (correlated NOT EXISTS sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10961,7 +11292,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for decorrelating sub-query that has aggregate with    * grouping sets.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -10996,6 +11333,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11017,6 +11357,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11038,6 +11381,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11059,6 +11405,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11080,6 +11429,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11097,10 +11449,33 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+comment|// Don't prune the Project. We want to see columns "FO"."C1"& "C1".
+name|c
+operator|.
+name|addRelBuilderConfigTransform
+argument_list|(
+name|c2
+lambda|->
+name|c2
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11122,6 +11497,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11143,7 +11521,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Dynamic Table / Dynamic Star support</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11171,7 +11555,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** As {@link #testSelectFromDynamicTable} but "SELECT *". */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11199,7 +11589,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2080">[CALCITE-2080]    * Query with NOT IN operator and literal fails throws AssertionError: 'Cast    * for just nullability not allowed'</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11235,7 +11631,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** As {@link #testSelectFromDynamicTable} but with ORDER BY. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11267,7 +11669,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** As {@link #testSelectFromDynamicTable} but with join. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11301,6 +11709,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11334,7 +11745,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2900">[CALCITE-2900]    * RelStructuredTypeFlattener generates wrong types on nested columns</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11360,7 +11777,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2962">[CALCITE-2962]    * RelStructuredTypeFlattener generates wrong types for nested column when    * flattenProjection</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11410,6 +11833,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11433,6 +11859,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11456,6 +11885,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11479,6 +11911,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11510,6 +11945,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11541,6 +11979,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11564,6 +12005,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11587,6 +12031,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11610,6 +12057,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11633,6 +12083,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11658,7 +12111,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11696,7 +12155,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Similar to {@link #testGroupByNestedColumn()},    * but with grouping sets.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11740,7 +12205,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Similar to {@link #testGroupByNestedColumn()},    * but with cube.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11778,6 +12249,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11811,6 +12285,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11844,6 +12321,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11875,6 +12355,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11905,6 +12388,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11936,6 +12422,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11967,6 +12456,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -11996,6 +12488,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12027,6 +12522,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12056,7 +12554,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Create the a new DynamicRecordType, avoiding star expansion when working    * with this type</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12084,7 +12588,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1321">[CALCITE-1321]    * Configurable IN list size when converting IN clause to join</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12148,7 +12658,13 @@ literal|"${planConverted}"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1944">[CALCITE-1944]    * Window function applied to sub-query with dynamic star gets wrong    * plan</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12180,6 +12696,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12239,7 +12758,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2366">[CALCITE-2366]    * Add support for ANY_VALUE aggregate function</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12261,6 +12786,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12282,6 +12810,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12307,6 +12838,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|Tester
 name|getExtendedTester
@@ -12323,6 +12857,9 @@ operator|new
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12382,6 +12919,9 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12409,6 +12949,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12446,6 +12989,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12491,7 +13037,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1909">[CALCITE-1909]    * Output rowType of Match should include PARTITION BY and ORDER BY    * columns</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12537,6 +13089,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12584,6 +13139,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12621,6 +13179,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12660,6 +13221,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12705,6 +13269,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12748,6 +13315,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12801,6 +13371,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12838,7 +13411,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2323">[CALCITE-2323]    * Validator should allow alternative nullCollations for ORDER BY in    * OVER</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12891,6 +13470,7 @@ argument_list|(
 name|properties
 argument_list|)
 decl_stmt|;
+specifier|final
 name|TesterImpl
 name|tester
 init|=
@@ -12899,31 +13479,20 @@ name|TesterImpl
 argument_list|(
 name|getDiffRepos
 argument_list|()
-argument_list|,
-literal|false
-argument_list|,
-literal|false
-argument_list|,
-literal|true
-argument_list|,
-literal|false
-argument_list|,
-literal|true
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-name|SqlToRelConverter
+argument_list|)
 operator|.
-name|Config
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
 operator|.
-name|DEFAULT
-argument_list|,
-name|SqlConformanceEnum
+name|withTrim
+argument_list|(
+literal|false
+argument_list|)
 operator|.
-name|DEFAULT
-argument_list|,
+name|withContext
+argument_list|(
 name|Contexts
 operator|.
 name|of
@@ -12946,6 +13515,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12975,6 +13547,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -12998,6 +13573,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13021,6 +13599,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13044,6 +13625,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13067,6 +13651,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13090,6 +13677,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13113,6 +13703,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13136,6 +13729,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13159,6 +13755,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13182,6 +13781,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13205,6 +13807,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13228,6 +13833,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13251,6 +13859,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13274,6 +13885,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13297,6 +13911,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13320,6 +13937,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13363,6 +13983,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13390,6 +14013,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13425,6 +14051,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13452,6 +14081,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13477,6 +14109,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13502,6 +14137,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13527,7 +14165,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests LEFT JOIN LATERAL with USING. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13555,7 +14199,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests LEFT JOIN LATERAL with NATURAL JOIN. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13581,7 +14231,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests LEFT JOIN LATERAL with ON condition. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13609,7 +14265,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests LEFT JOIN LATERAL with multiple columns from outer. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13637,7 +14299,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests LEFT JOIN LATERAL with correlating variable coming    * from one level up join scope. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13671,7 +14339,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests CROSS JOIN LATERAL with multiple columns from outer. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13699,7 +14373,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests CROSS JOIN LATERAL with correlating variable coming    * from one level up join scope. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13735,7 +14415,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3310">[CALCITE-3310]    * Approximate and exact aggregate calls are recognized as the same    * during sql-to-rel conversion</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13763,6 +14449,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13786,7 +14475,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3456">[CALCITE-3456]    * AssertionError throws when aggregation same digest in sub-query in same    * scope</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13818,11 +14513,36 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|addRelBuilderConfigTransform
+argument_list|(
+name|c2
+lambda|->
+name|c2
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3575">[CALCITE-3575]    * IndexOutOfBoundsException when converting SQL to rel</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13850,7 +14570,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2997">[CALCITE-2997]    * Avoid pushing down join condition in SqlToRelConverter</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13874,6 +14600,12 @@ argument_list|)
 operator|.
 name|withConfig
 argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|addRelBuilderConfigTransform
+argument_list|(
 name|b
 lambda|->
 name|b
@@ -13883,12 +14615,19 @@ argument_list|(
 literal|false
 argument_list|)
 argument_list|)
+argument_list|)
 operator|.
 name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** As {@link #testDoNotPushDownJoinCondition()}. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13914,6 +14653,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13935,7 +14677,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4145">[CALCITE-4145]    * Exception when query from UDF field with structured type</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -13959,7 +14707,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3826">[CALCITE-3826]    * UPDATE assigns wrong type to bind variables</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14057,7 +14811,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4167">[CALCITE-4167]    * Group by COALESCE IN throws NullPointerException</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -14083,6 +14843,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14129,6 +14892,9 @@ literal|"${planKeepSort}"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14164,6 +14930,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14199,6 +14968,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14234,6 +15006,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14269,6 +15044,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14304,6 +15082,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 specifier|public
@@ -14339,7 +15120,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -14478,7 +15265,13 @@ expr_stmt|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Allows fluent testing. */
+end_comment
+
+begin_class
 specifier|public
 class|class
 name|Sql
@@ -14509,7 +15302,7 @@ name|UnaryOperator
 argument_list|<
 name|SqlToRelConverter
 operator|.
-name|ConfigBuilder
+name|Config
 argument_list|>
 name|config
 decl_stmt|;
@@ -14536,7 +15329,7 @@ name|UnaryOperator
 argument_list|<
 name|SqlToRelConverter
 operator|.
-name|ConfigBuilder
+name|Config
 argument_list|>
 name|config
 parameter_list|,
@@ -14548,7 +15341,12 @@ name|this
 operator|.
 name|sql
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|sql
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -14560,7 +15358,12 @@ name|this
 operator|.
 name|tester
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|tester
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -14572,13 +15375,23 @@ name|this
 operator|.
 name|config
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|config
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
 name|conformance
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|conformance
+argument_list|)
 expr_stmt|;
 block|}
 specifier|public
@@ -14600,22 +15413,6 @@ name|String
 name|plan
 parameter_list|)
 block|{
-specifier|final
-name|SqlToRelConverter
-operator|.
-name|ConfigBuilder
-name|configBuilder
-init|=
-name|SqlToRelConverter
-operator|.
-name|configBuilder
-argument_list|()
-operator|.
-name|withTrimUnusedFields
-argument_list|(
-literal|true
-argument_list|)
-decl_stmt|;
 name|tester
 operator|.
 name|withDecorrelation
@@ -14631,14 +15428,18 @@ operator|.
 name|withConfig
 argument_list|(
 name|config
-operator|.
-name|apply
-argument_list|(
-name|configBuilder
 argument_list|)
 operator|.
-name|build
-argument_list|()
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withTrimUnusedFields
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 operator|.
 name|assertConvertsTo
@@ -14659,18 +15460,36 @@ name|UnaryOperator
 argument_list|<
 name|SqlToRelConverter
 operator|.
-name|ConfigBuilder
+name|Config
 argument_list|>
 name|config
 parameter_list|)
 block|{
+specifier|final
+name|UnaryOperator
+argument_list|<
+name|SqlToRelConverter
+operator|.
+name|Config
+argument_list|>
+name|config2
+init|=
+name|this
+operator|.
+name|config
+operator|.
+name|andThen
+argument_list|(
 name|Objects
 operator|.
 name|requireNonNull
 argument_list|(
 name|config
 argument_list|)
-expr_stmt|;
+argument_list|)
+operator|::
+name|apply
+decl_stmt|;
 return|return
 operator|new
 name|Sql
@@ -14683,21 +15502,7 @@ name|tester
 argument_list|,
 name|trim
 argument_list|,
-name|b
-lambda|->
-name|config
-operator|.
-name|apply
-argument_list|(
-name|this
-operator|.
-name|config
-operator|.
-name|apply
-argument_list|(
-name|b
-argument_list|)
-argument_list|)
+name|config2
 argument_list|,
 name|conformance
 argument_list|)
@@ -14830,8 +15635,8 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 
