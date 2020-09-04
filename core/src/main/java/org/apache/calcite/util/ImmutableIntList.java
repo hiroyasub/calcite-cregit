@@ -790,9 +790,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|integers
-operator|.
-name|length
+name|size
 condition|;
 name|i
 operator|++
