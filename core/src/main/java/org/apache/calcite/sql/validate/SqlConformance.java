@@ -183,6 +183,11 @@ name|boolean
 name|isFromRequired
 parameter_list|()
 function_decl|;
+comment|/**    * Whether to split a quoted table name. If true, {@code `x.y.z`} is parsed as    * if the user had written {@code `x`.`y`.`z`}.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BIG_QUERY};    * false otherwise.    */
+name|boolean
+name|splitQuotedTableName
+parameter_list|()
+function_decl|;
 comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#PRESTO};    * false otherwise.    */
 name|boolean
 name|isBangEqualAllowed

@@ -6264,6 +6264,63 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testFromStarFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from sales^.^*"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\. \\*\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno AS x from sales^.^*"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\. \\*\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp^.^*"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\. \\*\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno AS x from emp^.^*"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\. \\*\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno AS x from ^*^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\*\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testDerivedColumnList
 parameter_list|()
 block|{
@@ -36123,7 +36180,7 @@ operator|+
 literal|"FROM \"doublequotedtable\""
 argument_list|)
 expr_stmt|;
-comment|// BigQuery leaves quoted and unquoted identifers unchanged
+comment|// BigQuery leaves quoted and unquoted identifiers unchanged
 name|sql
 argument_list|(
 literal|"select unquotedColumn from `doubleQuotedTable`"
@@ -36139,6 +36196,118 @@ argument_list|(
 literal|"SELECT unquotedColumn\n"
 operator|+
 literal|"FROM doubleQuotedTable"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4230">[CALCITE-4230]    * In Babel for BigQuery, split quoted table names that contain dots</a>. */
+annotation|@
+name|Test
+name|void
+name|testSplitIdentifier
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from `bigquery-public-data.samples.natality`"
+decl_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select *\n"
+operator|+
+literal|"from `bigquery-public-data`.`samples`.`natality`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedSplit
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `bigquery-public-data`.samples.natality"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedNoSplit
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `bigquery-public-data.samples.natality`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedSplitMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `bigquery-public-data`.`samples`.`natality`"
+decl_stmt|;
+comment|// In BigQuery, an identifier containing dots is split into sub-identifiers.
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedSplit
+argument_list|)
+expr_stmt|;
+comment|// In MySQL, identifiers are not split.
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|MYSQL
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedNoSplit
+argument_list|)
+expr_stmt|;
+comment|// Query with split identifiers produces split AST. No surprise there.
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedSplit
+argument_list|)
+expr_stmt|;
+comment|// Similar to previous; we just quote simple identifiers on unparse.
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|MYSQL
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedSplitMysql
 argument_list|)
 expr_stmt|;
 block|}

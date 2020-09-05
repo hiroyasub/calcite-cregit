@@ -19470,7 +19470,7 @@ name|EMP_RECORD_TYPE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    * @see #testStarIdentifier()    */
+comment|/**    * Parser does not allow "*" in FROM clause.    * Parser allows "*" in column expressions, but throws if they are outside    * of the SELECT clause.    *    * @see #testStarIdentifier()    */
 annotation|@
 name|Test
 name|void
@@ -19479,32 +19479,32 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"select emp.empno AS x from ^sales.*^"
+literal|"select emp.empno AS x from sales^.^*"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Object '\\*' not found within 'SALES'"
+literal|"(?s)Encountered \"\\. \\*\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from ^emp.*^"
+literal|"select * from emp^.^*"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Object '\\*' not found within 'SALES.EMP'"
+literal|"(?s)Encountered \"\\. \\*\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select emp.empno AS x from ^emp.*^"
+literal|"select emp.empno AS x from emp^.^*"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Object '\\*' not found within 'SALES.EMP'"
+literal|"(?s)Encountered \"\\. \\*\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
