@@ -6321,6 +6321,367 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testHyphenatedTableName
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from bigquery^-^foo-bar.baz"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `bigquery-foo-bar`.baz"
+argument_list|)
+expr_stmt|;
+comment|// Like BigQuery, MySQL allows back-ticks.
+name|sql
+argument_list|(
+literal|"select `baz`.`buzz` from foo.`baz`"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT baz.buzz\n"
+operator|+
+literal|"FROM foo.baz"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|MYSQL
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `baz`.`buzz`\n"
+operator|+
+literal|"FROM `foo`.`baz`"
+argument_list|)
+expr_stmt|;
+comment|// Unlike BigQuery, MySQL does not allow hyphenated identifiers.
+name|sql
+argument_list|(
+literal|"select `baz`.`buzz` from foo^-^bar.`baz`"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT baz.buzz\n"
+operator|+
+literal|"FROM `foo-bar`.baz"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|MYSQL
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// No hyphenated identifiers as table aliases.
+name|sql
+argument_list|(
+literal|"select * from foo.baz as hyphenated^-^alias-not-allowed"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from foo.baz as `hyphenated-alias-allowed-if-quoted`"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foo.baz AS `hyphenated-alias-allowed-if-quoted`"
+argument_list|)
+expr_stmt|;
+comment|// No hyphenated identifiers as column names.
+name|sql
+argument_list|(
+literal|"select * from foo-bar.baz cross join (select alpha-omega from t) as t"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foo-bar`.baz\n"
+operator|+
+literal|"CROSS JOIN (SELECT (alpha - omega)\n"
+operator|+
+literal|"FROM t) AS t"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from bigquery-foo-bar.baz as hyphenated^-^alias-not-allowed"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into bigquery^-^public-data.foo values (1)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Non-query expression encountered in illegal context"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INSERT INTO `bigquery-public-data`.foo\n"
+operator|+
+literal|"VALUES (1)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update bigquery^-^public-data.foo set a = b"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"UPDATE `bigquery-public-data`.foo SET a = b"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from bigquery^-^public-data.foo where a = 5"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DELETE FROM `bigquery-public-data`.foo\n"
+operator|+
+literal|"WHERE (a = 5)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|mergeSql
+init|=
+literal|"merge into bigquery^-^public-data.emps e\n"
+operator|+
+literal|"using (\n"
+operator|+
+literal|"  select *\n"
+operator|+
+literal|"  from bigquery-public-data.tempemps\n"
+operator|+
+literal|"  where deptno is null) t\n"
+operator|+
+literal|"on e.empno = t.empno\n"
+operator|+
+literal|"when matched then\n"
+operator|+
+literal|"  update set name = t.name, deptno = t.deptno,\n"
+operator|+
+literal|"    salary = t.salary * .1\n"
+operator|+
+literal|"when not matched then\n"
+operator|+
+literal|"    insert (name, dept, salary)\n"
+operator|+
+literal|"    values(t.name, 10, t.salary * .15)"
+decl_stmt|;
+specifier|final
+name|String
+name|mergeExpected
+init|=
+literal|"MERGE INTO `bigquery-public-data`.emps AS e\n"
+operator|+
+literal|"USING (SELECT *\n"
+operator|+
+literal|"FROM `bigquery-public-data`.tempemps\n"
+operator|+
+literal|"WHERE (deptno IS NULL)) AS t\n"
+operator|+
+literal|"ON (e.empno = t.empno)\n"
+operator|+
+literal|"WHEN MATCHED THEN"
+operator|+
+literal|" UPDATE SET name = t.name, deptno = t.deptno,"
+operator|+
+literal|" salary = (t.salary * 0.1)\n"
+operator|+
+literal|"WHEN NOT MATCHED THEN"
+operator|+
+literal|" INSERT (name, dept, salary)"
+operator|+
+literal|" (VALUES (t.name, 10, (t.salary * 0.15)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|mergeSql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|mergeExpected
+argument_list|)
+expr_stmt|;
+comment|// Hyphenated identifiers may not contain spaces, even in BigQuery.
+name|sql
+argument_list|(
+literal|"select * from bigquery ^-^ foo - bar as t where x< y"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testHyphenatedColumnName
+parameter_list|()
+block|{
+comment|// While BigQuery allows hyphenated table names, no dialect allows
+comment|// hyphenated column names; they are parsed as arithmetic minus.
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT (`FOO` - `BAR`)\n"
+operator|+
+literal|"FROM `EMP`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT (foo - bar)\n"
+operator|+
+literal|"FROM emp"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select foo-bar from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testDerivedColumnList
 parameter_list|()
 block|{
@@ -16222,6 +16583,8 @@ literal|"    \"UNNEST\" \\.\\.\\.\n"
 operator|+
 literal|"<IDENTIFIER> \\.\\.\\.\n"
 operator|+
+literal|"<HYPHENATED_IDENTIFIER> \\.\\.\\.\n"
+operator|+
 literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"<BACK_QUOTED_IDENTIFIER> \\.\\.\\.\n"
@@ -17317,6 +17680,37 @@ operator|.
 name|ok
 argument_list|(
 literal|"DESCRIBE TABLE `EMPS` `COL1`"
+argument_list|)
+expr_stmt|;
+comment|// BigQuery allows hyphens in schema (project) names
+name|sql
+argument_list|(
+literal|"describe foo-bar.baz"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DESCRIBE TABLE `foo-bar`.baz"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"describe table foo-bar.baz"
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DESCRIBE TABLE `foo-bar`.baz"
 argument_list|)
 expr_stmt|;
 comment|// table keyword is OK

@@ -1177,17 +1177,98 @@ return|return
 name|originalSql
 return|;
 block|}
-comment|/**    * Change parser state.    *    * @param stateName new state.    */
+comment|/**    * Change parser state.    *    * @param state New state    */
 specifier|public
 specifier|abstract
 name|void
 name|switchTo
 parameter_list|(
-name|String
-name|stateName
+name|LexicalState
+name|state
 parameter_list|)
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
+comment|/** Valid starting states of the parser.    *    *<p>(There are other states that the parser enters during parsing, such as    * being inside a multi-line comment.)    *    *<p>The starting states generally control the syntax of quoted    * identifiers. */
+specifier|public
+enum|enum
+name|LexicalState
+block|{
+comment|/** Starting state where quoted identifiers use brackets, like Microsoft SQL      * Server. */
+name|DEFAULT
+block|,
+comment|/** Starting state where quoted identifiers use double-quotes, like      * Oracle and PostgreSQL. */
+name|DQID
+block|,
+comment|/** Starting state where quoted identifiers use back-ticks, like MySQL. */
+name|BTID
+block|,
+comment|/** Starting state where quoted identifiers use back-ticks,      * unquoted identifiers that are part of table names may contain hyphens,      * like BigQuery. */
+name|BQID
+block|;
+comment|/** Returns the corresponding parser state with the given configuration      * (in particular, quoting style). */
+specifier|public
+specifier|static
+name|LexicalState
+name|forConfig
+parameter_list|(
+name|SqlParser
+operator|.
+name|Config
+name|config
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|config
+operator|.
+name|quoting
+argument_list|()
+condition|)
+block|{
+case|case
+name|DOUBLE_QUOTE
+case|:
+return|return
+name|DQID
+return|;
+case|case
+name|BACK_TICK
+case|:
+if|if
+condition|(
+name|config
+operator|.
+name|conformance
+argument_list|()
+operator|.
+name|allowHyphenInUnquotedTableName
+argument_list|()
+condition|)
+block|{
+return|return
+name|BQID
+return|;
+block|}
+return|return
+name|BTID
+return|;
+case|case
+name|BRACKET
+case|:
+return|return
+name|DEFAULT
+return|;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+name|config
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
 comment|/**    * Metadata about the parser. For example:    *    *<ul>    *<li>"KEY" is a keyword: it is meaningful in certain contexts, such as    * "CREATE FOREIGN KEY", but can be used as an identifier, as in<code>    * "CREATE TABLE t (key INTEGER)"</code>.    *<li>"SELECT" is a reserved word. It can not be used as an identifier.    *<li>"CURRENT_USER" is the name of a context variable. It cannot be used    * as an identifier.    *<li>"ABS" is the name of a reserved function. It cannot be used as an    * identifier.    *<li>"DOMAIN" is a reserved word as specified by the SQL:92 standard.    *</ul>    */
 specifier|public
 interface|interface
