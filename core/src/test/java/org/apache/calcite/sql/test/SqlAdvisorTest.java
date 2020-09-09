@@ -2568,7 +2568,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testSimlifySubQueryStar
+name|testSimplifySubQueryStar
 parameter_list|()
 block|{
 name|String
@@ -2651,7 +2651,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testSimlifySubQueryMultipleFrom
+name|testSimplifySubQueryMultipleFrom
 parameter_list|()
 block|{
 name|String
@@ -2685,7 +2685,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testSimlifyMinus
+name|testSimplifyMinus
 parameter_list|()
 block|{
 name|String

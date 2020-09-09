@@ -2332,6 +2332,37 @@ decl_stmt|;
 if|if
 condition|(
 name|secondCaret
+operator|==
+name|firstCaret
+operator|+
+literal|1
+condition|)
+block|{
+comment|// If SQL contains "^^", it does not contain error positions; convert each
+comment|// "^^" to a single "^".
+return|return
+operator|new
+name|StringAndPos
+argument_list|(
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|"^^"
+argument_list|,
+literal|"^"
+argument_list|)
+argument_list|,
+operator|-
+literal|1
+argument_list|,
+literal|null
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
+name|secondCaret
 operator|<
 literal|0
 condition|)
