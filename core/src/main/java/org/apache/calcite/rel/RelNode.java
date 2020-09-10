@@ -109,6 +109,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelTraitSet
 import|;
 end_import
@@ -388,6 +402,21 @@ name|RelWriter
 name|pw
 parameter_list|)
 function_decl|;
+comment|/**    * Returns a relational expression string of this {@code RelNode}.    * The string returned is the same as    * {@link RelOptUtil#toString(org.apache.calcite.rel.RelNode)}.    *    * This method is intended mainly for use while debugging in an IDE,    * as a convenient short-hand for RelOptUtil.toString.    * We recommend that classes implementing this interface    * do not override this method.    *    * @return Relational expression string of this {@code RelNode}    */
+specifier|default
+name|String
+name|explain
+parameter_list|()
+block|{
+return|return
+name|RelOptUtil
+operator|.
+name|toString
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 comment|/**    * Receives notification that this expression is about to be registered. The    * implementation of this method must at least register all child    * expressions.    *    * @param planner Planner that plans this relational node    * @return Relational expression that should be used by the planner    */
 name|RelNode
 name|onRegister
