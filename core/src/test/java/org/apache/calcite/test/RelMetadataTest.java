@@ -6962,6 +6962,25 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testGroupingSets
+parameter_list|()
+block|{
+name|checkGetUniqueKeys
+argument_list|(
+literal|"select deptno, sal, count(*) from emp\n"
+operator|+
+literal|"group by GROUPING SETS (deptno, sal)"
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUnion
 parameter_list|()
 block|{

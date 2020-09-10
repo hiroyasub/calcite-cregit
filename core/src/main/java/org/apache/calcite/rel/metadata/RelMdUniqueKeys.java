@@ -1452,6 +1452,18 @@ name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
+if|if
+condition|(
+name|Aggregate
+operator|.
+name|isSimple
+argument_list|(
+name|rel
+argument_list|)
+operator|||
+name|ignoreNulls
+condition|)
+block|{
 comment|// group by keys form a unique key
 return|return
 name|ImmutableSet
@@ -1464,6 +1476,18 @@ name|getGroupSet
 argument_list|()
 argument_list|)
 return|;
+block|}
+else|else
+block|{
+comment|// If the aggregate has grouping sets, all group by keys might be null which means group by
+comment|// keys do not form a unique key.
+return|return
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
+return|;
+block|}
 block|}
 specifier|public
 name|Set
