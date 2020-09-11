@@ -457,7 +457,7 @@ name|util
 operator|.
 name|function
 operator|.
-name|Function
+name|UnaryOperator
 import|;
 end_import
 
@@ -4554,15 +4554,11 @@ specifier|private
 name|Tester
 name|withParser
 parameter_list|(
-name|Function
+name|UnaryOperator
 argument_list|<
 name|SqlParser
 operator|.
-name|ConfigBuilder
-argument_list|,
-name|SqlParser
-operator|.
-name|ConfigBuilder
+name|Config
 argument_list|>
 name|transform
 parameter_list|)
@@ -4579,19 +4575,11 @@ name|transform
 operator|.
 name|apply
 argument_list|(
-name|SqlParser
-operator|.
-name|configBuilder
-argument_list|(
 name|config
 operator|.
 name|getParserConfig
 argument_list|()
 argument_list|)
-argument_list|)
-operator|.
-name|build
-argument_list|()
 argument_list|)
 operator|.
 name|build

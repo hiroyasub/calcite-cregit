@@ -3036,10 +3036,10 @@ name|parserConfig
 init|=
 name|SqlParser
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
-name|setQuotedCasing
+name|withQuotedCasing
 argument_list|(
 name|config
 operator|.
@@ -3047,7 +3047,7 @@ name|quotedCasing
 argument_list|()
 argument_list|)
 operator|.
-name|setUnquotedCasing
+name|withUnquotedCasing
 argument_list|(
 name|config
 operator|.
@@ -3055,7 +3055,7 @@ name|unquotedCasing
 argument_list|()
 argument_list|)
 operator|.
-name|setQuoting
+name|withQuoting
 argument_list|(
 name|config
 operator|.
@@ -3063,7 +3063,7 @@ name|quoting
 argument_list|()
 argument_list|)
 operator|.
-name|setConformance
+name|withConformance
 argument_list|(
 name|config
 operator|.
@@ -3071,16 +3071,13 @@ name|conformance
 argument_list|()
 argument_list|)
 operator|.
-name|setCaseSensitive
+name|withCaseSensitive
 argument_list|(
 name|config
 operator|.
 name|caseSensitive
 argument_list|()
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 return|return
 operator|new

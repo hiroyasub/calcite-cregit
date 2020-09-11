@@ -861,24 +861,6 @@ begin_import
 import|import static
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
-name|SqlParser
-operator|.
-name|configBuilder
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -46484,10 +46466,9 @@ operator|.
 name|Config
 name|config
 init|=
-name|configBuilder
-argument_list|()
+name|SqlParser
 operator|.
-name|build
+name|config
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -46692,10 +46673,9 @@ operator|.
 name|Config
 name|config
 init|=
-name|configBuilder
-argument_list|()
+name|SqlParser
 operator|.
-name|build
+name|config
 argument_list|()
 decl_stmt|;
 specifier|final

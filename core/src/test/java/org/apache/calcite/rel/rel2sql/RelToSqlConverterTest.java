@@ -20204,12 +20204,9 @@ name|configureParser
 argument_list|(
 name|SqlParser
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 argument_list|)
-operator|.
-name|build
-argument_list|()
 decl_stmt|;
 comment|// Convert rel node to SQL with BigQuery dialect,
 comment|// in which "isHavingAlias" is true.

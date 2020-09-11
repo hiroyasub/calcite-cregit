@@ -497,10 +497,7 @@ name|parserConfig
 argument_list|(
 name|SqlParser
 operator|.
-name|configBuilder
-argument_list|()
-operator|.
-name|build
+name|config
 argument_list|()
 argument_list|)
 operator|.

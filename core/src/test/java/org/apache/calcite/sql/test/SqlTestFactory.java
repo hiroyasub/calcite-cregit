@@ -853,10 +853,10 @@ block|{
 return|return
 name|SqlParser
 operator|.
-name|configBuilder
+name|config
 argument_list|()
 operator|.
-name|setQuoting
+name|withQuoting
 argument_list|(
 operator|(
 name|Quoting
@@ -869,7 +869,7 @@ literal|"quoting"
 argument_list|)
 argument_list|)
 operator|.
-name|setUnquotedCasing
+name|withUnquotedCasing
 argument_list|(
 operator|(
 name|Casing
@@ -882,7 +882,7 @@ literal|"unquotedCasing"
 argument_list|)
 argument_list|)
 operator|.
-name|setQuotedCasing
+name|withQuotedCasing
 argument_list|(
 operator|(
 name|Casing
@@ -895,7 +895,7 @@ literal|"quotedCasing"
 argument_list|)
 argument_list|)
 operator|.
-name|setConformance
+name|withConformance
 argument_list|(
 operator|(
 name|SqlConformance
@@ -908,7 +908,7 @@ literal|"conformance"
 argument_list|)
 argument_list|)
 operator|.
-name|setCaseSensitive
+name|withCaseSensitive
 argument_list|(
 operator|(
 name|boolean
@@ -920,9 +920,6 @@ argument_list|(
 literal|"caseSensitive"
 argument_list|)
 argument_list|)
-operator|.
-name|build
-argument_list|()
 return|;
 block|}
 specifier|public
