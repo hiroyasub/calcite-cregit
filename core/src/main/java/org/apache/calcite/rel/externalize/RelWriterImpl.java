@@ -180,12 +180,12 @@ specifier|final
 name|PrintWriter
 name|pw
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|SqlExplainLevel
 name|detailLevel
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|boolean
 name|withIdPrefix

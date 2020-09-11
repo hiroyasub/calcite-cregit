@@ -771,6 +771,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|ParameterizedTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|provider
+operator|.
+name|MethodSource
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -826,6 +856,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|stream
+operator|.
+name|Stream
 import|;
 end_import
 
@@ -1553,6 +1595,29 @@ literal|"  ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
+specifier|static
+name|Stream
+argument_list|<
+name|SqlExplainFormat
+argument_list|>
+name|explainFormats
+parameter_list|()
+block|{
+return|return
+name|Stream
+operator|.
+name|of
+argument_list|(
+name|SqlExplainFormat
+operator|.
+name|TEXT
+argument_list|,
+name|SqlExplainFormat
+operator|.
+name|DOT
+argument_list|)
+return|;
+block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table and a    * project including window expressions.    */
 annotation|@
 name|Test
@@ -2809,10 +2874,18 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testAggregateWithAlias
-parameter_list|()
+parameter_list|(
+name|SqlExplainFormat
+name|format
+parameter_list|)
 block|{
 specifier|final
 name|FrameworkConfig
@@ -2930,7 +3003,7 @@ decl_stmt|;
 name|String
 name|s
 init|=
-name|deserializeAndDumpToTextFormat
+name|deserializeAndDump
 argument_list|(
 name|getSchema
 argument_list|(
@@ -2938,12 +3011,25 @@ name|rel
 argument_list|)
 argument_list|,
 name|relJson
+argument_list|,
+name|format
 argument_list|)
 decl_stmt|;
-specifier|final
 name|String
 name|expected
 init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+name|TEXT
+case|:
+name|expected
+operator|=
 literal|""
 operator|+
 literal|"LogicalProject(max_sal=[$1])\n"
@@ -2953,7 +3039,31 @@ operator|+
 literal|"    LogicalProject(JOB=[$2], SAL=[$5])\n"
 operator|+
 literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
-decl_stmt|;
+expr_stmt|;
+break|break;
+case|case
+name|DOT
+case|:
+name|expected
+operator|=
+literal|"digraph {\n"
+operator|+
+literal|"\"LogicalAggregate\\ngroup = {0}\\nmax_sal = MAX($1)\\n\" -> "
+operator|+
+literal|"\"LogicalProject\\nmax_sal = $1\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"LogicalProject\\nJOB = $2\\nSAL = $5\\n\" -> \"LogicalAggregate\\ngroup = "
+operator|+
+literal|"{0}\\nmax_sal = MAX($1)\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"LogicalTableScan\\ntable = [scott, EMP]\\n\" -> \"LogicalProject\\nJOB = $2\\nSAL = "
+operator|+
+literal|"$5\\n\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+expr_stmt|;
+break|break;
+block|}
 name|assertThat
 argument_list|(
 name|s
@@ -3390,10 +3500,18 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testCorrelateQuery
-parameter_list|()
+parameter_list|(
+name|SqlExplainFormat
+name|format
+parameter_list|)
 block|{
 specifier|final
 name|FrameworkConfig
@@ -3533,7 +3651,7 @@ decl_stmt|;
 name|String
 name|s
 init|=
-name|deserializeAndDumpToTextFormat
+name|deserializeAndDump
 argument_list|(
 name|getSchema
 argument_list|(
@@ -3541,12 +3659,25 @@ name|relNode
 argument_list|)
 argument_list|,
 name|relJson
+argument_list|,
+name|format
 argument_list|)
 decl_stmt|;
-specifier|final
 name|String
 name|expected
 init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+name|TEXT
+case|:
+name|expected
+operator|=
 literal|""
 operator|+
 literal|"LogicalCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{7}])\n"
@@ -3556,7 +3687,33 @@ operator|+
 literal|"  LogicalFilter(condition=[=($0, $cor0.DEPTNO)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
-decl_stmt|;
+expr_stmt|;
+break|break;
+case|case
+name|DOT
+case|:
+name|expected
+operator|=
+literal|"digraph {\n"
+operator|+
+literal|"\"LogicalTableScan\\ntable = [scott, EMP]\\n\" -> \"LogicalCorrelate\\ncorrelation = "
+operator|+
+literal|"$cor0\\njoinType = inner\\nrequiredColumns = {7\\n}\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"LogicalFilter\\ncondition = =($0, $c\\nor0.DEPTNO)\\n\" -> "
+operator|+
+literal|"\"LogicalCorrelate\\ncorrelation = $cor0\\njoinType = inner\\nrequiredColumns = "
+operator|+
+literal|"{7\\n}\\n\" [label=\"1\"]\n"
+operator|+
+literal|"\"LogicalTableScan\\ntable = [scott, DEPT\\n]\\n\" -> \"LogicalFilter\\ncondition = ="
+operator|+
+literal|"($0, $c\\nor0.DEPTNO)\\n\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+expr_stmt|;
+break|break;
+block|}
 name|assertThat
 argument_list|(
 name|s
@@ -4016,10 +4173,18 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testUDAF
-parameter_list|()
+parameter_list|(
+name|SqlExplainFormat
+name|format
+parameter_list|)
 block|{
 specifier|final
 name|FrameworkConfig
@@ -4128,7 +4293,7 @@ specifier|final
 name|String
 name|result
 init|=
-name|deserializeAndDumpToTextFormat
+name|deserializeAndDump
 argument_list|(
 name|getSchema
 argument_list|(
@@ -4136,12 +4301,25 @@ name|rel
 argument_list|)
 argument_list|,
 name|relJson
+argument_list|,
+name|format
 argument_list|)
 decl_stmt|;
-specifier|final
 name|String
 name|expected
 init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+name|TEXT
+case|:
+name|expected
+operator|=
 literal|""
 operator|+
 literal|"LogicalAggregate(group=[{0}], agg#0=[myAggFunc($1)])\n"
@@ -4149,7 +4327,27 @@ operator|+
 literal|"  LogicalProject(ENAME=[$1], DEPTNO=[$7])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
-decl_stmt|;
+expr_stmt|;
+break|break;
+case|case
+name|DOT
+case|:
+name|expected
+operator|=
+literal|"digraph {\n"
+operator|+
+literal|"\"LogicalProject\\nENAME = $1\\nDEPTNO = $7\\n\" -> \"LogicalAggregate\\ngroup = "
+operator|+
+literal|"{0}\\nagg#0 = myAggFunc($1\\n)\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"LogicalTableScan\\ntable = [scott, EMP]\\n\" -> \"LogicalProject\\nENAME = "
+operator|+
+literal|"$1\\nDEPTNO = $7\\n\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+expr_stmt|;
+break|break;
+block|}
 name|assertThat
 argument_list|(
 name|result
@@ -4361,16 +4559,19 @@ name|get
 argument_list|()
 return|;
 block|}
-comment|/**    * Deserialize a relnode from the json string by {@link RelJsonReader},    * and dump it to text format.    */
+comment|/**    * Deserialize a relnode from the json string by {@link RelJsonReader},    * and dump it to the given format.    */
 specifier|private
 name|String
-name|deserializeAndDumpToTextFormat
+name|deserializeAndDump
 parameter_list|(
 name|RelOptSchema
 name|schema
 parameter_list|,
 name|String
 name|relJson
+parameter_list|,
+name|SqlExplainFormat
+name|format
 parameter_list|)
 block|{
 name|String
@@ -4442,9 +4643,7 @@ literal|""
 argument_list|,
 name|node
 argument_list|,
-name|SqlExplainFormat
-operator|.
-name|TEXT
+name|format
 argument_list|,
 name|SqlExplainLevel
 operator|.
@@ -4456,6 +4655,31 @@ argument_list|)
 decl_stmt|;
 return|return
 name|s
+return|;
+block|}
+comment|/**    * Deserialize a relnode from the json string by {@link RelJsonReader},    * and dump it to text format.    */
+specifier|private
+name|String
+name|deserializeAndDumpToTextFormat
+parameter_list|(
+name|RelOptSchema
+name|schema
+parameter_list|,
+name|String
+name|relJson
+parameter_list|)
+block|{
+return|return
+name|deserializeAndDump
+argument_list|(
+name|schema
+argument_list|,
+name|relJson
+argument_list|,
+name|SqlExplainFormat
+operator|.
+name|TEXT
+argument_list|)
 return|;
 block|}
 comment|/**    * Creates a mock {@link RelNode} that contains OVER. The SQL is as follows:    *    *<blockquote>    * select count(*) over (partition by {@code partitionKeyNames}<br>    * order by {@code orderKeyNames}) from {@code table}    *</blockquote>    *    * @param table Table name    * @param partitionKeyNames Partition by column names, may empty, can not be    * null    * @param orderKeyNames Order by column names, may empty, can not be null    * @return RelNode for the SQL    */

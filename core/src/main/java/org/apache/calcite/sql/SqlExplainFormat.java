@@ -34,6 +34,9 @@ name|XML
 block|,
 comment|/** Indicates that the plan should be output in JSON format. */
 name|JSON
+block|,
+comment|/** Indicates that the plan should be output in dot format. */
+name|DOT
 block|}
 end_enum
 
