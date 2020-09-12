@@ -3720,6 +3720,11 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+argument_list|(
+name|makeImmutable
+operator|=
+literal|false
+argument_list|)
 name|List
 argument_list|<
 name|String
@@ -3928,6 +3933,11 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+argument_list|(
+name|makeImmutable
+operator|=
+literal|false
+argument_list|)
 name|List
 argument_list|<
 name|String

@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Primitive
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -78,6 +94,18 @@ operator|.
 name|reflect
 operator|.
 name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Modifier
 import|;
 end_import
 
@@ -2117,6 +2145,128 @@ block|}
 return|return
 literal|false
 return|;
+block|}
+comment|/** Returns whether a parameter of a given type could possibly have an    * argument of a given type.    *    *<p>For example, consider method    *    *<blockquote>    *   {@code foo(Object o, String s, int i, Number n, BigDecimal d}    *</blockquote>    *    *<p>To which which of those parameters could I pass a value that is an    * instance of {@link java.util.HashMap}? The answer:    *    *<ul>    *<li>{@code o} yes,    *<li>{@code s} no ({@code String} is a final class),    *<li>{@code i} no,    *<li>{@code n} yes ({@code Number} is an interface, and {@code HashMap} is    *       a non-final class, so I could create a sub-class of {@code HashMap}    *       that implements {@code Number},    *<li>{@code d} yes ({@code BigDecimal} is a non-final class).    *</ul>    */
+specifier|public
+specifier|static
+name|boolean
+name|mightBeAssignableFrom
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|parameterType
+parameter_list|,
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|argumentType
+parameter_list|)
+block|{
+comment|// TODO: think about arrays (e.g. int[] and String[])
+if|if
+condition|(
+name|parameterType
+operator|==
+name|argumentType
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+if|if
+condition|(
+name|Primitive
+operator|.
+name|is
+argument_list|(
+name|argumentType
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+if|if
+condition|(
+operator|!
+name|parameterType
+operator|.
+name|isInterface
+argument_list|()
+operator|&&
+name|Modifier
+operator|.
+name|isFinal
+argument_list|(
+name|parameterType
+operator|.
+name|getModifiers
+argument_list|()
+argument_list|)
+condition|)
+block|{
+comment|// parameter is a final class
+comment|// e.g. parameter String, argument Serializable
+comment|// e.g. parameter String, argument Map
+comment|// e.g. parameter String, argument Object
+comment|// e.g. parameter String, argument HashMap
+return|return
+name|argumentType
+operator|.
+name|isAssignableFrom
+argument_list|(
+name|parameterType
+argument_list|)
+return|;
+block|}
+else|else
+block|{
+comment|// parameter is an interface or non-final class
+if|if
+condition|(
+operator|!
+name|argumentType
+operator|.
+name|isInterface
+argument_list|()
+operator|&&
+name|Modifier
+operator|.
+name|isFinal
+argument_list|(
+name|argumentType
+operator|.
+name|getModifiers
+argument_list|()
+argument_list|)
+condition|)
+block|{
+comment|// argument is a final class
+comment|// e.g. parameter Object, argument String
+comment|// e.g. parameter Serializable, argument String
+return|return
+name|parameterType
+operator|.
+name|isAssignableFrom
+argument_list|(
+name|argumentType
+argument_list|)
+return|;
+block|}
+else|else
+block|{
+comment|// argument is an interface or non-final class
+comment|// e.g. parameter Map, argument Number
+return|return
+literal|true
+return|;
+block|}
+block|}
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Can invoke a method on an object of type E with return type T.    *    * @param<T> Return type of method    */
