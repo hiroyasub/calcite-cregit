@@ -111,20 +111,6 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Tag
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Test
 import|;
 end_import
@@ -222,11 +208,6 @@ comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *
 end_comment
 
 begin_class
-annotation|@
-name|Tag
-argument_list|(
-literal|"slow"
-argument_list|)
 class|class
 name|TpchTest
 block|{
@@ -270,7 +251,7 @@ literal|"       factory: 'org.apache.calcite.adapter.tpch.TpchSchemaFactory',\n"
 operator|+
 literal|"       operand: {\n"
 operator|+
-literal|"         columnPrefix: true,\n"
+literal|"         columnPrefix: false,\n"
 operator|+
 literal|"         scale: "
 operator|+

@@ -3114,7 +3114,7 @@ name|expected2
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[SEARCH($7, Sarg[(20\u202530)])])\n"
+literal|"LogicalFilter(condition=[SEARCH($7, Sarg[(20..30)])])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -18521,7 +18521,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[OR(SEARCH($7, Sarg[10, 11, (15â¥+â)]), "
+literal|"LogicalFilter(condition=[OR(SEARCH($7, Sarg[10, 11, (15..+â)]), "
 operator|+
 literal|"SEARCH($2, Sarg['CLERK']:CHAR(5)))])\n"
 operator|+
@@ -18793,7 +18793,7 @@ literal|"  LogicalFilter(condition=[=($cor0.SAL, 1000)])\n"
 operator|+
 literal|"    LogicalFilter(condition=[OR("
 operator|+
-literal|"SEARCH($cor0.DEPTNO, Sarg[(20\u202530)]), "
+literal|"SEARCH($cor0.DEPTNO, Sarg[(20..30)]), "
 operator|+
 literal|"IS NULL($2))], variablesSet=[[$cor0]])\n"
 operator|+
@@ -20752,7 +20752,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SEARCH($0, Sarg[[1\u20255]])"
+literal|"SEARCH($0, Sarg[[1..5]])"
 decl_stmt|;
 specifier|final
 name|RexNode
@@ -20864,7 +20864,7 @@ name|expectedRel
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[SEARCH($0, Sarg[[1\u20255]])])\n"
+literal|"LogicalFilter(condition=[SEARCH($0, Sarg[[1..5]])])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -20949,7 +20949,7 @@ literal|""
 operator|+
 literal|"LogicalFilter(condition=[AND(<>($0, 3), =($7, 10))])\n"
 operator|+
-literal|"  LogicalFilter(condition=[SEARCH($0, Sarg[[1\u20255]])])\n"
+literal|"  LogicalFilter(condition=[SEARCH($0, Sarg[[1..5]])])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -21058,7 +21058,7 @@ name|expectedRel3
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[AND(SEARCH($0, Sarg[[1\u20253), (3\u20255]]), "
+literal|"LogicalFilter(condition=[AND(SEARCH($0, Sarg[[1..3), (3..5]]), "
 operator|+
 literal|"SEARCH($7, Sarg[10]))])\n"
 operator|+

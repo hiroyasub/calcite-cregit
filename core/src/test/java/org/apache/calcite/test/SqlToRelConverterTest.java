@@ -4759,7 +4759,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4206">[CALCITE-4206]    * RelDecorrelator outputs wrong plan for correlate sort with fetch limit</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4206">[CALCITE-4206]    * RelDecorrelator outputs wrong plan for correlate sort with fetch    * limit</a>. */
 annotation|@
 name|Test
 name|void
@@ -4770,7 +4770,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"SELECT deptno, ename \n"
+literal|"SELECT deptno, ename\n"
 operator|+
 literal|"FROM\n"
 operator|+
@@ -15480,6 +15480,24 @@ argument_list|(
 name|sql
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|sql
+operator|.
+name|contains
+argument_list|(
+literal|" \n"
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"trailing whitespace"
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|decorrelate

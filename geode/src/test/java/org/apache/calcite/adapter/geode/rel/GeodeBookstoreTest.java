@@ -463,7 +463,7 @@ name|explainContains
 argument_list|(
 literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeFilter(condition=[SEARCH($0, Sarg[(122\u2025123]])])\n"
+literal|"  GeodeFilter(condition=[SEARCH($0, Sarg[(122..123]])])\n"
 operator|+
 literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)

@@ -453,6 +453,34 @@ name|versionString
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testGuavaMajorVersion
+parameter_list|()
+block|{
+name|int
+name|majorVersion
+init|=
+name|TestUtil
+operator|.
+name|getGuavaMajorVersion
+argument_list|()
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|majorVersion
+operator|>=
+literal|2
+argument_list|,
+literal|"current GuavaMajorVersion is "
+operator|+
+name|majorVersion
+operator|+
+literal|"; should exceed 2"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

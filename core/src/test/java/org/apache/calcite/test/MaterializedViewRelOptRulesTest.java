@@ -1265,7 +1265,7 @@ literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#5=[Sarg[(10\u202511]]], expr#6=[SEARCH($t0, $t5)]"
+literal|"expr#5=[Sarg[(10..11]]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.
@@ -1363,7 +1363,7 @@ literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#5=[Sarg[(10\u202511], [19\u202520)]], expr#6=[SEARCH($t0, $t5)]"
+literal|"expr#5=[Sarg[(10..11], [19..20)]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.
@@ -1897,7 +1897,7 @@ literal|"EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#5=[Sarg[(10\u202511], [19\u202520)]], expr#6=[SEARCH($t0, $t5)]"
+literal|"expr#5=[Sarg[(10..11], [19..20)]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.
@@ -2369,7 +2369,7 @@ literal|"EnumerableUnion(all=[true])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
-literal|"expr#5=[Sarg[(10\u202530]]], expr#6=[SEARCH($t0, $t5)]"
+literal|"expr#5=[Sarg[(10..30]]], expr#6=[SEARCH($t0, $t5)]"
 argument_list|)
 argument_list|)
 operator|.

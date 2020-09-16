@@ -2238,7 +2238,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|"(-\u221e\u2025+\u221e)"
+literal|"(-\u221e..+\u221e)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2272,7 +2272,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|"\u2025+\u221e)"
+literal|"..+\u221e)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2290,7 +2290,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|"(-\u221e\u2025"
+literal|"(-\u221e.."
 argument_list|)
 expr_stmt|;
 name|valuePrinter
@@ -2340,7 +2340,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|"\u2025+\u221e)"
+literal|"..+\u221e)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2358,7 +2358,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|"(-\u221e\u2025"
+literal|"(-\u221e.."
 argument_list|)
 expr_stmt|;
 name|valuePrinter
@@ -2431,7 +2431,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|'\u2025'
+literal|".."
 argument_list|)
 expr_stmt|;
 name|valuePrinter
@@ -2484,7 +2484,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|'\u2025'
+literal|".."
 argument_list|)
 expr_stmt|;
 name|valuePrinter
@@ -2537,7 +2537,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|'\u2025'
+literal|".."
 argument_list|)
 expr_stmt|;
 name|valuePrinter
@@ -2590,7 +2590,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|'\u2025'
+literal|".."
 argument_list|)
 expr_stmt|;
 name|valuePrinter

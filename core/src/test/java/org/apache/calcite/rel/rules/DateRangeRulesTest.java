@@ -737,7 +737,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"SEARCH($8, Sarg[[2014-06-01\u20252014-07-01)])"
+literal|"SEARCH($8, Sarg[[2014-06-01..2014-07-01)])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -777,9 +777,9 @@ specifier|final
 name|String
 name|s2
 init|=
-literal|"SEARCH($8, Sarg[[2000-02-01\u20252000-04-01),"
+literal|"SEARCH($8, Sarg[[2000-02-01..2000-04-01),"
 operator|+
-literal|" [2000-05-01\u20252000-06-01)])"
+literal|" [2000-05-01..2000-06-01)])"
 decl_stmt|;
 specifier|final
 name|RexNode

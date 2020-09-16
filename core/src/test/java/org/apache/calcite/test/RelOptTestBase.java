@@ -1099,6 +1099,24 @@ argument_list|(
 name|sql
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|sql
+operator|.
+name|contains
+argument_list|(
+literal|" \n"
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"trailing whitespace"
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|preProgram

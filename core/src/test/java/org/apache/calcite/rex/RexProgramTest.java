@@ -603,6 +603,22 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isRangeSet
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -7579,7 +7595,7 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|"SEARCH(?0.a, Sarg[(1\u20255)])"
+literal|"SEARCH(?0.a, Sarg[(1..5)])"
 argument_list|)
 expr_stmt|;
 comment|// condition "1> a&& 5> x" yields "1> a"
@@ -7689,7 +7705,7 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|"SEARCH(?0.a, Sarg[(1\u20255)])"
+literal|"SEARCH(?0.a, Sarg[(1..5)])"
 argument_list|)
 expr_stmt|;
 comment|// condition "a> 1&& a< 10&& a< 5"
@@ -7889,7 +7905,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"SEARCH(?0.a, Sarg[(1\u20255)])"
+literal|"SEARCH(?0.a, Sarg[(1..5)])"
 argument_list|)
 expr_stmt|;
 comment|// condition "a> 1"
@@ -8949,13 +8965,10 @@ decl_stmt|;
 name|assertThat
 argument_list|(
 name|setComplex
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252], [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..2], [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -8974,13 +8987,10 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[(-\u221e\u20251), (1\u2025+\u221e)]"
+literal|"[(-\u221e..1), (1..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9087,13 +9097,10 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[(0\u20251), (1\u2025+\u221e)]"
+literal|"[(0..1), (1..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9112,13 +9119,10 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20251), (1\u20252], [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..1), (1..2], [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9137,13 +9141,10 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252), [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..2), [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9162,13 +9163,10 @@ argument_list|(
 literal|3
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252], (5\u2025+\u221e)]"
+literal|"[[0..2], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9189,13 +9187,10 @@ argument_list|,
 literal|3
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252], [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..2], [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9216,13 +9211,10 @@ argument_list|,
 literal|3
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252), (5\u2025+\u221e)]"
+literal|"[[0..2), (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9243,13 +9235,10 @@ argument_list|,
 literal|7
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252), (7\u2025+\u221e)]"
+literal|"[[0..2), (7..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10231,7 +10220,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(0\u20256), (6\u202510], [15\u2025+\u221e)])"
+literal|"SEARCH($0, Sarg[(0..6), (6..10], [15..+\u221e)])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10300,7 +10289,7 @@ name|checkSimplify
 argument_list|(
 name|expr
 argument_list|,
-literal|"SEARCH($0, Sarg[[15\u2025+\u221e), null])"
+literal|"SEARCH($0, Sarg[[15..+\u221e), null])"
 argument_list|)
 operator|.
 name|expandedSearch
@@ -10403,7 +10392,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(0\u202512), [15\u2025+\u221e), null])"
+literal|"SEARCH($0, Sarg[(0..12), [15..+\u221e), null])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10478,7 +10467,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SEARCH($0, Sarg[(-\u221e\u20253), (3\u20255), (5\u2025+\u221e)])"
+literal|"SEARCH($0, Sarg[(-\u221e..3), (3..5), (5..+\u221e)])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10561,7 +10550,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(-\u221e\u20253), (3\u20255), (5\u2025+\u221e), null])"
+literal|"SEARCH($0, Sarg[(-\u221e..3), (3..5), (5..+\u221e), null])"
 decl_stmt|;
 specifier|final
 name|String

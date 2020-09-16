@@ -173,6 +173,34 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isRangeSet
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|anyOf
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -371,13 +399,10 @@ decl_stmt|;
 name|assertThat
 argument_list|(
 name|setComplex
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252], [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..2], [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -396,13 +421,10 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[(-\u221e\u20251), (1\u2025+\u221e)]"
+literal|"[(-\u221e..1), (1..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -509,13 +531,10 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[(0\u20251), (1\u2025+\u221e)]"
+literal|"[(0..1), (1..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -534,13 +553,10 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20251), (1\u20252], [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..1), (1..2], [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -559,13 +575,10 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252), [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..2), [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -584,13 +597,10 @@ argument_list|(
 literal|3
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252], (5\u2025+\u221e)]"
+literal|"[[0..2], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -611,13 +621,10 @@ argument_list|,
 literal|3
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252], [3\u20253], (5\u2025+\u221e)]"
+literal|"[[0..2], [3..3], (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -638,13 +645,10 @@ argument_list|,
 literal|3
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252), (5\u2025+\u221e)]"
+literal|"[[0..2), (5..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -665,13 +669,10 @@ argument_list|,
 literal|7
 argument_list|)
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|isRangeSet
 argument_list|(
-literal|"[[0\u20252), (7\u2025+\u221e)]"
+literal|"[[0..2), (7..+\u221e)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2523,7 +2524,8 @@ operator|new
 name|Fixture
 argument_list|()
 decl_stmt|;
-comment|// RangeSet's native printing
+comment|// RangeSet's native printing; format used a unicode symbol up to 28.2, and
+comment|// ".." 29.0 and later.
 specifier|final
 name|List
 argument_list|<
@@ -2557,13 +2559,23 @@ argument_list|)
 expr_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedGuava28
 init|=
 literal|"[(-\u221e\u2025+\u221e), (-\u221e\u20253], "
 operator|+
 literal|"[4\u2025+\u221e), (-\u221e\u20255), (6\u2025+\u221e), [7\u20257], "
 operator|+
 literal|"(8\u20259), (10\u202511], [12\u202513], [14\u202515)]"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedGuava29
+init|=
+literal|"[(-\u221e..+\u221e), (-\u221e..3], "
+operator|+
+literal|"[4..+\u221e), (-\u221e..5), (6..+\u221e), [7..7], "
+operator|+
+literal|"(8..9), (10..11], [12..13], [14..15)]"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -2572,9 +2584,17 @@ operator|.
 name|toString
 argument_list|()
 argument_list|,
+name|anyOf
+argument_list|(
 name|is
 argument_list|(
-name|expected
+name|expectedGuava28
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expectedGuava29
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2643,11 +2663,11 @@ specifier|final
 name|String
 name|expected2
 init|=
-literal|"[(-\u221e\u2025+\u221e), (-\u221e\u20253], "
+literal|"[(-\u221e..+\u221e), (-\u221e..3], "
 operator|+
-literal|"[4\u2025+\u221e), (-\u221e\u20255), (6\u2025+\u221e), 7, "
+literal|"[4..+\u221e), (-\u221e..5), (6..+\u221e), 7, "
 operator|+
-literal|"(8\u20259), (10\u202511], [12\u202513], [14\u202515)]"
+literal|"(8..9), (10..11], [12..13], [14..15)]"
 decl_stmt|;
 name|assertThat
 argument_list|(
