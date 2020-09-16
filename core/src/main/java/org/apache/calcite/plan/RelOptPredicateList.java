@@ -894,7 +894,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|// A comparison with a literal, such as 'ref< 10', is not null if 'ref'
+comment|// A comparison with a (non-null) literal, such as 'ref< 10', is not null if 'ref'
 comment|// is not null.
 name|RexCall
 name|call
@@ -917,6 +917,25 @@ literal|1
 argument_list|)
 operator|instanceof
 name|RexLiteral
+operator|&&
+operator|!
+operator|(
+operator|(
+name|RexLiteral
+operator|)
+name|call
+operator|.
+name|getOperands
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+operator|)
+operator|.
+name|isNull
+argument_list|()
 condition|)
 block|{
 return|return
