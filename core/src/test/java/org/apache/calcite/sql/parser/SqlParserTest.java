@@ -17437,6 +17437,41 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testExplainAsDot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan as dot for select * from emps"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"EXPLAIN PLAN"
+operator|+
+literal|" INCLUDING ATTRIBUTES WITH IMPLEMENTATION AS DOT FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testExplainAsJson
 parameter_list|()
 block|{

@@ -623,6 +623,17 @@ literal|"AS JSON"
 argument_list|)
 expr_stmt|;
 break|break;
+case|case
+name|DOT
+case|:
+name|writer
+operator|.
+name|keyword
+argument_list|(
+literal|"AS DOT"
+argument_list|)
+expr_stmt|;
+break|break;
 default|default:
 block|}
 name|writer

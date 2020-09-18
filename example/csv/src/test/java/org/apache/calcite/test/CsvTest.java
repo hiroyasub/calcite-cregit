@@ -203,6 +203,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|ParameterizedTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|provider
+operator|.
+name|MethodSource
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -416,6 +446,18 @@ operator|.
 name|function
 operator|.
 name|Consumer
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|stream
+operator|.
+name|Stream
 import|;
 end_import
 
@@ -763,6 +805,25 @@ operator|.
 name|append
 argument_list|(
 literal|'"'
+argument_list|)
+return|;
+block|}
+specifier|static
+name|Stream
+argument_list|<
+name|String
+argument_list|>
+name|explainFormats
+parameter_list|()
+block|{
+return|return
+name|Stream
+operator|.
+name|of
+argument_list|(
+literal|"text"
+argument_list|,
+literal|"dot"
 argument_list|)
 return|;
 block|}
@@ -1234,30 +1295,82 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testPushDownProjectAggregate
-parameter_list|()
+parameter_list|(
+name|String
+name|format
+parameter_list|)
 throws|throws
 name|SQLException
 block|{
-specifier|final
-name|String
-name|sql
-init|=
-literal|"explain plan for\n"
-operator|+
-literal|"select gender, count(*) from EMPS group by gender"
-decl_stmt|;
-specifier|final
 name|String
 name|expected
 init|=
+literal|null
+decl_stmt|;
+name|String
+name|extra
+init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+literal|"dot"
+case|:
+name|expected
+operator|=
+literal|"PLAN=digraph {\n"
+operator|+
+literal|"\"CsvTableScan\\ntable = [SALES, EMPS\\n]\\nfields = [3]\\n\" -> "
+operator|+
+literal|"\"EnumerableAggregate\\ngroup = {0}\\nEXPR$1 = COUNT()\\n\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|" as dot "
+expr_stmt|;
+break|break;
+case|case
+literal|"text"
+case|:
+name|expected
+operator|=
 literal|"PLAN="
 operator|+
 literal|"EnumerableAggregate(group=[{0}], EXPR$1=[COUNT()])\n"
 operator|+
 literal|"  CsvTableScan(table=[[SALES, EMPS]], fields=[[3]])\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|""
+expr_stmt|;
+break|break;
+block|}
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan "
+operator|+
+name|extra
+operator|+
+literal|"for\n"
+operator|+
+literal|"select gender, count(*) from EMPS group by gender"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1276,25 +1389,67 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testPushDownProjectAggregateWithFilter
-parameter_list|()
+parameter_list|(
+name|String
+name|format
+parameter_list|)
 throws|throws
 name|SQLException
 block|{
-specifier|final
-name|String
-name|sql
-init|=
-literal|"explain plan for\n"
-operator|+
-literal|"select max(empno) from EMPS where gender='F'"
-decl_stmt|;
-specifier|final
 name|String
 name|expected
 init|=
+literal|null
+decl_stmt|;
+name|String
+name|extra
+init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+literal|"dot"
+case|:
+name|expected
+operator|=
+literal|"PLAN=digraph {\n"
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..1 = {inputs}\\nexpr#2 = 'F':VARCHAR\\nexpr#3 = =($t1, $t2)"
+operator|+
+literal|"\\nproj#0..1 = {exprs}\\n$condition = $t3\" -> \"EnumerableAggregate\\ngroup = "
+operator|+
+literal|"{}\\nEXPR$0 = MAX($0)\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"CsvTableScan\\ntable = [SALES, EMPS\\n]\\nfields = [0, 3]\\n\" -> "
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..1 = {inputs}\\nexpr#2 = 'F':VARCHAR\\nexpr#3 = =($t1, $t2)"
+operator|+
+literal|"\\nproj#0..1 = {exprs}\\n$condition = $t3\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|" as dot "
+expr_stmt|;
+break|break;
+case|case
+literal|"text"
+case|:
+name|expected
+operator|=
 literal|"PLAN="
 operator|+
 literal|"EnumerableAggregate(group=[{}], EXPR$0=[MAX($0)])\n"
@@ -1304,6 +1459,24 @@ operator|+
 literal|"expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"    CsvTableScan(table=[[SALES, EMPS]], fields=[[0, 3]])\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|""
+expr_stmt|;
+break|break;
+block|}
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan "
+operator|+
+name|extra
+operator|+
+literal|" for\n"
+operator|+
+literal|"select max(empno) from EMPS where gender='F'"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1322,18 +1495,86 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testPushDownProjectAggregateNested
-parameter_list|()
+parameter_list|(
+name|String
+name|format
+parameter_list|)
 throws|throws
 name|SQLException
 block|{
+name|String
+name|expected
+init|=
+literal|null
+decl_stmt|;
+name|String
+name|extra
+init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+literal|"dot"
+case|:
+name|expected
+operator|=
+literal|"PLAN=digraph {\n"
+operator|+
+literal|"\"EnumerableAggregate\\ngroup = {0, 1}\\nQTY = COUNT()\\n\" -> "
+operator|+
+literal|"\"EnumerableAggregate\\ngroup = {1}\\nEXPR$1 = MAX($2)\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"CsvTableScan\\ntable = [SALES, EMPS\\n]\\nfields = [1, 3]\\n\" -> "
+operator|+
+literal|"\"EnumerableAggregate\\ngroup = {0, 1}\\nQTY = COUNT()\\n\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|" as dot "
+expr_stmt|;
+break|break;
+case|case
+literal|"text"
+case|:
+name|expected
+operator|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableAggregate(group=[{1}], EXPR$1=[MAX($2)])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1}], QTY=[COUNT()])\n"
+operator|+
+literal|"    CsvTableScan(table=[[SALES, EMPS]], fields=[[1, 3]])\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|""
+expr_stmt|;
+break|break;
+block|}
 specifier|final
 name|String
 name|sql
 init|=
-literal|"explain plan for\n"
+literal|"explain plan "
+operator|+
+name|extra
+operator|+
+literal|" for\n"
 operator|+
 literal|"select gender, max(qty)\n"
 operator|+
@@ -1346,18 +1587,6 @@ operator|+
 literal|"  group by name, gender) t\n"
 operator|+
 literal|"group by gender"
-decl_stmt|;
-specifier|final
-name|String
-name|expected
-init|=
-literal|"PLAN="
-operator|+
-literal|"EnumerableAggregate(group=[{1}], EXPR$1=[MAX($2)])\n"
-operator|+
-literal|"  EnumerableAggregate(group=[{0, 1}], QTY=[COUNT()])\n"
-operator|+
-literal|"    CsvTableScan(table=[[SALES, EMPS]], fields=[[1, 3]])\n"
 decl_stmt|;
 name|sql
 argument_list|(

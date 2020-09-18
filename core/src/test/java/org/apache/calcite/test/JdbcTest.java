@@ -1259,6 +1259,36 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|ParameterizedTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|provider
+operator|.
+name|MethodSource
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -2292,6 +2322,25 @@ parameter_list|()
 block|{
 return|return
 name|FOODMART_QUERIES
+return|;
+block|}
+specifier|static
+name|Stream
+argument_list|<
+name|String
+argument_list|>
+name|explainFormats
+parameter_list|()
+block|{
+return|return
+name|Stream
+operator|.
+name|of
+argument_list|(
+literal|"text"
+argument_list|,
+literal|"dot"
+argument_list|)
 return|;
 block|}
 comment|/** Tests a modifiable view. */
@@ -11936,23 +11985,71 @@ expr_stmt|;
 block|}
 comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testUnionWithSameColumnNames
-parameter_list|()
+parameter_list|(
+name|String
+name|format
+parameter_list|)
 block|{
-name|CalciteAssert
-operator|.
-name|hr
-argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"select \"deptno\", \"deptno\" from \"hr\".\"depts\" union select \"deptno\", \"empid\" from \"hr\".\"emps\""
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
+name|String
+name|expected
+init|=
+literal|null
+decl_stmt|;
+name|String
+name|extra
+init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+literal|"dot"
+case|:
+name|expected
+operator|=
+literal|"PLAN=digraph {\n"
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..3 = {inputs}\\ndeptno = $t0\\ndeptno0 = $t0\\n\" -> "
+operator|+
+literal|"\"EnumerableUnion\\nall = false\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..4 = {inputs}\\ndeptno = $t1\\nempid = $t0\\n\" -> "
+operator|+
+literal|"\"EnumerableUnion\\nall = false\\n\" [label=\"1\"]\n"
+operator|+
+literal|"\"EnumerableTableScan\\ntable = [hr, depts]\\n\" -> \"EnumerableCalc\\nexpr#0..3 = "
+operator|+
+literal|"{inputs}\\ndeptno = $t0\\ndeptno0 = $t0\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"EnumerableTableScan\\ntable = [hr, emps]\\n\" -> \"EnumerableCalc\\nexpr#0..4 = "
+operator|+
+literal|"{inputs}\\ndeptno = $t1\\nempid = $t0\\n\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+operator|+
+literal|"\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|" as dot "
+expr_stmt|;
+break|break;
+case|case
+literal|"text"
+case|:
+name|expected
+operator|=
 literal|""
 operator|+
 literal|"PLAN=EnumerableUnion(all=[false])\n"
@@ -11964,6 +12061,33 @@ operator|+
 literal|"  EnumerableCalc(expr#0..4=[{inputs}], deptno=[$t1], empid=[$t0])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|""
+expr_stmt|;
+break|break;
+block|}
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", \"deptno\" from \"hr\".\"depts\" union select \"deptno\", \"empid\" from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+name|extra
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+name|expected
+argument_list|)
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -11986,11 +12110,97 @@ expr_stmt|;
 block|}
 comment|/** Tests inner join to an inline table ({@code VALUES} clause). */
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testInnerJoinValues
-parameter_list|()
+parameter_list|(
+name|String
+name|format
+parameter_list|)
 block|{
+name|String
+name|expected
+init|=
+literal|null
+decl_stmt|;
+name|String
+name|extra
+init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+literal|"text"
+case|:
+name|expected
+operator|=
+literal|"EnumerableAggregate(group=[{0, 3}])\n"
+operator|+
+literal|"  EnumerableNestedLoopJoin(condition=[=(CAST($1):INTEGER NOT NULL, $2)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[SALES, EMPS]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=['SameName'], expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"      EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|""
+expr_stmt|;
+break|break;
+case|case
+literal|"dot"
+case|:
+name|expected
+operator|=
+literal|"PLAN=digraph {\n"
+operator|+
+literal|"\"EnumerableNestedLoop\\nJoin\\ncondition = =(CAST($\\n1):INTEGER NOT NULL,\\n $2)"
+operator|+
+literal|"\\njoinType = inner\\n\" -> \"EnumerableAggregate\\ngroup = {0, 3}\\n\" "
+operator|+
+literal|"[label=\"0\"]\n"
+operator|+
+literal|"\"EnumerableTableScan\\ntable = [SALES, EMPS\\n]\\n\" -> "
+operator|+
+literal|"\"EnumerableNestedLoop\\nJoin\\ncondition = =(CAST($\\n1):INTEGER NOT NULL,\\n $2)"
+operator|+
+literal|"\\njoinType = inner\\n\" [label=\"0\"]\n"
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..1 = {inputs}\\nexpr#2 = 'SameName'\\nexpr#3 = =($t1, $t2)"
+operator|+
+literal|"\\nproj#0..1 = {exprs}\\n$condition = $t3\" -> "
+operator|+
+literal|"\"EnumerableNestedLoop\\nJoin\\ncondition = =(CAST($\\n1):INTEGER NOT NULL,\\n $2)"
+operator|+
+literal|"\\njoinType = inner\\n\" [label=\"1\"]\n"
+operator|+
+literal|"\"EnumerableValues\\ntuples = [{ 10, 'Sam\\neName' }]\\n\" -> "
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..1 = {inputs}\\nexpr#2 = 'SameName'\\nexpr#3 = =($t1, $t2)"
+operator|+
+literal|"\\nproj#0..1 = {exprs}\\n$condition = $t3\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+operator|+
+literal|"\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|" as dot "
+expr_stmt|;
+break|break;
+block|}
 name|CalciteAssert
 operator|.
 name|that
@@ -12014,17 +12224,16 @@ operator|+
 literal|"where emps.deptno = sn.id and sn.desc = 'SameName' group by empno, desc"
 argument_list|)
 operator|.
-name|explainContains
+name|explainMatches
 argument_list|(
-literal|"EnumerableAggregate(group=[{0, 3}])\n"
-operator|+
-literal|"  EnumerableNestedLoopJoin(condition=[=(CAST($1):INTEGER NOT NULL, $2)], joinType=[inner])\n"
-operator|+
-literal|"    EnumerableTableScan(table=[[SALES, EMPS]])\n"
-operator|+
-literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=['SameName'], expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
-operator|+
-literal|"      EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
+name|extra
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+name|expected
+argument_list|)
 argument_list|)
 operator|.
 name|returns
@@ -14721,11 +14930,73 @@ expr_stmt|;
 block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
-name|Test
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"explainFormats"
+argument_list|)
 name|void
 name|testOrderByOnSortedTable2
-parameter_list|()
+parameter_list|(
+name|String
+name|format
+parameter_list|)
 block|{
+name|String
+name|expected
+init|=
+literal|null
+decl_stmt|;
+name|String
+name|extra
+init|=
+literal|null
+decl_stmt|;
+switch|switch
+condition|(
+name|format
+condition|)
+block|{
+case|case
+literal|"text"
+case|:
+name|expected
+operator|=
+literal|""
+operator|+
+literal|"PLAN=EnumerableCalc(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|""
+expr_stmt|;
+break|break;
+case|case
+literal|"dot"
+case|:
+name|expected
+operator|=
+literal|"PLAN=digraph {\n"
+operator|+
+literal|"\"EnumerableTableScan\\ntable = [foodmart2, \\ntime_by_day]\\n\" -> "
+operator|+
+literal|"\"EnumerableCalc\\nexpr#0..9 = {inputs}\\nexpr#10 = 370\\nexpr#11 =<($t0, $t1\\n0)"
+operator|+
+literal|"\\nproj#0..1 = {exprs}\\n$condition = $t11\" [label=\"0\"]\n"
+operator|+
+literal|"}\n"
+operator|+
+literal|"\n"
+expr_stmt|;
+name|extra
+operator|=
+literal|" as dot "
+expr_stmt|;
+break|break;
+block|}
 name|CalciteAssert
 operator|.
 name|that
@@ -14758,13 +15029,16 @@ operator|+
 literal|"time_id=369; the_date=1997-01-03 00:00:00\n"
 argument_list|)
 operator|.
-name|explainContains
+name|explainMatches
 argument_list|(
-literal|""
-operator|+
-literal|"PLAN=EnumerableCalc(expr#0..9=[{inputs}], expr#10=[370], expr#11=[<($t0, $t10)], proj#0..1=[{exprs}], $condition=[$t11])\n"
-operator|+
-literal|"  EnumerableTableScan(table=[[foodmart2, time_by_day]])\n\n"
+name|extra
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+name|expected
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
