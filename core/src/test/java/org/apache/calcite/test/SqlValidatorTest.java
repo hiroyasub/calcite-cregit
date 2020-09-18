@@ -8481,6 +8481,460 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testPivot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS ss FOR job in ('CLERK' AS c, 'MANAGER' AS m))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(20) NOT NULL ENAME, INTEGER MGR,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL HIREDATE, INTEGER NOT NULL COMM,"
+operator|+
+literal|" INTEGER NOT NULL DEPTNO, BOOLEAN NOT NULL SLACKER,"
+operator|+
+literal|" INTEGER C_SS, INTEGER M_SS) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivot2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM   (SELECT deptno, job, sal\n"
+operator|+
+literal|"        FROM   emp)\n"
+operator|+
+literal|"PIVOT  (SUM(sal) AS sum_sal, COUNT(*) AS \"COUNT\"\n"
+operator|+
+literal|"        FOR (job) IN ('CLERK', 'MANAGER' mgr, 'ANALYST' AS \"a\"))\n"
+operator|+
+literal|"ORDER BY deptno"
+decl_stmt|;
+specifier|final
+name|String
+name|type
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"INTEGER 'CLERK'_SUM_SAL, BIGINT NOT NULL 'CLERK'_COUNT, "
+operator|+
+literal|"INTEGER MGR_SUM_SAL, BIGINT NOT NULL MGR_COUNT, INTEGER a_SUM_SAL, "
+operator|+
+literal|"BIGINT NOT NULL a_COUNT) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotAliases
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|"    SELECT deptno, job, sal FROM   emp)\n"
+operator|+
+literal|"PIVOT (SUM(sal) AS ss\n"
+operator|+
+literal|"    FOR (job, deptno)\n"
+operator|+
+literal|"    IN (('A B'/*C*/||' D', 10),\n"
+operator|+
+literal|"        ('MANAGER', null) mgr,\n"
+operator|+
+literal|"        ('ANALYST', 30) AS \"a\"))"
+decl_stmt|;
+comment|// Oracle uses parse tree without spaces around '||',
+comment|//   'A B'||' D'_10_SUM_SAL
+comment|// but close enough.
+specifier|final
+name|String
+name|type
+init|=
+literal|"RecordType(INTEGER 'A B' || ' D'_10_SS, "
+operator|+
+literal|"INTEGER MGR_SS, INTEGER a_SS) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotAggAliases
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT deptno, job, sal FROM emp)\n"
+operator|+
+literal|"PIVOT (SUM(sal) AS ss, MIN(job)\n"
+operator|+
+literal|"    FOR deptno IN (10 AS ten, 20))"
+decl_stmt|;
+specifier|final
+name|String
+name|type
+init|=
+literal|"RecordType(INTEGER TEN_SS, VARCHAR(10) TEN, "
+operator|+
+literal|"INTEGER 20_SS, VARCHAR(10) 20) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotNoValues
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT deptno, sal, job FROM emp)\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sum_sal FOR job in ())"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL DEPTNO) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Output only includes columns not referenced in an aggregate or axis. */
+annotation|@
+name|Test
+name|void
+name|testPivotRemoveColumns
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sum_sal, count(comm) AS count_comm,\n"
+operator|+
+literal|"      min(hiredate) AS min_hiredate, max(hiredate) AS max_hiredate\n"
+operator|+
+literal|"  FOR (job, deptno, slacker, mgr, ename)\n"
+operator|+
+literal|"  IN (('CLERK', 10, false, null, ename) AS c10))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" INTEGER C10_SUM_SAL, BIGINT NOT NULL C10_COUNT_COMM,"
+operator|+
+literal|" TIMESTAMP(0) C10_MIN_HIREDATE,"
+operator|+
+literal|" TIMESTAMP(0) C10_MAX_HIREDATE) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotInvalidCol
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(^invalid^) AS sal FOR job in ('CLERK' AS c, 'MANAGER'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'INVALID' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotInvalidCol2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR (job, ^invalid^) in (('CLERK', 'x') AS c))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'INVALID' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotMeasureMustBeAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sal ^+^ 1 AS sal1 FOR job in ('CLERK' AS c, 'MANAGER'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"\\+\" at .*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (^log10(sal)^ AS logSal FOR job in ('CLERK' AS c, 'MANAGER'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Measure expression in PIVOT must use aggregate function"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (^123^ AS logSal FOR job in ('CLERK' AS c, 'MANAGER'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"123\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests an expression as argument to an aggregate function in a PIVOT.    * Both of the columns referenced ({@code sum} and {@code deptno}) are removed    * from the implicit GROUP BY. */
+annotation|@
+name|Test
+name|void
+name|testPivotAggExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM (SELECT sal, deptno, job, mgr FROM Emp)\n"
+operator|+
+literal|"PIVOT (sum(sal + deptno + 1)\n"
+operator|+
+literal|"   FOR job in ('CLERK' AS c, 'ANALYST' AS a))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER MGR, INTEGER C, INTEGER A) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotValueMismatch
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM Emp\n"
+operator|+
+literal|"PIVOT (SUM(sal) FOR job IN (^('A', 'B')^, ('C', 'D')))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Value count in PIVOT \\(2\\) must match number of "
+operator|+
+literal|"FOR columns \\(1\\)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"SELECT * FROM Emp\n"
+operator|+
+literal|"PIVOT (SUM(sal) FOR job IN (^('A', 'B')^ AS x, ('C', 'D')))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Value count in PIVOT \\(2\\) must match number of "
+operator|+
+literal|"FOR columns \\(1\\)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"SELECT * FROM Emp\n"
+operator|+
+literal|"PIVOT (SUM(sal) FOR (job) IN (^('A', 'B')^))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Value count in PIVOT \\(2\\) must match number of "
+operator|+
+literal|"FOR columns \\(1\\)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"SELECT * FROM Emp\n"
+operator|+
+literal|"PIVOT (SUM(sal) FOR (job, deptno) IN (^'CLERK'^, 10))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Value count in PIVOT \\(1\\) must match number of "
+operator|+
+literal|"FOR columns \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMatchRecognizeWithDistinctAggregation
 parameter_list|()
 block|{

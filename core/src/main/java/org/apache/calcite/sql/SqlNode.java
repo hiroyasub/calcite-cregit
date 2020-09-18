@@ -1059,7 +1059,7 @@ name|succeed
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns a {@code Collector} that accumulates the input elements into a    * {@link SqlNodeList}.    *    * @param<T> Type of the input elements    *    * @return a {@code Collector} that collects all the input elements into a    * {@link SqlNodeList}, in encounter order    */
+comment|/**    * Returns a {@code Collector} that accumulates the input elements into a    * {@link SqlNodeList}, with zero position.    *    * @param<T> Type of the input elements    *    * @return a {@code Collector} that collects all the input elements into a    * {@link SqlNodeList}, in encounter order    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -1080,6 +1080,40 @@ name|SqlNodeList
 argument_list|>
 name|toList
 parameter_list|()
+block|{
+return|return
+name|toList
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|)
+return|;
+block|}
+comment|/**    * Returns a {@code Collector} that accumulates the input elements into a    * {@link SqlNodeList}.    *    * @param<T> Type of the input elements    *    * @return a {@code Collector} that collects all the input elements into a    * {@link SqlNodeList}, in encounter order    */
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+extends|extends
+name|SqlNode
+parameter_list|>
+name|Collector
+argument_list|<
+name|T
+argument_list|,
+name|ArrayList
+argument_list|<
+name|T
+argument_list|>
+argument_list|,
+name|SqlNodeList
+argument_list|>
+name|toList
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
 block|{
 return|return
 name|Collector
@@ -1105,9 +1139,7 @@ name|SqlNodeList
 argument_list|(
 name|list
 argument_list|,
-name|SqlParserPos
-operator|.
-name|ZERO
+name|pos
 argument_list|)
 argument_list|)
 return|;

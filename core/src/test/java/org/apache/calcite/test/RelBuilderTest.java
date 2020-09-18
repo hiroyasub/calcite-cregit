@@ -17493,6 +17493,214 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testPivot
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM (SELECT mgr, deptno, job, sal FROM emp)
+comment|//   PIVOT (SUM(sal) AS ss, COUNT(*) AS c
+comment|//       FOR (job, deptno)
+comment|//       IN (('CLERK', 10) AS c10, ('MANAGER', 20) AS m20))
+comment|//
+comment|// translates to
+comment|//   SELECT mgr,
+comment|//     SUM(sal) FILTER (WHERE job = 'CLERK' AND deptno = 10) AS c10_ss,
+comment|//     COUNT(*) FILTER (WHERE job = 'CLERK' AND deptno = 10) AS c10_c,
+comment|//     SUM(sal) FILTER (WHERE job = 'MANAGER' AND deptno = 20) AS m20_ss,
+comment|//     COUNT(*) FILTER (WHERE job = 'MANAGER' AND deptno = 20) AS m20_c
+comment|//   FROM emp
+comment|//   GROUP BY mgr
+comment|//
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|b
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|pivot
+argument_list|(
+name|b
+operator|.
+name|groupKey
+argument_list|(
+literal|"MGR"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|b
+operator|.
+name|sum
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"SAL"
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"SS"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|count
+argument_list|()
+operator|.
+name|as
+argument_list|(
+literal|"C"
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|fields
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"JOB"
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableMap
+operator|.
+block_content|<String
+decl_stmt|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+decl|>
+name|builder
+argument_list|()
+decl|.
+name|put
+argument_list|(
+literal|"C10"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|"CLERK"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"M20"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|"MANAGER"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|)
+argument_list|)
+decl|.
+name|build
+argument_list|()
+decl|.
+name|entrySet
+argument_list|()
+decl_stmt|)             .build(
+block_content|)
+function|;
+end_function
+
+begin_decl_stmt
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{0}], C10_SS=[SUM($1) FILTER $2], "
+operator|+
+literal|"C10_C=[COUNT() FILTER $2], M20_SS=[SUM($1) FILTER $3], "
+operator|+
+literal|"M20_C=[COUNT() FILTER $3])\n"
+operator|+
+literal|"  LogicalProject(MGR=[$3], SAL=[$5], "
+operator|+
+literal|"$f8=[IS TRUE(AND(=($2, 'CLERK'), =($7, 10)))], "
+operator|+
+literal|"$f9=[IS TRUE(AND(=($2, 'MANAGER'), =($7, 20)))])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+end_decl_stmt
+
+begin_expr_stmt
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_function
+unit|}    @
+name|Test
+name|void
 name|testMatchRecognize
 parameter_list|()
 block|{

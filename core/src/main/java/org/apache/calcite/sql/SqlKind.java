@@ -206,6 +206,9 @@ block|,
 comment|/** TABLESAMPLE relational operator. */
 name|TABLESAMPLE
 block|,
+comment|/** PIVOT clause. */
+name|PIVOT
+block|,
 comment|/** MATCH_RECOGNIZE clause. */
 name|MATCH_RECOGNIZE
 block|,

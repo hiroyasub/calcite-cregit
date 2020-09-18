@@ -13087,6 +13087,72 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testPivot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT mgr, deptno, job, sal FROM emp)\n"
+operator|+
+literal|"PIVOT (SUM(sal) AS ss, COUNT(*)\n"
+operator|+
+literal|"    FOR (job, deptno)\n"
+operator|+
+literal|"    IN (('CLERK', 10) AS c10, ('MANAGER', 20) AS m20))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPivot2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM   (SELECT deptno, job, sal\n"
+operator|+
+literal|"        FROM   emp)\n"
+operator|+
+literal|"PIVOT  (SUM(sal) AS sum_sal, COUNT(*) AS \"COUNT\"\n"
+operator|+
+literal|"        FOR (job) IN ('CLERK', 'MANAGER' mgr, 'ANALYST' AS \"a\"))\n"
+operator|+
+literal|"ORDER BY deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testMatchRecognize1
 parameter_list|()
 block|{

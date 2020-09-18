@@ -3419,6 +3419,36 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Measure expression in PIVOT must use aggregate function"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|pivotAggMalformed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Value count in PIVOT ({0,number,#}) must match number of FOR columns ({1,number,#})"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|pivotValueArityMismatch
+parameter_list|(
+name|int
+name|valueCount
+parameter_list|,
+name|int
+name|forCount
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Pattern variable ''{0}'' has already been defined"
 argument_list|)
 name|ExInst

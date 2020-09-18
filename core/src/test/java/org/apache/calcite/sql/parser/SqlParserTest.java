@@ -33433,6 +33433,246 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testPivot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR job in ('CLERK' AS c))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` PIVOT (SUM(`SAL`) AS `SAL`"
+operator|+
+literal|" FOR `JOB` IN ('CLERK' AS `C`))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// As previous, but parentheses around singleton column.
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR (job) in ('CLERK' AS c))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testPivot()} but composite FOR and two composite values. */
+annotation|@
+name|Test
+name|void
+name|testPivotComposite
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR (job, deptno) IN\n"
+operator|+
+literal|" (('CLERK', 10) AS c10, ('MANAGER', 20) AS m20))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` PIVOT (SUM(`SAL`) AS `SAL` FOR (`JOB`, `DEPTNO`)"
+operator|+
+literal|" IN (('CLERK', 10) AS `C10`, ('MANAGER', 20) AS `M20`))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Pivot with no values. */
+annotation|@
+name|Test
+name|void
+name|testPivotWithoutValues
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR job IN ())"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` PIVOT (SUM(`SAL`) AS `SAL` FOR `JOB` IN ())"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** In PIVOT, FOR clause must contain only simple identifiers. */
+annotation|@
+name|Test
+name|void
+name|testPivotErrorExpressionInFor
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR deptno ^-^10 IN (10, 20)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testPivotErrorExpressionInFor()} but more than one column. */
+annotation|@
+name|Test
+name|void
+name|testPivotErrorExpressionInCompositeFor
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR (job, deptno ^-^10)\n"
+operator|+
+literal|" IN (('CLERK', 10), ('MANAGER', 20))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"-\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** More complex PIVOT case (multiple aggregates, composite FOR, multiple    * values with and without aliases). */
+annotation|@
+name|Test
+name|void
+name|testPivot2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT deptno, job, sal\n"
+operator|+
+literal|"    FROM   emp)\n"
+operator|+
+literal|"PIVOT (SUM(sal) AS sum_sal, COUNT(*) AS \"COUNT\"\n"
+operator|+
+literal|"    FOR (job, deptno)\n"
+operator|+
+literal|"    IN (('CLERK', 10),\n"
+operator|+
+literal|"        ('MANAGER', 20) mgr20,\n"
+operator|+
+literal|"        ('ANALYST', 10) AS \"a10\"))\n"
+operator|+
+literal|"ORDER BY deptno"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `DEPTNO`, `JOB`, `SAL`\n"
+operator|+
+literal|"FROM `EMP`) PIVOT (SUM(`SAL`) AS `SUM_SAL`, COUNT(*) AS `COUNT` "
+operator|+
+literal|"FOR (`JOB`, `DEPTNO`) "
+operator|+
+literal|"IN (('CLERK', 10),"
+operator|+
+literal|" ('MANAGER', 20) AS `MGR20`,"
+operator|+
+literal|" ('ANALYST', 10) AS `a10`))\n"
+operator|+
+literal|"ORDER BY `DEPTNO`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMatchRecognize1
 parameter_list|()
 block|{
@@ -33670,7 +33910,7 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"  from t match_recognize\n"
+literal|"  from (select * from t) match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
@@ -33690,7 +33930,9 @@ name|expected
 init|=
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `T` MATCH_RECOGNIZE(\n"
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `T`) MATCH_RECOGNIZE(\n"
 operator|+
 literal|"PATTERN (((`STRT` (`DOWN` *)) (`UP` ?)))\n"
 operator|+
