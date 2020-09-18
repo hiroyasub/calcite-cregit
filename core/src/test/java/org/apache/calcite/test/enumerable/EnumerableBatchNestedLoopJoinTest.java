@@ -29,6 +29,22 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
+name|EnumerableBatchNestedLoopJoinRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
 name|EnumerableRules
 import|;
 end_import
@@ -1277,6 +1293,98 @@ operator|.
 name|returnsUnordered
 argument_list|(
 literal|"EXPR$0=1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4261">[CALCITE-4261]    * Join with three tables causes IllegalArgumentException    * in EnumerableBatchNestedLoopJoinRule</a>. */
+annotation|@
+name|Test
+name|void
+name|doubleInnerBatchJoinTestSQL
+parameter_list|()
+block|{
+name|tester
+argument_list|(
+literal|false
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.name, d.name as dept, l.name as location "
+operator|+
+literal|"from emps e join depts d on d.deptno<> e.salary "
+operator|+
+literal|"join locations l on e.empid<> l.empid and d.deptno = l.empid"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PLANNER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|RelOptPlanner
+argument_list|>
+operator|)
+name|planner
+lambda|->
+block|{
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_CORRELATE_RULE
+argument_list|)
+expr_stmt|;
+comment|// Use a small batch size, otherwise we will run into Janino's
+comment|// "InternalCompilerException: Code of method grows beyond 64 KB".
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|EnumerableBatchNestedLoopJoinRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withBatchSize
+argument_list|(
+literal|10
+argument_list|)
+operator|.
+name|toRule
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableBatchNestedLoopJoin"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=Bill; dept=Sales; location=San Francisco"
+argument_list|,
+literal|"name=Eric; dept=Sales; location=San Francisco"
+argument_list|,
+literal|"name=Sebastian; dept=Sales; location=San Francisco"
+argument_list|,
+literal|"name=Theodore; dept=Sales; location=San Francisco"
 argument_list|)
 expr_stmt|;
 block|}
