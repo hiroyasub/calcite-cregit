@@ -10888,6 +10888,52 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testCaseOnSubQuery
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT CASE WHEN v.g IN (0, 1) THEN 0 ELSE 1 END\n"
+operator|+
+literal|"FROM (SELECT * FROM \"foodmart\".\"customer\") AS c,\n"
+operator|+
+literal|"  (SELECT 0 AS g) AS v\n"
+operator|+
+literal|"GROUP BY v.g"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" CASE WHEN \"t1\".\"G\" IN (0, 1) THEN 0 ELSE 1 END\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"customer\") AS \"t\",\n"
+operator|+
+literal|"(SELECT 0 AS \"G\"\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")) AS \"t1\"\n"
+operator|+
+literal|"GROUP BY \"t1\".\"G\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSimpleIn
 parameter_list|()
 block|{
