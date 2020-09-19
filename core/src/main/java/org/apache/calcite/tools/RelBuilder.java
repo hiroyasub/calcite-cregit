@@ -13610,6 +13610,11 @@ operator|&&
 name|fetch
 operator|==
 literal|0
+operator|&&
+name|config
+operator|.
+name|simplifyLimit
+argument_list|()
 condition|)
 block|{
 return|return
@@ -17198,6 +17203,30 @@ name|withSimplify
 parameter_list|(
 name|boolean
 name|simplify
+parameter_list|)
+function_decl|;
+comment|/** Whether to simplify LIMIT 0 to an empty relation; default true. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|true
+argument_list|)
+name|boolean
+name|simplifyLimit
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #simplifyLimit()}. */
+name|Config
+name|withSimplifyLimit
+parameter_list|(
+name|boolean
+name|simplifyLimit
 parameter_list|)
 function_decl|;
 comment|/** Whether to create an Aggregate even if we know that the input is      * already unique; default false. */
