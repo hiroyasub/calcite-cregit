@@ -653,6 +653,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|ArrayList
 import|;
 end_import
@@ -673,7 +683,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
+name|Deque
 import|;
 end_import
 
@@ -683,7 +693,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedList
+name|HashMap
 import|;
 end_import
 
@@ -4606,7 +4616,8 @@ name|long
 name|gap
 decl_stmt|;
 specifier|private
-name|LinkedList
+specifier|final
+name|Deque
 argument_list|<
 name|Object
 index|[]
@@ -4664,7 +4675,7 @@ expr_stmt|;
 name|list
 operator|=
 operator|new
-name|LinkedList
+name|ArrayDeque
 argument_list|<>
 argument_list|()
 expr_stmt|;
@@ -5475,7 +5486,8 @@ name|long
 name|offset
 decl_stmt|;
 specifier|private
-name|LinkedList
+specifier|final
+name|Deque
 argument_list|<
 name|Object
 index|[]
@@ -5538,7 +5550,7 @@ expr_stmt|;
 name|list
 operator|=
 operator|new
-name|LinkedList
+name|ArrayDeque
 argument_list|<>
 argument_list|()
 expr_stmt|;
