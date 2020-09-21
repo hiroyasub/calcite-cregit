@@ -6827,7 +6827,7 @@ name|type
 argument_list|)
 return|;
 block|}
-comment|/** Returns a DECIMAL type with the maximum precision/scale for the current    * type system. */
+comment|/** Returns a DECIMAL type with the maximum precision for the current    * type system. */
 specifier|public
 specifier|static
 name|RelDataType
@@ -6848,16 +6848,13 @@ operator|.
 name|getMaxNumericPrecision
 argument_list|()
 decl_stmt|;
+comment|// scale should not greater than precision.
 name|int
-name|maxScale
+name|scale
 init|=
-name|factory
-operator|.
-name|getTypeSystem
-argument_list|()
-operator|.
-name|getMaxNumericScale
-argument_list|()
+name|maxPrecision
+operator|/
+literal|2
 decl_stmt|;
 return|return
 name|factory
@@ -6870,7 +6867,7 @@ name|DECIMAL
 argument_list|,
 name|maxPrecision
 argument_list|,
-name|maxScale
+name|scale
 argument_list|)
 return|;
 block|}

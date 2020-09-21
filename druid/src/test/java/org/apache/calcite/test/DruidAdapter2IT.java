@@ -11291,13 +11291,11 @@ name|DruidChecker
 argument_list|(
 literal|false
 argument_list|,
-literal|"\"filter\":{"
+literal|"\"filter\":{\"type\":\"bound\",\"dimension\":\"product_id\",\"lower\":\"16.0\","
 operator|+
-literal|"\"type\":\"expression\","
+literal|"\"lowerStrict\":false,\"upper\":\"16.0\","
 operator|+
-literal|"\"expression\":\"(CAST(\\\"product_id\\\", 'DOUBLE') == 16.0)\""
-operator|+
-literal|"}"
+literal|"\"upperStrict\":false,\"ordering\":\"numeric\"}"
 argument_list|)
 argument_list|)
 expr_stmt|;

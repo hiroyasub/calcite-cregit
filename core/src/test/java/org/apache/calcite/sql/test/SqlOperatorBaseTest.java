@@ -15966,7 +15966,7 @@ name|checkType
 argument_list|(
 literal|"'a' + - 'b' + 'c'"
 argument_list|,
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -26320,7 +26320,7 @@ name|checkType
 argument_list|(
 literal|"round('abc', 'def')"
 argument_list|,
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -26524,7 +26524,7 @@ name|checkType
 argument_list|(
 literal|"sign('abc')"
 argument_list|,
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -27054,7 +27054,7 @@ name|checkType
 argument_list|(
 literal|"truncate('abc', 'def')"
 argument_list|,
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -36102,7 +36102,7 @@ name|checkType
 argument_list|(
 literal|"sum('name')"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|checkAggType
@@ -36171,7 +36171,7 @@ name|checkType
 argument_list|(
 literal|"sum(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -36349,7 +36349,7 @@ name|checkType
 argument_list|(
 literal|"avg(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -36511,7 +36511,7 @@ name|checkType
 argument_list|(
 literal|"covar_pop(cast(null as varchar(2)),cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -36603,7 +36603,7 @@ name|checkType
 argument_list|(
 literal|"covar_samp(cast(null as varchar(2)),cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -36695,7 +36695,7 @@ name|checkType
 argument_list|(
 literal|"regr_sxx(cast(null as varchar(2)), cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -36787,7 +36787,7 @@ name|checkType
 argument_list|(
 literal|"regr_syy(cast(null as varchar(2)), cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -36879,7 +36879,7 @@ name|checkType
 argument_list|(
 literal|"stddev_pop(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -37044,7 +37044,7 @@ name|checkType
 argument_list|(
 literal|"stddev_samp(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -37209,7 +37209,7 @@ name|checkType
 argument_list|(
 literal|"stddev(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -37327,7 +37327,7 @@ name|checkType
 argument_list|(
 literal|"var_pop(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -37494,7 +37494,7 @@ name|checkType
 argument_list|(
 literal|"var_samp(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -37661,7 +37661,7 @@ name|checkType
 argument_list|(
 literal|"variance(cast(null as varchar(2)))"
 argument_list|,
-literal|"DECIMAL(19, 19)"
+literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
 name|tester

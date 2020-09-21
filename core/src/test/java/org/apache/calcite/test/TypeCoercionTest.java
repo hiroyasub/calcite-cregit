@@ -3188,7 +3188,7 @@ literal|"INTEGER NOT NULL EXPR$2, "
 operator|+
 literal|"INTEGER NOT NULL EXPR$3, "
 operator|+
-literal|"DECIMAL(19, 19) "
+literal|"DECIMAL(19, 9) "
 operator|+
 literal|"NOT NULL EXPR$4) NOT NULL"
 argument_list|)
@@ -3349,7 +3349,7 @@ argument_list|)
 operator|.
 name|columnType
 argument_list|(
-literal|"DECIMAL(19, 18) NOT NULL"
+literal|"DECIMAL(19, 8) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|expr
@@ -3359,7 +3359,7 @@ argument_list|)
 operator|.
 name|columnType
 argument_list|(
-literal|"DECIMAL(19, 0) NOT NULL"
+literal|"DECIMAL(19, 8) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// test binary arithmetic with two strings.
@@ -3370,7 +3370,7 @@ argument_list|)
 operator|.
 name|columnType
 argument_list|(
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|expr
@@ -3380,7 +3380,7 @@ argument_list|)
 operator|.
 name|columnType
 argument_list|(
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|expr
@@ -3390,7 +3390,7 @@ argument_list|)
 operator|.
 name|columnType
 argument_list|(
-literal|"DECIMAL(19, 19) NOT NULL"
+literal|"DECIMAL(19, 18) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|expr

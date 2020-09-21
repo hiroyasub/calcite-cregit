@@ -22727,7 +22727,7 @@ argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(DECIMAL(19, 19) NOT NULL EXPR$0, INTEGER NOT NULL DEPTNO) NOT NULL"
+literal|"RecordType(DECIMAL(19, 9) NOT NULL EXPR$0, INTEGER NOT NULL DEPTNO) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
