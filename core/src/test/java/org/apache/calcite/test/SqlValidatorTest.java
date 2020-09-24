@@ -327,6 +327,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|parser
+operator|.
+name|StringAndPos
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|test
 operator|.
 name|SqlTestFactory
@@ -6244,7 +6260,7 @@ literal|"Geo-spatial extensions and the GEOMETRY data type are not enabled"
 decl_stmt|;
 name|sql
 argument_list|(
-literal|"select cast(null as geometry) as g from emp"
+literal|"select cast(null as ^geometry^) as g from emp"
 argument_list|)
 operator|.
 name|withConformance
@@ -6265,9 +6281,6 @@ name|SqlConformanceEnum
 operator|.
 name|LENIENT
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -7779,7 +7792,7 @@ else|else
 block|{
 name|expr
 argument_list|(
-literal|"^\"TRIM\"('b' FROM 'a')^"
+literal|"\"TRIM\"('b' ^FROM^ 'a')"
 argument_list|)
 operator|.
 name|fails
@@ -15546,9 +15559,9 @@ argument_list|(
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|wholeExpr
+name|expr
 argument_list|(
-literal|"timestampadd(incorrect, 1, current_timestamp)"
+literal|"timestampadd(^incorrect^, 1, current_timestamp)"
 argument_list|)
 operator|.
 name|fails
@@ -15556,9 +15569,9 @@ argument_list|(
 literal|"(?s).*Was expecting one of.*"
 argument_list|)
 expr_stmt|;
-name|wholeExpr
+name|expr
 argument_list|(
-literal|"timestampdiff(incorrect, current_timestamp, current_timestamp)"
+literal|"timestampdiff(^incorrect^, current_timestamp, current_timestamp)"
 argument_list|)
 operator|.
 name|fails
@@ -19548,7 +19561,7 @@ expr_stmt|;
 comment|// Parser does not allow star dot identifier.
 name|sql
 argument_list|(
-literal|"select ^*^.foo from emp"
+literal|"select *^.^foo from emp"
 argument_list|)
 operator|.
 name|fails
@@ -24681,7 +24694,7 @@ expr_stmt|;
 comment|// Our conformance behaves like ORACLE_10 for "!=" operator.
 name|sql
 argument_list|(
-literal|"select * from (values 1) where 1 != 2"
+literal|"select * from (values 1) where 1 ^!=^ 2"
 argument_list|)
 operator|.
 name|withConformance
@@ -24716,7 +24729,7 @@ argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from (values 1) where 1 != any (2, 3)"
+literal|"select * from (values 1) where 1 ^!=^ any (2, 3)"
 argument_list|)
 operator|.
 name|withConformance
@@ -25427,9 +25440,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25453,9 +25463,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25478,9 +25485,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25526,9 +25530,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25551,9 +25552,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25580,9 +25578,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25597,9 +25592,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25699,9 +25691,6 @@ argument_list|(
 name|strict
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25726,9 +25715,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25777,9 +25763,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25798,9 +25781,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25815,9 +25795,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25836,9 +25813,6 @@ name|withCaseSensitive
 argument_list|(
 literal|false
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25918,9 +25892,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25943,9 +25914,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -25970,9 +25938,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -25996,9 +25961,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26019,9 +25981,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26046,9 +26005,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26072,9 +26028,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26095,9 +26048,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26124,9 +26074,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26151,9 +26098,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26180,9 +26124,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26205,9 +26146,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26232,9 +26170,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26258,9 +26193,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26283,9 +26215,6 @@ name|withConformance
 argument_list|(
 name|strict
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26311,9 +26240,6 @@ name|withConformance
 argument_list|(
 name|strict
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26362,9 +26288,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26387,9 +26310,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26414,9 +26334,6 @@ argument_list|(
 name|lenient
 argument_list|)
 operator|.
-name|sansCarets
-argument_list|()
-operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -26439,9 +26356,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26468,9 +26382,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -26520,9 +26431,6 @@ name|withConformance
 argument_list|(
 name|lenient
 argument_list|)
-operator|.
-name|sansCarets
-argument_list|()
 operator|.
 name|ok
 argument_list|()
@@ -30848,7 +30756,7 @@ argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select count(deptno, *) from emp"
+literal|"select count(deptno, ^*^) from emp"
 argument_list|)
 operator|.
 name|fails
@@ -30858,7 +30766,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select count(*, deptno) from emp"
+literal|"select count(*^,^ deptno) from emp"
 argument_list|)
 operator|.
 name|fails
@@ -31633,7 +31541,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from table(abs(-1))"
+literal|"select * from table(^abs^(-1))"
 argument_list|)
 operator|.
 name|fails
@@ -31643,7 +31551,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from table(1 + 2)"
+literal|"select * from table(^1^ + 2)"
 argument_list|)
 operator|.
 name|fails
@@ -33238,7 +33146,12 @@ name|Sql
 argument_list|(
 name|sqlValidatorTester
 argument_list|,
+name|StringAndPos
+operator|.
+name|of
+argument_list|(
 name|sql
+argument_list|)
 argument_list|,
 literal|true
 argument_list|,
@@ -33554,7 +33467,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"select EMP.^\"x\"^ from EMP"
+literal|"select EMP^.^\"x\" from EMP"
 argument_list|)
 operator|.
 name|fails
@@ -33671,7 +33584,7 @@ name|s
 operator|.
 name|sql
 argument_list|(
-literal|"select EMP.^\"x\"^ from EMP"
+literal|"select EMP^.^\"x\" from EMP"
 argument_list|)
 operator|.
 name|fails
@@ -36774,7 +36687,7 @@ name|sql0
 init|=
 literal|"insert into empnullables\n"
 operator|+
-literal|" (empno, ename, \"f.dc\" varchar(10))\n"
+literal|" (empno, ename, \"f.dc\" ^varchar(10)^)\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
@@ -36821,7 +36734,7 @@ name|sql1
 init|=
 literal|"insert into empnullables\n"
 operator|+
-literal|" (empno, ename, dynamic_column double not null)\n"
+literal|" (empno, ename, dynamic_column ^double^ not null)\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
@@ -36868,7 +36781,7 @@ name|sql2
 init|=
 literal|"insert into struct.t_extend\n"
 operator|+
-literal|" (f0.c0, f1.c1, \"F2\".\"C2\" varchar(20) not null)\n"
+literal|" (f0.c0, f1.c1, \"F2\".\"C2\" ^varchar(20)^ not null)\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
@@ -40242,36 +40155,21 @@ name|testDummy
 parameter_list|()
 block|{
 comment|// (To debug individual statements, paste them into this method.)
-specifier|final
-name|Sql
-name|s
-init|=
-name|sql
+name|expr
 argument_list|(
-literal|"?"
+literal|"true\n"
+operator|+
+literal|"or ^(date '1-2-3', date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"   overlaps (date '1-2-3', date '1-2-3')^\n"
+operator|+
+literal|"or false"
 argument_list|)
 operator|.
-name|withTester
+name|fails
 argument_list|(
-name|t
-lambda|->
-name|t
-operator|.
-name|withLenientOperatorLookup
-argument_list|(
-literal|true
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
 argument_list|)
-argument_list|)
-decl_stmt|;
-name|s
-operator|.
-name|sql
-argument_list|(
-literal|"select count() from emp"
-argument_list|)
-operator|.
-name|ok
-argument_list|()
 expr_stmt|;
 block|}
 end_function

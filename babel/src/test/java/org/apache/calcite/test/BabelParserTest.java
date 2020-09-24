@@ -121,7 +121,7 @@ name|sql
 operator|.
 name|parser
 operator|.
-name|SqlParserUtil
+name|StringAndPos
 import|;
 end_import
 
@@ -1183,8 +1183,6 @@ parameter_list|(
 name|String
 name|expectedMsgPattern
 parameter_list|,
-name|SqlParserUtil
-operator|.
 name|StringAndPos
 name|sap
 parameter_list|,
@@ -1296,8 +1294,6 @@ specifier|private
 name|void
 name|checkExNotNull
 parameter_list|(
-name|SqlParserUtil
-operator|.
 name|StringAndPos
 name|sap
 parameter_list|,

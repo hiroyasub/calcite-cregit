@@ -14178,7 +14178,7 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"1 != 1"
+literal|"1 ^!=^ 1"
 argument_list|,
 literal|"Bang equal '!=' is not allowed under the current SQL conformance level"
 argument_list|,
@@ -34169,7 +34169,7 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"^floor(timestamp '2015-02-19 12:34:56.78' to microsecond)^"
+literal|"floor(timestamp '2015-02-19 12:34:56.78' to ^microsecond^)"
 argument_list|,
 literal|"(?s)Encountered \"microsecond\" at .*"
 argument_list|,
@@ -34180,7 +34180,7 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"^floor(timestamp '2015-02-19 12:34:56.78' to nanosecond)^"
+literal|"floor(timestamp '2015-02-19 12:34:56.78' to ^nanosecond^)"
 argument_list|,
 literal|"(?s)Encountered \"nanosecond\" at .*"
 argument_list|,
@@ -34350,7 +34350,7 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"^ceil(timestamp '2015-02-19 12:34:56.78' to microsecond)^"
+literal|"ceil(timestamp '2015-02-19 12:34:56.78' to ^microsecond^)"
 argument_list|,
 literal|"(?s)Encountered \"microsecond\" at .*"
 argument_list|,
@@ -34361,7 +34361,7 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"^ceil(timestamp '2015-02-19 12:34:56.78' to nanosecond)^"
+literal|"ceil(timestamp '2015-02-19 12:34:56.78' to ^nanosecond^)"
 argument_list|,
 literal|"(?s)Encountered \"nanosecond\" at .*"
 argument_list|,
@@ -35343,7 +35343,7 @@ name|tester
 operator|.
 name|checkFails
 argument_list|(
-literal|"timestampdiff(CENTURY, "
+literal|"timestampdiff(^CENTURY^, "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+

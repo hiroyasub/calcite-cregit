@@ -133,7 +133,7 @@ name|sql
 operator|.
 name|parser
 operator|.
-name|SqlParserUtil
+name|StringAndPos
 import|;
 end_import
 
@@ -436,14 +436,12 @@ argument_list|(
 name|getHintsSql
 argument_list|)
 decl_stmt|;
-name|SqlParserUtil
-operator|.
 name|StringAndPos
 name|sap
 init|=
-name|SqlParserUtil
+name|StringAndPos
 operator|.
-name|findPos
+name|of
 argument_list|(
 name|sql
 argument_list|)
