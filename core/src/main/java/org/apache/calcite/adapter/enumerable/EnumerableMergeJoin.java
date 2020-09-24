@@ -630,6 +630,12 @@ argument_list|,
 name|joinType
 argument_list|)
 expr_stmt|;
+assert|assert
+name|getConvention
+argument_list|()
+operator|instanceof
+name|EnumerableConvention
+assert|;
 specifier|final
 name|List
 argument_list|<
@@ -2228,8 +2234,12 @@ name|traitSet
 init|=
 name|cluster
 operator|.
-name|traitSet
-argument_list|()
+name|traitSetOf
+argument_list|(
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
