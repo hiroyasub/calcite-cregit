@@ -425,20 +425,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|apiguardian
@@ -1189,7 +1175,7 @@ name|Util
 operator|.
 name|isDistinct
 argument_list|(
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

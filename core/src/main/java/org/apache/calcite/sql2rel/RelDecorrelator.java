@@ -3618,7 +3618,7 @@ name|ORDERING
 operator|.
 name|immutableSortedCopy
 argument_list|(
-name|Iterables
+name|Util
 operator|.
 name|transform
 argument_list|(

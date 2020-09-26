@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|lang
@@ -52,6 +38,16 @@ operator|.
 name|reflect
 operator|.
 name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
 import|;
 end_import
 
@@ -304,6 +300,7 @@ literal|' '
 argument_list|)
 expr_stmt|;
 block|}
+comment|//noinspection unchecked
 name|writer
 operator|.
 name|append
@@ -329,16 +326,25 @@ literal|", "
 argument_list|,
 literal|")"
 argument_list|,
-name|Lists
-operator|.
-name|transform
-argument_list|(
+parameter_list|()
+lambda|->
+operator|(
+name|Iterator
+operator|)
 name|parameters
-argument_list|,
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|map
+argument_list|(
 name|ParameterExpression
 operator|::
 name|declString
 argument_list|)
+operator|.
+name|iterator
+argument_list|()
 argument_list|)
 operator|.
 name|append

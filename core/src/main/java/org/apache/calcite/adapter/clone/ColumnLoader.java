@@ -157,15 +157,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|collect
+name|util
 operator|.
-name|Lists
+name|Util
 import|;
 end_import
 
@@ -1390,7 +1390,7 @@ case|case
 name|JAVA_SQL_TIMESTAMP
 case|:
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -1430,7 +1430,7 @@ case|case
 name|JAVA_SQL_TIME
 case|:
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -1479,7 +1479,7 @@ case|case
 name|JAVA_SQL_DATE
 case|:
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

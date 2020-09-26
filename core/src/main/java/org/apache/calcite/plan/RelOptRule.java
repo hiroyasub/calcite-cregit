@@ -93,6 +93,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -1645,7 +1659,7 @@ name|trait
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

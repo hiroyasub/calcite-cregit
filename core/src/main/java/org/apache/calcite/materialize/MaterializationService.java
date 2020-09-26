@@ -331,20 +331,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|lang
@@ -2105,7 +2091,7 @@ operator|.
 name|getCollationList
 argument_list|()
 argument_list|,
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

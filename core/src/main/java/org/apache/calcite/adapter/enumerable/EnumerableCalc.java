@@ -509,20 +509,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|lang
@@ -1614,7 +1600,7 @@ name|RexNode
 argument_list|>
 name|exps
 init|=
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -1684,7 +1670,7 @@ name|RexNode
 argument_list|>
 name|exps
 init|=
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

@@ -563,20 +563,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|sql
@@ -941,7 +927,7 @@ name|typeFactory
 argument_list|)
 decl_stmt|;
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

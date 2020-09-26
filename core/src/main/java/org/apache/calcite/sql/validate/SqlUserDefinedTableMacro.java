@@ -283,20 +283,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -485,7 +471,7 @@ name|getParamNames
 parameter_list|()
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

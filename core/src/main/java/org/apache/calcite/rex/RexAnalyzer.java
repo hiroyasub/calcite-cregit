@@ -131,20 +131,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Iterables
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|math
@@ -340,9 +326,8 @@ argument_list|(
 name|generators
 argument_list|)
 decl_stmt|;
-comment|//noinspection StaticPseudoFunctionalStyleMethod
 return|return
-name|Iterables
+name|Util
 operator|.
 name|transform
 argument_list|(

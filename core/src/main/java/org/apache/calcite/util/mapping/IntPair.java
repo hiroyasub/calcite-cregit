@@ -33,15 +33,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|base
+name|util
 operator|.
-name|Function
+name|Util
 import|;
 end_import
 
@@ -53,9 +53,9 @@ name|google
 operator|.
 name|common
 operator|.
-name|collect
+name|base
 operator|.
-name|Lists
+name|Function
 import|;
 end_import
 
@@ -113,6 +113,8 @@ class|class
 name|IntPair
 block|{
 comment|/** Function that swaps source and target fields of an {@link IntPair}. */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -235,6 +237,8 @@ block|}
 argument_list|)
 decl_stmt|;
 comment|/** Function that returns the left (source) side of a pair. */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -272,6 +276,8 @@ block|}
 block|}
 decl_stmt|;
 comment|/** Function that returns the right (target) side of a pair. */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 specifier|final
@@ -641,13 +647,17 @@ name|pairs
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
 name|pairs
 argument_list|,
-name|LEFT
+name|x
+lambda|->
+name|x
+operator|.
+name|source
 argument_list|)
 return|;
 block|}
@@ -669,13 +679,17 @@ name|pairs
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
 name|pairs
 argument_list|,
-name|RIGHT
+name|x
+lambda|->
+name|x
+operator|.
+name|target
 argument_list|)
 return|;
 block|}

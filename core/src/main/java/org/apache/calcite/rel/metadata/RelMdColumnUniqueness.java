@@ -525,15 +525,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|collect
+name|util
 operator|.
-name|ImmutableList
+name|Util
 import|;
 end_import
 
@@ -547,7 +547,7 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Lists
+name|ImmutableList
 import|;
 end_import
 
@@ -1408,7 +1408,7 @@ name|columns
 argument_list|,
 name|ignoreNulls
 argument_list|,
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

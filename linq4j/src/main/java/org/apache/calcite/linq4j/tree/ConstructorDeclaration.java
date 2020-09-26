@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|lang
@@ -52,6 +38,16 @@ operator|.
 name|reflect
 operator|.
 name|Type
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Iterator
 import|;
 end_import
 
@@ -288,6 +284,7 @@ literal|' '
 argument_list|)
 expr_stmt|;
 block|}
+comment|//noinspection unchecked
 name|writer
 operator|.
 name|append
@@ -303,19 +300,25 @@ literal|", "
 argument_list|,
 literal|")"
 argument_list|,
-name|Lists
-operator|.
-name|transform
-argument_list|(
+parameter_list|()
+lambda|->
+operator|(
+name|Iterator
+operator|)
 name|parameters
-argument_list|,
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|map
+argument_list|(
 name|parameter
 lambda|->
 block|{
-specifier|final
+name|final
 name|String
 name|modifiers1
-init|=
+operator|=
 name|Modifier
 operator|.
 name|toString
@@ -324,8 +327,7 @@ name|parameter
 operator|.
 name|modifier
 argument_list|)
-decl_stmt|;
-return|return
+argument_list|;               return
 name|modifiers1
 operator|+
 operator|(
@@ -354,10 +356,16 @@ operator|+
 name|parameter
 operator|.
 name|name
-return|;
+argument_list|;
 block|}
-argument_list|)
-argument_list|)
+block|)
+operator|.
+name|iterator
+argument_list|()
+end_class
+
+begin_expr_stmt
+unit|)
 operator|.
 name|append
 argument_list|(
@@ -369,13 +377,18 @@ argument_list|(
 name|body
 argument_list|)
 expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
 name|writer
 operator|.
 name|newlineAndIndent
 argument_list|()
 expr_stmt|;
-block|}
-annotation|@
+end_expr_stmt
+
+begin_function
+unit|}    @
 name|Override
 specifier|public
 name|boolean
@@ -491,6 +504,9 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -546,8 +562,8 @@ return|return
 name|result
 return|;
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

@@ -2404,7 +2404,7 @@ name|type
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -14187,7 +14187,7 @@ operator|.
 name|getJoinTypes
 argument_list|()
 argument_list|,
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

@@ -8459,7 +8459,7 @@ name|composeConjunction
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|Iterables
+name|Util
 operator|.
 name|transform
 argument_list|(

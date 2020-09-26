@@ -355,6 +355,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -2574,7 +2588,7 @@ name|schema
 argument_list|)
 decl_stmt|;
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -2652,14 +2666,12 @@ name|schema
 argument_list|)
 decl_stmt|;
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
 name|list
 argument_list|,
-name|CalciteSchema
-operator|.
 name|LatticeEntry
 operator|::
 name|getLattice

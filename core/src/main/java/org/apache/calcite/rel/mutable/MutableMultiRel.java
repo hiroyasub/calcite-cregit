@@ -63,15 +63,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|collect
+name|util
 operator|.
-name|Lists
+name|Util
 import|;
 end_import
 
@@ -282,7 +282,7 @@ name|cloneChildren
 parameter_list|()
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

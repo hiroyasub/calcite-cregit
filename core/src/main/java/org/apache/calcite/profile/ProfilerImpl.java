@@ -2332,7 +2332,7 @@ name|ImmutableSortedSet
 operator|.
 name|copyOf
 argument_list|(
-name|Iterables
+name|Util
 operator|.
 name|transform
 argument_list|(

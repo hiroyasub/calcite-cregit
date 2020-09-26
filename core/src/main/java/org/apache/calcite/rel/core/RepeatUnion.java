@@ -151,20 +151,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -378,7 +364,7 @@ name|RelDataType
 argument_list|>
 name|inputRowTypes
 init|=
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(

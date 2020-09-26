@@ -7758,7 +7758,7 @@ name|nodes
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -7786,7 +7786,7 @@ name|types
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -8941,7 +8941,7 @@ argument_list|(
 name|e
 argument_list|)
 argument_list|,
-name|Iterables
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -10694,7 +10694,7 @@ name|toCnf2
 argument_list|(
 name|and
 argument_list|(
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -10730,7 +10730,7 @@ name|toCnf2
 argument_list|(
 name|or
 argument_list|(
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -11291,7 +11291,7 @@ name|list
 parameter_list|)
 block|{
 return|return
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -11591,7 +11591,7 @@ name|toDnf
 argument_list|(
 name|and
 argument_list|(
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
@@ -11627,7 +11627,7 @@ name|toDnf
 argument_list|(
 name|or
 argument_list|(
-name|Lists
+name|Util
 operator|.
 name|transform
 argument_list|(
