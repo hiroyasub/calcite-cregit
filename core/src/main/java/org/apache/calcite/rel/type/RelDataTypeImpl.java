@@ -205,6 +205,22 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelDataTypeImpl is an abstract base for implementations of  * {@link RelDataType}.  *  *<p>Identity is based upon the {@link #digest} field, which each derived class  * should set during construction.</p>  */
 end_comment
@@ -930,8 +946,12 @@ name|SqlTypeName
 name|getSqlTypeName
 parameter_list|()
 block|{
+comment|// The implementations must provide non-null value, however, we keep this for compatibility
 return|return
+name|castNonNull
+argument_list|(
 literal|null
+argument_list|)
 return|;
 block|}
 annotation|@
