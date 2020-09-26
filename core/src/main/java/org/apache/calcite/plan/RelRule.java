@@ -330,6 +330,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|String
 name|description
 parameter_list|()
@@ -338,6 +340,8 @@ comment|/** Sets {@link #description()}. */
 name|Config
 name|withDescription
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|description
 parameter_list|)

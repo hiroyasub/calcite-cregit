@@ -1472,6 +1472,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|SqlTypeCoercionRule
 name|typeCoercionRules
 parameter_list|()
@@ -1480,6 +1482,8 @@ comment|/**      * Sets the {@link SqlTypeCoercionRule} instance which defines t
 name|Config
 name|withTypeCoercionRules
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlTypeCoercionRule
 name|rules
 parameter_list|)

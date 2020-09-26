@@ -69,7 +69,7 @@ name|nullness
 operator|.
 name|qual
 operator|.
-name|NonNull
+name|Nullable
 import|;
 end_import
 
@@ -679,7 +679,9 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"property 'IntSansDefault' is required and has no default value"
+literal|"property 'org.apache.calcite.util.ImmutableBeanTest$Bean2#IntSansDefault'"
+operator|+
+literal|" is required and has no default value"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -789,9 +791,9 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"property 'BooleanSansDefault' is required and has no default "
+literal|"property 'org.apache.calcite.util.ImmutableBeanTest$Bean2#BooleanSansDefault'"
 operator|+
-literal|"value"
+literal|" is required and has no default value"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -901,9 +903,9 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"property 'StringSansDefault' is required and has no default "
+literal|"property 'org.apache.calcite.util.ImmutableBeanTest$Bean2#StringSansDefault'"
 operator|+
-literal|"value"
+literal|" is required and has no default value"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -963,7 +965,9 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"property 'NonnullString' is required and has no default value"
+literal|"property 'org.apache.calcite.util.ImmutableBeanTest$Bean2#NonnullString'"
+operator|+
+literal|" is required and has no default value"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3485,11 +3489,6 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
-argument_list|(
-name|required
-operator|=
-literal|true
-argument_list|)
 name|String
 name|getStringSansDefault
 parameter_list|()
@@ -3505,6 +3504,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|String
 name|getOptionalString
 parameter_list|()
@@ -3512,17 +3513,17 @@ function_decl|;
 name|Bean2
 name|withOptionalString
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|s
 parameter_list|)
 function_decl|;
-comment|/** Property is required because it has 'Nonnull' annotation. */
+comment|/** Property is required because its return type does not have Nullable annotation. */
 annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
-annotation|@
-name|NonNull
 name|String
 name|getNonnullString
 parameter_list|()
@@ -3545,8 +3546,6 @@ name|StringDefault
 argument_list|(
 literal|"abc"
 argument_list|)
-annotation|@
-name|NonNull
 name|String
 name|getStringWithDefault
 parameter_list|()
@@ -3554,6 +3553,8 @@ function_decl|;
 name|Bean2
 name|withStringWithDefault
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|s
 parameter_list|)
@@ -3566,6 +3567,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|NullDefault
+annotation|@
+name|Nullable
 name|String
 name|getStringWithNullDefault
 parameter_list|()
@@ -3573,6 +3576,8 @@ function_decl|;
 name|Bean2
 name|withStringWithNullDefault
 parameter_list|(
+annotation|@
+name|Nullable
 name|String
 name|s
 parameter_list|)
@@ -3588,8 +3593,6 @@ name|EnumDefault
 argument_list|(
 literal|"RED"
 argument_list|)
-annotation|@
-name|NonNull
 name|Color
 name|getColorWithDefault
 parameter_list|()
@@ -3597,6 +3600,8 @@ function_decl|;
 name|Bean2
 name|withColorWithDefault
 parameter_list|(
+annotation|@
+name|Nullable
 name|Color
 name|color
 parameter_list|)
@@ -3609,6 +3614,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|NullDefault
+annotation|@
+name|Nullable
 name|Color
 name|getColorWithNullDefault
 parameter_list|()
@@ -3616,6 +3623,8 @@ function_decl|;
 name|Bean2
 name|withColorWithNullDefault
 parameter_list|(
+annotation|@
+name|Nullable
 name|Color
 name|color
 parameter_list|)
@@ -3625,6 +3634,8 @@ name|ImmutableBeans
 operator|.
 name|Property
 argument_list|()
+annotation|@
+name|Nullable
 name|Color
 name|getColorOptional
 parameter_list|()
@@ -3632,6 +3643,8 @@ function_decl|;
 name|Bean2
 name|withColorOptional
 parameter_list|(
+annotation|@
+name|Nullable
 name|Color
 name|color
 parameter_list|)
@@ -3742,6 +3755,8 @@ name|makeImmutable
 operator|=
 literal|false
 argument_list|)
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -3752,6 +3767,8 @@ function_decl|;
 name|CollectionBean
 name|withList
 parameter_list|(
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -3768,6 +3785,8 @@ name|makeImmutable
 operator|=
 literal|true
 argument_list|)
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -3778,6 +3797,8 @@ function_decl|;
 name|CollectionBean
 name|withImmutableList
 parameter_list|(
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String
@@ -3794,6 +3815,8 @@ name|makeImmutable
 operator|=
 literal|false
 argument_list|)
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|String
@@ -3804,6 +3827,8 @@ function_decl|;
 name|CollectionBean
 name|withSet
 parameter_list|(
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|String
@@ -3820,6 +3845,8 @@ name|makeImmutable
 operator|=
 literal|true
 argument_list|)
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|String
@@ -3830,6 +3857,8 @@ function_decl|;
 name|CollectionBean
 name|withImmutableSet
 parameter_list|(
+annotation|@
+name|Nullable
 name|Set
 argument_list|<
 name|String
@@ -3846,6 +3875,8 @@ name|makeImmutable
 operator|=
 literal|false
 argument_list|)
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -3858,6 +3889,8 @@ function_decl|;
 name|CollectionBean
 name|withMap
 parameter_list|(
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -3876,6 +3909,8 @@ name|makeImmutable
 operator|=
 literal|true
 argument_list|)
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -3888,6 +3923,8 @@ function_decl|;
 name|CollectionBean
 name|withImmutableMap
 parameter_list|(
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String

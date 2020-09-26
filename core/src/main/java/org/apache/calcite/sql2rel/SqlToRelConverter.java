@@ -30439,11 +30439,6 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
-argument_list|(
-name|required
-operator|=
-literal|true
-argument_list|)
 name|RelBuilderFactory
 name|getRelBuilderFactory
 parameter_list|()
@@ -30461,11 +30456,6 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
-argument_list|(
-name|required
-operator|=
-literal|true
-argument_list|)
 name|UnaryOperator
 argument_list|<
 name|RelBuilder
@@ -30522,11 +30512,6 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
-argument_list|(
-name|required
-operator|=
-literal|true
-argument_list|)
 name|HintStrategyTable
 name|getHintStrategyTable
 parameter_list|()

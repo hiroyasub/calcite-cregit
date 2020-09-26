@@ -4603,8 +4603,6 @@ name|functionSet
 parameter_list|)
 function_decl|;
 comment|/** Returns the validated set of functions to reduce, or the default set      * if not specified. */
-annotation|@
-name|NonNull
 specifier|default
 name|Set
 argument_list|<

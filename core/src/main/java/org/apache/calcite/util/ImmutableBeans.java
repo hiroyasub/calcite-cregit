@@ -229,6 +229,18 @@ name|lang
 operator|.
 name|reflect
 operator|.
+name|AnnotatedElement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
 name|InvocationHandler
 import|;
 end_import
@@ -767,17 +779,6 @@ block|{
 continue|continue;
 block|}
 specifier|final
-name|boolean
-name|hasNonnull
-init|=
-name|hasAnnotation
-argument_list|(
-name|method
-argument_list|,
-literal|"org.checkerframework.checker.nullness.qual.NonNull"
-argument_list|)
-decl_stmt|;
-specifier|final
 name|Mode
 name|mode
 decl_stmt|;
@@ -945,17 +946,21 @@ specifier|final
 name|boolean
 name|required
 init|=
-name|property
-operator|.
-name|required
-argument_list|()
-operator|||
 name|propertyType
 operator|.
 name|isPrimitive
 argument_list|()
 operator|||
-name|hasNonnull
+operator|!
+name|hasAnnotation
+argument_list|(
+name|method
+operator|.
+name|getAnnotatedReturnType
+argument_list|()
+argument_list|,
+literal|"org.checkerframework.checker.nullness.qual.Nullable"
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -1097,6 +1102,13 @@ operator|new
 name|IllegalArgumentException
 argument_list|(
 literal|"property '"
+operator|+
+name|beanClass
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"#"
 operator|+
 name|propertyName
 operator|+
@@ -2113,14 +2125,14 @@ return|return
 name|o
 return|;
 block|}
-comment|/** Looks for an annotation by class name.    * Useful if you don't want to depend on the class    * (e.g. "org.checkerframework.checker.nullness.qual.NonNull") at compile time. */
+comment|/** Looks for an annotation by class name.    * Useful if you don't want to depend on the class    * (e.g. "org.checkerframework.checker.nullness.qual.Nullable") at compile time. */
 specifier|private
 specifier|static
 name|boolean
 name|hasAnnotation
 parameter_list|(
-name|Method
-name|method
+name|AnnotatedElement
+name|element
 parameter_list|,
 name|String
 name|className
@@ -2131,7 +2143,7 @@ control|(
 name|Annotation
 name|annotation
 range|:
-name|method
+name|element
 operator|.
 name|getDeclaredAnnotations
 argument_list|()
@@ -2511,13 +2523,6 @@ specifier|public
 annotation_defn|@interface
 name|Property
 block|{
-comment|/** Whether the property is required.      *      *<p>Properties of type {@code int} and {@code boolean} are always      * required.      *      *<p>If a property is required, it cannot be set to null.      * If it has no default value, calling "get" will give a runtime exception.      */
-name|boolean
-name|required
-parameter_list|()
-default|default
-literal|false
-function_decl|;
 comment|/** Whether to make immutable copies of property values. */
 name|boolean
 name|makeImmutable

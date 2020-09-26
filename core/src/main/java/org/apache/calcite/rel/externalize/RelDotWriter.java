@@ -1485,6 +1485,8 @@ annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|Nullable
 name|Predicate
 argument_list|<
 name|RelNode
