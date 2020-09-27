@@ -197,6 +197,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|type
+operator|.
+name|SqlTypeUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|validate
 operator|.
 name|SelectScope
@@ -416,16 +432,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -438,6 +444,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1712,8 +1730,6 @@ name|builder2
 operator|.
 name|put
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|valueAs
@@ -1724,10 +1740,10 @@ name|Object
 operator|.
 name|class
 argument_list|)
+argument_list|,
+literal|"key"
 argument_list|)
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|valueAs
@@ -1738,6 +1754,8 @@ name|Object
 operator|.
 name|class
 argument_list|)
+argument_list|,
+literal|"value"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2016,11 +2034,11 @@ specifier|final
 name|RelDataType
 name|type
 init|=
-name|validator
+name|SqlTypeUtil
 operator|.
 name|deriveType
 argument_list|(
-name|scope
+name|this
 argument_list|,
 name|operand
 argument_list|)
@@ -2115,11 +2133,11 @@ literal|0
 argument_list|)
 decl_stmt|;
 return|return
-name|validator
+name|SqlTypeUtil
 operator|.
 name|deriveType
 argument_list|(
-name|scope
+name|this
 argument_list|,
 name|query
 argument_list|)
