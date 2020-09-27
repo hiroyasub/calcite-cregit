@@ -22948,6 +22948,51 @@ block|}
 end_function
 
 begin_comment
+comment|/** Similar to {@link #testAggregateJoinRemove3()} but with agg call    * referencing the last column of the left input. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAggregateJoinRemove11
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.deptno, count(distinct e.slacker)\n"
+operator|+
+literal|"from sales.emp e\n"
+operator|+
+literal|"left outer join sales.dept d on e.deptno = d.deptno\n"
+operator|+
+literal|"group by e.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_PROJECT_MERGE
+argument_list|,
+name|CoreRules
+operator|.
+name|AGGREGATE_JOIN_REMOVE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Similar to {@link #testAggregateJoinRemove1()};    * Should remove the bottom join since the project uses column in the    * right input of bottom join. */
 end_comment
 
@@ -23299,6 +23344,45 @@ name|PROJECT_JOIN_REMOVE
 argument_list|)
 operator|.
 name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Similar to {@link #testAggregateJoinRemove4()};    * The project references the last column of the left input.    * The rule should be fired.*/
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testProjectJoinRemove10
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e.deptno, e.slacker\n"
+operator|+
+literal|"FROM sales.emp e\n"
+operator|+
+literal|"LEFT JOIN sales.dept d ON e.deptno = d.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_JOIN_REMOVE
+argument_list|)
+operator|.
+name|check
 argument_list|()
 expr_stmt|;
 block|}

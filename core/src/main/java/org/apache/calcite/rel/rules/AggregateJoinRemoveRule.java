@@ -415,8 +415,6 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
-operator|-
-literal|1
 else|:
 literal|0
 decl_stmt|;
