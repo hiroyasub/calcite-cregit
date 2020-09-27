@@ -93,21 +93,25 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|slf4j
+name|google
 operator|.
-name|Logger
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|slf4j
 operator|.
-name|Collections
+name|Logger
 import|;
 end_import
 
@@ -184,7 +188,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A collection of {@link HintStrategy}s.  *  *<p>Every hint must register a {@link HintStrategy} into the collection.  * With a hint strategies mapping, the hint strategy table is used as a tool  * to decide i) if the given hint was registered; ii) which hints are suitable for the rel with  * a given hints collection; iii) if the hint options are valid.  *  *<p>Once built, the hint strategy table is immutable during the planning phrase.  *  *<p>Match of hint name is case in-sensitive.  *  * @see HintPredicate  */
+comment|/**  * A collection of {@link HintStrategy}s.  *  *<p>Every hint must register a {@link HintStrategy} into the collection.  * With a hint strategies mapping, the hint strategy table is used as a tool  * to decide i) if the given hint was registered; ii) which hints are suitable for the rel with  * a given hints collection; iii) if the hint options are valid.  *  *<p>The hint strategy table is immutable. To create one, use  * {@link #builder()}.  *  *<p>Match of hint name is case insensitive.  *  * @see HintPredicate  */
 end_comment
 
 begin_class
@@ -203,9 +207,9 @@ init|=
 operator|new
 name|HintStrategyTable
 argument_list|(
-name|Collections
+name|ImmutableMap
 operator|.
-name|emptyMap
+name|of
 argument_list|()
 argument_list|,
 name|HintErrorLogger
@@ -250,7 +254,12 @@ name|this
 operator|.
 name|strategies
 operator|=
+name|ImmutableMap
+operator|.
+name|copyOf
+argument_list|(
 name|strategies
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -640,6 +649,7 @@ class|class
 name|Key
 block|{
 specifier|private
+specifier|final
 name|String
 name|name
 decl_stmt|;
@@ -763,6 +773,7 @@ class|class
 name|Builder
 block|{
 specifier|private
+specifier|final
 name|Map
 argument_list|<
 name|Key
@@ -770,33 +781,20 @@ argument_list|,
 name|HintStrategy
 argument_list|>
 name|strategies
-decl_stmt|;
-specifier|private
-name|Litmus
-name|errorHandler
-decl_stmt|;
-specifier|private
-name|Builder
-parameter_list|()
-block|{
-name|this
-operator|.
-name|strategies
-operator|=
+init|=
 operator|new
 name|HashMap
 argument_list|<>
 argument_list|()
-expr_stmt|;
-name|this
-operator|.
+decl_stmt|;
+specifier|private
+name|Litmus
 name|errorHandler
-operator|=
+init|=
 name|HintErrorLogger
 operator|.
 name|INSTANCE
-expr_stmt|;
-block|}
+decl_stmt|;
 specifier|public
 name|Builder
 name|hintStrategy
