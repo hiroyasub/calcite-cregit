@@ -40948,7 +40948,7 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLU
 operator|+
 literal|"<INTERVAL HOUR>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE table_name, "
 operator|+
-literal|"DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval\\[, datetime interval\\]\\)"
+literal|"DESCRIPTOR\\(timecol\\), datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40974,7 +40974,7 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLU
 operator|+
 literal|"<INTERVAL HOUR>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE table_name, "
 operator|+
-literal|"DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval\\[, datetime interval\\]\\)"
+literal|"DESCRIPTOR\\(timecol\\), datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41042,7 +41042,7 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLU
 operator|+
 literal|"<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
 operator|+
-literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval"
+literal|"table_name, DESCRIPTOR\\(timecol\\), datetime interval"
 operator|+
 literal|"\\[, datetime interval\\]\\)"
 argument_list|)
@@ -41062,7 +41062,7 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR
 operator|+
 literal|"(4\\)>,<INTERVAL HOUR>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
 operator|+
-literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval"
+literal|"table_name, DESCRIPTOR\\(timecol\\), datetime interval"
 operator|+
 literal|"\\[, datetime interval\\]\\)"
 argument_list|)
@@ -41082,7 +41082,7 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLU
 operator|+
 literal|"<INTERVAL HOUR>,<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
 operator|+
-literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval"
+literal|"table_name, DESCRIPTOR\\(timecol\\), datetime interval"
 operator|+
 literal|"\\[, datetime interval\\]\\)"
 argument_list|)

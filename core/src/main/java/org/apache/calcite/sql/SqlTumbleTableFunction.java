@@ -184,7 +184,7 @@ block|{
 return|return
 name|opName
 operator|+
-literal|"(TABLE table_name, DESCRIPTOR(col1, col2 ...), datetime interval"
+literal|"(TABLE table_name, DESCRIPTOR(timecol), datetime interval"
 operator|+
 literal|"[, datetime interval])"
 return|;
