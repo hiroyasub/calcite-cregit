@@ -2022,6 +2022,25 @@ name|columnMappings
 parameter_list|)
 block|{
 specifier|final
+name|RelDataType
+name|rowType
+decl_stmt|;
+comment|// To deduce the return type:
+comment|// 1. if the operator implements SqlTableFunction,
+comment|// use the SqlTableFunction's return type inference;
+comment|// 2. else use the call's type, e.g. the operator may has
+comment|// its custom way for return type inference.
+if|if
+condition|(
+name|call
+operator|.
+name|getOperator
+argument_list|()
+operator|instanceof
+name|SqlTableFunction
+condition|)
+block|{
+specifier|final
 name|SqlOperatorBinding
 name|callBinding
 init|=
@@ -2069,17 +2088,26 @@ operator|.
 name|getRowTypeInference
 argument_list|()
 decl_stmt|;
-specifier|final
-name|RelDataType
 name|rowType
-init|=
+operator|=
 name|rowTypeInference
 operator|.
 name|inferReturnType
 argument_list|(
 name|callBinding
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
+else|else
+block|{
+name|rowType
+operator|=
+name|call
+operator|.
+name|getType
+argument_list|()
+expr_stmt|;
+block|}
 return|return
 name|LogicalTableFunctionScan
 operator|.
