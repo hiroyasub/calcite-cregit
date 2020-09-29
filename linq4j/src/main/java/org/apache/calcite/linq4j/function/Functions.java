@@ -1320,6 +1320,11 @@ name|list2
 return|;
 block|}
 comment|/** Returns a list that contains only elements of {@code list} that match    * {@code predicate}. Avoids allocating a list if all elements match or no    * elements match. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MixedMutabilityReturnType"
+argument_list|)
 specifier|public
 specifier|static
 parameter_list|<

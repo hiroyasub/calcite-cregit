@@ -837,20 +837,29 @@ argument_list|()
 condition|)
 block|{
 return|return
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|completionHints
+argument_list|)
 return|;
 block|}
 comment|// If cursor was part of the way through a word, only include hints
 comment|// which start with that word in the result.
 specifier|final
-name|List
+name|ImmutableList
+operator|.
+name|Builder
 argument_list|<
 name|SqlMoniker
 argument_list|>
 name|result
 init|=
 operator|new
-name|ArrayList
+name|ImmutableList
+operator|.
+name|Builder
 argument_list|<>
 argument_list|()
 decl_stmt|;
@@ -934,6 +943,9 @@ block|}
 block|}
 return|return
 name|result
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 specifier|public

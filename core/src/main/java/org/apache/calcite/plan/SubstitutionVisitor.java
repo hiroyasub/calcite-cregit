@@ -2609,6 +2609,11 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns a list of all possible rels that result from substituting the    * matched RelNode with the replacement RelNode within the query.    *    *<p>For example, the substitution result of A join B, while A and B    * are both a qualified match for replacement R, is R join B, R join R,    * A join R.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MixedMutabilityReturnType"
+argument_list|)
 specifier|public
 name|List
 argument_list|<

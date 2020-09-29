@@ -2700,7 +2700,12 @@ expr_stmt|;
 block|}
 block|}
 return|return
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|cubeRowFields
+argument_list|)
 return|;
 block|}
 return|return

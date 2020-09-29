@@ -10317,14 +10317,18 @@ return|;
 comment|// short cut
 block|}
 specifier|final
-name|List
+name|ImmutableList
+operator|.
+name|Builder
 argument_list|<
 name|Expression
 argument_list|>
 name|parameterExpressions1
 init|=
 operator|new
-name|ArrayList
+name|ImmutableList
+operator|.
+name|Builder
 argument_list|<>
 argument_list|()
 decl_stmt|;
@@ -10351,6 +10355,9 @@ expr_stmt|;
 block|}
 return|return
 name|parameterExpressions1
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 specifier|static
