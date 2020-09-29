@@ -13513,6 +13513,9 @@ name|needed
 init|=
 name|fetch
 operator|+
+operator|(
+name|long
+operator|)
 name|offset
 decl_stmt|;
 comment|// read the input into a tree map
