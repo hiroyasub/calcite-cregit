@@ -13795,6 +13795,11 @@ name|result
 return|;
 block|}
 comment|/** Support the MULTISET EXCEPT ALL function. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 parameter_list|<
@@ -13819,6 +13824,7 @@ argument_list|>
 name|c2
 parameter_list|)
 block|{
+comment|// TOOD: use Multisets?
 specifier|final
 name|List
 argument_list|<
@@ -13988,6 +13994,11 @@ literal|true
 return|;
 block|}
 comment|/** Support the SUBMULTISET OF function. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|boolean
@@ -14017,6 +14028,7 @@ return|return
 literal|false
 return|;
 block|}
+comment|// TODO: use Multisets?
 name|Collection
 name|multisetLocal
 init|=

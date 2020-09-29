@@ -113,7 +113,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashSet
+name|ArrayDeque
 import|;
 end_import
 
@@ -123,7 +123,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedList
+name|HashSet
 import|;
 end_import
 
@@ -594,7 +594,7 @@ argument_list|>
 name|preQueue
 init|=
 operator|new
-name|LinkedList
+name|ArrayDeque
 argument_list|<>
 argument_list|()
 decl_stmt|;
@@ -608,7 +608,7 @@ argument_list|>
 name|queue
 init|=
 operator|new
-name|LinkedList
+name|ArrayDeque
 argument_list|<>
 argument_list|()
 decl_stmt|;

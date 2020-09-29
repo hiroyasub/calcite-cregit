@@ -2268,7 +2268,9 @@ argument_list|)
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|e
+argument_list|)
 throw|;
 block|}
 block|}
@@ -2473,7 +2475,9 @@ argument_list|()
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|ex
+argument_list|)
 throw|;
 block|}
 block|}
@@ -2563,10 +2567,17 @@ argument_list|()
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|ex
+argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 specifier|static
 name|Integer
@@ -2588,6 +2599,8 @@ return|return
 literal|1
 return|;
 block|}
+comment|// Note: even even though LinkedList implements Queue, it supports null values
+comment|//
 name|Queue
 argument_list|<
 name|Object
@@ -2941,7 +2954,9 @@ argument_list|()
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|ex
+argument_list|)
 throw|;
 block|}
 return|return
@@ -3162,7 +3177,9 @@ argument_list|()
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|ex
+argument_list|)
 throw|;
 block|}
 return|return
@@ -3318,7 +3335,9 @@ argument_list|)
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|ex
+argument_list|)
 throw|;
 block|}
 block|}
@@ -3390,7 +3409,9 @@ argument_list|)
 argument_list|)
 operator|.
 name|ex
-argument_list|()
+argument_list|(
+name|e
+argument_list|)
 throw|;
 block|}
 block|}

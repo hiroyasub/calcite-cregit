@@ -111,7 +111,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedList
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Deque
 import|;
 end_import
 
@@ -170,7 +180,7 @@ decl_stmt|;
 comment|//runtime
 specifier|private
 specifier|final
-name|LinkedList
+name|Deque
 argument_list|<
 name|ConsumerRecord
 argument_list|<
@@ -182,7 +192,7 @@ argument_list|>
 name|bufferedRecords
 init|=
 operator|new
-name|LinkedList
+name|ArrayDeque
 argument_list|<>
 argument_list|()
 decl_stmt|;
