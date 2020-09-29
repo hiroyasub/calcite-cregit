@@ -223,7 +223,6 @@ implements|implements
 name|TransformationRule
 block|{
 comment|/** Creates a FilterRemoveIsNotDistinctFromRule. */
-specifier|protected
 name|FilterRemoveIsNotDistinctFromRule
 parameter_list|(
 name|Config

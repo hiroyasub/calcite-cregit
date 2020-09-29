@@ -9413,7 +9413,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a RemoveSingleAggregateRule. */
-specifier|protected
 name|RemoveSingleAggregateRule
 parameter_list|(
 name|Config
@@ -9791,7 +9790,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a RemoveCorrelationForScalarProjectRule. */
-specifier|protected
 name|RemoveCorrelationForScalarProjectRule
 parameter_list|(
 name|Config
@@ -10704,7 +10702,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a RemoveCorrelationForScalarAggregateRule. */
-specifier|protected
 name|RemoveCorrelationForScalarAggregateRule
 parameter_list|(
 name|Config
@@ -12204,7 +12201,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates an AdjustProjectForCountAggregateRule. */
-specifier|protected
 name|AdjustProjectForCountAggregateRule
 parameter_list|(
 name|Config

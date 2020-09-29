@@ -611,7 +611,6 @@ implements|implements
 name|TransformationRule
 block|{
 comment|/** Creates an AggregateExpandDistinctAggregatesRule. */
-specifier|protected
 name|AggregateExpandDistinctAggregatesRule
 parameter_list|(
 name|Config

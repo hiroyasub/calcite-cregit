@@ -76,7 +76,6 @@ extends|extends
 name|AbstractJoinExtractFilterRule
 block|{
 comment|/** Creates a JoinExtractFilterRule. */
-specifier|protected
 name|JoinExtractFilterRule
 parameter_list|(
 name|Config
