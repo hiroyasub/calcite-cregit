@@ -9886,7 +9886,6 @@ else|else
 block|{
 break|break;
 block|}
-comment|// fall through
 case|case
 name|UNKNOWN_AS_FALSE
 case|:
