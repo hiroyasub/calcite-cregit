@@ -75,7 +75,7 @@ name|SqlValidatorCatalogReader
 name|catalogReader
 decl_stmt|;
 comment|/**    * Creates a DelegatingSqlValidatorCatalogReader.    *    * @param catalogReader Parent catalog reader    */
-specifier|public
+specifier|protected
 name|DelegatingSqlValidatorCatalogReader
 parameter_list|(
 name|SqlValidatorCatalogReader

@@ -389,7 +389,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a Correlate by parsing serialized output.    *    * @param input Input representation    */
-specifier|public
+specifier|protected
 name|Correlate
 parameter_list|(
 name|RelInput

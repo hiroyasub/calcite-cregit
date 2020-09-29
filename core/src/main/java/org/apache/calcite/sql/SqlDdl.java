@@ -76,7 +76,7 @@ name|SqlOperator
 name|operator
 decl_stmt|;
 comment|/** Creates a SqlDdl. */
-specifier|public
+specifier|protected
 name|SqlDdl
 parameter_list|(
 name|SqlOperator

@@ -2702,7 +2702,7 @@ specifier|final
 name|String
 name|name
 decl_stmt|;
-specifier|public
+specifier|protected
 name|Entry
 parameter_list|(
 name|CalciteSchema
@@ -2772,7 +2772,7 @@ name|String
 argument_list|>
 name|sqls
 decl_stmt|;
-specifier|public
+specifier|protected
 name|TableEntry
 parameter_list|(
 name|CalciteSchema
@@ -2823,7 +2823,7 @@ name|TypeEntry
 extends|extends
 name|Entry
 block|{
-specifier|public
+specifier|protected
 name|TypeEntry
 parameter_list|(
 name|CalciteSchema
@@ -2857,7 +2857,7 @@ name|FunctionEntry
 extends|extends
 name|Entry
 block|{
-specifier|public
+specifier|protected
 name|FunctionEntry
 parameter_list|(
 name|CalciteSchema
@@ -2898,7 +2898,7 @@ name|LatticeEntry
 extends|extends
 name|Entry
 block|{
-specifier|public
+specifier|protected
 name|LatticeEntry
 parameter_list|(
 name|CalciteSchema

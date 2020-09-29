@@ -447,7 +447,7 @@ argument_list|()
 assert|;
 block|}
 comment|/**    * Creates a Values by parsing serialized output.    */
-specifier|public
+specifier|protected
 name|Values
 parameter_list|(
 name|RelInput

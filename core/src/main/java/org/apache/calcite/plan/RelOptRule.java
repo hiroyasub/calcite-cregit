@@ -226,7 +226,7 @@ name|operands
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a rule.    *    * @param operand root operand, must not be null    */
-specifier|public
+specifier|protected
 name|RelOptRule
 parameter_list|(
 name|RelOptRuleOperand
@@ -246,7 +246,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a rule with an explicit description.    *    * @param operand     root operand, must not be null    * @param description Description, or null to guess description    */
-specifier|public
+specifier|protected
 name|RelOptRule
 parameter_list|(
 name|RelOptRuleOperand
@@ -269,7 +269,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a rule with an explicit description.    *    * @param operand     root operand, must not be null    * @param description Description, or null to guess description    * @param relBuilderFactory Builder for relational expressions    */
-specifier|public
+specifier|protected
 name|RelOptRule
 parameter_list|(
 name|RelOptRuleOperand

@@ -86,7 +86,7 @@ specifier|final
 name|Expression
 name|expression
 decl_stmt|;
-specifier|public
+specifier|protected
 name|BaseQueryable
 parameter_list|(
 name|QueryProvider

@@ -53,7 +53,7 @@ specifier|final
 name|int
 name|targetCount
 decl_stmt|;
-specifier|public
+specifier|protected
 name|AbstractSourceMapping
 parameter_list|(
 name|int

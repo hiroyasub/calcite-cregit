@@ -132,7 +132,7 @@ argument_list|>
 name|accumulator
 decl_stmt|;
 comment|/**    * Creates aggregate reset context.    *    * @param block Code block that will contain the added initialization    * @param accumulator Accumulator variables that store the intermediate    *                    aggregate state    */
-specifier|public
+specifier|protected
 name|AggResetContextImpl
 parameter_list|(
 name|BlockBuilder

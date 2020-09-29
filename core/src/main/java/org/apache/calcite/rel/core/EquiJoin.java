@@ -147,7 +147,7 @@ name|ImmutableIntList
 name|rightKeys
 decl_stmt|;
 comment|/** Creates an EquiJoin. */
-specifier|public
+specifier|protected
 name|EquiJoin
 parameter_list|(
 name|RelOptCluster
@@ -236,7 +236,7 @@ comment|/** Creates an EquiJoin. */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|EquiJoin
 parameter_list|(
 name|RelOptCluster
@@ -318,7 +318,7 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|EquiJoin
 parameter_list|(
 name|RelOptCluster

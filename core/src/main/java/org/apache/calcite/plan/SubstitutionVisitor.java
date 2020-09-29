@@ -4995,7 +4995,7 @@ name|AbstractUnifyRule
 extends|extends
 name|UnifyRule
 block|{
-specifier|public
+specifier|protected
 name|AbstractUnifyRule
 parameter_list|(
 name|Operand

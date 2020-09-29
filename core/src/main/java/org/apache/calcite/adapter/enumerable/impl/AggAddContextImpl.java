@@ -91,7 +91,7 @@ name|AggResultContextImpl
 implements|implements
 name|AggAddContext
 block|{
-specifier|public
+specifier|protected
 name|AggAddContextImpl
 parameter_list|(
 name|BlockBuilder

@@ -2813,7 +2813,7 @@ specifier|final
 name|boolean
 name|hasDefault
 decl_stmt|;
-specifier|public
+specifier|protected
 name|Prop
 parameter_list|(
 name|PropertyAccessor

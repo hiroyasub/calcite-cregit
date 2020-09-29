@@ -148,7 +148,7 @@ name|Implementor
 extends|extends
 name|JavaRelImplementor
 block|{
-specifier|public
+specifier|protected
 name|Implementor
 parameter_list|(
 name|RexBuilder

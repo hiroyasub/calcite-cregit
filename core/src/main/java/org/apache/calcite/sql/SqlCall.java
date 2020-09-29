@@ -210,7 +210,7 @@ extends|extends
 name|SqlNode
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
+specifier|protected
 name|SqlCall
 parameter_list|(
 name|SqlParserPos

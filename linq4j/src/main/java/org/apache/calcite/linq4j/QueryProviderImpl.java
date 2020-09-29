@@ -56,7 +56,7 @@ implements|implements
 name|QueryProvider
 block|{
 comment|/**    * Creates a QueryProviderImpl.    */
-specifier|public
+specifier|protected
 name|QueryProviderImpl
 parameter_list|()
 block|{

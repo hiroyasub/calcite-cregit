@@ -50,7 +50,7 @@ name|boolean
 name|ifExists
 decl_stmt|;
 comment|/** Creates a SqlDrop. */
-specifier|public
+specifier|protected
 name|SqlDrop
 parameter_list|(
 name|SqlOperator
@@ -80,7 +80,7 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|SqlDrop
 parameter_list|(
 name|SqlParserPos

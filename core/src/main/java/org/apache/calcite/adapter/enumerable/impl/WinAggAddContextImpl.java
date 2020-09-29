@@ -167,7 +167,7 @@ name|WinAggResultContextImpl
 implements|implements
 name|WinAggAddContext
 block|{
-specifier|public
+specifier|protected
 name|WinAggAddContextImpl
 parameter_list|(
 name|BlockBuilder
@@ -206,7 +206,7 @@ argument_list|)
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|WinAggAddContextImpl
 parameter_list|(
 name|BlockBuilder

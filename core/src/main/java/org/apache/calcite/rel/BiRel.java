@@ -87,7 +87,7 @@ specifier|protected
 name|RelNode
 name|right
 decl_stmt|;
-specifier|public
+specifier|protected
 name|BiRel
 parameter_list|(
 name|RelOptCluster

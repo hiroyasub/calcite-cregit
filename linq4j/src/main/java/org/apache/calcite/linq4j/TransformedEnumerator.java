@@ -43,7 +43,7 @@ name|F
 argument_list|>
 name|enumerator
 decl_stmt|;
-specifier|public
+specifier|protected
 name|TransformedEnumerator
 parameter_list|(
 name|Enumerator

@@ -892,7 +892,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-specifier|public
+specifier|protected
 name|Prepare
 parameter_list|(
 name|CalcitePrepare
@@ -2540,7 +2540,7 @@ specifier|final
 name|SqlExplainLevel
 name|detailLevel
 decl_stmt|;
-specifier|public
+specifier|protected
 name|PreparedExplain
 parameter_list|(
 name|RelDataType
@@ -2804,7 +2804,7 @@ name|RelCollation
 argument_list|>
 name|collations
 decl_stmt|;
-specifier|public
+specifier|protected
 name|PreparedResultImpl
 parameter_list|(
 name|RelDataType

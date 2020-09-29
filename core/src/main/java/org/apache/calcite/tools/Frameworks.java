@@ -543,7 +543,7 @@ specifier|final
 name|FrameworkConfig
 name|config
 decl_stmt|;
-specifier|public
+specifier|protected
 name|PrepareAction
 parameter_list|()
 block|{
@@ -568,7 +568,7 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
-specifier|public
+specifier|protected
 name|PrepareAction
 parameter_list|(
 name|FrameworkConfig

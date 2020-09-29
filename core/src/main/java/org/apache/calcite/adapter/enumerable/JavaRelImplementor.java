@@ -106,7 +106,7 @@ specifier|final
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
-specifier|public
+specifier|protected
 name|JavaRelImplementor
 parameter_list|(
 name|RexBuilder

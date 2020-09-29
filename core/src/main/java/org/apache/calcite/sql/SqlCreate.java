@@ -54,7 +54,7 @@ name|boolean
 name|ifNotExists
 decl_stmt|;
 comment|/** Creates a SqlCreate. */
-specifier|public
+specifier|protected
 name|SqlCreate
 parameter_list|(
 name|SqlOperator
@@ -93,7 +93,7 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|SqlCreate
 parameter_list|(
 name|SqlParserPos

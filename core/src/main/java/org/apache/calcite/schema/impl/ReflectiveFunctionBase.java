@@ -189,7 +189,7 @@ argument_list|>
 name|parameters
 decl_stmt|;
 comment|/**    * Creates a ReflectiveFunctionBase.    *    * @param method Method that is used to get type information from    */
-specifier|public
+specifier|protected
 name|ReflectiveFunctionBase
 parameter_list|(
 name|Method

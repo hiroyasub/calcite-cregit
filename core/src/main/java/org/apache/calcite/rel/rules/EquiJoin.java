@@ -154,7 +154,7 @@ name|core
 operator|.
 name|EquiJoin
 block|{
-specifier|public
+specifier|protected
 name|EquiJoin
 parameter_list|(
 name|RelOptCluster

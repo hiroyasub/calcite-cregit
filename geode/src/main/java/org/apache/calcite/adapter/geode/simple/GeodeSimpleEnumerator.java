@@ -121,7 +121,7 @@ specifier|private
 name|ClientCache
 name|clientCache
 decl_stmt|;
-specifier|public
+specifier|protected
 name|GeodeSimpleEnumerator
 parameter_list|(
 name|ClientCache

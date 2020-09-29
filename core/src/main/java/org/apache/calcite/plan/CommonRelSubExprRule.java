@@ -54,7 +54,7 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|CommonRelSubExprRule
 parameter_list|(
 name|RelOptRuleOperand

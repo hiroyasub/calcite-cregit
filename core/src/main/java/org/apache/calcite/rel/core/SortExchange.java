@@ -231,7 +231,7 @@ name|collation
 assert|;
 block|}
 comment|/**    * Creates a SortExchange by parsing serialized output.    */
-specifier|public
+specifier|protected
 name|SortExchange
 parameter_list|(
 name|RelInput

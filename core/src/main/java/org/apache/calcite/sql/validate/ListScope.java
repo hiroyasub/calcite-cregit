@@ -225,7 +225,7 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
+specifier|protected
 name|ListScope
 parameter_list|(
 name|SqlValidatorScope

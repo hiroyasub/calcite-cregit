@@ -188,7 +188,7 @@ name|C
 name|config
 decl_stmt|;
 comment|/** Creates a RelRule. */
-specifier|public
+specifier|protected
 name|RelRule
 parameter_list|(
 name|C

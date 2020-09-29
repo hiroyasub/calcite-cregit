@@ -510,7 +510,7 @@ name|traitSet
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an<code>AbstractRelNode</code>.    */
-specifier|public
+specifier|protected
 name|AbstractRelNode
 parameter_list|(
 name|RelOptCluster

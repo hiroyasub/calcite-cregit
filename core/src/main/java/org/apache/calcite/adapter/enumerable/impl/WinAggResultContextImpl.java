@@ -162,7 +162,7 @@ argument_list|>
 name|frame
 decl_stmt|;
 comment|/**    * Creates window aggregate result context.    *    * @param block code block that will contain the added initialization    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
-specifier|public
+specifier|protected
 name|WinAggResultContextImpl
 parameter_list|(
 name|BlockBuilder
@@ -211,7 +211,7 @@ argument_list|)
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|WinAggResultContextImpl
 parameter_list|(
 name|BlockBuilder

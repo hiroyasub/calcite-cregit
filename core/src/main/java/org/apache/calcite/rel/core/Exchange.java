@@ -302,7 +302,7 @@ name|ANY
 assert|;
 block|}
 comment|/**    * Creates an Exchange by parsing serialized output.    */
-specifier|public
+specifier|protected
 name|Exchange
 parameter_list|(
 name|RelInput

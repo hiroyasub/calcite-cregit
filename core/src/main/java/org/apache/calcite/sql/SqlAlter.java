@@ -47,7 +47,7 @@ comment|/** Scope of the operation. Values "SYSTEM" and "SESSION" are typical. *
 name|String
 name|scope
 decl_stmt|;
-specifier|public
+specifier|protected
 name|SqlAlter
 parameter_list|(
 name|SqlParserPos
@@ -62,7 +62,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
+specifier|protected
 name|SqlAlter
 parameter_list|(
 name|SqlParserPos

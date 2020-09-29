@@ -126,7 +126,7 @@ extends|extends
 name|SetOp
 block|{
 comment|/**    * Creates an Intersect.    */
-specifier|public
+specifier|protected
 name|Intersect
 parameter_list|(
 name|RelOptCluster

@@ -458,7 +458,7 @@ argument_list|>
 name|constants
 decl_stmt|;
 comment|/**    * Creates a window relational expression.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input   Input relational expression    * @param constants List of constants that are additional inputs    * @param rowType Output row type    * @param groups Windows    */
-specifier|public
+specifier|protected
 name|Window
 parameter_list|(
 name|RelOptCluster

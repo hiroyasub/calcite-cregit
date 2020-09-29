@@ -177,7 +177,7 @@ specifier|final
 name|String
 name|tableName
 decl_stmt|;
-specifier|public
+specifier|protected
 name|AbstractTableQueryable
 parameter_list|(
 name|QueryProvider

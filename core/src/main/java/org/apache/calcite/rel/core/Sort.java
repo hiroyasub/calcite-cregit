@@ -293,7 +293,7 @@ name|fetch
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a Sort.    *    * @param cluster   Cluster this relational expression belongs to    * @param traits    Traits    * @param child     input relational expression    * @param collation array of sort specifications    */
-specifier|public
+specifier|protected
 name|Sort
 parameter_list|(
 name|RelOptCluster
@@ -326,7 +326,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a Sort.    *    * @param cluster   Cluster this relational expression belongs to    * @param traits    Traits    * @param child     input relational expression    * @param collation array of sort specifications    * @param offset    Expression for number of rows to discard before returning    *                  first row    * @param fetch     Expression for number of rows to fetch    */
-specifier|public
+specifier|protected
 name|Sort
 parameter_list|(
 name|RelOptCluster
@@ -415,7 +415,7 @@ literal|"trivial sort"
 assert|;
 block|}
 comment|/**    * Creates a Sort by parsing serialized output.    */
-specifier|public
+specifier|protected
 name|Sort
 parameter_list|(
 name|RelInput

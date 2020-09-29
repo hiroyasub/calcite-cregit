@@ -296,7 +296,7 @@ comment|/**    * Creates a<code>ConverterRule</code>.    *    * @param clazz    
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 name|ConverterRule
 parameter_list|(
 name|Class
@@ -344,7 +344,7 @@ argument_list|)
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 parameter_list|<
 name|R
 extends|extends
@@ -419,7 +419,7 @@ comment|/**    * Creates a<code>ConverterRule</code> with a predicate.    *    *
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 parameter_list|<
 name|R
 extends|extends
@@ -495,7 +495,7 @@ argument_list|)
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
+specifier|protected
 parameter_list|<
 name|R
 extends|extends

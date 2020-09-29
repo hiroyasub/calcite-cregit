@@ -141,7 +141,7 @@ name|Minus
 extends|extends
 name|SetOp
 block|{
-specifier|public
+specifier|protected
 name|Minus
 parameter_list|(
 name|RelOptCluster
