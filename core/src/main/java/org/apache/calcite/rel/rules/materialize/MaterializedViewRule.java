@@ -821,18 +821,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-operator|.
-name|Entry
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -1741,6 +1729,8 @@ condition|)
 block|{
 for|for
 control|(
+name|Map
+operator|.
 name|Entry
 argument_list|<
 name|RexTableInputRef
@@ -2924,6 +2914,8 @@ argument_list|)
 decl_stmt|;
 for|for
 control|(
+name|Map
+operator|.
 name|Entry
 argument_list|<
 name|RelTableRef
@@ -3150,6 +3142,8 @@ return|;
 block|}
 for|for
 control|(
+name|Map
+operator|.
 name|Entry
 argument_list|<
 name|Class
@@ -6607,6 +6601,8 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
+name|Map
+operator|.
 name|Entry
 argument_list|<
 name|RexTableInputRef

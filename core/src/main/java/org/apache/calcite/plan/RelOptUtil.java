@@ -1509,18 +1509,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-operator|.
-name|Entry
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|NavigableSet
 import|;
 end_import
@@ -1889,6 +1877,8 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
+name|Map
+operator|.
 name|Entry
 argument_list|<
 name|Class
@@ -2037,6 +2027,11 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MixedMutabilityReturnType"
+argument_list|)
 specifier|public
 specifier|static
 name|List
