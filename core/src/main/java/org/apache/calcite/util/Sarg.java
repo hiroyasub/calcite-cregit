@@ -114,6 +114,11 @@ comment|/** Set of values (or ranges) that are the target of a search.  *  *<p>T
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 class|class
 name|Sarg

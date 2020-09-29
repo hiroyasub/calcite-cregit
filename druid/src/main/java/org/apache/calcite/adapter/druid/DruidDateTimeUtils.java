@@ -406,6 +406,11 @@ block|}
 comment|/**    * Generates a list of {@link Interval}s equivalent to a given    * expression. Assumes that all the predicates in the input    * reference a single column: the timestamp column.    */
 annotation|@
 name|Nullable
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 specifier|static
 name|List
@@ -1004,6 +1009,11 @@ block|}
 block|}
 annotation|@
 name|Nullable
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|protected
 specifier|static
 name|List

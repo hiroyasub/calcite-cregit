@@ -90,6 +90,11 @@ parameter_list|>
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Cache of traits.    *    *<p>Uses weak interner to allow GC.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 specifier|final
 name|Interner
@@ -138,6 +143,11 @@ name|getSimpleName
 parameter_list|()
 function_decl|;
 comment|/**    * Takes an arbitrary RelTrait and returns the canonical representation of    * that RelTrait. Canonized RelTrait objects may always be compared using    * the equality operator (<code>==</code>).    *    *<p>If an equal RelTrait has already been canonized and is still in use,    * it will be returned. Otherwise, the given RelTrait is made canonical and    * returned.    *    * @param trait a possibly non-canonical RelTrait    * @return a canonical RelTrait.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 specifier|final
 name|T

@@ -266,6 +266,11 @@ name|unsupportedCount
 expr_stmt|;
 block|}
 comment|/** Generates a map of variables and lists of values that could be assigned    * to them. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 name|Iterable
 argument_list|<

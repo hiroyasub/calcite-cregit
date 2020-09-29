@@ -4402,6 +4402,11 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Validate if value can be decoded by given charset.    *    * @param value nls string in byte array    * @param charset charset    * @throws RuntimeException If the given value cannot be represented in the    *     given charset    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 specifier|static
 name|void

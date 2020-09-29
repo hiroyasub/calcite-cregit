@@ -923,6 +923,11 @@ block|}
 comment|/** Replaces calls to EXTRACT, FLOOR and CEIL in an expression. */
 annotation|@
 name|VisibleForTesting
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 specifier|static
 name|RexNode
@@ -1578,6 +1583,11 @@ block|}
 comment|/** Walks over an expression, replacing calls to    * {@code EXTRACT}, {@code FLOOR} and {@code CEIL} with date ranges. */
 annotation|@
 name|VisibleForTesting
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|static
 class|class
 name|ExtractShuttle

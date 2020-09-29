@@ -5352,7 +5352,11 @@ comment|/** Converts a Sarg to SQL, generating "operand IN (c1, c2, ...)" if the
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
+literal|"BetaApi"
+block|,
 literal|"UnstableApiUsage"
+block|}
 argument_list|)
 specifier|private
 parameter_list|<

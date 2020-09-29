@@ -1675,6 +1675,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Given a list of conditions that contain Druid valid operations and      * a list that contains those that contain any non-supported operation,      * it outputs a triple with three different categories:      * 1-l) condition filters on the timestamp column,      * 2-m) condition filters that can be pushed to Druid,      * 3-r) condition filters that cannot be pushed to Druid.      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 specifier|static
 name|Triple

@@ -5363,6 +5363,11 @@ literal|true
 return|;
 block|}
 comment|/** Creates a {@link RexNode} representation a SQL    * "arg BETWEEN lower AND upper" expression.    *    *<p>If the expressions are all literals of compatible type, creates a call    * to {@link Sarg} literal, {@code SEARCH(arg, SARG([lower..upper])};    * otherwise creates a disjunction, {@code arg>= lower AND arg<= upper}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 name|RexNode
 name|makeBetween
@@ -5512,7 +5517,11 @@ comment|/** Converts a list of expressions to a search argument, or returns null
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
+literal|"BetaApi"
+block|,
 literal|"UnstableApiUsage"
+block|}
 argument_list|)
 specifier|private
 specifier|static

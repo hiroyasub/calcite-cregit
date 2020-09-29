@@ -128,6 +128,8 @@ annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
+literal|"BetaApi"
+block|,
 literal|"UnstableApiUsage"
 block|}
 argument_list|)
@@ -143,7 +145,11 @@ block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
+literal|"BetaApi"
+block|,
 literal|"rawtypes"
+block|}
 argument_list|)
 specifier|private
 specifier|static

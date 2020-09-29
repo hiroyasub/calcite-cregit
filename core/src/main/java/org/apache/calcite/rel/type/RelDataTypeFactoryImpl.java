@@ -385,6 +385,11 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    * Global cache for RelDataType.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 specifier|static
 specifier|final
@@ -1856,6 +1861,11 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Registers a type, or returns the existing type if it is already    * registered.    *    * @throws NullPointerException if type is null    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|protected
 name|RelDataType
 name|canonize

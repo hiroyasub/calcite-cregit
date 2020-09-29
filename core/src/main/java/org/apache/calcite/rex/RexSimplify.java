@@ -8887,6 +8887,11 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 parameter_list|<
 name|C
@@ -9216,6 +9221,11 @@ comment|/** Weakens a term so that it checks only what is not implied by predica
 end_comment
 
 begin_function
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 parameter_list|<
 name|C
@@ -12772,6 +12782,11 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 specifier|static
 parameter_list|<
@@ -14525,6 +14540,11 @@ comment|/** Equivalent to a {@link RexLiteral} whose value is a {@link Sarg},   
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|static
 class|class
 name|RexSargBuilder

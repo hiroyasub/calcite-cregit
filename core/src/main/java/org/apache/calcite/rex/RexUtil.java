@@ -2893,6 +2893,11 @@ name|shuttle
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|private
 specifier|static
 parameter_list|<
