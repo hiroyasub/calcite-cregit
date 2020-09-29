@@ -554,6 +554,11 @@ specifier|private
 name|Object
 name|field
 parameter_list|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|String
 name|field
 parameter_list|,

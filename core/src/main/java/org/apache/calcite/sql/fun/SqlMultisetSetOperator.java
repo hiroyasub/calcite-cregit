@@ -105,6 +105,11 @@ extends|extends
 name|SqlBinaryOperator
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|boolean

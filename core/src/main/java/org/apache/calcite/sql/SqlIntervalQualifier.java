@@ -1321,6 +1321,11 @@ parameter_list|,
 name|BigDecimal
 name|value
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|TimeUnit
 name|unit
 parameter_list|)

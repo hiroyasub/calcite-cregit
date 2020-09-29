@@ -1187,8 +1187,6 @@ name|add
 argument_list|(
 name|toAggCall
 argument_list|(
-name|this
-argument_list|,
 name|jsonAggCall
 argument_list|)
 argument_list|)
@@ -1870,9 +1868,6 @@ specifier|private
 name|AggregateCall
 name|toAggCall
 parameter_list|(
-name|RelInput
-name|relInput
-parameter_list|,
 name|Map
 argument_list|<
 name|String

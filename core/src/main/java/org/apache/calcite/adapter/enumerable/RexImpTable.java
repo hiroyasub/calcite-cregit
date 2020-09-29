@@ -15654,10 +15654,6 @@ block|{
 return|return
 name|callBackupMethodAnyType
 argument_list|(
-name|translator
-argument_list|,
-name|call
-argument_list|,
 name|argValueList
 argument_list|)
 return|;
@@ -15929,12 +15925,6 @@ specifier|private
 name|Expression
 name|callBackupMethodAnyType
 parameter_list|(
-name|RexToLixTranslator
-name|translator
-parameter_list|,
-name|RexCall
-name|call
-parameter_list|,
 name|List
 argument_list|<
 name|Expression
@@ -19074,6 +19064,12 @@ operator|.
 name|getAlpha
 argument_list|()
 decl_stmt|;
+comment|// TODO: verify if the variable is needed
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|final
 name|BinaryExpression
 name|lastIndex

@@ -1113,6 +1113,11 @@ specifier|private
 class|class
 name|CellReader
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|String
 name|type

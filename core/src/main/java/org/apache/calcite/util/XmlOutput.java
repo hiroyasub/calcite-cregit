@@ -910,6 +910,11 @@ name|specials
 init|=
 literal|false
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|boolean
 name|cdataEnd
 init|=
@@ -939,6 +944,7 @@ literal|"]]>"
 argument_list|)
 condition|)
 block|{
+comment|// TODO: support string that contains cdataEnd literal values
 name|cdataEnd
 operator|=
 literal|true

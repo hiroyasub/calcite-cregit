@@ -926,34 +926,6 @@ operator|::
 name|apply
 return|;
 block|}
-comment|/**    * Converts a 1-parameter function to a predicate.    */
-specifier|private
-specifier|static
-parameter_list|<
-name|T
-parameter_list|>
-name|Predicate1
-argument_list|<
-name|T
-argument_list|>
-name|toPredicate
-parameter_list|(
-specifier|final
-name|Function1
-argument_list|<
-name|T
-argument_list|,
-name|Boolean
-argument_list|>
-name|function
-parameter_list|)
-block|{
-return|return
-name|function
-operator|::
-name|apply
-return|;
-block|}
 comment|/**    * Returns the appropriate interface for a lambda function with    * 1 argument and the given return type.    *    *<p>For example:</p>    * functionClass(Integer.TYPE) returns IntegerFunction1.class    * functionClass(String.class) returns Function1.class    *    * @param aClass Return type    *    * @return Function class    */
 specifier|public
 specifier|static

@@ -45,22 +45,6 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableRel
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|adapter
-operator|.
-name|enumerable
-operator|.
 name|JavaRowFormat
 import|;
 end_import
@@ -385,22 +369,25 @@ block|{
 comment|// Generate:
 comment|//   Enumerable source = ...;
 comment|//   return SparkRuntime.createRdd(sparkContext, source);
+if|if
+condition|(
+literal|true
+condition|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"EnumerableToSparkConverter is not implemented"
+argument_list|)
+throw|;
+block|}
 specifier|final
 name|BlockBuilder
 name|list
 init|=
 operator|new
 name|BlockBuilder
-argument_list|()
-decl_stmt|;
-specifier|final
-name|EnumerableRel
-name|child
-init|=
-operator|(
-name|EnumerableRel
-operator|)
-name|getInput
 argument_list|()
 decl_stmt|;
 specifier|final

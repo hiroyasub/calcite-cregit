@@ -294,6 +294,11 @@ name|String
 argument_list|>
 name|args
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|InputStreamReader
@@ -304,6 +309,11 @@ specifier|final
 name|PrintWriter
 name|out
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|PrintWriter

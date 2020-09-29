@@ -1742,6 +1742,11 @@ name|RexNode
 argument_list|>
 name|aggCallMapping
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|List
 argument_list|<
 name|RexNode

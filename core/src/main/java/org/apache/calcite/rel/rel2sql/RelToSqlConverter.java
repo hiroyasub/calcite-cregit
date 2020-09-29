@@ -7294,6 +7294,11 @@ specifier|final
 name|RelNode
 name|parent
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|int

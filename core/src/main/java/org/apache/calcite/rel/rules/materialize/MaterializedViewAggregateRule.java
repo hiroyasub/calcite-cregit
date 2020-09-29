@@ -2903,6 +2903,11 @@ literal|null
 return|;
 block|}
 comment|// We could map all expressions. Create aggregate mapping.
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|int
 name|viewAggregateAdditionalFieldCount
 init|=

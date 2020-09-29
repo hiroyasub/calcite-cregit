@@ -2202,6 +2202,11 @@ init|=
 name|scope
 decl_stmt|;
 comment|// REVIEW
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|SqlIdentifier
 name|declName
 init|=

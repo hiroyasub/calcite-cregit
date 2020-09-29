@@ -1198,6 +1198,11 @@ init|=
 name|getConnection
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|final
 name|CalciteServerStatement
 name|stmt

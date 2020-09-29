@@ -118,6 +118,11 @@ name|ElasticsearchEnumerators
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 name|Function1

@@ -448,6 +448,11 @@ name|connection
 return|;
 block|}
 comment|/** Connection that looks up responses from a static map. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 class|class
@@ -521,6 +526,11 @@ throw|;
 block|}
 block|}
 comment|/** Connection that records requests and responses. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 class|class
@@ -528,6 +538,11 @@ name|WrappingSplunkConnection
 implements|implements
 name|SplunkConnection
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|SplunkConnection

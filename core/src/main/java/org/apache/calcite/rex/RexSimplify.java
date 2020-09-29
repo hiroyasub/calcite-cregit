@@ -6596,6 +6596,11 @@ name|CaseBranch
 argument_list|>
 name|inputBranches
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|RexUnknownAs
 name|unknownAs
 parameter_list|,

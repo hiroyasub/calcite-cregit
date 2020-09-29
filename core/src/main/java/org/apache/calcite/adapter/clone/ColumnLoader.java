@@ -2326,6 +2326,11 @@ argument_list|)
 return|;
 block|}
 comment|/** Two's complement absolute on int value. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 name|int

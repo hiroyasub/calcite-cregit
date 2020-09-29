@@ -1239,8 +1239,6 @@ case|:
 return|return
 name|cast
 argument_list|(
-name|call
-argument_list|,
 name|values
 argument_list|)
 return|;
@@ -1250,8 +1248,6 @@ case|:
 return|return
 name|coalesce
 argument_list|(
-name|call
-argument_list|,
 name|values
 argument_list|)
 return|;
@@ -1275,8 +1271,6 @@ case|:
 return|return
 name|extract
 argument_list|(
-name|call
-argument_list|,
 name|values
 argument_list|)
 return|;
@@ -1293,9 +1287,6 @@ specifier|private
 name|Comparable
 name|extract
 parameter_list|(
-name|RexCall
-name|call
-parameter_list|,
 name|List
 argument_list|<
 name|Comparable
@@ -1401,9 +1392,6 @@ specifier|private
 name|Comparable
 name|coalesce
 parameter_list|(
-name|RexCall
-name|call
-parameter_list|,
 name|List
 argument_list|<
 name|Comparable
@@ -1629,9 +1617,6 @@ specifier|private
 name|Comparable
 name|cast
 parameter_list|(
-name|RexCall
-name|call
-parameter_list|,
 name|List
 argument_list|<
 name|Comparable

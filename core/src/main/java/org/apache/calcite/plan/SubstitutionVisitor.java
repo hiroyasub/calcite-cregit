@@ -749,22 +749,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|trace
-operator|.
-name|CalciteTrace
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -830,16 +814,6 @@ operator|.
 name|collect
 operator|.
 name|Sets
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|slf4j
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -1005,17 +979,6 @@ operator|.
 name|DEBUG
 operator|.
 name|value
-argument_list|()
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|Logger
-name|LOGGER
-init|=
-name|CalciteTrace
-operator|.
-name|getPlannerTracer
 argument_list|()
 decl_stmt|;
 specifier|protected
@@ -1589,8 +1552,6 @@ if|if
 condition|(
 name|isEquivalent
 argument_list|(
-name|rexBuilder
-argument_list|,
 name|condition2
 argument_list|,
 name|target2
@@ -1670,8 +1631,6 @@ argument_list|()
 operator|&&
 name|isEquivalent
 argument_list|(
-name|rexBuilder
-argument_list|,
 name|condition2
 argument_list|,
 name|r
@@ -2239,9 +2198,6 @@ specifier|static
 name|boolean
 name|isEquivalent
 parameter_list|(
-name|RexBuilder
-name|rexBuilder
-parameter_list|,
 name|RexNode
 name|condition
 parameter_list|,

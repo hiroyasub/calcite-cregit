@@ -745,27 +745,6 @@ operator|.
 name|headings
 return|;
 block|}
-specifier|private
-name|String
-name|tableKey
-parameter_list|()
-block|{
-return|return
-literal|"Table: {url: "
-operator|+
-name|this
-operator|.
-name|source
-operator|+
-literal|", selector: "
-operator|+
-name|this
-operator|.
-name|selector
-operator|+
-literal|"}"
-return|;
-block|}
 annotation|@
 name|Override
 specifier|public

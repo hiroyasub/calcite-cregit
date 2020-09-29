@@ -6709,6 +6709,11 @@ literal|0
 decl_stmt|;
 for|for
 control|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|E
 name|e
 range|:

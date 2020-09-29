@@ -647,7 +647,9 @@ literal|"Invalid regular expression '"
 operator|+
 name|pattern
 operator|+
-literal|"'"
+literal|"', index "
+operator|+
+name|i
 argument_list|)
 return|;
 block|}

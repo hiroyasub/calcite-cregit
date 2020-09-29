@@ -242,6 +242,11 @@ argument_list|>
 argument_list|>
 name|parentFunction
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|Function

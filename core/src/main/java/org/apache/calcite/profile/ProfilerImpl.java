@@ -2607,6 +2607,11 @@ operator|=
 name|spaceColumnPair
 lambda|->
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|final
 name|Space
 name|space

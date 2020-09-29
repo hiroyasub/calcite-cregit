@@ -752,6 +752,11 @@ name|State
 name|state
 decl_stmt|;
 comment|// set in STATE_1_RESET
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|boolean
 name|open

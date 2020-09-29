@@ -1036,6 +1036,11 @@ parameter_list|(
 name|Join
 name|joinRel
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|List
 argument_list|<
 name|RelNode

@@ -12818,17 +12818,6 @@ name|pivot
 parameter_list|)
 block|{
 specifier|final
-name|SqlValidatorNamespace
-name|ns
-init|=
-name|validator
-operator|.
-name|getNamespace
-argument_list|(
-name|pivot
-argument_list|)
-decl_stmt|;
-specifier|final
 name|SqlValidatorScope
 name|scope
 init|=

@@ -595,6 +595,11 @@ specifier|static
 class|class
 name|Translator
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|RelDataType
@@ -608,6 +613,11 @@ name|String
 argument_list|>
 name|fieldNames
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|RexBuilder
 name|rexBuilder

@@ -32,6 +32,11 @@ comment|/**  * Default implementation of {@link Visitor}, which traverses a tree
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|public
 class|class
 name|VisitorImpl

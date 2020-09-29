@@ -934,6 +934,11 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|void
 name|sampleOfTheGeneratedWindowedAggregate
@@ -5462,9 +5467,15 @@ parameter_list|,
 name|PhysType
 name|physType
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|Expression
 name|rowComparator
 parameter_list|,
+comment|// TODO: remove or use
 name|Expression
 name|keySelector
 parameter_list|,

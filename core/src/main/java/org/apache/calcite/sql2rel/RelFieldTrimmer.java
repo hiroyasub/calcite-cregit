@@ -5096,6 +5096,11 @@ condition|)
 block|{
 for|for
 control|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|RelNode
 name|input
 range|:

@@ -117,6 +117,11 @@ specifier|private
 name|E
 name|current
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|ClientCache
 name|clientCache

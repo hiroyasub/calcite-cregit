@@ -651,7 +651,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// The subset is not used, but we need it, just for debugging
-comment|//noinspection unused
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|RelSubset
 name|subset
 init|=

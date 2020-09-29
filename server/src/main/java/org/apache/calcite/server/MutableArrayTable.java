@@ -279,6 +279,11 @@ operator|new
 name|ArrayList
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|RelProtoDataType

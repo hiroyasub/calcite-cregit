@@ -5443,6 +5443,11 @@ specifier|static
 name|String
 name|getClassName
 parameter_list|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|RelDataType
 name|type
 parameter_list|)
@@ -6016,6 +6021,11 @@ name|LinkedHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|int
 name|expansionDepth

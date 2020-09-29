@@ -777,6 +777,11 @@ specifier|public
 class|class
 name|SqlFunctions
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 specifier|final
@@ -927,6 +932,11 @@ block|,
 literal|"Space"
 block|}
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 specifier|final

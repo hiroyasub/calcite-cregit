@@ -1009,6 +1009,11 @@ parameter_list|()
 block|{
 block|}
 comment|/** Not used. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 class|class
 name|FooCompiler

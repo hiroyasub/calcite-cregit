@@ -1412,10 +1412,6 @@ name|triple
 init|=
 name|splitFilters
 argument_list|(
-name|rexBuilder
-argument_list|,
-name|query
-argument_list|,
 name|validPreds
 argument_list|,
 name|nonValidPreds
@@ -1700,14 +1696,6 @@ argument_list|>
 argument_list|>
 name|splitFilters
 parameter_list|(
-specifier|final
-name|RexBuilder
-name|rexBuilder
-parameter_list|,
-specifier|final
-name|DruidQuery
-name|input
-parameter_list|,
 specifier|final
 name|List
 argument_list|<

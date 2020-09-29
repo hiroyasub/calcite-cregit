@@ -492,6 +492,11 @@ comment|/** Creates and initializes the instance that will serve as a prototype 
 specifier|private
 name|RelMetadataQuery
 parameter_list|(
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 name|boolean
 name|dummy
 parameter_list|)

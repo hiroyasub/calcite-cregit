@@ -1730,6 +1730,11 @@ name|rel
 return|;
 block|}
 comment|// ~ Private Methods ------------------------------------------------------
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 name|RelNode
@@ -2151,6 +2156,11 @@ name|kind
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|String
 name|toString

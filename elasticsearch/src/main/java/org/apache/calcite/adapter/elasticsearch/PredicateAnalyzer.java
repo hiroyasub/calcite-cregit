@@ -632,6 +632,11 @@ throw|;
 block|}
 block|}
 comment|/**    * Converts expressions of the form NOT(LIKE(...)) into NOT_LIKE(...)    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 class|class
@@ -4102,6 +4107,11 @@ name|CastExpression
 implements|implements
 name|TerminalExpression
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|RelDataType

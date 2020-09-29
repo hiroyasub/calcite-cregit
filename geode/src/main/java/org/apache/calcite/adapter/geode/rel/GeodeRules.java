@@ -2037,16 +2037,6 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|GeodeTableScan
-name|scan
-init|=
-name|call
-operator|.
-name|rel
-argument_list|(
-literal|1
-argument_list|)
-decl_stmt|;
 if|if
 condition|(
 name|filter
@@ -2069,8 +2059,6 @@ init|=
 name|convert
 argument_list|(
 name|filter
-argument_list|,
-name|scan
 argument_list|)
 decl_stmt|;
 name|call
@@ -2088,9 +2076,6 @@ name|convert
 parameter_list|(
 name|LogicalFilter
 name|filter
-parameter_list|,
-name|GeodeTableScan
-name|scan
 parameter_list|)
 block|{
 specifier|final

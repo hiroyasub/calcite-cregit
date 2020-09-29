@@ -395,15 +395,6 @@ name|CassandraRules
 operator|.
 name|RexToCassandraTranslator
 argument_list|(
-operator|(
-name|JavaTypeFactory
-operator|)
-name|getCluster
-argument_list|()
-operator|.
-name|getTypeFactory
-argument_list|()
-argument_list|,
 name|CassandraRules
 operator|.
 name|cassandraFieldNames

@@ -4074,6 +4074,11 @@ argument_list|<
 name|TResult
 argument_list|>
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|Enumerable
@@ -4968,6 +4973,11 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|static
 parameter_list|<
@@ -15222,11 +15232,6 @@ name|boolean
 name|moveNext
 parameter_list|()
 block|{
-name|boolean
-name|incremented
-init|=
-literal|false
-decl_stmt|;
 for|for
 control|(
 init|;

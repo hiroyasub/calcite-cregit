@@ -105,16 +105,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Arrays
 import|;
 end_import
@@ -263,39 +253,15 @@ decl_stmt|;
 comment|// The following members are work space. They can be shared among partitions,
 comment|// but only one thread can use them at a time. Putting them here saves the
 comment|// expense of creating a fresh object each call to "match".
-specifier|private
-specifier|final
-name|ImmutableList
-argument_list|<
-name|Tuple
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|>
-name|emptyStateSet
-init|=
-name|ImmutableList
-operator|.
-name|of
-argument_list|()
-decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 specifier|final
 name|ImmutableBitSet
 name|startSet
-decl_stmt|;
-specifier|private
-specifier|final
-name|List
-argument_list|<
-name|Integer
-argument_list|>
-name|rowSymbols
-init|=
-operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
 decl_stmt|;
 comment|/**    * Creates a Matcher; use {@link #builder}.    */
 specifier|private

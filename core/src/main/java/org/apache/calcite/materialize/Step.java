@@ -702,6 +702,11 @@ name|c
 return|;
 block|}
 comment|/** Temporary method. We should use (inferred) primary keys to figure out    * the direction of steps. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
 specifier|private
 name|double
 name|cardinality

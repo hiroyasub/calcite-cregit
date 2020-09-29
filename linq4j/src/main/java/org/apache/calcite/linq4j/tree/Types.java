@@ -1701,15 +1701,6 @@ operator|==
 literal|0
 condition|)
 block|{
-name|Constructor
-index|[]
-name|constructors1
-init|=
-name|clazz
-operator|.
-name|getConstructors
-argument_list|()
-decl_stmt|;
 try|try
 block|{
 return|return
