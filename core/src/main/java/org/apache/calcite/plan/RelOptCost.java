@@ -48,6 +48,11 @@ function_decl|;
 comment|// REVIEW jvs 3-Apr-2006:  we should standardize this
 comment|// to Comparator/equals/hashCode
 comment|/**    * Compares this to another cost.    *    * @param cost another cost    * @return true iff this is exactly equal to other cost    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"NonOverridingEquals"
+argument_list|)
 name|boolean
 name|equals
 parameter_list|(

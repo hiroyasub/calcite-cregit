@@ -1350,6 +1350,11 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns whether this rule is equal to another rule.    *    *<p>The base implementation checks that the rules have the same class and    * that the operands are equal; derived classes can override.    *    * @param that Another rule    * @return Whether this rule is equal to another rule    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"NonOverridingEquals"
+argument_list|)
 specifier|protected
 name|boolean
 name|equals

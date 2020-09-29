@@ -172,6 +172,11 @@ return|;
 block|}
 comment|// implement RelOptCost
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"NonOverridingEquals"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|boolean
