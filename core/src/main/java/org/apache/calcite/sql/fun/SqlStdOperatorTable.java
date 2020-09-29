@@ -4588,7 +4588,7 @@ operator|new
 name|SqlNewOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * The<code>OVER</code> operator, which applies an aggregate functions to a    * {@link SqlWindow window}.    *    *<p>Operands are as follows:    *    *<ol>    *<li>name of window function ({@link org.apache.calcite.sql.SqlCall})</li>    *<li>window name ({@link org.apache.calcite.sql.SqlLiteral}) or window    * in-line specification (@link SqlWindowOperator})</li>    *</ol>    */
+comment|/**    * The<code>OVER</code> operator, which applies an aggregate functions to a    * {@link SqlWindow window}.    *    *<p>Operands are as follows:    *    *<ol>    *<li>name of window function ({@link org.apache.calcite.sql.SqlCall})</li>    *<li>window name ({@link org.apache.calcite.sql.SqlLiteral}) or window    * in-line specification ({@code org.apache.calcite.sql.SqlWindow.SqlWindowOperator})</li>    *</ol>    */
 specifier|public
 specifier|static
 specifier|final
