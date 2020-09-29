@@ -1923,7 +1923,6 @@ name|string
 return|;
 block|}
 comment|/**    * Outputs the traits of this set as a String. Traits are output in order,    * separated by periods.    */
-specifier|protected
 name|String
 name|computeString
 parameter_list|()

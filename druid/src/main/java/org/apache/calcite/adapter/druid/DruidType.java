@@ -131,7 +131,6 @@ name|COMPLEX
 return|;
 block|}
 comment|/** Returns a DruidType matching the given String type from a Druid metric. */
-specifier|protected
 specifier|static
 name|DruidType
 name|getTypeFromMetric
