@@ -227,6 +227,11 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Builds a pattern expression. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 class|class
 name|PatternBuilder
 block|{
@@ -242,6 +247,7 @@ name|Stack
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|// TODO: replace with Deque
 specifier|private
 name|PatternBuilder
 parameter_list|()

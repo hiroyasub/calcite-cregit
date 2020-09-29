@@ -220,6 +220,11 @@ comment|/**  * A rule driver that apply rules in a Top-Down manner.  * By ensuri
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 class|class
 name|TopDownRuleDriver
 implements|implements
@@ -260,6 +265,7 @@ name|Stack
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|// TODO: replace with Deque
 comment|/**    * A task that is currently applying and may generate new RelNode.    * It provides a callback to schedule tasks for new RelNodes that    * are registered during task performing.    */
 specifier|private
 name|GeneratorTask
