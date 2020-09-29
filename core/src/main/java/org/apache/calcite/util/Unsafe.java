@@ -98,6 +98,11 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/** Calls {@link Object#wait()}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"WaitNotInLoop"
+argument_list|)
 specifier|public
 specifier|static
 name|void
