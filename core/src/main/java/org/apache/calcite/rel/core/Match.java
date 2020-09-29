@@ -373,6 +373,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Objects
 import|;
 end_import
@@ -1209,7 +1219,7 @@ name|Void
 argument_list|>
 block|{
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|RexMRAggCall
 argument_list|>
@@ -1225,7 +1235,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|RexMRAggCall
 argument_list|>
@@ -1445,7 +1455,7 @@ name|pv
 control|)
 block|{
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|RexMRAggCall
 argument_list|>

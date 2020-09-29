@@ -1375,16 +1375,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|SortedMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|TreeMap
 import|;
 end_import
@@ -3253,7 +3243,7 @@ operator|++
 expr_stmt|;
 block|}
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -4363,7 +4353,7 @@ expr_stmt|;
 block|}
 comment|// Project any correlated variables the input wants to pass along.
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -4509,7 +4499,7 @@ parameter_list|,
 name|int
 name|valueGenFieldOffset
 parameter_list|,
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -5333,7 +5323,7 @@ operator|.
 name|r
 decl_stmt|;
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -5375,7 +5365,7 @@ operator|instanceof
 name|Filter
 condition|)
 block|{
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -6406,7 +6396,7 @@ comment|// Change correlator rel into a join.
 comment|// Join all the correlated variables produced by this correlator rel
 comment|// with the values generated and propagated from the right input
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -7093,7 +7083,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -8235,7 +8225,7 @@ name|Integer
 argument_list|>
 name|oldToNewOutputs
 parameter_list|,
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,
@@ -13288,7 +13278,7 @@ name|mapRefRelToCorRef
 decl_stmt|;
 specifier|private
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorrelationId
 argument_list|,
@@ -13318,7 +13308,7 @@ name|CorRef
 argument_list|>
 name|mapRefRelToCorRef
 parameter_list|,
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorrelationId
 argument_list|,
@@ -13478,7 +13468,7 @@ name|CorRef
 argument_list|>
 name|mapRefRelToCorVar
 parameter_list|,
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorrelationId
 argument_list|,
@@ -13508,7 +13498,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorrelationId
 argument_list|,
@@ -13545,7 +13535,7 @@ extends|extends
 name|RelHomogeneousShuttle
 block|{
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorrelationId
 argument_list|,
@@ -14174,7 +14164,7 @@ parameter_list|,
 name|RelNode
 name|r
 parameter_list|,
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|CorDef
 argument_list|,

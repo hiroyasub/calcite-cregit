@@ -75,6 +75,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|SortedMap
 import|;
 end_import
@@ -940,6 +950,11 @@ comment|/** Computes the closure of a map from integers to bits.    *    *<p>The
 end_comment
 
 begin_function
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|SortedMap
@@ -1221,7 +1236,7 @@ name|equivalence
 decl_stmt|;
 specifier|private
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|Integer
 argument_list|,
@@ -1234,6 +1249,11 @@ name|TreeMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 name|Closure
 parameter_list|(
 name|SortedMap

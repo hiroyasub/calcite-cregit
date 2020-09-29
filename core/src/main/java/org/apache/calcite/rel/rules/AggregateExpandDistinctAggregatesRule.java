@@ -543,7 +543,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|NavigableSet
 import|;
 end_import
 
@@ -553,7 +553,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|SortedSet
+name|Set
 import|;
 end_import
 
@@ -1699,7 +1699,7 @@ decl_stmt|;
 comment|// Add the distinct aggregate column(s) to the group-by columns,
 comment|// if not already a part of the group-by
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|Integer
 argument_list|>
@@ -1955,6 +1955,8 @@ operator|.
 name|headSet
 argument_list|(
 name|arg
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|size

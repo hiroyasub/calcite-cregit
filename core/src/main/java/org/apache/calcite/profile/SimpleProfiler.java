@@ -229,6 +229,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -1564,7 +1574,7 @@ name|int
 name|nullCount
 decl_stmt|;
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|FlatLists
 operator|.

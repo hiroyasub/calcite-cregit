@@ -893,6 +893,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Objects
 import|;
 end_import
@@ -904,16 +914,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|SortedMap
 import|;
 end_import
 
@@ -1723,7 +1723,7 @@ name|RexCall
 operator|)
 name|condition
 decl_stmt|;
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|String
 argument_list|,

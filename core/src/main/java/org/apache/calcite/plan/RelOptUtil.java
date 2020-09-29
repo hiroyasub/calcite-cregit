@@ -1521,7 +1521,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|NavigableSet
 import|;
 end_import
 
@@ -1531,7 +1531,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|SortedSet
+name|Set
 import|;
 end_import
 
@@ -19312,7 +19312,7 @@ name|RexShuttle
 block|{
 specifier|public
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|Integer
 argument_list|>

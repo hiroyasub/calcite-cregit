@@ -875,16 +875,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|SortedMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|SortedSet
 import|;
 end_import
@@ -24603,7 +24593,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|String
 argument_list|,

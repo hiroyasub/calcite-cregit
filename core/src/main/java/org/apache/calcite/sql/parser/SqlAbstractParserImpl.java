@@ -335,6 +335,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -1463,7 +1473,7 @@ decl_stmt|;
 comment|/**      * Set of all tokens.      */
 specifier|private
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|String
 argument_list|>

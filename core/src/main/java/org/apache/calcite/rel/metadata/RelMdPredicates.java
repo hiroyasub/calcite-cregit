@@ -2774,6 +2774,11 @@ specifier|final
 name|ImmutableBitSet
 name|allFieldsBitSet
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 name|SortedMap
 argument_list|<
 name|Integer
@@ -3988,6 +3993,11 @@ name|tr
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 name|void
 name|markAsEquivalent
@@ -4215,6 +4225,11 @@ decl_stmt|;
 name|boolean
 name|firstCall
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 name|ExprsItr
 parameter_list|(
 name|ImmutableBitSet

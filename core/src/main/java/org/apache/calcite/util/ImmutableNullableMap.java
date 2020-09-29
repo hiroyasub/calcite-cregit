@@ -155,6 +155,8 @@ annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
+literal|"JdkObsolete"
+block|,
 literal|"unchecked"
 block|,
 literal|"rawtypes"
@@ -341,6 +343,8 @@ annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
+literal|"JdkObsolete"
+block|,
 literal|"unchecked"
 block|,
 literal|"rawtypes"

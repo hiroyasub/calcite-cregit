@@ -717,6 +717,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Objects
 import|;
 end_import
@@ -1703,7 +1713,7 @@ name|projects
 parameter_list|)
 block|{
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|RelCollation
 argument_list|>

@@ -789,6 +789,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Objects
 import|;
 end_import
@@ -800,16 +810,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|SortedSet
 import|;
 end_import
 
@@ -4585,7 +4585,7 @@ name|columnsByAlias
 decl_stmt|;
 specifier|private
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|Measure
 argument_list|>

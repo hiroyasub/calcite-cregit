@@ -141,6 +141,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Per {@link Serializable}.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 name|void
 name|readObject

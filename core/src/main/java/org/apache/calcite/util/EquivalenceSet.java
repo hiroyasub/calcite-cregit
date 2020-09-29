@@ -103,7 +103,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|NavigableMap
 import|;
 end_import
 
@@ -113,7 +113,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|SortedMap
+name|Objects
 import|;
 end_import
 
@@ -445,7 +445,7 @@ return|;
 block|}
 comment|/** Returns a map of the canonical element in each equivalence class to the    * set of elements in that class. The keys are sorted in natural order, as    * are the elements within each key. */
 specifier|public
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|E
 argument_list|,

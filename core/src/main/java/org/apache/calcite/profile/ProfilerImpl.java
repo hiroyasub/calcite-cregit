@@ -381,6 +381,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|NavigableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|PriorityQueue
 import|;
 end_import
@@ -2759,7 +2769,7 @@ extends|extends
 name|Collector
 block|{
 specifier|final
-name|SortedSet
+name|NavigableSet
 argument_list|<
 name|Comparable
 argument_list|>

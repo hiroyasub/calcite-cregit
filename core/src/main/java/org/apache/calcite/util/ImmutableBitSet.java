@@ -2883,6 +2883,11 @@ block|}
 block|}
 block|}
 comment|/** Computes the closure of a map from integers to bits.    *    *<p>The input must have an entry for each position.    *    *<p>Does not modify the input map or its bit sets. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|SortedMap
@@ -3628,6 +3633,11 @@ literal|true
 return|;
 block|}
 comment|/**    * Setup equivalence Sets for each position. If i and j are equivalent then    * they will have the same equivalence Set. The algorithm computes the    * closure relation at each position for the position wrt to positions    * greater than it. Once a closure is computed for a position, the closure    * Set is set on all its descendants. So the closure computation bubbles up    * from lower positions and the final equivalence Set is propagated down    * from the lowest element in the Set.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 specifier|static
 class|class

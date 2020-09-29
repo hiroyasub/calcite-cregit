@@ -13851,6 +13851,8 @@ operator|.
 name|headMap
 argument_list|(
 name|until
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|clear

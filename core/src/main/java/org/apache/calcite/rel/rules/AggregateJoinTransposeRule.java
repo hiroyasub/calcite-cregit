@@ -515,7 +515,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|NavigableMap
 import|;
 end_import
 
@@ -525,7 +525,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|SortedMap
+name|Objects
 import|;
 end_import
 
@@ -2563,7 +2563,7 @@ argument_list|>
 name|predicates
 parameter_list|)
 block|{
-name|SortedMap
+name|NavigableMap
 argument_list|<
 name|Integer
 argument_list|,
