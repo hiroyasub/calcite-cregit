@@ -4075,6 +4075,8 @@ operator|=
 name|pos
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -4152,6 +4154,8 @@ name|all
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PrecedenceClimbingParser
 name|parser
@@ -4179,6 +4183,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -4191,6 +4197,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|op
@@ -4328,6 +4336,8 @@ argument_list|()
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlParserPos
 name|pos
@@ -4348,6 +4358,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOp
@@ -4369,6 +4381,8 @@ operator|instanceof
 name|ToTreeListItem
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|node
@@ -4389,6 +4403,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replaceSublist
@@ -4749,6 +4765,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -4761,6 +4779,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|op
@@ -4785,6 +4805,8 @@ operator|.
 name|op
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlParserPos
 name|pos
@@ -4829,6 +4851,8 @@ name|getParserPosition
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOp
@@ -4848,6 +4872,8 @@ operator|instanceof
 name|ToTreeListItem
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|node
@@ -4868,6 +4894,8 @@ name|i
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replaceSublist

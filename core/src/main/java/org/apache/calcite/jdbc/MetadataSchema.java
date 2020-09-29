@@ -179,6 +179,8 @@ operator|.
 name|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -258,6 +260,8 @@ operator|.
 name|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

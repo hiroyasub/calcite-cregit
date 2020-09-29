@@ -1421,6 +1421,8 @@ throw|;
 block|}
 block|}
 comment|/**    * Returns a string representation of this bit set. For every index    * for which this {@code BitSet} contains a bit in the set    * state, the decimal representation of that index is included in    * the result. Such indices are listed in order from lowest to    * highest, separated by ",&nbsp;" (a comma and a space) and    * surrounded by braces, resulting in the usual mathematical    * notation for a set of integers.    *    *<p>Example:    *<pre>    * BitSet drPepper = new BitSet();</pre>    * Now {@code drPepper.toString()} returns "{@code {}}".    *<pre>    * drPepper.set(2);</pre>    * Now {@code drPepper.toString()} returns "{@code {2}}".    *<pre>    * drPepper.set(4);    * drPepper.set(10);</pre>    * Now {@code drPepper.toString()} returns "{@code {2, 4, 10}}".    *    * @return a string representation of this bit set    */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1668,6 +1670,8 @@ name|sum
 return|;
 block|}
 comment|/**    * Returns the hash code value for this bit set. The hash code    * depends only on which bits are set within this {@code ImmutableBitSet}.    *    *<p>The hash code is defined using the same calculation as    * {@link java.util.BitSet#hashCode()}.    *    * @return the hash code value for this bit set    */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -1738,6 +1742,8 @@ name|BITS_PER_WORD
 return|;
 block|}
 comment|/**    * Compares this object against the specified object.    * The result is {@code true} if and only if the argument is    * not {@code null} and is a {@code ImmutableBitSet} object that has    * exactly the same set of bits set to {@code true} as this bit    * set.    *    * @param  obj the object to compare with    * @return {@code true} if the objects are the same;    *         {@code false} otherwise    * @see    #size()    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -1793,6 +1799,8 @@ argument_list|)
 return|;
 block|}
 comment|/** Compares this ImmutableBitSet with another, using a lexicographic    * ordering.    *    *<p>Bit sets {@code (), (0), (0, 1), (0, 1, 3), (1), (2, 3)} are in sorted    * order.</p>    */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -2231,6 +2239,8 @@ index|]
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -2255,6 +2265,8 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -2266,6 +2278,8 @@ operator|>=
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|next
@@ -2289,6 +2303,8 @@ return|return
 name|prev
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -2448,6 +2464,8 @@ argument_list|>
 argument_list|()
 block|{
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Iterator
@@ -2466,6 +2484,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

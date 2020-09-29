@@ -319,6 +319,8 @@ name|RexNode
 name|period
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|accept

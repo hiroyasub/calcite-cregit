@@ -13029,6 +13029,8 @@ operator|.
 name|field
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -13235,6 +13237,8 @@ operator|.
 name|field
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo

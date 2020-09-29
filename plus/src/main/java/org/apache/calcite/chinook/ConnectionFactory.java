@@ -86,6 +86,8 @@ operator|new
 name|CalciteConnectionProvider
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|connect

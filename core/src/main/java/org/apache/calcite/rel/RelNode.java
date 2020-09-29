@@ -298,6 +298,8 @@ name|i
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the type of the rows returned by this relational expression.    */
+annotation|@
+name|Override
 name|RelDataType
 name|getRowType
 parameter_list|()
@@ -311,6 +313,8 @@ name|ordinalInParent
 parameter_list|)
 function_decl|;
 comment|/**    * Returns an array of this relational expression's inputs. If there are no    * inputs, returns an empty list, not {@code null}.    *    * @return Array of this relational expression's inputs    */
+annotation|@
+name|Override
 name|List
 argument_list|<
 name|RelNode
@@ -426,6 +430,8 @@ name|planner
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a digest string of this {@code RelNode}.    *    *<p>Each call creates a new digest string,    * so don't forget to cache the result if necessary.    *    * @return Digest string of this {@code RelNode}    *    * @see #getRelDigest()    */
+annotation|@
+name|Override
 specifier|default
 name|String
 name|getDigest

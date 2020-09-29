@@ -5459,6 +5459,8 @@ name|Void
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -21480,6 +21482,8 @@ operator|.
 name|scope
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -23461,6 +23465,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Map
 operator|.
@@ -23493,6 +23499,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -24714,6 +24722,8 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertExpression
@@ -25859,6 +25869,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getGroupCount
@@ -25903,6 +25915,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexBuilder
 name|getRexBuilder
@@ -25912,6 +25926,8 @@ return|return
 name|rexBuilder
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|validateExpression
@@ -25948,6 +25964,8 @@ operator|.
 name|left
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexRangeRef
 name|getSubQueryExpr
@@ -25979,6 +25997,8 @@ operator|.
 name|expr
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -25988,6 +26008,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|InitializerExpressionFactory
 name|getInitializerExpressionFactory
@@ -25997,6 +26019,8 @@ return|return
 name|initializerExpressionFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -26006,6 +26030,8 @@ return|return
 name|validator
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertLiteral
@@ -26044,6 +26070,8 @@ name|intervalQualifier
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26063,6 +26091,8 @@ name|literal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26151,6 +26181,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26165,6 +26197,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26182,6 +26216,8 @@ name|id
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26196,6 +26232,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26211,6 +26249,8 @@ name|param
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visit
@@ -26343,6 +26383,8 @@ name|NoOpSubQueryConverter
 implements|implements
 name|SubQueryConverter
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|canConvertSubQuery
@@ -26352,6 +26394,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertSubQuery
@@ -26969,6 +27013,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -26981,6 +27027,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -27024,6 +27072,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -27036,6 +27086,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -27048,6 +27100,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -27060,6 +27114,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -27072,6 +27128,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -28397,6 +28455,8 @@ operator|=
 name|ignoreNulls
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall

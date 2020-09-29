@@ -1192,6 +1192,8 @@ operator|)
 name|meta
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteConnectionConfig
 name|config
@@ -1205,6 +1207,8 @@ name|info
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|createPrepareContext
@@ -1701,6 +1705,8 @@ name|cancelFlag
 return|;
 block|}
 comment|// CalciteConnection methods
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getRootSchema
@@ -1713,6 +1719,8 @@ name|plus
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -1722,6 +1730,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Properties
 name|getProperties
@@ -1732,6 +1742,8 @@ name|info
 return|;
 block|}
 comment|// QueryProvider methods
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1765,6 +1777,8 @@ name|expression
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1795,6 +1809,8 @@ name|expression
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1814,6 +1830,8 @@ literal|null
 return|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1836,6 +1854,8 @@ literal|null
 return|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -2261,6 +2281,8 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|void
 name|removeStatement
@@ -2281,6 +2303,8 @@ name|id
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addStatement
@@ -2336,6 +2360,8 @@ argument_list|()
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteServerStatement
 name|getStatement
@@ -2858,6 +2884,8 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|synchronized
 name|Object
@@ -3089,6 +3117,8 @@ name|parserConfig
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getRootSchema
@@ -3107,6 +3137,8 @@ name|plus
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -3116,6 +3148,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getQueryProvider
@@ -3204,6 +3238,8 @@ name|schemaVersion
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -3215,6 +3251,8 @@ operator|.
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|getRootSchema
@@ -3224,6 +3262,8 @@ return|return
 name|rootSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|getMutableRootSchema
@@ -3233,6 +3273,8 @@ return|return
 name|mutableRootSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3287,6 +3329,8 @@ name|schemaName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3299,6 +3343,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteConnectionConfig
 name|config
@@ -3311,6 +3357,8 @@ name|config
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|DataContext
 name|getDataContext
@@ -3330,6 +3378,8 @@ name|rootSchema
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelRunner
 name|getRelRunner
@@ -3384,6 +3434,8 @@ return|return
 name|runner
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalcitePrepare
 operator|.
@@ -3423,6 +3475,8 @@ name|DataContext
 implements|,
 name|Serializable
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getRootSchema
@@ -3432,6 +3486,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -3441,6 +3497,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getQueryProvider
@@ -3450,6 +3508,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -3515,6 +3575,8 @@ name|connection
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|createPrepareContext
@@ -3527,6 +3589,8 @@ name|createPrepareContext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteConnection
 name|getConnection
@@ -3536,6 +3600,8 @@ return|return
 name|connection
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setSignature
@@ -3553,6 +3619,8 @@ operator|=
 name|signature
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Meta
 operator|.
@@ -3564,6 +3632,8 @@ return|return
 name|signature
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -3576,6 +3646,8 @@ return|return
 name|iterator
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setResultSet

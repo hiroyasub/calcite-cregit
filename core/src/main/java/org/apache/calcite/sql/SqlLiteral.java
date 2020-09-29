@@ -698,6 +698,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlLiteral
 name|clone
@@ -718,6 +720,8 @@ name|pos
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 annotation|@
 name|Nonnull
@@ -2115,6 +2119,8 @@ argument_list|()
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate
@@ -2134,6 +2140,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -2157,6 +2165,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equalsDeep
@@ -2230,6 +2240,8 @@ name|succeed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -2393,6 +2405,8 @@ name|pos
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -2436,6 +2450,8 @@ name|value
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -2709,6 +2725,8 @@ name|getValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

@@ -365,6 +365,8 @@ throw|;
 block|}
 block|}
 comment|/**    * Reads the next line from the buffer and converts to a string array.    *    * @return a string array with each comma-separated element as a separate entry.    *    * @throws IOException if bad things happen during the read    */
+annotation|@
+name|Override
 specifier|public
 name|String
 index|[]
@@ -519,6 +521,8 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Closes the underlying reader.    *    * @throws IOException if the close fails    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

@@ -335,6 +335,8 @@ operator|new
 name|ScannableTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -395,6 +397,8 @@ argument_list|(
 name|in
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -419,6 +423,8 @@ decl_stmt|;
 name|int
 name|i
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -449,6 +455,8 @@ name|line
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -487,6 +495,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -498,6 +508,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -532,6 +544,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -568,6 +582,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -594,6 +610,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.
@@ -609,6 +627,8 @@ operator|.
 name|TABLE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRolledUp
@@ -621,6 +641,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|rolledUpColumnValidInsideAgg

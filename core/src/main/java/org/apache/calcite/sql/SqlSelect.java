@@ -321,6 +321,8 @@ name|hints
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -845,6 +847,8 @@ operator|>
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate

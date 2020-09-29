@@ -287,6 +287,8 @@ name|protoRowType
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -296,6 +298,8 @@ return|return
 literal|"CsvFilterableTable"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -398,6 +402,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

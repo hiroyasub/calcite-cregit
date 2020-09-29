@@ -83,6 +83,8 @@ operator|=
 name|clazz
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|Getter
 name|createGetter

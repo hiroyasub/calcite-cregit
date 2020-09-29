@@ -3352,6 +3352,8 @@ operator|=
 name|rel
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|visitInputRef
@@ -3423,6 +3425,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|visitLiteral
@@ -3445,6 +3449,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|visitCall

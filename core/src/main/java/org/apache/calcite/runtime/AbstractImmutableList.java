@@ -92,6 +92,8 @@ name|toList
 parameter_list|()
 function_decl|;
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Iterator
@@ -110,6 +112,8 @@ argument_list|()
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|ListIterator
@@ -127,6 +131,8 @@ name|listIterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isEmpty
@@ -136,6 +142,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|add
@@ -150,6 +158,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addAll
@@ -171,6 +181,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addAll
@@ -195,6 +207,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|removeAll
@@ -214,6 +228,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|retainAll
@@ -233,6 +249,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -244,6 +262,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|set
@@ -261,6 +281,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add
@@ -278,6 +300,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|remove
@@ -292,6 +316,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -315,6 +341,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -343,6 +371,8 @@ name|toIndex
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contains
@@ -360,6 +390,8 @@ operator|>=
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|containsAll
@@ -399,6 +431,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|remove

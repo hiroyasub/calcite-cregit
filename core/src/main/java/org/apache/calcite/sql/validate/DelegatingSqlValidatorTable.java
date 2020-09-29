@@ -89,6 +89,8 @@ operator|=
 name|table
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -101,6 +103,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -116,6 +120,8 @@ name|getQualifiedName
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -133,6 +139,8 @@ name|columnName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlAccessType
 name|getAllowedAccess

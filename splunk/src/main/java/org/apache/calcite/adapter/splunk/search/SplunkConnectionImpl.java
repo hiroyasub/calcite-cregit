@@ -680,6 +680,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|getSearchResults
@@ -733,6 +735,8 @@ operator|==
 literal|null
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1687,6 +1691,8 @@ operator|=
 name|print
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setFieldNames
@@ -1703,6 +1709,8 @@ operator|=
 name|fieldNames
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|processSearchResult
@@ -2050,6 +2058,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|current
@@ -2059,6 +2069,8 @@ return|return
 name|current
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -2249,6 +2261,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -2260,6 +2274,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

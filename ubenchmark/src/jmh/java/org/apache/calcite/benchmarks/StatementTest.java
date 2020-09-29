@@ -1155,6 +1155,8 @@ operator|=
 name|commission
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1236,6 +1238,8 @@ operator|=
 name|employees
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString

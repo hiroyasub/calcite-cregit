@@ -115,6 +115,8 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setInput
@@ -166,6 +168,8 @@ literal|0
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -183,6 +187,8 @@ name|input
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|childrenAccept

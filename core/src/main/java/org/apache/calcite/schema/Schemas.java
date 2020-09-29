@@ -2391,6 +2391,8 @@ operator|.
 name|Context
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -2400,6 +2402,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|getRootSchema
@@ -2412,6 +2416,8 @@ name|root
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|getMutableRootSchema
@@ -2422,6 +2428,8 @@ name|getRootSchema
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2452,6 +2460,8 @@ return|return
 name|schemaPath
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2464,6 +2474,8 @@ return|return
 name|objectPath
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteConnectionConfig
 name|config
@@ -2473,6 +2485,8 @@ return|return
 name|connectionConfig
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|DataContext
 name|getDataContext
@@ -2482,6 +2496,8 @@ return|return
 name|dataContext
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelRunner
 name|getRelRunner
@@ -2493,6 +2509,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalcitePrepare
 operator|.
@@ -3201,6 +3219,8 @@ name|of
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getRootSchema
@@ -3210,6 +3230,8 @@ return|return
 name|rootSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -3222,6 +3244,8 @@ name|getTypeFactory
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getQueryProvider
@@ -3231,6 +3255,8 @@ return|return
 name|connection
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -3364,6 +3390,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -3386,6 +3414,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -3398,6 +3428,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Path
 name|parent
@@ -3439,6 +3471,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3455,6 +3489,8 @@ name|String
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|get
@@ -3476,6 +3512,8 @@ operator|.
 name|left
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -3493,6 +3531,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

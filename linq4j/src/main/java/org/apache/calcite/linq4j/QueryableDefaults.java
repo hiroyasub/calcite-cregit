@@ -984,6 +984,8 @@ name|getExpression
 argument_list|()
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -3514,6 +3516,8 @@ name|getExpression
 argument_list|()
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -4008,6 +4012,8 @@ name|getExpression
 argument_list|()
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -4326,6 +4332,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4480,6 +4488,8 @@ argument_list|<
 name|T
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4492,6 +4502,8 @@ name|factory
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -4510,6 +4522,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -4630,6 +4644,8 @@ operator|=
 name|original
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -4642,6 +4658,8 @@ name|getElementType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -4654,6 +4672,8 @@ name|getExpression
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getProvider

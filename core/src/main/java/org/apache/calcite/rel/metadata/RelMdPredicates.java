@@ -900,6 +900,8 @@ operator|.
 name|of
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|MetadataDef
 argument_list|<
@@ -4319,6 +4321,8 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -4355,6 +4359,8 @@ operator|!=
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|next
@@ -4364,6 +4370,8 @@ return|return
 name|nextMapping
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

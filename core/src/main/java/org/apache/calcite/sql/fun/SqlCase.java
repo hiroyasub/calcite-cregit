@@ -386,6 +386,8 @@ operator|.
 name|CASE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -397,6 +399,8 @@ operator|.
 name|CASE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

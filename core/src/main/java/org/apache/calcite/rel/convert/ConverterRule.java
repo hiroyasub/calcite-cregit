@@ -579,6 +579,8 @@ operator|)
 name|outTrait
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTrait
 name|getOutTrait

@@ -190,6 +190,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -373,6 +375,8 @@ return|;
 block|}
 block|}
 comment|/**    * Similar functionality to    * {@link #checkOperandTypes(SqlCallBinding, boolean)}, but not part of the    * interface, and cannot throw an error.    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes

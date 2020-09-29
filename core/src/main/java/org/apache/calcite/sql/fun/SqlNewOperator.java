@@ -125,6 +125,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// override SqlOperator
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|rewriteCall
@@ -148,6 +150,8 @@ argument_list|)
 return|;
 block|}
 comment|// override SqlOperator
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|requiresDecimalExpansion

@@ -43,6 +43,8 @@ name|T
 argument_list|>
 block|{
 comment|/**    * Converts this Enumerable to a Queryable.    *    * @see EnumerableDefaults#asQueryable(Enumerable)    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|T

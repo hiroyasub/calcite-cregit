@@ -559,6 +559,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -652,6 +654,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelOptCluster
@@ -662,6 +666,8 @@ return|return
 name|cluster
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Convention
@@ -679,6 +685,8 @@ name|INSTANCE
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitSet
 name|getTraitSet
@@ -688,6 +696,8 @@ return|return
 name|traitSet
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getCorrelVariable
@@ -697,6 +707,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getId
@@ -706,6 +718,8 @@ return|return
 name|id
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|getInput
@@ -732,6 +746,8 @@ name|i
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|register
@@ -749,6 +765,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// It is not recommended to override this method, but sub-classes can do it at their own risk.
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getRelTypeName
@@ -816,6 +834,8 @@ return|return
 name|cn
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isValid
@@ -834,6 +854,8 @@ name|succeed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelDataType
@@ -877,6 +899,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getExpectedInputRowType
@@ -890,6 +914,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -905,6 +931,8 @@ name|emptyList
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|estimateRowCount
@@ -917,6 +945,8 @@ return|return
 literal|1.0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -932,6 +962,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|collectVariablesUsed
@@ -945,6 +977,8 @@ parameter_list|)
 block|{
 comment|// for default case, nothing to do
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isEnforcer
@@ -954,6 +988,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|collectVariablesSet
@@ -966,6 +1002,8 @@ name|variableSet
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|childrenAccept
@@ -1019,6 +1057,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|accept
@@ -1038,6 +1078,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|accept
@@ -1050,6 +1092,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -1088,6 +1132,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 parameter_list|<
@@ -1155,6 +1201,8 @@ return|return
 name|metadata
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|explain
@@ -1187,6 +1235,8 @@ return|return
 name|pw
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|onRegister
@@ -1327,6 +1377,8 @@ return|return
 name|r
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|recomputeDigest
@@ -1338,6 +1390,8 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replaceInput
@@ -1360,6 +1414,8 @@ argument_list|)
 throw|;
 block|}
 comment|/** Description; consists of id plus digest. */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1379,6 +1435,8 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|String
@@ -1392,6 +1450,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getDigest
@@ -1404,6 +1464,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelDigest
@@ -1414,6 +1476,8 @@ return|return
 name|digest
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptTable
 name|getTable
@@ -1461,6 +1525,8 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Equality check for RelNode digest.    *    *<p>By default this method collects digest attributes from    * {@link #explainTerms(RelWriter)}, then compares each attribute pair.    * This should work well for most cases. If this method is a performance    * bottleneck for your project, or the default behavior can't handle    * your scenario properly, you can choose to override this method and    * {@link #deepHashCode()}. See {@code LogicalJoin} as an example.</p>    *    * @return Whether the 2 RelNodes are equivalent or have the same digest.    * @see #deepHashCode()    */
+annotation|@
+name|Override
 annotation|@
 name|API
 argument_list|(
@@ -1719,6 +1785,8 @@ name|Status
 operator|.
 name|MAINTAINED
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|int
 name|deepHashCode

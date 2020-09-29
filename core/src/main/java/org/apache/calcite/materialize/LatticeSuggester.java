@@ -3064,6 +3064,8 @@ name|h
 argument_list|)
 argument_list|)
 block|{
+annotation|@
+name|Override
 name|ColRef
 name|column
 parameter_list|(
@@ -3247,6 +3249,8 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 name|ColRef
 name|column
 parameter_list|(
@@ -3666,6 +3670,8 @@ name|right
 argument_list|)
 argument_list|)
 block|{
+annotation|@
+name|Override
 name|ColRef
 name|column
 parameter_list|(
@@ -3769,6 +3775,8 @@ name|tableRef
 argument_list|)
 argument_list|)
 block|{
+annotation|@
+name|Override
 name|ColRef
 name|column
 parameter_list|(
@@ -4393,6 +4401,8 @@ operator|=
 name|ordinalInQuery
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -4402,6 +4412,8 @@ return|return
 name|ordinalInQuery
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -4431,6 +4443,8 @@ operator|.
 name|ordinalInQuery
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -4608,6 +4622,8 @@ argument_list|,
 name|StepRef
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|StepRef
 name|createEdge
@@ -4625,6 +4641,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|StepRef
 name|createEdge
@@ -4783,6 +4801,8 @@ operator|=
 name|c
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TableRef
 name|tableRef
@@ -4792,6 +4812,8 @@ return|return
 name|t
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|col
@@ -4933,6 +4955,8 @@ name|alias
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TableRef
 name|tableRef
@@ -4947,6 +4971,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|col

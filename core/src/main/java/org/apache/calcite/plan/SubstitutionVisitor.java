@@ -1402,6 +1402,8 @@ operator|new
 name|MutableRelVisitor
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|visit
@@ -5222,6 +5224,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -5595,6 +5599,8 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -8380,6 +8386,8 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -8533,6 +8541,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -8673,6 +8683,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -8731,6 +8743,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -8871,6 +8885,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|UnifyResult
 name|apply
@@ -10095,6 +10111,8 @@ operator|new
 name|RexShuttle
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef

@@ -1513,6 +1513,8 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Method
 name|lookupVisitMethod
@@ -1553,6 +1555,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Method
 name|lookupVisitMethod
@@ -1664,6 +1668,8 @@ return|return
 name|method
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|invokeVisitor
@@ -1792,6 +1798,8 @@ name|T
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|T
 name|invoke

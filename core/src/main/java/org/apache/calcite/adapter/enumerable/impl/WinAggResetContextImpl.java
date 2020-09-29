@@ -196,6 +196,8 @@ operator|=
 name|hasRows
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|index
@@ -205,6 +207,8 @@ return|return
 name|index
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|startIndex
@@ -214,6 +218,8 @@ return|return
 name|startIndex
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|endIndex
@@ -223,6 +229,8 @@ return|return
 name|endIndex
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|hasRows
@@ -232,6 +240,8 @@ return|return
 name|hasRows
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getFrameRowCount
@@ -241,6 +251,8 @@ return|return
 name|frameRowCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getPartitionRowCount

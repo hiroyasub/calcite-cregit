@@ -209,6 +209,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -327,6 +329,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange

@@ -2513,6 +2513,8 @@ operator|new
 name|RexShuttle
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef

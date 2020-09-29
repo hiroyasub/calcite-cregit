@@ -1305,6 +1305,8 @@ name|operands
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -1321,6 +1323,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -1440,6 +1444,8 @@ literal|null
 return|;
 block|}
 comment|/**    * Returns the description of this rule.    *    *<p>It must be unique (for rules that are not equal) and must consist of    * only the characters A-Z, a-z, 0-9, '_', '.', '(', ')', '-', ',', '[', ']', ':', ' '.    * It must start with a letter. */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|String
@@ -1819,6 +1825,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|matches

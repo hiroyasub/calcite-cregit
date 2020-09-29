@@ -4975,6 +4975,8 @@ operator|new
 name|InitializerContext
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexBuilder
 name|getRexBuilder
@@ -4984,6 +4986,8 @@ return|return
 name|rexBuilder
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|validateExpression
@@ -5001,6 +5005,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertExpression
@@ -6921,6 +6927,8 @@ operator|=
 name|kind
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -7790,6 +7798,8 @@ operator|=
 name|kind
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -8674,6 +8684,8 @@ operator|=
 name|flag
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -8749,6 +8761,8 @@ name|GreatestConvertlet
 implements|implements
 name|SqlRexConvertlet
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -9086,6 +9100,8 @@ name|FloorCeilConvertlet
 implements|implements
 name|SqlRexConvertlet
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -9115,6 +9131,8 @@ name|TimestampAddConvertlet
 implements|implements
 name|SqlRexConvertlet
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -9303,6 +9321,8 @@ name|TimestampDiffConvertlet
 implements|implements
 name|SqlRexConvertlet
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall

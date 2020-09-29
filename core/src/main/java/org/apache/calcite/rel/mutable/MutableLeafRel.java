@@ -103,6 +103,8 @@ operator|=
 name|rel
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setInput
@@ -120,6 +122,8 @@ name|IllegalArgumentException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -135,6 +139,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|childrenAccept

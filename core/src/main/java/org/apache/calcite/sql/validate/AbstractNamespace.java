@@ -199,6 +199,8 @@ name|enclosingNode
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -208,6 +210,8 @@ return|return
 name|validator
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -318,6 +322,8 @@ name|RelDataType
 name|targetRowType
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -357,6 +363,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowTypeSansSystemColumns
@@ -367,6 +375,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getType
@@ -384,6 +394,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setType
@@ -408,6 +420,8 @@ name|type
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getEnclosingNode
@@ -417,6 +431,8 @@ return|return
 name|enclosingNode
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorTable
 name|getTable
@@ -426,6 +442,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorNamespace
 name|lookupChild
@@ -446,6 +464,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|fieldExists
@@ -479,6 +499,8 @@ operator|!=
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -499,6 +521,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -518,6 +542,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|void
 name|makeNullable
@@ -536,6 +562,8 @@ return|return
 name|name
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorNamespace
 name|resolve
@@ -545,6 +573,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|supportsModality
@@ -557,6 +587,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -580,6 +612,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isWrapperFor

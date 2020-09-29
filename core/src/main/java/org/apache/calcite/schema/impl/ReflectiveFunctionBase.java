@@ -219,6 +219,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Returns the parameters of this function.    *    * @return Parameters; never null    */
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -484,6 +486,8 @@ literal|""
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getOrdinal
@@ -493,6 +497,8 @@ return|return
 name|ordinal
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -502,6 +508,8 @@ return|return
 name|name
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getType
@@ -519,6 +527,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional

@@ -1731,6 +1731,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -1956,6 +1958,8 @@ operator|!=
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -1977,6 +1981,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -2234,6 +2240,8 @@ name|condition
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BindableFilter
 name|copy
@@ -2263,6 +2271,8 @@ name|condition
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -2279,6 +2289,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -2300,6 +2312,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -2521,6 +2535,8 @@ operator|instanceof
 name|BindableConvention
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BindableProject
 name|copy
@@ -2558,6 +2574,8 @@ name|rowType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -2574,6 +2592,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -2595,6 +2615,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -2856,6 +2878,8 @@ name|fetch
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -2872,6 +2896,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -2893,6 +2919,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -3203,6 +3231,8 @@ name|joinType
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BindableJoin
 name|copy
@@ -3247,6 +3277,8 @@ name|joinType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -3263,6 +3295,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -3284,6 +3318,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -3543,6 +3579,8 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BindableUnion
 name|copy
@@ -3575,6 +3613,8 @@ name|all
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -3591,6 +3631,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -3612,6 +3654,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -3674,6 +3718,8 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BindableIntersect
 name|copy
@@ -3706,6 +3752,8 @@ name|all
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -3722,6 +3770,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -3743,6 +3793,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -3805,6 +3857,8 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BindableMinus
 name|copy
@@ -3837,6 +3891,8 @@ name|all
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -3853,6 +3909,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -3874,6 +3932,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -3975,6 +4035,8 @@ name|traitSet
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -3991,6 +4053,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -4012,6 +4076,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -4396,6 +4462,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -4412,6 +4480,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -4433,6 +4503,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -4735,6 +4807,8 @@ name|COST_MULTIPLIER
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -4751,6 +4825,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -4772,6 +4848,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement
@@ -5116,6 +5194,8 @@ name|interval
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -5132,6 +5212,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -5153,6 +5235,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement

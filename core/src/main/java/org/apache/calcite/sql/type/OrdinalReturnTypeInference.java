@@ -80,6 +80,8 @@ name|ordinal
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType

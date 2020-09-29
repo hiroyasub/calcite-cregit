@@ -735,6 +735,8 @@ return|return
 name|kind
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1115,6 +1117,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// override Object
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals

@@ -420,6 +420,8 @@ operator|.
 name|STAR
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -531,6 +533,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel

@@ -561,6 +561,8 @@ name|applying
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onSetMerged
@@ -689,6 +691,8 @@ block|}
 comment|// a callback invoked when a RelNode is going to be added into a RelSubset,
 comment|// either by Register or Reregister. The task driver should need to schedule
 comment|// tasks for the new nodes.
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onProduce

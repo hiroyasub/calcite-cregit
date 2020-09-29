@@ -111,6 +111,8 @@ operator|=
 name|clazz
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|nullable
@@ -120,6 +122,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -129,6 +133,8 @@ return|return
 name|fieldName
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getType
@@ -140,6 +146,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getModifiers
@@ -149,6 +157,8 @@ return|return
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -168,6 +178,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getDeclaringClass

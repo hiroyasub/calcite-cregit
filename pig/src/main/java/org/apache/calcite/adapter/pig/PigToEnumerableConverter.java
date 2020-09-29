@@ -313,6 +313,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * {@inheritDoc}    *    *<p>This implementation does not actually execute the associated Pig Latin    * script and return results. Instead it returns an empty    * {@link org.apache.calcite.adapter.enumerable.EnumerableRel.Result}    * in order to allow for testing and verification of every step of query    * processing up to actual physical execution and result verification.    *    *<p>Next step is to invoke Pig from here, likely in local mode, have it    * store results in a predefined file so they can be read here and returned as    * a {@code Result} object.    */
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement

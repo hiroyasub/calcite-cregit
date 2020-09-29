@@ -360,6 +360,8 @@ return|return
 name|fieldBuilder
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -373,6 +375,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -385,6 +389,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -396,6 +402,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

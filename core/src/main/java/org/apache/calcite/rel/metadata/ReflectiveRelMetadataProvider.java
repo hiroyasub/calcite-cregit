@@ -1068,12 +1068,14 @@ return|;
 end_return
 
 begin_function
-unit|}    public
-parameter_list|<
+unit|}    @
+name|Override
+specifier|public
+argument_list|<
 name|M
 extends|extends
 name|Metadata
-parameter_list|>
+argument_list|>
 name|Multimap
 argument_list|<
 name|Method
@@ -1321,6 +1323,8 @@ comment|//~ Methods ------------------------------------------------------------
 end_comment
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|M

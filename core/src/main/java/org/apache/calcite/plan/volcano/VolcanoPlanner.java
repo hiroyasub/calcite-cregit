@@ -1181,6 +1181,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRegistered
@@ -1200,6 +1202,8 @@ operator|!=
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setRoot
@@ -1254,6 +1258,8 @@ name|ensureRootConverters
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|getRoot
@@ -1871,6 +1877,8 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addRule
@@ -2026,6 +2034,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|removeRule
@@ -2232,6 +2242,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|changeTraits
@@ -2307,6 +2319,8 @@ literal|true
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptPlanner
 name|chooseDelegate
@@ -2317,6 +2331,8 @@ name|this
 return|;
 block|}
 comment|/**    * Finds the most efficient expression to implement the query given via    * {@link org.apache.calcite.plan.RelOptPlanner#setRoot(org.apache.calcite.rel.RelNode)}.    *    * @return the most efficient RelNode tree found for implementing the given    * query    */
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|findBestExp
@@ -2628,6 +2644,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelSubset
 name|register
@@ -2716,6 +2734,8 @@ name|set
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelSubset
 name|ensureRegistered
@@ -3118,6 +3138,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerSchema
@@ -3182,6 +3204,8 @@ operator|=
 name|infinite
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|getCost
@@ -5781,6 +5805,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerMetadataProviders
@@ -5805,6 +5831,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|long
 name|getRelMetadataTimestamp
@@ -6278,6 +6306,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Rather than invoking the rule (as the base method does), creates a      * {@link VolcanoRuleMatch} which can be invoked later.      */
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|onMatch

@@ -536,6 +536,8 @@ return|return
 name|list
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -564,6 +566,8 @@ name|valueList
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlExplainLevel
 name|getDetailLevel
@@ -575,6 +579,8 @@ operator|.
 name|ALL_ATTRIBUTES
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|item
@@ -698,6 +704,8 @@ return|return
 name|list
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|done

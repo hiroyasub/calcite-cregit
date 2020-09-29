@@ -597,6 +597,8 @@ name|collation
 return|;
 block|}
 comment|// implement RelDataTypeImpl
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString

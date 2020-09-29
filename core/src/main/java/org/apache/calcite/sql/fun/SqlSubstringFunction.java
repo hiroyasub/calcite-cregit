@@ -388,6 +388,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -422,6 +424,8 @@ argument_list|()
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -545,6 +549,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -772,6 +778,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -788,6 +796,8 @@ literal|3
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

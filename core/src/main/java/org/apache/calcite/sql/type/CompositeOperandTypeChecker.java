@@ -353,6 +353,8 @@ literal|1
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -402,6 +404,8 @@ return|return
 name|allowedRules
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency
@@ -413,6 +417,8 @@ operator|.
 name|NONE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -532,6 +538,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -583,6 +591,8 @@ name|SqlOperandCountRange
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|get
@@ -603,6 +613,8 @@ name|getOperandCountRange
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -642,6 +654,8 @@ operator|new
 name|SqlOperandCountRange
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isValidCount
@@ -717,6 +731,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMin
@@ -726,6 +742,8 @@ return|return
 name|min
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMax
@@ -919,6 +937,8 @@ return|return
 name|max
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes

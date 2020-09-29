@@ -210,6 +210,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement Map.Entry
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -228,6 +230,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement Map.Entry
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -251,6 +255,8 @@ throw|;
 block|}
 comment|// implement Map.Entry
 comment|// implement Grouping
+annotation|@
+name|Override
 specifier|public
 name|K
 name|getKey
@@ -260,6 +266,8 @@ return|return
 name|key
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

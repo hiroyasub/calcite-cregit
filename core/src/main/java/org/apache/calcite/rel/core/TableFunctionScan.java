@@ -522,6 +522,8 @@ return|return
 name|inputs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|accept
@@ -705,6 +707,8 @@ return|return
 name|rexCall
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms

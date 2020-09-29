@@ -88,6 +88,8 @@ name|dataType
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setType
@@ -102,6 +104,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|validateImpl
@@ -114,6 +118,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -123,6 +129,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorNamespace
 name|lookupChild
@@ -154,6 +162,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|fieldExists

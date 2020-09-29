@@ -390,6 +390,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement Writer
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write
@@ -516,6 +518,8 @@ break|break;
 block|}
 block|}
 comment|// implement Writer
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write
@@ -565,6 +569,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// implement Writer
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write

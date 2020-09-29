@@ -322,6 +322,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -335,6 +337,8 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|V
 name|next
@@ -399,6 +403,8 @@ return|return
 name|v
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

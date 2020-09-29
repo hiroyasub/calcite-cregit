@@ -246,6 +246,8 @@ name|names
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonikerType
 name|getType
@@ -255,6 +257,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -267,6 +271,8 @@ return|return
 name|names
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlIdentifier
 name|toIdentifier
@@ -284,6 +290,8 @@ name|ZERO
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -300,6 +308,8 @@ literal|"."
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|id

@@ -121,6 +121,8 @@ name|isDerived
 return|;
 block|}
 comment|// override Object
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -185,6 +187,8 @@ operator|)
 return|;
 block|}
 comment|// override Object
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode

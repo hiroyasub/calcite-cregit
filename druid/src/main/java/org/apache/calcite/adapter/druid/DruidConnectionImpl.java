@@ -3049,6 +3049,8 @@ name|Row
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -3077,6 +3079,8 @@ operator|new
 name|RunnableQueueSink
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -3097,6 +3101,8 @@ name|row
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|end
@@ -3117,6 +3123,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setSourceEnumerable
@@ -3148,6 +3156,8 @@ name|end
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|run
@@ -3996,6 +4006,8 @@ decl_stmt|;
 name|E
 name|next
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|E
 name|current
@@ -4018,6 +4030,8 @@ return|return
 name|next
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -4064,12 +4078,16 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

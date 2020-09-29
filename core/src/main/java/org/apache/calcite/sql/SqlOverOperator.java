@@ -214,6 +214,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateCall
@@ -339,6 +341,8 @@ name|aggCall
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveType
@@ -524,6 +528,8 @@ name|ret
 return|;
 block|}
 comment|/**    * Accepts a {@link SqlVisitor}, and tells it to visit each child.    *    * @param visitor Visitor    */
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R

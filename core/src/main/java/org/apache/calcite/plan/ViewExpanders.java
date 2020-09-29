@@ -142,6 +142,8 @@ operator|.
 name|ToRelContext
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelOptCluster
 name|getCluster
@@ -151,6 +153,8 @@ return|return
 name|cluster
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -163,6 +167,8 @@ return|return
 name|hints
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelRoot
 name|expandView
@@ -284,6 +290,8 @@ operator|.
 name|ToRelContext
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelOptCluster
 name|getCluster
@@ -293,6 +301,8 @@ return|return
 name|cluster
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelRoot
 name|expandView
@@ -322,6 +332,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

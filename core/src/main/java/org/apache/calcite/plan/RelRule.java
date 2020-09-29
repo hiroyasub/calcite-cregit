@@ -575,6 +575,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -605,6 +607,8 @@ name|relClass
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|exactly
@@ -716,6 +720,8 @@ name|relClass
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|OperandDetailBuilderImpl
 argument_list|<
@@ -744,6 +750,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|OperandDetailBuilderImpl
 argument_list|<
@@ -812,6 +820,8 @@ operator|.
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|convert
@@ -843,6 +853,8 @@ operator|.
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|noInputs
@@ -857,6 +869,8 @@ name|LEAF
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|anyInputs
@@ -871,6 +885,8 @@ name|ANY
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|oneInput
@@ -906,6 +922,8 @@ name|SOME
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|inputs
@@ -951,6 +969,8 @@ name|SOME
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Done
 name|unorderedInputs

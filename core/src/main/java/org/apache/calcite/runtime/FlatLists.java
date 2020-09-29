@@ -1504,6 +1504,8 @@ argument_list|>
 implements|implements
 name|RandomAccess
 block|{
+annotation|@
+name|Override
 specifier|protected
 specifier|final
 name|List
@@ -1579,6 +1581,8 @@ operator|=
 name|t0
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1592,6 +1596,8 @@ operator|+
 literal|"]"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -1623,6 +1629,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1632,6 +1640,8 @@ return|return
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -1652,6 +1662,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -1738,6 +1750,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -1765,6 +1779,8 @@ return|return
 name|h
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -1814,6 +1830,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -1863,6 +1881,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1928,6 +1948,8 @@ return|return
 name|a
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -1943,6 +1965,8 @@ name|t0
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -1965,6 +1989,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2039,6 +2065,8 @@ operator|=
 name|t1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2056,6 +2084,8 @@ operator|+
 literal|"]"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -2093,6 +2123,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2102,6 +2134,8 @@ return|return
 literal|2
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -2124,6 +2158,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -2221,6 +2257,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -2261,6 +2299,8 @@ return|return
 name|h
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -2335,6 +2375,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -2410,6 +2452,8 @@ literal|1
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -2484,6 +2528,8 @@ return|return
 name|a
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -2501,6 +2547,8 @@ name|t1
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -2523,6 +2571,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2613,6 +2663,8 @@ operator|=
 name|t2
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2634,6 +2686,8 @@ operator|+
 literal|"]"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -2677,6 +2731,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2686,6 +2742,8 @@ return|return
 literal|3
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -2710,6 +2768,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -2819,6 +2879,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -2872,6 +2934,8 @@ return|return
 name|h
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -2971,6 +3035,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -3071,6 +3137,8 @@ literal|1
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -3155,6 +3223,8 @@ return|return
 name|a
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -3174,6 +3244,8 @@ name|t2
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -3196,6 +3268,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3302,6 +3376,8 @@ operator|=
 name|t3
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3327,6 +3403,8 @@ operator|+
 literal|"]"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -3376,6 +3454,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -3385,6 +3465,8 @@ return|return
 literal|4
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -3411,6 +3493,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -3535,6 +3619,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -3601,6 +3687,8 @@ return|return
 name|h
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -3725,6 +3813,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -3850,6 +3940,8 @@ literal|1
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -3944,6 +4036,8 @@ return|return
 name|a
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -3965,6 +4059,8 @@ name|t3
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -3987,6 +4083,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4109,6 +4207,8 @@ operator|=
 name|t4
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -4138,6 +4238,8 @@ operator|+
 literal|"]"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -4193,6 +4295,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -4202,6 +4306,8 @@ return|return
 literal|5
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -4230,6 +4336,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -4369,6 +4477,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -4448,6 +4558,8 @@ return|return
 name|h
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -4597,6 +4709,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -4747,6 +4861,8 @@ literal|1
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -4851,6 +4967,8 @@ return|return
 name|a
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -4874,6 +4992,8 @@ name|t4
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -4896,6 +5016,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5034,6 +5156,8 @@ operator|=
 name|t5
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -5067,6 +5191,8 @@ operator|+
 literal|"]"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -5128,6 +5254,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -5137,6 +5265,8 @@ return|return
 literal|6
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -5167,6 +5297,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -5321,6 +5453,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -5413,6 +5547,8 @@ return|return
 name|h
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -5587,6 +5723,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -5762,6 +5900,8 @@ literal|1
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|SuppressWarnings
 argument_list|(
 block|{
@@ -5876,6 +6016,8 @@ return|return
 name|a
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -5901,6 +6043,8 @@ name|t5
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -5923,6 +6067,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5978,6 +6124,8 @@ name|ComparableEmptyList
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -5992,6 +6140,8 @@ name|IndexOutOfBoundsException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -6002,6 +6152,8 @@ literal|1
 return|;
 comment|// same as Collections.emptyList()
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -6030,6 +6182,8 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -6039,6 +6193,8 @@ return|return
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -6128,6 +6284,8 @@ operator|=
 name|list
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -6145,6 +6303,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -6157,6 +6317,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo

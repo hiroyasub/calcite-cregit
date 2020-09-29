@@ -88,6 +88,8 @@ name|type
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -97,6 +99,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|validateImpl
@@ -109,6 +113,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType

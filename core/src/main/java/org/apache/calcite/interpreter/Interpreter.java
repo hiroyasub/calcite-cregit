@@ -825,6 +825,8 @@ return|return
 name|rootRel
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -920,6 +922,8 @@ argument_list|(
 name|rows
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|Object
 index|[]
@@ -996,6 +1000,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -1009,6 +1015,8 @@ name|FooCompiler
 implements|implements
 name|ScalarCompiler
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Scalar
 name|compile
@@ -1086,6 +1094,8 @@ name|size
 argument_list|()
 index|]
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|void
 name|execute
@@ -1110,6 +1120,8 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|execute
@@ -1562,6 +1574,8 @@ operator|new
 name|Scalar
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|execute
@@ -1585,6 +1599,8 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|execute
@@ -1830,6 +1846,8 @@ operator|=
 name|list
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -1848,6 +1866,8 @@ name|row
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|end
@@ -1956,6 +1976,8 @@ operator|=
 name|list
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Row
 name|receive
@@ -2053,6 +2075,8 @@ name|queues
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -2083,6 +2107,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|end
@@ -2767,6 +2793,8 @@ name|r
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Scalar
 name|compile
@@ -2815,6 +2843,8 @@ name|inputRowType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|combinedRowType
@@ -2871,6 +2901,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Source
 name|source
@@ -3074,6 +3106,8 @@ name|ordinal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Sink
 name|sink
@@ -3304,6 +3338,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|enumerable
@@ -3339,6 +3375,8 @@ name|nodeInfo
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|createContext
@@ -3353,6 +3391,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|DataContext
 name|getDataContext

@@ -179,6 +179,8 @@ operator|.
 name|ZERO
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add
@@ -305,6 +307,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement Iterable<SqlNode>
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -348,6 +352,8 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNodeList
 name|clone
@@ -417,6 +423,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -522,6 +530,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate
@@ -552,6 +562,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -575,6 +587,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equalsDeep
@@ -907,6 +921,8 @@ return|return
 name|list
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr

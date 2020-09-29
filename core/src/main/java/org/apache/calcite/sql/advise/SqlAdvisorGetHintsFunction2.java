@@ -507,6 +507,8 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|CallImplementor
 name|getImplementor
@@ -516,6 +518,8 @@ return|return
 name|IMPLEMENTOR
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -541,6 +545,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -558,6 +564,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

@@ -224,6 +224,8 @@ name|register
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|String
 name|getConnectStringPrefix
@@ -233,6 +235,8 @@ return|return
 literal|"jdbc:splunk:"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|DriverVersion
 name|createDriverVersion
@@ -451,6 +455,8 @@ name|MockSplunkConnection
 implements|implements
 name|SplunkConnection
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -480,6 +486,8 @@ throw|throw
 literal|null
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|getSearchResults
@@ -538,6 +546,8 @@ operator|=
 name|connection
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|getSearchResults
@@ -583,6 +593,8 @@ name|fieldList
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

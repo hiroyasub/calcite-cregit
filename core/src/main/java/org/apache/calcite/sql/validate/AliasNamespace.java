@@ -260,6 +260,8 @@ name|AS
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|validateImpl
@@ -642,6 +644,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -651,6 +655,8 @@ return|return
 name|call
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|translate

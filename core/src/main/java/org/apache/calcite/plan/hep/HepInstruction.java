@@ -114,6 +114,8 @@ name|RelOptRule
 argument_list|>
 name|ruleSet
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|initialize
 parameter_list|(
@@ -134,6 +136,8 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -164,6 +168,8 @@ name|RelOptRule
 argument_list|>
 name|rules
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -197,6 +203,8 @@ name|RelOptRule
 argument_list|>
 name|ruleSet
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -226,6 +234,8 @@ name|RelOptRule
 argument_list|>
 name|ruleSet
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -257,6 +267,8 @@ comment|/**      * Explicitly specified rule, or rule looked up by planner from 
 name|RelOptRule
 name|rule
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|initialize
 parameter_list|(
@@ -286,6 +298,8 @@ literal|null
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -312,6 +326,8 @@ block|{
 name|HepMatchOrder
 name|order
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -338,6 +354,8 @@ block|{
 name|int
 name|limit
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -364,6 +382,8 @@ block|{
 name|HepProgram
 name|subprogram
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|initialize
 parameter_list|(
@@ -379,6 +399,8 @@ name|clearCache
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -405,6 +427,8 @@ block|{
 name|EndGroup
 name|endGroup
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|initialize
 parameter_list|(
@@ -413,6 +437,8 @@ name|clearCache
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(
@@ -446,6 +472,8 @@ decl_stmt|;
 name|boolean
 name|collecting
 decl_stmt|;
+annotation|@
+name|Override
 name|void
 name|initialize
 parameter_list|(
@@ -473,6 +501,8 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 name|void
 name|execute
 parameter_list|(

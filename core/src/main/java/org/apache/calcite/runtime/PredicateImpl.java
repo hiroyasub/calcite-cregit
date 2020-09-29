@@ -57,6 +57,8 @@ argument_list|<
 name|T
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|boolean
@@ -76,6 +78,8 @@ argument_list|)
 return|;
 block|}
 comment|/** Overrides {@code java.util.function.Predicate#test} in JDK8 and higher. */
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|boolean

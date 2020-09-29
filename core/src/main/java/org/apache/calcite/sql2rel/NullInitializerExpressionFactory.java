@@ -154,6 +154,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isGeneratedAlways
@@ -190,6 +192,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ColumnStrategy
 name|generationStrategy
@@ -230,6 +234,8 @@ operator|.
 name|NOT_NULLABLE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|newColumnDefaultValue
@@ -276,6 +282,8 @@ name|fieldType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BiFunction
 argument_list|<
@@ -292,6 +300,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|newAttributeInitializer

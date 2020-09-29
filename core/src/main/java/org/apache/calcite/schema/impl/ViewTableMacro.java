@@ -315,6 +315,8 @@ name|schemaPath
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -330,6 +332,8 @@ name|emptyList
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TranslatableTable
 name|apply

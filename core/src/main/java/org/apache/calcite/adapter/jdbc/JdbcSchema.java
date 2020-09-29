@@ -1288,6 +1288,8 @@ name|password
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isMutable
@@ -1297,6 +1299,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|snapshot
@@ -1333,6 +1337,8 @@ return|return
 name|dataSource
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -1377,6 +1383,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Collection
@@ -1400,6 +1408,8 @@ argument_list|)
 return|;
 comment|// never null
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Set
@@ -2051,6 +2061,8 @@ name|schema
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getTable
@@ -2838,6 +2850,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -2915,6 +2929,8 @@ name|keySet
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|getSubSchema
@@ -2928,6 +2944,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -3054,6 +3072,8 @@ name|Factory
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|create

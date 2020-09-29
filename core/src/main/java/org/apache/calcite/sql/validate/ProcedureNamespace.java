@@ -194,6 +194,8 @@ name|call
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|validateImpl
@@ -325,6 +327,8 @@ name|callBinding
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode

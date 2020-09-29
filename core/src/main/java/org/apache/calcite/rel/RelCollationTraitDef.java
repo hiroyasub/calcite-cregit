@@ -118,6 +118,8 @@ name|RelCollationTraitDef
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -132,6 +134,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSimpleName
@@ -152,6 +156,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelCollation
 name|getDefault
@@ -163,6 +169,8 @@ operator|.
 name|EMPTY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert
@@ -272,6 +280,8 @@ return|return
 name|newRel
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|canConvert

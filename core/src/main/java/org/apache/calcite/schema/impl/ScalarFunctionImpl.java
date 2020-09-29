@@ -717,6 +717,8 @@ name|implementor
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getReturnType
@@ -737,6 +739,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CallImplementor
 name|getImplementor

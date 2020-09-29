@@ -578,6 +578,8 @@ operator|.
 name|VIEW
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -595,6 +597,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -635,6 +639,8 @@ name|elementType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel

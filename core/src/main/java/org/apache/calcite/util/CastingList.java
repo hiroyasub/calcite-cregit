@@ -112,6 +112,8 @@ name|clazz
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|E
 name|get
@@ -134,6 +136,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -146,6 +150,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|set
@@ -179,6 +185,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|remove
@@ -201,6 +209,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add

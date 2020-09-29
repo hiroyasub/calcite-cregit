@@ -2946,6 +2946,8 @@ operator|.
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getParentSchema
@@ -2964,6 +2966,8 @@ name|plus
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -2978,6 +2982,8 @@ name|getName
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isMutable
@@ -2990,6 +2996,8 @@ name|isMutable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setCacheEnabled
@@ -3008,6 +3016,8 @@ name|cache
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isCacheEnabled
@@ -3022,6 +3032,8 @@ name|isCacheEnabled
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|snapshot
@@ -3036,6 +3048,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -3058,6 +3072,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getTable
@@ -3094,6 +3110,8 @@ name|getTable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|NavigableSet
 argument_list|<
@@ -3168,6 +3186,8 @@ name|getTypeNames
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Collection
 argument_list|<
@@ -3192,6 +3212,8 @@ literal|true
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|NavigableSet
 argument_list|<
@@ -3209,6 +3231,8 @@ name|getFunctionNames
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getSubSchema
@@ -3245,6 +3269,8 @@ name|plus
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -3265,6 +3291,8 @@ name|keySet
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|add
@@ -3298,6 +3326,8 @@ name|plus
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -3449,6 +3479,8 @@ name|clazz
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setPath
@@ -3472,6 +3504,8 @@ operator|=
 name|path
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add
@@ -3495,6 +3529,8 @@ name|table
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add
@@ -3518,6 +3554,8 @@ name|function
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add
@@ -3541,6 +3579,8 @@ name|type
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add
@@ -3619,6 +3659,8 @@ name|table
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getTable
@@ -3670,6 +3712,8 @@ operator|=
 name|protoDataType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelProtoDataType
 name|getType
@@ -3721,6 +3765,8 @@ operator|=
 name|function
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Function
 name|getFunction
@@ -3730,6 +3776,8 @@ return|return
 name|function
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isMaterialization
@@ -3813,6 +3861,8 @@ name|starTable
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Lattice
 name|getLattice
@@ -3822,6 +3872,8 @@ return|return
 name|lattice
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TableEntry
 name|getStarTable

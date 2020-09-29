@@ -1101,6 +1101,8 @@ argument_list|(
 literal|"CalcRelType"
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|canImplement
@@ -1113,13 +1115,15 @@ return|return
 literal|true
 return|;
 block_content|}
-block|protected boolean canImplement(RexDynamicParam param
+block|@Override protected boolean canImplement(RexDynamicParam param
 block|)
 block|{
 return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|canImplement
@@ -1132,7 +1136,7 @@ return|return
 literal|true
 return|;
 block_content|}
-block|protected boolean canImplement(RexCall call
+block|@Override protected boolean canImplement(RexCall call
 block|)
 block|{
 return|return
@@ -1144,6 +1148,8 @@ name|RexOver
 operator|)
 return|;
 block|}
+block|@
+name|Override
 specifier|protected
 name|RelNode
 name|makeRel
@@ -1216,6 +1222,8 @@ argument_list|(
 literal|"WinAggRelType"
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|canImplement
@@ -1228,6 +1236,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|canImplement
@@ -1240,6 +1250,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|canImplement
@@ -1252,6 +1264,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|canImplement
@@ -1266,6 +1280,8 @@ operator|instanceof
 name|RexOver
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|supportsCondition
@@ -1275,6 +1291,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelNode
 name|makeRel
@@ -2014,6 +2032,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLocalRef

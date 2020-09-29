@@ -732,6 +732,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|double
 name|estimateRowCount
@@ -748,6 +750,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms

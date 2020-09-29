@@ -520,6 +520,8 @@ name|typeSystem
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createStructType
@@ -770,6 +772,8 @@ return|return
 name|klass
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createType
@@ -1133,6 +1137,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getJavaClass
@@ -1495,6 +1501,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|toSql
@@ -1766,6 +1774,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|createSyntheticType
@@ -1918,6 +1928,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1964,6 +1976,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2204,6 +2218,8 @@ operator|+
 name|relType
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -2213,6 +2229,8 @@ return|return
 name|name
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2227,6 +2245,8 @@ return|return
 name|fields
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2355,6 +2375,8 @@ operator|+
 literal|"] can never be null"
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getType
@@ -2364,6 +2386,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -2373,6 +2397,8 @@ return|return
 name|name
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getModifiers
@@ -2382,6 +2408,8 @@ return|return
 name|modifiers
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|nullable
@@ -2391,6 +2419,8 @@ return|return
 name|nullable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -2405,6 +2435,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getDeclaringClass

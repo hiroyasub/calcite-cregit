@@ -100,6 +100,8 @@ name|paramTypes
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|inferOperandTypes

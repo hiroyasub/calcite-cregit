@@ -1022,6 +1022,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -1043,6 +1045,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Geometry
 name|g
@@ -1052,6 +1056,8 @@ return|return
 name|g
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|type
@@ -1066,6 +1072,8 @@ name|g
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SpatialReference
 name|sr
@@ -1075,6 +1083,8 @@ return|return
 name|SPATIAL_REFERENCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Geom
 name|transform
@@ -1106,6 +1116,8 @@ name|srid
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Geom
 name|wrap
@@ -1166,6 +1178,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -1187,6 +1201,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Geometry
 name|g
@@ -1199,6 +1215,8 @@ name|getGeometry
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|type
@@ -1216,6 +1234,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SpatialReference
 name|sr
@@ -1228,6 +1248,8 @@ name|getSpatialReference
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Geom
 name|transform
@@ -1283,6 +1305,8 @@ name|srid
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Geom
 name|wrap

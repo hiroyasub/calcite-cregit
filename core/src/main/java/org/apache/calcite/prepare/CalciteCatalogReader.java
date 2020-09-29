@@ -1003,6 +1003,8 @@ operator|=
 name|config
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteCatalogReader
 name|withSchemaPath
@@ -1040,6 +1042,8 @@ name|config
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Prepare
 operator|.
@@ -1395,6 +1399,8 @@ return|return
 name|functions2
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getNamedType
@@ -1444,6 +1450,8 @@ literal|null
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1716,6 +1724,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1731,6 +1741,8 @@ return|return
 name|schemaPaths
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Prepare
 operator|.
@@ -1751,6 +1763,8 @@ name|names
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1783,6 +1797,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|matches
@@ -1805,6 +1821,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createTypeFromProjection
@@ -1839,6 +1857,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|lookupOperatorOverloads
@@ -2806,6 +2826,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2915,6 +2937,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|getRootSchema
@@ -2924,6 +2948,8 @@ return|return
 name|rootSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -2933,6 +2959,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerRules
@@ -2961,6 +2989,8 @@ name|isCaseSensitive
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNameMatcher
 name|nameMatcher

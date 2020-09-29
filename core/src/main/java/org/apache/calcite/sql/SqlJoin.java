@@ -277,6 +277,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -299,6 +301,8 @@ operator|.
 name|JOIN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -599,6 +603,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -610,6 +616,8 @@ operator|.
 name|SPECIAL
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCall
 name|createCall

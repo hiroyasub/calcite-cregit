@@ -1197,6 +1197,8 @@ operator|=
 name|typeFactory
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlAggFunction
 name|aggregation
@@ -1211,6 +1213,8 @@ name|getAggregation
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|returnRelType
@@ -1224,6 +1228,8 @@ operator|.
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|returnType
@@ -1241,6 +1247,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1273,6 +1281,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1295,6 +1305,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1307,6 +1319,8 @@ return|return
 name|groupSets
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1322,6 +1336,8 @@ name|asList
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1352,6 +1368,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1532,6 +1550,8 @@ argument_list|,
 name|accumulator
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1597,6 +1617,8 @@ return|return
 name|args
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|rexFilterArgument
@@ -1630,6 +1652,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexToLixTranslator
 name|rowTranslator

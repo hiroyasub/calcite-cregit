@@ -619,6 +619,8 @@ operator|==
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -630,6 +632,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -681,6 +685,8 @@ return|return
 name|objects
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -905,6 +911,8 @@ return|return
 name|arrayList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -993,6 +1001,8 @@ argument_list|,
 name|index
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|Integer
 name|get
@@ -1015,6 +1025,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -1093,6 +1105,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf
@@ -1621,6 +1635,8 @@ operator|=
 name|position
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|boolean
@@ -1633,6 +1649,8 @@ operator|<
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|E
@@ -1660,6 +1678,8 @@ operator|++
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|int
@@ -1670,6 +1690,8 @@ return|return
 name|position
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|boolean
@@ -1682,6 +1704,8 @@ operator|>
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|E
@@ -1709,6 +1733,8 @@ name|position
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|int

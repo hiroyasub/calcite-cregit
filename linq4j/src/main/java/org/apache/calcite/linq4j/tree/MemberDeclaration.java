@@ -29,6 +29,8 @@ name|MemberDeclaration
 implements|implements
 name|Node
 block|{
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|MemberDeclaration

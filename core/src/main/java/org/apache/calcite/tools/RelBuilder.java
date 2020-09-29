@@ -12827,6 +12827,8 @@ name|RelDataType
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|get
@@ -12854,6 +12856,8 @@ name|getType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -15428,6 +15432,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|GroupKey
 name|alias
@@ -16105,6 +16111,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|sort
@@ -16163,6 +16171,8 @@ name|orderKeyList
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|sort
@@ -16184,6 +16194,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|approximate
@@ -16222,6 +16234,8 @@ name|orderKeys
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|filter
@@ -16265,6 +16279,8 @@ name|orderKeys
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|as
@@ -16308,6 +16324,8 @@ name|orderKeys
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|distinct
@@ -16346,6 +16364,8 @@ name|orderKeys
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|distinct
@@ -16358,6 +16378,8 @@ literal|true
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|ignoreNulls
@@ -16512,6 +16534,8 @@ parameter_list|)
 block|{
 comment|// nothing to do
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|sort
@@ -16529,6 +16553,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|sort
@@ -16544,6 +16570,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|approximate
@@ -16558,6 +16586,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|filter
@@ -16572,6 +16602,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|as
@@ -16586,6 +16618,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|distinct
@@ -16600,6 +16634,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|distinct
@@ -16611,6 +16647,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggCall
 name|ignoreNulls
@@ -17363,6 +17401,8 @@ operator|=
 name|right
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef

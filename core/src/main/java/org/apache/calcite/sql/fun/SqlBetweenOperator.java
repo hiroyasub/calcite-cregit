@@ -537,6 +537,8 @@ return|return
 name|negated
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -570,6 +572,8 @@ name|newOpBinding
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -611,6 +615,8 @@ name|name
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -770,6 +776,8 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ReduceResult
 name|reduceExpr
@@ -1048,6 +1056,8 @@ argument_list|<
 name|Void
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit

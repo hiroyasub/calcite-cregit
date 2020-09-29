@@ -713,6 +713,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -812,6 +814,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getOperandScope
@@ -881,6 +885,8 @@ name|call
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkAggregateExpr
@@ -974,6 +980,8 @@ name|expr
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr

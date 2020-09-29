@@ -147,6 +147,8 @@ name|getName
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 name|getInterface
@@ -158,6 +160,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -184,6 +188,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitDef
 name|getTraitDef
@@ -195,6 +201,8 @@ operator|.
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|satisfies
@@ -209,6 +217,8 @@ operator|==
 name|trait
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|register
@@ -218,6 +228,8 @@ name|planner
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|canConvertConvention
@@ -230,6 +242,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|useAbstractConvertersForConversion

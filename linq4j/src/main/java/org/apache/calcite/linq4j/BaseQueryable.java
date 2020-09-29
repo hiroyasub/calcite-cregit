@@ -118,6 +118,8 @@ operator|=
 name|expression
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getProvider
@@ -127,6 +129,8 @@ return|return
 name|provider
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -136,6 +140,8 @@ return|return
 name|elementType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -145,6 +151,8 @@ return|return
 name|expression
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -163,6 +171,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

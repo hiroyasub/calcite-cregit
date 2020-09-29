@@ -59,6 +59,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows
@@ -69,6 +71,8 @@ name|value
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getIo
@@ -79,6 +83,8 @@ literal|0
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getCpu
@@ -89,6 +95,8 @@ literal|0
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isInfinite
@@ -104,6 +112,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLe
@@ -123,6 +133,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLt
@@ -159,6 +171,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -209,6 +223,8 @@ literal|false
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isEqWithEpsilon
@@ -237,6 +253,8 @@ name|EPSILON
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|minus
@@ -260,6 +278,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|plus
@@ -283,6 +303,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|multiplyBy
@@ -302,6 +324,8 @@ name|factor
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|divideBy
@@ -331,6 +355,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement RelOptCost
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -370,6 +396,8 @@ implements|implements
 name|RelOptCostFactory
 block|{
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeCost
@@ -393,6 +421,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeHugeCost
@@ -409,6 +439,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeInfiniteCost
@@ -425,6 +457,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeTinyCost
@@ -439,6 +473,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeZeroCost

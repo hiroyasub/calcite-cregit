@@ -283,6 +283,8 @@ name|nullable
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|clone
@@ -303,6 +305,8 @@ name|pos
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -512,6 +516,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -538,6 +544,8 @@ name|rightPrec
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate
@@ -557,6 +565,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -580,6 +590,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equalsDeep

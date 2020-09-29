@@ -938,6 +938,8 @@ name|Integer
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -966,6 +968,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1086,6 +1090,8 @@ name|T
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -1108,6 +1114,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1145,6 +1153,8 @@ name|Integer
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -1173,6 +1183,8 @@ else|:
 name|target
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1210,6 +1222,8 @@ name|Integer
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -1253,6 +1267,8 @@ return|return
 name|target
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -3038,6 +3054,8 @@ name|IntPair
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -3050,6 +3068,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -3079,6 +3099,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -3168,6 +3190,8 @@ name|int
 name|source
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 name|MappingType
 name|getMappingType
 parameter_list|()
@@ -3216,6 +3240,8 @@ name|int
 name|source
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 name|MappingType
 name|getMappingType
 parameter_list|()
@@ -3236,6 +3262,8 @@ name|TargetMapping
 extends|extends
 name|FunctionMapping
 block|{
+annotation|@
+name|Override
 name|int
 name|getSourceCount
 parameter_list|()
@@ -3253,6 +3281,8 @@ name|getTargetCount
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the target that a source maps to.      *      * @param source source      * @return target      * @throws NoElementException if source is not mapped      */
+annotation|@
+name|Override
 name|int
 name|getTarget
 parameter_list|(
@@ -3261,6 +3291,8 @@ name|source
 parameter_list|)
 function_decl|;
 comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      */
+annotation|@
+name|Override
 name|int
 name|getTargetOpt
 parameter_list|(
@@ -3293,6 +3325,8 @@ name|AbstractMapping
 implements|implements
 name|Mapping
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -3310,6 +3344,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetOpt
@@ -3324,6 +3360,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTarget
@@ -3367,6 +3405,8 @@ return|return
 name|target
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceOpt
@@ -3381,6 +3421,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSource
@@ -3424,6 +3466,8 @@ return|return
 name|source
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceCount
@@ -3435,6 +3479,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetCount
@@ -3446,6 +3492,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -3509,6 +3557,8 @@ literal|true
 return|;
 block|}
 comment|/**      * Returns a string representation of this mapping.      *      *<p>For example, the mapping      *      *<table border="1">      *<caption>Example</caption>      *<tr>      *<th>source</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *</tr>      *<tr>      *<th>target</th>      *<td>-1</td>      *<td>3</td>      *<td>2</td>      *</tr>      *</table>      *      *<table border="1">      *<caption>Example</caption>      *<tr>      *<th>target</th>      *<td>0</td>      *<td>1</td>      *<td>2</td>      *<td>3</td>      *</tr>      *<tr>      *<th>source</th>      *<td>-1</td>      *<td>-1</td>      *<td>2</td>      *<td>1</td>      *</tr>      *</table>      *      *<p>is represented by the string "[1:3, 2:2]".      *      *<p>This method relies upon the optional method {@link #iterator()}.      */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3636,6 +3686,8 @@ name|FiniteAbstractMapping
 extends|extends
 name|AbstractMapping
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -3652,6 +3704,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -3666,6 +3720,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -3729,6 +3785,8 @@ operator|=
 name|mapping
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -3755,6 +3813,8 @@ literal|1
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -3781,6 +3841,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -4104,6 +4166,8 @@ operator|=
 name|mappingType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -4113,6 +4177,8 @@ return|return
 name|mappingType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceCount
@@ -4124,6 +4190,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetCount
@@ -4135,6 +4203,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -4161,6 +4231,8 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -4211,6 +4283,8 @@ return|return
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -4237,6 +4311,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -4354,6 +4430,8 @@ operator|)
 assert|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -4439,6 +4517,8 @@ argument_list|()
 assert|;
 block|}
 comment|/**      * Returns the source that a target maps to, or -1 if it is not mapped.      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceOpt
@@ -4455,6 +4535,8 @@ index|]
 return|;
 block|}
 comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetOpt
@@ -4470,6 +4552,8 @@ name|source
 index|]
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -4554,6 +4638,8 @@ name|advance
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -4596,6 +4682,8 @@ literal|1
 condition|)
 do|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -4623,6 +4711,8 @@ return|return
 name|pair
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -4665,6 +4755,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Creates a mapping between a source and a target.      *      *<p>It is an error to map a target to a source which already has a      * target.      *      *<p>If you map a source to a target which already has a source, the      * old source becomes an orphan.      *      * @param source source      * @param target target      */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -4726,6 +4818,8 @@ operator|=
 name|source
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSource
@@ -4776,6 +4870,8 @@ operator|=
 name|size
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -4789,6 +4885,8 @@ literal|"Mapping is read-only"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -4798,6 +4896,8 @@ return|return
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -4807,6 +4907,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -4816,6 +4918,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -4833,6 +4937,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -4844,6 +4950,8 @@ operator|.
 name|BIJECTION
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceCount
@@ -4853,6 +4961,8 @@ return|return
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetCount
@@ -4863,6 +4973,8 @@ name|size
 return|;
 block|}
 comment|/**      * Returns the target that a source maps to.      *      * @param source source      * @return target      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTarget
@@ -4908,6 +5020,8 @@ name|source
 return|;
 block|}
 comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      *      * @param source source      * @return target      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetOpt
@@ -4953,6 +5067,8 @@ name|source
 return|;
 block|}
 comment|/**      * Returns the source that a target maps to.      *      * @param target target      * @return source      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSource
@@ -4998,6 +5114,8 @@ name|target
 return|;
 block|}
 comment|/**      * Returns the source that a target maps to, or -1 if it is not mapped.      *      * @param target target      * @return source      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceOpt
@@ -5042,6 +5160,8 @@ return|return
 name|target
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -5063,6 +5183,8 @@ name|i
 init|=
 literal|0
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -5082,6 +5204,8 @@ name|size
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -5103,6 +5227,8 @@ name|x
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -5175,6 +5301,8 @@ operator|=
 name|target
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -5188,6 +5316,8 @@ literal|"Mapping is read-only"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -5216,6 +5346,8 @@ operator|+
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -5239,6 +5371,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -5252,6 +5386,8 @@ name|getMappingType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSource
@@ -5287,6 +5423,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -5307,6 +5445,8 @@ name|isIdentity
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -5382,6 +5522,8 @@ operator|=
 name|source
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -5395,6 +5537,8 @@ literal|"Mapping is read-only"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -5423,6 +5567,8 @@ operator|+
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -5444,6 +5590,8 @@ name|target
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -5464,6 +5612,8 @@ name|target
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -5477,6 +5627,8 @@ name|getMappingType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -5502,6 +5654,8 @@ name|isIdentity
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTarget
@@ -5537,6 +5691,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -5672,6 +5828,8 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceCount
@@ -5681,6 +5839,8 @@ return|return
 name|sourceCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetCount
@@ -5690,6 +5850,8 @@ return|return
 name|targetCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -5706,6 +5868,8 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -5740,6 +5904,8 @@ return|return
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -5805,6 +5971,8 @@ comment|// found one
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -5816,6 +5984,8 @@ operator|<
 name|sourceCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -5843,6 +6013,8 @@ return|return
 name|pair
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -5857,6 +6029,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -5866,6 +6040,8 @@ return|return
 name|mappingType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -5885,6 +6061,8 @@ name|sourceCount
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -5981,6 +6159,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      *      * @return target      */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetOpt
@@ -6023,6 +6203,8 @@ operator|=
 name|parent
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -6051,6 +6233,8 @@ name|IntPair
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -6063,6 +6247,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -6090,6 +6276,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -6104,6 +6292,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -6115,6 +6305,8 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -6127,6 +6319,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceCount
@@ -6139,6 +6333,8 @@ name|getTargetCount
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetCount
@@ -6151,6 +6347,8 @@ name|getSourceCount
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -6166,6 +6364,8 @@ name|inverse
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -6178,6 +6378,8 @@ name|isIdentity
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetOpt
@@ -6195,6 +6397,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTarget
@@ -6212,6 +6416,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSource
@@ -6229,6 +6435,8 @@ name|target
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceOpt
@@ -6246,6 +6454,8 @@ name|target
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -6255,6 +6465,8 @@ return|return
 name|parent
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set

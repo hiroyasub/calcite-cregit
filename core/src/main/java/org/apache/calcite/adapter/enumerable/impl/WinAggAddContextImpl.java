@@ -255,6 +255,8 @@ name|apply
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RexToLixTranslator
@@ -282,6 +284,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|List

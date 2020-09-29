@@ -139,6 +139,8 @@ operator|=
 name|elementType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -148,6 +150,8 @@ return|return
 name|elementType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression

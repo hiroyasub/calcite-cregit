@@ -317,6 +317,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|approximateDistinctCount
@@ -336,6 +338,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|approximateTopN
@@ -355,6 +359,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|approximateDecimal
@@ -395,6 +401,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|autoTemp
@@ -414,6 +422,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|materializationsEnabled
@@ -433,6 +443,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|createMaterializations
@@ -452,6 +464,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|NullCollation
 name|defaultNullCollation
@@ -479,6 +493,8 @@ name|HIGH
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -582,6 +598,8 @@ name|operatorTable
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|model
@@ -601,6 +619,8 @@ name|getString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Lex
 name|lex
@@ -624,6 +644,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Quoting
 name|quoting
@@ -652,6 +674,8 @@ name|quoting
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Casing
 name|unquotedCasing
@@ -680,6 +704,8 @@ name|unquotedCasing
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Casing
 name|quotedCasing
@@ -708,6 +734,8 @@ name|quotedCasing
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|caseSensitive
@@ -732,6 +760,8 @@ name|caseSensitive
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -767,6 +797,8 @@ name|defaultParserFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -802,6 +834,8 @@ name|defaultSchemaFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JsonSchema
 operator|.
@@ -829,6 +863,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|spark
@@ -848,6 +884,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|forceDecorrelate
@@ -867,6 +905,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -902,6 +942,8 @@ name|defaultTypeSystem
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlConformance
 name|conformance
@@ -946,6 +988,8 @@ name|getString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|locale
@@ -965,6 +1009,8 @@ name|getString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|typeCoercion
@@ -984,6 +1030,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|lenientOperatorLookup
@@ -1003,6 +1051,8 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|topDownOpt

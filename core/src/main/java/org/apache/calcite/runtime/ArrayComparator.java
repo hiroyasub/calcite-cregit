@@ -173,6 +173,8 @@ return|return
 name|comparators
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare

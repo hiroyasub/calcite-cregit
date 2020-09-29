@@ -1601,6 +1601,8 @@ operator|=
 name|ruleSet
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|run
@@ -1753,6 +1755,8 @@ operator|=
 name|programs
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|run
@@ -1818,6 +1822,8 @@ name|DecorrelateProgram
 implements|implements
 name|Program
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|run
@@ -1919,6 +1925,8 @@ name|TrimFieldsProgram
 implements|implements
 name|Program
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|run

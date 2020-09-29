@@ -201,6 +201,8 @@ operator|=
 name|needsIndent
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|needsIndent
@@ -226,6 +228,8 @@ operator|new
 name|FrameType
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -235,6 +239,8 @@ return|return
 name|name
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|needsIndent
@@ -247,6 +253,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName

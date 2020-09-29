@@ -222,6 +222,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|validateImpl
@@ -266,6 +268,8 @@ name|unnest
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode

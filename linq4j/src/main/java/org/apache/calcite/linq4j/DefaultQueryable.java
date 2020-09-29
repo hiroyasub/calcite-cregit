@@ -403,6 +403,8 @@ name|T
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -967,6 +969,8 @@ argument_list|)
 return|;
 block|}
 comment|// End disambiguate
+annotation|@
+name|Override
 specifier|public
 name|T
 name|aggregate
@@ -997,6 +1001,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TAccumulate
@@ -1035,6 +1041,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TAccumulate
@@ -1088,6 +1096,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|all
@@ -1114,6 +1124,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|any
@@ -1140,6 +1152,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|averageBigDecimal
@@ -1166,6 +1180,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|averageNullableBigDecimal
@@ -1192,6 +1208,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|averageDouble
@@ -1218,6 +1236,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|averageNullableDouble
@@ -1244,6 +1264,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|averageInteger
@@ -1270,6 +1292,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|averageNullableInteger
@@ -1296,6 +1320,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|averageFloat
@@ -1322,6 +1348,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Float
 name|averageNullableFloat
@@ -1348,6 +1376,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|averageLong
@@ -1374,6 +1404,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Long
 name|averageNullableLong
@@ -1400,6 +1432,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1426,6 +1460,8 @@ name|source2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|count
@@ -1452,6 +1488,8 @@ name|func
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|first
@@ -1478,6 +1516,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|firstOrDefault
@@ -1504,6 +1544,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1543,6 +1585,8 @@ name|keySelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1590,6 +1634,8 @@ name|comparer
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1644,6 +1690,8 @@ name|elementSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1706,6 +1754,8 @@ name|comparer
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1760,6 +1810,8 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1822,6 +1874,8 @@ name|comparer
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1891,6 +1945,8 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1968,6 +2024,8 @@ name|comparer
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2045,6 +2103,8 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2130,6 +2190,8 @@ name|comparer
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2204,6 +2266,8 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2286,6 +2350,8 @@ name|comparer
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|last
@@ -2312,6 +2378,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|lastOrDefault
@@ -2338,6 +2406,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|longCount
@@ -2364,6 +2434,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2400,6 +2472,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2436,6 +2510,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2472,6 +2548,8 @@ name|keySelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2514,6 +2592,8 @@ name|comparator
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2550,6 +2630,8 @@ name|keySelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2592,6 +2674,8 @@ name|comparator
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2626,6 +2710,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2662,6 +2748,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2699,6 +2787,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2738,6 +2828,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TCollection
@@ -2794,6 +2886,8 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TCollection
@@ -2848,6 +2942,8 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|single
@@ -2874,6 +2970,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|singleOrDefault
@@ -2900,6 +2998,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2929,6 +3029,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2960,6 +3062,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|sumBigDecimal
@@ -2986,6 +3090,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|sumNullableBigDecimal
@@ -3012,6 +3118,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|sumDouble
@@ -3038,6 +3146,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|sumNullableDouble
@@ -3064,6 +3174,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|sumInteger
@@ -3090,6 +3202,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|sumNullableInteger
@@ -3116,6 +3230,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|sumLong
@@ -3142,6 +3258,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Long
 name|sumNullableLong
@@ -3168,6 +3286,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|sumFloat
@@ -3194,6 +3314,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Float
 name|sumNullableFloat
@@ -3220,6 +3342,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3249,6 +3373,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3280,6 +3406,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3319,6 +3447,8 @@ name|keySelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3361,6 +3491,8 @@ name|comparator
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3400,6 +3532,8 @@ name|keySelector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3442,6 +3576,8 @@ name|comparator
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3473,6 +3609,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3506,6 +3644,8 @@ name|predicate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T1

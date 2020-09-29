@@ -506,6 +506,8 @@ return|return
 name|id
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|getTreeOrder
@@ -603,6 +605,8 @@ return|return
 name|right
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|getTreeOrder

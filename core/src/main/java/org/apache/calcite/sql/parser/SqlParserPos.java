@@ -290,6 +290,8 @@ name|endColumnNumber
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -310,6 +312,8 @@ name|endColumnNumber
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -659,6 +663,8 @@ name|SqlParserPos
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlParserPos
 name|get
@@ -677,6 +683,8 @@ name|getParserPosition
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -864,6 +872,8 @@ name|SqlParserPos
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlParserPos
 name|get
@@ -883,6 +893,8 @@ literal|1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

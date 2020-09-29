@@ -205,6 +205,8 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|EnumerableMinus
 name|copy
@@ -237,6 +239,8 @@ name|all
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement

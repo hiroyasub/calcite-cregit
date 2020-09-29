@@ -81,6 +81,8 @@ name|getName
 parameter_list|()
 function_decl|;
 comment|// override with stricter return
+annotation|@
+name|Override
 name|SchemaPlus
 name|getSubSchema
 parameter_list|(
@@ -143,6 +145,8 @@ name|Lattice
 name|lattice
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 name|boolean
 name|isMutable
 parameter_list|()

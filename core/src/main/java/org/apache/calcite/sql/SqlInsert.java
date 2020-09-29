@@ -248,6 +248,8 @@ operator|.
 name|INSERT
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -257,6 +259,8 @@ return|return
 name|OPERATOR
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -570,6 +574,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate

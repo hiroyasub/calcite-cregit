@@ -426,6 +426,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -507,6 +509,8 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -523,6 +527,8 @@ return|return
 name|resultRow
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -670,6 +676,8 @@ expr_stmt|;
 comment|/*               recentRows.add(e);               int earliestRetainedRow = Integer.MAX_VALUE;               for (int i = 0; i< partitionState.incompleteMatches.size(); i++) {                 MatchState match = partitionState.incompleteMatches.get(i);                 earliestRetainedRow = Math.min(earliestRetainedRow, match.firstRow);                 final int state = automaton.nextState(match.state, e);                 switch (state) {                 case Automaton.ACCEPT:                   final List<E> matchedRows =                       recentRows.subList(0, 0); // TODO:                   final List<Integer> rowStates = ImmutableList.of(); // TODO:                   emitRows.addAll(                       emitter.emit(matchedRows, rowStates,                           partitionState.matchCount++));                   // fall through                 case Automaton.FAIL:                   partitionState.incompleteMatches.remove(i--);                   break;                 default:                   match.state = state;                 }               }               // Try to start a match based on the current row               final int state = automaton.nextState(Automaton.START_STATE, e);               switch (state) {               case Automaton.ACCEPT:                 final List<E> matchedRows = ImmutableList.of(e);                 final List<Integer> rowStates = ImmutableList.of(state);                 emitRows.addAll(                     emitter.emit(matchedRows, rowStates,                         partitionState.matchCount++));                 // fall through               case Automaton.FAIL:                 // since it immediately succeeded or failed, don't add                 // it to the queue                 break;               default:                 partitionState.incompleteMatches.add(                     new MatchState(inputRow, state));               } */
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -681,6 +689,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

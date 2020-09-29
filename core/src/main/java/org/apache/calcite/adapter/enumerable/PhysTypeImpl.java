@@ -772,6 +772,8 @@ name|CUSTOM
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaRowFormat
 name|getFormat
@@ -781,6 +783,8 @@ return|return
 name|format
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PhysType
 name|project
@@ -806,6 +810,8 @@ name|format
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PhysType
 name|project
@@ -939,6 +945,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|generateSelector
@@ -964,6 +972,8 @@ name|format
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|generateSelector
@@ -1069,6 +1079,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|generateSelector
@@ -1255,6 +1267,8 @@ name|parameter
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1368,6 +1382,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1432,6 +1448,8 @@ return|return
 name|expressions
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PhysType
 name|makeNullable
@@ -1481,6 +1499,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|convertTo
@@ -1504,6 +1524,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|convertTo
@@ -1616,6 +1638,8 @@ name|selector
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -2359,6 +2383,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|generateComparator
@@ -2913,6 +2939,8 @@ name|memberDeclarations
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -2922,6 +2950,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|record
@@ -2944,6 +2974,8 @@ name|expressions
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getJavaRowType
@@ -2953,6 +2985,8 @@ return|return
 name|javaRowClass
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getJavaFieldType
@@ -2974,6 +3008,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PhysType
 name|component
@@ -3020,6 +3056,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PhysType
 name|field
@@ -3111,6 +3149,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|comparer
@@ -3150,6 +3190,8 @@ name|Expression
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|get
@@ -3172,6 +3214,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -3187,6 +3231,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 name|fieldClass
@@ -3204,6 +3250,8 @@ name|field
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|fieldNullable
@@ -3230,6 +3278,8 @@ name|isNullable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|generateAccessor
@@ -3611,6 +3661,8 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|fieldReference
@@ -3633,6 +3685,8 @@ literal|null
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|fieldReference

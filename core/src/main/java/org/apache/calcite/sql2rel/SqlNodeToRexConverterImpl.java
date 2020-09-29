@@ -347,6 +347,8 @@ name|convertletTable
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertCall
@@ -398,6 +400,8 @@ name|call
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexLiteral
 name|convertInterval
@@ -426,6 +430,8 @@ name|intervalQualifier
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|convertLiteral

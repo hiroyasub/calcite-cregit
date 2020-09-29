@@ -436,6 +436,8 @@ operator|)
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|toIndex
@@ -543,6 +545,8 @@ name|toLong
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Point
 name|toPoint
@@ -657,6 +661,8 @@ name|y
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

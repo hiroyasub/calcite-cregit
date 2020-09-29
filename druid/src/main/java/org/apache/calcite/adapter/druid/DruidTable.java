@@ -1232,6 +1232,8 @@ operator|!=
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1291,6 +1293,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel
@@ -1453,6 +1457,8 @@ operator|=
 name|timestampColumn
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|apply

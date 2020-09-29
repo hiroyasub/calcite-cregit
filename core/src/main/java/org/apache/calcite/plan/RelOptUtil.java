@@ -14427,6 +14427,8 @@ operator|new
 name|RelVisitor
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|visit
@@ -15172,6 +15174,8 @@ name|RexNode
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -15184,6 +15188,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|get
@@ -15730,6 +15736,8 @@ name|RexNode
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -15742,6 +15750,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|get
@@ -16380,6 +16390,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -16394,6 +16406,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -16562,6 +16576,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -16576,6 +16592,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -17960,6 +17978,8 @@ name|hintStrategies
 expr_stmt|;
 block|}
 comment|/**      * Visits a particular child of a parent.      */
+annotation|@
+name|Override
 specifier|protected
 name|RelNode
 name|visitChild
@@ -18071,6 +18091,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -18512,6 +18534,8 @@ name|hints
 expr_stmt|;
 block|}
 comment|/**      * Visits a particular child of a parent.      */
+annotation|@
+name|Override
 specifier|protected
 name|RelNode
 name|visitChild
@@ -18613,6 +18637,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -18909,6 +18935,8 @@ name|ResetHintsShuttle
 extends|extends
 name|RelHomogeneousShuttle
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -19052,6 +19080,8 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// implement RelVisitor
+annotation|@
+name|Override
 specifier|public
 name|void
 name|visit
@@ -19318,6 +19348,8 @@ name|TreeSet
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -19843,6 +19875,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef
@@ -20218,6 +20252,8 @@ name|adjustments
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef

@@ -990,6 +990,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -1103,6 +1105,8 @@ return|return
 name|semiJoinDone
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

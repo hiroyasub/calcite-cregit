@@ -136,6 +136,8 @@ return|return
 name|select
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|validateImpl
@@ -180,6 +182,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity

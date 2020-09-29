@@ -101,6 +101,8 @@ operator|.
 name|POSITIVE_INFINITY
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -133,6 +135,8 @@ operator|.
 name|MAX_VALUE
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -159,6 +163,8 @@ argument_list|,
 literal|0.0
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -185,6 +191,8 @@ argument_list|,
 literal|0.0
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -252,6 +260,8 @@ name|io
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getCpu
@@ -261,6 +271,8 @@ return|return
 name|cpu
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isInfinite
@@ -304,6 +316,8 @@ name|POSITIVE_INFINITY
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getIo
@@ -313,6 +327,8 @@ return|return
 name|io
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLe
@@ -388,6 +404,8 @@ operator|)
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLt
@@ -432,6 +450,8 @@ name|other
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows
@@ -461,6 +481,8 @@ name|io
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -555,6 +577,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isEqWithEpsilon
@@ -652,6 +676,8 @@ operator|)
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|minus
@@ -709,6 +735,8 @@ name|io
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|multiplyBy
@@ -746,6 +774,8 @@ name|factor
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|divideBy
@@ -957,6 +987,8 @@ name|n
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|plus
@@ -1022,6 +1054,8 @@ name|io
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1051,6 +1085,8 @@ name|Factory
 implements|implements
 name|RelOptCostFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeCost
@@ -1077,6 +1113,8 @@ name|dIo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeHugeCost
@@ -1088,6 +1126,8 @@ operator|.
 name|HUGE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeInfiniteCost
@@ -1099,6 +1139,8 @@ operator|.
 name|INFINITY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeTinyCost
@@ -1110,6 +1152,8 @@ operator|.
 name|TINY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|makeZeroCost

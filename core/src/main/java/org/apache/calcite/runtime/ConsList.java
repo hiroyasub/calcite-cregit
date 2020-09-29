@@ -230,6 +230,8 @@ operator|=
 name|rest
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|get
@@ -303,6 +305,8 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -417,6 +421,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 specifier|final
 name|List
@@ -564,6 +570,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Object
@@ -579,6 +587,8 @@ name|toArray
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -725,6 +735,8 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|indexOf
@@ -743,6 +755,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|lastIndexOf

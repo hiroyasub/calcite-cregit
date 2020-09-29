@@ -236,6 +236,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// override SqlOperator
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|rewriteCall

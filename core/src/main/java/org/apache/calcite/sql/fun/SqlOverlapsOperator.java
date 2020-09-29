@@ -516,6 +516,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -530,6 +532,8 @@ literal|2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -655,6 +659,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes

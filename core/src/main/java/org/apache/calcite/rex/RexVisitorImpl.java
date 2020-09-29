@@ -64,6 +64,8 @@ name|deep
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitInputRef
@@ -76,6 +78,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitLocalRef
@@ -88,6 +92,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitLiteral
@@ -100,6 +106,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitOver
@@ -186,6 +194,8 @@ return|return
 name|r
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitCorrelVariable
@@ -198,6 +208,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitCall
@@ -245,6 +257,8 @@ return|return
 name|r
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitDynamicParam
@@ -257,6 +271,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitRangeRef
@@ -269,6 +285,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitFieldAccess
@@ -305,6 +323,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitSubQuery

@@ -123,6 +123,8 @@ operator|=
 name|right
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|childrenAccept
@@ -154,6 +156,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -191,6 +195,8 @@ return|return
 name|right
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replaceInput

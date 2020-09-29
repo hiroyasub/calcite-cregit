@@ -247,6 +247,8 @@ parameter_list|()
 block|{
 block|}
 comment|// name that is also the same name as a complex metric
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|create

@@ -5363,6 +5363,8 @@ argument_list|,
 name|delim
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -5379,6 +5381,8 @@ name|String
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -5391,6 +5395,8 @@ name|hasMoreTokens
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|next
@@ -5403,6 +5409,8 @@ name|nextToken
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -6649,6 +6657,8 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -6671,6 +6681,8 @@ name|includeFilter
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -7241,6 +7253,8 @@ name|E
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|E
 name|get
@@ -7262,6 +7276,8 @@ name|k
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -7851,6 +7867,8 @@ name|Integer
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -7860,6 +7878,8 @@ return|return
 name|end
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -7900,6 +7920,8 @@ name|Integer
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -7911,6 +7933,8 @@ operator|-
 name|start
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -9270,6 +9294,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -9292,6 +9318,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -9316,6 +9344,8 @@ name|V
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -10929,6 +10959,8 @@ operator|=
 name|list
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -10951,6 +10983,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -11122,6 +11156,8 @@ name|moveNext
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -11133,6 +11169,8 @@ operator|!=
 name|DUMMY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|next

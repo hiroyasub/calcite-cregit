@@ -235,6 +235,8 @@ name|AbstractSchema
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isMutable
@@ -244,6 +246,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|snapshot
@@ -256,6 +260,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -299,6 +305,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Set
@@ -316,6 +324,8 @@ name|keySet
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Table
@@ -353,6 +363,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelProtoDataType
 name|getType
@@ -371,6 +383,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -405,6 +419,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Collection
@@ -428,6 +444,8 @@ argument_list|)
 return|;
 comment|// never null
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Set
@@ -463,6 +481,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Set
@@ -480,6 +500,8 @@ name|keySet
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Schema
@@ -522,6 +544,8 @@ name|Factory
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|create

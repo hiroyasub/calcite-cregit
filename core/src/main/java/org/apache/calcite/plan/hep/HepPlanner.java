@@ -883,6 +883,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setRoot
@@ -903,6 +905,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|getRoot
@@ -948,6 +952,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|changeTraits
@@ -989,6 +995,8 @@ name|rel
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|findBestExp
@@ -3379,6 +3387,8 @@ name|newVertex
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|register
@@ -3420,6 +3430,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|ensureRegistered
@@ -3436,6 +3448,8 @@ name|rel
 return|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRegistered
@@ -4588,6 +4602,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerMetadataProviders
@@ -4612,6 +4628,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|long
 name|getRelMetadataTimestamp

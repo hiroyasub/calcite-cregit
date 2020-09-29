@@ -206,6 +206,8 @@ operator|new
 name|QueryProviderImpl
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -248,6 +250,8 @@ name|Object
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|current
@@ -259,6 +263,8 @@ name|NoSuchElementException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -268,12 +274,16 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -298,6 +308,8 @@ name|Object
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -678,6 +690,8 @@ argument_list|(
 name|enumerator
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|E
 name|transform
@@ -801,6 +815,8 @@ name|T
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1257,6 +1273,8 @@ operator|)
 name|DUMMY
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|current
@@ -1279,6 +1297,8 @@ return|return
 name|current
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -1314,6 +1334,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -1334,6 +1356,8 @@ operator|)
 name|DUMMY
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -1408,6 +1432,8 @@ operator|=
 name|enumerableList
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1449,6 +1475,8 @@ argument_list|(
 name|enumerableList
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|E
 name|current
@@ -1461,6 +1489,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -1519,6 +1549,8 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -1535,6 +1567,8 @@ name|emptyEnumerator
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -1592,6 +1626,8 @@ operator|=
 name|iterable
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -1992,6 +2028,8 @@ operator|=
 name|e
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|current
@@ -2001,6 +2039,8 @@ return|return
 name|e
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -2013,6 +2053,8 @@ operator|==
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -2023,6 +2065,8 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -2049,6 +2093,8 @@ name|i
 init|=
 literal|0
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|E
 name|current
@@ -2058,6 +2104,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -2070,6 +2118,8 @@ operator|==
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -2080,6 +2130,8 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -2137,6 +2189,8 @@ name|moveNext
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -2146,6 +2200,8 @@ return|return
 name|hasNext
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|next
@@ -2170,6 +2226,8 @@ return|return
 name|t
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -2181,6 +2239,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -2241,6 +2301,8 @@ operator|=
 name|list
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|V
 name|current
@@ -2255,6 +2317,8 @@ name|i
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -2270,6 +2334,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -2281,6 +2347,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -2325,6 +2393,8 @@ name|enumerators
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

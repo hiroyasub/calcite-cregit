@@ -237,6 +237,8 @@ operator|=
 name|caseSensitive
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isCaseSensitive
@@ -246,6 +248,8 @@ return|return
 name|caseSensitive
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|matches
@@ -367,6 +371,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|K
@@ -574,6 +580,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|bestString
@@ -589,6 +597,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeField
 name|field
@@ -613,6 +623,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|frequency
@@ -659,6 +671,8 @@ return|return
 name|n
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<

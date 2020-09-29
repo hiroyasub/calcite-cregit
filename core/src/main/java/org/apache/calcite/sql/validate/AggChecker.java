@@ -384,6 +384,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit
@@ -514,6 +516,8 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visit

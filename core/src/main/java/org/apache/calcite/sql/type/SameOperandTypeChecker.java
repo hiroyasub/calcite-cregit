@@ -214,6 +214,8 @@ name|nOperands
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency
@@ -225,6 +227,8 @@ operator|.
 name|NONE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -237,6 +241,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -487,6 +493,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement SqlOperandTypeChecker
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -519,6 +527,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -583,6 +593,8 @@ return|return
 literal|"EQUIVALENT_TYPE"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType

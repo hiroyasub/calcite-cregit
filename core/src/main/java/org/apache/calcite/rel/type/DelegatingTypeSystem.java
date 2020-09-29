@@ -64,6 +64,8 @@ operator|=
 name|typeSystem
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxScale
@@ -81,6 +83,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getDefaultPrecision
@@ -98,6 +102,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxPrecision
@@ -115,6 +121,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxNumericScale
@@ -127,6 +135,8 @@ name|getMaxNumericScale
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxNumericPrecision
@@ -139,6 +149,8 @@ name|getMaxNumericPrecision
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getLiteral
@@ -161,6 +173,8 @@ name|isPrefix
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isCaseSensitive
@@ -178,6 +192,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isAutoincrement
@@ -195,6 +211,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getNumTypeRadix
@@ -212,6 +230,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveSumType
@@ -234,6 +254,8 @@ name|argumentType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveAvgAggType
@@ -256,6 +278,8 @@ name|argumentType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveCovarType
@@ -283,6 +307,8 @@ name|arg1Type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveFractionalRankType
@@ -300,6 +326,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveRankType
@@ -317,6 +345,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSchemaCaseSensitive
@@ -329,6 +359,8 @@ name|isSchemaCaseSensitive
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|shouldConvertRaggedUnionTypesToVarying

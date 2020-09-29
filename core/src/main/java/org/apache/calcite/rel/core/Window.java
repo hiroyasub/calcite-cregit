@@ -728,6 +728,8 @@ name|succeed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -807,6 +809,8 @@ name|Integer
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|get
@@ -832,6 +836,8 @@ name|getIndex
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -873,6 +879,8 @@ name|RelFieldCollation
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelFieldCollation
 name|get
@@ -920,6 +928,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1163,6 +1173,8 @@ name|computeString
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1559,6 +1571,8 @@ name|AggregateCall
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1571,6 +1585,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|get

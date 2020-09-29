@@ -96,6 +96,8 @@ name|PigSchemaFactory
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|create

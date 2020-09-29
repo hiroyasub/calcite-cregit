@@ -234,6 +234,8 @@ name|RelMdPercentageOriginalRows
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MetadataDef
 argument_list|<

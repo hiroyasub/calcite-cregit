@@ -315,6 +315,8 @@ operator|=
 name|values
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getRootSchema
@@ -328,6 +330,8 @@ literal|"Unsupported"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -341,6 +345,8 @@ literal|"Unsupported"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getQueryProvider
@@ -354,6 +360,8 @@ literal|"Unsupported"
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get

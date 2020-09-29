@@ -1013,6 +1013,8 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|validateImpl
@@ -1356,6 +1358,8 @@ return|return
 name|id
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -1407,6 +1411,8 @@ name|getTable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

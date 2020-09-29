@@ -222,6 +222,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -241,6 +243,8 @@ return|return
 literal|"{0}({1} FROM {2})"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

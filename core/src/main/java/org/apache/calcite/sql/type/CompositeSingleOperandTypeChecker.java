@@ -149,6 +149,8 @@ operator|)
 name|allowedRules
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType

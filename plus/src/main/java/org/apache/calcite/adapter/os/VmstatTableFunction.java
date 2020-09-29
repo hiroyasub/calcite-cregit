@@ -285,6 +285,8 @@ operator|new
 name|ScannableTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -420,6 +422,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -601,6 +605,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1005,6 +1011,8 @@ argument_list|()
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -1031,6 +1039,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.
@@ -1046,6 +1056,8 @@ operator|.
 name|TABLE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRolledUp
@@ -1058,6 +1070,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|rolledUpColumnValidInsideAgg

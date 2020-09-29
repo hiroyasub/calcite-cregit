@@ -129,6 +129,8 @@ operator|=
 name|minor
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getJdbcMajorVersion
@@ -138,6 +140,8 @@ return|return
 name|major
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getJdbcMinorVersion
@@ -147,6 +151,8 @@ return|return
 name|minor
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|AvaticaConnection

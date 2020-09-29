@@ -274,6 +274,8 @@ name|typeName
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -285,6 +287,8 @@ operator|.
 name|FUNCTION_ID
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -416,6 +420,8 @@ name|INCREASING
 return|;
 block|}
 comment|// Plans referencing context variables should never be cached
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDynamicFunction

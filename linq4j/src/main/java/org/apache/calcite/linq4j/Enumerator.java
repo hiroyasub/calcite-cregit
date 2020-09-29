@@ -45,6 +45,8 @@ name|reset
 parameter_list|()
 function_decl|;
 comment|/**    * Closes this enumerable and releases resources.    *    *<p>This method is idempotent. Calling it multiple times has the same effect    * as calling it once.    */
+annotation|@
+name|Override
 name|void
 name|close
 parameter_list|()

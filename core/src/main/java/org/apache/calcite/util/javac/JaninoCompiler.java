@@ -184,6 +184,8 @@ block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement JavaCompiler
+annotation|@
+name|Override
 specifier|public
 name|void
 name|compile
@@ -368,6 +370,8 @@ throw|;
 block|}
 block|}
 comment|// implement JavaCompiler
+annotation|@
+name|Override
 specifier|public
 name|JavaCompilerArgs
 name|getArgs
@@ -378,6 +382,8 @@ name|args
 return|;
 block|}
 comment|// implement JavaCompiler
+annotation|@
+name|Override
 specifier|public
 name|ClassLoader
 name|getClassLoader
@@ -388,6 +394,8 @@ name|classLoader
 return|;
 block|}
 comment|// implement JavaCompiler
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTotalByteCodeSize
@@ -423,6 +431,8 @@ name|JaninoCompilerArgs
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|supportsSetSource
@@ -432,6 +442,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setDestdir
@@ -454,6 +466,8 @@ operator|=
 name|destdir
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setSource
@@ -477,6 +491,8 @@ name|fileName
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setFullClassName

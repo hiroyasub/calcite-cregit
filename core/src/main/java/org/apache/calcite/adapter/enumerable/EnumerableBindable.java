@@ -341,6 +341,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -357,6 +359,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -428,6 +432,8 @@ name|dataContext
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|implement

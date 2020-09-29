@@ -106,6 +106,8 @@ name|namespace
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -118,6 +120,8 @@ name|getValidator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorTable
 name|getTable
@@ -130,6 +134,8 @@ name|getTable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -142,6 +148,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setType
@@ -158,6 +166,8 @@ name|type
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowTypeSansSystemColumns
@@ -170,6 +180,8 @@ name|getRowTypeSansSystemColumns
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getType
@@ -182,6 +194,8 @@ name|getType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate
@@ -198,6 +212,8 @@ name|targetRowType
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -210,6 +226,8 @@ name|getNode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getEnclosingNode
@@ -222,6 +240,8 @@ name|getEnclosingNode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorNamespace
 name|lookupChild
@@ -239,6 +259,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|fieldExists
@@ -256,6 +278,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -276,6 +300,8 @@ name|getMonotonicExprs
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -298,12 +324,16 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|void
 name|makeNullable
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -349,6 +379,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isWrapperFor

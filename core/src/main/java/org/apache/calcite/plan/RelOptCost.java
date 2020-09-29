@@ -112,6 +112,8 @@ name|cost
 parameter_list|)
 function_decl|;
 comment|/**    * Forces implementations to override {@link Object#toString} and provide a    * good cost rendering to use during tracing.    */
+annotation|@
+name|Override
 name|String
 name|toString
 parameter_list|()

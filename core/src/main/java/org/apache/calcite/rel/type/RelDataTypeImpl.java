@@ -288,6 +288,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeField
 name|getField
@@ -629,6 +631,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -650,6 +654,8 @@ return|return
 name|fieldList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -676,6 +682,8 @@ name|fieldList
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getFieldCount
@@ -697,6 +705,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|StructKind
 name|getStructKind
@@ -715,6 +725,8 @@ operator|.
 name|NONE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getComponentType
@@ -725,6 +737,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getKeyType
@@ -735,6 +749,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getValueType
@@ -745,6 +761,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isStruct
@@ -806,6 +824,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getFullTypeString
@@ -815,6 +835,8 @@ return|return
 name|digest
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isNullable
@@ -824,6 +846,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Charset
 name|getCharset
@@ -833,6 +857,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCollation
 name|getCollation
@@ -842,6 +868,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlIntervalQualifier
 name|getIntervalQualifier
@@ -851,6 +879,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getPrecision
@@ -860,6 +890,8 @@ return|return
 name|PRECISION_NOT_SPECIFIED
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getScale
@@ -870,6 +902,8 @@ name|SCALE_NOT_SPECIFIED
 return|;
 block|}
 comment|/**    * Gets the {@link SqlTypeName} of this type.    * Sub-classes must override the method to ensure the resulting value is non-nullable.    *    * @return SqlTypeName, never null    */
+annotation|@
+name|Override
 specifier|public
 name|SqlTypeName
 name|getSqlTypeName
@@ -879,6 +913,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlIdentifier
 name|getSqlIdentifier
@@ -916,6 +952,8 @@ name|ZERO
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFamily
 name|getFamily
@@ -1010,6 +1048,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypePrecedenceList
 name|getPrecedenceList
@@ -1022,6 +1062,8 @@ operator|new
 name|RelDataTypePrecedenceList
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|containsType
@@ -1040,6 +1082,8 @@ name|getFamily
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTypePrecedence
@@ -1070,6 +1114,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeComparability
 name|getComparability
@@ -1290,6 +1336,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDynamicStruct

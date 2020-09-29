@@ -348,6 +348,8 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelTraitDef
 name|getTraitDef
@@ -359,6 +361,8 @@ operator|.
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -371,6 +375,8 @@ return|return
 name|fieldCollations
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -383,6 +389,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -434,6 +442,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isTop
@@ -446,6 +456,8 @@ name|isEmpty
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -551,6 +563,8 @@ else|:
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|register
@@ -588,6 +602,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|satisfies
@@ -623,6 +639,8 @@ argument_list|)
 return|;
 block|}
 comment|/** Returns a string representation of this collation, suitably terse given    * that it will appear in plan traces. Examples:    * "[]", "[2]", "[0 DESC, 1]", "[0 DESC, 1 ASC NULLS LAST]". */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString

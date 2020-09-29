@@ -77,11 +77,15 @@ name|getTraitDef
 parameter_list|()
 function_decl|;
 comment|/**    * See<a href="#EqualsHashCodeNote">note about equals() and hashCode()</a>.    */
+annotation|@
+name|Override
 name|int
 name|hashCode
 parameter_list|()
 function_decl|;
 comment|/**    * See<a href="#EqualsHashCodeNote">note about equals() and hashCode()</a>.    */
+annotation|@
+name|Override
 name|boolean
 name|equals
 parameter_list|(
@@ -98,6 +102,8 @@ name|trait
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a succinct name for this trait. The planner may use this String    * to describe the trait.    */
+annotation|@
+name|Override
 name|String
 name|toString
 parameter_list|()

@@ -842,6 +842,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|camelName
@@ -851,6 +853,8 @@ return|return
 name|camelName
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|defaultValue
@@ -860,6 +864,8 @@ return|return
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|type
@@ -869,6 +875,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 name|valueClass
@@ -878,6 +886,8 @@ return|return
 name|valueClass
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|required
@@ -887,6 +897,8 @@ return|return
 name|required
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|PropEnv
 name|wrap

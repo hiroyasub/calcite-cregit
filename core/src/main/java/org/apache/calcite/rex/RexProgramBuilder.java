@@ -738,6 +738,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef
@@ -2839,6 +2841,8 @@ name|RegisterShuttle
 extends|extends
 name|RexShuttle
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -2867,6 +2871,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitOver
@@ -2895,6 +2901,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLiteral
@@ -2923,6 +2931,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitFieldAccess
@@ -2951,6 +2961,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitDynamicParam
@@ -2979,6 +2991,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCorrelVariable
@@ -3034,6 +3048,8 @@ operator|=
 name|valid
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -3156,6 +3172,8 @@ return|return
 name|ref
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -3355,6 +3373,8 @@ operator|=
 name|localExprList
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -3422,6 +3442,8 @@ operator|=
 name|localExprList
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -3480,6 +3502,8 @@ return|return
 name|local
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -3544,6 +3568,8 @@ operator|=
 name|newRefs
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef

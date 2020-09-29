@@ -484,6 +484,8 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlKind
 name|getKind
@@ -1221,6 +1223,8 @@ name|n
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -1247,6 +1251,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate
@@ -1268,6 +1274,8 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr
@@ -1320,6 +1328,8 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equalsDeep
@@ -1456,6 +1466,8 @@ name|succeed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -1574,6 +1586,8 @@ name|isQuoted
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity

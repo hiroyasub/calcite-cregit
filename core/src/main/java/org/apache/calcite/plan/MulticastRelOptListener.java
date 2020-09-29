@@ -88,6 +88,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelOptListener
+annotation|@
+name|Override
 specifier|public
 name|void
 name|relEquivalenceFound
@@ -114,6 +116,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// implement RelOptListener
+annotation|@
+name|Override
 specifier|public
 name|void
 name|ruleAttempted
@@ -140,6 +144,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// implement RelOptListener
+annotation|@
+name|Override
 specifier|public
 name|void
 name|ruleProductionSucceeded
@@ -166,6 +172,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// implement RelOptListener
+annotation|@
+name|Override
 specifier|public
 name|void
 name|relChosen
@@ -192,6 +200,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// implement RelOptListener
+annotation|@
+name|Override
 specifier|public
 name|void
 name|relDiscarded

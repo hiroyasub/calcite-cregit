@@ -185,6 +185,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isMutable
@@ -197,6 +199,8 @@ name|isMutable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|snapshot
@@ -214,6 +218,8 @@ name|version
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -236,6 +242,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getTable
@@ -253,6 +261,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -268,6 +278,8 @@ name|getTableNames
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelProtoDataType
 name|getType
@@ -285,6 +297,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -300,6 +314,8 @@ name|getTypeNames
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Collection
 argument_list|<
@@ -320,6 +336,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -335,6 +353,8 @@ name|getFunctionNames
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|getSubSchema
@@ -352,6 +372,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<

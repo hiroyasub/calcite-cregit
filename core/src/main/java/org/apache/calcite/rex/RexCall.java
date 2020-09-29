@@ -834,6 +834,8 @@ name|NEW_SPECIFICATION
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -857,6 +859,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -889,6 +893,8 @@ name|arg
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getType
@@ -1054,6 +1060,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlKind
 name|getKind

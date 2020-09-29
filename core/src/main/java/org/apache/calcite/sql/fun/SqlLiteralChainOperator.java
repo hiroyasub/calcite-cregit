@@ -541,6 +541,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -585,6 +587,8 @@ comment|// Result type is the same as all the args, but its size is the
 comment|// total size.
 comment|// REVIEW mb 8/8/04: Possibly this can be achieved by combining
 comment|// the strategy useFirstArgType with a new transformer.
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -669,6 +673,8 @@ name|size
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -683,6 +689,8 @@ operator|+
 literal|"(...)"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateCall
@@ -794,6 +802,8 @@ throw|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

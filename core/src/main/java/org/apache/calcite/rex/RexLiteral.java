@@ -3555,6 +3555,8 @@ return|return
 name|typeName
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getType
@@ -4642,6 +4644,8 @@ operator|.
 name|value
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isAlwaysTrue
@@ -4667,6 +4671,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isAlwaysFalse
@@ -4693,6 +4699,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -4748,6 +4756,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -5024,6 +5034,8 @@ name|o2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -5047,6 +5059,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R

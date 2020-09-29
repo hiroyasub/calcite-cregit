@@ -310,6 +310,8 @@ argument_list|)
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|clone
@@ -369,6 +371,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Returns the number of elements in this permutation.    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|int
@@ -381,6 +385,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -395,6 +401,8 @@ argument_list|)
 throw|;
 block|}
 comment|/**    * Returns a string representation of this permutation.    *    *<p>For example, the mapping    *    *<table>    *<caption>Example mapping</caption>    *<tr>    *<th>source</th>    *<th>target</th>    *</tr>    *<tr>    *<td>0</td>    *<td>2</td>    *</tr>    *<tr>    *<td>1</td>    *<td>0</td>    *</tr>    *<tr>    *<td>2</td>    *<td>1</td>    *</tr>    *<tr>    *<td>3</td>    *<td>3</td>    *</tr>    *</table>    *    *<p>is represented by the string "[2, 0, 1, 3]".    */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -472,6 +480,8 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Maps source position to target position.    *    *<p>To preserve the 1:1 nature of the permutation, the previous target of    * source becomes the new target of the previous source.    *    *<p>For example, given the permutation    *    *<blockquote><pre>[3, 2, 0, 1]</pre></blockquote>    *    *<p>suppose we map position 2 to target 1. Position 2 currently has target    * 0, and the source of position 1 is position 3. We preserve the permutation    * property by mapping the previous source 3 to the previous target 0. The new    * permutation is    *    *<blockquote><pre>[3, 2, 1, 0].</pre></blockquote>    *    *<p>Another example. Again starting from    *    *<blockquote><pre>[3, 2, 0, 1]</pre></blockquote>    *    *<p>suppose we map position 2 to target 3. We map the previous source 0 to    * the previous target 0, which gives    *    *<blockquote><pre>[0, 2, 3, 1].</pre></blockquote>    *    * @param source Source position    * @param target Target position    * @throws ArrayIndexOutOfBoundsException if source or target is negative or    *                                        greater than or equal to the size of    *                                        the permuation    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -986,6 +996,8 @@ name|source
 expr_stmt|;
 block|}
 comment|/**    * Returns the inverse permutation.    */
+annotation|@
+name|Override
 specifier|public
 name|Permutation
 name|inverse
@@ -1008,6 +1020,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns whether this is the identity permutation.    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isIdentity
@@ -1050,6 +1064,8 @@ literal|true
 return|;
 block|}
 comment|/**    * Returns the position that<code>source</code> is mapped to.    */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTarget
@@ -1066,6 +1082,8 @@ index|]
 return|;
 block|}
 comment|/**    * Returns the position which maps to<code>target</code>.    */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSource
@@ -1261,6 +1279,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -1275,6 +1295,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -1304,6 +1326,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement Mapping
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -1326,6 +1350,8 @@ name|i
 init|=
 literal|0
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1339,6 +1365,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -1366,6 +1394,8 @@ return|return
 name|pair
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -1380,6 +1410,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceCount
@@ -1391,6 +1423,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetCount
@@ -1402,6 +1436,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -1413,6 +1449,8 @@ operator|.
 name|BIJECTION
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getTargetOpt
@@ -1428,6 +1466,8 @@ name|source
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getSourceOpt

@@ -99,6 +99,8 @@ name|DEFAULT_URL
 init|=
 literal|"http://localhost:8082"
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|create

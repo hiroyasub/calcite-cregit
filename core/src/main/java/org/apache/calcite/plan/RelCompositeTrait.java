@@ -327,6 +327,8 @@ name|compositeTrait
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitDef
 name|getTraitDef
@@ -404,6 +406,8 @@ name|traits
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|satisfies
@@ -439,6 +443,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|register

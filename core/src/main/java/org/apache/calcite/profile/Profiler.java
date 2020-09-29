@@ -453,6 +453,8 @@ operator|=
 name|rowCount
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|toMap
@@ -533,6 +535,8 @@ name|columns
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|toMap
@@ -632,6 +636,8 @@ operator|=
 name|dependentColumn
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|toMap
@@ -893,6 +899,8 @@ operator|=
 name|minimal
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|toMap

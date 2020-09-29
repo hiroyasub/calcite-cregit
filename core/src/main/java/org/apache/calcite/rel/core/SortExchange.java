@@ -356,6 +356,8 @@ return|return
 name|collation
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms

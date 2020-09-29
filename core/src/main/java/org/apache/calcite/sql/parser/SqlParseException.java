@@ -310,6 +310,8 @@ name|expectedTokenSequences
 return|;
 block|}
 comment|// override Exception
+annotation|@
+name|Override
 specifier|public
 name|Throwable
 name|getCause

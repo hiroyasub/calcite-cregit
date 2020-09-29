@@ -182,6 +182,8 @@ block|}
 comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #addEdge(Object, Object, Object...)}. */
 annotation|@
+name|Override
+annotation|@
 name|Deprecated
 specifier|public
 name|E
@@ -416,6 +418,8 @@ argument_list|)
 return|;
 block|}
 comment|/** Removes all edges from a given vertex to another.    * Returns whether any were removed. */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|removeEdge

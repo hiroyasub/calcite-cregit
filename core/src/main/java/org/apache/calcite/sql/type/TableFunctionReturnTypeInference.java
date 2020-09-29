@@ -246,6 +246,8 @@ return|return
 name|columnMappings
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType

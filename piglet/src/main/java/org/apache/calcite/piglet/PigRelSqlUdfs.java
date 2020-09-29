@@ -1044,6 +1044,8 @@ operator|new
 name|SqlOperandMetadata
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -1196,6 +1198,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -1210,6 +1214,8 @@ literal|2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -1227,6 +1233,8 @@ operator|+
 literal|"(...)"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -1239,6 +1247,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency

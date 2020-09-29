@@ -287,6 +287,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelTraitDef
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<
@@ -301,6 +303,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSimpleName
@@ -310,6 +314,8 @@ return|return
 literal|"convention"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getDefault
@@ -321,6 +327,8 @@ operator|.
 name|NONE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerConverterRule
@@ -421,6 +429,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|deregisterConverterRule
@@ -511,6 +521,8 @@ expr_stmt|;
 block|}
 block|}
 comment|// implement RelTraitDef
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert
@@ -825,6 +837,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|canConvert

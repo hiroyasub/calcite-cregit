@@ -183,6 +183,8 @@ name|precision
 return|;
 block|}
 comment|/**    * Returns e.g.<code>DATE '1969-07-21'</code>.    */
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|String
@@ -196,6 +198,8 @@ name|String
 name|toFormattedString
 parameter_list|()
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -217,6 +221,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

@@ -253,6 +253,8 @@ name|optional
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -270,6 +272,8 @@ name|i
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType
@@ -486,6 +490,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -799,6 +805,8 @@ name|iFormalOperand
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -849,6 +857,8 @@ name|max
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -873,6 +883,8 @@ name|families
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency

@@ -274,6 +274,8 @@ name|SimpleProfiler
 implements|implements
 name|Profiler
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Profile
 name|profile
@@ -1679,6 +1681,8 @@ name|columnOrdinals
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo

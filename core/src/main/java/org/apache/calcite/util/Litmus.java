@@ -44,6 +44,8 @@ operator|new
 name|Litmus
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|fail
@@ -86,6 +88,8 @@ name|s
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|succeed
@@ -95,6 +99,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|check
@@ -142,6 +148,8 @@ operator|new
 name|Litmus
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|fail
@@ -158,6 +166,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|succeed
@@ -167,6 +177,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|check

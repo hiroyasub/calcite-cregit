@@ -443,6 +443,8 @@ name|SubSchemaCache
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SubSchemaCache
 name|build
@@ -480,6 +482,8 @@ name|NameSet
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|NameSet
 name|build
@@ -514,6 +518,8 @@ name|NameSet
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|NameSet
 name|build
@@ -548,6 +554,8 @@ name|NameSet
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|NameSet
 name|build
@@ -572,6 +580,8 @@ block|}
 block|}
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setCache
@@ -634,6 +644,8 @@ operator|=
 name|cache
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|isCacheEnabled
@@ -645,6 +657,8 @@ operator|.
 name|cache
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|CalciteSchema
 name|getImplicitSubSchema
@@ -710,6 +724,8 @@ literal|null
 return|;
 block|}
 comment|/** Adds a child schema of this schema. */
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|add
@@ -748,6 +764,8 @@ return|return
 name|calciteSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|TableEntry
 name|getImplicitTable
@@ -826,6 +844,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|TypeEntry
 name|getImplicitType
@@ -904,6 +924,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitSubSchemaToBuilder
@@ -996,6 +1018,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitTableToBuilder
@@ -1041,6 +1065,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitFunctionsToBuilder
@@ -1127,6 +1153,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitFuncNamesToBuilder
@@ -1172,6 +1200,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitTypeNamesToBuilder
@@ -1217,6 +1247,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitTablesBasedOnNullaryFunctionsToBuilder
@@ -1349,6 +1381,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|TableEntry
 name|getImplicitTableBasedOnNullaryFunction
@@ -1457,6 +1491,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|CalciteSchema
 name|snapshot
@@ -1706,6 +1742,8 @@ name|built
 init|=
 literal|false
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -1749,6 +1787,8 @@ return|return
 name|t
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|enable

@@ -216,6 +216,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -269,6 +271,8 @@ name|recomputeDigest
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|deriveRowType

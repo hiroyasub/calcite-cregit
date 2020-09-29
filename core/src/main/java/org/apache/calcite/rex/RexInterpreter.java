@@ -501,6 +501,8 @@ name|e
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitInputRef
@@ -516,6 +518,8 @@ name|inputRef
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitLocalRef
@@ -531,6 +535,8 @@ name|localRef
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitLiteral
@@ -553,6 +559,8 @@ name|N
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitOver
@@ -568,6 +576,8 @@ name|over
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitCorrelVariable
@@ -583,6 +593,8 @@ name|correlVariable
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitDynamicParam
@@ -598,6 +610,8 @@ name|dynamicParam
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitRangeRef
@@ -613,6 +627,8 @@ name|rangeRef
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitFieldAccess
@@ -628,6 +644,8 @@ name|fieldAccess
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitSubQuery
@@ -643,6 +661,8 @@ name|subQuery
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitTableInputRef
@@ -658,6 +678,8 @@ name|fieldRef
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitPatternFieldRef
@@ -673,6 +695,8 @@ name|fieldRef
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Comparable
 name|visitCall

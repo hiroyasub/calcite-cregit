@@ -152,6 +152,8 @@ operator|=
 name|fields
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|current
@@ -174,6 +176,8 @@ return|return
 name|current
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -260,6 +264,8 @@ throw|;
 block|}
 block|}
 comment|// required by linq4j Enumerator interface
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -272,6 +278,8 @@ argument_list|()
 throw|;
 block|}
 comment|// required by linq4j Enumerator interface
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

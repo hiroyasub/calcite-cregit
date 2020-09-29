@@ -549,6 +549,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCall
 name|createCall
@@ -662,6 +664,8 @@ return|return
 name|lookupCall
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -682,6 +686,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveType
@@ -749,6 +755,8 @@ name|call
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -902,6 +910,8 @@ name|newCall
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -1095,6 +1105,8 @@ operator|=
 name|operator
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -1104,6 +1116,8 @@ return|return
 name|operator
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCall
 name|createCall
@@ -1127,6 +1141,8 @@ name|operands
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|isValidArgCount

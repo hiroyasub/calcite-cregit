@@ -327,6 +327,8 @@ operator|new
 name|SqlTypeTransform
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|transformType

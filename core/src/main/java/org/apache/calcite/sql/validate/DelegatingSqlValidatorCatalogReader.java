@@ -89,6 +89,8 @@ operator|=
 name|catalogReader
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorTable
 name|getTable
@@ -109,6 +111,8 @@ name|names
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getNamedType
@@ -126,6 +130,8 @@ name|typeName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -149,6 +155,8 @@ name|names
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

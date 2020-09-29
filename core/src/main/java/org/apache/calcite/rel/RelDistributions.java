@@ -682,6 +682,8 @@ return|;
 block|}
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Type
@@ -692,6 +694,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -706,6 +710,8 @@ return|return
 name|keys
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistributionTraitDef
 name|getTraitDef
@@ -717,6 +723,8 @@ operator|.
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistribution
 name|apply
@@ -801,6 +809,8 @@ name|mappedKeys
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|satisfies
@@ -924,6 +934,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|register

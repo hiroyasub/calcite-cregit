@@ -597,6 +597,8 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -621,6 +623,8 @@ operator|.
 name|WINDOW
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3355,6 +3359,8 @@ operator|=
 name|sql
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3407,6 +3413,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -3418,6 +3426,8 @@ operator|.
 name|SPECIAL
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCall
 name|createCall
@@ -3510,6 +3520,8 @@ name|pos
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -3630,6 +3642,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

@@ -185,6 +185,8 @@ name|select
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -194,6 +196,8 @@ return|return
 name|orderList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAllColumnNames
@@ -224,6 +228,8 @@ name|result
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlQualified
 name|fullyQualify
@@ -454,6 +460,8 @@ return|return
 name|n
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|resolveColumn
@@ -545,6 +553,8 @@ name|ctx
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr

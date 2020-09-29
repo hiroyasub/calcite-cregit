@@ -147,6 +147,8 @@ name|keyType
 return|;
 block|}
 comment|// implement RelDataTypeImpl
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString
@@ -207,6 +209,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFamily
 name|getFamily

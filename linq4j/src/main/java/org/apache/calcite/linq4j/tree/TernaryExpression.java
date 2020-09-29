@@ -200,6 +200,8 @@ name|expression2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -223,6 +225,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 name|void
 name|accept
 parameter_list|(

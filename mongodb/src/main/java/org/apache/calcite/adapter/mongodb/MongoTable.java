@@ -415,6 +415,8 @@ operator|=
 name|collectionName
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -428,6 +430,8 @@ operator|+
 literal|"}"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -487,6 +491,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -522,6 +528,8 @@ name|tableName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel
@@ -667,6 +675,8 @@ name|Object
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -806,6 +816,8 @@ name|Object
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -924,6 +936,8 @@ name|tableName
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

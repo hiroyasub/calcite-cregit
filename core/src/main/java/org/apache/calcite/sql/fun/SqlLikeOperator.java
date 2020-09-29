@@ -316,6 +316,8 @@ return|return
 name|negated
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -332,6 +334,8 @@ literal|3
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -436,6 +440,8 @@ name|throwOnFailure
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -556,6 +562,8 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ReduceResult
 name|reduceExpr

@@ -104,6 +104,8 @@ name|includeFilter
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -150,6 +152,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|next
@@ -215,6 +219,8 @@ name|NoSuchElementException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

@@ -223,6 +223,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -235,6 +237,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|V
 index|[]
@@ -284,6 +288,8 @@ return|return
 name|vs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

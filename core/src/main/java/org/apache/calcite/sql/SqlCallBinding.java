@@ -1227,6 +1227,8 @@ name|operandList
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getOperandMonotonicity
@@ -2233,6 +2235,8 @@ name|paramName
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteException
 name|newError

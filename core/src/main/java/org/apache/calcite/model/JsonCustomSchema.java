@@ -51,6 +51,8 @@ name|Object
 argument_list|>
 name|operand
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|void
 name|accept

@@ -187,6 +187,8 @@ operator|=
 name|protoRowType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType

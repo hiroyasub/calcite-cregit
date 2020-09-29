@@ -725,6 +725,8 @@ operator|new
 name|RelInput
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelOptCluster
 name|getCluster
@@ -734,6 +736,8 @@ return|return
 name|cluster
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitSet
 name|getTraitSet
@@ -750,6 +754,8 @@ name|NONE
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptTable
 name|getTable
@@ -779,6 +785,8 @@ name|list
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|getInput
@@ -811,6 +819,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -882,6 +892,8 @@ return|return
 name|inputs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|getExpression
@@ -906,6 +918,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ImmutableBitSet
 name|getBitSet
@@ -926,6 +940,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1007,6 +1023,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1034,6 +1052,8 @@ name|tag
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1061,6 +1081,8 @@ name|tag
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1094,6 +1116,8 @@ name|tag
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1174,6 +1198,8 @@ return|return
 name|inputs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -1191,6 +1217,8 @@ name|tag
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getString
@@ -1211,6 +1239,8 @@ name|tag
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|getFloat
@@ -1236,6 +1266,8 @@ name|floatValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|getBoolean
@@ -1271,6 +1303,8 @@ else|:
 name|default_
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|E
@@ -1314,6 +1348,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1397,6 +1433,8 @@ return|return
 name|nodes
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1430,6 +1468,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1557,6 +1597,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelCollation
 name|getCollation
@@ -1578,6 +1620,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistribution
 name|getDistribution
@@ -1603,6 +1647,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ImmutableList
 argument_list|<

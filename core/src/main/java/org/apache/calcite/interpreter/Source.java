@@ -31,6 +31,8 @@ name|Row
 name|receive
 parameter_list|()
 function_decl|;
+annotation|@
+name|Override
 name|void
 name|close
 parameter_list|()

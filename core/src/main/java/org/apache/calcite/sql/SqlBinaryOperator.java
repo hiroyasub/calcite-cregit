@@ -292,6 +292,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -303,6 +305,8 @@ operator|.
 name|BINARY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -342,6 +346,8 @@ literal|"."
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|adjustType
@@ -577,6 +583,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveType

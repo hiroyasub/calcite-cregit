@@ -1011,6 +1011,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14214,6 +14216,8 @@ name|Comparable
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14837,6 +14841,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -15652,6 +15658,8 @@ return|return
 name|hasNext
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|FlatLists
 operator|.

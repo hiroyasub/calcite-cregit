@@ -62,6 +62,8 @@ name|enumerator
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|Getter
 name|createGetter

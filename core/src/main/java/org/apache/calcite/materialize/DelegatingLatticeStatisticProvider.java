@@ -56,6 +56,8 @@ operator|=
 name|provider
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|cardinality

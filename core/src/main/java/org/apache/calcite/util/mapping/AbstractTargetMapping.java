@@ -98,6 +98,8 @@ return|return
 name|targetCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Mapping
 name|inverse
@@ -112,6 +114,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -121,6 +125,8 @@ return|return
 name|sourceCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -132,6 +138,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MappingType
 name|getMappingType
@@ -143,6 +151,8 @@ operator|.
 name|PARTIAL_FUNCTION
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -204,6 +214,8 @@ break|break;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -215,6 +227,8 @@ operator|<
 name|sourceCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IntPair
 name|next
@@ -238,6 +252,8 @@ return|return
 name|p
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -254,6 +270,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|int

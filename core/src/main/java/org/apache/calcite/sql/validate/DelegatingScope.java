@@ -425,6 +425,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|resolve
@@ -960,6 +962,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAllColumnNames
@@ -979,6 +983,8 @@ name|result
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAliases
@@ -1003,6 +1009,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1031,6 +1039,8 @@ name|ctx
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Map
 argument_list|<
@@ -1063,6 +1073,8 @@ name|nameMatcher
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|resolveColumn
@@ -1085,6 +1097,8 @@ name|ctx
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|nullifyType
@@ -1107,6 +1121,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1132,6 +1148,8 @@ name|names
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|resolveTable
@@ -1166,6 +1184,8 @@ name|resolved
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getOperandScope
@@ -1197,6 +1217,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -1207,6 +1229,8 @@ name|validator
 return|;
 block|}
 comment|/**    * Converts an identifier into a fully-qualified identifier. For example,    * the "empno" in "select empno from emp natural join dept" becomes    * "emp.empno".    *    *<p>If the identifier cannot be resolved, throws. Never returns null.    */
+annotation|@
+name|Override
 specifier|public
 name|SqlQualified
 name|fullyQualify
@@ -2638,6 +2662,8 @@ name|Resolve
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare
@@ -3096,6 +3122,8 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr
@@ -3107,6 +3135,8 @@ block|{
 comment|// Do not delegate to parent. An expression valid in this scope may not
 comment|// be valid in the parent scope.
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWindow
 name|lookupWindow
@@ -3124,6 +3154,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -3141,6 +3173,8 @@ name|expr
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNodeList
 name|getOrderList

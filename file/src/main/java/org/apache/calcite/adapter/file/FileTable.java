@@ -526,6 +526,8 @@ name|fieldConfigs
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -535,6 +537,8 @@ return|return
 literal|"FileTable"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -546,6 +550,8 @@ operator|.
 name|UNKNOWN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -584,6 +590,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -620,6 +628,8 @@ argument_list|,
 name|tableName
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -695,6 +705,8 @@ name|Object
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -738,6 +750,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel

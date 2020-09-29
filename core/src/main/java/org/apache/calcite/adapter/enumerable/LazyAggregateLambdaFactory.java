@@ -186,6 +186,8 @@ operator|=
 name|accumulators
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Function0
 argument_list|<
@@ -203,6 +205,8 @@ operator|::
 operator|new
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Function2
 argument_list|<
@@ -242,6 +246,8 @@ return|;
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Function1
 argument_list|<
@@ -310,6 +316,8 @@ return|;
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Function2
 argument_list|<

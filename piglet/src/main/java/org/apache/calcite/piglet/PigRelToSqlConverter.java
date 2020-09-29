@@ -553,6 +553,8 @@ return|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
 comment|/** @see #dispatch */
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|visit

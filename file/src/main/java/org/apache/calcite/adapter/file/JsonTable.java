@@ -176,6 +176,8 @@ operator|=
 name|source
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -253,6 +255,8 @@ return|return
 name|dataList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic

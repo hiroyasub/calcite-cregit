@@ -295,6 +295,8 @@ name|minor
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteJdbc41Connection
 name|newConnection
@@ -339,6 +341,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteJdbc41DatabaseMetaData
 name|newDatabaseMetaData
@@ -358,6 +362,8 @@ name|connection
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteJdbc41Statement
 name|newStatement
@@ -399,6 +405,8 @@ name|resultSetHoldability
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AvaticaPreparedStatement
 name|newPreparedStatement
@@ -454,6 +462,8 @@ name|resultSetHoldability
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteResultSet
 name|newResultSet
@@ -520,6 +530,8 @@ name|firstFrame
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ResultSetMetaData
 name|newResultSetMetaData
@@ -685,6 +697,8 @@ name|resultSetHoldability
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setRowId
@@ -709,6 +723,8 @@ name|x
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNString
@@ -733,6 +749,8 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNCharacterStream
@@ -762,6 +780,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNClob
@@ -786,6 +806,8 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setClob
@@ -815,6 +837,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setBlob
@@ -844,6 +868,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNClob
@@ -873,6 +899,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setSQLXML
@@ -897,6 +925,8 @@ name|xmlObject
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setAsciiStream
@@ -926,6 +956,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setBinaryStream
@@ -955,6 +987,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setCharacterStream
@@ -984,6 +1018,8 @@ name|length
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setAsciiStream
@@ -1008,6 +1044,8 @@ name|x
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setBinaryStream
@@ -1032,6 +1070,8 @@ name|x
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setCharacterStream
@@ -1056,6 +1096,8 @@ name|reader
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNCharacterStream
@@ -1080,6 +1122,8 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setClob
@@ -1104,6 +1148,8 @@ name|reader
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setBlob
@@ -1128,6 +1174,8 @@ name|inputStream
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNClob

@@ -549,6 +549,8 @@ name|itemAliases
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|deriveRowType

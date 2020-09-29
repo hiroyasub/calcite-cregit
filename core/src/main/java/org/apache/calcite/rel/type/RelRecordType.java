@@ -240,6 +240,8 @@ return|return
 name|kind
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString

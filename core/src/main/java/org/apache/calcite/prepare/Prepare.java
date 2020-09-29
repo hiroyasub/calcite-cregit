@@ -2120,6 +2120,8 @@ name|SqlValidatorCatalogReader
 extends|,
 name|SqlOperatorTable
 block|{
+annotation|@
+name|Override
 name|PreparingTable
 name|getTableForMember
 parameter_list|(
@@ -2188,6 +2190,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|columnHasDefaultValue
@@ -2312,6 +2316,8 @@ name|isNullable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelOptTable
@@ -2478,6 +2484,8 @@ name|Table
 name|extendedTable
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2582,6 +2590,8 @@ operator|=
 name|detailLevel
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getCode
@@ -2623,6 +2633,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getParameterRowType
@@ -2632,6 +2644,8 @@ return|return
 name|parameterRowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDml
@@ -2641,6 +2655,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|LogicalTableModify
 operator|.
@@ -2652,6 +2668,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2890,6 +2908,8 @@ operator|=
 name|isDml
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDml
@@ -2899,6 +2919,8 @@ return|return
 name|isDml
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|LogicalTableModify
 operator|.
@@ -2910,6 +2932,8 @@ return|return
 name|tableModOp
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2925,6 +2949,8 @@ return|return
 name|fieldOrigins
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getParameterRowType
@@ -2944,6 +2970,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|Type

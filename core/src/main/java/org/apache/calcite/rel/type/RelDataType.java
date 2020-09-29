@@ -238,6 +238,8 @@ name|getSqlIdentifier
 parameter_list|()
 function_decl|;
 comment|/**    * Gets a string representation of this type without detail such as    * character set and nullability.    *    * @return abbreviated type string    */
+annotation|@
+name|Override
 name|String
 name|toString
 parameter_list|()

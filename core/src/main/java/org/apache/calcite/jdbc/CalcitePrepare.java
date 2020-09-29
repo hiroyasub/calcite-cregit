@@ -1061,6 +1061,8 @@ name|TrivialSparkHandler
 implements|implements
 name|SparkHandler
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|flattenTypes
@@ -1079,6 +1081,8 @@ return|return
 name|rootRel
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerRules
@@ -1088,6 +1092,8 @@ name|builder
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|enabled
@@ -1097,6 +1103,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ArrayBindable
 name|compile
@@ -1114,6 +1122,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|sparkContext

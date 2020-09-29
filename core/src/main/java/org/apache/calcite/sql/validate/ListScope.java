@@ -507,6 +507,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAllColumnNames
@@ -544,6 +546,8 @@ name|result
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAliases
@@ -1048,6 +1052,8 @@ name|resolved
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|resolveColumn

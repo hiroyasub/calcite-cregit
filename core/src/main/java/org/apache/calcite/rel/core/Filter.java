@@ -473,6 +473,8 @@ name|RexNode
 name|condition
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|accept
@@ -791,6 +793,8 @@ name|mq
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms

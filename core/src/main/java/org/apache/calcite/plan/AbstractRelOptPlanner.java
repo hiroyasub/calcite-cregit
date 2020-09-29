@@ -549,12 +549,16 @@ expr_stmt|;
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|getContext
@@ -564,6 +568,8 @@ return|return
 name|context
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCostFactory
 name|getCostFactory
@@ -578,6 +584,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setCancelFlag
@@ -613,6 +621,8 @@ argument_list|()
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -633,6 +643,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addRule
@@ -715,6 +727,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|removeRule
@@ -765,6 +779,8 @@ name|description
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setRuleDescExclusionFilter
@@ -806,6 +822,8 @@ name|matches
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptPlanner
 name|chooseDelegate
@@ -815,6 +833,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addMaterialization
@@ -825,6 +845,8 @@ parameter_list|)
 block|{
 comment|// ignore - this planner does not support materializations
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -840,6 +862,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addLattice
@@ -850,6 +874,8 @@ parameter_list|)
 block|{
 comment|// ignore - this planner does not support lattices
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptLattice
 name|getLattice
@@ -863,6 +889,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerSchema
@@ -872,6 +900,8 @@ name|schema
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|getRelMetadataTimestamp
@@ -895,6 +925,8 @@ name|rel
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerClass
@@ -975,6 +1007,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitSet
 name|emptyTraitSet
@@ -987,6 +1021,8 @@ name|createEmpty
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|getCost
@@ -1007,6 +1043,8 @@ name|rel
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1041,6 +1079,8 @@ name|mq
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addListener
@@ -1071,6 +1111,8 @@ name|newListener
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerMetadataProviders
@@ -1083,6 +1125,8 @@ name|list
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addRelTraitDef
@@ -1095,12 +1139,16 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clearRelTraitDefs
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1116,6 +1164,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setExecutor
@@ -1131,6 +1181,8 @@ operator|=
 name|executor
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexExecutor
 name|getExecutor
@@ -1140,6 +1192,8 @@ return|return
 name|executor
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|onCopy

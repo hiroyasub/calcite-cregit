@@ -410,6 +410,8 @@ name|rowType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|EnumerableProject
 name|copy
@@ -447,6 +449,8 @@ name|rowType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement

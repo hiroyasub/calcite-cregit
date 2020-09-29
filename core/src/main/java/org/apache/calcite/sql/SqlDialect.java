@@ -5618,6 +5618,8 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|DatabaseProduct
@@ -5628,6 +5630,8 @@ return|return
 name|databaseProduct
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withDatabaseProduct
@@ -5674,6 +5678,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|databaseProductName
@@ -5683,6 +5689,8 @@ return|return
 name|databaseProductName
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withDatabaseProductName
@@ -5727,6 +5735,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|databaseVersion
@@ -5736,6 +5746,8 @@ return|return
 name|databaseVersion
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withDatabaseVersion
@@ -5780,6 +5792,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|databaseMajorVersion
@@ -5789,6 +5803,8 @@ return|return
 name|databaseMajorVersion
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withDatabaseMajorVersion
@@ -5833,6 +5849,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|databaseMinorVersion
@@ -5842,6 +5860,8 @@ return|return
 name|databaseMinorVersion
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withDatabaseMinorVersion
@@ -5886,6 +5906,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|literalQuoteString
@@ -5895,6 +5917,8 @@ return|return
 name|literalQuoteString
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withLiteralQuoteString
@@ -5939,6 +5963,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|literalEscapedQuoteString
@@ -5948,6 +5974,8 @@ return|return
 name|literalEscapedQuoteString
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withLiteralEscapedQuoteString
@@ -5992,6 +6020,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|identifierQuoteString
@@ -6001,6 +6031,8 @@ return|return
 name|identifierQuoteString
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -6048,6 +6080,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Casing
@@ -6058,6 +6092,8 @@ return|return
 name|unquotedCasing
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -6105,6 +6141,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Casing
@@ -6115,6 +6153,8 @@ return|return
 name|quotedCasing
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -6161,6 +6201,8 @@ name|jethroInfo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|caseSensitive
@@ -6170,6 +6212,8 @@ return|return
 name|caseSensitive
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -6217,6 +6261,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|SqlConformance
@@ -6227,6 +6273,8 @@ return|return
 name|conformance
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -6274,6 +6322,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|NullCollation
@@ -6284,6 +6334,8 @@ return|return
 name|nullCollation
 return|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public
@@ -6333,6 +6385,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|RelDataTypeSystem
@@ -6343,6 +6397,8 @@ return|return
 name|dataTypeSystem
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withDataTypeSystem
@@ -6390,6 +6446,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|JethroDataSqlDialect
@@ -6402,6 +6460,8 @@ return|return
 name|jethroInfo
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|withJethroInfo

@@ -467,6 +467,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Widen a SqlNode's field type to common type,    * mainly used for set operations like UNION, INTERSECT and EXCEPT.    *    *<p>Rules:    *<pre>    *    *       type1, type2  type3       select a, b, c from t1    *          \      \      \    *         type4  type5  type6              UNION    *          /      /      /    *       type7  type8  type9       select d, e, f from t2    *</pre>    * For struct type (type1, type2, type3) union type (type4, type5, type6),    * infer the first result column type type7 as the wider type of type1 and type4,    * the second column type as the wider type of type2 and type5 and so on.    *    * @param scope       Validator scope    * @param query       Query node to update the field type for    * @param columnIndex Target column index    * @param targetType  Target type to cast to    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|rowTypeCoercion
@@ -739,6 +741,8 @@ return|;
 block|}
 block|}
 comment|/**    * Coerces operands in binary arithmetic expressions to NUMERIC types.    *    *<p>For binary arithmetic operators like [+, -, *, /, %]:    * If the operand is VARCHAR,    * coerce it to data type of the other operand if its data type is NUMERIC;    * If the other operand is DECIMAL,    * coerce the STRING operand to max precision/scale DECIMAL.    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|binaryArithmeticCoercion
@@ -1012,6 +1016,8 @@ literal|false
 return|;
 block|}
 comment|/**    * Coerces operands in binary comparison expressions.    *    *<p>Rules:</p>    *<ul>    *<li>For EQUALS(=) operator: 1. If operands are BOOLEAN and NUMERIC, evaluate    *   `1=true` and `0=false` all to be true; 2. If operands are datetime and string,    *   do nothing because the SqlToRelConverter already makes the type coercion;</li>    *<li>For binary comparison [=,&gt;,&gt;=,&lt;,&lt;=]: try to find the    *   common type, i.e. "1&gt; '1'" will be converted to "1&gt; 1";</li>    *<li>For BETWEEN operator, find the common comparison data type of all the operands,    *   the common type is deduced from left to right, i.e. for expression "A between B and C",    *   finds common comparison type D between A and B    *   then common comparison type E between D and C as the final common type.</li>    *</ul>    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|binaryComparisonCoercion
@@ -1904,6 +1910,8 @@ literal|false
 return|;
 block|}
 comment|/**    * CASE and COALESCE type coercion, collect all the branches types including then    * operands and else operands to find a common type, then cast the operands to the common type    * when needed.    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|caseWhenCoercion
@@ -2110,6 +2118,8 @@ literal|false
 return|;
 block|}
 comment|/**    * {@inheritDoc}    *    *<p>STRATEGIES    *    *<p>With(Without) sub-query:    *    *<ul>    *    *<li>With sub-query: find the common type through comparing the left hand    * side (LHS) expression types with corresponding right hand side (RHS)    * expression derived from the sub-query expression's row type. Wrap the    * fields of the LHS and RHS in CAST operators if it is needed.    *    *<li>Without sub-query: convert the nodes of the RHS to the common type by    * checking all the argument types and find out the minimum common type that    * all the arguments can be cast to.    *    *</ul>    *    *<p>How to find the common type:    *    *<ul>    *    *<li>For both struct sql types (LHS and RHS), find the common type of every    * LHS and RHS fields pair:    *    *<pre>    * (field1, field2, field3)    (field4, field5, field6)    *    |        |       |          |       |       |    *    +--------+---type1----------+       |       |    *             |       |                  |       |    *             +-------+----type2---------+       |    *                     |                          |    *                     +-------------type3--------+    *</pre>    *<li>For both basic sql types(LHS and RHS),    *   find the common type of LHS and RHS nodes.    *</ul>    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|inOperationCoercion
@@ -2324,6 +2334,8 @@ name|RelDataType
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|get
@@ -2363,6 +2375,8 @@ name|index
 index|]
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2744,6 +2758,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|builtinFunctionCoercion
@@ -2873,6 +2889,8 @@ name|coerced
 return|;
 block|}
 comment|/**    * Type coercion for user-defined functions (UDFs).    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|userDefinedFunctionCoercion
@@ -3085,6 +3103,8 @@ return|return
 name|coerced
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|querySourceCoercion

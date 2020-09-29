@@ -190,6 +190,8 @@ return|return
 literal|103
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|M
@@ -452,6 +454,8 @@ return|;
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|M

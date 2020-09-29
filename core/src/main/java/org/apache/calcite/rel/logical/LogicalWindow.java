@@ -1316,6 +1316,8 @@ operator|new
 name|RexShuttle
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitOver
@@ -1444,6 +1446,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -1638,6 +1642,8 @@ name|RexNode
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1650,6 +1656,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|get

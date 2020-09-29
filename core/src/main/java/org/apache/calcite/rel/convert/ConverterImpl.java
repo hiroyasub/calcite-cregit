@@ -272,6 +272,8 @@ literal|" traits"
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitSet
 name|getInputTraits
@@ -281,6 +283,8 @@ return|return
 name|inTraits
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitDef
 name|getTraitDef

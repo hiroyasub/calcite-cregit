@@ -282,6 +282,8 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|LogicalUnion
 name|copy

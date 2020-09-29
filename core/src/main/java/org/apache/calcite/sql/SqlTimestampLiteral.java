@@ -157,6 +157,8 @@ name|pos
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -172,6 +174,8 @@ literal|"'"
 return|;
 block|}
 comment|/**    * Returns e.g. '03:05:67.456'.    */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toFormattedString
@@ -209,6 +213,8 @@ name|precision
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

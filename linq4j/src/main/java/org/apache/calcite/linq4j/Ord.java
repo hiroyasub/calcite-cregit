@@ -254,6 +254,8 @@ name|n
 init|=
 literal|0
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -266,6 +268,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Ord
 argument_list|<
@@ -289,6 +293,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -471,6 +477,8 @@ argument_list|()
 operator|-
 literal|1
 return|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -482,6 +490,8 @@ operator|>=
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Ord
 argument_list|<
@@ -507,6 +517,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -526,6 +538,8 @@ block|}
 end_class
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|getKey
@@ -538,6 +552,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|E
 name|getValue
@@ -550,6 +566,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|E
 name|setValue
@@ -729,6 +747,8 @@ operator|=
 name|elements
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Ord
 argument_list|<
@@ -756,6 +776,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

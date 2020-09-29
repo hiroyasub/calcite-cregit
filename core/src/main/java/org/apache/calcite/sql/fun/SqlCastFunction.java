@@ -601,6 +601,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -739,6 +741,8 @@ return|return
 name|ret
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -757,6 +761,8 @@ return|return
 literal|"{0}({1} AS {2})"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -772,6 +778,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Makes sure that the number and types of arguments are allowable.    * Operators (such as "ROW" and "AS") which do not check their arguments can    * override this method.    */
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -945,6 +953,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -956,6 +966,8 @@ operator|.
 name|SPECIAL
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

@@ -267,6 +267,8 @@ argument_list|(
 literal|0
 argument_list|)
 return|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -278,6 +280,8 @@ operator|>=
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|next
@@ -303,6 +307,8 @@ return|return
 name|prev
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

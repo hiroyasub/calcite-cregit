@@ -100,6 +100,8 @@ name|JdbcQueryProvider
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T

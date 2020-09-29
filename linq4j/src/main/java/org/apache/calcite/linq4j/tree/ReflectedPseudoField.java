@@ -78,6 +78,8 @@ operator|=
 name|field
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -90,6 +92,8 @@ name|getName
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getType
@@ -102,6 +106,8 @@ name|getType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getModifiers
@@ -114,6 +120,8 @@ name|getModifiers
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -133,6 +141,8 @@ name|o
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Class
 argument_list|<

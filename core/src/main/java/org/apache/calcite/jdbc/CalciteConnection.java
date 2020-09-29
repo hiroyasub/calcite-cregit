@@ -148,6 +148,8 @@ name|getProperties
 parameter_list|()
 function_decl|;
 comment|// in java.sql.Connection from JDK 1.7, but declare here to allow other JDKs
+annotation|@
+name|Override
 name|void
 name|setSchema
 parameter_list|(
@@ -158,6 +160,8 @@ throws|throws
 name|SQLException
 function_decl|;
 comment|// in java.sql.Connection from JDK 1.7, but declare here to allow other JDKs
+annotation|@
+name|Override
 name|String
 name|getSchema
 parameter_list|()

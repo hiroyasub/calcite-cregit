@@ -150,6 +150,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString

@@ -1155,6 +1155,8 @@ name|R
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|R
 name|get
@@ -1177,6 +1179,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1232,6 +1236,8 @@ name|R
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|R
 name|get
@@ -1252,6 +1258,8 @@ index|]
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1990,6 +1998,8 @@ name|Object
 index|[]
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equal
@@ -2014,6 +2024,8 @@ name|v2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -2044,6 +2056,8 @@ argument_list|<
 name|Object
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equal
@@ -2066,6 +2080,8 @@ name|v2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -2133,6 +2149,8 @@ operator|=
 name|selector
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equal
@@ -2177,6 +2195,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -2217,6 +2237,8 @@ argument_list|>
 implements|,
 name|Serializable
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare
@@ -2286,6 +2308,8 @@ argument_list|>
 implements|,
 name|Serializable
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare
@@ -2355,6 +2379,8 @@ argument_list|>
 implements|,
 name|Serializable
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare
@@ -2425,6 +2451,8 @@ argument_list|>
 implements|,
 name|Serializable
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare
@@ -2517,6 +2545,8 @@ argument_list|,
 name|R
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|R
 name|apply
@@ -2526,6 +2556,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|apply
@@ -2538,6 +2570,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|apply
@@ -2617,6 +2651,8 @@ operator|=
 name|fn
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2626,6 +2662,8 @@ return|return
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|get

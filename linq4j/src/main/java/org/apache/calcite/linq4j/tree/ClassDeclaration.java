@@ -173,6 +173,8 @@ operator|=
 name|implemented
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|accept
@@ -294,6 +296,8 @@ name|newlineAndIndent
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ClassDeclaration
 name|accept
@@ -338,6 +342,8 @@ name|members1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R

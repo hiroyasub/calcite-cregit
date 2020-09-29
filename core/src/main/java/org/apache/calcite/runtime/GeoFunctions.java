@@ -3385,6 +3385,8 @@ name|y
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -3397,6 +3399,8 @@ operator|<
 name|area
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -3408,6 +3412,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

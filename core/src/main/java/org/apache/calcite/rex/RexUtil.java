@@ -3256,6 +3256,8 @@ operator|new
 name|ConstantFinder
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitLiteral
@@ -3268,6 +3270,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitInputRef
@@ -3280,6 +3284,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitLocalRef
@@ -3292,6 +3298,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitOver
@@ -3304,6 +3312,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitSubQuery
@@ -3344,6 +3354,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitCorrelVariable
@@ -3358,6 +3370,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitDynamicParam
@@ -3372,6 +3386,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitCall
@@ -3405,6 +3421,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitRangeRef
@@ -3417,6 +3435,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Boolean
 name|visitFieldAccess
@@ -3647,6 +3667,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitCall
@@ -3755,6 +3777,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef
@@ -3835,6 +3859,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitFieldAccess
@@ -4687,6 +4713,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitTableInputRef
@@ -9789,6 +9817,8 @@ name|expr
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -9804,6 +9834,8 @@ name|inputRef
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLiteral
@@ -9819,6 +9851,8 @@ name|literal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCorrelVariable
@@ -9834,6 +9868,8 @@ name|correlVariable
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -9933,6 +9969,8 @@ name|call
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitDynamicParam
@@ -9948,6 +9986,8 @@ name|dynamicParam
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitRangeRef
@@ -9963,6 +10003,8 @@ name|rangeRef
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitFieldAccess
@@ -10089,6 +10131,8 @@ operator|=
 name|inputRowType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef
@@ -10127,6 +10171,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLocalRef
@@ -10221,6 +10267,8 @@ argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitFieldAccess
@@ -10240,6 +10288,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitCall

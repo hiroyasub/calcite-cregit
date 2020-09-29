@@ -427,6 +427,8 @@ block|}
 block|}
 block|}
 comment|// implement SqlOperatorTable
+annotation|@
+name|Override
 specifier|public
 name|void
 name|lookupOperatorOverloads
@@ -775,6 +777,8 @@ name|op
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

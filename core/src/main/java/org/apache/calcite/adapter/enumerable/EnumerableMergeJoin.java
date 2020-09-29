@@ -2449,6 +2449,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement

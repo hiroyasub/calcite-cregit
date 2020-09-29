@@ -701,6 +701,8 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -720,6 +722,8 @@ name|table
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -734,6 +738,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -750,6 +756,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -764,6 +772,8 @@ return|return
 name|attributes
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|StatisticsProvider
 name|getStatisticsProvider
@@ -773,6 +783,8 @@ return|return
 name|statisticsProvider
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Dialect
 name|getDialect
@@ -784,6 +796,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|generateAggregateSql
@@ -813,6 +827,8 @@ name|TableImpl
 implements|implements
 name|Table
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getLabel
@@ -822,6 +838,8 @@ return|return
 literal|"TABLE"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getParent
@@ -889,6 +907,8 @@ name|getLabel
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getLabel
@@ -900,6 +920,8 @@ operator|.
 name|alias
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getTable
@@ -909,6 +931,8 @@ return|return
 name|table
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|estimateSpace
@@ -918,6 +942,8 @@ return|return
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getCandidateColumnName
@@ -927,6 +953,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getDatatype
@@ -939,6 +967,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -981,6 +1011,8 @@ operator|=
 name|lattice
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getFactRowCount
@@ -993,6 +1025,8 @@ name|getFactRowCount
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRowCount
@@ -1029,6 +1063,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getSpace
@@ -1047,6 +1083,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getLoadTime

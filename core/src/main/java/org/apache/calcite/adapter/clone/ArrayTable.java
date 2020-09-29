@@ -482,6 +482,8 @@ operator|=
 name|supplier
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -499,6 +501,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -589,6 +593,8 @@ name|collations
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -610,6 +616,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -638,6 +646,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -680,6 +690,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -902,6 +914,8 @@ operator|new
 name|AbstractList
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -921,6 +935,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1032,6 +1048,8 @@ operator|=
 name|ordinal
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1045,6 +1063,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -1056,6 +1076,8 @@ operator|.
 name|OBJECT_ARRAY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -1100,6 +1122,8 @@ index|]
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -1174,6 +1198,8 @@ return|return
 name|comparables
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -1198,6 +1224,8 @@ name|ordinal
 index|]
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -1226,6 +1254,8 @@ name|intValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1246,6 +1276,8 @@ operator|.
 name|length
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1321,6 +1353,8 @@ operator|=
 name|p
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1342,6 +1376,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -1353,6 +1389,8 @@ operator|.
 name|PRIMITIVE_ARRAY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -1387,6 +1425,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -1410,6 +1450,8 @@ name|sources
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -1432,6 +1474,8 @@ name|ordinal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -1454,6 +1498,8 @@ name|ordinal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1471,6 +1517,8 @@ name|dataSet
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1501,6 +1549,8 @@ name|PrimitiveDictionary
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1510,6 +1560,8 @@ return|return
 literal|"PrimitiveDictionary()"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -1521,6 +1573,8 @@ operator|.
 name|PRIMITIVE_DICTIONARY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -1542,6 +1596,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -1561,6 +1617,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -1579,6 +1637,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -1597,6 +1657,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1612,6 +1674,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1666,6 +1730,8 @@ operator|=
 name|representation
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1683,6 +1749,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -1694,6 +1762,8 @@ operator|.
 name|OBJECT_DICTIONARY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -1876,6 +1946,8 @@ name|codeValues
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -1936,6 +2008,8 @@ name|codeValues
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -1985,6 +2059,8 @@ name|code
 index|]
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -2013,6 +2089,8 @@ name|intValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2047,6 +2125,8 @@ name|left
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2093,6 +2173,8 @@ return|return
 literal|"StringDictionary()"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -2104,6 +2186,8 @@ operator|.
 name|STRING_DICTIONARY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -2125,6 +2209,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -2144,6 +2230,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -2162,6 +2250,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -2180,6 +2270,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2195,6 +2287,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2230,6 +2324,8 @@ name|ByteStringDictionary
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2239,6 +2335,8 @@ return|return
 literal|"ByteStringDictionary()"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -2250,6 +2348,8 @@ operator|.
 name|BYTE_STRING_DICTIONARY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -2271,6 +2371,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -2290,6 +2392,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -2308,6 +2412,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -2326,6 +2432,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2341,6 +2449,8 @@ argument_list|()
 throw|;
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2389,6 +2499,8 @@ operator|=
 name|ordinal
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2402,6 +2514,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -2413,6 +2527,8 @@ operator|.
 name|CONSTANT
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -2462,6 +2578,8 @@ name|size
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -2478,6 +2596,8 @@ return|return
 name|dataSet
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -2508,6 +2628,8 @@ operator|.
 name|left
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -2546,6 +2668,8 @@ name|intValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2573,6 +2697,8 @@ operator|.
 name|right
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2709,6 +2835,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RepresentationType
 name|getType
@@ -2720,6 +2848,8 @@ operator|.
 name|BIT_SLICED_PRIMITIVE_ARRAY
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|freeze
@@ -3116,6 +3246,8 @@ return|return
 name|longs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|permute
@@ -3200,6 +3332,8 @@ return|return
 name|longs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getObject
@@ -3388,6 +3522,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getInt
@@ -3711,6 +3847,8 @@ operator|<<
 name|shift
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -3747,6 +3885,8 @@ name|chunksPerWord
 return|;
 comment|// may be slightly too high
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3813,6 +3953,8 @@ name|E
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|E
 name|get
@@ -3833,6 +3975,8 @@ index|]
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -4116,6 +4260,8 @@ operator|.
 name|representation
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|current
@@ -4132,6 +4278,8 @@ name|i
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -4144,6 +4292,8 @@ operator|<
 name|rowCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -4155,6 +4305,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -4216,6 +4368,8 @@ operator|=
 name|columns
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -4286,6 +4440,8 @@ return|return
 name|objects
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -4298,6 +4454,8 @@ operator|<
 name|rowCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -4309,6 +4467,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

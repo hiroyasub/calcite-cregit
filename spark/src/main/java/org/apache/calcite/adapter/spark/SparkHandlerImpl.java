@@ -441,6 +441,8 @@ operator|.
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|flattenTypes
@@ -497,6 +499,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|registerRules
@@ -534,6 +538,8 @@ name|ENUMERABLE_VALUES_RULE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|sparkContext
@@ -543,6 +549,8 @@ return|return
 name|sparkContext
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|enabled
@@ -552,6 +560,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ArrayBindable
 name|compile

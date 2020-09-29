@@ -1322,6 +1322,8 @@ literal|null
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1451,6 +1453,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -1600,6 +1604,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRowCount
@@ -1651,6 +1657,8 @@ return|return
 literal|100d
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptSchema
 name|getRelOptSchema
@@ -1660,6 +1668,8 @@ return|return
 name|schema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel
@@ -1935,6 +1945,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1967,6 +1979,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistribution
 name|getDistribution
@@ -1998,6 +2012,8 @@ name|getDefault
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKey
@@ -2029,6 +2045,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2047,6 +2065,8 @@ name|getKeys
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2079,6 +2099,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -2088,6 +2110,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|supportsModality
@@ -2133,6 +2157,8 @@ operator|instanceof
 name|TemporalTable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -2145,6 +2171,8 @@ return|return
 name|names
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -2250,6 +2278,8 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlAccessType
 name|getAllowedAccess
@@ -2317,6 +2347,8 @@ name|ColumnStrategy
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2326,6 +2358,8 @@ return|return
 name|fieldCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ColumnStrategy
 name|get

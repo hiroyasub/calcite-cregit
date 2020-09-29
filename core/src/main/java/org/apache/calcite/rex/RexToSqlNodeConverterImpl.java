@@ -165,6 +165,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RexToSqlNodeConverter
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|convertNode
@@ -229,6 +231,8 @@ literal|null
 return|;
 block|}
 comment|// implement RexToSqlNodeConverter
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|convertCall
@@ -271,6 +275,8 @@ literal|null
 return|;
 block|}
 comment|// implement RexToSqlNodeConverter
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|convertLiteral
@@ -590,6 +596,8 @@ literal|null
 return|;
 block|}
 comment|// implement RexToSqlNodeConverter
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|convertInputRef

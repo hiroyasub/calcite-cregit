@@ -300,6 +300,8 @@ operator|new
 name|Statistic
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|getRowCount
@@ -309,6 +311,8 @@ return|return
 name|rowCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKey
@@ -344,6 +348,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -356,6 +362,8 @@ return|return
 name|keysCopy
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -368,6 +376,8 @@ return|return
 name|referentialConstraintsCopy
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

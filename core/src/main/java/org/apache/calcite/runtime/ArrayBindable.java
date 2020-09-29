@@ -33,6 +33,8 @@ extends|,
 name|Typed
 block|{
 comment|// override
+annotation|@
+name|Override
 name|Class
 argument_list|<
 name|Object

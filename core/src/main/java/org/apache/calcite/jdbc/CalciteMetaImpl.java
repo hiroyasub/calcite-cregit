@@ -1518,6 +1518,8 @@ name|EMPTY
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|MetaResultSet
 name|createResultSet
@@ -1868,6 +1870,8 @@ name|builder
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MetaResultSet
 name|getTables
@@ -2003,6 +2007,8 @@ literal|"REF_GENERATION"
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MetaResultSet
 name|getTypeInfo
@@ -2059,6 +2065,8 @@ literal|"NUM_PREC_RADIX"
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MetaResultSet
 name|getColumns
@@ -3002,6 +3010,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|MetaResultSet
 name|getSchemas
@@ -3054,6 +3064,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|MetaResultSet
 name|getCatalogs
@@ -3079,6 +3091,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|MetaResultSet
 name|getTableTypes
@@ -4324,6 +4338,8 @@ decl_stmt|;
 name|Signature
 name|signature
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|getMonitor
@@ -4333,6 +4349,8 @@ return|return
 name|statement
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|clear
@@ -4341,6 +4359,8 @@ throws|throws
 name|SQLException
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|assign
@@ -4374,6 +4394,8 @@ operator|=
 name|updateCount
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|execute
@@ -4572,6 +4594,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|syncResults
@@ -4774,6 +4798,8 @@ name|clazz
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -4850,6 +4876,8 @@ name|CalciteMetaImpl
 name|connection
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -4891,6 +4919,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -5034,6 +5064,8 @@ name|limit
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -5050,6 +5082,8 @@ operator|<
 name|limit
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|next
@@ -5065,6 +5099,8 @@ name|next
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

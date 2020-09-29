@@ -1957,6 +1957,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1969,6 +1971,8 @@ return|return
 name|tokenList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSql92ReservedWord
@@ -1986,6 +1990,8 @@ name|token
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getJdbcKeywords
@@ -1995,6 +2001,8 @@ return|return
 name|sql92ReservedWords
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKeyword
@@ -2025,6 +2033,8 @@ name|token
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isNonReservedKeyword
@@ -2042,6 +2052,8 @@ name|token
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isReservedFunctionName
@@ -2059,6 +2071,8 @@ name|token
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isContextVariableName
@@ -2076,6 +2090,8 @@ name|token
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isReservedWord

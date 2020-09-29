@@ -202,6 +202,8 @@ operator|=
 name|keyPhysType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|key
@@ -211,6 +213,8 @@ return|return
 name|key
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|keyField

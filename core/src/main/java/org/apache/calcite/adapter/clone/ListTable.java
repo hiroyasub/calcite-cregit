@@ -320,6 +320,8 @@ operator|=
 name|list
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -337,6 +339,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -359,6 +363,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -388,6 +394,8 @@ name|T
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -397,6 +405,8 @@ return|return
 name|elementType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -406,6 +416,8 @@ return|return
 name|expression
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getProvider
@@ -415,6 +427,8 @@ return|return
 name|queryProvider
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -431,6 +445,8 @@ name|iterator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

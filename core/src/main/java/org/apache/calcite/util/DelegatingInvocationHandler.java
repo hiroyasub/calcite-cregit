@@ -64,6 +64,8 @@ implements|implements
 name|InvocationHandler
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|invoke

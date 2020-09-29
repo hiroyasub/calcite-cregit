@@ -1042,6 +1042,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|current
@@ -1051,6 +1053,8 @@ return|return
 name|current
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -1234,6 +1238,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -1245,6 +1251,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -1781,6 +1789,8 @@ operator|=
 name|stream
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -2026,6 +2036,8 @@ operator|=
 name|fieldIndex
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|convertRow

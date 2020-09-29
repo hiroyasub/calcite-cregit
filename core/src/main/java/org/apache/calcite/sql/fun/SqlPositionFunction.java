@@ -210,6 +210,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -322,6 +324,8 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -356,6 +360,8 @@ argument_list|()
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes

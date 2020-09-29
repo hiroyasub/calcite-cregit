@@ -1654,6 +1654,8 @@ name|CalcitePrepareImpl
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ParseResult
 name|parse
@@ -1680,6 +1682,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ConvertResult
 name|convert
@@ -1709,6 +1713,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AnalyzeViewResult
 name|analyzeView
@@ -3309,6 +3315,8 @@ operator|.
 name|RuleSetBuilder
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addRule
@@ -3319,6 +3327,8 @@ parameter_list|)
 block|{
 comment|// TODO:
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|removeRule
@@ -3347,6 +3357,8 @@ return|return
 name|planner
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -3389,6 +3401,8 @@ literal|1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -7109,6 +7123,8 @@ argument_list|,
 name|isDml
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getCode
@@ -7120,6 +7136,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Bindable
 name|getBindable
@@ -7134,6 +7152,8 @@ return|return
 name|bindable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -7284,6 +7304,8 @@ name|detailLevel
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Bindable
 name|getBindable
@@ -7445,6 +7467,8 @@ name|builder
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -7503,6 +7527,8 @@ return|return
 name|list
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|toRex
@@ -7578,6 +7604,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|toRex
@@ -8035,6 +8063,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ScalarTranslator
 name|bind
@@ -8149,6 +8179,8 @@ operator|=
 name|values
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|parameter

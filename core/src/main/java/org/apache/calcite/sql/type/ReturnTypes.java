@@ -1127,6 +1127,8 @@ argument_list|>
 argument_list|()
 block|{
 comment|// CHECKSTYLE: IGNORE 12
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|get
@@ -1157,6 +1159,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

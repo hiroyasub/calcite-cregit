@@ -122,6 +122,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement RelDataTypeImpl
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString
@@ -171,6 +173,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getComponentType
@@ -181,6 +185,8 @@ name|elementType
 return|;
 block|}
 comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFamily
 name|getFamily
@@ -209,6 +215,8 @@ operator|new
 name|RelDataTypePrecedenceList
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|containsType
@@ -248,6 +256,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTypePrecedence

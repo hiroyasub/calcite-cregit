@@ -388,6 +388,8 @@ name|validator
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -397,6 +399,8 @@ return|return
 name|validator
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlQualified
 name|fullyQualify
@@ -420,6 +424,8 @@ name|identifier
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -431,6 +437,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|resolve
@@ -452,6 +460,8 @@ name|resolved
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -496,6 +506,8 @@ else|:
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|resolveTable
@@ -1064,6 +1076,8 @@ block|}
 return|return;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|nullifyType
@@ -1079,6 +1093,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAllColumnNames
@@ -1103,6 +1119,8 @@ name|result
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findAliases
@@ -1115,6 +1133,8 @@ name|result
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|resolveColumn
@@ -1130,6 +1150,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getOperandScope
@@ -1142,6 +1164,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr
@@ -1157,6 +1181,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1189,6 +1215,8 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Map
 argument_list|<
@@ -1215,6 +1243,8 @@ name|of
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addChild
@@ -1236,6 +1266,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWindow
 name|lookupWindow
@@ -1249,6 +1281,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -1287,6 +1321,8 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNodeList
 name|getOrderList

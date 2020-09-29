@@ -310,6 +310,8 @@ operator|=
 name|processSupplier
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -382,6 +384,8 @@ specifier|private
 name|String
 name|line
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|String
 name|current
@@ -391,6 +395,8 @@ return|return
 name|line
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -426,6 +432,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -437,6 +445,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -527,6 +537,8 @@ operator|=
 name|sep
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -608,6 +620,8 @@ specifier|private
 name|String
 name|line
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|String
 name|current
@@ -617,6 +631,8 @@ return|return
 name|line
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -701,6 +717,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -712,6 +730,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -784,6 +804,8 @@ operator|=
 name|args
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Process
 name|get

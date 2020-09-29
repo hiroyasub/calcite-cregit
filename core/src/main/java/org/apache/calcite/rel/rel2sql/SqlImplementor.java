@@ -6714,6 +6714,8 @@ name|SqlNode
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|get
@@ -6729,6 +6731,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -8423,6 +8427,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|field
@@ -8813,6 +8819,8 @@ operator|=
 name|qualified
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|field
@@ -8993,6 +9001,8 @@ operator|=
 name|rightContext
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|field

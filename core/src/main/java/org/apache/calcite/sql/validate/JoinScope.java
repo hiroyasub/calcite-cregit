@@ -114,6 +114,8 @@ name|join
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -123,6 +125,8 @@ return|return
 name|join
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addChild
@@ -186,6 +190,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWindow
 name|lookupWindow

@@ -1319,6 +1319,8 @@ operator|new
 name|CorrelationReferenceFinder
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|RexNode
 name|handle
@@ -1823,6 +1825,8 @@ operator|new
 name|CorrelationReferenceFinder
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|RexNode
 name|handle

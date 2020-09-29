@@ -243,6 +243,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement SqlOperatorBinding
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getOperandCount
@@ -256,6 +258,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement SqlOperatorBinding
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getOperandType
@@ -273,6 +277,8 @@ name|ordinal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteException
 name|newError
@@ -318,6 +324,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOperandNull

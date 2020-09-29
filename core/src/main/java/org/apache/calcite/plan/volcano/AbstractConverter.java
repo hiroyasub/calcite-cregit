@@ -260,6 +260,8 @@ argument_list|()
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -295,6 +297,8 @@ name|traitSet
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -316,6 +320,8 @@ name|makeInfiniteCost
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms

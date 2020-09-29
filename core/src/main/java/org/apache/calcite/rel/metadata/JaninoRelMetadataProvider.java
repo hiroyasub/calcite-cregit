@@ -1291,6 +1291,8 @@ name|hashCode
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|M
@@ -1326,6 +1328,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|M

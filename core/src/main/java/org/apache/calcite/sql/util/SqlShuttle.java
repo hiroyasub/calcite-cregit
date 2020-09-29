@@ -164,6 +164,8 @@ name|SqlNode
 argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -176,6 +178,8 @@ return|return
 name|literal
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -188,6 +192,8 @@ return|return
 name|id
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -200,6 +206,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -212,6 +220,8 @@ return|return
 name|param
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -224,6 +234,8 @@ return|return
 name|intervalQualifier
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -272,6 +284,8 @@ name|result
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -481,6 +495,8 @@ operator|=
 name|alwaysCopy
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|result
@@ -522,6 +538,8 @@ name|call
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visitChild

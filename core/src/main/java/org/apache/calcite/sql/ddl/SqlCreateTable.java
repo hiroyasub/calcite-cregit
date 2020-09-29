@@ -281,6 +281,8 @@ name|query
 expr_stmt|;
 comment|// for "CREATE TABLE ... AS query"; may be null
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

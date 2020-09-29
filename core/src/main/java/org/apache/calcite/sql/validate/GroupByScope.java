@@ -113,6 +113,8 @@ name|select
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -122,6 +124,8 @@ return|return
 name|groupByList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateExpr

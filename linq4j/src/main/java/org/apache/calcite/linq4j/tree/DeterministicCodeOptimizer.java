@@ -933,6 +933,8 @@ block|}
 block|}
 block|}
 comment|/**    * Finds if there exists ready for reuse declaration for given expression.    *    * @param expression input expression    * @return parameter of the already existing declaration, or null    */
+annotation|@
+name|Override
 specifier|protected
 name|ParameterExpression
 name|findDeclaredExpression
@@ -1452,6 +1454,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates child visitor. It is used to traverse nested class declarations.    *    * @return new Visitor that is used to optimize class declarations    */
+annotation|@
+name|Override
 specifier|protected
 name|DeterministicCodeOptimizer
 name|goDeeper

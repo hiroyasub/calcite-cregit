@@ -374,6 +374,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -495,6 +497,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Validates this call.    *    *<p>The default implementation delegates the validation to the operator's    * {@link SqlOperator#validateCall}. Derived classes may override (as do,    * for example {@link SqlSelect} and {@link SqlUpdate}).    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validate
@@ -516,6 +520,8 @@ name|scope
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|findValidOptions
@@ -610,6 +616,8 @@ block|}
 block|}
 comment|// no valid options
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|R
@@ -633,6 +641,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equalsDeep
@@ -820,6 +830,8 @@ name|signatureList
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity

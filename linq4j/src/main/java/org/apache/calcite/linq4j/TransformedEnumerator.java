@@ -69,6 +69,8 @@ name|F
 name|from
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -81,6 +83,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|current
@@ -96,6 +100,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -107,6 +113,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

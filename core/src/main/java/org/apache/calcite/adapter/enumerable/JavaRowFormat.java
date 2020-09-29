@@ -234,6 +234,8 @@ name|JavaRowFormat
 block|{
 name|CUSTOM
 block|{
+annotation|@
+name|Override
 name|Type
 name|javaRowClass
 parameter_list|(
@@ -296,6 +298,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|record
@@ -353,6 +357,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MemberExpression
 name|field
@@ -459,6 +465,8 @@ block|}
 block|,
 name|SCALAR
 block|{
+annotation|@
+name|Override
 name|Type
 name|javaRowClass
 parameter_list|(
@@ -521,6 +529,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|record
@@ -552,6 +562,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|field
@@ -583,6 +595,8 @@ block|,
 comment|/** A list that is comparable and immutable. Useful for records with 0 fields    * (empty list is a good singleton) but sometimes also for records with 2 or    * more fields that you need to be comparable, say as a key in a lookup. */
 name|LIST
 block|{
+annotation|@
+name|Override
 name|Type
 name|javaRowClass
 parameter_list|(
@@ -622,6 +636,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|record
@@ -862,6 +878,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|field
@@ -1006,6 +1024,8 @@ name|expressions
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|field
@@ -1079,6 +1099,8 @@ block|}
 block|,
 name|ARRAY
 block|{
+annotation|@
+name|Override
 name|Type
 name|javaRowClass
 parameter_list|(
@@ -1117,6 +1139,8 @@ operator|.
 name|class
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|record
@@ -1164,6 +1188,8 @@ name|method
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|field

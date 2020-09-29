@@ -147,6 +147,8 @@ name|R
 argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -159,6 +161,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -181,6 +185,8 @@ name|call
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -236,6 +242,8 @@ return|return
 name|result
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -248,6 +256,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -260,6 +270,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -272,6 +284,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visit
@@ -365,6 +379,8 @@ return|return
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|result
@@ -374,6 +390,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|R
 name|visitChild

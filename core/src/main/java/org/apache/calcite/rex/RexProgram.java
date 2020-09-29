@@ -631,6 +631,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -643,6 +645,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1014,6 +1018,8 @@ argument_list|)
 return|;
 block|}
 comment|// description of this calc, chiefly intended for debugging
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3240,6 +3246,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitCorrelVariable
@@ -3726,6 +3734,8 @@ operator|=
 name|exprs
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -3848,6 +3858,8 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -3860,6 +3872,8 @@ return|return
 name|inputRef
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -3890,6 +3904,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLiteral
@@ -3902,6 +3918,8 @@ return|return
 name|literal
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -3960,6 +3978,8 @@ name|newOperands
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitOver
@@ -3975,6 +3995,8 @@ name|over
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCorrelVariable
@@ -3987,6 +4009,8 @@ return|return
 name|correlVariable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitDynamicParam
@@ -3999,6 +4023,8 @@ return|return
 name|dynamicParam
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitRangeRef
@@ -4011,6 +4037,8 @@ return|return
 name|rangeRef
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitFieldAccess
@@ -4066,6 +4094,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLocalRef

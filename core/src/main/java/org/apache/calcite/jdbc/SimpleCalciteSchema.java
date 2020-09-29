@@ -343,6 +343,8 @@ name|path
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setCache
@@ -357,6 +359,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteSchema
 name|add
@@ -395,6 +399,8 @@ return|return
 name|calciteSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|CalciteSchema
 name|getImplicitSubSchema
@@ -440,6 +446,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|TableEntry
 name|getImplicitTable
@@ -482,6 +490,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|TypeEntry
 name|getImplicitType
@@ -524,6 +534,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitSubSchemaToBuilder
@@ -618,6 +630,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitTableToBuilder
@@ -642,6 +656,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitFunctionsToBuilder
@@ -690,6 +706,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitFuncNamesToBuilder
@@ -740,6 +758,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|addImplicitTablesBasedOnNullaryFunctionsToBuilder
@@ -852,6 +872,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|TableEntry
 name|getImplicitTableBasedOnNullaryFunction
@@ -940,6 +962,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|CalciteSchema
 name|snapshot
@@ -1030,6 +1054,8 @@ return|return
 name|snapshot
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|isCacheEnabled

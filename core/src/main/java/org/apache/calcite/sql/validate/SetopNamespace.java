@@ -138,6 +138,8 @@ name|call
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|getNode
@@ -319,6 +321,8 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|validateImpl

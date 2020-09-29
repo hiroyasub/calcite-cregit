@@ -555,6 +555,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Concatenates two sequences.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -583,6 +585,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the elements of the specified sequence or    * the type parameter's default value in a singleton collection if    * the sequence is empty.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -591,6 +595,8 @@ name|defaultIfEmpty
 parameter_list|()
 function_decl|;
 comment|/**    * Returns distinct elements from a sequence by using    * the default equality comparer to compare values.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -599,6 +605,8 @@ name|distinct
 parameter_list|()
 function_decl|;
 comment|/**    * Returns distinct elements from a sequence by using    * a specified EqualityComparer&lt;TSource&gt; to compare values.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -613,6 +621,8 @@ name|comparer
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values,    * eliminate duplicates. (Defined by Enumerable.)    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -627,6 +637,8 @@ name|enumerable
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values,    * using {@code all} to indicate whether to eliminate duplicates.    * (Defined by Enumerable.)    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -644,6 +656,8 @@ name|all
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, eliminate duplicates.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -664,6 +678,8 @@ name|comparer
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, using {@code all} to indicate whether to eliminate duplicates.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -1183,6 +1199,8 @@ name|comparer
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values,    * eliminate duplicates.(Defined by Queryable.)    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -1197,6 +1215,8 @@ name|enumerable
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values,    * using {@code all} to indicate whether to eliminate duplicates.    * (Defined by Queryable.)    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -1214,6 +1234,8 @@ name|all
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, eliminate duplicates.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -1234,6 +1256,8 @@ name|comparer
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, using {@code all} to indicate whether to eliminate duplicates.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -1465,9 +1489,11 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Filters the elements of an IQueryable based on a    * specified type.    *    *<p>The OfType method generates a    * {@link org.apache.calcite.linq4j.tree.MethodCallExpression} that represents    * calling OfType itself as a constructed generic method. It then passes the    * MethodCallExpression to the CreateQuery(Expression) method of the    * {@link QueryProvider} represented by the Provider property of the source    * parameter.    *    *<p>The query behavior that occurs as a result of executing an expression    * tree that represents calling OfType depends on the implementation of the    * type of the source parameter. The expected behavior is that it filters    * out any elements in source that are not of type TResult.    *    *<p>NOTE: clazz parameter not present in C# LINQ; necessary because of    * Java type erasure.</p>    */
-parameter_list|<
+annotation|@
+name|Override
+argument_list|<
 name|TResult
-parameter_list|>
+argument_list|>
 name|Queryable
 argument_list|<
 name|TResult
@@ -1481,9 +1507,11 @@ argument_list|>
 name|clazz
 parameter_list|)
 function_decl|;
-parameter_list|<
+annotation|@
+name|Override
+argument_list|<
 name|T2
-parameter_list|>
+argument_list|>
 name|Queryable
 argument_list|<
 name|T2
@@ -1602,6 +1630,8 @@ name|comparator
 parameter_list|)
 function_decl|;
 comment|/**    * Inverts the order of the elements in a sequence.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -1804,6 +1834,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
+annotation|@
+name|Override
 name|TSource
 name|singleOrDefault
 parameter_list|()
@@ -1823,6 +1855,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Bypasses a specified number of elements in a    * sequence and then returns the remaining elements.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -2010,6 +2044,8 @@ name|selector
 parameter_list|)
 function_decl|;
 comment|/**    * Returns a specified number of contiguous elements    * from the start of a sequence.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -2057,6 +2093,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set union of two sequences by using    * the default equality comparer.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource
@@ -2071,6 +2109,8 @@ name|source1
 parameter_list|)
 function_decl|;
 comment|/**    * Produces the set union of two sequences by using a    * specified {@code EqualityComparer<TSource>}.    */
+annotation|@
+name|Override
 name|Queryable
 argument_list|<
 name|TSource

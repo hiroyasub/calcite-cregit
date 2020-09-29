@@ -490,6 +490,8 @@ return|return
 name|rel
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -512,6 +514,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -534,6 +538,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -546,6 +552,8 @@ return|return
 name|scan
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -561,6 +569,8 @@ name|scan
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -573,6 +583,8 @@ return|return
 name|values
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -595,6 +607,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -610,6 +624,8 @@ name|calc
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -632,6 +648,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -647,6 +665,8 @@ name|join
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -662,6 +682,8 @@ name|correlate
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -677,6 +699,8 @@ name|union
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -692,6 +716,8 @@ name|intersect
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -707,6 +733,8 @@ name|minus
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -722,6 +750,8 @@ name|sort
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -737,6 +767,8 @@ name|exchange
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit
@@ -752,6 +784,8 @@ name|modify
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|visit

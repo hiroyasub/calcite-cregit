@@ -38,6 +38,8 @@ name|DYNAMIC_STAR_PREFIX
 init|=
 literal|"**"
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDynamicStruct

@@ -2563,6 +2563,8 @@ name|strongFields
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitCall
@@ -2769,6 +2771,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef
@@ -2903,6 +2907,8 @@ operator|=
 name|firstRightRef
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -3062,6 +3068,8 @@ name|RexNode
 argument_list|>
 block|{
 comment|/**      * Evaluates a condition for a given expression.      *      * @param expr Expression      * @return result of evaluating the condition      */
+annotation|@
+name|Override
 name|boolean
 name|test
 parameter_list|(
@@ -3124,6 +3132,8 @@ name|operatorSet
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|test

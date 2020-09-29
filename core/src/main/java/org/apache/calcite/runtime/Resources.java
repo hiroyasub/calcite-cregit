@@ -430,6 +430,8 @@ name|ConcurrentHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|invoke
@@ -3498,6 +3500,8 @@ name|PropertyAccessor
 block|{
 name|INSTANCE
 block|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSet
@@ -3510,6 +3514,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|intValue
@@ -3525,6 +3531,8 @@ name|defaultValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|intValue
@@ -3540,6 +3548,8 @@ return|return
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|stringValue
@@ -3555,6 +3565,8 @@ name|defaultValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|stringValue
@@ -3570,6 +3582,8 @@ return|return
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|booleanValue
@@ -3585,6 +3599,8 @@ name|defaultValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|booleanValue
@@ -3600,6 +3616,8 @@ return|return
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|doubleValue
@@ -3615,6 +3633,8 @@ name|defaultValue
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|doubleValue
@@ -3998,6 +4018,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumeration
 argument_list|<
@@ -4013,6 +4035,8 @@ name|getKeys
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|Object
 name|handleGetObject
@@ -4263,6 +4287,8 @@ operator|=
 name|properties
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSet
@@ -4282,6 +4308,8 @@ name|key
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|intValue
@@ -4332,6 +4360,8 @@ operator|.
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|intValue
@@ -4373,6 +4403,8 @@ literal|10
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|stringValue
@@ -4416,6 +4448,8 @@ operator|.
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|stringValue
@@ -4450,6 +4484,8 @@ else|:
 name|s
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|booleanValue
@@ -4498,6 +4534,8 @@ operator|.
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|booleanValue
@@ -4537,6 +4575,8 @@ name|s
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|doubleValue
@@ -4585,6 +4625,8 @@ operator|.
 name|defaultValue
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|doubleValue

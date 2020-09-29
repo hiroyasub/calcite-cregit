@@ -155,6 +155,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -167,6 +169,8 @@ name|FUNCTION
 return|;
 block|}
 comment|// Plans referencing context variables should never be cached
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDynamicFunction

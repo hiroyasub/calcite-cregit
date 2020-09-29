@@ -1515,6 +1515,8 @@ name|T2
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1869,6 +1871,8 @@ name|TSource
 argument_list|>
 name|rest
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1884,6 +1888,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|next
@@ -1930,6 +1936,8 @@ name|first
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -4009,6 +4017,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -5202,6 +5212,8 @@ name|entrySet
 argument_list|()
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -5218,6 +5230,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -5279,6 +5293,8 @@ name|inners
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -5291,6 +5307,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -5302,6 +5320,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -5460,6 +5480,8 @@ name|entrySet
 argument_list|()
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -5476,6 +5498,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -5537,6 +5561,8 @@ name|inners
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -5549,6 +5575,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -5560,6 +5588,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -6523,6 +6553,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -6610,6 +6642,8 @@ argument_list|)
 else|:
 literal|null
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -6632,6 +6666,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -6882,6 +6918,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -6893,6 +6931,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -7010,6 +7050,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -7119,6 +7161,8 @@ argument_list|)
 else|:
 literal|null
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -7141,6 +7185,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -7429,6 +7475,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -7440,6 +7488,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -7549,6 +7599,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -7596,6 +7648,8 @@ init|=
 literal|0
 decl_stmt|;
 comment|// 0 -- moving outer, 1 moving inner;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -7612,6 +7666,8 @@ name|innerValue
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -7797,6 +7853,8 @@ comment|// continue loop, move outer
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -7815,6 +7873,8 @@ name|closeInner
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -9420,6 +9480,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -9671,6 +9733,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -10305,6 +10369,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -11038,6 +11104,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -13948,6 +14016,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|get
@@ -13969,6 +14039,8 @@ name|index
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -14048,6 +14120,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14076,6 +14150,8 @@ operator|.
 name|enumerator
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -14093,6 +14169,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -14105,6 +14183,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -14116,6 +14196,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -14180,6 +14262,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14214,6 +14298,8 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -14233,6 +14319,8 @@ name|n
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -14260,6 +14348,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -14271,6 +14361,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -14336,6 +14428,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14374,6 +14468,8 @@ operator|.
 name|emptyEnumerator
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -14386,6 +14482,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -14439,6 +14537,8 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -14457,6 +14557,8 @@ name|emptyEnumerator
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -14529,6 +14631,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14573,6 +14677,8 @@ operator|.
 name|emptyEnumerator
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -14585,6 +14691,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -14644,6 +14752,8 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -14662,6 +14772,8 @@ name|emptyEnumerator
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -14747,6 +14859,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -14802,6 +14916,8 @@ operator|.
 name|emptyEnumerator
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -14814,6 +14930,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -14890,6 +15008,8 @@ argument_list|(
 name|collectionEnumerator
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|TResult
 name|transform
@@ -14913,6 +15033,8 @@ block|}
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -14931,6 +15053,8 @@ name|emptyEnumerator
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -15014,6 +15138,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -15063,6 +15189,8 @@ operator|.
 name|emptyEnumerator
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -15075,6 +15203,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -15150,6 +15280,8 @@ argument_list|(
 name|collectionEnumerator
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|TResult
 name|transform
@@ -15173,6 +15305,8 @@ block|}
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -15191,6 +15325,8 @@ name|emptyEnumerator
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -15316,6 +15452,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equal
@@ -15338,6 +15476,8 @@ name|v2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -16004,6 +16144,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -16696,6 +16838,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -16764,6 +16908,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -18309,6 +18455,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -18380,6 +18528,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|current
@@ -18392,6 +18542,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -18427,6 +18579,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -18438,6 +18592,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -18495,6 +18651,8 @@ name|TSource
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -18529,6 +18687,8 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|current
@@ -18541,6 +18701,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -18581,6 +18743,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -18597,6 +18761,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -18670,6 +18836,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -18710,6 +18878,8 @@ operator|.
 name|enumerator
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -18732,6 +18902,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -18749,6 +18921,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -18765,6 +18939,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -19061,6 +19237,8 @@ operator|=
 name|predicate
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|current
@@ -19073,6 +19251,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -19121,6 +19301,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -19141,6 +19323,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -19231,6 +19415,8 @@ operator|=
 name|predicate
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|current
@@ -19243,6 +19429,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -19291,6 +19479,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -19311,6 +19501,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -19401,6 +19593,8 @@ operator|=
 name|predicate
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TSource
 name|current
@@ -19413,6 +19607,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -19473,6 +19669,8 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -19493,6 +19691,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -19568,6 +19768,8 @@ operator|=
 name|clazz
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|current
@@ -19585,6 +19787,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -19597,6 +19801,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -19608,6 +19814,8 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -19935,6 +20143,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -19947,6 +20157,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Entry
 argument_list|<
@@ -19992,6 +20204,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -20258,6 +20472,8 @@ operator|=
 name|resultSelector
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
@@ -20296,6 +20512,8 @@ name|TResult
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -20308,6 +20526,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|next
@@ -20346,6 +20566,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -21669,6 +21891,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TResult
 name|current
@@ -21691,6 +21915,8 @@ return|return
 name|current
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -21798,6 +22024,8 @@ return|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -21844,6 +22072,8 @@ name|start
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

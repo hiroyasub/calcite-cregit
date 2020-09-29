@@ -809,6 +809,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Do constant reduction using generated code.    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reduce
@@ -927,6 +929,8 @@ operator|=
 name|typeFactory
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|field

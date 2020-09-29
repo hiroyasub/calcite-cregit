@@ -345,6 +345,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|get
@@ -403,6 +405,8 @@ name|IndexOutOfBoundsException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

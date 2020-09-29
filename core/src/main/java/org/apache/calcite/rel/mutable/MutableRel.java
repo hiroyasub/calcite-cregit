@@ -328,6 +328,8 @@ argument_list|>
 name|getInputs
 parameter_list|()
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 specifier|abstract
 name|MutableRel

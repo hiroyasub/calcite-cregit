@@ -1393,6 +1393,8 @@ return|return
 name|groupSets
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -1654,6 +1656,8 @@ literal|0
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|deriveRowType
@@ -1958,6 +1962,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isValid
@@ -2597,6 +2603,8 @@ return|return
 name|filter
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getOperandCount
@@ -2609,6 +2617,8 @@ name|size
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getOperandType
@@ -2626,6 +2636,8 @@ name|ordinal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteException
 name|newError

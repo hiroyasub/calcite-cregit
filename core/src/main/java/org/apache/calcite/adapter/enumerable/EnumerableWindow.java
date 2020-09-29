@@ -766,6 +766,8 @@ name|groups
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -872,6 +874,8 @@ operator|=
 name|constants
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|field
@@ -1094,6 +1098,8 @@ block|}
 comment|// multiMap.clear(); // allows gc
 comment|// source = Linq4j.asEnumerable(list);
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement
@@ -3396,22 +3402,17 @@ operator|new
 name|WinAggFrameResultContext
 argument_list|()
 block|{
-specifier|public
-name|RexToLixTranslator
-name|rowTranslator
-argument_list|(
-name|Expression
-name|rowIndex
-argument_list|)
+block_content|@Override public RexToLixTranslator rowTranslator(Expression rowIndex
+block_content|)
 block|{
 name|Expression
 name|row
-operator|=
+init|=
 name|getRow
 argument_list|(
 name|rowIndex
 argument_list|)
-return|;
+decl_stmt|;
 specifier|final
 name|RexToLixTranslator
 operator|.
@@ -3453,18 +3454,10 @@ name|conformance
 argument_list|)
 return|;
 block|}
-specifier|public
-name|Expression
-name|computeIndex
-parameter_list|(
-name|Expression
-name|offset
-parameter_list|,
-name|WinAggImplementor
-operator|.
-name|SeekType
-name|seekType
-parameter_list|)
+block|@Override public Expression computeIndex(Expression offset
+operator|,
+function|WinAggImplementor.SeekType seekType
+block|)
 block|{
 name|Expression
 name|index
@@ -3588,6 +3581,9 @@ return|return
 name|index
 return|;
 block|}
+end_class
+
+begin_function
 specifier|private
 name|Expression
 name|checkBounds
@@ -3667,6 +3663,11 @@ return|return
 name|res
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|rowInFrame
@@ -3686,6 +3687,11 @@ name|endX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|rowInPartition
@@ -3705,6 +3711,11 @@ name|maxX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|compareRows
@@ -3741,6 +3752,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|Expression
 name|getRow
@@ -3777,6 +3791,11 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|index
@@ -3786,6 +3805,11 @@ return|return
 name|i_
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|startIndex
@@ -3795,6 +3819,11 @@ return|return
 name|startX
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|endIndex
@@ -3804,6 +3833,11 @@ return|return
 name|endX
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|hasRows
@@ -3813,6 +3847,11 @@ return|return
 name|hasRows
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getFrameRowCount
@@ -3822,6 +3861,11 @@ return|return
 name|frameRowCount
 return|;
 block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getPartitionRowCount
@@ -3831,15 +3875,10 @@ return|return
 name|partitionRowCount
 return|;
 block|}
-block|}
-end_class
-
-begin_empty_stmt
-empty_stmt|;
-end_empty_stmt
+end_function
 
 begin_function
-unit|}    private
+unit|};   }    private
 name|Pair
 argument_list|<
 name|Expression
@@ -4538,6 +4577,8 @@ operator|new
 name|WinAggContext
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlAggFunction
 name|aggregation
@@ -4552,6 +4593,8 @@ name|getAggregation
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|returnRelType
@@ -4565,6 +4608,8 @@ operator|.
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|returnType
@@ -4582,6 +4627,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4604,6 +4651,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4637,6 +4686,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4651,6 +4702,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4665,6 +4718,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4681,6 +4736,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5103,6 +5160,8 @@ argument_list|,
 name|frame
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|currentPosition
@@ -5114,6 +5173,8 @@ operator|.
 name|parameter
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5131,6 +5192,8 @@ name|agg
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|rexFilterArgument
@@ -5286,6 +5349,8 @@ argument_list|,
 name|frame
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

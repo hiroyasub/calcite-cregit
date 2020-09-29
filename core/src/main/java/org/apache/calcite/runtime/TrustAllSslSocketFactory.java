@@ -473,6 +473,8 @@ name|DummyTrustManager
 implements|implements
 name|X509TrustManager
 block|{
+annotation|@
+name|Override
 specifier|public
 name|X509Certificate
 index|[]
@@ -483,6 +485,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkClientTrusted
@@ -496,6 +500,8 @@ name|authType
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkServerTrusted

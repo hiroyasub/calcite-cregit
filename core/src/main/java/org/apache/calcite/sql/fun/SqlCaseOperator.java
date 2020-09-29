@@ -530,6 +530,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateCall
@@ -637,6 +639,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveType
@@ -664,6 +668,8 @@ name|call
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -860,6 +866,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -1541,6 +1549,8 @@ name|thenTypes
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -1553,6 +1563,8 @@ name|any
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -1564,6 +1576,8 @@ operator|.
 name|SPECIAL
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCall
 name|createCall

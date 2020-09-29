@@ -343,6 +343,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTrait
 name|get
@@ -1407,6 +1409,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Returns the size of the RelTraitSet.    *    * @return the size of the RelTraitSet.    */
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

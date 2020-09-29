@@ -196,6 +196,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isValidCount
@@ -221,6 +223,8 @@ name|max
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMin
@@ -230,6 +234,8 @@ return|return
 name|min
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMax

@@ -338,6 +338,8 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Override
 specifier|default
 name|MaterializedViewProjectJoinRule
 name|toRule

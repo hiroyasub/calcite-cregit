@@ -759,6 +759,8 @@ name|rel
 expr_stmt|;
 block|}
 comment|// ~ Methods from QueryableFactory -----------------------------------------
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TAccumulate
@@ -808,6 +810,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|aggregate
@@ -838,6 +842,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TAccumulate
@@ -874,6 +880,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|all
@@ -900,6 +908,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|any
@@ -917,6 +927,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|any
@@ -943,6 +955,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|averageBigDecimal
@@ -969,6 +983,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|averageNullableBigDecimal
@@ -995,6 +1011,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|averageDouble
@@ -1021,6 +1039,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|averageNullableDouble
@@ -1047,6 +1067,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|averageInteger
@@ -1073,6 +1095,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|averageNullableInteger
@@ -1099,6 +1123,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|averageFloat
@@ -1125,6 +1151,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Float
 name|averageNullableFloat
@@ -1151,6 +1179,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|averageLong
@@ -1177,6 +1207,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Long
 name|averageNullableLong
@@ -1203,6 +1235,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1229,6 +1263,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contains
@@ -1249,6 +1285,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contains
@@ -1275,6 +1313,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|count
@@ -1292,6 +1332,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|count
@@ -1318,6 +1360,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1338,6 +1382,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1361,6 +1407,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1381,6 +1429,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1407,6 +1457,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|elementAt
@@ -1427,6 +1479,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|elementAtOrDefault
@@ -1447,6 +1501,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1478,6 +1534,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1507,6 +1565,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1546,6 +1606,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1581,6 +1643,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|first
@@ -1598,6 +1662,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|first
@@ -1624,6 +1690,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|firstOrDefault
@@ -1641,6 +1709,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|firstOrDefault
@@ -1667,6 +1737,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1706,6 +1778,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1751,6 +1825,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1803,6 +1879,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1855,6 +1933,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1913,6 +1993,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -1971,6 +2053,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2036,6 +2120,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2107,6 +2193,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2178,6 +2266,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2255,6 +2345,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2286,6 +2378,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2315,6 +2409,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2354,6 +2450,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2389,6 +2487,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2457,6 +2557,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -2531,6 +2633,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|last
@@ -2548,6 +2652,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|last
@@ -2574,6 +2680,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|lastOrDefault
@@ -2591,6 +2699,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|lastOrDefault
@@ -2617,6 +2727,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|longCount
@@ -2634,6 +2746,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|longCount
@@ -2660,6 +2774,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|max
@@ -2677,6 +2793,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2713,6 +2831,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|min
@@ -2730,6 +2850,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2766,6 +2888,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -2795,6 +2919,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T2
@@ -2824,6 +2950,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2860,6 +2988,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2900,6 +3030,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2936,6 +3068,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2976,6 +3110,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2996,6 +3132,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -3076,6 +3214,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -3112,6 +3252,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -3149,6 +3291,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -3188,6 +3332,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TCollection
@@ -3242,6 +3388,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TCollection
@@ -3294,6 +3442,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|sequenceEqual
@@ -3317,6 +3467,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|sequenceEqual
@@ -3346,6 +3498,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|single
@@ -3363,6 +3517,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|single
@@ -3389,6 +3545,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|singleOrDefault
@@ -3406,6 +3564,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|singleOrDefault
@@ -3432,6 +3592,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3455,6 +3617,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3484,6 +3648,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3515,6 +3681,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|sumBigDecimal
@@ -3541,6 +3709,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|sumNullableBigDecimal
@@ -3567,6 +3737,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|sumDouble
@@ -3593,6 +3765,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|sumNullableDouble
@@ -3619,6 +3793,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|sumInteger
@@ -3645,6 +3821,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|sumNullableInteger
@@ -3671,6 +3849,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|sumLong
@@ -3697,6 +3877,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Long
 name|sumNullableLong
@@ -3723,6 +3905,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|sumFloat
@@ -3749,6 +3933,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Float
 name|sumNullableFloat
@@ -3775,6 +3961,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3798,6 +3986,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3827,6 +4017,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3858,6 +4050,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3897,6 +4091,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3937,6 +4133,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3976,6 +4174,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -4016,6 +4216,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -4042,6 +4244,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -4074,6 +4278,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -4135,6 +4341,8 @@ return|return
 name|source
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -4168,6 +4376,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T1

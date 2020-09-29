@@ -722,6 +722,8 @@ name|build
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|run
@@ -1440,6 +1442,8 @@ argument_list|,
 name|accumulator
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1494,6 +1498,8 @@ return|return
 name|args
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|rexFilterArgument
@@ -1527,6 +1533,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexToLixTranslator
 name|rowTranslator
@@ -1702,6 +1710,8 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -1755,6 +1765,8 @@ operator|++
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|end
@@ -1910,6 +1922,8 @@ name|accumulatorLength
 index|]
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Accumulator
 name|get
@@ -1971,6 +1985,8 @@ operator|=
 name|values
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -2040,6 +2056,8 @@ name|values
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|end
@@ -3425,6 +3443,8 @@ operator|=
 name|nullIfEmpty
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Accumulator
 name|get
@@ -3515,6 +3535,8 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -3614,6 +3636,8 @@ operator|=
 literal|false
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|end
@@ -3718,6 +3742,8 @@ operator|=
 name|filterArg
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|send
@@ -3750,6 +3776,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|end

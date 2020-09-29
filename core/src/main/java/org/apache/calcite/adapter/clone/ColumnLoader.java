@@ -894,6 +894,8 @@ operator|.
 name|getFieldList
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|get
@@ -919,6 +921,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -992,6 +996,8 @@ name|pair
 operator|.
 name|i
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|get
@@ -1018,6 +1024,8 @@ name|slice
 index|]
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -2393,6 +2401,8 @@ operator|=
 name|key
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo

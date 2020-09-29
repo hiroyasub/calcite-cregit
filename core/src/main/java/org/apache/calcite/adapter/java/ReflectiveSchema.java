@@ -1463,6 +1463,8 @@ operator|=
 name|enumerable
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1485,6 +1487,8 @@ name|elementType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -1496,6 +1500,8 @@ operator|.
 name|UNKNOWN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -1543,6 +1549,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1584,6 +1592,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"unchecked"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1617,6 +1627,8 @@ name|Factory
 implements|implements
 name|SchemaFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Schema
 name|create
@@ -1875,6 +1887,8 @@ operator|+
 literal|"expanded"
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1888,6 +1902,8 @@ operator|+
 literal|"}"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TranslatableTable
 name|apply
@@ -2033,6 +2049,8 @@ operator|=
 name|statistic
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -2144,6 +2162,8 @@ name|getFields
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]

@@ -736,6 +736,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -748,6 +750,8 @@ return|return
 name|parameters
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getReturnType
@@ -765,6 +769,8 @@ name|resultType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggImplementor
 name|getImplementor

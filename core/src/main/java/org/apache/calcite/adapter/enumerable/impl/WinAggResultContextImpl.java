@@ -275,6 +275,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|List
@@ -300,6 +302,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|computeIndex
@@ -325,6 +329,8 @@ name|seekType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|rowInFrame
@@ -343,6 +349,8 @@ name|rowIndex
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|rowInPartition
@@ -361,6 +369,8 @@ name|rowIndex
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexToLixTranslator
 name|rowTranslator
@@ -379,6 +389,8 @@ name|rowIndex
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|compareRows
@@ -402,6 +414,8 @@ name|b
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|index
@@ -415,6 +429,8 @@ name|index
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|startIndex
@@ -428,6 +444,8 @@ name|startIndex
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|endIndex
@@ -441,6 +459,8 @@ name|endIndex
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|hasRows
@@ -454,6 +474,8 @@ name|hasRows
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getFrameRowCount
@@ -467,6 +489,8 @@ name|getFrameRowCount
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getPartitionRowCount

@@ -223,6 +223,8 @@ name|planner
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|M
@@ -340,12 +342,14 @@ empty_stmt|;
 end_empty_stmt
 
 begin_function
-unit|}    public
-parameter_list|<
+unit|}    @
+name|Override
+specifier|public
+argument_list|<
 name|M
 extends|extends
 name|Metadata
-parameter_list|>
+argument_list|>
 name|Multimap
 argument_list|<
 name|Method
@@ -432,6 +436,8 @@ name|metadata
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|invoke

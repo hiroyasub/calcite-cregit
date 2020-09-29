@@ -529,6 +529,8 @@ name|ModifiableViewTableInitializerExpressionFactory
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|getConstraint
@@ -549,6 +551,8 @@ name|constraint
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ImmutableIntList
 name|getColumnMapping
@@ -558,6 +562,8 @@ return|return
 name|columnMapping
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|getTable
@@ -567,6 +573,8 @@ return|return
 name|table
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Path
 name|getTablePath

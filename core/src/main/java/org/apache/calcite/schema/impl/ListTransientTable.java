@@ -622,6 +622,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -764,6 +766,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -831,6 +835,8 @@ argument_list|,
 name|tableName
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

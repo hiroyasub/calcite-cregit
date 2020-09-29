@@ -220,6 +220,8 @@ operator|!=
 literal|null
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -233,6 +235,8 @@ operator|+
 literal|"}"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

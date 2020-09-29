@@ -218,6 +218,8 @@ operator|=
 name|tableName
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -238,6 +240,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getProvider
@@ -247,6 +251,8 @@ return|return
 name|queryProvider
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -259,6 +265,8 @@ name|getElementType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<

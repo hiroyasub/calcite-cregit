@@ -766,6 +766,8 @@ operator|+
 literal|"}"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|FileReaderIterator
 name|iterator
@@ -1005,6 +1007,8 @@ name|iterator
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1046,6 +1050,8 @@ argument_list|)
 return|;
 block|}
 comment|// return th and td elements by default
+annotation|@
+name|Override
 specifier|public
 name|Elements
 name|next
@@ -1058,6 +1064,8 @@ literal|"th,td"
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

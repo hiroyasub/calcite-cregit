@@ -9779,6 +9779,8 @@ name|querySpec
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|run
@@ -10123,6 +10125,8 @@ operator|=
 name|expression
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write
@@ -10334,6 +10338,8 @@ operator|=
 name|collations
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write
@@ -10435,6 +10441,8 @@ operator|=
 name|dimensionOrder
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write
@@ -10533,6 +10541,8 @@ operator|=
 name|fieldNames
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write
@@ -10729,6 +10739,8 @@ name|name
 expr_stmt|;
 block|}
 comment|// Expects all subclasses to write the EndObject item
+annotation|@
+name|Override
 specifier|public
 name|void
 name|write

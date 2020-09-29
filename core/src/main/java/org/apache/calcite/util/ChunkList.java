@@ -968,6 +968,8 @@ operator|=
 name|end
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -979,6 +981,8 @@ operator|<
 name|size
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|next
@@ -1089,6 +1093,8 @@ return|return
 name|element
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasPrevious
@@ -1100,6 +1106,8 @@ operator|>
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|previous
@@ -1185,6 +1193,8 @@ name|start
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|nextIndex
@@ -1194,6 +1204,8 @@ return|return
 name|cursor
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|previousIndex
@@ -1205,6 +1217,8 @@ operator|-
 literal|1
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -1581,6 +1595,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|set
@@ -1655,6 +1671,8 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|add

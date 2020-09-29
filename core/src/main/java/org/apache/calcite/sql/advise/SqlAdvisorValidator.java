@@ -380,6 +380,8 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Registers the identifier and its scope into a map keyed by ParserPosition.    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateIdentifier
@@ -524,6 +526,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|expand
@@ -540,6 +544,8 @@ return|return
 name|expr
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|expandSelectExpr
@@ -559,6 +565,8 @@ return|return
 name|expr
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|expandOrderExpr
@@ -576,6 +584,8 @@ name|orderExpr
 return|;
 block|}
 comment|/**    * Calls the parent class method and mask Farrago exception thrown.    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveType
@@ -625,6 +635,8 @@ block|}
 comment|// we do not need to validate from clause for traversing the parse tree
 comment|// because there is no SqlIdentifier in from clause that need to be
 comment|// registered into {@link #idPositions} map
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|validateFrom
@@ -671,6 +683,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Calls the parent class method and masks Farrago exception thrown.    */
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|validateWhereClause
@@ -707,6 +721,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Calls the parent class method and masks Farrago exception thrown.    */
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|validateHavingClause
@@ -742,6 +758,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|validateOver
@@ -847,6 +865,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|validateNamespace
@@ -912,6 +932,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|shouldAllowOverRelation

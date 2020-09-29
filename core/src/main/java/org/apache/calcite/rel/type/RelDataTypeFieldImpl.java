@@ -223,6 +223,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelDataTypeField
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getName
@@ -233,6 +235,8 @@ name|name
 return|;
 block|}
 comment|// implement RelDataTypeField
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getIndex
@@ -243,6 +247,8 @@ name|index
 return|;
 block|}
 comment|// implement RelDataTypeField
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getType
@@ -253,6 +259,8 @@ name|type
 return|;
 block|}
 comment|// implement Map.Entry
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|String
@@ -265,6 +273,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement Map.Entry
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelDataType
@@ -277,6 +287,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement Map.Entry
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|setValue
@@ -292,6 +304,8 @@ argument_list|()
 throw|;
 block|}
 comment|// for debugging
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -311,6 +325,8 @@ operator|+
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isDynamicStar

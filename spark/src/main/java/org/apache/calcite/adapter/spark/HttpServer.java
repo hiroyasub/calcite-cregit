@@ -790,22 +790,18 @@ name|E
 argument_list|>
 argument_list|()
 block|{
-specifier|public
-name|boolean
-name|hasNext
-argument_list|()
-block|{
-block_content|return enumeration.hasMoreElements(
+block_content|@Override public boolean hasNext(
 block_content|)
-function|;
+block|{
+return|return
+name|enumeration
+operator|.
+name|hasMoreElements
+argument_list|()
+return|;
 block|}
-end_class
-
-begin_function
-specifier|public
-name|E
-name|next
-parameter_list|()
+block|@Override public E next(
+block|)
 block|{
 return|return
 name|enumeration
@@ -814,9 +810,11 @@ name|nextElement
 argument_list|()
 return|;
 block|}
-end_function
+end_class
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove

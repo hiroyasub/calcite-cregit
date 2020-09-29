@@ -1972,6 +1972,8 @@ operator|=
 name|viewExpander
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlParser
 operator|.
@@ -1983,6 +1985,8 @@ return|return
 name|parserConfig
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 operator|.
@@ -1994,6 +1998,8 @@ return|return
 name|sqlValidatorConfig
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlToRelConverter
 operator|.
@@ -2005,6 +2011,8 @@ return|return
 name|sqlToRelConverterConfig
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SchemaPlus
 name|getDefaultSchema
@@ -2014,6 +2022,8 @@ return|return
 name|defaultSchema
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexExecutor
 name|getExecutor
@@ -2023,6 +2033,8 @@ return|return
 name|executor
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ImmutableList
 argument_list|<
@@ -2035,6 +2047,8 @@ return|return
 name|programs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCostFactory
 name|getCostFactory
@@ -2044,6 +2058,8 @@ return|return
 name|costFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ImmutableList
 argument_list|<
@@ -2056,6 +2072,8 @@ return|return
 name|traitDefs
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlRexConvertletTable
 name|getConvertletTable
@@ -2065,6 +2083,8 @@ return|return
 name|convertletTable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Context
 name|getContext
@@ -2074,6 +2094,8 @@ return|return
 name|context
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperatorTable
 name|getOperatorTable
@@ -2083,6 +2105,8 @@ return|return
 name|operatorTable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeSystem
 name|getTypeSystem
@@ -2092,6 +2116,8 @@ return|return
 name|typeSystem
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isEvolveLattice
@@ -2101,6 +2127,8 @@ return|return
 name|evolveLattice
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlStatisticProvider
 name|getStatisticProvider
@@ -2110,6 +2138,8 @@ return|return
 name|statisticProvider
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptTable
 operator|.

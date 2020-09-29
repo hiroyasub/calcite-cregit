@@ -367,6 +367,8 @@ return|return
 name|INSTANCE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|aggregate
@@ -405,6 +407,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -433,6 +437,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TAccumulate
@@ -476,6 +482,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -506,6 +514,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TAccumulate
@@ -563,6 +573,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -595,6 +607,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|all
@@ -627,6 +641,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -658,6 +674,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|any
@@ -680,6 +698,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -709,6 +729,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|any
@@ -741,6 +763,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -772,6 +796,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|averageBigDecimal
@@ -804,6 +830,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -832,6 +860,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|averageNullableBigDecimal
@@ -864,6 +894,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -892,6 +924,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|averageDouble
@@ -924,6 +958,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -955,6 +991,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|averageNullableDouble
@@ -987,6 +1025,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1018,6 +1058,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|averageInteger
@@ -1050,6 +1092,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1081,6 +1125,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|averageNullableInteger
@@ -1113,6 +1159,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1144,6 +1192,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|averageFloat
@@ -1176,6 +1226,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1207,6 +1259,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Float
 name|averageNullableFloat
@@ -1239,6 +1293,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1270,6 +1326,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|averageLong
@@ -1302,6 +1360,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1333,6 +1393,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Long
 name|averageNullableLong
@@ -1365,6 +1427,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1396,6 +1460,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T2
@@ -1431,6 +1497,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1459,6 +1527,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1491,6 +1561,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1515,6 +1587,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contains
@@ -1541,6 +1615,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1572,6 +1648,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contains
@@ -1605,6 +1683,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1638,6 +1718,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|count
@@ -1660,6 +1742,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1689,6 +1773,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|count
@@ -1721,6 +1807,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1752,6 +1840,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1777,6 +1867,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1799,6 +1891,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1828,6 +1922,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1852,6 +1948,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1877,6 +1975,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1899,6 +1999,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1931,6 +2033,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -1955,6 +2059,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|elementAt
@@ -1981,6 +2087,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2009,6 +2117,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|elementAtOrDefault
@@ -2035,6 +2145,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2063,6 +2175,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2096,6 +2210,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2131,6 +2247,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2157,6 +2275,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2199,6 +2319,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -2241,6 +2363,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2269,6 +2393,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|first
@@ -2291,6 +2417,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2317,6 +2445,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|first
@@ -2349,6 +2479,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2377,6 +2509,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|firstOrDefault
@@ -2399,6 +2533,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2425,6 +2561,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|firstOrDefault
@@ -2457,6 +2595,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2485,6 +2625,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2530,6 +2672,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2558,6 +2702,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2610,6 +2756,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2640,6 +2788,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2699,6 +2849,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2729,6 +2881,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2795,6 +2949,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2827,6 +2983,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2886,6 +3044,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -2916,6 +3076,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -2982,6 +3144,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3014,111 +3178,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
-specifier|public
-parameter_list|<
-name|TKey
-parameter_list|,
-name|TElement
-parameter_list|,
-name|TResult
-parameter_list|>
-name|Queryable
-argument_list|<
-name|TResult
-argument_list|>
-name|groupBy
-parameter_list|(
-specifier|final
-name|Queryable
-argument_list|<
-name|T
-argument_list|>
-name|source
-parameter_list|,
-specifier|final
-name|FunctionExpression
-argument_list|<
-name|Function1
-argument_list|<
-name|T
-argument_list|,
-name|TKey
-argument_list|>
-argument_list|>
-name|keySelector
-parameter_list|,
-specifier|final
-name|FunctionExpression
-argument_list|<
-name|Function1
-argument_list|<
-name|T
-argument_list|,
-name|TElement
-argument_list|>
-argument_list|>
-name|elementSelector
-parameter_list|,
-specifier|final
-name|FunctionExpression
-argument_list|<
-name|Function2
-argument_list|<
-name|TKey
-argument_list|,
-name|Enumerable
-argument_list|<
-name|TElement
-argument_list|>
-argument_list|,
-name|TResult
-argument_list|>
-argument_list|>
-name|resultSelector
-parameter_list|)
-block|{
-return|return
-operator|new
-name|NonLeafReplayableQueryable
-argument_list|<
-name|T
-argument_list|>
-argument_list|(
-name|source
-argument_list|)
-block|{
-specifier|public
-name|void
-name|replay
-parameter_list|(
-name|QueryableFactory
-argument_list|<
-name|T
-argument_list|>
-name|factory
-parameter_list|)
-block|{
-name|factory
-operator|.
-name|groupBy
-argument_list|(
-name|source
-argument_list|,
-name|keySelector
-argument_list|,
-name|elementSelector
-argument_list|,
-name|resultSelector
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-operator|.
-name|castQueryable
-argument_list|()
-return|;
-comment|// CHECKSTYLE: IGNORE 0
-block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -3180,6 +3241,115 @@ name|TResult
 argument_list|>
 argument_list|>
 name|resultSelector
+parameter_list|)
+block|{
+return|return
+operator|new
+name|NonLeafReplayableQueryable
+argument_list|<
+name|T
+argument_list|>
+argument_list|(
+name|source
+argument_list|)
+block|{
+annotation|@
+name|Override
+specifier|public
+name|void
+name|replay
+parameter_list|(
+name|QueryableFactory
+argument_list|<
+name|T
+argument_list|>
+name|factory
+parameter_list|)
+block|{
+name|factory
+operator|.
+name|groupBy
+argument_list|(
+name|source
+argument_list|,
+name|keySelector
+argument_list|,
+name|elementSelector
+argument_list|,
+name|resultSelector
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+operator|.
+name|castQueryable
+argument_list|()
+return|;
+comment|// CHECKSTYLE: IGNORE 0
+block|}
+annotation|@
+name|Override
+specifier|public
+parameter_list|<
+name|TKey
+parameter_list|,
+name|TElement
+parameter_list|,
+name|TResult
+parameter_list|>
+name|Queryable
+argument_list|<
+name|TResult
+argument_list|>
+name|groupBy
+parameter_list|(
+specifier|final
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
+name|source
+parameter_list|,
+specifier|final
+name|FunctionExpression
+argument_list|<
+name|Function1
+argument_list|<
+name|T
+argument_list|,
+name|TKey
+argument_list|>
+argument_list|>
+name|keySelector
+parameter_list|,
+specifier|final
+name|FunctionExpression
+argument_list|<
+name|Function1
+argument_list|<
+name|T
+argument_list|,
+name|TElement
+argument_list|>
+argument_list|>
+name|elementSelector
+parameter_list|,
+specifier|final
+name|FunctionExpression
+argument_list|<
+name|Function2
+argument_list|<
+name|TKey
+argument_list|,
+name|Enumerable
+argument_list|<
+name|TElement
+argument_list|>
+argument_list|,
+name|TResult
+argument_list|>
+argument_list|>
+name|resultSelector
 parameter_list|,
 specifier|final
 name|EqualityComparer
@@ -3199,6 +3369,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3233,6 +3405,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -3313,6 +3487,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3347,6 +3523,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -3434,6 +3612,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3470,6 +3650,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3503,6 +3685,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3538,6 +3722,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3564,6 +3750,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3606,6 +3794,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -3648,6 +3838,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3676,6 +3868,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -3753,6 +3947,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3787,6 +3983,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TInner
@@ -3871,6 +4069,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3907,6 +4107,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|last
@@ -3929,6 +4131,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -3955,6 +4159,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|last
@@ -3987,6 +4193,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4015,6 +4223,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|lastOrDefault
@@ -4037,6 +4247,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4063,6 +4275,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|lastOrDefault
@@ -4095,6 +4309,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4123,6 +4339,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|longCount
@@ -4145,6 +4363,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4174,6 +4394,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|longCount
@@ -4206,6 +4428,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4234,6 +4458,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|max
@@ -4256,6 +4482,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4282,6 +4510,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -4324,6 +4554,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4352,6 +4584,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|min
@@ -4374,6 +4608,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4400,6 +4636,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -4442,6 +4680,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4470,6 +4710,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -4505,6 +4747,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4533,6 +4777,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -4575,6 +4821,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4599,6 +4847,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -4646,6 +4896,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4672,6 +4924,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -4714,6 +4968,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4738,6 +4994,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -4785,6 +5043,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4811,6 +5071,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -4836,6 +5098,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4858,6 +5122,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -4898,6 +5164,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -4941,6 +5209,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -4983,6 +5253,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5011,6 +5283,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -5054,6 +5328,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5082,6 +5358,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TResult
@@ -5127,6 +5405,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5155,6 +5435,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TCollection
@@ -5216,6 +5498,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5246,6 +5530,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TCollection
@@ -5305,6 +5591,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5335,6 +5623,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|sequenceEqual
@@ -5364,6 +5654,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5395,6 +5687,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|sequenceEqual
@@ -5431,6 +5725,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5464,6 +5760,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|single
@@ -5486,6 +5784,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5512,117 +5812,11 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T
 name|single
-parameter_list|(
-specifier|final
-name|Queryable
-argument_list|<
-name|T
-argument_list|>
-name|source
-parameter_list|,
-specifier|final
-name|FunctionExpression
-argument_list|<
-name|Predicate1
-argument_list|<
-name|T
-argument_list|>
-argument_list|>
-name|predicate
-parameter_list|)
-block|{
-return|return
-operator|new
-name|NonLeafReplayableQueryable
-argument_list|<
-name|T
-argument_list|>
-argument_list|(
-name|source
-argument_list|)
-block|{
-specifier|public
-name|void
-name|replay
-parameter_list|(
-name|QueryableFactory
-argument_list|<
-name|T
-argument_list|>
-name|factory
-parameter_list|)
-block|{
-name|factory
-operator|.
-name|single
-argument_list|(
-name|source
-argument_list|,
-name|predicate
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-operator|.
-name|single
-argument_list|()
-return|;
-comment|// CHECKSTYLE: IGNORE 0
-block|}
-specifier|public
-name|T
-name|singleOrDefault
-parameter_list|(
-specifier|final
-name|Queryable
-argument_list|<
-name|T
-argument_list|>
-name|source
-parameter_list|)
-block|{
-return|return
-operator|new
-name|NonLeafReplayableQueryable
-argument_list|<
-name|T
-argument_list|>
-argument_list|(
-name|source
-argument_list|)
-block|{
-specifier|public
-name|void
-name|replay
-parameter_list|(
-name|QueryableFactory
-argument_list|<
-name|T
-argument_list|>
-name|factory
-parameter_list|)
-block|{
-name|factory
-operator|.
-name|singleOrDefault
-argument_list|(
-name|source
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-operator|.
-name|single
-argument_list|()
-return|;
-comment|// CHECKSTYLE: IGNORE 0
-block|}
-specifier|public
-name|T
-name|singleOrDefault
 parameter_list|(
 specifier|final
 name|Queryable
@@ -5652,6 +5846,124 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
+specifier|public
+name|void
+name|replay
+parameter_list|(
+name|QueryableFactory
+argument_list|<
+name|T
+argument_list|>
+name|factory
+parameter_list|)
+block|{
+name|factory
+operator|.
+name|single
+argument_list|(
+name|source
+argument_list|,
+name|predicate
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+operator|.
+name|single
+argument_list|()
+return|;
+comment|// CHECKSTYLE: IGNORE 0
+block|}
+annotation|@
+name|Override
+specifier|public
+name|T
+name|singleOrDefault
+parameter_list|(
+specifier|final
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
+name|source
+parameter_list|)
+block|{
+return|return
+operator|new
+name|NonLeafReplayableQueryable
+argument_list|<
+name|T
+argument_list|>
+argument_list|(
+name|source
+argument_list|)
+block|{
+annotation|@
+name|Override
+specifier|public
+name|void
+name|replay
+parameter_list|(
+name|QueryableFactory
+argument_list|<
+name|T
+argument_list|>
+name|factory
+parameter_list|)
+block|{
+name|factory
+operator|.
+name|singleOrDefault
+argument_list|(
+name|source
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+operator|.
+name|single
+argument_list|()
+return|;
+comment|// CHECKSTYLE: IGNORE 0
+block|}
+annotation|@
+name|Override
+specifier|public
+name|T
+name|singleOrDefault
+parameter_list|(
+specifier|final
+name|Queryable
+argument_list|<
+name|T
+argument_list|>
+name|source
+parameter_list|,
+specifier|final
+name|FunctionExpression
+argument_list|<
+name|Predicate1
+argument_list|<
+name|T
+argument_list|>
+argument_list|>
+name|predicate
+parameter_list|)
+block|{
+return|return
+operator|new
+name|NonLeafReplayableQueryable
+argument_list|<
+name|T
+argument_list|>
+argument_list|(
+name|source
+argument_list|)
+block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5680,6 +5992,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -5709,6 +6023,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5733,6 +6049,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -5768,6 +6086,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5792,6 +6112,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -5829,6 +6151,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5853,6 +6177,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|sumBigDecimal
@@ -5885,6 +6211,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5913,6 +6241,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|BigDecimal
 name|sumNullableBigDecimal
@@ -5945,6 +6275,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -5973,6 +6305,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|sumDouble
@@ -6005,6 +6339,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6036,6 +6372,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|sumNullableDouble
@@ -6068,6 +6406,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6099,6 +6439,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|sumInteger
@@ -6131,6 +6473,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6162,6 +6506,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|sumNullableInteger
@@ -6194,6 +6540,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6225,6 +6573,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|sumLong
@@ -6257,6 +6607,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6288,6 +6640,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Long
 name|sumNullableLong
@@ -6320,6 +6674,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6351,6 +6707,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|float
 name|sumFloat
@@ -6383,6 +6741,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6414,6 +6774,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Float
 name|sumNullableFloat
@@ -6446,6 +6808,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6477,6 +6841,8 @@ argument_list|()
 return|;
 comment|// CHECKSTYLE: IGNORE 0
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -6506,6 +6872,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6530,6 +6898,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -6565,6 +6935,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6589,6 +6961,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -6626,6 +7000,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6650,6 +7026,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -6695,6 +7073,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6719,6 +7099,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -6766,6 +7148,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6792,6 +7176,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -6837,6 +7223,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6861,6 +7249,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|TKey
@@ -6908,6 +7298,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6934,6 +7326,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -6966,6 +7360,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -6990,6 +7386,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -7029,6 +7427,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -7055,6 +7455,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -7092,6 +7494,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -7116,6 +7520,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -7155,6 +7561,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay
@@ -7179,6 +7587,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T1
@@ -7230,6 +7640,8 @@ argument_list|(
 name|source
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|replay

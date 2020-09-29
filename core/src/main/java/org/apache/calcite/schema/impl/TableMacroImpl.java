@@ -294,6 +294,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Applies arguments to yield a table.    *    * @param arguments Arguments    * @return Table    */
+annotation|@
+name|Override
 specifier|public
 name|TranslatableTable
 name|apply

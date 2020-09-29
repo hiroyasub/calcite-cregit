@@ -570,6 +570,8 @@ name|region
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1362,6 +1364,8 @@ name|Object
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1448,6 +1452,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1587,6 +1593,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// tzolov: this should never be called for queryable tables???
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<

@@ -70,6 +70,8 @@ block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Microsoft SQL Server version 2008. */
 name|SQL_SERVER_2008
 block|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLiberal
@@ -92,6 +94,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowCharLiteralAlias
@@ -126,6 +130,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isGroupByAlias
@@ -157,6 +163,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isGroupByOrdinal
@@ -188,6 +196,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isHavingAlias
@@ -219,6 +229,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSortByOrdinal
@@ -274,6 +286,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSortByAlias
@@ -317,6 +331,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSortByAliasObscures
@@ -330,6 +346,8 @@ operator|.
 name|STRICT_92
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isFromRequired
@@ -364,6 +382,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|splitQuotedTableName
@@ -386,6 +406,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowHyphenInUnquotedTableName
@@ -408,6 +430,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isBangEqualAllowed
@@ -511,6 +535,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isApplyAllowed
@@ -542,6 +568,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isInsertSubsetColumnsAllowed
@@ -576,6 +604,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowNiladicParentheses
@@ -604,6 +634,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowExplicitRowValueConstructor
@@ -632,6 +664,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowExtend
@@ -657,6 +691,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLimitStartCountAllowed
@@ -685,6 +721,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowGeometry
@@ -719,6 +757,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|shouldConvertRaggedUnionTypesToVarying
@@ -762,6 +802,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowExtendedTrim

@@ -276,6 +276,8 @@ name|reset
 parameter_list|()
 function_decl|;
 comment|/**    * Releases all internal resources utilized while this {@code Planner}    * exists.  Once called, this Planner object is no longer valid.    */
+annotation|@
+name|Override
 name|void
 name|close
 parameter_list|()

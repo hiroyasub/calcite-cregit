@@ -288,6 +288,8 @@ name|RelFactories
 operator|.
 name|TableScanFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|createScan
@@ -336,6 +338,8 @@ name|RelFactories
 operator|.
 name|ProjectFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|createProject
@@ -423,6 +427,8 @@ name|RelFactories
 operator|.
 name|FilterFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|createFilter
@@ -472,6 +478,8 @@ name|RelFactories
 operator|.
 name|SortFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|createSort

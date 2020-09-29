@@ -165,6 +165,8 @@ block|,
 comment|/** Left parenthesis. */
 name|LPAREN
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|sql
@@ -179,6 +181,8 @@ block|,
 comment|/** Right parenthesis. */
 name|RPAREN
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|sql
@@ -203,6 +207,8 @@ name|COMMENT
 block|,
 name|COMMA
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|sql
@@ -1834,6 +1840,8 @@ operator|=
 name|s
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1987,6 +1995,8 @@ name|tokenList
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

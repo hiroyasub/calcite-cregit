@@ -242,6 +242,8 @@ argument_list|)
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -276,6 +278,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Map
 operator|.
@@ -312,6 +316,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -328,6 +334,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -358,6 +366,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// override SqlOperator
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|requiresDecimalExpansion

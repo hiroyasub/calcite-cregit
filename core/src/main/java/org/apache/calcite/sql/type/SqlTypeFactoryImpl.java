@@ -187,6 +187,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -240,6 +242,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -366,6 +370,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -460,6 +466,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createUnknownType
@@ -476,6 +484,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createMultisetType
@@ -511,6 +521,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createArrayType
@@ -546,6 +558,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createMapType
@@ -577,6 +591,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createSqlIntervalType
@@ -605,6 +621,8 @@ name|newType
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createTypeWithCharsetAndCollation
@@ -2732,6 +2750,8 @@ argument_list|)
 return|;
 block|}
 comment|// override RelDataTypeFactoryImpl
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|canonize

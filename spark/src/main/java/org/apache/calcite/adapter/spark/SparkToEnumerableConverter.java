@@ -420,6 +420,8 @@ literal|.01
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement
@@ -600,6 +602,8 @@ operator|=
 name|implementor
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SparkRel
 operator|.
@@ -625,6 +629,8 @@ name|blockStatement
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 name|SparkRel
 operator|.
 name|Result
@@ -670,6 +676,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -682,6 +690,8 @@ name|getTypeFactory
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlConformance
 name|getConformance

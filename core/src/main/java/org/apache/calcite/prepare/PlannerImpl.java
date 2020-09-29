@@ -1073,6 +1073,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelTraitSet
 name|getEmptyTraitSet
@@ -1085,6 +1087,8 @@ name|emptyTraitSet
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -1105,6 +1109,8 @@ operator|.
 name|STATE_0_CLOSED
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -1283,6 +1289,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|parse
@@ -1346,6 +1354,8 @@ return|return
 name|sqlNode
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|validate
@@ -1409,6 +1419,8 @@ return|return
 name|validatedSqlNode
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1464,6 +1476,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelNode
@@ -1482,6 +1496,8 @@ operator|.
 name|rel
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelRoot
 name|rel
@@ -1646,6 +1662,8 @@ name|ViewExpanderImpl
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelRoot
 name|expandView
@@ -2067,6 +2085,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JavaTypeFactory
 name|getTypeFactory
@@ -2076,6 +2096,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|transform

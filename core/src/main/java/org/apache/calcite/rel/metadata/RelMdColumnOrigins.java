@@ -403,6 +403,8 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|MetadataDef
 argument_list|<
@@ -1565,6 +1567,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef

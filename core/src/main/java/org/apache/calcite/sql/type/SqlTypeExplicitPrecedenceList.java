@@ -762,6 +762,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelDataTypePrecedenceList
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|containsType
@@ -792,6 +794,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelDataTypePrecedenceList
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTypePrecedence

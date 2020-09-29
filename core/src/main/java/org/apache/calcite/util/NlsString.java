@@ -328,6 +328,8 @@ name|String
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|String
 name|load
@@ -731,6 +733,8 @@ name|bytesValue
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|clone
@@ -758,6 +762,8 @@ argument_list|()
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -778,6 +784,8 @@ name|collation
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -1131,6 +1139,8 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Returns the string quoted for SQL, for example<code>_ISO-8859-1'is it a    * plane? no it''s superman!'</code>.    */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString

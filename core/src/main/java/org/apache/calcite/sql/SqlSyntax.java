@@ -57,6 +57,8 @@ block|{
 comment|/**    * Function syntax, as in "Foo(x, y)".    */
 name|FUNCTION
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -94,6 +96,8 @@ block|,
 comment|/**    * Function syntax, as in "Foo(x, y)", but uses "*" if there are no arguments,    * for example "COUNT(*)".    */
 name|FUNCTION_STAR
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -131,6 +135,8 @@ block|,
 comment|/**    * Binary operator syntax, as in "x + y".    */
 name|BINARY
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -172,6 +178,8 @@ block|,
 comment|/**    * Prefix unary operator syntax, as in "- x".    */
 name|PREFIX
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -238,6 +246,8 @@ block|,
 comment|/**    * Postfix unary operator syntax, as in "x ++".    */
 name|POSTFIX
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -304,6 +314,8 @@ block|,
 comment|/**    * Special syntax, such as that of the SQL CASE operator, "CASE x WHEN 1    * THEN 2 ELSE 3 END".    */
 name|SPECIAL
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -340,6 +352,8 @@ block|,
 comment|/**    * Function syntax which takes no parentheses if there are no arguments, for    * example "CURRENTTIME".    *    * @see SqlConformance#allowNiladicParentheses()    */
 name|FUNCTION_ID
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -377,6 +391,8 @@ block|,
 comment|/**    * Syntax of an internal operator, which does not appear in the SQL.    */
 name|INTERNAL
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

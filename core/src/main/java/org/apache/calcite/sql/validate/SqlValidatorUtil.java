@@ -5540,6 +5540,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -5587,6 +5589,8 @@ return|;
 block|}
 comment|// Override to copy all arguments regardless of whether visitor changes
 comment|// them.
+annotation|@
+name|Override
 specifier|protected
 name|SqlNode
 name|visitScoped
@@ -5632,6 +5636,8 @@ name|result
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -5649,6 +5655,8 @@ name|literal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -5702,6 +5710,8 @@ operator|.
 name|identifier
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -5719,6 +5729,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -5736,6 +5748,8 @@ name|param
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit

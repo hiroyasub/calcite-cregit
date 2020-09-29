@@ -184,6 +184,8 @@ literal|"'"
 return|;
 block|}
 comment|/**    * Returns e.g. '1969-07-21'.    */
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toFormattedString
@@ -197,6 +199,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -215,6 +219,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

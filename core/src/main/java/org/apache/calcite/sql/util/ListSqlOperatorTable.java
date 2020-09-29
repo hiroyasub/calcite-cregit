@@ -205,6 +205,8 @@ name|op
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|lookupOperatorOverloads
@@ -345,6 +347,8 @@ name|SYSTEM
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

@@ -333,6 +333,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"MethodDoesntCallSuperMethod"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|clone
@@ -496,6 +498,8 @@ return|return
 name|clones
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString

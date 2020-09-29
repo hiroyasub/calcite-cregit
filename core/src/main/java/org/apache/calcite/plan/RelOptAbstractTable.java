@@ -296,6 +296,8 @@ return|return
 name|name
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -313,6 +315,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRowCount
@@ -322,6 +326,8 @@ return|return
 literal|100
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -331,6 +337,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptSchema
 name|getRelOptSchema
@@ -341,6 +349,8 @@ name|schema
 return|;
 block|}
 comment|// Override to define collations.
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -356,6 +366,8 @@ name|emptyList
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistribution
 name|getDistribution
@@ -367,6 +379,8 @@ operator|.
 name|BROADCAST_DISTRIBUTED
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -400,6 +414,8 @@ literal|null
 return|;
 block|}
 comment|// Override to define keys
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKey
@@ -413,6 +429,8 @@ literal|false
 return|;
 block|}
 comment|// Override to get unique keys
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -429,6 +447,8 @@ argument_list|()
 return|;
 block|}
 comment|// Override to define foreign keys
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -444,6 +464,8 @@ name|emptyList
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel
@@ -471,6 +493,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -483,6 +507,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptTable
 name|extend
@@ -500,6 +526,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

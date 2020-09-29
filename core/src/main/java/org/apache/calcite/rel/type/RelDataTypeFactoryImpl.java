@@ -758,6 +758,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeSystem
 name|getTypeSystem
@@ -768,6 +770,8 @@ name|typeSystem
 return|;
 block|}
 comment|// implement RelDataTypeFactory
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createJavaType
@@ -815,6 +819,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelDataTypeFactory
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createJoinType
@@ -876,6 +882,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createStructType
@@ -908,6 +916,8 @@ name|fieldNameList
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createStructType
@@ -998,6 +1008,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createStructType
@@ -1102,6 +1114,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|RelDataType
@@ -1258,6 +1272,8 @@ name|nullable
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|leastRestrictive
@@ -1453,6 +1469,8 @@ name|RelDataType
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|get
@@ -1481,6 +1499,8 @@ name|getType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1718,6 +1738,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelDataTypeFactory
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|copyType
@@ -1739,6 +1761,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement RelDataTypeFactory
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createTypeWithNullability
@@ -2329,6 +2353,8 @@ return|;
 block|}
 comment|/**    * Delegates to    * {@link RelDataTypeSystem#deriveDecimalMultiplyType(RelDataTypeFactory, RelDataType, RelDataType)}    * to get the return type for the operation.    */
 annotation|@
+name|Override
+annotation|@
 name|Deprecated
 specifier|public
 name|RelDataType
@@ -2357,6 +2383,8 @@ block|}
 comment|/**    * Delegates to    * {@link RelDataTypeSystem#shouldUseDoubleMultiplication(RelDataTypeFactory, RelDataType, RelDataType)}    * to get if double should be used for multiplication.    */
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|useDoubleMultiplication
@@ -2383,6 +2411,8 @@ return|;
 block|}
 comment|/**    * Delegates to    * {@link RelDataTypeSystem#deriveDecimalDivideType(RelDataTypeFactory, RelDataType, RelDataType)}    * to get the return type for the operation.    */
 annotation|@
+name|Override
+annotation|@
 name|Deprecated
 specifier|public
 name|RelDataType
@@ -2408,6 +2438,8 @@ name|type2
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|decimalOf
@@ -2616,6 +2648,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Charset
 name|getDefaultCharset
@@ -2633,6 +2667,8 @@ name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
+annotation|@
+name|Override
 specifier|public
 name|FieldInfoBuilder
 name|builder
@@ -2791,6 +2827,8 @@ return|return
 name|clazz
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isNullable
@@ -2827,6 +2865,8 @@ else|:
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|generateTypeString
@@ -2860,6 +2900,8 @@ literal|")"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getComponentType
@@ -2969,6 +3011,8 @@ literal|null
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Charset
 name|getCharset
@@ -2980,6 +3024,8 @@ operator|.
 name|charset
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCollation
 name|getCollation
@@ -2991,6 +3037,8 @@ operator|.
 name|collation
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTypeName
 name|getSqlTypeName

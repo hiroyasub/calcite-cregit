@@ -337,6 +337,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Returns function that implements given operator call.    * @return function that implements given operator call    */
+annotation|@
+name|Override
 specifier|public
 name|TableFunction
 name|getFunction

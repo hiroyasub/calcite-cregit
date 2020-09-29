@@ -852,6 +852,8 @@ operator|.
 name|rel
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -920,6 +922,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -941,6 +945,8 @@ name|makeZeroCost
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|estimateRowCount

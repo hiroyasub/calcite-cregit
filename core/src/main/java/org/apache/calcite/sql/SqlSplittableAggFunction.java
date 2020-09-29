@@ -372,6 +372,8 @@ operator|new
 name|CountSplitter
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|split
@@ -394,6 +396,8 @@ name|mapping
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|other
@@ -445,6 +449,8 @@ literal|null
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|topSplit
@@ -636,6 +642,8 @@ argument_list|)
 return|;
 block|}
 comment|/**      * {@inheritDoc}      *      *<p>{@code COUNT(*)}, and {@code COUNT} applied to all NOT NULL arguments,      * become {@code 1}; otherwise      * {@code CASE WHEN arg0 IS NOT NULL THEN 1 ELSE 0 END}.      */
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|singleton
@@ -799,6 +807,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|merge
@@ -923,6 +933,8 @@ operator|new
 name|SelfSplitter
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|singleton
@@ -979,6 +991,8 @@ name|arg
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|split
@@ -1001,6 +1015,8 @@ name|mapping
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|other
@@ -1017,6 +1033,8 @@ literal|null
 return|;
 comment|// no aggregate function required on other side
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|topSplit
@@ -1103,6 +1121,8 @@ name|EMPTY
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|merge
@@ -1196,6 +1216,8 @@ name|AbstractSumSplitter
 implements|implements
 name|SqlSplittableAggFunction
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|singleton
@@ -1282,6 +1304,8 @@ name|arg
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|split
@@ -1304,6 +1328,8 @@ name|mapping
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|other
@@ -1355,6 +1381,8 @@ literal|null
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|topSplit
@@ -1593,6 +1621,8 @@ name|name
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|AggregateCall
 name|merge

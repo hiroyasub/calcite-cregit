@@ -215,6 +215,8 @@ operator|=
 name|upper
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|lower
@@ -224,6 +226,8 @@ return|return
 name|lower
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|long
 name|upper
@@ -233,6 +237,8 @@ return|return
 name|upper
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|IndexRangeTuple
 name|tuple
@@ -275,6 +281,8 @@ name|upper
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contained
@@ -327,6 +335,8 @@ name|upper
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|contained
@@ -365,6 +375,8 @@ argument_list|<
 name|IndexRange
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compare

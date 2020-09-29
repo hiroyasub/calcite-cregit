@@ -29,6 +29,8 @@ name|SqlAbstractConformance
 implements|implements
 name|SqlConformance
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLiberal
@@ -43,6 +45,8 @@ name|isLiberal
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowCharLiteralAlias
@@ -57,6 +61,8 @@ name|allowCharLiteralAlias
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isGroupByAlias
@@ -71,6 +77,8 @@ name|isGroupByAlias
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isGroupByOrdinal
@@ -85,6 +93,8 @@ name|isGroupByOrdinal
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isHavingAlias
@@ -99,6 +109,8 @@ name|isHavingAlias
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSortByOrdinal
@@ -113,6 +125,8 @@ name|isSortByOrdinal
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSortByAlias
@@ -127,6 +141,8 @@ name|isSortByAlias
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSortByAliasObscures
@@ -141,6 +157,8 @@ name|isSortByAliasObscures
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isFromRequired
@@ -155,6 +173,8 @@ name|isFromRequired
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|splitQuotedTableName
@@ -169,6 +189,8 @@ name|splitQuotedTableName
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowHyphenInUnquotedTableName
@@ -183,6 +205,8 @@ name|allowHyphenInUnquotedTableName
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isBangEqualAllowed
@@ -197,6 +221,8 @@ name|isBangEqualAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isMinusAllowed
@@ -211,6 +237,8 @@ name|isMinusAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isApplyAllowed
@@ -225,6 +253,8 @@ name|isApplyAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isInsertSubsetColumnsAllowed
@@ -239,6 +269,8 @@ name|isInsertSubsetColumnsAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowNiladicParentheses
@@ -253,6 +285,8 @@ name|allowNiladicParentheses
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowExplicitRowValueConstructor
@@ -267,6 +301,8 @@ name|allowExplicitRowValueConstructor
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowExtend
@@ -281,6 +317,8 @@ name|allowExtend
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isLimitStartCountAllowed
@@ -295,6 +333,8 @@ name|isLimitStartCountAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isPercentRemainderAllowed
@@ -309,6 +349,8 @@ name|isPercentRemainderAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowGeometry
@@ -323,6 +365,8 @@ name|allowGeometry
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|shouldConvertRaggedUnionTypesToVarying
@@ -337,6 +381,8 @@ name|shouldConvertRaggedUnionTypesToVarying
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowExtendedTrim
@@ -351,6 +397,8 @@ name|allowExtendedTrim
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowPluralTimeUnits
@@ -365,6 +413,8 @@ name|allowPluralTimeUnits
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowQualifyingCommonColumn
@@ -379,6 +429,8 @@ name|allowQualifyingCommonColumn
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|allowAliasUnnestItems

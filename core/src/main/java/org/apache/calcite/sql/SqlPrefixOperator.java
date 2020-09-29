@@ -218,6 +218,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -229,6 +231,8 @@ operator|.
 name|PREFIX
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -249,6 +253,8 @@ return|return
 literal|"{0}{1}"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|adjustType

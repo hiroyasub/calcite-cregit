@@ -1299,6 +1299,8 @@ name|RexLiteral
 argument_list|>
 name|literalList
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef

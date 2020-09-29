@@ -648,6 +648,8 @@ operator|new
 name|SqlOperandTypeChecker
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -671,6 +673,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -680,6 +684,8 @@ return|return
 name|range
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -697,6 +703,8 @@ operator|+
 literal|"(...)"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -709,6 +717,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency
@@ -1224,7 +1234,8 @@ name|i
 lambda|->
 literal|false
 argument_list|)
-block|{
+block|{         @
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType
@@ -1284,11 +1295,11 @@ operator|(
 name|SqlLiteral
 operator|)
 name|node
-decl_stmt|;
-specifier|final
+block|;
+name|final
 name|BigDecimal
 name|value
-init|=
+operator|=
 operator|(
 name|BigDecimal
 operator|)
@@ -1296,7 +1307,7 @@ name|arg
 operator|.
 name|getValue
 argument_list|()
-decl_stmt|;
+block|;
 if|if
 condition|(
 name|value
@@ -1340,29 +1351,15 @@ argument_list|()
 argument_list|)
 argument_list|)
 throw|;
-block|}
-return|return
-literal|false
-return|;
-block|}
-if|if
-condition|(
-name|value
-operator|.
-name|compareTo
-argument_list|(
-name|BigDecimal
-operator|.
-name|valueOf
-argument_list|(
-name|Integer
-operator|.
-name|MAX_VALUE
-argument_list|)
-argument_list|)
+block_content|}
+block|return false
+empty_stmt|;
+block_content|}
+block|if (value.compareTo(BigDecimal.valueOf(Integer.MAX_VALUE
+block|))
 operator|>
 literal|0
-condition|)
+init|)
 block|{
 if|if
 condition|(
@@ -2200,7 +2197,8 @@ name|i
 lambda|->
 literal|false
 argument_list|)
-block|{
+block|{         @
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -2233,15 +2231,11 @@ block|return SAME_SAME.checkOperandTypes(callBinding
 operator|,
 name|throwOnFailure
 block|)
-empty_stmt|;
+block|;         }
 end_decl_stmt
 
-begin_empty_stmt
-unit|}       }
-empty_stmt|;
-end_empty_stmt
-
 begin_decl_stmt
+unit|};
 specifier|public
 specifier|static
 specifier|final
@@ -2357,6 +2351,8 @@ name|typeNamePredicate
 operator|=
 name|predicate
 block|;     }
+expr|@
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType
@@ -2472,6 +2468,8 @@ block_content|}
 block|return !validationError
 empty_stmt|;
 block|}
+expr|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -2504,6 +2502,8 @@ block|}
 end_decl_stmt
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -2521,6 +2521,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -2536,6 +2538,8 @@ block|}
 end_function
 
 begin_function
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency
@@ -2671,6 +2675,8 @@ operator|new
 name|SqlSingleOperandTypeChecker
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType
@@ -2761,6 +2767,8 @@ operator|!
 name|validationError
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -2790,6 +2798,8 @@ name|throwOnFailure
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -2804,6 +2814,8 @@ literal|1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -2833,6 +2845,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -2845,6 +2859,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency
@@ -2872,6 +2888,8 @@ name|PeriodOperandTypeChecker
 implements|implements
 name|SqlSingleOperandTypeChecker
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkSingleOperandType
@@ -3038,6 +3056,8 @@ return|return
 name|valid
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -3067,6 +3087,8 @@ name|throwOnFailure
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -3081,6 +3103,8 @@ literal|1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -3112,6 +3136,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isOptional
@@ -3124,6 +3150,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Consistency
 name|getConsistency

@@ -90,6 +90,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlMonikerType
 name|getType
@@ -101,6 +103,8 @@ operator|.
 name|COLUMN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -115,6 +119,8 @@ operator|.
 name|names
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlIdentifier
 name|toIdentifier
@@ -124,6 +130,8 @@ return|return
 name|id
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -136,6 +144,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|id

@@ -341,6 +341,8 @@ name|negated
 expr_stmt|;
 block|}
 comment|// ~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -357,6 +359,8 @@ literal|3
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlCall
 name|createCall
@@ -437,6 +441,8 @@ name|functionQualifier
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -554,6 +560,8 @@ name|throwOnFailure
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

@@ -149,6 +149,8 @@ parameter_list|()
 block|{
 block|}
 comment|// Default implementation. Override if you have statistics.
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -160,6 +162,8 @@ operator|.
 name|UNKNOWN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.
@@ -175,6 +179,8 @@ operator|.
 name|TABLE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|C

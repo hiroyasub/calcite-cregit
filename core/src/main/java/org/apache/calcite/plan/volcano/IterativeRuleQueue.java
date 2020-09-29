@@ -241,6 +241,8 @@ name|empty
 return|;
 block|}
 comment|/**    * Add a rule match.    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addMatch

@@ -135,6 +135,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|accept
@@ -198,6 +200,8 @@ name|nodeType
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Node
 name|accept

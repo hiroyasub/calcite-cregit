@@ -606,6 +606,8 @@ name|implementor
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -632,6 +634,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -705,6 +709,8 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CallImplementor
 name|getImplementor
@@ -735,6 +741,8 @@ argument_list|(
 name|method
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|implement

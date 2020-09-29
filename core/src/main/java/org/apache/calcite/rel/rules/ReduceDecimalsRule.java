@@ -723,6 +723,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**      * Rewrites a call in place, from bottom up. Algorithm is as follows:      *      *<ol>      *<li>visit operands      *<li>visit call node      *      *<ol>      *<li>rewrite call      *<li>visit the rewritten call      *</ol>      *</ol>      */
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -2539,6 +2541,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RexExpander
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -3973,6 +3977,8 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -4168,6 +4174,8 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -4362,6 +4370,8 @@ name|rexBuilder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -4588,6 +4598,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|expand
@@ -4731,6 +4743,8 @@ name|builder
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getArgType

@@ -1878,6 +1878,8 @@ argument_list|()
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|StringEscaper
 name|clone

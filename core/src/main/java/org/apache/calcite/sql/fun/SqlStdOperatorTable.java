@@ -2881,6 +2881,8 @@ operator|.
 name|ANY
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|argumentMustBeScalar
@@ -4614,6 +4616,8 @@ operator|.
 name|REINTERPRET
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -5577,6 +5581,8 @@ operator|.
 name|NUMERIC
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|SqlSyntax
 name|getSyntax
@@ -6412,6 +6418,8 @@ operator|.
 name|MULTISET
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -6474,6 +6482,8 @@ operator|.
 name|RECORD_TO_SCALAR
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -6530,6 +6540,8 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|argumentMustBeScalar
@@ -6831,6 +6843,8 @@ operator|.
 name|VARIADIC
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse

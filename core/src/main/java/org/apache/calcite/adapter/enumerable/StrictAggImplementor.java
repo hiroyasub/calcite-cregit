@@ -284,6 +284,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|List
@@ -477,6 +479,8 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -649,6 +653,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -926,6 +932,8 @@ name|AggAddContext
 name|add
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|Expression

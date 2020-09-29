@@ -2620,6 +2620,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 index|[]
@@ -2639,6 +2641,8 @@ index|]
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getRawType
@@ -2648,6 +2652,8 @@ return|return
 name|rawType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Type
 name|getOwnerType

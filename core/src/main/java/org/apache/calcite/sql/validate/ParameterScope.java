@@ -137,6 +137,8 @@ name|nameToTypeMap
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|SqlQualified
 name|fullyQualify
@@ -160,6 +162,8 @@ name|identifier
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getOperandScope

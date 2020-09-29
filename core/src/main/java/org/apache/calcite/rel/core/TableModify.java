@@ -669,6 +669,8 @@ return|return
 name|catalogReader
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptTable
 name|getTable

@@ -327,6 +327,8 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Override
+annotation|@
 name|Nonnull
 specifier|public
 name|Type
@@ -460,6 +462,8 @@ name|writeEndObject
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nonnull
 specifier|public

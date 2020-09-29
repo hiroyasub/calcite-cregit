@@ -303,6 +303,8 @@ argument_list|)
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -401,6 +403,8 @@ operator|^
 name|valueHash
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|compareTo
@@ -461,6 +465,8 @@ return|return
 name|c
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -478,6 +484,8 @@ operator|+
 literal|">"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T1
 name|getKey
@@ -487,6 +495,8 @@ return|return
 name|left
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T2
 name|getValue
@@ -496,6 +506,8 @@ return|return
 name|right
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|T2
 name|setValue
@@ -858,6 +870,8 @@ argument_list|>
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -888,6 +902,8 @@ index|]
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -1535,6 +1551,8 @@ operator|=
 name|first
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1547,6 +1565,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1569,6 +1589,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -1666,6 +1688,8 @@ name|rightIterator
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1683,6 +1707,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1710,6 +1736,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -1796,6 +1824,8 @@ operator|=
 name|first
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1808,6 +1838,8 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1851,6 +1883,8 @@ return|return
 name|pair
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -1944,6 +1978,8 @@ operator|=
 name|size
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Pair
 argument_list|<
@@ -1978,6 +2014,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size

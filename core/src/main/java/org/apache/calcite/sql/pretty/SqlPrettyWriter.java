@@ -920,6 +920,8 @@ expr_stmt|;
 block|}
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getIndentation
@@ -934,6 +936,8 @@ return|;
 block|}
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isAlwaysUseParentheses
@@ -946,6 +950,8 @@ name|alwaysUseParentheses
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|inQuery
@@ -991,6 +997,8 @@ return|;
 block|}
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isQuoteAllIdentifiers
@@ -1005,6 +1013,8 @@ return|;
 block|}
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isClauseStartsLine
@@ -1019,6 +1029,8 @@ return|;
 block|}
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSelectListItemsOnSeparateLines
@@ -1061,6 +1073,8 @@ return|;
 block|}
 annotation|@
 name|Deprecated
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKeywordsLowerCase
@@ -1087,6 +1101,8 @@ name|lineLength
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|resetSettings
@@ -1101,6 +1117,8 @@ name|config
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -1485,6 +1503,8 @@ name|alwaysUseParentheses
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|newlineAndIndent
@@ -2448,6 +2468,8 @@ argument_list|,
 literal|false
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|void
 name|sep
@@ -3030,6 +3052,8 @@ return|return
 name|frame
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|endList
@@ -3232,6 +3256,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3244,6 +3270,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlString
 name|toSqlString
@@ -3283,6 +3311,8 @@ name|dynamicParameters
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlDialect
 name|getDialect
@@ -3292,6 +3322,8 @@ return|return
 name|dialect
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|literal
@@ -3311,6 +3343,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|keyword
@@ -3622,6 +3656,8 @@ return|return
 name|result
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|print
@@ -3643,6 +3679,8 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|print
@@ -3664,6 +3702,8 @@ name|x
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|identifier
@@ -3759,6 +3799,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|fetchOffset
@@ -3795,6 +3837,8 @@ name|fetch
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|topN
@@ -3831,6 +3875,8 @@ name|fetch
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Frame
 name|startFunCall
@@ -3862,6 +3908,8 @@ literal|")"
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|endFunCall
@@ -3878,6 +3926,8 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Frame
 name|startList
@@ -3904,6 +3954,8 @@ name|close
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Frame
 name|startList
@@ -3930,6 +3982,8 @@ literal|""
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Frame
 name|startList
@@ -3962,6 +4016,8 @@ name|close
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWriter
 name|list
@@ -4013,6 +4069,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWriter
 name|list
@@ -4061,6 +4119,8 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|sep
@@ -4092,6 +4152,8 @@ operator|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|sep
@@ -4153,6 +4215,8 @@ name|sep
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setNeedWhitespace

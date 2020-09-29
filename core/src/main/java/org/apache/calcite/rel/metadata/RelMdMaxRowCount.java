@@ -393,6 +393,8 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|MetadataDef
 argument_list|<

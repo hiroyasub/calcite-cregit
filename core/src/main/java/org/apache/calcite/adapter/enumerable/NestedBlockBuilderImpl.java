@@ -92,6 +92,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Starts nested code block. The resulting block can optimize expressions    * and reuse already calculated values from the parent blocks.    * @return new code block that can optimize expressions and reuse already    * calculated values from the parent blocks.    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|BlockBuilder
@@ -120,6 +122,8 @@ name|block
 return|;
 block|}
 comment|/**    * Uses given block as the new code context.    * The current block will be restored after {@link #exitBlock()} call.    * @param block new code block    * @see #exitBlock()    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -138,6 +142,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Returns the current code block.    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|BlockBuilder
@@ -159,6 +165,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Leaves the current code block.    * @see #nestBlock()    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void

@@ -555,6 +555,8 @@ operator|new
 name|StringBuilder
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|String
 name|current
@@ -578,6 +580,8 @@ name|toString
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -640,6 +644,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -651,6 +657,8 @@ operator|-
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

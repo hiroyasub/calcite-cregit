@@ -273,6 +273,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlSelect
 name|getNode
@@ -282,6 +284,8 @@ return|return
 name|select
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWindow
 name|lookupWindow
@@ -391,6 +395,8 @@ literal|null
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -528,6 +534,8 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNodeList
 name|getOrderList

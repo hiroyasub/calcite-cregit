@@ -85,6 +85,8 @@ operator|=
 name|enumerator
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|Getter
 name|createGetter
@@ -101,6 +103,8 @@ name|ordinal
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|Object
 name|current
@@ -113,6 +117,8 @@ name|current
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|next
@@ -125,6 +131,8 @@ name|moveNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

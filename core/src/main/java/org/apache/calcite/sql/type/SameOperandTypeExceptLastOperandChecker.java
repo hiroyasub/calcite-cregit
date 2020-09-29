@@ -180,6 +180,8 @@ name|lastOperandTypeName
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|checkOperandTypesImpl
@@ -437,6 +439,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getAllowedSignatures

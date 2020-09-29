@@ -64,6 +64,8 @@ name|RexNode
 argument_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitOver
@@ -330,6 +332,8 @@ name|rows
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitSubQuery
@@ -418,6 +422,8 @@ return|return
 name|fieldRef
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCall
@@ -775,6 +781,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitCorrelVariable
@@ -787,6 +795,8 @@ return|return
 name|variable
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitFieldAccess
@@ -840,6 +850,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -852,6 +864,8 @@ return|return
 name|inputRef
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -864,6 +878,8 @@ return|return
 name|localRef
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLiteral
@@ -876,6 +892,8 @@ return|return
 name|literal
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitDynamicParam
@@ -888,6 +906,8 @@ return|return
 name|dynamicParam
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitRangeRef

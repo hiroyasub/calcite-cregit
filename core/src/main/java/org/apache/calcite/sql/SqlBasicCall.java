@@ -179,6 +179,8 @@ operator|=
 name|functionQualifier
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlKind
 name|getKind
@@ -243,6 +245,8 @@ name|operator
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperator
 name|getOperator
@@ -262,6 +266,8 @@ return|return
 name|operands
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

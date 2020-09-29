@@ -345,6 +345,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/** Produces the next row from the results.    *    * @return A new row from the results    */
+annotation|@
+name|Override
 specifier|public
 name|Object
 name|current
@@ -674,6 +676,8 @@ return|return
 name|obj
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -705,6 +709,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -716,6 +722,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close

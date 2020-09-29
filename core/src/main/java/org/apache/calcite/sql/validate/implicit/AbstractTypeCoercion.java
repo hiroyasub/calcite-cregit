@@ -1532,6 +1532,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Case1: type widening with no precision loss.    * Find the tightest common type of two types that might be used in binary expression.    *    * @return tightest common type, i.e. INTEGER + DECIMAL(10, 2) returns DECIMAL(10, 2)    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getTightestCommonType
@@ -2187,6 +2189,8 @@ name|resultType
 return|;
 block|}
 comment|/**    * Determines common type for a comparison operator when one operand is String type and the    * other is not. For date + timestamp operands, use timestamp as common type,    * i.e. Timestamp(2017-01-01 00:00 ...)&gt; Date(2018) evaluates to be false.    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|commonTypeForBinaryComparison
@@ -2517,6 +2521,8 @@ literal|null
 return|;
 block|}
 comment|/**    * Case2: type widening. The main difference with {@link #getTightestCommonType}    * is that we allow some precision loss when widening decimal to fractional,    * or promote fractional to string type.    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getWiderTypeForTwo
@@ -2646,6 +2652,8 @@ name|resultType
 return|;
 block|}
 comment|/**    * Finds a wider type when one or both types are decimal type.    * If the wider decimal type's precision/scale exceeds system limitation,    * this rule will truncate the decimal type to the max precision/scale.    * For decimal and fractional types, returns a decimal type    * which has the higher precision of the two.    *    *<p>The default implementation depends on the max precision/scale of the type system,    * you can override it based on the specific system requirement in    * {@link org.apache.calcite.rel.type.RelDataTypeSystem}.    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getWiderTypeForDecimal
@@ -2722,6 +2730,8 @@ literal|null
 return|;
 block|}
 comment|/**    * Similar to {@link #getWiderTypeForTwo}, but can handle    * sequence types. {@link #getWiderTypeForTwo} doesn't satisfy the associative law,    * i.e. (a op b) op c may not equal to a op (b op c). This is only a problem for STRING type or    * nested STRING type in collection type like ARRAY. Excluding these types,    * {@link #getWiderTypeForTwo} satisfies the associative law. For instance,    * (DATE, INTEGER, VARCHAR) should have VARCHAR as the wider common type.    */
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getWiderTypeFor

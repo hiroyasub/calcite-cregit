@@ -844,6 +844,8 @@ name|program
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Result
 name|implement
@@ -1712,6 +1714,8 @@ name|traitSet
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexProgram
 name|getProgram

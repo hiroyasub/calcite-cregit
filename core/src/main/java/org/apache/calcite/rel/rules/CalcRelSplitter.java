@@ -2028,6 +2028,8 @@ argument_list|(
 literal|true
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLocalRef
@@ -3172,6 +3174,8 @@ operator|=
 name|name
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -3421,6 +3425,8 @@ operator|=
 name|relType
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitCall
@@ -3450,6 +3456,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitDynamicParam
@@ -3479,6 +3487,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitFieldAccess
@@ -3508,6 +3518,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLiteral
@@ -3651,6 +3663,8 @@ operator|=
 name|allExprs
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitInputRef
@@ -3689,6 +3703,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|visitLocalRef
@@ -3837,6 +3853,8 @@ operator|=
 name|exprLevels
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLocalRef
@@ -4024,6 +4042,8 @@ return|return
 name|maxUsingLevelOrdinals
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitLocalRef

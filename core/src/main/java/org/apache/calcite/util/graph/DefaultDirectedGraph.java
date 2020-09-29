@@ -386,6 +386,8 @@ operator|+
 literal|")"
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addVertex
@@ -427,6 +429,8 @@ literal|true
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -444,6 +448,8 @@ name|edges
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|addEdge
@@ -573,6 +579,8 @@ literal|null
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|E
 name|getEdge
@@ -632,6 +640,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|removeEdge
@@ -819,6 +829,8 @@ return|return
 name|outRemoved
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -834,6 +846,8 @@ name|keySet
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|removeAllVertices
@@ -1182,6 +1196,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -1204,6 +1220,8 @@ operator|.
 name|outEdges
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<

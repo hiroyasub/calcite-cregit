@@ -2279,6 +2279,8 @@ operator|=
 name|refCounts
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Void
 name|visitInputRef

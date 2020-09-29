@@ -2197,6 +2197,8 @@ name|sqlConformance
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorCatalogReader
 name|getCatalogReader
@@ -2206,6 +2208,8 @@ return|return
 name|catalogReader
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlOperatorTable
 name|getOperatorTable
@@ -2215,6 +2219,8 @@ return|return
 name|opTab
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -2224,6 +2230,8 @@ return|return
 name|typeFactory
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getUnknownType
@@ -2233,6 +2241,8 @@ return|return
 name|unknownType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNodeList
 name|expandStar
@@ -2370,6 +2380,8 @@ argument_list|)
 return|;
 block|}
 comment|// implement SqlValidator
+annotation|@
+name|Override
 specifier|public
 name|void
 name|declareCursor
@@ -2496,6 +2508,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement SqlValidator
+annotation|@
+name|Override
 specifier|public
 name|void
 name|pushFunctionCall
@@ -2517,6 +2531,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement SqlValidator
+annotation|@
+name|Override
 specifier|public
 name|void
 name|popFunctionCall
@@ -2529,6 +2545,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|// implement SqlValidator
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getParentCursor
@@ -4271,6 +4289,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|validate
@@ -4334,6 +4354,8 @@ return|return
 name|topNode2
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -4461,6 +4483,8 @@ name|hintList
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMoniker
 name|lookupQualifiedName
@@ -5635,6 +5659,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|validateParameterizedExpression
@@ -5786,6 +5812,8 @@ return|return
 name|outermostNode
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateQuery
@@ -6051,6 +6079,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getWhereScope
@@ -6077,6 +6107,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getSelectScope
@@ -6103,6 +6135,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SelectScope
 name|getRawSelectScope
@@ -6146,6 +6180,8 @@ operator|)
 name|scope
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getHavingScope
@@ -6173,6 +6209,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getGroupScope
@@ -6200,6 +6238,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getFromScope
@@ -6217,6 +6257,8 @@ name|select
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getOrderScope
@@ -6243,6 +6285,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getMatchRecognizeScope
@@ -6260,6 +6304,8 @@ name|node
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getJoinScope
@@ -6280,6 +6326,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getOverScope
@@ -6594,6 +6642,8 @@ name|id
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorNamespace
 name|getNamespace
@@ -9031,6 +9081,8 @@ name|rowTypes
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getValidatedNodeType
@@ -9070,6 +9122,8 @@ name|type
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getValidatedNodeTypeIfKnown
@@ -9177,6 +9231,8 @@ literal|null
 return|;
 block|}
 comment|/**    * Saves the type of a {@link SqlNode}, now that it has been validated.    *    *<p>Unlike the base class method, this method is not deprecated.    * It is available from within Calcite, but is not part of the public API.    *    * @param node A SQL parse tree node, never null    * @param type Its type; must not be null    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -9227,6 +9283,8 @@ name|type
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|removeValidatedNodeType
@@ -9243,6 +9301,8 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 annotation|@
 name|Nullable
 specifier|public
@@ -9356,6 +9416,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveType
@@ -9504,6 +9566,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveConstructorType
@@ -9721,6 +9785,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteException
 name|handleUnresolvedFunction
@@ -10642,6 +10708,8 @@ name|exp
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|deriveAlias
@@ -14080,6 +14148,8 @@ name|checkUpdate
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isAggregate
@@ -14718,6 +14788,8 @@ name|operand
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateIdentifier
@@ -14773,6 +14845,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateLiteral
@@ -15180,6 +15254,8 @@ throw|;
 block|}
 comment|// REVIEW jvs 4-Aug-2004:  what about underflow?
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateIntervalQualifier
@@ -18215,6 +18291,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|validateModality
@@ -19057,6 +19135,8 @@ name|windowScope
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateWith
@@ -19085,6 +19165,8 @@ name|unknownType
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateWithItem
@@ -19224,6 +19306,8 @@ throw|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateSequenceValue
@@ -19366,6 +19450,8 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidatorScope
 name|getWithScope
@@ -19393,6 +19479,8 @@ name|withItem
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|TypeCoercion
 name|getTypeCoercion
@@ -19410,6 +19498,8 @@ operator|.
 name|typeCoercion
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Config
 name|config
@@ -19421,6 +19511,8 @@ operator|.
 name|config
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlValidator
 name|transform
@@ -19775,6 +19867,8 @@ name|orderScope
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|expandOrderExpr
@@ -21313,6 +21407,8 @@ name|fields
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateInsert
@@ -23219,6 +23315,8 @@ return|;
 comment|// give up
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateDelete
@@ -23283,6 +23381,8 @@ name|DELETE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateUpdate
@@ -23438,6 +23538,8 @@ name|UPDATE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateMerge
@@ -24214,6 +24316,8 @@ name|RelDataType
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|get
@@ -24249,6 +24353,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|size
@@ -24290,6 +24396,8 @@ block|}
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateDataType
@@ -24299,6 +24407,8 @@ name|dataType
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateDynamicParam
@@ -24360,6 +24470,8 @@ operator|=
 name|validatorException
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteContextException
 name|get
@@ -24430,6 +24542,8 @@ return|return
 name|validationErrorFunction
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteContextException
 name|newValidationError
@@ -24542,6 +24656,8 @@ return|return
 name|window
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlWindow
 name|resolveWindow
@@ -24777,6 +24893,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateWindow
@@ -27132,6 +27250,8 @@ return|return
 name|node
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateAggregateParams
@@ -27419,6 +27539,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateCall
@@ -27659,6 +27781,8 @@ return|return
 name|newExpr
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|expand
@@ -27775,6 +27899,8 @@ return|return
 name|newExpr
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isSystemField
@@ -27787,6 +27913,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -28115,6 +28243,8 @@ literal|null
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getParameterRowType
@@ -28250,6 +28380,8 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|validateColumnListParams
@@ -28510,6 +28642,8 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlInsert
 name|getNode
@@ -28574,6 +28708,8 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlUpdate
 name|getNode
@@ -28638,6 +28774,8 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlDelete
 name|getNode
@@ -28702,6 +28840,8 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMerge
 name|getNode
@@ -28944,6 +29084,8 @@ operator|=
 name|scope
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -28961,6 +29103,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -28993,6 +29137,8 @@ name|call
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -29014,6 +29160,8 @@ name|nodeList
 argument_list|)
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -29451,6 +29599,8 @@ return|return
 name|type
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -29478,6 +29628,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -29490,6 +29642,8 @@ return|return
 name|unknownType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|visit
@@ -29897,6 +30051,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -30095,6 +30251,8 @@ name|pos
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit
@@ -30203,6 +30361,8 @@ operator|.
 name|identifier
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|SqlNode
 name|visitScoped
@@ -30675,6 +30835,8 @@ name|id
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|visit

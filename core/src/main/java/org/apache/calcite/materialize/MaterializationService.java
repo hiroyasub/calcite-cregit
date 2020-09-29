@@ -1990,6 +1990,8 @@ name|DefaultTableFactory
 implements|implements
 name|TableFactory
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|createTable
@@ -2114,7 +2116,8 @@ argument_list|<
 name|Object
 argument_list|>
 argument_list|()
-block|{
+block|{             @
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -2153,6 +2156,8 @@ name|enumerator
 argument_list|()
 return|;
 block|}
+expr|@
+name|Override
 specifier|public
 name|Type
 name|getElementType
@@ -2164,38 +2169,43 @@ operator|.
 name|class
 return|;
 block|}
+expr|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
-parameter_list|()
+argument_list|()
 block|{
 throw|throw
-operator|new
+argument_list|new
 name|UnsupportedOperationException
 argument_list|()
-throw|;
-block|}
+block|;             }
+expr|@
+name|Override
 specifier|public
 name|QueryProvider
 name|getProvider
-parameter_list|()
+argument_list|()
 block|{
 return|return
 name|connection
 return|;
 block|}
+expr|@
+name|Override
 specifier|public
 name|Iterator
 argument_list|<
 name|Object
 argument_list|>
 name|iterator
-parameter_list|()
+argument_list|()
 block|{
-specifier|final
+name|final
 name|DataContext
 name|dataContext
-init|=
+operator|=
 name|Schemas
 operator|.
 name|createDataContext
@@ -2209,7 +2219,7 @@ operator|.
 name|plus
 argument_list|()
 argument_list|)
-decl_stmt|;
+block|;
 return|return
 name|calciteSignature
 operator|.
@@ -2222,12 +2232,13 @@ name|iterator
 argument_list|()
 return|;
 block|}
+expr|}
+argument_list|)
+return|;
 block|}
-block|)
-class|;
+block|}
 block|}
 end_class
 
-unit|} }
 end_unit
 

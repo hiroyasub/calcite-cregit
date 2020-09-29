@@ -708,6 +708,8 @@ name|operands
 return|;
 block|}
 comment|// implement SqlOperatorBinding
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getOperandCount
@@ -721,6 +723,8 @@ argument_list|()
 return|;
 block|}
 comment|// implement SqlOperatorBinding
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getOperandType
@@ -741,6 +745,8 @@ name|getType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|CalciteException
 name|newError

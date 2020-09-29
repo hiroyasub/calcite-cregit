@@ -607,6 +607,8 @@ return|return
 name|variablesSet
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|LogicalFilter
 name|copy

@@ -2587,6 +2587,8 @@ name|rightRowCount
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -2674,6 +2676,8 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|convert
@@ -2858,6 +2862,8 @@ name|flags
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -2904,6 +2910,8 @@ name|mq
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -2962,6 +2970,8 @@ name|dIo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|copy
@@ -2994,6 +3004,8 @@ name|program
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -3405,6 +3417,8 @@ name|COST_MULTIPLIER
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -3644,6 +3658,8 @@ operator|instanceof
 name|JdbcConvention
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcFilter
 name|copy
@@ -3673,6 +3689,8 @@ name|condition
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -4151,6 +4169,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -4497,6 +4517,8 @@ literal|0.9
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -4686,6 +4708,8 @@ name|all
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcUnion
 name|copy
@@ -4747,6 +4771,8 @@ literal|.1
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -4950,6 +4976,8 @@ operator|!
 name|all
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcIntersect
 name|copy
@@ -4982,6 +5010,8 @@ name|all
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -5185,6 +5215,8 @@ operator|!
 name|all
 assert|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcMinus
 name|copy
@@ -5217,6 +5249,8 @@ name|all
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -5641,6 +5675,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
@@ -5858,6 +5894,8 @@ name|traitSet
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|JdbcImplementor
 operator|.
