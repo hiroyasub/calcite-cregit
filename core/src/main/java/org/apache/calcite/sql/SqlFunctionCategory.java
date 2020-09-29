@@ -241,6 +241,11 @@ argument_list|,
 name|TABLE_FUNCTION
 argument_list|)
 block|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|private
 specifier|final
 name|EnumSet

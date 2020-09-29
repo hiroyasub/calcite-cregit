@@ -5029,6 +5029,11 @@ operator|.
 name|HIGH
 argument_list|)
 block|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|private
 specifier|final
 name|Supplier

@@ -127,16 +127,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|stream
 operator|.
 name|Collectors
@@ -158,7 +148,7 @@ name|INSTANCE
 block|;
 specifier|private
 specifier|final
-name|Map
+name|ImmutableMap
 argument_list|<
 name|String
 argument_list|,
@@ -172,7 +162,7 @@ name|ImmutableMultimap
 argument_list|<
 name|String
 argument_list|,
-name|List
+name|ImmutableList
 argument_list|<
 name|String
 argument_list|>
@@ -1027,7 +1017,7 @@ name|Builder
 argument_list|<
 name|String
 argument_list|,
-name|List
+name|ImmutableList
 argument_list|<
 name|String
 argument_list|>

@@ -138,6 +138,11 @@ name|class
 argument_list|)
 block|;
 comment|// fetch
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Method

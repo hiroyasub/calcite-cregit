@@ -481,30 +481,55 @@ name|int
 name|family
 decl_stmt|;
 comment|/** The default value of this primitive class. This is the value    * taken by uninitialized fields, for instance; 0 for {@code int}, false for    * {@code boolean}, etc. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Object
 name|defaultValue
 decl_stmt|;
 comment|/** The minimum value of this primitive class. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Object
 name|min
 decl_stmt|;
 comment|/** The largest value that is less than zero. Null if not applicable for this    * type. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Object
 name|maxNegative
 decl_stmt|;
 comment|/** The smallest value that is greater than zero. Null if not applicable for    * this type. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Object
 name|minPositive
 decl_stmt|;
 comment|/** The maximum value of this primitive class. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Object

@@ -84,11 +84,13 @@ name|VARCHAR
 argument_list|)
 block|;
 specifier|private
+specifier|final
 name|byte
 name|pigType
 decl_stmt|;
 comment|// Pig defines types using bytes
 specifier|private
+specifier|final
 name|SqlTypeName
 name|sqlType
 decl_stmt|;

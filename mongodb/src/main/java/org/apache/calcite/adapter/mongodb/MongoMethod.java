@@ -120,6 +120,11 @@ operator|.
 name|class
 argument_list|)
 block|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Method

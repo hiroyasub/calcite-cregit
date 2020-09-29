@@ -69,6 +69,7 @@ literal|"publish"
 argument_list|)
 block|;
 specifier|private
+specifier|final
 name|String
 name|typeName
 decl_stmt|;

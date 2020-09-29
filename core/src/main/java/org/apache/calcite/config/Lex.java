@@ -246,6 +246,11 @@ specifier|final
 name|boolean
 name|caseSensitive
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|public
 specifier|final
 name|Set

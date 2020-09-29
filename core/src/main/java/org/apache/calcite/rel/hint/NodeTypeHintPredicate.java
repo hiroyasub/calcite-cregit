@@ -175,6 +175,11 @@ name|class
 argument_list|)
 block|;
 comment|/** Relational expression clazz that the hint can apply to. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|private
 name|Class
 argument_list|<

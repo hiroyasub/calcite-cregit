@@ -183,6 +183,11 @@ name|EXPERIMENTAL
 argument_list|)
 name|PLAN_BEFORE_IMPLEMENTATION
 block|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|private
 specifier|final
 name|List
@@ -199,6 +204,11 @@ name|CopyOnWriteArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ImmutableEnumChecker"
+argument_list|)
 specifier|private
 specifier|final
 name|ThreadLocal
