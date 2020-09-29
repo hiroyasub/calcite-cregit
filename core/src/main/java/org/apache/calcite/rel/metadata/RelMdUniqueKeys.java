@@ -1363,7 +1363,6 @@ literal|null
 operator|)
 operator|&&
 operator|!
-operator|(
 name|rel
 operator|.
 name|getJoinType
@@ -1371,7 +1370,6 @@ argument_list|()
 operator|.
 name|generatesNullsOnLeft
 argument_list|()
-operator|)
 condition|)
 block|{
 name|retSet
@@ -1400,7 +1398,6 @@ literal|null
 operator|)
 operator|&&
 operator|!
-operator|(
 name|rel
 operator|.
 name|getJoinType
@@ -1408,7 +1405,6 @@ argument_list|()
 operator|.
 name|generatesNullsOnRight
 argument_list|()
-operator|)
 condition|)
 block|{
 name|retSet

@@ -4256,10 +4256,8 @@ name|fieldName
 operator|+
 literal|"$"
 operator|+
-operator|(
 name|nameIdx
 operator|++
-operator|)
 decl_stmt|;
 if|if
 condition|(
@@ -4420,7 +4418,6 @@ argument_list|(
 literal|"row"
 argument_list|)
 operator|||
-operator|(
 name|call
 operator|.
 name|isA
@@ -4429,7 +4426,6 @@ name|SqlKind
 operator|.
 name|NEW_SPECIFICATION
 argument_list|)
-operator|)
 return|;
 block|}
 specifier|public

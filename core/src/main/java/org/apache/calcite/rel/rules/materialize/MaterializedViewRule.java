@@ -3220,7 +3220,6 @@ argument_list|(
 name|c
 argument_list|)
 operator|&&
-operator|(
 operator|!
 name|Join
 operator|.
@@ -3230,7 +3229,6 @@ name|isAssignableFrom
 argument_list|(
 name|c
 argument_list|)
-operator|)
 condition|)
 block|{
 comment|// Skip it

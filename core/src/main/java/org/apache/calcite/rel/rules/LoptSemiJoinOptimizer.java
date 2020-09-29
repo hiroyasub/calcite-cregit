@@ -3088,19 +3088,16 @@ literal|1
 return|;
 block|}
 return|return
-operator|(
 name|c1
 operator|.
 name|isLt
 argument_list|(
 name|c2
 argument_list|)
-operator|)
 condition|?
 operator|-
 literal|1
 else|:
-operator|(
 operator|(
 name|c1
 operator|.
@@ -3108,7 +3105,6 @@ name|equals
 argument_list|(
 name|c2
 argument_list|)
-operator|)
 condition|?
 literal|0
 else|:

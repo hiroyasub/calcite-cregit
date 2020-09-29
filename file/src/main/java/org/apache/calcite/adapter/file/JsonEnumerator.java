@@ -633,14 +633,12 @@ operator|=
 operator|(
 name|LinkedHashMap
 operator|)
-operator|(
 name|list
 operator|.
 name|get
 argument_list|(
 literal|0
 argument_list|)
-operator|)
 expr_stmt|;
 block|}
 if|else if

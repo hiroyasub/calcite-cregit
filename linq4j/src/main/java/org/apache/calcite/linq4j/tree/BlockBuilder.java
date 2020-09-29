@@ -2036,10 +2036,8 @@ name|candidate
 operator|=
 name|suggestion
 operator|+
-operator|(
 name|i
 operator|++
-operator|)
 expr_stmt|;
 block|}
 return|return

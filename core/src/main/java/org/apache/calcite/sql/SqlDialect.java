@@ -2592,13 +2592,11 @@ operator|.
 name|endUnit
 operator|)
 operator|&&
-operator|(
 operator|!
 name|qualifier
 operator|.
 name|useDefaultFractionalSecondPrecision
 argument_list|()
-operator|)
 condition|)
 block|{
 specifier|final

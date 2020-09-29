@@ -5099,10 +5099,8 @@ return|;
 block|}
 while|while
 condition|(
-operator|(
 operator|--
 name|n
-operator|)
 operator|>=
 literal|0
 condition|)

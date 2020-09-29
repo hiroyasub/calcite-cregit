@@ -2010,7 +2010,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|month
@@ -2019,7 +2018,6 @@ name|TimeUnit
 operator|.
 name|MONTH
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -2418,7 +2416,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|hour
@@ -2427,7 +2424,6 @@ name|TimeUnit
 operator|.
 name|HOUR
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -2594,7 +2590,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|hour
@@ -2603,10 +2598,8 @@ name|TimeUnit
 operator|.
 name|HOUR
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|minute
@@ -2615,7 +2608,6 @@ name|TimeUnit
 operator|.
 name|MINUTE
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -2879,7 +2871,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|hour
@@ -2888,10 +2879,8 @@ name|TimeUnit
 operator|.
 name|HOUR
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|minute
@@ -2900,10 +2889,8 @@ name|TimeUnit
 operator|.
 name|MINUTE
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|second
@@ -2912,15 +2899,12 @@ name|TimeUnit
 operator|.
 name|SECOND
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isFractionalSecondFieldInRange
 argument_list|(
 name|secondFrac
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -3203,7 +3187,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|minute
@@ -3212,7 +3195,6 @@ name|TimeUnit
 operator|.
 name|MINUTE
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -3464,7 +3446,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|minute
@@ -3473,10 +3454,8 @@ name|TimeUnit
 operator|.
 name|MINUTE
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|second
@@ -3485,15 +3464,12 @@ name|TimeUnit
 operator|.
 name|SECOND
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isFractionalSecondFieldInRange
 argument_list|(
 name|secondFrac
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -3861,7 +3837,6 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isSecondaryFieldInRange
 argument_list|(
 name|second
@@ -3870,15 +3845,12 @@ name|TimeUnit
 operator|.
 name|SECOND
 argument_list|)
-operator|)
 operator|||
 operator|!
-operator|(
 name|isFractionalSecondFieldInRange
 argument_list|(
 name|secondFrac
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw
@@ -4106,12 +4078,10 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-operator|(
 name|isFractionalSecondFieldInRange
 argument_list|(
 name|secondFrac
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw

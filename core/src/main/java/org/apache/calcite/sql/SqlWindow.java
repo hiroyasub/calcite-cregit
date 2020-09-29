@@ -2878,13 +2878,11 @@ name|boundVal
 decl_stmt|;
 if|if
 condition|(
-operator|(
 operator|!
 name|boundLiteral
 operator|.
 name|isExact
 argument_list|()
-operator|)
 operator|||
 operator|(
 name|boundLiteral

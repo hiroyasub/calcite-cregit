@@ -9741,7 +9741,6 @@ init|=
 operator|(
 name|RexExecutorImpl
 operator|)
-operator|(
 name|cluster
 operator|.
 name|getPlanner
@@ -9749,7 +9748,6 @@ argument_list|()
 operator|.
 name|getExecutor
 argument_list|()
-operator|)
 decl_stmt|;
 name|RexImplicationChecker
 name|rexImplicationChecker

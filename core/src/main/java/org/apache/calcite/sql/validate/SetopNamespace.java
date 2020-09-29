@@ -375,7 +375,6 @@ block|{
 if|if
 condition|(
 operator|!
-operator|(
 name|operand
 operator|.
 name|isA
@@ -384,7 +383,6 @@ name|SqlKind
 operator|.
 name|QUERY
 argument_list|)
-operator|)
 condition|)
 block|{
 throw|throw

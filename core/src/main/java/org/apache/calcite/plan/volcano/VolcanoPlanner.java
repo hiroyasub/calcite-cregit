@@ -3391,7 +3391,6 @@ operator|instanceof
 name|RelSubset
 operator|)
 operator|&&
-operator|(
 name|rel
 operator|.
 name|getTraitSet
@@ -3401,7 +3400,6 @@ name|equals
 argument_list|(
 name|traits
 argument_list|)
-operator|)
 condition|)
 block|{
 return|return

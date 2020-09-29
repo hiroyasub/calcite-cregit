@@ -509,12 +509,10 @@ operator|(
 operator|(
 name|NlsString
 operator|)
-operator|(
 name|literal
 operator|.
 name|getValue
 argument_list|()
-operator|)
 operator|)
 operator|.
 name|getValue

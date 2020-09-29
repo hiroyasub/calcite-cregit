@@ -9491,7 +9491,6 @@ decl_stmt|;
 comment|// check singleAggRel is single_value agg
 if|if
 condition|(
-operator|(
 operator|!
 name|singleAggregate
 operator|.
@@ -9500,7 +9499,6 @@ argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 operator|||
 operator|(
 name|singleAggregate
@@ -9992,7 +9990,6 @@ comment|// check that the agg is of the following type:
 comment|// doing a single_value() on the entire input
 if|if
 condition|(
-operator|(
 operator|!
 name|aggregate
 operator|.
@@ -10001,7 +9998,6 @@ argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 operator|||
 operator|(
 name|aggregate
