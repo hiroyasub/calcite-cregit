@@ -1106,7 +1106,7 @@ operator|.
 name|primitiveClass
 return|;
 block|}
-comment|/**    * Adapts a primitive array into a {@link List}. For example,    * {@code asList(new double[2])} returns a {@code List&lt;Double&gt;}.    */
+comment|/**    * Adapts a primitive array into a {@link List}. For example,    * {@code asList(new double[2])} returns a {@code List<Double>}.    */
 specifier|public
 specifier|static
 name|List

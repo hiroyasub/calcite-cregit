@@ -88,7 +88,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/**    * A bitwise or logical AND operation, such as {@code a&amp; b} in Java.    */
+comment|/**    * A bitwise or logical AND operation, such as {@code a& b} in Java.    */
 name|And
 argument_list|(
 literal|"& "
@@ -240,7 +240,7 @@ block|,
 comment|/**    * An operation that invokes a delegate or lambda expression,    * such as sampleDelegate.Invoke().    */
 name|Invoke
 block|,
-comment|/**    * A lambda expression, such as {@code a -&gt; a + a} in Java.    */
+comment|/**    * A lambda expression, such as {@code a -> a + a} in Java.    */
 name|Lambda
 block|,
 comment|/**    * A bitwise left-shift operation, such as {@code a<< b} in Java.    */
