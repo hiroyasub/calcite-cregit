@@ -116,6 +116,11 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/** Clears the contents of a {@link StringWriter}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|void
@@ -138,6 +143,11 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Helper for the SQL {@code REGEXP_REPLACE} function.    *    *<p>It is marked "unsafe" because it uses {@link StringBuffer};    * Versions of {@link Matcher#appendReplacement(StringBuffer, String)}    * and {@link Matcher#appendTail(StringBuffer)}    * that use {@link StringBuilder} are not available until JDK 9. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|String

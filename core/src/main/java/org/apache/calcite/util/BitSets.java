@@ -1300,6 +1300,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 name|BitSet
 name|computeClosure

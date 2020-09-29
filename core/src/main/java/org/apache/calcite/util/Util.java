@@ -1801,6 +1801,11 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|void
@@ -3088,6 +3093,11 @@ comment|/**    * Gets a timestamp string for use in file names. The generated ti
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|public
 specifier|static
 name|String

@@ -553,7 +553,14 @@ operator|instanceof
 name|Date
 condition|)
 block|{
-return|return
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
+name|long
+name|milli
+init|=
 operator|(
 operator|(
 name|Date
@@ -566,6 +573,9 @@ argument_list|()
 operator|.
 name|toEpochMilli
 argument_list|()
+decl_stmt|;
+return|return
+name|milli
 return|;
 block|}
 if|else if

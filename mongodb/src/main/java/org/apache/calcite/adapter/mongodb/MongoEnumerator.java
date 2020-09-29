@@ -566,6 +566,11 @@ name|fields
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 specifier|static
 name|Object

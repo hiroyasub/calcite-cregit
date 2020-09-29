@@ -1349,6 +1349,11 @@ index|[]
 name|rows
 parameter_list|)
 function_decl|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|protected
 name|Object
 name|convert

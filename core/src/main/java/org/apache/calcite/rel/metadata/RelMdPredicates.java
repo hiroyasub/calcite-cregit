@@ -2822,6 +2822,11 @@ specifier|final
 name|RexSimplify
 name|simplify
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 name|JoinConditionBasedPredicateInference
 parameter_list|(
 name|Join

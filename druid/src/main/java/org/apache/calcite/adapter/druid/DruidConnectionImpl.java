@@ -2106,6 +2106,11 @@ name|fieldName
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 name|void
 name|parseFieldForName
@@ -2928,6 +2933,11 @@ block|{
 comment|// empty
 block|}
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JdkObsolete"
+argument_list|)
 specifier|private
 name|Long
 name|extractTimestampField
