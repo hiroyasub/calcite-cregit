@@ -444,6 +444,7 @@ return|;
 block|}
 comment|/**    * Implementation of MutableVisitor that dumps the details    * of a MutableRel tree.    */
 specifier|private
+specifier|static
 class|class
 name|MutableRelDumper
 extends|extends

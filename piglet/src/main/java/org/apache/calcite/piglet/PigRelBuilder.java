@@ -3507,6 +3507,7 @@ return|;
 block|}
 comment|/**    * Context constructed during Pig-to-{@link RelNode} translation process.    */
 specifier|public
+specifier|static
 class|class
 name|PigRelTranslationContext
 block|{

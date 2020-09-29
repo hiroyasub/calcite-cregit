@@ -1110,6 +1110,7 @@ return|;
 block|}
 comment|/** Parses an an HTML table cell. */
 specifier|private
+specifier|static
 class|class
 name|CellReader
 block|{

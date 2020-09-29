@@ -2509,6 +2509,7 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/** Text and position info of a validator or parser exception. */
 specifier|public
+specifier|static
 class|class
 name|ValidateErrorInfo
 block|{

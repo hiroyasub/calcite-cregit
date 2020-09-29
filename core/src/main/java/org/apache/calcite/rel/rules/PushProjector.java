@@ -2419,6 +2419,7 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Visitor which builds a bitmap of the inputs used by an expressions, as    * well as locating expressions corresponding to special operators.    */
 specifier|private
+specifier|static
 class|class
 name|InputSpecialOpFinder
 extends|extends
@@ -2798,6 +2799,7 @@ block|}
 block|}
 comment|/**    * Walks an expression tree, replacing input refs with new values to reflect    * projection and converting special expressions to field references.    */
 specifier|private
+specifier|static
 class|class
 name|RefAndExprConverter
 extends|extends
@@ -3095,6 +3097,7 @@ literal|true
 decl_stmt|;
 block|}
 comment|/**    * An expression condition that evaluates to true if the expression is    * a call to one of a set of operators.    */
+specifier|static
 class|class
 name|OperatorExprCondition
 implements|implements

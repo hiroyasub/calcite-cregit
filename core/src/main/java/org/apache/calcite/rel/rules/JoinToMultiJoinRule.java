@@ -2251,6 +2251,7 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Visitor that keeps a reference count of the inputs used by an expression.    */
 specifier|private
+specifier|static
 class|class
 name|InputReferenceCounter
 extends|extends

@@ -3544,6 +3544,7 @@ block|}
 block|}
 comment|/**    * Shuttle that rewires {@link RexLocalRef} using a list of updated    * references.    */
 specifier|private
+specifier|static
 class|class
 name|UpdateRefShuttle
 extends|extends

@@ -329,6 +329,7 @@ function_decl|;
 block|}
 comment|/** Result of applying    * {@link org.apache.calcite.util.PrecedenceClimbingParser.Special#apply}.    * Tells the caller which range of tokens to replace, and with what. */
 specifier|public
+specifier|static
 class|class
 name|ReduceResult
 block|{

@@ -26397,6 +26397,7 @@ block|}
 block|}
 comment|/**    * A default implementation of SubQueryConverter that does no conversion.    */
 specifier|private
+specifier|static
 class|class
 name|NoOpSubQueryConverter
 implements|implements

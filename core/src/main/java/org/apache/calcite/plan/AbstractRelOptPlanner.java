@@ -1751,6 +1751,7 @@ return|;
 block|}
 comment|/** Listener for counting the attempts of each rule. Only enabled under DEBUG level.*/
 specifier|private
+specifier|static
 class|class
 name|RuleAttemptsListener
 implements|implements
