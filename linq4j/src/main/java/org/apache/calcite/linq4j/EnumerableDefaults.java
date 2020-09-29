@@ -21665,7 +21665,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**      * Clears {@code lefts} list, adds {@code left} into it, and advance left enumerator,      * adding all items with the same key to {@code lefts} list too, until left enumerator      * is over or a different key is found.      * @return {@code true} if there are still elements to be processed on the left enumerator,      * {@code false} otherwise (left enumerator is over or null key is found).      */
+comment|/**      * Clears {@code left} list, adds {@code left} into it, and advance left enumerator,      * adding all items with the same key to {@code left} list too, until left enumerator      * is over or a different key is found.      * @return {@code true} if there are still elements to be processed on the left enumerator,      * {@code false} otherwise (left enumerator is over or null key is found).      */
 specifier|private
 name|boolean
 name|advanceLeft
@@ -21791,7 +21791,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**      * Clears {@code rights} list, adds {@code right} into it, and advance right enumerator,      * adding all items with the same key to {@code rights} list too, until right enumerator      * is over or a different key is found.      * @return {@code true} if there are still elements to be processed on the right enumerator,      * {@code false} otherwise (right enumerator is over or null key is found).      */
+comment|/**      * Clears {@code right} list, adds {@code right} into it, and advance right enumerator,      * adding all items with the same key to {@code right} list too, until right enumerator      * is over or a different key is found.      * @return {@code true} if there are still elements to be processed on the right enumerator,      * {@code false} otherwise (right enumerator is over or null key is found).      */
 specifier|private
 name|boolean
 name|advanceRight
