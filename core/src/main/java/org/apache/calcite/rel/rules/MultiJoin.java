@@ -325,6 +325,11 @@ specifier|final
 name|RexNode
 name|joinFilter
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"HidingField"
+argument_list|)
 specifier|private
 specifier|final
 name|RelDataType

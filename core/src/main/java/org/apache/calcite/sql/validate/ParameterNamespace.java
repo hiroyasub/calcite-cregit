@@ -58,6 +58,11 @@ extends|extends
 name|AbstractNamespace
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"HidingField"
+argument_list|)
 specifier|private
 specifier|final
 name|RelDataType

@@ -1428,11 +1428,6 @@ name|ScannableTable
 block|{
 specifier|private
 specifier|final
-name|Type
-name|elementType
-decl_stmt|;
-specifier|private
-specifier|final
 name|Enumerable
 name|enumerable
 decl_stmt|;
@@ -1449,12 +1444,6 @@ name|super
 argument_list|(
 name|elementType
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|elementType
-operator|=
-name|elementType
 expr_stmt|;
 name|this
 operator|.

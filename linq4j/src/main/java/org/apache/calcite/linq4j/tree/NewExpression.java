@@ -60,6 +60,11 @@ name|NewExpression
 extends|extends
 name|Expression
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"HidingField"
+argument_list|)
 specifier|public
 specifier|final
 name|Type
