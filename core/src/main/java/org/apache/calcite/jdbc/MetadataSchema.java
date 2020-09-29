@@ -115,9 +115,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|jdbc
+name|avatica
 operator|.
-name|CalciteMetaImpl
+name|MetaImpl
 operator|.
 name|MetaColumn
 import|;
@@ -131,9 +131,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|jdbc
+name|avatica
 operator|.
-name|CalciteMetaImpl
+name|MetaImpl
 operator|.
 name|MetaTable
 import|;

@@ -319,7 +319,7 @@ name|MaterializedViewJoinRule
 parameter_list|<
 name|C
 extends|extends
-name|MaterializedViewJoinRule
+name|MaterializedViewRule
 operator|.
 name|Config
 parameter_list|>

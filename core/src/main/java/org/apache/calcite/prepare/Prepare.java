@@ -265,9 +265,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
+name|core
 operator|.
-name|LogicalTableModify
+name|TableModify
 import|;
 end_import
 
@@ -1829,7 +1829,7 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 name|mapTableModOp
@@ -1860,7 +1860,7 @@ case|case
 name|INSERT
 case|:
 return|return
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 operator|.
@@ -1870,7 +1870,7 @@ case|case
 name|DELETE
 case|:
 return|return
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 operator|.
@@ -1880,7 +1880,7 @@ case|case
 name|MERGE
 case|:
 return|return
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 operator|.
@@ -1890,7 +1890,7 @@ case|case
 name|UPDATE
 case|:
 return|return
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 operator|.
@@ -2658,7 +2658,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 name|getTableModOp
@@ -2714,7 +2714,7 @@ name|isDml
 parameter_list|()
 function_decl|;
 comment|/**      * Returns the table modification operation corresponding to this      * statement if it is a table modification statement; otherwise null.      */
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 name|getTableModOp
@@ -2780,7 +2780,7 @@ name|isDml
 decl_stmt|;
 specifier|protected
 specifier|final
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 name|tableModOp
@@ -2831,7 +2831,7 @@ parameter_list|,
 name|RelNode
 name|rootRel
 parameter_list|,
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 name|tableModOp
@@ -2922,7 +2922,7 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|LogicalTableModify
+name|TableModify
 operator|.
 name|Operation
 name|getTableModOp

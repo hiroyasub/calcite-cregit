@@ -106,7 +106,7 @@ name|MaterializedViewOnlyJoinRule
 extends|extends
 name|MaterializedViewJoinRule
 argument_list|<
-name|MaterializedViewJoinRule
+name|MaterializedViewRule
 operator|.
 name|Config
 argument_list|>

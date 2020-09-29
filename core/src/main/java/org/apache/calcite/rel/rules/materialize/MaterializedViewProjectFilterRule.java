@@ -248,7 +248,7 @@ specifier|public
 interface|interface
 name|Config
 extends|extends
-name|MaterializedViewJoinRule
+name|MaterializedViewRule
 operator|.
 name|Config
 block|{
