@@ -510,6 +510,11 @@ operator|.
 name|getPlannerTracer
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MutablePublicArray"
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
