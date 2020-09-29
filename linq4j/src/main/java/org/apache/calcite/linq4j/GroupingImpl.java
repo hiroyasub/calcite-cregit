@@ -21,7 +21,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collection
+name|List
 import|;
 end_import
 
@@ -89,7 +89,7 @@ name|key
 decl_stmt|;
 specifier|private
 specifier|final
-name|Collection
+name|List
 argument_list|<
 name|V
 argument_list|>
@@ -100,7 +100,7 @@ parameter_list|(
 name|K
 name|key
 parameter_list|,
-name|Collection
+name|List
 argument_list|<
 name|V
 argument_list|>
