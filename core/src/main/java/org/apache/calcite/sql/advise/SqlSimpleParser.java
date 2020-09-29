@@ -2284,6 +2284,8 @@ name|token
 expr_stmt|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 block|}
@@ -2422,6 +2424,8 @@ name|purgeGroupByHaving
 argument_list|()
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|// Simplify sub-queries.
@@ -2469,6 +2473,8 @@ argument_list|)
 expr_stmt|;
 break|break;
 block|}
+default|default:
+break|break;
 block|}
 block|}
 return|return
@@ -2615,6 +2621,9 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 if|if
@@ -3125,6 +3134,9 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|// Don't simplify a FROM clause containing a JOIN: we lose help
@@ -3564,6 +3576,8 @@ return|return
 literal|true
 return|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 block|}

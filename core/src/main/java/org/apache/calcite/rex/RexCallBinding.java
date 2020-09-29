@@ -354,6 +354,8 @@ argument_list|,
 name|inputCollations
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 operator|new

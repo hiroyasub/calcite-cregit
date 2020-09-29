@@ -1870,6 +1870,8 @@ operator|=
 literal|true
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 for|for
 control|(

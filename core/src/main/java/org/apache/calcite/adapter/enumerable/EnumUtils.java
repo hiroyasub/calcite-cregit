@@ -4092,6 +4092,8 @@ name|JoinType
 operator|.
 name|ANTI
 return|;
+default|default:
+break|break;
 block|}
 throw|throw
 operator|new

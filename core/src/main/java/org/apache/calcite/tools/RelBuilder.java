@@ -3414,6 +3414,9 @@ argument_list|(
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -3443,6 +3446,8 @@ argument_list|(
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 name|nodes
@@ -3793,6 +3798,8 @@ literal|2
 argument_list|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 specifier|final
 name|RexBuilder
@@ -7721,6 +7728,8 @@ name|right
 argument_list|)
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -16826,6 +16835,8 @@ expr_stmt|;
 return|return
 name|i
 return|;
+default|default:
+break|break;
 block|}
 name|int
 name|i

@@ -5320,6 +5320,9 @@ operator|.
 name|class
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 operator|new

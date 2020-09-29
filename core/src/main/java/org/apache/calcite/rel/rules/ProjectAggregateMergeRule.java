@@ -855,6 +855,9 @@ block|}
 block|}
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|super

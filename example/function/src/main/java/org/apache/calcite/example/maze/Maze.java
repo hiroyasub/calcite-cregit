@@ -1443,6 +1443,9 @@ operator|.
 name|BACKTRACK
 condition|)
 do|;
+break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(

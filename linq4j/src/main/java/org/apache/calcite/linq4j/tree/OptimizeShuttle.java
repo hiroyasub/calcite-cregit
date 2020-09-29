@@ -788,6 +788,9 @@ name|expr
 return|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|super
@@ -852,6 +855,9 @@ return|return
 name|expression0
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -1163,6 +1169,9 @@ return|return
 name|result
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|super
@@ -1356,6 +1365,8 @@ name|expression1
 return|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|null
@@ -1544,6 +1555,9 @@ argument_list|)
 return|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|super

@@ -2998,6 +2998,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|node
@@ -5078,6 +5081,9 @@ literal|"scalar IN is no longer allowed in RexCall: "
 operator|+
 name|rex
 assert|;
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|inverseOperator
@@ -5172,6 +5178,9 @@ name|SqlStdOperatorTable
 operator|.
 name|SUM
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|List
@@ -5321,6 +5330,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|SqlUtil
@@ -6438,6 +6450,9 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -6498,6 +6513,8 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -7332,6 +7349,9 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -7389,6 +7409,8 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -8096,6 +8118,8 @@ operator|+
 literal|"] should be handled as part of predicates, not as literals"
 argument_list|)
 throw|;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -8348,8 +8372,10 @@ argument_list|(
 name|POS
 argument_list|)
 return|;
-comment|// fall through
+default|default:
+break|break;
 block|}
+comment|// fall through
 default|default:
 throw|throw
 operator|new
@@ -9692,6 +9718,8 @@ argument_list|(
 literal|0
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 name|selectItem
@@ -10711,6 +10739,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 block|}

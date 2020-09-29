@@ -1544,6 +1544,8 @@ argument_list|)
 expr_stmt|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|super
@@ -1941,6 +1943,9 @@ name|FLOOR
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -2106,6 +2111,9 @@ name|FLOOR
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 comment|// fall through
 default|default:
@@ -2775,6 +2783,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|// Intersect old range set with new.
@@ -4500,6 +4511,9 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|c

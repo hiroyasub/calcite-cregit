@@ -1428,6 +1428,8 @@ argument_list|)
 return|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 throw|throw
 operator|new
@@ -1678,6 +1680,8 @@ argument_list|(
 name|valTime
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 block|}
 if|if

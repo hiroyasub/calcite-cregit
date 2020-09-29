@@ -1640,6 +1640,8 @@ literal|0
 argument_list|)
 return|;
 comment|// all but one were null
+default|default:
+break|break;
 block|}
 specifier|final
 name|ImmutableNullableList

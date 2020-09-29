@@ -233,6 +233,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|typeFactory

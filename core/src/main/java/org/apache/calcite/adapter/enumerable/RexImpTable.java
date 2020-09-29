@@ -9114,8 +9114,12 @@ operator|.
 name|primitiveClass
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
-comment|// fall through
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -16750,6 +16754,8 @@ operator|+
 name|sqlTypeName
 argument_list|)
 throw|;
+default|default:
+break|break;
 block|}
 break|break;
 case|case
@@ -16784,6 +16790,8 @@ literal|0L
 argument_list|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 break|break;
 block|}
@@ -18577,6 +18585,9 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 break|break;
@@ -18596,6 +18607,8 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 switch|switch
@@ -18632,6 +18645,9 @@ argument_list|(
 name|trop1
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -18808,6 +18824,8 @@ argument_list|,
 name|trop1
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 name|TimeUnit
 name|fromUnit

@@ -3719,6 +3719,8 @@ operator|.
 name|toString
 argument_list|()
 return|;
+default|default:
+break|break;
 block|}
 specifier|final
 name|StringBuilder
@@ -6134,6 +6136,8 @@ name|getDSTSavings
 argument_list|()
 expr_stmt|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 if|if

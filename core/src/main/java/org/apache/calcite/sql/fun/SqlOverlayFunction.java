@@ -359,6 +359,8 @@ case|:
 return|return
 literal|"{0}({1} PLACING {2} FROM {3} FOR {4})"
 return|;
+default|default:
+break|break;
 block|}
 assert|assert
 literal|false

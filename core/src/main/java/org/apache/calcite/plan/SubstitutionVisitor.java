@@ -2404,6 +2404,9 @@ return|return
 literal|false
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 for|for
@@ -2439,6 +2442,9 @@ return|return
 literal|false
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|// If one of the not-disjunctions is a disjunction that is wholly

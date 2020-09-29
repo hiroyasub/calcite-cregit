@@ -1421,6 +1421,8 @@ name|getTime
 argument_list|()
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 break|break;
 case|case
@@ -1470,6 +1472,8 @@ name|MILLIS_PER_DAY
 operator|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 break|break;
 case|case
@@ -1519,7 +1523,11 @@ name|MILLIS_PER_DAY
 operator|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 return|return
@@ -1848,6 +1856,8 @@ argument_list|(
 literal|"wtf?!"
 argument_list|)
 throw|;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -2295,6 +2305,8 @@ argument_list|,
 name|p
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 block|}
 return|return

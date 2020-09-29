@@ -2541,6 +2541,9 @@ operator|=
 name|other
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 comment|// Apply scale.
 if|if
@@ -2693,6 +2696,8 @@ literal|"Z"
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 return|return
@@ -2964,6 +2969,8 @@ argument_list|)
 expr_stmt|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 name|calendar
 operator|.
@@ -3172,6 +3179,8 @@ argument_list|,
 name|millis
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 return|return
@@ -3497,6 +3506,8 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 return|return

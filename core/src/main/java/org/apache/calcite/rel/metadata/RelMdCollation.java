@@ -3193,6 +3193,8 @@ block|}
 return|return
 name|leftCollations
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|null

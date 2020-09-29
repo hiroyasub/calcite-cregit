@@ -404,6 +404,8 @@ comment|// B'10000000' -> X'80', and B'' -> X''
 return|return
 name|s
 return|;
+default|default:
+break|break;
 block|}
 if|if
 condition|(

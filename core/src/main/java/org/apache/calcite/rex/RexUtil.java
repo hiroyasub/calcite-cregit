@@ -1438,6 +1438,8 @@ name|getType
 argument_list|()
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -2228,6 +2230,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|map
 operator|.
@@ -8587,6 +8592,8 @@ name|getOperands
 argument_list|()
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|null
@@ -8663,6 +8670,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|null
@@ -8944,6 +8953,9 @@ return|return
 literal|false
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|true
@@ -8952,6 +8964,9 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|composeConjunction
@@ -12636,6 +12651,9 @@ name|unknownAs
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|RexNode
 name|node

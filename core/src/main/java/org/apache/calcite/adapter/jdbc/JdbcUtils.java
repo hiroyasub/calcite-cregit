@@ -873,6 +873,8 @@ literal|1
 argument_list|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 name|reps

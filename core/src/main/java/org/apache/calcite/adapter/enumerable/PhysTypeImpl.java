@@ -1020,6 +1020,8 @@ operator|.
 name|SCALAR
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|PhysType
@@ -1322,6 +1324,8 @@ name|JavaRowFormat
 operator|.
 name|SCALAR
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 specifier|final
@@ -2043,6 +2047,9 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|boolean
@@ -2606,6 +2613,9 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|boolean

@@ -2443,6 +2443,9 @@ case|:
 operator|++
 name|n
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 return|return

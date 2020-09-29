@@ -1537,6 +1537,8 @@ name|v
 argument_list|)
 return|;
 block|}
+default|default:
+break|break;
 block|}
 specifier|final
 name|TimeUnitRange

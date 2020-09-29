@@ -613,6 +613,8 @@ argument_list|(
 name|millisEpoch
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 comment|// this is unknown type
 return|return

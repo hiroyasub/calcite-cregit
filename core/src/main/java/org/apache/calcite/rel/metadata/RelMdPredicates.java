@@ -3352,6 +3352,8 @@ name|allFieldsBitSet
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -3388,6 +3390,8 @@ else|:
 name|allFieldsBitSet
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 name|Mappings

@@ -1479,6 +1479,8 @@ name|DatabaseProduct
 operator|.
 name|REDSHIFT
 return|;
+default|default:
+break|break;
 block|}
 comment|// Now the fuzzy matches.
 if|if
@@ -3190,6 +3192,8 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -3399,6 +3403,9 @@ name|getSqlTypeName
 argument_list|()
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|String
 name|charSet

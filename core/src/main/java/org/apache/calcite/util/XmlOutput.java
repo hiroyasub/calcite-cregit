@@ -1538,6 +1538,8 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
 block|}
 return|return

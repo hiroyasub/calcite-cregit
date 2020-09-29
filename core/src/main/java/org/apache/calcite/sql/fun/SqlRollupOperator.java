@@ -232,6 +232,8 @@ expr_stmt|;
 return|return;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 name|unparseCube
 argument_list|(

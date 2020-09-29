@@ -1977,6 +1977,8 @@ argument_list|,
 name|i_
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 name|translator
@@ -2869,6 +2871,8 @@ argument_list|,
 name|next
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 return|return

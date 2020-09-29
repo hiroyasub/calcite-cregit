@@ -710,6 +710,9 @@ literal|true
 return|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -842,6 +845,9 @@ return|return
 literal|true
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|InputUsageFinder

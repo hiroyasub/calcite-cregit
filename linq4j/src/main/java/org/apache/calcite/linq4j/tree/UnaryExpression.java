@@ -225,6 +225,8 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return;
+default|default:
+break|break;
 block|}
 if|if
 condition|(

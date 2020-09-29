@@ -1856,6 +1856,8 @@ operator|.
 name|getMillisSinceEpoch
 argument_list|()
 return|;
+default|default:
+break|break;
 block|}
 break|break;
 case|case
@@ -1980,6 +1982,9 @@ name|operand
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|null

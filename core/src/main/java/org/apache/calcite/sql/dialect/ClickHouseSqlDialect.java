@@ -557,6 +557,8 @@ argument_list|,
 name|typeName
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 block|}
 return|return

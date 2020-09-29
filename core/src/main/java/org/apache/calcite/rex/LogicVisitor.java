@@ -423,6 +423,8 @@ operator|.
 name|TRUE_FALSE_UNKNOWN
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -452,6 +454,9 @@ operator|.
 name|TRUE_FALSE_UNKNOWN
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 for|for
 control|(

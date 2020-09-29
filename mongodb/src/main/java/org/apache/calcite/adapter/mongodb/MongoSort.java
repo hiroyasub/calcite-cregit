@@ -483,6 +483,8 @@ case|case
 name|LAST
 case|:
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 block|}

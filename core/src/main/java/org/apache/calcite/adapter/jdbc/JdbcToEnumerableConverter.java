@@ -1627,7 +1627,12 @@ name|offset
 operator|=
 literal|true
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 specifier|final

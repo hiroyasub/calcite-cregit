@@ -7782,6 +7782,8 @@ return|return
 literal|true
 return|;
 comment|// current row matches
+default|default:
+break|break;
 block|}
 comment|// INNER and LEFT just return result
 name|innerValue
@@ -7819,6 +7821,8 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
 comment|// For INNER and LEFT need to find another outer row
 continue|continue;
@@ -7850,6 +7854,9 @@ operator|=
 literal|0
 expr_stmt|;
 comment|// continue loop, move outer
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 block|}
@@ -10578,6 +10585,8 @@ comment|// INNER and LEFT just return result
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
 block|}
 comment|// else (predicate returned false) continue: move inner
@@ -10619,6 +10628,9 @@ literal|true
 return|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 block|}

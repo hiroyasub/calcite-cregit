@@ -4394,7 +4394,10 @@ return|return
 name|call
 return|;
 block|}
+break|break;
 block|}
+default|default:
+break|break;
 block|}
 name|int
 name|caseOrdinal

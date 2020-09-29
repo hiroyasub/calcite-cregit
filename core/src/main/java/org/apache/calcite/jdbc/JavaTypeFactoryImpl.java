@@ -1007,6 +1007,8 @@ operator|.
 name|boxClass
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -1429,6 +1431,8 @@ name|Void
 operator|.
 name|class
 return|;
+default|default:
+break|break;
 block|}
 block|}
 switch|switch
@@ -1496,6 +1500,8 @@ name|List
 operator|.
 name|class
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|null

@@ -357,6 +357,8 @@ case|:
 return|return
 name|typeToTransform
 return|;
+default|default:
+break|break;
 block|}
 name|SqlTypeName
 name|retTypeName

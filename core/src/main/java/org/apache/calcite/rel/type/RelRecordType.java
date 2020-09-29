@@ -298,6 +298,8 @@ literal|":peek_no_expand"
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 name|sb
 operator|.

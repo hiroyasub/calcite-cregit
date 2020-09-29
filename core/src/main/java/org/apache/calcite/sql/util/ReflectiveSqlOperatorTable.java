@@ -653,6 +653,8 @@ expr_stmt|;
 block|}
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|/**    * Look up operators based on case-sensitiveness.    */

@@ -3603,6 +3603,8 @@ argument_list|,
 literal|true
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -3633,6 +3635,9 @@ operator|.
 name|TRUE_FALSE
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|RelNode
 name|ret
@@ -12232,6 +12237,9 @@ expr_stmt|;
 continue|continue;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|filters
 operator|.

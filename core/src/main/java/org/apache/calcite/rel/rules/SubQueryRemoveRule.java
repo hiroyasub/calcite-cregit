@@ -2487,6 +2487,8 @@ expr_stmt|;
 return|return
 name|trueLiteral
 return|;
+default|default:
+break|break;
 block|}
 comment|// Now the left join
 name|builder
@@ -2631,6 +2633,8 @@ argument_list|)
 expr_stmt|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -2757,6 +2761,9 @@ argument_list|,
 name|b
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 name|operands

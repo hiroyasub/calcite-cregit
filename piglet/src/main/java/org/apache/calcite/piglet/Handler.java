@@ -608,6 +608,9 @@ argument_list|(
 name|field
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 for|for
@@ -2096,6 +2099,9 @@ argument_list|(
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|nodes
 operator|.
@@ -2137,6 +2143,9 @@ argument_list|(
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|nodes
 operator|.

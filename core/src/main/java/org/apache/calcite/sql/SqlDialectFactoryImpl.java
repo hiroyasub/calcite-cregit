@@ -1026,6 +1026,8 @@ argument_list|(
 name|c
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 comment|// Now the fuzzy matches.
 if|if

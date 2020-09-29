@@ -2441,6 +2441,9 @@ operator|.
 name|HALF_DOWN
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 comment|// Not all types are allowed for literals
 switch|switch
@@ -2457,7 +2460,13 @@ name|SqlTypeName
 operator|.
 name|BIGINT
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|RexLiteral
@@ -3985,6 +3994,8 @@ argument_list|(
 name|p
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 if|if

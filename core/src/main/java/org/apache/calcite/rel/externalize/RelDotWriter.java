@@ -687,6 +687,9 @@ argument_list|(
 literal|" "
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -723,6 +726,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 name|labels

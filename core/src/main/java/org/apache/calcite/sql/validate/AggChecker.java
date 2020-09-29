@@ -714,6 +714,8 @@ expr_stmt|;
 return|return
 literal|null
 return|;
+default|default:
+break|break;
 block|}
 comment|// Visit the operand in window function
 if|if

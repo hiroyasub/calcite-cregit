@@ -365,6 +365,8 @@ comment|// no need to check
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
 if|if
 condition|(

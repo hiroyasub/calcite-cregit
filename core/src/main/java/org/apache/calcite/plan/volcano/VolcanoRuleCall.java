@@ -1947,6 +1947,9 @@ name|inputs
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|rels
 index|[

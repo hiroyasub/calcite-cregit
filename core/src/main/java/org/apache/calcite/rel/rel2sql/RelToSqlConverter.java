@@ -1742,6 +1742,8 @@ argument_list|(
 name|e
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 specifier|final
 name|Result

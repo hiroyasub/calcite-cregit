@@ -394,6 +394,8 @@ argument_list|(
 name|username
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 throw|throw
 operator|new

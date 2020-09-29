@@ -4606,6 +4606,8 @@ argument_list|)
 return|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 throw|throw
 operator|new

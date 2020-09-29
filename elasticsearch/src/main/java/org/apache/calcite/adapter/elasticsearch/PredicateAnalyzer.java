@@ -935,6 +935,10 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+return|return
+literal|false
+return|;
 block|}
 case|case
 name|PREFIX
@@ -954,8 +958,11 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+return|return
+literal|false
+return|;
 block|}
-comment|// fall through
 case|case
 name|FUNCTION_ID
 case|:

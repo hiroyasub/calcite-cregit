@@ -1150,6 +1150,9 @@ case|:
 name|reset
 argument_list|()
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|ensure
 argument_list|(
@@ -1316,6 +1319,9 @@ case|:
 name|ready
 argument_list|()
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|ensure
 argument_list|(

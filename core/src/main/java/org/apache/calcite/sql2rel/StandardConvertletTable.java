@@ -5609,6 +5609,9 @@ name|BIGINT
 argument_list|)
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 block|}
@@ -5795,6 +5798,9 @@ literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 return|return
@@ -9455,6 +9461,8 @@ name|TimeUnit
 operator|.
 name|MONTH
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 specifier|final

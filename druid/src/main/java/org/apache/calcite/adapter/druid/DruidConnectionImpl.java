@@ -1924,6 +1924,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 catch|catch
@@ -2469,6 +2472,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 break|break;
 case|case
@@ -2565,6 +2570,8 @@ argument_list|(
 literal|"/ by zero"
 argument_list|)
 throw|;
+default|default:
+break|break;
 block|}
 name|rowBuilder
 operator|.
@@ -2646,6 +2653,8 @@ name|NaN
 argument_list|)
 expr_stmt|;
 return|return;
+default|default:
+break|break;
 block|}
 name|rowBuilder
 operator|.
@@ -2661,6 +2670,8 @@ name|s
 argument_list|)
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 block|}

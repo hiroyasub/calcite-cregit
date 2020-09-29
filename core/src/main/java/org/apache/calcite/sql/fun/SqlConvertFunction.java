@@ -229,6 +229,8 @@ case|:
 return|return
 literal|"{0}({1} USING {2})"
 return|;
+default|default:
+break|break;
 block|}
 assert|assert
 literal|false

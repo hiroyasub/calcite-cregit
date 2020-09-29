@@ -1267,6 +1267,9 @@ literal|"l"
 else|:
 name|type
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|true

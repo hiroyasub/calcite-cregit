@@ -836,6 +836,8 @@ operator|.
 name|ZERO
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 block|}
 return|return

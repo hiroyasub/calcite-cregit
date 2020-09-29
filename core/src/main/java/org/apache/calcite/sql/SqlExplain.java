@@ -546,6 +546,8 @@ literal|"INCLUDING ALL ATTRIBUTES"
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(

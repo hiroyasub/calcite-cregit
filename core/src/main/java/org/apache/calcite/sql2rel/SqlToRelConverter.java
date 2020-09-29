@@ -6064,7 +6064,12 @@ argument_list|()
 argument_list|)
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|sqlNode
@@ -6997,6 +7002,9 @@ operator|.
 name|TRUE_FALSE
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|subQuery
 operator|.
@@ -9683,6 +9691,8 @@ name|negate
 argument_list|()
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -9904,6 +9914,9 @@ name|Logic
 operator|.
 name|TRUE
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|bb
 operator|.
@@ -9914,6 +9927,8 @@ argument_list|,
 name|logic
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -10159,6 +10174,9 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 name|SqlNode
 name|windowOrRef
@@ -17409,6 +17427,8 @@ operator|.
 name|LAST
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 name|SqlNode
 name|converted
@@ -17460,6 +17480,9 @@ name|NullDirection
 operator|.
 name|FIRST
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 comment|// Scan the select list and order exprs for an identical expression.
 specifier|final
@@ -25277,6 +25300,8 @@ operator|.
 name|rel
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 block|}
 switch|switch
@@ -25654,6 +25679,9 @@ operator|.
 name|DESCENDING
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -25768,6 +25796,8 @@ operator|.
 name|NULLS_LAST
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 return|return
@@ -27168,6 +27198,8 @@ comment|// for now do not detect aggregates in sub-queries.
 return|return
 literal|null
 return|;
+default|default:
+break|break;
 block|}
 specifier|final
 name|boolean
@@ -27481,6 +27513,8 @@ name|outerCall
 argument_list|)
 expr_stmt|;
 return|return;
+default|default:
+break|break;
 block|}
 specifier|final
 name|List

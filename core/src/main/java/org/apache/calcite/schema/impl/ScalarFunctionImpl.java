@@ -969,6 +969,8 @@ argument_list|,
 literal|true
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 name|returnType

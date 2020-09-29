@@ -784,6 +784,8 @@ name|majorVersion
 operator|>=
 literal|8
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -965,6 +967,8 @@ operator|.
 name|ZERO
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 name|super

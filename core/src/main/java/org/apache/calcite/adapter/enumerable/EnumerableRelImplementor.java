@@ -1093,6 +1093,9 @@ name|SCALAR
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|List

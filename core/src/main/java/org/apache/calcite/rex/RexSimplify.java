@@ -1283,6 +1283,8 @@ name|toBoolean
 argument_list|()
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 block|}
 return|return
@@ -2077,6 +2079,8 @@ argument_list|)
 return|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 if|if
@@ -2187,6 +2191,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -3174,6 +3180,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|SqlKind
@@ -4271,6 +4280,8 @@ argument_list|)
 return|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
@@ -4336,6 +4347,8 @@ argument_list|,
 name|UNKNOWN
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 specifier|final
 name|RexNode
@@ -4965,6 +4978,9 @@ name|isNullable
 argument_list|)
 assert|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|/**    * Returns {@code true} if specified {@link SqlKind} has custom nullability rules which    * depend not only on the nullability of input operands.    *    *<p>For example, CAST may be used to change the nullability of its operand type,    * so it may be nullable, though the argument type was non-nullable.    *    * @param sqlKind Sql kind to check    * @return {@code true} if specified {@link SqlKind} has custom nullability rules    */
@@ -7156,6 +7172,8 @@ operator|.
 name|class
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 name|simplifyAnd2
@@ -8522,6 +8540,9 @@ literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|// If one column should be null and is in a comparison predicate,
@@ -9466,6 +9487,9 @@ break|break;
 comment|// short-cut
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 return|return
@@ -10160,6 +10184,8 @@ continue|continue;
 block|}
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 end_for
@@ -10516,6 +10542,9 @@ name|toBoolean
 argument_list|()
 expr_stmt|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 if|if
@@ -11093,6 +11122,8 @@ name|e
 return|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|List
@@ -11552,6 +11583,8 @@ operator|.
 name|ordinal
 argument_list|()
 return|;
+default|default:
+break|break;
 block|}
 break|break;
 case|case
@@ -11589,7 +11622,12 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -13165,7 +13203,13 @@ name|left
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|null
@@ -13325,6 +13369,8 @@ name|getKind
 argument_list|()
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|null
@@ -14007,6 +14053,8 @@ argument_list|,
 name|newTerms
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -14046,10 +14094,14 @@ argument_list|,
 name|newTerms
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false

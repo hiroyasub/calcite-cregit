@@ -1985,6 +1985,8 @@ operator|=
 literal|0
 expr_stmt|;
 break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|int
@@ -5364,6 +5366,9 @@ return|return
 literal|false
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 name|save
 operator|.

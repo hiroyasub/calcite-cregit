@@ -3240,6 +3240,9 @@ name|t1
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 literal|null
@@ -5955,6 +5958,9 @@ argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -6549,7 +6555,11 @@ argument_list|,
 name|scope
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -7846,6 +7856,8 @@ argument_list|)
 expr_stmt|;
 break|break;
 block|}
+default|default:
+break|break;
 block|}
 return|return
 name|node
@@ -11260,6 +11272,8 @@ argument_list|)
 expr_stmt|;
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 block|}
 if|if
@@ -11708,6 +11722,8 @@ name|forceRightNullable
 operator|=
 literal|true
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 specifier|final
@@ -14472,6 +14488,8 @@ name|getParserPosition
 argument_list|()
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -18125,6 +18143,8 @@ name|cannotStreamValues
 argument_list|()
 argument_list|)
 throw|;
+default|default:
+break|break;
 block|}
 block|}
 else|else
@@ -18619,6 +18639,9 @@ literal|false
 return|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 comment|// Make sure that ORDER BY is possible.
@@ -18695,6 +18718,9 @@ literal|false
 return|;
 block|}
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 return|return
@@ -18777,6 +18803,8 @@ argument_list|,
 literal|true
 argument_list|)
 return|;
+default|default:
+break|break;
 block|}
 specifier|final
 name|SqlMonotonicity
@@ -19431,6 +19459,8 @@ case|case
 name|TEMPORARY_SEQUENCE
 case|:
 return|return;
+default|default:
+break|break;
 block|}
 block|}
 throw|throw
@@ -19849,6 +19879,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 return|return;
+default|default:
+break|break;
 block|}
 specifier|final
 name|SqlValidatorScope
@@ -22516,6 +22548,9 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 block|}
@@ -22577,6 +22612,8 @@ block|}
 return|return
 literal|true
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -22641,6 +22678,8 @@ name|SqlKind
 operator|.
 name|DEFAULT
 return|;
+default|default:
+break|break;
 block|}
 return|return
 literal|false
@@ -29805,6 +29844,8 @@ case|:
 return|return
 name|call
 return|;
+default|default:
+break|break;
 block|}
 comment|// Only visits arguments which are expressions. We don't want to
 comment|// qualify non-expressions such as 'x' in 'empno * 5 AS x'.
@@ -30157,6 +30198,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -30945,6 +30988,8 @@ block|}
 block|}
 block|}
 break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(
@@ -31039,6 +31084,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
 break|break;
 block|}
 block|}
@@ -31805,6 +31852,9 @@ name|operands
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 return|return
 name|super

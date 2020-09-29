@@ -1497,6 +1497,9 @@ name|FUNCTION
 case|:
 comment|// E.g. "RANK()"
 comment|// fall through - dealt with below
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 specifier|final
@@ -1579,6 +1582,9 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+break|break;
 block|}
 block|}
 for|for
@@ -5013,6 +5019,9 @@ case|:
 comment|// fall through
 block|}
 comment|// fall through
+break|break;
+default|default:
+break|break;
 block|}
 if|if
 condition|(

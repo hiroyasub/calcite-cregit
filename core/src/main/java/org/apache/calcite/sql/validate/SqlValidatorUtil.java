@@ -3957,6 +3957,9 @@ name|of
 argument_list|()
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 specifier|final
 name|int
@@ -4308,6 +4311,8 @@ argument_list|(
 name|expr
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
 break|break;
 block|}
 name|groupAnalyzer
