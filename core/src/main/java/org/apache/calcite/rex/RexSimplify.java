@@ -11140,6 +11140,8 @@ case|:
 return|return
 name|e
 return|;
+default|default:
+break|break;
 block|}
 break|break;
 default|default:
@@ -13185,6 +13187,9 @@ name|right
 argument_list|)
 return|;
 block|}
+break|break;
+default|default:
+break|break;
 block|}
 switch|switch
 condition|(
