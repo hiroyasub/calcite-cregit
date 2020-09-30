@@ -15487,6 +15487,44 @@ block|}
 end_function
 
 begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4295">[CALCITE-4295]    * Composite of two checker with SqlOperandCountRange throws IllegalArgumentException</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCompositeOfCountRange
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select COMPOSITE(deptno)\n"
+operator|+
+literal|"from dept"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 end_comment
 

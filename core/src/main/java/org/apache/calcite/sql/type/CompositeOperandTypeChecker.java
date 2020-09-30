@@ -837,7 +837,7 @@ name|min
 argument_list|,
 name|range
 operator|.
-name|getMax
+name|getMin
 argument_list|()
 argument_list|)
 expr_stmt|;
