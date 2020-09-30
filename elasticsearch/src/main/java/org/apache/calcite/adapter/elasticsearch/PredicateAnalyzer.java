@@ -1316,6 +1316,11 @@ operator|.
 name|stringValue
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ModifiedButNotUsed"
+argument_list|)
 name|Map
 argument_list|<
 name|String

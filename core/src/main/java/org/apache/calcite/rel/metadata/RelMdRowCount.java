@@ -462,6 +462,11 @@ name|mq
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"CatchAndPrintStackTrace"
+argument_list|)
 specifier|public
 name|Double
 name|getRowCount

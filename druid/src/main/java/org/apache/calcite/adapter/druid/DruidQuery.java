@@ -3981,7 +3981,7 @@ name|double
 name|getIntervalCostMultiplier
 parameter_list|()
 block|{
-name|int
+name|long
 name|days
 init|=
 literal|0
@@ -4014,6 +4014,9 @@ name|RelMdUtil
 operator|.
 name|linear
 argument_list|(
+operator|(
+name|int
+operator|)
 name|days
 argument_list|,
 literal|1
@@ -7444,8 +7447,8 @@ block|{
 if|if
 condition|(
 name|postAgg
-operator|instanceof
-name|JsonExpressionPostAgg
+operator|!=
+literal|null
 condition|)
 block|{
 if|if

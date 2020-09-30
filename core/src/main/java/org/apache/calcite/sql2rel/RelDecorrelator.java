@@ -13344,6 +13344,11 @@ literal|"\n"
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"UndefinedEquals"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|boolean
@@ -13361,6 +13366,7 @@ operator|||
 name|obj
 operator|instanceof
 name|CorelMap
+comment|// TODO: Multimap does not have well-defined equals behavior
 operator|&&
 name|mapRefRelToCorRef
 operator|.

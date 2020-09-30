@@ -232,7 +232,6 @@ argument_list|)
 throw|;
 block|}
 comment|/** Returns a DruidType matching the String from a meta data query. */
-specifier|protected
 specifier|static
 name|DruidType
 name|getTypeFromMetaData

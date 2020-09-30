@@ -1101,6 +1101,11 @@ argument_list|)
 decl_stmt|;
 comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #BINDABLE_SET_OP_RULE}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MissingSummary"
+argument_list|)
 specifier|public
 specifier|static
 specifier|final

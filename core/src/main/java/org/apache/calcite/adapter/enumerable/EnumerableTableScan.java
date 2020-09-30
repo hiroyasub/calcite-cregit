@@ -737,7 +737,7 @@ name|elementType
 argument_list|)
 return|;
 block|}
-comment|/** Returns whether EnumerableTableScan can generate code to handle a    * particular variant of the Table SPI.    * @deprecated    **/
+comment|/** Returns whether EnumerableTableScan can generate code to handle a    * particular variant of the Table SPI.    * @deprecated remove before Calcite 2.0    **/
 annotation|@
 name|Deprecated
 specifier|public

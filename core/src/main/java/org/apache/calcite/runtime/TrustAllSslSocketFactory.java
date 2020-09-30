@@ -120,6 +120,11 @@ comment|/**  * Socket factory that trusts all SSL connections.  */
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"CatchAndPrintStackTrace"
+argument_list|)
 specifier|public
 class|class
 name|TrustAllSslSocketFactory

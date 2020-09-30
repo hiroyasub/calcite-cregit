@@ -1037,6 +1037,11 @@ return|return
 name|values
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"CatchAndPrintStackTrace"
+argument_list|)
 specifier|private
 specifier|static
 name|Object

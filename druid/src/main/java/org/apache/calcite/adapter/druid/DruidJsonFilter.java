@@ -1947,7 +1947,7 @@ name|SqlTypeFamily
 operator|.
 name|NUMERIC
 operator|||
-name|lhs
+name|rhs
 operator|.
 name|getType
 argument_list|()

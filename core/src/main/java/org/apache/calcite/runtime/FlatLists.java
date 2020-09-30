@@ -6219,6 +6219,11 @@ return|;
 block|}
 block|}
 comment|/** List that is also comparable.    *    *<p>You can create an instance whose type    * parameter {@code T} does not extend {@link Comparable}, but you will get a    * {@link ClassCastException} at runtime when you call    * {@link #compareTo(Object)} if the elements of the list do not implement    * {@code Comparable}.    *    * @param<T> element type    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ComparableType"
+argument_list|)
 specifier|public
 interface|interface
 name|ComparableList

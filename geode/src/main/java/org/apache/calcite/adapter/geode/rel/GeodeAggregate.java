@@ -227,22 +227,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableMap
-operator|.
-name|Builder
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -595,6 +579,8 @@ name|groupByFields
 argument_list|)
 expr_stmt|;
 comment|// Find the aggregate functions (e.g. MAX, SUM ...)
+name|ImmutableMap
+operator|.
 name|Builder
 argument_list|<
 name|String

@@ -488,7 +488,9 @@ name|fieldList
 parameter_list|)
 block|{
 throw|throw
-literal|null
+operator|new
+name|NullPointerException
+argument_list|()
 throw|;
 block|}
 annotation|@

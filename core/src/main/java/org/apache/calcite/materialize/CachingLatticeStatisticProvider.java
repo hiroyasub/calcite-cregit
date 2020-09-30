@@ -182,11 +182,6 @@ name|cache
 operator|=
 name|CacheBuilder
 operator|.
-expr|<
-name|Lattice
-operator|.
-name|Column
-operator|>
 name|newBuilder
 argument_list|()
 operator|.

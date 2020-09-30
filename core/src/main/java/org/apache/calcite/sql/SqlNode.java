@@ -331,7 +331,11 @@ name|Deprecated
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"MethodDoesntCallSuperMethod"
+block|,
+literal|"AmbiguousMethodReference"
+block|}
 argument_list|)
 annotation|@
 name|Override
@@ -349,6 +353,11 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a copy of a SqlNode. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"AmbiguousMethodReference"
+argument_list|)
 specifier|public
 specifier|static
 parameter_list|<

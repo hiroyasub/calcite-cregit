@@ -419,22 +419,6 @@ name|common
 operator|.
 name|collect
 operator|.
-name|ImmutableList
-operator|.
-name|Builder
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
 name|ImmutableMap
 import|;
 end_import
@@ -927,6 +911,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|// Construct the list of fields to project
+name|ImmutableList
+operator|.
 name|Builder
 argument_list|<
 name|String

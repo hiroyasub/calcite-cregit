@@ -1120,6 +1120,14 @@ name|APPLICATION_JSON
 argument_list|)
 argument_list|)
 expr_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+name|Response
+name|response
+init|=
 name|rawHttp
 argument_list|()
 operator|.
@@ -1127,7 +1135,7 @@ name|apply
 argument_list|(
 name|request
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 block|}
 catch|catch
 parameter_list|(

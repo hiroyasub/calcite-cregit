@@ -503,6 +503,11 @@ block|{
 comment|// ignore
 block|}
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"CatchAndPrintStackTrace"
+argument_list|)
 specifier|private
 name|void
 name|connect

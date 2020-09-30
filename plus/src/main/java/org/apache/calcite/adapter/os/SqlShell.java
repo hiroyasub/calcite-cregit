@@ -615,6 +615,11 @@ argument_list|()
 return|;
 block|}
 comment|/** Main entry point. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"CatchAndPrintStackTrace"
+argument_list|)
 specifier|public
 specifier|static
 name|void

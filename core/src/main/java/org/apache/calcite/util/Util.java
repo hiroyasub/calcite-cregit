@@ -4058,6 +4058,11 @@ return|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Throw new {@link AssertionError} if applicable;    * or {@link RuntimeException} if e is checked;    * or raw exception if e is unchecked or {@link Error}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MissingSummary"
+argument_list|)
 specifier|public
 specifier|static
 name|Error

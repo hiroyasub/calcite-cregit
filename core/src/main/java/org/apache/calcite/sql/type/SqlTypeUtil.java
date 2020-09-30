@@ -5696,7 +5696,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Returns the least restrictive type T, such that a value of type T can be    * compared with values of type {@code type0} and {@code type1} using    * {@code =}. */
+comment|/** Returns the least restrictive type T, such that a value of type T can be    * compared with values of type {@code type1} and {@code type2} using    * {@code =}. */
 specifier|public
 specifier|static
 name|RelDataType

@@ -289,7 +289,11 @@ comment|/** @deprecated Use {@link #add(Consumer)}. */
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"Guava"
+block|,
+literal|"ReturnValueIgnored"
+block|}
 argument_list|)
 annotation|@
 name|Deprecated

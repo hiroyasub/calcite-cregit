@@ -141,6 +141,11 @@ expr_stmt|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
 comment|/** @see #dispatch */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MissingSummary"
+argument_list|)
 specifier|public
 name|Result
 name|visit

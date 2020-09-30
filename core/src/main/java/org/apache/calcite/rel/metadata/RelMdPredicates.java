@@ -2638,7 +2638,7 @@ argument_list|)
 return|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
-comment|/** @see RelMetadataQuery#getPulledUpPredicates(RelNode) */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Predicates#getPredicates()}    * statistic.    * @see RelMetadataQuery#getPulledUpPredicates(RelNode) */
 specifier|public
 name|RelOptPredicateList
 name|getPredicates
