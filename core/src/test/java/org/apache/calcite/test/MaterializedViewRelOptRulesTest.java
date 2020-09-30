@@ -154,7 +154,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for extensions of AbstractMaterializedViewRule,  * in which materialized view gets matched by using structual information of plan.  */
+comment|/**  * Unit test for  * {@link org.apache.calcite.rel.rules.materialize.MaterializedViewRule} and its  * sub-classes, in which materialized views are matched to the structure of a  * plan.  */
 end_comment
 
 begin_class
@@ -2004,6 +2004,87 @@ operator|+
 literal|"where \"depts\".\"name\" is not null and \"emps\".\"name\" = 'a'\n"
 operator|+
 literal|"group by \"depts\".\"deptno\""
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4276">[CALCITE-4276]    * If query contains join and rollup function (FLOOR), rewrite to materialized    * view contains bad field offset</a>. */
+annotation|@
+name|Test
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs15
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|m
+init|=
+literal|""
+operator|+
+literal|"SELECT \"deptno\",\n"
+operator|+
+literal|"  COUNT(*) AS \"dept_size\",\n"
+operator|+
+literal|"  SUM(\"salary\") AS \"dept_budget\"\n"
+operator|+
+literal|"FROM \"emps\"\n"
+operator|+
+literal|"GROUP BY \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|q
+init|=
+literal|""
+operator|+
+literal|"SELECT FLOOR(\"CREATED_AT\" TO YEAR) AS by_year,\n"
+operator|+
+literal|"  COUNT(*) AS \"num_emps\"\n"
+operator|+
+literal|"FROM (SELECT\"deptno\"\n"
+operator|+
+literal|"    FROM \"emps\") AS \"t\"\n"
+operator|+
+literal|"JOIN (SELECT \"deptno\",\n"
+operator|+
+literal|"        \"inceptionDate\" as \"CREATED_AT\"\n"
+operator|+
+literal|"    FROM \"depts2\") using (\"deptno\")\n"
+operator|+
+literal|"GROUP BY FLOOR(\"CREATED_AT\" TO YEAR)"
+decl_stmt|;
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"EnumerableAggregate(group=[{8}], num_emps=[$SUM0($1)])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..7=[{inputs}], expr#8=[FLAG(YEAR)], "
+operator|+
+literal|"expr#9=[FLOOR($t3, $t8)], proj#0..7=[{exprs}], $f8=[$t9])\n"
+operator|+
+literal|"    EnumerableHashJoin(condition=[=($0, $4)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, MV0]])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, depts2]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|m
+argument_list|,
+name|q
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+name|plan
+argument_list|)
 argument_list|)
 operator|.
 name|ok
