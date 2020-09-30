@@ -2543,9 +2543,9 @@ name|endX
 argument_list|,
 name|hasRows
 argument_list|,
-name|partitionRowCount
-argument_list|,
 name|frameRowCount
+argument_list|,
+name|partitionRowCount
 argument_list|)
 argument_list|)
 expr_stmt|;
