@@ -1297,7 +1297,11 @@ block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"JdkObsolete"
+block|,
+literal|"ModifyCollectionInEnhancedForLoop"
+block|}
 argument_list|)
 specifier|public
 name|void
