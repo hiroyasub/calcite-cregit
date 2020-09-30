@@ -255,18 +255,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Predicate
-import|;
-end_import
-
 begin_comment
 comment|/**  * Planner rule that creates a {@code SemiJoin} from a  * {@link org.apache.calcite.rel.core.Join} on top of a  * {@link org.apache.calcite.rel.logical.LogicalAggregate}.  */
 end_comment
@@ -288,15 +276,14 @@ name|TransformationRule
 block|{
 specifier|private
 specifier|static
-specifier|final
-name|Predicate
-argument_list|<
+name|boolean
+name|notGenerateNullsOnLeft
+parameter_list|(
 name|Join
-argument_list|>
-name|NOT_GENERATE_NULLS_ON_LEFT
-init|=
 name|join
-lambda|->
+parameter_list|)
+block|{
+return|return
 operator|!
 name|join
 operator|.
@@ -305,19 +292,19 @@ argument_list|()
 operator|.
 name|generatesNullsOnLeft
 argument_list|()
-decl_stmt|;
-comment|/* Tests if an Aggregate always produces 1 row and 0 columns. */
+return|;
+block|}
+comment|/**    * Tests if an Aggregate always produces 1 row and 0 columns.    */
 specifier|private
 specifier|static
-specifier|final
-name|Predicate
-argument_list|<
+name|boolean
+name|isEmptyAggregate
+parameter_list|(
 name|Aggregate
-argument_list|>
-name|IS_EMPTY_AGGREGATE
-init|=
 name|aggregate
-lambda|->
+parameter_list|)
+block|{
+return|return
 name|aggregate
 operator|.
 name|getRowType
@@ -327,7 +314,8 @@ name|getFieldCount
 argument_list|()
 operator|==
 literal|0
-decl_stmt|;
+return|;
+block|}
 comment|/** Creates a SemiJoinRule. */
 specifier|protected
 name|SemiJoinRule
@@ -456,9 +444,7 @@ name|projectsRight
 argument_list|()
 operator|&&
 operator|!
-name|IS_EMPTY_AGGREGATE
-operator|.
-name|test
+name|isEmptyAggregate
 argument_list|(
 name|aggregate
 argument_list|)
@@ -985,7 +971,9 @@ argument_list|)
 operator|.
 name|predicate
 argument_list|(
-name|NOT_GENERATE_NULLS_ON_LEFT
+name|SemiJoinRule
+operator|::
+name|notGenerateNullsOnLeft
 argument_list|)
 operator|.
 name|inputs
@@ -1249,7 +1237,9 @@ argument_list|)
 operator|.
 name|predicate
 argument_list|(
-name|NOT_GENERATE_NULLS_ON_LEFT
+name|SemiJoinRule
+operator|::
+name|notGenerateNullsOnLeft
 argument_list|)
 operator|.
 name|inputs
