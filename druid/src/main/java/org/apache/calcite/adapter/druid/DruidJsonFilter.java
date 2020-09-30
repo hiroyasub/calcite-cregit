@@ -335,12 +335,22 @@ block|{
 specifier|private
 specifier|static
 specifier|final
+name|ThreadLocal
+argument_list|<
 name|SimpleDateFormat
+argument_list|>
 name|DATE_FORMATTER
 init|=
+name|ThreadLocal
+operator|.
+name|withInitial
+argument_list|(
+parameter_list|()
+lambda|->
 name|getDateFormatter
 argument_list|(
 name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    * Converts a {@link RexNode} to a Druid JSON filter.    *    * @param rexNode    RexNode to translate to Druid Json Filter    * @param rowType    Row type associated to rexNode    * @param druidQuery Druid query    *    * @return Druid JSON filter, or null if it cannot translate    */
@@ -1323,6 +1333,9 @@ block|}
 name|val
 operator|=
 name|DATE_FORMATTER
+operator|.
+name|get
+argument_list|()
 operator|.
 name|format
 argument_list|(
