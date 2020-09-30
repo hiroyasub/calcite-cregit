@@ -1241,6 +1241,8 @@ argument_list|()
 expr_stmt|;
 comment|// escape quotes in the label.
 name|label
+operator|=
+name|label
 operator|.
 name|replace
 argument_list|(
