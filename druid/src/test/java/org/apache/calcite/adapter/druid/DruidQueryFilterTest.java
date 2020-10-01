@@ -535,6 +535,10 @@ operator|.
 name|varcharRowType
 argument_list|,
 name|druidQuery
+argument_list|,
+name|f
+operator|.
+name|rexBuilder
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -714,6 +718,10 @@ operator|.
 name|varcharRowType
 argument_list|,
 name|druidQuery
+argument_list|,
+name|f
+operator|.
+name|rexBuilder
 argument_list|)
 decl_stmt|;
 name|assertThat

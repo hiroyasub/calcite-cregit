@@ -2861,17 +2861,6 @@ name|void
 name|testFilterSortDesc
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -4108,17 +4097,6 @@ name|void
 name|testGroupByMonthGranularityFiltered
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -4278,17 +4256,6 @@ name|void
 name|testTopNDayGranularityFiltered
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -4609,17 +4576,6 @@ name|void
 name|testFilterDistinct
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -4664,19 +4620,19 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"2992-01-10T00:00:00.000Z]],"
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|" filter=[AND(=($3, 'High Top Dried Mushrooms'),"
+literal|"filter=[AND("
 operator|+
-literal|" OR(=($87, 'Q2'),"
+literal|"SEARCH($3, Sarg['High Top Dried Mushrooms':VARCHAR]:VARCHAR), "
 operator|+
-literal|" =($87, 'Q3')),"
+literal|"SEARCH($87, Sarg['Q2', 'Q3']:CHAR(2)), "
 operator|+
-literal|" =($30, 'WA'))],"
+literal|"SEARCH($30, Sarg['WA':VARCHAR]:VARCHAR))], "
 operator|+
-literal|" projects=[[$30, $29, $3]], groups=[{0, 1, 2}], aggs=[[]])\n"
+literal|"projects=[[$30, $29, $3]], groups=[{0, 1, 2}], aggs=[[]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4729,17 +4685,6 @@ name|void
 name|testFilter
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -4792,9 +4737,13 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[AND(=($3, 'High Top Dried Mushrooms'), "
+literal|"filter=[AND("
 operator|+
-literal|"OR(=($87, 'Q2'), =($87, 'Q3')), =($30, 'WA'))], "
+literal|"SEARCH($3, Sarg['High Top Dried Mushrooms':VARCHAR]:VARCHAR), "
+operator|+
+literal|"SEARCH($87, Sarg['Q2', 'Q3']:CHAR(2)), "
+operator|+
+literal|"SEARCH($30, Sarg['WA':VARCHAR]:VARCHAR))], "
 operator|+
 literal|"projects=[[$30, $29, $3]])\n"
 decl_stmt|;
@@ -4973,17 +4922,6 @@ name|void
 name|testWhereGroupBy
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5153,17 +5091,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractYear
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5213,17 +5140,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractMonth
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5281,17 +5197,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractDay
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5349,17 +5254,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractHourOfDay
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5401,17 +5295,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractYearMonthDay
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5500,17 +5383,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractYearMonthDayWithOutRenaming
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5599,17 +5471,6 @@ name|void
 name|testPushAggregateOnTimeWithExtractWithOutRenaming
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -5680,17 +5541,6 @@ name|void
 name|testPushComplexFilter
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -8399,17 +8249,6 @@ name|void
 name|testOrderByOnMetricsInSelectDruidQuery
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sqlQuery
@@ -8958,17 +8797,6 @@ name|void
 name|testFilterClausesFactoredForPruning1
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -9030,17 +8858,6 @@ name|void
 name|testFilterClausesFactoredForPruning2
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 name|String
 name|sql
 init|=
@@ -9461,17 +9278,6 @@ name|void
 name|testNestedFilterClauseFactored
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 comment|// Logically equivalent to
 comment|// select sum("store_sales") from "foodmart" where "store_state" in ('CA', 'OR')
 name|String
@@ -10952,17 +10758,6 @@ name|void
 name|testFilterWithFloorOnTime
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 comment|// Test filter on floor on time column is pushed to druid
 specifier|final
 name|String
@@ -11432,17 +11227,6 @@ name|void
 name|testFloorToDateRangeWithTimeZone
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -13458,17 +13242,6 @@ name|void
 name|testCeilFilterExpression
 parameter_list|()
 block|{
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4279_FIXED
-argument_list|,
-literal|"CALCITE-4279"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -15362,11 +15135,6 @@ name|FOODMART_TABLE
 operator|+
 literal|" GROUP BY \"product_id\" ORDER BY prod_id2 LIMIT 1"
 decl_stmt|;
-name|CalciteAssert
-operator|.
-name|AssertQuery
-name|q
-init|=
 name|sql
 argument_list|(
 name|sql
@@ -15393,19 +15161,6 @@ argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
 argument_list|)
-decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
-name|q
 operator|.
 name|returnsOrdered
 argument_list|(

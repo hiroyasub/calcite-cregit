@@ -272,15 +272,6 @@ name|CALCITE_4213_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-4279">[CALCITE-4279]    * SEARCH operator cannot be pushed into Druid</a> is fixed. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|CALCITE_4279_FIXED
-init|=
-literal|false
-decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

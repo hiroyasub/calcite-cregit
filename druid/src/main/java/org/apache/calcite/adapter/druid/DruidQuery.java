@@ -3339,6 +3339,12 @@ name|getRowType
 argument_list|()
 argument_list|,
 name|this
+argument_list|,
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -4740,11 +4746,10 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**    * Translates Filter rel to Druid Filter Json object if possible.    * Currently Filter rel input has to be Druid Table scan    *    * @param filterRel input filter rel    * @param druidQuery Druid query    *    * @return DruidJson Filter or null if cannot translate one of filters    */
+comment|/**    * Translates Filter rel to Druid Filter Json object if possible.    * Currently Filter rel input has to be Druid Table scan    *    * @param filterRel input filter rel    *    * @return DruidJson Filter or null if cannot translate one of filters    */
 annotation|@
 name|Nullable
 specifier|private
-specifier|static
 name|DruidJsonFilter
 name|computeFilter
 parameter_list|(
@@ -4752,9 +4757,6 @@ annotation|@
 name|Nullable
 name|Filter
 name|filterRel
-parameter_list|,
-name|DruidQuery
-name|druidQuery
 parameter_list|)
 block|{
 if|if
@@ -4805,7 +4807,13 @@ name|filter
 argument_list|,
 name|inputRowType
 argument_list|,
-name|druidQuery
+name|this
+argument_list|,
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -6197,8 +6205,6 @@ init|=
 name|computeFilter
 argument_list|(
 name|filter
-argument_list|,
-name|this
 argument_list|)
 decl_stmt|;
 if|if
@@ -6556,6 +6562,12 @@ name|getRowType
 argument_list|()
 argument_list|,
 name|this
+argument_list|,
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -9061,6 +9073,14 @@ name|getRowType
 argument_list|()
 argument_list|,
 name|druidQuery
+argument_list|,
+name|druidQuery
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getRexBuilder
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
