@@ -91,20 +91,6 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Disabled
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Test
 import|;
 end_import
@@ -613,11 +599,11 @@ literal|"select \"f_list\"[1], "
 operator|+
 literal|"\"f_map\"['k1'], "
 operator|+
-literal|"\"f_tuple\"['1'], "
+literal|"\"test_collections\".\"f_tuple\".\"1\", "
 operator|+
-literal|"\"f_tuple\"['2'], "
+literal|"\"test_collections\".\"f_tuple\".\"2\", "
 operator|+
-literal|"\"f_tuple\"['3']"
+literal|"\"test_collections\".\"f_tuple\".\"3\""
 operator|+
 literal|" from \"test_collections\""
 argument_list|)
@@ -628,17 +614,14 @@ literal|"[EXPR$0 INTEGER"
 operator|+
 literal|", EXPR$1 VARCHAR"
 operator|+
-literal|", EXPR$2 BIGINT"
+literal|", 1 BIGINT"
 operator|+
-literal|", EXPR$3 VARBINARY"
+literal|", 2 VARBINARY"
 operator|+
-literal|", EXPR$4 TIMESTAMP]"
+literal|", 3 TIMESTAMP]"
 argument_list|)
 expr_stmt|;
 block|}
-comment|// ignored as tuple elements returns 'null' when accessed in the select statement
-annotation|@
-name|Disabled
 annotation|@
 name|Test
 name|void
@@ -661,11 +644,11 @@ literal|"select \"f_list\"[1], "
 operator|+
 literal|"\"f_map\"['k1'], "
 operator|+
-literal|"\"f_tuple\"['1'], "
+literal|"\"test_collections\".\"f_tuple\".\"1\", "
 operator|+
-literal|"\"f_tuple\"['2'], "
+literal|"\"test_collections\".\"f_tuple\".\"2\", "
 operator|+
-literal|"\"f_tuple\"['3']"
+literal|"\"test_collections\".\"f_tuple\".\"3\""
 operator|+
 literal|" from \"test_collections\""
 argument_list|)
@@ -676,11 +659,11 @@ literal|"EXPR$0=1"
 operator|+
 literal|"; EXPR$1=v1"
 operator|+
-literal|"; EXPR$2=3000000000"
+literal|"; 1=3000000000"
 operator|+
-literal|"; EXPR$3=30ff87"
+literal|"; 2=30ff87"
 operator|+
-literal|"; EXPR$4=2015-05-03 13:30:54.234"
+literal|"; 3=2015-05-03 11:30:54\n"
 argument_list|)
 expr_stmt|;
 block|}
