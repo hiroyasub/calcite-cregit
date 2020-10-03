@@ -2086,9 +2086,9 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN=EnumerableLimit(offset=[2], fetch=[3])\n"
 operator|+
-literal|"  BindableSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[DESC], offset=[2], fetch=[3])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -4280,9 +4280,9 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN=EnumerableCalc(expr#0..3=[{inputs}], S=[$t2], M=[$t3], P=[$t0])\n"
 operator|+
-literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -4414,7 +4414,11 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"BindableProject(C=[$2], state_province=[$0], city=[$1])\n"
+literal|"PLAN=EnumerableCalc(expr#0..2=[{inputs}], C=[$t2], "
+operator|+
+literal|"state_province=[$t0], city=[$t1])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$30, $29]], groups=[{0, 1}], aggs=[[COUNT()]], sort0=[2], dir0=[DESC], fetch=[2])"
 decl_stmt|;
@@ -13977,7 +13981,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"BindableProject(S=[$1])\n"
+literal|"PLAN=EnumerableCalc(expr#0..1=[{inputs}], S=[$t1])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
@@ -14509,9 +14515,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN=EnumerableCalc(expr#0..2=[{inputs}], QR_TIMESTAMP_OK=[$t0], "
 operator|+
-literal|"  BindableProject(QR_TIMESTAMP_OK=[$0], SUM_STORE_SALES=[$2], YR_TIMESTAMP_OK=[$1])\n"
+literal|"SUM_STORE_SALES=[$t2], YR_TIMESTAMP_OK=[$t1])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
@@ -14636,9 +14644,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"BindableProject(HR_T_TIMESTAMP_OK=[$0], MI_T_TIMESTAMP_OK=[$1], "
+literal|"PLAN=EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}], "
 operator|+
-literal|"SUM_T_OTHER_OK=[$3], HR_T_TIMESTAMP_OK2=[$2])\n"
+literal|"SUM_T_OTHER_OK=[$t3], HR_T_TIMESTAMP_OK2=[$t2])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
@@ -14788,11 +14798,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN=EnumerableCalc(expr#0..5=[{inputs}], QUARTER=[$t4], WEEK=[$t0], "
 operator|+
-literal|"  BindableProject(QUARTER=[$4], WEEK=[$0], DAYOFWEEK=[$1], "
+literal|"DAYOFWEEK=[$t1], DAYOFMONTH=[$t2], DAYOFYEAR=[$t3], SUM_ADDED=[$t5])\n"
 operator|+
-literal|"DAYOFMONTH=[$2], DAYOFYEAR=[$3], SUM_ADDED=[$5])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[wiki, wikipedia]], "
 operator|+
@@ -15144,7 +15154,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"BindableProject(PROD_ID1=[$0], PROD_ID2=[$0], S1=[$1], S2=[$1])\n"
+literal|"PLAN=EnumerableCalc(expr#0..1=[{inputs}], PROD_ID1=[$t0], "
+operator|+
+literal|"PROD_ID2=[$t0], S1=[$t1], S2=[$t1])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
 operator|+
