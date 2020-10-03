@@ -1707,6 +1707,12 @@ operator|(
 name|colOrigin
 operator|==
 literal|null
+operator|||
+operator|!
+name|colOrigin
+operator|.
+name|isDerived
+argument_list|()
 operator|)
 operator|||
 name|LucidDbSpecialOperators

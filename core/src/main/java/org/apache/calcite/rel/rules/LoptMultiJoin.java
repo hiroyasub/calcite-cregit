@@ -2120,6 +2120,12 @@ condition|(
 name|colOrigin
 operator|!=
 literal|null
+operator|||
+operator|!
+name|colOrigin
+operator|.
+name|isDerived
+argument_list|()
 condition|)
 block|{
 name|leftFactorColMapping
@@ -2187,6 +2193,12 @@ condition|(
 name|colOrigin
 operator|==
 literal|null
+operator|||
+operator|!
+name|colOrigin
+operator|.
+name|isDerived
+argument_list|()
 condition|)
 block|{
 continue|continue;

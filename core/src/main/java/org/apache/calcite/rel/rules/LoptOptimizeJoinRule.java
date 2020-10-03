@@ -7361,6 +7361,12 @@ condition|(
 name|leftOrigin
 operator|==
 literal|null
+operator|||
+operator|!
+name|leftOrigin
+operator|.
+name|isDerived
+argument_list|()
 condition|)
 block|{
 return|return
@@ -7387,6 +7393,12 @@ condition|(
 name|rightOrigin
 operator|==
 literal|null
+operator|||
+operator|!
+name|rightOrigin
+operator|.
+name|isDerived
+argument_list|()
 condition|)
 block|{
 return|return

@@ -1574,7 +1574,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Determines the origin of a column, provided the column maps to a single    * column that isn't derived.    *    * @see #getColumnOrigins(org.apache.calcite.rel.RelNode, int)    *    * @param rel the RelNode of the column    * @param column the offset of the column whose origin we are trying to    * determine    *    * @return the origin of a column provided it's a simple column; otherwise,    * returns null    */
+comment|/**    * Determines the origin of a column.    *    * @see #getColumnOrigins(org.apache.calcite.rel.RelNode, int)    *    * @param rel the RelNode of the column    * @param column the offset of the column whose origin we are trying to    * determine    *    * @return the origin of a column    */
 specifier|public
 name|RelColumnOrigin
 name|getColumnOrigin
@@ -1630,13 +1630,6 @@ name|origins
 argument_list|)
 decl_stmt|;
 return|return
-name|origin
-operator|.
-name|isDerived
-argument_list|()
-condition|?
-literal|null
-else|:
 name|origin
 return|;
 block|}
