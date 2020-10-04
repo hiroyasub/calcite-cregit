@@ -40182,6 +40182,54 @@ name|CONSTANT
 argument_list|)
 expr_stmt|;
 comment|// +inf is constant!
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) / null from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream null / extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream extract(year from rowtime) / cast(null as integer) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream cast(null as integer) / extract(year from rowtime) from orders"
+argument_list|)
+operator|.
+name|monotonic
+argument_list|(
+name|SqlMonotonicity
+operator|.
+name|CONSTANT
+argument_list|)
+expr_stmt|;
 comment|// constant /<monotonic> is not monotonic (we don't know whether sign of
 comment|// expression ever changes)
 name|sql
