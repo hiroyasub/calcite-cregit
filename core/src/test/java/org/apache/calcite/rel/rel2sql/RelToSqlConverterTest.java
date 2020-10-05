@@ -1696,6 +1696,185 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testAggregateFilterWhereToSqlFromProductTable
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select\n"
+operator|+
+literal|"  sum(\"shelf_width\") filter (where \"net_weight\"> 0),\n"
+operator|+
+literal|"  sum(\"shelf_width\")\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+operator|+
+literal|"where \"product_id\"> 0\n"
+operator|+
+literal|"group by \"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" SUM(\"shelf_width\") FILTER (WHERE \"net_weight\"> 0 IS TRUE),"
+operator|+
+literal|" SUM(\"shelf_width\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\"> 0\n"
+operator|+
+literal|"GROUP BY \"product_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testAggregateFilterWhereToBigQuerySqlFromProductTable
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select\n"
+operator|+
+literal|"  sum(\"shelf_width\") filter (where \"net_weight\"> 0),\n"
+operator|+
+literal|"  sum(\"shelf_width\")\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+operator|+
+literal|"where \"product_id\"> 0\n"
+operator|+
+literal|"group by \"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUM(CASE WHEN net_weight> 0 IS TRUE"
+operator|+
+literal|" THEN shelf_width ELSE NULL END), "
+operator|+
+literal|"SUM(shelf_width)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"WHERE product_id> 0\n"
+operator|+
+literal|"GROUP BY product_id"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPivotToSqlFromProductTable
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * from (\n"
+operator|+
+literal|"  select \"shelf_width\", \"net_weight\", \"product_id\"\n"
+operator|+
+literal|"  from \"foodmart\".\"product\")\n"
+operator|+
+literal|"  pivot (sum(\"shelf_width\") as w, count(*) as c\n"
+operator|+
+literal|"    for (\"product_id\") in (10, 20))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"net_weight\","
+operator|+
+literal|" SUM(\"shelf_width\") FILTER (WHERE \"product_id\" = 10) AS \"10_W\","
+operator|+
+literal|" COUNT(*) FILTER (WHERE \"product_id\" = 10) AS \"10_C\","
+operator|+
+literal|" SUM(\"shelf_width\") FILTER (WHERE \"product_id\" = 20) AS \"20_W\","
+operator|+
+literal|" COUNT(*) FILTER (WHERE \"product_id\" = 20) AS \"20_C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"net_weight\""
+decl_stmt|;
+comment|// BigQuery does not support FILTER, so we generate CASE around the
+comment|// arguments to the aggregate functions.
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT net_weight,"
+operator|+
+literal|" SUM(CASE WHEN product_id = 10 "
+operator|+
+literal|"THEN shelf_width ELSE NULL END) AS `10_W`,"
+operator|+
+literal|" COUNT(CASE WHEN product_id = 10 THEN 1 ELSE NULL END) AS `10_C`,"
+operator|+
+literal|" SUM(CASE WHEN product_id = 20 "
+operator|+
+literal|"THEN shelf_width ELSE NULL END) AS `20_W`,"
+operator|+
+literal|" COUNT(CASE WHEN product_id = 20 THEN 1 ELSE NULL END) AS `20_C`\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY net_weight"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSimpleSelectQueryFromProductTable
 parameter_list|()
 block|{
@@ -18025,7 +18204,6 @@ name|void
 name|testWithinGroup4
 parameter_list|()
 block|{
-comment|// filter in AggregateCall is not unparsed
 specifier|final
 name|String
 name|query
@@ -18041,6 +18219,8 @@ name|String
 name|expected
 init|=
 literal|"SELECT \"product_class_id\", COLLECT(\"net_weight\") "
+operator|+
+literal|"FILTER (WHERE \"net_weight\"> 0 IS TRUE) "
 operator|+
 literal|"WITHIN GROUP (ORDER BY \"net_weight\" DESC)\n"
 operator|+

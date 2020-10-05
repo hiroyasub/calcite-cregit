@@ -3199,6 +3199,16 @@ return|return
 literal|false
 return|;
 block|}
+comment|/** Returns whether this dialect supports the use of FILTER clauses for    * aggregate functions. e.g. {@code COUNT(*) FILTER (WHERE a = 2)}. */
+specifier|public
+name|boolean
+name|supportsAggregateFunctionFilter
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Returns whether this dialect supports window functions (OVER clause). */
 specifier|public
 name|boolean

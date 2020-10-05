@@ -4044,6 +4044,30 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
+if|if
+condition|(
+name|aggCall
+operator|.
+name|hasFilter
+argument_list|()
+operator|&&
+operator|!
+name|dialect
+operator|.
+name|supportsAggregateFunctionFilter
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|InvalidRelException
+argument_list|(
+literal|"dialect does not support aggregate "
+operator|+
+literal|"functions FILTER clauses"
+argument_list|)
+throw|;
+block|}
 block|}
 block|}
 annotation|@
