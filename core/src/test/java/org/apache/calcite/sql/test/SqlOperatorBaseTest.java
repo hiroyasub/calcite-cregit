@@ -24954,6 +24954,33 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"CURRENT_DATETIME()"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"CURRENT_DATETIME('America/Los_Angeles')"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"CURRENT_DATETIME(CAST(NULL AS VARCHAR(20)))"
+argument_list|,
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

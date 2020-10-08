@@ -625,6 +625,9 @@ case|:
 case|case
 name|MYSQL_5
 case|:
+case|case
+name|BIG_QUERY
+case|:
 return|return
 literal|true
 return|;
