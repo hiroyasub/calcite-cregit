@@ -3129,6 +3129,257 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4325">[CALCITE-4325]    * RexSimplify incorrectly simplifies complex expressions with Sarg and    * NULL</a>. */
+annotation|@
+name|Test
+name|void
+name|testFilterAndOrWithNull
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE (deptno<> 20 OR deptno IS NULL) AND deptno = 10
+comment|// Should be simplified to:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE deptno = 10
+comment|// With [CALCITE-4325], is incorrectly simplified to:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE deptno = 10 OR deptno IS NULL
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|b
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|b
+operator|.
+name|and
+argument_list|(
+name|b
+operator|.
+name|or
+argument_list|(
+name|b
+operator|.
+name|notEquals
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|isNull
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|equals
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalFilter(condition=[=($7, 10)])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testFilterAndOrWithNull2
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE (deptno = 20 OR deptno IS NULL) AND deptno = 10
+comment|// Should be simplified to:
+comment|//   No rows (WHERE FALSE)
+comment|// With [CALCITE-4325], is incorrectly simplified to:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE deptno IS NULL
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|b
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|b
+operator|.
+name|and
+argument_list|(
+name|b
+operator|.
+name|or
+argument_list|(
+name|b
+operator|.
+name|equals
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|isNull
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|equals
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalValues(tuples=[[]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
