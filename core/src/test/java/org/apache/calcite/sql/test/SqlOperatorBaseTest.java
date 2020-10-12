@@ -34554,7 +34554,9 @@ literal|"^ARRAY ['foo', 'bar']['baz']^"
 argument_list|,
 literal|"Cannot apply 'ITEM' to arguments of type 'ITEM\\(<CHAR\\(3\\) ARRAY>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\):<ARRAY>\\[<INTEGER>\\]\n"
 operator|+
-literal|"<MAP>\\[<VALUE>\\]"
+literal|"<MAP>\\[<ANY>\\]\n"
+operator|+
+literal|"<ROW>\\[<CHARACTER>\\|<INTEGER>\\]"
 argument_list|,
 literal|false
 argument_list|)
@@ -34624,6 +34626,88 @@ argument_list|(
 literal|"select cast(null as any)['x'] from (values(1))"
 argument_list|,
 literal|"ANY"
+argument_list|)
+expr_stmt|;
+comment|// Row item
+specifier|final
+name|String
+name|intStructQuery
+init|=
+literal|"select \"T\".\"X\"[1] "
+operator|+
+literal|"from (VALUES (ROW(ROW(3, 7), ROW(4, 8)))) as T(x, y)"
+decl_stmt|;
+name|tester
+operator|.
+name|check
+argument_list|(
+name|intStructQuery
+argument_list|,
+name|SqlTests
+operator|.
+name|INTEGER_TYPE_CHECKER
+argument_list|,
+literal|3
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkColumnType
+argument_list|(
+name|intStructQuery
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|check
+argument_list|(
+literal|"select \"T\".\"X\"[1] "
+operator|+
+literal|"from (VALUES (ROW(ROW(3, CAST(NULL AS INTEGER)), ROW(4, 8)))) as T(x, y)"
+argument_list|,
+name|SqlTests
+operator|.
+name|INTEGER_TYPE_CHECKER
+argument_list|,
+literal|3
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|check
+argument_list|(
+literal|"select \"T\".\"X\"[2] "
+operator|+
+literal|"from (VALUES (ROW(ROW(3, CAST(NULL AS INTEGER)), ROW(4, 8)))) as T(x, y)"
+argument_list|,
+name|SqlTests
+operator|.
+name|ANY_TYPE_CHECKER
+argument_list|,
+literal|null
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"select \"T\".\"X\"[1 + CAST(NULL AS INTEGER)] "
+operator|+
+literal|"from (VALUES (ROW(ROW(3, CAST(NULL AS INTEGER)), ROW(4, 8)))) as T(x, y)"
+argument_list|,
+literal|"Cannot infer type of field at position null within ROW type: "
+operator|+
+literal|"RecordType\\(INTEGER EXPR\\$0, INTEGER EXPR\\$1\\)"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

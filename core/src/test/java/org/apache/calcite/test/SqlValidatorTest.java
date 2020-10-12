@@ -32969,7 +32969,9 @@ literal|"Cannot apply 'ITEM' to arguments of type 'ITEM\\(<VARCHAR\\(10\\)>, "
 operator|+
 literal|"<INTEGER>\\)'\\. Supported form\\(s\\):<ARRAY>\\[<INTEGER>\\]\n"
 operator|+
-literal|"<MAP>\\[<VALUE>\\].*"
+literal|"<MAP>\\[<ANY>\\]\n"
+operator|+
+literal|"<ROW>\\[<CHARACTER>\\|<INTEGER>\\].*"
 argument_list|)
 expr_stmt|;
 block|}
