@@ -4799,6 +4799,46 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4333">[CALCITE-4333]    * The Sort rel should be decorrelated even though it has fetch or limit    * when its parent is not a Correlate</a>. */
+annotation|@
+name|Test
+name|void
+name|testSortLimitWithCorrelateInput
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"SELECT deptno, ename\n"
+operator|+
+literal|"    FROM\n"
+operator|+
+literal|"        (SELECT DISTINCT deptno FROM emp) t1,\n"
+operator|+
+literal|"          LATERAL (\n"
+operator|+
+literal|"            SELECT ename, sal\n"
+operator|+
+literal|"            FROM emp\n"
+operator|+
+literal|"            WHERE deptno = t1.deptno)\n"
+operator|+
+literal|"    ORDER BY ename DESC\n"
+operator|+
+literal|"    LIMIT 3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
