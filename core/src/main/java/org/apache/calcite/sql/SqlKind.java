@@ -705,6 +705,9 @@ block|,
 comment|/** The {@code STRING_AGG} aggregate function. */
 name|STRING_AGG
 block|,
+comment|/** The {@code COUNTIF} aggregate function. */
+name|COUNTIF
+block|,
 comment|/** The {@code ARRAY_AGG} aggregate function. */
 name|ARRAY_AGG
 block|,
@@ -1010,6 +1013,8 @@ argument_list|,
 name|ARRAY_AGG
 argument_list|,
 name|ARRAY_CONCAT_AGG
+argument_list|,
+name|COUNTIF
 argument_list|,
 name|INTERSECTION
 argument_list|,

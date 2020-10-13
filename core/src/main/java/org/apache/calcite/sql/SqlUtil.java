@@ -672,6 +672,26 @@ import|;
 end_import
 
 begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -698,13 +718,21 @@ class|class
 name|SqlUtil
 block|{
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Returns the AND of two expressions.    *    *<p>If {@code node1} is null, returns {@code node2}.    * Flattens if either node is an AND. */
+specifier|public
 specifier|static
+annotation|@
+name|Nonnull
 name|SqlNode
 name|andExpressions
 parameter_list|(
+annotation|@
+name|Nullable
 name|SqlNode
 name|node1
 parameter_list|,
+annotation|@
+name|Nonnull
 name|SqlNode
 name|node2
 parameter_list|)

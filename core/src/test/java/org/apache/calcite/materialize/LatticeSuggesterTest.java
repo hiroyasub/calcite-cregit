@@ -3457,7 +3457,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a number of features only available in BigQuery: back-ticks;    * GROUP BY ordinal; case-insensitive unquoted identifiers. */
+comment|/** Tests a number of features only available in BigQuery: back-ticks;    * GROUP BY ordinal; case-insensitive unquoted identifiers;    * the {@code COUNTIF} aggregate function. */
 annotation|@
 name|Test
 name|void
@@ -3506,6 +3506,8 @@ name|String
 name|q0
 init|=
 literal|"select `product_id`,\n"
+operator|+
+literal|"  countif(unit_sales> 1000) as num_over_thousand,\n"
 operator|+
 literal|"  SUM(unit_sales)\n"
 operator|+
