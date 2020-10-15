@@ -1761,8 +1761,11 @@ name|Sql
 name|withContext
 parameter_list|(
 specifier|final
+name|UnaryOperator
+argument_list|<
 name|Context
-name|context
+argument_list|>
+name|transform
 parameter_list|)
 block|{
 return|return
@@ -1774,7 +1777,7 @@ name|tester
 operator|.
 name|withContext
 argument_list|(
-name|context
+name|transform
 argument_list|)
 argument_list|)
 return|;

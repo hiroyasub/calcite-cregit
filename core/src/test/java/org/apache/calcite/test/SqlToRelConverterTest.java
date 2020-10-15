@@ -13731,11 +13731,15 @@ argument_list|)
 operator|.
 name|withContext
 argument_list|(
+name|c
+lambda|->
 name|Contexts
 operator|.
 name|of
 argument_list|(
 name|connectionConfig
+argument_list|,
+name|c
 argument_list|)
 argument_list|)
 decl_stmt|;
