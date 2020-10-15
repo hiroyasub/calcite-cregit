@@ -1483,6 +1483,55 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
+literal|"select * from elastic.zips where _MAP['state'] = 'NY' or "
+operator|+
+literal|"_MAP['city'] = 'BROOKLYN'"
+operator|+
+literal|" order by _MAP['city']"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"query:{'dis_max':{'queries':[{'bool':{'should':"
+operator|+
+literal|"[{'term':{'state':'NY'}},{'term':"
+operator|+
+literal|"{'city':'BROOKLYN'}}]}}]}},'sort':[{'city':'asc'}]"
+argument_list|,
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"size:%s"
+argument_list|,
+name|ElasticsearchTransport
+operator|.
+name|DEFAULT_FETCH_SIZE
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
 literal|"select _MAP['city'] from elastic.zips where _MAP['state'] = 'NY' "
 operator|+
 literal|"order by _MAP['city']"
@@ -1864,6 +1913,96 @@ operator|+
 literal|"{must:[{term:{state:'CA'}},"
 operator|+
 literal|"{range:{pop:{gte:94000}}}]}}}}"
+argument_list|,
+literal|"'script_fields': {longitude:{script:'params._source.loc[0]'}, "
+operator|+
+literal|"latitude:{script:'params._source.loc[1]'}, "
+operator|+
+literal|"city:{script: 'params._source.city'}, "
+operator|+
+literal|"pop:{script: 'params._source.pop'}, "
+operator|+
+literal|"state:{script: 'params._source.state'}, "
+operator|+
+literal|"id:{script: 'params._source.id'}}"
+argument_list|,
+literal|"sort: [ {state: 'asc'}, {pop: 'asc'}]"
+argument_list|,
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"size:%s"
+argument_list|,
+name|ElasticsearchTransport
+operator|.
+name|DEFAULT_FETCH_SIZE
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDismaxQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from zips\n"
+operator|+
+literal|"where state = 'CA' or pop>= 94000\n"
+operator|+
+literal|"order by state, pop"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=ElasticsearchToEnumerableConverter\n"
+operator|+
+literal|"  ElasticsearchSort(sort0=[$4], sort1=[$3], dir0=[ASC], dir1=[ASC])\n"
+operator|+
+literal|"    ElasticsearchProject(city=[CAST(ITEM($0, 'city')):VARCHAR(20)], longitude=[CAST(ITEM(ITEM($0, 'loc'), 0)):FLOAT], latitude=[CAST(ITEM(ITEM($0, 'loc'), 1)):FLOAT], pop=[CAST(ITEM($0, 'pop')):INTEGER], state=[CAST(ITEM($0, 'state')):VARCHAR(2)], id=[CAST(ITEM($0, 'id')):VARCHAR(5)])\n"
+operator|+
+literal|"      ElasticsearchFilter(condition=[OR(=(CAST(ITEM($0, 'state')):VARCHAR(2), 'CA'),>=(CAST(ITEM($0, 'pop')):INTEGER, 94000))])\n"
+operator|+
+literal|"        ElasticsearchTableScan(table=[[elastic, zips]])\n\n"
+decl_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'query' : "
+operator|+
+literal|"{'dis_max':{'queries':[{bool:"
+operator|+
+literal|"{should:[{term:{state:'CA'}},"
+operator|+
+literal|"{range:{pop:{gte:94000}}}]}}]}}"
 argument_list|,
 literal|"'script_fields': {longitude:{script:'params._source.loc[0]'}, "
 operator|+
