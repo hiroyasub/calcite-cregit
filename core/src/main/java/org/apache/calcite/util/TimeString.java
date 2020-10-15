@@ -1065,7 +1065,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Converts this TimestampString to a string, truncated or padded with    * zeroes to a given precision. */
+comment|/** Converts this TimestampString to a string, truncated or padded with    * zeros to a given precision. */
 specifier|public
 name|String
 name|toString

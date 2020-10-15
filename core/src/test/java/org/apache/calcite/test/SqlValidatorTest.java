@@ -15541,7 +15541,7 @@ argument_list|(
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// leading zeroes do not cause precision to be exceeded
+comment|// leading zeros do not cause precision to be exceeded
 name|expr
 argument_list|(
 literal|"INTERVAL '0999' MONTH(3)"

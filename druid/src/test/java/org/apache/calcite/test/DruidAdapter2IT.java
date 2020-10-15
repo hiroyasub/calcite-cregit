@@ -378,7 +378,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Druid must be up and running with foodmart and wikipedia datasets loaded. Follow the  * instructions on<a href="https://github.com/zabetak/calcite-druid-dataset">calcite-druid-dataset  *</a> to setup Druid before launching these tests.</p>  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  *<p>These tests use TIMESTAMP type for the Druid timestamp column, instead  * of TIMESTAMP WITH LOCAL TIME ZONE type as {@link DruidAdapterIT}.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Druid must be up and running with foodmart and wikipedia datasets loaded. Follow the  * instructions on<a href="https://github.com/zabetak/calcite-druid-dataset">calcite-druid-dataset  *</a> to setup Druid before launching these tests.  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  *<p>These tests use TIMESTAMP type for the Druid timestamp column, instead  * of TIMESTAMP WITH LOCAL TIME ZONE type as {@link DruidAdapterIT}.  */
 end_comment
 
 begin_class
@@ -6019,26 +6019,15 @@ name|postAggString
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"A=369117.52790000016; store_state=WA"
+literal|"A=369117.5279; store_state=WA"
 argument_list|,
-literal|"A=222698.26509999996; store_state=CA"
+literal|"A=222698.2651; store_state=CA"
 argument_list|,
-literal|"A=199049.57059999998; store_state=OR"
+literal|"A=199049.5706; store_state=OR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6255,26 +6244,15 @@ name|postAggString
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"store_state=WA; A=158468.91210000002"
+literal|"store_state=WA; A=158468.9121"
 argument_list|,
-literal|"store_state=CA; A=95637.41489999992"
+literal|"store_state=CA; A=95637.4149"
 argument_list|,
-literal|"store_state=OR; A=85504.56939999988"
+literal|"store_state=OR; A=85504.5694"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6333,26 +6311,15 @@ name|postAggString
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"store_state=WA; A=263893.2200000001"
+literal|"store_state=WA; A=263893.22"
 argument_list|,
-literal|"store_state=CA; A=159267.83999999994"
+literal|"store_state=CA; A=159267.84"
 argument_list|,
-literal|"store_state=OR; A=142377.06999999992"
+literal|"store_state=OR; A=142377.07"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6518,11 +6485,11 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"store_state=CA; brand_name=Bird Call; A=34.364599999999996"
+literal|"store_state=CA; brand_name=Bird Call; A=34.3646"
 argument_list|,
-literal|"store_state=OR; brand_name=Bird Call; A=39.16359999999999"
+literal|"store_state=OR; brand_name=Bird Call; A=39.1636"
 argument_list|,
-literal|"store_state=WA; brand_name=Bird Call; A=53.742500000000014"
+literal|"store_state=WA; brand_name=Bird Call; A=53.7425"
 argument_list|)
 operator|.
 name|queryContains
@@ -6584,11 +6551,11 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"store_state=CA; brand_name=Bird Call; A=34.364599999999996"
+literal|"store_state=CA; brand_name=Bird Call; A=34.3646"
 argument_list|,
-literal|"store_state=OR; brand_name=Bird Call; A=39.16359999999999"
+literal|"store_state=OR; brand_name=Bird Call; A=39.1636"
 argument_list|,
-literal|"store_state=WA; brand_name=Bird Call; A=53.742500000000014"
+literal|"store_state=WA; brand_name=Bird Call; A=53.7425"
 argument_list|)
 operator|.
 name|explainContains
@@ -6830,26 +6797,15 @@ name|postAggString
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"store_state=WA; A=263893.2200000001; C=158568.91210000002"
+literal|"store_state=WA; A=263893.22; C=158568.9121"
 argument_list|,
-literal|"store_state=CA; A=159267.83999999994; C=95737.41489999992"
+literal|"store_state=CA; A=159267.84; C=95737.4149"
 argument_list|,
-literal|"store_state=OR; A=142377.06999999992; C=85604.56939999988"
+literal|"store_state=OR; A=142377.07; C=85604.5694"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7148,17 +7104,6 @@ name|postAggString
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
@@ -7167,7 +7112,7 @@ literal|"store_state=CA; brand_name=King; A=21.4632"
 argument_list|,
 literal|"store_state=OR; brand_name=Symphony; A=32.176"
 argument_list|,
-literal|"store_state=CA; brand_name=Toretti; A=32.24650000000001"
+literal|"store_state=CA; brand_name=Toretti; A=32.2465"
 argument_list|,
 literal|"store_state=WA; brand_name=King; A=34.6104"
 argument_list|,
@@ -7233,30 +7178,19 @@ name|postAggString
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
 literal|"store_state=CA; brand_name=ADJ; A=222.1524"
 argument_list|,
-literal|"store_state=OR; brand_name=ADJ; A=186.60359999999997"
+literal|"store_state=OR; brand_name=ADJ; A=186.6036"
 argument_list|,
 literal|"store_state=WA; brand_name=ADJ; A=216.9912"
 argument_list|,
 literal|"store_state=CA; brand_name=Akron; A=250.349"
 argument_list|,
-literal|"store_state=OR; brand_name=Akron; A=278.69720000000007"
+literal|"store_state=OR; brand_name=Akron; A=278.6972"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7310,9 +7244,9 @@ literal|"A=0.51; B=0.2397; C=0.2703"
 argument_list|,
 literal|"A=0.57; B=0.285; C=0.285"
 argument_list|,
-literal|"A=0.5; B=0.21; C=0.29000000000000004"
+literal|"A=0.5; B=0.21; C=0.29"
 argument_list|,
-literal|"A=0.57; B=0.2793; C=0.29069999999999996"
+literal|"A=0.57; B=0.2793; C=0.2907"
 argument_list|)
 operator|.
 name|explainContains
@@ -7330,7 +7264,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests whether an aggregate with a filter clause has its filter factored     * out when there is no outer filter. */
+comment|/** Tests whether an aggregate with a filter clause has its filter factored    * out when there is no outer filter. */
 annotation|@
 name|Test
 name|void
@@ -7709,7 +7643,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=52644.07000000001"
+literal|"EXPR$0=52644.07"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7805,7 +7739,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that multiple aggregates with filter clauses have their filters   extracted to the outer filter field for data pruning. */
+comment|/** Tests that multiple aggregates with filter clauses have their filters    * extracted to the outer filter field for data pruning. */
 annotation|@
 name|Test
 name|void
@@ -7862,7 +7796,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=159167.83999999994; EXPR$1=263793.2200000001"
+literal|"EXPR$0=159167.84; EXPR$1=263793.22"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7925,7 +7859,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=2600.01; EXPR$1=4486.4400000000005"
+literal|"EXPR$0=2600.01; EXPR$1=4486.44"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8145,7 +8079,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=25.060000000000002"
+literal|"EXPR$0=25.06"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8203,17 +8137,6 @@ literal|"\"ordering\":\"numeric\"}"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsUnordered
@@ -8332,7 +8255,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=301444.9099999999"
+literal|"EXPR$0=301444.91"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8414,7 +8337,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=13077.789999999992; EXPR$1=9830.7799"
+literal|"EXPR$0=13077.79; EXPR$1=9830.7799"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9037,7 +8960,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=85.31639999999999"
+literal|"A=85.3164"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -9059,7 +8982,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=85.31639999999999"
+literal|"A=85.3164"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9113,7 +9036,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=225541.91720000014"
+literal|"A=225541.9172"
 argument_list|)
 operator|.
 name|queryContains
@@ -9144,7 +9067,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=225541.91720000014"
+literal|"A=225541.9172"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9264,7 +9187,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"Select floor(\"timestamp\" to MONTH) as t from \"foodmart\" where "
+literal|"select"
+operator|+
+literal|" floor(\"timestamp\" to MONTH) as t from \"foodmart\" where "
 operator|+
 literal|"floor(\"timestamp\" to MONTH) between '1997-01-01 00:00:00'"
 operator|+
@@ -11214,7 +11139,7 @@ literal|" groups=[{}], aggs=[[COUNT()]])\n\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for https://issues.apache.org/jira/browse/CALCITE-2098.    * Need to make sure that when there we have a valid filter with no conjunction we still push    * all the valid filters.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2098">[CALCITE-2098]    * Push filters to Druid Query Scan when we have OR of AND clauses</a>.    *    *<p>Need to make sure that when there we have a valid filter with no    * conjunction we still push all the valid filters.    */
 annotation|@
 name|Test
 name|void
@@ -11256,7 +11181,7 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for https://issues.apache.org/jira/browse/CALCITE-2123    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2123">[CALCITE-2123]    * Bug in the Druid Filter Translation when Comparing String Ref to a Constant    * Number</a>.    */
 annotation|@
 name|Test
 name|void
@@ -11630,7 +11555,7 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"EXPR$0=652067.1299999984"
+literal|"EXPR$0=652067.13"
 argument_list|)
 operator|.
 name|explainContains
@@ -11679,7 +11604,9 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"S=-15918.020000000002\nS=-14115.959999999988"
+literal|"S=-15918.02"
+argument_list|,
+literal|"S=-14115.96"
 argument_list|)
 operator|.
 name|explainContains
@@ -11736,9 +11663,9 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"S=-16003.314460250002; S2=1.4768000000000001"
+literal|"S=-16003.314460250002; S2=1.4768"
 argument_list|,
-literal|"S=-14181.569999999989; S2=0.8093999999999999"
+literal|"S=-14181.57; S2=0.8094"
 argument_list|)
 operator|.
 name|explainContains
@@ -12175,22 +12102,11 @@ operator|+
 literal|"EXTRACT(FLAG(YEAR), $0), $90]], groups=[{0, 1}], aggs=[[SUM($2)]], fetch=[1])"
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"QR_TIMESTAMP_OK=1; SUM_STORE_SALES=139628.34999999971; YR_TIMESTAMP_OK=1997"
+literal|"QR_TIMESTAMP_OK=1; SUM_STORE_SALES=139628.35; YR_TIMESTAMP_OK=1997"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12313,24 +12229,13 @@ literal|"\"queryType\":\"groupBy\""
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
 literal|"HR_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; "
 operator|+
-literal|"SUM_T_OTHER_OK=565238.1299999986; HR_T_TIMESTAMP_OK2=0"
+literal|"SUM_T_OTHER_OK=565238.13; HR_T_TIMESTAMP_OK2=0"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12382,22 +12287,11 @@ literal|"\"queryType\":\"groupBy\""
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"SC_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; SUM_STORE_SALES=565238.1299999986"
+literal|"SC_T_TIMESTAMP_OK=0; MI_T_TIMESTAMP_OK=0; SUM_STORE_SALES=565238.13"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12487,17 +12381,6 @@ literal|"'dimension':'S','lower':'220','lowerStrict':true,'ordering':'numeric'}}
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
@@ -12554,22 +12437,11 @@ literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all'"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"P=100; S=343.19999999999993"
+literal|"P=100; S=343.2"
 argument_list|,
 literal|"P=1000; S=532.62"
 argument_list|)
@@ -12745,17 +12617,6 @@ literal|"\"queryType\":\"groupBy\""
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
@@ -12811,22 +12672,11 @@ literal|"'lowerStrict':true,'ordering':'numeric'}}}"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"EXPR$0=565238.1299999986"
+literal|"EXPR$0=565238.13"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12950,22 +12800,11 @@ literal|"QUARTER"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"EXPR$0=1; product_id=1; EXPR$2=37.050000000000004\n"
+literal|"EXPR$0=1; product_id=1; EXPR$2=37.05\n"
 operator|+
 literal|"EXPR$0=2; product_id=1; EXPR$2=62.7\n"
 operator|+
@@ -13015,28 +12854,17 @@ literal|"QUARTER"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assumptions
-operator|.
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_4204_FIXED
-argument_list|,
-literal|"CALCITE-4204"
-argument_list|)
-expr_stmt|;
 name|q
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"EXPR$0=1; EXPR$1=139628.34999999971\n"
+literal|"EXPR$0=1; EXPR$1=139628.35\n"
 operator|+
-literal|"EXPR$0=2; EXPR$1=132666.26999999944\n"
+literal|"EXPR$0=2; EXPR$1=132666.27\n"
 operator|+
-literal|"EXPR$0=3; EXPR$1=140271.88999999964\n"
+literal|"EXPR$0=3; EXPR$1=140271.89\n"
 operator|+
-literal|"EXPR$0=4; EXPR$1=152671.61999999985"
+literal|"EXPR$0=4; EXPR$1=152671.62"
 argument_list|)
 expr_stmt|;
 block|}

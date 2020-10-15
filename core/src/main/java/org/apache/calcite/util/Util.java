@@ -2734,7 +2734,7 @@ operator|==
 literal|0
 condition|)
 block|{
-comment|// trim trailing zeroes since they aren't significant
+comment|// trim trailing zeros since they aren't significant
 name|int
 name|i
 init|=

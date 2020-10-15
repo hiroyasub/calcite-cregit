@@ -18939,7 +18939,7 @@ argument_list|(
 literal|"(X'1234567890ABCDEF' = X'FFEEDDCCBBAA')"
 argument_list|)
 expr_stmt|;
-comment|// Check the inital zeroes don't get trimmed somehow
+comment|// Check the inital zeros don't get trimmed somehow
 name|expr
 argument_list|(
 literal|"x'001'=X'000102'"
