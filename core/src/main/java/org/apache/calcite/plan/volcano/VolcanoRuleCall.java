@@ -855,6 +855,7 @@ return|return;
 block|}
 if|if
 condition|(
+operator|(
 name|subset
 operator|.
 name|set
@@ -862,6 +863,27 @@ operator|.
 name|equivalentSet
 operator|!=
 literal|null
+operator|)
+comment|// When rename RelNode via VolcanoPlanner#rename(RelNode rel),
+comment|// we may remove rel from its subset: "subset.set.rels.remove(rel)".
+comment|// Skip rule match when the rel has been removed from set.
+operator|||
+operator|(
+name|subset
+operator|!=
+name|rel
+operator|&&
+operator|!
+name|subset
+operator|.
+name|getRelList
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+name|rel
+argument_list|)
+operator|)
 condition|)
 block|{
 name|LOGGER
