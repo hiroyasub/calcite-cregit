@@ -650,6 +650,23 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/**    * Whether to use Docker containers (https://www.testcontainers.org/) in tests.    *    * If the property is set to<code>true</code>, affected tests will attempt to start Docker    * containers; when Docker is not available tests fallback to other execution modes and if it's    * not possible they are skipped entirely.    *    * If the property is set to<code>false</code>, Docker containers are not used at all and    * affected tests either fallback to other execution modes or skipped entirely.    *    * Users can override the default behavior to force non-Dockerized execution even when Docker    * is installed on the machine; this can be useful for replicating an issue that appears only in    * non-docker test mode or for running tests both with and without containers in CI.    */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|TEST_WITH_DOCKER_CONTAINER
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.test.docker"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
 comment|/**    * A list of ids designating the queries    * (from query.json in new.hydromatic:foodmart-queries:0.4.1)    * that should be run as part of FoodmartTest.    */
 comment|// TODO review zabetak:
 comment|// The name of the property is not appropriate. A better alternative would be

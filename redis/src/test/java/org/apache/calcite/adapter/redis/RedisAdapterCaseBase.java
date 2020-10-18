@@ -561,7 +561,8 @@ name|Integer
 operator|.
 name|toString
 argument_list|(
-name|PORT
+name|getRedisServerPort
+argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
