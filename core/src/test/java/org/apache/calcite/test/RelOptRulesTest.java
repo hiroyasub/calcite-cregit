@@ -17602,6 +17602,14 @@ literal|" sum(case when deptno = 30 then 1 else 0 end) as count_d30,\n"
 operator|+
 literal|" count(case when deptno = 40 then 'x' end) as count_d40,\n"
 operator|+
+literal|" sum(case when deptno = 45 then 1 end) as count_d45,\n"
+operator|+
+literal|" sum(case when deptno = 50 then 1 else null end) as count_d50,\n"
+operator|+
+literal|" sum(case when deptno = 60 then null end) as sum_null_d60,\n"
+operator|+
+literal|" sum(case when deptno = 70 then null else 1 end) as sum_null_d70,\n"
+operator|+
 literal|" count(case when deptno = 20 then 1 end) as count_d20\n"
 operator|+
 literal|"from emp"
