@@ -55,20 +55,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|TestUtil
 import|;
 end_import
@@ -184,22 +170,6 @@ operator|.
 name|MatcherAssert
 operator|.
 name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
-name|Assumptions
-operator|.
-name|assumeTrue
 import|;
 end_import
 
@@ -1845,11 +1815,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"Infinite planning"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|testQuery02
@@ -1861,11 +1826,6 @@ literal|2
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
-argument_list|(
-literal|"Infinite planning"
-argument_list|)
 annotation|@
 name|Test
 name|void
@@ -1925,11 +1885,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|testQuery04
@@ -1941,11 +1896,6 @@ literal|4
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
-argument_list|(
-literal|"OutOfMemoryError"
-argument_list|)
 annotation|@
 name|Test
 name|void
@@ -1976,13 +1926,6 @@ name|void
 name|testQuery07
 parameter_list|()
 block|{
-name|assumeTrue
-argument_list|(
-name|Bug
-operator|.
-name|CALCITE_2223_FIXED
-argument_list|)
-expr_stmt|;
 name|checkQuery
 argument_list|(
 literal|7
@@ -2001,11 +1944,6 @@ literal|8
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
-argument_list|(
-literal|"no method found"
-argument_list|)
 annotation|@
 name|Test
 name|void
@@ -2031,11 +1969,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"CannotPlanException"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|testQuery11
@@ -2048,11 +1981,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|testQuery12
@@ -2064,11 +1992,6 @@ literal|12
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
-argument_list|(
-literal|"CannotPlanException"
-argument_list|)
 annotation|@
 name|Test
 name|void
@@ -2093,11 +2016,6 @@ literal|14
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
-argument_list|(
-literal|"AssertionError"
-argument_list|)
 annotation|@
 name|Test
 name|void
@@ -2201,11 +2119,6 @@ literal|21
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
-argument_list|(
-literal|"IllegalArgumentException during decorrelation"
-argument_list|)
 annotation|@
 name|Test
 name|void

@@ -2657,11 +2657,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"CALCITE-2592 EnumerableMergeJoin is never taken"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|testMergeJoin
@@ -2865,16 +2860,16 @@ name|assertThat
 argument_list|(
 literal|"Merge join + sort is expected"
 argument_list|,
-name|plan
-argument_list|,
-name|isLinux
-argument_list|(
 name|RelOptUtil
 operator|.
 name|toString
 argument_list|(
 name|bestExp
 argument_list|)
+argument_list|,
+name|isLinux
+argument_list|(
+name|plan
 argument_list|)
 argument_list|)
 expr_stmt|;
