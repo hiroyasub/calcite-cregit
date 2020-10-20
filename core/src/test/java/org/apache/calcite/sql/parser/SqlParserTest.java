@@ -35917,6 +35917,112 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testStringAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  string_agg(ename order by deptno, ename) as c1,\n"
+operator|+
+literal|"  string_agg(ename, '; ' order by deptno, ename desc) as c2,\n"
+operator|+
+literal|"  string_agg(ename) as c3,\n"
+operator|+
+literal|"  string_agg(ename, ':') as c4,\n"
+operator|+
+literal|"  string_agg(ename, ':' ignore nulls) as c5\n"
+operator|+
+literal|"from emp group by gender"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" STRING_AGG(`ENAME` ORDER BY `DEPTNO`, `ENAME`) AS `C1`,"
+operator|+
+literal|" STRING_AGG(`ENAME`, '; ' ORDER BY `DEPTNO`, `ENAME` DESC) AS `C2`,"
+operator|+
+literal|" STRING_AGG(`ENAME`) AS `C3`,"
+operator|+
+literal|" STRING_AGG(`ENAME`, ':') AS `C4`,"
+operator|+
+literal|" STRING_AGG(`ENAME`, ':') IGNORE NULLS AS `C5`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY `GENDER`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testArrayAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  array_agg(ename respect nulls order by deptno, ename) as c1,\n"
+operator|+
+literal|"  array_concat_agg(ename order by deptno, ename desc) as c2,\n"
+operator|+
+literal|"  array_agg(ename) as c3,\n"
+operator|+
+literal|"  array_concat_agg(ename) within group (order by ename) as c4\n"
+operator|+
+literal|"from emp group by gender"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" ARRAY_AGG(`ENAME` ORDER BY `DEPTNO`, `ENAME`) RESPECT NULLS AS `C1`,"
+operator|+
+literal|" ARRAY_CONCAT_AGG(`ENAME` ORDER BY `DEPTNO`, `ENAME` DESC) AS `C2`,"
+operator|+
+literal|" ARRAY_AGG(`ENAME`) AS `C3`,"
+operator|+
+literal|" ARRAY_CONCAT_AGG(`ENAME`) WITHIN GROUP (ORDER BY `ENAME`) AS `C4`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY `GENDER`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
 block|{

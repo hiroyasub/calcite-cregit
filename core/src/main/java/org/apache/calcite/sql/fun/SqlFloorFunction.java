@@ -631,6 +631,8 @@ argument_list|,
 name|writer
 argument_list|,
 name|call1
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

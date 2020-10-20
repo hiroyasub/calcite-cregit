@@ -1243,6 +1243,42 @@ name|fun
 operator|.
 name|SqlLibraryOperators
 operator|.
+name|ARRAY_AGG
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
+name|ARRAY_CONCAT_AGG
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
 name|BOOL_AND
 import|;
 end_import
@@ -7806,6 +7842,20 @@ name|aggMap
 operator|.
 name|put
 argument_list|(
+name|ARRAY_AGG
+argument_list|,
+name|constructorSupplier
+argument_list|(
+name|CollectImplementor
+operator|.
+name|class
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|aggMap
+operator|.
+name|put
+argument_list|(
 name|LISTAGG
 argument_list|,
 name|constructorSupplier
@@ -7821,6 +7871,20 @@ operator|.
 name|put
 argument_list|(
 name|FUSION
+argument_list|,
+name|constructorSupplier
+argument_list|(
+name|FusionImplementor
+operator|.
+name|class
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|aggMap
+operator|.
+name|put
+argument_list|(
+name|ARRAY_CONCAT_AGG
 argument_list|,
 name|constructorSupplier
 argument_list|(
@@ -10459,7 +10523,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Implementor for the {@code COLLECT} aggregate function. */
+comment|/** Implementor for the {@code COLLECT} and {@code ARRAY_AGG}    * aggregate functions. */
 specifier|static
 class|class
 name|CollectImplementor
@@ -11014,7 +11078,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Implementor for the {@code FUSION} aggregate function. */
+comment|/** Implementor for the {@code FUSION} and {@code ARRAY_CONCAT_AGG}    * aggregate functions. */
 specifier|static
 class|class
 name|FusionImplementor

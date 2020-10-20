@@ -702,6 +702,15 @@ block|,
 comment|/** The {@code LISTAGG} aggregate function. */
 name|LISTAGG
 block|,
+comment|/** The {@code STRING_AGG} aggregate function. */
+name|STRING_AGG
+block|,
+comment|/** The {@code ARRAY_AGG} aggregate function. */
+name|ARRAY_AGG
+block|,
+comment|/** The {@code ARRAY_CONCAT_AGG} aggregate function. */
+name|ARRAY_CONCAT_AGG
+block|,
 comment|/** The {@code COLLECT} aggregate function. */
 name|COLLECT
 block|,
@@ -995,6 +1004,12 @@ argument_list|,
 name|BIT_XOR
 argument_list|,
 name|LISTAGG
+argument_list|,
+name|STRING_AGG
+argument_list|,
+name|ARRAY_AGG
+argument_list|,
+name|ARRAY_CONCAT_AGG
 argument_list|,
 name|INTERSECTION
 argument_list|,

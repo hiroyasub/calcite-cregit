@@ -547,6 +547,32 @@ operator|-
 literal|1
 argument_list|)
 decl_stmt|;
+comment|/**    * Parameter type-inference transform strategy that wraps a given type    * in a array.    *    * @see org.apache.calcite.rel.type.RelDataTypeFactory#createArrayType(RelDataType, long)    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlTypeTransform
+name|TO_ARRAY
+init|=
+parameter_list|(
+name|opBinding
+parameter_list|,
+name|typeToTransform
+parameter_list|)
+lambda|->
+name|opBinding
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createArrayType
+argument_list|(
+name|typeToTransform
+argument_list|,
+operator|-
+literal|1
+argument_list|)
+decl_stmt|;
 comment|/**    * Parameter type-inference transform strategy where a derived type must be    * a struct type with precisely one field and the returned type is the type    * of that field.    */
 specifier|public
 specifier|static

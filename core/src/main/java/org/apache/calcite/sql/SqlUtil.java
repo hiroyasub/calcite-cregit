@@ -1359,7 +1359,9 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Unparses a call to an operator which has function syntax.    *    * @param operator    The operator    * @param writer      Writer    * @param call    List of 0 or more operands    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -1373,6 +1375,37 @@ name|writer
 parameter_list|,
 name|SqlCall
 name|call
+parameter_list|)
+block|{
+name|unparseFunctionSyntax
+argument_list|(
+name|operator
+argument_list|,
+name|writer
+argument_list|,
+name|call
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Unparses a call to an operator that has function syntax.    *    * @param operator    The operator    * @param writer      Writer    * @param call        List of 0 or more operands    * @param ordered     Whether argument list may end with ORDER BY    */
+specifier|public
+specifier|static
+name|void
+name|unparseFunctionSyntax
+parameter_list|(
+name|SqlOperator
+name|operator
+parameter_list|,
+name|SqlWriter
+name|writer
+parameter_list|,
+name|SqlCall
+name|call
+parameter_list|,
+name|boolean
+name|ordered
 parameter_list|)
 block|{
 if|if
@@ -1496,6 +1529,10 @@ case|case
 name|FUNCTION
 case|:
 comment|// E.g. "RANK()"
+case|case
+name|ORDERED_FUNCTION
+case|:
+comment|// E.g. "STRING_AGG(x)"
 comment|// fall through - dealt with below
 break|break;
 default|default:
@@ -1598,6 +1635,25 @@ name|getOperandList
 argument_list|()
 control|)
 block|{
+if|if
+condition|(
+name|ordered
+operator|&&
+name|operand
+operator|instanceof
+name|SqlNodeList
+condition|)
+block|{
+name|writer
+operator|.
+name|sep
+argument_list|(
+literal|"ORDER BY"
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|writer
 operator|.
 name|sep
@@ -1605,6 +1661,7 @@ argument_list|(
 literal|","
 argument_list|)
 expr_stmt|;
+block|}
 name|operand
 operator|.
 name|unparse

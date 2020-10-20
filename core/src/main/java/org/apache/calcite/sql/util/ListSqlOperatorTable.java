@@ -246,6 +246,8 @@ name|operator
 operator|.
 name|getSyntax
 argument_list|()
+operator|.
+name|family
 operator|!=
 name|syntax
 condition|)
