@@ -327,6 +327,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Iterables
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -771,7 +785,7 @@ name|SqlSyntax
 name|getSyntax
 parameter_list|()
 function_decl|;
-comment|/**    * Creates a call to this operand with an array of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    *    * @param functionQualifier function qualifier (e.g. "DISTINCT"), may be    * @param pos               parser position of the identifier of the call    * @param operands          array of operands    */
+comment|/**    * Creates a call to this operator with an array of operands.    *    *<p>The position of the resulting call is the union of the {@code pos}    * and the positions of all of the operands.    *    * @param functionQualifier Function qualifier (e.g. "DISTINCT"), or null    * @param pos               Parser position of the identifier of the call    * @param operands          Array of operands    */
 specifier|public
 name|SqlCall
 name|createCall
@@ -817,7 +831,48 @@ name|functionQualifier
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call to this operand with an array of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    *    * @param pos      Parser position    * @param operands List of arguments    * @return call to this operator    */
+comment|/**    * Creates a call to this operator with a list of operands.    *    *<p>The position of the resulting call is the union of the {@code pos}    * and the positions of all of the operands.    *    * @param functionQualifier Function qualifier (e.g. "DISTINCT"), or null    * @param pos               Parser position of the identifier of the call    * @param operands          List of operands    */
+specifier|public
+specifier|final
+name|SqlCall
+name|createCall
+parameter_list|(
+name|SqlLiteral
+name|functionQualifier
+parameter_list|,
+name|SqlParserPos
+name|pos
+parameter_list|,
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|SqlNode
+argument_list|>
+name|operands
+parameter_list|)
+block|{
+return|return
+name|createCall
+argument_list|(
+name|functionQualifier
+argument_list|,
+name|pos
+argument_list|,
+name|Iterables
+operator|.
+name|toArray
+argument_list|(
+name|operands
+argument_list|,
+name|SqlNode
+operator|.
+name|class
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a call to this operator with an array of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    *    * @param pos      Parser position    * @param operands List of arguments    * @return call to this operator    */
 specifier|public
 specifier|final
 name|SqlCall
@@ -842,7 +897,7 @@ name|operands
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call to this operand with a list of operands contained in a    * {@link SqlNodeList}.    *    *<p>The position of the resulting call inferred from the SqlNodeList.    *    * @param nodeList List of arguments    * @return call to this operator    */
+comment|/**    * Creates a call to this operator with a list of operands contained in a    * {@link SqlNodeList}.    *    *<p>The position of the resulting call is inferred from the SqlNodeList.    *    * @param nodeList List of arguments    * @return call to this operator    */
 specifier|public
 specifier|final
 name|SqlCall
@@ -869,7 +924,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call to this operand with a list of operands.    *    *<p>The position of the resulting call is the union of the<code>    * pos</code> and the positions of all of the operands.    */
+comment|/**    * Creates a call to this operator with a list of operands.    *    *<p>The position of the resulting call is the union of the {@code pos}    * and the positions of all of the operands.    */
 specifier|public
 specifier|final
 name|SqlCall

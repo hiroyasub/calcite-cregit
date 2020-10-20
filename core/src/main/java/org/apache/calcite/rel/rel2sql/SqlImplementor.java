@@ -7336,11 +7336,6 @@ name|collation
 argument_list|)
 return|;
 block|}
-specifier|final
-name|SqlNode
-index|[]
-name|operands
-decl_stmt|;
 if|if
 condition|(
 name|op
@@ -7353,32 +7348,17 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|// If there is no parameter in "count" function, add a star identifier to it
-name|operands
+comment|// If there is no parameter in "count" function, add a star identifier
+comment|// to it.
+name|operandList
 operator|=
-operator|new
-name|SqlNode
-index|[]
-block|{
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
 name|SqlIdentifier
 operator|.
 name|STAR
-block|}
-expr_stmt|;
-block|}
-else|else
-block|{
-name|operands
-operator|=
-name|operandList
-operator|.
-name|toArray
-argument_list|(
-operator|new
-name|SqlNode
-index|[
-literal|0
-index|]
 argument_list|)
 expr_stmt|;
 block|}
@@ -7394,7 +7374,7 @@ name|qualifier
 argument_list|,
 name|POS
 argument_list|,
-name|operands
+name|operandList
 argument_list|)
 decl_stmt|;
 comment|// Handle filter by generating FILTER (WHERE ...)
