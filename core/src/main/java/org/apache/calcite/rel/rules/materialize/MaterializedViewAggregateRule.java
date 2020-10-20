@@ -2491,13 +2491,13 @@ block|}
 name|SqlAggFunction
 name|rollupAgg
 init|=
-name|getRollup
-argument_list|(
 name|aggCall
 operator|.
 name|getAggregation
 argument_list|()
-argument_list|)
+operator|.
+name|getRollup
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -4092,13 +4092,13 @@ decl_stmt|;
 name|SqlAggFunction
 name|rollupAgg
 init|=
-name|getRollup
-argument_list|(
 name|queryAggCall
 operator|.
 name|getAggregation
 argument_list|()
-argument_list|)
+operator|.
+name|getRollup
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -5462,6 +5462,9 @@ name|FLOOR
 return|;
 block|}
 comment|/**    * Get rollup aggregation function.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 annotation|@
 name|Nullable

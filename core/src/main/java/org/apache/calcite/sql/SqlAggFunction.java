@@ -721,6 +721,18 @@ return|return
 literal|false
 return|;
 block|}
+comment|/**    * Gets rollup aggregation function.    */
+specifier|public
+annotation|@
+name|Nullable
+name|SqlAggFunction
+name|getRollup
+parameter_list|()
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 end_class
 

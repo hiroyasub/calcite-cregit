@@ -21408,6 +21408,94 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPushAggregateThroughJoin7
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select any_value(distinct B.sal)\n"
+operator|+
+literal|"from sales.emp as A\n"
+operator|+
+literal|"join (select distinct sal from sales.emp) as B\n"
+operator|+
+literal|"on A.sal=B.sal\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPreRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_PROJECT_MERGE
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_JOIN_TRANSPOSE_EXTENDED
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPushAggregateThroughJoin8
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select single_value(distinct B.sal)\n"
+operator|+
+literal|"from sales.emp as A\n"
+operator|+
+literal|"join (select distinct sal from sales.emp) as B\n"
+operator|+
+literal|"on A.sal=B.sal\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPreRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_PROJECT_MERGE
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_JOIN_TRANSPOSE_EXTENDED
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2278">[CALCITE-2278]    * AggregateJoinTransposeRule fails to split aggregate call if input contains    * an aggregate call and has distinct rows</a>. */
 end_comment

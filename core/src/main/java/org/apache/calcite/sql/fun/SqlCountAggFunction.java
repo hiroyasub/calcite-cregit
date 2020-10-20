@@ -564,6 +564,19 @@ name|clazz
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlAggFunction
+name|getRollup
+parameter_list|()
+block|{
+return|return
+name|SqlStdOperatorTable
+operator|.
+name|SUM0
+return|;
+block|}
 block|}
 end_class
 

@@ -10827,13 +10827,13 @@ specifier|final
 name|SqlAggFunction
 name|aggFunction
 init|=
-name|getRollup
-argument_list|(
 name|aggregateCall
 operator|.
 name|getAggregation
 argument_list|()
-argument_list|)
+operator|.
+name|getRollup
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -11001,6 +11001,9 @@ return|return
 name|result
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 annotation|@
