@@ -97,6 +97,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptRuleCall
 import|;
 end_import
@@ -158,6 +172,22 @@ operator|.
 name|hep
 operator|.
 name|HepProgram
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|hep
+operator|.
+name|HepProgramBuilder
 import|;
 end_import
 
@@ -1402,7 +1432,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelDecorrelator replaces all correlated expressions (corExp) in a relational  * expression (RelNode) tree with non-correlated expressions that are produced  * from joining the RelNode that produces the corExp with the RelNode that  * references it.  *  *<p>TODO:</p>  *<ul>  *<li>replace {@code CorelMap} constructor parameter with a RelNode  *<li>make {@link #currentRel} immutable (would require a fresh  *      RelDecorrelator for each node being decorrelated)</li>  *<li>make fields of {@code CorelMap} immutable</li>  *<li>make sub-class rules static, and have them create their own  *   de-correlator</li>  *</ul>  */
+comment|/**  * RelDecorrelator replaces all correlated expressions (corExp) in a relational  * expression (RelNode) tree with non-correlated expressions that are produced  * from joining the RelNode that produces the corExp with the RelNode that  * references it.  *  *<p>TODO:</p>  *<ul>  *<li>replace {@code CorelMap} constructor parameter with a RelNode  *<li>make {@link #currentRel} immutable (would require a fresh  *      RelDecorrelator for each node being decorrelated)</li>  *<li>make fields of {@code CorelMap} immutable</li>  *<li>make sub-class rules static, and have them create their own  *   de-correlator</li>  *</ul>  *  *<p>Note: make all the members protected scope so that they can be  * accessed by the sub-class.  */
 end_comment
 
 begin_class
@@ -1425,7 +1455,7 @@ name|getSqlToRelTracer
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-specifier|private
+specifier|protected
 specifier|final
 name|RelBuilder
 name|relBuilder
@@ -1435,7 +1465,7 @@ specifier|protected
 name|CorelMap
 name|cm
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|ReflectUtil
 operator|.
@@ -1453,7 +1483,8 @@ name|Frame
 operator|.
 name|class
 argument_list|,
-name|this
+name|getVisitor
+argument_list|()
 argument_list|,
 literal|"decorrelateRel"
 argument_list|,
@@ -1463,17 +1494,17 @@ name|class
 argument_list|)
 decl_stmt|;
 comment|// The rel which is being visited
-specifier|private
+specifier|protected
 name|RelNode
 name|currentRel
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|Context
 name|context
 decl_stmt|;
 comment|/** Built during decorrelation, of rel to all the newly created correlated    * variables in its output, and to map old input positions to new input    * positions. This is from the view point of the parent rel of a new rel. */
-specifier|private
+specifier|protected
 specifier|final
 name|Map
 argument_list|<
@@ -1488,7 +1519,7 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|HashSet
 argument_list|<
@@ -2063,8 +2094,8 @@ condition|)
 block|{
 comment|// has been rewritten; apply rules post-decorrelation
 specifier|final
-name|HepProgram
-name|program2
+name|HepProgramBuilder
+name|builder
 init|=
 name|HepProgram
 operator|.
@@ -2104,6 +2135,31 @@ operator|.
 name|toRule
 argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|getPostDecorrelateRules
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|builder
+operator|.
+name|addRuleCollection
+argument_list|(
+name|getPostDecorrelateRules
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|final
+name|HepProgram
+name|program2
+init|=
+name|builder
 operator|.
 name|build
 argument_list|()
@@ -14355,6 +14411,35 @@ name|RelDecorrelator
 name|decorrelator
 parameter_list|)
 function_decl|;
+block|}
+comment|// -------------------------------------------------------------------------
+comment|//  Getter/Setter
+comment|// -------------------------------------------------------------------------
+comment|/**    * Returns the {@code visitor} on which the {@code MethodDispatcher} dispatches    * each {@code decorrelateRel} method, the default implementation returns this instance,    * if you got a sub-class, override this method to replace the {@code visitor} as the    * sub-class instance.    */
+specifier|protected
+name|RelDecorrelator
+name|getVisitor
+parameter_list|()
+block|{
+return|return
+name|this
+return|;
+block|}
+comment|/** Returns the rules applied on the rel after decorrelation, never null. */
+specifier|protected
+name|Collection
+argument_list|<
+name|RelOptRule
+argument_list|>
+name|getPostDecorrelateRules
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+return|;
 block|}
 block|}
 end_class
