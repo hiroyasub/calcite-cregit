@@ -31068,6 +31068,83 @@ literal|"RecordType(INTEGER NOT NULL KEY, INTEGER NOT NULL VALUE) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4305">[CALCITE-4305]    * Implicit column alias for single-column UNNEST</a>. */
+annotation|@
+name|Test
+name|void
+name|testUnnestAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expectedType
+init|=
+literal|"RecordType(CHAR(6) NOT NULL FRUIT) NOT NULL"
+decl_stmt|;
+comment|// When UNNEST produces a single column, and you use an alias for the
+comment|// relation, that alias becomes the name of the column.
+name|sql
+argument_list|(
+literal|"select fruit.* from UNNEST(array ['apple', 'banana']) as fruit"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType
+argument_list|)
+expr_stmt|;
+comment|// The magic doesn't happen if the query is not an UNNEST.
+comment|// In this case, the query is a SELECT.
+name|sql
+argument_list|(
+literal|"SELECT fruit.*\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|"  SELECT * FROM UNNEST(array ['apple', 'banana']) as x) as fruit"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(CHAR(6) NOT NULL X) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// The magic doesn't happen if the UNNEST yields more than one column.
+name|sql
+argument_list|(
+literal|"select * from UNNEST(array [('apple', 1), ('banana', 2)]) as fruit"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(CHAR(6) NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) "
+operator|+
+literal|"NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// VALUES gets the same treatment as ARRAY. (Unlike PostgreSQL.)
+name|sql
+argument_list|(
+literal|"select * from (values ('apple'), ('banana')) as fruit"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(CHAR(6) NOT NULL FRUIT) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// UNNEST MULTISET gets the same treatment as UNNEST ARRAY.
+name|sql
+argument_list|(
+literal|"select * from unnest(multiset [1, 2, 1]) as f"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL F) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -40729,7 +40806,20 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"select stream * from (^values 1^) as e"
+literal|"select stream * from (^values 1) as e^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotConvertToStream
+argument_list|(
+literal|"E"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream * from (^values 1) as e (c)^"
 argument_list|)
 operator|.
 name|fails
