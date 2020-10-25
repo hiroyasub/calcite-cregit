@@ -256,7 +256,7 @@ name|containsNull
 argument_list|)
 return|;
 block|}
-comment|/**    * {@inheritDoc}    *    *<p>Produces a similar result to {@link RangeSet}, but adds ", null"    * if nulls are matched, and simplifies point ranges. For example,    * the Sarg that allows the range set    *    *<blockquote>{@code [[7..7], [9..9], (10..+â)]}</blockquote>    *    * and also null is printed as    *    *<blockquote>{@code Sarg[7, 9, (10..+â), null]}</blockquote>    */
+comment|/**    * {@inheritDoc}    *    *<p>Produces a similar result to {@link RangeSet}, but adds ", null"    * if nulls are matched, and simplifies point ranges. For example,    * the Sarg that allows the range set    *    *<blockquote>{@code [[7..7], [9..9], (10..+â)]}</blockquote>    *    * and also null is printed as    *    *<blockquote>{@code Sarg[7, 9, (10..+â) OR NULL]}</blockquote>    */
 annotation|@
 name|Override
 specifier|public
@@ -305,6 +305,44 @@ argument_list|>
 name|valuePrinter
 parameter_list|)
 block|{
+if|if
+condition|(
+name|isAll
+argument_list|()
+condition|)
+block|{
+return|return
+name|sb
+operator|.
+name|append
+argument_list|(
+name|containsNull
+condition|?
+literal|"Sarg[TRUE]"
+else|:
+literal|"Sarg[NOT NULL]"
+argument_list|)
+return|;
+block|}
+if|if
+condition|(
+name|isNone
+argument_list|()
+condition|)
+block|{
+return|return
+name|sb
+operator|.
+name|append
+argument_list|(
+name|containsNull
+condition|?
+literal|"Sarg[NULL]"
+else|:
+literal|"Sarg[FALSE]"
+argument_list|)
+return|;
+block|}
 name|sb
 operator|.
 name|append
@@ -382,7 +420,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|", null"
+literal|" OR NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -492,6 +530,37 @@ operator|.
 name|containsNull
 return|;
 block|}
+comment|/** Returns whether this Sarg includes all values (including or not including    * null). */
+specifier|public
+name|boolean
+name|isAll
+parameter_list|()
+block|{
+return|return
+name|rangeSet
+operator|.
+name|equals
+argument_list|(
+name|RangeSets
+operator|.
+name|rangeSetAll
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** Returns whether this Sarg includes no values (including or not including    * null). */
+specifier|public
+name|boolean
+name|isNone
+parameter_list|()
+block|{
+return|return
+name|rangeSet
+operator|.
+name|isEmpty
+argument_list|()
+return|;
+block|}
 comment|/** Returns whether this Sarg is a collection of 1 or more points (and perhaps    * an {@code IS NULL} if {@link #containsNull}).    *    *<p>Such sargs could be translated as {@code ref = value}    * or {@code ref IN (value1, ...)}. */
 specifier|public
 name|boolean
@@ -527,6 +596,17 @@ argument_list|(
 name|Range
 operator|.
 name|all
+argument_list|()
+argument_list|)
+operator|&&
+operator|!
+name|rangeSet
+operator|.
+name|equals
+argument_list|(
+name|RangeSets
+operator|.
+name|rangeSetAll
 argument_list|()
 argument_list|)
 operator|&&
@@ -634,6 +714,27 @@ expr_stmt|;
 block|}
 return|return
 name|complexity
+return|;
+block|}
+comment|/** Returns a Sarg that matches a value if and only this Sarg does not. */
+specifier|public
+name|Sarg
+name|negate
+parameter_list|()
+block|{
+return|return
+name|Sarg
+operator|.
+name|of
+argument_list|(
+operator|!
+name|containsNull
+argument_list|,
+name|rangeSet
+operator|.
+name|complement
+argument_list|()
+argument_list|)
 return|;
 block|}
 block|}

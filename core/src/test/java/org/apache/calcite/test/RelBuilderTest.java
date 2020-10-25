@@ -3858,7 +3858,7 @@ name|builder
 operator|.
 name|field
 argument_list|(
-literal|7
+literal|5
 argument_list|)
 argument_list|)
 argument_list|)
@@ -3984,7 +3984,7 @@ literal|"LogicalProject(DEPTNO=[$7], COMM=[CAST($6):SMALLINT NOT NULL], "
 operator|+
 literal|"$f2=[OR(SEARCH($7, Sarg[20, 30]), AND(null:NULL, =($7, 10), "
 operator|+
-literal|"IS NULL($6), IS NULL($7)))], n2=[IS NULL($2)], "
+literal|"IS NULL($6), IS NULL($5)))], n2=[IS NULL($2)], "
 operator|+
 literal|"nn2=[IS NOT NULL($3)], $f5=[20], COMM0=[$6], C=[$6])\n"
 operator|+

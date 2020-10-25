@@ -517,6 +517,16 @@ begin_import
 import|import
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|Matcher
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|jupiter
@@ -6364,11 +6374,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"AND(null, IS NULL(?0.i))"
+literal|"AND(null, SEARCH(?0.i, Sarg[NULL]))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"IS NULL(?0.i)"
+literal|"SEARCH(?0.i, Sarg[NULL])"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -6421,11 +6431,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"AND(null, IS NULL(?0.i))"
+literal|"AND(null, SEARCH(?0.i, Sarg[NULL]))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"IS NULL(?0.i)"
+literal|"SEARCH(?0.i, Sarg[NULL])"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -6478,11 +6488,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"AND(null, IS NULL(?0.i))"
+literal|"AND(null, SEARCH(?0.i, Sarg[NULL]))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"IS NULL(?0.i)"
+literal|"SEARCH(?0.i, Sarg[NULL])"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -10114,7 +10124,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(SEARCH(?0.b, Sarg[2]), SEARCH(?0.a, Sarg[3]))"
+literal|"AND(=(?0.b, 2), =(?0.a, 3))"
 argument_list|)
 expr_stmt|;
 name|checkSimplify3
@@ -10303,7 +10313,7 @@ name|checkSimplify
 argument_list|(
 name|expr
 argument_list|,
-literal|"SEARCH($0, Sarg[[15..+\u221e), null])"
+literal|"SEARCH($0, Sarg[[15..+\u221e) OR NULL])"
 argument_list|)
 operator|.
 name|expandedSearch
@@ -10406,7 +10416,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(0..12), [15..+\u221e), null])"
+literal|"SEARCH($0, Sarg[(0..12), [15..+\u221e) OR NULL])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10564,7 +10574,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(-\u221e..3), (3..5), (5..+\u221e), null])"
+literal|"SEARCH($0, Sarg[(-\u221e..3), (3..5), (5..+\u221e) OR NULL])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10658,7 +10668,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"OR(SEARCH($1, Sarg[, null]), SEARCH($0, Sarg[1, 2]))"
+literal|"OR(SEARCH($1, Sarg[NULL]), SEARCH($0, Sarg[1, 2]))"
 decl_stmt|;
 specifier|final
 name|String
@@ -10742,6 +10752,201 @@ name|String
 name|expanded
 init|=
 literal|"AND(>($0, 3),<($0, 10))"
+decl_stmt|;
+name|checkSimplify
+argument_list|(
+name|expr
+argument_list|,
+name|simplified
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+name|expanded
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4352">[CALCITE-4352]    * OR simplification incorrectly loses term</a>. */
+annotation|@
+name|Test
+name|void
+name|testSimplifyAndIsNotNull
+parameter_list|()
+block|{
+specifier|final
+name|RexNode
+name|aRef
+init|=
+name|input
+argument_list|(
+name|tInt
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+literal|0
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexNode
+name|bRef
+init|=
+name|input
+argument_list|(
+name|tInt
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+literal|1
+argument_list|)
+decl_stmt|;
+comment|// (0< a and a< 10) and b is not null
+name|RexNode
+name|expr
+init|=
+name|and
+argument_list|(
+name|and
+argument_list|(
+name|lt
+argument_list|(
+name|literal
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|aRef
+argument_list|)
+argument_list|,
+name|lt
+argument_list|(
+name|aRef
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNotNull
+argument_list|(
+name|bRef
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// [CALCITE-4352] causes "and b is not null" to disappear from the expanded
+comment|// form.
+specifier|final
+name|String
+name|simplified
+init|=
+literal|"AND(SEARCH($0, Sarg[(0..10)]),"
+operator|+
+literal|" SEARCH($1, Sarg[NOT NULL]))"
+decl_stmt|;
+specifier|final
+name|String
+name|expanded
+init|=
+literal|"AND(AND(>($0, 0),<($0, 10)), IS NOT NULL($1))"
+decl_stmt|;
+name|checkSimplify
+argument_list|(
+name|expr
+argument_list|,
+name|simplified
+argument_list|)
+operator|.
+name|expandedSearch
+argument_list|(
+name|expanded
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSimplifyAndIsNull
+parameter_list|()
+block|{
+specifier|final
+name|RexNode
+name|aRef
+init|=
+name|input
+argument_list|(
+name|tInt
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+literal|0
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexNode
+name|bRef
+init|=
+name|input
+argument_list|(
+name|tInt
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+literal|1
+argument_list|)
+decl_stmt|;
+comment|// (0< a and a< 10) and b is null
+name|RexNode
+name|expr
+init|=
+name|and
+argument_list|(
+name|and
+argument_list|(
+name|lt
+argument_list|(
+name|literal
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|aRef
+argument_list|)
+argument_list|,
+name|lt
+argument_list|(
+name|aRef
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNull
+argument_list|(
+name|bRef
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// [CALCITE-4352] causes "and b is null" to disappear from the expanded
+comment|// form.
+specifier|final
+name|String
+name|simplified
+init|=
+literal|"AND(SEARCH($0, Sarg[(0..10)]), SEARCH($1, Sarg[NULL]))"
+decl_stmt|;
+specifier|final
+name|String
+name|expanded
+init|=
+literal|"AND(AND(>($0, 0),<($0, 10)), IS NULL($1))"
 decl_stmt|;
 name|checkSimplify
 argument_list|(
@@ -11030,11 +11235,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|e
-argument_list|,
-literal|"SEARCH(?0.int0, Sarg[])"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -15858,11 +16061,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(null, IS NULL(?0.int0), IS NULL(?0.int1))"
+literal|"AND(null, SEARCH(?0.int0, Sarg[NULL]), SEARCH(?0.int1, Sarg[NULL]))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"AND(IS NULL(?0.int0), IS NULL(?0.int1))"
+literal|"AND(SEARCH(?0.int0, Sarg[NULL]), SEARCH(?0.int1, Sarg[NULL]))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17960,11 +18163,13 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(OR(null, IS NOT NULL(?0.int1)), null, IS NULL(?0.int2))"
+literal|"AND(OR(null, IS NOT NULL(?0.int1)), null,"
+operator|+
+literal|" SEARCH(?0.int2, Sarg[NULL]))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"IS NULL(?0.int2)"
+literal|"SEARCH(?0.int2, Sarg[NULL])"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(x = x AND NOT (y = y))"
@@ -18007,7 +18212,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(AND(null, IS NULL(?0.int1)), null, IS NOT NULL(?0.int2))"
+literal|"OR(AND(null, SEARCH(?0.int1, Sarg[NULL])), null,"
+operator|+
+literal|" IS NOT NULL(?0.int2))"
 argument_list|,
 literal|"IS NOT NULL(?0.int2)"
 argument_list|,
@@ -18048,7 +18255,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"SEARCH(?0.int0, Sarg[10, null])"
+literal|"SEARCH(?0.int0, Sarg[10 OR NULL])"
 argument_list|)
 expr_stmt|;
 comment|// 10 = x OR x IS NULL
@@ -18078,7 +18285,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"SEARCH(?0.int0, Sarg[10, null])"
+literal|"SEARCH(?0.int0, Sarg[10 OR NULL])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -18163,7 +18370,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(null, IS NOT NULL(?0.int1), AND(null, IS NULL(?0.int2)))"
+literal|"OR(null, IS NOT NULL(?0.int1),"
+operator|+
+literal|" AND(null, SEARCH(?0.int2, Sarg[NULL])))"
 argument_list|,
 literal|"IS NOT NULL(?0.int1)"
 argument_list|,
@@ -18210,11 +18419,61 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(null, IS NULL(?0.int1), OR(null, IS NOT NULL(?0.int2)))"
+literal|"AND(null, SEARCH(?0.int1, Sarg[NULL]),"
+operator|+
+literal|" OR(null, IS NOT NULL(?0.int2)))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"IS NULL(?0.int1)"
+literal|"SEARCH(?0.int1, Sarg[NULL])"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkSarg
+parameter_list|(
+name|String
+name|message
+parameter_list|,
+name|Sarg
+name|sarg
+parameter_list|,
+name|Matcher
+argument_list|<
+name|Integer
+argument_list|>
+name|complexityMatcher
+parameter_list|,
+name|Matcher
+argument_list|<
+name|String
+argument_list|>
+name|stringMatcher
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|message
+argument_list|,
+name|sarg
+operator|.
+name|complexity
+argument_list|()
+argument_list|,
+name|complexityMatcher
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|message
+argument_list|,
+name|sarg
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|stringMatcher
 argument_list|)
 expr_stmt|;
 block|}
@@ -18230,7 +18489,7 @@ name|void
 name|testSargComplexity
 parameter_list|()
 block|{
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x is not null'"
 argument_list|,
@@ -18248,17 +18507,19 @@ operator|>
 name|rangeSetAll
 argument_list|()
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[NOT NULL]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x is null'"
 argument_list|,
@@ -18276,17 +18537,79 @@ operator|>
 name|of
 argument_list|()
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[NULL]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
+argument_list|(
+literal|"complexity of 'false'"
+argument_list|,
+name|Sarg
+operator|.
+name|of
+argument_list|(
+literal|false
+argument_list|,
+name|ImmutableRangeSet
+operator|.
+expr|<
+name|Integer
+operator|>
+name|of
+argument_list|()
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[FALSE]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkSarg
+argument_list|(
+literal|"complexity of 'true'"
+argument_list|,
+name|Sarg
+operator|.
+name|of
+argument_list|(
+literal|true
+argument_list|,
+name|RangeSets
+operator|.
+expr|<
+name|Integer
+operator|>
+name|rangeSetAll
+argument_list|()
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|2
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[TRUE]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x = 1'"
 argument_list|,
@@ -18308,17 +18631,19 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[1]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x> 1'"
 argument_list|,
@@ -18340,17 +18665,19 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[(1..+\u221E)]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x>= 1'"
 argument_list|,
@@ -18372,17 +18699,19 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[[1..+\u221E)]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x> 1 or x is null'"
 argument_list|,
@@ -18404,17 +18733,19 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|2
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[(1..+\u221E) OR NULL]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x<> 1'"
 argument_list|,
@@ -18439,17 +18770,19 @@ operator|.
 name|complement
 argument_list|()
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[(-\u221E..1), (1..+\u221E)]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x<> 1 or x is null'"
 argument_list|,
@@ -18474,17 +18807,19 @@ operator|.
 name|complement
 argument_list|()
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|2
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[(-\u221E..1), (1..+\u221E) OR NULL]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x< 10 or x>= 20'"
 argument_list|,
@@ -18518,17 +18853,19 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|2
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[(-\u221E..10), [20..+\u221E)]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x in (2, 4, 6) or x> 20'"
 argument_list|,
@@ -18576,17 +18913,19 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|4
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[2, 4, 6, (20..+\u221E)]"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
+name|checkSarg
 argument_list|(
 literal|"complexity of 'x between 3 and 8 or x between 10 and 20'"
 argument_list|,
@@ -18624,13 +18963,15 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-operator|.
-name|complexity
-argument_list|()
 argument_list|,
 name|is
 argument_list|(
 literal|2
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Sarg[[3..8], [10..20]]"
 argument_list|)
 argument_list|)
 expr_stmt|;
