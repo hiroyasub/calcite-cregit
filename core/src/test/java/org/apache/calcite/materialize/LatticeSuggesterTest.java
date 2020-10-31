@@ -3362,6 +3362,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a number of features only available in Redshift: the {@code CONCAT}    * and {@code CONVERT_TIMEZONE} functions. */
 annotation|@
 name|Test
 name|void
@@ -3430,6 +3431,89 @@ operator|+
 literal|"from \"customer\" join \"sales_fact_1997\" using (\"customer_id\")\n"
 operator|+
 literal|"group by \"fname\", \"lname\""
+decl_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q0
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|t
+operator|.
+name|s
+operator|.
+name|latticeMap
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a number of features only available in BigQuery: back-ticks;    * GROUP BY ordinal; case-insensitive unquoted identifiers. */
+annotation|@
+name|Test
+name|void
+name|testBigQueryDialect
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|Tester
+name|t
+init|=
+operator|new
+name|Tester
+argument_list|()
+operator|.
+name|foodmart
+argument_list|()
+operator|.
+name|withEvolve
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|BIG_QUERY
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|q0
+init|=
+literal|"select `product_id`,\n"
+operator|+
+literal|"  SUM(unit_sales)\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  `sales_fact_1997`"
+operator|+
+literal|"group by 1"
 decl_stmt|;
 name|t
 operator|.
