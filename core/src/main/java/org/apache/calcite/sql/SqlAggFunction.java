@@ -71,6 +71,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|fun
+operator|.
+name|SqlBasicAggFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|type
 operator|.
 name|SqlOperandTypeChecker
@@ -186,7 +202,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for the definition of an aggregate function: an operator  * which aggregates sets of values into a result.  */
+comment|/**  * Abstract base class for the definition of an aggregate function: an operator  * which aggregates sets of values into a result.  *  * @see SqlBasicAggFunction  */
 end_comment
 
 begin_class
