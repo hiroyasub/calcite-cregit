@@ -973,6 +973,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test {@link RelOptUtil#getFullTypeDifferenceString(String, RelDataType, String, RelDataType)}    * which returns the detained difference of two types.    */
 annotation|@
 name|Test
 name|void

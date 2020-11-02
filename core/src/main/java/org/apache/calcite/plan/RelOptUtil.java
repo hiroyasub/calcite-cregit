@@ -10704,6 +10704,7 @@ name|succeed
 argument_list|()
 return|;
 block|}
+comment|/**    * Returns the detailed difference of two types.    *    * @param sourceDesc description of role of source type    * @param sourceType source type    * @param targetDesc description of role of target type    * @param targetType target type    * @return the detailed difference of two types    */
 specifier|public
 specifier|static
 name|String
