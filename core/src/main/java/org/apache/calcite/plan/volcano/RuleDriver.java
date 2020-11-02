@@ -44,12 +44,12 @@ name|RuleQueue
 name|getRuleQueue
 parameter_list|()
 function_decl|;
-comment|/**    * Apply rules.    */
+comment|/**    * Applies rules.    */
 name|void
 name|drive
 parameter_list|()
 function_decl|;
-comment|/**    * Callback when new RelNodes are added into RelSet.    * @param rel the new RelNode    * @param subset subset to add    */
+comment|/**    * Callback when new RelNodes are added into RelSet.    *    * @param rel the new RelNode    * @param subset subset to add    */
 name|void
 name|onProduce
 parameter_list|(
@@ -60,7 +60,7 @@ name|RelSubset
 name|subset
 parameter_list|)
 function_decl|;
-comment|/**    * Callback when RelSets are merged.    * @param set the merged result set    */
+comment|/**    * Callback when RelSets are merged.    *    * @param set the merged result set    */
 name|void
 name|onSetMerged
 parameter_list|(
@@ -68,7 +68,7 @@ name|RelSet
 name|set
 parameter_list|)
 function_decl|;
-comment|/**    * Clear this RuleDriver.    */
+comment|/**    * Clears this RuleDriver.    */
 name|void
 name|clear
 parameter_list|()

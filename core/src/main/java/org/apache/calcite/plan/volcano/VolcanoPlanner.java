@@ -6375,7 +6375,7 @@ operator|!=
 name|rootConvention
 return|;
 block|}
-comment|/**    * Check whether a rule match is a substitute rule match.    * @param match The rule match to check    * @return True if the rule match is a substitute rule match    */
+comment|/**    * Checks whether a rule match is a substitution rule match.    *    * @param match The rule match to check    * @return True if the rule match is a substitution rule match    */
 annotation|@
 name|API
 argument_list|(
@@ -6408,7 +6408,7 @@ operator|instanceof
 name|SubstitutionRule
 return|;
 block|}
-comment|/**    * Check whether a rule match is a transformation rule match.    * @param match The rule match to check    * @return True if the rule match is a transformation rule match    */
+comment|/**    * Checks whether a rule match is a transformation rule match.    *    * @param match The rule match to check    * @return True if the rule match is a transformation rule match    */
 annotation|@
 name|API
 argument_list|(
@@ -6498,7 +6498,7 @@ operator|==
 literal|null
 return|;
 block|}
-comment|/**    * Gets the lower bound cost of a relational operator.    * @param rel The rel node    * @return The lower bound cost of the given rel. The value is ensured NOT NULL.    */
+comment|/**    * Gets the lower bound cost of a relational operator.    *    * @param rel The rel node    * @return The lower bound cost of the given rel. The value is ensured NOT NULL.    */
 annotation|@
 name|API
 argument_list|(

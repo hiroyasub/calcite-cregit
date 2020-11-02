@@ -128,7 +128,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A rule queue that manage rule matches for cascade planner.  */
+comment|/**  * A rule queue that manages rule matches for cascades planner.  */
 end_comment
 
 begin_class
@@ -258,6 +258,13 @@ condition|)
 block|{
 return|return;
 block|}
+comment|// The substitution rule would be applied first though it is added at the end of the queue.
+comment|// The process looks like:
+comment|//   1) put the non-substitution rule at the front and substitution rule at the end of the queue
+comment|//   2) get each rule from the queue in order from first to last and generate an ApplyRule task
+comment|//   3) push each ApplyRule task into the task stack
+comment|// As a result, substitution rule is executed first since the ApplyRule(substitution) task is
+comment|// popped earlier than the ApplyRule(non-substitution) task from the stack.
 if|if
 condition|(
 operator|!
