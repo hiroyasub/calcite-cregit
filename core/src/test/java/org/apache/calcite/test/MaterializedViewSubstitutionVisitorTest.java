@@ -4979,6 +4979,193 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testQueryDistinctColumnInTargetGroupByList0
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"commission\", \"deptno\"\n"
+operator|+
+literal|"from \"emps\" group by \"name\", \"commission\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"commission\", count(distinct \"deptno\") as cnt\n"
+operator|+
+literal|"from \"emps\" group by \"name\", \"commission\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQueryDistinctColumnInTargetGroupByList1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\" "
+operator|+
+literal|"from \"emps\" group by \"name\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\", count(distinct \"deptno\")\n"
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQueryDistinctColumnInTargetGroupByList2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", \"empid\"\n"
+operator|+
+literal|"from \"emps\" group by \"name\", \"deptno\", \"empid\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\", count(distinct \"deptno\"), count(distinct \"empid\")\n"
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQueryDistinctColumnInTargetGroupByList3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", \"empid\", count(\"commission\")\n"
+operator|+
+literal|"from \"emps\" group by \"name\", \"deptno\", \"empid\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\", count(distinct \"deptno\"), count(distinct \"empid\"), count"
+operator|+
+literal|"(\"commission\")\n"
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQueryDistinctColumnInTargetGroupByList4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", \"empid\"\n"
+operator|+
+literal|"from \"emps\" group by \"name\", \"deptno\", \"empid\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\", count(distinct \"deptno\")\n"
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 specifier|final
 name|JavaTypeFactoryImpl
 name|typeFactory
