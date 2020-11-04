@@ -1267,6 +1267,15 @@ argument_list|()
 return|;
 block|}
 comment|/** Converts a list of extended columns    * (of the form [name0, type0, name1, type1, ...])    * into a list of (name, type) pairs. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"unchecked"
+block|,
+literal|"rawtypes"
+block|}
+argument_list|)
 specifier|private
 specifier|static
 name|List
@@ -1284,22 +1293,15 @@ name|SqlNodeList
 name|extendedColumns
 parameter_list|)
 block|{
-specifier|final
-name|List
-name|list
-init|=
-name|extendedColumns
-operator|.
-name|getList
-argument_list|()
-decl_stmt|;
-comment|//noinspection unchecked
 return|return
 name|Util
 operator|.
 name|pairs
 argument_list|(
-name|list
+operator|(
+name|List
+operator|)
+name|extendedColumns
 argument_list|)
 return|;
 block|}

@@ -181,9 +181,6 @@ argument_list|(
 name|with
 operator|.
 name|withList
-operator|.
-name|getList
-argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;

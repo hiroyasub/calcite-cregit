@@ -542,9 +542,6 @@ argument_list|,
 name|selectList
 argument_list|,
 name|groupBy
-operator|.
-name|getList
-argument_list|()
 argument_list|)
 operator|.
 name|result

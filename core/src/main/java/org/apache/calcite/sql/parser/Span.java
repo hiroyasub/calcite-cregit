@@ -33,6 +33,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlNodeList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -197,6 +211,29 @@ operator|.
 name|addAll
 argument_list|(
 name|nodes
+argument_list|)
+return|;
+block|}
+comment|/** Creates a Span of a node list. */
+specifier|public
+specifier|static
+name|Span
+name|of
+parameter_list|(
+name|SqlNodeList
+name|nodeList
+parameter_list|)
+block|{
+comment|// SqlNodeList has its own position, so just that position, not all of the
+comment|// constituent nodes.
+return|return
+operator|new
+name|Span
+argument_list|()
+operator|.
+name|add
+argument_list|(
+name|nodeList
 argument_list|)
 return|;
 block|}

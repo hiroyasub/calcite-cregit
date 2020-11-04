@@ -3309,9 +3309,6 @@ operator|=
 name|create
 operator|.
 name|columnList
-operator|.
-name|getList
-argument_list|()
 expr_stmt|;
 block|}
 else|else

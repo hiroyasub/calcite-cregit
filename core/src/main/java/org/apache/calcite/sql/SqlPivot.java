@@ -543,9 +543,6 @@ block|{
 return|return
 name|list
 operator|.
-name|getList
-argument_list|()
-operator|.
 name|stream
 argument_list|()
 operator|.
@@ -865,9 +862,6 @@ name|SqlNodeList
 operator|)
 name|node
 operator|)
-operator|.
-name|getList
-argument_list|()
 operator|.
 name|stream
 argument_list|()

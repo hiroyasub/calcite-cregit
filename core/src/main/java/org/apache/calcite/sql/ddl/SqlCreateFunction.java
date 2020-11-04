@@ -547,9 +547,6 @@ operator|(
 name|List
 operator|)
 name|usingList
-operator|.
-name|getList
-argument_list|()
 argument_list|)
 return|;
 block|}

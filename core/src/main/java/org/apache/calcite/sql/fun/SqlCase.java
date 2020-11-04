@@ -244,17 +244,6 @@ operator|!=
 name|value
 condition|)
 block|{
-name|List
-argument_list|<
-name|SqlNode
-argument_list|>
-name|list
-init|=
-name|whenList
-operator|.
-name|getList
-argument_list|()
-decl_stmt|;
 for|for
 control|(
 name|int
@@ -264,7 +253,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|list
+name|whenList
 operator|.
 name|size
 argument_list|()
@@ -276,7 +265,7 @@ block|{
 name|SqlNode
 name|e
 init|=
-name|list
+name|whenList
 operator|.
 name|get
 argument_list|(
@@ -328,7 +317,7 @@ name|e
 argument_list|)
 expr_stmt|;
 block|}
-name|list
+name|whenList
 operator|.
 name|set
 argument_list|(

@@ -526,6 +526,8 @@ name|SuppressWarnings
 argument_list|(
 block|{
 literal|"unchecked"
+block|,
+literal|"rawtypes"
 block|}
 argument_list|)
 specifier|public
@@ -546,9 +548,6 @@ name|List
 name|list
 init|=
 name|columnList
-operator|.
-name|getList
-argument_list|()
 decl_stmt|;
 name|Pair
 operator|.

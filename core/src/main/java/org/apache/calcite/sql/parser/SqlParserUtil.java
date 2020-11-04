@@ -3065,7 +3065,13 @@ return|return
 name|list
 operator|.
 name|toArray
-argument_list|()
+argument_list|(
+operator|new
+name|SqlNode
+index|[
+literal|0
+index|]
+argument_list|)
 return|;
 block|}
 comment|/** Converts "ROW (1, 2)" to "(1, 2)"    * and "3" to "(3)". */

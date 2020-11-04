@@ -1086,7 +1086,7 @@ name|T
 argument_list|,
 name|ArrayList
 argument_list|<
-name|T
+name|SqlNode
 argument_list|>
 argument_list|,
 name|SqlNodeList
@@ -1117,7 +1117,7 @@ name|T
 argument_list|,
 name|ArrayList
 argument_list|<
-name|T
+name|SqlNode
 argument_list|>
 argument_list|,
 name|SqlNodeList
@@ -1147,12 +1147,13 @@ name|combine
 argument_list|,
 name|list
 lambda|->
-operator|new
 name|SqlNodeList
+operator|.
+name|of
 argument_list|(
-name|list
-argument_list|,
 name|pos
+argument_list|,
+name|list
 argument_list|)
 argument_list|)
 return|;

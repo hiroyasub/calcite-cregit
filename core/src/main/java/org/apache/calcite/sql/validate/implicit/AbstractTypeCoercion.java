@@ -740,9 +740,6 @@ name|index
 operator|>=
 name|nodeList
 operator|.
-name|getList
-argument_list|()
-operator|.
 name|size
 argument_list|()
 condition|)

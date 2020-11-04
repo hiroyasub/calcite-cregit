@@ -39417,9 +39417,6 @@ block|{
 return|return
 name|sqlNodeList
 operator|.
-name|getList
-argument_list|()
-operator|.
 name|stream
 argument_list|()
 operator|.

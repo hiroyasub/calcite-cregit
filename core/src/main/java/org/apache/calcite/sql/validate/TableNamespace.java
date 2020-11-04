@@ -481,9 +481,6 @@ operator|.
 name|quotientList
 argument_list|(
 name|extendList
-operator|.
-name|getList
-argument_list|()
 argument_list|,
 literal|2
 argument_list|,
@@ -855,9 +852,6 @@ operator|.
 name|find
 argument_list|(
 name|extendList
-operator|.
-name|getList
-argument_list|()
 argument_list|,
 name|sqlNode
 lambda|->
