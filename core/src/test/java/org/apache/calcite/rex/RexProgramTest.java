@@ -5923,7 +5923,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|and
 argument_list|(
@@ -5947,8 +5947,6 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"AND(<=(?0.h, 1),>=(?0.h, 1))"
 argument_list|,
 literal|"=(?0.h, 1)"
 argument_list|)
@@ -6374,11 +6372,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"AND(null, SEARCH(?0.i, Sarg[NULL]))"
+literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"SEARCH(?0.i, Sarg[NULL])"
+literal|"IS NULL(?0.i)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -6431,11 +6429,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"AND(null, SEARCH(?0.i, Sarg[NULL]))"
+literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"SEARCH(?0.i, Sarg[NULL])"
+literal|"IS NULL(?0.i)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -6488,11 +6486,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"AND(null, SEARCH(?0.i, Sarg[NULL]))"
+literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"SEARCH(?0.i, Sarg[NULL])"
+literal|"IS NULL(?0.i)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -7586,7 +7584,7 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|"<(5, ?0.a)"
+literal|">(?0.a, 5)"
 argument_list|)
 expr_stmt|;
 comment|// condition "1< a&& a< 5" is converted to a Sarg
@@ -7652,7 +7650,7 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|">(1, ?0.a)"
+literal|"<(?0.a, 1)"
 argument_list|)
 expr_stmt|;
 comment|// condition "1> a&& a> 5" yields false
@@ -9750,7 +9748,7 @@ argument_list|,
 literal|"<>(?0.a, 4)"
 argument_list|)
 expr_stmt|;
-comment|// "b<> 1 or b = 1" cannot be simplified, because b might be null
+comment|// "b<> 1 or b = 1" ==> "b is not null" with unknown as false
 specifier|final
 name|RexNode
 name|neOrEq
@@ -9782,7 +9780,7 @@ name|checkSimplifyFilter
 argument_list|(
 name|neOrEq
 argument_list|,
-literal|"OR(<>(?0.b, 1), =(?0.b, 1))"
+literal|"IS NOT NULL(?0.b)"
 argument_list|)
 expr_stmt|;
 comment|// Careful of the excluded middle!
@@ -10668,13 +10666,13 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"OR(SEARCH($1, Sarg[NULL]), SEARCH($0, Sarg[1, 2]))"
+literal|"OR(IS NULL($1), SEARCH($0, Sarg[1, 2]))"
 decl_stmt|;
 specifier|final
 name|String
 name|expanded
 init|=
-literal|"OR(IS NULL($1), OR(=($0, 1), =($0, 2)))"
+literal|"OR(IS NULL($1), =($0, 1), =($0, 2))"
 decl_stmt|;
 name|checkSimplify
 argument_list|(
@@ -10842,15 +10840,13 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"AND(SEARCH($0, Sarg[(0..10)]),"
-operator|+
-literal|" SEARCH($1, Sarg[NOT NULL]))"
+literal|"AND(SEARCH($0, Sarg[(0..10)]), IS NOT NULL($1))"
 decl_stmt|;
 specifier|final
 name|String
 name|expanded
 init|=
-literal|"AND(AND(>($0, 0),<($0, 10)), IS NOT NULL($1))"
+literal|"AND(>($0, 0),<($0, 10), IS NOT NULL($1))"
 decl_stmt|;
 name|checkSimplify
 argument_list|(
@@ -10940,13 +10936,13 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"AND(SEARCH($0, Sarg[(0..10)]), SEARCH($1, Sarg[NULL]))"
+literal|"AND(SEARCH($0, Sarg[(0..10)]), IS NULL($1))"
 decl_stmt|;
 specifier|final
 name|String
 name|expanded
 init|=
-literal|"AND(AND(>($0, 0),<($0, 10)), IS NULL($1))"
+literal|"AND(>($0, 0),<($0, 10), IS NULL($1))"
 decl_stmt|;
 name|checkSimplify
 argument_list|(
@@ -11178,11 +11174,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|e
-argument_list|,
-literal|"SEARCH(?0.int0, Sarg[10])"
 argument_list|,
 literal|"=(?0.int0, 10)"
 argument_list|)
@@ -11290,13 +11284,245 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|e
 argument_list|,
-literal|"SEARCH(?0.int0, Sarg[10])"
+literal|"=(?0.int0, 10)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSimplifyInAnd
+parameter_list|()
+block|{
+comment|// deptno in (20, 10) and deptno = 10
+comment|//   ==>
+comment|// deptno = 10
+name|checkSimplify
+argument_list|(
+name|and
+argument_list|(
+name|in
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
 argument_list|,
 literal|"=(?0.int0, 10)"
+argument_list|)
+expr_stmt|;
+comment|// deptno in (20, 10) and deptno = 30
+comment|//   ==>
+comment|// false
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|in
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|30
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(SEARCH(?0.int0, Sarg[10, 20]), =(?0.int0, 30))"
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSimplifyInOr
+parameter_list|()
+block|{
+comment|// deptno> 0 or deptno in (20, 10)
+comment|//   ==>
+comment|// deptno> 0
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|gt
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|in
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|">(?0.int0, 0)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test strategies for {@code SargCollector.canMerge(Sarg, RexUnknownAs)}. */
+annotation|@
+name|Test
+name|void
+name|testSargMerge
+parameter_list|()
+block|{
+name|checkSimplify2
+argument_list|(
+name|or
+argument_list|(
+name|ne
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"OR(<>(?0.int0, 1), =(?0.int0, 1))"
+argument_list|,
+literal|"IS NOT NULL(?0.int0)"
+argument_list|)
+expr_stmt|;
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|gt
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|5
+argument_list|)
+argument_list|)
+argument_list|,
+name|lt
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(>(?0.int0, 5),<(?0.int0, 3))"
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|falseLiteral
+argument_list|,
+name|isNull
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NULL(?0.int0)"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|and
+argument_list|(
+name|trueLiteral
+argument_list|,
+name|isNotNull
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT NULL(?0.int0)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11532,7 +11758,7 @@ parameter_list|()
 block|{
 comment|// to have the correct mode for the AND at the bottom,
 comment|// both the OR and AND parent should retain the UnknownAs mode
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|and
 argument_list|(
@@ -11590,8 +11816,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"AND(=(?0.int2, 2), OR(=(?0.int3, 3), AND(>=(?0.int0, 1),<=(?0.int0, 1))))"
 argument_list|,
 literal|"AND(=(?0.int2, 2), OR(=(?0.int3, 3), =(?0.int0, 1)))"
 argument_list|)
@@ -16061,11 +16285,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(null, SEARCH(?0.int0, Sarg[NULL]), SEARCH(?0.int1, Sarg[NULL]))"
+literal|"AND(null, IS NULL(?0.int0), IS NULL(?0.int1))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"AND(SEARCH(?0.int0, Sarg[NULL]), SEARCH(?0.int1, Sarg[NULL]))"
+literal|"AND(IS NULL(?0.int0), IS NULL(?0.int1))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -18163,13 +18387,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(OR(null, IS NOT NULL(?0.int1)), null,"
-operator|+
-literal|" SEARCH(?0.int2, Sarg[NULL]))"
+literal|"AND(OR(null, IS NOT NULL(?0.int1)), null, IS NULL(?0.int2))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"SEARCH(?0.int2, Sarg[NULL])"
+literal|"IS NULL(?0.int2)"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(x = x AND NOT (y = y))"
@@ -18212,9 +18434,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(AND(null, SEARCH(?0.int1, Sarg[NULL])), null,"
-operator|+
-literal|" IS NOT NULL(?0.int2))"
+literal|"OR(AND(null, IS NULL(?0.int1)), null, IS NOT NULL(?0.int2))"
 argument_list|,
 literal|"IS NOT NULL(?0.int2)"
 argument_list|,
@@ -18370,9 +18590,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(null, IS NOT NULL(?0.int1),"
-operator|+
-literal|" AND(null, SEARCH(?0.int2, Sarg[NULL])))"
+literal|"OR(null, IS NOT NULL(?0.int1), AND(null, IS NULL(?0.int2)))"
 argument_list|,
 literal|"IS NOT NULL(?0.int1)"
 argument_list|,
@@ -18419,13 +18637,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(null, SEARCH(?0.int1, Sarg[NULL]),"
-operator|+
-literal|" OR(null, IS NOT NULL(?0.int2)))"
+literal|"AND(null, IS NULL(?0.int1), OR(null, IS NOT NULL(?0.int2)))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"SEARCH(?0.int1, Sarg[NULL])"
+literal|"IS NULL(?0.int1)"
 argument_list|)
 expr_stmt|;
 block|}

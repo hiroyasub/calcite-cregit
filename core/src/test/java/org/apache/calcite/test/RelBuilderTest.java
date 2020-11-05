@@ -18980,9 +18980,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[OR(SEARCH($7, Sarg[10, 11, (15..+â)]), "
-operator|+
-literal|"SEARCH($2, Sarg['CLERK']:CHAR(5)))])\n"
+literal|"LogicalFilter(condition=[OR(SEARCH($7, Sarg[10, 11, (15..+â)]), =($2, 'CLERK'))])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -21517,9 +21515,7 @@ name|expectedRel3
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[AND(SEARCH($0, Sarg[[1..3), (3..5]]), "
-operator|+
-literal|"SEARCH($7, Sarg[10]))])\n"
+literal|"LogicalFilter(condition=[AND(SEARCH($0, Sarg[[1..3), (3..5]]), =($7, 10))])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;

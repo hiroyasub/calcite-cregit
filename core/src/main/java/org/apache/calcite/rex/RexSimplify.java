@@ -7189,24 +7189,9 @@ if|if
 condition|(
 name|sargCollector
 operator|.
-name|map
-operator|.
-name|values
-argument_list|()
-operator|.
-name|stream
-argument_list|()
-operator|.
-name|anyMatch
+name|needToFix
 argument_list|(
-name|b
-lambda|->
-name|b
-operator|.
-name|complexity
-argument_list|()
-operator|>
-literal|1
+name|unknownAs
 argument_list|)
 condition|)
 block|{
@@ -7214,7 +7199,7 @@ name|operands
 operator|.
 name|clear
 argument_list|()
-block|;
+expr_stmt|;
 name|terms
 operator|.
 name|forEach
@@ -7235,13 +7220,13 @@ name|t
 argument_list|)
 argument_list|)
 argument_list|)
-empty_stmt|;
+expr_stmt|;
 block|}
 name|terms
 operator|.
 name|clear
-parameter_list|()
-constructor_decl|;
+argument_list|()
+expr_stmt|;
 for|for
 control|(
 name|RexNode
@@ -7294,13 +7279,7 @@ name|notTerms
 argument_list|)
 return|;
 block|}
-end_class
-
-begin_comment
 comment|// package-protected only to support a deprecated method; treat as private
-end_comment
-
-begin_function
 name|RexNode
 name|simplifyAnd2
 parameter_list|(
@@ -7583,13 +7562,7 @@ name|terms
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** As {@link #simplifyAnd2(List, List)} but we assume that if the expression    * returns UNKNOWN it will be interpreted as FALSE. */
-end_comment
-
-begin_function
 name|RexNode
 name|simplifyAnd2ForUnknownAsFalse
 parameter_list|(
@@ -7620,9 +7593,6 @@ name|class
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 specifier|private
 parameter_list|<
 name|C
@@ -8984,9 +8954,6 @@ name|terms
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -9314,13 +9281,7 @@ name|e
 return|;
 block|}
 block|}
-end_function
-
-begin_comment
 comment|/** Weakens a term so that it checks only what is not implied by predicates.    *    *<p>The term is broken into "ref comparison constant",    * for example "$0&lt; 5".    *    *<p>Examples:    *<ul>    *    *<li>{@code residue($0< 10, [$0< 5])} returns {@code true}    *    *<li>{@code residue($0< 10, [$0< 20, $0> 0])} returns {@code $0< 10}    *</ul>    */
-end_comment
-
-begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -9616,13 +9577,7 @@ return|return
 name|result
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** Simplifies OR(x, x) into x, and similar.    * The simplified expression returns UNKNOWN values as is (not as FALSE). */
-end_comment
-
-begin_function
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -9646,9 +9601,6 @@ name|UNKNOWN
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 specifier|private
 name|RexNode
 name|simplifyOr
@@ -9747,13 +9699,7 @@ name|unknownAs
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** Simplifies a list of terms and combines them into an OR.    * Modifies the list in place.    * The simplified expression returns UNKNOWN values as is (not as FALSE). */
-end_comment
-
-begin_function
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -9780,9 +9726,6 @@ name|UNKNOWN
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 specifier|private
 name|void
 name|ensureParanoidOff
@@ -9802,13 +9745,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-end_function
-
-begin_comment
 comment|/** Simplifies a list of terms and combines them into an OR.    * Modifies the list in place. */
-end_comment
-
-begin_function
 specifier|private
 name|RexNode
 name|simplifyOrs
@@ -9867,24 +9804,9 @@ if|if
 condition|(
 name|sargCollector
 operator|.
-name|map
-operator|.
-name|values
-argument_list|()
-operator|.
-name|stream
-argument_list|()
-operator|.
-name|anyMatch
+name|needToFix
 argument_list|(
-name|b
-lambda|->
-name|b
-operator|.
-name|complexity
-argument_list|()
-operator|>
-literal|1
+name|unknownAs
 argument_list|)
 condition|)
 block|{
@@ -9892,7 +9814,7 @@ name|terms
 operator|.
 name|clear
 argument_list|()
-block|;
+expr_stmt|;
 name|newTerms
 operator|.
 name|forEach
@@ -9913,27 +9835,12 @@ name|t
 argument_list|)
 argument_list|)
 argument_list|)
-empty_stmt|;
+expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|// CALCITE-3198 Auxiliary map to simplify cases like:
-end_comment
-
-begin_comment
 comment|//   X<> A OR X<> B => X IS NOT NULL or NULL
-end_comment
-
-begin_comment
 comment|// The map key will be the 'X'; and the value the first call 'X<>A' that is found,
-end_comment
-
-begin_comment
 comment|// or 'X IS NOT NULL' if a simplification takes place (because another 'X<>B' is found)
-end_comment
-
-begin_decl_stmt
 specifier|final
 name|Map
 argument_list|<
@@ -9948,9 +9855,6 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-end_decl_stmt
-
-begin_decl_stmt
 specifier|final
 name|RexLiteral
 name|trueLiteral
@@ -9962,9 +9866,6 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
-end_decl_stmt
-
-begin_for
 for|for
 control|(
 name|int
@@ -10308,9 +10209,6 @@ default|default:
 break|break;
 block|}
 block|}
-end_for
-
-begin_return
 return|return
 name|RexUtil
 operator|.
@@ -10321,10 +10219,8 @@ argument_list|,
 name|terms
 argument_list|)
 return|;
-end_return
-
-begin_function
-unit|}    private
+block|}
+specifier|private
 name|void
 name|verify
 parameter_list|(
@@ -10706,9 +10602,6 @@ throw|;
 block|}
 block|}
 block|}
-end_function
-
-begin_function
 specifier|private
 name|RexNode
 name|simplifySearch
@@ -10919,9 +10812,6 @@ return|return
 name|call
 return|;
 block|}
-end_function
-
-begin_function
 specifier|private
 name|RexNode
 name|simplifyCast
@@ -11377,13 +11267,7 @@ return|;
 block|}
 block|}
 block|}
-end_function
-
-begin_comment
 comment|/** Tries to simplify CEIL/FLOOR function on top of CEIL/FLOOR.    *    *<p>Examples:    *<ul>    *    *<li>{@code floor(floor($0, flag(hour)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code ceil(ceil($0, flag(second)), flag(day))} returns {@code ceil($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(day)), flag(second))} does not change    *    *</ul>    */
-end_comment
-
-begin_function
 specifier|private
 name|RexNode
 name|simplifyCeilFloor
@@ -11630,13 +11514,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** Method that returns whether we can rollup from inner time unit    * to outer time unit. */
-end_comment
-
-begin_function
 specifier|private
 specifier|static
 name|boolean
@@ -11790,13 +11668,7 @@ return|return
 literal|false
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** Removes any casts that change nullability but not type.    *    *<p>For example, {@code CAST(1 = 0 AS BOOLEAN)} becomes {@code 1 = 0}. */
-end_comment
-
-begin_function
 specifier|public
 name|RexNode
 name|removeNullabilityCast
@@ -11819,9 +11691,6 @@ name|e
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -12822,9 +12691,6 @@ return|return
 literal|null
 return|;
 block|}
-end_function
-
-begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -12916,9 +12782,6 @@ argument_list|()
 throw|;
 block|}
 block|}
-end_function
-
-begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -13027,13 +12890,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-end_function
-
-begin_comment
 comment|/** Marker interface for predicates (expressions that evaluate to BOOLEAN). */
-end_comment
-
-begin_interface
 specifier|private
 interface|interface
 name|Predicate
@@ -13092,13 +12949,7 @@ literal|true
 return|;
 block|}
 block|}
-end_interface
-
-begin_comment
 comment|/** Represents a simple Comparison.    *    *<p>Left hand side is a {@link RexNode}, right hand side is a literal.    */
-end_comment
-
-begin_class
 specifier|private
 specifier|static
 class|class
@@ -13409,13 +13260,7 @@ argument_list|)
 return|;
 block|}
 block|}
-end_class
-
-begin_comment
 comment|/** Represents an IS Predicate. */
-end_comment
-
-begin_class
 specifier|private
 specifier|static
 class|class
@@ -13542,9 +13387,6 @@ literal|null
 return|;
 block|}
 block|}
-end_class
-
-begin_function
 specifier|private
 specifier|static
 name|boolean
@@ -13670,9 +13512,6 @@ literal|false
 return|;
 block|}
 block|}
-end_function
-
-begin_function
 specifier|private
 specifier|static
 name|boolean
@@ -13798,13 +13637,7 @@ literal|false
 return|;
 block|}
 block|}
-end_function
-
-begin_comment
 comment|/**    * Combines predicates AND, optimizes, and returns null if the result is    * always false.    *    *<p>The expression is simplified on the assumption that an UNKNOWN value    * is always treated as FALSE. Therefore the simplified expression may    * sometimes evaluate to FALSE where the original expression would evaluate to    * UNKNOWN.    *    * @param predicates Filter condition predicates    * @return simplified conjunction of predicates for the filter, null if always false    */
-end_comment
-
-begin_function
 specifier|public
 name|RexNode
 name|simplifyFilterPredicates
@@ -13863,13 +13696,7 @@ name|simplifiedAnds
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Replaces the last occurrence of one specified value in a list with    * another.    *    *<p>Does not change the size of the list.    *    *<p>Returns whether the value was found.    */
-end_comment
-
-begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -13926,13 +13753,7 @@ return|return
 literal|true
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** Gathers expressions that can be converted into    * {@link Sarg search arguments}. */
-end_comment
-
-begin_class
 specifier|static
 class|class
 name|SargCollector
@@ -13960,6 +13781,11 @@ specifier|private
 specifier|final
 name|boolean
 name|negate
+decl_stmt|;
+comment|/**      * Count of the new terms after converting all the operands to      * {@code SEARCH} on a {@link Sarg}. It is used to decide whether      * the new terms are simpler.      */
+specifier|private
+name|int
+name|newTermsCount
 decl_stmt|;
 name|SargCollector
 parameter_list|(
@@ -14016,6 +13842,13 @@ name|term
 argument_list|)
 expr_stmt|;
 block|}
+name|newTermsCount
+operator|=
+name|newTerms
+operator|.
+name|size
+argument_list|()
+expr_stmt|;
 block|}
 specifier|private
 name|boolean
@@ -14634,6 +14467,224 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**      * Returns whether the merged {@code sarg} with given {@code unknownAs} keeps the semantics,      * The merge can not go ahead if the semantics change.      *      * @return true if the semantics does not change      */
+specifier|private
+specifier|static
+name|boolean
+name|canMerge
+parameter_list|(
+name|Sarg
+name|sarg
+parameter_list|,
+name|RexUnknownAs
+name|unknownAs
+parameter_list|)
+block|{
+specifier|final
+name|boolean
+name|isAllOrNone
+init|=
+name|sarg
+operator|.
+name|isAll
+argument_list|()
+operator|||
+name|sarg
+operator|.
+name|isNone
+argument_list|()
+decl_stmt|;
+specifier|final
+name|boolean
+name|containsNull
+init|=
+name|sarg
+operator|.
+name|containsNull
+decl_stmt|;
+switch|switch
+condition|(
+name|unknownAs
+condition|)
+block|{
+case|case
+name|UNKNOWN
+case|:
+comment|// "unknown as unknown" can not be simplified to
+comment|// "IS NULL"/"IS NOT NULL"/"TRUE"/"FALSE"
+return|return
+operator|!
+name|isAllOrNone
+return|;
+case|case
+name|TRUE
+case|:
+comment|// "unknown as true" can not be simplified to
+comment|// "false" or "IS NOT NULL"
+return|return
+name|containsNull
+operator|||
+operator|!
+name|isAllOrNone
+return|;
+case|case
+name|FALSE
+case|:
+comment|// "unknown as false" can not be simplified to
+comment|// "true" or "IS NULL"
+return|return
+operator|!
+name|containsNull
+operator|||
+operator|!
+name|isAllOrNone
+return|;
+default|default:
+return|return
+literal|true
+return|;
+block|}
+block|}
+comment|/** Returns whether it is worth to fix and convert to {@code SEARCH} calls. */
+name|boolean
+name|needToFix
+parameter_list|(
+name|RexUnknownAs
+name|unknownAs
+parameter_list|)
+block|{
+comment|// Fix and converts to SEARCH if:
+comment|// 1. A Sarg has complexity greater than 1;
+comment|// 2. The terms are reduced as simpler Sarg points;
+comment|// 3. The terms are reduced as simpler Sarg comparison.
+comment|// Ignore 'negate' just to be compatible with previous versions of this
+comment|// method. "build().complexity()" would be a better estimate, if we could
+comment|// switch to it breaking lots of plans.
+specifier|final
+name|Collection
+argument_list|<
+name|RexSargBuilder
+argument_list|>
+name|builders
+init|=
+name|map
+operator|.
+name|values
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|builders
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|anyMatch
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|build
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|complexity
+argument_list|()
+operator|>
+literal|1
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+if|if
+condition|(
+name|builders
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+operator|&&
+operator|!
+name|canMerge
+argument_list|(
+name|builders
+operator|.
+name|iterator
+argument_list|()
+operator|.
+name|next
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|,
+name|unknownAs
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+return|return
+name|newTermsCount
+operator|==
+literal|1
+operator|&&
+name|map
+operator|.
+name|values
+argument_list|()
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|allMatch
+argument_list|(
+name|b
+lambda|->
+name|simpleSarg
+argument_list|(
+name|b
+operator|.
+name|build
+argument_list|()
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**      * Returns whether this Sarg can be expanded to more simple form, e.g.      * the IN call or single comparison.      */
+specifier|private
+specifier|static
+name|boolean
+name|simpleSarg
+parameter_list|(
+name|Sarg
+name|sarg
+parameter_list|)
+block|{
+return|return
+name|sarg
+operator|.
+name|isPoints
+argument_list|()
+operator|||
+name|RangeSets
+operator|.
+name|isOpenInterval
+argument_list|(
+name|sarg
+operator|.
+name|rangeSet
+argument_list|)
+return|;
+block|}
 comment|/** If a term is a call to {@code SEARCH} on a {@link RexSargBuilder},      * converts it to a {@code SEARCH} on a {@link Sarg}. */
 name|RexNode
 name|fix
@@ -14652,6 +14703,7 @@ operator|instanceof
 name|RexSargBuilder
 condition|)
 block|{
+specifier|final
 name|RexSargBuilder
 name|sargBuilder
 init|=
@@ -14660,6 +14712,52 @@ name|RexSargBuilder
 operator|)
 name|term
 decl_stmt|;
+specifier|final
+name|Sarg
+name|sarg
+init|=
+name|sargBuilder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|sarg
+operator|.
+name|complexity
+argument_list|()
+operator|<=
+literal|1
+operator|&&
+name|simpleSarg
+argument_list|(
+name|sarg
+argument_list|)
+condition|)
+block|{
+comment|// Expand small sargs into comparisons in order to avoid plan changes
+comment|// and better readability.
+return|return
+name|RexUtil
+operator|.
+name|sargRef
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|sargBuilder
+operator|.
+name|ref
+argument_list|,
+name|sarg
+argument_list|,
+name|term
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+return|;
+block|}
 return|return
 name|rexBuilder
 operator|.
@@ -14677,10 +14775,7 @@ name|rexBuilder
 operator|.
 name|makeSearchArgumentLiteral
 argument_list|(
-name|sargBuilder
-operator|.
-name|build
-argument_list|()
+name|sarg
 argument_list|,
 name|term
 operator|.
@@ -14695,13 +14790,7 @@ name|term
 return|;
 block|}
 block|}
-end_class
-
-begin_comment
 comment|/** Equivalent to a {@link RexLiteral} whose value is a {@link Sarg},    * but mutable, so that the Sarg can be expanded as {@link SargCollector}    * traverses a list of OR or AND terms.    *    *<p>The {@link SargCollector#fix} method converts it to an immutable    * literal. */
-end_comment
-
-begin_class
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -14834,24 +14923,6 @@ operator|+
 name|nullTermCount
 operator|+
 literal|" allow null)"
-return|;
-block|}
-comment|/** Returns a rough estimate of whether it is worth converting to a Sarg.      *      * @see Sarg#complexity()      */
-name|int
-name|complexity
-parameter_list|()
-block|{
-comment|// Ignore 'negate' just to be compatible with previous versions of this
-comment|// method. "build().complexity()" would be a better estimate, if we could
-comment|// switch to it breaking lots of plans.
-return|return
-name|build
-argument_list|(
-literal|false
-argument_list|)
-operator|.
-name|complexity
-argument_list|()
 return|;
 block|}
 parameter_list|<
@@ -15194,8 +15265,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+block|}
 end_class
 
-unit|}
 end_unit
 

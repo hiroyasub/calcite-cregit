@@ -3764,11 +3764,11 @@ literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
 literal|"filter=[AND("
 operator|+
-literal|"SEARCH($3, Sarg['High Top Dried Mushrooms':VARCHAR]:VARCHAR), "
+literal|"=($3, 'High Top Dried Mushrooms'), "
 operator|+
 literal|"SEARCH($87, Sarg['Q2', 'Q3']:CHAR(2)), "
 operator|+
-literal|"SEARCH($30, Sarg['WA':VARCHAR]:VARCHAR))], "
+literal|"=($30, 'WA'))], "
 operator|+
 literal|"projects=[[$30, $29, $3]], groups=[{0, 1, 2}], aggs=[[]])\n"
 decl_stmt|;
@@ -3877,11 +3877,11 @@ literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
 literal|"filter=[AND("
 operator|+
-literal|"SEARCH($3, Sarg['High Top Dried Mushrooms':VARCHAR]:VARCHAR), "
+literal|"=($3, 'High Top Dried Mushrooms'), "
 operator|+
 literal|"SEARCH($87, Sarg['Q2', 'Q3']:CHAR(2)), "
 operator|+
-literal|"SEARCH($30, Sarg['WA':VARCHAR]:VARCHAR))], "
+literal|"=($30, 'WA'))], "
 operator|+
 literal|"projects=[[$30, $29, $3]])\n"
 decl_stmt|;
