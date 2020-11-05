@@ -203,18 +203,6 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|anyOf
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|hamcrest
-operator|.
-name|CoreMatchers
-operator|.
 name|equalTo
 import|;
 end_import
@@ -4783,30 +4771,10 @@ block|}
 catch|catch
 parameter_list|(
 name|ArrayIndexOutOfBoundsException
-name|e
+name|ignored
 parameter_list|)
 block|{
-name|assertThat
-argument_list|(
-name|e
-operator|.
-name|getMessage
-argument_list|()
-argument_list|,
-name|anyOf
-argument_list|(
-name|is
-argument_list|(
-literal|"-1"
-argument_list|)
-argument_list|,
-name|is
-argument_list|(
-literal|"Index -1 out of bounds for length 0"
-argument_list|)
-argument_list|)
-argument_list|)
-expr_stmt|;
+comment|// Exact message is not specified by Java
 block|}
 specifier|final
 name|ImmutableBitSet

@@ -259,6 +259,8 @@ name|DataContext
 name|root
 parameter_list|)
 block|{
+comment|// https://github.com/eclipse/openj9/issues/11036
+comment|// openj9 jps doesn't handle multiple flags in one argument
 return|return
 name|Processes
 operator|.
@@ -266,7 +268,11 @@ name|processLines
 argument_list|(
 literal|"jps"
 argument_list|,
-literal|"-mlvV"
+literal|"-m"
+argument_list|,
+literal|"-l"
+argument_list|,
+literal|"-v"
 argument_list|)
 operator|.
 name|select

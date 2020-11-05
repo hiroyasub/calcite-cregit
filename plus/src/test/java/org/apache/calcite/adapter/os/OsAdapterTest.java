@@ -1269,6 +1269,11 @@ name|void
 name|testJps
 parameter_list|()
 block|{
+name|assumeToolExists
+argument_list|(
+literal|"jps"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|String
 name|q
