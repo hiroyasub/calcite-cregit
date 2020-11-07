@@ -1603,6 +1603,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|SqlKind
+operator|.
+name|UNION
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Static
@@ -8287,6 +8303,136 @@ return|return
 name|this
 return|;
 block|}
+comment|// If the expressions are all literals, and the input is a Values with N
+comment|// rows, replace with a Values with same tuple N times.
+if|if
+condition|(
+name|config
+operator|.
+name|simplifyValues
+argument_list|()
+operator|&&
+name|frame
+operator|.
+name|rel
+operator|instanceof
+name|Values
+operator|&&
+name|nodeList
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|allMatch
+argument_list|(
+name|e
+lambda|->
+name|e
+operator|instanceof
+name|RexLiteral
+argument_list|)
+condition|)
+block|{
+name|final
+name|Values
+name|values
+operator|=
+operator|(
+name|Values
+operator|)
+name|build
+argument_list|()
+block|;
+name|final
+name|RelDataTypeFactory
+operator|.
+name|Builder
+name|typeBuilder
+operator|=
+name|getTypeFactory
+argument_list|()
+operator|.
+name|builder
+argument_list|()
+empty_stmt|;
+name|Pair
+operator|.
+name|forEach
+argument_list|(
+name|fieldNameList
+argument_list|,
+name|nodeList
+argument_list|,
+parameter_list|(
+name|name
+parameter_list|,
+name|expr
+parameter_list|)
+lambda|->
+name|typeBuilder
+operator|.
+name|add
+argument_list|(
+name|name
+argument_list|,
+name|expr
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"unchecked"
+block|,
+literal|"rawtypes"
+block|}
+argument_list|)
+specifier|final
+name|List
+argument_list|<
+name|RexLiteral
+argument_list|>
+name|tuple
+init|=
+operator|(
+name|List
+argument_list|<
+name|RexLiteral
+argument_list|>
+operator|)
+operator|(
+name|List
+operator|)
+name|nodeList
+decl_stmt|;
+return|return
+name|values
+argument_list|(
+name|Collections
+operator|.
+name|nCopies
+argument_list|(
+name|values
+operator|.
+name|tuples
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|tuple
+argument_list|)
+argument_list|,
+name|typeBuilder
+operator|.
+name|build
+argument_list|()
+argument_list|)
+return|;
+block|}
 specifier|final
 name|RelNode
 name|project
@@ -8321,8 +8467,8 @@ decl_stmt|;
 name|stack
 operator|.
 name|pop
-argument_list|()
-expr_stmt|;
+parameter_list|()
+constructor_decl|;
 name|stack
 operator|.
 name|push
@@ -8343,7 +8489,13 @@ return|return
 name|this
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/** Creates a {@link Project} of the given    * expressions and field names, and optionally optimizing.    *    *<p>If {@code fieldNames} is null, or if a particular entry in    * {@code fieldNames} is null, derives field names from the input    * expressions.    *    *<p>If {@code force} is false,    * and the input is a {@code Project},    * and the expressions  make the trivial projection ($0, $1, ...),    * modifies the input.    *    * @param nodes       Expressions    * @param fieldNames  Suggested field names, or null to generate    * @param force       Whether to create a renaming Project if the    *                    projections are trivial    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|projectNamed
@@ -8557,6 +8709,124 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|input
+operator|instanceof
+name|Values
+operator|&&
+name|fieldNames
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// Rename columns of child values if desired field names are given.
+specifier|final
+name|Frame
+name|frame
+init|=
+name|stack
+operator|.
+name|pop
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Values
+name|values
+init|=
+operator|(
+name|Values
+operator|)
+name|frame
+operator|.
+name|rel
+decl_stmt|;
+specifier|final
+name|RelDataTypeFactory
+operator|.
+name|Builder
+name|typeBuilder
+init|=
+name|getTypeFactory
+argument_list|()
+operator|.
+name|builder
+argument_list|()
+decl_stmt|;
+name|Pair
+operator|.
+name|forEach
+argument_list|(
+name|fieldNameList
+argument_list|,
+name|rowType
+operator|.
+name|getFieldList
+argument_list|()
+argument_list|,
+parameter_list|(
+name|name
+parameter_list|,
+name|field
+parameter_list|)
+lambda|->
+name|typeBuilder
+operator|.
+name|add
+argument_list|(
+name|name
+argument_list|,
+name|field
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelDataType
+name|newRowType
+init|=
+name|typeBuilder
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelNode
+name|newValues
+init|=
+name|struct
+operator|.
+name|valuesFactory
+operator|.
+name|createValues
+argument_list|(
+name|cluster
+argument_list|,
+name|newRowType
+argument_list|,
+name|values
+operator|.
+name|tuples
+argument_list|)
+decl_stmt|;
+name|stack
+operator|.
+name|push
+argument_list|(
+operator|new
+name|Frame
+argument_list|(
+name|newValues
+argument_list|,
+name|frame
+operator|.
+name|fields
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{
@@ -8577,7 +8847,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates an {@link Uncollect} with given item aliases.    *    * @param itemAliases   Operand item aliases, never null    * @param withOrdinality If {@code withOrdinality}, the output contains an extra    * {@code ORDINALITY} column    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|uncollect
@@ -8641,7 +8917,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Ensures that the field names match those given.    *    *<p>If all fields have the same name, adds nothing;    * if any fields do not have the same name, adds a {@link Project}.    *    *<p>Note that the names can be short-lived. Other {@code RelBuilder}    * operations make no guarantees about the field names of the rows they    * produce.    *    * @param fieldNames List of desired field names; may contain null values or    * have fewer fields than the current row type    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|rename
@@ -8861,7 +9143,13 @@ literal|true
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Infers the alias of an expression.    *    *<p>If the expression was created by {@link #alias}, replaces the expression    * in the project list.    */
+end_comment
+
+begin_function
 specifier|private
 name|String
 name|inferAlias
@@ -9018,7 +9306,13 @@ literal|null
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an {@link Aggregate} that makes the    * relational expression distinct on all fields. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|distinct
@@ -9035,7 +9329,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an {@link Aggregate} with an array of    * calls. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|aggregate
@@ -9062,7 +9362,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an {@link Aggregate} with an array of    * {@link AggregateCall}s. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|aggregate
@@ -9104,7 +9410,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an {@link Aggregate} with multiple calls. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|aggregate
@@ -10247,7 +10559,13 @@ name|fields
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Finishes the implementation of {@link #aggregate} by creating an    * {@link Aggregate} and pushing it onto the stack. */
+end_comment
+
+begin_function
 specifier|private
 name|RelBuilder
 name|aggregate_
@@ -10550,7 +10868,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * The {@code GROUP_ID()} function is used to distinguish duplicate groups.    * However, as Aggregate normalizes group sets to canonical form (i.e.,    * flatten, sorting, redundancy removal), this information is lost in RelNode.    * Therefore, it is impossible to implement the function in runtime.    *    *<p>To fill this gap, an aggregation query that contains {@code GROUP_ID()}    * function will generally be rewritten into UNION when converting to RelNode.    *    *<p>Also see the discussion in    *<a href="https://issues.apache.org/jira/browse/CALCITE-1824">[CALCITE-1824]    * GROUP_ID returns wrong result</a>.    */
+end_comment
+
+begin_function
 specifier|private
 name|RelBuilder
 name|rewriteAggregateWithGroupId
@@ -10975,6 +11299,9 @@ literal|1
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|boolean
@@ -11002,6 +11329,9 @@ operator|.
 name|GROUP_ID
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|RelBuilder
 name|setOp
@@ -11094,14 +11424,13 @@ name|kind
 argument_list|)
 throw|;
 block|}
-switch|switch
+if|if
 condition|(
 name|n
+operator|==
+literal|1
 condition|)
 block|{
-case|case
-literal|1
-case|:
 return|return
 name|push
 argument_list|(
@@ -11113,7 +11442,124 @@ literal|0
 argument_list|)
 argument_list|)
 return|;
-default|default:
+block|}
+if|if
+condition|(
+name|config
+operator|.
+name|simplifyValues
+argument_list|()
+operator|&&
+name|kind
+operator|==
+name|UNION
+operator|&&
+name|inputs
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|allMatch
+argument_list|(
+name|r
+lambda|->
+name|r
+operator|instanceof
+name|Values
+argument_list|)
+condition|)
+block|{
+name|RelDataType
+name|rowType
+operator|=
+name|getTypeFactory
+argument_list|()
+operator|.
+name|leastRestrictive
+argument_list|(
+name|Util
+operator|.
+name|transform
+argument_list|(
+name|inputs
+argument_list|,
+name|RelNode
+operator|::
+name|getRowType
+argument_list|)
+argument_list|)
+block|;
+name|final
+name|List
+argument_list|<
+name|List
+argument_list|<
+name|RexLiteral
+argument_list|>
+argument_list|>
+name|tuples
+operator|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+empty_stmt|;
+for|for
+control|(
+name|RelNode
+name|input
+range|:
+name|inputs
+control|)
+block|{
+name|tuples
+operator|.
+name|addAll
+argument_list|(
+operator|(
+operator|(
+name|Values
+operator|)
+name|input
+operator|)
+operator|.
+name|tuples
+argument_list|)
+expr_stmt|;
+block|}
+specifier|final
+name|List
+argument_list|<
+name|List
+argument_list|<
+name|RexLiteral
+argument_list|>
+argument_list|>
+name|tuples2
+init|=
+name|all
+condition|?
+name|tuples
+else|:
+name|Util
+operator|.
+name|distinctList
+argument_list|(
+name|tuples
+argument_list|)
+decl_stmt|;
+return|return
+name|values
+argument_list|(
+name|tuples2
+argument_list|,
+name|rowType
+argument_list|)
+return|;
+block|}
+end_function
+
+begin_return
 return|return
 name|push
 argument_list|(
@@ -11131,10 +11577,15 @@ name|all
 argument_list|)
 argument_list|)
 return|;
-block|}
-block|}
+end_return
+
+begin_comment
+unit|}
 comment|/** Creates a {@link Union} of the two most recent    * relational expressions on the stack.    *    * @param all Whether to create UNION ALL    */
-specifier|public
+end_comment
+
+begin_function
+unit|public
 name|RelBuilder
 name|union
 parameter_list|(
@@ -11151,7 +11602,13 @@ literal|2
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Union} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create UNION ALL    * @param n Number of inputs to the UNION operator    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|union
@@ -11168,15 +11625,19 @@ name|setOp
 argument_list|(
 name|all
 argument_list|,
-name|SqlKind
-operator|.
 name|UNION
 argument_list|,
 name|n
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an {@link Intersect} of the two most    * recent relational expressions on the stack.    *    * @param all Whether to create INTERSECT ALL    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|intersect
@@ -11194,7 +11655,13 @@ literal|2
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an {@link Intersect} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create INTERSECT ALL    * @param n Number of inputs to the INTERSECT operator    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|intersect
@@ -11219,7 +11686,13 @@ name|n
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Minus} of the two most recent    * relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|minus
@@ -11237,7 +11710,13 @@ literal|2
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Minus} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|minus
@@ -11262,7 +11741,13 @@ name|n
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@link TableScan} on a {@link TransientTable} with the given name, using as type    * the top of the stack's type.    *    * @param tableName table name    */
+end_comment
+
+begin_function
 annotation|@
 name|Experimental
 specifier|public
@@ -11290,7 +11775,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@link TableScan} on a {@link TransientTable} with the given name and type.    *    * @param tableName table name    * @param rowType row type of the table    */
+end_comment
+
+begin_function
 annotation|@
 name|Experimental
 specifier|public
@@ -11374,7 +11865,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@link TableSpool} for the most recent relational expression.    *    * @param readType Spool's read type (as described in {@link Spool.Type})    * @param writeType Spool's write type (as described in {@link Spool.Type})    * @param table Table to write into    */
+end_comment
+
+begin_function
 specifier|private
 name|RelBuilder
 name|tableSpool
@@ -11421,7 +11918,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@link RepeatUnion} associated to a {@link TransientTable} without a maximum number    * of iterations, i.e. repeatUnion(tableName, all, -1).    *    * @param tableName name of the {@link TransientTable} associated to the {@link RepeatUnion}    * @param all whether duplicates will be considered or not    */
+end_comment
+
+begin_function
 annotation|@
 name|Experimental
 specifier|public
@@ -11447,7 +11950,13 @@ literal|1
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@link RepeatUnion} associated to a {@link TransientTable} of the    * two most recent relational expressions on the stack.    *    *<p>Warning: if these relational expressions are not    * correctly defined, this operation might lead to an infinite loop.    *    *<p>The generated {@link RepeatUnion} operates as follows:    *    *<ul>    *<li>Evaluate its left term once, propagating the results into the    *     {@link TransientTable};    *<li>Evaluate its right term (which may contain a {@link TableScan} on the    *     {@link TransientTable}) over and over until it produces no more results    *     (or until an optional maximum number of iterations is reached). On each    *     iteration, the results are propagated into the {@link TransientTable},    *     overwriting the results from the previous one.    *</ul>    *    * @param tableName Name of the {@link TransientTable} associated to the    *     {@link RepeatUnion}    * @param all Whether duplicates are considered    * @param iterationLimit Maximum number of iterations; negative value means no limit    */
+end_comment
+
+begin_function
 annotation|@
 name|Experimental
 specifier|public
@@ -11611,7 +12120,13 @@ name|repeatUnion
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Auxiliary class to find a certain RelOptTable based on its name.    */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 specifier|final
@@ -11711,7 +12226,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Creates a {@link Join} with an array of conditions. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|join
@@ -11743,7 +12264,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Join} with multiple    * conditions. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|join
@@ -11777,7 +12304,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Join} with one condition. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|join
@@ -11803,7 +12336,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Join} with correlating variables. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|join
@@ -12169,7 +12708,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Correlate}    * with a {@link CorrelationId} and an array of fields that are used by correlation. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|correlate
@@ -12201,7 +12746,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Correlate}    * with a {@link CorrelationId} and a list of fields that are used by correlation. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|correlate
@@ -12371,7 +12922,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Join} using USING syntax.    *    *<p>For each of the field names, both left and right inputs must have a    * field of that name. Constructs a join condition that the left and right    * fields are equal.    *    * @param joinType Join type    * @param fieldNames Field names    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|join
@@ -12444,7 +13001,13 @@ name|conditions
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Join} with {@link JoinRelType#SEMI}.    *    *<p>A semi-join is a form of join that combines two relational expressions    * according to some condition, and outputs only rows from the left input for    * which at least one row from the right input matches. It only outputs    * columns from the left input, and ignores duplicates on the right.    *    *<p>For example, {@code EMP semi-join DEPT} finds all {@code EMP} records    * that do not have a corresponding {@code DEPT} record, similar to the    * following SQL:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|semiJoin
@@ -12515,7 +13078,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Join} with {@link JoinRelType#SEMI}.    *    * @see #semiJoin(Iterable) */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|semiJoin
@@ -12537,7 +13106,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an anti-join.    *    *<p>An anti-join is a form of join that combines two relational expressions    * according to some condition, but outputs only rows from the left input    * for which no rows from the right input match.    *    *<p>For example, {@code EMP anti-join DEPT} finds all {@code EMP} records    * that do not have a corresponding {@code DEPT} record, similar to the    * following SQL:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE NOT EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|antiJoin
@@ -12608,7 +13183,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an anti-join.    *    * @see #antiJoin(Iterable) */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|antiJoin
@@ -12630,7 +13211,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Assigns a table alias to the top entry on the stack. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|as
@@ -12697,7 +13284,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values}.    *    *<p>The {@code values} array must have the same number of entries as    * {@code fieldNames}, or an integer multiple if you wish to create multiple    * rows.    *    *<p>If there are zero rows, or if all values of a any column are    * null, this method cannot deduce the type of columns. For these cases,    * call {@link #values(Iterable, RelDataType)}.    *    * @param fieldNames Field names    * @param values Values    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -12971,6 +13564,9 @@ name|rowType
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|ImmutableList
 argument_list|<
@@ -13095,7 +13691,13 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns whether all values for a given column are null. */
+end_comment
+
+begin_function
 specifier|private
 name|boolean
 name|allNull
@@ -13148,7 +13750,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a relational expression that reads from an input and throws    * all of the rows away.    *    *<p>Note that this method always pops one relational expression from the    * stack. {@code values}, in contrast, does not pop any relational    * expressions, and always produces a leaf.    *    *<p>The default implementation creates a {@link Values} with the same    * specified row type and aliases as the input, and ignores the input entirely.    * But schema-on-query systems such as Drill might override this method to    * create a relation expression that retains the input, just to read its    * schema.    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|empty
@@ -13207,7 +13815,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values} with a specified row type.    *    *<p>This method can handle cases that {@link #values(String[], Object...)}    * cannot, such as all values of a column being null, or there being zero    * rows.    *    * @param rowType Row type    * @param columnValues Values    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -13270,7 +13884,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values} with a specified row type.    *    *<p>This method can handle cases that {@link #values(String[], Object...)}    * cannot, such as all values of a column being null, or there being zero    * rows.    *    * @param tupleList Tuple list    * @param rowType Row type    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -13318,7 +13938,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values} with a specified row type and    * zero rows.    *    * @param rowType Row type    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -13345,7 +13971,13 @@ name|rowType
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Converts an iterable of lists into an immutable list of immutable lists    * with the same contents. Returns the same object if possible. */
+end_comment
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -13443,6 +14075,10 @@ condition|(
 name|changeCount
 operator|==
 literal|0
+operator|&&
+name|tupleList
+operator|instanceof
+name|ImmutableList
 condition|)
 block|{
 comment|// don't make a copy if we don't have to
@@ -13467,7 +14103,13 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a limit without a sort. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|limit
@@ -13493,7 +14135,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates an Exchange by distribution. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|exchange
@@ -13526,7 +14174,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a SortExchange by distribution and collation. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sortExchange
@@ -13564,7 +14218,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by field ordinals.    *    *<p>Negative fields mean descending: -1 means field(0) descending,    * -2 means field(1) descending, etc.    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -13638,7 +14298,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by expressions. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -13666,7 +14332,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by expressions. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -13693,7 +14365,13 @@ name|nodes
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by expressions, with limit and offset. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sortLimit
@@ -13725,7 +14403,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by specifying collations.    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -13763,7 +14447,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by a list of expressions, with limit and offset.    *    * @param offset Number of rows to skip; non-positive means don't skip any    * @param fetch Maximum number of rows to fetch; negative means no limit    * @param nodes Sort expressions    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sortLimit
@@ -14159,6 +14849,9 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|RelFieldCollation
@@ -14360,7 +15053,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a projection that converts the current relational expression's    * output to a desired row type.    *    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|convert
@@ -14407,6 +15106,9 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|RelBuilder
 name|permute
@@ -14498,7 +15200,13 @@ name|exprList
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Match}. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|match
@@ -14893,7 +15601,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a Pivot.    *    *<p>To achieve the same effect as the SQL    *    *<blockquote><pre>{@code    * SELECT *    * FROM (SELECT mgr, deptno, job, sal FROM emp)    * PIVOT (SUM(sal) AS ss, COUNT(*) AS c    *     FOR (job, deptno)    *     IN (('CLERK', 10) AS c10, ('MANAGER', 20) AS m20))    * }</pre></blockquote>    *    *<p>use the builder as follows:    *    *<blockquote><pre>{@code    * RelBuilder b;    * b.scan("EMP");    * final RelBuilder.GroupKey groupKey = b.groupKey("MGR");    * final List<RelBuilder.AggCall> aggCalls =    *     Arrays.asList(b.sum(b.field("SAL")).as("SS"),    *         b.count().as("C"));    * final List<RexNode> axes =    *     Arrays.asList(b.field("JOB"),    *         b.field("DEPTNO"));    * final ImmutableMap.Builder<String, List<RexNode>> valueMap =    *     ImmutableMap.builder();    * valueMap.put("C10",    *     Arrays.asList(b.literal("CLERK"), b.literal(10)));    * valueMap.put("M20",    *     Arrays.asList(b.literal("MANAGER"), b.literal(20)));    * b.pivot(groupKey, aggCalls, axes, valueMap.build().entrySet());    * }</pre></blockquote>    *    *<p>Note that the SQL uses a sub-query to project away columns (e.g.    * {@code HIREDATE}) that it does not reference, so that they do not appear in    * the {@code GROUP BY}. You do not need to do that in this API, because the    * {@code groupKey} parameter specifies the keys.    *    *<p>Pivot is implemented by desugaring. The above example becomes the    * following:    *    *<blockquote><pre>{@code    * SELECT mgr,    *     SUM(sal) FILTER (WHERE job = 'CLERK' AND deptno = 10) AS c10_ss,    *     COUNT(*) FILTER (WHERE job = 'CLERK' AND deptno = 10) AS c10_c,    *     SUM(sal) FILTER (WHERE job = 'MANAGER' AND deptno = 20) AS m20_ss,    *      COUNT(*) FILTER (WHERE job = 'MANAGER' AND deptno = 20) AS m20_c    * FROM emp    * GROUP BY mgr    * }</pre></blockquote>    *    * @param groupKey Key columns    * @param aggCalls Aggregate expressions to compute for each value    * @param axes Columns to pivot    * @param values Values to pivot, and the alias for each column group    *    * @return this RelBuilder    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|pivot
@@ -15121,7 +15835,13 @@ name|multipliedAggCalls
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Attaches an array of hints to the stack top relational expression.    *    *<p>The redundant hints would be eliminated.    *    * @param hints Hints    *    * @throws AssertionError if the top relational expression does not implement    * {@link org.apache.calcite.rel.hint.Hintable}    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|hints
@@ -15143,7 +15863,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Attaches multiple hints to the stack top relational expression.    *    *<p>The redundant hints would be eliminated.    *    * @param hints Hints    *    * @throws AssertionError if the top relational expression does not implement    * {@link org.apache.calcite.rel.hint.Hintable}    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|hints
@@ -15247,7 +15973,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Clears the stack.    *    *<p>The builder's state is now the same as when it was created. */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|clear
@@ -15259,7 +15991,13 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Information necessary to create a call to an aggregate function.    *    * @see RelBuilder#aggregateCall */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|AggCall
@@ -15330,7 +16068,13 @@ name|distinct
 parameter_list|()
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/** Internal methods shared by all implementations of {@link AggCall}. */
+end_comment
+
+begin_interface
 specifier|private
 interface|interface
 name|AggCallPlus
@@ -15375,7 +16119,13 @@ name|registrar
 parameter_list|)
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/** Information necessary to create the GROUP BY clause of an Aggregate.    *    * @see RelBuilder#groupKey */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|GroupKey
@@ -15394,7 +16144,13 @@ name|groupKeyCount
 parameter_list|()
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/** Implementation of {@link RelBuilder.GroupKey}. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|GroupKeyImpl
@@ -15558,7 +16314,13 @@ literal|1
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Implementation of {@link AggCall}. */
+end_comment
+
+begin_class
 specifier|private
 class|class
 name|AggCallImpl
@@ -16492,7 +17254,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Implementation of {@link AggCall} that wraps an    * {@link AggregateCall}. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -16737,7 +17505,13 @@ argument_list|()
 throw|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Collects the extra expressions needed for {@link #aggregate}.    *    *<p>The extra expressions come from the group key and as arguments to    * aggregate calls, and later there will be a {@link #project} or a    * {@link #rename(List)} if necessary. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -17104,7 +17878,13 @@ argument_list|()
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Builder stack frame.    *    *<p>Describes a previously created relational expression and    * information about how table aliases map into its row type. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -17327,7 +18107,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** A field that belongs to a stack {@link Frame}. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -17423,7 +18209,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Shuttle that shifts a predicate's inputs to the left, replacing early    * ones with references to a    * {@link RexCorrelVariable}. */
+end_comment
+
+begin_class
 specifier|private
 class|class
 name|Shifter
@@ -17568,7 +18360,13 @@ return|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Configuration of RelBuilder.    *    *<p>It is immutable, and all fields are public.    *    *<p>Start with the {@link #DEFAULT} instance,    * and call {@code withXxx} methods to set its properties. */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|Config
@@ -17761,6 +18559,30 @@ name|boolean
 name|simplifyLimit
 parameter_list|)
 function_decl|;
+comment|/** Whether to simplify {@code Union(Values, Values)} or      * {@code Union(Project(Values))} to {@code Values}; default true. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|true
+argument_list|)
+name|boolean
+name|simplifyValues
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #simplifyValues()}. */
+name|Config
+name|withSimplifyValues
+parameter_list|(
+name|boolean
+name|simplifyValues
+parameter_list|)
+function_decl|;
 comment|/** Whether to create an Aggregate even if we know that the input is      * already unique; default false. */
 annotation|@
 name|ImmutableBeans
@@ -17786,7 +18608,13 @@ name|aggregateUnique
 parameter_list|)
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/** Creates a {@link RelBuilder.Config}.    *    * @deprecated Use the {@code withXxx} methods in    * {@link RelBuilder.Config}. */
+end_comment
+
+begin_class
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -17870,8 +18698,8 @@ name|this
 return|;
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 

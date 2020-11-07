@@ -331,6 +331,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
+import|;
+end_import
+
 begin_comment
 comment|/**  * Tests for {@link RelToSqlConverter} on a schema that has nested structures of multiple  * levels.  */
 end_comment
@@ -809,9 +821,10 @@ name|Config
 operator|.
 name|DEFAULT
 argument_list|,
-name|RelToSqlConverterTest
+name|UnaryOperator
 operator|.
-name|DEFAULT_REL_CONFIG
+name|identity
+argument_list|()
 argument_list|,
 literal|null
 argument_list|,

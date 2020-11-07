@@ -2891,13 +2891,13 @@ name|explain
 init|=
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[INSERT], flattened=[false])\n"
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], "
 operator|+
-literal|"    JdbcProject(store_id=[666], account_id=[666], exp_date=[1997-01-01 00:00:00], "
+literal|"operation=[INSERT], flattened=[false])\n"
 operator|+
-literal|"time_id=[666], category_id=['666'], currency_id=[666], amount=[666:DECIMAL(10, 4)])\n"
+literal|"    JdbcValues(tuples=[[{ 666, 666, 1997-01-01 00:00:00, 666, "
 operator|+
-literal|"      JdbcValues(tuples=[[{ 0 }]])\n\n"
+literal|"'666', 666, 666 }]])\n\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -2909,15 +2909,9 @@ literal|"\"account_id\", \"exp_date\", \"time_id\", \"category_id\", \"currency_
 operator|+
 literal|"\"amount\")\n"
 operator|+
-literal|"(SELECT 666 AS \"store_id\", 666 AS \"account_id\", "
+literal|"VALUES (666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', "
 operator|+
-literal|"TIMESTAMP '1997-01-01 00:00:00' AS \"exp_date\", 666 AS \"time_id\", "
-operator|+
-literal|"'666' AS \"category_id\", 666 AS \"currency_id\", "
-operator|+
-literal|"666 AS \"amount\"\n"
-operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\"))"
+literal|"666, 666)"
 decl_stmt|;
 specifier|final
 name|AssertThat
@@ -3040,39 +3034,31 @@ name|explain
 init|=
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[INSERT], flattened=[false])\n"
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], "
 operator|+
-literal|"    JdbcUnion(all=[true])\n"
+literal|"operation=[INSERT], flattened=[false])\n"
 operator|+
-literal|"      JdbcProject(EXPR$0=[666], EXPR$1=[666], EXPR$2=[1997-01-01 00:00:00], EXPR$3=[666], EXPR$4=['666'], EXPR$5=[666], EXPR$6=[666:DECIMAL(10, 4)])\n"
+literal|"    JdbcValues(tuples=[["
 operator|+
-literal|"        JdbcValues(tuples=[[{ 0 }]])\n"
+literal|"{ 666, 666, 1997-01-01 00:00:00, 666, '666', 666, 666 }, "
 operator|+
-literal|"      JdbcProject(EXPR$0=[666], EXPR$1=[777], EXPR$2=[1997-01-01 00:00:00], EXPR$3=[666], EXPR$4=['666'], EXPR$5=[666], EXPR$6=[666:DECIMAL(10, 4)])\n"
-operator|+
-literal|"        JdbcValues(tuples=[[{ 0 }]])\n\n"
+literal|"{ 666, 777, 1997-01-01 00:00:00, 666, '666', 666, 666 }]])\n\n"
 decl_stmt|;
 specifier|final
 name|String
 name|jdbcSql
 init|=
-literal|"INSERT INTO \"foodmart\".\"expense_fact\" (\"store_id\", "
+literal|"INSERT INTO \"foodmart\".\"expense_fact\""
 operator|+
-literal|"\"account_id\", \"exp_date\", \"time_id\", \"category_id\", \"currency_id\","
+literal|" (\"store_id\", \"account_id\", \"exp_date\", \"time_id\", "
 operator|+
-literal|" \"amount\")\n"
+literal|"\"category_id\", \"currency_id\", \"amount\")\n"
 operator|+
-literal|"SELECT 666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
+literal|"VALUES "
 operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")\n"
+literal|"(666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666),\n"
 operator|+
-literal|"UNION ALL\n"
-operator|+
-literal|"SELECT 666, 777, "
-operator|+
-literal|"TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
-operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
+literal|"(666, 777, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666)"
 decl_stmt|;
 specifier|final
 name|AssertThat

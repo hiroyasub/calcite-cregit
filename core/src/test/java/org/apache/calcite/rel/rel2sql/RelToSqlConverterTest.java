@@ -1091,45 +1091,6 @@ begin_class
 class|class
 name|RelToSqlConverterTest
 block|{
-specifier|static
-specifier|final
-name|SqlToRelConverter
-operator|.
-name|Config
-name|DEFAULT_REL_CONFIG
-init|=
-name|SqlToRelConverter
-operator|.
-name|config
-argument_list|()
-operator|.
-name|withTrimUnusedFields
-argument_list|(
-literal|false
-argument_list|)
-decl_stmt|;
-specifier|static
-specifier|final
-name|SqlToRelConverter
-operator|.
-name|Config
-name|NO_EXPAND_CONFIG
-init|=
-name|SqlToRelConverter
-operator|.
-name|config
-argument_list|()
-operator|.
-name|withTrimUnusedFields
-argument_list|(
-literal|false
-argument_list|)
-operator|.
-name|withExpand
-argument_list|(
-literal|false
-argument_list|)
-decl_stmt|;
 comment|/** Initiates a test case with a given SQL query. */
 specifier|private
 name|Sql
@@ -1161,7 +1122,10 @@ name|Config
 operator|.
 name|DEFAULT
 argument_list|,
-name|DEFAULT_REL_CONFIG
+name|UnaryOperator
+operator|.
+name|identity
+argument_list|()
 argument_list|,
 literal|null
 argument_list|,
@@ -11177,17 +11141,13 @@ name|expected
 init|=
 literal|"SELECT"
 operator|+
-literal|" CASE WHEN \"t1\".\"G\" IN (0, 1) THEN 0 ELSE 1 END\n"
+literal|" CASE WHEN \"t0\".\"G\" IN (0, 1) THEN 0 ELSE 1 END\n"
 operator|+
-literal|"FROM (SELECT *\n"
+literal|"FROM (SELECT *\nFROM \"foodmart\".\"customer\") AS \"t\",\n"
 operator|+
-literal|"FROM \"foodmart\".\"customer\") AS \"t\",\n"
+literal|"(VALUES (0)) AS \"t0\" (\"G\")\n"
 operator|+
-literal|"(SELECT 0 AS \"G\"\n"
-operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")) AS \"t1\"\n"
-operator|+
-literal|"GROUP BY \"t1\".\"G\""
+literal|"GROUP BY \"t0\".\"G\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14413,9 +14373,16 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
-name|config
+name|withConfig
 argument_list|(
-name|NO_EXPAND_CONFIG
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -14459,9 +14426,16 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
-name|config
+name|withConfig
 argument_list|(
-name|NO_EXPAND_CONFIG
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -14505,9 +14479,16 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
-name|config
+name|withConfig
 argument_list|(
-name|NO_EXPAND_CONFIG
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -14543,9 +14524,16 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
-name|config
+name|withConfig
 argument_list|(
-name|NO_EXPAND_CONFIG
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -14589,9 +14577,16 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
-name|config
+name|withConfig
 argument_list|(
-name|NO_EXPAND_CONFIG
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -19731,9 +19726,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT CAST(NULL AS INTEGER)\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (NULL)) AS \"t\" (\"EXPR$0\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19771,9 +19766,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
+literal|"SELECT COUNT(\"$f0\")\n"
 operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (NULL)) AS \"t\" (\"$f0\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19815,11 +19810,11 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
+literal|"SELECT COUNT(\"$f1\")\n"
 operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"EXPR$0\")\n"
+literal|"FROM (VALUES (NULL, NULL)) AS \"t\" (\"$f0\", \"$f1\")\n"
 operator|+
-literal|"GROUP BY CAST(NULL AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
+literal|"GROUP BY \"$f0\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19913,17 +19908,25 @@ literal|"\"account_id\", \"account_parent\", \"account_description\", "
 operator|+
 literal|"\"account_type\", \"account_rollup\", \"Custom_Members\")\n"
 operator|+
-literal|"(SELECT 1 AS \"account_id\", CAST(NULL AS INTEGER) AS \"account_parent\","
+literal|"(SELECT \"EXPR$0\" AS \"account_id\","
 operator|+
-literal|" CAST(NULL AS VARCHAR(30) CHARACTER SET "
+literal|" \"EXPR$1\" AS \"account_parent\","
 operator|+
-literal|"\"ISO-8859-1\") AS \"account_description\", '123' AS \"account_type\", "
+literal|" CAST(NULL AS VARCHAR(30) CHARACTER SET \"ISO-8859-1\") "
 operator|+
-literal|"'123' AS \"account_rollup\", CAST(NULL AS VARCHAR"
+literal|"AS \"account_description\","
 operator|+
-literal|"(255) CHARACTER SET \"ISO-8859-1\") AS \"Custom_Members\"\n"
+literal|" \"EXPR$2\" AS \"account_type\","
 operator|+
-literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\"))"
+literal|" \"EXPR$3\" AS \"account_rollup\","
+operator|+
+literal|" CAST(NULL AS VARCHAR(255) CHARACTER SET \"ISO-8859-1\") "
+operator|+
+literal|"AS \"Custom_Members\"\n"
+operator|+
+literal|"FROM (VALUES (1, NULL, '123', '123')) "
+operator|+
+literal|"AS \"t\" (\"EXPR$0\", \"EXPR$1\", \"EXPR$2\", \"EXPR$3\"))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20309,11 +20312,25 @@ name|sql
 init|=
 literal|"insert into \"DEPT\"\n"
 operator|+
-literal|"values ROW(1,'Fred', 'San Francisco'), ROW(2, 'Eric', 'Washington')"
+literal|"values ROW(1,'Fred', 'San Francisco'),\n"
+operator|+
+literal|"  ROW(2, 'Eric', 'Washington')"
 decl_stmt|;
 specifier|final
 name|String
 name|expectedDefault
+init|=
+literal|"INSERT INTO \"SCOTT\".\"DEPT\""
+operator|+
+literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"VALUES (1, 'Fred', 'San Francisco'),\n"
+operator|+
+literal|"(2, 'Eric', 'Washington')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedDefaultX
 init|=
 literal|"INSERT INTO \"SCOTT\".\"DEPT\""
 operator|+
@@ -20335,6 +20352,16 @@ name|expectedHive
 init|=
 literal|"INSERT INTO SCOTT.DEPT (DEPTNO, DNAME, LOC)\n"
 operator|+
+literal|"VALUES (1, 'Fred', 'San Francisco'),\n"
+operator|+
+literal|"(2, 'Eric', 'Washington')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedHiveX
+init|=
+literal|"INSERT INTO SCOTT.DEPT (DEPTNO, DNAME, LOC)\n"
+operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
 literal|"UNION ALL\n"
@@ -20347,6 +20374,18 @@ name|expectedMysql
 init|=
 literal|"INSERT INTO `SCOTT`.`DEPT`"
 operator|+
+literal|" (`DEPTNO`, `DNAME`, `LOC`)\n"
+operator|+
+literal|"VALUES (1, 'Fred', 'San Francisco'),\n"
+operator|+
+literal|"(2, 'Eric', 'Washington')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysqlX
+init|=
+literal|"INSERT INTO `SCOTT`.`DEPT`"
+operator|+
 literal|" (`DEPTNO`, `DNAME`, `LOC`)\nSELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
 literal|"UNION ALL\n"
@@ -20356,6 +20395,18 @@ decl_stmt|;
 specifier|final
 name|String
 name|expectedOracle
+init|=
+literal|"INSERT INTO \"SCOTT\".\"DEPT\""
+operator|+
+literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"VALUES (1, 'Fred', 'San Francisco'),\n"
+operator|+
+literal|"(2, 'Eric', 'Washington')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedOracleX
 init|=
 literal|"INSERT INTO \"SCOTT\".\"DEPT\""
 operator|+
@@ -20379,6 +20430,18 @@ literal|"INSERT INTO [SCOTT].[DEPT]"
 operator|+
 literal|" ([DEPTNO], [DNAME], [LOC])\n"
 operator|+
+literal|"VALUES (1, 'Fred', 'San Francisco'),\n"
+operator|+
+literal|"(2, 'Eric', 'Washington')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMssqlX
+init|=
+literal|"INSERT INTO [SCOTT].[DEPT]"
+operator|+
+literal|" ([DEPTNO], [DNAME], [LOC])\n"
+operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
 literal|"FROM (VALUES (0)) AS [t] ([ZERO])\n"
@@ -20392,6 +20455,18 @@ decl_stmt|;
 specifier|final
 name|String
 name|expectedCalcite
+init|=
+literal|"INSERT INTO \"SCOTT\".\"DEPT\""
+operator|+
+literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"VALUES (1, 'Fred', 'San Francisco'),\n"
+operator|+
+literal|"(2, 'Eric', 'Washington')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedCalciteX
 init|=
 literal|"INSERT INTO \"SCOTT\".\"DEPT\""
 operator|+
@@ -20464,6 +20539,73 @@ operator|.
 name|ok
 argument_list|(
 name|expectedCalcite
+argument_list|)
+operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withRelBuilderConfigTransform
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|withSimplifyValues
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|withCalcite
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedDefaultX
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHiveX
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysqlX
+argument_list|)
+operator|.
+name|withOracle
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedOracleX
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMssqlX
+argument_list|)
+operator|.
+name|withCalcite
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedCalciteX
 argument_list|)
 expr_stmt|;
 block|}
@@ -20822,9 +20964,12 @@ name|parserConfig
 decl_stmt|;
 specifier|private
 specifier|final
+name|UnaryOperator
+argument_list|<
 name|SqlToRelConverter
 operator|.
 name|Config
+argument_list|>
 name|config
 decl_stmt|;
 name|Sql
@@ -20845,9 +20990,12 @@ operator|.
 name|Config
 name|parserConfig
 parameter_list|,
+name|UnaryOperator
+argument_list|<
 name|SqlToRelConverter
 operator|.
 name|Config
+argument_list|>
 name|config
 parameter_list|,
 name|Function
@@ -20952,9 +21100,12 @@ operator|.
 name|Config
 name|parserConfig
 parameter_list|,
+name|UnaryOperator
+argument_list|<
 name|SqlToRelConverter
 operator|.
 name|Config
+argument_list|>
 name|config
 parameter_list|,
 name|Function
@@ -21635,11 +21786,14 @@ argument_list|)
 return|;
 block|}
 name|Sql
-name|config
+name|withConfig
 parameter_list|(
+name|UnaryOperator
+argument_list|<
 name|SqlToRelConverter
 operator|.
 name|Config
+argument_list|>
 name|config
 parameter_list|)
 block|{
@@ -21874,6 +22028,29 @@ expr_stmt|;
 block|}
 else|else
 block|{
+specifier|final
+name|SqlToRelConverter
+operator|.
+name|Config
+name|config
+init|=
+name|this
+operator|.
+name|config
+operator|.
+name|apply
+argument_list|(
+name|SqlToRelConverter
+operator|.
+name|config
+argument_list|()
+operator|.
+name|withTrimUnusedFields
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+decl_stmt|;
 specifier|final
 name|Planner
 name|planner

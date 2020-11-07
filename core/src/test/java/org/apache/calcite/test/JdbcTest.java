@@ -2472,6 +2472,32 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], "
+operator|+
+literal|"operation=[INSERT], flattened=[false])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..2=[{inputs}], "
+operator|+
+literal|"expr#3=[CAST($t1):JavaType(int) NOT NULL], expr#4=[10], "
+operator|+
+literal|"expr#5=[CAST($t0):JavaType(class java.lang.String)], "
+operator|+
+literal|"expr#6=[CAST($t2):JavaType(float) NOT NULL], "
+operator|+
+literal|"expr#7=[null:JavaType(class java.lang.Integer)], "
+operator|+
+literal|"empid=[$t3], deptno=[$t4], name=[$t5], salary=[$t6], "
+operator|+
+literal|"commission=[$t7])\n"
+operator|+
+literal|"    EnumerableValues(tuples=[[{ 'Fred', 56, 123.4 }]])\n"
+decl_stmt|;
 name|assertThat
 argument_list|(
 name|resultSet
@@ -2483,11 +2509,7 @@ argument_list|)
 argument_list|,
 name|isLinux
 argument_list|(
-literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], flattened=[false])\n"
-operator|+
-literal|"  EnumerableCalc(expr#0=[{inputs}], expr#1=[56], expr#2=[10], expr#3=['Fred':JavaType(class java.lang.String)], expr#4=[CAST($t3):JavaType(class java.lang.String)], expr#5=[123.4:JavaType(float)], expr#6=[null:JavaType(class java.lang.Integer)], empid=[$t1], deptno=[$t2], name=[$t4], salary=[$t5], commission=[$t6])\n"
-operator|+
-literal|"    EnumerableValues(tuples=[[{ 0 }]])\n"
+name|expected
 argument_list|)
 argument_list|)
 expr_stmt|;
