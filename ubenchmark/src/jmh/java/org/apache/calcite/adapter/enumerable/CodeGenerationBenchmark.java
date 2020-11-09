@@ -952,10 +952,10 @@ argument_list|)
 decl_stmt|;
 comment|// Generates queries of the following form depending on the configuration parameters.
 comment|// SELECT `t`.`name`
-comment|// FROM (VALUES  (1, 'Value0')) AS `t` (`id`, `name`)
-comment|// INNER JOIN (VALUES  (1, 'Value1')) AS `t` (`id`, `name`) AS `t0` ON `t`.`id` = `t0`.`id`
-comment|// INNER JOIN (VALUES  (2, 'Value2')) AS `t` (`id`, `name`) AS `t1` ON `t`.`id` = `t1`.`id`
-comment|// INNER JOIN (VALUES  (3, 'Value3')) AS `t` (`id`, `name`) AS `t2` ON `t`.`id` = `t2`.`id`
+comment|// FROM (VALUES (1, 'Value0')) AS `t` (`id`, `name`)
+comment|// INNER JOIN (VALUES (1, 'Value1')) AS `t` (`id`, `name`) AS `t0` ON `t`.`id` = `t0`.`id`
+comment|// INNER JOIN (VALUES (2, 'Value2')) AS `t` (`id`, `name`) AS `t1` ON `t`.`id` = `t1`.`id`
+comment|// INNER JOIN (VALUES (3, 'Value3')) AS `t` (`id`, `name`) AS `t2` ON `t`.`id` = `t2`.`id`
 comment|// INNER JOIN ...
 comment|// WHERE
 comment|//  `t`.`name` = 'name0' OR

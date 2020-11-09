@@ -865,7 +865,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlRowOperator
+name|SqlInternalOperators
 import|;
 end_import
 
@@ -1264,19 +1264,6 @@ name|SqlImplementor
 implements|implements
 name|ReflectiveVisitor
 block|{
-comment|/** Similar to {@link SqlStdOperatorTable#ROW}, but does not print "ROW". */
-specifier|private
-specifier|static
-specifier|final
-name|SqlRowOperator
-name|ANONYMOUS_ROW
-init|=
-operator|new
-name|SqlRowOperator
-argument_list|(
-literal|" "
-argument_list|)
-decl_stmt|;
 specifier|private
 specifier|final
 name|ReflectUtil
@@ -4629,12 +4616,15 @@ name|isEmpty
 condition|)
 block|{
 comment|// In case of empty values, we need to build:
-comment|// select * from VALUES(NULL, NULL ...) as T (C1, C2 ...)
-comment|// where 1=0.
+comment|//   SELECT *
+comment|//   FROM (VALUES (NULL, NULL ...)) AS T (C1, C2 ...)
+comment|//   WHERE 1 = 0
 name|selects
 operator|.
 name|add
 argument_list|(
+name|SqlInternalOperators
+operator|.
 name|ANONYMOUS_ROW
 operator|.
 name|createCall
@@ -4681,6 +4671,8 @@ name|selects
 operator|.
 name|add
 argument_list|(
+name|SqlInternalOperators
+operator|.
 name|ANONYMOUS_ROW
 operator|.
 name|createCall

@@ -1563,7 +1563,7 @@ literal|"    GROUP BY DEPTNO, JOB) AS $cor1,\n"
 operator|+
 literal|"  LATERAL UNNEST (SELECT $cor1.$f2 AS $f0\n"
 operator|+
-literal|"    FROM (VALUES  (0)) AS t (ZERO)) AS t3 (EMPNO, ENAME, JOB,"
+literal|"    FROM (VALUES (0)) AS t (ZERO)) AS t3 (EMPNO, ENAME, JOB,"
 operator|+
 literal|" MGR, HIREDATE, SAL, COMM, DEPTNO) AS t30\n"
 operator|+
@@ -1787,7 +1787,7 @@ literal|"        FROM (SELECT ENAME, JOB, DEPTNO, SAL\n"
 operator|+
 literal|"            FROM UNNEST (SELECT $cor4.A AS $f0\n"
 operator|+
-literal|"                FROM (VALUES  (0)) AS t (ZERO)) "
+literal|"                FROM (VALUES (0)) AS t (ZERO)) "
 operator|+
 literal|"AS t2 (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)\n"
 operator|+
@@ -1799,7 +1799,7 @@ literal|"        GROUP BY 'all') AS t8) AS $cor5,\n"
 operator|+
 literal|"  LATERAL UNNEST (SELECT $cor5.X AS $f0\n"
 operator|+
-literal|"    FROM (VALUES  (0)) AS t (ZERO)) "
+literal|"    FROM (VALUES (0)) AS t (ZERO)) "
 operator|+
 literal|"AS t11 (ENAME, JOB, DEPTNO, SAL) AS t110\n"
 operator|+

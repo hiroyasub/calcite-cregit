@@ -2915,7 +2915,9 @@ literal|"TIMESTAMP '1997-01-01 00:00:00' AS \"exp_date\", 666 AS \"time_id\", "
 operator|+
 literal|"'666' AS \"category_id\", 666 AS \"currency_id\", "
 operator|+
-literal|"666 AS \"amount\"\nFROM (VALUES  (0)) AS \"t\" (\"ZERO\"))"
+literal|"666 AS \"amount\"\n"
+operator|+
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\"))"
 decl_stmt|;
 specifier|final
 name|AssertThat
@@ -3062,7 +3064,7 @@ literal|" \"amount\")\n"
 operator|+
 literal|"SELECT 666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
@@ -3070,7 +3072,7 @@ literal|"SELECT 666, 777, "
 operator|+
 literal|"TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 specifier|final
 name|AssertThat

@@ -481,6 +481,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlWriterConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|dialect
 operator|.
 name|CalciteSqlDialect
@@ -946,6 +960,18 @@ operator|.
 name|function
 operator|.
 name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
 import|;
 end_import
 
@@ -1635,6 +1661,58 @@ name|SqlDialect
 name|dialect
 parameter_list|)
 block|{
+return|return
+name|toSql
+argument_list|(
+name|root
+argument_list|,
+name|dialect
+argument_list|,
+name|c
+lambda|->
+name|c
+operator|.
+name|withAlwaysUseParentheses
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withSelectListItemsOnSeparateLines
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withUpdateSetListNewline
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withIndentation
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/** Converts a relational expression to SQL in a given dialect    * and with a particular writer configuration. */
+specifier|private
+specifier|static
+name|String
+name|toSql
+parameter_list|(
+name|RelNode
+name|root
+parameter_list|,
+name|SqlDialect
+name|dialect
+parameter_list|,
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|transform
+parameter_list|)
+block|{
 specifier|final
 name|RelToSqlConverter
 name|converter
@@ -1664,7 +1742,19 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
+name|c
+lambda|->
+name|transform
+operator|.
+name|apply
+argument_list|(
+name|c
+operator|.
+name|withDialect
+argument_list|(
 name|dialect
+argument_list|)
+argument_list|)
 argument_list|)
 operator|.
 name|getSql
@@ -11095,7 +11185,7 @@ literal|"FROM \"foodmart\".\"customer\") AS \"t\",\n"
 operator|+
 literal|"(SELECT 0 AS \"G\"\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")) AS \"t1\"\n"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")) AS \"t1\"\n"
 operator|+
 literal|"GROUP BY \"t1\".\"G\""
 decl_stmt|;
@@ -12335,7 +12425,7 @@ name|ok
 argument_list|(
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (VALUES  ("
+literal|"FROM (VALUES ("
 operator|+
 name|expected
 operator|+
@@ -17255,9 +17345,9 @@ name|expectedHsqldb
 init|=
 literal|"SELECT a\n"
 operator|+
-literal|"FROM (VALUES  (1, 'x '),\n"
+literal|"FROM (VALUES (1, 'x '),\n"
 operator|+
-literal|" (2, 'yy')) AS t (a, b)"
+literal|"(2, 'yy')) AS t (a, b)"
 decl_stmt|;
 specifier|final
 name|String
@@ -17277,9 +17367,9 @@ name|expectedPostgresql
 init|=
 literal|"SELECT \"a\"\n"
 operator|+
-literal|"FROM (VALUES  (1, 'x '),\n"
+literal|"FROM (VALUES (1, 'x '),\n"
 operator|+
-literal|" (2, 'yy')) AS \"t\" (\"a\", \"b\")"
+literal|"(2, 'yy')) AS \"t\" (\"a\", \"b\")"
 decl_stmt|;
 specifier|final
 name|String
@@ -17458,7 +17548,7 @@ name|expectedPostgresql
 init|=
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (VALUES  (NULL, NULL)) AS \"t\" (\"X\", \"Y\")\n"
+literal|"FROM (VALUES (NULL, NULL)) AS \"t\" (\"X\", \"Y\")\n"
 operator|+
 literal|"WHERE 1 = 0"
 decl_stmt|;
@@ -17585,13 +17675,13 @@ name|expectedSql
 init|=
 literal|"SELECT \"t\".\"a\"\n"
 operator|+
-literal|"FROM (VALUES  (1, 'x '),\n"
+literal|"FROM (VALUES (1, 'x '),\n"
 operator|+
-literal|" (2, 'yy')) AS \"t\" (\"a\", \"b\")\n"
+literal|"(2, 'yy')) AS \"t\" (\"a\", \"b\")\n"
 operator|+
-literal|"FULL JOIN (VALUES  (1, 'x '),\n"
+literal|"FULL JOIN (VALUES (1, 'x '),\n"
 operator|+
-literal|" (2, 'yy')) AS \"t0\" (\"a\", \"b\") ON TRUE"
+literal|"(2, 'yy')) AS \"t0\" (\"a\", \"b\") ON TRUE"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -17603,6 +17693,50 @@ argument_list|,
 name|isLinux
 argument_list|(
 name|expectedSql
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Now with indentation.
+specifier|final
+name|String
+name|expectedSql2
+init|=
+literal|"SELECT \"t\".\"a\"\n"
+operator|+
+literal|"FROM (VALUES (1, 'x '),\n"
+operator|+
+literal|"        (2, 'yy')) AS \"t\" (\"a\", \"b\")\n"
+operator|+
+literal|"  FULL JOIN (VALUES (1, 'x '),\n"
+operator|+
+literal|"        (2, 'yy')) AS \"t0\" (\"a\", \"b\") ON TRUE"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|toSql
+argument_list|(
+name|root
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|CALCITE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|,
+name|c
+lambda|->
+name|c
+operator|.
+name|withIndentation
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+argument_list|,
+name|isLinux
+argument_list|(
+name|expectedSql2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -17954,7 +18088,7 @@ literal|"FROM \"foodmart\".\"department\" AS \"$cor0\",\n"
 operator|+
 literal|"LATERAL (SELECT \"$cor0\".\"department_id\" + 1 AS \"D_PLUSONE\"\n"
 operator|+
-literal|"FROM (VALUES  (TRUE)) AS \"t\" (\"EXPR$0\")) AS \"t0\""
+literal|"FROM (VALUES (TRUE)) AS \"t\" (\"EXPR$0\")) AS \"t0\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19186,7 +19320,7 @@ literal|"INNER JOIN (SELECT \"t1\".\"department_id\" AS \"department_id0\","
 operator|+
 literal|" MIN(\"t1\".\"department_id\") AS \"EXPR$0\"\n"
 operator|+
-literal|"FROM (SELECT *\nFROM (VALUES  (NULL, NULL))"
+literal|"FROM (SELECT *\nFROM (VALUES (NULL, NULL))"
 operator|+
 literal|" AS \"t\" (\"department_id\", \"department_description\")"
 operator|+
@@ -19599,7 +19733,7 @@ name|expected
 init|=
 literal|"SELECT CAST(NULL AS INTEGER)\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19639,7 +19773,7 @@ name|expected
 init|=
 literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19683,9 +19817,9 @@ name|expected
 init|=
 literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"EXPR$0\")\nGROUP BY CAST(NULL "
+literal|"FROM (VALUES (0)) AS \"t\" (\"EXPR$0\")\n"
 operator|+
-literal|"AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
+literal|"GROUP BY CAST(NULL AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19789,7 +19923,7 @@ literal|"'123' AS \"account_rollup\", CAST(NULL AS VARCHAR"
 operator|+
 literal|"(255) CHARACTER SET \"ISO-8859-1\") AS \"Custom_Members\"\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\"))"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\"))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20187,13 +20321,13 @@ literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
 operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
 literal|"SELECT 2, 'Eric', 'Washington'\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 specifier|final
 name|String
@@ -20247,13 +20381,13 @@ literal|" ([DEPTNO], [DNAME], [LOC])\n"
 operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS [t] ([ZERO])\n"
+literal|"FROM (VALUES (0)) AS [t] ([ZERO])\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
 literal|"SELECT 2, 'Eric', 'Washington'\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS [t] ([ZERO])"
+literal|"FROM (VALUES (0)) AS [t] ([ZERO])"
 decl_stmt|;
 specifier|final
 name|String
@@ -20265,13 +20399,13 @@ literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
 operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
 literal|"SELECT 2, 'Eric', 'Washington'\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20355,13 +20489,13 @@ literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
 operator|+
 literal|"SELECT ?, ?, ?\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
 literal|"SELECT ?, ?, ?\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20409,13 +20543,13 @@ literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
 operator|+
 literal|"SELECT ?, ?, ?\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
 literal|"SELECT ?, ?, ?\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(
