@@ -470,6 +470,12 @@ name|SqlCallBinding
 extends|extends
 name|SqlOperatorBinding
 block|{
+comment|/** Static nested class required due to    *<a href="https://issues.apache.org/jira/browse/CALCITE-4393">[CALCITE-4393]    * ExceptionInInitializerError due to NPE in SqlCallBinding caused by circular dependency</a>.    * The static field inside it cannot be part of the outer class: it must be defined    * within a nested class in order to break the cycle during class loading. */
+specifier|private
+specifier|static
+class|class
+name|DefaultCallHolder
+block|{
 specifier|private
 specifier|static
 specifier|final
@@ -487,6 +493,7 @@ operator|.
 name|ZERO
 argument_list|)
 decl_stmt|;
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
@@ -818,6 +825,8 @@ name|list
 operator|.
 name|add
 argument_list|(
+name|DefaultCallHolder
+operator|.
 name|DEFAULT_CALL
 argument_list|)
 expr_stmt|;
@@ -1148,6 +1157,8 @@ name|permuted
 operator|.
 name|add
 argument_list|(
+name|DefaultCallHolder
+operator|.
 name|DEFAULT_CALL
 argument_list|)
 expr_stmt|;
