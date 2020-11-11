@@ -25801,6 +25801,94 @@ name|str1
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testVisitSqlMatchRecognizeWithSqlShuttle
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"match_recognize (\n"
+operator|+
+literal|"  pattern (strt down+ up+)\n"
+operator|+
+literal|"  define\n"
+operator|+
+literal|"    down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"    up as up.sal> PREV(up.sal)\n"
+operator|+
+literal|") mr"
+decl_stmt|;
+specifier|final
+name|SqlNode
+name|sqlNode
+init|=
+name|getSqlParser
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|parseStmt
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlNode
+name|sqlNodeVisited
+init|=
+name|sqlNode
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|SqlShuttle
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|SqlNode
+name|visit
+parameter_list|(
+name|SqlIdentifier
+name|identifier
+parameter_list|)
+block|{
+return|return
+operator|new
+name|SqlIdentifier
+argument_list|(
+name|identifier
+operator|.
+name|names
+argument_list|,
+name|identifier
+operator|.
+name|getParserPosition
+argument_list|()
+argument_list|)
+return|;
+block|}
+block|}
+argument_list|)
+decl_stmt|;
+name|assertNotSame
+argument_list|(
+name|sqlNodeVisited
+argument_list|,
+name|sqlNode
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Runs tests for INTERVAL... DAY TO HOUR that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlValidatorTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXFailsValidation() tests.    */
 specifier|public
 name|void

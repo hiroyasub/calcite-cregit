@@ -594,9 +594,13 @@ name|after
 argument_list|,
 name|subsetList
 argument_list|,
+name|rowsPerMatch
+argument_list|,
 name|partitionList
 argument_list|,
 name|orderList
+argument_list|,
+name|interval
 argument_list|)
 return|;
 block|}
