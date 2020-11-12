@@ -4718,20 +4718,6 @@ if|if
 condition|(
 name|type1
 operator|.
-name|equals
-argument_list|(
-name|type2
-argument_list|)
-condition|)
-block|{
-return|return
-literal|true
-return|;
-block|}
-if|if
-condition|(
-name|type1
-operator|.
 name|isNullable
 argument_list|()
 operator|==
@@ -4741,10 +4727,13 @@ name|isNullable
 argument_list|()
 condition|)
 block|{
-comment|// If types have the same nullability and they weren't equal above,
-comment|// they must be different.
 return|return
-literal|false
+name|type1
+operator|.
+name|equals
+argument_list|(
+name|type2
+argument_list|)
 return|;
 block|}
 return|return
@@ -4898,7 +4887,7 @@ argument_list|(
 name|type1
 argument_list|)
 argument_list|,
-literal|"Input type must be collection type"
+literal|"Input type1 must be collection type"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -4910,7 +4899,7 @@ argument_list|(
 name|type2
 argument_list|)
 argument_list|,
-literal|"Input type must be collection type"
+literal|"Input type2 must be collection type"
 argument_list|)
 expr_stmt|;
 return|return
@@ -4973,7 +4962,7 @@ argument_list|(
 name|type1
 argument_list|)
 argument_list|,
-literal|"Input type must be map type"
+literal|"Input type1 must be map type"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -4985,7 +4974,7 @@ argument_list|(
 name|type2
 argument_list|)
 argument_list|,
-literal|"Input type must be map type"
+literal|"Input type2 must be map type"
 argument_list|)
 expr_stmt|;
 name|MapSqlType
@@ -5072,7 +5061,7 @@ operator|.
 name|isStruct
 argument_list|()
 argument_list|,
-literal|"Input type must be struct type"
+literal|"Input type1 must be struct type"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -5084,7 +5073,7 @@ operator|.
 name|isStruct
 argument_list|()
 argument_list|,
-literal|"Input type must be struct type"
+literal|"Input type2 must be struct type"
 argument_list|)
 expr_stmt|;
 if|if
