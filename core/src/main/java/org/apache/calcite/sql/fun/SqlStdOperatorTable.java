@@ -1225,7 +1225,7 @@ operator|new
 name|SqlExtendOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * String concatenation operator, '<code>||</code>'.    */
+comment|/**    * String concatenation operator, '<code>||</code>'.    *    * @see SqlLibraryOperators#CONCAT_FUNCTION    */
 specifier|public
 specifier|static
 specifier|final

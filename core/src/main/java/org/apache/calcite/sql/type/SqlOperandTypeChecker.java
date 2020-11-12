@@ -59,6 +59,16 @@ name|SqlOperator
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  *  * @see OperandTypes  */
 end_comment
@@ -117,6 +127,18 @@ parameter_list|()
 block|{
 return|return
 literal|false
+return|;
+block|}
+comment|/** Converts this type checker to a type inference; returns null if not    * possible. */
+annotation|@
+name|Nullable
+specifier|default
+name|SqlOperandTypeInference
+name|typeInference
+parameter_list|()
+block|{
+return|return
+literal|null
 return|;
 block|}
 comment|/** Strategy used to make arguments consistent. */

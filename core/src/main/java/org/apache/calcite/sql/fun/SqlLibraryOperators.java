@@ -173,6 +173,22 @@ name|sql
 operator|.
 name|type
 operator|.
+name|InferTypes
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
 name|OperandTypes
 import|;
 end_import
@@ -2420,7 +2436,9 @@ name|ReturnTypes
 operator|.
 name|MULTIVALENT_STRING_SUM_PRECISION_NULLABLE
 argument_list|,
-literal|null
+name|InferTypes
+operator|.
+name|RETURN_TYPE
 argument_list|,
 name|OperandTypes
 operator|.
@@ -2443,7 +2461,7 @@ operator|.
 name|STRING
 argument_list|)
 decl_stmt|;
-comment|/** The "CONCAT(arg0, arg1)" function that concatenates strings.    * For example, "CONCAT('a', 'bc')" returns "abc". */
+comment|/** The "CONCAT(arg0, arg1)" function that concatenates strings.    * For example, "CONCAT('a', 'bc')" returns "abc".    *    *<p>It is assigned {@link SqlKind#CONCAT2} to make it not equal to    * {@link #CONCAT_FUNCTION}. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -2466,13 +2484,15 @@ literal|"CONCAT"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|CONCAT2
 argument_list|,
 name|ReturnTypes
 operator|.
 name|MULTIVALENT_STRING_SUM_PRECISION_NULLABLE
 argument_list|,
-literal|null
+name|InferTypes
+operator|.
+name|RETURN_TYPE
 argument_list|,
 name|OperandTypes
 operator|.

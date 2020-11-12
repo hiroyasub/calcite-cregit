@@ -599,6 +599,19 @@ name|SqlNode
 name|node
 parameter_list|)
 function_decl|;
+comment|/**    * Returns the types of a call's operands.    *    *<p>Returns null if the call has not been validated, or if the operands'    * types do not differ from their types as expressions.    *    *<p>This method is most useful when some of the operands are of type ANY,    * or if they need to be coerced to be consistent with other operands, or    * with the needs of the function.    *    * @param call Call    * @return List of operands' types, or null if not known or 'obvious'    */
+annotation|@
+name|Nullable
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|getValidatedOperandTypes
+parameter_list|(
+name|SqlCall
+name|call
+parameter_list|)
+function_decl|;
 comment|/**    * Resolves an identifier to a fully-qualified name.    *    * @param id    Identifier    * @param scope Naming scope    */
 name|void
 name|validateIdentifier

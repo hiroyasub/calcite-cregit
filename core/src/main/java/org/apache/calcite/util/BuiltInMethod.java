@@ -4643,7 +4643,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"concat"
+literal|"concatMulti"
 argument_list|,
 name|String
 index|[]

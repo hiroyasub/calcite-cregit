@@ -535,6 +535,25 @@ name|returnTypeInference
 operator|=
 name|returnTypeInference
 expr_stmt|;
+if|if
+condition|(
+name|operandTypeInference
+operator|==
+literal|null
+operator|&&
+name|operandTypeChecker
+operator|!=
+literal|null
+condition|)
+block|{
+name|operandTypeInference
+operator|=
+name|operandTypeChecker
+operator|.
+name|typeInference
+argument_list|()
+expr_stmt|;
+block|}
 name|this
 operator|.
 name|operandTypeInference
@@ -1452,12 +1471,7 @@ argument_list|(
 name|opBinding
 argument_list|)
 decl_stmt|;
-operator|(
-operator|(
-name|SqlValidatorImpl
-operator|)
 name|validator
-operator|)
 operator|.
 name|setValidatedNodeType
 argument_list|(
@@ -1539,6 +1553,120 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
+if|if
+condition|(
+name|operandTypeInference
+operator|!=
+literal|null
+operator|&&
+name|opBinding
+operator|instanceof
+name|SqlCallBinding
+operator|&&
+name|this
+operator|instanceof
+name|SqlFunction
+condition|)
+block|{
+specifier|final
+name|SqlCallBinding
+name|callBinding
+init|=
+operator|(
+name|SqlCallBinding
+operator|)
+name|opBinding
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|operandTypes
+init|=
+name|opBinding
+operator|.
+name|collectOperandTypes
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|operandTypes
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|anyMatch
+argument_list|(
+name|t
+lambda|->
+name|t
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|ANY
+argument_list|)
+condition|)
+block|{
+name|final
+name|RelDataType
+index|[]
+name|operandTypes2
+operator|=
+name|operandTypes
+operator|.
+name|toArray
+argument_list|(
+operator|new
+name|RelDataType
+index|[
+literal|0
+index|]
+argument_list|)
+block|;
+name|operandTypeInference
+operator|.
+name|inferOperandTypes
+argument_list|(
+name|callBinding
+argument_list|,
+name|returnType
+argument_list|,
+name|operandTypes2
+argument_list|)
+empty_stmt|;
+operator|(
+operator|(
+name|SqlValidatorImpl
+operator|)
+name|callBinding
+operator|.
+name|getValidator
+argument_list|()
+operator|)
+operator|.
+name|callToOperandTypesMap
+operator|.
+name|put
+argument_list|(
+name|callBinding
+operator|.
+name|getCall
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|operandTypes2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 return|return
 name|returnType
 return|;
@@ -1554,7 +1682,13 @@ name|this
 argument_list|)
 throw|;
 block|}
+end_class
+
+begin_comment
 comment|/**    * Derives the type of a call to this operator.    *    *<p>This method is an intrinsic part of the validation process so, unlike    * {@link #inferReturnType}, specific operators would not typically override    * this method.    *    * @param validator Validator    * @param scope     Scope of validation    * @param call      Call to this operator    * @return Type of call    */
+end_comment
+
+begin_function
 specifier|public
 name|RelDataType
 name|deriveType
@@ -1733,6 +1867,9 @@ return|return
 name|type
 return|;
 block|}
+end_function
+
+begin_function
 specifier|protected
 name|List
 argument_list|<
@@ -1851,6 +1988,9 @@ name|argNames
 return|;
 block|}
 block|}
+end_function
+
+begin_function
 specifier|protected
 name|List
 argument_list|<
@@ -2029,6 +2169,9 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 specifier|protected
 name|List
 argument_list|<
@@ -2173,7 +2316,13 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this operator should be surrounded by space when    * unparsed.    *    * @return whether this operator should be surrounded by space    */
+end_comment
+
+begin_function
 name|boolean
 name|needsSpace
 parameter_list|()
@@ -2182,7 +2331,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Validates and determines coercibility and resulting collation name of    * binary operator if needed.    */
+end_comment
+
+begin_function
 specifier|protected
 name|RelDataType
 name|adjustType
@@ -2202,7 +2357,13 @@ return|return
 name|type
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Infers the type of a call to this operator with a given set of operand    * types. Shorthand for {@link #inferReturnType(SqlOperatorBinding)}.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|final
 name|RelDataType
@@ -2233,7 +2394,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Checks that the operand values in a {@link SqlCall} to this operator are    * valid. Subclasses must either override this method or supply an instance    * of {@link SqlOperandTypeChecker} to the constructor.    *    * @param callBinding    description of call    * @param throwOnFailure whether to throw an exception if check fails    *                       (otherwise returns false in that case)    * @return whether check succeeded    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|checkOperandTypes
@@ -2347,6 +2514,9 @@ name|throwOnFailure
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|protected
 name|void
 name|checkOperandCount
@@ -2444,7 +2614,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether the given operands are valid. If not valid and    * {@code fail}, throws an assertion error.    *    *<p>Similar to {@link #checkOperandCount}, but some operators may have    * different valid operands in {@link SqlNode} and {@code RexNode} formats    * (some examples are CAST and AND), and this method throws internal errors,    * not user errors.</p>    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|validRexOperands
@@ -2460,7 +2636,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a template describing how the operator signature is to be built.    * E.g for the binary + operator the template looks like "{1} {0} {2}" {0}    * is the operator, subsequent numbers are operands.    *    * @param operandsCount is used with functions that can take a variable    *                      number of operands    * @return signature template, or null to indicate that a default template    * will suffice    */
+end_comment
+
+begin_function
 specifier|public
 name|String
 name|getSignatureTemplate
@@ -2474,7 +2656,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a string describing the expected operand types of a call, e.g.    * "SUBSTR(VARCHAR, INTEGER, INTEGER)".    */
+end_comment
+
+begin_function
 specifier|public
 specifier|final
 name|String
@@ -2488,7 +2676,13 @@ name|name
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a string describing the expected operand types of a call, e.g.    * "SUBSTRING(VARCHAR, INTEGER, INTEGER)" where the name (SUBSTRING in this    * example) can be replaced by a specified name.    */
+end_comment
+
+begin_function
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -2520,6 +2714,9 @@ name|trim
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|SqlOperandTypeInference
 name|getOperandTypeInference
@@ -2529,7 +2726,13 @@ return|return
 name|operandTypeInference
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this operator is an aggregate function. By default,    * subclass type is used (an instance of SqlAggFunction is assumed to be an    * aggregator; anything else is not).    *    *<p>Per SQL:2011, there are<dfn>aggregate functions</dfn> and    *<dfn>window functions</dfn>.    * Every aggregate function (e.g. SUM) is also a window function.    * There are window functions that are not aggregate functions, e.g. RANK,    * NTILE, LEAD, FIRST_VALUE.</p>    *    *<p>Collectively, aggregate and window functions are called<dfn>analytic    * functions</dfn>. Despite its name, this method returns true for every    * analytic function.</p>    *    * @see #requiresOrder()    *    * @return whether this operator is an analytic function (aggregate function    * or window function)    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isAggregator
@@ -2539,7 +2742,13 @@ return|return
 literal|false
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns whether this is a window function that requires an OVER clause.    *    *<p>For example, returns true for {@code RANK}, {@code DENSE_RANK} and    * other ranking functions; returns false for {@code SUM}, {@code COUNT},    * {@code MIN}, {@code MAX}, {@code AVG} (they can be used as non-window    * aggregate functions).    *    *<p>If {@code requiresOver} returns true, then {@link #isAggregator()} must    * also return true.    *    * @see #allowsFraming()    * @see #requiresOrder()    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|requiresOver
@@ -2549,7 +2758,13 @@ return|return
 literal|false
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this is a window function that requires ordering.    *    *<p>Per SQL:2011, 2, 6.10: "If&lt;ntile function&gt;,&lt;lead or lag    * function&gt;, RANK or DENSE_RANK is specified, then the window ordering    * clause shall be present."</p>    *    * @see #isAggregator()    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|requiresOrder
@@ -2559,7 +2774,13 @@ return|return
 literal|false
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this is a window function that allows framing (i.e. a    * ROWS or RANGE clause in the window specification).    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|allowsFraming
@@ -2569,7 +2790,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this is a group function.    *    *<p>Group functions can only appear in the GROUP BY clause.    *    *<p>Examples are {@code HOP}, {@code TUMBLE}, {@code SESSION}.    *    *<p>Group functions have auxiliary functions, e.g. {@code HOP_START}, but    * these are not group functions.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isGroup
@@ -2579,7 +2806,13 @@ return|return
 literal|false
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this is an group auxiliary function.    *    *<p>Examples are {@code HOP_START} and {@code HOP_END} (both auxiliary to    * {@code HOP}).    *    * @see #isGroup()    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isGroupAuxiliary
@@ -2589,7 +2822,13 @@ return|return
 literal|false
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Accepts a {@link SqlVisitor}, visiting each operand of a call. Returns    * null.    *    * @param visitor Visitor    * @param call    Call to visit    */
+end_comment
+
+begin_function
 specifier|public
 parameter_list|<
 name|R
@@ -2639,7 +2878,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Accepts a {@link SqlVisitor}, directing an    * {@link org.apache.calcite.sql.util.SqlBasicVisitor.ArgHandler}    * to visit an operand of a call.    *    *<p>The argument handler allows fine control about how the operands are    * visited, and how the results are combined.    *    * @param visitor         Visitor    * @param call            Call to visit    * @param onlyExpressions If true, ignores operands which are not    *                        expressions. For example, in the call to the    *<code>AS</code> operator    * @param argHandler      Called for each operand    */
+end_comment
+
+begin_function
 specifier|public
 parameter_list|<
 name|R
@@ -2717,7 +2962,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the return type inference strategy for this operator, or null if    * return type inference is implemented by a subclass override. */
+end_comment
+
+begin_function
 specifier|public
 name|SqlReturnTypeInference
 name|getReturnTypeInference
@@ -2727,7 +2978,13 @@ return|return
 name|returnTypeInference
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the {@link Strong.Policy} strategy for this operator, or null if    * there is no particular strategy, in which case this policy will be deducted    * from the operator's {@link SqlKind}.    *    * @see Strong    */
+end_comment
+
+begin_function
 specifier|public
 name|Supplier
 argument_list|<
@@ -2742,7 +2999,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call  Call to this operator    * @param scope Scope in which the call occurs    *    * @deprecated Use {@link #getMonotonicity(SqlOperatorBinding)}    */
+end_comment
+
+begin_function
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -2775,7 +3038,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether a call to this operator is monotonic.    *    *<p>Default implementation returns {@link SqlMonotonicity#NOT_MONOTONIC}.    *    * @param call Call to this operator with particular arguments and information    *             about the monotonicity of the arguments    */
+end_comment
+
+begin_function
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -2790,7 +3059,13 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isDeterministic
@@ -2800,7 +3075,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether a call to this operator is not sensitive to the operands input order.    * An operator is symmetrical if the call returns the same result when    * the operands are shuffled.    *    *<p>By default, returns true for {@link SqlKind#SYMMETRICAL}.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isSymmetrical
@@ -2817,7 +3098,13 @@ name|kind
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether it is unsafe to cache query plans referencing this    * operator; false is assumed by default.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|isDynamicFunction
@@ -2827,7 +3114,13 @@ return|return
 literal|false
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Method to check if call requires expansion when it has decimal operands.    * The default implementation is to return true.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|requiresDecimalExpansion
@@ -2837,7 +3130,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns whether the<code>ordinal</code>th argument to this operator must    * be scalar (as opposed to a query).    *    *<p>If true (the default), the validator will attempt to convert the    * argument into a scalar sub-query, which must have one column and return at    * most one row.    *    *<p>Operators such as<code>SELECT</code> and<code>EXISTS</code> override    * this method.    */
+end_comment
+
+begin_function
 specifier|public
 name|boolean
 name|argumentMustBeScalar
@@ -2850,8 +3149,8 @@ return|return
 literal|true
 return|;
 block|}
-block|}
-end_class
+end_function
 
+unit|}
 end_unit
 

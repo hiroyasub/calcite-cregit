@@ -721,20 +721,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|junit
@@ -9094,55 +9080,53 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
+block|}
+annotation|@
+name|Test
+name|void
+name|testConcatFunc
+parameter_list|()
+block|{
+name|checkConcatFunc
+argument_list|(
 name|tester
 argument_list|(
 name|SqlLibrary
 operator|.
 name|MYSQL
 argument_list|)
-decl_stmt|;
-specifier|final
-name|SqlTester
-name|tester2
-init|=
+argument_list|)
+expr_stmt|;
+name|checkConcatFunc
+argument_list|(
 name|tester
 argument_list|(
 name|SqlLibrary
 operator|.
 name|POSTGRESQL
 argument_list|)
-decl_stmt|;
-specifier|final
-name|SqlTester
-name|tester3
-init|=
+argument_list|)
+expr_stmt|;
+name|checkConcat2Func
+argument_list|(
 name|tester
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
-decl_stmt|;
-for|for
-control|(
-name|SqlTester
-name|sqlTester
-range|:
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|tester1
-argument_list|,
-name|tester2
 argument_list|)
-control|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkConcatFunc
+parameter_list|(
+name|SqlTester
+name|t
+parameter_list|)
 block|{
-name|sqlTester
+name|t
 operator|.
 name|setFor
 argument_list|(
@@ -9151,7 +9135,7 @@ operator|.
 name|CONCAT_FUNCTION
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9162,7 +9146,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9175,21 +9159,21 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkNull
 argument_list|(
 literal|"concat('a', 'b', cast(null as char(2)))"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkNull
 argument_list|(
 literal|"concat(cast(null as ANY), 'b', cast(null as char(2)))"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9200,7 +9184,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9211,7 +9195,7 @@ argument_list|,
 literal|"VARCHAR(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|t
 operator|.
 name|checkFails
 argument_list|(
@@ -9223,7 +9207,15 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-name|tester3
+specifier|private
+name|void
+name|checkConcat2Func
+parameter_list|(
+name|SqlTester
+name|t
+parameter_list|)
+block|{
+name|t
 operator|.
 name|setFor
 argument_list|(
@@ -9232,7 +9224,7 @@ operator|.
 name|CONCAT2
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9243,7 +9235,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9254,7 +9246,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9265,7 +9257,7 @@ argument_list|,
 literal|"VARCHAR(33335) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9276,7 +9268,7 @@ argument_list|,
 literal|"VARCHAR(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9287,7 +9279,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkString
 argument_list|(
@@ -9298,14 +9290,14 @@ argument_list|,
 literal|"VARCHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkNull
 argument_list|(
 literal|"concat('a', cast(null as varchar))"
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkFails
 argument_list|(
@@ -9316,7 +9308,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester3
+name|t
 operator|.
 name|checkFails
 argument_list|(

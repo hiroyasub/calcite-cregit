@@ -2798,11 +2798,11 @@ name|s1
 argument_list|)
 return|;
 block|}
-comment|/** SQL {@code concat(arg0, arg1, arg2, ...)} function. */
+comment|/** SQL {@code CONCAT(arg0, arg1, arg2, ...)} function. */
 specifier|public
 specifier|static
 name|String
-name|concat
+name|concatMulti
 parameter_list|(
 name|String
 modifier|...

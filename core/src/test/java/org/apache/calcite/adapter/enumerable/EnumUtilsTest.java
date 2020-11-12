@@ -1094,6 +1094,8 @@ name|EnumUtils
 operator|.
 name|call
 argument_list|(
+literal|null
+argument_list|,
 name|SqlFunctions
 operator|.
 name|class
@@ -1150,6 +1152,8 @@ name|EnumUtils
 operator|.
 name|call
 argument_list|(
+literal|null
+argument_list|,
 name|XmlFunctions
 operator|.
 name|class
@@ -1225,6 +1229,8 @@ name|EnumUtils
 operator|.
 name|call
 argument_list|(
+literal|null
+argument_list|,
 name|SqlFunctions
 operator|.
 name|class
@@ -1299,6 +1305,8 @@ name|EnumUtils
 operator|.
 name|call
 argument_list|(
+literal|null
+argument_list|,
 name|GeoFunctions
 operator|.
 name|class

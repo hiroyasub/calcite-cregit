@@ -377,6 +377,9 @@ block|,
 comment|/** {@code GREATEST} function (Oracle). */
 name|GREATEST
 block|,
+comment|/** The two-argument {@code CONCAT} function (Oracle). */
+name|CONCAT2
+block|,
 comment|/** The "IF" function (BigQuery, Hive, Spark). */
 name|IF
 block|,
