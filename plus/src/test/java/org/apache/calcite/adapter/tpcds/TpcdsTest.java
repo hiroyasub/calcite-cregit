@@ -1857,15 +1857,11 @@ literal|"  LogicalAggregate(group=[{84, 90}], AGG1=[AVG($10)], AGG2=[AVG($12)], 
 operator|+
 literal|"    LogicalFilter(condition=[AND(=($0, $32), =($2, $89), "
 operator|+
-literal|"=($7, $60), =($4, $23), SEARCH($24, Sarg['M']:CHAR(1)), "
+literal|"=($7, $60), =($4, $23), =($24, 'M'), "
 operator|+
-literal|"SEARCH($25, Sarg['S']:CHAR(1)), "
+literal|"=($25, 'S'), =($26, 'HIGH SCHOOL'), =($38, 1998), "
 operator|+
-literal|"SEARCH($26, Sarg['HIGH SCHOOL']:CHAR(11)), "
-operator|+
-literal|"SEARCH($38, Sarg[1998]), SEARCH($84, Sarg['CA', 'MD', 'OK', 'OR', "
-operator|+
-literal|"'TX', 'WA']:CHAR(2)))])\n"
+literal|"SEARCH($84, Sarg['CA', 'MD', 'OK', 'OR', 'TX', 'WA']:CHAR(2)))])\n"
 operator|+
 literal|"      LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
