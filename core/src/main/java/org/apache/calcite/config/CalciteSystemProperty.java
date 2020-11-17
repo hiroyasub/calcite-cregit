@@ -295,6 +295,23 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+comment|/**    * Whether to enable index-based access for struct fields.    *    *<p>Note: the feature is experimental as it relies on field order which is JVM-dependent    * (see CALCITE-2489).</p>    */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ALLOW_FIELD_INDEX_ACCESS
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.enumerable.fieldIndexAccess"
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
 comment|/** Whether streaming is enabled in the default planner configuration. */
 specifier|public
 specifier|static

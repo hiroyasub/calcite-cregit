@@ -3977,7 +3977,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Failed to access field ''{0}'' of object of type {1}"
+literal|"Failed to access field ''{0}'', index {1,number,#} of object of type {2}"
 argument_list|)
 name|ExInstWithCause
 argument_list|<
@@ -3987,6 +3987,9 @@ name|failedToAccessField
 parameter_list|(
 name|String
 name|fieldName
+parameter_list|,
+name|int
+name|fieldIndex
 parameter_list|,
 name|String
 name|typeName
