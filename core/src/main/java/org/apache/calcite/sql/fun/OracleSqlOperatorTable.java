@@ -149,7 +149,7 @@ name|SUBSTR
 init|=
 name|SqlLibraryOperators
 operator|.
-name|SUBSTR
+name|ORACLE_SUBSTR
 decl_stmt|;
 annotation|@
 name|Deprecated

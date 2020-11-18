@@ -1015,7 +1015,7 @@ operator|.
 name|STRING
 argument_list|)
 decl_stmt|;
-comment|/** Oracle's "SUBSTR(string, position [, substringLength ])" function.    *    *<p>It has similar semantics to standard SQL's    * {@link SqlStdOperatorTable#SUBSTRING} function but different syntax. */
+comment|/** Oracle's "SUBSTR(string, position [, substringLength ])" function.    *    *<p>It has different semantics to standard SQL's    * {@link SqlStdOperatorTable#SUBSTRING} function:    *    *<ul>    *<li>If {@code substringLength}&le; 0, result is the empty string    *   (Oracle would return null, because it treats the empty string as null,    *   but Calcite does not have these semantics);    *<li>If {@code position} = 0, treat {@code position} as 1;    *<li>If {@code position}&lt; 0, treat {@code position} as    *       "length(string) + position + 1".    *</ul>    */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -1029,7 +1029,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|SUBSTR
+name|ORACLE_SUBSTR
 init|=
 operator|new
 name|SqlFunction
@@ -1046,7 +1046,9 @@ name|ARG0_NULLABLE_VARYING
 argument_list|,
 literal|null
 argument_list|,
-literal|null
+name|OperandTypes
+operator|.
+name|STRING_INTEGER_OPTIONAL_INTEGER
 argument_list|,
 name|SqlFunctionCategory
 operator|.

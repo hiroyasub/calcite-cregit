@@ -799,7 +799,7 @@ name|unparseFunctionSyntax
 argument_list|(
 name|SqlLibraryOperators
 operator|.
-name|SUBSTR
+name|ORACLE_SUBSTR
 argument_list|,
 name|writer
 argument_list|,
