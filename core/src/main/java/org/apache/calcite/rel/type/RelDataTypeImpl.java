@@ -304,6 +304,27 @@ name|boolean
 name|elideRecord
 parameter_list|)
 block|{
+if|if
+condition|(
+name|fieldList
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Trying to access field "
+operator|+
+name|fieldName
+operator|+
+literal|" in a type with no fields: "
+operator|+
+name|this
+argument_list|)
+throw|;
+block|}
 for|for
 control|(
 name|RelDataTypeField
