@@ -12592,6 +12592,46 @@ literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
 literal|"GROUP BY \"hire_date\", \"employee_id\""
 decl_stmt|;
+name|String
+name|query7
+init|=
+literal|"SELECT "
+operator|+
+literal|"count(distinct \"employee_id\") over (order by \"hire_date\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected7
+init|=
+literal|"SELECT "
+operator|+
+literal|"COUNT(DISTINCT \"employee_id\") "
+operator|+
+literal|"OVER (ORDER BY \"hire_date\" RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$0\""
+operator|+
+literal|"\nFROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|query8
+init|=
+literal|"SELECT "
+operator|+
+literal|"sum(distinct \"position_id\") over (order by \"hire_date\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected8
+init|=
+literal|"SELECT CASE WHEN (COUNT(DISTINCT \"position_id\") OVER (ORDER BY \"hire_date\" "
+operator|+
+literal|"RANGE"
+operator|+
+literal|" BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW))> 0 THEN COALESCE(SUM(DISTINCT "
+operator|+
+literal|"\"position_id\") OVER (ORDER BY \"hire_date\" RANGE BETWEEN UNBOUNDED "
+operator|+
+literal|"PRECEDING AND CURRENT ROW), 0) ELSE NULL END\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
 name|HepProgramBuilder
 name|builder
 init|=
@@ -12749,6 +12789,40 @@ operator|.
 name|ok
 argument_list|(
 name|expected6
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query7
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected7
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query8
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected8
 argument_list|)
 expr_stmt|;
 block|}
