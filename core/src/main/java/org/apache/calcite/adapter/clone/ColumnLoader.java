@@ -1452,6 +1452,15 @@ name|RelDataType
 name|type
 argument_list|)
 block|{
+if|if
+condition|(
+literal|true
+condition|)
+block|{
+return|return
+name|list
+return|;
+block|}
 switch|switch
 condition|(
 name|type
@@ -1658,21 +1667,18 @@ break|break;
 default|default:
 break|break;
 block|}
-end_class
-
-begin_return
 return|return
 name|list
 return|;
-end_return
+block|}
+end_class
 
 begin_comment
-unit|}
 comment|/**    * Set of values of a column, created during the load process, and converted    * to a serializable (and more compact) form before load completes.    */
 end_comment
 
 begin_class
-unit|static
+specifier|static
 class|class
 name|ValueSet
 block|{
