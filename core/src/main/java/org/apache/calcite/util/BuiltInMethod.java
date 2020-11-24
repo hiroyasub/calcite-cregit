@@ -5137,7 +5137,7 @@ name|String
 operator|.
 name|class
 argument_list|,
-name|Boolean
+name|boolean
 operator|.
 name|class
 argument_list|)
