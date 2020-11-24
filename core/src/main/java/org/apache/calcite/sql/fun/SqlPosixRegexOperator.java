@@ -402,12 +402,7 @@ name|pos
 operator|.
 name|plusAll
 argument_list|(
-name|Arrays
-operator|.
-name|asList
-argument_list|(
 name|operands
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|operands
