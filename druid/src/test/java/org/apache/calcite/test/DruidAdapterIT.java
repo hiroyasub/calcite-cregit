@@ -12937,7 +12937,7 @@ literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(((CAST(\\\"produc
 argument_list|,
 literal|"LONG"
 argument_list|,
-literal|") + (1 * \\\"store_sales\\\")) / (\\\"store_cost\\\" - 5))"
+literal|") + \\\"store_sales\\\") / (\\\"store_cost\\\" - 5))"
 argument_list|,
 literal|"<= ((floor(\\\"store_sales\\\") * 25) + 2))\"}"
 argument_list|)
@@ -12951,7 +12951,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[<=(/(+(CAST($1):INTEGER, *(1, $90)), -($91, 5)), +(*(FLOOR($90), 25), 2))], "
+literal|"filter=[<=(/(+(CAST($1):INTEGER, $90), -($91, 5)), +(*(FLOOR($90), 25), 2))], "
 operator|+
 literal|"groups=[{}], aggs=[[COUNT()]])"
 argument_list|)
@@ -13053,7 +13053,7 @@ specifier|final
 name|String
 name|filterExpPart2
 init|=
-literal|" (1 * \\'store_sales\\')) / (\\'store_cost\\' - 5)) "
+literal|" \\'store_sales\\') / (\\'store_cost\\' - 5)) "
 operator|+
 literal|"<= ((floor(\\'store_sales\\') * 25) + 2))'}"
 decl_stmt|;
@@ -13152,7 +13152,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[AND(<=(/(+(CAST($1):INTEGER, *(1, $90)), -($91, 5)), +(*(FLOOR($90), 25), 2)), "
+literal|"filter=[AND(<=(/(+(CAST($1):INTEGER, $90), -($91, 5)), +(*(FLOOR($90), 25), 2)), "
 operator|+
 literal|">($90, 0), LIKE($1, '1%'),>($91, 1),<($0, 1997-01-02 00:00:00), "
 operator|+
