@@ -2120,8 +2120,7 @@ condition|(
 name|colOrigin
 operator|!=
 literal|null
-operator|||
-operator|!
+operator|&&
 name|colOrigin
 operator|.
 name|isDerived
