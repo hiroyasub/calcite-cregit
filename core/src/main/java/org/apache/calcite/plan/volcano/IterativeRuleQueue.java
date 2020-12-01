@@ -464,6 +464,7 @@ return|;
 block|}
 comment|/**    * Dumps rules queue to the logger when debug level is set to {@code TRACE}.    */
 specifier|private
+specifier|static
 name|void
 name|dumpRuleQueue
 parameter_list|(

@@ -1901,6 +1901,7 @@ return|;
 block|}
 comment|/**    * Computes the order in which to visit expressions, so that we decide the    * level of an expression only after the levels of lower expressions have    * been decided.    *    *<p>First, we need to ensure that an expression is visited after all of    * its inputs.    *    *<p>Further, if the expression is a member of a cohort, we need to visit    * it after the inputs of all other expressions in that cohort. With this    * condition, expressions in the same cohort will very likely end up in the    * same level.    *    *<p>Note that if there are no cohorts, the expressions from the    * {@link RexProgram} are already in a suitable order. We perform the    * topological sort just to ensure that the code path is well-trodden.    *    * @param exprs   Expressions    * @param cohorts List of cohorts, each of which is a set of expr ordinals    * @return Expression ordinals in topological order    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Integer
@@ -2188,6 +2189,7 @@ literal|null
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 index|[]
 name|identityArray

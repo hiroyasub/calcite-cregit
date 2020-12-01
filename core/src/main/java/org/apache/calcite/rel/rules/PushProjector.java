@@ -3026,6 +3026,7 @@ return|;
 block|}
 comment|/**      * Looks for a matching RexNode from among two lists of RexNodes and      * returns the offset into the list corresponding to the match, adjusted      * by an amount, depending on whether the match was from the first or      * second list.      *      * @param rex      RexNode that is being matched against      * @param rexList1 first list of RexNodes      * @param adjust1  adjustment if match occurred in first list      * @param rexList2 second list of RexNodes      * @param adjust2  adjustment if match occurred in the second list      * @return index in the list corresponding to the matching RexNode; -1      * if no match      */
 specifier|private
+specifier|static
 name|int
 name|findExprInLists
 parameter_list|(

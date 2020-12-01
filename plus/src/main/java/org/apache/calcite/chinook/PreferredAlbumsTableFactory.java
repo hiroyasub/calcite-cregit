@@ -358,6 +358,7 @@ block|}
 return|;
 block|}
 specifier|private
+specifier|static
 name|Queryable
 argument_list|<
 name|Integer

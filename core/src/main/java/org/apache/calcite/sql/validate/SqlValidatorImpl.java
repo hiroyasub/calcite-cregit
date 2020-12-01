@@ -8316,6 +8316,7 @@ name|node
 return|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|SqlSelect
@@ -8392,6 +8393,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|rewriteMerge
 parameter_list|(
@@ -18077,6 +18079,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|SqlNode
@@ -18390,6 +18393,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|SqlWindow
@@ -18687,6 +18691,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|Table
@@ -18824,6 +18829,7 @@ literal|false
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|shouldCheckForRollUp
 parameter_list|(
@@ -19016,6 +19022,7 @@ block|}
 block|}
 comment|/** Return the intended modality of a SELECT or set-op. */
 specifier|private
+specifier|static
 name|SqlModality
 name|deduceModality
 parameter_list|(
@@ -19542,6 +19549,7 @@ return|;
 block|}
 comment|/** Returns whether the prefix is sorted. */
 specifier|private
+specifier|static
 name|boolean
 name|hasSortedPrefix
 parameter_list|(
@@ -19569,6 +19577,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isSortCompatible
 parameter_list|(
@@ -23394,6 +23403,7 @@ block|}
 block|}
 comment|/** Returns whether a query uses {@code DEFAULT} to populate a given    *  column. */
 specifier|private
+specifier|static
 name|boolean
 name|isValuesWithDefault
 parameter_list|(
@@ -23458,6 +23468,7 @@ literal|false
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isRowWithDefault
 parameter_list|(
@@ -24017,6 +24028,7 @@ block|}
 block|}
 comment|/**    * Locates the n'th expression in an INSERT or UPDATE query.    *    * @param query       Query    * @param ordinal     Ordinal of expression    * @param sourceCount Number of expressions    * @return Ordinal'th expression, never null    */
 specifier|private
+specifier|static
 name|SqlNode
 name|getNthExpr
 parameter_list|(

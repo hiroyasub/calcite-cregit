@@ -1347,6 +1347,7 @@ name|optimizedPlans
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|resetPlannerRules
 parameter_list|(

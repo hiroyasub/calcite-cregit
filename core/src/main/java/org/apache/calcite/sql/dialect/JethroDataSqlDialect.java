@@ -949,6 +949,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|JethroInfo
 name|makeInfo
 parameter_list|(

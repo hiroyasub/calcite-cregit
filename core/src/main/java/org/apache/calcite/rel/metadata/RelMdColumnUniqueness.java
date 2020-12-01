@@ -1461,6 +1461,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|Boolean
@@ -2562,6 +2563,7 @@ literal|false
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|simplyProjects
 parameter_list|(

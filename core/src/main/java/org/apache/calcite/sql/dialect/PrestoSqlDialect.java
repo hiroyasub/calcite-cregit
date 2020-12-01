@@ -350,6 +350,7 @@ expr_stmt|;
 block|}
 comment|/** Unparses offset/fetch using "OFFSET offset LIMIT fetch " syntax. */
 specifier|private
+specifier|static
 name|void
 name|unparseUsingLimit
 parameter_list|(

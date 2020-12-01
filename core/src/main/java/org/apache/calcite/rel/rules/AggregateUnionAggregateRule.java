@@ -357,6 +357,7 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns an input with the same row type with the input Aggregate,    * create a Project node if needed.    */
 specifier|private
+specifier|static
 name|RelNode
 name|getInputWithSameRowType
 parameter_list|(

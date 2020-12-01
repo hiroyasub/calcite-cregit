@@ -1351,6 +1351,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|ClassDeclaration
 name|classDecl
 parameter_list|(
@@ -3087,6 +3088,7 @@ block|}
 block|}
 comment|/** Adds a declaration of each synthetic type found in a code block. */
 specifier|private
+specifier|static
 class|class
 name|TypeRegistrar
 block|{

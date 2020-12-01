@@ -1104,6 +1104,7 @@ expr_stmt|;
 block|}
 comment|/**    * Get conjunctions of filter's condition but with collapsed    * {@code IS NOT DISTINCT FROM} expressions if needed.    *    * @param filter filter containing condition    * @return condition conjunctions with collapsed {@code IS NOT DISTINCT FROM}    * expressions if any    * @see RelOptUtil#conjunctions(RexNode)    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|RexNode

@@ -423,6 +423,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|Pair
 argument_list|<
 annotation|@

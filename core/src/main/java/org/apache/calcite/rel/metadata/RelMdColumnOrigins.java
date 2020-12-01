@@ -1500,6 +1500,7 @@ name|set
 return|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|PolyNull
 name|Set
@@ -1580,6 +1581,7 @@ name|set
 return|;
 block|}
 specifier|private
+specifier|static
 name|Set
 argument_list|<
 name|RelColumnOrigin

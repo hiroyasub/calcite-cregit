@@ -708,6 +708,7 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|writeJsonArray
 parameter_list|(

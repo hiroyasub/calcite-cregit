@@ -1292,6 +1292,7 @@ name|sign
 return|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|stripLeadingSign
 parameter_list|(
@@ -1551,6 +1552,7 @@ argument_list|)
 block|,   }
 decl_stmt|;
 specifier|private
+specifier|static
 name|boolean
 name|isFractionalSecondFieldInRange
 parameter_list|(
@@ -1577,6 +1579,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isSecondaryFieldInRange
 parameter_list|(
@@ -1649,6 +1652,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|BigDecimal
 name|normalizeSecondFraction
 parameter_list|(
@@ -1674,6 +1678,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 index|[]
 name|fillIntervalValueArray
@@ -1730,6 +1735,7 @@ name|ret
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 index|[]
 name|fillIntervalValueArray
@@ -4496,6 +4502,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|BigDecimal
 name|parseField
 parameter_list|(
@@ -4559,6 +4566,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|CalciteContextException
 name|fieldExceedsPrecisionException
 parameter_list|(

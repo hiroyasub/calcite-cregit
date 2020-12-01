@@ -1024,6 +1024,7 @@ return|;
 block|}
 comment|/**    * Handles point query push down. The operation of the leftmost nodes    * should be "=", then we try to find as many "=" operations as    * possible, if "=" operation found on all index columns, then it is a    * point query on key (both primary key or composite key), else it will    * transform to a range query.    *    *<p>If conditions can be pushed down, for range query, we only remove    * first node from field expression list (<code>rexNodeList</code>),    * because Innodb-java-reader only support range query, not fully    * index condition pushdown; for point query, we can remove them all.    */
 specifier|private
+specifier|static
 name|IndexCondition
 name|handlePointQuery
 parameter_list|(
@@ -1278,6 +1279,7 @@ return|;
 block|}
 comment|/**    * Handles range query push down. We try to find operation of GTE, GT, LT    * or LTE in the left most key.    *    *<p>We only push down partial condition since Innodb-java-reader only    * supports range query with lower and upper bound, not fully index condition    * push down.    *    *<p>For example, given the following 7 rows with (a,b) as secondary key.    *<pre>    *   a=100,b=200    *   a=100,b=300    *   a=100,b=500    *   a=200,b=100    *   a=200,b=400    *   a=300,b=300    *   a=500,b=600    *</pre>    *    *<p>If condition is<code>a&gt;200 AND b&gt;300</code>,    * the lower bound should be    *<code>a=300,b=300</code>, we can only push down one condition    *<code>a&gt;200</code> as lower bound condition, we cannot push    *<code>a&gt;200 AND b&gt;300</code> because it will include    *<code>a=200,b=400</code> as well which is incorrect.    *    *<p>If conditions can be pushed down, we will first node from field    * expression list (<code>rexNodeList</code>).    */
 specifier|private
+specifier|static
 name|IndexCondition
 name|handleRangeQuery
 parameter_list|(
@@ -1933,6 +1935,7 @@ block|}
 block|}
 comment|/**    * Combines a field name, operator, and literal to produce a predicate string.    */
 specifier|private
+specifier|static
 name|Optional
 argument_list|<
 name|InternalRexNode
@@ -2163,6 +2166,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|findSubsequentMatches
 parameter_list|(
@@ -2249,6 +2253,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Object
@@ -2288,6 +2293,7 @@ return|;
 block|}
 comment|/**    * Finds first node from field expression nodes which match specific    * operations.    *    *<p>If not found, result is {@link Optional#empty()}.    */
 specifier|private
+specifier|static
 name|Optional
 argument_list|<
 name|InternalRexNode
@@ -2472,6 +2478,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isSqlTypeMatch
 parameter_list|(

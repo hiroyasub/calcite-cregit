@@ -793,6 +793,7 @@ return|;
 block|}
 comment|/**    * Tries to convert a relational expression to the target convention of an    * arc.    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|RelNode

@@ -1545,6 +1545,7 @@ argument_list|)
 throw|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|stripQuotes
 parameter_list|(

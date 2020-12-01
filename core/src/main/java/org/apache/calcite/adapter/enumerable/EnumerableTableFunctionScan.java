@@ -532,6 +532,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isImplementorDefined
 parameter_list|(

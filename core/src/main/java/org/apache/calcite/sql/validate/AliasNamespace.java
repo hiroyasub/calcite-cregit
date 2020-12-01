@@ -721,6 +721,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|String
 name|getString
 parameter_list|(

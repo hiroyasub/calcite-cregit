@@ -3552,6 +3552,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|String
 name|extractName
 argument_list|(
@@ -4467,6 +4468,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isConstructor
 parameter_list|(

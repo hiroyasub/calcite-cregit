@@ -1352,6 +1352,7 @@ return|;
 block|}
 comment|/** Converts a predicate on a particular set of columns into a predicate on    * a subset of those columns, weakening if necessary.    *    *<p>If not possible to simplify, returns {@code true}, which is the weakest    * possible predicate.    *    *<p>Examples:<ol>    *<li>The predicate {@code $7 = $9} on columns [7]    *     becomes {@code $7 is not null}    *<li>The predicate {@code $7 = $9 + $11} on columns [7, 9]    *     becomes {@code $7 is not null or $9 is not null}    *<li>The predicate {@code $7 = $9 and $9 = 5} on columns [7] becomes    *   {@code $7 = 5}    *<li>The predicate    *   {@code $7 = $9 and ($9 = $1 or $9 = $2) and $1> 3 and $2> 10}    *   on columns [7] becomes {@code $7> 3}    *</ol>    *    *<p>We currently only handle examples 1 and 2.    *    * @param rexBuilder Rex builder    * @param input Input relational expression    * @param r Predicate expression    * @param columnsMapped Columns which the final predicate can reference    * @return Predicate expression narrowed to reference only certain columns    */
 specifier|private
+specifier|static
 name|RexNode
 name|projectPredicate
 parameter_list|(
@@ -3981,6 +3982,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|checkTarget
 parameter_list|(
@@ -4665,6 +4667,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|int
 name|pos
 parameter_list|(
@@ -4697,6 +4700,7 @@ literal|1
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isAlwaysTrue
 parameter_list|(

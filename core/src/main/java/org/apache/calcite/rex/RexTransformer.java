@@ -251,6 +251,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|private
+specifier|static
 name|boolean
 name|isBoolean
 parameter_list|(
@@ -276,6 +277,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isNullable
 parameter_list|(

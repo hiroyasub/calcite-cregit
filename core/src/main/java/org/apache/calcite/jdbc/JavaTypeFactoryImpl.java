@@ -636,6 +636,7 @@ return|;
 block|}
 comment|/** Returns the type of a field.    *    *<p>Takes into account {@link org.apache.calcite.adapter.java.Array}    * annotations if present.    */
 specifier|private
+specifier|static
 name|Type
 name|fieldType
 parameter_list|(

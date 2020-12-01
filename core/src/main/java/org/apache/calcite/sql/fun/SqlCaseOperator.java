@@ -933,6 +933,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RelDataType
 name|inferTypeFromValidator
 parameter_list|(
@@ -1344,6 +1345,7 @@ name|ret
 return|;
 block|}
 specifier|private
+specifier|static
 name|RelDataType
 name|inferTypeFromOperands
 parameter_list|(

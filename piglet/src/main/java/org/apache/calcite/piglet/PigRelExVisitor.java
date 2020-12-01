@@ -1943,6 +1943,7 @@ expr_stmt|;
 block|}
 comment|/**    * Replaces Pig regular expressions with SQL regular expressions in a string.    *    * @param rexNode The string literal    * @return New string literal with Pig regular expressions replaced by SQL regular expressions    */
 specifier|private
+specifier|static
 name|RexNode
 name|replacePatternIfPossible
 parameter_list|(
@@ -2440,6 +2441,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|int
 name|optSize
 parameter_list|(

@@ -1768,6 +1768,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|ImmutableMap
 operator|.
 name|Builder
@@ -3678,6 +3679,7 @@ end_comment
 
 begin_function
 specifier|private
+specifier|static
 name|CalcitePrepare
 operator|.
 name|Query

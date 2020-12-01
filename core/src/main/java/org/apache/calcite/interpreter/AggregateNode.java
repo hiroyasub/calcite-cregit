@@ -1742,6 +1742,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|AggregateFunctionImpl
 name|getAggFunction
 parameter_list|(

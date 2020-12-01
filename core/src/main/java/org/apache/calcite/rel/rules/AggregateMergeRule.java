@@ -313,6 +313,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isAggregateSupported
 parameter_list|(

@@ -3285,6 +3285,7 @@ return|;
 block|}
 comment|/** Returns whether {@code rowType} contains more than one star column or    * fields with the same name, which implies ambiguous column. */
 specifier|private
+specifier|static
 name|boolean
 name|hasAmbiguousField
 parameter_list|(

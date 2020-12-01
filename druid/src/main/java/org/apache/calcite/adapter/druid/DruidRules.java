@@ -3774,6 +3774,7 @@ expr_stmt|;
 block|}
 comment|/** Returns an array of unique filter references from the given list of      * {@link org.apache.calcite.rel.core.AggregateCall}s. */
 specifier|private
+specifier|static
 name|Set
 argument_list|<
 name|Integer
@@ -3831,6 +3832,7 @@ return|;
 block|}
 comment|/**      * Attempts to optimize any aggregations with filters in the DruidQuery.      * Uses the following steps:      *      *<ol>      *<li>Tries to abstract common filters out into the "filter" field;      *<li>Eliminates expressions that are always true or always false when      *     possible;      *<li>ANDs aggregate filters together with the outer filter to allow for      *     pruning of data.      *</ol>      *      *<p>Should be called before pushing both the aggregate and project into      * Druid. Assumes that at least one aggregate call has a filter attached to      * it. */
 specifier|private
+specifier|static
 name|DruidQuery
 name|optimizeFilteredAggregations
 parameter_list|(

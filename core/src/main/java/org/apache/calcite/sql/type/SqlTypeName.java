@@ -3927,6 +3927,7 @@ block|,
 name|OVERFLOW
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|BigDecimal

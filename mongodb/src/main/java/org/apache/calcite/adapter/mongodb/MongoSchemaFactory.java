@@ -234,6 +234,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|MongoCredential
 name|createCredential
 parameter_list|(

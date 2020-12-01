@@ -792,6 +792,7 @@ block|}
 block|}
 comment|/** Parses the output of a query, sending the results to a    * {@link Sink}. */
 specifier|private
+specifier|static
 name|void
 name|parse
 parameter_list|(
@@ -1947,6 +1948,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|parseFields
 parameter_list|(
@@ -1991,6 +1993,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|parseFields
 parameter_list|(
@@ -2050,6 +2053,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|parseField
 parameter_list|(
@@ -2112,6 +2116,7 @@ argument_list|(
 literal|"JdkObsolete"
 argument_list|)
 specifier|private
+specifier|static
 name|void
 name|parseFieldForName
 parameter_list|(
@@ -2695,6 +2700,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|expect
 parameter_list|(
@@ -2719,6 +2725,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|expect
 parameter_list|(
@@ -2754,6 +2761,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|expectScalarField
 parameter_list|(
@@ -2857,6 +2865,7 @@ argument_list|(
 literal|"unused"
 argument_list|)
 specifier|private
+specifier|static
 name|void
 name|expectObjectField
 parameter_list|(
@@ -2939,6 +2948,7 @@ argument_list|(
 literal|"JdkObsolete"
 argument_list|)
 specifier|private
+specifier|static
 name|Long
 name|extractTimestampField
 parameter_list|(
@@ -3884,6 +3894,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|InputStream
 name|traceResponse
 parameter_list|(

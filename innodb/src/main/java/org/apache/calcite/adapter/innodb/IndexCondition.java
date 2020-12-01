@@ -1682,6 +1682,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|append
 parameter_list|(

@@ -5363,6 +5363,7 @@ return|;
 block|}
 comment|/** Returns whether and argument and bounds are have types that are    * sufficiently compatible to be converted to a {@link Sarg}. */
 specifier|private
+specifier|static
 name|boolean
 name|areAssignable
 parameter_list|(

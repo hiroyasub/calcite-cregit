@@ -97,6 +97,7 @@ name|type
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|validate
 parameter_list|(

@@ -410,6 +410,7 @@ return|;
 block|}
 comment|/**    * Convert an object into the expected internal representation.    *    * @param obj         object to convert, if needed    * @param relDataType data type    */
 specifier|private
+specifier|static
 name|Object
 name|convertToEnumeratorObject
 parameter_list|(

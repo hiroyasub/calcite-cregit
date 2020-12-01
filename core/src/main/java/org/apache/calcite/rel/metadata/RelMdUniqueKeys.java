@@ -743,6 +743,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Set
 argument_list|<
 name|ImmutableBitSet

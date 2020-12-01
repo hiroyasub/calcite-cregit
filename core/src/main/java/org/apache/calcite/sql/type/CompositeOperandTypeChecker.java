@@ -847,6 +847,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|int
 name|minMin
 parameter_list|(

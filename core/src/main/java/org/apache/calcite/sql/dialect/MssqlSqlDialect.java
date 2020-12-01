@@ -918,6 +918,7 @@ return|;
 block|}
 comment|/**    * Unparses datetime floor for Microsoft SQL Server.    * There is no TRUNC function, so simulate this using calls to CONVERT.    *    * @param writer Writer    * @param call Call    */
 specifier|private
+specifier|static
 name|void
 name|unparseFloor
 parameter_list|(
@@ -1467,6 +1468,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|unparseFloorWithUnit
 parameter_list|(

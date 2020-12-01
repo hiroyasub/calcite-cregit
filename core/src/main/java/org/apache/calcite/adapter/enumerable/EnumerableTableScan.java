@@ -1206,6 +1206,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Expression
 name|toEnumerable
 parameter_list|(
@@ -1892,6 +1893,7 @@ name|CUSTOM
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|hasCollectionField
 parameter_list|(

@@ -2968,6 +2968,7 @@ name|parents
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|matchOperands
 parameter_list|(

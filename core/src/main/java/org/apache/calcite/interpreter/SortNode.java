@@ -544,7 +544,7 @@ operator|.
 name|getFieldCollations
 argument_list|()
 argument_list|,
-name|this
+name|SortNode
 operator|::
 name|comparator
 argument_list|)
@@ -552,6 +552,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Comparator
 argument_list|<
 name|Row

@@ -1118,6 +1118,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlSingleOperandTypeChecker
 name|getChecker
 parameter_list|(

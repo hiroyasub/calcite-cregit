@@ -1326,6 +1326,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|String
 name|getArgCountMismatchMsg
 parameter_list|(
@@ -2645,6 +2646,7 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|MakeCall
 name|trim
 parameter_list|(
@@ -2722,6 +2724,7 @@ block|}
 return|;
 block|}
 specifier|private
+specifier|static
 name|MakeCall
 name|simple
 parameter_list|(

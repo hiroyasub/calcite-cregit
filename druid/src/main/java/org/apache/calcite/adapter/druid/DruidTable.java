@@ -1090,6 +1090,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isValidParentKind
 parameter_list|(
@@ -1126,6 +1127,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isCountDistinct
 parameter_list|(
@@ -1166,6 +1168,7 @@ block|}
 comment|// Post aggs support +, -, /, * so we should allow the parent of a count distinct to be any one of
 comment|// those.
 specifier|private
+specifier|static
 name|boolean
 name|isSupportedPostAggOperation
 parameter_list|(

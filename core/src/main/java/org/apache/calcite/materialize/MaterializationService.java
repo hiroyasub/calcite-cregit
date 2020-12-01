@@ -1856,6 +1856,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|boolean
 name|allSatisfiable
 parameter_list|(

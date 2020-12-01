@@ -2927,6 +2927,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|validateFrameBoundary
 parameter_list|(

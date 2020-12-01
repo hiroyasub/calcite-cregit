@@ -2496,6 +2496,7 @@ return|;
 block|}
 comment|/** Copies measures and column usages from an existing lattice into a builder,    * using a mapper to translate old-to-new columns, so that the new lattice can    * inherit from the old. */
 specifier|private
+specifier|static
 name|void
 name|copyMeasures
 parameter_list|(
@@ -2699,6 +2700,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|int
 name|matchQuality
 parameter_list|(
@@ -2830,6 +2832,7 @@ name|c3
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|frames
 parameter_list|(
@@ -2905,6 +2908,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|Frame

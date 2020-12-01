@@ -5181,6 +5181,7 @@ return|;
 block|}
 comment|/**      * Detect, in a generic, but strict way, whether it is possible to      * simplify a reinterpret cast. The rules are as follows:      *      *<ol>      *<li>If value is not the same basic type as outer, then we cannot      * simplify      *<li>If the value is nullable but the inner or outer are not, then we      * cannot simplify.      *<li>If inner is nullable but outer is not, we cannot simplify.      *<li>If an overflow check is required from either inner or outer, we      * cannot simplify.      *<li>Otherwise, given the same type, and sufficient nullability      * constraints, we can simplify.      *</ol>      *      * @param outer outer call to reinterpret      * @param inner inner call to reinterpret      * @param value inner value      * @return whether the two reinterpret casts can be removed      */
 specifier|private
+specifier|static
 name|boolean
 name|canSimplify
 parameter_list|(

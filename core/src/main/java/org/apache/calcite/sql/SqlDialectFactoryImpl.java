@@ -1300,6 +1300,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Casing
 name|getCasing
 parameter_list|(
@@ -1416,6 +1417,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isCaseSensitive
 parameter_list|(
@@ -1455,6 +1457,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|NullCollation
 name|getNullCollation
 parameter_list|(
@@ -1586,6 +1589,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|getIdentifierQuoteString
 parameter_list|(

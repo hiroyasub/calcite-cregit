@@ -2207,6 +2207,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|boolean
 name|shouldTrim
 parameter_list|(

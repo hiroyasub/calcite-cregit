@@ -5481,6 +5481,7 @@ return|;
 block|}
 comment|/** Returns whether all of a collection of {@link CorRef}s are satisfied    * by at least one of a collection of {@link CorDef}s. */
 specifier|private
+specifier|static
 name|boolean
 name|hasAll
 parameter_list|(
@@ -5527,6 +5528,7 @@ return|;
 block|}
 comment|/** Returns whether a {@link CorrelationId} is satisfied by at least one of a    * collection of {@link CorDef}s. */
 specifier|private
+specifier|static
 name|boolean
 name|has
 parameter_list|(
@@ -6004,6 +6006,7 @@ return|;
 block|}
 comment|/** Finds a {@link RexInputRef} that is equivalent to a {@link CorRef},    * and if found, throws a {@link org.apache.calcite.util.Util.FoundOne}. */
 specifier|private
+specifier|static
 name|void
 name|findCorrelationEquivalent
 parameter_list|(
@@ -6144,6 +6147,7 @@ break|break;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|references
 parameter_list|(
@@ -6279,6 +6283,7 @@ block|}
 block|}
 comment|/** Returns whether one type is just a widening of another.    *    *<p>For example:<ul>    *<li>{@code VARCHAR(10)} is a widening of {@code VARCHAR(5)}.    *<li>{@code VARCHAR(10)} is a widening of {@code VARCHAR(10) NOT NULL}.    *</ul>    */
 specifier|private
+specifier|static
 name|boolean
 name|isWidening
 parameter_list|(

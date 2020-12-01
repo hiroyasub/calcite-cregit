@@ -1469,6 +1469,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|ConstantExpression
@@ -1514,6 +1515,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|UnaryExpression
 name|getTimeZoneExpression
 parameter_list|(
@@ -1552,6 +1554,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|generateGet
 parameter_list|(
@@ -1948,6 +1951,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Method
 name|getMethod
 parameter_list|(
@@ -2051,6 +2055,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Method
 name|getMethod2
 parameter_list|(
@@ -2105,6 +2110,7 @@ block|}
 block|}
 comment|/** E,g, {@code jdbcGetMethod(int)} returns "getInt". */
 specifier|private
+specifier|static
 name|String
 name|jdbcGetMethod
 parameter_list|(

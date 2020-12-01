@@ -11281,6 +11281,7 @@ name|list
 return|;
 block|}
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|RexNode

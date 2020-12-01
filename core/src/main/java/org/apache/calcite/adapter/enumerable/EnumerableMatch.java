@@ -1792,6 +1792,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Expression
 name|implementMeasure
 parameter_list|(
@@ -2327,6 +2328,7 @@ return|;
 block|}
 comment|/** Generates code for a predicate. */
 specifier|private
+specifier|static
 name|Expression
 name|implementPredicate
 parameter_list|(
@@ -2591,6 +2593,7 @@ return|;
 block|}
 comment|/** Generates code for a pattern.    *    *<p>For example, for the pattern {@code (A B)}, generates    * {@code patternBuilder.symbol("A").symbol("B").seq()}. */
 specifier|private
+specifier|static
 name|Expression
 name|implementPattern
 parameter_list|(

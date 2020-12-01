@@ -758,6 +758,7 @@ argument_list|(
 literal|"unused"
 argument_list|)
 specifier|private
+specifier|static
 name|double
 name|cardinality
 parameter_list|(

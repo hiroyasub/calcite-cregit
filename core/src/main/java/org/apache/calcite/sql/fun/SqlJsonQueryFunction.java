@@ -644,6 +644,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|unparseEmptyOrErrorBehavior
 parameter_list|(
@@ -719,6 +720,7 @@ argument_list|(
 literal|"unchecked"
 argument_list|)
 specifier|private
+specifier|static
 parameter_list|<
 name|E
 extends|extends

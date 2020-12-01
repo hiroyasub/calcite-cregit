@@ -1335,6 +1335,7 @@ return|;
 block|}
 comment|/** It should not be used directly, because some other work should be done    * before cast operation, see {@link #coerceColumnType}, {@link #coerceOperandType}.    *    *<p>Ignore constant reduction which should happen in RexSimplify.    */
 specifier|private
+specifier|static
 name|SqlNode
 name|castTo
 parameter_list|(
@@ -2993,6 +2994,7 @@ name|resultType
 return|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|RelDataType

@@ -511,6 +511,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|allowAliasUnnestItems
 parameter_list|(

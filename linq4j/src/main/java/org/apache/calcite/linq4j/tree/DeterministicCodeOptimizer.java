@@ -1369,6 +1369,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 parameter_list|<
 name|C
 parameter_list|>

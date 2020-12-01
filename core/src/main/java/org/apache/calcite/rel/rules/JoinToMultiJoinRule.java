@@ -763,6 +763,7 @@ expr_stmt|;
 block|}
 comment|/**    * Combines the inputs into a LogicalJoin into an array of inputs.    *    * @param join                   original join    * @param left                   left input into join    * @param right                  right input into join    * @param projFieldsList         returns a list of the new combined projection    *                               fields    * @param joinFieldRefCountsList returns a list of the new combined join    *                               field reference counts    * @return combined left and right inputs in an array    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|RelNode
@@ -1068,6 +1069,7 @@ return|;
 block|}
 comment|/**    * Combines the outer join conditions and join types from the left and right    * join inputs. If the join itself is either a left or right outer join,    * then the join condition corresponding to the join is also set in the    * position corresponding to the null-generating input into the join. The    * join type is also set.    *    * @param joinRel        join rel    * @param combinedInputs the combined inputs to the join    * @param left           left child of the joinrel    * @param right          right child of the joinrel    * @param joinSpecs      the list where the join types and conditions will be    *                       copied    */
 specifier|private
+specifier|static
 name|void
 name|combineOuterJoins
 parameter_list|(
@@ -1405,6 +1407,7 @@ block|}
 block|}
 comment|/**    * Copies outer join data from a source MultiJoin to a new set of arrays.    * Also adjusts the conditions to reflect the new position of an input if    * that input ends up being shifted to the right.    *    * @param multiJoin     the source MultiJoin    * @param destJoinSpecs    the list where the join types and conditions will    *                         be copied    * @param adjustmentAmount if&gt; 0, the amount the RexInputRefs in the join    *                         conditions need to be adjusted by    * @param srcFields        the source fields that the original join conditions    *                         are referencing    * @param destFields       the destination fields that the new join conditions    */
 specifier|private
+specifier|static
 name|void
 name|copyOuterJoinInfo
 parameter_list|(
@@ -1610,6 +1613,7 @@ block|}
 block|}
 comment|/**    * Combines the join filters from the left and right inputs (if they are    * MultiJoinRels) with the join filter in the joinrel into a single AND'd    * join filter, unless the inputs correspond to null generating inputs in an    * outer join.    *    * @param join    Join    * @param left    Left input of the join    * @param right   Right input of the join    * @return combined join filters AND-ed together    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 annotation|@
@@ -1761,6 +1765,7 @@ return|;
 block|}
 comment|/**    * Returns whether an input can be merged into a given relational expression    * without changing semantics.    *    * @param input          input into a join    * @param nullGenerating true if the input is null generating    * @return true if the input can be combined into a parent MultiJoin    */
 specifier|private
+specifier|static
 name|boolean
 name|canCombine
 parameter_list|(
@@ -1804,6 +1809,7 @@ return|;
 block|}
 comment|/**    * Shifts a filter originating from the right child of the LogicalJoin to the    * right, to reflect the filter now being applied on the resulting    * MultiJoin.    *    * @param joinRel     the original LogicalJoin    * @param left        the left child of the LogicalJoin    * @param right       the right child of the LogicalJoin    * @param rightFilter the filter originating from the right child    * @return the adjusted right filter    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|RexNode
@@ -1941,6 +1947,7 @@ return|;
 block|}
 comment|/**    * Adds on to the existing join condition reference counts the references    * from the new join condition.    *    * @param multiJoinInputs          inputs into the new MultiJoin    * @param nTotalFields             total number of fields in the MultiJoin    * @param joinCondition            the new join condition    * @param origJoinFieldRefCounts   existing join condition reference counts    *    * @return Map containing the new join condition    */
 specifier|private
+specifier|static
 name|ImmutableMap
 argument_list|<
 name|Integer
@@ -2232,6 +2239,7 @@ return|;
 block|}
 comment|/**    * Combines the post-join filters from the left and right inputs (if they    * are MultiJoinRels) into a single AND'd filter.    *    * @param joinRel the original LogicalJoin    * @param left    left child of the LogicalJoin    * @param right   right child of the LogicalJoin    * @return combined post-join filters AND'd together    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 annotation|@

@@ -2371,6 +2371,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isCrossJoin
 parameter_list|(
@@ -3779,6 +3780,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|groupItem
 parameter_list|(
@@ -4914,6 +4916,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|createAlwaysFalseCondition
 parameter_list|()
@@ -5597,6 +5600,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlIdentifier
 name|getSqlTargetTable
 parameter_list|(
@@ -5945,6 +5949,7 @@ block|}
 block|}
 comment|/** Converts a list of {@link RexNode} expressions to {@link SqlNode}    * expressions. */
 specifier|private
+specifier|static
 name|SqlNodeList
 name|exprList
 parameter_list|(
@@ -5989,6 +5994,7 @@ return|;
 block|}
 comment|/** Converts a list of names expressions to a list of single-part    * {@link SqlIdentifier}s. */
 specifier|private
+specifier|static
 name|SqlNodeList
 name|identifierList
 parameter_list|(
@@ -6840,6 +6846,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlCall
 name|as
 parameter_list|(

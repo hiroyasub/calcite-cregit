@@ -929,6 +929,7 @@ name|alias
 return|;
 block|}
 specifier|private
+specifier|static
 name|PigAggFunction
 name|toPigAggFunc
 parameter_list|(

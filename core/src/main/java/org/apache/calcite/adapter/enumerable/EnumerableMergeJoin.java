@@ -2099,6 +2099,7 @@ end_comment
 
 begin_function
 specifier|private
+specifier|static
 name|RelCollation
 name|extendCollation
 parameter_list|(
@@ -2208,6 +2209,7 @@ end_comment
 
 begin_function
 specifier|private
+specifier|static
 name|RelCollation
 name|intersectCollationAndJoinKey
 parameter_list|(

@@ -753,6 +753,7 @@ literal|')'
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|containsOnlyConjunctions
 parameter_list|(
@@ -776,6 +777,7 @@ return|;
 block|}
 comment|/**    * Converts a literal to a Pig Latin string literal.    *    *<p>TODO: do proper literal to string conversion + escaping    */
 specifier|private
+specifier|static
 name|String
 name|getLiteralAsString
 parameter_list|(

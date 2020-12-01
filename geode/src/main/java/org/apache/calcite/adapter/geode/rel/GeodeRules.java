@@ -768,6 +768,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|stripQuotes
 parameter_list|(
@@ -1529,6 +1530,7 @@ return|;
 block|}
 comment|/**      * Check if the node is a supported predicate (primary field condition).      *      * @param node       Condition node to check      * @param fieldNames Names of all columns in the table      * @return True if the node represents an equality predicate on a primary key      */
 specifier|private
+specifier|static
 name|boolean
 name|isEqualityOnKey
 parameter_list|(
@@ -1647,6 +1649,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isBooleanColumnReference
 parameter_list|(
@@ -1783,6 +1786,7 @@ return|;
 block|}
 comment|/**      * Checks whether a condition contains input refs of literals.      *      * @param left       Left operand of the equality      * @param right      Right operand of the equality      * @param fieldNames Names of all columns in the table      * @return Whether condition is supported      */
 specifier|private
+specifier|static
 name|boolean
 name|checkConditionContainsInputRefOrLiterals
 parameter_list|(
@@ -2071,6 +2075,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|RelNode
 name|convert
 parameter_list|(

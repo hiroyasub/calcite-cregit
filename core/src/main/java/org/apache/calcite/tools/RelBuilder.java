@@ -4793,6 +4793,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|GroupKey
 name|groupKey_
 parameter_list|(
@@ -6756,6 +6757,7 @@ return|;
 block|}
 comment|/**    * Gets column mappings of the operator.    *    * @param op operator instance    * @return column mappings associated with this function    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|Set
@@ -13984,6 +13986,7 @@ end_comment
 
 begin_function
 specifier|private
+specifier|static
 name|boolean
 name|allNull
 parameter_list|(

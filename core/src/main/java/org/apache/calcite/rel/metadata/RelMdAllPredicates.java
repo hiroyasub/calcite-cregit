@@ -917,6 +917,7 @@ block|}
 block|}
 comment|/**    * Add the Filter condition to the list obtained from the input.    * The pred comes from the parent of rel.    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|RelOptPredicateList

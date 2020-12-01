@@ -4989,6 +4989,7 @@ block|}
 block|}
 comment|/**    * Validates strong policy for specified {@link RexNode}.    *    * @param rexNode Rex node to validate the strong policy    * @throws AssertionError If the validation fails    */
 specifier|private
+specifier|static
 name|void
 name|validateStrongPolicy
 parameter_list|(
@@ -5114,6 +5115,7 @@ block|}
 block|}
 comment|/**    * Returns {@code true} if specified {@link SqlKind} has custom nullability rules which    * depend not only on the nullability of input operands.    *    *<p>For example, CAST may be used to change the nullability of its operand type,    * so it may be nullable, though the argument type was non-nullable.    *    * @param sqlKind Sql kind to check    * @return {@code true} if specified {@link SqlKind} has custom nullability rules    */
 specifier|private
+specifier|static
 name|boolean
 name|hasCustomNullabilityRules
 parameter_list|(
@@ -5810,6 +5812,7 @@ return|;
 block|}
 comment|/**    * If boolean is true, simplify cond in input branch and return new branch.    * Otherwise, simply return input branch.    */
 specifier|private
+specifier|static
 name|CaseBranch
 name|generateBranch
 parameter_list|(
@@ -9339,6 +9342,7 @@ argument_list|(
 literal|"BetaApi"
 argument_list|)
 specifier|private
+specifier|static
 parameter_list|<
 name|C
 extends|extends

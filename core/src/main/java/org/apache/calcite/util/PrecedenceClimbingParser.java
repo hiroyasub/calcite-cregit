@@ -934,6 +934,7 @@ return|;
 block|}
 comment|/** Returns the right precedence of the preceding operator token. */
 specifier|private
+specifier|static
 name|int
 name|prevRight
 parameter_list|(
@@ -997,6 +998,7 @@ return|;
 block|}
 comment|/** Returns the left precedence of the following operator token. */
 specifier|private
+specifier|static
 name|int
 name|nextLeft
 parameter_list|(

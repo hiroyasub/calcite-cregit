@@ -1886,6 +1886,7 @@ block|}
 block|}
 comment|/** Returns [major, minor] version from a database metadata. */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Integer
@@ -2487,6 +2488,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RelDataType
 name|sqlType
 parameter_list|(
@@ -2705,6 +2707,7 @@ block|}
 block|}
 comment|/** Given "INTEGER", returns BasicSqlType(INTEGER).    * Given "VARCHAR(10)", returns BasicSqlType(VARCHAR, 10).    * Given "NUMERIC(10, 2)", returns BasicSqlType(NUMERIC, 10, 2). */
 specifier|private
+specifier|static
 name|RelDataType
 name|parseTypeString
 parameter_list|(

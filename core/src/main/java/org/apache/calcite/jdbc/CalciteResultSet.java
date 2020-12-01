@@ -549,7 +549,7 @@ specifier|final
 name|Cursor
 name|cursor
 init|=
-name|resultSet
+name|CalciteResultSet
 operator|.
 name|createCursor
 argument_list|(
@@ -570,6 +570,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Cursor
 name|createCursor
 parameter_list|(

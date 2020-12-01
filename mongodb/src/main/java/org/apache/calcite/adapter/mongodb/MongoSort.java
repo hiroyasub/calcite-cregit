@@ -591,6 +591,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|int
 name|direction
 parameter_list|(

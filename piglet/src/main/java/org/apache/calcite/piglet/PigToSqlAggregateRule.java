@@ -2146,6 +2146,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 name|getGroupRefIndex
 parameter_list|(
@@ -2221,6 +2222,7 @@ return|;
 block|}
 comment|/**    * Returns a list of columns accessed in a Pig aggregate UDF call.    *    * @param pigAggCall Pig aggregate UDF call    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Integer
@@ -2350,6 +2352,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Integer

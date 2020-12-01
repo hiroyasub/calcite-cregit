@@ -1507,6 +1507,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|evaluateBoolean
 parameter_list|(
@@ -1539,6 +1540,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Number
 name|evaluateNumber
 parameter_list|(
@@ -1571,6 +1573,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 name|evaluateInt
 parameter_list|(
@@ -1594,6 +1597,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|short
 name|evaluateShort
 parameter_list|(
@@ -1617,6 +1621,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|long
 name|evaluateLong
 parameter_list|(
@@ -1640,6 +1645,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|byte
 name|evaluateByte
 parameter_list|(
@@ -1663,6 +1669,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|float
 name|evaluateFloat
 parameter_list|(
@@ -1686,6 +1693,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|double
 name|evaluateDouble
 parameter_list|(

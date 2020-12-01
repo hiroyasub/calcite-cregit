@@ -945,6 +945,7 @@ name|map
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|addPredicate
 parameter_list|(
@@ -1001,6 +1002,7 @@ expr_stmt|;
 block|}
 comment|/** Returns whether {@code v0} is a stronger value for operator {@code key}      * than {@code v1}.      *      *<p>For example, {@code stronger("$lt", 100, 200)} returns true, because      * "&lt; 100" is a more powerful condition than "&lt; 200".      */
 specifier|private
+specifier|static
 name|boolean
 name|stronger
 parameter_list|(

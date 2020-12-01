@@ -5225,6 +5225,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Boolean
 name|isUdf
 parameter_list|(

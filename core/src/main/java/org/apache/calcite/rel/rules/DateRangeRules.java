@@ -2936,6 +2936,7 @@ return|;
 block|}
 comment|// Assumes v is a valid value for given timeunit
 specifier|private
+specifier|static
 name|boolean
 name|next
 parameter_list|(
@@ -3484,6 +3485,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Range
 argument_list|<
 name|Calendar
@@ -3616,6 +3618,7 @@ block|}
 block|}
 comment|/** Returns a copy of a calendar, optionally rounded up to the next time      * unit. */
 specifier|private
+specifier|static
 name|Calendar
 name|round
 parameter_list|(
@@ -3971,6 +3974,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Range
 argument_list|<
 name|Calendar
@@ -4128,6 +4132,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Range
 argument_list|<
 name|Calendar
@@ -4333,6 +4338,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Calendar
 name|increment
 parameter_list|(
@@ -4370,6 +4376,7 @@ name|c
 return|;
 block|}
 specifier|private
+specifier|static
 name|Calendar
 name|decrement
 parameter_list|(
@@ -4408,6 +4415,7 @@ name|c
 return|;
 block|}
 specifier|private
+specifier|static
 name|Calendar
 name|ceil
 parameter_list|(
@@ -4448,6 +4456,7 @@ return|;
 block|}
 comment|/**      * Computes floor of a calendar to a given time unit.      *      * @return returns a copy of calendar, floored to the given time unit      */
 specifier|private
+specifier|static
 name|Calendar
 name|floor
 parameter_list|(

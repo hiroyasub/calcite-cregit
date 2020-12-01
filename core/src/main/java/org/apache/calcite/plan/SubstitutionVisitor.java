@@ -3379,6 +3379,7 @@ return|;
 block|}
 comment|/**    * Equivalence checking for row types, but except for the field names.    */
 specifier|private
+specifier|static
 name|boolean
 name|rowTypesAreEquivalent
 parameter_list|(

@@ -587,6 +587,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlDataTypeSpec
 name|createSqlDataTypeSpecByName
 parameter_list|(
@@ -1048,6 +1049,7 @@ block|}
 block|}
 comment|/**    * Unparses datetime floor for ClickHouse.    *    * @param writer Writer    * @param call Call    */
 specifier|private
+specifier|static
 name|void
 name|unparseFloor
 parameter_list|(

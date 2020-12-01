@@ -3369,6 +3369,7 @@ return|;
 block|}
 comment|/** Returns the row type of {@code rel}, adjusting the field names if    * {@code node} is "(query) as tableAlias (fieldAlias, ...)". */
 specifier|private
+specifier|static
 name|RelDataType
 name|adjustedRowType
 parameter_list|(
@@ -3747,6 +3748,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|collectAliases
 parameter_list|(
@@ -6433,6 +6435,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlCall
 name|createOverCall
 parameter_list|(

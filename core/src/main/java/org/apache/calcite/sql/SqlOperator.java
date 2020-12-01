@@ -967,7 +967,7 @@ comment|/** Not supported. Choose between    * {@link #createCall(SqlLiteral, Sq
 annotation|@
 name|Deprecated
 specifier|public
-specifier|final
+specifier|static
 name|SqlCall
 name|createCall
 parameter_list|(

@@ -465,6 +465,7 @@ name|v
 return|;
 block|}
 specifier|private
+specifier|static
 name|IllegalArgumentException
 name|unbound
 parameter_list|(
@@ -1302,6 +1303,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|extract
 parameter_list|(
@@ -1407,6 +1409,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|coalesce
 parameter_list|(
@@ -1442,6 +1445,7 @@ name|N
 return|;
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|ceil
 parameter_list|(
@@ -1603,6 +1607,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|TimeUnitRange
 name|subUnit
 parameter_list|(
@@ -1632,6 +1637,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|cast
 parameter_list|(
@@ -1668,6 +1674,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|not
 parameter_list|(
@@ -1711,6 +1718,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|case_
 parameter_list|(
@@ -1822,6 +1830,7 @@ name|elseValue
 return|;
 block|}
 specifier|private
+specifier|static
 name|BigDecimal
 name|number
 parameter_list|(
@@ -1894,6 +1903,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Comparable
 name|compare
 parameter_list|(
@@ -2073,6 +2083,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|containsNull
 parameter_list|(

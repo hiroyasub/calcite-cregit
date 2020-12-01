@@ -1292,6 +1292,7 @@ return|;
 block|}
 comment|/**    * Looks at the usage of variables in first and second conjunction to decide    * whether this kind of expression is currently supported for proving first    * implies second.    *    *<ol>    *<li>Variables should be used only once in both the conjunction against    * given set of operations only:&gt;,&lt;,&le;,&ge;, =;&ne;.    *    *<li>All the variables used in second condition should be used even in the    * first.    *    *<li>If operator used for variable in first is op1 and op2 for second, then    * we support these combination for conjunction (op1, op2) then op1, op2    * belongs to one of the following sets:    *    *<ul>    *<li>(&lt;,&le;) X (&lt;,&le;)<i>note: X represents cartesian product</i>    *<li>(&gt; /&ge;) X (&gt;,&ge;)    *<li>(=) X (&gt;,&ge;,&lt;,&le;, =,&ne;)    *<li>(&ne;, =)    *</ul>    *    *<li>We support at most 2 operators to be be used for a variable in first    * and second usages.    *    *</ol>    *    * @return whether input usage pattern is supported    */
 specifier|private
+specifier|static
 name|boolean
 name|checkSupport
 parameter_list|(
@@ -1765,6 +1766,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isSupportedUnaryOperators
 parameter_list|(
@@ -1793,6 +1795,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isEquivalentOp
 parameter_list|(
@@ -1884,6 +1887,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isOppositeOp
 parameter_list|(
@@ -1973,6 +1977,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|validate
 parameter_list|(
@@ -2329,6 +2334,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|SqlOperator
 name|reverse
 parameter_list|(

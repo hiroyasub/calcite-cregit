@@ -1657,6 +1657,7 @@ expr_stmt|;
 block|}
 comment|/**    * Converts an aggregate with one distinct aggregate and one or more    * non-distinct aggregates to multi-phase aggregates (see reference example    * below).    *    * @param relBuilder Contains the input relational expression    * @param aggregate  Original aggregate    * @param argLists   Arguments and filters to the distinct aggregate function    *    */
 specifier|private
+specifier|static
 name|RelBuilder
 name|convertSingletonDistinct
 parameter_list|(
@@ -2310,6 +2311,7 @@ name|relBuilder
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|rewriteUsingGroupingSets
 parameter_list|(
@@ -3525,6 +3527,7 @@ return|;
 block|}
 comment|/**    * Converts an aggregate relational expression that contains just one    * distinct aggregate function (or perhaps several over the same arguments)    * and no non-distinct aggregate functions.    */
 specifier|private
+specifier|static
 name|RelBuilder
 name|convertMonopole
 parameter_list|(
@@ -3661,6 +3664,7 @@ return|;
 block|}
 comment|/**    * Converts all distinct aggregate calls to a given set of arguments.    *    *<p>This method is called several times, one for each set of arguments.    * Each time it is called, it generates a JOIN to a new SELECT DISTINCT    * relational expression, and modifies the set of top-level calls.    *    * @param aggregate Original aggregate    * @param n         Ordinal of this in a join. {@code relBuilder} contains the    *                  input relational expression (either the original    *                  aggregate, the output from the previous call to this    *                  method. {@code n} is 0 if we're converting the    *                  first distinct aggregate in a query with no non-distinct    *                  aggregates)    * @param argList   Arguments to the distinct aggregate function    * @param filterArg Argument that filters input to aggregate function, or -1    * @param refs      Array of expressions which will be the projected by the    *                  result of this rule. Those relating to this arg list will    *                  be modified    */
 specifier|private
+specifier|static
 name|void
 name|doRewrite
 parameter_list|(
@@ -4578,6 +4582,7 @@ block|}
 block|}
 comment|/**    * Given an {@link org.apache.calcite.rel.core.Aggregate}    * and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    *<p>and the argument list    *    *<blockquote>{2}</blockquote>    *    *<p>returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.    *    * @param relBuilder Relational expression builder    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param filterArg Ordinal of column to filter on, or -1    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
 specifier|private
+specifier|static
 name|RelBuilder
 name|createSelectDistinct
 parameter_list|(

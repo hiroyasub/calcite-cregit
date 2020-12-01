@@ -1124,6 +1124,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|ImmutableBitSet
 name|findReference
 parameter_list|(
@@ -1316,6 +1317,7 @@ argument_list|()
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 name|getAdjustedIndex
 parameter_list|(

@@ -854,6 +854,7 @@ expr_stmt|;
 block|}
 comment|/**    * Locates all null generating factors whose outer join can be removed. The    * outer join can be removed if the join keys corresponding to the null    * generating factor are unique and no columns are projected from it.    *    * @param multiJoin join factors being optimized    */
 specifier|private
+specifier|static
 name|void
 name|findRemovableOuterJoins
 parameter_list|(
@@ -1408,6 +1409,7 @@ block|}
 block|}
 comment|/**    * Sets a join key if only one of the specified input references corresponds    * to a specified factor as determined by its field numbers. Also keeps    * track of the keys from the other factor.    *    * @param joinKeys join keys to be set if a key is found    * @param otherJoinKeys join keys for the other join factor    * @param ref1 first input reference    * @param ref2 second input reference    * @param firstFieldNum first field number of the factor    * @param lastFieldNum last field number + 1 of the factor    * @param swap if true, check for the desired input reference in the second    * input reference parameter if the first input reference isn't the correct    * one    */
 specifier|private
+specifier|static
 name|void
 name|setJoinKey
 parameter_list|(
@@ -1515,6 +1517,7 @@ block|}
 block|}
 comment|/**    * Locates pairs of joins that are self-joins where the join can be removed    * because the join condition between the two factors is an equality join on    * unique keys.    *    * @param multiJoin join factors being optimized    */
 specifier|private
+specifier|static
 name|void
 name|findRemovableSelfJoins
 parameter_list|(
@@ -1863,6 +1866,7 @@ block|}
 block|}
 comment|/**    * Retrieves join factors that correspond to simple table references. A    * simple table reference is a single table reference with no grouping or    * aggregation.    *    * @param multiJoin join factors being optimized    *    * @return map consisting of the simple factors and the tables they    * correspond    */
 specifier|private
+specifier|static
 name|Map
 argument_list|<
 name|Integer
@@ -1998,6 +2002,7 @@ return|;
 block|}
 comment|/**    * Determines if the equality join filters between two factors that map to    * the same table consist of unique, identical keys.    *    * @param multiJoin join factors being optimized    * @param leftFactor left factor in the join    * @param rightFactor right factor in the join    * @param joinFilterList list of join filters between the two factors    *    * @return true if the criteria are met    */
 specifier|private
+specifier|static
 name|boolean
 name|isSelfJoinFilterUnique
 parameter_list|(
@@ -2226,6 +2231,7 @@ return|;
 block|}
 comment|/**    * Generates N optimal join orderings. Each ordering contains each factor as    * the first factor in the ordering.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param call RelOptRuleCall associated with this rule    */
 specifier|private
+specifier|static
 name|void
 name|findBestOrderings
 parameter_list|(
@@ -2381,6 +2387,7 @@ block|}
 block|}
 comment|/**    * Creates the topmost projection that will sit on top of the selected join    * ordering. The projection needs to match the original join ordering. Also,    * places any post-join filters on top of the project.    *    * @param multiJoin join factors being optimized    * @param joinTree selected join ordering    * @param fieldNames field names corresponding to the projection expressions    *    * @return created projection    */
 specifier|private
+specifier|static
 name|RelNode
 name|createTopProject
 parameter_list|(
@@ -2731,6 +2738,7 @@ return|;
 block|}
 comment|/**    * Computes the cardinality of the join columns from a particular factor,    * when that factor is joined with another join tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins chosen for each factor    * @param joinTree the join tree that the factor is being joined with    * @param filters possible join filters to select from    * @param factor the factor being added    *    * @return computed cardinality    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|Double
@@ -2900,6 +2908,7 @@ block|}
 block|}
 comment|/**    * Locates from a list of filters those that correspond to a particular join    * tree. Then, for each of those filters, extracts the fields corresponding    * to a particular factor, setting them in a bitmap.    *    * @param multiJoin join factors being optimized    * @param filters list of join filters    * @param joinFactors bitmap containing the factors in a particular join    * tree    * @param factorStart the initial offset of the factor whose join keys will    * be extracted    * @param nFields the number of fields in the factor whose join keys will be    * extracted    * @param joinKeys the bitmap that will be set with the join keys    */
 specifier|private
+specifier|static
 name|void
 name|setFactorJoinKeys
 parameter_list|(
@@ -3025,6 +3034,7 @@ block|}
 block|}
 comment|/**    * Generates a join tree with a specific factor as the first factor in the    * join tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param firstFactor first factor in the tree    *    * @return constructed join tree or null if it is not possible for    * firstFactor to appear as the first factor in the join    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|LoptJoinTree
@@ -3320,6 +3330,7 @@ return|;
 block|}
 comment|/**    * Determines the best factor to be added next into a join tree.    *    * @param multiJoin join factors being optimized    * @param factorsToAdd factors to choose from to add next    * @param factorsAdded factors that have already been added to the join tree    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree join tree constructed thus far    * @param filtersToAdd remaining filters that need to be added    *    * @return index of the best factor to add next    */
 specifier|private
+specifier|static
 name|int
 name|getBestNextFactor
 parameter_list|(
@@ -3625,6 +3636,7 @@ return|;
 block|}
 comment|/**    * Returns whether a RelNode corresponds to a Join that wasn't one of the    * original MultiJoin input factors.    */
 specifier|private
+specifier|static
 name|boolean
 name|isJoinTree
 parameter_list|(
@@ -3670,6 +3682,7 @@ block|}
 block|}
 comment|/**    * Adds a new factor into the current join tree. The factor is either pushed    * down into one of the subtrees of the join recursively, or it is added to    * the top of the current tree, whichever yields a better ordering.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param factorsNeeded factors that must precede the factor to be added    * @param filtersToAdd filters remaining to be added; filters added to the    * new join tree are removed from the list    * @param selfJoin true if the join being created is a self-join that's    * removable    *    * @return optimal join tree with the new factor added if it is possible to    * add the factor; otherwise, null is returned    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|LoptJoinTree
@@ -4050,6 +4063,7 @@ return|;
 block|}
 comment|/**    * Computes a cost for a join tree based on the row widths of the inputs    * into the join. Joins where the inputs have the fewest number of columns    * lower in the tree are better than equivalent joins where the inputs with    * the larger number of columns are lower in the tree.    *    * @param tree a tree of RelNodes    *    * @return the cost associated with the width of the tree    */
 specifier|private
+specifier|static
 name|int
 name|rowWidthCost
 parameter_list|(
@@ -4113,6 +4127,7 @@ return|;
 block|}
 comment|/**    * Creates a join tree where the new factor is pushed down one of the    * operands of the current join tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param factorsNeeded factors that must precede the factor to be added    * @param filtersToAdd filters remaining to be added; filters that are added    * to the join tree are removed from the list    * @param selfJoin true if the factor being added is part of a removable    * self-join    *    * @return optimal join tree with the new factor pushed down the current    * join tree if it is possible to do the pushdown; otherwise, null is    * returned    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|LoptJoinTree
@@ -4620,6 +4635,7 @@ return|;
 block|}
 comment|/**    * Creates a join tree with the new factor added to the top of the tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param joinTree current join tree    * @param factorToAdd new factor to be added    * @param filtersToAdd filters remaining to be added; modifies the list to    * remove filters that can be added to the join tree    * @param selfJoin true if the join being created is a self-join that's    * removable    *    * @return new join tree    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|LoptJoinTree
@@ -4837,6 +4853,7 @@ return|;
 block|}
 comment|/**    * Determines which join filters can be added to the current join tree. Note    * that the join filter still reflects the original join ordering. It will    * only be adjusted to reflect the new join ordering if the "adjust"    * parameter is set to true.    *    * @param multiJoin join factors being optimized    * @param leftTree left subtree of the join tree    * @param leftIdx if&ge; 0, only consider filters that reference leftIdx in    * leftTree; otherwise, consider all filters that reference any factor in    * leftTree    * @param rightTree right subtree of the join tree    * @param filtersToAdd remaining join filters that need to be added; those    * that are added are removed from the list    * @param adjust if true, adjust filter to reflect new join ordering    *    * @return AND'd expression of the join filters that can be added to the    * current join tree    */
 specifier|private
+specifier|static
 name|RexNode
 name|addFilters
 parameter_list|(
@@ -5157,6 +5174,7 @@ return|;
 block|}
 comment|/**    * Adjusts a filter to reflect a newly added factor in the middle of an    * existing join tree.    *    * @param multiJoin join factors being optimized    * @param left left subtree of the join    * @param right right subtree of the join    * @param condition current join condition    * @param factorAdded index corresponding to the newly added factor    * @param origJoinOrder original join order, before factor was pushed into    * the tree    * @param origFields fields from the original join before the factor was    * added    *    * @return modified join condition reflecting addition of the new factor    */
 specifier|private
+specifier|static
 name|RexNode
 name|adjustFilter
 parameter_list|(
@@ -5444,6 +5462,7 @@ return|;
 block|}
 comment|/**    * Sets an adjustment array based on where column references for a    * particular factor end up as a result of a new join ordering.    *    *<p>If the factor is not the right factor in a removable self-join, then    * it needs to be adjusted as follows:    *    *<ul>    *<li>First subtract, based on where the factor was in the original join    * ordering.    *<li>Then add on the number of fields in the factors that now precede this    * factor in the new join ordering.    *</ul>    *    *<p>If the factor is the right factor in a removable self-join and its    * column reference can be mapped to the left factor in the self-join, then:    *    *<ul>    *<li>First subtract, based on where the column reference is in the new    * join ordering.    *<li>Then, add on the number of fields up to the start of the left factor    * in the self-join in the new join ordering.    *<li>Then, finally add on the offset of the corresponding column from the    * left factor.    *</ul>    *    *<p>Note that this only applies if both factors in the self-join are in the    * join ordering. If they are, then the left factor always precedes the    * right factor in the join ordering.    *    * @param multiJoin join factors being optimized    * @param factor the factor whose references are being adjusted    * @param newJoinOrder the new join ordering containing the factor    * @param newPos the position of the factor in the new join ordering    * @param adjustments the adjustments array that will be set    * @param offset the starting offset within the original join ordering for    * the columns of the factor being adjusted    * @param newOffset the new starting offset in the new join ordering for the    * columns of the factor being adjusted    * @param alwaysUseDefault always use the default adjustment value    * regardless of whether the factor is the right factor in a removable    * self-join    *    * @return true if at least one column from the factor requires adjustment    */
 specifier|private
+specifier|static
 name|boolean
 name|remapJoinReferences
 parameter_list|(
@@ -5695,6 +5714,7 @@ return|;
 block|}
 comment|/**    * In the event that a dimension table does not need to be joined because of    * a semijoin, this method creates a join tree that consists of a projection    * on top of an existing join tree. The existing join tree must contain the    * fact table in the semijoin that allows the dimension table to be removed.    *    *<p>The projection created on top of the join tree mimics a join of the    * fact and dimension tables. In order for the dimension table to have been    * removed, the only fields referenced from the dimension table are its    * dimension keys. Therefore, we can replace these dimension fields with the    * fields corresponding to the semijoin keys from the fact table in the    * projection.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param factTree existing join tree containing the fact table    * @param dimIdx dimension table factor id    * @param filtersToAdd filters remaining to be added; filters added to the    * new join tree are removed from the list    *    * @return created join tree or null if the corresponding fact table has not    * been joined in yet    */
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|LoptJoinTree
@@ -5945,6 +5965,7 @@ return|;
 block|}
 comment|/**    * Creates a replacement join, projecting either dummy columns or    * replacement keys from the factor that doesn't actually need to be joined.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins for each factor    * @param currJoinTree current join tree being added to    * @param leftIdx if&ge; 0, when creating the replacement join, only consider    * filters that reference leftIdx in currJoinTree; otherwise, consider all    * filters that reference any factor in currJoinTree    * @param factorToAdd new factor whose join can be removed    * @param newKeys join keys that need to be replaced    * @param replacementKeys the keys that replace the join keys; null if we're    * removing the null generating factor in an outer join    * @param filtersToAdd filters remaining to be added; filters added to the    * new join tree are removed from the list    *    * @return created join tree with an appropriate projection for the factor    * that can be removed    */
 specifier|private
+specifier|static
 name|LoptJoinTree
 name|createReplacementJoin
 argument_list|(
@@ -6426,6 +6447,7 @@ return|;
 block|}
 comment|/**    * Creates a LogicalJoin given left and right operands and a join condition.    * Swaps the operands if beneficial.    *    * @param multiJoin join factors being optimized    * @param left left operand    * @param right right operand    * @param condition join condition    * @param joinType the join type    * @param fullAdjust true if the join condition reflects the original join    * ordering and therefore has not gone through any type of adjustment yet;    * otherwise, the condition has already been partially adjusted and only    * needs to be further adjusted if swapping is done    * @param filtersToAdd additional filters that may be added on top of the    * resulting LogicalJoin, if the join is a left or right outer join    * @param selfJoin true if the join being created is a self-join that's    * removable    *    * @return created LogicalJoin    */
 specifier|private
+specifier|static
 name|LoptJoinTree
 name|createJoinSubtree
 parameter_list|(
@@ -6738,6 +6760,7 @@ return|;
 block|}
 comment|/**    * Determines whether any additional filters are applicable to a join tree.    * If there are any, creates a filter node on top of the join tree with the    * additional filters.    *    * @param relBuilder Builder holding current join tree    * @param multiJoin join factors being optimized    * @param left left side of join tree    * @param right right side of join tree    * @param filtersToAdd remaining filters    */
 specifier|private
+specifier|static
 name|void
 name|addAdditionalFilters
 parameter_list|(
@@ -6877,6 +6900,7 @@ block|}
 block|}
 comment|/**    * Swaps the operands to a join, so the smaller input is on the right. Or,    * if this is a removable self-join, swap so the factor that should be    * preserved when the self-join is removed is put on the left.    *    * @param multiJoin join factors being optimized    * @param left left side of join tree    * @param right right hand side of join tree    * @param selfJoin true if the join is a removable self-join    *    * @return true if swapping should be done    */
 specifier|private
+specifier|static
 name|boolean
 name|swapInputs
 parameter_list|(
@@ -7029,6 +7053,7 @@ return|;
 block|}
 comment|/**    * Adjusts a filter to reflect swapping of join inputs.    *    * @param rexBuilder rexBuilder    * @param multiJoin join factors being optimized    * @param origLeft original LHS of the join tree (before swap)    * @param origRight original RHS of the join tree (before swap)    * @param condition original join condition    *    * @return join condition reflect swap of join inputs    */
 specifier|private
+specifier|static
 name|RexNode
 name|swapFilter
 parameter_list|(
@@ -7180,6 +7205,7 @@ return|;
 block|}
 comment|/**    * Sets an array indicating how much each factor in a join tree needs to be    * adjusted to reflect the tree's join ordering.    *    * @param multiJoin join factors being optimized    * @param adjustments array to be filled out    * @param joinTree join tree    * @param otherTree null unless joinTree only represents the left side of    * the join tree    * @param selfJoin true if no adjustments need to be made for self-joins    *    * @return true if some adjustment is required; false otherwise    */
 specifier|private
+specifier|static
 name|boolean
 name|needsAdjustment
 parameter_list|(

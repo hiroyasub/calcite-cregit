@@ -302,6 +302,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|double
 name|cardinality
 parameter_list|(

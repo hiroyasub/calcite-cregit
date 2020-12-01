@@ -502,6 +502,7 @@ expr_stmt|;
 block|}
 comment|/**    * Pulls the project above the semijoin and returns the resulting semijoin    * condition. As a result, the semijoin condition should be modified such    * that references to the LHS of a semijoin should now reference the    * children of the project that's on the LHS.    *    * @param project  LogicalProject on the LHS of the semijoin    * @param semiJoin the semijoin    * @return the modified semijoin condition    */
 specifier|private
+specifier|static
 name|RexNode
 name|adjustCondition
 parameter_list|(

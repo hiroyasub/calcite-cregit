@@ -1697,6 +1697,7 @@ end_return
 
 begin_function
 unit|}      private
+specifier|static
 name|boolean
 name|isDependent
 parameter_list|(
@@ -1893,6 +1894,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Integer
@@ -1965,6 +1967,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|DirectedGraph
 argument_list|<
 name|Integer

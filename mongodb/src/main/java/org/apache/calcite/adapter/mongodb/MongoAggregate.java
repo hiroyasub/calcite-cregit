@@ -986,6 +986,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|String
 name|toMongo
 parameter_list|(

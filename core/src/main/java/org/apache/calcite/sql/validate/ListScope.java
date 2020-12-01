@@ -541,6 +541,7 @@ literal|null
 return|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|List

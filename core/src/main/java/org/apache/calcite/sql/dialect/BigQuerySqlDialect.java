@@ -1502,6 +1502,7 @@ block|}
 block|}
 comment|/**    * For usage of TRIM, LTRIM and RTRIM in BQ see    *<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators#trim">    *  BQ Trim Function</a>.    */
 specifier|private
+specifier|static
 name|void
 name|unparseTrim
 parameter_list|(
@@ -1674,6 +1675,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|TimeUnit
 name|validate
 parameter_list|(
@@ -1904,6 +1906,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlDataTypeSpec
 name|createSqlDataTypeSpecByName
 parameter_list|(

@@ -458,6 +458,7 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// all operands must be the same type
 specifier|private
+specifier|static
 name|boolean
 name|argTypesValid
 parameter_list|(

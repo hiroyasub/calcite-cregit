@@ -521,6 +521,7 @@ literal|null
 return|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|String

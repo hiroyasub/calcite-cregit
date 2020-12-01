@@ -888,6 +888,7 @@ block|}
 block|}
 comment|/**    * Determines if a join filter can be used with a semijoin against a    * specified fact table. A suitable filter is of the form "factable.col1 =    * dimTable.col2".    *    * @param multiJoin join factors being optimized    * @param joinFilter filter to be analyzed    * @param factIdx index corresponding to the fact table    *    * @return index of corresponding dimension table if the filter is    * appropriate; otherwise -1 is returned    */
 specifier|private
+specifier|static
 name|int
 name|isSuitableFilter
 parameter_list|(

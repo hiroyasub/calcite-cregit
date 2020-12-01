@@ -2147,6 +2147,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|long
 name|toLong
 parameter_list|(
@@ -2218,6 +2219,7 @@ operator|=
 literal|"#1"
 argument_list|)
 specifier|private
+specifier|static
 name|boolean
 name|canBeLong
 parameter_list|(
@@ -2243,6 +2245,7 @@ return|;
 block|}
 comment|/** Chooses a representation for a fixed-precision primitive type      * (boolean, byte, char, short, int, long).      *      * @param ordinal Ordinal of this column in table      * @param p Type that values are to be returned as (not necessarily the      *     same as they will be stored)      * @param min Minimum value to be encoded      * @param max Maximum value to be encoded (inclusive)      */
 specifier|private
+specifier|static
 name|ArrayTable
 operator|.
 name|Representation

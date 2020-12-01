@@ -850,6 +850,7 @@ return|;
 block|}
 comment|/** Check if the node is a supported predicate (primary key equality).      *      * @param node Condition node to check      * @param fieldNames Names of all columns in the table      * @param partitionKeys Names of primary key columns      * @param clusteringKeys Names of primary key columns      * @return True if the node represents an equality predicate on a primary key      */
 specifier|private
+specifier|static
 name|boolean
 name|isEqualityOnKey
 parameter_list|(
@@ -988,6 +989,7 @@ block|}
 block|}
 comment|/** Check if an equality operation is comparing a primary key column with a literal.      *      * @param left Left operand of the equality      * @param right Right operand of the equality      * @param fieldNames Names of all columns in the table      * @return The field being compared or null if there is no key equality      */
 specifier|private
+specifier|static
 name|String
 name|compareFieldWithLiteral
 parameter_list|(
@@ -1643,6 +1645,7 @@ return|;
 block|}
 comment|/** Check if it is possible to exploit native CQL sorting for a given collation.      *      * @return True if it is possible to achieve this sort in Cassandra      */
 specifier|private
+specifier|static
 name|boolean
 name|collationsCompatible
 parameter_list|(

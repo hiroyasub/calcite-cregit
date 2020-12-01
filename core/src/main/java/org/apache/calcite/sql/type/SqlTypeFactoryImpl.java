@@ -1158,6 +1158,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|assertBasic
 parameter_list|(
@@ -2670,6 +2671,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RelDataType
 name|copyObjectType
 parameter_list|(

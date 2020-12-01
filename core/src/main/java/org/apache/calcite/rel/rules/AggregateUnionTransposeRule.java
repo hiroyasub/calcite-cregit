@@ -952,6 +952,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|List

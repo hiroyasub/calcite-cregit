@@ -2124,6 +2124,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|String
 name|quoteCharLiteral
 parameter_list|(
@@ -2164,6 +2165,7 @@ return|;
 block|}
 comment|/**      * Combines a field name, operator, and literal to produce a predicate string.      */
 specifier|private
+specifier|static
 name|String
 name|translateOp2
 parameter_list|(

@@ -4326,6 +4326,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|RelCollation
 name|requiredCollation
 parameter_list|(
@@ -9747,6 +9748,7 @@ name|literal
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isRowConstructor
 parameter_list|(
@@ -14255,6 +14257,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 annotation|@
 name|Nullable
 name|Set
@@ -18376,6 +18379,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|all
 parameter_list|(
@@ -19870,6 +19874,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|InitializerExpressionFactory
 name|getInitializerFactory
 parameter_list|(
@@ -26860,6 +26865,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|SqlQuantifyOperator
 name|negate
 parameter_list|(

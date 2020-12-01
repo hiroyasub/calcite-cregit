@@ -985,6 +985,7 @@ comment|// OUTER joins are supported for group by without aggregate functions
 comment|// FULL OUTER JOIN is not supported since it could produce wrong result
 comment|// due to bug (CALCITE-3012)
 specifier|private
+specifier|static
 name|boolean
 name|isJoinSupported
 parameter_list|(

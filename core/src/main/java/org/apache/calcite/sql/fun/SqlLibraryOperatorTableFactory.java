@@ -537,6 +537,7 @@ return|;
 block|}
 comment|/** Returns whether an operator is in one or more of the given libraries. */
 specifier|private
+specifier|static
 name|boolean
 name|operatorIsInLibrary
 parameter_list|(

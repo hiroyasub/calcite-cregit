@@ -1621,6 +1621,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|AggregateCall
 name|createAggregateCallWithBinding
 parameter_list|(
@@ -1725,6 +1726,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|reduceAvg
 parameter_list|(
@@ -2047,6 +2049,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|reduceSum
 parameter_list|(
@@ -2337,6 +2340,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|reduceStddev
 parameter_list|(
@@ -2856,6 +2860,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|getSumAggregatedRexNode
 parameter_list|(
@@ -2973,6 +2978,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|getSumAggregatedRexNodeWithBinding
 parameter_list|(
@@ -3072,6 +3078,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|getRegrCountRexNode
 parameter_list|(
@@ -3182,6 +3189,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|reduceRegrSzz
 parameter_list|(
@@ -3736,6 +3744,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|reduceCovariance
 parameter_list|(
@@ -4163,6 +4172,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|divide
 parameter_list|(
@@ -4461,6 +4471,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|RelDataType
 name|getFieldType
 parameter_list|(

@@ -1885,6 +1885,7 @@ name|parents
 return|;
 block|}
 specifier|private
+specifier|static
 parameter_list|<
 name|T
 parameter_list|>

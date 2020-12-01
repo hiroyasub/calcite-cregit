@@ -6198,6 +6198,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlAggFunction
 name|resolveAgg
 parameter_list|(

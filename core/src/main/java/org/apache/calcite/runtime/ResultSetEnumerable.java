@@ -2123,6 +2123,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|closeIfPossible
 parameter_list|(

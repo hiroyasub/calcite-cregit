@@ -1777,6 +1777,7 @@ comment|// TODO: refactor this to use more tree like parsing, need to also
 comment|//      make sure we use parens properly - currently precedence
 comment|//      rules are simply left to right
 specifier|private
+specifier|static
 name|boolean
 name|getFilter
 parameter_list|(
@@ -1942,6 +1943,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|asd
 parameter_list|(
@@ -2130,6 +2132,7 @@ literal|true
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|valid
 parameter_list|(
@@ -2152,6 +2155,7 @@ argument_list|(
 literal|"unused"
 argument_list|)
 specifier|private
+specifier|static
 name|String
 name|toString
 parameter_list|(
@@ -2355,6 +2359,7 @@ name|str
 return|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|toString
 parameter_list|(

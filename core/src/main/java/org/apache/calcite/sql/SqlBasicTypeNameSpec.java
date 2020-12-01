@@ -965,6 +965,7 @@ block|}
 block|}
 comment|/**    * Remove the local time zone definition of the {@code typeName}.    *    * @param typeName Type name    * @return new type name without local time zone definition    */
 specifier|private
+specifier|static
 name|SqlTypeName
 name|stripLocalTimeZoneDef
 parameter_list|(

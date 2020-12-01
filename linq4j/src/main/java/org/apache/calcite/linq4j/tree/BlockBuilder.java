@@ -1164,6 +1164,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isCostly
 parameter_list|(
@@ -1181,6 +1182,7 @@ return|;
 block|}
 comment|/**    * Prepares declaration for inlining, adds cast.    *    * @param decl inlining candidate    * @return normalized expression    */
 specifier|private
+specifier|static
 name|Expression
 name|normalizeDeclaration
 parameter_list|(

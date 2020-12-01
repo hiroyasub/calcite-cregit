@@ -976,6 +976,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 parameter_list|<
 name|T
 extends|extends
@@ -2867,6 +2868,7 @@ name|map
 return|;
 block|}
 specifier|private
+specifier|static
 name|Object
 name|toJson
 parameter_list|(

@@ -505,6 +505,7 @@ block|}
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|addFilter
 parameter_list|(

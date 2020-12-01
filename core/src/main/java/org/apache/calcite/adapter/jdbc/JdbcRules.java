@@ -2231,6 +2231,7 @@ block|}
 block|}
 comment|/**      * Returns whether a condition is supported by {@link JdbcJoin}.      *      *<p>Corresponds to the capabilities of      * {@link SqlImplementor#convertConditionToSqlNode}.      *      * @param node Condition      * @return Whether condition is supported      */
 specifier|private
+specifier|static
 name|boolean
 name|canJoinOnCondition
 parameter_list|(

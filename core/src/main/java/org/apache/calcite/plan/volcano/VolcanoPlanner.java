@@ -4998,6 +4998,7 @@ expr_stmt|;
 block|}
 comment|/**    * If a subset has one or more equivalent subsets (owing to a set having    * merged with another), returns the subset which is the leader of the    * equivalence class.    *    * @param subset Subset    * @return Leader of subset's equivalence class    */
 specifier|private
+specifier|static
 name|RelSubset
 name|canonize
 parameter_list|(

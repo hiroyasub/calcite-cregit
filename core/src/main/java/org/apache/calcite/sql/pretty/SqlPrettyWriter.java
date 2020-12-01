@@ -2886,6 +2886,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|SqlWriterConfig
 operator|.
 name|LineFolding

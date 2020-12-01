@@ -3642,7 +3642,7 @@ block|{
 block|}
 comment|/** Unparses offset/fetch using ANSI standard "OFFSET offset ROWS FETCH NEXT    * fetch ROWS ONLY" syntax. */
 specifier|protected
-specifier|final
+specifier|static
 name|void
 name|unparseFetchUsingAnsi
 parameter_list|(
@@ -3818,7 +3818,7 @@ block|}
 block|}
 comment|/** Unparses offset/fetch using "LIMIT fetch OFFSET offset" syntax. */
 specifier|protected
-specifier|final
+specifier|static
 name|void
 name|unparseFetchUsingLimit
 parameter_list|(
@@ -3865,7 +3865,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|protected
-specifier|final
+specifier|static
 name|void
 name|unparseLimit
 parameter_list|(
@@ -3937,7 +3937,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|protected
-specifier|final
+specifier|static
 name|void
 name|unparseOffset
 parameter_list|(

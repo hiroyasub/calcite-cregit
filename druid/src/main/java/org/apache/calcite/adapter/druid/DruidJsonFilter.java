@@ -2147,9 +2147,9 @@ return|;
 block|}
 block|}
 comment|/**    * Converts a {@link RexNode} to a Druid filter.    *    * @param rexNode    RexNode to translate to Druid Filter    * @param rowType    Row type of filter input    * @param druidQuery Druid query    * @param rexBuilder Rex builder    *    * @return Druid Json filters, or null when cannot translate to valid Druid    * filters    */
+specifier|static
 annotation|@
 name|Nullable
-specifier|static
 name|DruidJsonFilter
 name|toDruidFilters
 parameter_list|(

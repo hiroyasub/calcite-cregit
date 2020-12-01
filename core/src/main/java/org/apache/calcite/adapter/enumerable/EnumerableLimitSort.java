@@ -910,6 +910,7 @@ name|cost
 return|;
 block|}
 specifier|private
+specifier|static
 name|double
 name|getValue
 parameter_list|(

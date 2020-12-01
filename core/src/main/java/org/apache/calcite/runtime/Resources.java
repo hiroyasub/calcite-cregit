@@ -2355,6 +2355,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|int
 name|countQuotesIn
 parameter_list|(

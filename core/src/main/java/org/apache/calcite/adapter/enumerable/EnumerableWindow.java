@@ -1019,6 +1019,7 @@ literal|"nullness"
 block|}
 argument_list|)
 specifier|private
+specifier|static
 name|void
 name|sampleOfTheGeneratedWindowedAggregate
 parameter_list|()
@@ -3442,6 +3443,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Function
 argument_list|<
 name|BlockBuilder
@@ -4002,6 +4004,7 @@ end_function
 
 begin_function
 unit|};   }    private
+specifier|static
 name|Pair
 argument_list|<
 name|Expression
@@ -4526,6 +4529,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|Pair
 argument_list|<
 annotation|@
@@ -5246,6 +5250,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|void
 name|implementAdd
 parameter_list|(
@@ -5387,6 +5392,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|boolean
 name|implementResult
 parameter_list|(
@@ -5618,6 +5624,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|Expression
 name|translateBound
 parameter_list|(

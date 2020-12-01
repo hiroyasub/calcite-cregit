@@ -8126,6 +8126,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 parameter_list|<
 name|T
 parameter_list|>
@@ -16300,6 +16301,7 @@ return|;
 block|}
 comment|/** Returns whether any of a call's operands have ANY type. */
 specifier|private
+specifier|static
 name|boolean
 name|anyAnyOperands
 parameter_list|(
@@ -16407,6 +16409,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Expression
 name|maybeBox
 parameter_list|(
@@ -17538,6 +17541,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Expression
 name|implementRecurse
 parameter_list|(
@@ -17828,6 +17832,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RelDataType
 name|nullifyType
 parameter_list|(
@@ -19325,6 +19330,7 @@ block|}
 block|}
 comment|/** Normalizes a TIME value into 00:00:00..23:59:39. */
 specifier|private
+specifier|static
 name|Expression
 name|normalize
 parameter_list|(
@@ -19725,6 +19731,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|setInputGetterIndex
 parameter_list|(
@@ -20344,6 +20351,7 @@ return|;
 block|}
 comment|/** Ensures that operands have identical type. */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Expression
@@ -20615,7 +20623,7 @@ argument_list|()
 operator|.
 name|map
 argument_list|(
-name|this
+name|AbstractRexCallImplementor
 operator|::
 name|unboxExpression
 argument_list|)
@@ -20674,6 +20682,7 @@ name|unboxValueList
 return|;
 block|}
 specifier|private
+specifier|static
 name|Expression
 name|unboxExpression
 parameter_list|(

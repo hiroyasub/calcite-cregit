@@ -740,6 +740,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|String

@@ -585,6 +585,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Element
 name|getBestTable
 parameter_list|(

@@ -685,6 +685,7 @@ block|}
 block|}
 comment|/**    * Rewrites a scalar sub-query into an    * {@link org.apache.calcite.rel.core.Aggregate}.    *    * @param e            IN sub-query to rewrite    * @param variablesSet A set of variables used by a relational    *                     expression of the specified RexSubQuery    * @param builder      Builder    * @param offset       Offset to shift {@link RexInputRef}    *    * @return Expression that may be used to replace the RexSubQuery    */
 specifier|private
+specifier|static
 name|RexNode
 name|rewriteScalarQuery
 parameter_list|(
@@ -817,6 +818,7 @@ return|;
 block|}
 comment|/**    * Rewrites a SOME sub-query into a {@link Join}.    *    * @param e            SOME sub-query to rewrite    * @param builder      Builder    *    * @return Expression that may be used to replace the RexSubQuery    */
 specifier|private
+specifier|static
 name|RexNode
 name|rewriteSome
 parameter_list|(
@@ -1550,6 +1552,7 @@ return|;
 block|}
 comment|/**    * Rewrites an EXISTS RexSubQuery into a {@link Join}.    *    * @param e            EXISTS sub-query to rewrite    * @param variablesSet A set of variables used by a relational    *                     expression of the specified RexSubQuery    * @param logic        Logic for evaluating    * @param builder      Builder    *    * @return Expression that may be used to replace the RexSubQuery    */
 specifier|private
+specifier|static
 name|RexNode
 name|rewriteExists
 parameter_list|(
@@ -1706,6 +1709,7 @@ return|;
 block|}
 comment|/**    * Rewrites an IN RexSubQuery into a {@link Join}.    *    * @param e            IN sub-query to rewrite    * @param variablesSet A set of variables used by a relational    *                     expression of the specified RexSubQuery    * @param logic        Logic for evaluating    * @param builder      Builder    * @param offset       Offset to shift {@link RexInputRef}    *    * @return Expression that may be used to replace the RexSubQuery    */
 specifier|private
+specifier|static
 name|RexNode
 name|rewriteIn
 parameter_list|(
@@ -2783,6 +2787,7 @@ return|;
 block|}
 comment|/** Returns a reference to a particular field, by offset, across several    * inputs on a {@link RelBuilder}'s stack. */
 specifier|private
+specifier|static
 name|RexInputRef
 name|field
 parameter_list|(

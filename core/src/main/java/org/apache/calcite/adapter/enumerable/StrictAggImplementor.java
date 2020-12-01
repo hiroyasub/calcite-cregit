@@ -238,7 +238,7 @@ name|stateSize
 return|;
 block|}
 specifier|protected
-specifier|final
+specifier|static
 name|void
 name|accAdvance
 parameter_list|(
@@ -396,6 +396,7 @@ name|res
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|anyNullable
 parameter_list|(

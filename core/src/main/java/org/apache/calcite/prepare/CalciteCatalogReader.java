@@ -1697,6 +1697,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|SqlMonikerImpl
 name|moniker
 parameter_list|(

@@ -6414,6 +6414,7 @@ end_comment
 
 begin_function
 specifier|private
+specifier|static
 name|void
 name|implementRecursively
 parameter_list|(

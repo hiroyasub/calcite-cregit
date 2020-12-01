@@ -964,6 +964,7 @@ argument_list|(
 literal|"unchecked"
 argument_list|)
 specifier|private
+specifier|static
 parameter_list|<
 name|E
 extends|extends

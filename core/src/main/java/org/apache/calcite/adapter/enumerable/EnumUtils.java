@@ -5383,6 +5383,7 @@ block|}
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isOverlapped
 parameter_list|(
@@ -5417,6 +5418,7 @@ operator|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Pair
 argument_list|<
 name|Long
@@ -5482,6 +5484,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Pair
 argument_list|<
 name|Long

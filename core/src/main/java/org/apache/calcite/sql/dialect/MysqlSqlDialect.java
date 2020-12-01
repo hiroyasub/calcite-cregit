@@ -1256,6 +1256,7 @@ block|}
 block|}
 comment|/**    * Unparses datetime floor for MySQL. There is no TRUNC function, so simulate    * this using calls to DATE_FORMAT.    *    * @param writer Writer    * @param call Call    */
 specifier|private
+specifier|static
 name|void
 name|unparseFloor
 parameter_list|(
@@ -1612,6 +1613,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|TimeUnit
 name|validate
 parameter_list|(

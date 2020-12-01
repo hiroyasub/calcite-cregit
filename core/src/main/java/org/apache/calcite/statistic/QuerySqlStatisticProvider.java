@@ -1184,6 +1184,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RuntimeException
 name|handle
 parameter_list|(
@@ -1274,6 +1275,7 @@ name|sql
 return|;
 block|}
 specifier|private
+specifier|static
 parameter_list|<
 name|R
 parameter_list|>

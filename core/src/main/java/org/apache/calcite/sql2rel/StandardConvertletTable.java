@@ -2451,6 +2451,7 @@ return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|private
+specifier|static
 name|RexNode
 name|or
 parameter_list|(
@@ -2480,6 +2481,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|eq
 parameter_list|(
@@ -2509,6 +2511,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|ge
 parameter_list|(
@@ -2538,6 +2541,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|le
 parameter_list|(
@@ -2567,6 +2571,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|and
 parameter_list|(
@@ -2626,6 +2631,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|plus
 parameter_list|(
@@ -2655,6 +2661,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|minus
 parameter_list|(
@@ -2714,6 +2721,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexNode
 name|case_
 parameter_list|(
@@ -2740,6 +2748,7 @@ return|;
 block|}
 comment|// SqlNode helpers
 specifier|private
+specifier|static
 name|SqlCall
 name|plus
 parameter_list|(
@@ -4304,6 +4313,7 @@ argument_list|(
 literal|"unused"
 argument_list|)
 specifier|private
+specifier|static
 name|RexNode
 name|mod
 parameter_list|(
@@ -5451,6 +5461,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Integer
@@ -7035,6 +7046,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|Pair
 argument_list|<
 name|RexNode
@@ -7493,6 +7505,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|expandRegrSzz
 parameter_list|(
@@ -7608,6 +7621,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|expandCovariance
 parameter_list|(
@@ -8087,6 +8101,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|getCastedSqlNode
 parameter_list|(
@@ -8368,6 +8383,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|expandAvg
 parameter_list|(
@@ -8466,6 +8482,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|expandVariance
 parameter_list|(
@@ -8971,6 +8988,7 @@ name|result
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|getCastedSqlNode
 parameter_list|(

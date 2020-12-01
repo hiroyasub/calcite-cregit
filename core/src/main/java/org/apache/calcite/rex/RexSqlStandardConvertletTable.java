@@ -808,6 +808,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 annotation|@
 name|Nullable
@@ -1202,6 +1203,7 @@ end_comment
 
 begin_class
 specifier|private
+specifier|static
 class|class
 name|EquivConvertlet
 implements|implements

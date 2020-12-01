@@ -725,6 +725,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|addTable
 parameter_list|(

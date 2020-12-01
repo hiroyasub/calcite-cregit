@@ -3715,6 +3715,7 @@ throw|;
 block|}
 comment|/** Quickly prepares a simple SQL statement, circumventing the usual    * preparation process. */
 specifier|private
+specifier|static
 parameter_list|<
 name|T
 parameter_list|>
@@ -3911,6 +3912,7 @@ return|;
 block|}
 comment|/**    * Deduces the broad type of statement.    * Currently returns SELECT for most statement types, but this may change.    *    * @param kind Kind of statement    */
 specifier|private
+specifier|static
 name|Meta
 operator|.
 name|StatementType
@@ -3953,6 +3955,7 @@ block|}
 block|}
 comment|/**    * Deduces the broad type of statement for a prepare result.    * Currently returns SELECT for most statement types, but this may change.    *    * @param preparedResult Prepare result    */
 specifier|private
+specifier|static
 name|Meta
 operator|.
 name|StatementType
@@ -4796,6 +4799,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlValidator
 name|createSqlValidator
 parameter_list|(
@@ -4938,6 +4942,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|ColumnMetaData
@@ -5079,6 +5084,7 @@ name|columns
 return|;
 block|}
 specifier|private
+specifier|static
 name|ColumnMetaData
 name|metaData
 parameter_list|(
@@ -5208,6 +5214,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|ColumnMetaData
 operator|.
 name|AvaticaType
@@ -5513,6 +5520,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|int
 name|getTypeOrdinal
 parameter_list|(
@@ -6836,7 +6844,7 @@ name|catalogReader
 parameter_list|)
 block|{
 return|return
-name|prepare
+name|CalcitePrepareImpl
 operator|.
 name|createSqlValidator
 argument_list|(

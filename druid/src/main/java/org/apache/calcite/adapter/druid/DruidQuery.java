@@ -7051,6 +7051,7 @@ return|;
 block|}
 comment|/**    * Converts a sort specification to a {@link JsonLimit} (never null).    *    * @param fetch limit to fetch    * @param collationIndexes index of fields as listed in query row output    * @param collationDirections direction of sort    * @param numericCollationIndexes flag of to determine sort comparator    * @param queryOutputFieldNames query output fields    */
 specifier|private
+specifier|static
 name|JsonLimit
 name|computeSort
 parameter_list|(
@@ -9956,6 +9957,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|ColumnMetaData
 operator|.
 name|Rep

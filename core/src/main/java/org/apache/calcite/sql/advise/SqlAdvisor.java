@@ -1524,6 +1524,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|applyCasing
 parameter_list|(

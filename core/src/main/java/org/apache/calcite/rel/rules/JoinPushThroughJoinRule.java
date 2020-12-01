@@ -518,6 +518,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|onMatchRight
 parameter_list|(
@@ -1078,6 +1079,7 @@ expr_stmt|;
 block|}
 comment|/**    * Similar to {@link #onMatch}, but swaps the upper sibling with the left    * of the two lower siblings, rather than the right.    */
 specifier|private
+specifier|static
 name|void
 name|onMatchLeft
 parameter_list|(
