@@ -2636,6 +2636,65 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testToString
+parameter_list|()
+block|{
+name|DefaultDirectedGraph
+argument_list|<
+name|String
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|g
+init|=
+name|createDag
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|g
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"graph(vertices: [A, B, C, D, E, F], "
+operator|+
+literal|"edges: [A -> B, A -> E, B -> C, C -> D, E -> C, E -> F])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|DefaultDirectedGraph
+argument_list|<
+name|String
+argument_list|,
+name|DefaultEdge
+argument_list|>
+name|g1
+init|=
+name|createDag1
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|g1
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"graph(vertices: [A, B, C, D, E, F], "
+operator|+
+literal|"edges: [A -> B, A -> D, B -> C, C -> E, D -> E])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Edge that stores its attributes in a list. */
 specifier|private
 specifier|static
