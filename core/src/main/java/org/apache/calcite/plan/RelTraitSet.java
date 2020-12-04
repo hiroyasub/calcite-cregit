@@ -1692,6 +1692,17 @@ name|RelTraitSet
 name|that
 parameter_list|)
 block|{
+if|if
+condition|(
+name|this
+operator|==
+name|that
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
 specifier|final
 name|int
 name|n
