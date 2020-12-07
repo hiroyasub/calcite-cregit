@@ -4605,7 +4605,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    *<p>No need to create new projection if {@code rel} is already a project,    * instead, create a projection with the input of {@code rel} and the new    * cast expressions.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @return conversion rel    */
+comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    *<p>No need to create new projection if {@code rel} is already a project,    * instead, create a projection with the input of {@code rel} and the new    * cast expressions.    *    *<p>The desired row type and the row type to be converted must have the    * same number of fields.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @return conversion rel    */
 specifier|public
 specifier|static
 name|RelNode
@@ -4637,7 +4637,7 @@ name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    *<p>No need to create new projection if {@code rel} is already a project,    * instead, create a projection with the input of {@code rel} and the new    * cast expressions.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @param projectFactory Project Factory    * @return conversion rel    */
+comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    *<p>No need to create new projection if {@code rel} is already a project,    * instead, create a projection with the input of {@code rel} and the new    * cast expressions.    *    *<p>The desired row type and the row type to be converted must have the    * same number of fields.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @param projectFactory Project Factory    * @return conversion rel    */
 specifier|public
 specifier|static
 name|RelNode
@@ -4688,6 +4688,37 @@ comment|// nothing to do
 return|return
 name|rel
 return|;
+block|}
+if|if
+condition|(
+name|rowType
+operator|.
+name|getFieldCount
+argument_list|()
+operator|!=
+name|castRowType
+operator|.
+name|getFieldCount
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Field counts are not equal: "
+operator|+
+literal|"rowType ["
+operator|+
+name|rowType
+operator|+
+literal|"] castRowType ["
+operator|+
+name|castRowType
+operator|+
+literal|"]"
+argument_list|)
+throw|;
 block|}
 specifier|final
 name|RexBuilder

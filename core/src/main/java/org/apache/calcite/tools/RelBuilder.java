@@ -15348,7 +15348,7 @@ block|}
 end_decl_stmt
 
 begin_comment
-comment|/**    * Creates a projection that converts the current relational expression's    * output to a desired row type.    *    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    */
+comment|/**    * Creates a projection that converts the current relational expression's    * output to a desired row type.    *    *<p>The desired row type and the row type to be converted must have the    * same number of fields.    *    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    */
 end_comment
 
 begin_function
