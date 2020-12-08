@@ -162,6 +162,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|startState
+argument_list|,
+literal|"startState"
 argument_list|)
 expr_stmt|;
 name|this
@@ -173,6 +175,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|endState
+argument_list|,
+literal|"endState"
 argument_list|)
 expr_stmt|;
 name|this
@@ -184,6 +188,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|transitions
+argument_list|,
+literal|"transitions"
 argument_list|)
 expr_stmt|;
 name|this
@@ -201,6 +207,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|symbolNames
+argument_list|,
+literal|"symbolNames"
 argument_list|)
 expr_stmt|;
 block|}
@@ -476,6 +484,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|fromState
+argument_list|,
+literal|"fromState"
 argument_list|)
 expr_stmt|;
 name|this
@@ -487,6 +497,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|toState
+argument_list|,
+literal|"toState"
 argument_list|)
 expr_stmt|;
 block|}

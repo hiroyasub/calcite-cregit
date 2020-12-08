@@ -480,6 +480,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|metadata
+argument_list|,
+literal|"metadata"
 argument_list|)
 expr_stmt|;
 block|}

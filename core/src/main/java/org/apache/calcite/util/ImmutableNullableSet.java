@@ -309,6 +309,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|elements
+argument_list|,
+literal|"elements"
 argument_list|)
 expr_stmt|;
 block|}

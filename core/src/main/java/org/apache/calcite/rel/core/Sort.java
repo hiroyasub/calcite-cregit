@@ -839,6 +839,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|field
+argument_list|,
+literal|"field"
 argument_list|)
 operator|.
 name|getFieldIndex

@@ -117,6 +117,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|table
+argument_list|,
+literal|"table"
 argument_list|)
 expr_stmt|;
 name|alias

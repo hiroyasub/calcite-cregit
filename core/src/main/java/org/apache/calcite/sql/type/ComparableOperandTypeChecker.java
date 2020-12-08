@@ -186,6 +186,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|consistency
+argument_list|,
+literal|"consistency"
 argument_list|)
 expr_stmt|;
 block|}

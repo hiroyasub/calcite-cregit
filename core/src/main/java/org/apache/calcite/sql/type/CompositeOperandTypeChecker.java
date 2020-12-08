@@ -337,6 +337,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|allowedRules
+argument_list|,
+literal|"allowedRules"
 argument_list|)
 expr_stmt|;
 name|this
@@ -346,6 +348,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|composition
+argument_list|,
+literal|"composition"
 argument_list|)
 expr_stmt|;
 name|this

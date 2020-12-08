@@ -1251,6 +1251,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|order
+argument_list|,
+literal|"order"
 argument_list|)
 expr_stmt|;
 block|}

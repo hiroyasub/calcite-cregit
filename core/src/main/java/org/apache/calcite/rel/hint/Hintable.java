@@ -139,6 +139,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|hintList
+argument_list|,
+literal|"hintList"
 argument_list|)
 expr_stmt|;
 specifier|final

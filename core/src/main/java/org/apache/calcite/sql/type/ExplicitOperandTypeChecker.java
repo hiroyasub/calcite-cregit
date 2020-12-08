@@ -166,6 +166,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 block|}

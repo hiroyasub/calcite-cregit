@@ -2703,6 +2703,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|def
+argument_list|,
+literal|"def"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2714,6 +2716,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|map
+argument_list|,
+literal|"map"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2905,6 +2909,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|beanClass
+argument_list|,
+literal|"beanClass"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2916,6 +2922,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|handlers
+argument_list|,
+literal|"handlers"
 argument_list|)
 expr_stmt|;
 block|}

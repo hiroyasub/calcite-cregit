@@ -993,6 +993,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|g
+argument_list|,
+literal|"g"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1149,6 +1151,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|mg
+argument_list|,
+literal|"mg"
 argument_list|)
 expr_stmt|;
 block|}

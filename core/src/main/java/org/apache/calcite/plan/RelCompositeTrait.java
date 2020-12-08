@@ -143,6 +143,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|traits
+argument_list|,
+literal|"traits"
 argument_list|)
 expr_stmt|;
 comment|//noinspection unchecked

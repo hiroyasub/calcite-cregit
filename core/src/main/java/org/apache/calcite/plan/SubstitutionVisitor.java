@@ -4767,6 +4767,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rule
+argument_list|,
+literal|"rule"
 argument_list|)
 expr_stmt|;
 name|this
@@ -4776,6 +4778,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|query
+argument_list|,
+literal|"query"
 argument_list|)
 expr_stmt|;
 name|this
@@ -4785,6 +4789,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|target
+argument_list|,
+literal|"target"
 argument_list|)
 expr_stmt|;
 name|this
@@ -4794,6 +4800,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|slots
+argument_list|,
+literal|"slots"
 argument_list|)
 expr_stmt|;
 block|}

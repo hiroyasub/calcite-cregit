@@ -228,6 +228,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|window
+argument_list|,
+literal|"window"
 argument_list|)
 expr_stmt|;
 name|this

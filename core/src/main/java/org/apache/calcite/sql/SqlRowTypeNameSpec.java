@@ -225,6 +225,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|fieldNames
+argument_list|,
+literal|"fieldNames"
 argument_list|)
 expr_stmt|;
 name|Objects
@@ -232,6 +234,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|fieldTypes
+argument_list|,
+literal|"fieldTypes"
 argument_list|)
 expr_stmt|;
 assert|assert

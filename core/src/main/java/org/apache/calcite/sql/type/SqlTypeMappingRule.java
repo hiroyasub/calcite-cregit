@@ -100,6 +100,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|to
+argument_list|,
+literal|"to"
 argument_list|)
 expr_stmt|;
 name|Objects
@@ -107,6 +109,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|from
+argument_list|,
+literal|"from"
 argument_list|)
 expr_stmt|;
 if|if

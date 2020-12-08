@@ -207,6 +207,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|o
+argument_list|,
+literal|"o"
 argument_list|)
 argument_list|)
 return|;

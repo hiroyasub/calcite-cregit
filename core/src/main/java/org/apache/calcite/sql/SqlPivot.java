@@ -294,6 +294,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|query
+argument_list|,
+literal|"query"
 argument_list|)
 expr_stmt|;
 name|this
@@ -305,6 +307,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|aggList
+argument_list|,
+literal|"aggList"
 argument_list|)
 expr_stmt|;
 name|this
@@ -316,6 +320,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|axisList
+argument_list|,
+literal|"axisList"
 argument_list|)
 expr_stmt|;
 name|this
@@ -327,6 +333,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|inList
+argument_list|,
+literal|"inList"
 argument_list|)
 expr_stmt|;
 block|}

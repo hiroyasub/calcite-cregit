@@ -193,6 +193,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|elementTypeName
+argument_list|,
+literal|"elementTypeName"
 argument_list|)
 expr_stmt|;
 name|this
@@ -204,6 +206,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|collectionTypeName
+argument_list|,
+literal|"collectionTypeName"
 argument_list|)
 expr_stmt|;
 block|}

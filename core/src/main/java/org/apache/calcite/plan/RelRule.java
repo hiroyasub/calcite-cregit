@@ -550,6 +550,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|done
+argument_list|,
+literal|"done"
 argument_list|)
 expr_stmt|;
 if|if
@@ -718,6 +720,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|parent
+argument_list|,
+literal|"parent"
 argument_list|)
 expr_stmt|;
 name|this
@@ -729,6 +733,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|relClass
+argument_list|,
+literal|"relClass"
 argument_list|)
 expr_stmt|;
 block|}
@@ -754,6 +760,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|trait
+argument_list|,
+literal|"trait"
 argument_list|)
 expr_stmt|;
 return|return
@@ -921,6 +929,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|done
+argument_list|,
+literal|"done"
 argument_list|)
 expr_stmt|;
 return|return
@@ -967,6 +977,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|done
+argument_list|,
+literal|"done"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1014,6 +1026,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|done
+argument_list|,
+literal|"done"
 argument_list|)
 expr_stmt|;
 block|}

@@ -354,6 +354,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|parentScope
+argument_list|,
+literal|"parentScope"
 argument_list|)
 expr_stmt|;
 block|}

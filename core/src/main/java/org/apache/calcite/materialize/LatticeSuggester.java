@@ -4469,6 +4469,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|table
+argument_list|,
+literal|"table"
 argument_list|)
 expr_stmt|;
 name|this
@@ -4584,6 +4586,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|step
+argument_list|,
+literal|"step"
 argument_list|)
 expr_stmt|;
 name|this

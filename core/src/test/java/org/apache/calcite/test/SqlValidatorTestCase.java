@@ -1232,6 +1232,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|expected
+argument_list|,
+literal|"expected"
 argument_list|)
 expr_stmt|;
 name|tester

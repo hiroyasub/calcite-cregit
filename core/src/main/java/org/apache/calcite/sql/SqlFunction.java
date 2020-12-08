@@ -588,6 +588,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|category
+argument_list|,
+literal|"category"
 argument_list|)
 expr_stmt|;
 block|}

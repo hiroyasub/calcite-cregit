@@ -579,6 +579,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|buf
+argument_list|,
+literal|"buf"
 argument_list|)
 expr_stmt|;
 name|this
@@ -600,6 +602,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|config
+argument_list|,
+literal|"config"
 argument_list|)
 expr_stmt|;
 name|lineStart
@@ -628,6 +632,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|buf
+argument_list|,
+literal|"buf"
 argument_list|)
 argument_list|,
 literal|false
@@ -657,6 +663,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 argument_list|)
 argument_list|,
@@ -686,6 +694,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -717,6 +727,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 argument_list|)
 operator|.
@@ -749,6 +761,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 argument_list|)
 operator|.
@@ -779,6 +793,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 argument_list|)
 argument_list|)

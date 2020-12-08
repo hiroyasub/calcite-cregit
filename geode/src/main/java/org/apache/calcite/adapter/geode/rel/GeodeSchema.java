@@ -190,7 +190,7 @@ name|GeodeSchema
 parameter_list|(
 specifier|final
 name|GemFireCache
-name|cache
+name|gemFireCache
 parameter_list|,
 specifier|final
 name|Iterable
@@ -211,9 +211,9 @@ name|Objects
 operator|.
 name|requireNonNull
 argument_list|(
-name|cache
+name|gemFireCache
 argument_list|,
-literal|"clientCache"
+literal|"gemFireCache"
 argument_list|)
 expr_stmt|;
 name|this

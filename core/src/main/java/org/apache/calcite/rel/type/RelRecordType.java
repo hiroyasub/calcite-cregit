@@ -139,6 +139,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|kind
+argument_list|,
+literal|"kind"
 argument_list|)
 expr_stmt|;
 name|computeDigest

@@ -202,6 +202,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|dimension
+argument_list|,
+literal|"dimension"
 argument_list|)
 expr_stmt|;
 name|this
@@ -213,6 +215,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|extractionFunction
+argument_list|,
+literal|"extractionFunction"
 argument_list|)
 expr_stmt|;
 name|this

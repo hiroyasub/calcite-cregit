@@ -99,6 +99,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|atomicBoolean
+argument_list|,
+literal|"atomicBoolean"
 argument_list|)
 expr_stmt|;
 block|}

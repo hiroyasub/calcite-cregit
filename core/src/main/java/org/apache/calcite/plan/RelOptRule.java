@@ -315,6 +315,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operand
+argument_list|,
+literal|"operand"
 argument_list|)
 expr_stmt|;
 name|this
@@ -326,6 +328,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|relBuilderFactory
+argument_list|,
+literal|"relBuilderFactory"
 argument_list|)
 expr_stmt|;
 if|if

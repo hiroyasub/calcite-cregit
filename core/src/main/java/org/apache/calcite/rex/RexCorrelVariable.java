@@ -132,6 +132,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|id
+argument_list|,
+literal|"id"
 argument_list|)
 expr_stmt|;
 block|}

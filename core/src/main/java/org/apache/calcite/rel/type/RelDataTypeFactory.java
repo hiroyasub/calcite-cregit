@@ -878,6 +878,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|typeFactory
+argument_list|,
+literal|"typeFactory"
 argument_list|)
 expr_stmt|;
 block|}

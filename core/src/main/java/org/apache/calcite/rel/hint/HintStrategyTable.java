@@ -843,7 +843,7 @@ name|String
 name|hintName
 parameter_list|,
 name|HintPredicate
-name|strategy
+name|hintPredicate
 parameter_list|)
 block|{
 name|this
@@ -865,9 +865,9 @@ name|builder
 argument_list|(
 name|requireNonNull
 argument_list|(
-name|strategy
+name|hintPredicate
 argument_list|,
-literal|"HintPredicate"
+literal|"hintPredicate"
 argument_list|)
 argument_list|)
 operator|.
@@ -887,7 +887,7 @@ name|String
 name|hintName
 parameter_list|,
 name|HintStrategy
-name|entry
+name|hintStrategy
 parameter_list|)
 block|{
 name|this
@@ -905,9 +905,9 @@ argument_list|)
 argument_list|,
 name|requireNonNull
 argument_list|(
-name|entry
+name|hintStrategy
 argument_list|,
-literal|"HintStrategy"
+literal|"hintStrategy"
 argument_list|)
 argument_list|)
 expr_stmt|;

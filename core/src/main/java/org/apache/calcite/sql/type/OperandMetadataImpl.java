@@ -205,6 +205,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|paramTypesFactory
+argument_list|,
+literal|"paramTypesFactory"
 argument_list|)
 expr_stmt|;
 name|this

@@ -1312,6 +1312,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|c
+argument_list|,
+literal|"c"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1335,6 +1337,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|executor
+argument_list|,
+literal|"executor"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1358,6 +1362,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|convertletTable
+argument_list|,
+literal|"convertletTable"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1381,6 +1387,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operatorTable
+argument_list|,
+literal|"operatorTable"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1475,6 +1483,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|parserConfig
+argument_list|,
+literal|"parserConfig"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1500,6 +1510,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|sqlValidatorConfig
+argument_list|,
+literal|"sqlValidatorConfig"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1525,6 +1537,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|sqlToRelConverterConfig
+argument_list|,
+literal|"sqlToRelConverterConfig"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1611,6 +1625,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|ruleSets
+argument_list|,
+literal|"ruleSets"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1683,6 +1699,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|typeSystem
+argument_list|,
+literal|"typeSystem"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1724,6 +1742,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|statisticProvider
+argument_list|,
+literal|"statisticProvider"
 argument_list|)
 expr_stmt|;
 return|return

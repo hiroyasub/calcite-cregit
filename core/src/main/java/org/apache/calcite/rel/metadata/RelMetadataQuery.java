@@ -933,6 +933,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|metadataProvider
+argument_list|,
+literal|"metadataProvider"
 argument_list|)
 argument_list|)
 expr_stmt|;

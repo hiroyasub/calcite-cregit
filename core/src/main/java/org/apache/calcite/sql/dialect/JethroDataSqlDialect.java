@@ -591,6 +591,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|name
+argument_list|,
+literal|"name"
 argument_list|)
 expr_stmt|;
 comment|// not currently used

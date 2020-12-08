@@ -748,6 +748,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|dataContext
+argument_list|,
+literal|"dataContext"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1917,6 +1919,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|enumerator
+argument_list|,
+literal|"enumerator"
 argument_list|)
 expr_stmt|;
 block|}

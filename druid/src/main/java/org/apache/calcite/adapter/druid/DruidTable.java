@@ -636,6 +636,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|timestampFieldName
+argument_list|,
+literal|"timestampFieldName"
 argument_list|)
 expr_stmt|;
 name|this
@@ -647,6 +649,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|schema
+argument_list|,
+literal|"schema"
 argument_list|)
 expr_stmt|;
 name|this
@@ -658,6 +662,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|dataSource
+argument_list|,
+literal|"dataSource"
 argument_list|)
 expr_stmt|;
 name|this

@@ -482,6 +482,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|sqlConsumer
+argument_list|,
+literal|"sqlConsumer"
 argument_list|)
 expr_stmt|;
 block|}

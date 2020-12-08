@@ -509,6 +509,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|body
+argument_list|,
+literal|"body"
 argument_list|)
 argument_list|)
 return|;
@@ -829,6 +831,8 @@ block|}
 name|requireNonNull
 argument_list|(
 name|body
+argument_list|,
+literal|"body"
 argument_list|)
 expr_stmt|;
 name|Type

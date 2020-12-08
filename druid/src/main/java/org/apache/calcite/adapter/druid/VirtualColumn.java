@@ -127,6 +127,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|name
+argument_list|,
+literal|"name"
 argument_list|)
 expr_stmt|;
 name|this
@@ -138,6 +140,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|expression
+argument_list|,
+literal|"expression"
 argument_list|)
 expr_stmt|;
 name|this

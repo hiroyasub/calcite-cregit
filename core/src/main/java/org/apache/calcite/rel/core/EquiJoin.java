@@ -301,6 +301,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|leftKeys
+argument_list|,
+literal|"leftKeys"
 argument_list|)
 expr_stmt|;
 name|this
@@ -312,6 +314,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rightKeys
+argument_list|,
+literal|"rightKeys"
 argument_list|)
 expr_stmt|;
 block|}

@@ -547,6 +547,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|resultRow
+argument_list|,
+literal|"resultRow"
 argument_list|)
 expr_stmt|;
 return|return

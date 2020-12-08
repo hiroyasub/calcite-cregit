@@ -66,6 +66,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|s
+argument_list|,
+literal|"s"
 argument_list|)
 argument_list|)
 expr_stmt|;

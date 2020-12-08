@@ -9542,6 +9542,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|queryType
+argument_list|,
+literal|"queryType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -9553,6 +9555,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|queryString
+argument_list|,
+literal|"queryString"
 argument_list|)
 expr_stmt|;
 name|this

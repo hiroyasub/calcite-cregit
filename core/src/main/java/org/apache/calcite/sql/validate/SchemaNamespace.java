@@ -187,6 +187,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|names
+argument_list|,
+literal|"names"
 argument_list|)
 expr_stmt|;
 block|}

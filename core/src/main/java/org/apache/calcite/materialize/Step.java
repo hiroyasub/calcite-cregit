@@ -241,6 +241,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|keyString
+argument_list|,
+literal|"keyString"
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -823,6 +825,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|space
+argument_list|,
+literal|"space"
 argument_list|)
 expr_stmt|;
 block|}

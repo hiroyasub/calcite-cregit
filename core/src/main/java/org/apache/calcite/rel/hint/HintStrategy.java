@@ -241,6 +241,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|predicate
+argument_list|,
+literal|"predicate"
 argument_list|)
 expr_stmt|;
 name|this
@@ -280,6 +282,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|optionChecker
+argument_list|,
+literal|"optionChecker"
 argument_list|)
 expr_stmt|;
 return|return

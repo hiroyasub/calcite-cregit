@@ -1163,6 +1163,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|geom
+argument_list|,
+literal|"geom"
 argument_list|)
 return|;
 block|}

@@ -500,6 +500,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|requiresGroupOrder
+argument_list|,
+literal|"requiresGroupOrder"
 argument_list|)
 expr_stmt|;
 block|}

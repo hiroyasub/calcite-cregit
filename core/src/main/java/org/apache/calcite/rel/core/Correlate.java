@@ -379,6 +379,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|joinType
+argument_list|,
+literal|"joinType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -388,6 +390,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|correlationId
+argument_list|,
+literal|"correlationId"
 argument_list|)
 expr_stmt|;
 name|this
@@ -397,6 +401,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|requiredColumns
+argument_list|,
+literal|"requiredColumns"
 argument_list|)
 expr_stmt|;
 block|}

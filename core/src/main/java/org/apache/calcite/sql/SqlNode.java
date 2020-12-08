@@ -328,6 +328,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|pos
+argument_list|,
+literal|"pos"
 argument_list|)
 expr_stmt|;
 block|}

@@ -433,6 +433,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|tableRef
+argument_list|,
+literal|"tableRef"
 argument_list|)
 expr_stmt|;
 name|this
@@ -444,6 +446,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|pattern
+argument_list|,
+literal|"pattern"
 argument_list|)
 expr_stmt|;
 name|this
@@ -467,6 +471,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|patternDefList
+argument_list|,
+literal|"patternDefList"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -490,6 +496,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|measureList
+argument_list|,
+literal|"measureList"
 argument_list|)
 expr_stmt|;
 name|this
@@ -534,6 +542,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|partitionList
+argument_list|,
+literal|"partitionList"
 argument_list|)
 expr_stmt|;
 name|this
@@ -545,6 +555,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|orderList
+argument_list|,
+literal|"orderList"
 argument_list|)
 expr_stmt|;
 name|this
@@ -714,6 +726,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operand
+argument_list|,
+literal|"operand"
 argument_list|)
 expr_stmt|;
 break|break;

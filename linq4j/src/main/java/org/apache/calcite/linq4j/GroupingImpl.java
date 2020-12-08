@@ -139,6 +139,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|key
+argument_list|,
+literal|"key"
 argument_list|)
 expr_stmt|;
 name|this
@@ -150,6 +152,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|values
+argument_list|,
+literal|"values"
 argument_list|)
 expr_stmt|;
 block|}

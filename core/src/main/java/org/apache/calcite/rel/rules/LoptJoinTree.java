@@ -615,6 +615,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|left
+argument_list|,
+literal|"left"
 argument_list|)
 expr_stmt|;
 name|this
@@ -626,6 +628,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|right
+argument_list|,
+literal|"right"
 argument_list|)
 expr_stmt|;
 block|}

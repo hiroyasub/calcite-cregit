@@ -373,6 +373,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 name|this
@@ -384,6 +386,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|period
+argument_list|,
+literal|"period"
 argument_list|)
 expr_stmt|;
 name|this
@@ -395,6 +399,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|timeZone
+argument_list|,
+literal|"timeZone"
 argument_list|)
 expr_stmt|;
 block|}

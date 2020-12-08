@@ -299,6 +299,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|opTab
+argument_list|,
+literal|"opTab"
 argument_list|)
 expr_stmt|;
 name|this
@@ -310,6 +312,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|nameMatcher
+argument_list|,
+literal|"nameMatcher"
 argument_list|)
 expr_stmt|;
 block|}

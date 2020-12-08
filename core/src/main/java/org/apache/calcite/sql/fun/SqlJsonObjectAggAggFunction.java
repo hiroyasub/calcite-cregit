@@ -418,6 +418,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|nullClause
+argument_list|,
+literal|"nullClause"
 argument_list|)
 expr_stmt|;
 block|}

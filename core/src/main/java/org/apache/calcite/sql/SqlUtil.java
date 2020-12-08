@@ -2365,6 +2365,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operator
+argument_list|,
+literal|"operator"
 argument_list|)
 operator|.
 name|getKind
@@ -2723,6 +2725,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operator
+argument_list|,
+literal|"operator"
 argument_list|)
 operator|.
 name|getSyntax
@@ -2769,6 +2773,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operator
+argument_list|,
+literal|"operator"
 argument_list|)
 operator|.
 name|getOperandCountRange

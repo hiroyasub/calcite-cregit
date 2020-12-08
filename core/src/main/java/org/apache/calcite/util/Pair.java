@@ -1713,6 +1713,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|iterator
+argument_list|,
+literal|"iterator"
 argument_list|)
 expr_stmt|;
 name|this
@@ -1851,6 +1853,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|leftIterator
+argument_list|,
+literal|"leftIterator"
 argument_list|)
 expr_stmt|;
 name|this
@@ -1862,6 +1866,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rightIterator
+argument_list|,
+literal|"rightIterator"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1995,6 +2001,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|iterator
+argument_list|,
+literal|"iterator"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2294,6 +2302,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|ks
+argument_list|,
+literal|"ks"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2305,6 +2315,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|vs
+argument_list|,
+literal|"vs"
 argument_list|)
 expr_stmt|;
 block|}

@@ -232,6 +232,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|abbrev
+argument_list|,
+literal|"abbrev"
 argument_list|)
 expr_stmt|;
 name|this
@@ -243,6 +245,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|fun
+argument_list|,
+literal|"fun"
 argument_list|)
 expr_stmt|;
 name|Preconditions

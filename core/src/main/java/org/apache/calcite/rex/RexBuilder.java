@@ -4499,6 +4499,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|s
+argument_list|,
+literal|"s"
 argument_list|)
 argument_list|,
 name|type
@@ -4833,6 +4835,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|date
+argument_list|,
+literal|"date"
 argument_list|)
 argument_list|,
 name|typeFactory
@@ -4900,6 +4904,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|time
+argument_list|,
+literal|"time"
 argument_list|)
 argument_list|,
 name|typeFactory
@@ -4939,6 +4945,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|time
+argument_list|,
+literal|"time"
 argument_list|)
 argument_list|,
 name|typeFactory
@@ -5008,6 +5016,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|timestamp
+argument_list|,
+literal|"timestamp"
 argument_list|)
 argument_list|,
 name|typeFactory
@@ -5047,6 +5057,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|timestamp
+argument_list|,
+literal|"timestamp"
 argument_list|)
 argument_list|,
 name|typeFactory

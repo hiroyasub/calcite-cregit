@@ -370,6 +370,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|dataSource
+argument_list|,
+literal|"dataSource"
 argument_list|)
 expr_stmt|;
 name|this
@@ -379,6 +381,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 expr_stmt|;
 name|this
@@ -388,6 +392,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|convention
+argument_list|,
+literal|"convention"
 argument_list|)
 expr_stmt|;
 name|this

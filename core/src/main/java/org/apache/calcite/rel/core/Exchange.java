@@ -291,6 +291,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|distribution
+argument_list|,
+literal|"distribution"
 argument_list|)
 expr_stmt|;
 assert|assert

@@ -288,7 +288,7 @@ name|RelDataType
 name|type
 parameter_list|,
 name|SqlOperator
-name|op
+name|operator
 parameter_list|,
 name|List
 argument_list|<
@@ -316,7 +316,7 @@ name|op
 operator|=
 name|requireNonNull
 argument_list|(
-name|op
+name|operator
 argument_list|,
 literal|"operator"
 argument_list|)
@@ -348,17 +348,17 @@ name|operands
 argument_list|)
 expr_stmt|;
 assert|assert
-name|op
+name|operator
 operator|.
 name|getKind
 argument_list|()
 operator|!=
 literal|null
 operator|:
-name|op
+name|operator
 assert|;
 assert|assert
-name|op
+name|operator
 operator|.
 name|validRexOperands
 argument_list|(
@@ -375,7 +375,7 @@ operator|:
 name|this
 assert|;
 assert|assert
-name|op
+name|operator
 operator|.
 name|kind
 operator|!=

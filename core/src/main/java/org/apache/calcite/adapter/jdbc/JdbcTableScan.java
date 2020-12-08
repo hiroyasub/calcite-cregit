@@ -201,6 +201,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|jdbcTable
+argument_list|,
+literal|"jdbcTable"
 argument_list|)
 expr_stmt|;
 block|}

@@ -192,6 +192,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|typeToTransform
+argument_list|,
+literal|"typeToTransform"
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -261,6 +263,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|typeToTransform
+argument_list|,
+literal|"typeToTransform"
 argument_list|)
 argument_list|,
 literal|false
@@ -289,6 +293,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|typeToTransform
+argument_list|,
+literal|"typeToTransform"
 argument_list|)
 argument_list|,
 literal|true

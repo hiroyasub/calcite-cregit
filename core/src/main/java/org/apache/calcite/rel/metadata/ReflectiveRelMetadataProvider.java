@@ -1879,6 +1879,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|relNodeClass
+argument_list|,
+literal|"relNodeClass"
 argument_list|)
 expr_stmt|;
 for|for

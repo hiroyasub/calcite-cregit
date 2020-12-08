@@ -205,6 +205,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|typeName
+argument_list|,
+literal|"typeName"
 argument_list|)
 expr_stmt|;
 name|this

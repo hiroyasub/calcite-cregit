@@ -217,6 +217,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|natural
+argument_list|,
+literal|"natural"
 argument_list|)
 expr_stmt|;
 name|this
@@ -226,6 +228,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|joinType
+argument_list|,
+literal|"joinType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -241,6 +245,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|conditionType
+argument_list|,
+literal|"conditionType"
 argument_list|)
 expr_stmt|;
 name|this

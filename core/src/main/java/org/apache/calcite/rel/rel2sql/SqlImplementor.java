@@ -1453,6 +1453,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|dialect
+argument_list|,
+literal|"dialect"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11700,6 +11702,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rel
+argument_list|,
+literal|"rel"
 argument_list|)
 expr_stmt|;
 name|this
@@ -11720,6 +11724,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|select
+argument_list|,
+literal|"select"
 argument_list|)
 expr_stmt|;
 name|this
@@ -11729,6 +11735,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|context
+argument_list|,
+literal|"context"
 argument_list|)
 expr_stmt|;
 name|this

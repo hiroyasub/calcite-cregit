@@ -283,6 +283,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|tableDef
+argument_list|,
+literal|"tableDef"
 argument_list|)
 expr_stmt|;
 name|this
@@ -294,6 +296,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|indexCondition
+argument_list|,
+literal|"indexCondition"
 argument_list|)
 expr_stmt|;
 name|this

@@ -2565,6 +2565,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|expression
+argument_list|,
+literal|"expression"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3328,6 +3330,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|column
+argument_list|,
+literal|"column"
 argument_list|)
 expr_stmt|;
 return|return

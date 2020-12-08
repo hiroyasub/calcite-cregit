@@ -270,6 +270,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|period
+argument_list|,
+literal|"period"
 argument_list|)
 expr_stmt|;
 comment|// Too expensive for everyday use:

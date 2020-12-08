@@ -276,6 +276,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|alias
+argument_list|,
+literal|"alias"
 argument_list|)
 expr_stmt|;
 name|children

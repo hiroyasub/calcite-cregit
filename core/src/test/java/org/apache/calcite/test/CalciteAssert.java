@@ -6201,6 +6201,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|connectionFactory
+argument_list|,
+literal|"connectionFactory"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7549,6 +7551,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|name
+argument_list|,
+literal|"name"
 argument_list|)
 expr_stmt|;
 name|this
@@ -7560,6 +7564,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|schema
+argument_list|,
+literal|"schema"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7898,6 +7904,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|map
+argument_list|,
+literal|"map"
 argument_list|)
 expr_stmt|;
 name|this
@@ -7909,6 +7917,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|postProcessors
+argument_list|,
+literal|"postProcessors"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11145,6 +11155,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|java
+argument_list|,
+literal|"java"
 argument_list|)
 expr_stmt|;
 name|this

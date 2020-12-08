@@ -349,6 +349,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|returnTypeInference
+argument_list|,
+literal|"returnTypeInference"
 argument_list|)
 argument_list|,
 name|operandTypeInference
@@ -356,11 +358,15 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|operandTypeChecker
+argument_list|,
+literal|"operandTypeChecker"
 argument_list|)
 argument_list|,
 name|requireNonNull
 argument_list|(
 name|funcType
+argument_list|,
+literal|"funcType"
 argument_list|)
 argument_list|,
 name|requiresOrder
@@ -377,6 +383,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|distinctOptionality
+argument_list|,
+literal|"distinctOptionality"
 argument_list|)
 expr_stmt|;
 name|this
@@ -386,6 +394,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|syntax
+argument_list|,
+literal|"syntax"
 argument_list|)
 expr_stmt|;
 name|this

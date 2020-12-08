@@ -460,6 +460,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rangeQueryLowerOp
+argument_list|,
+literal|"rangeQueryLowerOp"
 argument_list|)
 expr_stmt|;
 name|this
@@ -471,6 +473,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rangeQueryUpperOp
+argument_list|,
+literal|"rangeQueryUpperOp"
 argument_list|)
 expr_stmt|;
 name|this

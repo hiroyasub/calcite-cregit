@@ -177,6 +177,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|tableRef
+argument_list|,
+literal|"tableRef"
 argument_list|)
 expr_stmt|;
 name|this
@@ -188,6 +190,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|period
+argument_list|,
+literal|"period"
 argument_list|)
 expr_stmt|;
 block|}
@@ -274,6 +278,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operand
+argument_list|,
+literal|"operand"
 argument_list|)
 expr_stmt|;
 break|break;
@@ -287,6 +293,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operand
+argument_list|,
+literal|"operand"
 argument_list|)
 expr_stmt|;
 break|break;

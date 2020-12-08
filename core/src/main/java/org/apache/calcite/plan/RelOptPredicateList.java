@@ -284,6 +284,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|pulledUpPredicates
+argument_list|,
+literal|"pulledUpPredicates"
 argument_list|)
 expr_stmt|;
 name|this
@@ -295,6 +297,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|leftInferredPredicates
+argument_list|,
+literal|"leftInferredPredicates"
 argument_list|)
 expr_stmt|;
 name|this
@@ -306,6 +310,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rightInferredPredicates
+argument_list|,
+literal|"rightInferredPredicates"
 argument_list|)
 expr_stmt|;
 name|this
@@ -317,6 +323,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|constantMap
+argument_list|,
+literal|"constantMap"
 argument_list|)
 expr_stmt|;
 block|}

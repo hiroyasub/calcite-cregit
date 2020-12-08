@@ -166,6 +166,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|automaton
+argument_list|,
+literal|"automaton"
 argument_list|)
 expr_stmt|;
 comment|// Calculate eps closure of start state
@@ -788,6 +790,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|fromState
+argument_list|,
+literal|"fromState"
 argument_list|)
 expr_stmt|;
 name|this
@@ -799,6 +803,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|toState
+argument_list|,
+literal|"toState"
 argument_list|)
 expr_stmt|;
 name|this
@@ -816,6 +822,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|symbol
+argument_list|,
+literal|"symbol"
 argument_list|)
 expr_stmt|;
 block|}
@@ -875,6 +883,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|states
+argument_list|,
+literal|"states"
 argument_list|)
 expr_stmt|;
 block|}

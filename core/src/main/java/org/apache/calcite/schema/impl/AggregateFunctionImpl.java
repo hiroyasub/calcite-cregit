@@ -411,6 +411,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|initMethod
+argument_list|,
+literal|"initMethod"
 argument_list|)
 expr_stmt|;
 name|this
@@ -422,6 +424,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|addMethod
+argument_list|,
+literal|"addMethod"
 argument_list|)
 expr_stmt|;
 name|this

@@ -533,6 +533,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|costFactory
+argument_list|,
+literal|"costFactory"
 argument_list|)
 expr_stmt|;
 if|if

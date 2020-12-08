@@ -812,6 +812,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
 argument_list|)
 expr_stmt|;
 name|this

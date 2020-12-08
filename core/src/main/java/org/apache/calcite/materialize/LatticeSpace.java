@@ -369,6 +369,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|statisticProvider
+argument_list|,
+literal|"statisticProvider"
 argument_list|)
 expr_stmt|;
 block|}

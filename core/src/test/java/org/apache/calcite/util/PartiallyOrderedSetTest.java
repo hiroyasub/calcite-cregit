@@ -1368,6 +1368,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|i
+argument_list|,
+literal|"i"
 argument_list|)
 decl_stmt|;
 comment|// bits not yet cleared
@@ -1438,6 +1440,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|i
+argument_list|,
+literal|"i"
 argument_list|)
 expr_stmt|;
 specifier|final

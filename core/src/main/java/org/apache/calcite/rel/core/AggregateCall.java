@@ -391,6 +391,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 name|this
@@ -408,6 +410,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|aggFunction
+argument_list|,
+literal|"aggFunction"
 argument_list|)
 expr_stmt|;
 name|this
@@ -436,6 +440,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|collation
+argument_list|,
+literal|"collation"
 argument_list|)
 expr_stmt|;
 name|this

@@ -2281,6 +2281,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|conditions
+argument_list|,
+literal|"conditions"
 argument_list|)
 expr_stmt|;
 block|}

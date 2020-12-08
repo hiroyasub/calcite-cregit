@@ -99,6 +99,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|dimension
+argument_list|,
+literal|"dimension"
 argument_list|)
 expr_stmt|;
 name|this
@@ -110,6 +112,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|outputName
+argument_list|,
+literal|"outputName"
 argument_list|)
 expr_stmt|;
 name|this

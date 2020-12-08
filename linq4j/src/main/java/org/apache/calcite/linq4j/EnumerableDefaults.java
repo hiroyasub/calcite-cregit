@@ -2027,6 +2027,8 @@ operator|||
 name|requireNonNull
 argument_list|(
 name|rest
+argument_list|,
+literal|"rest"
 argument_list|)
 operator|.
 name|hasNext
@@ -2049,6 +2051,8 @@ return|return
 name|requireNonNull
 argument_list|(
 name|rest
+argument_list|,
+literal|"rest"
 argument_list|)
 operator|.
 name|next
@@ -4670,6 +4674,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|curAccumulator
+argument_list|,
+literal|"curAccumulator"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -19376,6 +19382,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 literal|null
+argument_list|,
+literal|"null"
 argument_list|)
 argument_list|,
 literal|null

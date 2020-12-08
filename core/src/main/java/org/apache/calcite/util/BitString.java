@@ -701,6 +701,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|bytes
+argument_list|,
+literal|"bytes"
 argument_list|)
 operator|.
 name|length

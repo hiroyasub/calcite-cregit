@@ -544,6 +544,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|condition
+argument_list|,
+literal|"condition"
 argument_list|)
 expr_stmt|;
 name|this
@@ -566,6 +568,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|joinType
+argument_list|,
+literal|"joinType"
 argument_list|)
 expr_stmt|;
 name|this

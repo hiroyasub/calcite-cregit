@@ -1283,6 +1283,8 @@ block|{
 name|requireNonNull
 argument_list|(
 name|names
+argument_list|,
+literal|"names"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -4802,6 +4804,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|calciteTable
+argument_list|,
+literal|"calciteTable"
 argument_list|)
 expr_stmt|;
 block|}

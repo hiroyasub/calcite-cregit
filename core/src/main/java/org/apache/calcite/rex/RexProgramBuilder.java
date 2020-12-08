@@ -355,6 +355,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|inputRowType
+argument_list|,
+literal|"inputRowType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -364,6 +366,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rexBuilder
+argument_list|,
+literal|"rexBuilder"
 argument_list|)
 expr_stmt|;
 name|this

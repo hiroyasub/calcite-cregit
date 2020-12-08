@@ -293,6 +293,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rootSchema
+argument_list|,
+literal|"rootSchema"
 argument_list|)
 block|;
 name|Preconditions

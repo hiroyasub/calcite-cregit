@@ -828,6 +828,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|groupSet
+argument_list|,
+literal|"groupSet"
 argument_list|)
 expr_stmt|;
 if|if

@@ -197,6 +197,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|readType
+argument_list|,
+literal|"readType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -208,6 +210,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|writeType
+argument_list|,
+literal|"writeType"
 argument_list|)
 expr_stmt|;
 block|}

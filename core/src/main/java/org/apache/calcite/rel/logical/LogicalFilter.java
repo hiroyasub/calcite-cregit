@@ -365,6 +365,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|variablesSet
+argument_list|,
+literal|"variablesSet"
 argument_list|)
 expr_stmt|;
 assert|assert

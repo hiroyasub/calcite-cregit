@@ -2357,6 +2357,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|syntheticType
+argument_list|,
+literal|"syntheticType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2366,6 +2368,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|name
+argument_list|,
+literal|"name"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2375,6 +2379,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 name|this

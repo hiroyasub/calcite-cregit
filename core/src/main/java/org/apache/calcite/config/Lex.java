@@ -287,6 +287,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|quoting
+argument_list|,
+literal|"quoting"
 argument_list|)
 expr_stmt|;
 name|this
@@ -298,6 +300,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|unquotedCasing
+argument_list|,
+literal|"unquotedCasing"
 argument_list|)
 expr_stmt|;
 name|this
@@ -309,6 +313,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|quotedCasing
+argument_list|,
+literal|"quotedCasing"
 argument_list|)
 expr_stmt|;
 name|this

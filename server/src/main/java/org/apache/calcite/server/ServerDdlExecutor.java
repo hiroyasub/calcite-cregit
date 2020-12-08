@@ -4357,6 +4357,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|strategy
+argument_list|,
+literal|"strategy"
 argument_list|)
 expr_stmt|;
 name|Preconditions

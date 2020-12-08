@@ -455,6 +455,7 @@ name|requireNonNull
 argument_list|(
 name|operand
 argument_list|,
+comment|/**/
 literal|"name"
 argument_list|)
 expr_stmt|;

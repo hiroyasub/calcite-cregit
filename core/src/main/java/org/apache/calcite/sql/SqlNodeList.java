@@ -348,6 +348,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|list
+argument_list|,
+literal|"list"
 argument_list|)
 expr_stmt|;
 block|}

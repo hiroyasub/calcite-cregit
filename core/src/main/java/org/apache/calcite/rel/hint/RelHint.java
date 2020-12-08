@@ -214,6 +214,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|inheritPath
+argument_list|,
+literal|"inheritPath"
 argument_list|)
 expr_stmt|;
 name|Objects
@@ -221,6 +223,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|hintName
+argument_list|,
+literal|"hintName"
 argument_list|)
 expr_stmt|;
 name|this
@@ -317,6 +321,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|inheritPath
+argument_list|,
+literal|"inheritPath"
 argument_list|)
 expr_stmt|;
 return|return
@@ -678,6 +684,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|inheritPath
+argument_list|,
+literal|"inheritPath"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -724,6 +732,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|hintOption
+argument_list|,
+literal|"hintOption"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -772,6 +782,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|hintOptions
+argument_list|,
+literal|"hintOptions"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -822,6 +834,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|optionKey
+argument_list|,
+literal|"optionKey"
 argument_list|)
 expr_stmt|;
 name|Objects
@@ -829,6 +843,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|optionValue
+argument_list|,
+literal|"optionValue"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -881,6 +897,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|kvOptions
+argument_list|,
+literal|"kvOptions"
 argument_list|)
 expr_stmt|;
 name|Preconditions

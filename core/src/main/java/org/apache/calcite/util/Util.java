@@ -4187,6 +4187,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|throwable
+argument_list|,
+literal|"throwable"
 argument_list|)
 expr_stmt|;
 if|if

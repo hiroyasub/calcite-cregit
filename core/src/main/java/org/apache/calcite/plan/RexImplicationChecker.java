@@ -417,6 +417,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|builder
+argument_list|,
+literal|"builder"
 argument_list|)
 expr_stmt|;
 name|this
@@ -428,6 +430,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|executor
+argument_list|,
+literal|"executor"
 argument_list|)
 expr_stmt|;
 name|this
@@ -439,6 +443,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
 argument_list|)
 expr_stmt|;
 block|}

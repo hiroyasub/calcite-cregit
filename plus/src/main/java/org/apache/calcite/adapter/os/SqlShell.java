@@ -355,6 +355,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|in
+argument_list|,
+literal|"in"
 argument_list|)
 expr_stmt|;
 name|this
@@ -366,6 +368,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|out
+argument_list|,
+literal|"out"
 argument_list|)
 expr_stmt|;
 name|this
@@ -377,6 +381,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|err
+argument_list|,
+literal|"err"
 argument_list|)
 expr_stmt|;
 block|}

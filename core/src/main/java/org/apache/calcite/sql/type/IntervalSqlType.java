@@ -255,6 +255,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|typeSystem
+argument_list|,
+literal|"typeSystem"
 argument_list|)
 expr_stmt|;
 name|this
@@ -266,6 +268,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|intervalQualifier
+argument_list|,
+literal|"intervalQualifier"
 argument_list|)
 expr_stmt|;
 name|computeDigest

@@ -2696,6 +2696,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|configTransform
+argument_list|,
+literal|"configTransform"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2707,6 +2709,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|plannerFactory
+argument_list|,
+literal|"plannerFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2718,6 +2722,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|conformance
+argument_list|,
+literal|"conformance"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2729,6 +2735,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|contextTransform
+argument_list|,
+literal|"contextTransform"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2745,6 +2753,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|sql
+argument_list|,
+literal|"sql"
 argument_list|)
 expr_stmt|;
 specifier|final

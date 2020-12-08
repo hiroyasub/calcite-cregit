@@ -651,6 +651,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -662,6 +664,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|pattern
+argument_list|,
+literal|"pattern"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -719,6 +723,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|after
+argument_list|,
+literal|"after"
 argument_list|)
 expr_stmt|;
 name|this
@@ -745,6 +751,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|partitionKeys
+argument_list|,
+literal|"partitionKeys"
 argument_list|)
 expr_stmt|;
 name|this
@@ -756,6 +764,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|orderKeys
+argument_list|,
+literal|"orderKeys"
 argument_list|)
 expr_stmt|;
 name|this

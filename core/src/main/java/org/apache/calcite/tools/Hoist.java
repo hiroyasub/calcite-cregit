@@ -337,6 +337,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|config
+argument_list|,
+literal|"config"
 argument_list|)
 expr_stmt|;
 block|}
@@ -621,6 +623,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|originalSql
+argument_list|,
+literal|"originalSql"
 argument_list|)
 expr_stmt|;
 name|this
@@ -638,6 +642,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|node
+argument_list|,
+literal|"node"
 argument_list|)
 expr_stmt|;
 specifier|final

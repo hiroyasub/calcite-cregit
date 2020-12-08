@@ -345,6 +345,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|protoStoredRowType
+argument_list|,
+literal|"protoStoredRowType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -356,6 +358,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|protoRowType
+argument_list|,
+literal|"protoRowType"
 argument_list|)
 expr_stmt|;
 name|this
@@ -367,6 +371,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|initializerExpressionFactory
+argument_list|,
+literal|"initializerExpressionFactory"
 argument_list|)
 expr_stmt|;
 block|}

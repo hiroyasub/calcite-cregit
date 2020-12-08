@@ -200,6 +200,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operator
+argument_list|,
+literal|"operator"
 argument_list|)
 expr_stmt|;
 name|this
@@ -286,6 +288,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|operator
+argument_list|,
+literal|"operator"
 argument_list|)
 expr_stmt|;
 block|}

@@ -105,6 +105,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|parent
+argument_list|,
+literal|"parent"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -117,6 +119,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|node
+argument_list|,
+literal|"node"
 argument_list|)
 expr_stmt|;
 block|}

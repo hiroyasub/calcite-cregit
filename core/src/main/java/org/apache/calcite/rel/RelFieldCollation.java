@@ -576,6 +576,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|direction
+argument_list|,
+literal|"direction"
 argument_list|)
 expr_stmt|;
 name|this
@@ -587,6 +589,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|nullDirection
+argument_list|,
+literal|"nullDirection"
 argument_list|)
 expr_stmt|;
 block|}

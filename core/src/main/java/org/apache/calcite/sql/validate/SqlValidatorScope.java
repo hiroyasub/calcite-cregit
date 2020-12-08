@@ -754,6 +754,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|parent
+argument_list|,
+literal|"parent"
 argument_list|)
 expr_stmt|;
 name|this
@@ -784,6 +786,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|kind
+argument_list|,
+literal|"kind"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1061,6 +1065,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|namespace
+argument_list|,
+literal|"namespace"
 argument_list|)
 expr_stmt|;
 name|this
@@ -1092,6 +1098,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|path
+argument_list|,
+literal|"path"
 argument_list|)
 expr_stmt|;
 name|this

@@ -1811,6 +1811,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|input
+argument_list|,
+literal|"input"
 argument_list|)
 operator|.
 name|getParserPosition

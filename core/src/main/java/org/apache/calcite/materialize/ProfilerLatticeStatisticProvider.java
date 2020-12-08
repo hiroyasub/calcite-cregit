@@ -267,6 +267,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|lattice
+argument_list|,
+literal|"lattice"
 argument_list|)
 expr_stmt|;
 name|this

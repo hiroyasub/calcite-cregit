@@ -2195,6 +2195,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|sql
+argument_list|,
+literal|"sql"
 argument_list|)
 block|;
 name|this
@@ -2206,6 +2208,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|factory
+argument_list|,
+literal|"factory"
 argument_list|)
 block|;
 name|this
@@ -2228,6 +2232,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|predicate
+argument_list|,
+literal|"predicate"
 argument_list|)
 block|;
 name|this

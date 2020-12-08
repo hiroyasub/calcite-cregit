@@ -398,6 +398,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|sql
+argument_list|,
+literal|"sql"
 argument_list|)
 expr_stmt|;
 name|this
@@ -421,6 +423,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|formatted
+argument_list|,
+literal|"formatted"
 argument_list|)
 expr_stmt|;
 name|this
@@ -432,6 +436,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|transform
+argument_list|,
+literal|"transform"
 argument_list|)
 expr_stmt|;
 block|}
@@ -450,6 +456,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|transform
+argument_list|,
+literal|"transform"
 argument_list|)
 expr_stmt|;
 return|return

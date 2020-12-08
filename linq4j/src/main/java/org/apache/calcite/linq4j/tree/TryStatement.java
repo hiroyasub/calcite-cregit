@@ -133,6 +133,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|body
+argument_list|,
+literal|"body"
 argument_list|)
 expr_stmt|;
 name|this
@@ -144,6 +146,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|catchBlocks
+argument_list|,
+literal|"catchBlocks"
 argument_list|)
 expr_stmt|;
 name|this

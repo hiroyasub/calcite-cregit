@@ -613,6 +613,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|resultCol
+argument_list|,
+literal|"resultCol"
 argument_list|)
 argument_list|)
 expr_stmt|;

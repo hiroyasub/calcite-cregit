@@ -185,6 +185,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 return|;
 block|}

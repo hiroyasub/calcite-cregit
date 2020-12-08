@@ -9765,6 +9765,8 @@ block|{
 name|requireNonNull
 argument_list|(
 name|node
+argument_list|,
+literal|"node"
 argument_list|)
 expr_stmt|;
 specifier|final

@@ -1440,6 +1440,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|scan
+argument_list|,
+literal|"scan"
 argument_list|)
 block|;     }
 specifier|static

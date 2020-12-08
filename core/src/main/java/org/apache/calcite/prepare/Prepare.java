@@ -3077,6 +3077,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
 argument_list|)
 block|;
 name|this
@@ -3086,6 +3088,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|parameterRowType
+argument_list|,
+literal|"parameterRowType"
 argument_list|)
 block|;
 name|this
@@ -3095,6 +3099,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|fieldOrigins
+argument_list|,
+literal|"fieldOrigins"
 argument_list|)
 block|;
 name|this
@@ -3115,6 +3121,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rootRel
+argument_list|,
+literal|"rootRel"
 argument_list|)
 block|;
 name|this

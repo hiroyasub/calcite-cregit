@@ -726,6 +726,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 name|this
@@ -735,6 +737,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|typeName
+argument_list|,
+literal|"typeName"
 argument_list|)
 expr_stmt|;
 name|Preconditions

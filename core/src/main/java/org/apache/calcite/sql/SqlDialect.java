@@ -5066,6 +5066,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|databaseProductName
+argument_list|,
+literal|"databaseProductName"
 argument_list|)
 expr_stmt|;
 name|Objects
@@ -5073,6 +5075,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|nullCollation
+argument_list|,
+literal|"nullCollation"
 argument_list|)
 expr_stmt|;
 comment|// Note: below lambda accesses uninitialized DatabaseProduct.this, so it might be
@@ -5501,6 +5505,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|databaseProduct
+argument_list|,
+literal|"databaseProduct"
 argument_list|)
 expr_stmt|;
 name|this
@@ -5554,6 +5560,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|quotedCasing
+argument_list|,
+literal|"quotedCasing"
 argument_list|)
 expr_stmt|;
 name|this
@@ -5565,6 +5573,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|unquotedCasing
+argument_list|,
+literal|"unquotedCasing"
 argument_list|)
 expr_stmt|;
 name|this
@@ -5582,6 +5592,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|conformance
+argument_list|,
+literal|"conformance"
 argument_list|)
 expr_stmt|;
 name|this
@@ -5593,6 +5605,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|nullCollation
+argument_list|,
+literal|"nullCollation"
 argument_list|)
 expr_stmt|;
 name|this
@@ -5604,6 +5618,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|dataTypeSystem
+argument_list|,
+literal|"dataTypeSystem"
 argument_list|)
 expr_stmt|;
 name|this
@@ -5615,6 +5631,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|jethroInfo
+argument_list|,
+literal|"jethroInfo"
 argument_list|)
 expr_stmt|;
 block|}

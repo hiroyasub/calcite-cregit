@@ -3205,6 +3205,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|config
+argument_list|,
+literal|"config"
 argument_list|)
 expr_stmt|;
 name|this
@@ -3256,6 +3258,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|cluster
+argument_list|,
+literal|"cluster"
 argument_list|)
 expr_stmt|;
 block|}
@@ -26486,6 +26490,8 @@ return|return
 name|requireNonNull
 argument_list|(
 name|rex
+argument_list|,
+literal|"rex"
 argument_list|)
 return|;
 block|}

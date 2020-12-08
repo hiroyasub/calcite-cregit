@@ -432,6 +432,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|target
+argument_list|,
+literal|"target"
 argument_list|)
 expr_stmt|;
 block|}
@@ -545,6 +547,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|contexts
+argument_list|,
+literal|"contexts"
 argument_list|)
 expr_stmt|;
 for|for

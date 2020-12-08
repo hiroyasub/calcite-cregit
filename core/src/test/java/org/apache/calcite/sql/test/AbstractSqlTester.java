@@ -806,6 +806,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|factory
+argument_list|,
+literal|"factory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -817,6 +819,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|validatorTransform
+argument_list|,
+literal|"validatorTransform"
 argument_list|)
 expr_stmt|;
 block|}

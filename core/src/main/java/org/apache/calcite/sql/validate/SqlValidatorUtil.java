@@ -1817,7 +1817,7 @@ name|transform
 argument_list|(
 name|columnList
 argument_list|,
-name|o
+name|sqlNode
 lambda|->
 operator|(
 operator|(
@@ -1825,7 +1825,7 @@ name|SqlIdentifier
 operator|)
 name|requireNonNull
 argument_list|(
-name|o
+name|sqlNode
 argument_list|,
 literal|"sqlNode"
 argument_list|)
@@ -6267,6 +6267,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rowType
+argument_list|,
+literal|"rowType"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6329,6 +6331,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|tableMap
+argument_list|,
+literal|"tableMap"
 argument_list|)
 expr_stmt|;
 block|}

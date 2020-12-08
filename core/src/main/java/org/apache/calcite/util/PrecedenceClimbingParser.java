@@ -673,6 +673,8 @@ decl_stmt|;
 name|requireNonNull
 argument_list|(
 name|r
+argument_list|,
+literal|"r"
 argument_list|)
 expr_stmt|;
 name|replace

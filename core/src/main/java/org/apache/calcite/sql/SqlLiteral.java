@@ -2605,6 +2605,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 decl_stmt|;
 if|if
@@ -2697,6 +2699,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 decl_stmt|;
 if|if
@@ -2836,6 +2840,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 operator|)
 operator|.
@@ -3010,6 +3016,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 expr_stmt|;
 name|int
@@ -3046,6 +3054,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 decl_stmt|;
 name|Charset
@@ -3181,6 +3191,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 decl_stmt|;
 return|return
@@ -3948,6 +3960,8 @@ operator|)
 name|requireNonNull
 argument_list|(
 name|value
+argument_list|,
+literal|"value"
 argument_list|)
 decl_stmt|;
 name|String

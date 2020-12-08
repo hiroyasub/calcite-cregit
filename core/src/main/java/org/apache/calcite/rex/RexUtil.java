@@ -5560,6 +5560,8 @@ return|return
 name|requireNonNull
 argument_list|(
 name|e
+argument_list|,
+literal|"e"
 argument_list|)
 return|;
 block|}
@@ -5891,6 +5893,8 @@ return|return
 name|requireNonNull
 argument_list|(
 name|e
+argument_list|,
+literal|"e"
 argument_list|)
 return|;
 block|}
@@ -13119,6 +13123,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|ref
+argument_list|,
+literal|"ref"
 argument_list|)
 expr_stmt|;
 name|this
@@ -13128,6 +13134,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|list
+argument_list|,
+literal|"list"
 argument_list|)
 expr_stmt|;
 name|this
@@ -13137,6 +13145,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rexBuilder
+argument_list|,
+literal|"rexBuilder"
 argument_list|)
 expr_stmt|;
 name|this
@@ -13146,6 +13156,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 block|}

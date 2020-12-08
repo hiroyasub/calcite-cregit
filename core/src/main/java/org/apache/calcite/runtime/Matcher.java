@@ -312,6 +312,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|predicates
+argument_list|,
+literal|"predicates"
 argument_list|)
 expr_stmt|;
 specifier|final

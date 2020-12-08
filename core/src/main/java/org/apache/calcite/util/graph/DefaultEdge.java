@@ -81,6 +81,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|source
+argument_list|,
+literal|"source"
 argument_list|)
 expr_stmt|;
 name|this
@@ -92,6 +94,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|target
+argument_list|,
+literal|"target"
 argument_list|)
 expr_stmt|;
 block|}

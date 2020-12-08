@@ -2907,6 +2907,8 @@ init|=
 name|requireNonNull
 argument_list|(
 name|entry
+argument_list|,
+literal|"entry"
 argument_list|)
 operator|.
 name|getStarTable
@@ -3174,6 +3176,8 @@ init|=
 name|requireNonNull
 argument_list|(
 name|base
+argument_list|,
+literal|"base"
 argument_list|)
 decl_stmt|;
 for|for

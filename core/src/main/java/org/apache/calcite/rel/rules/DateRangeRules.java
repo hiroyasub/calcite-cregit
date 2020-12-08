@@ -1731,6 +1731,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|rexBuilder
+argument_list|,
+literal|"rexBuilder"
 argument_list|)
 expr_stmt|;
 name|this
@@ -1740,6 +1742,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|timeUnit
+argument_list|,
+literal|"timeUnit"
 argument_list|)
 expr_stmt|;
 name|this
@@ -1749,6 +1753,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|operandRanges
+argument_list|,
+literal|"operandRanges"
 argument_list|)
 expr_stmt|;
 name|this
@@ -1758,6 +1764,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|timeUnitRanges
+argument_list|,
+literal|"timeUnitRanges"
 argument_list|)
 expr_stmt|;
 name|this

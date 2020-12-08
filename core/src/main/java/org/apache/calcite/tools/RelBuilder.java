@@ -3205,11 +3205,15 @@ block|{
 name|requireNonNull
 argument_list|(
 name|alias
+argument_list|,
+literal|"alias"
 argument_list|)
 expr_stmt|;
 name|requireNonNull
 argument_list|(
 name|fieldName
+argument_list|,
+literal|"fieldName"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -5142,6 +5146,8 @@ block|}
 name|requireNonNull
 argument_list|(
 name|groupSets
+argument_list|,
+literal|"groupSets"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -9119,6 +9125,8 @@ argument_list|,
 name|requireNonNull
 argument_list|(
 name|itemAliases
+argument_list|,
+literal|"itemAliases"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -17011,6 +17019,8 @@ block|{
 name|requireNonNull
 argument_list|(
 name|hints
+argument_list|,
+literal|"hints"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -17347,6 +17357,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|nodes
+argument_list|,
+literal|"nodes"
 argument_list|)
 expr_stmt|;
 name|this
@@ -17566,6 +17578,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|aggFunction
+argument_list|,
+literal|"aggFunction"
 argument_list|)
 expr_stmt|;
 comment|// If the aggregate function ignores DISTINCT,
@@ -17610,6 +17624,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|operands
+argument_list|,
+literal|"operands"
 argument_list|)
 expr_stmt|;
 name|this
@@ -17619,6 +17635,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|orderKeys
+argument_list|,
+literal|"orderKeys"
 argument_list|)
 expr_stmt|;
 if|if
@@ -18445,6 +18463,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|aggregateCall
+argument_list|,
+literal|"aggregateCall"
 argument_list|)
 expr_stmt|;
 block|}

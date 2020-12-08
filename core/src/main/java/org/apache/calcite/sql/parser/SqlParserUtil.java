@@ -2082,6 +2082,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|startQuote
+argument_list|,
+literal|"startQuote"
 argument_list|)
 argument_list|,
 name|Objects
@@ -2089,6 +2091,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|endQuote
+argument_list|,
+literal|"endQuote"
 argument_list|)
 argument_list|,
 name|Objects
@@ -2096,6 +2100,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|escape
+argument_list|,
+literal|"escape"
 argument_list|)
 argument_list|,
 name|casing
@@ -3348,6 +3354,8 @@ block|{
 name|requireNonNull
 argument_list|(
 name|list
+argument_list|,
+literal|"list"
 argument_list|)
 expr_stmt|;
 name|Preconditions
@@ -4907,6 +4915,8 @@ argument_list|(
 name|requireNonNull
 argument_list|(
 name|o
+argument_list|,
+literal|"o"
 argument_list|)
 argument_list|)
 expr_stmt|;

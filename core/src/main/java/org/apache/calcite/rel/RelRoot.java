@@ -315,6 +315,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|collation
+argument_list|,
+literal|"collation"
 argument_list|)
 expr_stmt|;
 name|this

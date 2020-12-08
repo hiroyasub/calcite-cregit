@@ -105,6 +105,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|comparisonKind
+argument_list|,
+literal|"comparisonKind"
 argument_list|)
 expr_stmt|;
 name|Preconditions

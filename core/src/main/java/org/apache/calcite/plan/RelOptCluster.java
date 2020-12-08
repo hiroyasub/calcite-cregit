@@ -496,6 +496,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|planner
+argument_list|,
+literal|"planner"
 argument_list|)
 expr_stmt|;
 name|this
@@ -507,6 +509,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|typeFactory
+argument_list|,
+literal|"typeFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -860,6 +864,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|hintStrategies
+argument_list|,
+literal|"hintStrategies"
 argument_list|)
 expr_stmt|;
 name|this

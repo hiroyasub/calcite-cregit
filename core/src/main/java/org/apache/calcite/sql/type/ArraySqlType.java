@@ -142,6 +142,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|elementType
+argument_list|,
+literal|"elementType"
 argument_list|)
 expr_stmt|;
 name|computeDigest

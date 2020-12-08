@@ -714,6 +714,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|jdbcSchema
+argument_list|,
+literal|"jdbcSchema"
 argument_list|)
 expr_stmt|;
 name|this
@@ -735,6 +737,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|jdbcTableName
+argument_list|,
+literal|"jdbcTableName"
 argument_list|)
 expr_stmt|;
 name|this
@@ -744,6 +748,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|jdbcTableType
+argument_list|,
+literal|"jdbcTableType"
 argument_list|)
 expr_stmt|;
 block|}

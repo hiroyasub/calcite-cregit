@@ -674,6 +674,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|relBuilder
+argument_list|,
+literal|"relBuilder"
 argument_list|)
 expr_stmt|;
 if|if

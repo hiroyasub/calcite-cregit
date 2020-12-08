@@ -925,6 +925,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|defaultSchema
+argument_list|,
+literal|"defaultSchema"
 argument_list|)
 argument_list|,
 name|ImmutableList
@@ -973,6 +975,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rootSchema
+argument_list|,
+literal|"rootSchema"
 argument_list|)
 expr_stmt|;
 name|this

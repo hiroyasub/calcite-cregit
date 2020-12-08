@@ -423,6 +423,8 @@ return|return
 name|requireNonNull
 argument_list|(
 name|expression
+argument_list|,
+literal|"expression"
 argument_list|)
 operator|.
 name|evaluate

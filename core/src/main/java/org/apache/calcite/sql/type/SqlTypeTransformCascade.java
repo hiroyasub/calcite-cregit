@@ -159,6 +159,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|rule
+argument_list|,
+literal|"rule"
 argument_list|)
 expr_stmt|;
 name|this

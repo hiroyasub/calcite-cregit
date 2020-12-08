@@ -515,6 +515,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|bytesValue
+argument_list|,
+literal|"bytesValue"
 argument_list|)
 argument_list|,
 name|Objects
@@ -522,6 +524,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|charsetName
+argument_list|,
+literal|"charsetName"
 argument_list|)
 argument_list|,
 name|collation
@@ -553,6 +557,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|stringValue
+argument_list|,
+literal|"stringValue"
 argument_list|)
 argument_list|,
 literal|null

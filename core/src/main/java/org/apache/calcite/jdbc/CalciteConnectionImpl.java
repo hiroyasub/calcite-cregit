@@ -3256,6 +3256,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|connection
+argument_list|,
+literal|"connection"
 argument_list|)
 expr_stmt|;
 name|long
@@ -3641,6 +3643,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|connection
+argument_list|,
+literal|"connection"
 argument_list|)
 expr_stmt|;
 block|}

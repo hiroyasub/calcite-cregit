@@ -107,6 +107,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|parameter
+argument_list|,
+literal|"parameter"
 argument_list|)
 expr_stmt|;
 name|this
@@ -118,6 +120,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|iterable
+argument_list|,
+literal|"iterable"
 argument_list|)
 expr_stmt|;
 name|this
@@ -129,6 +133,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|body
+argument_list|,
+literal|"body"
 argument_list|)
 expr_stmt|;
 comment|// may be empty block, not null

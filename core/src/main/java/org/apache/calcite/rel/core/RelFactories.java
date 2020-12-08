@@ -2636,6 +2636,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|filterFactory
+argument_list|,
+literal|"filterFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2645,6 +2647,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|projectFactory
+argument_list|,
+literal|"projectFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2654,6 +2658,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|aggregateFactory
+argument_list|,
+literal|"aggregateFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2663,6 +2669,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|sortFactory
+argument_list|,
+literal|"sortFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2672,6 +2680,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|exchangeFactory
+argument_list|,
+literal|"exchangeFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2681,6 +2691,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|sortExchangeFactory
+argument_list|,
+literal|"sortExchangeFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2690,6 +2702,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|setOpFactory
+argument_list|,
+literal|"setOpFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2699,6 +2713,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|joinFactory
+argument_list|,
+literal|"joinFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2708,6 +2724,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|correlateFactory
+argument_list|,
+literal|"correlateFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2717,6 +2735,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|valuesFactory
+argument_list|,
+literal|"valuesFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2726,6 +2746,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|scanFactory
+argument_list|,
+literal|"scanFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2735,6 +2757,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|tableFunctionScanFactory
+argument_list|,
+literal|"tableFunctionScanFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2744,6 +2768,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|snapshotFactory
+argument_list|,
+literal|"snapshotFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2753,6 +2779,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|matchFactory
+argument_list|,
+literal|"matchFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2762,6 +2790,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|spoolFactory
+argument_list|,
+literal|"spoolFactory"
 argument_list|)
 expr_stmt|;
 name|this
@@ -2771,6 +2801,8 @@ operator|=
 name|requireNonNull
 argument_list|(
 name|repeatUnionFactory
+argument_list|,
+literal|"repeatUnionFactory"
 argument_list|)
 expr_stmt|;
 block|}

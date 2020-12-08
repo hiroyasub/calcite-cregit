@@ -3107,6 +3107,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|clazz
+argument_list|,
+literal|"clazz"
 argument_list|)
 expr_stmt|;
 name|this

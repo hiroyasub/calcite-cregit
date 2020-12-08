@@ -747,6 +747,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|functionsToReduce
+argument_list|,
+literal|"functionsToReduce"
 argument_list|)
 argument_list|)
 argument_list|)
