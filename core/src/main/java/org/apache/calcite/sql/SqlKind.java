@@ -552,6 +552,18 @@ block|,
 comment|/** {@code REVERSE} function (SQL Server, MySQL). */
 name|REVERSE
 block|,
+comment|/** {@code SUBSTR} function (BigQuery semantics). */
+name|SUBSTR_BIG_QUERY
+block|,
+comment|/** {@code SUBSTR} function (MySQL semantics). */
+name|SUBSTR_MYSQL
+block|,
+comment|/** {@code SUBSTR} function (Oracle semantics). */
+name|SUBSTR_ORACLE
+block|,
+comment|/** {@code SUBSTR} function (PostgreSQL semantics). */
+name|SUBSTR_POSTGRESQL
+block|,
 comment|/** Call to a function using JDBC function syntax. */
 name|JDBC_FN
 block|,

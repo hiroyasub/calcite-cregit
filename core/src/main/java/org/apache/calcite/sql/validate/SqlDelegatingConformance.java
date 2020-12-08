@@ -17,6 +17,22 @@ name|validate
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibrary
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link SqlConformance} that delegates all methods to  * another object. You can create a sub-class that overrides particular  * methods.  */
 end_comment
@@ -213,6 +229,20 @@ return|return
 name|delegate
 operator|.
 name|allowAliasUnnestItems
+argument_list|()
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlLibrary
+name|semantics
+parameter_list|()
+block|{
+return|return
+name|delegate
+operator|.
+name|semantics
 argument_list|()
 return|;
 block|}

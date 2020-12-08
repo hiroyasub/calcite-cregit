@@ -17,6 +17,22 @@ name|validate
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibrary
+import|;
+end_import
+
 begin_comment
 comment|/**  * Enumeration of valid SQL compatibility modes.  *  *<p>For most purposes, one of the built-in compatibility modes in enum  * {@link SqlConformanceEnum} will suffice.  *  *<p>If you wish to implement this interface to build your own conformance,  * we strongly recommend that you extend {@link SqlAbstractConformance},  * or use a {@link SqlDelegatingConformance},  * so that you won't be broken by future changes.  *  * @see SqlConformanceEnum  * @see SqlAbstractConformance  * @see SqlDelegatingConformance  */
 end_comment
@@ -266,6 +282,11 @@ function_decl|;
 comment|/**    * Whether to allow a qualified common column in a query that has a    * NATURAL join or a join with a USING clause.    *    *<p>For example, in the query    *    *<blockquote><pre>SELECT emp.deptno    * FROM emp    * JOIN dept USING (deptno)</pre></blockquote>    *    *<p>{@code deptno} is the common column. A qualified common column    * such as {@code emp.deptno} is not allowed in Oracle, but is allowed    * in PostgreSQL.    *    *<p>Among the built-in conformance levels, false in    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#PRESTO},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#STRICT_99},    * {@link SqlConformanceEnum#STRICT_2003};    * true otherwise.    */
 name|boolean
 name|allowQualifyingCommonColumn
+parameter_list|()
+function_decl|;
+comment|/**    * Controls the behavior of operators that are part of Standard SQL but    * nevertheless have different behavior in different databases.    *    *<p>Consider the {@code SUBSTRING} operator. In ISO standard SQL, negative    * start indexes are converted to 1; in Google BigQuery, negative start    * indexes are treated as offsets from the end of the string. For example,    * {@code SUBSTRING('abcde' FROM -3 FOR 2)} returns {@code 'ab'} in standard    * SQL and 'cd' in BigQuery.    *    *<p>If you specify {@code conformance=BIG_QUERY} in your connection    * parameters, {@code SUBSTRING} will give the BigQuery behavior. Similarly    * MySQL and Oracle.    *    *<p>Among the built-in conformance levels:    *<ul>    *<li>{@link SqlConformanceEnum#BIG_QUERY} returns    *     {@link SqlLibrary#BIG_QUERY};    *<li>{@link SqlConformanceEnum#MYSQL_5} returns {@link SqlLibrary#MYSQL};    *<li>{@link SqlConformanceEnum#ORACLE_10} and    *     {@link SqlConformanceEnum#ORACLE_12} return {@link SqlLibrary#ORACLE};    *<li>otherwise returns {@link SqlLibrary#STANDARD}.    *</ul>    */
+name|SqlLibrary
+name|semantics
 parameter_list|()
 function_decl|;
 block|}

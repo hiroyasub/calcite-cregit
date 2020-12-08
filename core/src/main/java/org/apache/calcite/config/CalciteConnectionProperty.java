@@ -587,7 +587,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** SQL conformance level. */
+comment|/** SQL conformance level.    *    *<p>Controls the semantics of ISO standard SQL features that are implemented    * in non-standard ways in some other systems.    *    *<p>For example, the {@code SUBSTRING(string FROM start [FOR length])}    * operator treats negative {@code start} values as 1, but BigQuery's    * implementation regards negative {@code starts} as counting from the end.    * If {@code conformance=BIG_QUERY} we will use BigQuery's behavior.    *    *<p>This property only affects ISO standard SQL features. For example, the    * {@code SUBSTR} function is non-standard, so is controlled by the    * {@link #FUN fun} property. If you set {@code fun=oracle} you will get    * {@code SUBSTR} with Oracle's semantics; if you set {@code fun=postgres} you    * will get {@code SUBSTR} with PostgreSQL's (slightly different)    * semantics. */
 name|CONFORMANCE
 argument_list|(
 literal|"conformance"

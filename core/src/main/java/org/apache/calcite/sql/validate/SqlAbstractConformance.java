@@ -17,6 +17,22 @@ name|validate
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibrary
+import|;
+end_import
+
 begin_comment
 comment|/**  * Abstract base class for implementing {@link SqlConformance}.  *  *<p>Every method in {@code SqlConformance} is implemented,  * and behaves the same as in {@link SqlConformanceEnum#DEFAULT}.  */
 end_comment
@@ -442,6 +458,22 @@ operator|.
 name|DEFAULT
 operator|.
 name|allowAliasUnnestItems
+argument_list|()
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlLibrary
+name|semantics
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|semantics
 argument_list|()
 return|;
 block|}
