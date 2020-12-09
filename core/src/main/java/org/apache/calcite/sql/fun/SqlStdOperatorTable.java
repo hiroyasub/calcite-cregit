@@ -6424,7 +6424,7 @@ operator|.
 name|SYSTEM
 argument_list|)
 decl_stmt|;
-comment|/**    * The item operator {@code [ ... ]}, used to access a given element of an    * array or map. For example, {@code myArray[3]} or {@code "myMap['foo']"}.    *    *<p>The SQL standard calls the ARRAY variant a    *&lt;array element reference&gt;. Index is 1-based. The standard says    * to raise "data exception - array element error" but we currently return    * null.</p>    *    *<p>MAP is not standard SQL.</p>    */
+comment|/**    * The item operator {@code [ ... ]}, used to access a given element of an    * array, map or struct. For example, {@code myArray[3]}, {@code "myMap['foo']"},    * {@code myStruct[2]} or {@code myStruct['fieldName']}.    *    *<p>The SQL standard calls the ARRAY variant a    *&lt;array element reference&gt;. Index is 1-based. The standard says    * to raise "data exception - array element error" but we currently return    * null.</p>    *    *<p>MAP is not standard SQL.</p>    */
 specifier|public
 specifier|static
 specifier|final
