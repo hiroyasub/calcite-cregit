@@ -33774,6 +33774,61 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testUnpivot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM emp_pivoted\n"
+operator|+
+literal|"UNPIVOT (\n"
+operator|+
+literal|"  (sum_sal, count_star)\n"
+operator|+
+literal|"  FOR (job, deptno)\n"
+operator|+
+literal|"  IN ((c10_ss, c10_c) AS ('CLERK', 10),\n"
+operator|+
+literal|"      (c20_ss, c20_c) AS ('CLERK', 20),\n"
+operator|+
+literal|"      (a20_ss, a20_c) AS ('ANALYST', 20)))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP_PIVOTED` "
+operator|+
+literal|"UNPIVOT EXCLUDE NULLS ((`SUM_SAL`, `COUNT_STAR`)"
+operator|+
+literal|" FOR (`JOB`, `DEPTNO`)"
+operator|+
+literal|" IN ((`C10_SS`, `C10_C`) AS ('CLERK', 10),"
+operator|+
+literal|" (`C20_SS`, `C20_C`) AS ('CLERK', 20),"
+operator|+
+literal|" (`A20_SS`, `A20_C`) AS ('ANALYST', 20)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMatchRecognize1
 parameter_list|()
 block|{

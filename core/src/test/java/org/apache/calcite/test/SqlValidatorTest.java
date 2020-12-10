@@ -9076,6 +9076,314 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testUnpivot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT (remuneration\n"
+operator|+
+literal|"  FOR remuneration_type IN (comm AS 'commission',\n"
+operator|+
+literal|"                            sal as 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(20) NOT NULL ENAME, VARCHAR(10) NOT NULL JOB, INTEGER MGR,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL HIREDATE, INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" BOOLEAN NOT NULL SLACKER, CHAR(10) NOT NULL REMUNERATION_TYPE,"
+operator|+
+literal|" INTEGER NOT NULL REMUNERATION) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotInvalidColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT (remuneration\n"
+operator|+
+literal|"  FOR remuneration_type IN (comm AS 'commission',\n"
+operator|+
+literal|"                            ^unknownCol^ as 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'UNKNOWNCOL' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotCannotDeriveMeasureType
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT (remuneration\n"
+operator|+
+literal|"  FOR remuneration_type IN (^comm^ AS 'commission',\n"
+operator|+
+literal|"                            ename as 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"In UNPIVOT, cannot derive type for measure 'REMUNERATION'"
+operator|+
+literal|" because source columns have different data types"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotValueMismatch
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT (remuneration\n"
+operator|+
+literal|"  FOR remuneration_type IN (comm AS 'commission',\n"
+operator|+
+literal|"                            sal AS ^('salary', 1)^))"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"Value count in UNPIVOT \\(2\\) must match "
+operator|+
+literal|"number of FOR columns \\(1\\)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotDuplicateName
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT ((remuneration, ^remuneration^)\n"
+operator|+
+literal|"  FOR remuneration_type\n"
+operator|+
+literal|"  IN ((comm, comm) AS 'commission',\n"
+operator|+
+literal|"      (sal, sal) AS 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Duplicate column name 'REMUNERATION' in UNPIVOT"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotDuplicateName2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT (remuneration\n"
+operator|+
+literal|"  FOR ^remuneration^ IN (comm AS 'commission',\n"
+operator|+
+literal|"                         sal AS 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Duplicate column name 'REMUNERATION' in UNPIVOT"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotDuplicateName3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT (remuneration\n"
+operator|+
+literal|"  FOR ^deptno^ IN (comm AS 'commission',\n"
+operator|+
+literal|"                         sal AS 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Duplicate column name 'DEPTNO' in UNPIVOT"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotMissingAs
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|"  SELECT *\n"
+operator|+
+literal|"  FROM (VALUES (0, 1, 2, 3, 4),\n"
+operator|+
+literal|"               (10, 11, 12, 13, 14))\n"
+operator|+
+literal|"      AS t (c0, c1, c2, c3, c4))\n"
+operator|+
+literal|"UNPIVOT ((m0, m1, m2)\n"
+operator|+
+literal|"    FOR (a0, a1)\n"
+operator|+
+literal|"     IN ((c1, c2, c3) AS ('col1','col2'),\n"
+operator|+
+literal|"         (c2, c3, c4)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL C0, VARCHAR(8) NOT NULL A0,"
+operator|+
+literal|" VARCHAR(8) NOT NULL A1, INTEGER M0, INTEGER M1,"
+operator|+
+literal|" INTEGER M2) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnpivotMissingAs2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|"  SELECT *\n"
+operator|+
+literal|"  FROM (VALUES (0, 1, 2, 3, 4),\n"
+operator|+
+literal|"               (10, 11, 12, 13, 14))\n"
+operator|+
+literal|"      AS t (c0, c1, c2, c3, c4))\n"
+operator|+
+literal|"UNPIVOT ((m0, m1, m2)\n"
+operator|+
+literal|"    FOR (^a0^, a1)\n"
+operator|+
+literal|"     IN ((c1, c2, c3) AS (6, true),\n"
+operator|+
+literal|"         (c2, c3, c4)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"In UNPIVOT, cannot derive type for axis 'A0'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMatchRecognizeWithDistinctAggregation
 parameter_list|()
 block|{

@@ -725,6 +725,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TimestampString
 import|;
 end_import
@@ -18786,6 +18800,222 @@ end_expr_stmt
 
 begin_function
 unit|}    @
+name|Test
+name|void
+name|testUnpivot
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM (SELECT deptno, job, sal, comm FROM emp)
+comment|//   UNPIVOT INCLUDE NULLS (remuneration
+comment|//     FOR remuneration_type IN (comm AS 'commission',
+comment|//                               sal AS 'salary'))
+comment|//
+comment|// translates to
+comment|//   SELECT e.deptno, e.job,
+comment|//     CASE t.remuneration_type
+comment|//     WHEN 'commission' THEN comm
+comment|//     ELSE sal
+comment|//     END AS remuneration
+comment|//   FROM emp
+comment|//   CROSS JOIN VALUES ('commission', 'salary') AS t (remuneration_type)
+comment|//
+specifier|final
+name|BiFunction
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|Boolean
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+parameter_list|(
+name|b
+parameter_list|,
+name|includeNulls
+parameter_list|)
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|unpivot
+argument_list|(
+name|includeNulls
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"REMUNERATION"
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"REMUNERATION_TYPE"
+argument_list|)
+argument_list|,
+name|Pair
+operator|.
+name|zip
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|"commission"
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|"salary"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"COMM"
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"SAL"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expectedIncludeNulls
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], "
+operator|+
+literal|"HIREDATE=[$4], DEPTNO=[$7], REMUNERATION_TYPE=[$8], "
+operator|+
+literal|"REMUNERATION=[CASE(=($8, 'commission'), $6, =($8, 'salary'), $5, "
+operator|+
+literal|"null:NULL)])\n"
+operator|+
+literal|"  LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"    LogicalValues(tuples=[[{ 'commission' }, { 'salary' }]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedExcludeNulls
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], "
+operator|+
+literal|"HIREDATE=[$4], DEPTNO=[$5], REMUNERATION_TYPE=[$6], "
+operator|+
+literal|"REMUNERATION=[CAST($7):DECIMAL(7, 2) NOT NULL])\n"
+operator|+
+literal|"  LogicalFilter(condition=[IS NOT NULL($7)])\n"
+operator|+
+literal|"    "
+operator|+
+name|expectedIncludeNulls
+operator|.
+name|replace
+argument_list|(
+literal|"\n  "
+argument_list|,
+literal|"\n      "
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expectedIncludeNulls
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|()
+argument_list|,
+literal|false
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expectedExcludeNulls
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
 name|Test
 name|void
 name|testMatchRecognize

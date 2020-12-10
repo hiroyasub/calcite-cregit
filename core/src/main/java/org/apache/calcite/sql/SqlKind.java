@@ -209,6 +209,9 @@ block|,
 comment|/** PIVOT clause. */
 name|PIVOT
 block|,
+comment|/** UNPIVOT clause. */
+name|UNPIVOT
+block|,
 comment|/** MATCH_RECOGNIZE clause. */
 name|MATCH_RECOGNIZE
 block|,

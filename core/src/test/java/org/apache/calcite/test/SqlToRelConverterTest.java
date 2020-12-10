@@ -13209,6 +13209,36 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testUnpivot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"UNPIVOT INCLUDE NULLS (remuneration\n"
+operator|+
+literal|"  FOR remuneration_type IN (comm AS 'commission',\n"
+operator|+
+literal|"                            sal as 'salary'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testMatchRecognize1
 parameter_list|()
 block|{

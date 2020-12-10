@@ -933,6 +933,18 @@ name|util
 operator|.
 name|function
 operator|.
+name|BiFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
 name|Function
 import|;
 end_import
@@ -986,6 +998,18 @@ operator|.
 name|Matchers
 operator|.
 name|isLinux
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|allOf
 import|;
 end_import
 
@@ -23086,7 +23110,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link Util#transform(List, java.util.function.Function)}. */
+comment|/** Tests {@link Util#transform(List, java.util.function.Function)}    * and {@link Util#transformIndexed(List, BiFunction)}. */
 annotation|@
 name|Test
 name|void
@@ -23273,6 +23297,105 @@ argument_list|(
 name|RandomAccess
 operator|.
 name|class
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|Util
+operator|.
+name|transformIndexed
+argument_list|(
+name|beatles
+argument_list|,
+parameter_list|(
+name|s
+parameter_list|,
+name|i
+parameter_list|)
+lambda|->
+name|i
+operator|+
+literal|": "
+operator|+
+name|s
+argument_list|)
+argument_list|,
+name|allOf
+argument_list|(
+name|is
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"0: John"
+argument_list|,
+literal|"1: Paul"
+argument_list|,
+literal|"2: George"
+argument_list|,
+literal|"3: Ringo"
+argument_list|)
+argument_list|)
+argument_list|,
+name|instanceOf
+argument_list|(
+name|RandomAccess
+operator|.
+name|class
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|Util
+operator|.
+name|transformIndexed
+argument_list|(
+name|beatles2
+argument_list|,
+parameter_list|(
+name|s
+parameter_list|,
+name|i
+parameter_list|)
+lambda|->
+name|i
+operator|+
+literal|": "
+operator|+
+name|s
+argument_list|)
+argument_list|,
+name|allOf
+argument_list|(
+name|is
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"0: John"
+argument_list|,
+literal|"1: Paul"
+argument_list|,
+literal|"2: George"
+argument_list|,
+literal|"3: Ringo"
+argument_list|)
+argument_list|)
+argument_list|,
+name|not
+argument_list|(
+name|instanceOf
+argument_list|(
+name|RandomAccess
+operator|.
+name|class
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
