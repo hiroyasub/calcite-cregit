@@ -674,6 +674,10 @@ literal|"calcite.ids"
 argument_list|,
 name|Function
 operator|.
+expr|<@
+name|Nullable
+name|String
+operator|>
 name|identity
 argument_list|()
 argument_list|)

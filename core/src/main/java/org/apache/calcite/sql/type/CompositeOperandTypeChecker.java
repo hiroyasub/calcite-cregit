@@ -167,6 +167,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|UnknownKeyFor
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -262,11 +278,15 @@ block|,
 name|REPEAT
 block|}
 comment|//~ Instance fields --------------------------------------------------------
+comment|// It is not clear if @UnknownKeyFor is needed here or not, however, checkerframework inference
+comment|// fails otherwise, see https://github.com/typetools/checker-framework/issues/4048
 specifier|protected
 specifier|final
 name|ImmutableList
 argument_list|<
-name|?
+annotation|@
+name|UnknownKeyFor
+operator|?
 extends|extends
 name|SqlOperandTypeChecker
 argument_list|>
@@ -1674,14 +1694,19 @@ operator|.
 name|REPEAT
 condition|)
 block|{
-if|if
-condition|(
+name|SqlOperandTypeChecker
+name|checker
+init|=
 name|Iterables
 operator|.
 name|getOnlyElement
 argument_list|(
 name|allowedRules
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|checker
 operator|instanceof
 name|SqlOperandTypeInference
 condition|)
@@ -1693,12 +1718,7 @@ init|=
 operator|(
 name|SqlOperandTypeInference
 operator|)
-name|Iterables
-operator|.
-name|getOnlyElement
-argument_list|(
-name|allowedRules
-argument_list|)
+name|checker
 decl_stmt|;
 return|return
 parameter_list|(
