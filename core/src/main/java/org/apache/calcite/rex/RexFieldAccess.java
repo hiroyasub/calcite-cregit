@@ -190,6 +190,10 @@ operator|.
 name|checkArgument
 argument_list|(
 name|fieldIdx
+operator|>=
+literal|0
+operator|&&
+name|fieldIdx
 operator|<
 name|exprType
 operator|.

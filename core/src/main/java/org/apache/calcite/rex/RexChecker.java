@@ -515,7 +515,7 @@ operator|)
 operator|||
 operator|(
 name|index
-operator|>
+operator|>=
 name|refType
 operator|.
 name|getFieldList
