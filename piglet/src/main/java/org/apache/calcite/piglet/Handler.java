@@ -1527,9 +1527,6 @@ operator|)
 name|node
 decl_stmt|;
 return|return
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -1539,8 +1536,6 @@ operator|.
 name|value
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 case|case
@@ -1576,9 +1571,6 @@ name|type
 argument_list|)
 decl_stmt|;
 return|return
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -1586,8 +1578,6 @@ argument_list|(
 name|list
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 case|case
@@ -1623,9 +1613,6 @@ name|type
 argument_list|)
 decl_stmt|;
 return|return
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -1633,8 +1620,6 @@ argument_list|(
 name|list2
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 default|default:

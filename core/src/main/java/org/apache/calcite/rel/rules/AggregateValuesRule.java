@@ -371,9 +371,6 @@ name|literals
 operator|.
 name|add
 argument_list|(
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -386,8 +383,6 @@ name|aggregateCall
 operator|.
 name|getType
 argument_list|()
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -1133,6 +1133,20 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexNode
 import|;
 end_import
@@ -16219,7 +16233,7 @@ argument_list|,
 literal|0
 argument_list|)
 decl_stmt|;
-name|RexNode
+name|RexLiteral
 name|literal1
 init|=
 name|rexBuilder
@@ -16229,11 +16243,9 @@ argument_list|(
 literal|1
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
-name|RexNode
+name|RexLiteral
 name|literal2
 init|=
 name|rexBuilder
@@ -16243,11 +16255,9 @@ argument_list|(
 literal|2
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
-name|RexNode
+name|RexLiteral
 name|literal3
 init|=
 name|rexBuilder
@@ -16257,8 +16267,6 @@ argument_list|(
 literal|3
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// CASE WHEN x % 2 = 1 THEN x< 2

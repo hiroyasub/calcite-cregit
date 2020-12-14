@@ -4727,8 +4727,6 @@ name|createSqlType
 argument_list|(
 name|sqlTypeName
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 operator|.

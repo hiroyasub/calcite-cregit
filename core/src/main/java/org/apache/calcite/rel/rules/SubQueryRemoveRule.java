@@ -1913,9 +1913,6 @@ specifier|final
 name|RexLiteral
 name|trueLiteral
 init|=
-operator|(
-name|RexLiteral
-operator|)
 name|builder
 operator|.
 name|literal
@@ -1927,9 +1924,6 @@ specifier|final
 name|RexLiteral
 name|falseLiteral
 init|=
-operator|(
-name|RexLiteral
-operator|)
 name|builder
 operator|.
 name|literal

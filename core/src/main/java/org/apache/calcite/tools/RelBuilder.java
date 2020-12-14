@@ -2537,7 +2537,7 @@ block|}
 comment|// Methods that return scalar expressions
 comment|/** Creates a literal (constant expression). */
 specifier|public
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 annotation|@
@@ -2727,8 +2727,6 @@ name|SqlTypeName
 operator|.
 name|SYMBOL
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -13930,9 +13928,6 @@ name|valueList
 operator|.
 name|add
 argument_list|(
-operator|(
-name|RexLiteral
-operator|)
 name|literal
 argument_list|(
 name|value

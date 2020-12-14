@@ -10297,7 +10297,7 @@ name|getType
 argument_list|()
 decl_stmt|;
 specifier|final
-name|RexNode
+name|RexLiteral
 name|zeroLiteral
 init|=
 name|rexBuilder
@@ -10307,12 +10307,10 @@ argument_list|(
 literal|0
 argument_list|,
 name|startType
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final
-name|RexNode
+name|RexLiteral
 name|oneLiteral
 init|=
 name|rexBuilder
@@ -10322,8 +10320,6 @@ argument_list|(
 literal|1
 argument_list|,
 name|startType
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final

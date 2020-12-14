@@ -5692,8 +5692,6 @@ argument_list|(
 name|v
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 argument_list|)

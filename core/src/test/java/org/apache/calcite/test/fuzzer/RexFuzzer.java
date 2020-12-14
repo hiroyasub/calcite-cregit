@@ -1042,8 +1042,6 @@ condition|?
 name|intType
 else|:
 name|nullableIntType
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}

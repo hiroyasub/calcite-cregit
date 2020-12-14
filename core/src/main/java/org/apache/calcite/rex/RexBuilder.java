@@ -5879,9 +5879,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a literal of the default value for the given type.    *    *<p>This value is:</p>    *    *<ul>    *<li>0 for numeric types;    *<li>FALSE for BOOLEAN;    *<li>The epoch for TIMESTAMP and DATE;    *<li>Midnight for TIME;    *<li>The empty string for string types (CHAR, BINARY, VARCHAR, VARBINARY).    *</ul>    *    * @param type      Type    * @return Simple literal, or cast simple literal    */
+comment|/**    * Creates a literal of the default value for the given type.    *    *<p>This value is:</p>    *    *<ul>    *<li>0 for numeric types;    *<li>FALSE for BOOLEAN;    *<li>The epoch for TIMESTAMP and DATE;    *<li>Midnight for TIME;    *<li>The empty string for string types (CHAR, BINARY, VARCHAR, VARBINARY).    *</ul>    *    * @param type      Type    * @return Simple literal    */
 specifier|public
-name|RexNode
+name|RexLiteral
 name|makeZeroLiteral
 parameter_list|(
 name|RelDataType
@@ -5897,8 +5897,6 @@ name|type
 argument_list|)
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -6077,6 +6075,36 @@ argument_list|)
 throw|;
 block|}
 block|}
+comment|/**    * Creates a literal of a given type, padding values of constant-width    * types to match their type, not allowing casts.    *    * @param value     Value    * @param type      Type    * @return Simple literal    */
+specifier|public
+name|RexLiteral
+name|makeLiteral
+parameter_list|(
+annotation|@
+name|Nullable
+name|Object
+name|value
+parameter_list|,
+name|RelDataType
+name|type
+parameter_list|)
+block|{
+return|return
+operator|(
+name|RexLiteral
+operator|)
+name|makeLiteral
+argument_list|(
+name|value
+argument_list|,
+name|type
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
 comment|/**    * Creates a literal of a given type, padding values of constant-width    * types to match their type.    *    * @param value     Value    * @param type      Type    * @param allowCast Whether to allow a cast. If false, value is always a    *                  {@link RexLiteral} but may not be the exact type    * @return Simple literal, or cast simple literal    */
 specifier|public
 name|RexNode
@@ -6164,6 +6192,11 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|allowCast
+condition|)
+block|{
 name|RexNode
 name|literalNotNull
 init|=
@@ -6184,6 +6217,11 @@ argument_list|,
 name|literalNotNull
 argument_list|)
 return|;
+block|}
+name|type
+operator|=
+name|typeNotNull
+expr_stmt|;
 block|}
 name|value
 operator|=

@@ -279,6 +279,20 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexNode
 import|;
 end_import
@@ -3062,7 +3076,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|RexNode
+name|RexLiteral
 name|literal
 parameter_list|(
 name|Object
@@ -3102,8 +3116,6 @@ name|getAll
 argument_list|()
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -3176,8 +3188,6 @@ argument_list|(
 name|multisetObj
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -3190,8 +3200,6 @@ argument_list|(
 name|value
 argument_list|,
 name|type
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}

@@ -2270,9 +2270,6 @@ name|value
 parameter_list|)
 block|{
 return|return
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -2280,8 +2277,6 @@ argument_list|(
 name|value
 argument_list|,
 name|nonNullableBool
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -2328,9 +2323,6 @@ name|value
 parameter_list|)
 block|{
 return|return
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -2338,8 +2330,6 @@ argument_list|(
 name|value
 argument_list|,
 name|nonNullableInt
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -2441,9 +2431,6 @@ argument_list|)
 return|;
 block|}
 return|return
-operator|(
-name|RexLiteral
-operator|)
 name|rexBuilder
 operator|.
 name|makeLiteral
@@ -2451,8 +2438,6 @@ argument_list|(
 name|value
 argument_list|,
 name|nonNullableVarchar
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
