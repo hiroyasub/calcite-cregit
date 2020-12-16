@@ -1538,6 +1538,10 @@ argument_list|,
 name|RelNode
 operator|.
 name|class
+argument_list|,
+name|boolean
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 comment|// The rel which is being visited
@@ -2135,6 +2139,8 @@ name|getInvoke
 argument_list|(
 name|root
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
@@ -2688,6 +2694,9 @@ name|decorrelateRel
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 name|RelNode
@@ -2773,6 +2782,8 @@ name|get
 argument_list|(
 name|i
 argument_list|)
+argument_list|,
+name|isCorVarDefined
 argument_list|,
 name|rel
 argument_list|)
@@ -2883,6 +2894,9 @@ name|decorrelateRel
 parameter_list|(
 name|Sort
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|//
@@ -2923,6 +2937,8 @@ init|=
 name|getInvoke
 argument_list|(
 name|oldInput
+argument_list|,
+name|isCorVarDefined
 argument_list|,
 name|rel
 argument_list|)
@@ -3095,6 +3111,9 @@ name|decorrelateRel
 parameter_list|(
 name|Values
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|// There are no inputs, so rel does not need to be changed.
@@ -3110,6 +3129,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalAggregate
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 return|return
@@ -3119,6 +3141,8 @@ operator|(
 name|Aggregate
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -3130,6 +3154,9 @@ name|decorrelateRel
 parameter_list|(
 name|Aggregate
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|//
@@ -3168,6 +3195,8 @@ init|=
 name|getInvoke
 argument_list|(
 name|oldInput
+argument_list|,
+name|isCorVarDefined
 argument_list|,
 name|rel
 argument_list|)
@@ -4197,6 +4226,9 @@ parameter_list|(
 name|RelNode
 name|r
 parameter_list|,
+name|boolean
+name|isCorVarDefined
+parameter_list|,
 annotation|@
 name|Nullable
 name|RelNode
@@ -4212,6 +4244,8 @@ operator|.
 name|invoke
 argument_list|(
 name|r
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 decl_stmt|;
 name|currentRel
@@ -4224,9 +4258,7 @@ name|frame
 operator|!=
 literal|null
 operator|&&
-name|parent
-operator|!=
-literal|null
+name|isCorVarDefined
 operator|&&
 name|r
 operator|instanceof
@@ -4359,6 +4391,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalProject
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 return|return
@@ -4368,6 +4403,8 @@ operator|(
 name|Project
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -4379,6 +4416,9 @@ name|decorrelateRel
 parameter_list|(
 name|Project
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|//
@@ -4401,6 +4441,8 @@ init|=
 name|getInvoke
 argument_list|(
 name|oldInput
+argument_list|,
+name|isCorVarDefined
 argument_list|,
 name|rel
 argument_list|)
@@ -6324,6 +6366,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalSnapshot
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 if|if
@@ -6350,6 +6395,8 @@ operator|(
 name|RelNode
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -6361,6 +6408,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalTableFunctionScan
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 if|if
@@ -6387,6 +6437,8 @@ operator|(
 name|RelNode
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -6398,6 +6450,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalFilter
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 return|return
@@ -6407,6 +6462,8 @@ operator|(
 name|Filter
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -6418,6 +6475,9 @@ name|decorrelateRel
 parameter_list|(
 name|Filter
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|//
@@ -6450,6 +6510,8 @@ init|=
 name|getInvoke
 argument_list|(
 name|oldInput
+argument_list|,
+name|isCorVarDefined
 argument_list|,
 name|rel
 argument_list|)
@@ -6584,6 +6646,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalCorrelate
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 return|return
@@ -6593,6 +6658,8 @@ operator|(
 name|Correlate
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -6604,6 +6671,9 @@ name|decorrelateRel
 parameter_list|(
 name|Correlate
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|//
@@ -6645,6 +6715,8 @@ name|getInvoke
 argument_list|(
 name|oldLeft
 argument_list|,
+name|isCorVarDefined
+argument_list|,
 name|rel
 argument_list|)
 decl_stmt|;
@@ -6655,6 +6727,8 @@ init|=
 name|getInvoke
 argument_list|(
 name|oldRight
+argument_list|,
+literal|true
 argument_list|,
 name|rel
 argument_list|)
@@ -7119,6 +7193,9 @@ name|decorrelateRel
 parameter_list|(
 name|LogicalJoin
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 return|return
@@ -7128,6 +7205,8 @@ operator|(
 name|Join
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -7139,6 +7218,9 @@ name|decorrelateRel
 parameter_list|(
 name|Join
 name|rel
+parameter_list|,
+name|boolean
+name|isCorVarDefined
 parameter_list|)
 block|{
 comment|// For SEMI/ANTI join decorrelate it's input directly,
@@ -7163,6 +7245,8 @@ operator|(
 name|RelNode
 operator|)
 name|rel
+argument_list|,
+name|isCorVarDefined
 argument_list|)
 return|;
 block|}
@@ -7202,6 +7286,8 @@ name|getInvoke
 argument_list|(
 name|oldLeft
 argument_list|,
+name|isCorVarDefined
+argument_list|,
 name|rel
 argument_list|)
 decl_stmt|;
@@ -7212,6 +7298,8 @@ init|=
 name|getInvoke
 argument_list|(
 name|oldRight
+argument_list|,
+name|isCorVarDefined
 argument_list|,
 name|rel
 argument_list|)
