@@ -1962,11 +1962,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"Ignore for now: CALCITE-3457"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|defaultFuzzTest
