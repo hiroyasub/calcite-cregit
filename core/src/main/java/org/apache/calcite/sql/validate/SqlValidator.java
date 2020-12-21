@@ -313,6 +313,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlOperatorTable
 import|;
 end_import
@@ -1103,14 +1117,14 @@ argument_list|>
 name|argTypes
 parameter_list|)
 function_decl|;
-comment|/**    * Handles a call to a function which cannot be resolved. Returns a an    * appropriately descriptive error, which caller must throw.    *    * @param call               Call    * @param unresolvedFunction Overloaded function which is the target of the    *                           call    * @param argTypes           Types of arguments    * @param argNames           Names of arguments, or null if call by position    */
+comment|/**    * Handles a call to a function which cannot be resolved. Returns an    * appropriately descriptive error, which caller must throw.    *    * @param call               Call    * @param unresolvedFunction Overloaded function which is the target of the    *                           call    * @param argTypes           Types of arguments    * @param argNames           Names of arguments, or null if call by position    */
 name|CalciteException
 name|handleUnresolvedFunction
 parameter_list|(
 name|SqlCall
 name|call
 parameter_list|,
-name|SqlFunction
+name|SqlOperator
 name|unresolvedFunction
 parameter_list|,
 name|List

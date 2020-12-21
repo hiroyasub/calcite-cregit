@@ -3495,8 +3495,6 @@ block|}
 comment|/**    * Converts a list of {expression, operator, expression, ...} into a tree,    * taking operator precedence and associativity into account.    *    * @param list        List of operands and operators. This list is modified as    *                    expressions are reduced.    * @param start       Position of first operand in the list. Anything to the    *                    left of this (besides the immediately preceding operand)    *                    is ignored. Generally use value 1.    * @param minPrec     Minimum precedence to consider. If the method encounters    *                    an operator of lower precedence, it doesn't reduce any    *                    further.    * @param stopperKind If not {@link SqlKind#OTHER}, stop reading the list if    *                    we encounter a token of this kind.    * @return the root node of the tree which the list condenses into    */
 specifier|public
 specifier|static
-annotation|@
-name|Nullable
 name|SqlNode
 name|toTreeEx
 parameter_list|(
@@ -3669,8 +3667,6 @@ return|;
 block|}
 specifier|private
 specifier|static
-annotation|@
-name|Nullable
 name|SqlNode
 name|convert
 parameter_list|(
@@ -3691,12 +3687,15 @@ case|case
 name|ATOM
 case|:
 return|return
+name|requireNonNull
+argument_list|(
 operator|(
 name|SqlNode
 operator|)
 name|token
 operator|.
 name|o
+argument_list|)
 return|;
 case|case
 name|CALL
@@ -4529,8 +4528,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-annotation|@
-name|Nullable
 name|SqlNode
 name|node
 parameter_list|(
@@ -4562,8 +4559,6 @@ parameter_list|,
 name|int
 name|end
 parameter_list|,
-annotation|@
-name|Nullable
 name|SqlNode
 name|e
 parameter_list|)
@@ -4909,7 +4904,10 @@ name|builder
 operator|.
 name|atom
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|o
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5056,8 +5054,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-annotation|@
-name|Nullable
 name|SqlNode
 name|node
 parameter_list|(
@@ -5066,9 +5062,9 @@ name|i
 parameter_list|)
 block|{
 return|return
+name|requireNonNull
+argument_list|(
 operator|(
-expr|@
-name|Nullable
 name|SqlNode
 operator|)
 name|list
@@ -5076,6 +5072,7 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -5091,8 +5088,6 @@ parameter_list|,
 name|int
 name|end
 parameter_list|,
-annotation|@
-name|Nullable
 name|SqlNode
 name|e
 parameter_list|)

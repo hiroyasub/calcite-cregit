@@ -843,6 +843,11 @@ name|Config
 operator|.
 name|DEFAULT
 argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|UnaryOperator
 operator|.
 name|identity

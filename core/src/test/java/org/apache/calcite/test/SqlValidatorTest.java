@@ -5140,6 +5140,91 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testIlike
+parameter_list|()
+block|{
+specifier|final
+name|Sql
+name|s
+init|=
+name|sql
+argument_list|(
+literal|"?"
+argument_list|)
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTableFor
+argument_list|(
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"'a' ilike 'b'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"'a' ilike cast(null as varchar(99))"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"cast(null as varchar(99)) not ilike 'b'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"'a' not ilike 'b' || 'c'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// ILIKE is only available in the PostgreSQL function library
+name|expr
+argument_list|(
+literal|"^'a' ilike 'b'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature ILIKE"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|_testLikeAndSimilarFails

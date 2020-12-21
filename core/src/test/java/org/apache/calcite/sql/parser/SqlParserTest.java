@@ -2696,6 +2696,8 @@ literal|"99"
 argument_list|,
 literal|"2003"
 argument_list|,
+literal|"ILIKE"
+argument_list|,
 literal|"IMMEDIATE"
 argument_list|,
 literal|"92"
@@ -10189,9 +10191,63 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testFoo
+name|testIlike
 parameter_list|()
 block|{
+comment|// The ILIKE operator is only valid when the PostgreSQL function library is
+comment|// enabled ('fun=postgresql'). But the parser can always parse it.
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE (`X` NOT ILIKE '%abc%')"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from t where x not ilike '%abc%'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select * from t where x ilike '%abc%'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE (`X` ILIKE '%abc%')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

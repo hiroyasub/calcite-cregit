@@ -312,8 +312,6 @@ name|int
 name|i
 parameter_list|)
 function_decl|;
-annotation|@
-name|Nullable
 name|SqlNode
 name|node
 parameter_list|(
@@ -330,8 +328,6 @@ parameter_list|,
 name|int
 name|end
 parameter_list|,
-annotation|@
-name|Nullable
 name|SqlNode
 name|e
 parameter_list|)

@@ -220,8 +220,6 @@ specifier|public
 name|Token
 name|atom
 parameter_list|(
-annotation|@
-name|Nullable
 name|Object
 name|o
 parameter_list|)
@@ -1958,8 +1956,6 @@ specifier|public
 name|Builder
 name|atom
 parameter_list|(
-annotation|@
-name|Nullable
 name|Object
 name|o
 parameter_list|)
