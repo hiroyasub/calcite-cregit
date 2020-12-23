@@ -5309,7 +5309,9 @@ name|class
 argument_list|,
 name|ranges
 argument_list|,
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|)
 decl_stmt|;
 if|if
@@ -5542,7 +5544,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -5656,8 +5660,8 @@ name|RexNode
 argument_list|>
 name|ranges
 parameter_list|,
-name|boolean
-name|containsNull
+name|RexUnknownAs
+name|unknownAs
 parameter_list|)
 block|{
 if|if
@@ -5734,7 +5738,7 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-name|containsNull
+name|unknownAs
 argument_list|,
 name|rangeSet
 argument_list|)

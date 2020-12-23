@@ -3894,9 +3894,18 @@ name|and
 argument_list|(
 name|builder
 operator|.
+name|cast
+argument_list|(
+name|builder
+operator|.
 name|literal
 argument_list|(
 literal|null
+argument_list|)
+argument_list|,
+name|SqlTypeName
+operator|.
+name|BOOLEAN
 argument_list|)
 argument_list|,
 name|builder
@@ -4070,7 +4079,7 @@ literal|""
 operator|+
 literal|"LogicalProject(DEPTNO=[$7], COMM=[CAST($6):SMALLINT NOT NULL], "
 operator|+
-literal|"$f2=[OR(SEARCH($7, Sarg[20, 30]), AND(null:NULL, =($7, 10), "
+literal|"$f2=[OR(SEARCH($7, Sarg[20, 30]), AND(null, =($7, 10), "
 operator|+
 literal|"IS NULL($6), IS NULL($5)))], n2=[IS NULL($2)], "
 operator|+

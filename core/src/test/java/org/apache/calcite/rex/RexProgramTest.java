@@ -5892,8 +5892,8 @@ argument_list|,
 literal|"true"
 argument_list|)
 expr_stmt|;
-comment|// condition, and the inverse - nothing to do due to null values
-name|checkSimplify2
+comment|// condition, and the inverse
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -5918,7 +5918,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(<=(?0.h, 1),>(?0.h, 1))"
+literal|"<>(?0.h, ?0.h)"
+argument_list|,
+literal|"false"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -5951,7 +5953,7 @@ argument_list|,
 literal|"=(?0.h, 1)"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -5986,7 +5988,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(<(?0.h, 1), =(?0.h, 1),>=(?0.h, 1))"
+literal|"<>(?0.h, ?0.h)"
+argument_list|,
+literal|"false"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -9341,6 +9345,19 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|RelDataType
+name|boolType
+init|=
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|BOOLEAN
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelDataType
 name|rowType
 init|=
 name|typeFactory
@@ -9377,6 +9394,18 @@ argument_list|(
 literal|"c"
 argument_list|,
 name|intType
+argument_list|)
+operator|.
+name|nullable
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"d"
+argument_list|,
+name|boolType
 argument_list|)
 operator|.
 name|nullable
@@ -9437,6 +9466,19 @@ argument_list|(
 name|range
 argument_list|,
 literal|2
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexNode
+name|dRef
+init|=
+name|rexBuilder
+operator|.
+name|makeFieldAccess
+argument_list|(
+name|range
+argument_list|,
+literal|3
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -9841,7 +9883,7 @@ expr_stmt|;
 comment|// Careful of the excluded middle!
 comment|// We cannot simplify "b<> 1 or b = 1" to "true" because if b is null, the
 comment|// result is unknown.
-comment|// TODO: "b is not unknown" would be the best simplification.
+comment|// TODO: "b = b" would be the best simplification.
 specifier|final
 name|RexNode
 name|simplified
@@ -9868,7 +9910,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"OR(<>(?0.b, 1), =(?0.b, 1))"
+literal|"OR(IS NOT NULL(?0.b), null)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10085,24 +10127,24 @@ argument_list|,
 literal|"OR(IS NULL(?0.c), IS NOT NULL(?0.b))"
 argument_list|)
 expr_stmt|;
-comment|// "b is null or b is not false" => "b is null or b"
-comment|// (because after the first term we know that b cannot be null)
+comment|// "d is null or d is not false" => "d is null or d"
+comment|// (because after the first term we know that d cannot be null)
 name|checkSimplifyFilter
 argument_list|(
 name|or
 argument_list|(
 name|isNull
 argument_list|(
-name|bRef
+name|dRef
 argument_list|)
 argument_list|,
 name|isNotFalse
 argument_list|(
-name|bRef
+name|dRef
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(IS NULL(?0.b), ?0.b)"
+literal|"OR(IS NULL(?0.d), ?0.d)"
 argument_list|)
 expr_stmt|;
 comment|// multiple predicates are handled correctly
@@ -10366,7 +10408,7 @@ name|checkSimplify
 argument_list|(
 name|expr
 argument_list|,
-literal|"SEARCH($0, Sarg[[15..+\u221e) OR NULL])"
+literal|"SEARCH($0, Sarg[[15..+\u221e); NULL AS TRUE])"
 argument_list|)
 operator|.
 name|expandedSearch
@@ -10469,7 +10511,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(0..12), [15..+\u221e) OR NULL])"
+literal|"SEARCH($0, Sarg[(0..12), [15..+\u221e); NULL AS TRUE])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10627,7 +10669,7 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(-\u221e..3), (3..5), (5..+\u221e) OR NULL])"
+literal|"SEARCH($0, Sarg[(-\u221e..3), (3..5), (5..+\u221e); NULL AS TRUE])"
 decl_stmt|;
 specifier|final
 name|String
@@ -10798,13 +10840,13 @@ specifier|final
 name|String
 name|simplified
 init|=
-literal|"SEARCH($0, Sarg[(3..10)])"
+literal|"SEARCH($0, Sarg[(3..10); NULL AS FALSE])"
 decl_stmt|;
 specifier|final
 name|String
 name|expanded
 init|=
-literal|"AND(>($0, 3),<($0, 10))"
+literal|"AND(IS NOT NULL($0), AND(>($0, 3),<($0, 10)))"
 decl_stmt|;
 name|checkSimplify
 argument_list|(
@@ -11245,7 +11287,7 @@ parameter_list|()
 block|{
 comment|// (deptno = 20 OR deptno IS NULL) AND deptno = 10
 comment|//   ==>
-comment|// false
+comment|// deptno<> deptno
 specifier|final
 name|RexNode
 name|e
@@ -11284,11 +11326,15 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|checkSimplify
+name|checkSimplify3
 argument_list|(
 name|e
 argument_list|,
+literal|"<>(?0.int0, ?0.int0)"
+argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.int0)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11394,7 +11440,7 @@ expr_stmt|;
 comment|// deptno in (20, 10) and deptno = 30
 comment|//   ==>
 comment|// false
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -11426,9 +11472,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(SEARCH(?0.int0, Sarg[10, 20]), =(?0.int0, 30))"
+literal|"<>(?0.int0, ?0.int0)"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.int0)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11484,7 +11532,7 @@ name|void
 name|testSargMerge
 parameter_list|()
 block|{
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|or
 argument_list|(
@@ -11511,12 +11559,14 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(<>(?0.int0, 1), =(?0.int0, 1))"
+literal|"OR(IS NOT NULL(?0.int0), null)"
 argument_list|,
 literal|"IS NOT NULL(?0.int0)"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -11543,9 +11593,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(>(?0.int0, 5),<(?0.int0, 3))"
+literal|"<>(?0.int0, ?0.int0)"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.int0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -18498,6 +18550,11 @@ name|void
 name|testSimplifyOrIsNull
 parameter_list|()
 block|{
+name|String
+name|expected
+init|=
+literal|"SEARCH(?0.int0, Sarg[10; NULL AS TRUE])"
+decl_stmt|;
 comment|// x = 10 OR x IS NULL
 name|checkSimplify
 argument_list|(
@@ -18525,7 +18582,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"SEARCH(?0.int0, Sarg[10 OR NULL])"
+name|expected
 argument_list|)
 expr_stmt|;
 comment|// 10 = x OR x IS NULL
@@ -18555,7 +18612,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"SEARCH(?0.int0, Sarg[10 OR NULL])"
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -18763,7 +18820,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|FALSE
 argument_list|,
 name|RangeSets
 operator|.
@@ -18781,7 +18840,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"Sarg[NOT NULL]"
+literal|"Sarg[IS NOT NULL]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -18793,7 +18852,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|true
+name|RexUnknownAs
+operator|.
+name|TRUE
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -18811,7 +18872,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"Sarg[NULL]"
+literal|"Sarg[IS NULL]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -18823,7 +18884,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|FALSE
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -18853,7 +18916,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|true
+name|RexUnknownAs
+operator|.
+name|TRUE
 argument_list|,
 name|RangeSets
 operator|.
@@ -18883,7 +18948,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -18917,7 +18984,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -18951,7 +19020,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -18985,7 +19056,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|true
+name|RexUnknownAs
+operator|.
+name|TRUE
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -19007,7 +19080,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"Sarg[(1..+\u221E) OR NULL]"
+literal|"Sarg[(1..+\u221E); NULL AS TRUE]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -19019,7 +19092,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -19056,7 +19131,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|true
+name|RexUnknownAs
+operator|.
+name|TRUE
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -19081,7 +19158,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"Sarg[(-\u221E..1), (1..+\u221E) OR NULL]"
+literal|"Sarg[(-\u221E..1), (1..+\u221E); NULL AS TRUE]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -19093,7 +19170,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -19139,7 +19218,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -19199,7 +19280,9 @@ name|Sarg
 operator|.
 name|of
 argument_list|(
-literal|false
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -19401,7 +19484,7 @@ name|void
 name|testIsNullRecursion
 parameter_list|()
 block|{
-comment|// make sure that simplifcation is visiting below isX expressions
+comment|// make sure that simplification is visiting below isX expressions
 name|checkSimplify
 argument_list|(
 name|isNull
@@ -20458,7 +20541,7 @@ literal|"%"
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"true"
+literal|"OR(null, IS NOT NULL($0))"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -20475,6 +20558,57 @@ argument_list|,
 name|literal
 argument_list|(
 literal|"#"
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"OR(null, IS NOT NULL($0))"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|isNull
+argument_list|(
+name|ref
+argument_list|)
+argument_list|,
+name|like
+argument_list|(
+name|ref
+argument_list|,
+name|literal
+argument_list|(
+literal|"%"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"true"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|isNull
+argument_list|(
+name|ref
+argument_list|)
+argument_list|,
+name|like
+argument_list|(
+name|ref
+argument_list|,
+name|literal
+argument_list|(
+literal|"%"
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|"#"
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,

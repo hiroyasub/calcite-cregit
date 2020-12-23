@@ -359,7 +359,7 @@ argument_list|)
 argument_list|,
 name|f
 operator|.
-name|t
+name|ts
 argument_list|)
 argument_list|,
 name|f
@@ -368,7 +368,7 @@ name|le
 argument_list|(
 name|f
 operator|.
-name|t
+name|ts
 argument_list|,
 name|f
 operator|.

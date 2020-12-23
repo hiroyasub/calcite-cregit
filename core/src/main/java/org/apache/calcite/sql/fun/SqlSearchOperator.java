@@ -41,6 +41,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexUnknownAs
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlInternalOperator
@@ -201,7 +215,7 @@ name|COMPARABLE_UNORDERED_COMPARABLE_UNORDERED
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Sets whether a call to SEARCH should allow nulls.    *    *<p>For example, if the type of {@code x} is NOT NULL, then    * {@code SEARCH(x, Sarg[10])} will never return UNKNOWN.    * It is evident from the expansion, "x = 10", but holds for all Sarg    * values.    *    *<p>If {@link Sarg#containsNull} is true, SEARCH will never return    * UNKNOWN. For example, {@code SEARCH(x, Sarg[10 OR NULL])} expands to    * {@code x = 10 OR x IS NOT NULL}, which returns {@code TRUE} if    * {@code x} is NULL, {@code TRUE} if {@code x} is 10, and {@code FALSE}    * for all other values.    */
+comment|/** Sets whether a call to SEARCH should allow nulls.    *    *<p>For example, if the type of {@code x} is NOT NULL, then    * {@code SEARCH(x, Sarg[10])} will never return UNKNOWN.    * It is evident from the expansion, "x = 10", but holds for all Sarg    * values.    *    *<p>If {@link Sarg#nullAs} is TRUE or FALSE, SEARCH will never return    * UNKNOWN. For example, {@code SEARCH(x, Sarg[10; NULL AS UNKNOWN])} expands    * to {@code x = 10 OR x IS NOT NULL}, which returns {@code TRUE} if    * {@code x} is NULL, {@code TRUE} if {@code x} is 10, and {@code FALSE}    * for all other values.    */
 specifier|private
 specifier|static
 name|RelDataType
@@ -228,7 +242,6 @@ operator|.
 name|isNullable
 argument_list|()
 operator|&&
-operator|!
 name|getOperandLiteralValueOrThrow
 argument_list|(
 name|binding
@@ -240,7 +253,11 @@ operator|.
 name|class
 argument_list|)
 operator|.
-name|containsNull
+name|nullAs
+operator|==
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
 decl_stmt|;
 return|return
 name|binding
