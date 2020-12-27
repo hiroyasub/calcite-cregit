@@ -28776,13 +28776,13 @@ expr_stmt|;
 block|}
 comment|// add tables and retrieve with various case sensitivities
 specifier|final
-name|TableInRootSchemaTest
+name|Smalls
 operator|.
 name|SimpleTable
 name|table
 init|=
 operator|new
-name|TableInRootSchemaTest
+name|Smalls
 operator|.
 name|SimpleTable
 argument_list|()

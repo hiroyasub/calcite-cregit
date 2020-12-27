@@ -31,6 +31,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Smalls
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -192,7 +206,7 @@ argument_list|(
 literal|"T1"
 argument_list|,
 operator|new
-name|TableInRootSchemaTest
+name|Smalls
 operator|.
 name|SimpleTable
 argument_list|()

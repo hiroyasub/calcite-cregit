@@ -322,6 +322,8 @@ name|names
 argument_list|,
 name|pigTable
 argument_list|,
+name|c
+lambda|->
 name|Expressions
 operator|.
 name|constant
