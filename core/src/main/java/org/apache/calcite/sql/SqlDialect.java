@@ -3354,23 +3354,6 @@ operator|instanceof
 name|AbstractSqlType
 condition|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"type.getSqlTypeName() = "
-operator|+
-name|type
-operator|.
-name|getSqlTypeName
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-expr_stmt|;
 switch|switch
 condition|(
 name|type
