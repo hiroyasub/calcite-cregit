@@ -3387,7 +3387,7 @@ name|RelBuilder
 argument_list|,
 name|RelNode
 argument_list|>
-name|fn
+name|relFn
 init|=
 name|b
 lambda|->
@@ -3448,7 +3448,7 @@ literal|"FROM \"scott\".\"EMP\""
 decl_stmt|;
 name|relFn
 argument_list|(
-name|fn
+name|relFn
 argument_list|)
 operator|.
 name|withPostgresql
@@ -4354,7 +4354,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2792">[CALCITE-2792]    * Stackoverflow while evaluating filter with large number of OR conditions</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2792">[CALCITE-2792]    * StackOverflowError while evaluating filter with large number of OR    * conditions</a>. */
 annotation|@
 name|Test
 name|void
