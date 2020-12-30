@@ -173,20 +173,6 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Disabled
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Test
 import|;
 end_import
@@ -364,11 +350,6 @@ comment|/**  * Checks renaming of fields (also upper, lower cases) during projec
 end_comment
 
 begin_class
-annotation|@
-name|Disabled
-argument_list|(
-literal|"RestClient often timeout in PR CI"
-argument_list|)
 annotation|@
 name|ResourceLock
 argument_list|(
@@ -1113,6 +1094,90 @@ name|regexMatch
 argument_list|(
 literal|"EXPR$0=\\p{Graph}+; EXPR$1=1; EXPR$2=2"
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4450">[CALCITE-4450]    * ElasticSearch query with varchar literal projection fails with JsonParseException</a>. */
+annotation|@
+name|Test
+name|void
+name|projectionStringLiteral
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select 'foo' as \"lit\"\n"
+operator|+
+literal|"from \"elastic\".\"%s\""
+argument_list|,
+name|NAME
+argument_list|)
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"lit=foo\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4450">[CALCITE-4450]    * ElasticSearch query with varchar literal projection fails with JsonParseException</a>. */
+annotation|@
+name|Test
+name|void
+name|projectionStringLiteralAndColumn
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select 'foo\\\"bar\\\"' as \"lit\", _MAP['a'] as \"a\"\n"
+operator|+
+literal|"from \"elastic\".\"%s\""
+argument_list|,
+name|NAME
+argument_list|)
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"lit=foo\\\"bar\\\"; a=1\n"
 argument_list|)
 expr_stmt|;
 block|}
