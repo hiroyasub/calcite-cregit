@@ -36449,6 +36449,53 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testGroupConcat
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  group_concat(ename order by deptno, ename desc) as c2,\n"
+operator|+
+literal|"  group_concat(ename) as c3,\n"
+operator|+
+literal|"  group_concat(ename order by deptno, ename desc separator ',') as c4\n"
+operator|+
+literal|"from emp group by gender"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" GROUP_CONCAT(`ENAME` ORDER BY `DEPTNO`, `ENAME` DESC) AS `C2`,"
+operator|+
+literal|" GROUP_CONCAT(`ENAME`) AS `C3`,"
+operator|+
+literal|" GROUP_CONCAT(`ENAME` ORDER BY `DEPTNO`, `ENAME` DESC SEPARATOR ',') AS `C4`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY `GENDER`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
 block|{

@@ -28392,7 +28392,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testGroupAgg
+name|testGroupByAliasedColumn
 parameter_list|()
 block|{
 comment|// alias in GROUP BY query has been known to cause problems

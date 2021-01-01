@@ -365,6 +365,9 @@ block|,
 comment|/** {@code INTERVAL} expression. */
 name|INTERVAL
 block|,
+comment|/** {@code SEPARATOR} expression. */
+name|SEPARATOR
+block|,
 comment|/** {@code NULLIF} operator. */
 name|NULLIF
 block|,
@@ -732,6 +735,9 @@ block|,
 comment|/** The {@code ARRAY_CONCAT_AGG} aggregate function. */
 name|ARRAY_CONCAT_AGG
 block|,
+comment|/** The {@code GROUP_CONCAT} aggregate function. */
+name|GROUP_CONCAT
+block|,
 comment|/** The {@code COLLECT} aggregate function. */
 name|COLLECT
 block|,
@@ -1032,6 +1038,8 @@ name|ARRAY_AGG
 argument_list|,
 name|ARRAY_CONCAT_AGG
 argument_list|,
+name|GROUP_CONCAT
+argument_list|,
 name|COUNTIF
 argument_list|,
 name|INTERSECTION
@@ -1209,6 +1217,8 @@ argument_list|,
 name|IGNORE_NULLS
 argument_list|,
 name|RESPECT_NULLS
+argument_list|,
+name|SEPARATOR
 argument_list|,
 name|DESCENDING
 argument_list|,
