@@ -898,6 +898,35 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testRowValueConstructorWithSubquery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ROW("
+operator|+
+literal|"(select deptno\n"
+operator|+
+literal|"from dept\n"
+operator|+
+literal|"where dept.deptno = emp.deptno), emp.ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testIntegerLiteral
 parameter_list|()
 block|{

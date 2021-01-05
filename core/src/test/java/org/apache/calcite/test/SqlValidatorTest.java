@@ -8091,6 +8091,38 @@ argument_list|(
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"select row(emp.empno, emp.ename) from emp"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EXPR$0, VARCHAR(20) NOT NULL EXPR$1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select row(emp.empno + 1, emp.ename) from emp"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EXPR$0, VARCHAR(20) NOT NULL EXPR$1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select row((select deptno from dept where dept.deptno = emp.deptno), emp.ename)\n"
+operator|+
+literal|"from emp"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER EXPR$0, VARCHAR(20) NOT NULL EXPR$1) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

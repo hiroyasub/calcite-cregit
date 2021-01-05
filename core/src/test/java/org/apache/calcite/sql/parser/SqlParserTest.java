@@ -8144,6 +8144,46 @@ argument_list|(
 name|expected3
 argument_list|)
 expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"ROW(EMP.EMPNO, EMP.ENAME)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"(ROW(`EMP`.`EMPNO`, `EMP`.`ENAME`))"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"ROW(EMP.EMPNO + 1, EMP.ENAME)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"(ROW((`EMP`.`EMPNO` + 1), `EMP`.`ENAME`))"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"ROW((select deptno from dept where dept.deptno = emp.deptno), EMP.ENAME)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"(ROW((SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"WHERE (`DEPT`.`DEPTNO` = `EMP`.`DEPTNO`)), `EMP`.`ENAME`))"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Whether this is a sub-class that tests un-parsing as well as parsing. */
 specifier|protected
