@@ -229,6 +229,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|dialect
+operator|.
+name|SparkSqlDialect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|parser
 operator|.
 name|impl
@@ -15046,6 +15062,199 @@ operator|+
 literal|"ORDER BY `B`, `C`\n"
 operator|+
 literal|"OFFSET 1 ROWS"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4463">[CALCITE-4463]    * JDBC adapter for Spark generates incorrect ORDER BY syntax</a>.    *    *<p>Similar to {@link #testLimit}, but parses and unparses in the Spark    * dialect, which uses LIMIT and OFFSET rather than OFFSET and FETCH. */
+annotation|@
+name|Test
+name|void
+name|testLimitSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select a from foo order by b, c limit 2 offset 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT A\n"
+operator|+
+literal|"FROM FOO\n"
+operator|+
+literal|"ORDER BY B, C\n"
+operator|+
+literal|"LIMIT 2\n"
+operator|+
+literal|"OFFSET 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SparkSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select a from foo order by b, c limit 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT A\n"
+operator|+
+literal|"FROM FOO\n"
+operator|+
+literal|"ORDER BY B, C\n"
+operator|+
+literal|"LIMIT 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SparkSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select a from foo order by b, c offset 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT A\n"
+operator|+
+literal|"FROM FOO\n"
+operator|+
+literal|"ORDER BY B, C\n"
+operator|+
+literal|"OFFSET 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SparkSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"select a from foo offset 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected4
+init|=
+literal|"SELECT A\n"
+operator|+
+literal|"FROM FOO\n"
+operator|+
+literal|"OFFSET 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SparkSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected4
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql5
+init|=
+literal|"select a from foo\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"select b from baz\n"
+operator|+
+literal|"limit 3"
+decl_stmt|;
+specifier|final
+name|String
+name|expected5
+init|=
+literal|"(SELECT A\n"
+operator|+
+literal|"FROM FOO\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT B\n"
+operator|+
+literal|"FROM BAZ)\n"
+operator|+
+literal|"LIMIT 3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql5
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SparkSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected5
 argument_list|)
 expr_stmt|;
 block|}
