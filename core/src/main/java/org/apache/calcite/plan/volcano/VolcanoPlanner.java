@@ -3914,7 +3914,7 @@ if|if
 condition|(
 name|fromTrait
 operator|.
-name|equals
+name|satisfies
 argument_list|(
 name|toTrait
 argument_list|)
