@@ -6376,12 +6376,12 @@ parameter_list|()
 block|{
 name|expr
 argument_list|(
-literal|"cast(123 as customBigInt)"
+literal|"cast(123 as ^customBigInt^)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"class org.apache.calcite.sql.SqlIdentifier: CUSTOMBIGINT"
+literal|"Unknown identifier 'CUSTOMBIGINT'"
 argument_list|)
 expr_stmt|;
 name|expr
@@ -6418,7 +6418,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"class org.apache.calcite.sql.SqlIdentifier: BAR"
+literal|"Unknown identifier 'BAR'"
 argument_list|)
 expr_stmt|;
 name|wholeExpr
@@ -31211,7 +31211,7 @@ expr_stmt|;
 comment|// test UDT collection type.
 name|sql
 argument_list|(
-literal|"select cast(a as MyUDT array multiset) from COMPLEXTYPES.CTC_T1"
+literal|"select cast(a as ^MyUDT^ array multiset) from COMPLEXTYPES.CTC_T1"
 argument_list|)
 operator|.
 name|withExtendedCatalog
@@ -31219,7 +31219,7 @@ argument_list|()
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*class org\\.apache\\.calcite\\.sql\\.SqlIdentifier: MYUDT.*"
+literal|"Unknown identifier 'MYUDT'"
 argument_list|)
 expr_stmt|;
 block|}
