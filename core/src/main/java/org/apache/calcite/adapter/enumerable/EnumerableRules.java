@@ -416,6 +416,22 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+comment|/** Rule to convert a {@link org.apache.calcite.rel.logical.LogicalSort} on top of a    * {@link org.apache.calcite.rel.logical.LogicalUnion} into a {@link EnumerableMergeUnion}. */
+specifier|public
+specifier|static
+specifier|final
+name|EnumerableMergeUnionRule
+name|ENUMERABLE_MERGE_UNION_RULE
+init|=
+name|EnumerableMergeUnionRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT_CONFIG
+operator|.
+name|toRule
+argument_list|()
+decl_stmt|;
 comment|/** Rule that converts a {@link LogicalTableSpool} into an    * {@link EnumerableTableSpool}. */
 annotation|@
 name|Experimental
@@ -763,6 +779,10 @@ argument_list|,
 name|EnumerableRules
 operator|.
 name|ENUMERABLE_UNCOLLECT_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_UNION_RULE
 argument_list|,
 name|EnumerableRules
 operator|.

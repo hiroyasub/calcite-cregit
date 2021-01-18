@@ -613,6 +613,10 @@ name|ENUMERABLE_UNION_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_MERGE_UNION_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_INTERSECT_RULE
 argument_list|,
 name|EnumerableRules
