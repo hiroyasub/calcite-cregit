@@ -349,6 +349,30 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|jupiter
@@ -5526,6 +5550,164 @@ literal|"TABLE(a)"
 argument_list|)
 argument_list|,
 name|DEPT_COLUMNS
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterComment
+parameter_list|()
+block|{
+comment|// SqlSimpleParser.Tokenizer#nextToken() lines 401 - 423
+comment|// is used to recognize the sql of TokenType.ID or some keywords
+comment|// if a certain segment of characters is continuously composed of Token,
+comment|// the function of this code may be wrong
+comment|// E.g :
+comment|// (1)select * from a where price> 10.0--comment
+comment|// ã10.0--commentãshould be recognize as TokenType.ID("10.0") and TokenType.COMMENT
+comment|// but it recognize as TokenType.ID("10.0--comment")
+comment|// (2)select * from a where column_b='/* this is not comment */'
+comment|// ã/* this is not comment */ãshould be recognize as
+comment|// TokenType.SQID("/* this is not comment */"), but it was not
+specifier|final
+name|String
+name|baseOriginSql
+init|=
+literal|"select * from a "
+decl_stmt|;
+specifier|final
+name|String
+name|baseResultSql
+init|=
+literal|"SELECT * FROM a "
+decl_stmt|;
+name|String
+name|originSql
+decl_stmt|;
+comment|// when SqlSimpleParser.Tokenizer#nextToken() method parse sql,
+comment|// ignore the  "--" after 10.0, this is a comment,
+comment|// but Tokenizer#nextToken() does not recognize it
+name|originSql
+operator|=
+name|baseOriginSql
+operator|+
+literal|"where price> 10.0-- this is comment "
+operator|+
+name|System
+operator|.
+name|lineSeparator
+argument_list|()
+operator|+
+literal|" -- comment "
+expr_stmt|;
+name|assertSimplifySql
+argument_list|(
+name|originSql
+argument_list|,
+name|baseResultSql
+operator|+
+literal|"WHERE price> 10.0"
+argument_list|)
+expr_stmt|;
+name|originSql
+operator|=
+name|baseOriginSql
+operator|+
+literal|"where column_b='/* this is not comment */'"
+expr_stmt|;
+name|assertSimplifySql
+argument_list|(
+name|originSql
+argument_list|,
+name|baseResultSql
+operator|+
+literal|"WHERE column_b= '/* this is not comment */'"
+argument_list|)
+expr_stmt|;
+name|originSql
+operator|=
+name|baseOriginSql
+operator|+
+literal|"where column_b='2021 --this is not comment'"
+expr_stmt|;
+name|assertSimplifySql
+argument_list|(
+name|originSql
+argument_list|,
+name|baseResultSql
+operator|+
+literal|"WHERE column_b= '2021 --this is not comment'"
+argument_list|)
+expr_stmt|;
+name|originSql
+operator|=
+name|baseOriginSql
+operator|+
+literal|"where column_b='2021--this is not comment'"
+expr_stmt|;
+name|assertSimplifySql
+argument_list|(
+name|originSql
+argument_list|,
+name|baseResultSql
+operator|+
+literal|"WHERE column_b= '2021--this is not comment'"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that the simplified originSql is consistent with expectedSql.    *    * @param originSql   a string sql to simplify.    * @param expectedSql Expected result after simplification.    */
+specifier|private
+name|void
+name|assertSimplifySql
+parameter_list|(
+name|String
+name|originSql
+parameter_list|,
+name|String
+name|expectedSql
+parameter_list|)
+block|{
+name|SqlSimpleParser
+name|simpleParser
+init|=
+operator|new
+name|SqlSimpleParser
+argument_list|(
+literal|"_suggest_"
+argument_list|,
+name|SqlParser
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+argument_list|)
+decl_stmt|;
+name|String
+name|actualSql
+init|=
+name|simpleParser
+operator|.
+name|simplifySql
+argument_list|(
+name|originSql
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+literal|"simpleParser.simplifySql("
+operator|+
+name|originSql
+operator|+
+literal|")"
+argument_list|,
+name|actualSql
+argument_list|,
+name|equalTo
+argument_list|(
+name|expectedSql
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
