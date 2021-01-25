@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RepeatUnion
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalRepeatUnion
@@ -92,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalRepeatUnion} into an  * {@link EnumerableRepeatUnion}.  *  * @see EnumerableRules#ENUMERABLE_REPEAT_UNION_RULE  */
+comment|/**  * Rule to convert a {@link LogicalRepeatUnion} into an {@link EnumerableRepeatUnion}.  * You may provide a custom config to convert other nodes that extend {@link RepeatUnion}.  *  * @see EnumerableRules#ENUMERABLE_REPEAT_UNION_RULE  */
 end_comment
 
 begin_class
@@ -161,11 +177,11 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-name|LogicalRepeatUnion
+name|RepeatUnion
 name|union
 init|=
 operator|(
-name|LogicalRepeatUnion
+name|RepeatUnion
 operator|)
 name|rel
 decl_stmt|;

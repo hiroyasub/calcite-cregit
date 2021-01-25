@@ -132,7 +132,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|LogicalSort
+name|Sort
 name|sort
 init|=
 name|call

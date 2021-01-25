@@ -87,6 +87,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|TableSpool
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalTableSpool
@@ -94,7 +110,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalTableSpool} into an  * {@link EnumerableTableSpool}.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  *  * @see EnumerableRules#ENUMERABLE_TABLE_SPOOL_RULE  */
+comment|/**  * Rule to convert a {@link LogicalTableSpool} into an {@link EnumerableTableSpool}.  * You may provide a custom config to convert other nodes that extend {@link TableSpool}.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  *  * @see EnumerableRules#ENUMERABLE_TABLE_SPOOL_RULE  */
 end_comment
 
 begin_class
@@ -165,11 +181,11 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-name|LogicalTableSpool
+name|TableSpool
 name|spool
 init|=
 operator|(
-name|LogicalTableSpool
+name|TableSpool
 operator|)
 name|rel
 decl_stmt|;

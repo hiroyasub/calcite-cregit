@@ -99,6 +99,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Aggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalAggregate
@@ -122,7 +138,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalAggregate}  * to an {@link EnumerableAggregate}.  *  * @see EnumerableRules#ENUMERABLE_AGGREGATE_RULE  */
+comment|/**  * Rule to convert a {@link LogicalAggregate} to an {@link EnumerableAggregate}.  * You may provide a custom config to convert other nodes that extend {@link Aggregate}.  *  * @see EnumerableRules#ENUMERABLE_AGGREGATE_RULE  */
 end_comment
 
 begin_class
@@ -192,11 +208,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalAggregate
+name|Aggregate
 name|agg
 init|=
 operator|(
-name|LogicalAggregate
+name|Aggregate
 operator|)
 name|rel
 decl_stmt|;

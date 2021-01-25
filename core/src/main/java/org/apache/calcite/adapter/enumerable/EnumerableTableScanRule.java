@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|TableScan
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalTableScan
@@ -136,7 +152,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableScan} to  * {@link EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_SCAN_RULE */
+comment|/** Planner rule that converts a {@link LogicalTableScan} to an {@link EnumerableTableScan}.  * You may provide a custom config to convert other nodes that extend {@link TableScan}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_SCAN_RULE */
 end_comment
 
 begin_class
@@ -225,11 +241,11 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-name|LogicalTableScan
+name|TableScan
 name|scan
 init|=
 operator|(
-name|LogicalTableScan
+name|TableScan
 operator|)
 name|rel
 decl_stmt|;

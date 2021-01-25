@@ -73,6 +73,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|JoinInfo
 import|;
 end_import
@@ -166,7 +182,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalJoin} relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_JOIN_RULE */
+comment|/** Planner rule that converts a  * {@link LogicalJoin} relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  * You may provide a custom config to convert other nodes that extend {@link Join}.  *  * @see EnumerableRules#ENUMERABLE_JOIN_RULE */
 end_comment
 
 begin_class
@@ -234,11 +250,11 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-name|LogicalJoin
+name|Join
 name|join
 init|=
 operator|(
-name|LogicalJoin
+name|Join
 operator|)
 name|rel
 decl_stmt|;

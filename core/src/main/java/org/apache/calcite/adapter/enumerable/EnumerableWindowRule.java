@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Window
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalWindow
@@ -92,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalWindow} to  * an {@link org.apache.calcite.adapter.enumerable.EnumerableWindow}.  *  * @see EnumerableRules#ENUMERABLE_WINDOW_RULE  */
+comment|/**  * Rule to convert a {@link LogicalWindow} to an {@link EnumerableWindow}.  * You may provide a custom config to convert other nodes that extend {@link Window}.  *  * @see EnumerableRules#ENUMERABLE_WINDOW_RULE  */
 end_comment
 
 begin_class
@@ -160,11 +176,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalWindow
+name|Window
 name|winAgg
 init|=
 operator|(
-name|LogicalWindow
+name|Window
 operator|)
 name|rel
 decl_stmt|;

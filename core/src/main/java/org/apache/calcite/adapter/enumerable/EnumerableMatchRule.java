@@ -71,6 +71,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Match
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalMatch
@@ -78,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalMatch} to an  * {@link EnumerableMatch}.  *  * @see EnumerableRules#ENUMERABLE_MATCH_RULE  */
+comment|/**  * Rule to convert a {@link LogicalMatch} to an {@link EnumerableMatch}.  * You may provide a custom config to convert other nodes that extend {@link Match}.  *  * @see EnumerableRules#ENUMERABLE_MATCH_RULE  */
 end_comment
 
 begin_class
@@ -148,11 +164,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalMatch
+name|Match
 name|match
 init|=
 operator|(
-name|LogicalMatch
+name|Match
 operator|)
 name|rel
 decl_stmt|;

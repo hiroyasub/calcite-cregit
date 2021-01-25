@@ -71,6 +71,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalProject
@@ -78,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalProject} to an  * {@link EnumerableProject}.  *  * @see EnumerableRules#ENUMERABLE_PROJECT_RULE  */
+comment|/**  * Rule to convert a {@link LogicalProject} to an {@link EnumerableProject}.  * You may provide a custom config to convert other nodes that extend {@link Project}.  *  * @see EnumerableRules#ENUMERABLE_PROJECT_RULE  */
 end_comment
 
 begin_class
@@ -161,11 +177,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalProject
+name|Project
 name|project
 init|=
 operator|(
-name|LogicalProject
+name|Project
 operator|)
 name|rel
 decl_stmt|;

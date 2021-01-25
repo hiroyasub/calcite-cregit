@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Calc
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalCalc
@@ -92,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalCalc} to an  * {@link EnumerableCalc}.  *  * @see EnumerableRules#ENUMERABLE_CALC_RULE  */
+comment|/**  * Rule to convert a {@link LogicalCalc} to an {@link EnumerableCalc}.  * You may provide a custom config to convert other nodes that extend {@link Calc}.  *  * @see EnumerableRules#ENUMERABLE_CALC_RULE  */
 end_comment
 
 begin_class
@@ -173,11 +189,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalCalc
+name|Calc
 name|calc
 init|=
 operator|(
-name|LogicalCalc
+name|Calc
 operator|)
 name|rel
 decl_stmt|;

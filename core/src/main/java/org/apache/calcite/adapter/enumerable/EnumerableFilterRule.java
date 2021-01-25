@@ -71,6 +71,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalFilter
@@ -78,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalFilter} to an  * {@link EnumerableFilter}.  *  * @see EnumerableRules#ENUMERABLE_FILTER_RULE  */
+comment|/**  * Rule to convert a {@link LogicalFilter} to an {@link EnumerableFilter}.  * You may provide a custom config to convert other nodes that extend {@link Filter}.  *  * @see EnumerableRules#ENUMERABLE_FILTER_RULE  */
 end_comment
 
 begin_class
@@ -161,11 +177,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalFilter
+name|Filter
 name|filter
 init|=
 operator|(
-name|LogicalFilter
+name|Filter
 operator|)
 name|rel
 decl_stmt|;

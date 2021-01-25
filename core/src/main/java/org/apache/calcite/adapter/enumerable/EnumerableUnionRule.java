@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Union
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalUnion
@@ -116,7 +132,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link org.apache.calcite.rel.logical.LogicalUnion} to an  * {@link EnumerableUnion}.  *  * @see EnumerableRules#ENUMERABLE_UNION_RULE  */
+comment|/**  * Rule to convert an {@link LogicalUnion} to an {@link EnumerableUnion}.  * You may provide a custom config to convert other nodes that extend {@link Union}.  *  * @see EnumerableRules#ENUMERABLE_UNION_RULE  */
 end_comment
 
 begin_class
@@ -184,11 +200,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalUnion
+name|Union
 name|union
 init|=
 operator|(
-name|LogicalUnion
+name|Union
 operator|)
 name|rel
 decl_stmt|;

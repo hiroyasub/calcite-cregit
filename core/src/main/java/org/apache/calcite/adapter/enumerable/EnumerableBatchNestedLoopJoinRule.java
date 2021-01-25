@@ -304,7 +304,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalJoin} into an  * {@link org.apache.calcite.adapter.enumerable.EnumerableBatchNestedLoopJoin}.  *  * @see EnumerableRules#ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE  */
+comment|/** Rule to convert a {@link LogicalJoin} to an {@link EnumerableBatchNestedLoopJoin}.  * You may provide a custom config to convert other nodes that extend {@link Join}.  *  * @see EnumerableRules#ENUMERABLE_BATCH_NESTED_LOOP_JOIN_RULE  */
 end_comment
 
 begin_class

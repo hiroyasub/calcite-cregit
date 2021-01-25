@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Intersect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalIntersect
@@ -92,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a  * {@link org.apache.calcite.rel.logical.LogicalIntersect} to an  * {@link EnumerableIntersect}.  *  * @see EnumerableRules#ENUMERABLE_INTERSECT_RULE  */
+comment|/**  * Rule to convert a {@link LogicalIntersect} to an {@link EnumerableIntersect}.  * You may provide a custom config to convert other nodes that extend {@link Intersect}.  *  * @see EnumerableRules#ENUMERABLE_INTERSECT_RULE  */
 end_comment
 
 begin_class
@@ -161,11 +177,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalIntersect
+name|Intersect
 name|intersect
 init|=
 operator|(
-name|LogicalIntersect
+name|Intersect
 operator|)
 name|rel
 decl_stmt|;

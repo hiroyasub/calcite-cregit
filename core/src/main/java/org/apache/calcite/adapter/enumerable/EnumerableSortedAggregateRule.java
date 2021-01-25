@@ -152,7 +152,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalAggregate}  * to an {@link EnumerableSortedAggregate}.  *  * @see EnumerableRules#ENUMERABLE_SORTED_AGGREGATE_RULE  */
+comment|/**  * Rule to convert a {@link LogicalAggregate} to an {@link EnumerableSortedAggregate}.  * You may provide a custom config to convert other nodes that extend {@link Aggregate}.  *  * @see EnumerableRules#ENUMERABLE_SORTED_AGGREGATE_RULE  */
 end_comment
 
 begin_class
@@ -223,11 +223,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalAggregate
+name|Aggregate
 name|agg
 init|=
 operator|(
-name|LogicalAggregate
+name|Aggregate
 operator|)
 name|rel
 decl_stmt|;

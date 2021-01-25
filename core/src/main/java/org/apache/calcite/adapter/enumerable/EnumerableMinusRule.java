@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Minus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalMinus
@@ -92,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert an {@link org.apache.calcite.rel.logical.LogicalMinus} to an  * {@link EnumerableMinus}.  *  * @see EnumerableRules#ENUMERABLE_MINUS_RULE  */
+comment|/**  * Rule to convert an {@link LogicalMinus} to an {@link EnumerableMinus}.  * You may provide a custom config to convert other nodes that extend {@link Minus}.  *  * @see EnumerableRules#ENUMERABLE_MINUS_RULE  */
 end_comment
 
 begin_class
@@ -160,11 +176,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalMinus
+name|Minus
 name|minus
 init|=
 operator|(
-name|LogicalMinus
+name|Minus
 operator|)
 name|rel
 decl_stmt|;

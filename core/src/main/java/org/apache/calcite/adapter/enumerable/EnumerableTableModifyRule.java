@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|TableModify
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalTableModify
@@ -122,7 +138,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableModify} to  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_MODIFICATION_RULE */
+comment|/** Planner rule that converts a {@link LogicalTableModify} to an {@link EnumerableTableModify}.  * You may provide a custom config to convert other nodes that extend {@link TableModify}.  *  * @see EnumerableRules#ENUMERABLE_TABLE_MODIFICATION_RULE */
 end_comment
 
 begin_class
@@ -194,11 +210,11 @@ name|rel
 parameter_list|)
 block|{
 specifier|final
-name|LogicalTableModify
+name|TableModify
 name|modify
 init|=
 operator|(
-name|LogicalTableModify
+name|TableModify
 operator|)
 name|rel
 decl_stmt|;
