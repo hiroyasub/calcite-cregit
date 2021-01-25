@@ -401,7 +401,7 @@ name|m3
 init|=
 name|Smalls
 operator|.
-name|FIBONACCI2_TABLE_METHOD
+name|FIBONACCI_LIMIT_TABLE_METHOD
 operator|.
 name|getName
 argument_list|()
