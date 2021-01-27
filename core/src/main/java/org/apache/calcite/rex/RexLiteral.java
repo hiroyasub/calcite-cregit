@@ -1228,7 +1228,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Returns the strict literal type for a given type. */
+comment|/**    * Returns the strict literal type for a given type. The rules should keep    * sync with what {@link RexBuilder#makeLiteral} defines.    */
 specifier|public
 specifier|static
 name|SqlTypeName
@@ -1265,6 +1265,17 @@ return|return
 name|SqlTypeName
 operator|.
 name|DECIMAL
+return|;
+case|case
+name|REAL
+case|:
+case|case
+name|FLOAT
+case|:
+return|return
+name|SqlTypeName
+operator|.
+name|DOUBLE
 return|;
 case|case
 name|VARBINARY
