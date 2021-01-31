@@ -652,6 +652,34 @@ name|RexShuttle
 name|shuttle
 parameter_list|)
 function_decl|;
+comment|/** Returns whether a field is nullable. */
+specifier|default
+name|boolean
+name|fieldIsNullable
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|isNullable
+argument_list|()
+return|;
+block|}
 comment|/** Context of a relational expression, for purposes of checking validity. */
 interface|interface
 name|Context
