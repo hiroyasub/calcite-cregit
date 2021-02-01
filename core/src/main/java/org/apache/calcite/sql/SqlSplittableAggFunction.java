@@ -1129,7 +1129,7 @@ decl_stmt|;
 return|return
 name|aggregateCall
 operator|.
-name|copy
+name|withArgList
 argument_list|(
 name|ImmutableIntList
 operator|.
@@ -1137,13 +1137,6 @@ name|of
 argument_list|(
 name|arg
 argument_list|)
-argument_list|,
-operator|-
-literal|1
-argument_list|,
-name|RelCollations
-operator|.
-name|EMPTY
 argument_list|)
 return|;
 block|}

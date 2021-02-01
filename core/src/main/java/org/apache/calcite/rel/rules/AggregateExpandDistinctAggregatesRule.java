@@ -2589,7 +2589,7 @@ name|add
 argument_list|(
 name|newAggCall
 operator|.
-name|rename
+name|withName
 argument_list|(
 name|aggCall
 operator|.
