@@ -17867,6 +17867,31 @@ name|AggregateCall
 name|aggregateCall
 parameter_list|()
 block|{
+comment|// Use dummy values for collation and type. This method only promises to
+comment|// return a call that is "approximately equivalent ... and is good for
+comment|// deriving field names", so dummy values are good enough.
+specifier|final
+name|RelCollation
+name|collation
+init|=
+name|RelCollations
+operator|.
+name|EMPTY
+decl_stmt|;
+specifier|final
+name|RelDataType
+name|type
+init|=
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|BOOLEAN
+argument_list|)
+decl_stmt|;
 return|return
 name|AggregateCall
 operator|.
@@ -17888,19 +17913,9 @@ argument_list|,
 operator|-
 literal|1
 argument_list|,
-name|requireNonNull
-argument_list|(
-literal|null
+name|collation
 argument_list|,
-literal|"CALCITE-4234: collation is null"
-argument_list|)
-argument_list|,
-name|requireNonNull
-argument_list|(
-literal|null
-argument_list|,
-literal|"CALCITE-4234: type is null"
-argument_list|)
+name|type
 argument_list|,
 name|alias
 argument_list|)
