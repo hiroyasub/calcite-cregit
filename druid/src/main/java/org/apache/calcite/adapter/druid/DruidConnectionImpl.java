@@ -4039,10 +4039,8 @@ name|throwableHolder
 init|=
 name|Holder
 operator|.
-name|of
-argument_list|(
-literal|null
-argument_list|)
+name|empty
+argument_list|()
 decl_stmt|;
 name|E
 name|next

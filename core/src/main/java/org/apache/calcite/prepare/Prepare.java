@@ -1324,10 +1324,8 @@ name|holder
 init|=
 name|Holder
 operator|.
-name|of
-argument_list|(
-literal|null
-argument_list|)
+name|empty
+argument_list|()
 decl_stmt|;
 name|Hook
 operator|.
@@ -1338,6 +1336,8 @@ argument_list|(
 name|holder
 argument_list|)
 expr_stmt|;
+annotation|@
+name|Nullable
 name|Program
 name|holderValue
 init|=
