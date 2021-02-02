@@ -440,6 +440,29 @@ literal|"org.apache.calcite.sql.pretty.SqlPrettyWriter"
 argument_list|)
 argument_list|)
 decl_stmt|;
+comment|/**    * Default SqlWriterConfig, reduce the overhead of "ImmutableBeans.create"    */
+specifier|private
+specifier|static
+specifier|final
+name|SqlWriterConfig
+name|CONFIG
+init|=
+name|ImmutableBeans
+operator|.
+name|create
+argument_list|(
+name|SqlWriterConfig
+operator|.
+name|class
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|CalciteSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+decl_stmt|;
 comment|/**    * Bean holding the default property values.    */
 specifier|private
 specifier|static
@@ -840,21 +863,7 @@ name|config
 parameter_list|()
 block|{
 return|return
-name|ImmutableBeans
-operator|.
-name|create
-argument_list|(
-name|SqlWriterConfig
-operator|.
-name|class
-argument_list|)
-operator|.
-name|withDialect
-argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|)
+name|CONFIG
 return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
