@@ -1011,6 +1011,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|jupiter
@@ -4248,6 +4264,9 @@ literal|"rank"
 argument_list|)
 argument_list|)
 operator|.
+name|distinct
+argument_list|()
+operator|.
 name|as
 argument_list|(
 literal|"c"
@@ -4288,13 +4307,13 @@ specifier|final
 name|String
 name|expectedPostgresql
 init|=
-literal|"SELECT COUNT(\"rank\") AS \"c\"\n"
+literal|"SELECT COUNT(DISTINCT \"rank\") AS \"c\"\n"
 operator|+
 literal|"FROM (SELECT RANK() OVER (ORDER BY \"SAL\") AS \"rank\"\n"
 operator|+
 literal|"FROM \"scott\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"HAVING COUNT(\"rank\")>= 10"
+literal|"HAVING COUNT(DISTINCT \"rank\")>= 10"
 decl_stmt|;
 name|relFn
 argument_list|(
@@ -4314,11 +4333,11 @@ specifier|final
 name|String
 name|expectedOracle
 init|=
-literal|"SELECT COUNT(RANK() OVER (ORDER BY \"SAL\")) \"c\"\n"
+literal|"SELECT COUNT(DISTINCT RANK() OVER (ORDER BY \"SAL\")) \"c\"\n"
 operator|+
 literal|"FROM \"scott\".\"EMP\"\n"
 operator|+
-literal|"HAVING COUNT(RANK() OVER (ORDER BY \"SAL\"))>= 10"
+literal|"HAVING COUNT(DISTINCT RANK() OVER (ORDER BY \"SAL\"))>= 10"
 decl_stmt|;
 name|relFn
 argument_list|(
@@ -4481,25 +4500,7 @@ name|builder
 operator|.
 name|field
 argument_list|(
-name|builder
-operator|.
-name|peek
-argument_list|()
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getField
-argument_list|(
 literal|"EMPNO"
-argument_list|,
-literal|false
-argument_list|,
-literal|false
-argument_list|)
-operator|.
-name|getIndex
-argument_list|()
 argument_list|)
 argument_list|,
 name|builder
@@ -21653,6 +21654,8 @@ name|librarySet
 decl_stmt|;
 specifier|private
 specifier|final
+annotation|@
+name|Nullable
 name|Function
 argument_list|<
 name|RelBuilder
@@ -21723,6 +21726,8 @@ name|Config
 argument_list|>
 name|config
 parameter_list|,
+annotation|@
+name|Nullable
 name|Function
 argument_list|<
 name|RelBuilder

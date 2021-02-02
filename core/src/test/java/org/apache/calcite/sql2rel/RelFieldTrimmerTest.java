@@ -1847,7 +1847,7 @@ name|builder
 operator|.
 name|field
 argument_list|(
-literal|"EMPNO"
+literal|"SAL"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1891,7 +1891,7 @@ literal|""
 operator|+
 literal|"LogicalAggregate(group=[{1}], C=[COUNT($0)])\n"
 operator|+
-literal|"  LogicalProject(EMPNO=[$0], DEPTNO=[$7])\n"
+literal|"  LogicalProject(SAL=[$5], DEPTNO=[$7])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;

@@ -1329,7 +1329,7 @@ name|testAggregate
 parameter_list|()
 block|{
 comment|// Equivalent SQL:
-comment|//   SELECT COUNT(empno) AS c
+comment|//   SELECT deptno, COUNT(sal) AS c
 comment|//   FROM emp
 comment|//   GROUP BY deptno
 specifier|final
@@ -1376,7 +1376,7 @@ name|builder
 operator|.
 name|field
 argument_list|(
-literal|"EMPNO"
+literal|"SAL"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1389,7 +1389,7 @@ name|expectedPhysical
 init|=
 literal|""
 operator|+
-literal|"EnumerableAggregate(group=[{7}], C=[COUNT($0)])\n"
+literal|"EnumerableAggregate(group=[{7}], C=[COUNT($5)])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -1398,7 +1398,7 @@ name|expectedLogical
 init|=
 literal|""
 operator|+
-literal|"LogicalAggregate(group=[{7}], C=[COUNT($0)])\n"
+literal|"LogicalAggregate(group=[{7}], C=[COUNT($5)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
