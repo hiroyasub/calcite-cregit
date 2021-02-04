@@ -3659,6 +3659,36 @@ name|matches
 argument_list|()
 return|;
 block|}
+comment|/** SQL {@code RLIKE} function. */
+specifier|public
+specifier|static
+name|boolean
+name|rlike
+parameter_list|(
+name|String
+name|s
+parameter_list|,
+name|String
+name|pattern
+parameter_list|)
+block|{
+return|return
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+name|pattern
+argument_list|)
+operator|.
+name|matcher
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|find
+argument_list|()
+return|;
+block|}
 comment|/** SQL {@code SIMILAR} function. */
 specifier|public
 specifier|static

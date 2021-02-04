@@ -15336,6 +15336,107 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testRlike
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_name\" rlike '.+@.+\\\\..+'"
+decl_stmt|;
+name|String
+name|expectedSpark
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_name\" RLIKE '.+@.+\\\\..+'"
+decl_stmt|;
+name|String
+name|expectedHive
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_name\" RLIKE '.+@.+\\\\..+'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|SPARK
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedSpark
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|HIVE
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testNotRlike
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_name\" not rlike '.+@.+\\\\..+'"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_name\" NOT RLIKE '.+@.+\\\\..+'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|SPARK
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testNotIlike
 parameter_list|()
 block|{

@@ -347,6 +347,9 @@ block|,
 comment|/** {@code LIKE} operator. */
 name|LIKE
 block|,
+comment|/** {@code RLIKE} operator. */
+name|RLIKE
+block|,
 comment|/** {@code SIMILAR} operator. */
 name|SIMILAR
 block|,

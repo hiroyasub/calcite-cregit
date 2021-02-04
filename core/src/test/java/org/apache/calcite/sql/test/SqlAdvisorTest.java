@@ -1038,6 +1038,8 @@ literal|"KEYWORD(FORMAT)"
 argument_list|,
 literal|"KEYWORD(ILIKE)"
 argument_list|,
+literal|"KEYWORD(RLIKE)"
+argument_list|,
 literal|"KEYWORD(IMMEDIATELY)"
 argument_list|,
 literal|"KEYWORD(IN)"

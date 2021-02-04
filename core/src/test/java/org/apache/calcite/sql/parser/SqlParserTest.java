@@ -2714,6 +2714,7 @@ literal|"2003"
 argument_list|,
 literal|"ILIKE"
 argument_list|,
+comment|// PostgreSQL
 literal|"IMMEDIATE"
 argument_list|,
 literal|"92"
@@ -4272,6 +4273,9 @@ literal|"2014"
 argument_list|,
 literal|"c"
 argument_list|,
+literal|"RLIKE"
+argument_list|,
+comment|// Hive and Spark
 literal|"ROLE"
 argument_list|,
 literal|"99"
@@ -10253,6 +10257,67 @@ operator|+
 literal|"FROM `T`\n"
 operator|+
 literal|"WHERE (`X` ILIKE '%abc%')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRlike
+parameter_list|()
+block|{
+comment|// The RLIKE operator is valid when the HIVE or SPARK function library is
+comment|// enabled ('fun=spark' or 'fun=hive'). But the parser can always parse it.
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COLA`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE (MAX(`EMAIL`) RLIKE '.+@.+\\\\..+')"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select cola from t where max(email) rlike '.+@.+\\\\..+'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT `COLA`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE (MAX(`EMAIL`) NOT RLIKE '.+@.+\\\\..+')"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select cola from t where max(email) not rlike '.+@.+\\\\..+'"
 decl_stmt|;
 name|sql
 argument_list|(
