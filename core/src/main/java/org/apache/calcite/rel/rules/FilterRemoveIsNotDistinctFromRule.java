@@ -204,7 +204,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that replaces {@code IS NOT DISTINCT FROM}  * in a {@link Filter} with logically equivalent operations.  *  * @see org.apache.calcite.sql.fun.SqlStdOperatorTable#IS_NOT_DISTINCT_FROM  * @see CoreRules#FILTER_EXPAND_IS_NOT_DISTINCT_FROM  */
+comment|/**  * Planner rule that replaces {@code IS NOT DISTINCT FROM}  * in a {@link Filter} with logically equivalent operations.  *  * @see org.apache.calcite.sql.fun.SqlStdOperatorTable#IS_NOT_DISTINCT_FROM  * @see CoreRules#FILTER_EXPAND_IS_NOT_DISTINCT_FROM  * @see RelBuilder#isDistinctFrom  * @see RelBuilder#isNotDistinctFrom  */
 end_comment
 
 begin_class
