@@ -4329,6 +4329,11 @@ index|]
 operator|=
 name|i
 expr_stmt|;
+name|int
+name|fieldIndex
+init|=
+name|i
+decl_stmt|;
 name|columnSets
 index|[
 name|j
@@ -4343,9 +4348,11 @@ argument_list|(
 name|i
 argument_list|)
 argument_list|,
+parameter_list|()
+lambda|->
 literal|"equivalence.get(i) is null for "
 operator|+
-name|i
+name|fieldIndex
 operator|+
 literal|", "
 operator|+

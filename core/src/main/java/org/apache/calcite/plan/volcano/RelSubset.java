@@ -1932,6 +1932,36 @@ return|return
 name|list
 return|;
 block|}
+comment|/**    * Returns whether this subset contains the specified relational expression.    */
+specifier|public
+name|boolean
+name|contains
+parameter_list|(
+name|RelNode
+name|node
+parameter_list|)
+block|{
+return|return
+name|set
+operator|.
+name|rels
+operator|.
+name|contains
+argument_list|(
+name|node
+argument_list|)
+operator|&&
+name|node
+operator|.
+name|getTraitSet
+argument_list|()
+operator|.
+name|satisfies
+argument_list|(
+name|traitSet
+argument_list|)
+return|;
+block|}
 comment|/**    * Returns stream of subsets whose traitset satisfies    * current subset's traitset.    */
 annotation|@
 name|API
