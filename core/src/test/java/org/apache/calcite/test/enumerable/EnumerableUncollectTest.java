@@ -69,26 +69,12 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Disabled
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Test
 import|;
 end_import
 
 begin_comment
-comment|/** Test for {@link EnumerableUncollect}. */
+comment|/** Test for {@link org.apache.calcite.adapter.enumerable.EnumerableUncollect}. */
 end_comment
 
 begin_class
@@ -294,11 +280,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-argument_list|(
-literal|"CALCITE-4064"
-argument_list|)
-annotation|@
 name|Test
 name|void
 name|simpleUnnestArrayOfRows4
@@ -308,7 +289,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from UNNEST(array[ROW(1, ROW(5, 10)), ROW(2, ROW(6, 12))])"
+literal|"select * from UNNEST(array[ROW(1, ROW(5, 10)), ROW(2, ROW(6, 12))]) "
+operator|+
+literal|"as T2(y, z)"
 decl_stmt|;
 name|tester
 argument_list|()
@@ -320,7 +303,37 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|""
+literal|"y=1; z={5, 10}"
+argument_list|,
+literal|"y=2; z={6, 12}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|simpleUnnestArrayOfRows5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from UNNEST(array[ROW(ROW(3)), ROW(ROW(4))]) as T2(y)"
+decl_stmt|;
+name|tester
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"y={3}"
+argument_list|,
+literal|"y={4}"
 argument_list|)
 expr_stmt|;
 block|}
