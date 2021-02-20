@@ -269,11 +269,11 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|util
+name|linq4j
 operator|.
-name|Static
+name|Nullness
 operator|.
-name|RESOURCE
+name|castNonNull
 import|;
 end_import
 
@@ -281,15 +281,15 @@ begin_import
 import|import static
 name|org
 operator|.
-name|checkerframework
+name|apache
 operator|.
-name|checker
+name|calcite
 operator|.
-name|nullness
+name|util
 operator|.
-name|NullnessUtil
+name|Static
 operator|.
-name|castNonNull
+name|RESOURCE
 import|;
 end_import
 

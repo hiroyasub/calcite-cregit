@@ -159,13 +159,13 @@ begin_import
 import|import static
 name|org
 operator|.
-name|checkerframework
+name|apache
 operator|.
-name|checker
+name|calcite
 operator|.
-name|nullness
+name|linq4j
 operator|.
-name|NullnessUtil
+name|Nullness
 operator|.
 name|castNonNull
 import|;
