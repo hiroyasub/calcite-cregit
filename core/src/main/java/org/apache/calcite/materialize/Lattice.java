@@ -5143,7 +5143,7 @@ init|=
 literal|null
 decl_stmt|;
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|LatticeTable
 argument_list|,

@@ -777,7 +777,7 @@ argument_list|()
 decl_stmt|;
 specifier|private
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|Object
 argument_list|,

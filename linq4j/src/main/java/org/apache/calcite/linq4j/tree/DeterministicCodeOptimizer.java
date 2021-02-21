@@ -211,7 +211,7 @@ block|{
 comment|/**    * The map contains known to be effectively-final expression.    * The map uses identity equality.    * Typically the key is {@code ParameterExpression}, however there might be    * non-factored to final field expression that is known to be constant.    * For instance, cast expression will not be factored to a field,    * but we still need to track its constant status.    */
 specifier|protected
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|Expression
 argument_list|,

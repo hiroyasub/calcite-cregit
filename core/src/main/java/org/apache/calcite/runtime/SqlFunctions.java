@@ -10748,7 +10748,7 @@ comment|// mainly intended for java.sql.Timestamp but works for other dates also
 annotation|@
 name|SuppressWarnings
 argument_list|(
-literal|"JdkObsolete"
+literal|"JavaUtilDate"
 argument_list|)
 specifier|public
 specifier|static

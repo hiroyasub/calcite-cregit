@@ -1931,7 +1931,7 @@ decl_stmt|;
 comment|/**    * Maps {@link SqlNode query node} objects to the {@link SqlValidatorScope}    * scope created from them.    */
 specifier|protected
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|SqlNode
 argument_list|,
@@ -1977,7 +1977,7 @@ decl_stmt|;
 comment|/**    * Maps a {@link SqlNode node} to the    * {@link SqlValidatorNamespace namespace} which describes what columns they    * contain.    */
 specifier|protected
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|SqlNode
 argument_list|,
@@ -2041,7 +2041,7 @@ decl_stmt|;
 comment|/**    * Map of derived RelDataType for each node. This is an IdentityHashMap    * since in some cases (such as null literals) we need to discriminate by    * instance.    */
 specifier|private
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|SqlNode
 argument_list|,
@@ -2057,7 +2057,7 @@ decl_stmt|;
 comment|/** Provides the data for {@link #getValidatedOperandTypes(SqlCall)}. */
 specifier|public
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|SqlCall
 argument_list|,

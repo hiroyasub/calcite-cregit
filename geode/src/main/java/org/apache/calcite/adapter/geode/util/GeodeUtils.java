@@ -1212,7 +1212,7 @@ block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
-literal|"JdkObsolete"
+literal|"JavaUtilDate"
 argument_list|)
 specifier|private
 specifier|static

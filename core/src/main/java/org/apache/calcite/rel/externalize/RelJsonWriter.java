@@ -191,7 +191,7 @@ name|relJson
 decl_stmt|;
 specifier|private
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|RelNode
 argument_list|,

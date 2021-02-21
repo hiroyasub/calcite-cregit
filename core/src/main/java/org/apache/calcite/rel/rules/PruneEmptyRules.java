@@ -1275,7 +1275,11 @@ block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"Guava"
+block|,
+literal|"UnnecessaryMethodReference"
+block|}
 argument_list|)
 annotation|@
 name|Deprecated

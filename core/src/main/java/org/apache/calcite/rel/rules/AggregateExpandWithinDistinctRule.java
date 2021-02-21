@@ -1739,6 +1739,7 @@ name|aggregateCall
 return|;
 block|}
 specifier|private
+specifier|static
 name|ImmutableBitSet
 name|union
 parameter_list|(

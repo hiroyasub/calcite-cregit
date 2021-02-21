@@ -405,7 +405,7 @@ init|=
 literal|null
 decl_stmt|;
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,
@@ -1545,7 +1545,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,
@@ -2187,7 +2187,7 @@ name|map
 decl_stmt|;
 specifier|private
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,
@@ -2487,7 +2487,7 @@ argument_list|>
 block|{
 specifier|private
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|ParameterExpression
 argument_list|,

@@ -400,7 +400,11 @@ block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"Guava"
+block|,
+literal|"UnnecessaryMethodReference"
+block|}
 argument_list|)
 annotation|@
 name|Deprecated
@@ -453,6 +457,7 @@ argument_list|>
 name|parentFunction
 parameter_list|)
 block|{
+comment|//noinspection FunctionalExpressionCanBeFolded
 name|this
 argument_list|(
 name|ordering

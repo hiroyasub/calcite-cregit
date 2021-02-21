@@ -3170,7 +3170,7 @@ comment|// to be removed before 2.0
 annotation|@
 name|SuppressWarnings
 argument_list|(
-literal|"JdkObsolete"
+literal|"JavaUtilDate"
 argument_list|)
 specifier|public
 specifier|static
@@ -9524,7 +9524,11 @@ block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"Guava"
+block|,
+literal|"UnnecessaryMethodReference"
+block|}
 argument_list|)
 annotation|@
 name|Deprecated

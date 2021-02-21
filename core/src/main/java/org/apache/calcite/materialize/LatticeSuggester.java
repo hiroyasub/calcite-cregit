@@ -1334,7 +1334,7 @@ return|return;
 block|}
 comment|// Translate the query graph to mutable nodes
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|TableRef
 argument_list|,

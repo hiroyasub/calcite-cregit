@@ -445,16 +445,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
-import|;
-end_import
-
 begin_comment
 comment|/**  * Planner rule that pushes an  * {@link org.apache.calcite.rel.core.Aggregate}  * past a non-distinct {@link org.apache.calcite.rel.core.Union}.  *  * @see CoreRules#AGGREGATE_UNION_TRANSPOSE  */
 end_comment
@@ -476,7 +466,7 @@ block|{
 specifier|private
 specifier|static
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|Class
 argument_list|<

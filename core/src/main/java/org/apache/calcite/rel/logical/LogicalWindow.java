@@ -782,7 +782,7 @@ comment|// Build a list of groups, partitions, and aggregate functions. Each
 comment|// aggregate function will add its arguments as outputs of the input
 comment|// program.
 specifier|final
-name|Map
+name|IdentityHashMap
 argument_list|<
 name|RexOver
 argument_list|,
