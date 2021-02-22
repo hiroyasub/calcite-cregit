@@ -85,6 +85,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Smalls
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TestUtil
 import|;
 end_import
@@ -2694,6 +2708,151 @@ argument_list|)
 throw|;
 block|}
 block|}
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testMetadataFunctions
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|model
+init|=
+literal|""
+operator|+
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_STR',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
+name|MyToStringFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'FIBONACCI_TABLE',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           methodName: 'fibonacciTable'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       materializations: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           table: 'TEST_VIEW',\n"
+operator|+
+literal|"           sql: 'SELECT 1'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+operator|.
+name|metaData
+argument_list|(
+name|connection
+lambda|->
+block|{
+try|try
+block|{
+return|return
+name|connection
+operator|.
+name|getMetaData
+argument_list|()
+operator|.
+name|getFunctions
+argument_list|(
+literal|null
+argument_list|,
+literal|"adhoc"
+argument_list|,
+literal|"%"
+argument_list|)
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|TestUtil
+operator|.
+name|rethrow
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+operator|+
+literal|"FUNCTION_CAT=null; FUNCTION_SCHEM=adhoc; FUNCTION_NAME=FIBONACCI_TABLE; REMARKS=null; FUNCTION_TYPE=0; SPECIFIC_NAME=FIBONACCI_TABLE\n"
+operator|+
+literal|"FUNCTION_CAT=null; FUNCTION_SCHEM=adhoc; FUNCTION_NAME=MY_STR; REMARKS=null; FUNCTION_TYPE=0; SPECIFIC_NAME=MY_STR\n"
 argument_list|)
 expr_stmt|;
 block|}
