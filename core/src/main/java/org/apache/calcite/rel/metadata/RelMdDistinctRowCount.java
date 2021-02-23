@@ -1367,6 +1367,66 @@ literal|1D
 return|;
 block|}
 block|}
+comment|// try to remove const columns from the group keys, as they do not
+comment|// affect the distinct row count
+name|ImmutableBitSet
+name|nonConstCols
+init|=
+name|RexUtil
+operator|.
+name|getNonConstColumns
+argument_list|(
+name|groupKey
+argument_list|,
+name|rel
+operator|.
+name|getProjects
+argument_list|()
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|nonConstCols
+operator|.
+name|cardinality
+argument_list|()
+operator|==
+literal|0
+condition|)
+block|{
+comment|// all columns are constants, the distinct row count should be 1
+return|return
+literal|1D
+return|;
+block|}
+if|if
+condition|(
+name|nonConstCols
+operator|.
+name|cardinality
+argument_list|()
+operator|<
+name|groupKey
+operator|.
+name|cardinality
+argument_list|()
+condition|)
+block|{
+comment|// some const columns can be removed, call the method recursively
+comment|// with the trimmed columns
+return|return
+name|getDistinctRowCount
+argument_list|(
+name|rel
+argument_list|,
+name|mq
+argument_list|,
+name|nonConstCols
+argument_list|,
+name|predicate
+argument_list|)
+return|;
+block|}
 name|ImmutableBitSet
 operator|.
 name|Builder
