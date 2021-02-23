@@ -633,6 +633,24 @@ end_import
 
 begin_import
 import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeImpl
+operator|.
+name|NON_NULLABLE_SUFFIX
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
@@ -1406,7 +1424,7 @@ name|fullTypeString
 operator|.
 name|endsWith
 argument_list|(
-literal|"NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 condition|)
 block|{
@@ -1434,7 +1452,10 @@ operator|.
 name|length
 argument_list|()
 operator|-
-literal|9
+name|NON_NULLABLE_SUFFIX
+operator|.
+name|length
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

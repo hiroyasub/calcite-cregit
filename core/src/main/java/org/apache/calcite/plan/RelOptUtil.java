@@ -1631,6 +1631,24 @@ name|Collectors
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeImpl
+operator|.
+name|NON_NULLABLE_SUFFIX
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>RelOptUtil</code> defines static utility methods for use in optimizing  * {@link RelNode}s.  */
 end_comment
@@ -20100,7 +20118,7 @@ name|pw
 operator|.
 name|print
 argument_list|(
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 expr_stmt|;
 block|}
@@ -20157,7 +20175,7 @@ name|pw
 operator|.
 name|print
 argument_list|(
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 expr_stmt|;
 block|}

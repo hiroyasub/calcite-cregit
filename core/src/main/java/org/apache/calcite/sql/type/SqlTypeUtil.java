@@ -579,6 +579,24 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeImpl
+operator|.
+name|NON_NULLABLE_SUFFIX
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|type
@@ -4958,13 +4976,16 @@ operator|.
 name|length
 argument_list|()
 operator|+
-literal|9
+name|NON_NULLABLE_SUFFIX
+operator|.
+name|length
+argument_list|()
 operator|&&
 name|x
 operator|.
 name|endsWith
 argument_list|(
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 operator|)
 operator|&&

@@ -289,6 +289,15 @@ name|RelDataType
 implements|,
 name|RelDataTypeFamily
 block|{
+comment|/**    * Suffix for the digests of non-nullable types.    */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|NON_NULLABLE_SUFFIX
+init|=
+literal|" NOT NULL"
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
@@ -1146,7 +1155,7 @@ name|sb
 operator|.
 name|append
 argument_list|(
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 expr_stmt|;
 block|}

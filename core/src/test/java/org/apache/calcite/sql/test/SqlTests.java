@@ -55,6 +55,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|runtime
 operator|.
 name|CalciteContextException
@@ -565,7 +581,9 @@ condition|)
 block|{
 name|actual
 operator|+=
-literal|" NOT NULL"
+name|RelDataTypeImpl
+operator|.
+name|NON_NULLABLE_SUFFIX
 expr_stmt|;
 block|}
 return|return

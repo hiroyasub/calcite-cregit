@@ -1021,6 +1021,24 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeImpl
+operator|.
+name|NON_NULLABLE_SUFFIX
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|fun
@@ -2681,7 +2699,7 @@ argument_list|)
 argument_list|,
 name|targetType
 operator|+
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|,
 name|expected
 argument_list|,
@@ -2720,7 +2738,7 @@ name|expected
 argument_list|,
 name|targetType
 operator|+
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 expr_stmt|;
 block|}
@@ -2753,7 +2771,7 @@ argument_list|)
 argument_list|,
 name|targetType
 operator|+
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|,
 name|expected
 argument_list|)
@@ -31941,7 +31959,7 @@ name|expected
 argument_list|,
 name|type
 operator|+
-literal|" NOT NULL"
+name|NON_NULLABLE_SUFFIX
 argument_list|)
 expr_stmt|;
 block|}

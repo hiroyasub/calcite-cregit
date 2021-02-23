@@ -129,6 +129,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlKind
@@ -16726,7 +16742,9 @@ argument_list|()
 condition|?
 literal|""
 else|:
-literal|" NOT NULL"
+name|RelDataTypeImpl
+operator|.
+name|NON_NULLABLE_SUFFIX
 operator|)
 argument_list|,
 literal|"type of "
