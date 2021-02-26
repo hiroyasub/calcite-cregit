@@ -781,13 +781,36 @@ literal|0
 argument_list|)
 decl_stmt|;
 comment|// SEMI and ANTI join cannot be swapped.
-return|return
+if|if
+condition|(
+operator|!
 name|join
 operator|.
 name|getJoinType
 argument_list|()
 operator|.
 name|projectsRight
+argument_list|()
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+comment|// Suppress join with "true" condition (that is, cartesian joins).
+return|return
+name|config
+operator|.
+name|isAllowAlwaysTrueCondition
+argument_list|()
+operator|||
+operator|!
+name|join
+operator|.
+name|getCondition
+argument_list|()
+operator|.
+name|isAlwaysTrue
 argument_list|()
 return|;
 block|}
@@ -1241,7 +1264,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/** Whether to swap outer joins. */
+comment|/** Whether to swap outer joins; default false. */
 annotation|@
 name|ImmutableBeans
 operator|.
@@ -1263,6 +1286,30 @@ name|withSwapOuter
 parameter_list|(
 name|boolean
 name|swapOuter
+parameter_list|)
+function_decl|;
+comment|/** Whether to emit the new join tree if the join condition is {@code TRUE}      * (that is, cartesian joins); default true. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|true
+argument_list|)
+name|boolean
+name|isAllowAlwaysTrueCondition
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #isAllowAlwaysTrueCondition()}. */
+name|Config
+name|withAllowAlwaysTrueCondition
+parameter_list|(
+name|boolean
+name|allowAlwaysTrueCondition
 parameter_list|)
 function_decl|;
 block|}
