@@ -2364,15 +2364,10 @@ comment|// a bit more efficient
 block|}
 switch|switch
 condition|(
-name|requireNonNull
-argument_list|(
 name|calls
 operator|.
-name|peek
+name|getFirst
 argument_list|()
-argument_list|,
-literal|"calls.peek()"
-argument_list|)
 operator|.
 name|getKind
 argument_list|()

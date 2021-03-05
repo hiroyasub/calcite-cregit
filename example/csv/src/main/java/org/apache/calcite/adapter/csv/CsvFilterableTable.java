@@ -287,18 +287,6 @@ name|AtomicBoolean
 import|;
 end_import
 
-begin_import
-import|import static
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-operator|.
-name|requireNonNull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Table based on a CSV file that can implement simple filtering.  *  *<p>It implements the {@link FilterableTable} interface, so Calcite gets  * data by calling the {@link #scan(DataContext, List)} method.  */
 end_comment
@@ -367,15 +355,10 @@ block|{
 name|JavaTypeFactory
 name|typeFactory
 init|=
-name|requireNonNull
-argument_list|(
 name|root
 operator|.
 name|getTypeFactory
 argument_list|()
-argument_list|,
-literal|"typeFactory"
-argument_list|)
 decl_stmt|;
 specifier|final
 name|List

@@ -23,6 +23,18 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|DataContexts
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|avatica
 operator|.
 name|util
@@ -230,20 +242,6 @@ operator|.
 name|rex
 operator|.
 name|RexUnknownAs
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|schema
-operator|.
-name|Schemas
 import|;
 end_import
 
@@ -2401,7 +2399,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Similar to {@link MaterializationTest#testAlias()}:    * {@code x> 1 OR (y> 2 AND z> 4)}    * implies    * {@code (y> 3 AND z> 5)}. */
+comment|/** Similar to {@link MaterializedViewSubstitutionVisitorTest#testAlias()}:    * {@code x> 1 OR (y> 2 AND z> 4)}    * implies    * {@code (y> 3 AND z> 5)}. */
 annotation|@
 name|Test
 name|void
@@ -4438,9 +4436,9 @@ lambda|->
 operator|new
 name|RexExecutorImpl
 argument_list|(
-name|Schemas
+name|DataContexts
 operator|.
-name|createDataContext
+name|of
 argument_list|(
 name|statement
 operator|.

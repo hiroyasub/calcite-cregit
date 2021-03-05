@@ -202,7 +202,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Runtime context allowing access to the tables in a database.  */
+comment|/**  * Runtime context allowing access to the tables in a database.  *  * @see DataContexts  */
 end_comment
 
 begin_interface
@@ -236,15 +236,11 @@ name|getRootSchema
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the type factory.    */
-annotation|@
-name|Nullable
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the query provider.    */
-annotation|@
-name|Nullable
 name|QueryProvider
 name|getQueryProvider
 parameter_list|()

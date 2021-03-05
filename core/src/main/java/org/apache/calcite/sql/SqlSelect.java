@@ -134,12 +134,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -183,8 +185,6 @@ decl_stmt|;
 name|SqlNodeList
 name|keywordList
 decl_stmt|;
-annotation|@
-name|Nullable
 name|SqlNodeList
 name|selectList
 decl_stmt|;
@@ -243,8 +243,6 @@ name|Nullable
 name|SqlNodeList
 name|keywordList
 parameter_list|,
-annotation|@
-name|Nullable
 name|SqlNodeList
 name|selectList
 parameter_list|,
@@ -303,8 +301,6 @@ name|this
 operator|.
 name|keywordList
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|keywordList
@@ -324,7 +320,12 @@ name|this
 operator|.
 name|selectList
 operator|=
+name|requireNonNull
+argument_list|(
 name|selectList
+argument_list|,
+literal|"selectList"
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -354,8 +355,6 @@ name|this
 operator|.
 name|windowDecls
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|windowDecls
@@ -492,8 +491,6 @@ literal|0
 case|:
 name|keywordList
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 operator|(
@@ -508,10 +505,13 @@ literal|1
 case|:
 name|selectList
 operator|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|SqlNodeList
 operator|)
 name|operand
+argument_list|)
 expr_stmt|;
 break|break;
 case|case
@@ -554,8 +554,6 @@ literal|6
 case|:
 name|windowDecls
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 operator|(
@@ -768,8 +766,6 @@ annotation|@
 name|Pure
 specifier|public
 specifier|final
-annotation|@
-name|Nullable
 name|SqlNodeList
 name|getSelectList
 parameter_list|()
@@ -782,8 +778,6 @@ specifier|public
 name|void
 name|setSelectList
 parameter_list|(
-annotation|@
-name|Nullable
 name|SqlNodeList
 name|selectList
 parameter_list|)

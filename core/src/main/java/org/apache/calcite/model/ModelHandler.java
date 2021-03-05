@@ -2820,15 +2820,10 @@ name|nameAndSchema
 argument_list|()
 block|{
 return|return
-name|requireNonNull
-argument_list|(
 name|schemaStack
 operator|.
-name|peek
+name|getFirst
 argument_list|()
-argument_list|,
-literal|"schemaStack.peek()"
-argument_list|)
 return|;
 block|}
 specifier|private

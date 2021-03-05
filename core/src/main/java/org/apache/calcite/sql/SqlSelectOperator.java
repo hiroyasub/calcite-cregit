@@ -147,6 +147,18 @@ name|castNonNull
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * An operator describing a query. (Not a query itself.)  *  *<p>Operands are:</p>  *  *<ul>  *<li>0: distinct ({@link SqlLiteral})</li>  *<li>1: selectClause ({@link SqlNodeList})</li>  *<li>2: fromClause ({@link SqlCall} to "join" operator)</li>  *<li>3: whereClause ({@link SqlNode})</li>  *<li>4: havingClause ({@link SqlNode})</li>  *<li>5: groupClause ({@link SqlNode})</li>  *<li>6: windowClause ({@link SqlNodeList})</li>  *<li>7: orderClause ({@link SqlNode})</li>  *</ul>  */
 end_comment
@@ -249,6 +261,8 @@ index|[
 literal|0
 index|]
 argument_list|,
+name|requireNonNull
+argument_list|(
 operator|(
 name|SqlNodeList
 operator|)
@@ -256,6 +270,9 @@ name|operands
 index|[
 literal|1
 index|]
+argument_list|,
+literal|"selectList"
+argument_list|)
 argument_list|,
 name|operands
 index|[
@@ -316,7 +333,10 @@ index|]
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a call to the<code>SELECT</code> operator.    *    * @param keywordList List of keywords such DISTINCT and ALL, or null    * @param selectList  The SELECT clause, or null if empty    * @param fromClause  The FROM clause    * @param whereClause The WHERE clause, or null if not present    * @param groupBy     The GROUP BY clause, or null if not present    * @param having      The HAVING clause, or null if not present    * @param windowDecls The WINDOW clause, or null if not present    * @param orderBy     The ORDER BY clause, or null if not present    * @param offset      Expression for number of rows to discard before    *                    returning first row    * @param fetch       Expression for number of rows to fetch    * @param pos         The parser position, or    *                    {@link org.apache.calcite.sql.parser.SqlParserPos#ZERO}    *                    if not specified; must not be null.    * @return A {@link SqlSelect}, never null    */
+comment|/**    * Creates a call to the<code>SELECT</code> operator.    *    * @deprecated Use {@link #createCall(SqlLiteral, SqlParserPos, SqlNode...)}.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|SqlSelect
 name|createCall
@@ -605,26 +625,6 @@ init|=
 name|select
 operator|.
 name|selectList
-operator|!=
-literal|null
-condition|?
-name|select
-operator|.
-name|selectList
-else|:
-name|SqlNodeList
-operator|.
-name|of
-argument_list|(
-name|SqlIdentifier
-operator|.
-name|star
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
-argument_list|)
 decl_stmt|;
 name|writer
 operator|.

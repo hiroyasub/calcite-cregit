@@ -8302,15 +8302,10 @@ decl_stmt|;
 name|SqlNodeList
 name|selectList
 init|=
-name|requireNonNull
-argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
-argument_list|,
-literal|"selectList"
-argument_list|)
 decl_stmt|;
 name|SqlNodeList
 name|groupList
@@ -16835,15 +16830,6 @@ operator|.
 name|getSelectList
 argument_list|()
 decl_stmt|;
-assert|assert
-name|selectList
-operator|!=
-literal|null
-operator|:
-literal|"selectList must not be null for "
-operator|+
-name|select
-assert|;
 name|SqlNode
 name|having
 init|=
@@ -22827,19 +22813,10 @@ block|{
 name|SqlNodeList
 name|selectList
 init|=
-name|requireNonNull
-argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
-argument_list|,
-parameter_list|()
-lambda|->
-literal|"null selectList for "
-operator|+
-name|select
-argument_list|)
 decl_stmt|;
 name|selectList
 operator|=
@@ -27641,19 +27618,10 @@ specifier|final
 name|SqlNodeList
 name|selectList
 init|=
-name|requireNonNull
-argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
-argument_list|,
-parameter_list|()
-lambda|->
-literal|"selectList must not be null in "
-operator|+
-name|select
-argument_list|)
 decl_stmt|;
 for|for
 control|(

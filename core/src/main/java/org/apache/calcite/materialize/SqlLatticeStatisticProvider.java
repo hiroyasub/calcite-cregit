@@ -23,9 +23,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|schema
-operator|.
-name|ScannableTable
+name|DataContexts
 import|;
 end_import
 
@@ -39,7 +37,7 @@ name|calcite
 operator|.
 name|schema
 operator|.
-name|Schemas
+name|ScannableTable
 import|;
 end_import
 
@@ -379,9 +377,9 @@ operator|)
 operator|.
 name|scan
 argument_list|(
-name|Schemas
+name|DataContexts
 operator|.
-name|createDataContext
+name|of
 argument_list|(
 name|MaterializedViewTable
 operator|.

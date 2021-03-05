@@ -1604,8 +1604,6 @@ name|tableType
 decl_stmt|;
 specifier|private
 specifier|final
-annotation|@
-name|Nullable
 name|SqlNodeList
 name|replaceSource
 decl_stmt|;
@@ -1617,13 +1615,10 @@ parameter_list|,
 name|RelDataType
 name|tableType
 parameter_list|,
-annotation|@
-name|Nullable
 name|SqlNodeList
 name|replaceSource
 parameter_list|)
 block|{
-comment|// TODO: should replaceSource be non-nullable?
 name|this
 operator|.
 name|tableAlias
@@ -4838,7 +4833,9 @@ name|POS
 argument_list|,
 literal|null
 argument_list|,
-literal|null
+name|SqlNodeList
+operator|.
+name|SINGLETON_STAR
 argument_list|,
 name|query
 argument_list|,
@@ -5298,8 +5295,13 @@ name|select
 operator|.
 name|getSelectList
 argument_list|()
-operator|==
-literal|null
+operator|.
+name|equals
+argument_list|(
+name|SqlNodeList
+operator|.
+name|SINGLETON_STAR
+argument_list|)
 condition|)
 block|{
 comment|// Generates explicit column names instead of start(*) for
@@ -7110,7 +7112,9 @@ name|ZERO
 argument_list|,
 literal|null
 argument_list|,
-literal|null
+name|SqlNodeList
+operator|.
+name|SINGLETON_STAR
 argument_list|,
 name|tableCall
 argument_list|,

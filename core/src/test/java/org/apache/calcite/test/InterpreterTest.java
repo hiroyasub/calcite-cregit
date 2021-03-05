@@ -484,8 +484,6 @@ name|rootSchema
 return|;
 block|}
 specifier|public
-annotation|@
-name|Nullable
 name|JavaTypeFactory
 name|getTypeFactory
 parameter_list|()

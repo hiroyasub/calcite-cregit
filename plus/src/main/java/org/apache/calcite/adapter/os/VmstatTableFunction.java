@@ -289,18 +289,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import static
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-operator|.
-name|requireNonNull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Table function that executes the OS "vmstat" command  * to share memory statistics.  */
 end_comment
@@ -348,15 +336,10 @@ block|{
 name|JavaTypeFactory
 name|typeFactory
 init|=
-name|requireNonNull
-argument_list|(
 name|root
 operator|.
 name|getTypeFactory
 argument_list|()
-argument_list|,
-literal|"root.getTypeFactory"
-argument_list|)
 decl_stmt|;
 specifier|final
 name|RelDataType

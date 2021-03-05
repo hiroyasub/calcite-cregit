@@ -5608,19 +5608,10 @@ decl_stmt|;
 name|SqlNodeList
 name|selectList
 init|=
-name|requireNonNull
-argument_list|(
 name|select
 operator|.
 name|getSelectList
 argument_list|()
-argument_list|,
-parameter_list|()
-lambda|->
-literal|"selectList in "
-operator|+
-name|select
-argument_list|)
 decl_stmt|;
 assert|assert
 name|selectList

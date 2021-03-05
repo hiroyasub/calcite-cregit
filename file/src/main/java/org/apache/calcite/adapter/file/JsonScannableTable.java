@@ -131,18 +131,6 @@ name|Nullable
 import|;
 end_import
 
-begin_import
-import|import static
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-operator|.
-name|requireNonNull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Table based on a JSON file.  *  *<p>It implements the {@link ScannableTable} interface, so Calcite gets  * data by calling the {@link #scan(DataContext)} method.  */
 end_comment
@@ -224,15 +212,10 @@ block|{
 name|JavaTypeFactory
 name|typeFactory
 init|=
-name|requireNonNull
-argument_list|(
 name|root
 operator|.
 name|getTypeFactory
 argument_list|()
-argument_list|,
-literal|"root.getTypeFactory"
-argument_list|)
 decl_stmt|;
 return|return
 operator|new

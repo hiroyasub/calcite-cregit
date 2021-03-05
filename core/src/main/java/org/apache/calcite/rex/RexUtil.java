@@ -23,6 +23,18 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|DataContexts
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|linq4j
 operator|.
 name|function
@@ -226,20 +238,6 @@ operator|.
 name|RexTableInputRef
 operator|.
 name|RelTableRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|schema
-operator|.
-name|Schemas
 import|;
 end_import
 
@@ -677,22 +675,6 @@ end_import
 
 begin_import
 import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|Nullness
-operator|.
-name|castNonNull
-import|;
-end_import
-
-begin_import
-import|import static
 name|java
 operator|.
 name|util
@@ -722,17 +704,9 @@ init|=
 operator|new
 name|RexExecutorImpl
 argument_list|(
-name|Schemas
+name|DataContexts
 operator|.
-name|createDataContext
-argument_list|(
-name|castNonNull
-argument_list|(
-literal|null
-argument_list|)
-argument_list|,
-literal|null
-argument_list|)
+name|EMPTY
 argument_list|)
 decl_stmt|;
 specifier|private

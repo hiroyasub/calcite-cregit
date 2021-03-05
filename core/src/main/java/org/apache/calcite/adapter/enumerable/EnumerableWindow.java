@@ -2094,8 +2094,6 @@ literal|true
 argument_list|,
 name|inputPhysType
 argument_list|,
-name|comparator_
-argument_list|,
 name|keySelector
 argument_list|,
 name|keyComparator
@@ -2131,8 +2129,6 @@ argument_list|,
 literal|false
 argument_list|,
 name|inputPhysType
-argument_list|,
-name|comparator_
 argument_list|,
 name|keySelector
 argument_list|,
@@ -5655,15 +5651,6 @@ parameter_list|,
 name|PhysType
 name|physType
 parameter_list|,
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
-name|Expression
-name|rowComparator
-parameter_list|,
-comment|// TODO: remove or use
 annotation|@
 name|Nullable
 name|Expression

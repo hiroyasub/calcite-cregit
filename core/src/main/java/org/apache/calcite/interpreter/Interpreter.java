@@ -35,6 +35,18 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|DataContexts
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|adapter
 operator|.
 name|java
@@ -660,22 +672,6 @@ operator|.
 name|util
 operator|.
 name|NoSuchElementException
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|Nullness
-operator|.
-name|castNonNull
 import|;
 end_import
 
@@ -2858,7 +2854,6 @@ name|InterpretableRel
 operator|)
 name|p
 decl_stmt|;
-comment|// TODO: analyze if null is permissible argument for dataContext
 name|node
 operator|=
 name|interpretableRel
@@ -2874,10 +2869,9 @@ name|this
 argument_list|,
 literal|null
 argument_list|,
-name|castNonNull
-argument_list|(
-literal|null
-argument_list|)
+name|DataContexts
+operator|.
+name|EMPTY
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3033,19 +3027,12 @@ name|getTypeFactory
 parameter_list|()
 block|{
 return|return
-name|requireNonNull
-argument_list|(
 name|interpreter
 operator|.
 name|dataContext
 operator|.
 name|getTypeFactory
 argument_list|()
-argument_list|,
-parameter_list|()
-lambda|->
-literal|"no typeFactory in dataContext"
-argument_list|)
 return|;
 block|}
 annotation|@

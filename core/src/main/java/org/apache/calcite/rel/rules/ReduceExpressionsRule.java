@@ -5191,12 +5191,19 @@ comment|// call.
 comment|//
 comment|// REVIEW zfong 6/13/08 - Are there other expressions where we
 comment|// also need to preserve casts?
-if|if
-condition|(
+name|SqlOperator
+name|op
+init|=
 name|parentCallTypeStack
 operator|.
-name|isEmpty
+name|peek
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|op
+operator|==
+literal|null
 condition|)
 block|{
 name|addCasts
@@ -5215,10 +5222,7 @@ name|add
 argument_list|(
 name|isUdf
 argument_list|(
-name|parentCallTypeStack
-operator|.
-name|peek
-argument_list|()
+name|op
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5234,8 +5238,6 @@ name|SuppressWarnings
 argument_list|(
 literal|"unused"
 argument_list|)
-annotation|@
-name|Nullable
 name|SqlOperator
 name|operator
 parameter_list|)

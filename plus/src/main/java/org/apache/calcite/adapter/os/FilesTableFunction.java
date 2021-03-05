@@ -830,15 +830,10 @@ block|{
 name|JavaTypeFactory
 name|typeFactory
 init|=
-name|requireNonNull
-argument_list|(
 name|root
 operator|.
 name|getTypeFactory
 argument_list|()
-argument_list|,
-literal|"root.getTypeFactory"
-argument_list|)
 decl_stmt|;
 specifier|final
 name|RelDataType

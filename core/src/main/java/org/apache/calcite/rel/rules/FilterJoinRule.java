@@ -989,7 +989,6 @@ argument_list|,
 name|newJoinRel
 argument_list|)
 expr_stmt|;
-comment|// TODO: review if filter can be nullable here or not
 if|if
 condition|(
 operator|!

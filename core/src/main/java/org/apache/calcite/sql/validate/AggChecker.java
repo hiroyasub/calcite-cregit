@@ -478,15 +478,10 @@ specifier|final
 name|SqlQualified
 name|fqId
 init|=
-name|requireNonNull
-argument_list|(
 name|scopes
 operator|.
-name|peek
+name|getFirst
 argument_list|()
-argument_list|,
-literal|"scopes.peek()"
-argument_list|)
 operator|.
 name|fullyQualify
 argument_list|(

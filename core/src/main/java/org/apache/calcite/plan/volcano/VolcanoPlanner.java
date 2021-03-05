@@ -5585,6 +5585,7 @@ return|;
 block|}
 comment|/** Returns whether {@code set1} is less popular than {@code set2}    * (or smaller, or younger). If so, it will be more efficient to merge set1    * into set2 than set2 into set1. */
 specifier|private
+specifier|static
 name|boolean
 name|isSmaller
 parameter_list|(
