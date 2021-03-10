@@ -32244,6 +32244,31 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+name|void
+name|testSnapshotForSystemTimeWithAlias
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT * FROM orders LEFT JOIN products FOR SYSTEM_TIME AS OF "
+operator|+
+literal|"orders.proctime as products ON orders.product_id = products.pro_id"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `ORDERS`\n"
+operator|+
+literal|"LEFT JOIN `PRODUCTS` FOR SYSTEM_TIME AS OF `ORDERS`.`PROCTIME` AS `PRODUCTS` ON (`ORDERS`"
+operator|+
+literal|".`PRODUCT_ID` = `PRODUCTS`.`PRO_ID`)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
 specifier|protected
 name|void
 name|testMetadata
