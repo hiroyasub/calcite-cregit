@@ -18969,11 +18969,13 @@ name|expected
 init|=
 literal|"SELECT \"$cor0\".\"department_id\", \"$cor0\".\"D_PLUSONE\"\n"
 operator|+
-literal|"FROM \"foodmart\".\"department\" AS \"$cor0\",\n"
+literal|"FROM (SELECT \"department_id\", \"department_description\", \"department_id\" + 1 AS \"$f2\"\n"
 operator|+
-literal|"LATERAL (SELECT \"$cor0\".\"department_id\" + 1 AS \"D_PLUSONE\"\n"
+literal|"FROM \"foodmart\".\"department\") AS \"$cor0\",\n"
 operator|+
-literal|"FROM (VALUES (TRUE)) AS \"t\" (\"EXPR$0\")) AS \"t0\""
+literal|"LATERAL (SELECT \"$cor0\".\"$f2\" AS \"D_PLUSONE\"\n"
+operator|+
+literal|"FROM (VALUES (TRUE)) AS \"t\" (\"EXPR$0\")) AS \"t1\""
 decl_stmt|;
 name|sql
 argument_list|(

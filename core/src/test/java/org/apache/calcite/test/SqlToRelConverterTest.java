@@ -5652,6 +5652,35 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-4560">[CALCITE-4560]    * Wrong plan when decorrelating EXISTS subquery with COALESCE in the predicate</a>. */
+annotation|@
+name|Test
+name|void
+name|testExistsDecorrelateComplexCorrelationPredicate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e1.empno from empnullables e1 where exists (\n"
+operator|+
+literal|"  select 1 from empnullables e2 where COALESCE(e1.ename,'M')=COALESCE(e2.ename,'M'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
