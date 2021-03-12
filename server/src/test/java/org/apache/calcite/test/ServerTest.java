@@ -489,6 +489,22 @@ name|api
 operator|.
 name|Assertions
 operator|.
+name|assertDoesNotThrow
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
 name|assertEquals
 import|;
 end_import
@@ -1029,6 +1045,54 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|assertDoesNotThrow
+argument_list|(
+parameter_list|()
+lambda|->
+block|{
+name|s
+operator|.
+name|execute
+argument_list|(
+literal|"create schema if not exists s"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|executeUpdate
+argument_list|(
+literal|"insert into s.t values 2"
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|,
+literal|"IF NOT EXISTS should not overwrite the existing schema"
+argument_list|)
+expr_stmt|;
+name|assertDoesNotThrow
+argument_list|(
+parameter_list|()
+lambda|->
+block|{
+name|s
+operator|.
+name|execute
+argument_list|(
+literal|"create or replace schema s"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|execute
+argument_list|(
+literal|"create table s.t (i int not null)"
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|,
+literal|"REPLACE must overwrite the existing schema"
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 annotation|@
@@ -1361,7 +1425,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3046">[CALCITE-3046]    * CompileException when inserting casted value of composited user defined type    * into table</a>. */
 annotation|@
 name|Test
 name|void
@@ -1653,6 +1716,30 @@ name|is
 argument_list|(
 literal|1
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertDoesNotThrow
+argument_list|(
+parameter_list|()
+lambda|->
+block|{
+name|s
+operator|.
+name|execute
+argument_list|(
+literal|"create or replace table t2 (i int not null)"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|executeUpdate
+argument_list|(
+literal|"insert into t2 values (1)"
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|,
+literal|"REPLACE must recreate the table, leaving only one column"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2000,6 +2087,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3046">[CALCITE-3046]    * CompileException when inserting casted value of composited user defined type    * into table</a>. */
 annotation|@
 name|Test
 name|void

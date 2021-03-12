@@ -2938,16 +2938,20 @@ condition|)
 block|{
 if|if
 condition|(
+name|create
+operator|.
+name|ifNotExists
+condition|)
+block|{
+return|return;
+block|}
+if|if
+condition|(
 operator|!
 name|create
 operator|.
 name|getReplace
 argument_list|()
-operator|&&
-operator|!
-name|create
-operator|.
-name|ifNotExists
 condition|)
 block|{
 throw|throw
@@ -3849,10 +3853,20 @@ block|{
 comment|// Table exists.
 if|if
 condition|(
-operator|!
 name|create
 operator|.
 name|ifNotExists
+condition|)
+block|{
+return|return;
+block|}
+if|if
+condition|(
+operator|!
+name|create
+operator|.
+name|getReplace
+argument_list|()
 condition|)
 block|{
 comment|// They did not specify IF NOT EXISTS, so give error.
@@ -3879,7 +3893,6 @@ argument_list|)
 argument_list|)
 throw|;
 block|}
-return|return;
 block|}
 comment|// Table does not exist. Create it.
 name|pair
