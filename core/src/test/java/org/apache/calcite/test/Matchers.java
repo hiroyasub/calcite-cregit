@@ -1690,10 +1690,12 @@ name|item
 parameter_list|)
 block|{
 return|return
-name|matcher
+name|Unsafe
 operator|.
 name|matches
 argument_list|(
+name|matcher
+argument_list|,
 name|f
 operator|.
 name|apply
