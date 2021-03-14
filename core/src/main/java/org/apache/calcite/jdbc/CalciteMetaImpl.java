@@ -3658,6 +3658,8 @@ argument_list|(
 name|handle
 argument_list|,
 name|calciteSignature
+argument_list|,
+name|parameterValues
 argument_list|)
 return|;
 block|}
