@@ -8908,7 +8908,7 @@ literal|"No handler for method [public abstract java.lang.String "
 operator|+
 literal|"org.apache.calcite.test.RelMetadataTest$ColType.getColType(int)] "
 operator|+
-literal|"applied to argument of type [interface org.apache.calcite.rel.RelNode]; "
+literal|"applied to argument of type [class org.apache.calcite.rel.logical.LogicalFilter]; "
 operator|+
 literal|"we recommend you create a catch-all (RelNode) handler"
 decl_stmt|;
@@ -9109,7 +9109,7 @@ literal|"No handler for method [public abstract java.lang.String "
 operator|+
 literal|"org.apache.calcite.test.RelMetadataTest$ColType.getColType(int)] "
 operator|+
-literal|"applied to argument of type [interface org.apache.calcite.rel.RelNode]; "
+literal|"applied to argument of type [class org.apache.calcite.rel.logical.LogicalFilter]; "
 operator|+
 literal|"we recommend you create a catch-all (RelNode) handler"
 decl_stmt|;

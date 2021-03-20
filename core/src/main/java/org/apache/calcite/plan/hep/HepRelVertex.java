@@ -113,6 +113,22 @@ name|rel
 operator|.
 name|metadata
 operator|.
+name|DelegatingMetadataRel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
 name|RelMetadataQuery
 import|;
 end_import
@@ -169,6 +185,8 @@ class|class
 name|HepRelVertex
 extends|extends
 name|AbstractRelNode
+implements|implements
+name|DelegatingMetadataRel
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Wrapped rel currently chosen for implementation of expression.    */
@@ -338,6 +356,18 @@ comment|/**    * Returns current implementation chosen for this vertex.    */
 specifier|public
 name|RelNode
 name|getCurrentRel
+parameter_list|()
+block|{
+return|return
+name|currentRel
+return|;
+block|}
+comment|/**    * Returns {@link RelNode} for metadata.    */
+annotation|@
+name|Override
+specifier|public
+name|RelNode
+name|getMetadataDelegateRel
 parameter_list|()
 block|{
 return|return
