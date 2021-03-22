@@ -1066,8 +1066,6 @@ name|superMethod
 operator|.
 name|getParameterCount
 argument_list|()
-operator|+
-literal|2
 operator|!=
 name|candidate
 operator|.
@@ -1150,7 +1148,7 @@ control|(
 name|int
 name|i
 init|=
-literal|0
+literal|2
 init|;
 name|i
 operator|<
@@ -1167,8 +1165,6 @@ condition|(
 name|cpt
 index|[
 name|i
-operator|+
-literal|2
 index|]
 operator|!=
 name|smpt

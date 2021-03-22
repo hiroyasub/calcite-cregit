@@ -79,20 +79,6 @@ name|Values
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|BuiltInMethod
-import|;
-end_import
-
 begin_comment
 comment|/**  * Default implementations of the  * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism}  * metadata provider for the standard logical algebra.  *  * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isPhaseTransition  * @see org.apache.calcite.rel.metadata.RelMetadataQuery#splitCount  */
 end_comment
@@ -124,17 +110,13 @@ operator|new
 name|RelMdParallelism
 argument_list|()
 argument_list|,
-name|BuiltInMethod
+name|BuiltInMetadata
 operator|.
-name|IS_PHASE_TRANSITION
+name|Parallelism
 operator|.
-name|method
-argument_list|,
-name|BuiltInMethod
+name|Handler
 operator|.
-name|SPLIT_COUNT
-operator|.
-name|method
+name|class
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------

@@ -1413,20 +1413,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|BuiltInMethod
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Holder
 import|;
 end_import
@@ -5706,6 +5692,9 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+annotation|@
 name|Override
 specifier|public
 parameter_list|<
@@ -5737,6 +5726,39 @@ operator|.
 name|handlers
 argument_list|(
 name|def
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|List
+argument_list|<
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|handlers
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|handlerClass
+parameter_list|)
+block|{
+return|return
+name|metadataProvider
+operator|.
+name|handlers
+argument_list|(
+name|handlerClass
 argument_list|)
 return|;
 block|}
@@ -8904,9 +8926,11 @@ specifier|final
 name|String
 name|value
 init|=
-literal|"No handler for method [public abstract java.lang.String "
+literal|"No handler for method [public abstract "
 operator|+
-literal|"org.apache.calcite.test.RelMetadataTest$ColType.getColType(int)] "
+literal|"java.lang.String org.apache.calcite.test.RelMetadataTest$ColType$Handler.getColType("
+operator|+
+literal|"org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery,int)] "
 operator|+
 literal|"applied to argument of type [class org.apache.calcite.rel.logical.LogicalFilter]; "
 operator|+
@@ -9107,11 +9131,13 @@ name|value
 init|=
 literal|"No handler for method [public abstract java.lang.String "
 operator|+
-literal|"org.apache.calcite.test.RelMetadataTest$ColType.getColType(int)] "
+literal|"org.apache.calcite.test.RelMetadataTest$ColType$Handler.getColType("
 operator|+
-literal|"applied to argument of type [class org.apache.calcite.rel.logical.LogicalFilter]; "
+literal|"org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery,int)]"
 operator|+
-literal|"we recommend you create a catch-all (RelNode) handler"
+literal|" applied to argument of type [class org.apache.calcite.rel.logical.LogicalFilter];"
+operator|+
+literal|" we recommend you create a catch-all (RelNode) handler"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -11549,6 +11575,10 @@ init|=
 operator|(
 name|RelMdColumnUniqueness
 operator|)
+name|Iterables
+operator|.
+name|getOnlyElement
+argument_list|(
 name|RelMdColumnUniqueness
 operator|.
 name|SOURCE
@@ -11559,23 +11589,11 @@ name|BuiltInMetadata
 operator|.
 name|ColumnUniqueness
 operator|.
-name|DEF
+name|Handler
+operator|.
+name|class
 argument_list|)
-operator|.
-name|get
-argument_list|(
-name|BuiltInMethod
-operator|.
-name|COLUMN_UNIQUENESS
-operator|.
-name|method
 argument_list|)
-operator|.
-name|iterator
-argument_list|()
-operator|.
-name|next
-argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -23521,13 +23539,15 @@ name|ReflectiveRelMetadataProvider
 operator|.
 name|reflectiveSource
 argument_list|(
-name|ColType
-operator|.
-name|METHOD
-argument_list|,
 operator|new
 name|ColTypeImpl
 argument_list|()
+argument_list|,
+name|ColType
+operator|.
+name|Handler
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 comment|/** Implementation of {@link ColType#getColType(int)} for      * {@link RelNode}, called via reflection. */
@@ -23605,13 +23625,15 @@ name|ReflectiveRelMetadataProvider
 operator|.
 name|reflectiveSource
 argument_list|(
-name|ColType
-operator|.
-name|METHOD
-argument_list|,
 operator|new
 name|BrokenColTypeImpl
 argument_list|()
+argument_list|,
+name|ColType
+operator|.
+name|Handler
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 block|}
@@ -23688,13 +23710,11 @@ name|colTypeHandler
 operator|=
 name|revise
 argument_list|(
-name|e
-operator|.
-name|relClass
-argument_list|,
 name|ColType
 operator|.
-name|DEF
+name|Handler
+operator|.
+name|class
 argument_list|)
 expr_stmt|;
 block|}

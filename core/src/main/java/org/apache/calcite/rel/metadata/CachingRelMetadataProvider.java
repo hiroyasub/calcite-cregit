@@ -396,6 +396,9 @@ end_class
 
 begin_function
 unit|};   }    @
+name|Deprecated
+comment|// to be removed before 2.0
+annotation|@
 name|Override
 specifier|public
 argument_list|<
@@ -427,6 +430,42 @@ operator|.
 name|handlers
 argument_list|(
 name|def
+argument_list|)
+return|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Override
+specifier|public
+name|List
+argument_list|<
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|handlers
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|handlerClass
+parameter_list|)
+block|{
+return|return
+name|underlyingProvider
+operator|.
+name|handlers
+argument_list|(
+name|handlerClass
 argument_list|)
 return|;
 block|}

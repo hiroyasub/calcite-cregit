@@ -99,20 +99,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|BuiltInMethod
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|checkerframework
 operator|.
 name|checker
@@ -153,11 +139,11 @@ operator|new
 name|RelMdLowerBoundCost
 argument_list|()
 argument_list|,
-name|BuiltInMethod
+name|LowerBoundCost
 operator|.
-name|LOWER_BOUND_COST
+name|Handler
 operator|.
-name|method
+name|class
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------

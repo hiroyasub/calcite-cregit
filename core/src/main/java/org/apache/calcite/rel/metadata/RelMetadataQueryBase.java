@@ -283,6 +283,9 @@ return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/** Re-generates the handler for a given kind of metadata, adding support for    * {@code class_} if it is not already present. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 parameter_list|<
 name|M
@@ -322,12 +325,49 @@ literal|"metadataProvider"
 argument_list|)
 expr_stmt|;
 return|return
+operator|(
+name|H
+operator|)
+name|revise
+argument_list|(
+name|def
+operator|.
+name|handlerClass
+argument_list|)
+return|;
+block|}
+comment|/** Re-generates the handler for a given kind of metadata, adding support for    * {@code class_} if it is not already present. */
+specifier|protected
+parameter_list|<
+name|H
+extends|extends
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+parameter_list|>
+name|H
+name|revise
+parameter_list|(
+name|Class
+argument_list|<
+name|H
+argument_list|>
+name|def
+parameter_list|)
+block|{
+name|requireNonNull
+argument_list|(
+name|metadataProvider
+argument_list|,
+literal|"metadataProvider"
+argument_list|)
+expr_stmt|;
+return|return
 name|metadataProvider
 operator|.
 name|revise
 argument_list|(
-name|class_
-argument_list|,
 name|def
 argument_list|)
 return|;

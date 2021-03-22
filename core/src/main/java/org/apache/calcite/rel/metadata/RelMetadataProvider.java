@@ -73,6 +73,16 @@ name|Method
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMetadataProvider defines an interface for obtaining metadata about  * relational expressions. This interface is weakly-typed and is not intended to  * be called directly in most contexts; instead, use a strongly-typed facade  * such as {@link RelMetadataQuery}.  *  *<p>For background and motivation, see<a  * href="http://wiki.eigenbase.org/RelationalExpressionMetadata">wiki</a>.  *  *<p>If your provider is not a singleton, we recommend that you implement  * {@link Object#equals(Object)} and {@link Object#hashCode()} methods. This  * makes the cache of {@link JaninoRelMetadataProvider} more effective.  */
 end_comment
@@ -120,11 +130,14 @@ argument_list|>
 name|metadataClass
 argument_list|)
 expr_stmt|;
-parameter_list|<
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+argument_list|<
 name|M
 extends|extends
 name|Metadata
-parameter_list|>
+argument_list|>
 name|Multimap
 argument_list|<
 name|Method
@@ -141,6 +154,28 @@ argument_list|<
 name|M
 argument_list|>
 name|def
+parameter_list|)
+function_decl|;
+comment|/**    * Retrieves a list of {@link MetadataHandler} for implements a particular    * {@link MetadataHandler}.class.  The resolution order is specificity of the relNode class,    * with preference given to handlers that occur earlier in the list.    *    * For instance, given a return list of {A, B, C} where A implements RelNode and Scan,    * B implements Scan, and C implements LogicalScan and Filter.    *    * Scan dispatches to a.method(Scan)    * LogicalFilter dispatches to c.method(Filter).    * LogicalScan dispatches to c.method(LogicalScan).    * Aggregate dispatches to a.method(RelNode).    *    * The behavior is undefined if the class hierarchy for dispatching is not a tree.    */
+name|List
+argument_list|<
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|handlers
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|MetadataHandler
+argument_list|<
+name|?
+argument_list|>
+argument_list|>
+name|handlerClass
 parameter_list|)
 function_decl|;
 block|}
