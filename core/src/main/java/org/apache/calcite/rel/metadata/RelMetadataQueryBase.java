@@ -93,16 +93,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Map
 import|;
 end_import
@@ -148,7 +138,7 @@ name|Table
 argument_list|<
 name|RelNode
 argument_list|,
-name|List
+name|Object
 argument_list|,
 name|Object
 argument_list|>
@@ -383,7 +373,7 @@ parameter_list|)
 block|{
 name|Map
 argument_list|<
-name|List
+name|Object
 argument_list|,
 name|Object
 argument_list|>

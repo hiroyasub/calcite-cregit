@@ -19,11 +19,34 @@ name|janino
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apiguardian
+operator|.
+name|api
+operator|.
+name|API
+import|;
+end_import
+
 begin_comment
 comment|/**  * A key used in caching with descriptive to string.  Note the key uses  * reference equality for performance.  */
 end_comment
 
 begin_class
+annotation|@
+name|API
+argument_list|(
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|INTERNAL
+argument_list|)
 specifier|public
 specifier|final
 class|class
@@ -34,6 +57,17 @@ specifier|final
 name|String
 name|description
 decl_stmt|;
+annotation|@
+name|API
+argument_list|(
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|INTERNAL
+argument_list|)
 specifier|public
 name|DescriptiveCacheKey
 parameter_list|(
