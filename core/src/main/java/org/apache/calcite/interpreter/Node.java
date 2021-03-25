@@ -23,6 +23,8 @@ begin_interface
 specifier|public
 interface|interface
 name|Node
+extends|extends
+name|AutoCloseable
 block|{
 name|void
 name|run
@@ -30,6 +32,14 @@ parameter_list|()
 throws|throws
 name|InterruptedException
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|void
+name|close
+parameter_list|()
+block|{
+block|}
 block|}
 end_interface
 
