@@ -1878,11 +1878,7 @@ name|create
 argument_list|(
 name|Smalls
 operator|.
-name|MyPlusFunction
-operator|.
-name|class
-argument_list|,
-literal|"eval"
+name|MY_PLUS_EVAL_METHOD
 argument_list|)
 argument_list|)
 expr_stmt|;

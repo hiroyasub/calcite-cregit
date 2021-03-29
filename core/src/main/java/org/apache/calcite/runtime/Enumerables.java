@@ -235,7 +235,6 @@ argument_list|>
 name|enumerable
 parameter_list|)
 block|{
-comment|//noinspection unchecked
 return|return
 name|enumerable
 operator|.

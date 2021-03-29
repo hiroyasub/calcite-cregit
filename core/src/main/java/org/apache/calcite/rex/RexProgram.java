@@ -2375,6 +2375,36 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/** Expands a list of expressions that may contain {@link RexLocalRef}s. */
+specifier|public
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|expandList
+parameter_list|(
+name|List
+argument_list|<
+name|?
+extends|extends
+name|RexNode
+argument_list|>
+name|nodes
+parameter_list|)
+block|{
+return|return
+operator|new
+name|ExpansionShuttle
+argument_list|(
+name|exprs
+argument_list|)
+operator|.
+name|visitList
+argument_list|(
+name|nodes
+argument_list|)
+return|;
+block|}
 comment|/** Splits this program into a list of project expressions and a list of    * filter expressions.    *    *<p>Neither list is null.    * The filters are evaluated first. */
 specifier|public
 name|Pair

@@ -1314,7 +1314,7 @@ comment|//   GROUP BY deptno
 comment|//
 comment|// or in algebra,
 comment|//
-comment|//   Aggregate($0, SUM($2 WHERE $4 = 0), SUM($3 WHERE $4 = 0))
+comment|//   Aggregate($0, SUM($2 WHERE $4 = 0), SUM($3 WHERE $4 = 1))
 comment|//     Aggregate([($0), ($0, $2)], SUM($2), MIN($2), GROUPING($0, $4))
 comment|//       Scan(emp)
 comment|//

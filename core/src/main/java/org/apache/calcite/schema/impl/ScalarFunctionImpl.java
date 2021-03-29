@@ -657,6 +657,9 @@ argument_list|)
 condition|)
 block|{
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 init|=
 name|method
@@ -668,6 +671,12 @@ if|if
 condition|(
 operator|!
 name|classHasPublicZeroArgsConstructor
+argument_list|(
+name|clazz
+argument_list|)
+operator|&&
+operator|!
+name|classHasPublicFunctionContextConstructor
 argument_list|(
 name|clazz
 argument_list|)

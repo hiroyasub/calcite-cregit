@@ -851,8 +851,6 @@ name|Test
 name|void
 name|testUserDefinedFunction
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -931,8 +929,6 @@ name|Test
 name|void
 name|testUserDefinedFunctionInstanceCount
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1010,8 +1006,6 @@ name|Test
 name|void
 name|testUserDefinedFunctionB
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1052,8 +1046,6 @@ name|Test
 name|void
 name|testUserDefinedFunctionWithNull
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1132,8 +1124,6 @@ name|Test
 name|void
 name|testUserDefinedFunctionWithException
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1384,13 +1374,21 @@ name|result
 init|=
 literal|""
 operator|+
-literal|"EMPLOYEE_ID=100; EMPLOYEE_NAME=Bill Bill; EMPLOYEE_SALARY=10000.0; INCREMENTED_SALARY=110.0\n"
+literal|"EMPLOYEE_ID=100; EMPLOYEE_NAME=Bill Bill;"
 operator|+
-literal|"EMPLOYEE_ID=200; EMPLOYEE_NAME=Eric Eric; EMPLOYEE_SALARY=8000.0; INCREMENTED_SALARY=220.0\n"
+literal|" EMPLOYEE_SALARY=10000.0; INCREMENTED_SALARY=110.0\n"
 operator|+
-literal|"EMPLOYEE_ID=150; EMPLOYEE_NAME=Sebastian Sebastian; EMPLOYEE_SALARY=7000.0; INCREMENTED_SALARY=165.0\n"
+literal|"EMPLOYEE_ID=200; EMPLOYEE_NAME=Eric Eric;"
 operator|+
-literal|"EMPLOYEE_ID=110; EMPLOYEE_NAME=Theodore Theodore; EMPLOYEE_SALARY=11500.0; INCREMENTED_SALARY=121.0\n"
+literal|" EMPLOYEE_SALARY=8000.0; INCREMENTED_SALARY=220.0\n"
+operator|+
+literal|"EMPLOYEE_ID=150; EMPLOYEE_NAME=Sebastian Sebastian;"
+operator|+
+literal|" EMPLOYEE_SALARY=7000.0; INCREMENTED_SALARY=165.0\n"
+operator|+
+literal|"EMPLOYEE_ID=110; EMPLOYEE_NAME=Theodore Theodore;"
+operator|+
+literal|" EMPLOYEE_SALARY=11500.0; INCREMENTED_SALARY=121.0\n"
 decl_stmt|;
 name|Statement
 name|statement
@@ -2208,9 +2206,18 @@ name|Test
 name|void
 name|testUserDefinedFunction2
 parameter_list|()
-throws|throws
-name|Exception
 block|{
+name|String
+name|message
+init|=
+literal|"Declaring class "
+operator|+
+literal|"'org.apache.calcite.util.Smalls$AwkwardFunction' of non-static "
+operator|+
+literal|"user-defined function must have a public constructor with zero "
+operator|+
+literal|"parameters"
+decl_stmt|;
 name|withBadUdf
 argument_list|(
 name|Smalls
@@ -2222,7 +2229,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Declaring class 'org.apache.calcite.util.Smalls$AwkwardFunction' of non-static user-defined function must have a public constructor with zero parameters"
+name|message
 argument_list|)
 expr_stmt|;
 block|}
@@ -2232,8 +2239,6 @@ name|Test
 name|void
 name|testUserDefinedFunctionWithMethodName
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 comment|// java.lang.Math has abs(int) and abs(double).
 specifier|final
@@ -2338,8 +2343,6 @@ name|Test
 name|void
 name|testUserDefinedAggregateFunction
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -2577,8 +2580,6 @@ name|Test
 name|void
 name|testUserDefinedAggregateFunctionWithMultipleParameters
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -2758,7 +2759,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum3(\"deptno\",\"name\",'Eric') as p from \"adhoc\".EMPLOYEES\n"
+literal|"select \"adhoc\".my_sum3(\"deptno\",\"name\",'Eric') as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
 operator|.
 name|returns
@@ -2784,7 +2787,9 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\"),\"name\" as p "
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\"),\n"
+operator|+
+literal|"  \"name\"\n"
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
@@ -2798,7 +2803,9 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"name\",\"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\") as p "
+literal|"select \"name\",\n"
+operator|+
+literal|"  \"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\") as p\n"
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
 operator|+
@@ -2821,7 +2828,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"salary\") as p "
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"salary\") as p\n"
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
@@ -2830,7 +2837,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"name\") as p "
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"name\") as p\n"
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
@@ -2839,7 +2846,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum2(\"commission\",250) as p "
+literal|"select \"adhoc\".my_sum2(\"commission\",250) as p\n"
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
@@ -2854,7 +2861,9 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum2(\"name\",250) as p from \"adhoc\".EMPLOYEES\n"
+literal|"select \"adhoc\".my_sum2(\"name\",250) as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
 operator|.
 name|throws_
@@ -2867,7 +2876,9 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select \"adhoc\".my_sum2(\"empid\",0.0) as p from \"adhoc\".EMPLOYEES\n"
+literal|"select \"adhoc\".my_sum2(\"empid\",0.0) as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
 operator|.
 name|returns
@@ -2882,9 +2893,18 @@ name|Test
 name|void
 name|testUserDefinedAggregateFunction3
 parameter_list|()
-throws|throws
-name|Exception
 block|{
+name|String
+name|message
+init|=
+literal|"Caused by: java.lang.RuntimeException: In user-defined "
+operator|+
+literal|"aggregate class 'org.apache.calcite.util.Smalls$SumFunctionBadIAdd'"
+operator|+
+literal|", first parameter to 'add' method must be the accumulator (the "
+operator|+
+literal|"return type of the 'init' method)"
+decl_stmt|;
 name|withBadUdf
 argument_list|(
 name|Smalls
@@ -2896,7 +2916,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Caused by: java.lang.RuntimeException: In user-defined aggregate class 'org.apache.calcite.util.Smalls$SumFunctionBadIAdd', first parameter to 'add' method must be the accumulator (the return type of the 'init' method)"
+name|message
 argument_list|)
 expr_stmt|;
 block|}
@@ -3126,6 +3146,9 @@ name|AssertThat
 name|withBadUdf
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|)
 block|{
@@ -3221,8 +3244,6 @@ name|Test
 name|void
 name|testUserDefinedAggregateFunctionWithFilter
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -3367,8 +3388,6 @@ name|Test
 name|void
 name|testPath
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -4353,11 +4372,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|connection
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 comment|/**    * Base class for functions that append arrays.    */
@@ -4553,6 +4567,7 @@ block|}
 block|}
 comment|/** Function with signature "f(ARRAY OF INTEGER, INTEGER) returns ARRAY OF    * INTEGER". */
 specifier|private
+specifier|static
 class|class
 name|ArrayAppendIntegerFunction
 extends|extends
@@ -4637,6 +4652,7 @@ block|}
 block|}
 comment|/** Function with signature "f(ARRAY OF DOUBLE, INTEGER) returns ARRAY OF    * DOUBLE". */
 specifier|private
+specifier|static
 class|class
 name|ArrayAppendDoubleFunction
 extends|extends

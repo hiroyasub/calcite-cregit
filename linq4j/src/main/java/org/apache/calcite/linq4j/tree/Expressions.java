@@ -6603,7 +6603,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating an array    * that has a specified rank.    */
+comment|/**    * Creates a NewArrayExpression that represents creating an array    * that has a specified rank.    *    *<p>For example,    * {@code newArrayBounds(int.class, 1, constant(8))}    * yields {@code new int[8]};    * {@code newArrayBounds(int.class, 3, constant(8))}    * yields {@code new int[8][][]};    *    * @param type Element type of the array    * @param dimension Dimension of the array    * @param bound Size of the first dimension    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -6635,7 +6635,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements.    *    * @param type Element type of the array.    */
+comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements.    *    *<p>For example, "{@code newArrayInit(int.class,    * Arrays.asList(constant(1), constant(2))}"    * yields "{@code new int[] {1, 2}}".    *    * @param type Element type of the array    * @param expressions Initializer expressions    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -6670,7 +6670,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements, using varargs.    *    * @param type Element type of the array.    */
+comment|/**    * Creates a NewArrayExpression that represents creating a    * one-dimensional array and initializing it from a list of    * elements, using varargs.    *    *<p>For example, "{@code newArrayInit(int.class, constant(1), constant(2)}"    * yields "{@code new int[] {1, 2}}".    *    * @param type Element type of the array    * @param expressions Initializer expressions    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -6701,7 +6701,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating a    * n-dimensional array and initializing it from a list of    * elements.    *    * @param type Element type of the array.    */
+comment|/**    * Creates a NewArrayExpression that represents creating a    * n-dimensional array and initializing it from a list of    * elements.    *    *<p>For example, "{@code newArrayInit(int.class, 2, Arrays.asList())}"    * yields "{@code new int[][] {}}".    *    * @param type Element type of the array    * @param dimension Dimension of the array    * @param expressions Initializer expressions    */
 specifier|public
 specifier|static
 name|NewArrayExpression
@@ -6739,7 +6739,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a NewArrayExpression that represents creating an    * n-dimensional array and initializing it from a list of    * elements, using varargs.    *    * @param type Element type of the array.    */
+comment|/**    * Creates a NewArrayExpression that represents creating an    * n-dimensional array and initializing it from a list of    * elements, using varargs.    *    *<p>For example, "{@code newArrayInit(int.class, 2)}"    * yields "{@code new int[][] {}}".    *    * @param type Element type of the array    * @param dimension Dimension of the array    * @param expressions Initializer expressions    */
 specifier|public
 specifier|static
 name|NewArrayExpression
