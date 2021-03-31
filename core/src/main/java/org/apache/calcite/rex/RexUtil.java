@@ -9498,7 +9498,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/** Applies NOT to an expression. */
+comment|/** Applies NOT to an expression.    *    *<p>Unlike {@link #not}, may strengthen the type from {@code BOOLEAN}    * to {@code BOOLEAN NOT NULL}. */
 specifier|static
 name|RexNode
 name|not
