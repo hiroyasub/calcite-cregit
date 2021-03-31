@@ -1408,7 +1408,7 @@ return|return
 name|groupSet
 return|;
 block|}
-comment|/**    * Returns the list of grouping sets computed by this Aggregate.    *    * @return List of all grouping sets; null for just {@code groupSet}    */
+comment|/**    * Returns the list of grouping sets computed by this Aggregate.    *    * @return List of all grouping sets    */
 specifier|public
 name|ImmutableList
 argument_list|<

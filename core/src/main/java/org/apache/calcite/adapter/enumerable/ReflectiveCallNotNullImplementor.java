@@ -209,20 +209,17 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// The UDF class must have a public zero-args constructor.
-comment|// Assume that the validator checked already.
 specifier|final
 name|Expression
 name|target
 init|=
-name|Expressions
+name|translator
 operator|.
-name|new_
+name|functionInstance
 argument_list|(
+name|call
+argument_list|,
 name|method
-operator|.
-name|getDeclaringClass
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|callExpr
