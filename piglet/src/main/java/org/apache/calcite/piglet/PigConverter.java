@@ -1207,6 +1207,11 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|writer
+operator|.
+name|reset
+argument_list|()
+expr_stmt|;
 block|}
 return|return
 name|sqlStatements
