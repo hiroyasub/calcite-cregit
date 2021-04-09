@@ -12970,21 +12970,6 @@ argument_list|(
 name|variablesSet
 argument_list|)
 decl_stmt|;
-specifier|final
-name|ImmutableBitSet
-name|requiredColumns
-init|=
-name|RelOptUtil
-operator|.
-name|correlationColumns
-argument_list|(
-name|id
-argument_list|,
-name|right
-operator|.
-name|rel
-argument_list|)
-decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -13016,6 +13001,7 @@ literal|" must not be used by left input to correlation"
 argument_list|)
 throw|;
 block|}
+comment|// Correlate does not have an ON clause.
 switch|switch
 condition|(
 name|joinType
@@ -13024,9 +13010,13 @@ block|{
 case|case
 name|LEFT
 case|:
-comment|// Correlate does not have an ON clause.
-comment|// For a LEFT correlate, predicate must be evaluated first.
-comment|// For INNER, we can defer.
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
+comment|// For a LEFT/SEMI/ANTI, predicate must be evaluated first.
 name|stack
 operator|.
 name|push
@@ -13064,12 +13054,43 @@ name|pop
 argument_list|()
 expr_stmt|;
 break|break;
-default|default:
+case|case
+name|INNER
+case|:
+comment|// For INNER, we can defer.
 name|postCondition
 operator|=
 name|condition
 expr_stmt|;
+break|break;
+default|default:
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Correlated "
+operator|+
+name|joinType
+operator|+
+literal|" join is not supported"
+argument_list|)
+throw|;
 block|}
+specifier|final
+name|ImmutableBitSet
+name|requiredColumns
+init|=
+name|RelOptUtil
+operator|.
+name|correlationColumns
+argument_list|(
+name|id
+argument_list|,
+name|right
+operator|.
+name|rel
+argument_list|)
+decl_stmt|;
 name|join
 operator|=
 name|struct

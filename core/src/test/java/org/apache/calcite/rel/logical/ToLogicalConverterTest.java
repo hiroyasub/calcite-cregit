@@ -1817,7 +1817,7 @@ name|expectedPhysical
 init|=
 literal|""
 operator|+
-literal|"EnumerableCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{}])\n"
+literal|"EnumerableCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{5}])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[scott, EMP]])\n"
 operator|+
