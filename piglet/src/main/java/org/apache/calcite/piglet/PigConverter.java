@@ -357,6 +357,22 @@ name|apache
 operator|.
 name|pig
 operator|.
+name|impl
+operator|.
+name|util
+operator|.
+name|PropertiesUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|pig
+operator|.
 name|newplan
 operator|.
 name|logical
@@ -428,6 +444,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
 import|;
 end_import
 
@@ -612,6 +638,7 @@ specifier|final
 name|PigRelBuilder
 name|builder
 decl_stmt|;
+comment|/** Private constructor. */
 specifier|private
 name|PigConverter
 parameter_list|(
@@ -620,6 +647,9 @@ name|config
 parameter_list|,
 name|ExecType
 name|execType
+parameter_list|,
+name|Properties
+name|properties
 parameter_list|)
 throws|throws
 name|Exception
@@ -627,6 +657,8 @@ block|{
 name|super
 argument_list|(
 name|execType
+argument_list|,
+name|properties
 argument_list|)
 expr_stmt|;
 name|this
@@ -641,6 +673,7 @@ name|config
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a PigConverter using the given property settings. */
 specifier|public
 specifier|static
 name|PigConverter
@@ -648,6 +681,9 @@ name|create
 parameter_list|(
 name|FrameworkConfig
 name|config
+parameter_list|,
+name|Properties
+name|properties
 parameter_list|)
 throws|throws
 name|Exception
@@ -661,6 +697,32 @@ argument_list|,
 name|ExecType
 operator|.
 name|LOCAL
+argument_list|,
+name|properties
+argument_list|)
+return|;
+block|}
+comment|/** Creates a PigConverter using default property settings. */
+specifier|public
+specifier|static
+name|PigConverter
+name|create
+parameter_list|(
+name|FrameworkConfig
+name|config
+parameter_list|)
+throws|throws
+name|Exception
+block|{
+return|return
+name|create
+argument_list|(
+name|config
+argument_list|,
+name|PropertiesUtil
+operator|.
+name|loadDefaultProperties
+argument_list|()
 argument_list|)
 return|;
 block|}
