@@ -325,6 +325,11 @@ name|joinType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a Correlate.    *    * @param cluster      Cluster this relational expression belongs to    * @param left         Left input relational expression    * @param right        Right input relational expression    * @param correlationId Variable name for the row of left input    * @param requiredColumns Set of columns that are used by correlation    * @param joinType Join type    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"method.invocation.invalid"
+argument_list|)
 specifier|protected
 name|Correlate
 parameter_list|(
@@ -405,6 +410,16 @@ argument_list|,
 literal|"requiredColumns"
 argument_list|)
 expr_stmt|;
+assert|assert
+name|isValid
+argument_list|(
+name|Litmus
+operator|.
+name|THROW
+argument_list|,
+literal|null
+argument_list|)
+assert|;
 block|}
 comment|/**    * Creates a Correlate by parsing serialized output.    *    * @param input Input representation    */
 specifier|protected

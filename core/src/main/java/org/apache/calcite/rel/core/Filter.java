@@ -25,20 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|config
-operator|.
-name|CalciteSystemProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|plan
 operator|.
 name|RelOptCluster
@@ -422,16 +408,7 @@ literal|"RexUtil.isFlat should be true for condition "
 operator|+
 name|condition
 assert|;
-comment|// Too expensive for everyday use:
 assert|assert
-operator|!
-name|CalciteSystemProperty
-operator|.
-name|DEBUG
-operator|.
-name|value
-argument_list|()
-operator|||
 name|isValid
 argument_list|(
 name|Litmus

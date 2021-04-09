@@ -239,20 +239,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Litmus
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -369,16 +355,6 @@ argument_list|,
 literal|"variablesSet"
 argument_list|)
 expr_stmt|;
-assert|assert
-name|isValid
-argument_list|(
-name|Litmus
-operator|.
-name|THROW
-argument_list|,
-literal|null
-argument_list|)
-assert|;
 block|}
 annotation|@
 name|Deprecated

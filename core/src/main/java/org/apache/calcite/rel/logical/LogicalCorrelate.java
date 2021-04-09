@@ -25,20 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|config
-operator|.
-name|CalciteSystemProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|plan
 operator|.
 name|Convention
@@ -178,20 +164,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Litmus
-import|;
-end_import
-
-begin_import
 import|import static
 name|java
 operator|.
@@ -260,24 +232,6 @@ argument_list|,
 name|joinType
 argument_list|)
 expr_stmt|;
-assert|assert
-operator|!
-name|CalciteSystemProperty
-operator|.
-name|DEBUG
-operator|.
-name|value
-argument_list|()
-operator|||
-name|isValid
-argument_list|(
-name|Litmus
-operator|.
-name|THROW
-argument_list|,
-literal|null
-argument_list|)
-assert|;
 block|}
 comment|/**    * Creates a LogicalCorrelate by parsing serialized output.    */
 specifier|public
