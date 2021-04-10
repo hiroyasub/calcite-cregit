@@ -941,14 +941,6 @@ name|PigRelOpWalker
 operator|.
 name|PlanPreVisitor
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|String
-name|RANK_PREFIX
-init|=
-literal|"rank_"
-decl_stmt|;
 comment|// The relational algebra builder customized for Pig
 specifier|protected
 specifier|final
@@ -4261,12 +4253,17 @@ name|fieldNames
 operator|.
 name|add
 argument_list|(
-name|RANK_PREFIX
-operator|+
 name|loRank
 operator|.
-name|getAlias
+name|getSchema
 argument_list|()
+operator|.
+name|getField
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|alias
 argument_list|)
 expr_stmt|;
 comment|// alias of the rank field

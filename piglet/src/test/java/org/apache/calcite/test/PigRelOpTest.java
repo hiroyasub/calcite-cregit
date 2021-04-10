@@ -3969,7 +3969,7 @@ name|optimizedPlan
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(rank_C=[$3], EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
+literal|"LogicalProject(rank_B=[$3], EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
 literal|"  LogicalWindow(window#0=[window(order by [2, 1 DESC] "
 operator|+
@@ -3993,7 +3993,7 @@ name|plan
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(rank_C=[RANK() OVER (ORDER BY $2, $1 DESC)], "
+literal|"LogicalProject(rank_B=[RANK() OVER (ORDER BY $2, $1 DESC)], "
 operator|+
 literal|"EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
@@ -4041,7 +4041,7 @@ literal|""
 operator|+
 literal|"SELECT RANK() OVER (ORDER BY DEPTNO, JOB DESC RANGE BETWEEN "
 operator|+
-literal|"UNBOUNDED PRECEDING AND CURRENT ROW) AS rank_C, EMPNO, JOB, DEPTNO\n"
+literal|"UNBOUNDED PRECEDING AND CURRENT ROW) AS rank_B, EMPNO, JOB, DEPTNO\n"
 operator|+
 literal|"FROM scott.EMP"
 decl_stmt|;
@@ -4096,7 +4096,7 @@ name|optimizedPlan2
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(rank_C=[$3], EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
+literal|"LogicalProject(rank_B=[$3], EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
 literal|"  LogicalWindow(window#0=[window(order by [2, 1 DESC] "
 operator|+
@@ -4114,7 +4114,7 @@ name|plan2
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(rank_C=[DENSE_RANK() OVER (ORDER BY $2, $1 DESC)], "
+literal|"LogicalProject(rank_B=[DENSE_RANK() OVER (ORDER BY $2, $1 DESC)], "
 operator|+
 literal|"EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
@@ -4162,7 +4162,7 @@ literal|""
 operator|+
 literal|"SELECT DENSE_RANK() OVER (ORDER BY DEPTNO, JOB DESC RANGE BETWEEN "
 operator|+
-literal|"UNBOUNDED PRECEDING AND CURRENT ROW) AS rank_C, EMPNO, JOB, DEPTNO\n"
+literal|"UNBOUNDED PRECEDING AND CURRENT ROW) AS rank_B, EMPNO, JOB, DEPTNO\n"
 operator|+
 literal|"FROM scott.EMP"
 decl_stmt|;
@@ -5456,6 +5456,76 @@ operator|+
 literal|"SELECT CAST(STRSPLIT(PIG_TUPLE(DNAME, ','))[1] AS BINARY(1)) AS NAMES\n"
 operator|+
 literal|"FROM scott.DEPT"
+decl_stmt|;
+name|pig
+argument_list|(
+name|script
+argument_list|)
+operator|.
+name|assertRel
+argument_list|(
+name|hasTree
+argument_list|(
+name|plan
+argument_list|)
+argument_list|)
+operator|.
+name|assertSql
+argument_list|(
+name|is
+argument_list|(
+name|sql
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRankAndFilter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|script
+init|=
+literal|""
+operator|+
+literal|"A = LOAD 'emp1' USING PigStorage(',')  as ("
+operator|+
+literal|"    id:int, name:chararray, age:int, city:chararray);\n"
+operator|+
+literal|"B = rank A;\n"
+operator|+
+literal|"C = FILTER B by ($0> 1);"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"LogicalFilter(condition=[>($0, 1)])\n"
+operator|+
+literal|"  LogicalProject(rank_A=[RANK() OVER ()], id=[$0],"
+operator|+
+literal|" name=[$1], age=[$2], city=[$3])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[emp1]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT w0$o0 AS rank_A, id, name, age, city\n"
+operator|+
+literal|"FROM (SELECT id, name, age, city, RANK() OVER (RANGE BETWEEN "
+operator|+
+literal|"UNBOUNDED PRECEDING AND CURRENT ROW)\n"
+operator|+
+literal|"    FROM emp1) AS t\n"
+operator|+
+literal|"WHERE w0$o0> 1"
 decl_stmt|;
 name|pig
 argument_list|(
