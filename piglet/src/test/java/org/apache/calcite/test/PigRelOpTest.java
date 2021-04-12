@@ -5421,6 +5421,64 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testFlattenStrSplit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|script
+init|=
+literal|""
+operator|+
+literal|"A = LOAD 'scott.DEPT' as (DEPTNO:int, DNAME:chararray, LOC:CHARARRAY);\n"
+operator|+
+literal|"B = FOREACH A GENERATE FLATTEN(STRSPLIT(DNAME, ',')) as NAMES;\n"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(NAMES=[CAST(ITEM(STRSPLIT(PIG_TUPLE($1, ',')), 1)):BINARY(1)])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"SELECT CAST(STRSPLIT(PIG_TUPLE(DNAME, ','))[1] AS BINARY(1)) AS NAMES\n"
+operator|+
+literal|"FROM scott.DEPT"
+decl_stmt|;
+name|pig
+argument_list|(
+name|script
+argument_list|)
+operator|.
+name|assertRel
+argument_list|(
+name|hasTree
+argument_list|(
+name|plan
+argument_list|)
+argument_list|)
+operator|.
+name|assertSql
+argument_list|(
+name|is
+argument_list|(
+name|sql
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
