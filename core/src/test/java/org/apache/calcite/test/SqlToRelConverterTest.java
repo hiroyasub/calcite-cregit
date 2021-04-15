@@ -16249,6 +16249,63 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFunctionExprInOver
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select ename, row_number() over(partition by char_length(ename)\n"
+operator|+
+literal|" order by deptno desc) as rn\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where deptno = 10"
+decl_stmt|;
+name|Tester
+name|newTester
+init|=
+name|tester
+operator|.
+name|withValidatorTransform
+argument_list|(
+name|sqlValidator
+lambda|->
+name|sqlValidator
+operator|.
+name|transform
+argument_list|(
+name|config
+lambda|->
+name|config
+operator|.
+name|withIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|newTester
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 end_comment
