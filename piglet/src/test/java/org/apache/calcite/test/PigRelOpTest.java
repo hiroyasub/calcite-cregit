@@ -5010,11 +5010,9 @@ literal|""
 operator|+
 literal|"LogicalSort(sort0=[$2], dir0=[ASC])\n"
 operator|+
-literal|"  LogicalProject(group=[ROW($0, $1, $2)], $f1=[+(CAST($3):BIGINT, 1)], "
+literal|"  LogicalProject(group=[ROW($0, $1, $2)], $f1=[+($3, 1)], salSum=[CAST($4):DECIMAL(19,"
 operator|+
-literal|"salSum=[CAST($4):DECIMAL(19, 0)], salAvg=[/(CAST($4):DECIMAL(19, 0), CAST(CAST($3)"
-operator|+
-literal|":BIGINT):DECIMAL(19, 0))])\n"
+literal|" 0)], salAvg=[/(CAST($4):DECIMAL(19, 0), CAST($3):DECIMAL(19, 0))])\n"
 operator|+
 literal|"    LogicalAggregate(group=[{0, 1, 2}], agg#0=[COUNT()], agg#1=[SUM($3)])\n"
 operator|+
@@ -5062,13 +5060,11 @@ name|sql
 init|=
 literal|""
 operator|+
-literal|"SELECT ROW(DEPTNO, MGR, HIREDATE) AS group, CAST(COUNT(*) AS "
+literal|"SELECT ROW(DEPTNO, MGR, HIREDATE) AS group, COUNT(*) + 1 AS $f1, CAST(SUM(SAL) AS "
 operator|+
-literal|"BIGINT) + 1 AS $f1, CAST(SUM(SAL) AS DECIMAL(19, 0)) AS salSum, "
+literal|"DECIMAL(19, 0)) AS salSum, CAST(SUM(SAL) AS DECIMAL(19, 0)) / CAST(COUNT(*) AS DECIMAL"
 operator|+
-literal|"CAST(SUM(SAL) AS DECIMAL(19, 0)) / CAST(CAST(COUNT(*) AS BIGINT) "
-operator|+
-literal|"AS DECIMAL(19, 0)) AS salAvg\n"
+literal|"(19, 0)) AS salAvg\n"
 operator|+
 literal|"FROM scott.EMP\n"
 operator|+
@@ -5139,15 +5135,13 @@ name|sql2
 init|=
 literal|""
 operator|+
-literal|"SELECT ROW(DEPTNO, MGR, HIREDATE) AS group, CAST(COUNT(*) AS BIGINT) + 1"
+literal|"SELECT ROW(DEPTNO, MGR, HIREDATE) AS group, COUNT(*) + 1 AS $f1, CAST(SUM(SAL) AS "
 operator|+
-literal|" AS $f1, CAST(SUM(SAL) AS DECIMAL(19, 0)) AS salSum, CAST(SUM(SAL) AS "
+literal|"DECIMAL(19, 0)) AS salSum, CAST(SUM(SAL) AS DECIMAL(19, 0)) / CAST(COUNT(*) AS DECIMAL"
 operator|+
-literal|"DECIMAL(19, 0)) / CAST(CAST(COUNT(*) AS BIGINT) AS DECIMAL(19, 0)) AS "
+literal|"(19, 0)) AS salAvg, COLLECT(ROW(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)) "
 operator|+
-literal|"salAvg, COLLECT(ROW(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)"
-operator|+
-literal|") AS A\n"
+literal|"AS A\n"
 operator|+
 literal|"FROM scott.EMP\n"
 operator|+
