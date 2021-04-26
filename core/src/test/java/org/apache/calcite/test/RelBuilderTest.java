@@ -21773,7 +21773,7 @@ operator|.
 name|class
 argument_list|)
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|node
 argument_list|)

@@ -39,6 +39,16 @@ name|PreparedStatement
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
 begin_comment
 comment|/**  * Runs a relational expression.  *  *<p>Experimental.  *  * @see RelRunners  */
 end_comment
@@ -48,7 +58,10 @@ specifier|public
 interface|interface
 name|RelRunner
 block|{
-comment|/** Runs a relational expression. */
+comment|/** Prepares a statement based on a relational expression. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.28
 name|PreparedStatement
 name|prepare
 parameter_list|(
@@ -56,6 +69,24 @@ name|RelNode
 name|rel
 parameter_list|)
 function_decl|;
+comment|/** Prepares a statement based on a relational expression.    *    * @param rel Relational expression    * @throws SQLException on error */
+specifier|default
+name|PreparedStatement
+name|prepareStatement
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+throws|throws
+name|SQLException
+block|{
+return|return
+name|prepare
+argument_list|(
+name|rel
+argument_list|)
+return|;
+block|}
 block|}
 end_interface
 

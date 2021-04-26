@@ -1314,7 +1314,7 @@ name|preparedStatement
 init|=
 name|ru
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|root
 argument_list|)

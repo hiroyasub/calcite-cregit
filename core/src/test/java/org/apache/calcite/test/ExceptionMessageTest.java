@@ -612,6 +612,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
 name|RelBuilder
 name|relBuilder
 init|=
@@ -668,12 +669,13 @@ argument_list|(
 name|relFn
 argument_list|)
 decl_stmt|;
+specifier|final
 name|PreparedStatement
 name|preparedStatement
 init|=
 name|relRunner
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|relNode
 argument_list|)
@@ -942,8 +944,6 @@ name|Test
 name|void
 name|testRelNodeQueryException
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 try|try
 block|{
@@ -1002,14 +1002,14 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|RuntimeException
+name|SQLException
 name|e
 parameter_list|)
 block|{
 name|String
 name|message
 init|=
-literal|"java.sql.SQLException: Error while preparing plan ["
+literal|"Error while preparing plan ["
 operator|+
 literal|"LogicalProject($f0=[ABS($1)])\n"
 operator|+

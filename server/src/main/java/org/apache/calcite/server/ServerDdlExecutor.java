@@ -1709,7 +1709,7 @@ operator|.
 name|getRelRunner
 argument_list|()
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|r
 operator|.
@@ -1750,8 +1750,9 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-operator|new
-name|RuntimeException
+name|Util
+operator|.
+name|throwAsRuntime
 argument_list|(
 name|e
 argument_list|)

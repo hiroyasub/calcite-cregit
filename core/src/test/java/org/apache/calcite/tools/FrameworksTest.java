@@ -2721,7 +2721,7 @@ condition|)
 block|{
 name|runner
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|values
 argument_list|)
@@ -2748,7 +2748,7 @@ argument_list|()
 decl_stmt|;
 name|runner
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|scan
 argument_list|)
@@ -2776,7 +2776,7 @@ argument_list|)
 decl_stmt|;
 name|runner2
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|values
 argument_list|)

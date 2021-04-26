@@ -453,6 +453,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|DelegatingTypeSystem
@@ -819,6 +833,16 @@ name|java
 operator|.
 name|sql
 operator|.
+name|PreparedStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
 name|ResultSet
 import|;
 end_import
@@ -956,7 +980,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of JDBC connection  * in the Calcite engine.  *  *<p>Abstract to allow newer versions of JDBC to add methods.</p>  */
+comment|/**  * Implementation of JDBC connection  * in the Calcite engine.  *  *<p>Abstract to allow newer versions of JDBC to add methods.  */
 end_comment
 
 begin_class
@@ -1003,7 +1027,7 @@ init|=
 name|createTrojan
 argument_list|()
 decl_stmt|;
-comment|/**    * Creates a CalciteConnectionImpl.    *    *<p>Not public; method is called only from the driver.</p>    *    * @param driver Driver    * @param factory Factory for JDBC objects    * @param url Server URL    * @param info Other connection properties    * @param rootSchema Root schema, or null    * @param typeFactory Type factory, or null    */
+comment|/**    * Creates a CalciteConnectionImpl.    *    *<p>Not public; method is called only from the driver.    *    * @param driver Driver    * @param factory Factory for JDBC objects    * @param url Server URL    * @param info Other connection properties    * @param rootSchema Root schema, or null    * @param typeFactory Type factory, or null    */
 specifier|protected
 name|CalciteConnectionImpl
 parameter_list|(
@@ -1384,13 +1408,21 @@ name|iface
 operator|.
 name|cast
 argument_list|(
-operator|(
+operator|new
 name|RelRunner
-operator|)
-name|rel
-lambda|->
+argument_list|()
 block|{
-try|try
+annotation|@
+name|Override
+specifier|public
+name|PreparedStatement
+name|prepareStatement
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+throws|throws
+name|SQLException
 block|{
 return|return
 name|prepareStatement_
@@ -1417,6 +1449,30 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
+name|Override
+specifier|public
+name|PreparedStatement
+name|prepare
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+block|{
+try|try
+block|{
+return|return
+name|prepareStatement
+argument_list|(
+name|rel
+argument_list|)
+return|;
+block|}
 catch|catch
 parameter_list|(
 name|SQLException
@@ -1424,12 +1480,14 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-operator|new
-name|RuntimeException
+name|Util
+operator|.
+name|throwAsRuntime
 argument_list|(
 name|e
 argument_list|)
 throw|;
+block|}
 block|}
 block|}
 argument_list|)

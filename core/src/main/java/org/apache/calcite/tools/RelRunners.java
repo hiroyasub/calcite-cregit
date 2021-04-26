@@ -119,6 +119,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -291,7 +305,7 @@ decl_stmt|;
 return|return
 name|runner
 operator|.
-name|prepare
+name|prepareStatement
 argument_list|(
 name|rel
 argument_list|)
@@ -304,8 +318,9 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-operator|new
-name|RuntimeException
+name|Util
+operator|.
+name|throwAsRuntime
 argument_list|(
 name|e
 argument_list|)
