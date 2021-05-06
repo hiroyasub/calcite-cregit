@@ -2214,17 +2214,6 @@ name|indent
 argument_list|)
 expr_stmt|;
 block|}
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"write; modCount="
-operator|+
-name|modCount
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
