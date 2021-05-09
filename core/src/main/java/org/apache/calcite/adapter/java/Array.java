@@ -25,6 +25,18 @@ name|lang
 operator|.
 name|annotation
 operator|.
+name|ElementType
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|annotation
+operator|.
 name|Retention
 import|;
 end_import
@@ -53,20 +65,6 @@ name|Target
 import|;
 end_import
 
-begin_import
-import|import static
-name|java
-operator|.
-name|lang
-operator|.
-name|annotation
-operator|.
-name|ElementType
-operator|.
-name|FIELD
-import|;
-end_import
-
 begin_comment
 comment|/**  * Annotation that indicates that a field is an array type.  */
 end_comment
@@ -75,9 +73,9 @@ begin_annotation_defn
 annotation|@
 name|Target
 argument_list|(
-block|{
+name|ElementType
+operator|.
 name|FIELD
-block|}
 argument_list|)
 annotation|@
 name|Retention
@@ -92,6 +90,9 @@ name|Array
 block|{
 comment|/** Component type. */
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|component
 parameter_list|()
 function_decl|;
