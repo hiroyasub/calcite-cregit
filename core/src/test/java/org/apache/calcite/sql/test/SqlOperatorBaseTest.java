@@ -25969,6 +25969,200 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests {@code ARRAY_CONCAT} function from BigQuery. */
+annotation|@
+name|Test
+name|void
+name|testArrayConcat
+parameter_list|()
+block|{
+name|SqlTester
+name|tester
+init|=
+name|libraryTester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|ARRAY_CONCAT
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^array_concat()^"
+argument_list|,
+name|INVALID_ARGUMENTS_NUMBER
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_concat(array[1, 2], array[2, 3])"
+argument_list|,
+literal|"[1, 2, 2, 3]"
+argument_list|,
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_concat(array[1, 2], array[2, null])"
+argument_list|,
+literal|"[1, 2, 2, null]"
+argument_list|,
+literal|"INTEGER ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_concat(array['hello', 'world'], array['!'], array[cast(null as char)])"
+argument_list|,
+literal|"[hello, world, !, null]"
+argument_list|,
+literal|"CHAR(5) ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"array_concat(cast(null as integer array), array[1])"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests {@code ARRAY_REVERSE} function from BigQuery. */
+annotation|@
+name|Test
+name|void
+name|testArrayReverseFunc
+parameter_list|()
+block|{
+name|SqlTester
+name|tester
+init|=
+name|libraryTester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|ARRAY_REVERSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_reverse(array[1])"
+argument_list|,
+literal|"[1]"
+argument_list|,
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_reverse(array[1, 2])"
+argument_list|,
+literal|"[2, 1]"
+argument_list|,
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_reverse(array[null, 1])"
+argument_list|,
+literal|"[1, null]"
+argument_list|,
+literal|"INTEGER ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests {@code ARRAY_LENGTH} function from BigQuery. */
+annotation|@
+name|Test
+name|void
+name|testArrayLengthFunc
+parameter_list|()
+block|{
+name|SqlTester
+name|tester
+init|=
+name|libraryTester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|ARRAY_LENGTH
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_length(array[1])"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array_length(array[1, 2, null])"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"array_length(null)"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests {@code UNIX_SECONDS} and other datetime functions from BigQuery. */
 annotation|@
 name|Test

@@ -599,6 +599,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Comparator
 import|;
 end_import
@@ -14762,6 +14772,27 @@ argument_list|)
 expr_stmt|;
 return|return
 name|resultCollection
+return|;
+block|}
+comment|/** Support the ARRAY_REVERSE function. */
+specifier|public
+specifier|static
+name|List
+name|reverse
+parameter_list|(
+name|List
+name|list
+parameter_list|)
+block|{
+name|Collections
+operator|.
+name|reverse
+argument_list|(
+name|list
+argument_list|)
+expr_stmt|;
+return|return
+name|list
 return|;
 block|}
 comment|/**    * Function that, given a certain List containing single-item structs (i.e. arrays / lists with    * a single item), builds an Enumerable that returns those single items inside the structs.    */

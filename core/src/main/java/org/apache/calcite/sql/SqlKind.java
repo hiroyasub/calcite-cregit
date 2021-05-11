@@ -561,6 +561,12 @@ block|,
 comment|/** {@code EXTRACT} function. */
 name|EXTRACT
 block|,
+comment|/** {@code ARRAY_CONCAT} function (BigQuery semantics). */
+name|ARRAY_CONCAT
+block|,
+comment|/** {@code ARRAY_REVERSE} function (BigQuery semantics). */
+name|ARRAY_REVERSE
+block|,
 comment|/** {@code REVERSE} function (SQL Server, MySQL). */
 name|REVERSE
 block|,

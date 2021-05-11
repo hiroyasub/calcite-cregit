@@ -1665,6 +1665,44 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
+comment|/**    * Operand type-checking strategy where any positive number of operands must all be    * in the same type family.    */
+end_comment
+
+begin_decl_stmt
+specifier|public
+specifier|static
+specifier|final
+name|SqlOperandTypeChecker
+name|AT_LEAST_ONE_SAME_VARIADIC
+init|=
+operator|new
+name|SameOperandTypeChecker
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+block|{
+annotation|@
+name|Override
+specifier|public
+name|SqlOperandCountRange
+name|getOperandCountRange
+parameter_list|()
+block|{
+return|return
+name|SqlOperandCountRanges
+operator|.
+name|from
+argument_list|(
+literal|1
+argument_list|)
+return|;
+block|}
+block|}
+decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where operand types must allow ordered    * comparisons.    */
 end_comment
 
