@@ -12615,6 +12615,71 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4610">[CALCITE-4610]    * Join on range causes AssertionError in RelToSqlConverter</a>. */
+annotation|@
+name|Test
+name|void
+name|testJoinOnRange
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT d.deptno, e.deptno\n"
+operator|+
+literal|"FROM dept d\n"
+operator|+
+literal|"LEFT JOIN emp e\n"
+operator|+
+literal|" ON d.deptno = e.deptno\n"
+operator|+
+literal|" AND d.deptno< 15\n"
+operator|+
+literal|" AND d.deptno> 10\n"
+operator|+
+literal|"WHERE e.job LIKE 'PRESIDENT'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"DEPT\".\"DEPTNO\","
+operator|+
+literal|" \"EMP\".\"DEPTNO\" AS \"DEPTNO0\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\"\n"
+operator|+
+literal|"LEFT JOIN \"SCOTT\".\"EMP\" "
+operator|+
+literal|"ON \"DEPT\".\"DEPTNO\" = \"EMP\".\"DEPTNO\" "
+operator|+
+literal|"AND (\"DEPT\".\"DEPTNO\"> 10"
+operator|+
+literal|" AND \"DEPT\".\"DEPTNO\"< 15)\n"
+operator|+
+literal|"WHERE \"EMP\".\"JOB\" LIKE 'PRESIDENT'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1586">[CALCITE-1586]    * JDBC adapter generates wrong SQL if UNION has more than two inputs</a>. */
 annotation|@
 name|Test
