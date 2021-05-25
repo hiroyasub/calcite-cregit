@@ -8984,11 +8984,11 @@ specifier|final
 name|SqlOperator
 name|op
 init|=
-name|op
+name|requireNonNull
 argument_list|(
 name|call
 operator|.
-name|getKind
+name|getOperator
 argument_list|()
 operator|.
 name|reverse
@@ -9014,11 +9014,10 @@ argument_list|)
 argument_list|)
 return|;
 default|default:
-break|break;
-block|}
 return|return
 literal|null
 return|;
+block|}
 block|}
 annotation|@
 name|Deprecated

@@ -8298,7 +8298,10 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Returns the binary operator that corresponds to this operator but in the opposite    * direction. Or returns this, if its kind is not reversible.    *    *<p>For example, {@code reverse(GREATER_THAN)} returns {@link #LESS_THAN}.    */
+comment|/** Returns the binary operator that corresponds to this operator but in the opposite    * direction. Or returns this, if its kind is not reversible.    *    *<p>For example, {@code reverse(GREATER_THAN)} returns {@link #LESS_THAN}.    *    * @deprecated Use {@link SqlOperator#reverse()}, but beware that it has    * slightly different semantics    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|SqlOperator
