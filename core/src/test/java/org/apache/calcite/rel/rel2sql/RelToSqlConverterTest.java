@@ -12557,18 +12557,20 @@ literal|"(\"t1\".\"product_id\" is not null or "
 operator|+
 literal|"\"t3\".\"product_id\" is not null)"
 decl_stmt|;
-comment|// Some of the "IS NULL" and "IS NOT NULL" are reduced to TRUE or FALSE,
-comment|// but not all.
 name|String
 name|expected
 init|=
-literal|"SELECT *\nFROM \"foodmart\".\"sales_fact_1997\"\n"
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
 operator|+
 literal|"INNER JOIN \"foodmart\".\"customer\" "
 operator|+
 literal|"ON \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\""
 operator|+
-literal|" OR FALSE AND FALSE"
+literal|" OR \"sales_fact_1997\".\"customer_id\" IS NULL"
+operator|+
+literal|" AND \"customer\".\"customer_id\" IS NULL"
 operator|+
 literal|" OR \"customer\".\"occupation\" IS NULL\n"
 operator|+
@@ -12576,9 +12578,9 @@ literal|"INNER JOIN \"foodmart\".\"product\" "
 operator|+
 literal|"ON \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\""
 operator|+
-literal|" OR TRUE"
+literal|" OR \"sales_fact_1997\".\"product_id\" IS NOT NULL"
 operator|+
-literal|" OR TRUE"
+literal|" OR \"product\".\"product_id\" IS NOT NULL"
 decl_stmt|;
 comment|// The hook prevents RelBuilder from removing "FALSE AND FALSE" and such
 try|try
@@ -12659,6 +12661,119 @@ operator|+
 literal|" AND \"DEPT\".\"DEPTNO\"< 15)\n"
 operator|+
 literal|"WHERE \"EMP\".\"JOB\" LIKE 'PRESIDENT'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4620">[CALCITE-4620]    * Join on CASE causes AssertionError in RelToSqlConverter</a>. */
+annotation|@
+name|Test
+name|void
+name|testJoinOnCase
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT d.deptno, e.deptno\n"
+operator|+
+literal|"FROM dept AS d LEFT JOIN emp AS e\n"
+operator|+
+literal|" ON CASE WHEN e.job = 'PRESIDENT' THEN true ELSE d.deptno = 10 END\n"
+operator|+
+literal|"WHERE e.job LIKE 'PRESIDENT'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"DEPT\".\"DEPTNO\","
+operator|+
+literal|" \"EMP\".\"DEPTNO\" AS \"DEPTNO0\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\"\n"
+operator|+
+literal|"LEFT JOIN \"SCOTT\".\"EMP\""
+operator|+
+literal|" ON CASE WHEN \"EMP\".\"JOB\" = 'PRESIDENT' THEN TRUE"
+operator|+
+literal|" ELSE CAST(\"DEPT\".\"DEPTNO\" AS INTEGER) = 10 END\n"
+operator|+
+literal|"WHERE \"EMP\".\"JOB\" LIKE 'PRESIDENT'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testWhereCase
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT d.deptno, e.deptno\n"
+operator|+
+literal|"FROM dept AS d LEFT JOIN emp AS e ON d.deptno = e.deptno\n"
+operator|+
+literal|"WHERE CASE WHEN e.job = 'PRESIDENT' THEN true\n"
+operator|+
+literal|"      ELSE d.deptno = 10 END\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"DEPT\".\"DEPTNO\","
+operator|+
+literal|" \"EMP\".\"DEPTNO\" AS \"DEPTNO0\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\"\n"
+operator|+
+literal|"LEFT JOIN \"SCOTT\".\"EMP\""
+operator|+
+literal|" ON \"DEPT\".\"DEPTNO\" = \"EMP\".\"DEPTNO\"\n"
+operator|+
+literal|"WHERE CASE WHEN \"EMP\".\"JOB\" = 'PRESIDENT' THEN TRUE"
+operator|+
+literal|" ELSE CAST(\"DEPT\".\"DEPTNO\" AS INTEGER) = 10 END"
 decl_stmt|;
 name|sql
 argument_list|(
