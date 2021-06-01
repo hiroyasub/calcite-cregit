@@ -20474,6 +20474,77 @@ name|expectedPostgresql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** As {@link #testValuesEmpty()} but with extra {@code SUBSTRING}. Before    *<a href="https://issues.apache.org/jira/browse/CALCITE-4524">[CALCITE-4524]    * Make some fields non-nullable</a> was fixed, this case would fail with    * {@code java.lang.IndexOutOfBoundsException}. */
+annotation|@
+name|Test
+name|void
+name|testValuesEmpty2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (values (1, 'a'), (2, 'bb')) as t(x, y)\n"
+operator|+
+literal|"limit 0"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT SUBSTRING(y, 1, 1) FROM ("
+operator|+
+name|sql0
+operator|+
+literal|") t"
+decl_stmt|;
+specifier|final
+name|RuleSet
+name|rules
+init|=
+name|RuleSets
+operator|.
+name|ofList
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|SORT_FETCH_ZERO_INSTANCE
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING(`Y` FROM 1 FOR 1)\n"
+operator|+
+literal|"FROM (SELECT NULL AS `X`, NULL AS `Y`) AS `t`\n"
+operator|+
+literal|"WHERE 1 = 0"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+literal|null
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3840">[CALCITE-3840]    * Re-aliasing of VALUES that has column aliases produces wrong SQL in the    * JDBC adapter</a>. */
 annotation|@
 name|Test
