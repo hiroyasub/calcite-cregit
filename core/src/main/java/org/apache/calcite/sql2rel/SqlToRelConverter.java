@@ -29556,6 +29556,15 @@ expr_stmt|;
 block|}
 else|else
 block|{
+try|try
+block|{
+comment|// switch out of agg mode
+name|bb
+operator|.
+name|agg
+operator|=
+literal|null
+expr_stmt|;
 name|collation
 operator|=
 name|RelCollations
@@ -29604,6 +29613,17 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+finally|finally
+block|{
+comment|// switch back into agg mode
+name|bb
+operator|.
+name|agg
+operator|=
+name|this
+expr_stmt|;
+block|}
 block|}
 specifier|final
 name|AggregateCall
