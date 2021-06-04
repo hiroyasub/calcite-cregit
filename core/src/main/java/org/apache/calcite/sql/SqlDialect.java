@@ -2722,6 +2722,25 @@ name|DEFAULT
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Converts table scan hints. The default implementation suppresses all hints. */
+specifier|public
+name|void
+name|unparseTableScanHints
+parameter_list|(
+name|SqlWriter
+name|writer
+parameter_list|,
+name|SqlNodeList
+name|hints
+parameter_list|,
+name|int
+name|leftPrec
+parameter_list|,
+name|int
+name|rightPrec
+parameter_list|)
+block|{
+block|}
 comment|/**    * Returns whether the string contains any characters outside the    * comfortable 7-bit ASCII range (32 through 127, plus linefeed (10) and    * carriage return (13)).    *    *<p>Such characters can be used unquoted in SQL character literals.    *    * @param s String    * @return Whether string contains any non-7-bit-ASCII characters    */
 specifier|protected
 specifier|static

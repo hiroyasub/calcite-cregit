@@ -1274,6 +1274,11 @@ operator|.
 name|getCluster
 argument_list|()
 argument_list|,
+name|context
+operator|.
+name|getTableHints
+argument_list|()
+argument_list|,
 name|relOptTable
 argument_list|,
 name|this

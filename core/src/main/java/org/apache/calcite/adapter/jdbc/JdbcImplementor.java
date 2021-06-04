@@ -91,20 +91,6 @@ name|Util
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
-import|;
-end_import
-
 begin_comment
 comment|/**  * State for generating a SQL statement.  */
 end_comment
@@ -138,46 +124,6 @@ argument_list|(
 name|typeFactory
 argument_list|)
 expr_stmt|;
-block|}
-comment|// CHECKSTYLE: IGNORE 1
-comment|/** @see #dispatch */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"MissingSummary"
-argument_list|)
-specifier|public
-name|Result
-name|visit
-parameter_list|(
-name|JdbcTableScan
-name|scan
-parameter_list|)
-block|{
-return|return
-name|result
-argument_list|(
-name|scan
-operator|.
-name|jdbcTable
-operator|.
-name|tableName
-argument_list|()
-argument_list|,
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|Clause
-operator|.
-name|FROM
-argument_list|)
-argument_list|,
-name|scan
-argument_list|,
-literal|null
-argument_list|)
-return|;
 block|}
 specifier|public
 name|Result
