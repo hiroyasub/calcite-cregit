@@ -409,22 +409,6 @@ name|sql
 operator|.
 name|SqlDialect
 operator|.
-name|Context
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 import|;
 end_import
@@ -1391,6 +1375,8 @@ name|JethroDataSqlDialect
 name|jethroDataSqlDialect
 parameter_list|()
 block|{
+name|SqlDialect
+operator|.
 name|Context
 name|dummyContext
 init|=
@@ -1400,8 +1386,6 @@ name|EMPTY_CONTEXT
 operator|.
 name|withDatabaseProduct
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|JETHRO
@@ -1500,8 +1484,6 @@ argument_list|()
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|BIG_QUERY
@@ -1509,8 +1491,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|BIG_QUERY
@@ -1518,8 +1498,6 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|CALCITE
@@ -1527,8 +1505,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|CALCITE
@@ -1536,8 +1512,6 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|DB2
@@ -1545,8 +1519,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|DB2
@@ -1554,8 +1526,20 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
+name|DatabaseProduct
 operator|.
+name|EXASOL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|EXASOL
+argument_list|)
+operator|.
+name|put
+argument_list|(
 name|DatabaseProduct
 operator|.
 name|HIVE
@@ -1563,8 +1547,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|HIVE
@@ -1575,8 +1557,6 @@ argument_list|(
 name|jethroDataSqlDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|JETHRO
@@ -1584,8 +1564,6 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|MSSQL
@@ -1593,8 +1571,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|MSSQL
@@ -1602,8 +1578,6 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|MYSQL
@@ -1611,8 +1585,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|MYSQL
@@ -1627,8 +1599,6 @@ operator|.
 name|HIGH
 argument_list|)
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|MYSQL
@@ -1636,8 +1606,6 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|ORACLE
@@ -1645,8 +1613,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|ORACLE
@@ -1654,8 +1620,6 @@ argument_list|)
 operator|.
 name|put
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|POSTGRESQL
@@ -1663,8 +1627,6 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|POSTGRESQL
@@ -1724,8 +1686,6 @@ name|toSql
 argument_list|(
 name|root
 argument_list|,
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|CALCITE
@@ -3990,8 +3950,6 @@ specifier|final
 name|SqlDialect
 name|dialect
 init|=
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|CALCITE
@@ -5168,6 +5126,12 @@ name|expectedSpark
 init|=
 name|expectedHive
 decl_stmt|;
+specifier|final
+name|String
+name|expectedExasol
+init|=
+name|expectedBigQuery
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -5227,6 +5191,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedSpark
+argument_list|)
+operator|.
+name|withExasol
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedExasol
 argument_list|)
 expr_stmt|;
 block|}
@@ -7234,6 +7206,81 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testExasolCharacterSet
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10))\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT hire_date, CAST(hire_date AS VARCHAR(10))\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withExasol
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testExasolCastToTimestamp
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" - "
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> cast(\"hire_date\" as TIMESTAMP(0))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee\n"
+operator|+
+literal|"WHERE (hire_date - INTERVAL '19800' SECOND(5))"
+operator|+
+literal|"> CAST(hire_date AS TIMESTAMP)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withExasol
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tests that IN can be un-parsed.    *    *<p>This cannot be tested using "sql", because because Calcite's SQL parser    * replaces INs with ORs or sub-queries.    */
 annotation|@
 name|Test
@@ -7841,6 +7888,20 @@ argument_list|,
 literal|" "
 argument_list|)
 decl_stmt|;
+specifier|final
+name|String
+name|expectedExasol
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT 1 AS one, 2 AS tWo, 3 AS THREE,"
+operator|+
+literal|" 4 AS \"fo$ur\", 5 AS \"ignore\"\n"
+operator|+
+literal|"FROM foodmart.days) AS t\n"
+operator|+
+literal|"WHERE one< tWo AND THREE< \"fo$ur\""
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -7876,6 +7937,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedPostgresql
+argument_list|)
+operator|.
+name|withExasol
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedExasol
 argument_list|)
 expr_stmt|;
 block|}
@@ -20588,8 +20657,6 @@ specifier|final
 name|SqlDialect
 name|oracleDialect
 init|=
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|ORACLE
@@ -20621,8 +20688,6 @@ specifier|final
 name|SqlDialect
 name|postgresqlDialect
 init|=
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|POSTGRESQL
@@ -22286,8 +22351,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|CALCITE
@@ -22304,8 +22367,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|CLICKHOUSE
@@ -22322,11 +22383,25 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withExasol
+parameter_list|()
+block|{
+return|return
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|EXASOL
 operator|.
 name|getDialect
 argument_list|()
@@ -22340,8 +22415,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|HIVE
@@ -22358,8 +22431,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|HSQLDB
@@ -22449,8 +22520,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|MYSQL
@@ -22525,8 +22594,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|ORACLE
@@ -22543,8 +22610,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|POSTGRESQL
@@ -22625,8 +22690,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|VERTICA
@@ -22643,8 +22706,6 @@ block|{
 return|return
 name|dialect
 argument_list|(
-name|SqlDialect
-operator|.
 name|DatabaseProduct
 operator|.
 name|BIG_QUERY
