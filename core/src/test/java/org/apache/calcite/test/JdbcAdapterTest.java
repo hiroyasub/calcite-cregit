@@ -3879,6 +3879,79 @@ literal|"SELECT \"EMPNO\", \"ENAME\"\nFROM \"SCOTT\".\"EMP\"\nWHERE \"EMPNO\" = 
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4619">[CALCITE-4619]    * "Full join" generates an incorrect execution plan under mysql</a>. */
+annotation|@
+name|Test
+name|void
+name|testFullJoinNonSupportedDialect
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|H2
+operator|||
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|MYSQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, e.deptno, dname\n"
+operator|+
+literal|"from scott.emp e full join scott.dept d\n"
+operator|+
+literal|"on e.deptno = d.deptno"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}],"
+operator|+
+literal|" DNAME=[$t4])\n"
+operator|+
+literal|"  EnumerableHashJoin(condition=[=($2, $3)], joinType=[full])\n"
+operator|+
+literal|"    JdbcToEnumerableConverter\n"
+operator|+
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], DEPTNO=[$7])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"    JdbcToEnumerableConverter\n"
+operator|+
+literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Acquires a lock, and releases it when closed. */
 specifier|static
 class|class

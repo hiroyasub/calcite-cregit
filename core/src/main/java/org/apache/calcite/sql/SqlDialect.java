@@ -117,6 +117,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -4019,6 +4035,19 @@ parameter_list|()
 block|{
 return|return
 literal|false
+return|;
+block|}
+comment|/**    * Returns whether this dialect support the specified type of join.    */
+specifier|public
+name|boolean
+name|supportsJoinType
+parameter_list|(
+name|JoinRelType
+name|joinType
+parameter_list|)
+block|{
+return|return
+literal|true
 return|;
 block|}
 comment|/** Returns how NULL values are sorted if an ORDER BY item does not contain    * NULLS ASCENDING or NULLS DESCENDING. */
