@@ -747,6 +747,12 @@ block|,
 comment|/** The {@code COLLECT} aggregate function. */
 name|COLLECT
 block|,
+comment|/** The {@code PERCENTILE_CONT} aggregate function. */
+name|PERCENTILE_CONT
+block|,
+comment|/** The {@code PERCENTILE_DISC} aggregate function. */
+name|PERCENTILE_DISC
+block|,
 comment|/** The {@code FUSION} aggregate function. */
 name|FUSION
 block|,
@@ -1047,6 +1053,10 @@ argument_list|,
 name|GROUP_CONCAT
 argument_list|,
 name|COUNTIF
+argument_list|,
+name|PERCENTILE_CONT
+argument_list|,
+name|PERCENTILE_DISC
 argument_list|,
 name|INTERSECTION
 argument_list|,

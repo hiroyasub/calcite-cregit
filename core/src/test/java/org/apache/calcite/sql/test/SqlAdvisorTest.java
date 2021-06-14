@@ -780,6 +780,10 @@ literal|"KEYWORD(OCTET_LENGTH)"
 argument_list|,
 literal|"KEYWORD(OVERLAY)"
 argument_list|,
+literal|"KEYWORD(PERCENTILE_CONT)"
+argument_list|,
+literal|"KEYWORD(PERCENTILE_DISC)"
+argument_list|,
 literal|"KEYWORD(PERCENT_RANK)"
 argument_list|,
 literal|"KEYWORD(PERIOD)"

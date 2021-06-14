@@ -14508,6 +14508,126 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4644">[CALCITE-4644]    * Add PERCENTILE_CONT and PERCENTILE_DISC aggregate functions</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPercentileCont
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_cont(0.25) within group (order by deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPercentileContWithGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno,\n"
+operator|+
+literal|" percentile_cont(0.25) within group (order by empno desc)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPercentileDisc
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_disc(0.25) within group (order by deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPercentileDiscWithGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno,\n"
+operator|+
+literal|" percentile_disc(0.25) within group (order by empno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test

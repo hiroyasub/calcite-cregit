@@ -2214,6 +2214,39 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Invalid type ''{0}'' in ORDER BY clause of ''{1}'' function. Only NUMERIC types are supported"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|unsupportedTypeInOrderBy
+parameter_list|(
+name|String
+name|a0
+parameter_list|,
+name|String
+name|a1
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"''{0}'' requires precisely one ORDER BY key"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|orderByRequiresOneKey
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"DISTINCT/ALL not allowed with {0} function"
 argument_list|)
 name|ExInst
@@ -2529,6 +2562,27 @@ name|argumentMustBePositiveInteger
 parameter_list|(
 name|String
 name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Argument to function ''{0}'' must be a numeric literal between {1,number,#} and {2,number,#}"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|argumentMustBeNumericLiteralInRange
+parameter_list|(
+name|String
+name|a0
+parameter_list|,
+name|int
+name|min
+parameter_list|,
+name|int
+name|max
 parameter_list|)
 function_decl|;
 annotation|@

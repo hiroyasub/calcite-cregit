@@ -39112,6 +39112,160 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testPercentileContFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PERCENTILE_CONT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"percentile_cont(0.25) within group (order by 1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"percentile_cont(0.25) within group (^order by 'a'^)"
+argument_list|,
+literal|"Invalid type 'CHAR' in ORDER BY clause of 'PERCENTILE_CONT' function. "
+operator|+
+literal|"Only NUMERIC types are supported"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"percentile_cont(0.25) within group (^order by 1, 2^)"
+argument_list|,
+literal|"'PERCENTILE_CONT' requires precisely one ORDER BY key"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|" ^percentile_cont(2 + 3)^ within group (order by 1)"
+argument_list|,
+literal|"Argument to function 'PERCENTILE_CONT' must be a literal"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|" ^percentile_cont(2)^ within group (order by 1)"
+argument_list|,
+literal|"Argument to function 'PERCENTILE_CONT' must be a numeric literal "
+operator|+
+literal|"between 0 and 1"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPercentileDiscFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PERCENTILE_DISC
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"percentile_disc(0.25) within group (order by 1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"percentile_disc(0.25) within group (^order by 'a'^)"
+argument_list|,
+literal|"Invalid type 'CHAR' in ORDER BY clause of 'PERCENTILE_DISC' function. "
+operator|+
+literal|"Only NUMERIC types are supported"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"percentile_disc(0.25) within group (^order by 1, 2^)"
+argument_list|,
+literal|"'PERCENTILE_DISC' requires precisely one ORDER BY key"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|" ^percentile_disc(2 + 3)^ within group (order by 1)"
+argument_list|,
+literal|"Argument to function 'PERCENTILE_DISC' must be a literal"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|" ^percentile_disc(2)^ within group (order by 1)"
+argument_list|,
+literal|"Argument to function 'PERCENTILE_DISC' must be a numeric literal "
+operator|+
+literal|"between 0 and 1"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testCountFunc
 parameter_list|()
 block|{

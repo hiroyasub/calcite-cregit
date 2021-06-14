@@ -3162,6 +3162,25 @@ name|String
 name|expression
 parameter_list|)
 block|{
+if|if
+condition|(
+name|expression
+operator|.
+name|matches
+argument_list|(
+literal|"(?i).*percentile_(cont|disc).*"
+argument_list|)
+condition|)
+block|{
+comment|// PERCENTILE_CONT requires its argument to be a literal,
+comment|// so converting its argument to a column will cause false errors.
+return|return
+name|buildQuery
+argument_list|(
+name|expression
+argument_list|)
+return|;
+block|}
 comment|// "values (1< 5)"
 comment|// becomes
 comment|// "select p0< p1 from (values (1, 5)) as t(p0, p1)"

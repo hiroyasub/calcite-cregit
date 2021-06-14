@@ -29403,6 +29403,212 @@ literal|"WITHIN GROUP must not contain aggregate expression"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4644">[CALCITE-4644]    * Add PERCENTILE_CONT and PERCENTILE_DISC aggregate functions</a>. */
+annotation|@
+name|Test
+name|void
+name|testPercentile
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_cont(0.25) within group (order by sal) as c,\n"
+operator|+
+literal|" percentile_disc(0.5) within group (order by sal desc) as d\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(DOUBLE NOT NULL C, DOUBLE NOT NULL D) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@code PERCENTILE_CONT} only allows numeric fields. */
+annotation|@
+name|Test
+name|void
+name|testPercentileContMustOrderByNumeric
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_cont(0.25) within group (^order by ename^)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid type 'VARCHAR' in ORDER BY clause of "
+operator|+
+literal|"'PERCENTILE_CONT' function. Only NUMERIC types are supported"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@code PERCENTILE_CONT} only allows one sort key. */
+annotation|@
+name|Test
+name|void
+name|testPercentileContMultipleOrderByFields
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_cont(0.25) within group (^order by deptno, empno^)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"'PERCENTILE_CONT' requires precisely one ORDER BY key"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPercentileContFractionMustBeLiteral
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" ^percentile_cont(deptno)^ within group (order by empno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to function 'PERCENTILE_CONT' must be a literal"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testPercentileContFractionOutOfRange
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" ^percentile_cont(1.5)^ within group (order by deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to function 'PERCENTILE_CONT' must be a numeric "
+operator|+
+literal|"literal between 0 and 1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@code PERCENTILE_DISC} only allows numeric fields. */
+annotation|@
+name|Test
+name|void
+name|testPercentileDiscMustOrderByNumeric
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_disc(0.25) within group (^order by ename^)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid type 'VARCHAR' in ORDER BY clause of "
+operator|+
+literal|"'PERCENTILE_DISC' function. Only NUMERIC types are supported"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@code PERCENTILE_DISC} only allows one sort key. */
+annotation|@
+name|Test
+name|void
+name|testPercentileDiscMultipleOrderByFields
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" percentile_disc(0.25) within group (^order by deptno, empno^)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"'PERCENTILE_DISC' requires precisely one ORDER BY key"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
