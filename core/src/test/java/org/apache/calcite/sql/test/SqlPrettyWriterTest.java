@@ -864,6 +864,7 @@ name|this
 return|;
 block|}
 block|}
+comment|/** Creates a fluent test for a SQL statement that has most common lexical    * features. */
 specifier|private
 name|Sql
 name|simple
@@ -899,6 +900,29 @@ operator|+
 literal|"    and interval '1' day following)) "
 operator|+
 literal|"order by gg"
+argument_list|)
+return|;
+block|}
+comment|/** Creates a fluent test for a SQL statement that contains "tableAlias.*". */
+specifier|private
+name|Sql
+name|tableDotStar
+parameter_list|()
+block|{
+return|return
+name|sql
+argument_list|(
+literal|"select x as a, b, s.*, t.* "
+operator|+
+literal|"from"
+operator|+
+literal|" (select *"
+operator|+
+literal|" from t"
+operator|+
+literal|" where x = y and a> 5) "
+operator|+
+literal|"order by g desc, h asc, i"
 argument_list|)
 return|;
 block|}
@@ -999,6 +1023,31 @@ name|testClausesNotOnNewLine
 parameter_list|()
 block|{
 name|simple
+argument_list|()
+operator|.
+name|withWriter
+argument_list|(
+name|w
+lambda|->
+name|w
+operator|.
+name|withClauseStartsLine
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableDotStarClausesNotOnNewLine
+parameter_list|()
+block|{
+name|tableDotStar
 argument_list|()
 operator|.
 name|withWriter

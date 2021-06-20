@@ -1998,6 +1998,13 @@ argument_list|(
 literal|"*"
 argument_list|)
 expr_stmt|;
+name|writer
+operator|.
+name|setNeedWhitespace
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
 block|}
 else|else
 block|{
