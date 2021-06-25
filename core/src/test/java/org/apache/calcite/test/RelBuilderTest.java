@@ -13467,6 +13467,133 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testTrivialCorrelation
+parameter_list|()
+block|{
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+specifier|final
+name|Holder
+argument_list|<
+annotation|@
+name|Nullable
+name|RexCorrelVariable
+argument_list|>
+name|v
+init|=
+name|Holder
+operator|.
+name|empty
+argument_list|()
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|variable
+argument_list|(
+name|v
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|LEFT
+argument_list|,
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|2
+argument_list|,
+literal|0
+argument_list|,
+literal|"SAL"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|1000
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|(
+name|v
+operator|.
+name|get
+argument_list|()
+operator|.
+name|id
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Note that the join is emitted since the query is not actually a correlated.
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalJoin(condition=[=($5, 1000)], joinType=[left])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testAntiJoin
 parameter_list|()
 block|{
@@ -22464,16 +22591,64 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[semi], requiredColumns=[{7}])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[semi])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+literal|"Join with correlate id but the id never used should be simplified to a join."
+argument_list|,
+name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSemiCorrelatedViaJoin
+parameter_list|()
+block|{
+name|RelNode
+name|root
+init|=
+name|buildCorrelateWithJoin
+argument_list|(
+name|JoinRelType
+operator|.
+name|SEMI
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalCorrelate(correlation=[$cor0], joinType=[semi], requiredColumns=[{0, 7}])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"  LogicalFilter(condition=[=($cor0.DEPTNO, $0)])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+literal|"    LogicalFilter(condition=[=($cor0.EMPNO, 'NaN')])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"Correlated semi joins should emmit a correlate with a filter on the right side."
+argument_list|,
 name|root
 argument_list|,
 name|hasTree
@@ -22508,16 +22683,64 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[anti], requiredColumns=[{7}])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[anti])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+literal|"Join with correlate id but the id never used should be simplified to a join."
+argument_list|,
+name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAntiCorrelateViaJoin
+parameter_list|()
+block|{
+name|RelNode
+name|root
+init|=
+name|buildCorrelateWithJoin
+argument_list|(
+name|JoinRelType
+operator|.
+name|ANTI
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalCorrelate(correlation=[$cor0], joinType=[anti], requiredColumns=[{0, 7}])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"  LogicalFilter(condition=[=($cor0.DEPTNO, $0)])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+literal|"    LogicalFilter(condition=[=($cor0.EMPNO, 'NaN')])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"Correlated anti joins should emmit a correlate with a filter on the right side."
+argument_list|,
 name|root
 argument_list|,
 name|hasTree
@@ -22552,16 +22775,64 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{7}])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[left])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+literal|"Join with correlate id but the id never used should be simplified to a join."
+argument_list|,
+name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testLeftCorrelateViaJoin
+parameter_list|()
+block|{
+name|RelNode
+name|root
+init|=
+name|buildCorrelateWithJoin
+argument_list|(
+name|JoinRelType
+operator|.
+name|LEFT
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{0, 7}])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"  LogicalFilter(condition=[=($cor0.DEPTNO, $0)])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+literal|"    LogicalFilter(condition=[=($cor0.EMPNO, 'NaN')])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"Correlated left joins should emmit a correlate with a filter on the right side."
+argument_list|,
 name|root
 argument_list|,
 name|hasTree
@@ -22596,16 +22867,64 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalFilter(condition=[=($7, $8)])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[inner])\n"
 operator|+
-literal|"  LogicalCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{}])\n"
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
-operator|+
-literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"Join with correlate id but never used should be simplified to a join."
+argument_list|,
+name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testInnerCorrelateViaJoin
+parameter_list|()
+block|{
+name|RelNode
+name|root
+init|=
+name|buildCorrelateWithJoin
+argument_list|(
+name|JoinRelType
+operator|.
+name|INNER
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalFilter(condition=[=($7, $8)])\n"
+operator|+
+literal|"  LogicalCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{0}])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"    LogicalFilter(condition=[=($cor0.EMPNO, 'NaN')])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+literal|"Correlated inner joins should emmit a correlate with a filter on top."
+argument_list|,
 name|root
 argument_list|,
 name|hasTree
@@ -22638,6 +22957,8 @@ name|JoinRelType
 operator|.
 name|RIGHT
 argument_list|)
+argument_list|,
+literal|"Right outer joins with correlated ids are invalid even if id is not used."
 argument_list|)
 expr_stmt|;
 block|}
@@ -22664,6 +22985,64 @@ name|JoinRelType
 operator|.
 name|FULL
 argument_list|)
+argument_list|,
+literal|"Full outer joins with correlated ids are invalid even if id is not used."
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testRightCorrelateViaJoinThrowsException
+parameter_list|()
+block|{
+name|assertThrows
+argument_list|(
+name|IllegalArgumentException
+operator|.
+name|class
+argument_list|,
+parameter_list|()
+lambda|->
+name|buildCorrelateWithJoin
+argument_list|(
+name|JoinRelType
+operator|.
+name|RIGHT
+argument_list|)
+argument_list|,
+literal|"Right outer joins with correlated ids are invalid."
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testFullCorrelateViaJoinThrowsException
+parameter_list|()
+block|{
+name|assertThrows
+argument_list|(
+name|IllegalArgumentException
+operator|.
+name|class
+argument_list|,
+parameter_list|()
+lambda|->
+name|buildCorrelateWithJoin
+argument_list|(
+name|JoinRelType
+operator|.
+name|FULL
+argument_list|)
+argument_list|,
+literal|"Full outer joins with correlated ids are invalid."
 argument_list|)
 expr_stmt|;
 block|}
@@ -22724,6 +23103,149 @@ operator|.
 name|scan
 argument_list|(
 literal|"DEPT"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|type
+argument_list|,
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|2
+argument_list|,
+literal|0
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|2
+argument_list|,
+literal|1
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|(
+name|v
+operator|.
+name|get
+argument_list|()
+operator|.
+name|id
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+end_function
+
+begin_function
+specifier|private
+specifier|static
+name|RelNode
+name|buildCorrelateWithJoin
+parameter_list|(
+name|JoinRelType
+name|type
+parameter_list|)
+block|{
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexBuilder
+name|rexBuilder
+init|=
+name|builder
+operator|.
+name|getRexBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Holder
+argument_list|<
+annotation|@
+name|Nullable
+name|RexCorrelVariable
+argument_list|>
+name|v
+init|=
+name|Holder
+operator|.
+name|empty
+argument_list|()
+decl_stmt|;
+return|return
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|variable
+argument_list|(
+name|v
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeFieldAccess
+argument_list|(
+name|v
+operator|.
+name|get
+argument_list|()
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|"NaN"
+argument_list|)
+argument_list|)
 argument_list|)
 operator|.
 name|join

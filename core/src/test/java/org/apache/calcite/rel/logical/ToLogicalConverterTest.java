@@ -1767,6 +1767,33 @@ argument_list|(
 literal|"DEPT"
 argument_list|)
 operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|equals
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+name|v
+operator|.
+name|get
+argument_list|()
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
 name|join
 argument_list|(
 name|JoinRelType
@@ -1817,26 +1844,30 @@ name|expectedPhysical
 init|=
 literal|""
 operator|+
-literal|"EnumerableCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{5}])\n"
+literal|"EnumerableCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{5, 7}])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"  EnumerableFilter(condition=[=($cor0.SAL, 1000)])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[scott, DEPT]])\n"
+literal|"    EnumerableFilter(condition=[=($0, $cor0.DEPTNO)])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|String
 name|expectedLogical
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{5}])\n"
+literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{5, 7}])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"  LogicalFilter(condition=[=($cor0.SAL, 1000)])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+literal|"    LogicalFilter(condition=[=($0, $cor0.DEPTNO)])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|verify
 argument_list|(
