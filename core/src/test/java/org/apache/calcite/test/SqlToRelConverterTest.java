@@ -14508,6 +14508,70 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testModeFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select mode(deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testModeFunctionWithWinAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, ename,\n"
+operator|+
+literal|"  mode(job) over (partition by deptno order by ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4644">[CALCITE-4644]    * Add PERCENTILE_CONT and PERCENTILE_DISC aggregate functions</a>. */
 end_comment

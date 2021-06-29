@@ -32303,6 +32303,66 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testModeFunction
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select MODE(sal) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select MODE(sal) over (order by empno) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select MODE(ename) from emp where sal=3000"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select MODE(sal) from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select MODE(sal) from emp group by deptno order by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|"^mode(empno)^ within group(order by 1)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Aggregate expression 'MODE' must not contain a WITHIN GROUP clause"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSomeEveryAndIntersectionFunctions
 parameter_list|()
 block|{

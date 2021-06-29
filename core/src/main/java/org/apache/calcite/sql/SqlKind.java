@@ -747,6 +747,9 @@ block|,
 comment|/** The {@code COLLECT} aggregate function. */
 name|COLLECT
 block|,
+comment|/** The {@code MODE} aggregate function. */
+name|MODE
+block|,
 comment|/** The {@code PERCENTILE_CONT} aggregate function. */
 name|PERCENTILE_CONT
 block|,
@@ -1017,6 +1020,8 @@ argument_list|,
 name|NTILE
 argument_list|,
 name|COLLECT
+argument_list|,
+name|MODE
 argument_list|,
 name|FUSION
 argument_list|,
