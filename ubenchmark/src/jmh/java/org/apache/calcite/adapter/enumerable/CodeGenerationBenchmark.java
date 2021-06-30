@@ -1253,7 +1253,14 @@ operator|=
 name|CompilerFactoryFactory
 operator|.
 name|getDefaultCompilerFactory
+argument_list|(
+name|CodeGenerationBenchmark
+operator|.
+name|class
+operator|.
+name|getClassLoader
 argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
 catch|catch

@@ -515,6 +515,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Compiles a scalar expression ({@link RexNode}) to an expression that  * can be evaluated ({@link Scalar}) by generating a Java AST and compiling it  * to a class using Janino.  */
 end_comment
@@ -1385,6 +1395,23 @@ block|{
 name|ICompilerFactory
 name|compilerFactory
 decl_stmt|;
+name|ClassLoader
+name|classLoader
+init|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|JaninoRexCompiler
+operator|.
+name|class
+operator|.
+name|getClassLoader
+argument_list|()
+argument_list|,
+literal|"classLoader"
+argument_list|)
+decl_stmt|;
 try|try
 block|{
 name|compilerFactory
@@ -1392,7 +1419,9 @@ operator|=
 name|CompilerFactoryFactory
 operator|.
 name|getDefaultCompilerFactory
-argument_list|()
+argument_list|(
+name|classLoader
+argument_list|)
 expr_stmt|;
 block|}
 catch|catch
@@ -1448,12 +1477,7 @@ name|cbe
 operator|.
 name|setParentClassLoader
 argument_list|(
-name|JaninoRexCompiler
-operator|.
-name|class
-operator|.
-name|getClassLoader
-argument_list|()
+name|classLoader
 argument_list|)
 expr_stmt|;
 if|if
