@@ -721,6 +721,18 @@ name|util
 operator|.
 name|function
 operator|.
+name|Consumer
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
 name|UnaryOperator
 import|;
 end_import
@@ -4809,6 +4821,216 @@ block|{
 name|sql
 argument_list|(
 literal|"select * from dept, lateral table(DEDUP(dept.deptno, dept.name))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4673">[CALCITE-4673]    * If arguments to a table function use correlation variables,    * SqlToRelConverter should eliminate duplicate variables</a>.    *    *<p>The {@code LogicalTableFunctionScan} should have two identical    * correlation variables like "{@code $cor0.DEPTNO}", but before this bug was    * fixed, we have different ones: "{@code $cor0.DEPTNO}" and    * "{@code $cor1.DEPTNO}". */
+annotation|@
+name|Test
+name|void
+name|testCorrelationCollectionTableInSubQuery
+parameter_list|()
+block|{
+name|Consumer
+argument_list|<
+name|String
+argument_list|>
+name|fn
+init|=
+name|sql
+lambda|->
+block|{
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${planExpanded}"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${planNotExpanded}"
+argument_list|)
+expr_stmt|;
+block|}
+decl_stmt|;
+name|fn
+operator|.
+name|accept
+argument_list|(
+literal|"select e.deptno,\n"
+operator|+
+literal|"  (select * from lateral table(DEDUP(e.deptno, e.deptno)))\n"
+operator|+
+literal|"from emp e"
+argument_list|)
+expr_stmt|;
+comment|// same effect without LATERAL
+name|fn
+operator|.
+name|accept
+argument_list|(
+literal|"select e.deptno,\n"
+operator|+
+literal|"  (select * from table(DEDUP(e.deptno, e.deptno)))\n"
+operator|+
+literal|"from emp e"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelationLateralSubQuery
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT deptno, ename\n"
+operator|+
+literal|"FROM\n"
+operator|+
+literal|"  (SELECT DISTINCT deptno FROM emp) t1,\n"
+operator|+
+literal|"  LATERAL (\n"
+operator|+
+literal|"    SELECT ename, sal\n"
+operator|+
+literal|"    FROM emp\n"
+operator|+
+literal|"    WHERE deptno IN (t1.deptno, t1.deptno)\n"
+operator|+
+literal|"    AND   deptno = t1.deptno\n"
+operator|+
+literal|"    ORDER BY sal\n"
+operator|+
+literal|"    DESC LIMIT 3)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelationExistsWithSubQuery
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select emp.deptno, dept.deptno\n"
+operator|+
+literal|"from emp, dept\n"
+operator|+
+literal|"where exists (select * from emp\n"
+operator|+
+literal|"  where emp.deptno = dept.deptno\n"
+operator|+
+literal|"  and emp.deptno = dept.deptno\n"
+operator|+
+literal|"  and emp.deptno in (dept.deptno, dept.deptno))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelationInWithSubQuery
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select deptno\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where deptno in (select deptno\n"
+operator|+
+literal|"    from dept\n"
+operator|+
+literal|"    where emp.deptno = dept.deptno\n"
+operator|+
+literal|"    and emp.deptno = dept.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|false
 argument_list|)
 operator|.
 name|ok
@@ -15807,7 +16029,7 @@ argument_list|)
 operator|.
 name|convertsTo
 argument_list|(
-literal|"${plan_extended}"
+literal|"${planExpanded}"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -15834,7 +16056,7 @@ argument_list|)
 operator|.
 name|convertsTo
 argument_list|(
-literal|"${plan_not_extended}"
+literal|"${planNotExpanded}"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15871,26 +16093,19 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|withConfig
-argument_list|(
-name|configBuilder
-lambda|->
-name|configBuilder
-operator|.
-name|withDecorrelationEnabled
+name|expand
 argument_list|(
 literal|true
 argument_list|)
 operator|.
-name|withExpand
+name|decorrelate
 argument_list|(
 literal|true
-argument_list|)
 argument_list|)
 operator|.
 name|convertsTo
 argument_list|(
-literal|"${plan_extended}"
+literal|"${planExpanded}"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -15898,26 +16113,19 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|withConfig
-argument_list|(
-name|configBuilder
-lambda|->
-name|configBuilder
-operator|.
-name|withDecorrelationEnabled
+name|expand
 argument_list|(
 literal|false
 argument_list|)
 operator|.
-name|withExpand
+name|decorrelate
 argument_list|(
 literal|false
-argument_list|)
 argument_list|)
 operator|.
 name|convertsTo
 argument_list|(
-literal|"${plan_not_extended}"
+literal|"${planNotExpanded}"
 argument_list|)
 expr_stmt|;
 block|}
