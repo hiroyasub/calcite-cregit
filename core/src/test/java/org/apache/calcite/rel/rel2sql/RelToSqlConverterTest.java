@@ -12988,6 +12988,38 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4674">[CALCITE-4674]    * Excess quotes in generated SQL when STAR is a column alias</a>. */
+annotation|@
+name|Test
+name|void
+name|testAliasOnStarNoExcessQuotes
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"customer_id\" as \"*\" from \"customer\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"customer_id\" AS \"*\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"customer\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

@@ -647,15 +647,6 @@ condition|?
 literal|"*"
 else|:
 name|s
-operator|.
-name|equals
-argument_list|(
-literal|"*"
-argument_list|)
-condition|?
-literal|"\"*\""
-else|:
-name|s
 argument_list|)
 return|;
 block|}
