@@ -7270,6 +7270,42 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4690">[CALCITE-4690]    * Error when executing query with CHARACTER SET in Redshift</a>. */
+annotation|@
+name|Test
+name|void
+name|testRedshiftCharacterSet
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10))\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"hire_date\", CAST(\"hire_date\" AS VARCHAR(10))\n"
+operator|+
+literal|"FROM \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
