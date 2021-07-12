@@ -10435,10 +10435,20 @@ name|RelBuilder
 operator|::
 name|isGroupId
 argument_list|)
+operator|||
+operator|!
+name|ImmutableBitSet
+operator|.
+name|ORDERING
+operator|.
+name|isStrictlyOrdered
+argument_list|(
+name|groupSetMultiset
+argument_list|)
 condition|)
 block|{
 return|return
-name|rewriteAggregateWithGroupId
+name|rewriteAggregateWithDuplicateGroupSets
 argument_list|(
 name|groupSet
 argument_list|,
@@ -11529,13 +11539,13 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * The {@code GROUP_ID()} function is used to distinguish duplicate groups.    * However, as Aggregate normalizes group sets to canonical form (i.e.,    * flatten, sorting, redundancy removal), this information is lost in RelNode.    * Therefore, it is impossible to implement the function in runtime.    *    *<p>To fill this gap, an aggregation query that contains {@code GROUP_ID()}    * function will generally be rewritten into UNION when converting to RelNode.    *    *<p>Also see the discussion in    *<a href="https://issues.apache.org/jira/browse/CALCITE-1824">[CALCITE-1824]    * GROUP_ID returns wrong result</a>.    */
+comment|/**    * The {@code GROUP_ID()} function is used to distinguish duplicate groups.    * However, as Aggregate normalizes group sets to canonical form (i.e.,    * flatten, sorting, redundancy removal), this information is lost in RelNode.    * Therefore, it is impossible to implement the function in runtime.    *    *<p>To fill this gap, an aggregation query that contains duplicate group    * sets is rewritten into a Union of Aggregate operators whose group sets are    * distinct. The number of inputs to the Union is equal to the maximum number    * of duplicates. In the {@code N}th input to the Union, calls to the    * {@code GROUP_ID} aggregate function are replaced by the integer literal    * {@code N}.    *    *<p>This method also handles the case where group sets are distinct but    * there is a call to {@code GROUP_ID}. That call is replaced by the integer    * literal {@code 0}.    *    *<p>Also see the discussion in    *<a href="https://issues.apache.org/jira/browse/CALCITE-1824">[CALCITE-1824]    * GROUP_ID returns wrong result</a> and    *<a href="https://issues.apache.org/jira/browse/CALCITE-4748">[CALCITE-4748]    * If there are duplicate GROUPING SETS, Calcite should return duplicate    * rows</a>.    */
 end_comment
 
 begin_function
 specifier|private
 name|RelBuilder
-name|rewriteAggregateWithGroupId
+name|rewriteAggregateWithDuplicateGroupSets
 parameter_list|(
 name|ImmutableBitSet
 name|groupSet

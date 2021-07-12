@@ -9769,10 +9769,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Tests that, if you try to create an Aggregate with duplicate grouping    * sets, RelBuilder creates a Union. Each branch of the Union has an    * Aggregate that has distinct grouping sets. */
 annotation|@
 name|Test
 name|void
-name|testAggregateGroupingSetDuplicateIgnored
+name|testAggregateGroupingSetDuplicate
 parameter_list|()
 block|{
 specifier|final
@@ -9858,9 +9859,15 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalAggregate(group=[{6, 7}], groups=[[{6}, {7}]])\n"
+literal|"LogicalUnion(all=[true])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+literal|"  LogicalAggregate(group=[{6, 7}], groups=[[{6}, {7}]])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"  LogicalAggregate(group=[{6, 7}], groups=[[{7}]])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(

@@ -2363,7 +2363,63 @@ literal|"select deptno, group_id()\n"
 operator|+
 literal|"from emp\n"
 operator|+
-literal|"group by grouping sets (deptno, (), deptno)"
+literal|"group by grouping sets (deptno, (), job, (deptno, job), deptno,\n"
+operator|+
+literal|"  job, deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testGroupingSetsRepeated()} but with no {@code GROUP_ID}    * function. (We still need the plan to contain a Union.) */
+annotation|@
+name|Test
+name|void
+name|testGroupingSetsRepeatedNoGroupId
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, job\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by grouping sets (deptno, (), job, (deptno, job), deptno,\n"
+operator|+
+literal|"  job, deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testGroupingSetsRepeated()} but grouping sets are distinct.    * The {@code GROUP_ID} is replaced by 0.*/
+annotation|@
+name|Test
+name|void
+name|testGroupingSetsWithGroupId
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, group_id()\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by grouping sets (deptno, (), job)"
 decl_stmt|;
 name|sql
 argument_list|(
