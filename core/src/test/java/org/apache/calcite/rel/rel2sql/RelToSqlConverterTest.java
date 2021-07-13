@@ -20854,6 +20854,70 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testRedshiftCastToTinyint
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT CAST(\"department_id\" AS tinyint) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(\"department_id\" AS \"int2\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRedshiftCastToDouble
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT CAST(\"department_id\" AS double) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(\"department_id\" AS \"float8\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testDateLiteralOracle
 parameter_list|()
 block|{
