@@ -335,12 +335,6 @@ name|type
 operator|==
 name|JoinRelType
 operator|.
-name|SEMI
-operator|||
-name|type
-operator|==
-name|JoinRelType
-operator|.
 name|LEFT
 return|;
 block|}
