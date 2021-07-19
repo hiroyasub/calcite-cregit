@@ -842,6 +842,8 @@ literal|"KEYWORD(TRUE)"
 argument_list|,
 literal|"KEYWORD(TRUNCATE)"
 argument_list|,
+literal|"KEYWORD(UNIQUE)"
+argument_list|,
 literal|"KEYWORD(UNKNOWN)"
 argument_list|,
 literal|"KEYWORD(UPPER)"

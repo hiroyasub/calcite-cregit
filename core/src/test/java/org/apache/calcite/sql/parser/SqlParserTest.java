@@ -10448,6 +10448,77 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testUnique
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from dept where unique (select 1 from emp where emp.deptno = dept.deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"WHERE (UNIQUE (SELECT 1\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUniqueInWhere
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from emp where 1 = 2 and unique (select 1 from dept) and 3 = 4"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (((1 = 2) AND (UNIQUE (SELECT 1\n"
+operator|+
+literal|"FROM `DEPT`))) AND (3 = 4))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testNotUnique
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from dept where not not unique (select * from emp) and true"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"WHERE ((NOT (NOT (UNIQUE (SELECT *\n"
+operator|+
+literal|"FROM `EMP`)))) AND TRUE)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testFromWithAs
 parameter_list|()
 block|{

@@ -37081,6 +37081,8 @@ literal|"- -\n"
 operator|+
 literal|"EXISTS pre\n"
 operator|+
+literal|"UNIQUE pre\n"
+operator|+
 literal|"\n"
 operator|+
 literal|"< ALL left\n"

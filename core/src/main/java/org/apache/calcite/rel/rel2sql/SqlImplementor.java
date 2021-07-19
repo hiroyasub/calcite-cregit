@@ -4551,6 +4551,9 @@ case|case
 name|EXISTS
 case|:
 case|case
+name|UNIQUE
+case|:
+case|case
 name|SCALAR_QUERY
 case|:
 name|subQuery
