@@ -800,20 +800,10 @@ comment|// we've detected the presence of something like AVG,
 comment|// which we can't handle
 return|return;
 block|}
-comment|// create corresponding aggregates on top of each union child
-specifier|final
-name|RelBuilder
-name|relBuilder
+name|boolean
+name|hasUniqueKeyInAllInputs
 init|=
-name|call
-operator|.
-name|builder
-argument_list|()
-decl_stmt|;
-name|int
-name|transformCount
-init|=
-literal|0
+literal|true
 decl_stmt|;
 specifier|final
 name|RelMetadataQuery
@@ -852,21 +842,56 @@ name|getGroupSet
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|relBuilder
-operator|.
-name|push
-argument_list|(
-name|input
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 operator|!
 name|alreadyUnique
 condition|)
 block|{
-operator|++
-name|transformCount
+name|hasUniqueKeyInAllInputs
+operator|=
+literal|false
+expr_stmt|;
+break|break;
+block|}
+block|}
+if|if
+condition|(
+name|hasUniqueKeyInAllInputs
+condition|)
+block|{
+comment|// none of the children could benefit from the push-down,
+comment|// so bail out (preventing the infinite loop to which most
+comment|// planners would succumb)
+return|return;
+block|}
+comment|// create corresponding aggregates on top of each union child
+specifier|final
+name|RelBuilder
+name|relBuilder
+init|=
+name|call
+operator|.
+name|builder
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|RelNode
+name|input
+range|:
+name|union
+operator|.
+name|getInputs
+argument_list|()
+control|)
+block|{
+name|relBuilder
+operator|.
+name|push
+argument_list|(
+name|input
+argument_list|)
 expr_stmt|;
 name|relBuilder
 operator|.
@@ -888,19 +913,6 @@ name|getAggCallList
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
-block|}
-if|if
-condition|(
-name|transformCount
-operator|==
-literal|0
-condition|)
-block|{
-comment|// none of the children could benefit from the push-down,
-comment|// so bail out (preventing the infinite loop to which most
-comment|// planners would succumb)
-return|return;
 block|}
 comment|// create a new union whose children are the aggregates created above
 name|relBuilder

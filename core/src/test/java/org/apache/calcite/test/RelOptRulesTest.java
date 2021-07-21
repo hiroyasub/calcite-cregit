@@ -22469,6 +22469,92 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4616">[CALCITE-4616]    * AggregateUnionTransposeRule causes row type mismatch when some inputs have    * unique grouping key</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAggregateUnionTransposeWithOneInputUnique
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, SUM(t) from (\n"
+operator|+
+literal|"select deptno, 1 as t from sales.emp e1\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select distinct deptno, 2 as t from sales.emp e2)\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_UNION_TRANSPOSE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** If all inputs to UNION are already unique, AggregateUnionTransposeRule is    * a no-op. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAggregateUnionTransposeWithAllInputsUnique
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, SUM(t) from (\n"
+operator|+
+literal|"select distinct deptno, 1 as t from sales.emp e1\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select distinct deptno, 2 as t from sales.emp e2)\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_UNION_TRANSPOSE
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
