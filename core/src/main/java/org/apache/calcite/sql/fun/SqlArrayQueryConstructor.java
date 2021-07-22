@@ -31,6 +31,22 @@ name|SqlKind
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeTransforms
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the SQL:2003 standard ARRAY query constructor,<code>  * ARRAY (&lt;query&gt;)</code>.  */
 end_comment
@@ -54,6 +70,10 @@ argument_list|,
 name|SqlKind
 operator|.
 name|ARRAY_QUERY_CONSTRUCTOR
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_ARRAY
 argument_list|)
 expr_stmt|;
 block|}

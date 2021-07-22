@@ -2529,6 +2529,19 @@ return|return
 name|this
 return|;
 block|}
+comment|/** Returns the size of the stack. */
+specifier|public
+name|int
+name|size
+parameter_list|()
+block|{
+return|return
+name|stack
+operator|.
+name|size
+argument_list|()
+return|;
+block|}
 comment|/** Returns the final relational expression.    *    *<p>Throws if the stack is empty.    */
 specifier|public
 name|RelNode

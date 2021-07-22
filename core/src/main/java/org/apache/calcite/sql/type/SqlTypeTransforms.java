@@ -624,6 +624,31 @@ operator|-
 literal|1
 argument_list|)
 decl_stmt|;
+comment|/**    * Parameter type-inference transform strategy that converts a two-field    * record type to a MAP type.    *    * @see org.apache.calcite.rel.type.RelDataTypeFactory#createMapType    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlTypeTransform
+name|TO_MAP
+init|=
+parameter_list|(
+name|opBinding
+parameter_list|,
+name|typeToTransform
+parameter_list|)
+lambda|->
+name|SqlTypeUtil
+operator|.
+name|createMapTypeFromRecord
+argument_list|(
+name|opBinding
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
+name|typeToTransform
+argument_list|)
+decl_stmt|;
 comment|/**    * Parameter type-inference transform strategy where a derived type must be    * a struct type with precisely one field and the returned type is the type    * of that field.    */
 specifier|public
 specifier|static

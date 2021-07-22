@@ -3100,9 +3100,25 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|map
+operator|.
+name|put
+argument_list|(
+literal|"nullable"
+argument_list|,
+name|node
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|isNullable
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 else|else
 block|{
+comment|//noinspection unchecked
 name|map
 operator|=
 operator|(

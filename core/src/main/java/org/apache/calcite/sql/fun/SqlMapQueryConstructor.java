@@ -31,6 +31,22 @@ name|SqlKind
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeTransforms
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the MAP query constructor,<code>  * MAP (&lt;query&gt;)</code>.  *  *<p>Like the MAP type, not standard SQL.</p>  */
 end_comment
@@ -54,6 +70,10 @@ argument_list|,
 name|SqlKind
 operator|.
 name|MAP_QUERY_CONSTRUCTOR
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_MAP
 argument_list|)
 expr_stmt|;
 block|}

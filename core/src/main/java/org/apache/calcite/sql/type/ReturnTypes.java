@@ -1696,6 +1696,22 @@ operator|.
 name|TO_ARRAY
 argument_list|)
 decl_stmt|;
+comment|/**    * Returns a MAP type.    *    *<p>For example, given {@code Record(f0: INTEGER, f1: DATE)}, returns    * {@code (INTEGER, DATE) MAP}.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|TO_MAP
+init|=
+name|ARG0
+operator|.
+name|andThen
+argument_list|(
+name|SqlTypeTransforms
+operator|.
+name|TO_MAP
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is    * {@link #ARG0_INTERVAL_NULLABLE} and {@link #LEAST_RESTRICTIVE}. These rules    * are used for integer division.    */
 specifier|public
 specifier|static

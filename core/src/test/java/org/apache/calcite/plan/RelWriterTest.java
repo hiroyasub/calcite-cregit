@@ -237,6 +237,22 @@ name|rel
 operator|.
 name|externalize
 operator|.
+name|RelJson
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|externalize
+operator|.
 name|RelJsonReader
 import|;
 end_import
@@ -366,6 +382,22 @@ operator|.
 name|type
 operator|.
 name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
 import|;
 end_import
 
@@ -743,6 +775,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|JsonBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TestUtil
 import|;
 end_import
@@ -946,6 +992,18 @@ operator|.
 name|CoreMatchers
 operator|.
 name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
 import|;
 end_import
 
@@ -1683,6 +1741,289 @@ operator|.
 name|DOT
 argument_list|)
 return|;
+block|}
+comment|/** Unit test for {@link RelJson#toJson(Object)} for an object of type    * {@link RelDataType}. */
+annotation|@
+name|Test
+name|void
+name|testTypeJson
+parameter_list|()
+block|{
+name|int
+name|i
+init|=
+name|Frameworks
+operator|.
+name|withPlanner
+argument_list|(
+parameter_list|(
+name|cluster
+parameter_list|,
+name|relOptSchema
+parameter_list|,
+name|rootSchema
+parameter_list|)
+lambda|->
+block|{
+specifier|final
+name|RelDataTypeFactory
+name|typeFactory
+init|=
+name|cluster
+operator|.
+name|getTypeFactory
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelDataType
+name|type
+init|=
+name|typeFactory
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|add
+argument_list|(
+literal|"i"
+argument_list|,
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|INTEGER
+argument_list|)
+argument_list|)
+operator|.
+name|nullable
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"v"
+argument_list|,
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|VARCHAR
+argument_list|,
+literal|9
+argument_list|)
+argument_list|)
+operator|.
+name|nullable
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"r"
+argument_list|,
+name|typeFactory
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|add
+argument_list|(
+literal|"d"
+argument_list|,
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|DATE
+argument_list|)
+argument_list|)
+operator|.
+name|nullable
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|nullableRecord
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|JsonBuilder
+name|jsonBuilder
+init|=
+operator|new
+name|JsonBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelJson
+name|json
+init|=
+operator|new
+name|RelJson
+argument_list|(
+name|jsonBuilder
+argument_list|)
+decl_stmt|;
+specifier|final
+name|Object
+name|o
+init|=
+name|json
+operator|.
+name|toJson
+argument_list|(
+name|type
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|o
+argument_list|,
+name|notNullValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|s
+init|=
+name|jsonBuilder
+operator|.
+name|toJsonString
+argument_list|(
+name|o
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expectedJson
+init|=
+literal|"{\n"
+operator|+
+literal|"  \"fields\": [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"type\": \"INTEGER\",\n"
+operator|+
+literal|"      \"nullable\": false,\n"
+operator|+
+literal|"      \"name\": \"i\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"type\": \"VARCHAR\",\n"
+operator|+
+literal|"      \"nullable\": true,\n"
+operator|+
+literal|"      \"precision\": 9,\n"
+operator|+
+literal|"      \"name\": \"v\"\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"fields\": {\n"
+operator|+
+literal|"        \"fields\": [\n"
+operator|+
+literal|"          {\n"
+operator|+
+literal|"            \"type\": \"DATE\",\n"
+operator|+
+literal|"            \"nullable\": false,\n"
+operator|+
+literal|"            \"name\": \"d\"\n"
+operator|+
+literal|"          }\n"
+operator|+
+literal|"        ],\n"
+operator|+
+literal|"        \"nullable\": false\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      \"nullable\": false,\n"
+operator|+
+literal|"      \"name\": \"r\"\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  \"nullable\": false\n"
+operator|+
+literal|"}"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|is
+argument_list|(
+name|expectedJson
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelDataType
+name|type2
+init|=
+name|json
+operator|.
+name|toType
+argument_list|(
+name|typeFactory
+argument_list|,
+name|o
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|type2
+argument_list|,
+name|is
+argument_list|(
+name|type
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+literal|0
+return|;
+block|}
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|i
+argument_list|,
+name|is
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table and a    * project including window expressions.    */
 annotation|@

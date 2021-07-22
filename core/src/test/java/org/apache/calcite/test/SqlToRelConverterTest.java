@@ -5677,6 +5677,52 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testUnnestArrayNoExpand
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name,\n"
+operator|+
+literal|"    array (select *\n"
+operator|+
+literal|"        from emp\n"
+operator|+
+literal|"        where deptno = dept.deptno) as emp_array,\n"
+operator|+
+literal|"    multiset (select *\n"
+operator|+
+literal|"        from emp\n"
+operator|+
+literal|"        where deptno = dept.deptno) as emp_multiset,\n"
+operator|+
+literal|"    map (select empno, job\n"
+operator|+
+literal|"        from emp\n"
+operator|+
+literal|"        where deptno = dept.deptno) as job_map\n"
+operator|+
+literal|"from dept"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUnnestWithOrdinality
 parameter_list|()
 block|{
@@ -5784,23 +5830,10 @@ name|void
 name|testCorrelationJoin
 parameter_list|()
 block|{
-specifier|final
-name|String
-name|sql
-init|=
-literal|"select *,\n"
-operator|+
-literal|"  multiset(select * from emp where deptno=dept.deptno) as empset\n"
-operator|+
-literal|"from dept"
-decl_stmt|;
-name|sql
+name|checkCorrelationJoin
 argument_list|(
-name|sql
+literal|true
 argument_list|)
-operator|.
-name|ok
-argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -5808,6 +5841,19 @@ name|Test
 name|void
 name|testCorrelationJoinRex
 parameter_list|()
+block|{
+name|checkCorrelationJoin
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+name|void
+name|checkCorrelationJoin
+parameter_list|(
+name|boolean
+name|expand
+parameter_list|)
 block|{
 specifier|final
 name|String
@@ -5826,7 +5872,121 @@ argument_list|)
 operator|.
 name|expand
 argument_list|(
+name|expand
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelatedArraySubQuery
+parameter_list|()
+block|{
+name|checkCorrelatedArraySubQuery
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelatedArraySubQueryRex
+parameter_list|()
+block|{
+name|checkCorrelatedArraySubQuery
+argument_list|(
 literal|false
+argument_list|)
+expr_stmt|;
+block|}
+name|void
+name|checkCorrelatedArraySubQuery
+parameter_list|(
+name|boolean
+name|expand
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *,\n"
+operator|+
+literal|"    array (select * from emp\n"
+operator|+
+literal|"        where deptno = dept.deptno) as empset\n"
+operator|+
+literal|"from dept"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+name|expand
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelatedMapSubQuery
+parameter_list|()
+block|{
+name|checkCorrelatedMapSubQuery
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCorrelatedMapSubQueryRex
+parameter_list|()
+block|{
+name|checkCorrelatedMapSubQuery
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+name|void
+name|checkCorrelatedMapSubQuery
+parameter_list|(
+name|boolean
+name|expand
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *,\n"
+operator|+
+literal|"  map (select empno, job\n"
+operator|+
+literal|"       from emp where deptno = dept.deptno) as jobMap\n"
+operator|+
+literal|"from dept"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+name|expand
 argument_list|)
 operator|.
 name|ok
