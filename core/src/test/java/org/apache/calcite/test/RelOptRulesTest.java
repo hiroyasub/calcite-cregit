@@ -23209,6 +23209,52 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testAggregateUnionTransposeWithTopLevelGroupSetRemapping
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(t1), t2 from (\n"
+operator|+
+literal|"select (case when deptno=0 then 1 else null end) as t1, 1 as t2 from sales.emp e1\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select (case when deptno=0 then 1 else null end) as t1, 2 as t2 from sales.emp e2)\n"
+operator|+
+literal|"group by t2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPreRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_PROJECT_MERGE
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_UNION_TRANSPOSE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testSortJoinTranspose1
 parameter_list|()
 block|{
