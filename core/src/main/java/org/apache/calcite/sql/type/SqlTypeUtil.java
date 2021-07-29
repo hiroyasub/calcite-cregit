@@ -4284,7 +4284,7 @@ return|return
 name|nested
 return|;
 block|}
-comment|/**    * Converts an instance of RelDataType to an instance of SqlDataTypeSpec.    *    * @param type         type descriptor    * @param charSetName  charSet name    * @param maxPrecision The max allowed precision.    * @return corresponding parse representation    */
+comment|/**    * Converts an instance of RelDataType to an instance of SqlDataTypeSpec.    *    * @param type         type descriptor    * @param charSetName  charSet name    * @param maxPrecision The max allowed precision.    * @param maxScale     max allowed scale    * @return corresponding parse representation    */
 specifier|public
 specifier|static
 name|SqlDataTypeSpec
@@ -4300,6 +4300,9 @@ name|charSetName
 parameter_list|,
 name|int
 name|maxPrecision
+parameter_list|,
+name|int
+name|maxScale
 parameter_list|)
 block|{
 name|SqlTypeName
@@ -4383,6 +4386,22 @@ else|:
 operator|-
 literal|1
 decl_stmt|;
+if|if
+condition|(
+name|maxScale
+operator|>
+literal|0
+operator|&&
+name|scale
+operator|>
+name|maxScale
+condition|)
+block|{
+name|scale
+operator|=
+name|maxScale
+expr_stmt|;
+block|}
 name|typeNameSpec
 operator|=
 operator|new
@@ -4608,6 +4627,9 @@ argument_list|(
 name|type
 argument_list|,
 name|charSetName
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 operator|-
 literal|1

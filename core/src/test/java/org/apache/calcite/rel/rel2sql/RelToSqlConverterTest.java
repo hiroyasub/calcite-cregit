@@ -1093,6 +1093,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -1296,6 +1306,10 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|()
+argument_list|,
+name|RelDataTypeSystem
+operator|.
+name|DEFAULT
 argument_list|)
 return|;
 block|}
@@ -1363,6 +1377,9 @@ argument_list|<
 name|SqlLibrary
 argument_list|>
 name|librarySet
+parameter_list|,
+name|RelDataTypeSystem
+name|typeSystem
 parameter_list|,
 name|Program
 modifier|...
@@ -1440,6 +1457,11 @@ operator|.
 name|operatorTable
 argument_list|(
 name|operatorTable
+argument_list|)
+operator|.
+name|typeSystem
+argument_list|(
+name|typeSystem
 argument_list|)
 operator|.
 name|build
@@ -3694,6 +3716,140 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4706">[CALCITE-4706]    * JDBC adapter generates casts exceeding Redshift's data types bounds</a>.    */
+annotation|@
+name|Test
+name|void
+name|testCastDecimalBigPrecision
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as decimal(60,2)) "
+operator|+
+literal|"from \"product\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRedshift
+init|=
+literal|"SELECT CAST(\"product_id\" AS DECIMAL(38, 2))\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withTypeSystem
+argument_list|(
+operator|new
+name|RelDataTypeSystemImpl
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|int
+name|getMaxNumericPrecision
+parameter_list|()
+block|{
+comment|// Ensures that parsed decimal will not be truncated during SQL to Rel transformation
+comment|// The default type system sets precision to 19 so it is not sufficient to test
+comment|// this change.
+return|return
+literal|100
+return|;
+block|}
+block|}
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4706">[CALCITE-4706]    * JDBC adapter generates casts exceeding Redshift's data types bounds</a>.    */
+annotation|@
+name|Test
+name|void
+name|testCastDecimalBigScale
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as decimal(2,90)) "
+operator|+
+literal|"from \"product\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRedshift
+init|=
+literal|"SELECT CAST(\"product_id\" AS DECIMAL(2, 37))\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4706">[CALCITE-4706]    * JDBC adapter generates casts exceeding Redshift's data types bounds</a>.    */
+annotation|@
+name|Test
+name|void
+name|testCastLongChar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as char(9999999)) "
+operator|+
+literal|"from \"product\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRedshift
+init|=
+literal|"SELECT CAST(\"product_id\" AS CHAR(4096))\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2713">[CALCITE-2713]    * JDBC adapter may generate casts on PostgreSQL for VARCHAR type exceeding    * max length</a>. */
 annotation|@
 name|Test
@@ -3717,6 +3873,22 @@ literal|"SELECT CAST(\"store_id\" AS VARCHAR(256))\n"
 operator|+
 literal|"FROM \"foodmart\".\"expense_fact\""
 decl_stmt|;
+specifier|final
+name|String
+name|expectedOracle
+init|=
+literal|"SELECT CAST(\"store_id\" AS VARCHAR(512))\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedRedshift
+init|=
+literal|"SELECT CAST(\"store_id\" AS VARCHAR(65535))\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -3729,19 +3901,6 @@ name|ok
 argument_list|(
 name|expectedPostgreSQL
 argument_list|)
-expr_stmt|;
-specifier|final
-name|String
-name|expectedOracle
-init|=
-literal|"SELECT CAST(\"store_id\" AS VARCHAR(512))\n"
-operator|+
-literal|"FROM \"foodmart\".\"expense_fact\""
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
 operator|.
 name|withOracleModifiedTypeSystem
 argument_list|()
@@ -3749,6 +3908,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedOracle
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
 argument_list|)
 expr_stmt|;
 block|}
@@ -22991,6 +23158,11 @@ name|Config
 argument_list|>
 name|config
 decl_stmt|;
+specifier|private
+specifier|final
+name|RelDataTypeSystem
+name|typeSystem
+decl_stmt|;
 name|Sql
 parameter_list|(
 name|CalciteAssert
@@ -23043,6 +23215,9 @@ name|RelNode
 argument_list|>
 argument_list|>
 name|transforms
+parameter_list|,
+name|RelDataTypeSystem
+name|typeSystem
 parameter_list|)
 block|{
 name|this
@@ -23098,6 +23273,19 @@ name|config
 operator|=
 name|config
 expr_stmt|;
+name|this
+operator|.
+name|typeSystem
+operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|typeSystem
+argument_list|,
+literal|"typeSystem"
+argument_list|)
+expr_stmt|;
 block|}
 name|Sql
 name|dialect
@@ -23125,6 +23313,8 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}
@@ -23159,6 +23349,8 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}
@@ -23707,6 +23899,8 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}
@@ -23741,6 +23935,39 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withTypeSystem
+parameter_list|(
+name|RelDataTypeSystem
+name|typeSystem
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|schemaSpec
+argument_list|,
+name|sql
+argument_list|,
+name|dialect
+argument_list|,
+name|parserConfig
+argument_list|,
+name|librarySet
+argument_list|,
+name|config
+argument_list|,
+name|relFn
+argument_list|,
+name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}
@@ -23800,6 +24027,8 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}
@@ -23926,6 +24155,8 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}
@@ -24123,6 +24354,8 @@ argument_list|,
 name|config
 argument_list|,
 name|librarySet
+argument_list|,
+name|typeSystem
 argument_list|)
 decl_stmt|;
 name|SqlNode
@@ -24234,6 +24467,8 @@ argument_list|,
 name|relFn
 argument_list|,
 name|transforms
+argument_list|,
+name|typeSystem
 argument_list|)
 return|;
 block|}

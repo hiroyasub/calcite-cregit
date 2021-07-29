@@ -1011,6 +1011,13 @@ operator|new
 name|RedshiftSqlDialect
 argument_list|(
 name|c
+operator|.
+name|withDataTypeSystem
+argument_list|(
+name|RedshiftSqlDialect
+operator|.
+name|TYPE_SYSTEM
+argument_list|)
 argument_list|)
 return|;
 case|case
