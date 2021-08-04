@@ -1105,6 +1105,18 @@ name|util
 operator|.
 name|function
 operator|.
+name|Consumer
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
 name|Function
 import|;
 end_import
@@ -20150,20 +20162,288 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4485">[CALCITE-4485]    * JDBC adapter generates invalid SQL when one of the joins is {@code INNER    * JOIN ... ON TRUE}</a>. */
 annotation|@
 name|Test
 name|void
-name|testCrossJoinEmulationForSpark
+name|testCommaCrossJoin
 parameter_list|()
 block|{
-name|String
-name|query
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|relFn
 init|=
-literal|"select * from \"employee\", \"department\""
+name|b
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"tpch"
+argument_list|,
+literal|"customer"
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|b
+operator|.
+name|groupKey
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"nation_name"
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|count
+argument_list|()
+operator|.
+name|as
+argument_list|(
+literal|"cnt1"
+argument_list|)
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"nation_name"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"cnt1"
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"cust"
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"tpch"
+argument_list|,
+literal|"lineitem"
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|b
+operator|.
+name|groupKey
+argument_list|()
+argument_list|,
+name|b
+operator|.
+name|count
+argument_list|()
+operator|.
+name|as
+argument_list|(
+literal|"cnt2"
+argument_list|)
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"cnt2"
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"lineitem"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|INNER
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"tpch"
+argument_list|,
+literal|"part"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|LEFT
+argument_list|,
+name|b
+operator|.
+name|equals
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|2
+argument_list|,
+literal|"cust"
+argument_list|,
+literal|"nation_name"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|field
+argument_list|(
+literal|2
+argument_list|,
+literal|"part"
+argument_list|,
+literal|"p_brand"
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"cust"
+argument_list|,
+literal|"nation_name"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|alias
+argument_list|(
+name|b
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MINUS
+argument_list|,
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"cnt1"
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"cnt2"
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"f1"
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// For documentation purposes, here is the query that was generated before
+comment|// [CALCITE-4485] was fixed.
+specifier|final
+name|String
+name|previousPostgresql
+init|=
+literal|""
+operator|+
+literal|"SELECT \"t\".\"nation_name\", \"t\".\"cnt1\" - \"t0\".\"cnt2\" AS \"f1\"\n"
+operator|+
+literal|"FROM (SELECT \"nation_name\", COUNT(*) AS \"cnt1\"\n"
+operator|+
+literal|"FROM \"tpch\".\"customer\"\n"
+operator|+
+literal|"GROUP BY \"nation_name\") AS \"t\",\n"
+operator|+
+literal|"(SELECT COUNT(*) AS \"cnt2\"\n"
+operator|+
+literal|"FROM \"tpch\".\"lineitem\") AS \"t0\"\n"
+operator|+
+literal|"LEFT JOIN \"tpch\".\"part\" ON \"t\".\"nation_name\" = \"part\".\"p_brand\""
 decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedPostgresql
+init|=
+literal|""
+operator|+
+literal|"SELECT \"t\".\"nation_name\", \"t\".\"cnt1\" - \"t0\".\"cnt2\" AS \"f1\"\n"
+operator|+
+literal|"FROM (SELECT \"nation_name\", COUNT(*) AS \"cnt1\"\n"
+operator|+
+literal|"FROM \"tpch\".\"customer\"\n"
+operator|+
+literal|"GROUP BY \"nation_name\") AS \"t\"\n"
+operator|+
+literal|"CROSS JOIN (SELECT COUNT(*) AS \"cnt2\"\n"
+operator|+
+literal|"FROM \"tpch\".\"lineitem\") AS \"t0\"\n"
+operator|+
+literal|"LEFT JOIN \"tpch\".\"part\" ON \"t\".\"nation_name\" = \"part\".\"p_brand\""
+decl_stmt|;
+name|relFn
+argument_list|(
+name|relFn
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|TPCH
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** A cartesian product is unparsed as a CROSS JOIN on Spark,    * comma join on other DBs.    *    * @see SqlDialect#emulateJoinTypeForCrossJoin()    */
+annotation|@
+name|Test
+name|void
+name|testCrossJoinEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expectedSpark
 init|=
 literal|"SELECT *\n"
 operator|+
@@ -20171,9 +20451,27 @@ literal|"FROM foodmart.employee\n"
 operator|+
 literal|"CROSS JOIN foodmart.department"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`employee`,\n"
+operator|+
+literal|"`foodmart`.`department`"
+decl_stmt|;
+name|Consumer
+argument_list|<
+name|String
+argument_list|>
+name|fn
+init|=
+name|sql
+lambda|->
 name|sql
 argument_list|(
-name|query
+name|sql
 argument_list|)
 operator|.
 name|withSpark
@@ -20181,7 +20479,234 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
+name|expectedSpark
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+decl_stmt|;
+name|fn
+operator|.
+name|accept
+argument_list|(
+literal|"select * from \"employee\", \"department\""
+argument_list|)
+expr_stmt|;
+name|fn
+operator|.
+name|accept
+argument_list|(
+literal|"select * from \"employee\" cross join \"department\""
+argument_list|)
+expr_stmt|;
+name|fn
+operator|.
+name|accept
+argument_list|(
+literal|"select * from \"employee\" join \"department\" on true"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testCommaCrossJoin()} (but uses SQL)    * and {@link #testCrossJoinEmulation()} (but is 3 way). We generate a comma    * join if the only joins are {@code CROSS JOIN} or    * {@code INNER JOIN ... ON TRUE}, and if we're not on Spark. */
+annotation|@
+name|Test
+name|void
+name|testCommaCrossJoin3way
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"store\" as s\n"
+operator|+
+literal|"inner join \"employee\" as e on true\n"
+operator|+
+literal|"cross join \"department\" as d"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`store`,\n"
+operator|+
+literal|"`foodmart`.`employee`,\n"
+operator|+
+literal|"`foodmart`.`department`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedSpark
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.store\n"
+operator|+
+literal|"CROSS JOIN foodmart.employee\n"
+operator|+
+literal|"CROSS JOIN foodmart.department"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedSpark
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testCommaCrossJoin3way()}, but shows that if there is a    * {@code LEFT JOIN} in the FROM clause, we can't use comma-join. */
+annotation|@
+name|Test
+name|void
+name|testLeftJoinPreventsCommaJoin
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"store\" as s\n"
+operator|+
+literal|"left join \"employee\" as e on true\n"
+operator|+
+literal|"cross join \"department\" as d"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`store`\n"
+operator|+
+literal|"LEFT JOIN `foodmart`.`employee` ON TRUE\n"
+operator|+
+literal|"CROSS JOIN `foodmart`.`department`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testLeftJoinPreventsCommaJoin()}, but the non-cross-join    * occurs later in the FROM clause. */
+annotation|@
+name|Test
+name|void
+name|testRightJoinPreventsCommaJoin
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"store\" as s\n"
+operator|+
+literal|"cross join \"employee\" as e\n"
+operator|+
+literal|"right join \"department\" as d on true"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`store`\n"
+operator|+
+literal|"CROSS JOIN `foodmart`.`employee`\n"
+operator|+
+literal|"RIGHT JOIN `foodmart`.`department` ON TRUE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testLeftJoinPreventsCommaJoin()}, but the impediment is a    * {@code JOIN} whose condition is not {@code TRUE}. */
+annotation|@
+name|Test
+name|void
+name|testOnConditionPreventsCommaJoin
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"store\" as s\n"
+operator|+
+literal|"join \"employee\" as e on s.\"store_id\" = e.\"store_id\"\n"
+operator|+
+literal|"cross join \"department\" as d"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`store`\n"
+operator|+
+literal|"INNER JOIN `foodmart`.`employee`"
+operator|+
+literal|" ON `store`.`store_id` = `employee`.`store_id`\n"
+operator|+
+literal|"CROSS JOIN `foodmart`.`department`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
 argument_list|)
 expr_stmt|;
 block|}
