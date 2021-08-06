@@ -182,6 +182,9 @@ comment|/**  * VolcanoRelMetadataProvider implements the {@link RelMetadataProvi
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|VolcanoRelMetadataProvider
@@ -218,6 +221,9 @@ return|return
 literal|103
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Override
 specifier|public

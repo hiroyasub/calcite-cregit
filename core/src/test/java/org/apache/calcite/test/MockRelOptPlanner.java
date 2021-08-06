@@ -851,6 +851,9 @@ literal|true
 return|;
 block|}
 annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+annotation|@
 name|Override
 specifier|public
 name|long
@@ -864,6 +867,9 @@ return|return
 name|metadataTimestamp
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 comment|/** Allow tests to tweak the timestamp. */
 specifier|public
 name|void

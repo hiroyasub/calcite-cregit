@@ -433,7 +433,10 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a metadata interface.    *    * @param<M> Type of metadata being requested    * @param metadataClass Metadata interface    * @param mq Metadata query    *    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
+comment|/**    * Returns a metadata interface.    *    * @deprecated Use {@link RelMetadataQuery} via {@link #getCluster()}.    *    * @param<M> Type of metadata being requested    * @param metadataClass Metadata interface    * @param mq Metadata query    *    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 operator|<
 expr|@
 name|Nullable

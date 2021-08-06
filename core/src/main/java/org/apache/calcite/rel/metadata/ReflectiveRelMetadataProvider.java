@@ -379,6 +379,9 @@ implements|,
 name|ReflectiveVisitor
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|private
 specifier|final
 name|ConcurrentMap
@@ -392,6 +395,9 @@ name|UnboundMetadata
 argument_list|>
 name|map
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|private
 specifier|final
 name|Class
@@ -1340,6 +1346,15 @@ end_comment
 
 begin_annotation
 annotation|@
+name|Deprecated
+end_annotation
+
+begin_comment
+comment|// to be removed before 2.0
+end_comment
+
+begin_annotation
+annotation|@
 name|Override
 end_annotation
 
@@ -1413,6 +1428,9 @@ block|,
 literal|"SuspiciousMethodCalls"
 block|}
 argument_list|)
+expr|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 operator|<
 expr|@

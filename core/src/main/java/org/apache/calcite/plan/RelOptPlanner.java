@@ -417,6 +417,9 @@ name|newListener
 parameter_list|)
 function_decl|;
 comment|/**    * Gives this planner a chance to register one or more    * {@link RelMetadataProvider}s in the chain which will be used to answer    * metadata queries.    *    *<p>Planners which use their own relational expressions internally    * to represent concepts such as equivalence classes will generally need to    * supply corresponding metadata providers.</p>    *    * @param list receives planner's custom providers, if any    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|void
 name|registerMetadataProviders
 parameter_list|(
@@ -428,6 +431,9 @@ name|list
 parameter_list|)
 function_decl|;
 comment|/**    * Gets a timestamp for a given rel's metadata. This timestamp is used by    * {@link CachingRelMetadataProvider} to decide whether cached metadata has    * gone stale.    *    * @param rel rel of interest    * @return timestamp of last change which might affect metadata derivation    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|long
 name|getRelMetadataTimestamp
 parameter_list|(

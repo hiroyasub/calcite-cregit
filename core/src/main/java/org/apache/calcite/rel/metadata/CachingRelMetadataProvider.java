@@ -200,6 +200,9 @@ comment|/**  * Implementation of the {@link RelMetadataProvider}  * interface th
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|CachingRelMetadataProvider
@@ -257,6 +260,9 @@ name|planner
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Override
 specifier|public

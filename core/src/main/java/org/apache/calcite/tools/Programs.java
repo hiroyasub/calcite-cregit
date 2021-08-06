@@ -935,6 +935,11 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a program that executes a {@link HepProgram}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 specifier|static
 name|Program

@@ -6692,6 +6692,9 @@ return|;
 block|}
 comment|// implement RelOptPlanner
 annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+annotation|@
 name|Override
 specifier|public
 name|void
@@ -6717,6 +6720,9 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Override
 specifier|public

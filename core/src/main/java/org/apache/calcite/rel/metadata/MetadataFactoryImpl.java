@@ -146,10 +146,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link MetadataFactory} that gets providers from a  * {@link RelMetadataProvider} and stores them in a cache.  *  *<p>The cache does not store metadata. It remembers which providers can  * provide which kinds of metadata, for which kinds of relational  * expressions.</p>  */
+comment|/**  * Implementation of {@link MetadataFactory} that gets providers from a  * {@link RelMetadataProvider} and stores them in a cache.  *  *<p>The cache does not store metadata. It remembers which providers can  * provide which kinds of metadata, for which kinds of relational  * expressions.</p>  *  * @deprecated Use {@link RelMetadataQuery}.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|MetadataFactoryImpl

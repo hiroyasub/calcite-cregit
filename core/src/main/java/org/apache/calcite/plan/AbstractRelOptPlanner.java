@@ -991,6 +991,9 @@ parameter_list|)
 block|{
 block|}
 annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+annotation|@
 name|Override
 specifier|public
 name|long
@@ -1142,10 +1145,8 @@ argument_list|)
 return|;
 block|}
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Override
 specifier|public
@@ -1216,6 +1217,9 @@ name|newListener
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Override
 specifier|public

@@ -772,13 +772,6 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-name|planner
-operator|.
-name|registerMetadataProviders
-argument_list|(
-name|list
-argument_list|)
-expr_stmt|;
 name|RelMetadataProvider
 name|plannerChain
 init|=

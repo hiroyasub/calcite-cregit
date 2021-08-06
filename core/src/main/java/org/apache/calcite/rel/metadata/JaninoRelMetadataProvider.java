@@ -1310,6 +1310,9 @@ argument_list|()
 return|;
 block|}
 annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+annotation|@
 name|Override
 specifier|public
 operator|<

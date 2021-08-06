@@ -184,6 +184,9 @@ comment|/**  * HepRelMetadataProvider implements the {@link RelMetadataProvider}
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 class|class
 name|HepRelMetadataProvider
 implements|implements
@@ -219,6 +222,9 @@ return|return
 literal|107
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Override
 specifier|public

@@ -121,22 +121,6 @@ name|rel
 operator|.
 name|metadata
 operator|.
-name|MetadataFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|metadata
-operator|.
 name|RelMetadataProvider
 import|;
 end_import
@@ -385,6 +369,9 @@ specifier|private
 name|RelMetadataProvider
 name|metadataProvider
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|private
 name|MetadataFactory
 name|metadataFactory
@@ -711,6 +698,11 @@ block|,
 literal|"this.metadataFactory"
 block|}
 argument_list|)
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|void
 name|setMetadataProvider
@@ -735,6 +727,16 @@ operator|.
 name|metadataFactory
 operator|=
 operator|new
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
 name|MetadataFactoryImpl
 argument_list|(
 name|metadataProvider
@@ -758,6 +760,10 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Returns a {@link MetadataFactory}.    *    * @deprecated Use {@link #getMetadataQuery()}.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|MetadataFactory
 name|getMetadataFactory
