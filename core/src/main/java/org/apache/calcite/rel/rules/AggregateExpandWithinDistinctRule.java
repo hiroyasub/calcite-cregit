@@ -239,6 +239,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|mapping
+operator|.
+name|IntPair
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -511,26 +527,6 @@ name|AGGREGATE_REDUCE_FUNCTIONS
 operator|::
 name|canReduce
 argument_list|)
-comment|// Don't know that we can handle FILTER yet
-operator|&&
-name|aggregate
-operator|.
-name|getAggCallList
-argument_list|()
-operator|.
-name|stream
-argument_list|()
-operator|.
-name|noneMatch
-argument_list|(
-name|c
-lambda|->
-name|c
-operator|.
-name|filterArg
-operator|>=
-literal|0
-argument_list|)
 comment|// Don't think we can handle GROUPING SETS yet
 operator|&&
 name|aggregate
@@ -575,7 +571,7 @@ comment|//   GROUP BY deptno
 comment|//
 comment|// or in algebra,
 comment|//
-comment|//   Aggregate($0, SUM($2), SUM($3) WITHIN DISTINCT ($4))
+comment|//   Aggregate($0, SUM($2), SUM($2) WITHIN DISTINCT ($4))
 comment|//     Scan(emp)
 comment|//
 comment|// We plan to generate the following:
@@ -596,7 +592,6 @@ comment|// as if the user had written
 comment|//
 comment|//   SUM(sal) WITHIN DISTINCT (sal)
 comment|//
-comment|// TODO: handle "agg(x) filter (b)"
 specifier|final
 name|List
 argument_list|<
@@ -720,6 +715,7 @@ comment|// Remove group keys. E.g.
 comment|//   sum(x) within distinct (y, z) ... group by y
 comment|// can be simplified to
 comment|//   sum(x) within distinct (z) ... group by y
+comment|// Note that this assumes a single grouping set for the original agg.
 name|distinctKeys
 operator|=
 name|distinctKeys
@@ -749,14 +745,12 @@ argument_list|,
 name|aggCall
 argument_list|)
 expr_stmt|;
-assert|assert
-name|aggCall
-operator|.
-name|filterArg
-operator|<
-literal|0
-assert|;
 block|}
+comment|// Compute the set of all grouping sets that will be used in the output
+comment|// query. For each WITHIN DISTINCT aggregate call, we will need a grouping
+comment|// set that is the union of the aggregate call's unique keys and the input
+comment|// query's overall grouping. Redundant grouping sets can be reused for
+comment|// multiple aggregate calls.
 specifier|final
 name|Set
 argument_list|<
@@ -773,16 +767,6 @@ operator|.
 name|ORDERING
 argument_list|)
 decl_stmt|;
-name|groupSetTreeSet
-operator|.
-name|add
-argument_list|(
-name|aggregate
-operator|.
-name|getGroupSet
-argument_list|()
-argument_list|)
-expr_stmt|;
 for|for
 control|(
 name|ImmutableBitSet
@@ -794,19 +778,21 @@ name|keySet
 argument_list|()
 control|)
 block|{
-if|if
-condition|(
-name|key
-operator|==
-name|notDistinct
-condition|)
-block|{
-continue|continue;
-block|}
 name|groupSetTreeSet
 operator|.
 name|add
 argument_list|(
+operator|(
+name|key
+operator|==
+name|notDistinct
+operator|)
+condition|?
+name|aggregate
+operator|.
+name|getGroupSet
+argument_list|()
+else|:
 name|ImmutableBitSet
 operator|.
 name|of
@@ -837,6 +823,17 @@ name|copyOf
 argument_list|(
 name|groupSetTreeSet
 argument_list|)
+decl_stmt|;
+specifier|final
+name|boolean
+name|hasMultipleGroupSets
+init|=
+name|groupSets
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
 decl_stmt|;
 specifier|final
 name|ImmutableBitSet
@@ -904,7 +901,7 @@ comment|//   GROUP BY GROUPING SETS ((deptno), (deptno, job))
 comment|//
 comment|// or in algebra,
 comment|//
-comment|//   Aggregate([($0), ($0, $2)], SUM($2), MIN($2), MAX($2), GROUPING($0, $4))
+comment|//   Aggregate([($0), ($0, $4)], SUM($2), MIN($2), MAX($2), GROUPING($0, $4))
 comment|//     Scan(emp)
 specifier|final
 name|RelBuilder
@@ -939,6 +936,7 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|// Helper class for building the inner query.
 comment|// CHECKSTYLE: IGNORE 1
 class|class
 name|Registrar
@@ -952,10 +950,11 @@ operator|.
 name|cardinality
 argument_list|()
 decl_stmt|;
+comment|/** Map of input fields (below the original aggregation) and filter args        * to inner query aggregate calls. */
 specifier|final
 name|Map
 argument_list|<
-name|Integer
+name|IntPair
 argument_list|,
 name|Integer
 argument_list|>
@@ -966,6 +965,7 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|/** Map of aggregate calls from the original aggregation to inner query        * aggregate calls. */
 specifier|final
 name|Map
 argument_list|<
@@ -980,6 +980,21 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|/** Map of aggregate calls from the original aggregation to inner-query        * {@code COUNT(*)} calls, which are only needed for filters in the outer        * aggregate when the original aggregate call does not ignore null        * inputs. */
+specifier|final
+name|Map
+argument_list|<
+name|Integer
+argument_list|,
+name|Integer
+argument_list|>
+name|counts
+init|=
+operator|new
+name|HashMap
+argument_list|<>
+argument_list|()
+decl_stmt|;
 name|List
 argument_list|<
 name|Integer
@@ -991,6 +1006,9 @@ argument_list|<
 name|Integer
 argument_list|>
 name|fields
+parameter_list|,
+name|int
+name|filterArg
 parameter_list|)
 block|{
 return|return
@@ -1000,9 +1018,16 @@ name|transform
 argument_list|(
 name|fields
 argument_list|,
+name|f
+lambda|->
 name|this
-operator|::
+operator|.
 name|field
+argument_list|(
+name|f
+argument_list|,
+name|filterArg
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1011,6 +1036,9 @@ name|field
 parameter_list|(
 name|int
 name|field
+parameter_list|,
+name|int
+name|filterArg
 parameter_list|)
 block|{
 return|return
@@ -1022,16 +1050,27 @@ name|args
 operator|.
 name|get
 argument_list|(
+name|IntPair
+operator|.
+name|of
+argument_list|(
 name|field
+argument_list|,
+name|filterArg
+argument_list|)
 argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/** Computes an aggregate call argument's values for a        * {@code WITHIN DISTINCT} aggregate call.        *        *<p>For example, to compute        * {@code SUM(x) WITHIN DISTINCT (y) GROUP BY (z)},        * the inner aggregate must first group {@code x} by {@code (y, z)}        *&mdash; using {@code MIN} to select the (hopefully) unique value of        * {@code x} for each {@code (y, z)} group. Actually summing over the        * grouped {@code x} values must occur in an outer aggregate.        *        * @param field Index of an input field that's used in a        *         {@code WITHIN DISTINCT} aggregate call        * @param filterArg Filter arg used in the original aggregate call, or        *         {@code -1} if there is no filter. We use the same filter in        *         the inner query.        * @return Index of the inner query aggregate call representing the        *         grouped field, which can be referenced in the outer query        *         aggregate call        */
 name|int
 name|register
 parameter_list|(
 name|int
 name|field
+parameter_list|,
+name|int
+name|filterArg
 parameter_list|)
 block|{
 return|return
@@ -1039,7 +1078,14 @@ name|args
 operator|.
 name|computeIfAbsent
 argument_list|(
+name|IntPair
+operator|.
+name|of
+argument_list|(
 name|field
+argument_list|,
+name|filterArg
+argument_list|)
 argument_list|,
 name|j
 lambda|->
@@ -1055,10 +1101,11 @@ operator|.
 name|size
 argument_list|()
 decl_stmt|;
-name|aggCalls
+name|RelBuilder
 operator|.
-name|add
-argument_list|(
+name|AggCall
+name|groupedField
+init|=
 name|b
 operator|.
 name|aggregateCall
@@ -1071,7 +1118,29 @@ name|b
 operator|.
 name|field
 argument_list|(
-name|j
+name|field
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|aggCalls
+operator|.
+name|add
+argument_list|(
+name|filterArg
+operator|<
+literal|0
+condition|?
+name|groupedField
+else|:
+name|groupedField
+operator|.
+name|filter
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+name|filterArg
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1084,10 +1153,8 @@ name|throwIfNotUnique
 argument_list|()
 condition|)
 block|{
-name|aggCalls
-operator|.
-name|add
-argument_list|(
+name|groupedField
+operator|=
 name|b
 operator|.
 name|aggregateCall
@@ -1100,7 +1167,29 @@ name|b
 operator|.
 name|field
 argument_list|(
-name|j
+name|field
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|aggCalls
+operator|.
+name|add
+argument_list|(
+name|filterArg
+operator|<
+literal|0
+condition|?
+name|groupedField
+else|:
+name|groupedField
+operator|.
+name|filter
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+name|filterArg
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1113,6 +1202,7 @@ block|}
 argument_list|)
 return|;
 block|}
+comment|/** Registers an aggregate call that is<em>not</em> a        * {@code WITHIN DISTINCT} call.        *        *<p>Unlike the case handled by {@link #register(int, int)} above,        * aggregate calls without any distinct keys do not need a second round        * of aggregation in the outer query, so they can be computed "as-is" in        * the inner query.        *        * @param i Index of the aggregate call in the original aggregation        * @param aggregateCall Original aggregate call        * @return Index of the aggregate call in the computed inner query        */
 name|int
 name|registerAgg
 parameter_list|(
@@ -1173,6 +1263,92 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/** Registers an extra {@code COUNT} aggregate call when it's needed to        * filter out null inputs in the outer aggregate.        *        *<p>This should only be called for aggregate calls with filters. It's        * possible that the filter would eliminate all input rows to the        * {@code MIN} call in the inner query, so calls in the outer        * aggregate may need to be aware of this. See usage of        * {@link AggregateExpandWithinDistinctRule#mustBeCounted(AggregateCall)}.        *        * @param filterArg The original aggregate call's filter; must be        *                 non-negative        * @return Index of the {@code COUNT} call in the computed inner query        */
+name|int
+name|registerCount
+parameter_list|(
+name|int
+name|filterArg
+parameter_list|)
+block|{
+assert|assert
+name|filterArg
+operator|>=
+literal|0
+assert|;
+return|return
+name|counts
+operator|.
+name|computeIfAbsent
+argument_list|(
+name|filterArg
+argument_list|,
+name|i
+lambda|->
+block|{
+specifier|final
+name|int
+name|ordinal
+init|=
+name|g
+operator|+
+name|aggCalls
+operator|.
+name|size
+argument_list|()
+decl_stmt|;
+name|aggCalls
+operator|.
+name|add
+argument_list|(
+name|b
+operator|.
+name|aggregateCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|COUNT
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+name|filterArg
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|ordinal
+return|;
+block|}
+argument_list|)
+return|;
+block|}
+name|int
+name|getCount
+parameter_list|(
+name|int
+name|filterArg
+parameter_list|)
+block|{
+return|return
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|counts
+operator|.
+name|get
+argument_list|(
+name|filterArg
 argument_list|)
 argument_list|)
 return|;
@@ -1238,26 +1414,61 @@ expr_stmt|;
 block|}
 else|else
 block|{
+for|for
+control|(
+name|int
+name|inputIdx
+range|:
 name|c
 operator|.
 name|getArgList
 argument_list|()
-operator|.
-name|forEach
-argument_list|(
+control|)
+block|{
 name|registrar
-operator|::
+operator|.
 name|register
+argument_list|(
+name|inputIdx
+argument_list|,
+name|c
+operator|.
+name|filterArg
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|mustBeCounted
+argument_list|(
+name|c
+argument_list|)
+condition|)
+block|{
+name|registrar
+operator|.
+name|registerCount
+argument_list|(
+name|c
+operator|.
+name|filterArg
 argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 argument_list|)
 expr_stmt|;
+comment|// Add an additional GROUPING() aggregate call so we can select only the
+comment|// relevant inner-aggregate rows from the outer aggregate. If there is only
+comment|// 1 grouping set (i.e. every aggregate call has the same distinct keys),
+comment|// no GROUPING() call is necessary.
 specifier|final
 name|int
 name|grouping
 init|=
+name|hasMultipleGroupSets
+condition|?
 name|registrar
 operator|.
 name|registerAgg
@@ -1281,6 +1492,9 @@ name|fullGroupList
 argument_list|)
 argument_list|)
 argument_list|)
+else|:
+operator|-
+literal|1
 decl_stmt|;
 name|b
 operator|.
@@ -1354,10 +1568,18 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|final
 name|RexNode
 name|groupFilter
 init|=
+literal|null
+decl_stmt|;
+if|if
+condition|(
+name|hasMultipleGroupSets
+condition|)
+block|{
+name|groupFilter
+operator|=
 name|b
 operator|.
 name|equals
@@ -1391,7 +1613,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|filters
 operator|.
 name|add
@@ -1399,7 +1621,7 @@ argument_list|(
 name|groupFilter
 argument_list|)
 expr_stmt|;
-specifier|final
+block|}
 name|RelBuilder
 operator|.
 name|AggCall
@@ -1440,6 +1662,14 @@ expr_stmt|;
 block|}
 else|else
 block|{
+comment|// The inputs to this aggregate are outputs from MIN() calls from the
+comment|// inner agg, and MIN() returns null iff it has no non-null inputs,
+comment|// which can only happen if an original aggregate's filter causes all
+comment|// non-null input rows to be discarded for a particular group in the
+comment|// inner aggregate. In this case, it should be ignored by the outer
+comment|// aggregate as well. In case the aggregate call does not naturally
+comment|// ignore null inputs, we add a filter based on a COUNT() in the inner
+comment|// aggregate.
 name|aggCall
 operator|=
 name|b
@@ -1463,10 +1693,54 @@ name|c
 operator|.
 name|getArgList
 argument_list|()
+argument_list|,
+name|c
+operator|.
+name|filterArg
 argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|mustBeCounted
+argument_list|(
+name|c
+argument_list|)
+condition|)
+block|{
+name|filters
+operator|.
+name|add
+argument_list|(
+name|b
+operator|.
+name|greaterThan
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+name|registrar
+operator|.
+name|getCount
+argument_list|(
+name|c
+operator|.
+name|filterArg
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|config
@@ -1486,6 +1760,72 @@ name|getArgList
 argument_list|()
 control|)
 block|{
+name|RexNode
+name|isUniqueCondition
+init|=
+name|b
+operator|.
+name|isNotDistinctFrom
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+name|registrar
+operator|.
+name|field
+argument_list|(
+name|j
+argument_list|,
+name|c
+operator|.
+name|filterArg
+argument_list|)
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|field
+argument_list|(
+name|registrar
+operator|.
+name|field
+argument_list|(
+name|j
+argument_list|,
+name|c
+operator|.
+name|filterArg
+argument_list|)
+operator|+
+literal|1
+argument_list|)
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|groupFilter
+operator|!=
+literal|null
+condition|)
+block|{
+name|isUniqueCondition
+operator|=
+name|b
+operator|.
+name|or
+argument_list|(
+name|b
+operator|.
+name|not
+argument_list|(
+name|groupFilter
+argument_list|)
+argument_list|,
+name|isUniqueCondition
+argument_list|)
+expr_stmt|;
+block|}
 name|String
 name|message
 init|=
@@ -1503,48 +1843,7 @@ name|SqlInternalOperators
 operator|.
 name|THROW_UNLESS
 argument_list|,
-name|b
-operator|.
-name|or
-argument_list|(
-name|b
-operator|.
-name|not
-argument_list|(
-name|groupFilter
-argument_list|)
-argument_list|,
-name|b
-operator|.
-name|isNotDistinctFrom
-argument_list|(
-name|b
-operator|.
-name|field
-argument_list|(
-name|registrar
-operator|.
-name|field
-argument_list|(
-name|j
-argument_list|)
-argument_list|)
-argument_list|,
-name|b
-operator|.
-name|field
-argument_list|(
-name|registrar
-operator|.
-name|field
-argument_list|(
-name|j
-argument_list|)
-operator|+
-literal|1
-argument_list|)
-argument_list|)
-argument_list|)
+name|isUniqueCondition
 argument_list|,
 name|b
 operator|.
@@ -1558,10 +1857,18 @@ expr_stmt|;
 block|}
 block|}
 block|}
-name|aggCalls
+if|if
+condition|(
+name|filters
 operator|.
-name|add
-argument_list|(
+name|size
+argument_list|()
+operator|>
+literal|0
+condition|)
+block|{
+name|aggCall
+operator|=
 name|aggCall
 operator|.
 name|filter
@@ -1573,6 +1880,13 @@ argument_list|(
 name|filters
 argument_list|)
 argument_list|)
+expr_stmt|;
+block|}
+name|aggCalls
+operator|.
+name|add
+argument_list|(
+name|aggCall
 argument_list|)
 expr_stmt|;
 block|}
@@ -1639,6 +1953,34 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+specifier|static
+name|boolean
+name|mustBeCounted
+parameter_list|(
+name|AggregateCall
+name|aggCall
+parameter_list|)
+block|{
+comment|// Always count filtered inner aggregates to be safe.
+comment|//
+comment|// It's possible that, for some aggregate calls (namely, those that
+comment|// completely ignore null inputs), we could neglect counting the
+comment|// grouped-and-filtered rows of the inner aggregate and filtering the empty
+comment|// ones out from the outer aggregate, since those empty groups would produce
+comment|// null values as the result of MIN and thus be ignored by the outer
+comment|// aggregate anyway.
+comment|//
+comment|// Note that using "aggCall.ignoreNulls()" is not sufficient to determine
+comment|// when it's safe to do this, since for COUNT the value of ignoreNulls()
+comment|// should generally be true even though COUNT(*) will never ignore anything.
+return|return
+name|aggCall
+operator|.
+name|hasFilter
+argument_list|()
+return|;
+block|}
 comment|/** Converts a {@code DISTINCT} aggregate call into an equivalent one with    * {@code WITHIN DISTINCT}.    *    *<p>Examples:    *<ul>    *<li>{@code SUM(DISTINCT x)}&rarr;    *     {@code SUM(x) WITHIN DISTINCT (x)} has distinct key (x);    *<li>{@code SUM(DISTINCT x)} WITHIN DISTINCT (y)&rarr;    *     {@code SUM(x) WITHIN DISTINCT (x)} has distinct key (x);    *<li>{@code SUM(x)} WITHIN DISTINCT (y, z) has distinct key (y, z);    *<li>{@code SUM(x)} has no distinct key.    *</ul>    */
 specifier|private
 specifier|static
@@ -1690,6 +2032,11 @@ operator|!=
 name|SqlKind
 operator|.
 name|COUNT
+operator|||
+name|aggregateCall
+operator|.
+name|hasFilter
+argument_list|()
 operator|||
 name|isNullable
 operator|.

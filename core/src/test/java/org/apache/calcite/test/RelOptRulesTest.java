@@ -7308,11 +7308,11 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Tests that {@link AggregateExpandWithinDistinctRule} treats    * "COUNT(DISTINCT x)" as if it were "COUNT(x) WITHIN DISTINCT (x)". */
+comment|/** Tests {@link AggregateExpandWithinDistinctRule}. If all aggregate calls    * have the same distinct keys, there is no need for multiple grouping    * sets. */
 annotation|@
 name|Test
 name|void
-name|testWithinDistinctCountDistinct
+name|testWithinDistinctUniformDistinctKeys
 parameter_list|()
 block|{
 specifier|final
@@ -7321,13 +7321,68 @@ name|sql
 init|=
 literal|"SELECT deptno,\n"
 operator|+
-literal|"  SUM(sal) WITHIN DISTINCT (job) AS ss_j,\n"
+literal|" SUM(sal) WITHIN DISTINCT (job),\n"
 operator|+
-literal|"  COUNT(DISTINCT job) cdj,\n"
+literal|" AVG(comm) WITHIN DISTINCT (job)\n"
 operator|+
-literal|"  COUNT(job) WITHIN DISTINCT (job) AS cj_j,\n"
+literal|"FROM emp\n"
 operator|+
-literal|"  COUNT(DISTINCT job) WITHIN DISTINCT (job) AS cdj_j\n"
+literal|"GROUP BY deptno"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests {@link AggregateExpandWithinDistinctRule}. If all aggregate calls    * have the same distinct keys, and we're not checking for true uniqueness,    * there is no need for filtering in the outer aggregate. */
+annotation|@
+name|Test
+name|void
+name|testWithinDistinctUniformDistinctKeysNoThrow
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno,\n"
+operator|+
+literal|" SUM(sal) WITHIN DISTINCT (job),\n"
+operator|+
+literal|" AVG(comm) WITHIN DISTINCT (job)\n"
 operator|+
 literal|"FROM emp\n"
 operator|+
@@ -7362,6 +7417,327 @@ argument_list|)
 operator|.
 name|toRule
 argument_list|()
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests that {@link AggregateExpandWithinDistinctRule} treats    * "COUNT(DISTINCT x)" as if it were "COUNT(x) WITHIN DISTINCT (x)". */
+annotation|@
+name|Test
+name|void
+name|testWithinDistinctCountDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno,\n"
+operator|+
+literal|"  SUM(sal) WITHIN DISTINCT (comm) AS ss_c,\n"
+operator|+
+literal|"  COUNT(DISTINCT job) cdj,\n"
+operator|+
+literal|"  COUNT(job) WITHIN DISTINCT (job) AS cj_j,\n"
+operator|+
+literal|"  COUNT(DISTINCT job) WITHIN DISTINCT (job) AS cdj_j,\n"
+operator|+
+literal|"  COUNT(DISTINCT job) FILTER (WHERE sal> 1000) AS cdj_filtered\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY deptno"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+operator|.
+name|config
+operator|.
+name|withThrowIfNotUnique
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|toRule
+argument_list|()
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4726">[CALCITE-4726]    * Support aggregate calls with a FILTER clause in    * AggregateExpandWithinDistinctRule</a>.    *    *<p>Tests {@link AggregateExpandWithinDistinctRule} with different    * distinct keys and different filters for each aggregate call. */
+annotation|@
+name|Test
+name|void
+name|testWithinDistinctFilteredAggs
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno,\n"
+operator|+
+literal|" SUM(sal) WITHIN DISTINCT (job) FILTER (WHERE comm> 10),\n"
+operator|+
+literal|" AVG(comm) WITHIN DISTINCT (sal) FILTER (WHERE ename LIKE '%ok%')\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY deptno"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests {@link AggregateExpandWithinDistinctRule}. Includes multiple    * different filters for the aggregate calls, and all aggregate calls have the    * same distinct keys, so there is no need to filter based on    * {@code GROUPING()}. */
+annotation|@
+name|Test
+name|void
+name|testWithinDistinctFilteredAggsUniformDistinctKeys
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno,\n"
+operator|+
+literal|" SUM(sal) WITHIN DISTINCT (job) FILTER (WHERE comm> 10),\n"
+operator|+
+literal|" AVG(comm) WITHIN DISTINCT (job) FILTER (WHERE ename LIKE '%ok%')\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY deptno"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests {@link AggregateExpandWithinDistinctRule}. Includes multiple    * different filters for the aggregate calls, and all aggregate calls have the    * same distinct keys, so there is no need to filter based on    * {@code GROUPING()}. Does<em>not</em> throw if not unique. */
+annotation|@
+name|Test
+name|void
+name|testWithinDistinctFilteredAggsUniformDistinctKeysNoThrow
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno,\n"
+operator|+
+literal|" SUM(sal) WITHIN DISTINCT (job) FILTER (WHERE comm> 10),\n"
+operator|+
+literal|" AVG(comm) WITHIN DISTINCT (job) FILTER (WHERE ename LIKE '%ok%')\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY deptno"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+operator|.
+name|config
+operator|.
+name|withThrowIfNotUnique
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|toRule
+argument_list|()
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests {@link AggregateExpandWithinDistinctRule}. Includes multiple    * identical filters for the aggregate calls. The filters should be    * re-used. */
+annotation|@
+name|Test
+name|void
+name|testWithinDistinctFilteredAggsSameFilter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno,\n"
+operator|+
+literal|" SUM(sal) WITHIN DISTINCT (job) FILTER (WHERE ename LIKE '%ok%'),\n"
+operator|+
+literal|" AVG(comm) WITHIN DISTINCT (sal) FILTER (WHERE ename LIKE '%ok%')\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY deptno"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
 argument_list|)
 operator|.
 name|build

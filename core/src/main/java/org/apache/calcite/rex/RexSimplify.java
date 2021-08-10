@@ -2039,6 +2039,7 @@ return|;
 block|}
 comment|/**    * Try to find a literal with the given value in the input list.    * The type of the literal must be one of the numeric types.    */
 specifier|private
+specifier|static
 name|int
 name|findLiteralIndex
 parameter_list|(
