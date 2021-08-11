@@ -18907,6 +18907,19 @@ literal|"from (values (1, 'x'), (2, 'yy')) as t(\"a\", \"b\")"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT `a`\n"
+operator|+
+literal|"FROM (SELECT 1 AS `a`, 'x ' AS `b`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2 AS `a`, 'yy' AS `b`)"
+decl_stmt|;
+comment|// almost the same as MySQL
+specifier|final
+name|String
 name|expectedHsqldb
 init|=
 literal|"SELECT a\n"
@@ -18992,6 +19005,14 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 operator|.
 name|withBigQuery
@@ -19118,6 +19139,12 @@ literal|"FROM (VALUES (NULL, NULL)) AS \"t\" (\"X\", \"Y\")\n"
 operator|+
 literal|"WHERE 1 = 0"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedClickHouse
+init|=
+name|expectedMysql
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -19128,6 +19155,14 @@ argument_list|(
 name|rules
 argument_list|,
 literal|null
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 operator|.
 name|withMysql
@@ -19155,7 +19190,7 @@ name|expectedPostgresql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests SELECT without FROM clause; effectively the same as a VALUES    * query. */
+comment|/** Tests SELECT without FROM clause; effectively the same as a VALUES    * query.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4724">[CALCITE-4724]    * In JDBC adapter for ClickHouse, implement Values by generating SELECT    * without FROM</a>. */
 annotation|@
 name|Test
 name|void
@@ -19176,6 +19211,12 @@ literal|"SELECT 2 + 2"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedClickHouse
+init|=
+name|expectedBigQuery
+decl_stmt|;
+specifier|final
+name|String
 name|expectedHive
 init|=
 name|expectedBigQuery
@@ -19184,7 +19225,7 @@ specifier|final
 name|String
 name|expectedMysql
 init|=
-literal|"SELECT 2 + 2"
+name|expectedBigQuery
 decl_stmt|;
 specifier|final
 name|String
@@ -19205,6 +19246,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedBigQuery
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 operator|.
 name|withHive
@@ -19252,6 +19301,12 @@ literal|"SELECT 1"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedClickHouse
+init|=
+name|expectedBigQuery
+decl_stmt|;
+specifier|final
+name|String
 name|expectedHive
 init|=
 name|expectedBigQuery
@@ -19281,6 +19336,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedBigQuery
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 operator|.
 name|withHive
