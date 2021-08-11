@@ -1947,6 +1947,104 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testGroupByBooleanLiteral
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select avg(\"salary\") from \"employee\" group by true"
+decl_stmt|;
+name|String
+name|expectedRedshift
+init|=
+literal|"SELECT AVG(\"employee\".\"salary\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\",\n"
+operator|+
+literal|"(SELECT TRUE AS \"$f0\") AS \"t\"\nGROUP BY \"t\".\"$f0\""
+decl_stmt|;
+name|String
+name|expectedInformix
+init|=
+literal|"SELECT AVG(employee.salary)\nFROM foodmart.employee,"
+operator|+
+literal|"\n(SELECT TRUE AS $f0) AS t\nGROUP BY t.$f0"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
+argument_list|)
+operator|.
+name|withInformix
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedInformix
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testGroupByDateLiteral
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select avg(\"salary\") from \"employee\" group by DATE '2022-01-01'"
+decl_stmt|;
+name|String
+name|expectedRedshift
+init|=
+literal|"SELECT AVG(\"employee\".\"salary\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\",\n"
+operator|+
+literal|"(SELECT DATE '2022-01-01' AS \"$f0\") AS \"t\"\nGROUP BY \"t\".\"$f0\""
+decl_stmt|;
+name|String
+name|expectedInformix
+init|=
+literal|"SELECT AVG(employee.salary)\nFROM foodmart.employee,"
+operator|+
+literal|"\n(SELECT DATE '2022-01-01' AS $f0) AS t\nGROUP BY t.$f0"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
+argument_list|)
+operator|.
+name|withInformix
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedInformix
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSimpleSelectStarFromProductTable
 parameter_list|()
 block|{
@@ -20290,7 +20388,11 @@ specifier|final
 name|String
 name|expectedRedshift
 init|=
-name|expectedPostgresql
+literal|"SELECT \"a\"\n"
+operator|+
+literal|"FROM (SELECT 1 AS \"a\", 'x ' AS \"b\"\n"
+operator|+
+literal|"UNION ALL\nSELECT 2 AS \"a\", 'yy' AS \"b\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -25416,6 +25518,22 @@ argument_list|(
 name|DatabaseProduct
 operator|.
 name|REDSHIFT
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withInformix
+parameter_list|()
+block|{
+return|return
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|INFORMIX
 operator|.
 name|getDialect
 argument_list|()

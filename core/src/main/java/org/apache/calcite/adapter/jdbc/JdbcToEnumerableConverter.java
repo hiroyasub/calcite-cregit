@@ -2177,11 +2177,12 @@ name|result
 init|=
 name|jdbcImplementor
 operator|.
-name|visitInput
+name|visitRoot
 argument_list|(
 name|this
-argument_list|,
-literal|0
+operator|.
+name|getInput
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
