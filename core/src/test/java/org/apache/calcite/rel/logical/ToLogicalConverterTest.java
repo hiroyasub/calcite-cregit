@@ -2300,7 +2300,7 @@ literal|"insert into \"employee\" select * from \"employee\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -2329,7 +2329,7 @@ argument_list|(
 name|sql
 argument_list|)
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)

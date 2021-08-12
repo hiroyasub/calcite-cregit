@@ -1926,6 +1926,13 @@ name|query
 init|=
 literal|"select * from \"product\""
 decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -1933,7 +1940,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT *\nFROM \"foodmart\".\"product\""
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -2697,7 +2704,7 @@ literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT COUNT(*)\n"
 operator|+
@@ -2726,7 +2733,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPresto
@@ -2752,7 +2759,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPresto
@@ -2788,7 +2795,7 @@ literal|"GROUP BY ()"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT 42 AS `C`\n"
 operator|+
@@ -2821,7 +2828,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPresto
@@ -2915,7 +2922,7 @@ literal|"ORDER BY \"product_class_id\", \"brand_name\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT `product_class_id`, `brand_name`\n"
 operator|+
@@ -2925,7 +2932,7 @@ literal|"GROUP BY `product_class_id`, `brand_name` WITH ROLLUP"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql8
+name|expectedMysql8
 init|=
 literal|"SELECT `product_class_id`, `brand_name`\n"
 operator|+
@@ -2950,7 +2957,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withMysql8
@@ -2958,7 +2965,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql8
+name|expectedMysql8
 argument_list|)
 expr_stmt|;
 block|}
@@ -2995,7 +3002,7 @@ literal|"ORDER BY \"brand_name\", \"product_class_id\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT `product_class_id`, `brand_name`\n"
 operator|+
@@ -3018,7 +3025,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 expr_stmt|;
 block|}
@@ -3192,7 +3199,7 @@ literal|"ORDER BY \"product_class_id\", COUNT(*)"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT `product_class_id`, COUNT(*) AS `C`\n"
 operator|+
@@ -3233,7 +3240,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPresto
@@ -3274,7 +3281,7 @@ literal|"GROUP BY ROLLUP(\"product_class_id\")"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT `product_class_id`, COUNT(*) AS `C`\n"
 operator|+
@@ -3307,7 +3314,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPresto
@@ -3356,7 +3363,7 @@ literal|"ORDER BY \"product_class_id\", \"brand_name\", COUNT(*)"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT `product_class_id`, `brand_name`,"
 operator|+
@@ -3387,7 +3394,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 expr_stmt|;
 block|}
@@ -3426,7 +3433,7 @@ comment|// If a MySQL 5 query has GROUP BY ... ROLLUP, you cannot add ORDER BY,
 comment|// but you can add LIMIT.
 specifier|final
 name|String
-name|expectedMySql
+name|expectedMysql
 init|=
 literal|"SELECT `product_class_id`, COUNT(*) AS `C`\n"
 operator|+
@@ -3463,7 +3470,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMySql
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPresto
@@ -3867,7 +3874,7 @@ literal|" from \"expense_fact\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedPostgreSQL
+name|expectedPostgresql
 init|=
 literal|"SELECT CAST(\"store_id\" AS VARCHAR(256))\n"
 operator|+
@@ -3899,7 +3906,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedPostgreSQL
+name|expectedPostgresql
 argument_list|)
 operator|.
 name|withOracleModifiedTypeSystem
@@ -3936,7 +3943,7 @@ literal|" from \"expense_fact\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedPostgreSQL
+name|expectedPostgresql
 init|=
 literal|"SELECT CAST(\"store_id\" AS VARCHAR(175))\n"
 operator|+
@@ -3952,7 +3959,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedPostgreSQL
+name|expectedPostgresql
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -5499,7 +5506,7 @@ literal|"GROUP BY \"product_id\""
 decl_stmt|;
 specifier|final
 name|String
-name|expectedMySQL
+name|expectedMysql
 init|=
 literal|"SELECT SUM(`net_weight1`) AS `net_weight_converted`\n"
 operator|+
@@ -5568,44 +5575,20 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
-name|withOracle
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedOracle
-argument_list|)
-operator|.
-name|withMysql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedMySQL
-argument_list|)
-operator|.
-name|withVertica
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedVertica
-argument_list|)
-operator|.
-name|withPostgresql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedPostgresql
-argument_list|)
-operator|.
 name|withBigQuery
 argument_list|()
 operator|.
 name|ok
 argument_list|(
 name|expectedBigQuery
+argument_list|)
+operator|.
+name|withExasol
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedExasol
 argument_list|)
 operator|.
 name|withHive
@@ -5616,6 +5599,30 @@ argument_list|(
 name|expectedHive
 argument_list|)
 operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withOracle
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedOracle
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+operator|.
 name|withSpark
 argument_list|()
 operator|.
@@ -5624,12 +5631,12 @@ argument_list|(
 name|expectedSpark
 argument_list|)
 operator|.
-name|withExasol
+name|withVertica
 argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedExasol
+name|expectedVertica
 argument_list|)
 expr_stmt|;
 block|}
@@ -6410,6 +6417,14 @@ lambda|->
 name|root
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+operator|.
 name|withMysql
 argument_list|()
 operator|.
@@ -6424,14 +6439,6 @@ operator|.
 name|ok
 argument_list|(
 name|expectedPostgresql
-argument_list|)
-operator|.
-name|withBigQuery
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedBigQuery
 argument_list|)
 expr_stmt|;
 block|}
@@ -6577,6 +6584,14 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+operator|.
 name|withPostgresql
 argument_list|()
 operator|.
@@ -6591,14 +6606,6 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMysql
-argument_list|)
-operator|.
-name|withBigQuery
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedBigQuery
 argument_list|)
 expr_stmt|;
 block|}
@@ -7088,6 +7095,14 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withHive
 argument_list|()
 operator|.
@@ -7097,14 +7112,6 @@ name|expected
 argument_list|)
 operator|.
 name|withSpark
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-operator|.
-name|withBigQuery
 argument_list|()
 operator|.
 name|ok
@@ -7140,6 +7147,14 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withHive
 argument_list|()
 operator|.
@@ -7149,14 +7164,6 @@ name|expected
 argument_list|)
 operator|.
 name|withSpark
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-operator|.
-name|withBigQuery
 argument_list|()
 operator|.
 name|ok
@@ -7192,6 +7199,14 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withHive
 argument_list|()
 operator|.
@@ -7201,14 +7216,6 @@ name|expected
 argument_list|)
 operator|.
 name|withSpark
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-operator|.
-name|withBigQuery
 argument_list|()
 operator|.
 name|ok
@@ -7244,6 +7251,14 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withHive
 argument_list|()
 operator|.
@@ -7253,14 +7268,6 @@ name|expected
 argument_list|)
 operator|.
 name|withSpark
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-operator|.
-name|withBigQuery
 argument_list|()
 operator|.
 name|ok
@@ -7601,11 +7608,11 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2715">[CALCITE-2715]    * MS SQL Server does not support character set as part of data type</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2715">[CALCITE-2715]    * MS SQL Server does not support character set as part of data type</a>    * and    *<a href="https://issues.apache.org/jira/browse/CALCITE-4690">[CALCITE-4690]    * Error when executing query with CHARACTER SET in Redshift</a>. */
 annotation|@
 name|Test
 name|void
-name|testMssqlCharacterSet
+name|testCharacterSet
 parameter_list|()
 block|{
 name|String
@@ -7617,80 +7624,31 @@ literal|"from \"foodmart\".\"reserve_employee\""
 decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedMssql
 init|=
-literal|"SELECT [hire_date], CAST([hire_date] AS VARCHAR(10))\n"
+literal|"SELECT [hire_date],"
+operator|+
+literal|" CAST([hire_date] AS VARCHAR(10))\n"
 operator|+
 literal|"FROM [foodmart].[reserve_employee]"
 decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withMssql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4690">[CALCITE-4690]    * Error when executing query with CHARACTER SET in Redshift</a>. */
-annotation|@
-name|Test
-name|void
-name|testRedshiftCharacterSet
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10))\n"
-operator|+
-literal|"from \"foodmart\".\"reserve_employee\""
-decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedRedshift
 init|=
-literal|"SELECT \"hire_date\", CAST(\"hire_date\" AS VARCHAR(10))\n"
+literal|"SELECT \"hire_date\","
+operator|+
+literal|" CAST(\"hire_date\" AS VARCHAR(10))\n"
 operator|+
 literal|"FROM \"foodmart\".\"reserve_employee\""
 decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withRedshift
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testExasolCharacterSet
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10))\n"
-operator|+
-literal|"from \"foodmart\".\"reserve_employee\""
-decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedExasol
 init|=
-literal|"SELECT hire_date, CAST(hire_date AS VARCHAR(10))\n"
+literal|"SELECT hire_date,"
+operator|+
+literal|" CAST(hire_date AS VARCHAR(10))\n"
 operator|+
 literal|"FROM foodmart.reserve_employee"
 decl_stmt|;
@@ -7704,7 +7662,23 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
+name|expectedExasol
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMssql
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedRedshift
 argument_list|)
 expr_stmt|;
 block|}
@@ -8142,7 +8116,9 @@ literal|"SELECT product_id\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
-literal|"LIMIT 100\nOFFSET 10"
+literal|"LIMIT 100\n"
+operator|+
+literal|"OFFSET 10"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10087,9 +10063,13 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT *\nFROM `foodmart`.`employee`"
+literal|"SELECT *\n"
 operator|+
-literal|"\nWHERE (`hire_date` - INTERVAL '19800' SECOND)> CAST(`hire_date` AS DATETIME)"
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"WHERE (`hire_date` - INTERVAL '19800' SECOND)"
+operator|+
+literal|"> CAST(`hire_date` AS DATETIME)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -12246,7 +12226,9 @@ literal|"SELECT"
 operator|+
 literal|" CASE WHEN \"t0\".\"G\" IN (0, 1) THEN 0 ELSE 1 END\n"
 operator|+
-literal|"FROM (SELECT *\nFROM \"foodmart\".\"customer\") AS \"t\",\n"
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"customer\") AS \"t\",\n"
 operator|+
 literal|"(VALUES (0)) AS \"t0\" (\"G\")\n"
 operator|+
@@ -12288,11 +12270,17 @@ literal|"\"department\".\"department_id\", \"department\""
 operator|+
 literal|".\"department_description\"\n"
 operator|+
-literal|"FROM \"foodmart\".\"department\"\nINNER JOIN "
+literal|"FROM \"foodmart\".\"department\"\n"
 operator|+
-literal|"(SELECT \"department_id\"\nFROM \"foodmart\".\"employee\"\n"
+literal|"INNER JOIN "
 operator|+
-literal|"WHERE \"store_id\"< 150\nGROUP BY \"department_id\") AS \"t1\" "
+literal|"(SELECT \"department_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"WHERE \"store_id\"< 150\n"
+operator|+
+literal|"GROUP BY \"department_id\") AS \"t1\" "
 operator|+
 literal|"ON \"department\".\"department_id\" = \"t1\".\"department_id\""
 decl_stmt|;
@@ -13686,6 +13674,17 @@ name|String
 name|expected
 parameter_list|)
 block|{
+name|String
+name|expectedHsqldb
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (VALUES ("
+operator|+
+name|expected
+operator|+
+literal|")) AS t (EXPR$0)"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"VALUES "
@@ -13698,13 +13697,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT *\n"
-operator|+
-literal|"FROM (VALUES ("
-operator|+
-name|expected
-operator|+
-literal|")) AS t (EXPR$0)"
+name|expectedHsqldb
 argument_list|)
 expr_stmt|;
 block|}
@@ -13919,11 +13912,11 @@ name|expected7
 init|=
 literal|"SELECT "
 operator|+
-literal|"COUNT(DISTINCT \"employee_id\") "
+literal|"COUNT(DISTINCT \"employee_id\") OVER (ORDER BY \"hire_date\""
 operator|+
-literal|"OVER (ORDER BY \"hire_date\" RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$0\""
+literal|" RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$0\"\n"
 operator|+
-literal|"\nFROM \"foodmart\".\"employee\""
+literal|"FROM \"foodmart\".\"employee\""
 decl_stmt|;
 name|String
 name|query8
@@ -14494,39 +14487,39 @@ init|=
 literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
 decl_stmt|;
 name|String
-name|expected
+name|expectedClickHouse
 init|=
-literal|"SELECT TRUNC(hire_date, 'MI')\nFROM foodmart.employee"
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withHsqldb
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testFloorClickHouse
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
+literal|"SELECT toStartOfMinute(`hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|String
-name|expected
+name|expectedHsqldb
 init|=
-literal|"SELECT toStartOfMinute(`hire_date`)\nFROM `foodmart`.`employee`"
+literal|"SELECT TRUNC(hire_date, 'MI')\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|String
+name|expectedOracle
+init|=
+literal|"SELECT TRUNC(\"hire_date\", 'MINUTE')\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT DATE_TRUNC('MINUTE', \"hire_date\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT DATE_TRUNC('MINUTE', \"hire_date\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14538,59 +14531,15 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testFloorPostgres
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
-decl_stmt|;
-name|String
-name|expected
-init|=
-literal|"SELECT DATE_TRUNC('MINUTE', \"hire_date\")\nFROM \"foodmart\".\"employee\""
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
+name|expectedClickHouse
 argument_list|)
 operator|.
-name|withPostgresql
+name|withHsqldb
 argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testFloorOracle
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
-decl_stmt|;
-name|String
-name|expected
-init|=
-literal|"SELECT TRUNC(\"hire_date\", 'MINUTE')\nFROM \"foodmart\".\"employee\""
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
+name|expectedHsqldb
 argument_list|)
 operator|.
 name|withOracle
@@ -14598,29 +14547,15 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
+name|expectedOracle
 argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testFloorPresto
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
-decl_stmt|;
-name|String
-name|expected
-init|=
-literal|"SELECT DATE_TRUNC('MINUTE', \"hire_date\")\nFROM \"foodmart\".\"employee\""
-decl_stmt|;
-name|sql
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
 argument_list|(
-name|query
+name|expectedPostgresql
 argument_list|)
 operator|.
 name|withPresto
@@ -14628,7 +14563,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -15470,6 +15405,14 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
+argument_list|)
+operator|.
 name|withHsqldb
 argument_list|()
 operator|.
@@ -15478,12 +15421,12 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
-name|withClickHouse
+name|withMysql
 argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedClickHouse
+name|expectedMysql
 argument_list|)
 operator|.
 name|withOracle
@@ -15500,14 +15443,6 @@ operator|.
 name|ok
 argument_list|(
 name|expectedPostgresql
-argument_list|)
-operator|.
-name|withMysql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedMysql
 argument_list|)
 expr_stmt|;
 block|}
@@ -15590,6 +15525,23 @@ argument_list|(
 name|expectedClickHouse
 argument_list|)
 operator|.
+name|withMssql
+argument_list|()
+comment|// mssql does not support this syntax and so should fail
+operator|.
+name|throws_
+argument_list|(
+literal|"MSSQL SUBSTRING requires FROM and FOR arguments"
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
 name|withOracle
 argument_list|()
 operator|.
@@ -15614,14 +15566,6 @@ argument_list|(
 name|expectedPresto
 argument_list|)
 operator|.
-name|withSnowflake
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedSnowflake
-argument_list|)
-operator|.
 name|withRedshift
 argument_list|()
 operator|.
@@ -15630,21 +15574,12 @@ argument_list|(
 name|expectedRedshift
 argument_list|)
 operator|.
-name|withMysql
+name|withSnowflake
 argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMysql
-argument_list|)
-operator|.
-name|withMssql
-argument_list|()
-comment|// mssql does not support this syntax and so should fail
-operator|.
-name|throws_
-argument_list|(
-literal|"MSSQL SUBSTRING requires FROM and FOR arguments"
+name|expectedSnowflake
 argument_list|)
 expr_stmt|;
 block|}
@@ -15735,6 +15670,22 @@ argument_list|(
 name|expectedClickHouse
 argument_list|)
 operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMssql
+argument_list|)
+operator|.
 name|withOracle
 argument_list|()
 operator|.
@@ -15759,14 +15710,6 @@ argument_list|(
 name|expectedPresto
 argument_list|)
 operator|.
-name|withSnowflake
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedSnowflake
-argument_list|)
-operator|.
 name|withRedshift
 argument_list|()
 operator|.
@@ -15775,20 +15718,12 @@ argument_list|(
 name|expectedRedshift
 argument_list|)
 operator|.
-name|withMysql
+name|withSnowflake
 argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedMysql
-argument_list|)
-operator|.
-name|withMssql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedMssql
+name|expectedSnowflake
 argument_list|)
 expr_stmt|;
 block|}
@@ -19059,6 +18994,22 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+operator|.
 name|withHsqldb
 argument_list|()
 operator|.
@@ -19075,14 +19026,6 @@ argument_list|(
 name|expectedMysql
 argument_list|)
 operator|.
-name|withPostgresql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedPostgresql
-argument_list|)
-operator|.
 name|withOracle
 argument_list|()
 operator|.
@@ -19091,28 +19034,12 @@ argument_list|(
 name|expectedOracle
 argument_list|)
 operator|.
-name|withHive
+name|withPostgresql
 argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedHive
-argument_list|)
-operator|.
-name|withBigQuery
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedBigQuery
-argument_list|)
-operator|.
-name|withSnowflake
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedSnowflake
+name|expectedPostgresql
 argument_list|)
 operator|.
 name|withRedshift
@@ -19121,6 +19048,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedRedshift
+argument_list|)
+operator|.
+name|withSnowflake
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedSnowflake
 argument_list|)
 expr_stmt|;
 block|}
@@ -19209,6 +19144,159 @@ operator|.
 name|ok
 argument_list|(
 name|expectedOracle
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests SELECT without FROM clause; effectively the same as a VALUES    * query. */
+annotation|@
+name|Test
+name|void
+name|testSelectWithoutFrom
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select 2 + 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT 2 + 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedHive
+init|=
+name|expectedBigQuery
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT 2 + 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT 2 + 2\n"
+operator|+
+literal|"FROM (VALUES (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSelectOne
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedHive
+init|=
+name|expectedBigQuery
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+name|expectedBigQuery
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (VALUES (1)) AS \"t\" (\"EXPR$0\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
 argument_list|)
 operator|.
 name|withPostgresql
@@ -19511,45 +19599,6 @@ name|isLinux
 argument_list|(
 name|expectedSql2
 argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testSelectWithoutFromEmulationForHiveAndBigQuery
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"select 2 + 2"
-decl_stmt|;
-specifier|final
-name|String
-name|expected
-init|=
-literal|"SELECT 2 + 2"
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withHive
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-operator|.
-name|withBigQuery
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -21286,20 +21335,20 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
-name|withSpark
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedInSpark
-argument_list|)
-operator|.
 name|withPresto
 argument_list|()
 operator|.
 name|ok
 argument_list|(
 name|expectedPresto
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedInSpark
 argument_list|)
 expr_stmt|;
 block|}
@@ -21331,7 +21380,7 @@ literal|"GROUP BY ROLLUP(\"product_id\", \"product_class_id\")"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedInSpark
+name|expectedSpark
 init|=
 literal|"SELECT COUNT(*)\n"
 operator|+
@@ -21359,20 +21408,20 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
-name|withSpark
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expectedInSpark
-argument_list|)
-operator|.
 name|withPresto
 argument_list|()
 operator|.
 name|ok
 argument_list|(
 name|expectedPresto
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedSpark
 argument_list|)
 expr_stmt|;
 block|}
@@ -21559,9 +21608,17 @@ literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
 literal|"INNER JOIN (SELECT \"t1\".\"department_id\" \"department_id0\", MIN(\"t1\".\"department_id\") \"EXPR$0\"\n"
 operator|+
-literal|"FROM (SELECT NULL \"department_id\", NULL \"department_description\"\nFROM \"DUAL\"\nWHERE 1 = 0) \"t\",\n"
+literal|"FROM (SELECT NULL \"department_id\", NULL \"department_description\"\n"
 operator|+
-literal|"(SELECT \"department_id\"\nFROM \"foodmart\".\"employee\"\nGROUP BY \"department_id\") \"t1\"\n"
+literal|"FROM \"DUAL\"\n"
+operator|+
+literal|"WHERE 1 = 0) \"t\",\n"
+operator|+
+literal|"(SELECT \"department_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY \"department_id\") \"t1\"\n"
 operator|+
 literal|"GROUP BY \"t1\".\"department_id\") \"t3\" ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
 operator|+
@@ -21608,17 +21665,21 @@ literal|"INNER JOIN (SELECT \"t1\".\"department_id\" AS \"department_id0\","
 operator|+
 literal|" MIN(\"t1\".\"department_id\") AS \"EXPR$0\"\n"
 operator|+
-literal|"FROM (SELECT *\nFROM (VALUES (NULL, NULL))"
+literal|"FROM (SELECT *\n"
 operator|+
-literal|" AS \"t\" (\"department_id\", \"department_description\")"
+literal|"FROM (VALUES (NULL, NULL))"
 operator|+
-literal|"\nWHERE 1 = 0) AS \"t\","
+literal|" AS \"t\" (\"department_id\", \"department_description\")\n"
 operator|+
-literal|"\n(SELECT \"department_id\"\nFROM \"foodmart\".\"employee\""
+literal|"WHERE 1 = 0) AS \"t\",\n"
 operator|+
-literal|"\nGROUP BY \"department_id\") AS \"t1\""
+literal|"(SELECT \"department_id\"\n"
 operator|+
-literal|"\nGROUP BY \"t1\".\"department_id\") AS \"t3\" "
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY \"department_id\") AS \"t1\"\n"
+operator|+
+literal|"GROUP BY \"t1\".\"department_id\") AS \"t3\" "
 operator|+
 literal|"ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
 operator|+
@@ -22423,7 +22484,9 @@ specifier|final
 name|String
 name|expected2
 init|=
-literal|"SELECT CAST(1111111 AS DECIMAL(5, 2)) AS \"num\"\nFROM \"foodmart\".\"product\""
+literal|"SELECT CAST(1111111 AS DECIMAL(5, 2)) AS \"num\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -22739,7 +22802,9 @@ name|expectedMysqlX
 init|=
 literal|"INSERT INTO `SCOTT`.`DEPT`"
 operator|+
-literal|" (`DEPTNO`, `DNAME`, `LOC`)\nSELECT 1, 'Fred', 'San Francisco'\n"
+literal|" (`DEPTNO`, `DNAME`, `LOC`)\n"
+operator|+
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
