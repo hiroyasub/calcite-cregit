@@ -3150,6 +3150,41 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testMoreSameExprInMv
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"empid\", \"deptno\", sum(\"empid\") as s1, sum(\"empid\") as s2, count(*) as c\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select sum(\"empid\"), count(*) from \"emps\" group by \"empid\", \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link RexUtil#simplify}. */
 annotation|@
 name|Test
