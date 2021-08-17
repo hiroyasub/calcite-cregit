@@ -480,8 +480,15 @@ name|newName
 argument_list|(
 literal|"mergeUnionInputs"
 operator|+
+name|Integer
+operator|.
+name|toUnsignedString
+argument_list|(
+name|this
+operator|.
 name|getId
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
