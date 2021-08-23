@@ -1159,6 +1159,11 @@ name|config
 operator|.
 name|matchNullability
 argument_list|()
+argument_list|,
+name|config
+operator|.
+name|treatDynamicCallsAsConstant
+argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -1823,6 +1828,11 @@ name|config
 operator|.
 name|matchNullability
 argument_list|()
+argument_list|,
+name|config
+operator|.
+name|treatDynamicCallsAsConstant
+argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -2228,6 +2238,11 @@ name|config
 operator|.
 name|matchNullability
 argument_list|()
+argument_list|,
+name|config
+operator|.
+name|treatDynamicCallsAsConstant
+argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -2627,6 +2642,11 @@ argument_list|,
 name|config
 operator|.
 name|matchNullability
+argument_list|()
+argument_list|,
+name|config
+operator|.
+name|treatDynamicCallsAsConstant
 argument_list|()
 argument_list|)
 condition|)
@@ -3608,6 +3628,8 @@ argument_list|,
 literal|false
 argument_list|,
 literal|true
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
@@ -3647,10 +3669,12 @@ argument_list|,
 name|unknownAsFalse
 argument_list|,
 literal|true
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Reduces a list of expressions.    *    *<p>The {@code matchNullability} flag comes into play when reducing a    * expression whose type is nullable. Suppose we are reducing an expression    * {@code CASE WHEN 'a' = 'a' THEN 1 ELSE NULL END}. Before reduction the    * type is {@code INTEGER} (nullable), but after reduction the literal 1 has    * type {@code INTEGER NOT NULL}.    *    *<p>In some situations it is more important to preserve types; in this    * case you should use {@code matchNullability = true} (which used to be    * the default behavior of this method), and it will cast the literal to    * {@code INTEGER} (nullable).    *    *<p>In other situations, you would rather propagate the new stronger type,    * because it may allow further optimizations later; pass    * {@code matchNullability = false} and no cast will be added, but you may    * need to adjust types elsewhere in the expression tree.    *    * @param rel     Relational expression    * @param expList List of expressions, modified in place    * @param predicates Constraints known to hold on input expressions    * @param unknownAsFalse Whether UNKNOWN will be treated as FALSE    * @param matchNullability Whether Calcite should add a CAST to a literal    *                         resulting from simplification and expression if the    *                         expression had nullable type and the literal is    *                         NOT NULL    *    * @return whether reduction found something to change, and succeeded    */
+comment|/**    * Reduces a list of expressions.    *    *<p>The {@code matchNullability} flag comes into play when reducing a    * expression whose type is nullable. Suppose we are reducing an expression    * {@code CASE WHEN 'a' = 'a' THEN 1 ELSE NULL END}. Before reduction the    * type is {@code INTEGER} (nullable), but after reduction the literal 1 has    * type {@code INTEGER NOT NULL}.    *    *<p>In some situations it is more important to preserve types; in this    * case you should use {@code matchNullability = true} (which used to be    * the default behavior of this method), and it will cast the literal to    * {@code INTEGER} (nullable).    *    *<p>In other situations, you would rather propagate the new stronger type,    * because it may allow further optimizations later; pass    * {@code matchNullability = false} and no cast will be added, but you may    * need to adjust types elsewhere in the expression tree.    *    * @param rel     Relational expression    * @param expList List of expressions, modified in place    * @param predicates Constraints known to hold on input expressions    * @param unknownAsFalse Whether UNKNOWN will be treated as FALSE    * @param matchNullability Whether Calcite should add a CAST to a literal    *                         resulting from simplification and expression if the    *                         expression had nullable type and the literal is    *                         NOT NULL    * @param treatDynamicCallsAsConstant Whether to treat dynamic functions as    *                                    constants    *    * @return whether reduction found something to change, and succeeded    */
 specifier|protected
 specifier|static
 name|boolean
@@ -3673,6 +3697,9 @@ name|unknownAsFalse
 parameter_list|,
 name|boolean
 name|matchNullability
+parameter_list|,
+name|boolean
+name|treatDynamicCallsAsConstant
 parameter_list|)
 block|{
 specifier|final
@@ -3769,6 +3796,8 @@ argument_list|,
 name|expList
 argument_list|,
 name|predicates
+argument_list|,
+name|treatDynamicCallsAsConstant
 argument_list|)
 decl_stmt|;
 name|boolean
@@ -3890,6 +3919,9 @@ name|expList
 parameter_list|,
 name|RelOptPredicateList
 name|predicates
+parameter_list|,
+name|boolean
+name|treatDynamicCallsAsConstant
 parameter_list|)
 block|{
 comment|// Replace predicates on CASE to CASE on predicates.
@@ -3948,6 +3980,8 @@ argument_list|,
 name|constExps
 argument_list|,
 name|addCasts
+argument_list|,
+name|treatDynamicCallsAsConstant
 argument_list|)
 expr_stmt|;
 if|if
@@ -4194,7 +4228,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Locates expressions that can be reduced to literals or converted to    * expressions with redundant casts removed.    *    * @param typeFactory    Type factory    * @param exps           list of candidate expressions to be examined for    *                       reduction    * @param constants      List of expressions known to be constant    * @param constExps      returns the list of expressions that can be constant    *                       reduced    * @param addCasts       indicator for each expression that can be constant    *                       reduced, whether a cast of the resulting reduced    *                       expression is potentially necessary    */
+comment|/**    * Locates expressions that can be reduced to literals or converted to    * expressions with redundant casts removed.    *    * @param typeFactory    Type factory    * @param exps           list of candidate expressions to be examined for    *                       reduction    * @param constants      List of expressions known to be constant    * @param constExps      returns the list of expressions that can be constant    *                       reduced    * @param addCasts       indicator for each expression that can be constant    *                       reduced, whether a cast of the resulting reduced    *                       expression is potentially necessary    * @param treatDynamicCallsAsConstant Whether to treat dynamic functions as    *                                    constants    */
 specifier|protected
 specifier|static
 name|void
@@ -4228,6 +4262,9 @@ argument_list|<
 name|Boolean
 argument_list|>
 name|addCasts
+parameter_list|,
+name|boolean
+name|treatDynamicCallsAsConstant
 parameter_list|)
 block|{
 name|ReducibleExprLocator
@@ -4243,6 +4280,8 @@ argument_list|,
 name|constExps
 argument_list|,
 name|addCasts
+argument_list|,
+name|treatDynamicCallsAsConstant
 argument_list|)
 decl_stmt|;
 for|for
@@ -4985,6 +5024,11 @@ name|IRREDUCIBLE_CONSTANT
 block|}
 specifier|private
 specifier|final
+name|boolean
+name|treatDynamicCallsAsConstant
+decl_stmt|;
+specifier|private
+specifier|final
 name|List
 argument_list|<
 name|Constancy
@@ -5059,6 +5103,9 @@ argument_list|<
 name|Boolean
 argument_list|>
 name|addCasts
+parameter_list|,
+name|boolean
+name|treatDynamicCallsAsConstant
 parameter_list|)
 block|{
 comment|// go deep
@@ -5084,6 +5131,12 @@ operator|.
 name|addCasts
 operator|=
 name|addCasts
+expr_stmt|;
+name|this
+operator|.
+name|treatDynamicCallsAsConstant
+operator|=
+name|treatDynamicCallsAsConstant
 expr_stmt|;
 block|}
 specifier|public
@@ -5573,6 +5626,9 @@ expr_stmt|;
 block|}
 if|else if
 condition|(
+operator|!
+name|treatDynamicCallsAsConstant
+operator|&&
 name|call
 operator|.
 name|getOperator
@@ -5582,9 +5638,8 @@ name|isDynamicFunction
 argument_list|()
 condition|)
 block|{
-comment|// We can reduce the call to a constant, but we can't
-comment|// cache the plan if the function is dynamic.
-comment|// For now, treat it same as non-deterministic.
+comment|// In some circumstances, we should avoid caching the plan if we have dynamic functions.
+comment|// If desired, treat this situation the same as a non-deterministic function.
 name|callConstancy
 operator|=
 name|Constancy
@@ -5867,6 +5922,28 @@ name|withMatchNullability
 parameter_list|(
 name|boolean
 name|matchNullability
+parameter_list|)
+function_decl|;
+comment|/** Whether to treat      * {@link SqlOperator#isDynamicFunction() dynamic functions} as constants.      *      *<p>When false (the default), calls to dynamic functions (e.g.      * {@code USER}) are not reduced. When true, calls to dynamic functions      * are treated as a constant, and reduced. */
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
+name|boolean
+name|treatDynamicCallsAsConstant
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+comment|/** Sets {@link #treatDynamicCallsAsConstant()}. */
+name|Config
+name|withTreatDynamicCallsAsConstant
+parameter_list|(
+name|boolean
+name|treatDynamicCallsAsConstant
 parameter_list|)
 function_decl|;
 comment|/** Defines an operand tree for the given classes. */
