@@ -10027,9 +10027,35 @@ name|SqlCall
 operator|)
 name|selectItem
 decl_stmt|;
+name|SqlNode
+name|alias
+init|=
+name|asCall
+operator|.
+name|operand
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|aliasRef
+operator|&&
+operator|!
+name|SqlUtil
+operator|.
+name|isGeneratedAlias
+argument_list|(
+operator|(
+operator|(
+name|SqlIdentifier
+operator|)
+name|alias
+operator|)
+operator|.
+name|getSimple
+argument_list|()
+argument_list|)
 condition|)
 block|{
 comment|// For BigQuery, given the query
@@ -10038,12 +10064,7 @@ comment|// we can generate
 comment|//   SELECT SUM(x) AS x FROM t HAVING(x> 0)
 comment|// because 'x' in HAVING resolves to the 'AS x' not 't.x'.
 return|return
-name|asCall
-operator|.
-name|operand
-argument_list|(
-literal|1
-argument_list|)
+name|alias
 return|;
 block|}
 return|return

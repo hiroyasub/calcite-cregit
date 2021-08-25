@@ -24567,6 +24567,70 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4740">[CALCITE-4740]    * JDBC adapter generates incorrect HAVING clause in BigQuery dialect</a>. */
+annotation|@
+name|Test
+name|void
+name|testBigQueryHavingWithoutGeneratedAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"SELECT \"DEPTNO\", COUNT(DISTINCT \"EMPNO\")\n"
+operator|+
+literal|"FROM \"EMP\"\n"
+operator|+
+literal|"GROUP BY \"DEPTNO\"\n"
+operator|+
+literal|"HAVING COUNT(DISTINCT \"EMPNO\")> 0\n"
+operator|+
+literal|"ORDER BY COUNT(DISTINCT \"EMPNO\") DESC"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"SELECT DEPTNO, COUNT(DISTINCT EMPNO)\n"
+operator|+
+literal|"FROM SCOTT.EMP\n"
+operator|+
+literal|"GROUP BY DEPTNO\n"
+operator|+
+literal|"HAVING COUNT(DISTINCT EMPNO)> 0\n"
+operator|+
+literal|"ORDER BY COUNT(DISTINCT EMPNO) IS NULL DESC, COUNT(DISTINCT EMPNO) DESC"
+decl_stmt|;
+comment|// Convert rel node to SQL with BigQuery dialect,
+comment|// in which "isHavingAlias" is true.
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|static
 class|class
