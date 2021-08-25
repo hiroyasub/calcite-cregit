@@ -6300,7 +6300,9 @@ name|first
 argument_list|(
 name|original
 argument_list|,
-literal|"EXPR$"
+name|SqlUtil
+operator|.
+name|GENERATED_EXPR_ALIAS_PREFIX
 argument_list|)
 operator|+
 name|attempt

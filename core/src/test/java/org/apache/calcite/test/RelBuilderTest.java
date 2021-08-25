@@ -17402,7 +17402,7 @@ specifier|final
 name|String
 name|expectedType
 init|=
-literal|"RecordType(BOOLEAN a, INTEGER expr$1, CHAR(13) NOT NULL c) NOT NULL"
+literal|"RecordType(BOOLEAN a, INTEGER EXPR$1, CHAR(13) NOT NULL c) NOT NULL"
 decl_stmt|;
 name|assertThat
 argument_list|(
