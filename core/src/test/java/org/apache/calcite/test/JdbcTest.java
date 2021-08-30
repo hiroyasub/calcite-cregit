@@ -14099,6 +14099,51 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testSelectValuesIncludeNull
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from (values (null))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4757">[CALCITE-4757]    * In Avatica, support columns of type "NULL" in query results</a>. */
+annotation|@
+name|Test
+name|void
+name|testSelectValuesIncludeNull2
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from (values (null, true))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=null; EXPR$1=true\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSelectDistinct
 parameter_list|()
 block|{
