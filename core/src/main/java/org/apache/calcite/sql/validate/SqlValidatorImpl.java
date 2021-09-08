@@ -7699,82 +7699,15 @@ block|{
 case|case
 name|VALUES
 case|:
-comment|// CHECKSTYLE: IGNORE 1
-if|if
-condition|(
-name|underFrom
-operator|||
-literal|true
-condition|)
-block|{
-comment|// leave FROM (VALUES(...)) [ AS alias ] clauses alone,
-comment|// otherwise they grow cancerously if this rewrite is invoked
-comment|// over and over
+comment|// Do not rewrite VALUES clauses.
+comment|// At some point we used to rewrite VALUES(...) clauses
+comment|// to (SELECT * FROM VALUES(...)) but this was problematic
+comment|// in various cases such as FROM (VALUES(...)) [ AS alias ]
+comment|// where the rewrite was invoked over and over making the
+comment|// expression grow indefinitely.
 return|return
 name|node
 return|;
-block|}
-else|else
-block|{
-specifier|final
-name|SqlNodeList
-name|selectList
-init|=
-operator|new
-name|SqlNodeList
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
-decl_stmt|;
-name|selectList
-operator|.
-name|add
-argument_list|(
-name|SqlIdentifier
-operator|.
-name|star
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
-argument_list|)
-expr_stmt|;
-return|return
-operator|new
-name|SqlSelect
-argument_list|(
-name|node
-operator|.
-name|getParserPosition
-argument_list|()
-argument_list|,
-literal|null
-argument_list|,
-name|selectList
-argument_list|,
-name|node
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|)
-return|;
-block|}
 case|case
 name|ORDER_BY
 case|:
