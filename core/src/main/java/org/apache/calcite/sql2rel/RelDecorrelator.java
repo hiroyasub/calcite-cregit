@@ -9837,7 +9837,7 @@ name|newCall
 return|;
 block|}
 block|}
-comment|/**    * Rule to remove single_value rel. For cases like    *    *<blockquote>AggRel single_value proj/filter/agg/ join on unique LHS key    * AggRel single group</blockquote>    */
+comment|/**    * Rule to remove an Aggregate with SINGLE_VALUE. For cases like:    *    * Aggregate(SINGLE_VALUE)    *   Project(single expression)    *     Aggregate    *    * For instance (subtree taken from TPCH query 17):    *    * LogicalAggregate(group=[{}], agg#0=[SINGLE_VALUE($0)])    *   LogicalProject(EXPR$0=[*(0.2:DECIMAL(2, 1), $0)])    *     LogicalAggregate(group=[{}], agg#0=[AVG($0)])    *       LogicalProject(L_QUANTITY=[$4])    *         LogicalFilter(condition=[=($1, $cor0.P_PARTKEY)])    *           LogicalTableScan(table=[[TPCH_01, LINEITEM]])    *    * Will be converted into:    *    * LogicalProject($f0=[*(0.2:DECIMAL(2, 1), $0)])    *   LogicalAggregate(group=[{}], agg#0=[AVG($0)])    *     LogicalProject(L_QUANTITY=[$4])    *       LogicalFilter(condition=[=($1, $cor0.P_PARTKEY)])    *         LogicalTableScan(table=[[TPCH_01, LINEITEM]])    */
 specifier|public
 specifier|static
 specifier|final
@@ -9945,6 +9945,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
+specifier|final
 name|Aggregate
 name|singleAggregate
 init|=
@@ -9955,6 +9956,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Project
 name|project
 init|=
@@ -9965,6 +9967,7 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Aggregate
 name|aggregate
 init|=
@@ -9975,7 +9978,7 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-comment|// check singleAggRel is single_value agg
+comment|// check the top aggregate is a single value agg function
 if|if
 condition|(
 operator|!
@@ -10020,9 +10023,8 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// check projRel only projects one expression
-comment|// check this project only projects one expression, i.e. scalar
-comment|// sub-queries.
+comment|// check the project only projects one expression, i.e. scalar sub-queries.
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -10061,8 +10063,7 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// singleAggRel produces a nullable type, so create the new
-comment|// projection that casts proj expr to a nullable type.
+comment|// ensure we keep the same type after removing the SINGLE_VALUE Aggregate
 specifier|final
 name|RelBuilder
 name|relBuilder
@@ -10074,16 +10075,15 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|RelDataType
-name|type
+name|singleAggType
 init|=
-name|relBuilder
+name|singleAggregate
 operator|.
-name|getTypeFactory
+name|getRowType
 argument_list|()
 operator|.
-name|createTypeWithNullability
-argument_list|(
-name|projExprs
+name|getFieldList
+argument_list|()
 operator|.
 name|get
 argument_list|(
@@ -10092,14 +10092,34 @@ argument_list|)
 operator|.
 name|getType
 argument_list|()
-argument_list|,
-literal|true
+decl_stmt|;
+specifier|final
+name|RexNode
+name|oldProjectExp
+init|=
+name|projExprs
+operator|.
+name|get
+argument_list|(
+literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
 name|RexNode
-name|cast
+name|newProjectExp
 init|=
+name|singleAggType
+operator|.
+name|equals
+argument_list|(
+name|oldProjectExp
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+condition|?
+name|oldProjectExp
+else|:
 name|relBuilder
 operator|.
 name|getRexBuilder
@@ -10107,14 +10127,9 @@ argument_list|()
 operator|.
 name|makeCast
 argument_list|(
-name|type
+name|singleAggType
 argument_list|,
-name|projExprs
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
+name|oldProjectExp
 argument_list|)
 decl_stmt|;
 name|relBuilder
@@ -10126,7 +10141,7 @@ argument_list|)
 operator|.
 name|project
 argument_list|(
-name|cast
+name|newProjectExp
 argument_list|)
 expr_stmt|;
 name|call
