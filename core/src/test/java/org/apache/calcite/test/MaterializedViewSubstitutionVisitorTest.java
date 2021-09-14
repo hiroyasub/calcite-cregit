@@ -5201,6 +5201,116 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testRexPredicate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\"> 100 and \"deptno\"> 50\n"
+operator|+
+literal|"group by \"name\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\"> 100"
+operator|+
+literal|"group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableTableScan(table=[[hr, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRexPredicate1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\"> 100 and \"deptno\"> 50\n"
+operator|+
+literal|"group by \"name\""
+decl_stmt|;
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\"> 100"
+operator|+
+literal|"group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableTableScan(table=[[hr, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 specifier|final
 name|JavaTypeFactoryImpl
 name|typeFactory
