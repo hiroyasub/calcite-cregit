@@ -338,14 +338,6 @@ name|input
 operator|.
 name|getTraitSet
 argument_list|()
-operator|.
-name|plus
-argument_list|(
-name|input
-operator|.
-name|getCollation
-argument_list|()
-argument_list|)
 argument_list|,
 name|input
 operator|.
