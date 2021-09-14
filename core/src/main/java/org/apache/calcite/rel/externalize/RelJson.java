@@ -829,6 +829,22 @@ end_import
 
 begin_import
 import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
@@ -5591,9 +5607,21 @@ name|class_
 argument_list|)
 return|;
 block|}
-return|return
-literal|null
-return|;
+throw|throw
+name|RESOURCE
+operator|.
+name|noOperator
+argument_list|(
+name|name
+argument_list|,
+name|kind
+argument_list|,
+name|syntax
+argument_list|)
+operator|.
+name|ex
+argument_list|()
+throw|;
 block|}
 annotation|@
 name|Nullable

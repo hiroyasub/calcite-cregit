@@ -4649,6 +4649,27 @@ name|int
 name|l1
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"No operator for ''{0}'' with kind: ''{1}'', syntax: ''{2}'' during JSON deserialization"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|noOperator
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|String
+name|kind
+parameter_list|,
+name|String
+name|syntax
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
