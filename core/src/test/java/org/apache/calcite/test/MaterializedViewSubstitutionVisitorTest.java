@@ -3150,6 +3150,280 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Unit test for FilterBottomJoin can be pulled up. */
+annotation|@
+name|Test
+name|void
+name|testLeftFilterOnLeftJoinToJoinOk1
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"left join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\" where \"empid\"> 10) \"t1\"\n"
+operator|+
+literal|"left join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testLeftFilterOnLeftJoinToJoinOk2
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\" where \"empid\"> 10) \"t1\"\n"
+operator|+
+literal|"left join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\" where \"empid\"> 30) \"t1\"\n"
+operator|+
+literal|"left join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRightFilterOnLeftJoinToJoinFail
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"left join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"left join (select \"deptno\", \"name\" from \"depts\" where \"name\" is not null) \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRightFilterOnRightJoinToJoinOk
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"right join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"right join (select \"deptno\", \"name\" from \"depts\" where \"name\" is not null) \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testLeftFilterOnRightJoinToJoinFail
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"right join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\" where \"empid\"> 30) \"t1\"\n"
+operator|+
+literal|"right join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testLeftFilterOnFullJoinToJoinFail
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"full join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\" where \"empid\"> 30) \"t1\"\n"
+operator|+
+literal|"full join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRightFilterOnFullJoinToJoinFail
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"full join (select \"deptno\", \"name\" from \"depts\") \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from \n"
+operator|+
+literal|"(select \"empid\", \"deptno\", \"name\" from \"emps\") \"t1\"\n"
+operator|+
+literal|"full join (select \"deptno\", \"name\" from \"depts\" where \"name\" is not null) \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"deptno\" = \"t2\".\"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
