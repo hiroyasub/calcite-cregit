@@ -3459,6 +3459,234 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * It's match, distinct agg-call could be expressed by mv's grouping.    */
+annotation|@
+name|Test
+name|void
+name|testAggDistinctInMvGrouping
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"name\""
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"name\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"name\", count(distinct \"name\")"
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * It's match, `Optionality.IGNORED` agg-call could be expressed by mv's grouping.    */
+annotation|@
+name|Test
+name|void
+name|testAggOptionalityInMvGrouping
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\""
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"salary\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\", max(\"salary\")"
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"salary\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * It's not match, normal agg-call could be expressed by mv's grouping.    * Such as: sum, count    */
+annotation|@
+name|Test
+name|void
+name|testAggNormalInMvGrouping
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\""
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"salary\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", sum(\"salary\")"
+operator|+
+literal|"from \"emps\" group by \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * It's not match, which is count(*) with same grouping.    */
+annotation|@
+name|Test
+name|void
+name|testGenerateQueryAggCallByMvGroupingForEmptyArg1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\""
+operator|+
+literal|"from \"emps\" group by \"deptno\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", count(*)"
+operator|+
+literal|"from \"emps\" group by \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * It's not match, which is count(*) with rollup grouping.    */
+annotation|@
+name|Test
+name|void
+name|testGenerateQueryAggCallByMvGroupingForEmptyArg2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"commission\", \"salary\""
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"commission\", \"salary\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"commission\", count(*)"
+operator|+
+literal|"from \"emps\" group by \"deptno\", \"commission\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|noMat
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * It's match, when query's agg-calls could be both rollup and expressed by mv's grouping.    */
+annotation|@
+name|Test
+name|void
+name|testAggCallBothGenByMvGroupingAndRollupOk
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"name\", \"deptno\", \"empid\", min(\"commission\")"
+operator|+
+literal|"from \"emps\" group by \"name\", \"deptno\", \"empid\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\", max(\"deptno\"), count(distinct \"empid\"), min(\"commission\")"
+operator|+
+literal|"from \"emps\" group by \"name\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link RexUtil#simplify}. */
 annotation|@
 name|Test
