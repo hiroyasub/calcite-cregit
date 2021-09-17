@@ -6398,6 +6398,34 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testSomeWithNotEquality
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp where deptno<> some (\n"
+operator|+
+literal|"  select deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testNotInUncorrelatedSubQueryRex
 parameter_list|()
 block|{
