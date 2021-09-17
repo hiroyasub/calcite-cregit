@@ -546,6 +546,11 @@ argument_list|(
 literal|"`"
 argument_list|)
 operator|.
+name|withIdentifierEscapedQuoteString
+argument_list|(
+literal|"\\`"
+argument_list|)
+operator|.
 name|withNullCollation
 argument_list|(
 name|NullCollation

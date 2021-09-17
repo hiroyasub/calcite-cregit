@@ -9309,7 +9309,7 @@ literal|"from (\n"
 operator|+
 literal|"  select 1 as \"one\", 2 as \"tWo\", 3 as \"THREE\",\n"
 operator|+
-literal|"    4 as \"fo$ur\", 5 as \"ignore\"\n"
+literal|"    4 as \"fo$ur\", 5 as \"ignore\", 6 as \"si`x\"\n"
 operator|+
 literal|"  from \"foodmart\".\"days\") as \"my$table\"\n"
 operator|+
@@ -9323,7 +9323,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT 1 AS one, 2 AS tWo, 3 AS THREE,"
 operator|+
-literal|" 4 AS `fo$ur`, 5 AS `ignore`\n"
+literal|" 4 AS `fo$ur`, 5 AS `ignore`, 6 AS `si\\`x`\n"
 operator|+
 literal|"FROM foodmart.days) AS t\n"
 operator|+
@@ -9337,7 +9337,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT 1 AS `one`, 2 AS `tWo`, 3 AS `THREE`,"
 operator|+
-literal|" 4 AS `fo$ur`, 5 AS `ignore`\n"
+literal|" 4 AS `fo$ur`, 5 AS `ignore`, 6 AS `si``x`\n"
 operator|+
 literal|"FROM `foodmart`.`days`) AS `t`\n"
 operator|+
@@ -9351,7 +9351,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT 1 AS \"one\", 2 AS \"tWo\", 3 AS \"THREE\","
 operator|+
-literal|" 4 AS \"fo$ur\", 5 AS \"ignore\"\n"
+literal|" 4 AS \"fo$ur\", 5 AS \"ignore\", 6 AS \"si`x\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"days\") AS \"t\"\n"
 operator|+
@@ -9378,7 +9378,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT 1 AS one, 2 AS tWo, 3 AS THREE,"
 operator|+
-literal|" 4 AS \"fo$ur\", 5 AS \"ignore\"\n"
+literal|" 4 AS \"fo$ur\", 5 AS \"ignore\", 6 AS \"si`x\"\n"
 operator|+
 literal|"FROM foodmart.days) AS t\n"
 operator|+
