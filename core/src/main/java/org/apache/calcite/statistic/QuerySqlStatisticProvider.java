@@ -789,12 +789,8 @@ name|column
 lambda|->
 name|relBuilder
 operator|.
-name|call
+name|isNotNull
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IS_NOT_NULL
-argument_list|,
 name|relBuilder
 operator|.
 name|field

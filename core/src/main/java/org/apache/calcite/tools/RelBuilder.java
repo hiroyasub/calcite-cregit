@@ -4457,6 +4457,81 @@ name|operand1
 argument_list|)
 return|;
 block|}
+comment|/** Creates a {@code>=}. */
+specifier|public
+name|RexNode
+name|greaterThanOrEqual
+parameter_list|(
+name|RexNode
+name|operand0
+parameter_list|,
+name|RexNode
+name|operand1
+parameter_list|)
+block|{
+return|return
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|GREATER_THAN_OR_EQUAL
+argument_list|,
+name|operand0
+argument_list|,
+name|operand1
+argument_list|)
+return|;
+block|}
+comment|/** Creates a {@code<}. */
+specifier|public
+name|RexNode
+name|lessThan
+parameter_list|(
+name|RexNode
+name|operand0
+parameter_list|,
+name|RexNode
+name|operand1
+parameter_list|)
+block|{
+return|return
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|LESS_THAN
+argument_list|,
+name|operand0
+argument_list|,
+name|operand1
+argument_list|)
+return|;
+block|}
+comment|/** Creates a {@code<=}. */
+specifier|public
+name|RexNode
+name|lessThanOrEqual
+parameter_list|(
+name|RexNode
+name|operand0
+parameter_list|,
+name|RexNode
+name|operand1
+parameter_list|)
+block|{
+return|return
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|LESS_THAN_OR_EQUAL
+argument_list|,
+name|operand0
+argument_list|,
+name|operand1
+argument_list|)
+return|;
+block|}
 comment|/** Creates a {@code<>}. */
 specifier|public
 name|RexNode
@@ -4567,7 +4642,7 @@ name|upper
 argument_list|)
 return|;
 block|}
-comment|/** Creates a IS NULL. */
+comment|/** Creates ab {@code IS NULL}. */
 specifier|public
 name|RexNode
 name|isNull
@@ -4587,7 +4662,7 @@ name|operand
 argument_list|)
 return|;
 block|}
-comment|/** Creates a IS NOT NULL. */
+comment|/** Creates an {@code IS NOT NULL}. */
 specifier|public
 name|RexNode
 name|isNotNull
@@ -13689,12 +13764,8 @@ name|conditions
 operator|.
 name|add
 argument_list|(
-name|call
+name|equals
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|EQUALS
-argument_list|,
 name|field
 argument_list|(
 literal|2
@@ -17364,12 +17435,8 @@ name|conditions
 operator|.
 name|add
 argument_list|(
-name|call
+name|equals
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|EQUALS
-argument_list|,
 name|field
 argument_list|(
 name|leftRowType

@@ -7043,12 +7043,8 @@ name|add
 argument_list|(
 name|relBuilder
 operator|.
-name|call
+name|equals
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|EQUALS
-argument_list|,
 name|RexInputRef
 operator|.
 name|of
