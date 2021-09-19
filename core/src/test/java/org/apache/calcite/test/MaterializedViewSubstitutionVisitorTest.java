@@ -5585,6 +5585,84 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4779">[CALCITE-4779]    * GroupByList contains constant literal, materialized view recognition failed</a>. */
+annotation|@
+name|Test
+name|void
+name|testGroupByListContainsConstantLiteral
+parameter_list|()
+block|{
+comment|// Aggregate operator grouping set contains a literal and count(distinct col) function.
+specifier|final
+name|String
+name|mv1
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"empid\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\""
+decl_stmt|;
+specifier|final
+name|String
+name|query1
+init|=
+literal|""
+operator|+
+literal|"select 'a', \"deptno\", count(distinct \"empid\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by 'a', \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv1
+argument_list|,
+name|query1
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// Aggregate operator grouping set contains a literal and sum(col) function.
+specifier|final
+name|String
+name|mv2
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"empid\", sum(\"empid\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\""
+decl_stmt|;
+specifier|final
+name|String
+name|query2
+init|=
+literal|""
+operator|+
+literal|"select 'a', \"deptno\", sum(\"empid\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by 'a', \"deptno\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv2
+argument_list|,
+name|query2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 specifier|final
 name|JavaTypeFactoryImpl
 name|typeFactory
@@ -5771,6 +5849,13 @@ argument_list|(
 name|CoreRules
 operator|.
 name|PROJECT_SET_OP_TRANSPOSE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_PROJECT_PULL_UP_CONSTANTS
 argument_list|)
 operator|.
 name|addRuleInstance

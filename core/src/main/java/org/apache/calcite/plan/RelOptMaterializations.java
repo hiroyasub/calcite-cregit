@@ -1270,6 +1270,13 @@ name|addRuleInstance
 argument_list|(
 name|CoreRules
 operator|.
+name|AGGREGATE_PROJECT_PULL_UP_CONSTANTS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
 name|FILTER_TO_CALC
 argument_list|)
 operator|.
