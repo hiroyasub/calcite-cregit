@@ -693,6 +693,8 @@ name|this
 operator|::
 name|supplyProto
 argument_list|)
+operator|::
+name|get
 decl_stmt|;
 specifier|public
 specifier|final

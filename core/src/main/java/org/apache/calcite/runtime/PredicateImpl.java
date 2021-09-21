@@ -84,8 +84,15 @@ argument_list|)
 return|;
 block|}
 comment|/** Overrides {@code java.util.function.Predicate#test} in JDK8 and higher. */
+comment|// Suppress ErrorProne's MissingOverride warning. The @Override annotation
+comment|// would be incorrect on Guava< 21 because Guava's interface Predicate does
+comment|// not implement Java's interface Predicate until Guava 21, and we need the
+comment|// code to compile on all versions.
 annotation|@
-name|Override
+name|SuppressWarnings
+argument_list|(
+literal|"MissingOverride"
+argument_list|)
 specifier|public
 specifier|abstract
 name|boolean

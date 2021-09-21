@@ -1052,6 +1052,8 @@ operator|.
 name|DEFAULT
 argument_list|)
 argument_list|)
+operator|::
+name|get
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
