@@ -13416,9 +13416,6 @@ argument_list|()
 decl_stmt|;
 comment|// REVIEW - are there any expressions that need special handling
 comment|// and therefore cannot be pushed?
-comment|// filters can be pushed to the left child if the left child
-comment|// does not generate NULLs and the only columns referenced in
-comment|// the filter originate from the left child
 if|if
 condition|(
 name|pushLeft
@@ -13485,9 +13482,6 @@ argument_list|(
 name|filter
 argument_list|)
 expr_stmt|;
-comment|// filters can be pushed to the right child if the right child
-comment|// does not generate NULLs and the only columns referenced in
-comment|// the filter originate from the right child
 block|}
 if|else if
 condition|(
@@ -13511,11 +13505,7 @@ argument_list|()
 condition|)
 block|{
 comment|// adjust the field references in the filter to reflect
-comment|// that fields in the right now shift over to the left;
-comment|// since we never push filters to a NULL generating
-comment|// child, the types of the source should match the dest
-comment|// so we don't need to explicitly pass the destination
-comment|// fields to RexInputConverter
+comment|// that fields in the right now shift over to the left
 specifier|final
 name|RexNode
 name|shiftedFilter
