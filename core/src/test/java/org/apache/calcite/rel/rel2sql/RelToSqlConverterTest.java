@@ -15323,9 +15323,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT \"t\".\"customer_id\", SUM(\"t\".\"EXPR$0\")\n"
+literal|"SELECT \"t\".\"customer_id\", SUM(\"t\".\"$f1\")\n"
 operator|+
-literal|"FROM (SELECT \"customer_id\", \"store_sales\" * \"store_cost\" AS \"EXPR$0\"\n"
+literal|"FROM (SELECT \"customer_id\", \"store_sales\" * \"store_cost\" AS \"$f1\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"sales_fact_1997\") AS \"t\"\n"
 operator|+
@@ -15334,6 +15334,70 @@ operator|+
 literal|"FROM \"foodmart\".\"customer\") AS \"t0\" ON \"t\".\"customer_id\" = \"t0\".\"customer_id\"\n"
 operator|+
 literal|"GROUP BY \"t\".\"customer_id\""
+decl_stmt|;
+name|RuleSet
+name|rules
+init|=
+name|RuleSets
+operator|.
+name|ofList
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_JOIN_TRANSPOSE
+argument_list|)
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+literal|null
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testMultiplicationRetainsExplicitAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select s.\"customer_id\", s.\"store_sales\" * s.\"store_cost\" as \"total\""
+operator|+
+literal|"from \"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"customer\" as c\n"
+operator|+
+literal|"  on s.\"customer_id\" = c.\"customer_id\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"t\".\"customer_id\", \"t\".\"total\"\n"
+operator|+
+literal|"FROM (SELECT \"customer_id\", \"store_sales\" * \"store_cost\" AS \"total\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"customer_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"customer\") AS \"t0\" ON \"t\".\"customer_id\" = \"t0\""
+operator|+
+literal|".\"customer_id\""
 decl_stmt|;
 name|RuleSet
 name|rules
