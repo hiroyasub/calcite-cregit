@@ -7327,15 +7327,6 @@ name|call
 operator|.
 name|getOperandList
 argument_list|()
-operator|.
-name|toArray
-argument_list|(
-operator|new
-name|SqlNode
-index|[
-literal|0
-index|]
-argument_list|)
 argument_list|,
 name|call
 operator|.

@@ -7868,12 +7868,12 @@ name|SqlStdOperatorTable
 operator|.
 name|COLLECTION_TABLE
 argument_list|,
-operator|new
-name|SqlNode
-index|[]
-block|{
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
 name|callNode
-block|}
+argument_list|)
 argument_list|,
 name|SqlParserPos
 operator|.

@@ -97,6 +97,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableNullableList
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -228,7 +242,12 @@ name|SqlBasicCall
 argument_list|(
 name|this
 argument_list|,
+name|ImmutableNullableList
+operator|.
+name|copyOf
+argument_list|(
 name|operands
+argument_list|)
 argument_list|,
 name|pos
 argument_list|,
