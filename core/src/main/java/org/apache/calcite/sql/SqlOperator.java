@@ -957,8 +957,6 @@ name|operands
 argument_list|,
 name|pos
 argument_list|,
-literal|false
-argument_list|,
 name|functionQualifier
 argument_list|)
 return|;

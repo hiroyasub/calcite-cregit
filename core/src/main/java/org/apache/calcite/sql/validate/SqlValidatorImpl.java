@@ -9934,9 +9934,12 @@ operator|.
 name|getParserPosition
 argument_list|()
 argument_list|,
-literal|true
-argument_list|,
 literal|null
+argument_list|)
+operator|.
+name|withExpanded
+argument_list|(
+literal|true
 argument_list|)
 return|;
 block|}

@@ -10715,7 +10715,7 @@ name|operand
 range|:
 name|call
 operator|.
-name|getOperands
+name|getOperandList
 argument_list|()
 control|)
 block|{
