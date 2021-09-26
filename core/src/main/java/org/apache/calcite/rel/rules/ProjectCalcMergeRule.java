@@ -221,11 +221,27 @@ name|Pair
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalProject} and a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The resulting {@link org.apache.calcite.rel.logical.LogicalCalc} has the  * same project list as the original  * {@link org.apache.calcite.rel.logical.LogicalProject}, but expressed in terms  * of the original {@link org.apache.calcite.rel.logical.LogicalCalc}'s inputs.  *  * @see FilterCalcMergeRule  * @see CoreRules#PROJECT_CALC_MERGE  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|ProjectCalcMergeRule
@@ -502,6 +518,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -513,14 +533,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableProjectCalcMergeRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

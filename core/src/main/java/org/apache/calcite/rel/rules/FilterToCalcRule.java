@@ -163,11 +163,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalFilter} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does<em>NOT</em> fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalFilter} or a  * {@link org.apache.calcite.rel.logical.LogicalProject} (we assume they they  * will be converted using {@link FilterToCalcRule} or  * {@link ProjectToCalcRule}) or a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. This  * {@link org.apache.calcite.rel.logical.LogicalFilter} will eventually be  * converted by {@link FilterCalcMergeRule}.  *  * @see CoreRules#FILTER_TO_CALC  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|FilterToCalcRule
@@ -336,6 +352,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -347,7 +367,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableFilterToCalcRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -364,13 +389,6 @@ argument_list|)
 operator|.
 name|anyInputs
 argument_list|()
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@

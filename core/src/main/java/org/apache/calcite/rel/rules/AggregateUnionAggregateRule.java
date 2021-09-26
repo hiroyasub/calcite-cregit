@@ -181,11 +181,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that matches  * {@link org.apache.calcite.rel.core.Aggregate}s beneath a  * {@link org.apache.calcite.rel.core.Union} and pulls them up, so  * that a single  * {@link org.apache.calcite.rel.core.Aggregate} removes duplicates.  *  *<p>This rule only handles cases where the  * {@link org.apache.calcite.rel.core.Union}s  * still have only two inputs.  *  * @see CoreRules#AGGREGATE_UNION_AGGREGATE  * @see CoreRules#AGGREGATE_UNION_AGGREGATE_FIRST  * @see CoreRules#AGGREGATE_UNION_AGGREGATE_SECOND  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|AggregateUnionAggregateRule
@@ -644,6 +660,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -655,18 +675,16 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableAggregateUnionAggregateRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withDescription
 argument_list|(
 literal|"AggregateUnionAggregateRule"
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 operator|.
 name|withOperandFor

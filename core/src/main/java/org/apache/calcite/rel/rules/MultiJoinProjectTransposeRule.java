@@ -135,11 +135,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * MultiJoinProjectTransposeRule implements the rule for pulling  * {@link org.apache.calcite.rel.logical.LogicalProject}s that are on top of a  * {@link MultiJoin} and beneath a  * {@link org.apache.calcite.rel.logical.LogicalJoin} so the  * {@link org.apache.calcite.rel.logical.LogicalProject} appears above the  * {@link org.apache.calcite.rel.logical.LogicalJoin}.  *  *<p>In the process of doing  * so, also save away information about the respective fields that are  * referenced in the expressions in the  * {@link org.apache.calcite.rel.logical.LogicalProject} we're pulling up, as  * well as the join condition, in the resultant {@link MultiJoin}s  *  *<p>For example, if we have the following sub-query:  *  *<blockquote><pre>  * (select X.x1, Y.y1 from X, Y  *  where X.x2 = Y.y2 and X.x3 = 1 and Y.y3 = 2)</pre></blockquote>  *  *<p>The {@link MultiJoin} associated with (X, Y) associates x1 with X and  * y1 with Y. Although x3 and y3 need to be read due to the filters, they are  * not required after the row scan has completed and therefore are not saved.  * The join fields, x2 and y2, are also tracked separately.  *  *<p>Note that by only pulling up projects that are on top of  * {@link MultiJoin}s, we preserve projections on top of row scans.  *  *<p>See the superclass for details on restrictions regarding which  * {@link org.apache.calcite.rel.logical.LogicalProject}s cannot be pulled.  *  * @see CoreRules#MULTI_JOIN_BOTH_PROJECT  * @see CoreRules#MULTI_JOIN_LEFT_PROJECT  * @see CoreRules#MULTI_JOIN_RIGHT_PROJECT  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|MultiJoinProjectTransposeRule
@@ -175,9 +191,12 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
+name|ImmutableMultiJoinProjectTransposeRule
+operator|.
 name|Config
 operator|.
-name|DEFAULT
+name|of
+argument_list|()
 operator|.
 name|withDescription
 argument_list|(
@@ -194,13 +213,6 @@ name|exactly
 argument_list|(
 name|operand
 argument_list|)
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -223,9 +235,12 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
+name|ImmutableMultiJoinProjectTransposeRule
+operator|.
 name|Config
 operator|.
-name|DEFAULT
+name|of
+argument_list|()
 operator|.
 name|withDescription
 argument_list|(
@@ -247,13 +262,6 @@ name|exactly
 argument_list|(
 name|operand
 argument_list|)
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -424,6 +432,15 @@ argument_list|)
 return|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"immutables:subtype"
+argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -435,7 +452,12 @@ block|{
 name|Config
 name|BOTH_PROJECT
 init|=
-name|EMPTY
+name|ImmutableMultiJoinProjectTransposeRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -514,18 +536,16 @@ name|withDescription
 argument_list|(
 literal|"MultiJoinProjectTransposeRule: with two LogicalProject children"
 argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
 decl_stmt|;
 name|Config
 name|LEFT_PROJECT
 init|=
-name|EMPTY
+name|ImmutableMultiJoinProjectTransposeRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -576,18 +596,16 @@ name|withDescription
 argument_list|(
 literal|"MultiJoinProjectTransposeRule: with LogicalProject on left"
 argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
 decl_stmt|;
 name|Config
 name|RIGHT_PROJECT
 init|=
-name|EMPTY
+name|ImmutableMultiJoinProjectTransposeRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -651,13 +669,6 @@ operator|.
 name|withDescription
 argument_list|(
 literal|"MultiJoinProjectTransposeRule: with LogicalProject on right"
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@

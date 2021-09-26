@@ -125,11 +125,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/** Rule that matches Project on Aggregate.  *  * @see MaterializedViewRules#PROJECT_AGGREGATE */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|MaterializedViewProjectAggregateRule
@@ -324,6 +340,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -351,11 +376,14 @@ name|relBuilderFactory
 parameter_list|)
 block|{
 return|return
-name|MaterializedViewAggregateRule
+name|ImmutableMaterializedViewProjectAggregateRule
 operator|.
 name|Config
 operator|.
-name|create
+name|builder
+argument_list|()
+operator|.
+name|withRelBuilderFactory
 argument_list|(
 name|relBuilderFactory
 argument_list|)
@@ -368,6 +396,11 @@ operator|.
 name|withUnionRewritingPullProgram
 argument_list|(
 literal|null
+argument_list|)
+operator|.
+name|withFastBailOut
+argument_list|(
+literal|false
 argument_list|)
 operator|.
 name|withOperandSupplier
@@ -406,12 +439,8 @@ argument_list|(
 literal|"MaterializedViewAggregateRule(Project-Aggregate)"
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 return|;
 block|}
 annotation|@

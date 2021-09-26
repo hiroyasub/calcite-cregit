@@ -161,11 +161,27 @@ name|Nullable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * TraitMatchingRule adapts a converter rule, restricting it to fire only when  * its input already matches the expected output trait. This can be used with  * {@link org.apache.calcite.plan.hep.HepPlanner} in cases where alternate  * implementations are available and it is desirable to minimize converters.  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|TraitMatchingRule
@@ -209,9 +225,12 @@ operator|.
 name|ANY
 assert|;
 return|return
+name|ImmutableTraitMatchingRule
+operator|.
 name|Config
 operator|.
-name|EMPTY
+name|builder
+argument_list|()
 operator|.
 name|withRelBuilderFactory
 argument_list|(
@@ -257,17 +276,13 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
-operator|.
 name|withConverterRule
 argument_list|(
 name|converterRule
 argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|//~ Constructors -----------------------------------------------------------
@@ -407,6 +422,15 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
 specifier|public
 interface|interface
 name|Config

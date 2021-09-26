@@ -105,11 +105,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that removes a trivial  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>A {@link org.apache.calcite.rel.logical.LogicalCalc}  * is trivial if it projects its input fields in their  * original order, and it does not filter.  *  * @see ProjectRemoveRule  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|CalcRemoveRule
@@ -239,6 +255,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -250,7 +270,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableCalcRemoveRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(

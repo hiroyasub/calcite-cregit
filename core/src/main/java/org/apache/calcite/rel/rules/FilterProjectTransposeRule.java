@@ -249,6 +249,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -274,6 +286,10 @@ comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|FilterProjectTransposeRule
@@ -965,6 +981,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration.    *    *<p>If {@code copyFilter} is true, creates the same kind of Filter as    * matched in the rule, otherwise it creates a Filter using the RelBuilder    * obtained by the {@code relBuilderFactory}.    * Similarly for {@code copyProject}.    *    *<p>Defining predicates for the Filter (using {@code filterPredicate})    * and/or the Project (using {@code projectPredicate} allows making the rule    * more restrictive. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -976,14 +996,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableFilterProjectTransposeRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(
@@ -1050,10 +1068,19 @@ name|BooleanDefault
 argument_list|(
 literal|true
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isCopyFilter
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #isCopyFilter()}. */
 name|Config
 name|withCopyFilter
@@ -1074,10 +1101,19 @@ name|BooleanDefault
 argument_list|(
 literal|true
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isCopyProject
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #isCopyProject()}. */
 name|Config
 name|withCopyProject

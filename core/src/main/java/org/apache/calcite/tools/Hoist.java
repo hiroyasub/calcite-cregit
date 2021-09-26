@@ -141,20 +141,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -208,6 +194,18 @@ operator|.
 name|qual
 operator|.
 name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
 import|;
 end_import
 
@@ -268,6 +266,10 @@ comment|/**  * Utility that extracts constants from a SQL query.  *  *<p>Simple 
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|Hoist
@@ -285,14 +287,12 @@ name|config
 parameter_list|()
 block|{
 return|return
-name|ImmutableBeans
+name|ImmutableHoist
 operator|.
-name|create
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|builder
+argument_list|()
 operator|.
 name|withParserConfig
 argument_list|(
@@ -301,6 +301,9 @@ operator|.
 name|config
 argument_list|()
 argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/** Creates a Hoist. */
@@ -539,15 +542,20 @@ argument_list|)
 return|;
 block|}
 comment|/** Configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
 specifier|public
 interface|interface
 name|Config
 block|{
 comment|/** Returns the configuration for the SQL parser. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 name|SqlParser
 operator|.
 name|Config

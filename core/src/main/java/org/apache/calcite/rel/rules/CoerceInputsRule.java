@@ -149,6 +149,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -172,6 +184,10 @@ comment|/**  * CoerceInputsRule pre-casts inputs to a particular type. This can 
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|CoerceInputsRule
@@ -500,6 +516,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -511,14 +536,22 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableCoerceInputsRule
 operator|.
-name|as
-argument_list|(
 name|Config
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|withConsumerRelClass
+argument_list|(
+name|RelNode
 operator|.
 name|class
 argument_list|)
+operator|.
+name|build
+argument_list|()
 operator|.
 name|withCoerceNames
 argument_list|(
@@ -559,10 +592,19 @@ name|BooleanDefault
 argument_list|(
 literal|false
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isCoerceNames
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #isCoerceNames()}. */
 name|Config
 name|withCoerceNames

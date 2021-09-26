@@ -117,11 +117,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalCalc} onto a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The resulting {@link org.apache.calcite.rel.logical.LogicalCalc} has the  * same project list as the upper  * {@link org.apache.calcite.rel.logical.LogicalCalc}, but expressed in terms of  * the lower {@link org.apache.calcite.rel.logical.LogicalCalc}'s inputs.  *  * @see CoreRules#CALC_MERGE  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|CalcMergeRule
@@ -345,6 +361,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -356,9 +376,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
+name|ImmutableCalcMergeRule
+operator|.
 name|Config
 operator|.
-name|EMPTY
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(

@@ -253,6 +253,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -276,6 +288,10 @@ comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.core
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|AggregateRemoveRule
@@ -754,6 +770,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -765,20 +785,18 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableAggregateRemoveRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withRelBuilderFactory
 argument_list|(
 name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 operator|.
 name|withOperandFor

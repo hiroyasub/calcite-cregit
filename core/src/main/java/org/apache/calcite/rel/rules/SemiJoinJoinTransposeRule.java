@@ -209,6 +209,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -232,6 +244,10 @@ comment|/**  * Planner rule that pushes a {@link Join#isSemiJoin semi-join}  * d
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|SemiJoinJoinTransposeRule
@@ -932,6 +948,10 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -943,14 +963,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableSemiJoinJoinTransposeRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

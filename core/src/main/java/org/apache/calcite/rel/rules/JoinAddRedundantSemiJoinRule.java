@@ -165,11 +165,27 @@ name|ImmutableSet
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to add a semi-join into a join. Transformation is as follows:  *  *<p>LogicalJoin(X, Y)&rarr; LogicalJoin(SemiJoin(X, Y), Y)  *  *<p>Can be configured to match any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.  *  * @see CoreRules#JOIN_ADD_REDUNDANT_SEMI_JOIN  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|JoinAddRedundantSemiJoinRule
@@ -387,6 +403,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -398,14 +418,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableJoinAddRedundantSemiJoinRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

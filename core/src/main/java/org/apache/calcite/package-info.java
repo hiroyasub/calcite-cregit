@@ -7,6 +7,11 @@ begin_comment
 comment|/**  * Main package for Calcite, the dynamic data management platform.  */
 end_comment
 
+begin_annotation
+annotation|@
+name|CalciteImmutable
+end_annotation
+
 begin_package
 package|package
 name|org

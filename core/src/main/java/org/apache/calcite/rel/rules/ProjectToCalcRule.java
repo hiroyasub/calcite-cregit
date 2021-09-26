@@ -119,11 +119,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to convert a  * {@link org.apache.calcite.rel.logical.LogicalProject} to a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The rule does not fire if the child is a  * {@link org.apache.calcite.rel.logical.LogicalProject},  * {@link org.apache.calcite.rel.logical.LogicalFilter} or  * {@link org.apache.calcite.rel.logical.LogicalCalc}. If it did, then the same  * {@link org.apache.calcite.rel.logical.LogicalCalc} would be formed via  * several transformation paths, which is a waste of effort.  *  * @see FilterToCalcRule  * @see CoreRules#PROJECT_TO_CALC  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|ProjectToCalcRule
@@ -268,6 +284,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -279,7 +299,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableProjectToCalcRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -296,13 +321,6 @@ argument_list|)
 operator|.
 name|anyInputs
 argument_list|()
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@

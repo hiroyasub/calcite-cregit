@@ -93,11 +93,27 @@ name|StarTable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/** Variant of {@link AggregateStarTableRule} that accepts a {@link Project}  * between the {@link Aggregate} and its {@link StarTable.StarTableScan}  * input. */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|AggregateProjectStarTableRule
@@ -247,6 +263,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"immutables:subtype"
+argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -258,14 +283,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableAggregateProjectStarTableRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

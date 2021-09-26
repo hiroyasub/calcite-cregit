@@ -477,6 +477,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -562,6 +574,10 @@ comment|/**  * Planner rule that pushes an  * {@link org.apache.calcite.rel.core
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|AggregateJoinTransposeRule
@@ -2938,6 +2954,10 @@ name|aggregate
 decl_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -2949,14 +2969,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableAggregateJoinTransposeRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(
@@ -2975,14 +2993,12 @@ comment|/** Extended instance that can push down aggregate functions. */
 name|Config
 name|EXTENDED
 init|=
-name|EMPTY
+name|ImmutableAggregateJoinTransposeRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(
@@ -3024,10 +3040,19 @@ name|BooleanDefault
 argument_list|(
 literal|false
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isAllowFunctions
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #isAllowFunctions()}. */
 name|Config
 name|withAllowFunctions

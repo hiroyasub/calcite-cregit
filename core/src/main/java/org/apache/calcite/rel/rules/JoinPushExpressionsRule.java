@@ -147,11 +147,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes down expressions in "equal" join condition.  *  *<p>For example, given  * "emp JOIN dept ON emp.deptno + 1 = dept.deptno", adds a project above  * "emp" that computes the expression  * "emp.deptno + 1". The resulting join condition is a simple combination  * of AND, equals, and input fields, plus the remaining non-equal conditions.  *  * @see CoreRules#JOIN_PUSH_EXPRESSIONS  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|JoinPushExpressionsRule
@@ -355,6 +371,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -366,25 +386,16 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableJoinPushExpressionsRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(
 name|Join
-operator|.
-name|class
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
 operator|.
 name|class
 argument_list|)

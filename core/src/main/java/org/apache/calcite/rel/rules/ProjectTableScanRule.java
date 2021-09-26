@@ -267,6 +267,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -302,6 +314,10 @@ comment|/**  * Planner rule that converts a {@link Project}  * on a {@link org.a
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|ProjectTableScanRule
@@ -858,6 +874,10 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -870,7 +890,12 @@ comment|/** Config that matches Project on TableScan. */
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableProjectTableScanRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -908,13 +933,6 @@ operator|.
 name|noInputs
 argument_list|()
 argument_list|)
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 comment|/** Config that matches Project on EnumerableInterpreter on TableScan. */

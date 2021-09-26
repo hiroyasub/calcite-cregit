@@ -165,11 +165,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalFilter} and a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. The  * result is a {@link org.apache.calcite.rel.logical.LogicalCalc}  * whose filter condition is the logical AND of the two.  *  * @see FilterMergeRule  * @see ProjectCalcMergeRule  * @see CoreRules#FILTER_CALC_MERGE  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|FilterCalcMergeRule
@@ -372,6 +388,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -383,14 +403,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableFilterCalcMergeRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

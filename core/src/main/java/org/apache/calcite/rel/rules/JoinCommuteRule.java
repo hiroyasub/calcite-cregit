@@ -317,6 +317,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -330,6 +342,10 @@ comment|/**  * Planner rule that permutes the inputs to a  * {@link org.apache.c
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|JoinCommuteRule
@@ -1149,6 +1165,10 @@ throw|;
 block|}
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -1160,14 +1180,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableJoinCommuteRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(
@@ -1276,10 +1294,19 @@ name|BooleanDefault
 argument_list|(
 literal|false
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isSwapOuter
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #isSwapOuter()}. */
 name|Config
 name|withSwapOuter
@@ -1300,10 +1327,19 @@ name|BooleanDefault
 argument_list|(
 literal|true
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isAllowAlwaysTrueCondition
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #isAllowAlwaysTrueCondition()}. */
 name|Config
 name|withAllowAlwaysTrueCondition

@@ -163,11 +163,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that infers predicates from on a  * {@link org.apache.calcite.rel.core.Join} and creates  * {@link org.apache.calcite.rel.core.Filter}s if those predicates can be pushed  * to its inputs.  *  *<p>Uses {@link org.apache.calcite.rel.metadata.RelMdPredicates} to infer  * the predicates,  * returns them in a {@link org.apache.calcite.plan.RelOptPredicateList}  * and applies them appropriately.  *  * @see CoreRules#JOIN_PUSH_TRANSITIVE_PREDICATES  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|JoinPushTransitivePredicatesRule
@@ -527,6 +543,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -538,14 +558,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableJoinPushTransitivePredicatesRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

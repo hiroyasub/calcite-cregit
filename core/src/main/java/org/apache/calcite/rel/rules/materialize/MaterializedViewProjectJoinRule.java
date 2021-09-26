@@ -111,11 +111,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/** Rule that matches Project on Join. */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|MaterializedViewProjectJoinRule
@@ -244,6 +260,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -255,14 +280,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableMaterializedViewProjectJoinRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|builder
+argument_list|()
 operator|.
 name|withRelBuilderFactory
 argument_list|(
@@ -307,15 +330,6 @@ argument_list|(
 literal|"MaterializedViewJoinRule(Project-Join)"
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|MaterializedViewProjectFilterRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
-operator|.
 name|withGenerateUnionRewriting
 argument_list|(
 literal|true
@@ -331,12 +345,8 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override

@@ -147,11 +147,27 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that converts a {@link Calc}  * to a {@link org.apache.calcite.rel.core.Project}  * and {@link Filter}.  *  *<p>Not enabled by default, as it works against the usual flow, which is to  * convert {@code Project} and {@code Filter} to {@code Calc}. But useful for  * specific tasks, such as optimizing before calling an  * {@link org.apache.calcite.interpreter.Interpreter}.  *  * @see CoreRules#CALC_SPLIT  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|CalcSplitRule
@@ -310,6 +326,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -321,7 +341,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableCalcSplitRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -338,13 +363,6 @@ argument_list|)
 operator|.
 name|anyInputs
 argument_list|()
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@

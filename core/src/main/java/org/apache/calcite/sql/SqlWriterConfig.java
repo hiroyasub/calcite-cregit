@@ -35,20 +35,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|checkerframework
 operator|.
 name|checker
@@ -61,20 +47,37 @@ name|Nullable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/** Configuration for {@link SqlWriter} and {@link SqlPrettyWriter}. */
 end_comment
 
 begin_interface
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|true
+argument_list|)
 specifier|public
 interface|interface
 name|SqlWriterConfig
 block|{
 comment|/** Returns the dialect. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|SqlDialect
@@ -93,20 +96,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether to print keywords (SELECT, AS, etc.) in lower-case.    * Default is false: keywords are printed in upper-case. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|keywordsLowerCase
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #keywordsLowerCase}. */
 name|SqlWriterConfig
 name|withKeywordsLowerCase
@@ -117,20 +118,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether to quote all identifiers, even those which would be    * correct according to the rules of the {@link SqlDialect} if quotation    * marks were omitted. Default is true. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|true
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|quoteAllIdentifiers
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #quoteAllIdentifiers}. */
 name|SqlWriterConfig
 name|withQuoteAllIdentifiers
@@ -141,20 +140,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the number of spaces indentation. Default is 4. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|IntDefault
-argument_list|(
-literal|4
-argument_list|)
+name|Default
+specifier|default
 name|int
 name|indentation
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|4
+return|;
+block|}
 comment|/** Sets {@link #indentation}. */
 name|SqlWriterConfig
 name|withIndentation
@@ -165,20 +162,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether a clause (FROM, WHERE, GROUP BY, HAVING, WINDOW,    * ORDER BY) starts a new line. Default is true. SELECT is always at the    * start of a line. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|true
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|clauseStartsLine
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #clauseStartsLine}. */
 name|SqlWriterConfig
 name|withClauseStartsLine
@@ -189,20 +184,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether a clause (FROM, WHERE, GROUP BY, HAVING, WINDOW,    * ORDER BY) is followed by a new line. Default is false. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|clauseEndsLine
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #clauseEndsLine()}. */
 name|SqlWriterConfig
 name|withClauseEndsLine
@@ -213,20 +206,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether each item in a SELECT list, GROUP BY list, or ORDER BY    * list is on its own line.    *    *<p>Default is false;    * this property is superseded by {@link #selectFolding()},    * {@link #groupByFolding()}, {@link #orderByFolding()}. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|selectListItemsOnSeparateLines
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #selectListItemsOnSeparateLines}. */
 name|SqlWriterConfig
 name|withSelectListItemsOnSeparateLines
@@ -236,10 +227,6 @@ name|selectListItemsOnSeparateLines
 parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for lists in the SELECT, GROUP BY and    * ORDER clauses, for items in the SET clause of UPDATE, and for items in    * VALUES.    *    * @see #foldLength()    *    *<p>If not set, the values of    * {@link #selectListItemsOnSeparateLines()},    * {@link #valuesListNewline()},    * {@link #updateSetListNewline()},    * {@link #windowDeclListNewline()} are used. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|LineFolding
@@ -258,10 +245,6 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the SELECT clause.    * If not set, the value of {@link #lineFolding()} is used. */
 annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Nullable
 name|LineFolding
 name|selectFolding
@@ -279,20 +262,20 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the FROM clause (and JOIN).    * If not set, the value of {@link #lineFolding()} is used. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|EnumDefault
-argument_list|(
-literal|"TALL"
-argument_list|)
+name|Default
+specifier|default
 name|LineFolding
 name|fromFolding
 parameter_list|()
-function_decl|;
+block|{
+return|return
+name|LineFolding
+operator|.
+name|TALL
+return|;
+block|}
 comment|/** Sets {@link #fromFolding()}. */
 name|SqlWriterConfig
 name|withFromFolding
@@ -302,10 +285,6 @@ name|lineFolding
 parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the WHERE clause.    * If not set, the value of {@link #lineFolding()} is used. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|LineFolding
@@ -324,10 +303,6 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the GROUP BY clause.    * If not set, the value of {@link #lineFolding()} is used. */
 annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Nullable
 name|LineFolding
 name|groupByFolding
@@ -344,10 +319,6 @@ name|lineFolding
 parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the HAVING clause.    * If not set, the value of {@link #lineFolding()} is used. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|LineFolding
@@ -366,10 +337,6 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the WINDOW clause.    * If not set, the value of {@link #lineFolding()} is used. */
 annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Nullable
 name|LineFolding
 name|windowFolding
@@ -386,10 +353,6 @@ name|lineFolding
 parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the MATCH_RECOGNIZE clause.    * If not set, the value of {@link #lineFolding()} is used. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|LineFolding
@@ -408,10 +371,6 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the ORDER BY clause.    * If not set, the value of {@link #lineFolding()} is used. */
 annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Nullable
 name|LineFolding
 name|orderByFolding
@@ -428,10 +387,6 @@ name|lineFolding
 parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the OVER clause or a window    * declaration. If not set, the value of {@link #lineFolding()} is used. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|LineFolding
@@ -450,10 +405,6 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the VALUES expression.    * If not set, the value of {@link #lineFolding()} is used. */
 annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Nullable
 name|LineFolding
 name|valuesFolding
@@ -470,10 +421,6 @@ name|lineFolding
 parameter_list|)
 function_decl|;
 comment|/** Returns the line-folding policy for the SET clause of an UPDATE statement.    * If not set, the value of {@link #lineFolding()} is used. */
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Nullable
 name|LineFolding
@@ -492,20 +439,18 @@ parameter_list|)
 function_decl|;
 comment|/**    * Returns whether to use a fix for SELECT list indentations.    *    *<ul>    *<li>If set to "false":    *    *<blockquote><pre>    * SELECT    *     A as A,    *         B as B,    *         C as C,    *     D    *</pre></blockquote>    *    *<li>If set to "true" (the default):    *    *<blockquote><pre>    * SELECT    *     A as A,    *     B as B,    *     C as C,    *     D    *</pre></blockquote>    *</ul>    */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|true
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|selectListExtraIndentFlag
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #selectListExtraIndentFlag}. */
 name|SqlWriterConfig
 name|withSelectListExtraIndentFlag
@@ -516,20 +461,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether each declaration in a WINDOW clause should be on its own    * line.    *    *<p>Default is true;    * this property is superseded by {@link #windowFolding()}. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|true
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|windowDeclListNewline
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #windowDeclListNewline}. */
 name|SqlWriterConfig
 name|withWindowDeclListNewline
@@ -540,20 +483,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether each row in a VALUES clause should be on its own    * line.    *    *<p>Default is true;    * this property is superseded by {@link #valuesFolding()}. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|true
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|valuesListNewline
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #valuesListNewline}. */
 name|SqlWriterConfig
 name|withValuesListNewline
@@ -564,20 +505,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether each assignment in the SET clause of an UPDATE or MERGE    * statement should be on its own line.    *    *<p>Default is true;    * this property is superseded by {@link #updateSetFolding()}. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|true
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|updateSetListNewline
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #updateSetListNewline}. */
 name|SqlWriterConfig
 name|withUpdateSetListNewline
@@ -588,20 +527,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether a WINDOW clause should start its own line. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|windowNewline
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #windowNewline}. */
 name|SqlWriterConfig
 name|withWindowNewline
@@ -612,20 +549,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether commas in SELECT, GROUP BY and ORDER clauses should    * appear at the start of the line. Default is false. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|leadingComma
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #leadingComma()}. */
 name|SqlWriterConfig
 name|withLeadingComma
@@ -636,22 +571,24 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the sub-query style.    * Default is {@link SqlWriter.SubQueryStyle#HYDE}. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|EnumDefault
-argument_list|(
-literal|"HYDE"
-argument_list|)
+name|Default
+specifier|default
 name|SqlWriter
 operator|.
 name|SubQueryStyle
 name|subQueryStyle
 parameter_list|()
-function_decl|;
+block|{
+return|return
+name|SqlWriter
+operator|.
+name|SubQueryStyle
+operator|.
+name|HYDE
+return|;
+block|}
 comment|/** Sets {@link #subQueryStyle}. */
 name|SqlWriterConfig
 name|withSubQueryStyle
@@ -664,20 +601,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether to print a newline before each AND or OR (whichever is    * higher level) in WHERE clauses.    *    *<p>NOTE: Ignored when alwaysUseParentheses is set to true. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|whereListItemsOnSeparateLines
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #whereListItemsOnSeparateLines}. */
 name|SqlWriterConfig
 name|withWhereListItemsOnSeparateLines
@@ -688,20 +623,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether expressions should always be included in parentheses.    * Default is false. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|alwaysUseParentheses
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #alwaysUseParentheses}. */
 name|SqlWriterConfig
 name|withAlwaysUseParentheses
@@ -712,20 +645,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the maximum line length. Default is zero, which means there is    * no maximum. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|IntDefault
-argument_list|(
-literal|0
-argument_list|)
+name|Default
+specifier|default
 name|int
 name|lineLength
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|0
+return|;
+block|}
 comment|/** Sets {@link #lineLength}. */
 name|SqlWriterConfig
 name|withLineLength
@@ -736,20 +667,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the line length at which items are chopped or folded (for clauses    * that have chosen {@link LineFolding#CHOP} or {@link LineFolding#FOLD}).    * Default is 80. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|IntDefault
-argument_list|(
-literal|80
-argument_list|)
+name|Default
+specifier|default
 name|int
 name|foldLength
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|80
+return|;
+block|}
 comment|/** Sets {@link #foldLength()}. */
 name|SqlWriterConfig
 name|withFoldLength
@@ -760,20 +689,18 @@ parameter_list|)
 function_decl|;
 comment|/** Returns whether the WHEN, THEN and ELSE clauses of a CASE expression    * appear at the start of a new line. The default is false. */
 annotation|@
-name|ImmutableBeans
+name|Value
 operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
+name|Default
+specifier|default
 name|boolean
 name|caseClausesOnNewLines
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Sets {@link #caseClausesOnNewLines}. */
 name|SqlWriterConfig
 name|withCaseClausesOnNewLines
@@ -800,6 +727,19 @@ name|CHOP
 block|,
 comment|/** Wrap always. Items are on separate lines. */
 name|TALL
+block|}
+comment|/**    * Create a default SqlWriterConfig object.    * @return The config.    */
+specifier|static
+name|SqlWriterConfig
+name|of
+parameter_list|()
+block|{
+return|return
+name|ImmutableSqlWriterConfig
+operator|.
+name|of
+argument_list|()
+return|;
 block|}
 block|}
 end_interface

@@ -91,11 +91,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that removes a {@link Join#isSemiJoin semi-join} from a join  * tree.  *  *<p>It is invoked after attempts have been made to convert a SemiJoin to an  * indexed scan on a join factor have failed. Namely, if the join factor does  * not reduce to a single table that can be scanned using an index.  *  *<p>It should only be enabled if all SemiJoins in the plan are advisory; that  * is, they can be safely dropped without affecting the semantics of the query.  *  * @see CoreRules#SEMI_JOIN_REMOVE  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|SemiJoinRemoveRule
@@ -183,6 +199,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -194,14 +214,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableSemiJoinRemoveRule
 operator|.
-name|as
-argument_list|(
 name|Config
 operator|.
-name|class
-argument_list|)
+name|of
+argument_list|()
 operator|.
 name|withOperandFor
 argument_list|(

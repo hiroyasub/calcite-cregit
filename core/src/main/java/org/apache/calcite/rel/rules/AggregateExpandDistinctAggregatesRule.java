@@ -491,6 +491,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -640,6 +652,10 @@ comment|/**  * Planner rule that expands distinct aggregates  * (such as {@code 
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 specifier|final
 class|class
@@ -5018,6 +5034,10 @@ name|relBuilder
 return|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -5029,7 +5049,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableAggregateExpandDistinctAggregatesRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -5046,13 +5071,6 @@ argument_list|)
 operator|.
 name|anyInputs
 argument_list|()
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 name|Config
@@ -5092,10 +5110,19 @@ name|BooleanDefault
 argument_list|(
 literal|true
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|boolean
 name|isUsingGroupingSets
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #isUsingGroupingSets()}. */
 name|Config
 name|withUsingGroupingSets
