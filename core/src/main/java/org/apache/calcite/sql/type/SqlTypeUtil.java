@@ -3511,7 +3511,11 @@ name|ROW
 condition|)
 block|{
 return|return
-literal|false
+name|fromTypeName
+operator|==
+name|SqlTypeName
+operator|.
+name|NULL
 return|;
 block|}
 name|int

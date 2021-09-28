@@ -1413,6 +1413,20 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+comment|// precheck that fieldCount is present
+if|if
+condition|(
+operator|!
+name|type0
+operator|.
+name|isStruct
+argument_list|()
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|int
 name|fieldCount

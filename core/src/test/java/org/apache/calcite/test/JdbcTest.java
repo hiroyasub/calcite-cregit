@@ -31036,6 +31036,41 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4811">[CALCITE-4811]    * Check for internal content in case of ROW in    * RelDataTypeFactoryImpl#leastRestrictiveStructuredType should be after isStruct check</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCoalesceNullAndRow
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT COALESCE(NULL, ROW(1)) AS F"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[F STRUCT]"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"F={1}\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 specifier|static
