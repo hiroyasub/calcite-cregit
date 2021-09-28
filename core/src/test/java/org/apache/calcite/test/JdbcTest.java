@@ -31071,6 +31071,36 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4600">[CALCITE-4600]    * ClassCastException retrieving from an ARRAY that has DATE, TIME or    * TIMESTAMP elements</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testArrayOfDates
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select array[cast('1900-1-1' as date)]"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=[1900-01-01]\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 specifier|static
