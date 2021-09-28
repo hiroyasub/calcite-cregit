@@ -31101,6 +31101,37 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4602">[CALCITE-4602]    * ClassCastException retrieving from ARRAY that has mixed INTEGER and DECIMAL    * elements</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntAndBigDecimalInArray
+parameter_list|()
+block|{
+comment|// Result should be "EXPR$0=[1, 1.1]\n"; [CALCITE-4850] logged.
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select array[1, 1.1]"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=[0E+1, 1.1]\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 specifier|static
