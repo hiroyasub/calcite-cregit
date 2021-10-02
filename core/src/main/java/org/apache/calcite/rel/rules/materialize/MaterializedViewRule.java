@@ -3361,12 +3361,6 @@ operator|!=
 name|JoinRelType
 operator|.
 name|INNER
-operator|&&
-operator|!
-name|join
-operator|.
-name|isSemiJoin
-argument_list|()
 condition|)
 block|{
 comment|// Skip it

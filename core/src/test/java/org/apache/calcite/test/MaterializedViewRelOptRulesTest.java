@@ -2475,7 +2475,7 @@ operator|+
 literal|"where \"deptno\" in (select \"deptno\" from \"depts\")"
 argument_list|)
 operator|.
-name|ok
+name|noMat
 argument_list|()
 expr_stmt|;
 block|}
