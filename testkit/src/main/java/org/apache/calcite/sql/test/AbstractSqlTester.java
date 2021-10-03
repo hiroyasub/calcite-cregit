@@ -824,6 +824,8 @@ literal|"validatorTransform"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|SqlTestFactory
@@ -835,6 +837,8 @@ name|factory
 return|;
 block|}
 comment|/**    * {@inheritDoc}    *    *<p>This default implementation does nothing.    */
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -842,6 +846,8 @@ parameter_list|()
 block|{
 comment|// no resources to release
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|SqlConformance
@@ -860,6 +866,8 @@ literal|"conformance"
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|SqlValidator
@@ -873,6 +881,8 @@ name|getValidator
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|assertExceptionIsThrown
@@ -1084,6 +1094,8 @@ argument_list|)
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getColumnType
@@ -1136,6 +1148,8 @@ name|getType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getResultType
@@ -1169,6 +1183,8 @@ name|n
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|parseAndValidate
@@ -1220,6 +1236,8 @@ name|sqlNode
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNode
 name|parseQuery
@@ -1247,6 +1265,8 @@ name|parseQuery
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkColumnType
@@ -1284,6 +1304,8 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkFieldOrigin
@@ -1444,6 +1466,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkResultType
@@ -1481,6 +1505,8 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkIntervalConv
@@ -1640,6 +1666,8 @@ name|actual
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkType
@@ -1671,6 +1699,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkCollation
@@ -1736,6 +1766,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkCharset
@@ -1809,6 +1841,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withQuoting
@@ -1826,6 +1860,8 @@ name|quoting
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withQuotedCasing
@@ -1843,6 +1879,8 @@ name|casing
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withUnquotedCasing
@@ -1860,6 +1898,8 @@ name|casing
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withCaseSensitive
@@ -1877,6 +1917,8 @@ name|sensitive
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withLenientOperatorLookup
@@ -1894,6 +1936,8 @@ name|lenient
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withLex
@@ -1932,6 +1976,8 @@ name|unquotedCasing
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withConformance
@@ -1999,6 +2045,8 @@ name|tester
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|enableTypeCoercion
@@ -2016,6 +2064,8 @@ name|enabled
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withOperatorTable
@@ -2033,6 +2083,8 @@ name|operatorTable
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withConnectionFactory
@@ -2090,6 +2142,8 @@ name|factory
 parameter_list|)
 function_decl|;
 comment|// SqlTester methods
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setFor
@@ -2104,6 +2158,8 @@ parameter_list|)
 block|{
 comment|// do nothing
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkAgg
@@ -2148,6 +2204,8 @@ name|delta
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkAggWithMultipleArgs
@@ -2193,6 +2251,8 @@ name|delta
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkWinAgg
@@ -2245,6 +2305,8 @@ name|delta
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkScalar
@@ -2292,6 +2354,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkScalarExact
@@ -2329,6 +2393,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkScalarExact
@@ -2378,6 +2444,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkScalarApprox
@@ -2430,6 +2498,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkBoolean
@@ -2486,6 +2556,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkString
@@ -2535,6 +2607,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkNull
@@ -2569,6 +2643,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|void
@@ -2608,6 +2684,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|check
@@ -2702,6 +2780,8 @@ name|parameterRowType
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkMonotonic
@@ -2790,6 +2870,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkRewrite
@@ -2934,6 +3016,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkQueryFails
@@ -3029,6 +3113,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkQuery
@@ -3050,6 +3136,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -3835,6 +3923,8 @@ name|i
 operator|=
 literal|0
 return|;
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -3846,6 +3936,8 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|next
@@ -3883,6 +3975,8 @@ argument_list|()
 throw|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext

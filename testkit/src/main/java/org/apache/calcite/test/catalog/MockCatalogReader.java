@@ -1259,6 +1259,8 @@ name|isCaseSensitive
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlNameMatcher
 name|nameMatcher
@@ -1657,6 +1659,8 @@ argument_list|(
 name|table
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|stream
@@ -3262,6 +3266,8 @@ return|return
 name|table
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -3397,6 +3403,8 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRowCount
@@ -3406,6 +3414,8 @@ return|return
 name|rowCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptSchema
 name|getRelOptSchema
@@ -3415,6 +3425,8 @@ return|return
 name|catalogReader
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|toRel
@@ -3442,6 +3454,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3454,6 +3468,8 @@ return|return
 name|collationList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistribution
 name|getDistribution
@@ -3465,6 +3481,8 @@ operator|.
 name|BROADCAST_DISTRIBUTED
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKey
@@ -3493,6 +3511,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3530,6 +3550,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3542,6 +3564,8 @@ return|return
 name|referentialConstraints
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -3551,6 +3575,8 @@ return|return
 name|rowType
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|supportsModality
@@ -3625,6 +3651,8 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -3637,6 +3665,8 @@ return|return
 name|names
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlMonotonicity
 name|getMonotonicity
@@ -3662,6 +3692,8 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlAccessType
 name|getAllowedAccess
@@ -3673,6 +3705,8 @@ operator|.
 name|ALL
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Expression
 name|getExpression
@@ -5817,6 +5851,8 @@ operator|=
 name|table
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|C
@@ -5863,6 +5899,8 @@ else|:
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -5878,6 +5916,8 @@ name|getRowType
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -5888,6 +5928,8 @@ operator|new
 name|Statistic
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Double
 name|getRowCount
@@ -5899,6 +5941,8 @@ operator|.
 name|rowCount
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isKey
@@ -5916,6 +5960,8 @@ name|columns
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5931,6 +5977,8 @@ name|getKeys
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5946,6 +5994,8 @@ name|getReferentialConstraints
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -5960,6 +6010,8 @@ operator|.
 name|collationList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDistribution
 name|getDistribution
@@ -6051,6 +6103,8 @@ name|FILTER
 operator|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.
@@ -6099,6 +6153,8 @@ name|table
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|stream

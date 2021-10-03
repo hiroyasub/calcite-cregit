@@ -1391,6 +1391,8 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|connect
@@ -1792,6 +1794,8 @@ operator|new
 name|AbstractTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType

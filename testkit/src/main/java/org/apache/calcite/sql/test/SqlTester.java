@@ -449,6 +449,8 @@ name|type
 parameter_list|)
 function_decl|;
 comment|/**    * Checks that a query returns one column of an expected type. For example,    *<code>checkType("VALUES (1 + 2)", "INTEGER NOT NULL")</code>.    *    * @param sql  Query expression    * @param type Type string    */
+annotation|@
+name|Override
 name|void
 name|checkColumnType
 parameter_list|(

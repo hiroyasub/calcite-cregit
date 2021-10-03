@@ -2790,6 +2790,8 @@ operator|=
 name|typeName
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkType
@@ -2843,6 +2845,8 @@ operator|=
 name|expected
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkType
@@ -3036,6 +3040,8 @@ operator|=
 name|pattern
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkResult
@@ -3096,6 +3102,8 @@ operator|=
 name|delta
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkResult
@@ -3153,6 +3161,8 @@ operator|=
 name|expected
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkResult

@@ -5893,6 +5893,8 @@ name|SqlNode
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|matches
@@ -5924,6 +5926,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|describeTo
@@ -5971,6 +5975,8 @@ argument_list|(
 literal|"quoting"
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|matchesSafely
@@ -30528,6 +30534,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|Consumer
 argument_list|<
 name|List
@@ -39203,6 +39210,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|check
@@ -39396,6 +39405,8 @@ return|return
 name|sqlNodeList
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkExp

@@ -290,6 +290,8 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -307,6 +309,8 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -333,6 +337,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.

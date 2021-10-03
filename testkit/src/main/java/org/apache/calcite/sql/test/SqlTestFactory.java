@@ -1267,6 +1267,8 @@ argument_list|(
 name|typeSystem
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|shouldConvertRaggedUnionTypesToVarying

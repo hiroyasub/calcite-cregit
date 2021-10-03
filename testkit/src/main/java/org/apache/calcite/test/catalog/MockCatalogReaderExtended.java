@@ -1522,6 +1522,8 @@ operator|.
 name|Handler
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -1676,6 +1678,8 @@ name|AssertionError
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|MetadataDef
 argument_list|<

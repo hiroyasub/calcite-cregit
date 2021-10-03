@@ -114,6 +114,8 @@ name|validatorTransform
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTester
 name|withValidatorTransform

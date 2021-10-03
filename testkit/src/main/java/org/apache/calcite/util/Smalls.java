@@ -1266,6 +1266,8 @@ operator|.
 name|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|E
@@ -1300,6 +1302,8 @@ name|asQueryable
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1383,6 +1387,8 @@ operator|.
 name|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1402,6 +1408,8 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -1443,6 +1451,8 @@ argument_list|,
 literal|null
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1477,6 +1487,8 @@ decl_stmt|;
 name|String
 name|curS
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|IntString
 name|current
@@ -1492,6 +1504,8 @@ name|curS
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -1538,6 +1552,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -1548,6 +1564,8 @@ operator|=
 literal|0
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -1661,6 +1679,8 @@ operator|.
 expr|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1743,6 +1763,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Queryable
 argument_list|<
@@ -1921,6 +1943,8 @@ operator|new
 name|ScannableTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -1948,6 +1972,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -1971,6 +1997,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -1989,6 +2017,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -2002,6 +2032,8 @@ index|[]
 block|{}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -2011,12 +2043,16 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
 parameter_list|()
 block|{
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -2029,6 +2065,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -2040,6 +2078,8 @@ operator|.
 name|UNKNOWN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.
@@ -2055,6 +2095,8 @@ operator|.
 name|TABLE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRolledUp
@@ -2067,6 +2109,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|rolledUpColumnValidInsideAgg
@@ -2111,6 +2155,8 @@ operator|new
 name|ScannableTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -2138,6 +2184,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -2161,6 +2209,8 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerator
 argument_list|<
@@ -2191,6 +2241,8 @@ name|current
 init|=
 literal|0
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -2206,6 +2258,8 @@ name|current
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|moveNext
@@ -2246,6 +2300,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|reset
@@ -2260,6 +2316,8 @@ operator|=
 literal|1
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|close
@@ -2272,6 +2330,8 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -2283,6 +2343,8 @@ operator|.
 name|UNKNOWN
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Schema
 operator|.
@@ -2298,6 +2360,8 @@ operator|.
 name|TABLE
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRolledUp
@@ -2310,6 +2374,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|rolledUpColumnValidInsideAgg
@@ -2483,6 +2549,8 @@ operator|.
 expr|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -2510,6 +2578,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -2606,6 +2676,8 @@ operator|.
 expr|class
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -2633,6 +2705,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|T
@@ -2982,6 +3056,8 @@ operator|=
 name|s
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -4590,6 +4666,8 @@ argument_list|,
 name|Integer
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|init
@@ -4599,6 +4677,8 @@ return|return
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|add
@@ -4616,6 +4696,8 @@ operator|+
 name|val
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|merge
@@ -4633,6 +4715,8 @@ operator|+
 name|accumulator2
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Integer
 name|result
@@ -5680,6 +5764,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -5709,6 +5795,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<

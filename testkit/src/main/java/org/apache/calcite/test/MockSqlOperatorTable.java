@@ -718,6 +718,8 @@ name|USER_DEFINED_TABLE_FUNCTION
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -879,6 +881,8 @@ name|USER_DEFINED_FUNCTION
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -1409,6 +1413,8 @@ name|USER_DEFINED_FUNCTION
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|inferReturnType

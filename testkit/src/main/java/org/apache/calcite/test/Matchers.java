@@ -479,6 +479,8 @@ name|value
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|matchesSafely
@@ -709,6 +711,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|matchesSafely
@@ -877,6 +881,8 @@ operator|+
 name|max
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|matchesSafely
@@ -1489,6 +1495,8 @@ operator|=
 name|epsilon
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|matches
@@ -1508,6 +1516,8 @@ name|epsilon
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|describeTo
@@ -1681,6 +1691,8 @@ operator|=
 name|f
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|matchesSafely
@@ -1705,6 +1717,8 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|describeTo

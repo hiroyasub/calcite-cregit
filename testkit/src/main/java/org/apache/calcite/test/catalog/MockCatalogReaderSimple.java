@@ -1993,6 +1993,8 @@ operator|.
 name|INSTANCE
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|getConstraint
@@ -2282,6 +2284,8 @@ operator|.
 name|INSTANCE
 argument_list|)
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RexNode
 name|getConstraint

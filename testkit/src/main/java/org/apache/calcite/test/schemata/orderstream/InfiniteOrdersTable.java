@@ -126,6 +126,8 @@ name|BaseOrderStreamTable
 implements|implements
 name|StreamableTable
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -175,6 +177,8 @@ name|counter
 operator|=
 literal|0
 argument_list|;
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -184,6 +188,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Object
 index|[]
@@ -222,6 +228,8 @@ literal|10
 block|}
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|remove
@@ -239,7 +247,9 @@ class|;
 end_class
 
 begin_function
-unit|}    public
+unit|}    @
+name|Override
+specifier|public
 name|Table
 name|stream
 parameter_list|()

@@ -2730,6 +2730,8 @@ decl_stmt|;
 name|Collection
 name|expected
 decl_stmt|;
+annotation|@
+name|Override
 specifier|public
 name|void
 name|accept
@@ -6026,6 +6028,8 @@ operator|new
 name|AbstractTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -6062,6 +6066,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|C
@@ -6128,6 +6134,8 @@ operator|new
 name|AbstractTable
 argument_list|()
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -6164,6 +6172,8 @@ name|build
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 parameter_list|<
 name|C
@@ -7933,6 +7943,8 @@ literal|"schema"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|apply
@@ -8019,6 +8031,8 @@ operator|=
 name|name
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|apply
@@ -8068,6 +8082,8 @@ operator|=
 name|schemaSpec
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|apply
@@ -8200,6 +8216,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|createConnection
@@ -8357,6 +8375,8 @@ name|postProcessors
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Connection
 name|createConnection
@@ -8440,6 +8460,8 @@ return|return
 name|connection
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ConnectionFactory
 name|with
@@ -8475,6 +8497,8 @@ name|postProcessors
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ConnectionFactory
 name|with
@@ -8526,6 +8550,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|ConnectionFactory
 name|with

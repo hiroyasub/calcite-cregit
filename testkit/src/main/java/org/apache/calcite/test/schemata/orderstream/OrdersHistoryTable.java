@@ -127,6 +127,8 @@ operator|=
 name|rows
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Enumerable
 argument_list|<

@@ -131,6 +131,8 @@ argument_list|<
 name|Table
 argument_list|>
 block|{
+annotation|@
+name|Override
 specifier|public
 name|Table
 name|create
