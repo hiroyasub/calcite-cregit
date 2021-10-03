@@ -690,6 +690,11 @@ return|return
 name|m
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|protected
 specifier|static
 name|Collection

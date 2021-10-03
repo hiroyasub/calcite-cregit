@@ -4371,7 +4371,7 @@ name|var
 operator|==
 literal|null
 condition|?
-literal|null
+literal|0.0d
 else|:
 name|var
 operator|.
@@ -5179,9 +5179,14 @@ name|v
 parameter_list|)
 block|{
 return|return
+name|Math
+operator|.
+name|addExact
+argument_list|(
 name|accumulator
-operator|+
+argument_list|,
 name|v
+argument_list|)
 return|;
 block|}
 block|}
@@ -5319,6 +5324,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|abc
 parameter_list|(
@@ -5477,6 +5483,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|abc
 parameter_list|(

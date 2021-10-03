@@ -186,6 +186,11 @@ comment|/**  * Object whose fields are relations. Called "catch-all" because it'
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"UnusedVariable"
+argument_list|)
 specifier|public
 class|class
 name|CatchallSchema
@@ -244,6 +249,11 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"JavaUtilDate"
+argument_list|)
 specifier|public
 specifier|final
 name|EveryType

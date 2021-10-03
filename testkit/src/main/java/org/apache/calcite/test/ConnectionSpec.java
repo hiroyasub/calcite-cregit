@@ -15,11 +15,27 @@ name|test
 package|;
 end_package
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|errorprone
+operator|.
+name|annotations
+operator|.
+name|Immutable
+import|;
+end_import
+
 begin_comment
 comment|/** Information necessary to create a JDBC connection.  *  *<p>Specify one to run tests against a different database. */
 end_comment
 
 begin_class
+annotation|@
+name|Immutable
 specifier|public
 class|class
 name|ConnectionSpec

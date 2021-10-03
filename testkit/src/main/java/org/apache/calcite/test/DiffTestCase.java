@@ -668,11 +668,6 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-name|int
-name|n
-init|=
-literal|0
-decl_stmt|;
 name|BufferedReader
 name|logReader
 init|=

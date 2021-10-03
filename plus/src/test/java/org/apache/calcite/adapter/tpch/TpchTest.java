@@ -1865,9 +1865,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-return|return
-literal|null
-return|;
 block|}
 argument_list|)
 expr_stmt|;

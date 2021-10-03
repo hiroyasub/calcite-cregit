@@ -1176,6 +1176,11 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a Matcher that matches a {@link RangeSet} if its string    * representation, after changing "&#2025;" to "..",    * is equal to the given {@code value}.    *    *<p>This method is necessary because {@link RangeSet#toString()} changed    * behavior. Guava 19 - 28 used a unicode symbol;Guava 29 onwards uses "..".    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"BetaApi"
+argument_list|)
 specifier|public
 specifier|static
 name|Matcher

@@ -3771,10 +3771,8 @@ name|param
 init|=
 literal|"p"
 operator|+
-operator|(
 name|p
 operator|++
-operator|)
 decl_stmt|;
 name|values
 operator|.
