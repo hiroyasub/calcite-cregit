@@ -465,9 +465,12 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
+name|ImmutableValuesReduceRule
+operator|.
 name|Config
 operator|.
-name|EMPTY
+name|builder
+argument_list|()
 operator|.
 name|withRelBuilderFactory
 argument_list|(
@@ -491,14 +494,35 @@ name|operand
 argument_list|)
 argument_list|)
 operator|.
-name|as
+name|withMatchHandler
 argument_list|(
-name|Config
+parameter_list|(
+name|u
+parameter_list|,
+name|v
+parameter_list|)
+lambda|->
+block|{
+throw|throw
+argument_list|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Match handler not set."
+argument_list|)
+argument_list|;
+block|}
+block|)
 operator|.
-name|class
-argument_list|)
-argument_list|)
-expr_stmt|;
+name|build
+argument_list|()
+end_class
+
+begin_empty_stmt
+unit|)
+empty_stmt|;
+end_empty_stmt
+
+begin_throw
 throw|throw
 operator|new
 name|IllegalArgumentException
@@ -506,8 +530,10 @@ argument_list|(
 literal|"cannot guess matchHandler"
 argument_list|)
 throw|;
-block|}
-specifier|private
+end_throw
+
+begin_function
+unit|}    private
 specifier|static
 name|void
 name|matchProjectFilter
@@ -563,6 +589,9 @@ name|values
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|void
@@ -609,6 +638,9 @@ name|values
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|void
@@ -655,7 +687,13 @@ name|values
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|//~ Methods ----------------------------------------------------------------
+end_comment
+
+begin_function
 annotation|@
 name|Override
 specifier|public
@@ -679,7 +717,13 @@ name|call
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Does the work.    *    * @param call    Rule call    * @param project Project, may be null    * @param filter  Filter, may be null    * @param values  Values rel to be reduced    */
+end_comment
+
+begin_function
 specifier|protected
 name|void
 name|apply
@@ -1329,8 +1373,17 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/** Shuttle that converts inputs to literals. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1377,7 +1430,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Rule configuration. */
+end_comment
+
+begin_interface
 annotation|@
 name|Value
 operator|.
@@ -1679,8 +1738,8 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
-end_class
+end_interface
 
+unit|}
 end_unit
 

@@ -265,6 +265,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -308,6 +320,10 @@ comment|/** Rule to convert a {@link LogicalJoin} to an {@link EnumerableBatchNe
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|EnumerableBatchNestedLoopJoinRule
@@ -957,6 +973,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -968,7 +988,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableEnumerableBatchNestedLoopJoinRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -990,13 +1015,6 @@ operator|.
 name|withDescription
 argument_list|(
 literal|"EnumerableBatchNestedLoopJoinRule"
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@
@@ -1026,10 +1044,19 @@ name|IntDefault
 argument_list|(
 literal|100
 argument_list|)
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
 name|int
 name|batchSize
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|100
+return|;
+block|}
 comment|/** Sets {@link #batchSize()}. */
 name|Config
 name|withBatchSize

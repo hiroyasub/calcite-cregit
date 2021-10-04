@@ -131,11 +131,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/** Variant of {@link org.apache.calcite.rel.rules.FilterToCalcRule} for  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_FILTER_TO_CALC_RULE */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|EnumerableFilterToCalcRule
@@ -301,6 +317,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
 specifier|public
 interface|interface
 name|Config
@@ -312,7 +332,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableEnumerableFilterToCalcRule
+operator|.
+name|Config
+operator|.
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -329,13 +354,6 @@ argument_list|)
 operator|.
 name|anyInputs
 argument_list|()
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@

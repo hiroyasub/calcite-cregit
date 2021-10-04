@@ -127,14 +127,7 @@ name|DEFAULT_CONFIG
 init|=
 name|Config
 operator|.
-name|EMPTY
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|INSTANCE
 operator|.
 name|withConversion
 argument_list|(

@@ -93,11 +93,27 @@ name|LogicalCorrelate
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of nested loops over enumerable inputs.  *  * @see EnumerableRules#ENUMERABLE_CORRELATE_RULE  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|EnumerableCorrelateRule
@@ -113,14 +129,7 @@ name|DEFAULT_CONFIG
 init|=
 name|Config
 operator|.
-name|EMPTY
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|INSTANCE
 operator|.
 name|withConversion
 argument_list|(

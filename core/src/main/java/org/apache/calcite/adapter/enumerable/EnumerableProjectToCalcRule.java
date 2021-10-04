@@ -39,20 +39,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
-operator|.
-name|RelRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rel
 operator|.
 name|RelNode
@@ -103,11 +89,27 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/** Variant of {@link org.apache.calcite.rel.rules.ProjectToCalcRule} for  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @see EnumerableRules#ENUMERABLE_PROJECT_TO_CALC_RULE */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|EnumerableProjectToCalcRule
@@ -244,6 +246,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"immutables"
+argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -255,11 +266,12 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|RelRule
+name|ImmutableEnumerableProjectToCalcRule
 operator|.
 name|Config
 operator|.
-name|EMPTY
+name|of
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -276,13 +288,6 @@ argument_list|)
 operator|.
 name|anyInputs
 argument_list|()
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
 argument_list|)
 decl_stmt|;
 annotation|@

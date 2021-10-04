@@ -111,7 +111,7 @@ name|DEFAULT_CONFIG
 init|=
 name|Config
 operator|.
-name|EMPTY
+name|INSTANCE
 operator|.
 name|as
 argument_list|(

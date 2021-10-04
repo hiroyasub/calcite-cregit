@@ -107,11 +107,27 @@ name|LogicalCalc
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to convert a {@link LogicalCalc} to an {@link EnumerableCalc}.  * You may provide a custom config to convert other nodes that extend {@link Calc}.  *  * @see EnumerableRules#ENUMERABLE_CALC_RULE  */
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 class|class
 name|EnumerableCalcRule
 extends|extends
@@ -126,14 +142,7 @@ name|DEFAULT_CONFIG
 init|=
 name|Config
 operator|.
-name|EMPTY
-operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|INSTANCE
 comment|// The predicate ensures that if there's a multiset,
 comment|// FarragoMultisetSplitter will work on it first.
 operator|.
