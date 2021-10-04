@@ -109,6 +109,12 @@ argument_list|,
 name|init
 operator|=
 literal|"with*"
+argument_list|,
+name|passAnnotations
+operator|=
+name|SuppressWarnings
+operator|.
+name|class
 argument_list|)
 specifier|public
 annotation_defn|@interface

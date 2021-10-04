@@ -777,6 +777,11 @@ return|;
 block|}
 comment|/** Defines when an expression should not be pushed. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

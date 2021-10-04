@@ -1958,7 +1958,7 @@ name|FilterJoinRule
 operator|.
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -2009,7 +2009,7 @@ name|FilterJoinRule
 operator|.
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2038,7 +2038,7 @@ name|FilterJoinRule
 operator|.
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -9860,11 +9860,11 @@ name|RelRule
 argument_list|<
 name|RemoveSingleAggregateRule
 operator|.
-name|Config
+name|RemoveSingleAggregateRuleConfig
 argument_list|>
 block|{
 specifier|static
-name|Config
+name|RemoveSingleAggregateRuleConfig
 name|config
 parameter_list|(
 name|RelBuilderFactory
@@ -9934,7 +9934,7 @@ block|}
 comment|/** Creates a RemoveSingleAggregateRule. */
 name|RemoveSingleAggregateRule
 parameter_list|(
-name|Config
+name|RemoveSingleAggregateRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -10164,6 +10164,15 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link RemoveSingleAggregateRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RemoveSingleAggregateRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -10174,22 +10183,9 @@ name|singleton
 operator|=
 literal|false
 argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableRemoveSingleAggregateRuleConfig"
-argument_list|,
-name|init
-operator|=
-literal|"with*"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|RemoveSingleAggregateRuleConfig
 extends|extends
 name|RelRule
 operator|.
@@ -10223,7 +10219,7 @@ name|RelRule
 argument_list|<
 name|RemoveCorrelationForScalarProjectRule
 operator|.
-name|Config
+name|RemoveCorrelationForScalarProjectRuleConfig
 argument_list|>
 block|{
 specifier|private
@@ -10232,7 +10228,7 @@ name|RelDecorrelator
 name|d
 decl_stmt|;
 specifier|static
-name|Config
+name|RemoveCorrelationForScalarProjectRuleConfig
 name|config
 parameter_list|(
 name|RelDecorrelator
@@ -10338,7 +10334,7 @@ block|}
 comment|/** Creates a RemoveCorrelationForScalarProjectRule. */
 name|RemoveCorrelationForScalarProjectRule
 parameter_list|(
-name|Config
+name|RemoveCorrelationForScalarProjectRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -11065,6 +11061,15 @@ name|correlate
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link RemoveCorrelationForScalarProjectRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RemoveCorrelationForScalarProjectRuleConfig
+block|{ }
 comment|/** Rule configuration.      *      *<p>Extends {@link RelDecorrelator.Config} because rule needs a      * decorrelator instance. */
 annotation|@
 name|Value
@@ -11075,22 +11080,9 @@ name|singleton
 operator|=
 literal|false
 argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableRemoveCorrelationForScalarProjectRuleConfig"
-argument_list|,
-name|init
-operator|=
-literal|"with*"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|RemoveCorrelationForScalarProjectRuleConfig
 extends|extends
 name|RelDecorrelator
 operator|.
@@ -11124,7 +11116,7 @@ name|RelRule
 argument_list|<
 name|RemoveCorrelationForScalarAggregateRule
 operator|.
-name|Config
+name|RemoveCorrelationForScalarAggregateRuleConfig
 argument_list|>
 block|{
 specifier|private
@@ -11133,7 +11125,7 @@ name|RelDecorrelator
 name|d
 decl_stmt|;
 specifier|static
-name|Config
+name|RemoveCorrelationForScalarAggregateRuleConfig
 name|config
 parameter_list|(
 name|RelDecorrelator
@@ -11260,7 +11252,7 @@ block|}
 comment|/** Creates a RemoveCorrelationForScalarAggregateRule. */
 name|RemoveCorrelationForScalarAggregateRule
 parameter_list|(
-name|Config
+name|RemoveCorrelationForScalarAggregateRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -12582,6 +12574,15 @@ name|correlate
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link RemoveCorrelationForScalarAggregateRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RemoveCorrelationForScalarAggregateRuleConfig
+block|{ }
 comment|/** Rule configuration.      *      *<p>Extends {@link RelDecorrelator.Config} because rule needs a      * decorrelator instance. */
 annotation|@
 name|Value
@@ -12592,22 +12593,9 @@ name|singleton
 operator|=
 literal|false
 argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableRemoveCorrelationForScalarAggregateRuleConfig"
-argument_list|,
-name|init
-operator|=
-literal|"with*"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|RemoveCorrelationForScalarAggregateRuleConfig
 extends|extends
 name|RelDecorrelator
 operator|.
@@ -12647,7 +12635,7 @@ name|RelRule
 argument_list|<
 name|AdjustProjectForCountAggregateRule
 operator|.
-name|Config
+name|AdjustProjectForCountAggregateRuleConfig
 argument_list|>
 block|{
 specifier|final
@@ -12655,7 +12643,7 @@ name|RelDecorrelator
 name|d
 decl_stmt|;
 specifier|static
-name|Config
+name|AdjustProjectForCountAggregateRuleConfig
 name|config
 parameter_list|(
 name|boolean
@@ -12769,7 +12757,7 @@ block|}
 comment|/** Creates an AdjustProjectForCountAggregateRule. */
 name|AdjustProjectForCountAggregateRule
 parameter_list|(
-name|Config
+name|AdjustProjectForCountAggregateRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -13373,6 +13361,15 @@ name|newOutput
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link AdjustProjectForCountAggregateRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|AdjustProjectForCountAggregateRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -13383,22 +13380,9 @@ name|singleton
 operator|=
 literal|false
 argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableAdjustProjectForCountAggregateRuleConfig"
-argument_list|,
-name|init
-operator|=
-literal|"with*"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|AdjustProjectForCountAggregateRuleConfig
 extends|extends
 name|RelDecorrelator
 operator|.
@@ -13421,6 +13405,11 @@ return|;
 block|}
 comment|/** Returns the flavor of the rule (true for 4 operands, false for 3        * operands). */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -13429,7 +13418,7 @@ name|flavor
 parameter_list|()
 function_decl|;
 comment|/** Sets {@link #flavor}. */
-name|Config
+name|AdjustProjectForCountAggregateRuleConfig
 name|withFlavor
 parameter_list|(
 name|boolean
@@ -14885,6 +14874,11 @@ operator|.
 name|Config
 block|{
 comment|/** Returns the RelDecorrelator that will be context for the created      * rule instance. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

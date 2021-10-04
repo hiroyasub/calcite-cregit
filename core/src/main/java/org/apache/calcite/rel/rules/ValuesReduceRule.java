@@ -1674,6 +1674,11 @@ return|;
 block|}
 comment|/** Forwards a call to {@link #onMatch(RelOptRuleCall)}. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

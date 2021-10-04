@@ -359,6 +359,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -784,14 +796,14 @@ name|RelRule
 argument_list|<
 name|InnodbFilterRule
 operator|.
-name|Config
+name|InnodbFilterRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a InnodbFilterRule. */
 specifier|protected
 name|InnodbFilterRule
 parameter_list|(
-name|Config
+name|InnodbFilterRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1037,19 +1049,40 @@ return|return
 name|filter
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link InnodbFilterRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|InnodbFilterRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|InnodbFilterRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|InnodbFilterRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableInnodbFilterRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1082,12 +1115,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -1468,14 +1497,14 @@ name|AbstractInnodbSortRule
 argument_list|<
 name|InnodbSortFilterRule
 operator|.
-name|Config
+name|InnodbSortFilterRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a InnodbSortFilterRule. */
 specifier|protected
 name|InnodbSortFilterRule
 parameter_list|(
-name|Config
+name|InnodbSortFilterRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1532,19 +1561,40 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link InnodbSortFilterRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|InnodbSortFilterRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|InnodbSortFilterRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|InnodbSortFilterRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableInnodbSortFilterRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1605,12 +1655,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -1639,14 +1685,14 @@ name|AbstractInnodbSortRule
 argument_list|<
 name|InnodbSortTableScanRule
 operator|.
-name|Config
+name|InnodbSortTableScanRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a InnodbSortTableScanRule. */
 specifier|protected
 name|InnodbSortTableScanRule
 parameter_list|(
-name|Config
+name|InnodbSortTableScanRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1703,21 +1749,40 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link InnodbSortTableScanRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|InnodbSortTableScanRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|InnodbSortTableScanRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|InnodbSortTableScanRule
-operator|.
-name|Config
+name|InnodbSortTableScanRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableInnodbSortTableScanRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1778,14 +1843,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|InnodbSortTableScanRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override

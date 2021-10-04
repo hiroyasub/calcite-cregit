@@ -456,6 +456,11 @@ return|;
 block|}
 comment|/** Returns the rule to be restricted; rule must take a single      * operand expecting a single input. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

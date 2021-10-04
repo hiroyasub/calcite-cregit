@@ -1284,6 +1284,11 @@ return|;
 block|}
 comment|/** Whether to swap outer joins; default false. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -1316,6 +1321,11 @@ name|swapOuter
 parameter_list|)
 function_decl|;
 comment|/** Whether to emit the new join tree if the join condition is {@code TRUE}      * (that is, cartesian joins); default true. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

@@ -2153,6 +2153,11 @@ return|;
 block|}
 comment|/** Whether to include outer joins, default false. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

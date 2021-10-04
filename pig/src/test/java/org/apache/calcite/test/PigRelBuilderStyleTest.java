@@ -1886,7 +1886,7 @@ name|as
 argument_list|(
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1907,15 +1907,6 @@ name|exp
 parameter_list|)
 lambda|->
 literal|true
-argument_list|)
-operator|.
-name|as
-argument_list|(
-name|FilterIntoJoinRule
-operator|.
-name|Config
-operator|.
-name|class
 argument_list|)
 operator|.
 name|toRule

@@ -430,6 +430,10 @@ comment|/**  * Collection of planner rules that convert  * calls to spatial func
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 specifier|abstract
 class|class
@@ -1730,20 +1734,6 @@ annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableFilterHilbertRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
 name|Config
@@ -1755,7 +1745,9 @@ block|{
 name|Config
 name|DEFAULT
 init|=
-name|ImmutableFilterHilbertRuleConfig
+name|ImmutableSpatialRules
+operator|.
+name|Config
 operator|.
 name|of
 argument_list|()

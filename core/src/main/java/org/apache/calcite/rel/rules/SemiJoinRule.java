@@ -775,7 +775,7 @@ comment|/** Creates a ProjectToSemiJoinRule. */
 specifier|protected
 name|ProjectToSemiJoinRule
 parameter_list|(
-name|Config
+name|ProjectToSemiJoinRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -818,7 +818,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|ProjectToSemiJoinRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -834,7 +834,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectToSemiJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -918,34 +918,29 @@ name|aggregate
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link ProjectToSemiJoinRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|ProjectToSemiJoinRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableProjectToSemiJoinRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|ProjectToSemiJoinRuleConfig
 extends|extends
 name|SemiJoinRule
 operator|.
 name|Config
 block|{
-name|Config
+name|ProjectToSemiJoinRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableProjectToSemiJoinRuleConfig
@@ -990,7 +985,7 @@ return|;
 block|}
 comment|/** Defines an operand tree for the given classes. */
 specifier|default
-name|Config
+name|ProjectToSemiJoinRuleConfig
 name|withOperandFor
 parameter_list|(
 name|Class
@@ -1081,7 +1076,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectToSemiJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1101,7 +1096,7 @@ comment|/** Creates a JoinToSemiJoinRule. */
 specifier|protected
 name|JoinToSemiJoinRule
 parameter_list|(
-name|Config
+name|JoinToSemiJoinRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1138,7 +1133,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|JoinToSemiJoinRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1154,7 +1149,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinToSemiJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1225,34 +1220,29 @@ name|aggregate
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link JoinToSemiJoinRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|JoinToSemiJoinRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableJoinToSemiJoinRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|JoinToSemiJoinRuleConfig
 extends|extends
 name|SemiJoinRule
 operator|.
 name|Config
 block|{
-name|Config
+name|JoinToSemiJoinRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableJoinToSemiJoinRuleConfig
@@ -1293,7 +1283,7 @@ return|;
 block|}
 comment|/** Defines an operand tree for the given classes. */
 specifier|default
-name|Config
+name|JoinToSemiJoinRuleConfig
 name|withOperandFor
 parameter_list|(
 name|Class
@@ -1360,7 +1350,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinToSemiJoinRuleConfig
 operator|.
 name|class
 argument_list|)

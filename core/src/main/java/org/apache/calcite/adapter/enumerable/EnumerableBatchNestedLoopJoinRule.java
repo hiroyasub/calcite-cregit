@@ -1034,6 +1034,11 @@ return|;
 block|}
 comment|/** Batch size.      *      *<p>Warning: if the batch size is around or bigger than 1000 there      * can be an error because the generated code exceeds the size limit. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

@@ -946,14 +946,14 @@ name|ReduceExpressionsRule
 argument_list|<
 name|FilterReduceExpressionsRule
 operator|.
-name|Config
+name|FilterReduceExpressionsRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a FilterReduceExpressionsRule. */
 specifier|protected
 name|FilterReduceExpressionsRule
 parameter_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -983,7 +983,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -994,7 +994,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1011,7 +1011,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1041,7 +1041,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1052,7 +1052,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1069,7 +1069,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1540,34 +1540,29 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|/** Deprecated, use {@link FilterReduceExpressionsRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|FilterReduceExpressionsRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableFilterReduceExpressionsRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|FilterReduceExpressionsRuleConfig
 extends|extends
 name|ReduceExpressionsRule
 operator|.
 name|Config
 block|{
-name|Config
+name|FilterReduceExpressionsRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableFilterReduceExpressionsRuleConfig
@@ -1594,7 +1589,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1626,14 +1621,14 @@ name|ReduceExpressionsRule
 argument_list|<
 name|ProjectReduceExpressionsRule
 operator|.
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a ProjectReduceExpressionsRule. */
 specifier|protected
 name|ProjectReduceExpressionsRule
 parameter_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1663,7 +1658,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1674,7 +1669,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1686,7 +1681,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1716,7 +1711,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1727,7 +1722,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1744,7 +1739,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1897,29 +1892,15 @@ annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableProjectReduceExpressionsRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 extends|extends
 name|ReduceExpressionsRule
 operator|.
 name|Config
 block|{
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableProjectReduceExpressionsRuleConfig
@@ -1946,7 +1927,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1978,14 +1959,14 @@ name|ReduceExpressionsRule
 argument_list|<
 name|JoinReduceExpressionsRule
 operator|.
-name|Config
+name|JoinReduceExpressionsRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a JoinReduceExpressionsRule. */
 specifier|protected
 name|JoinReduceExpressionsRule
 parameter_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -2015,7 +1996,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -2026,7 +2007,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2043,7 +2024,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2073,7 +2054,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -2084,7 +2065,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2101,7 +2082,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2306,34 +2287,29 @@ name|join
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link JoinReduceExpressionsRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|JoinReduceExpressionsRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableJoinReduceExpressionsRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|JoinReduceExpressionsRuleConfig
 extends|extends
 name|ReduceExpressionsRule
 operator|.
 name|Config
 block|{
-name|Config
+name|JoinReduceExpressionsRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableJoinReduceExpressionsRuleConfig
@@ -2360,7 +2336,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2392,14 +2368,14 @@ name|ReduceExpressionsRule
 argument_list|<
 name|CalcReduceExpressionsRule
 operator|.
-name|Config
+name|CalcReduceExpressionsRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a CalcReduceExpressionsRule. */
 specifier|protected
 name|CalcReduceExpressionsRule
 parameter_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -2429,7 +2405,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -2440,7 +2416,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2457,7 +2433,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2487,7 +2463,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -2498,7 +2474,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2515,7 +2491,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -2926,34 +2902,29 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/** Deprecated, use {@link CalcReduceExpressionsRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|CalcReduceExpressionsRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableCalcReduceExpressionsRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|CalcReduceExpressionsRuleConfig
 extends|extends
 name|ReduceExpressionsRule
 operator|.
 name|Config
 block|{
-name|Config
+name|CalcReduceExpressionsRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableCalcReduceExpressionsRuleConfig
@@ -2980,7 +2951,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -3012,14 +2983,14 @@ name|ReduceExpressionsRule
 argument_list|<
 name|WindowReduceExpressionsRule
 operator|.
-name|Config
+name|WindowReduceExpressionsRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a WindowReduceExpressionsRule. */
 specifier|protected
 name|WindowReduceExpressionsRule
 parameter_list|(
-name|Config
+name|WindowReduceExpressionsRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -3052,7 +3023,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|WindowReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -3063,7 +3034,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|WindowReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -3080,7 +3051,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|WindowReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -3519,34 +3490,29 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Deprecated, use {@link WindowReduceExpressionsRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|WindowReduceExpressionsRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableWindowReduceExpressionsRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|WindowReduceExpressionsRuleConfig
 extends|extends
 name|ReduceExpressionsRule
 operator|.
 name|Config
 block|{
-name|Config
+name|WindowReduceExpressionsRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableWindowReduceExpressionsRuleConfig
@@ -3573,7 +3539,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|WindowReduceExpressionsRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -5866,6 +5832,11 @@ name|toRule
 parameter_list|()
 function_decl|;
 comment|/** Whether to add a CAST when a nullable expression      * reduces to a NOT NULL literal. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

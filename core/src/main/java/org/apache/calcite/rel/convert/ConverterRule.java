@@ -863,6 +863,11 @@ name|build
 argument_list|()
 decl_stmt|;
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -879,6 +884,11 @@ name|trait
 parameter_list|)
 function_decl|;
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -894,6 +904,11 @@ name|RelTrait
 name|trait
 parameter_list|)
 function_decl|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

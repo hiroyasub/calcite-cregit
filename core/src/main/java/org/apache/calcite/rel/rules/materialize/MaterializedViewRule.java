@@ -7017,6 +7017,11 @@ name|Config
 block|{
 comment|/** Whether to generate rewritings containing union if the query results      * are contained within the view results. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -7033,6 +7038,11 @@ name|b
 parameter_list|)
 function_decl|;
 comment|/** If we generate union rewriting, we might want to pull up projections      * from the query itself to maximize rewriting opportunities. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.
@@ -7054,6 +7064,11 @@ name|program
 parameter_list|)
 function_decl|;
 comment|/** Whether we should create the rewriting in the minimal subtree of plan      * operators. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

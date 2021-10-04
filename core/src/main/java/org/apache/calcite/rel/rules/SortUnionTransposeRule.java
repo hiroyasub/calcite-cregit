@@ -619,6 +619,11 @@ return|;
 block|}
 comment|/** Whether to match a Sort whose {@link Sort#fetch} is null. Generally      * this only makes sense if the Union preserves order (and merges). */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

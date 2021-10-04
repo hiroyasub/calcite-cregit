@@ -3030,6 +3030,11 @@ return|;
 block|}
 comment|/** Whether to push down aggregate functions, default false. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

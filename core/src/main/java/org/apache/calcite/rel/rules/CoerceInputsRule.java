@@ -582,6 +582,11 @@ return|;
 block|}
 comment|/** Whether to coerce names. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -614,6 +619,11 @@ name|coerceNames
 parameter_list|)
 function_decl|;
 comment|/** Class of {@link RelNode} to coerce to. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

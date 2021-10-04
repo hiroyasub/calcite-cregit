@@ -1804,6 +1804,11 @@ return|;
 block|}
 comment|/** Whether to push on the right. If false, push to the left. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

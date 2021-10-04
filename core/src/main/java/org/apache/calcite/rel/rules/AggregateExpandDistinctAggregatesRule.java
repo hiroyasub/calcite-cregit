@@ -5100,6 +5100,11 @@ return|;
 block|}
 comment|/** Whether to use GROUPING SETS, default true. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

@@ -631,6 +631,18 @@ begin_import
 import|import
 name|org
 operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|joda
 operator|.
 name|time
@@ -1119,14 +1131,14 @@ name|RelRule
 argument_list|<
 name|DruidFilterRule
 operator|.
-name|Config
+name|DruidFilterRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidFilterRule. */
 specifier|protected
 name|DruidFilterRule
 parameter_list|(
-name|Config
+name|DruidFilterRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1839,19 +1851,40 @@ name|nonPushableNodes
 argument_list|)
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidFilterRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidFilterRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidFilterRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidFilterRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidFilterRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1884,14 +1917,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidFilterRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -1920,14 +1947,14 @@ name|RelRule
 argument_list|<
 name|DruidHavingFilterRule
 operator|.
-name|Config
+name|DruidHavingFilterRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidHavingFilterRule. */
 specifier|protected
 name|DruidHavingFilterRule
 parameter_list|(
-name|Config
+name|DruidHavingFilterRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -2094,19 +2121,40 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidHavingFilterRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidHavingFilterRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidHavingFilterRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidHavingFilterRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidHavingFilterRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -2139,14 +2187,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidHavingFilterRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -2175,14 +2217,14 @@ name|RelRule
 argument_list|<
 name|DruidProjectRule
 operator|.
-name|Config
+name|DruidProjectRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidProjectRule. */
 specifier|protected
 name|DruidProjectRule
 parameter_list|(
-name|Config
+name|DruidProjectRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -2769,19 +2811,40 @@ name|belowNodes
 argument_list|)
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidProjectRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidProjectRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidProjectRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidProjectRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidProjectRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -2814,14 +2877,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidProjectRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -2850,14 +2907,14 @@ name|RelRule
 argument_list|<
 name|DruidPostAggregationProjectRule
 operator|.
-name|Config
+name|DruidPostAggregationProjectRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidPostAggregationProjectRule. */
 specifier|protected
 name|DruidPostAggregationProjectRule
 parameter_list|(
-name|Config
+name|DruidPostAggregationProjectRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -3080,19 +3137,40 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidPostAggregationProjectRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidPostAggregationProjectRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidPostAggregationProjectRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidPostAggregationProjectRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidPostAggregationProjectRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -3125,14 +3203,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidPostAggregationProjectRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -3161,14 +3233,14 @@ name|RelRule
 argument_list|<
 name|DruidAggregateRule
 operator|.
-name|Config
+name|DruidAggregateRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidAggregateRule. */
 specifier|protected
 name|DruidAggregateRule
 parameter_list|(
-name|Config
+name|DruidAggregateRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -3385,19 +3457,40 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidAggregateRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidAggregateRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidAggregateRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidAggregateRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidAggregateRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -3430,14 +3523,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidAggregateRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -3466,14 +3553,14 @@ name|RelRule
 argument_list|<
 name|DruidAggregateProjectRule
 operator|.
-name|Config
+name|DruidAggregateProjectRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidAggregateProjectRule. */
 specifier|protected
 name|DruidAggregateProjectRule
 parameter_list|(
-name|Config
+name|DruidAggregateProjectRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -4644,19 +4731,40 @@ return|return
 name|refs
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidAggregateProjectRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidAggregateProjectRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidAggregateProjectRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidAggregateProjectRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidAggregateProjectRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -4703,14 +4811,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidAggregateProjectRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -4739,14 +4841,14 @@ name|RelRule
 argument_list|<
 name|DruidSortRule
 operator|.
-name|Config
+name|DruidSortRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a DruidSortRule. */
 specifier|protected
 name|DruidSortRule
 parameter_list|(
-name|Config
+name|DruidSortRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -4897,19 +4999,40 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link DruidSortRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|DruidSortRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|DruidSortRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|DruidSortRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableDruidSortRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -4942,14 +5065,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|DruidSortRule
-operator|.
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override

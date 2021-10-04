@@ -899,7 +899,7 @@ name|ReduceExpressionsRule
 operator|.
 name|CalcReduceExpressionsRule
 operator|.
-name|Config
+name|CalcReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -935,7 +935,7 @@ name|ProjectToWindowRule
 operator|.
 name|CalcToWindowRule
 operator|.
-name|Config
+name|CalcToWindowRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1003,7 +1003,7 @@ name|FilterJoinRule
 operator|.
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1034,7 +1034,7 @@ name|FilterJoinRule
 operator|.
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1247,7 +1247,7 @@ name|ReduceExpressionsRule
 operator|.
 name|FilterReduceExpressionsRule
 operator|.
-name|Config
+name|FilterReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1427,7 +1427,7 @@ name|ReduceExpressionsRule
 operator|.
 name|ProjectReduceExpressionsRule
 operator|.
-name|Config
+name|ProjectReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1495,7 +1495,7 @@ name|ProjectToWindowRule
 operator|.
 name|ProjectToLogicalProjectAndWindowRule
 operator|.
-name|Config
+name|ProjectToLogicalProjectAndWindowRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1515,7 +1515,7 @@ name|SemiJoinRule
 operator|.
 name|ProjectToSemiJoinRule
 operator|.
-name|Config
+name|ProjectToSemiJoinRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1711,7 +1711,7 @@ name|FilterJoinRule
 operator|.
 name|JoinConditionPushRule
 operator|.
-name|Config
+name|JoinConditionPushRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1944,7 +1944,7 @@ name|ReduceExpressionsRule
 operator|.
 name|JoinReduceExpressionsRule
 operator|.
-name|Config
+name|JoinReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1996,7 +1996,7 @@ name|SemiJoinRule
 operator|.
 name|JoinToSemiJoinRule
 operator|.
-name|Config
+name|JoinToSemiJoinRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -2437,7 +2437,7 @@ name|ReduceExpressionsRule
 operator|.
 name|WindowReduceExpressionsRule
 operator|.
-name|Config
+name|WindowReduceExpressionsRuleConfig
 operator|.
 name|DEFAULT
 operator|.

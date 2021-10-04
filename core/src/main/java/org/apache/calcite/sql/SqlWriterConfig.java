@@ -68,11 +68,6 @@ annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
 specifier|public
 interface|interface
 name|SqlWriterConfig

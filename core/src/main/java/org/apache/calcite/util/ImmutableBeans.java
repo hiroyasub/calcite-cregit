@@ -458,7 +458,9 @@ name|ImmutableBeans
 parameter_list|()
 block|{
 block|}
-comment|/** Creates an immutable bean that implements a given interface. */
+comment|/** Creates an immutable bean that implements a given interface.    *    * This method for the creation of value classes is now deprecated. Please use    * the<a href="https://immutables.github.io/">Immutables</a> annotation processor    * moving forward.    * */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 parameter_list|<
@@ -489,6 +491,8 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a bean of a given class whose contents are the same as this bean.    *    *<p>You typically use this to downcast a bean to a sub-class. */
+annotation|@
+name|Deprecated
 specifier|public
 specifier|static
 parameter_list|<
@@ -2552,6 +2556,8 @@ function_decl|;
 block|}
 comment|/** Property of a bean. Apply this annotation to the "get" method. */
 annotation|@
+name|Deprecated
+annotation|@
 name|Retention
 argument_list|(
 name|RetentionPolicy
@@ -2579,6 +2585,8 @@ function_decl|;
 block|}
 comment|/** Default value of an int property. */
 annotation|@
+name|Deprecated
+annotation|@
 name|Retention
 argument_list|(
 name|RetentionPolicy
@@ -2602,6 +2610,8 @@ parameter_list|()
 function_decl|;
 block|}
 comment|/** Default value of a boolean property of a bean. */
+annotation|@
+name|Deprecated
 annotation|@
 name|Retention
 argument_list|(
@@ -2627,6 +2637,8 @@ function_decl|;
 block|}
 comment|/** Default value of a String property of a bean. */
 annotation|@
+name|Deprecated
+annotation|@
 name|Retention
 argument_list|(
 name|RetentionPolicy
@@ -2651,6 +2663,8 @@ function_decl|;
 block|}
 comment|/** Default value of an enum property of a bean. */
 annotation|@
+name|Deprecated
+annotation|@
 name|Retention
 argument_list|(
 name|RetentionPolicy
@@ -2674,6 +2688,8 @@ parameter_list|()
 function_decl|;
 block|}
 comment|/** Default value of a String or enum property of a bean that is null. */
+annotation|@
+name|Deprecated
 annotation|@
 name|Retention
 argument_list|(

@@ -204,7 +204,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule that is parameterized via a configuration.  *  *<p>Eventually (before Calcite version 2.0), this class will replace  * {@link RelOptRule}. Constructors of {@code RelOptRule} are deprecated, so new  * rule classes should extend {@code RelRule}, not {@code RelOptRule}.  * Next, we will deprecate {@code RelOptRule}, so that variables that reference  * rules will be of type {@code RelRule}.  *  *<p><b>Guidelines for writing rules</b>  *  *<p>1. If your rule is a sub-class of  * {@link org.apache.calcite.rel.convert.ConverterRule}  * and does not need any extra properties,  * there's no need to create an {@code interface Config} inside your class.  * In your class, create a constant  * {@code public static final Config DEFAULT_CONFIG}. Goto step 5.  *  *<p>2. If your rule is not a sub-class of  * {@link org.apache.calcite.rel.convert.ConverterRule},  * create an inner {@code interface Config extends RelRule.Config}.  * Implement {@link Config#toRule() toRule} using a {@code default} method:  *  *<blockquote>  *<code>  *&#x40;Override default CsvProjectTableScanRule toRule() {<br>  *&nbsp;&nbsp;return new CsvProjectTableScanRule(this);<br>  * }  *</code>  *</blockquote>  *  *<p>3. For each configuration property, create a pair of methods in your  * {@code Config} interface. For example, for a property {@code foo} of type  * {@code int}, create methods {@code foo} and {@code withFoo}:  *  *<blockquote><pre><code>  *&#x2f;** Returns foo. *&#x2f;  *&#x40;ImmutableBeans.Property  * int foo();  *  *&#x2f;** Sets {&#x40;link #foo}. *&#x2f;  * Config withFoo(int x);  *</code></pre></blockquote>  *  *<p>4. In your {@code Config} interface, create a {@code DEFAULT} constant  * that represents the most typical configuration of your rule. For example,  * {@code CsvProjectTableScanRule.Config} has the following:  *  *<blockquote><pre><code>  * Config DEFAULT = EMPTY  *     .withOperandSupplier(b0 -&gt;  *         b0.operand(LogicalProject.class).oneInput(b1 -&gt;  *             b1.operand(CsvTableScan.class).noInputs()))  *      .as(Config.class);  *</code></pre></blockquote>  *  *<p>5. Do not create an {@code INSTANCE} constant inside your rule.  * Instead, create a named instance of your rule, with default configuration,  * in a holder class. The holder class must not be a sub-class of  * {@code RelOptRule} (otherwise cyclic class-loading issues may arise).  * Generally it will be called<code><i>Xxx</i>Rules</code>, for example  * {@code CsvRules}. The rule instance is named after your rule, and is based  * on the default config ({@code Config.DEFAULT}, or {@code DEFAULT_CONFIG} for  * converter rules):  *  *<blockquote><pre><code>  *&#x2f;** Rule that matches a {&#x40;code Project} on a  *  * {&#x40;code CsvTableScan} and pushes down projects if possible. *&#x2f;  * public static final CsvProjectTableScanRule PROJECT_SCAN =  *     CsvProjectTableScanRule.Config.DEFAULT.toRule();  *</code></pre></blockquote>  *  * @param<C> Configuration type  */
+comment|/**  * Rule that is parameterized via a configuration.  *  *<p>Eventually (before Calcite version 2.0), this class will replace  * {@link RelOptRule}. Constructors of {@code RelOptRule} are deprecated, so new  * rule classes should extend {@code RelRule}, not {@code RelOptRule}.  * Next, we will deprecate {@code RelOptRule}, so that variables that reference  * rules will be of type {@code RelRule}.  *  *<p><b>Guidelines for writing rules</b>  *  *<p>1. If your rule is a sub-class of  * {@link org.apache.calcite.rel.convert.ConverterRule}  * and does not need any extra properties,  * there's no need to create an {@code interface Config} inside your class.  * In your class, create a constant  * {@code public static final Config DEFAULT_CONFIG}. Goto step 5.  *  *<p>2. If your rule is not a sub-class of  * {@link org.apache.calcite.rel.convert.ConverterRule},  * create an inner {@code interface Config extends RelRule.Config} and  * annotate it with {@code @Value.Immutable}. Note, if your inner class  * is two levels deep (e.g. top-level Rule with Config inside), we recommend  * you annotate the outer class with {@code @Value.Enclosing} which will  * instruct the annotation processor to put your generated value class  * inside a new Immutable outer class. If your rule is three levels deep,  * the best thing to do is give your class a unique name to avoid any  * generated code class name overlaps.  * Implement {@link Config#toRule() toRule} using a {@code default} method:  *  *<blockquote>  *<code>  *&#x40;Override default CsvProjectTableScanRule toRule() {<br>  *&nbsp;&nbsp;return new CsvProjectTableScanRule(this);<br>  * }  *</code>  *</blockquote>  *  *<p>3. For each configuration property, create a pair of methods in your  * {@code Config} interface. For example, for a property {@code foo} of type  * {@code int}, create methods {@code foo} and {@code withFoo}:  *  *<blockquote><pre><code>  *&#x2f;** Returns foo. *&#x2f;  * int foo();  *  *&#x2f;** Sets {&#x40;link #foo}. *&#x2f;  * Config withFoo(int x);  *</code></pre></blockquote>  *  *<p>4. In your {@code Config} interface, create a {@code DEFAULT} constant  * that represents the most typical configuration of your rule. This default  * will leverage the Immutables class generated by the Annotation Processor  * based on the annotation you provided above. For example,  * {@code CsvProjectTableScanRule.Config} has the following:  *  *<blockquote><pre><code>  * Config DEFAULT = ImmutableCsvProjectTableScanRule.Config.builder()  *     .withOperandSupplier(b0 -&gt;  *         b0.operand(LogicalProject.class).oneInput(b1 -&gt;  *             b1.operand(CsvTableScan.class).noInputs()))  *      .build();  *</code></pre></blockquote>  *  *<p>5. Do not create an {@code INSTANCE} constant inside your rule.  * Instead, create a named instance of your rule, with default configuration,  * in a holder class. The holder class must not be a sub-class of  * {@code RelOptRule} (otherwise cyclic class-loading issues may arise).  * Generally it will be called<code><i>Xxx</i>Rules</code>, for example  * {@code CsvRules}. The rule instance is named after your rule, and is based  * on the default config ({@code Config.DEFAULT}, or {@code DEFAULT_CONFIG} for  * converter rules):  *  *<blockquote><pre><code>  *&#x2f;** Rule that matches a {&#x40;code Project} on a  *  * {&#x40;code CsvTableScan} and pushes down projects if possible. *&#x2f;  * public static final CsvProjectTableScanRule PROJECT_SCAN =  *     CsvProjectTableScanRule.Config.DEFAULT.toRule();  *</code></pre></blockquote>  *  * @param<C> Configuration type  */
 end_comment
 
 begin_class
@@ -266,11 +266,18 @@ name|config
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 interface|interface
 name|Config
 block|{
-comment|/** Empty configuration. */
+comment|/**      * Empty configuration.      *      * This is based on ImmutableBeans and dynamic proxies and has been replaced      * by the use of the Immutables annotation processor to pre-generate values.      *      * This field will be removed in a subsequent release.      * */
+annotation|@
+name|Deprecated
 name|RelRule
 operator|.
 name|Config
@@ -406,6 +413,11 @@ block|}
 block|}
 comment|/** The factory that is used to create a      * {@link org.apache.calcite.tools.RelBuilder} during rule invocations. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -433,10 +445,22 @@ name|factory
 parameter_list|)
 function_decl|;
 comment|/** Description of the rule instance. */
+comment|// CALCITE-4831: remove the second nullable annotation once immutables/#1261 is fixed
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
+annotation|@
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
 annotation|@
 name|Nullable
 name|String
@@ -454,6 +478,11 @@ name|description
 parameter_list|)
 function_decl|;
 comment|/** Creates the operands for the rule instance. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

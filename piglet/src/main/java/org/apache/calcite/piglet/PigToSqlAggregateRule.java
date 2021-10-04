@@ -293,6 +293,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -362,6 +374,10 @@ comment|/**  * Planner rule that converts Pig aggregate UDF calls to built-in SQ
 end_comment
 
 begin_class
+annotation|@
+name|Value
+operator|.
+name|Enclosing
 specifier|public
 class|class
 name|PigToSqlAggregateRule
@@ -387,9 +403,12 @@ specifier|final
 name|PigToSqlAggregateRule
 name|INSTANCE
 init|=
+name|ImmutablePigToSqlAggregateRule
+operator|.
 name|Config
 operator|.
-name|EMPTY
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -450,12 +469,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 operator|.
 name|toRule
 argument_list|()
@@ -2472,6 +2487,15 @@ argument_list|)
 return|;
 block|}
 comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
 specifier|public
 interface|interface
 name|Config

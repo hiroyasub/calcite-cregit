@@ -361,6 +361,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -1144,7 +1156,7 @@ name|RelRule
 argument_list|<
 name|GeodeSortLimitRule
 operator|.
-name|Config
+name|GeodeSortLimitRuleConfig
 argument_list|>
 block|{
 specifier|private
@@ -1153,9 +1165,10 @@ specifier|final
 name|GeodeSortLimitRule
 name|INSTANCE
 init|=
-name|Config
+name|ImmutableGeodeSortLimitRuleConfig
 operator|.
-name|EMPTY
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1186,12 +1199,8 @@ name|anyInputs
 argument_list|()
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 operator|.
 name|toRule
 argument_list|()
@@ -1200,7 +1209,7 @@ comment|/** Creates a GeodeSortLimitRule. */
 specifier|protected
 name|GeodeSortLimitRule
 parameter_list|(
-name|Config
+name|GeodeSortLimitRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1303,10 +1312,28 @@ name|geodeSort
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link GeodeSortLimitRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|GeodeSortLimitRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|GeodeSortLimitRuleConfig
 extends|extends
 name|RelRule
 operator|.
@@ -1339,7 +1366,7 @@ name|RelRule
 argument_list|<
 name|GeodeFilterRule
 operator|.
-name|Config
+name|GeodeFilterRuleConfig
 argument_list|>
 block|{
 specifier|private
@@ -1348,9 +1375,10 @@ specifier|final
 name|GeodeFilterRule
 name|INSTANCE
 init|=
-name|Config
+name|ImmutableGeodeFilterRuleConfig
 operator|.
-name|EMPTY
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1383,12 +1411,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 operator|.
 name|toRule
 argument_list|()
@@ -1397,7 +1421,7 @@ comment|/** Creates a GeodeFilterRule. */
 specifier|protected
 name|GeodeFilterRule
 parameter_list|(
-name|Config
+name|GeodeFilterRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -2129,10 +2153,28 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated, use {@link GeodeFilterRuleConfig} instead. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|GeodeFilterRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+argument_list|(
+name|singleton
+operator|=
+literal|false
+argument_list|)
+specifier|public
+interface|interface
+name|GeodeFilterRuleConfig
 extends|extends
 name|RelRule
 operator|.

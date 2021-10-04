@@ -801,6 +801,11 @@ return|;
 block|}
 comment|/** Limit how much complexity can increase during merging.      * Default is {@link #DEFAULT_BLOAT} (100). */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -837,6 +842,11 @@ name|bloat
 parameter_list|)
 function_decl|;
 comment|/** Whether to always merge projects, default true. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

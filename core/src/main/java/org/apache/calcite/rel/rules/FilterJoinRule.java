@@ -1301,14 +1301,14 @@ name|FilterJoinRule
 argument_list|<
 name|JoinConditionPushRule
 operator|.
-name|Config
+name|JoinConditionPushRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a JoinConditionPushRule. */
 specifier|protected
 name|JoinConditionPushRule
 parameter_list|(
-name|Config
+name|JoinConditionPushRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1439,37 +1439,34 @@ name|join
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link JoinConditionPushRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|JoinConditionPushRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-annotation|@
-name|Value
-operator|.
-name|Style
 argument_list|(
-name|typeImmutable
+name|singleton
 operator|=
-literal|"ImmutableJoinConditionPushRuleConfig"
-argument_list|,
-name|get
-operator|=
-block|{
-literal|"is*"
-block|,
-literal|"get*"
-block|}
+literal|false
 argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|JoinConditionPushRuleConfig
 extends|extends
 name|FilterJoinRule
 operator|.
 name|Config
 block|{
-name|Config
+name|JoinConditionPushRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableJoinConditionPushRuleConfig
@@ -1536,14 +1533,14 @@ name|FilterJoinRule
 argument_list|<
 name|FilterIntoJoinRule
 operator|.
-name|Config
+name|FilterIntoJoinRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a FilterIntoJoinRule. */
 specifier|protected
 name|FilterIntoJoinRule
 parameter_list|(
-name|Config
+name|FilterIntoJoinRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1571,7 +1568,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|ImmutableFilterJoinRuleConfig
+name|ImmutableFilterIntoJoinRuleConfig
 operator|.
 name|of
 argument_list|(
@@ -1651,7 +1648,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|ImmutableFilterJoinRuleConfig
+name|ImmutableFilterIntoJoinRuleConfig
 operator|.
 name|of
 argument_list|(
@@ -1753,40 +1750,37 @@ name|join
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link FilterIntoJoinRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|FilterIntoJoinRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-annotation|@
-name|Value
-operator|.
-name|Style
 argument_list|(
-name|typeImmutable
+name|singleton
 operator|=
-literal|"ImmutableFilterJoinRuleConfig"
-argument_list|,
-name|get
-operator|=
-block|{
-literal|"is*"
-block|,
-literal|"get*"
-block|}
+literal|false
 argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|FilterIntoJoinRuleConfig
 extends|extends
 name|FilterJoinRule
 operator|.
 name|Config
 block|{
-name|Config
+name|FilterIntoJoinRuleConfig
 name|DEFAULT
 init|=
-name|ImmutableFilterJoinRuleConfig
+name|ImmutableFilterIntoJoinRuleConfig
 operator|.
 name|of
 argument_list|(
@@ -1886,6 +1880,11 @@ name|Config
 block|{
 comment|/** Whether to try to strengthen join-type, default false. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -1918,6 +1917,11 @@ name|smart
 parameter_list|)
 function_decl|;
 comment|/** Predicate that returns whether a filter is valid in the ON clause of a      * join for this particular kind of join. If not, Calcite will push it back to      * above the join. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

@@ -1335,6 +1335,11 @@ return|;
 block|}
 comment|/** Expressions that should be preserved in the projection. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -1366,6 +1371,11 @@ name|condition
 parameter_list|)
 function_decl|;
 comment|/** Whether to push whole expressions from the project;      * if false (the default), only pushes references. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.
@@ -1399,6 +1409,11 @@ name|wholeProject
 parameter_list|)
 function_decl|;
 comment|/** Whether to push whole expressions from the filter;      * if false (the default), only pushes references. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.

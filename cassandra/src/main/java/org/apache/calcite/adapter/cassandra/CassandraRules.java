@@ -371,6 +371,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|immutables
+operator|.
+name|value
+operator|.
+name|Value
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -639,14 +651,14 @@ name|RelRule
 argument_list|<
 name|CassandraFilterRule
 operator|.
-name|Config
+name|CassandraFilterRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a CassandraFilterRule. */
 specifier|protected
 name|CassandraFilterRule
 parameter_list|(
-name|Config
+name|CassandraFilterRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1257,19 +1269,35 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated in favor of CassandraFilterRuleConfig. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|CassandraFilterRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+specifier|public
+interface|interface
+name|CassandraFilterRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|CassandraFilterRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableCassandraFilterRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1302,12 +1330,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -1509,14 +1533,14 @@ name|RelRule
 argument_list|<
 name|CassandraSortRule
 operator|.
-name|Config
+name|CassandraSortRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a CassandraSortRule. */
 specifier|protected
 name|CassandraSortRule
 parameter_list|(
-name|Config
+name|CassandraSortRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1911,19 +1935,35 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated in favor of CassandraSortRuleConfig. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|CassandraSortRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+specifier|public
+interface|interface
+name|CassandraSortRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|CassandraSortRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableCassandraSortRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -1997,12 +2037,8 @@ argument_list|)
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override
@@ -2031,14 +2067,14 @@ name|RelRule
 argument_list|<
 name|CassandraLimitRule
 operator|.
-name|Config
+name|CassandraLimitRuleConfig
 argument_list|>
 block|{
 comment|/** Creates a CassandraLimitRule. */
 specifier|protected
 name|CassandraLimitRule
 parameter_list|(
-name|Config
+name|CassandraLimitRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -2151,19 +2187,35 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Rule configuration. */
+comment|/** Deprecated in favor of CassandraLimitRuleConfig. **/
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|Config
+extends|extends
+name|CassandraLimitRuleConfig
+block|{ }
+comment|/** Rule configuration. */
+annotation|@
+name|Value
+operator|.
+name|Immutable
+specifier|public
+interface|interface
+name|CassandraLimitRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|CassandraLimitRuleConfig
 name|DEFAULT
 init|=
-name|EMPTY
+name|ImmutableCassandraLimitRuleConfig
+operator|.
+name|builder
+argument_list|()
 operator|.
 name|withOperandSupplier
 argument_list|(
@@ -2196,12 +2248,8 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|as
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
+name|build
+argument_list|()
 decl_stmt|;
 annotation|@
 name|Override

@@ -844,6 +844,11 @@ return|;
 block|}
 comment|/**      * Whether to emit the new join tree if the new top or bottom join has a condition which      * is always {@code TRUE}.      */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property

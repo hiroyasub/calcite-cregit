@@ -659,7 +659,7 @@ name|as
 argument_list|(
 name|FilterDateRangeRule
 operator|.
-name|Config
+name|FilterDateRangeRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1108,7 +1108,7 @@ name|RelRule
 argument_list|<
 name|FilterDateRangeRule
 operator|.
-name|Config
+name|FilterDateRangeRuleConfig
 argument_list|>
 implements|implements
 name|TransformationRule
@@ -1117,7 +1117,7 @@ comment|/** Creates a FilterDateRangeRule. */
 specifier|protected
 name|FilterDateRangeRule
 parameter_list|(
-name|Config
+name|FilterDateRangeRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1139,7 +1139,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|Config
+name|FilterDateRangeRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1150,7 +1150,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|FilterDateRangeRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1379,34 +1379,29 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link FilterDateRangeRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|FilterDateRangeRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutableFilterDateRangeRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|FilterDateRangeRuleConfig
 extends|extends
 name|RelRule
 operator|.
 name|Config
 block|{
-name|Config
+name|FilterDateRangeRuleConfig
 name|DEFAULT
 init|=
 name|ImmutableFilterDateRangeRuleConfig

@@ -777,7 +777,7 @@ specifier|final
 name|RelOptRule
 name|PROJECT_INSTANCE
 init|=
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -808,7 +808,7 @@ specifier|final
 name|RelOptRule
 name|FILTER_INSTANCE
 init|=
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -839,7 +839,7 @@ specifier|final
 name|RelOptRule
 name|SORT_INSTANCE
 init|=
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -907,7 +907,7 @@ specifier|final
 name|RelOptRule
 name|AGGREGATE_INSTANCE
 init|=
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -1086,7 +1086,7 @@ block|{
 comment|/** Creates a RemoveEmptySingleRule. */
 name|RemoveEmptySingleRule
 parameter_list|(
-name|Config
+name|RemoveEmptySingleRuleConfig
 name|config
 parameter_list|)
 block|{
@@ -1119,7 +1119,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -1131,7 +1131,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1179,7 +1179,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -1196,7 +1196,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1259,7 +1259,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|ImmutablePruneEmptyRuleConfig
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|of
 argument_list|()
@@ -1276,7 +1276,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|ImmutableRemoveEmptySingleRuleConfig
 operator|.
 name|class
 argument_list|)
@@ -1385,28 +1385,23 @@ name|emptyValues
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Deprecated, use {@link RemoveEmptySingleRuleConfig} instead. **/
+annotation|@
+name|Deprecated
+specifier|public
+interface|interface
+name|Config
+extends|extends
+name|RemoveEmptySingleRuleConfig
+block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
 operator|.
 name|Immutable
-argument_list|(
-name|singleton
-operator|=
-literal|true
-argument_list|)
-annotation|@
-name|Value
-operator|.
-name|Style
-argument_list|(
-name|typeImmutable
-operator|=
-literal|"ImmutablePruneEmptyRuleConfig"
-argument_list|)
 specifier|public
 interface|interface
-name|Config
+name|RemoveEmptySingleRuleConfig
 extends|extends
 name|PruneEmptyRule
 operator|.
@@ -1434,7 +1429,7 @@ name|R
 extends|extends
 name|RelNode
 parameter_list|>
-name|Config
+name|RemoveEmptySingleRuleConfig
 name|withOperandFor
 parameter_list|(
 name|Class
@@ -1494,7 +1489,7 @@ argument_list|)
 operator|.
 name|as
 argument_list|(
-name|Config
+name|RemoveEmptySingleRuleConfig
 operator|.
 name|class
 argument_list|)

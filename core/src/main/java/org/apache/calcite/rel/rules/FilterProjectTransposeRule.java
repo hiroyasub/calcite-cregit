@@ -1058,6 +1058,11 @@ return|;
 block|}
 comment|/** Whether to create a {@link Filter} of the same convention as the      * matched Filter. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|ImmutableBeans
 operator|.
 name|Property
@@ -1090,6 +1095,11 @@ name|copyFilter
 parameter_list|)
 function_decl|;
 comment|/** Whether to create a {@link Project} of the same convention as the      * matched Project. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|ImmutableBeans
 operator|.
