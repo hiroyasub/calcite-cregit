@@ -30412,6 +30412,141 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-4818">[CALCITE-4818]    * AggregateExpandDistinctAggregatesRule must infer correct data type for top aggregate calls</a>.    *<p>    * Checks AggregateExpandDistinctAggregatesRule when return type of the SUM aggregate    * is changed (expanded) by define custom type factory.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSumAndDistinctSumWithExpandSumType
+parameter_list|()
+block|{
+comment|// Define new type system to expand SUM return type.
+name|RelDataTypeSystemImpl
+name|typeSystem
+init|=
+operator|new
+name|RelDataTypeSystemImpl
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|RelDataType
+name|deriveSumType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|RelDataType
+name|argumentType
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|argumentType
+operator|.
+name|getSqlTypeName
+argument_list|()
+condition|)
+block|{
+case|case
+name|INTEGER
+case|:
+return|return
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|BIGINT
+argument_list|)
+return|;
+case|case
+name|BIGINT
+case|:
+return|return
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|DECIMAL
+argument_list|)
+return|;
+default|default:
+return|return
+name|super
+operator|.
+name|deriveSumType
+argument_list|(
+name|typeFactory
+argument_list|,
+name|argumentType
+argument_list|)
+return|;
+block|}
+block|}
+block|}
+decl_stmt|;
+name|Supplier
+argument_list|<
+name|RelDataTypeFactory
+argument_list|>
+name|typeFactorySupplier
+init|=
+parameter_list|()
+lambda|->
+operator|new
+name|SqlTypeFactoryImpl
+argument_list|(
+name|typeSystem
+argument_list|)
+decl_stmt|;
+comment|// Expected plan:
+comment|// LogicalProject(EXPR$0=[CAST($0):BIGINT], EXPR$1=[$1])
+comment|//  LogicalAggregate(group=[{}], EXPR$0=[SUM($1)], EXPR$1=[SUM($0)]) // RowType[DECIMAL, BIGINT]
+comment|//    LogicalAggregate(group=[{0}], EXPR$0=[SUM($0)])  // RowType[INTEGER, BIGINT]
+comment|//      LogicalProject(COMM=[$6])
+comment|//        LogicalTableScan(table=[[CATALOG, SALES, EMP]])
+comment|//
+comment|// The top 'LogicalProject' must be added in case SUM type is expanded
+comment|// because type of original expression 'COUNT(DISTINCT comm)' is BIGINT
+comment|// and type of SUM (of BIGINT) is DECIMAL.
+name|sql
+argument_list|(
+literal|"SELECT SUM(comm), SUM(DISTINCT comm) FROM emp"
+argument_list|)
+operator|.
+name|withTester
+argument_list|(
+name|t
+lambda|->
+name|t
+operator|.
+name|withTypeFactorySupplier
+argument_list|(
+name|typeFactorySupplier
+argument_list|)
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_EXPAND_DISTINCT_AGGREGATES_TO_JOIN
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 unit|}
 end_unit
 
