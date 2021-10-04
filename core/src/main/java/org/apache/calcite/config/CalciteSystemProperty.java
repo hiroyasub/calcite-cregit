@@ -93,16 +93,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|security
-operator|.
-name|AccessControlException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Locale
@@ -1209,11 +1199,31 @@ throw|;
 block|}
 catch|catch
 parameter_list|(
-name|AccessControlException
+name|RuntimeException
 name|e
 parameter_list|)
 block|{
-comment|// we're in a sandbox
+if|if
+condition|(
+operator|!
+literal|"java.security.AccessControlException"
+operator|.
+name|equals
+argument_list|(
+name|e
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+condition|)
+block|{
+throw|throw
+name|e
+throw|;
+block|}
 block|}
 comment|// Merge system and saffron properties, mapping deprecated saffron
 comment|// namespaces to calcite

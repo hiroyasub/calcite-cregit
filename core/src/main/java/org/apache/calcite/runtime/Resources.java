@@ -247,16 +247,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|security
-operator|.
-name|PrivilegedAction
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|text
 operator|.
 name|DateFormat
@@ -4528,6 +4518,11 @@ expr_stmt|;
 block|}
 block|}
 comment|/**      * Opens the properties file corresponding to a given class. The code is      * copied from {@link ResourceBundle}.      */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"removal"
+argument_list|)
 specifier|private
 specifier|static
 annotation|@
@@ -4576,6 +4571,10 @@ operator|.
 name|doPrivileged
 argument_list|(
 operator|(
+name|java
+operator|.
+name|security
+operator|.
 name|PrivilegedAction
 argument_list|<
 annotation|@
