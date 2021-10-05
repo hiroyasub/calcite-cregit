@@ -345,9 +345,13 @@ parameter_list|,
 name|RelCollation
 name|newCollation
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|offset
 parameter_list|,
+annotation|@
+name|Nullable
 name|RexNode
 name|fetch
 parameter_list|)

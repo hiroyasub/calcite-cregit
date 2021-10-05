@@ -21,11 +21,15 @@ name|com
 operator|.
 name|datastax
 operator|.
+name|oss
+operator|.
 name|driver
+operator|.
+name|api
 operator|.
 name|core
 operator|.
-name|Session
+name|CqlSession
 import|;
 end_import
 
@@ -190,7 +194,7 @@ specifier|static
 name|void
 name|load
 parameter_list|(
-name|Session
+name|CqlSession
 name|session
 parameter_list|)
 block|{
@@ -567,7 +571,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"tweet_id\" from \"tweets\" where \"username\"='JmuhsAaMdw'"
+literal|"select \"tweet_id\" from \"tweets\" where "
+operator|+
+literal|"\"username\"='JmuhsAaMdw' and \"tweet_id\"='f3d3d4dc-d05b-11e5-b58b-90e2ba530b12'"
 argument_list|)
 operator|.
 name|enableMaterializations

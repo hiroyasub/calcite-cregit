@@ -1274,6 +1274,22 @@ operator|.
 name|bestVersion
 return|;
 block|}
+comment|/** Returns the JVM vendor. */
+specifier|public
+specifier|static
+name|String
+name|getJavaVirtualMachineVendor
+parameter_list|()
+block|{
+return|return
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"java.vm.vendor"
+argument_list|)
+return|;
+block|}
 comment|/** Given a list, returns the number of elements that are not between an    * element that is less and an element that is greater. */
 specifier|public
 specifier|static

@@ -149,6 +149,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -175,6 +191,8 @@ name|CassandraTable
 name|cassandraTable
 decl_stmt|;
 specifier|final
+annotation|@
+name|Nullable
 name|RelDataType
 name|projectRowType
 decl_stmt|;
@@ -194,6 +212,8 @@ parameter_list|,
 name|CassandraTable
 name|cassandraTable
 parameter_list|,
+annotation|@
+name|Nullable
 name|RelDataType
 name|projectRowType
 parameter_list|)
@@ -224,11 +244,6 @@ name|projectRowType
 operator|=
 name|projectRowType
 expr_stmt|;
-assert|assert
-name|cassandraTable
-operator|!=
-literal|null
-assert|;
 assert|assert
 name|getConvention
 argument_list|()

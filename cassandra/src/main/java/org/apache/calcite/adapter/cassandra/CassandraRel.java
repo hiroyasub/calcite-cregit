@@ -61,6 +61,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -186,9 +202,13 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Nullable
 name|RelOptTable
 name|table
 decl_stmt|;
+annotation|@
+name|Nullable
 name|CassandraTable
 name|cassandraTable
 decl_stmt|;
@@ -197,6 +217,8 @@ specifier|public
 name|void
 name|add
 parameter_list|(
+annotation|@
+name|Nullable
 name|Map
 argument_list|<
 name|String
@@ -205,6 +227,8 @@ name|String
 argument_list|>
 name|fields
 parameter_list|,
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|String

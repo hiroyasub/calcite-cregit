@@ -419,6 +419,16 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression representing a scan of a table in a Cassandra data source.  */
 end_comment
@@ -625,6 +635,9 @@ operator|new
 name|AbstractList
 argument_list|<
 name|Class
+argument_list|<
+name|?
+argument_list|>
 argument_list|>
 argument_list|()
 block|{
@@ -632,6 +645,9 @@ annotation|@
 name|Override
 specifier|public
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|get
 parameter_list|(
 name|int
@@ -758,6 +774,10 @@ name|append
 argument_list|(
 literal|"table"
 argument_list|,
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|cassandraImplementor
 operator|.
 name|table
@@ -769,6 +789,7 @@ operator|.
 name|CassandraQueryable
 operator|.
 name|class
+argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -966,6 +987,9 @@ argument_list|>
 name|values
 parameter_list|,
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|)
 block|{

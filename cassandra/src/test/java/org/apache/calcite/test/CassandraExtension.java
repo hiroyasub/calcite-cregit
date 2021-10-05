@@ -81,7 +81,7 @@ name|cassandra
 operator|.
 name|concurrent
 operator|.
-name|StageManager
+name|Stage
 import|;
 end_import
 
@@ -157,43 +157,19 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|thrift
-operator|.
-name|transport
-operator|.
-name|TTransportException
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|datastax
 operator|.
-name|driver
-operator|.
-name|core
-operator|.
-name|Cluster
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|datastax
+name|oss
 operator|.
 name|driver
 operator|.
+name|api
+operator|.
 name|core
 operator|.
-name|Session
+name|CqlSession
 import|;
 end_import
 
@@ -417,6 +393,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|concurrent
 operator|.
 name|ExecutionException
@@ -424,7 +410,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JUnit5 extension to start and stop embedded cassandra server.  *  *<p>Note that tests will be skipped if running on JDK11+  * (which is not yet supported by cassandra) see  *<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>.  */
+comment|/**  * JUnit5 extension to start and stop embedded cassandra server.  *  *<p>Note that tests will be skipped if running on JDK11+ or Eclipse OpenJ9 JVM  * (not supported by cassandra-unit and Cassandra, respectively) see  *<a href="https://github.com/jsevellec/cassandra-unit/issues/294">cassandra-unit issue #294</a>  *  and<a href="https://issues.apache.org/jira/browse/CASSANDRA-14883">CASSANDRA-14883</a>,  *  respectively.  */
 end_comment
 
 begin_class
@@ -495,16 +481,7 @@ name|getType
 argument_list|()
 decl_stmt|;
 return|return
-name|Session
-operator|.
-name|class
-operator|.
-name|isAssignableFrom
-argument_list|(
-name|type
-argument_list|)
-operator|||
-name|Cluster
+name|CqlSession
 operator|.
 name|class
 operator|.
@@ -547,7 +524,7 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|Session
+name|CqlSession
 operator|.
 name|class
 operator|.
@@ -566,27 +543,6 @@ operator|.
 name|session
 return|;
 block|}
-if|else if
-condition|(
-name|Cluster
-operator|.
-name|class
-operator|.
-name|isAssignableFrom
-argument_list|(
-name|type
-argument_list|)
-condition|)
-block|{
-return|return
-name|getOrCreate
-argument_list|(
-name|extensionContext
-argument_list|)
-operator|.
-name|cluster
-return|;
-block|}
 throw|throw
 operator|new
 name|ExtensionConfigurationException
@@ -599,7 +555,7 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"%s supports only %s or %s but yours was %s"
+literal|"%s supports only %s but yours was %s"
 argument_list|,
 name|CassandraExtension
 operator|.
@@ -608,14 +564,7 @@ operator|.
 name|getSimpleName
 argument_list|()
 argument_list|,
-name|Session
-operator|.
-name|class
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-name|Cluster
+name|CqlSession
 operator|.
 name|class
 operator|.
@@ -654,6 +603,10 @@ name|Sources
 operator|.
 name|of
 argument_list|(
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|CassandraExtension
 operator|.
 name|class
@@ -661,6 +614,7 @@ operator|.
 name|getResource
 argument_list|(
 name|resourcePath
+argument_list|)
 argument_list|)
 argument_list|)
 operator|.
@@ -672,7 +626,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Registers a Cassandra resource in root context so it can be shared with    * other tests. */
+comment|/** Registers a Cassandra resource in root context, so it can be shared with    * other tests. */
 specifier|private
 specifier|static
 name|CassandraResource
@@ -710,7 +664,7 @@ name|class
 argument_list|)
 return|;
 block|}
-comment|/**    * Whether to run this test.    *<p>Enabled by default, unless explicitly disabled    * from command line ({@code -Dcalcite.test.cassandra=false}) or running on incompatible JDK    * version (see below).    *    *<p>As of this wiring Cassandra 4.x is not yet released and we're using 3.x    * (which fails on JDK11+). All cassandra tests will be skipped if    * running on JDK11+.    *    * @see<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>    * @return {@code true} if test is compatible with current environment,    *         {@code false} otherwise    */
+comment|/**    * Whether to run this test.    *<p>Enabled by default, unless explicitly disabled    * from command line ({@code -Dcalcite.test.cassandra=false}) or running on incompatible JDK    * version or JVM (see below).    *    *<p>cassandra-unit does not support JDK11+ yet, therefore all cassandra tests will be skipped    * if this JDK version is used.    *    * @see<a href="https://github.com/jsevellec/cassandra-unit/issues/294">cassandra-unit issue #294</a>    *    *<p>Cassandra does not support Eclipse OpenJ9 JVM, therefore all cassandra tests will be    * skipped if this JVM version is used.    *    * @see<a href="https://issues.apache.org/jira/browse/CASSANDRA-14883">CASSANDRA-14883</a>    *    * @return {@code true} if test is compatible with current environment,    *         {@code false} otherwise    */
 annotation|@
 name|Override
 specifier|public
@@ -736,7 +690,7 @@ name|Bug
 operator|.
 name|upgrade
 argument_list|(
-literal|"remove JDK version check once current adapter supports Cassandra 4.x"
+literal|"remove JDK version check once cassandra-unit supports JDK11+"
 argument_list|)
 expr_stmt|;
 name|boolean
@@ -756,8 +710,29 @@ name|TestUtil
 operator|.
 name|getGuavaMajorVersion
 argument_list|()
-operator|<
-literal|26
+operator|>=
+literal|20
+decl_stmt|;
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"remove JVM check once Cassandra supports Eclipse OpenJ9 JVM"
+argument_list|)
+expr_stmt|;
+name|boolean
+name|compatibleJVM
+init|=
+operator|!
+literal|"Eclipse OpenJ9"
+operator|.
+name|equals
+argument_list|(
+name|TestUtil
+operator|.
+name|getJavaVirtualMachineVendor
+argument_list|()
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -766,6 +741,8 @@ operator|&&
 name|compatibleJdk
 operator|&&
 name|compatibleGuava
+operator|&&
+name|compatibleJVM
 condition|)
 block|{
 return|return
@@ -777,6 +754,8 @@ literal|"Cassandra enabled"
 argument_list|)
 return|;
 block|}
+else|else
+block|{
 return|return
 name|ConditionEvaluationResult
 operator|.
@@ -785,6 +764,7 @@ argument_list|(
 literal|"Cassandra tests disabled"
 argument_list|)
 return|;
+block|}
 block|}
 comment|/** Cassandra resource. */
 specifier|private
@@ -800,28 +780,14 @@ name|CloseableResource
 block|{
 specifier|private
 specifier|final
-name|Session
+name|CqlSession
 name|session
-decl_stmt|;
-specifier|private
-specifier|final
-name|Cluster
-name|cluster
 decl_stmt|;
 specifier|private
 name|CassandraResource
 parameter_list|()
 block|{
 name|startCassandra
-argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|cluster
-operator|=
-name|EmbeddedCassandraServerHelper
-operator|.
-name|getCluster
 argument_list|()
 expr_stmt|;
 name|this
@@ -849,34 +815,12 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-name|cluster
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 name|CassandraDaemon
 name|daemon
 init|=
 name|extractDaemon
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|daemon
-operator|.
-name|thriftServer
-operator|!=
-literal|null
-condition|)
-block|{
-name|daemon
-operator|.
-name|thriftServer
-operator|.
-name|stop
-argument_list|()
-expr_stmt|;
-block|}
 name|daemon
 operator|.
 name|stopNativeTransport
@@ -946,7 +890,7 @@ name|interrupt
 argument_list|()
 expr_stmt|;
 block|}
-name|StageManager
+name|Stage
 operator|.
 name|shutdownNow
 argument_list|()
@@ -1011,27 +955,13 @@ name|Duration
 operator|.
 name|ofMinutes
 argument_list|(
-literal|1
+literal|2
 argument_list|)
 operator|.
 name|toMillis
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|TTransportException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
 block|}
 catch|catch
 parameter_list|(

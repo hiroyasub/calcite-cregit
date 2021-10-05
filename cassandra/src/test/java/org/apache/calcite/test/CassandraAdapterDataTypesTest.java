@@ -37,11 +37,15 @@ name|com
 operator|.
 name|datastax
 operator|.
+name|oss
+operator|.
 name|driver
+operator|.
+name|api
 operator|.
 name|core
 operator|.
-name|Session
+name|CqlSession
 import|;
 end_import
 
@@ -51,11 +55,19 @@ name|com
 operator|.
 name|datastax
 operator|.
+name|oss
+operator|.
 name|driver
+operator|.
+name|api
 operator|.
 name|core
 operator|.
-name|TypeCodec
+name|type
+operator|.
+name|codec
+operator|.
+name|TypeCodecs
 import|;
 end_import
 
@@ -179,27 +191,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Calendar
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Locale
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|TimeZone
+name|Objects
 import|;
 end_import
 
@@ -250,7 +242,7 @@ specifier|static
 name|void
 name|load
 parameter_list|(
-name|Session
+name|CqlSession
 name|session
 parameter_list|)
 block|{
@@ -314,6 +306,8 @@ operator|+
 literal|", f_float REAL"
 operator|+
 literal|", f_inet ANY"
+operator|+
+literal|", f_int_null INTEGER"
 operator|+
 literal|", f_smallint SMALLINT"
 operator|+
@@ -490,6 +484,8 @@ operator|+
 literal|"; f_float=5.1"
 operator|+
 literal|"; f_inet=/192.168.0.1"
+operator|+
+literal|"; f_int_null=null"
 operator|+
 literal|"; f_smallint=5"
 operator|+
@@ -692,44 +688,23 @@ comment|// timestamp retrieval depends on the user timezone, we must compute the
 name|long
 name|v
 init|=
-name|TypeCodec
+name|Objects
 operator|.
-name|timestamp
-argument_list|()
+name|requireNonNull
+argument_list|(
+name|TypeCodecs
+operator|.
+name|TIMESTAMP
 operator|.
 name|parse
 argument_list|(
-literal|"2015-05-03 13:30:54.234"
+literal|"'2015-05-03 13:30:54.234'"
+argument_list|)
 argument_list|)
 operator|.
-name|getTime
+name|toEpochMilli
 argument_list|()
 decl_stmt|;
-comment|// UTC timestamp is adjusted using the offset from the user timezone
-name|v
-operator|-=
-name|Calendar
-operator|.
-name|getInstance
-argument_list|(
-name|TimeZone
-operator|.
-name|getDefault
-argument_list|()
-argument_list|,
-name|Locale
-operator|.
-name|ROOT
-argument_list|)
-operator|.
-name|getTimeZone
-argument_list|()
-operator|.
-name|getOffset
-argument_list|(
-name|v
-argument_list|)
-expr_stmt|;
 name|String
 name|expectedTimestamp
 init|=

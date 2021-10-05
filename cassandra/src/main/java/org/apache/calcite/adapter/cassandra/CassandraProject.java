@@ -437,6 +437,13 @@ name|getNamedProjects
 argument_list|()
 control|)
 block|{
+assert|assert
+name|pair
+operator|.
+name|left
+operator|!=
+literal|null
+assert|;
 specifier|final
 name|String
 name|name
