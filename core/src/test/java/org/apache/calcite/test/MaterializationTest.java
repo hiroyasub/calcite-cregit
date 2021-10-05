@@ -291,6 +291,24 @@ name|schemata
 operator|.
 name|hr
 operator|.
+name|HrSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|schemata
+operator|.
+name|hr
+operator|.
 name|Location
 import|;
 end_import
@@ -1291,7 +1309,16 @@ literal|"      factory: 'org.apache.calcite.adapter.java.ReflectiveSchema$Factor
 operator|+
 literal|"      operand: {\n"
 operator|+
-literal|"        class: 'org.apache.calcite.test.JdbcTest$HrSchema'\n"
+literal|"        class: '"
+operator|+
+name|HrSchema
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
 operator|+
 literal|"      }\n"
 operator|+
