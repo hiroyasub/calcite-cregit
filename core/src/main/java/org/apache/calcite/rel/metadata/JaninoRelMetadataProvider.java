@@ -836,7 +836,22 @@ name|buff
 operator|.
 name|append
 argument_list|(
-literal|"  private final org.apache.calcite.rel.metadata.MetadataDef def;\n"
+literal|"  private final "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|MetadataDef
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" def;\n"
 argument_list|)
 expr_stmt|;
 for|for
@@ -919,7 +934,22 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      org.apache.calcite.rel.metadata.MetadataDef def"
+literal|"      "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|MetadataDef
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" def"
 argument_list|)
 expr_stmt|;
 for|for
