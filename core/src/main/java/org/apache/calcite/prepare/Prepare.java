@@ -841,6 +841,22 @@ end_import
 
 begin_import
 import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql2rel
+operator|.
+name|SqlToRelConverter
+operator|.
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
@@ -952,6 +968,25 @@ operator|.
 name|of
 argument_list|(
 literal|false
+argument_list|)
+decl_stmt|;
+comment|// temporary. for testing.
+specifier|public
+specifier|static
+specifier|final
+name|TryThreadLocal
+argument_list|<
+annotation|@
+name|Nullable
+name|Integer
+argument_list|>
+name|THREAD_INSUBQUERY_THRESHOLD
+init|=
+name|TryThreadLocal
+operator|.
+name|of
+argument_list|(
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 argument_list|)
 decl_stmt|;
 specifier|protected
@@ -1485,6 +1520,17 @@ argument_list|(
 name|castNonNull
 argument_list|(
 name|THREAD_EXPAND
+operator|.
+name|get
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|withInSubQueryThreshold
+argument_list|(
+name|castNonNull
+argument_list|(
+name|THREAD_INSUBQUERY_THRESHOLD
 operator|.
 name|get
 argument_list|()
@@ -2133,6 +2179,17 @@ argument_list|(
 name|castNonNull
 argument_list|(
 name|THREAD_EXPAND
+operator|.
+name|get
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|withInSubQueryThreshold
+argument_list|(
+name|castNonNull
+argument_list|(
+name|THREAD_INSUBQUERY_THRESHOLD
 operator|.
 name|get
 argument_list|()
