@@ -90,12 +90,12 @@ specifier|public
 enum|enum
 name|Lex
 block|{
-comment|/** Lexical policy similar to BigQuery.    * The case of identifiers is preserved whether or not they quoted;    * after which, identifiers are matched case-insensitively.    * Back-ticks allow identifiers to contain non-alphanumeric characters.    * Character literals may be enclosed in single or double quotes. */
+comment|/** Lexical policy similar to BigQuery.    * The case of identifiers is preserved whether or not they quoted;    * after which, identifiers are matched case-insensitively.    * Back-ticks allow identifiers to contain non-alphanumeric characters;    * a back-tick is escaped using a backslash.    * Character literals may be enclosed in single or double quotes. */
 name|BIG_QUERY
 argument_list|(
 name|Quoting
 operator|.
-name|BACK_TICK
+name|BACK_TICK_BACKSLASH
 argument_list|,
 name|Casing
 operator|.
@@ -138,7 +138,7 @@ operator|.
 name|STANDARD
 argument_list|)
 block|,
-comment|/** Lexical policy similar to MySQL. (To be precise: MySQL on Windows;    * MySQL on Linux uses case-sensitive matching, like the Linux file system.)    * The case of identifiers is preserved whether or not they quoted;    * after which, identifiers are matched case-insensitively.    * Back-ticks allow identifiers to contain non-alphanumeric characters. */
+comment|/** Lexical policy similar to MySQL. (To be precise: MySQL on Windows;    * MySQL on Linux uses case-sensitive matching, like the Linux file system.)    * The case of identifiers is preserved whether or not they quoted;    * after which, identifiers are matched case-insensitively.    * Back-ticks allow identifiers to contain non-alphanumeric characters;    * a back-tick is escaped using a back-tick. */
 name|MYSQL
 argument_list|(
 name|Quoting
@@ -204,7 +204,7 @@ operator|.
 name|STANDARD
 argument_list|)
 block|,
-comment|/** Lexical policy similar to Java.    * The case of identifiers is preserved whether or not they are quoted;    * after which, identifiers are matched case-sensitively.    * Unlike Java, back-ticks allow identifiers to contain non-alphanumeric    * characters. */
+comment|/** Lexical policy similar to Java.    * The case of identifiers is preserved whether or not they are quoted;    * after which, identifiers are matched case-sensitively.    * Unlike Java, back-ticks allow identifiers to contain non-alphanumeric    * characters; a back-tick is escaped using a back-tick. */
 name|JAVA
 argument_list|(
 name|Quoting

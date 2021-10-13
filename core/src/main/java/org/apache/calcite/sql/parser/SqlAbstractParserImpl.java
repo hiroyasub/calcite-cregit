@@ -1310,6 +1310,12 @@ return|return
 name|DQID
 return|;
 case|case
+name|BACK_TICK_BACKSLASH
+case|:
+return|return
+name|BQID
+return|;
+case|case
 name|BACK_TICK
 case|:
 if|if

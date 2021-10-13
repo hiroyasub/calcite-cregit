@@ -12002,6 +12002,16 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
+literal|"`x\\`^y^\\`z`"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
 literal|"myMap[field] + myArray[1 + 2]"
 argument_list|)
 operator|.
@@ -12028,6 +12038,151 @@ expr_stmt|;
 name|sql
 argument_list|(
 literal|"VALUES `a`"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isQuoted
+argument_list|(
+literal|0
+argument_list|,
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"VALUES `a``b`"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isQuoted
+argument_list|(
+literal|0
+argument_list|,
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testBackTickBackslashIdentifier
+parameter_list|()
+block|{
+name|quoting
+operator|=
+name|Quoting
+operator|.
+name|BACK_TICK_BACKSLASH
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"ab"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"`AB`"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"     `a  \" b!c`"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"`a  \" b!c`"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"     \"a  \"^\" b!c\"^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+comment|// BACK_TICK_BACKSLASH identifiers implies
+comment|// BigQuery dialect, which implies double-quoted character literals.
+name|expr
+argument_list|(
+literal|"^\"^x`y`z\""
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"'x`y`z'"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"`x`^`y`^`z`"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered.*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"`x\\`y\\`z`"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"`x``y``z`"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"myMap[field] + myArray[1 + 2]"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"(`MYMAP`[`FIELD`] + `MYARRAY`[(1 + 2)])"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"VALUES a"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isQuoted
+argument_list|(
+literal|0
+argument_list|,
+literal|false
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"VALUES `a`"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isQuoted
+argument_list|(
+literal|0
+argument_list|,
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"VALUES `a\\`b`"
 argument_list|)
 operator|.
 name|node
@@ -17020,6 +17175,8 @@ literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"<BACK_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
+literal|"<BIG_QUERY_BACK_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+operator|+
 literal|"<BRACKET_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
 literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\.\n"
@@ -19781,7 +19938,7 @@ expr_stmt|;
 comment|// MySQL uses single-quotes as escapes; BigQuery uses backslashes
 name|sql
 argument_list|(
-literal|"select 'Let''s call him \"Elvis\"!'"
+literal|"select 'Let''s call the dog \"Elvis\"!'"
 argument_list|)
 operator|.
 name|withDialect
@@ -19793,13 +19950,13 @@ name|node
 argument_list|(
 name|isCharLiteral
 argument_list|(
-literal|"Let's call him \"Elvis\"!"
+literal|"Let's call the dog \"Elvis\"!"
 argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select 'Let\\'\\'s call him \"Elvis\"!'"
+literal|"select 'Let\\'\\'s call the dog \"Elvis\"!'"
 argument_list|)
 operator|.
 name|withDialect
@@ -19811,13 +19968,13 @@ name|node
 argument_list|(
 name|isCharLiteral
 argument_list|(
-literal|"Let''s call him \"Elvis\"!"
+literal|"Let''s call the dog \"Elvis\"!"
 argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select 'Let\\'s ^call^ him \"Elvis\"!'"
+literal|"select 'Let\\'s ^call^ the dog \"Elvis\"!'"
 argument_list|)
 operator|.
 name|withDialect
@@ -19839,7 +19996,7 @@ name|node
 argument_list|(
 name|isCharLiteral
 argument_list|(
-literal|"Let's call him \"Elvis\"!"
+literal|"Let's call the dog \"Elvis\"!"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -19847,7 +20004,7 @@ comment|// Oracle uses double-quotes as escapes in identifiers;
 comment|// BigQuery uses backslashes as escapes in double-quoted character literals.
 name|sql
 argument_list|(
-literal|"select \"Let's call him \\\"Elvis^\\^\"!\""
+literal|"select \"Let's call the dog \\\"Elvis^\\^\"!\""
 argument_list|)
 operator|.
 name|withDialect
@@ -19857,7 +20014,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Lexical error at line 1, column 31\\.  "
+literal|"(?s)Lexical error at line 1, column 35\\.  "
 operator|+
 literal|"Encountered: \"\\\\\\\\\" \\(92\\), after : \"\".*"
 argument_list|)
@@ -19871,7 +20028,7 @@ name|node
 argument_list|(
 name|isCharLiteral
 argument_list|(
-literal|"Let's call him \"Elvis\"!"
+literal|"Let's call the dog \"Elvis\"!"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -37827,7 +37984,7 @@ block|{
 comment|// Calcite's default converts unquoted identifiers to upper case
 name|sql
 argument_list|(
-literal|"select unquotedColumn from \"doubleQuotedTable\""
+literal|"select unquotedColumn from \"double\"\"QuotedTable\""
 argument_list|)
 operator|.
 name|withDialect
@@ -37839,13 +37996,13 @@ name|ok
 argument_list|(
 literal|"SELECT \"UNQUOTEDCOLUMN\"\n"
 operator|+
-literal|"FROM \"doubleQuotedTable\""
+literal|"FROM \"double\"\"QuotedTable\""
 argument_list|)
 expr_stmt|;
 comment|// MySQL leaves unquoted identifiers unchanged
 name|sql
 argument_list|(
-literal|"select unquotedColumn from `doubleQuotedTable`"
+literal|"select unquotedColumn from `double``QuotedTable`"
 argument_list|)
 operator|.
 name|withDialect
@@ -37857,13 +38014,13 @@ name|ok
 argument_list|(
 literal|"SELECT `unquotedColumn`\n"
 operator|+
-literal|"FROM `doubleQuotedTable`"
+literal|"FROM `double``QuotedTable`"
 argument_list|)
 expr_stmt|;
 comment|// Oracle converts unquoted identifiers to upper case
 name|sql
 argument_list|(
-literal|"select unquotedColumn from \"doubleQuotedTable\""
+literal|"select unquotedColumn from \"double\"\"QuotedTable\""
 argument_list|)
 operator|.
 name|withDialect
@@ -37875,13 +38032,13 @@ name|ok
 argument_list|(
 literal|"SELECT \"UNQUOTEDCOLUMN\"\n"
 operator|+
-literal|"FROM \"doubleQuotedTable\""
+literal|"FROM \"double\"\"QuotedTable\""
 argument_list|)
 expr_stmt|;
 comment|// PostgreSQL converts unquoted identifiers to lower case
 name|sql
 argument_list|(
-literal|"select unquotedColumn from \"doubleQuotedTable\""
+literal|"select unquotedColumn from \"double\"\"QuotedTable\""
 argument_list|)
 operator|.
 name|withDialect
@@ -37893,13 +38050,13 @@ name|ok
 argument_list|(
 literal|"SELECT \"unquotedcolumn\"\n"
 operator|+
-literal|"FROM \"doubleQuotedTable\""
+literal|"FROM \"double\"\"QuotedTable\""
 argument_list|)
 expr_stmt|;
 comment|// Redshift converts all identifiers to lower case
 name|sql
 argument_list|(
-literal|"select unquotedColumn from \"doubleQuotedTable\""
+literal|"select unquotedColumn from \"double\"\"QuotedTable\""
 argument_list|)
 operator|.
 name|withDialect
@@ -37911,13 +38068,13 @@ name|ok
 argument_list|(
 literal|"SELECT \"unquotedcolumn\"\n"
 operator|+
-literal|"FROM \"doublequotedtable\""
+literal|"FROM \"double\"\"quotedtable\""
 argument_list|)
 expr_stmt|;
 comment|// BigQuery leaves quoted and unquoted identifiers unchanged
 name|sql
 argument_list|(
-literal|"select unquotedColumn from `doubleQuotedTable`"
+literal|"select unquotedColumn from `double\\`QuotedTable`"
 argument_list|)
 operator|.
 name|withDialect
@@ -37929,7 +38086,7 @@ name|ok
 argument_list|(
 literal|"SELECT unquotedColumn\n"
 operator|+
-literal|"FROM doubleQuotedTable"
+literal|"FROM `double\\`QuotedTable`"
 argument_list|)
 expr_stmt|;
 block|}
