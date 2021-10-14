@@ -5381,6 +5381,10 @@ condition|(
 name|constant
 operator|instanceof
 name|RexCall
+operator|||
+name|constant
+operator|instanceof
+name|RexDynamicParam
 condition|)
 block|{
 name|constant
