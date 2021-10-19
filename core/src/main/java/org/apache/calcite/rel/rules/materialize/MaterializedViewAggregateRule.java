@@ -577,20 +577,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|ImmutableBitSet
 import|;
 end_import
@@ -5756,15 +5742,6 @@ name|Config
 block|{
 comment|/** Instance of rule to push filter through project. */
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Value
 operator|.
 name|Default
@@ -5847,15 +5824,6 @@ parameter_list|)
 function_decl|;
 comment|/** Instance of rule to push filter through aggregate. */
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Value
 operator|.
 name|Default
@@ -5910,15 +5878,6 @@ name|rule
 parameter_list|)
 function_decl|;
 comment|/** Instance of rule to pull up constants into aggregate. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Value
 operator|.
@@ -5979,15 +5938,6 @@ name|rule
 parameter_list|)
 function_decl|;
 comment|/** Instance of rule to merge project operators. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Value
 operator|.

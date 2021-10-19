@@ -918,15 +918,6 @@ name|aggregate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link ProjectToSemiJoinRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|ProjectToSemiJoinRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1220,15 +1211,6 @@ name|aggregate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link JoinToSemiJoinRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|JoinToSemiJoinRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

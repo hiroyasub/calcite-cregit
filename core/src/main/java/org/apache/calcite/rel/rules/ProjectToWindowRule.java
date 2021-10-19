@@ -638,15 +638,6 @@ name|newRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link CalcToWindowRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|CalcToWindowRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1004,15 +995,6 @@ name|newRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link ProjectToLogicalProjectAndWindowRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|ProjectToLogicalProjectAndWindowRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

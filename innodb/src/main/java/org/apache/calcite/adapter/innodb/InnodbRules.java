@@ -438,7 +438,7 @@ name|FILTER
 init|=
 name|InnodbFilterRule
 operator|.
-name|Config
+name|InnodbFilterRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -454,7 +454,7 @@ name|SORT_FILTER
 init|=
 name|InnodbSortFilterRule
 operator|.
-name|Config
+name|InnodbSortFilterRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -470,7 +470,7 @@ name|SORT_SCAN
 init|=
 name|InnodbSortTableScanRule
 operator|.
-name|Config
+name|InnodbSortTableScanRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1049,15 +1049,6 @@ return|return
 name|filter
 return|;
 block|}
-comment|/** Deprecated, use {@link InnodbFilterRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|InnodbFilterRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1561,15 +1552,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Deprecated, use {@link InnodbSortFilterRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|InnodbSortFilterRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1749,15 +1731,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Deprecated, use {@link InnodbSortTableScanRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|InnodbSortTableScanRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

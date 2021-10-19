@@ -692,15 +692,6 @@ name|newProject
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DeltaProjectTransposeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaProjectTransposeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -914,15 +905,6 @@ name|newFilter
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DeltaFilterTransposeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaFilterTransposeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1150,15 +1132,6 @@ name|newAggregate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DeltaAggregateTransposeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaAggregateTransposeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1386,15 +1359,6 @@ name|newSort
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DeltaSortTransposeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaSortTransposeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1597,15 +1561,6 @@ name|newUnion
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DeltaUnionTransposeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaUnionTransposeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1855,15 +1810,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Deprecated, use {@link DeltaTableScanRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaTableScanRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2052,15 +1998,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Deprecated, use {@link DeltaTableScanToEmptyRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaTableScanToEmptyRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2400,15 +2337,6 @@ name|newNode
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DeltaJoinTransposeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DeltaJoinTransposeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

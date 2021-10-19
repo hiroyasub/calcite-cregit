@@ -744,7 +744,7 @@ name|FILTER
 init|=
 name|DruidFilterRule
 operator|.
-name|Config
+name|DruidFilterRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -759,7 +759,7 @@ name|PROJECT
 init|=
 name|DruidProjectRule
 operator|.
-name|Config
+name|DruidProjectRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -774,7 +774,7 @@ name|AGGREGATE
 init|=
 name|DruidAggregateRule
 operator|.
-name|Config
+name|DruidAggregateRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -789,7 +789,7 @@ name|AGGREGATE_PROJECT
 init|=
 name|DruidAggregateProjectRule
 operator|.
-name|Config
+name|DruidAggregateProjectRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -804,7 +804,7 @@ name|SORT
 init|=
 name|DruidSortRule
 operator|.
-name|Config
+name|DruidSortRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1024,7 +1024,7 @@ name|POST_AGGREGATION_PROJECT
 init|=
 name|DruidPostAggregationProjectRule
 operator|.
-name|Config
+name|DruidPostAggregationProjectRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1074,7 +1074,7 @@ name|DRUID_HAVING_FILTER_RULE
 init|=
 name|DruidHavingFilterRule
 operator|.
-name|Config
+name|DruidHavingFilterRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1851,15 +1851,6 @@ name|nonPushableNodes
 argument_list|)
 return|;
 block|}
-comment|/** Deprecated, use {@link DruidFilterRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidFilterRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2121,15 +2112,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Deprecated, use {@link DruidHavingFilterRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidHavingFilterRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2811,15 +2793,6 @@ name|belowNodes
 argument_list|)
 return|;
 block|}
-comment|/** Deprecated, use {@link DruidProjectRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidProjectRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -3137,15 +3110,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Deprecated, use {@link DruidPostAggregationProjectRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidPostAggregationProjectRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -3457,15 +3421,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DruidAggregateRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidAggregateRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -4731,15 +4686,6 @@ return|return
 name|refs
 return|;
 block|}
-comment|/** Deprecated, use {@link DruidAggregateProjectRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidAggregateProjectRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -4999,15 +4945,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link DruidSortRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|DruidSortRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

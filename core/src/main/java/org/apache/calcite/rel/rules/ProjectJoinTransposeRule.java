@@ -227,20 +227,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|immutables
 operator|.
 name|value
@@ -776,15 +762,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Defines when an expression should not be pushed. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 name|PushProjector
 operator|.
 name|ExprCondition

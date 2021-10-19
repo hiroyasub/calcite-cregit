@@ -1035,20 +1035,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|ImmutableBitSet
 import|;
 end_import
@@ -10164,15 +10150,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link RemoveSingleAggregateRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|RemoveSingleAggregateRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -11061,15 +11038,6 @@ name|correlate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link RemoveCorrelationForScalarProjectRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|RemoveCorrelationForScalarProjectRuleConfig
-block|{ }
 comment|/** Rule configuration.      *      *<p>Extends {@link RelDecorrelator.Config} because rule needs a      * decorrelator instance. */
 annotation|@
 name|Value
@@ -12574,15 +12542,6 @@ name|correlate
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link RemoveCorrelationForScalarAggregateRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|RemoveCorrelationForScalarAggregateRuleConfig
-block|{ }
 comment|/** Rule configuration.      *      *<p>Extends {@link RelDecorrelator.Config} because rule needs a      * decorrelator instance. */
 annotation|@
 name|Value
@@ -13361,15 +13320,6 @@ name|newOutput
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link AdjustProjectForCountAggregateRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|AdjustProjectForCountAggregateRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -13404,15 +13354,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Returns the flavor of the rule (true for 4 operands, false for 3        * operands). */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 name|boolean
 name|flavor
 parameter_list|()
@@ -14874,15 +14815,6 @@ operator|.
 name|Config
 block|{
 comment|/** Returns the RelDecorrelator that will be context for the created      * rule instance. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 name|RelDecorrelator
 name|decorrelator
 parameter_list|()

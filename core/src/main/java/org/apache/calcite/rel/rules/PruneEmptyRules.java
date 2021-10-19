@@ -1385,15 +1385,6 @@ name|emptyValues
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link RemoveEmptySingleRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|RemoveEmptySingleRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

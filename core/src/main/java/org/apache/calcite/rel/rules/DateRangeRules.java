@@ -651,7 +651,7 @@ name|FILTER_INSTANCE
 init|=
 name|FilterDateRangeRule
 operator|.
-name|Config
+name|FilterDateRangeRuleConfig
 operator|.
 name|DEFAULT
 operator|.
@@ -1379,15 +1379,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link FilterDateRangeRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|FilterDateRangeRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

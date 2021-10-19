@@ -711,20 +711,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|ImmutableBitSet
 import|;
 end_import
@@ -1545,15 +1531,6 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Deprecated, use {@link FilterReduceExpressionsRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|FilterReduceExpressionsRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2302,15 +2279,6 @@ name|join
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link JoinReduceExpressionsRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|JoinReduceExpressionsRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2922,15 +2890,6 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** Deprecated, use {@link CalcReduceExpressionsRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|CalcReduceExpressionsRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -3510,15 +3469,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Deprecated, use {@link WindowReduceExpressionsRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|WindowReduceExpressionsRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -5891,22 +5841,6 @@ name|toRule
 parameter_list|()
 function_decl|;
 comment|/** Whether to add a CAST when a nullable expression      * reduces to a NOT NULL literal. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
 annotation|@
 name|Value
 operator|.

@@ -239,20 +239,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -1439,15 +1425,6 @@ name|join
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link JoinConditionPushRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|JoinConditionPushRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1750,15 +1727,6 @@ name|join
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link FilterIntoJoinRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|FilterIntoJoinRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -1880,22 +1848,6 @@ name|Config
 block|{
 comment|/** Whether to try to strengthen join-type, default false. */
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
-name|ImmutableBeans
-operator|.
-name|BooleanDefault
-argument_list|(
-literal|false
-argument_list|)
-annotation|@
 name|Value
 operator|.
 name|Default
@@ -1917,15 +1869,6 @@ name|smart
 parameter_list|)
 function_decl|;
 comment|/** Predicate that returns whether a filter is valid in the ON clause of a      * join for this particular kind of join. If not, Calcite will push it back to      * above the join. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Value
 operator|.

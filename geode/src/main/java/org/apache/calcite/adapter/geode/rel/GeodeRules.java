@@ -1312,15 +1312,6 @@ name|geodeSort
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Deprecated, use {@link GeodeSortLimitRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|GeodeSortLimitRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value
@@ -2153,15 +2144,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Deprecated, use {@link GeodeFilterRuleConfig} instead. **/
-annotation|@
-name|Deprecated
-specifier|public
-interface|interface
-name|Config
-extends|extends
-name|GeodeFilterRuleConfig
-block|{ }
 comment|/** Rule configuration. */
 annotation|@
 name|Value

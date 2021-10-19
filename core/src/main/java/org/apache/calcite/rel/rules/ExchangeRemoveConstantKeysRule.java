@@ -241,20 +241,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|immutables
 operator|.
 name|value
@@ -1126,15 +1112,6 @@ argument_list|)
 return|;
 block|}
 comment|/** Forwards a call to {@link #onMatch(RelOptRuleCall)}. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Value
 operator|.

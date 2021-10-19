@@ -61,20 +61,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBeans
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -112,18 +98,6 @@ operator|.
 name|value
 operator|.
 name|Value
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Proxy
 import|;
 end_import
 
@@ -266,56 +240,10 @@ name|config
 expr_stmt|;
 block|}
 comment|/** Rule configuration. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
 specifier|public
 interface|interface
 name|Config
 block|{
-comment|/**      * Empty configuration.      *      * This is based on ImmutableBeans and dynamic proxies and has been replaced      * by the use of the Immutables annotation processor to pre-generate values.      *      * This field will be removed in a subsequent release.      * */
-annotation|@
-name|Deprecated
-name|RelRule
-operator|.
-name|Config
-name|EMPTY
-init|=
-name|ImmutableBeans
-operator|.
-name|create
-argument_list|(
-name|Config
-operator|.
-name|class
-argument_list|)
-operator|.
-name|withRelBuilderFactory
-argument_list|(
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|)
-operator|.
-name|withOperandSupplier
-argument_list|(
-name|b
-lambda|->
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Rules must have at least one "
-operator|+
-literal|"operand. Call Config.withOperandSupplier to specify them."
-argument_list|)
-throw|;
-block|}
-argument_list|)
-decl_stmt|;
 comment|/** Creates a rule that uses this configuration. Sub-class must override. */
 name|RelOptRule
 name|toRule
@@ -339,30 +267,6 @@ name|class_
 parameter_list|)
 block|{
 if|if
-condition|(
-name|Proxy
-operator|.
-name|isProxyClass
-argument_list|(
-name|this
-operator|.
-name|getClass
-argument_list|()
-argument_list|)
-condition|)
-block|{
-return|return
-name|ImmutableBeans
-operator|.
-name|copy
-argument_list|(
-name|class_
-argument_list|,
-name|this
-argument_list|)
-return|;
-block|}
-if|else if
 condition|(
 name|class_
 operator|.
@@ -413,15 +317,6 @@ block|}
 block|}
 comment|/** The factory that is used to create a      * {@link org.apache.calcite.tools.RelBuilder} during rule invocations. */
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|Value
 operator|.
 name|Default
@@ -447,15 +342,6 @@ function_decl|;
 comment|/** Description of the rule instance. */
 comment|// CALCITE-4831: remove the second nullable annotation once immutables/#1261 is fixed
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
-annotation|@
 name|javax
 operator|.
 name|annotation
@@ -478,15 +364,6 @@ name|description
 parameter_list|)
 function_decl|;
 comment|/** Creates the operands for the rule instance. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
-name|ImmutableBeans
-operator|.
-name|Property
 annotation|@
 name|Value
 operator|.
