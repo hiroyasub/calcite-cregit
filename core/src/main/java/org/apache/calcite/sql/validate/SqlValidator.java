@@ -1494,6 +1494,28 @@ name|boolean
 name|lenient
 parameter_list|)
 function_decl|;
+comment|/** Returns whether the validator allows measures to be used without the      * AGGREGATE function. Default is true. */
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
+name|boolean
+name|nakedMeasures
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
+comment|/** Sets whether the validator allows measures to be used without the      * AGGREGATE function. */
+name|Config
+name|withNakedMeasures
+parameter_list|(
+name|boolean
+name|nakedMeasures
+parameter_list|)
+function_decl|;
 comment|/** Returns whether the validator supports implicit type coercion. */
 annotation|@
 name|Value

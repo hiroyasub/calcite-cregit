@@ -990,27 +990,33 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
-comment|/** Returns whether two lists of operands are equal. */
+comment|/** Returns whether two lists of operands are equal, comparing using    * {@link SqlNode#equalsDeep(SqlNode, Litmus)}. */
 specifier|public
 specifier|static
 name|boolean
 name|equalDeep
-parameter_list|(
+argument_list|(
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|SqlNode
-argument_list|>
+operator|>
 name|operands0
-parameter_list|,
+argument_list|,
 name|List
-argument_list|<
+operator|<
+condition|?
+then|extends @
+name|Nullable
 name|SqlNode
-argument_list|>
+operator|>
 name|operands1
-parameter_list|,
+argument_list|,
 name|Litmus
 name|litmus
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(

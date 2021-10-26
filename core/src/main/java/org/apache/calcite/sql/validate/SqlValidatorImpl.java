@@ -22860,6 +22860,44 @@ argument_list|()
 throw|;
 block|}
 block|}
+comment|// Unless 'naked measures' are enabled, a non-aggregating query cannot
+comment|// reference measure columns. (An aggregating query can use them as
+comment|// argument to the AGGREGATE function.)
+if|if
+condition|(
+operator|!
+name|config
+operator|.
+name|nakedMeasures
+argument_list|()
+operator|&&
+operator|!
+operator|(
+name|scope
+operator|instanceof
+name|AggregatingScope
+operator|)
+operator|&&
+name|scope
+operator|.
+name|isMeasureRef
+argument_list|(
+name|expr
+argument_list|)
+condition|)
+block|{
+throw|throw
+name|newValidationError
+argument_list|(
+name|expr
+argument_list|,
+name|RESOURCE
+operator|.
+name|measureMustBeInAggregateQuery
+argument_list|()
+argument_list|)
+throw|;
+block|}
 comment|// Call on the expression to validate itself.
 name|expr
 operator|.

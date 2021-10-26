@@ -6053,6 +6053,55 @@ block|}
 end_function
 
 begin_comment
+comment|/** Returns whether a select item is a measure. */
+end_comment
+
+begin_function
+specifier|public
+specifier|static
+name|boolean
+name|isMeasure
+parameter_list|(
+name|SqlNode
+name|selectItem
+parameter_list|)
+block|{
+return|return
+name|getMeasure
+argument_list|(
+name|selectItem
+argument_list|)
+operator|!=
+literal|null
+return|;
+block|}
+end_function
+
+begin_comment
+comment|/** Returns the measure expression if a select item is a measure, null    * otherwise.    *    *<p>For a measure, {@code selectItem} will have the form    * {@code AS(MEASURE(exp), alias)} and this method returns {@code exp}. */
+end_comment
+
+begin_function
+specifier|public
+specifier|static
+annotation|@
+name|Nullable
+name|SqlNode
+name|getMeasure
+parameter_list|(
+name|SqlNode
+name|selectItem
+parameter_list|)
+block|{
+comment|// The implementation of this method will be extended when we add the
+comment|// 'AS MEASURE' construct in [CALCITE-4496].
+return|return
+literal|null
+return|;
+block|}
+end_function
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
 end_comment
 
@@ -6491,6 +6540,18 @@ name|List
 argument_list|<
 name|SqlNode
 argument_list|>
+name|measureExprs
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|SqlNode
+argument_list|>
 name|groupExprs
 init|=
 operator|new
@@ -6537,6 +6598,8 @@ operator|.
 name|Resolved
 argument_list|(
 name|extraExprs
+argument_list|,
+name|measureExprs
 argument_list|,
 name|groupExprs
 argument_list|,

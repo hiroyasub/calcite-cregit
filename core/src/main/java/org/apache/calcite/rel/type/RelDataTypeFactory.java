@@ -299,6 +299,14 @@ name|RelDataType
 name|valueType
 parameter_list|)
 function_decl|;
+comment|/**    * Creates a measure type.    *    * @param valueType type of the values of the measure    * @return canonical measure type descriptor    */
+name|RelDataType
+name|createMeasureType
+parameter_list|(
+name|RelDataType
+name|valueType
+parameter_list|)
+function_decl|;
 comment|/**    * Creates a multiset type. Multisets are unordered collections of elements.    *    * @param elementType    type of the elements of the multiset    * @param maxCardinality maximum collection size, or -1 for unlimited    * @return canonical multiset type descriptor    */
 name|RelDataType
 name|createMultisetType

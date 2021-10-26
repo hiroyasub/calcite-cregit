@@ -212,6 +212,24 @@ name|SqlIntervalQualifier
 name|intervalQualifier
 parameter_list|)
 function_decl|;
+comment|/** Asks a {@code SqlNode} to accept this visitor. */
+specifier|default
+name|R
+name|visitNode
+parameter_list|(
+name|SqlNode
+name|n
+parameter_list|)
+block|{
+return|return
+name|n
+operator|.
+name|accept
+argument_list|(
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 end_interface
 

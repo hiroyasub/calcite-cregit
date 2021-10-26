@@ -780,6 +780,9 @@ block|,
 comment|/** The {@code SINGLE_VALUE} aggregate function. */
 name|SINGLE_VALUE
 block|,
+comment|/** The {@code AGGREGATE} aggregate function. */
+name|AGGREGATE_FN
+block|,
 comment|/** The {@code BIT_AND} aggregate function. */
 name|BIT_AND
 block|,

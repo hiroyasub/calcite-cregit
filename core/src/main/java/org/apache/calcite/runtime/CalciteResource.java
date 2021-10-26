@@ -1578,6 +1578,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Argument to function ''{0}'' must be a measure"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|argumentMustBeMeasure
+parameter_list|(
+name|String
+name|functionName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Window ''{0}'' not found"
 argument_list|)
 name|ExInst
@@ -1720,6 +1735,30 @@ argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|nestedAggIllegal
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Measure expressions can only occur within AGGREGATE function"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|measureIllegal
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Measure expressions can only occur within a GROUP BY query"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|measureMustBeInAggregateQuery
 parameter_list|()
 function_decl|;
 annotation|@

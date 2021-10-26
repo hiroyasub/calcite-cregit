@@ -21869,6 +21869,374 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testMeasureRef
+parameter_list|()
+block|{
+comment|// A measure can be used in the SELECT clause of a GROUP BY query even
+comment|// though it is not a GROUP BY key.
+name|SqlValidatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTableFor
+argument_list|(
+name|SqlLibrary
+operator|.
+name|CALCITE
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|SqlValidatorFixture
+name|f2
+init|=
+name|f
+operator|.
+name|withValidatorConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withNakedMeasures
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|measureIllegal
+init|=
+literal|"Measure expressions can only occur within AGGREGATE function"
+decl_stmt|;
+specifier|final
+name|String
+name|measureIllegal2
+init|=
+literal|"Measure expressions can only occur within a GROUP BY query"
+decl_stmt|;
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select deptno, ^count_plus_100^\n"
+operator|+
+literal|"from empm\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// Same SQL is invalid if naked measures are not enabled
+name|f2
+operator|.
+name|withSql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|measureIllegal
+argument_list|)
+expr_stmt|;
+comment|// Similarly, with alias
+specifier|final
+name|String
+name|sql1b
+init|=
+literal|"select deptno, ^count_plus_100^ as x\n"
+operator|+
+literal|"from empm\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|sql1b
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|f2
+operator|.
+name|withSql
+argument_list|(
+name|sql1b
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|measureIllegal
+argument_list|)
+expr_stmt|;
+comment|// Similarly, in an expression
+specifier|final
+name|String
+name|sql1c
+init|=
+literal|"select deptno, deptno + ^count_plus_100^ * 2 as x\n"
+operator|+
+literal|"from empm\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|sql1c
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|f2
+operator|.
+name|withSql
+argument_list|(
+name|sql1c
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|measureIllegal
+argument_list|)
+expr_stmt|;
+comment|// Similarly, for a query that is an aggregate query because of another
+comment|// aggregate function.
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select count(*), ^count_plus_100^\n"
+operator|+
+literal|"from empm"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|f2
+operator|.
+name|withSql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|measureIllegal
+argument_list|)
+expr_stmt|;
+comment|// A measure in a non-aggregate query.
+comment|// Using a measure should not make it an aggregate query.
+comment|// The type of the measure should be the result type of the COUNT aggregate
+comment|// function (BIGINT), not type of the un-aggregated argument type (VARCHAR).
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select deptno, ^count_plus_100^, ename\n"
+operator|+
+literal|"from empm"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"MEASURE<INTEGER NOT NULL> NOT NULL COUNT_PLUS_100, "
+operator|+
+literal|"VARCHAR(20) NOT NULL ENAME) NOT NULL"
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|f2
+operator|.
+name|withSql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|measureIllegal2
+argument_list|)
+expr_stmt|;
+comment|// as above, wrapping the measure in AGGREGATE
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select deptno, aggregate(count_plus_100) as x, ename\n"
+operator|+
+literal|"from empm\n"
+operator|+
+literal|"group by deptno, ename"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"MEASURE<INTEGER NOT NULL> NOT NULL X, "
+operator|+
+literal|"VARCHAR(20) NOT NULL ENAME) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// you can apply the AGGREGATE function only to measures
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select deptno, aggregate(count_plus_100), ^aggregate(ename)^\n"
+operator|+
+literal|"from empm\n"
+operator|+
+literal|"group by deptno, ename"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to function 'AGGREGATE' must be a measure"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select deptno, ^aggregate(count_plus_100 + 1)^\n"
+operator|+
+literal|"from empm\n"
+operator|+
+literal|"group by deptno, ename"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to function 'AGGREGATE' must be a measure"
+argument_list|)
+expr_stmt|;
+comment|// A query with AGGREGATE is an aggregate query, even without GROUP BY,
+comment|// and even if it is inside an expression.
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select aggregate(count_plus_100) + 1\n"
+operator|+
+literal|"from empm"
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Including a measure in a query does not make it an aggregate query
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select count_plus_100\n"
+operator|+
+literal|"from empm"
+argument_list|)
+operator|.
+name|isAggregate
+argument_list|(
+name|is
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testAmbiguousColumnInIn
 parameter_list|()
 block|{

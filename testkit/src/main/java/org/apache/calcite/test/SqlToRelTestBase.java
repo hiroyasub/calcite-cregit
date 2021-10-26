@@ -227,11 +227,6 @@ return|return
 name|fixture
 argument_list|()
 operator|.
-name|expression
-argument_list|(
-literal|false
-argument_list|)
-operator|.
 name|withSql
 argument_list|(
 name|sql

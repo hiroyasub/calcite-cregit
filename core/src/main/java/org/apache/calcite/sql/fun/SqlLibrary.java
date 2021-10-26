@@ -162,6 +162,14 @@ argument_list|,
 literal|"bigquery"
 argument_list|)
 block|,
+comment|/** Calcite-specific extensions. */
+name|CALCITE
+argument_list|(
+literal|"c"
+argument_list|,
+literal|"calcite"
+argument_list|)
+block|,
 comment|/** A collection of operators that are in Apache Hive but not in standard    * SQL. */
 name|HIVE
 argument_list|(
