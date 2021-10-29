@@ -120,6 +120,12 @@ operator|==
 name|SqlTypeName
 operator|.
 name|NULL
+operator|||
+name|to
+operator|==
+name|SqlTypeName
+operator|.
+name|UNKNOWN
 condition|)
 block|{
 return|return
@@ -133,6 +139,12 @@ operator|==
 name|SqlTypeName
 operator|.
 name|NULL
+operator|||
+name|from
+operator|==
+name|SqlTypeName
+operator|.
+name|UNKNOWN
 condition|)
 block|{
 return|return

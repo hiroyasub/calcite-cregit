@@ -528,6 +528,14 @@ name|SqlTypeName
 operator|.
 name|NULL
 return|;
+case|case
+name|UNKNOWN
+case|:
+return|return
+name|SqlTypeName
+operator|.
+name|UNKNOWN
+return|;
 default|default:
 throw|throw
 name|Util

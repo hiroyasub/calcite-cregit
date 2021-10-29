@@ -5120,9 +5120,26 @@ name|fieldOperand
 argument_list|)
 return|;
 block|}
+comment|// Ideally the UNKNOWN type would never exist in a fully-formed, validated rel node, but
+comment|// it can be useful in certain situations where determining the type of an expression is
+comment|// infeasible, such as inserting arbitrary user-provided SQL snippets into an otherwise
+comment|// manually-constructed (as opposed to parsed) rel node.
+comment|// In such a context, assume that casting anything to UNKNOWN is a no-op.
 if|if
 condition|(
 name|ignoreCast
+operator|||
+name|call
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|UNKNOWN
 condition|)
 block|{
 assert|assert
