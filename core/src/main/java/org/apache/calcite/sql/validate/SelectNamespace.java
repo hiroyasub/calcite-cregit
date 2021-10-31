@@ -78,22 +78,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|org
-operator|.
-name|checkerframework
-operator|.
-name|checker
-operator|.
-name|nullness
-operator|.
-name|qual
-operator|.
-name|Nullable
-import|;
-end_import
-
-begin_import
 import|import static
 name|java
 operator|.
@@ -152,13 +136,10 @@ name|select
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement SqlValidatorNamespace, overriding return type
 annotation|@
 name|Override
 specifier|public
-annotation|@
-name|Nullable
-name|SqlNode
+name|SqlSelect
 name|getNode
 parameter_list|()
 block|{
