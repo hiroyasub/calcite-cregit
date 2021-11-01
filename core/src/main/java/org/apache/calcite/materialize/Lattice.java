@@ -1432,12 +1432,9 @@ name|aliases
 argument_list|,
 name|SqlValidatorUtil
 operator|.
-name|getAlias
+name|alias
 argument_list|(
 name|from
-argument_list|,
-operator|-
-literal|1
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1455,12 +1452,9 @@ name|current
 operator|=
 name|SqlValidatorUtil
 operator|.
-name|getAlias
+name|alias
 argument_list|(
 name|from
-argument_list|,
-operator|-
-literal|1
 argument_list|)
 expr_stmt|;
 block|}
