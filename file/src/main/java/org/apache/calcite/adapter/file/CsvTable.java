@@ -160,7 +160,7 @@ decl_stmt|;
 specifier|private
 name|List
 argument_list|<
-name|CsvFieldType
+name|RelDataType
 argument_list|>
 name|fieldTypes
 decl_stmt|;
@@ -248,7 +248,7 @@ comment|/** Returns the field types of this CSV table. */
 specifier|public
 name|List
 argument_list|<
-name|CsvFieldType
+name|RelDataType
 argument_list|>
 name|getFieldTypes
 parameter_list|(

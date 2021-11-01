@@ -90,7 +90,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Type of a field in a Web (HTML) table.  *  *<p>Usually, and unless specified explicitly in the header row, a field is  * of type {@link #STRING}. But specifying the field type in the fields  * makes it easier to write SQL.  *  *<p>Trivially modified from CsvFieldType.  */
+comment|/**  * Type of a field in a Web (HTML) table.  *  *<p>Usually, and unless specified explicitly in the header row, a field is  * of type {@link #STRING}. But specifying the field type in the fields  * makes it easier to write SQL.  */
 end_comment
 
 begin_enum
