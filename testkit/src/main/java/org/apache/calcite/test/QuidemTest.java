@@ -1701,6 +1701,15 @@ argument_list|,
 literal|"oracle"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
 name|connect
 argument_list|()
 return|;
