@@ -1443,20 +1443,29 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|buf
-operator|.
-name|append
-argument_list|(
+if|if
+condition|(
 name|buf
 operator|.
 name|length
 argument_list|()
-operator|==
+operator|>
 name|i
-condition|?
+condition|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
+name|buf
+operator|.
+name|append
+argument_list|(
 literal|"order by "
-else|:
-literal|" order by "
 argument_list|)
 expr_stmt|;
 name|buf
@@ -1540,15 +1549,33 @@ comment|// "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW"
 block|}
 else|else
 block|{
+if|if
+condition|(
+name|buf
+operator|.
+name|length
+argument_list|()
+operator|>
+name|i
+condition|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
 name|buf
 operator|.
 name|append
 argument_list|(
 name|isRows
 condition|?
-literal|" rows "
+literal|"rows "
 else|:
-literal|" range "
+literal|"range "
 argument_list|)
 expr_stmt|;
 name|buf
@@ -1589,20 +1616,29 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|buf
-operator|.
-name|append
-argument_list|(
+if|if
+condition|(
 name|buf
 operator|.
 name|length
 argument_list|()
-operator|==
+operator|>
 name|i
-condition|?
+condition|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
+name|buf
+operator|.
+name|append
+argument_list|(
 literal|"aggs "
-else|:
-literal|" aggs "
 argument_list|)
 expr_stmt|;
 name|buf
