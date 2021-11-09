@@ -12720,10 +12720,9 @@ specifier|final
 name|String
 name|alias
 init|=
-name|validator
-argument_list|()
+name|SqlValidatorUtil
 operator|.
-name|deriveAlias
+name|alias
 argument_list|(
 name|node
 argument_list|,

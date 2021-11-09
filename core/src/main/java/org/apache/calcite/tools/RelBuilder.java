@@ -5438,8 +5438,6 @@ parameter_list|(
 name|RexNode
 name|expr
 parameter_list|,
-annotation|@
-name|Nullable
 name|String
 name|alias
 parameter_list|)
@@ -8503,6 +8501,8 @@ name|projectPlus
 parameter_list|(
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|RexNode
 argument_list|>
 name|nodes
