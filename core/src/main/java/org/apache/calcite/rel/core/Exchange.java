@@ -307,7 +307,7 @@ literal|"traits="
 operator|+
 name|traitSet
 operator|+
-literal|", distribution"
+literal|", distribution="
 operator|+
 name|distribution
 assert|;
@@ -338,6 +338,14 @@ name|input
 operator|.
 name|getTraitSet
 argument_list|()
+operator|.
+name|plus
+argument_list|(
+name|input
+operator|.
+name|getDistribution
+argument_list|()
+argument_list|)
 argument_list|,
 name|input
 operator|.
