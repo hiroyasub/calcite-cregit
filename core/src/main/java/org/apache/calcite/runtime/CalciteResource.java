@@ -4694,6 +4694,57 @@ name|String
 name|syntax
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Only tables with set semantics may be partitioned. Invalid PARTITION BY clause in the {0,number,#}-th operand of table function ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|invalidPartitionKeys
+parameter_list|(
+name|int
+name|idx
+parameter_list|,
+name|String
+name|funcName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Only tables with set semantics may be ordered. Invalid ORDER BY clause in the {0,number,#}-th operand of table function ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|invalidOrderBy
+parameter_list|(
+name|int
+name|idx
+parameter_list|,
+name|String
+name|funcName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"A table function at most has one input table with row semantics. Table function ''{0}'' has multiple input tables with row semantics"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|multipleRowSemanticsTables
+parameter_list|(
+name|String
+name|funcName
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

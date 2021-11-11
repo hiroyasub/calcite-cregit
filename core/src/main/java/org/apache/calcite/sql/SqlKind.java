@@ -119,6 +119,9 @@ block|,
 comment|/**    * Function that is not a special function.    *    * @see #FUNCTION    */
 name|OTHER_FUNCTION
 block|,
+comment|/**    * Input tables have either row semantics or set semantics.    *<ul>    *<li>Row semantics means that the the result of the table function is    * decided on a row-by-row basis.    *<li>Set semantics means that the outcome of the function depends on how    * the data is partitioned.    * When the table function is called from a query, the table parameter can    * optionally be extended with either a PARTITION BY clause or    * an ORDER BY clause or both.    *</ul>    */
+name|SET_SEMANTICS_TABLE
+block|,
 comment|/** POSITION function. */
 name|POSITION
 block|,

@@ -18634,6 +18634,335 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testTableFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(score(table orders))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`SCORE`((TABLE `ORDERS`)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithPartitionKey
+parameter_list|()
+block|{
+comment|// test one partition key for input table
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(table orders partition by productid, 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((TABLE `ORDERS`) PARTITION BY `PRODUCTID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultiplePartitionKeys
+parameter_list|()
+block|{
+comment|// test multiple partition keys for input table
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(table orders partition by (orderId, productid), 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((TABLE `ORDERS`) PARTITION BY `ORDERID`, `PRODUCTID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithOrderKey
+parameter_list|()
+block|{
+comment|// test one order key for input table
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(table orders order by orderId, 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((TABLE `ORDERS`) ORDER BY `ORDERID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultipleOrderKeys
+parameter_list|()
+block|{
+comment|// test multiple order keys for input table
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(table orders order by (orderId, productid), 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((TABLE `ORDERS`) ORDER BY `ORDERID`, `PRODUCTID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithComplexOrderBy
+parameter_list|()
+block|{
+comment|// test complex order-by clause for input table
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(table orders order by (orderId desc, productid asc), 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((TABLE `ORDERS`) ORDER BY `ORDERID` DESC, `PRODUCTID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithPartitionKeyAndOrderKey
+parameter_list|()
+block|{
+comment|// test partition by clause and order by clause for input table
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(table orders partition by productid order by orderId, 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((TABLE `ORDERS`) PARTITION BY `PRODUCTID` ORDER BY `ORDERID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithSubQuery
+parameter_list|()
+block|{
+comment|// test partition by clause and order by clause for subquery
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(topn(select * from Orders partition by productid "
+operator|+
+literal|"order by orderId, 3))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`TOPN`(((SELECT *\n"
+operator|+
+literal|"FROM `ORDERS`) PARTITION BY `PRODUCTID` ORDER BY `ORDERID`), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultipleInputTables
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table(similarlity(table emp, table emp_b))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`SIMILARLITY`((TABLE `EMP`), (TABLE `EMP_B`)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultipleInputTablesAndSubClauses
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from table("
+operator|+
+literal|"similarlity("
+operator|+
+literal|"  table emp partition by deptno order by empno, "
+operator|+
+literal|"  table emp_b partition by deptno order by empno))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`SIMILARLITY`(((TABLE `EMP`) PARTITION BY `DEPTNO` ORDER BY `EMPNO`), "
+operator|+
+literal|"((TABLE `EMP_B`) PARTITION BY `DEPTNO` ORDER BY `EMPNO`)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testIllegalCursors
 parameter_list|()
 block|{

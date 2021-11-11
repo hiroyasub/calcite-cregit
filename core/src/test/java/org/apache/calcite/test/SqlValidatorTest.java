@@ -7727,6 +7727,157 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testInvalidTableFunction
+parameter_list|()
+block|{
+comment|// A table function at most have one input table with row semantics
+name|sql
+argument_list|(
+literal|"select * from table(^invalid(table orders, table emp)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"A table function at most has one input table with row semantics."
+operator|+
+literal|" Table function 'INVALID' has multiple input tables with row semantics"
+argument_list|)
+expr_stmt|;
+comment|// Only tables with set semantics may be partitioned
+name|sql
+argument_list|(
+literal|"select * from table(^score(table orders partition by productid)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Only tables with set semantics may be partitioned."
+operator|+
+literal|" Invalid PARTITION BY clause in the 0-th operand of table function 'SCORE'"
+argument_list|)
+expr_stmt|;
+comment|// Only tables with set semantics may be ordered
+name|sql
+argument_list|(
+literal|"select * from table(^score(table orders order by orderId)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Only tables with set semantics may be ordered."
+operator|+
+literal|" Invalid ORDER BY clause in the 0-th operand of table function 'SCORE'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithTableParam
+parameter_list|()
+block|{
+comment|// test input table with row semantic
+name|sql
+argument_list|(
+literal|"select * from table(score(table orders))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test no partition by clause and order by clause for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders, 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test one partition key for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders partition by productid, 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test multiple partition keys for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders partition by (orderId, productid), 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test one order key for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders order by orderId, 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test multiple order keys for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders order by (orderId, productid), 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test complex order-by clause for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders order by (orderId desc, productid asc), 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test partition by clause and order by clause for input table with set semantic
+name|sql
+argument_list|(
+literal|"select * from table(topn(table orders partition by productid order by orderId, 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test partition by clause and order by clause for subquery
+name|sql
+argument_list|(
+literal|"select * from table(topn(select * from Orders partition by productid\n "
+operator|+
+literal|"order by orderId, 3))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// test multiple input tables
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"similarlity(\n"
+operator|+
+literal|"  table emp partition by deptno order by empno,\n"
+operator|+
+literal|"  table emp_b partition by deptno order by empno))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUnknownFunctionHandling
 parameter_list|()
 block|{

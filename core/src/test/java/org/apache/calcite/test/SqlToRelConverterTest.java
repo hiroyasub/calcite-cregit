@@ -8189,6 +8189,308 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testTableFunctionWithPartitionKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders partition by productid, 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultiplePartitionKeys
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders partition by (orderId, productid), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithOrderKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders order by orderId, 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultipleOrderKeys
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders order by (orderId, productid), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithComplexOrderBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders order by (orderId desc, productid desc nulls last), 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithOrderByWithNullLast
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders order by orderId desc nulls last, 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithPartitionKeyAndOrderKey
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn(table orders partition by productid order by orderId, 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithParamNames
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"topn(\n"
+operator|+
+literal|"  DATA => table orders partition by productid order by orderId,\n"
+operator|+
+literal|"  COL => 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(topn("
+operator|+
+literal|"select * from orders partition by productid order by orderId desc nulls last, 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithSubQueryWithParamNames
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"topn(\n"
+operator|+
+literal|"  DATA => select * from orders partition by productid order by orderId nulls first,\n"
+operator|+
+literal|"  COL => 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultipleInputTables
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"similarlity(\n"
+operator|+
+literal|"  table emp partition by deptno order by empno nulls first,\n"
+operator|+
+literal|"  table emp_b partition by deptno order by empno nulls first))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTableFunctionWithMultipleInputTablesWithParamNames
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\n"
+operator|+
+literal|"similarlity(\n"
+operator|+
+literal|"  LTABLE => table emp partition by deptno order by empno nulls first,\n"
+operator|+
+literal|"  RTABLE => table emp_b partition by deptno order by empno nulls first))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testNotNotIn
 parameter_list|()
 block|{

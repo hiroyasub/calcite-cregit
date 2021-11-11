@@ -463,6 +463,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlSetSemanticsTableOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlSpecialOperator
 import|;
 end_import
@@ -8164,6 +8178,17 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+decl_stmt|;
+comment|/** SetSemanticsTable represents as an input table with set semantics. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|SET_SEMANTICS_TABLE
+init|=
+operator|new
+name|SqlSetSemanticsTableOperator
+argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the standard operator table, creating it if necessary.    */
