@@ -273,6 +273,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|NonNull
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -312,8 +328,8 @@ name|MockCatalogReaderExtended
 extends|extends
 name|MockCatalogReaderSimple
 block|{
-comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data.</p>    *    * @param typeFactory   Type factory    * @param caseSensitive case sensitivity    */
-specifier|public
+comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data;    * constructor is protected to encourage you to call {@link #create}.    *    * @param typeFactory   Type factory    * @param caseSensitive case sensitivity    */
+specifier|protected
 name|MockCatalogReaderExtended
 parameter_list|(
 name|RelDataTypeFactory
@@ -331,10 +347,38 @@ name|caseSensitive
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates and initializes a MockCatalogReaderExtended. */
+specifier|public
+specifier|static
+annotation|@
+name|NonNull
+name|MockCatalogReaderExtended
+name|create
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|boolean
+name|caseSensitive
+parameter_list|)
+block|{
+return|return
+operator|new
+name|MockCatalogReaderExtended
+argument_list|(
+name|typeFactory
+argument_list|,
+name|caseSensitive
+argument_list|)
+operator|.
+name|init
+argument_list|()
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public
-name|MockCatalogReader
+name|MockCatalogReaderExtended
 name|init
 parameter_list|()
 block|{

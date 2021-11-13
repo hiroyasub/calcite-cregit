@@ -58,19 +58,7 @@ specifier|public
 interface|interface
 name|RelRunner
 block|{
-comment|/** Prepares a statement based on a relational expression. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.28
-name|PreparedStatement
-name|prepare
-parameter_list|(
-name|RelNode
-name|rel
-parameter_list|)
-function_decl|;
 comment|/** Prepares a statement based on a relational expression.    *    * @param rel Relational expression    * @throws SQLException on error */
-specifier|default
 name|PreparedStatement
 name|prepareStatement
 parameter_list|(
@@ -79,14 +67,7 @@ name|rel
 parameter_list|)
 throws|throws
 name|SQLException
-block|{
-return|return
-name|prepare
-argument_list|(
-name|rel
-argument_list|)
-return|;
-block|}
+function_decl|;
 block|}
 end_interface
 

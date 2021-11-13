@@ -73,6 +73,20 @@ name|calcite
 operator|.
 name|config
 operator|.
+name|CharLiteralStyle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|config
+operator|.
 name|NullCollation
 import|;
 end_import
@@ -501,16 +515,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -540,6 +544,18 @@ operator|.
 name|DateTimeStringUtils
 operator|.
 name|getDateFormatter
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1115,8 +1131,6 @@ name|this
 operator|.
 name|nullCollation
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1129,8 +1143,6 @@ name|this
 operator|.
 name|dataTypeSystem
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1143,8 +1155,6 @@ name|this
 operator|.
 name|databaseProduct
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1157,8 +1167,6 @@ name|this
 operator|.
 name|literalQuoteString
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1171,8 +1179,6 @@ name|this
 operator|.
 name|literalEndQuoteString
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1185,8 +1191,6 @@ name|this
 operator|.
 name|literalEscapedQuote
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1294,8 +1298,6 @@ name|this
 operator|.
 name|unquotedCasing
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -1308,8 +1310,6 @@ name|this
 operator|.
 name|quotedCasing
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|context
@@ -4338,6 +4338,18 @@ argument_list|(
 name|getConformance
 argument_list|()
 argument_list|)
+operator|.
+name|withCharLiteralStyles
+argument_list|(
+name|ImmutableSet
+operator|.
+name|of
+argument_list|(
+name|CharLiteralStyle
+operator|.
+name|STANDARD
+argument_list|)
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -5170,8 +5182,6 @@ name|NullCollation
 name|nullCollation
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|databaseProductName
@@ -5179,8 +5189,6 @@ argument_list|,
 literal|"databaseProductName"
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|nullCollation
@@ -5636,8 +5644,6 @@ name|this
 operator|.
 name|databaseProduct
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|databaseProduct
@@ -5697,8 +5703,6 @@ name|this
 operator|.
 name|quotedCasing
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|quotedCasing
@@ -5710,8 +5714,6 @@ name|this
 operator|.
 name|unquotedCasing
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|unquotedCasing
@@ -5729,8 +5731,6 @@ name|this
 operator|.
 name|conformance
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|conformance
@@ -5742,8 +5742,6 @@ name|this
 operator|.
 name|nullCollation
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|nullCollation
@@ -5755,8 +5753,6 @@ name|this
 operator|.
 name|dataTypeSystem
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|dataTypeSystem
@@ -5768,8 +5764,6 @@ name|this
 operator|.
 name|jethroInfo
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|jethroInfo

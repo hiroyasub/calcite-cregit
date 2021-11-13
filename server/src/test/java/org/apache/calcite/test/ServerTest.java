@@ -3608,7 +3608,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropWithFullyQualifiedNameWhenSchemaDoesntExist
 parameter_list|()

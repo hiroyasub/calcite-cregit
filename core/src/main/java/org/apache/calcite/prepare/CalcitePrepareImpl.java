@@ -1575,16 +1575,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -1618,6 +1608,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -4906,7 +4908,7 @@ name|lenientOperatorLookup
 argument_list|()
 argument_list|)
 operator|.
-name|withSqlConformance
+name|withConformance
 argument_list|(
 name|connectionConfig
 operator|.
@@ -7150,8 +7152,6 @@ argument_list|()
 argument_list|,
 name|enumerable
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|prefer
@@ -7208,8 +7208,6 @@ name|PreparedResultImpl
 argument_list|(
 name|resultType
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|parameterRowType
@@ -7217,8 +7215,6 @@ argument_list|,
 literal|"parameterRowType"
 argument_list|)
 argument_list|,
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|fieldOrigins
@@ -7791,8 +7787,6 @@ decl_stmt|;
 name|Expression
 name|targetExpression
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|memberExpression

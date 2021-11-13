@@ -2725,7 +2725,7 @@ name|SqlToRelConverter
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/** Default configuration. */
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|Config
@@ -2799,7 +2799,7 @@ init|=
 name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-specifier|protected
+specifier|public
 specifier|final
 annotation|@
 name|Nullable
@@ -3775,6 +3775,8 @@ block|{
 comment|// Trim fields that are not used by their consumer.
 if|if
 condition|(
+name|config
+operator|.
 name|isTrimUnusedFields
 argument_list|()
 condition|)
@@ -11847,7 +11849,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|allowAliasUnnestItems
@@ -20564,7 +20566,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isInsertSubsetColumnsAllowed

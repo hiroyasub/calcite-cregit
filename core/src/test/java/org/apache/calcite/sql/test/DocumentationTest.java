@@ -551,10 +551,11 @@ operator|new
 name|SqlParserTest
 argument_list|()
 operator|.
-name|getSqlParser
-argument_list|(
-literal|""
-argument_list|)
+name|fixture
+argument_list|()
+operator|.
+name|parser
+argument_list|()
 operator|.
 name|getMetadata
 argument_list|()

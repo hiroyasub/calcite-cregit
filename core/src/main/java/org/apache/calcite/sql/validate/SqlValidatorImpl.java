@@ -2420,7 +2420,7 @@ block|{
 return|return
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 return|;
 block|}
@@ -3569,7 +3569,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|allowQualifyingCommonColumn
@@ -17183,7 +17183,7 @@ name|this
 operator|.
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isLiberal
@@ -17888,7 +17888,7 @@ name|this
 operator|.
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isFromRequired
@@ -21626,7 +21626,7 @@ if|if
 condition|(
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isHavingAlias
@@ -23784,7 +23784,7 @@ name|this
 operator|.
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isInsertSubsetColumnsAllowed
@@ -25190,7 +25190,7 @@ name|this
 operator|.
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isInsertSubsetColumnsAllowed
@@ -28586,8 +28586,6 @@ specifier|final
 name|SqlValidatorNamespace
 name|inputNs
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|getNamespace
@@ -29757,7 +29755,7 @@ name|this
 operator|.
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|allowNiladicParentheses
@@ -32287,7 +32285,7 @@ name|root
 operator|&&
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isSortByOrdinal
@@ -32490,7 +32488,7 @@ argument_list|()
 operator|&&
 name|config
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isSortByAlias
@@ -32797,7 +32795,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isHavingAlias
@@ -32808,7 +32806,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isGroupByAlias
@@ -33084,7 +33082,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|isGroupByOrdinal

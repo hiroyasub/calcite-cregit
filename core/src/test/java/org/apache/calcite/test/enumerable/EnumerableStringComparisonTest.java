@@ -763,11 +763,6 @@ block|{
 name|tester
 argument_list|()
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 name|builder
@@ -865,11 +860,6 @@ block|{
 name|tester
 argument_list|()
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 name|builder
@@ -943,11 +933,6 @@ parameter_list|()
 block|{
 name|tester
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withHook
 argument_list|(
@@ -1856,11 +1841,6 @@ parameter_list|)
 block|{
 name|tester
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withRel
 argument_list|(

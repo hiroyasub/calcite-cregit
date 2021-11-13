@@ -623,11 +623,6 @@ name|HrSchema
 argument_list|()
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 comment|// Retrieve employees with the top salary in their department. Equivalent SQL:

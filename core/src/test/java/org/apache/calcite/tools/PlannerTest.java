@@ -1165,7 +1165,7 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|RelMetadataTest
+name|Matchers
 operator|.
 name|sortsAs
 import|;

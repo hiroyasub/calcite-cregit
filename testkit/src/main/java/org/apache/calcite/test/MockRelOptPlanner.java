@@ -325,7 +325,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|void
 name|setRoot
@@ -341,7 +342,8 @@ operator|=
 name|rel
 expr_stmt|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 annotation|@
 name|Nullable
@@ -372,6 +374,8 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -398,6 +402,8 @@ name|rule
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|addRule
@@ -425,6 +431,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|removeRule
@@ -437,7 +445,8 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|changeTraits
@@ -453,7 +462,8 @@ return|return
 name|rel
 return|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|findBestExp
@@ -662,6 +672,7 @@ return|;
 block|}
 comment|/**    * Matches a relational expression to a rule.    *    * @param operand  Root operand of rule    * @param rel      Relational expression    * @param bindings Bindings, populated on successful match    * @return whether relational expression matched rule    */
 specifier|private
+specifier|static
 name|boolean
 name|match
 parameter_list|(
@@ -713,6 +724,8 @@ case|:
 return|return
 literal|true
 return|;
+default|default:
+comment|// fall through
 block|}
 name|List
 argument_list|<
@@ -803,7 +816,8 @@ return|return
 literal|true
 return|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|register
@@ -821,7 +835,8 @@ return|return
 name|rel
 return|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|ensureRegistered
@@ -837,7 +852,8 @@ return|return
 name|rel
 return|;
 block|}
-comment|// implement RelOptPlanner
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isRegistered

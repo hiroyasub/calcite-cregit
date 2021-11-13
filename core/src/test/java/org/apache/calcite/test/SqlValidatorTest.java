@@ -327,54 +327,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|parser
-operator|.
-name|StringAndPos
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|test
-operator|.
-name|SqlTestFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|test
-operator|.
-name|SqlValidatorTester
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|ArraySqlType
@@ -554,6 +506,22 @@ operator|.
 name|validate
 operator|.
 name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidatorCatalogReader
 import|;
 end_import
 
@@ -807,18 +775,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|nio
-operator|.
-name|charset
-operator|.
-name|Charset
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|util
 operator|.
 name|Comparator
@@ -884,6 +840,22 @@ operator|.
 name|function
 operator|.
 name|Consumer
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isCharset
 import|;
 end_import
 
@@ -1028,7 +1000,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #getTester} returns a different implementation of  * {@link org.apache.calcite.sql.test.SqlTester}.  */
+comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing lots of unit  * tests.  *  *<p>If you want to run these same tests in a different environment, create a  * derived class whose {@link #fixture()} returns a different implementation of  * {@link SqlValidatorFixture}.  */
 end_comment
 
 begin_class
@@ -3725,11 +3697,9 @@ argument_list|(
 literal|"_UTF16'a'||_UTF16'b'||_UTF16'c'"
 argument_list|)
 operator|.
-name|charset
+name|assertCharset
 argument_list|(
-name|Charset
-operator|.
-name|forName
+name|isCharset
 argument_list|(
 literal|"UTF-16LE"
 argument_list|)
@@ -3766,13 +3736,11 @@ parameter_list|()
 block|{
 comment|// CONCAT is not in the library operator table
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withOperatorTable
 argument_list|(
@@ -3786,7 +3754,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('a', 'b')"
 argument_list|)
@@ -3796,7 +3764,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat(x'12', x'34')"
 argument_list|)
@@ -3806,7 +3774,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat(_UTF16'a', _UTF16'b', _UTF16'c')"
 argument_list|)
@@ -3816,7 +3784,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('aabbcc', 'ab', '+-')"
 argument_list|)
@@ -3828,7 +3796,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('aabbcc', CAST(NULL AS VARCHAR(20)), '+-')"
 argument_list|)
@@ -3840,7 +3808,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('aabbcc', 2)"
 argument_list|)
@@ -3864,7 +3832,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('aabbcc', 2)"
 argument_list|)
@@ -3874,7 +3842,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('abc', 'ab', 123)"
 argument_list|)
@@ -3898,7 +3866,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('abc', 'ab', 123)"
 argument_list|)
@@ -3908,7 +3876,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat(true, false)"
 argument_list|)
@@ -3932,7 +3900,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat(true, false)"
 argument_list|)
@@ -3942,7 +3910,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat(DATE '2020-04-17', TIMESTAMP '2020-04-17 14:17:51')"
 argument_list|)
@@ -3966,7 +3934,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat(DATE '2020-04-17', TIMESTAMP '2020-04-17 14:17:51')"
 argument_list|)
@@ -4136,15 +4104,21 @@ argument_list|(
 literal|"'s'"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"ISO-8859-1$en_US$primary"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
 name|COERCIBLE
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -4152,15 +4126,21 @@ argument_list|(
 literal|"'s' collate latin1$sv$3"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"ISO-8859-1$sv$3"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
 name|EXPLICIT
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4249,15 +4229,21 @@ argument_list|(
 literal|"'a' || 'b'"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"ISO-8859-1$en_US$primary"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
 name|COERCIBLE
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -4265,15 +4251,21 @@ argument_list|(
 literal|"'a' collate latin1$sv$3 || 'b'"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"ISO-8859-1$sv$3"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
 name|EXPLICIT
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -4281,15 +4273,21 @@ argument_list|(
 literal|"'a' collate latin1$sv$3 || 'b' collate latin1$sv$3"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"ISO-8859-1$sv$3"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
 name|EXPLICIT
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4557,11 +4555,17 @@ argument_list|(
 literal|"trim('mustache' FROM 'beard')"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"CHAR(5)"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|expectedCoercibility
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4859,15 +4863,21 @@ argument_list|(
 literal|"overlay('ABCdef' placing 'abc' collate latin1$sv from 1 for 3)"
 argument_list|)
 operator|.
-name|collation
+name|assertCollation
+argument_list|(
+name|is
 argument_list|(
 literal|"ISO-8859-1$sv"
+argument_list|)
 argument_list|,
+name|is
+argument_list|(
 name|SqlCollation
 operator|.
 name|Coercibility
 operator|.
 name|EXPLICIT
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -4966,26 +4976,23 @@ argument_list|(
 literal|"substring('10' FROM 1  FOR 2)"
 argument_list|)
 operator|.
-name|charset
+name|assertCharset
 argument_list|(
-name|Charset
-operator|.
-name|forName
+name|isCharset
 argument_list|(
-literal|"latin1"
+literal|"ISO-8859-1"
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// aka "latin1"
 name|sql
 argument_list|(
 literal|"substring(_UTF16'10' FROM 1  FOR 2)"
 argument_list|)
 operator|.
-name|charset
+name|assertCharset
 argument_list|(
-name|Charset
-operator|.
-name|forName
+name|isCharset
 argument_list|(
 literal|"UTF-16LE"
 argument_list|)
@@ -5147,13 +5154,11 @@ name|testIlike
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withOperatorTable
 argument_list|(
@@ -5167,7 +5172,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"'a' ilike 'b'"
 argument_list|)
@@ -5179,7 +5184,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"'a' ilike cast(null as varchar(99))"
 argument_list|)
@@ -5191,7 +5196,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"cast(null as varchar(99)) not ilike 'b'"
 argument_list|)
@@ -5203,7 +5208,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"'a' not ilike 'b' || 'c'"
 argument_list|)
@@ -5233,13 +5238,11 @@ parameter_list|()
 block|{
 comment|// RLIKE is supported for SPARK
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withOperatorTable
 argument_list|(
@@ -5253,7 +5256,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"'first_name' rlike '%Ted%'"
 argument_list|)
@@ -5265,7 +5268,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"'first_name' rlike '^M+'"
 argument_list|)
@@ -7566,7 +7569,7 @@ name|currentDateTimeExpr
 init|=
 literal|"select ^current_datetime^"
 decl_stmt|;
-name|Sql
+name|SqlValidatorFixture
 name|shouldFail
 init|=
 name|sql
@@ -7728,29 +7731,20 @@ name|testUnknownFunctionHandling
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
-name|withTester
-argument_list|(
-name|t
-lambda|->
-name|t
+name|fixture
+argument_list|()
 operator|.
 name|withLenientOperatorLookup
 argument_list|(
 literal|true
 argument_list|)
-argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"concat('a', 2)"
 argument_list|)
@@ -7760,7 +7754,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"foo('2001-12-21')"
 argument_list|)
@@ -7770,7 +7764,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"\"foo\"('b')"
 argument_list|)
@@ -7780,7 +7774,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"foo()"
 argument_list|)
@@ -7790,7 +7784,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"'a' || foo(bar('2001-12-21'))"
 argument_list|)
@@ -7800,7 +7794,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"cast(foo(5, 2) as DECIMAL)"
 argument_list|)
@@ -7810,7 +7804,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"select ascii('xyz')"
 argument_list|)
@@ -7820,7 +7814,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"select get_bit(CAST('FFFF' as BINARY), 1)"
 argument_list|)
@@ -7830,7 +7824,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"select now()"
 argument_list|)
@@ -7840,7 +7834,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"^TIMESTAMP_CMP_TIMESTAMPTZ^"
 argument_list|)
@@ -7852,7 +7846,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"atan(0)"
 argument_list|)
@@ -7862,7 +7856,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"select row_number() over () from emp"
 argument_list|)
@@ -7872,7 +7866,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|expr
+name|withExpr
 argument_list|(
 literal|"select coalesce(1, 2, 3)"
 argument_list|)
@@ -7882,7 +7876,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count() from emp"
 argument_list|)
@@ -7893,7 +7887,7 @@ expr_stmt|;
 comment|// too few args
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select sum(1, 2) from emp"
 argument_list|)
@@ -8068,7 +8062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotedFunction
 parameter_list|()
@@ -9836,9 +9829,12 @@ argument_list|(
 literal|"INTERVAL '1' YEAR"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"12"
+name|is
+argument_list|(
+literal|12L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9846,9 +9842,12 @@ argument_list|(
 literal|"INTERVAL '5' MONTH"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"5"
+name|is
+argument_list|(
+literal|5L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9856,9 +9855,12 @@ argument_list|(
 literal|"INTERVAL '3-2' YEAR TO MONTH"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"38"
+name|is
+argument_list|(
+literal|38L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9866,9 +9868,13 @@ argument_list|(
 literal|"INTERVAL '-5-4' YEAR TO MONTH"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"-64"
+name|is
+argument_list|(
+operator|-
+literal|64L
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -9883,9 +9889,12 @@ argument_list|(
 literal|"INTERVAL '1' DAY"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"86400000"
+name|is
+argument_list|(
+literal|86_400_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9893,9 +9902,12 @@ argument_list|(
 literal|"INTERVAL '1' HOUR"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"3600000"
+name|is
+argument_list|(
+literal|3_600_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9903,9 +9915,12 @@ argument_list|(
 literal|"INTERVAL '1' MINUTE"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"60000"
+name|is
+argument_list|(
+literal|60_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9913,9 +9928,12 @@ argument_list|(
 literal|"INTERVAL '1' SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"1000"
+name|is
+argument_list|(
+literal|1_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9923,9 +9941,12 @@ argument_list|(
 literal|"INTERVAL '1:05' HOUR TO MINUTE"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"3900000"
+name|is
+argument_list|(
+literal|3_900_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9933,9 +9954,12 @@ argument_list|(
 literal|"INTERVAL '1:05' MINUTE TO SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"65000"
+name|is
+argument_list|(
+literal|65_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9943,9 +9967,12 @@ argument_list|(
 literal|"INTERVAL '1 1' DAY TO HOUR"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"90000000"
+name|is
+argument_list|(
+literal|90_000_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9953,9 +9980,12 @@ argument_list|(
 literal|"INTERVAL '1 1:05' DAY TO MINUTE"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"90300000"
+name|is
+argument_list|(
+literal|90_300_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9963,9 +9993,12 @@ argument_list|(
 literal|"INTERVAL '1 1:05:03' DAY TO SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"90303000"
+name|is
+argument_list|(
+literal|90_303_000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9973,9 +10006,12 @@ argument_list|(
 literal|"INTERVAL '1 1:05:03.12345' DAY TO SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"90303123"
+name|is
+argument_list|(
+literal|90_303_123L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9983,9 +10019,12 @@ argument_list|(
 literal|"INTERVAL '1.12345' SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"1123"
+name|is
+argument_list|(
+literal|1_123L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -9993,9 +10032,12 @@ argument_list|(
 literal|"INTERVAL '1:05.12345' MINUTE TO SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"65123"
+name|is
+argument_list|(
+literal|65_123L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -10003,9 +10045,12 @@ argument_list|(
 literal|"INTERVAL '1:05:03' HOUR TO SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"3903000"
+name|is
+argument_list|(
+literal|3903000L
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|expr
@@ -10013,9 +10058,12 @@ argument_list|(
 literal|"INTERVAL '1:05:03.12345' HOUR TO SECOND"
 argument_list|)
 operator|.
-name|intervalConv
+name|assertInterval
 argument_list|(
-literal|"3903123"
+name|is
+argument_list|(
+literal|3_903_123L
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -15835,11 +15883,10 @@ specifier|final
 name|RelDataTypeSystem
 name|typeSystem
 init|=
-name|getTester
+name|fixture
 argument_list|()
 operator|.
-name|getValidator
-argument_list|()
+name|factory
 operator|.
 name|getTypeFactory
 argument_list|()
@@ -25905,9 +25952,10 @@ specifier|final
 name|SqlConformance
 name|conformance
 init|=
-name|tester
+name|fixture
+argument_list|()
 operator|.
-name|getConformance
+name|conformance
 argument_list|()
 decl_stmt|;
 name|sql
@@ -26335,12 +26383,19 @@ argument_list|()
 expr_stmt|;
 comment|// ordinal out of range -- if 'order by<ordinal>' means something in
 comment|// this dialect
+specifier|final
+name|SqlConformance
+name|conformance
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|conformance
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
-name|tester
-operator|.
-name|getConformance
-argument_list|()
+name|conformance
 operator|.
 name|isSortByOrdinal
 argument_list|()
@@ -26503,6 +26558,16 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
+specifier|final
+name|SqlConformance
+name|conformance
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|conformance
+argument_list|()
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"select empno as x "
@@ -26516,10 +26581,7 @@ argument_list|)
 operator|.
 name|failsIf
 argument_list|(
-name|tester
-operator|.
-name|getConformance
-argument_list|()
+name|conformance
 operator|.
 name|isSortByAliasObscures
 argument_list|()
@@ -27632,9 +27694,10 @@ specifier|final
 name|SqlConformance
 name|conformance
 init|=
-name|tester
+name|fixture
+argument_list|()
 operator|.
-name|getConformance
+name|conformance
 argument_list|()
 decl_stmt|;
 name|sql
@@ -30944,7 +31007,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasUnnestMultipleArrays
 parameter_list|()
@@ -32427,13 +32489,11 @@ name|testBoolAndBoolOrFunction
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withOperatorTable
 argument_list|(
@@ -32447,7 +32507,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"SELECT bool_and(true) from emp"
 argument_list|)
@@ -32457,7 +32517,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"SELECT bool_or(true) from emp"
 argument_list|)
@@ -32467,7 +32527,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select bool_and(col)\n"
 operator|+
@@ -32479,7 +32539,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select bool_or(col)\n"
 operator|+
@@ -32491,7 +32551,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select bool_and(col)\n"
 operator|+
@@ -32503,7 +32563,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select bool_or(col)\n"
 operator|+
@@ -32515,7 +32575,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"SELECT ^bool_and(ename)^ from emp"
 argument_list|)
@@ -32529,7 +32589,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"SELECT ^bool_or(ename)^ from emp"
 argument_list|)
@@ -34398,312 +34458,6 @@ name|void
 name|testRewriteExpansionOfColumnReferenceBeforeResolution
 parameter_list|()
 block|{
-name|SqlValidatorTester
-name|sqlValidatorTester
-init|=
-operator|new
-name|SqlValidatorTester
-argument_list|(
-name|SqlTestFactory
-operator|.
-name|INSTANCE
-operator|.
-name|withValidator
-argument_list|(
-parameter_list|(
-name|opTab
-parameter_list|,
-name|catalogReader
-parameter_list|,
-name|typeFactory
-parameter_list|,
-name|config
-parameter_list|)
-lambda|->
-comment|// Rewrites columnar sql identifiers 'UNEXPANDED'.'Something' to 'DEPT'.'Something',
-comment|// where 'Something' is any string.
-operator|new
-name|SqlValidatorImpl
-argument_list|(
-name|opTab
-argument_list|,
-name|catalogReader
-argument_list|,
-name|typeFactory
-argument_list|,
-name|config
-argument_list|)
-block|{
-block_content|@Override public SqlNode expand(SqlNode expr
-argument_list|,
-name|SqlValidatorScope
-name|scope
-argument_list|)
-block|{
-name|SqlNode
-name|rewrittenNode
-operator|=
-name|rewriteNode
-argument_list|(
-name|expr
-argument_list|)
-block|;
-return|return
-name|super
-operator|.
-name|expand
-argument_list|(
-name|rewrittenNode
-argument_list|,
-name|scope
-argument_list|)
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|SqlNode
-name|expandSelectExpr
-parameter_list|(
-name|SqlNode
-name|expr
-parameter_list|,
-name|SelectScope
-name|scope
-parameter_list|,
-name|SqlSelect
-name|select
-parameter_list|)
-block|{
-name|SqlNode
-name|rewrittenNode
-init|=
-name|rewriteNode
-argument_list|(
-name|expr
-argument_list|)
-decl_stmt|;
-return|return
-name|super
-operator|.
-name|expandSelectExpr
-argument_list|(
-name|rewrittenNode
-argument_list|,
-name|scope
-argument_list|,
-name|select
-argument_list|)
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|SqlNode
-name|expandGroupByOrHavingExpr
-parameter_list|(
-name|SqlNode
-name|expr
-parameter_list|,
-name|SqlValidatorScope
-name|scope
-parameter_list|,
-name|SqlSelect
-name|select
-parameter_list|,
-name|boolean
-name|havingExpression
-parameter_list|)
-block|{
-name|SqlNode
-name|rewrittenNode
-init|=
-name|rewriteNode
-argument_list|(
-name|expr
-argument_list|)
-decl_stmt|;
-return|return
-name|super
-operator|.
-name|expandGroupByOrHavingExpr
-argument_list|(
-name|rewrittenNode
-argument_list|,
-name|scope
-argument_list|,
-name|select
-argument_list|,
-name|havingExpression
-argument_list|)
-return|;
-block|}
-specifier|private
-name|SqlNode
-name|rewriteNode
-parameter_list|(
-name|SqlNode
-name|sqlNode
-parameter_list|)
-block|{
-return|return
-name|sqlNode
-operator|.
-name|accept
-argument_list|(
-operator|new
-name|SqlShuttle
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|SqlNode
-name|visit
-parameter_list|(
-name|SqlIdentifier
-name|id
-parameter_list|)
-block|{
-return|return
-name|rewriteIdentifier
-argument_list|(
-name|id
-argument_list|)
-return|;
-block|}
-block|}
-argument_list|)
-return|;
-block|}
-specifier|private
-name|SqlIdentifier
-name|rewriteIdentifier
-parameter_list|(
-name|SqlIdentifier
-name|sqlIdentifier
-parameter_list|)
-block|{
-name|Preconditions
-operator|.
-name|checkArgument
-argument_list|(
-name|sqlIdentifier
-operator|.
-name|names
-operator|.
-name|size
-argument_list|()
-operator|==
-literal|2
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|sqlIdentifier
-operator|.
-name|names
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-operator|.
-name|equals
-argument_list|(
-literal|"UNEXPANDED"
-argument_list|)
-condition|)
-block|{
-return|return
-operator|new
-name|SqlIdentifier
-argument_list|(
-name|asList
-argument_list|(
-literal|"DEPT"
-argument_list|,
-name|sqlIdentifier
-operator|.
-name|names
-operator|.
-name|get
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
-argument_list|,
-literal|null
-argument_list|,
-name|sqlIdentifier
-operator|.
-name|getParserPosition
-argument_list|()
-argument_list|,
-name|asList
-argument_list|(
-name|sqlIdentifier
-operator|.
-name|getComponentParserPosition
-argument_list|(
-literal|0
-argument_list|)
-argument_list|,
-name|sqlIdentifier
-operator|.
-name|getComponentParserPosition
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
-argument_list|)
-return|;
-block|}
-if|else if
-condition|(
-name|sqlIdentifier
-operator|.
-name|names
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-operator|.
-name|equals
-argument_list|(
-literal|"DEPT"
-argument_list|)
-condition|)
-block|{
-comment|//  Identifiers are expanded multiple times
-return|return
-name|sqlIdentifier
-return|;
-block|}
-else|else
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-literal|"Unknown Identifier "
-operator|+
-name|sqlIdentifier
-argument_list|)
-throw|;
-block|}
-block|}
-block|}
-block|)
-end_class
-
-begin_empty_stmt
-unit|)
-empty_stmt|;
-end_empty_stmt
-
-begin_decl_stmt
 specifier|final
 name|String
 name|sql
@@ -34718,9 +34472,6 @@ literal|" having sum(unexpanded.deptno)> 0\n"
 operator|+
 literal|" order by unexpanded.deptno"
 decl_stmt|;
-end_decl_stmt
-
-begin_decl_stmt
 specifier|final
 name|String
 name|expectedSql
@@ -34737,24 +34488,27 @@ literal|"HAVING SUM(`DEPT`.`DEPTNO`)> 0\n"
 operator|+
 literal|"ORDER BY `DEPT`.`DEPTNO`"
 decl_stmt|;
-end_decl_stmt
-
-begin_expr_stmt
-operator|new
-name|Sql
-argument_list|(
-name|sqlValidatorTester
-argument_list|,
-name|StringAndPos
+name|SqlValidatorTestCase
 operator|.
-name|of
+name|FIXTURE
+operator|.
+name|withFactory
+argument_list|(
+name|t
+lambda|->
+name|t
+operator|.
+name|withValidator
+argument_list|(
+name|UnexpandedToDeptValidator
+operator|::
+operator|new
+argument_list|)
+argument_list|)
+operator|.
+name|withSql
 argument_list|(
 name|sql
-argument_list|)
-argument_list|,
-literal|true
-argument_list|,
-literal|false
 argument_list|)
 operator|.
 name|withValidatorIdentifierExpansion
@@ -34779,10 +34533,8 @@ argument_list|(
 name|expectedSql
 argument_list|)
 expr_stmt|;
-end_expr_stmt
-
-begin_function
-unit|}    @
+block|}
+annotation|@
 name|Test
 name|void
 name|testCoalesceWithoutRewrite
@@ -34820,28 +34572,27 @@ argument_list|(
 literal|false
 argument_list|)
 operator|.
+name|withValidatorIdentifierExpansion
+argument_list|(
+literal|true
+argument_list|)
+operator|.
 name|rewritesTo
 argument_list|(
-name|tester
-operator|.
-name|getValidator
-argument_list|()
-operator|.
-name|config
-argument_list|()
-operator|.
-name|identifierExpansion
-argument_list|()
-condition|?
 name|expected1
-else|:
+argument_list|)
+operator|.
+name|withValidatorIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|rewritesTo
+argument_list|(
 name|expected2
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -34884,28 +34635,27 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withValidatorIdentifierExpansion
+argument_list|(
+literal|true
+argument_list|)
+operator|.
 name|rewritesTo
 argument_list|(
-name|tester
-operator|.
-name|getValidator
-argument_list|()
-operator|.
-name|config
-argument_list|()
-operator|.
-name|identifierExpansion
-argument_list|()
-condition|?
 name|expected1
-else|:
+argument_list|)
+operator|.
+name|withValidatorIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|rewritesTo
+argument_list|(
 name|expected2
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Disabled
 annotation|@
@@ -34927,21 +34677,21 @@ literal|"functions not allowed in ROW definitions\\."
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
 name|testFieldOrigin
 parameter_list|()
 block|{
-name|tester
-operator|.
-name|checkFieldOrigin
+name|sql
 argument_list|(
 literal|"select * from emp join dept on true"
-argument_list|,
+argument_list|)
+operator|.
+name|assertFieldOrigin
+argument_list|(
+name|is
+argument_list|(
 literal|"{CATALOG.SALES.EMP.EMPNO,"
 operator|+
 literal|" CATALOG.SALES.EMP.ENAME,"
@@ -34964,17 +34714,21 @@ literal|" CATALOG.SALES.DEPT.DEPTNO,"
 operator|+
 literal|" CATALOG.SALES.DEPT.NAME}"
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkFieldOrigin
+name|sql
 argument_list|(
 literal|"select distinct emp.empno, hiredate, 1 as uno,\n"
 operator|+
 literal|" emp.empno * 2 as twiceEmpno\n"
 operator|+
 literal|"from emp join dept on true"
-argument_list|,
+argument_list|)
+operator|.
+name|assertFieldOrigin
+argument_list|(
+name|is
+argument_list|(
 literal|"{CATALOG.SALES.EMP.EMPNO,"
 operator|+
 literal|" CATALOG.SALES.EMP.HIREDATE,"
@@ -34983,11 +34737,9 @@ literal|" null,"
 operator|+
 literal|" null}"
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -34995,13 +34747,11 @@ name|testBrackets
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withQuoting
 argument_list|(
@@ -35012,7 +34762,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [e].EMPNO from [EMP] as [e]"
 argument_list|)
@@ -35024,7 +34774,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^e^.EMPNO from [EMP] as [e]"
 argument_list|)
@@ -35036,7 +34786,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^x^ from (\n"
 operator|+
@@ -35050,7 +34800,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^x^ from (\n"
 operator|+
@@ -35064,7 +34814,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select EMP^.^\"x\" from EMP"
 argument_list|)
@@ -35076,7 +34826,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [x[y]] z ] from (\n"
 operator|+
@@ -35089,9 +34839,6 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35099,13 +34846,11 @@ name|testLexJava
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withLex
 argument_list|(
@@ -35116,7 +34861,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select e.EMPNO from EMP as e"
 argument_list|)
@@ -35128,7 +34873,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^e^.EMPNO from EMP as E"
 argument_list|)
@@ -35140,7 +34885,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^E^.EMPNO from EMP as e"
 argument_list|)
@@ -35152,7 +34897,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^x^ from (\n"
 operator|+
@@ -35166,7 +34911,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^x^ from (\n"
 operator|+
@@ -35181,7 +34926,7 @@ expr_stmt|;
 comment|// double-quotes are not valid in this lexical convention
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select EMP^.^\"x\" from EMP"
 argument_list|)
@@ -35195,7 +34940,7 @@ comment|// in Java mode, creating identifiers with spaces is not encouraged, but
 comment|// can use back-ticks if you really have to
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select `x[y] z ` from (\n"
 operator|+
@@ -35208,13 +34953,7 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-145">[CALCITE-145]    * Unexpected upper-casing of keywords when using java lexer</a>. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35222,13 +34961,11 @@ name|testLexJavaKeyword
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withLex
 argument_list|(
@@ -35239,7 +34976,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select path, x from (select 1 as path, 2 as x from (values (true)))"
 argument_list|)
@@ -35251,7 +34988,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select path, x from (select 1 as `path`, 2 as x from (values (true)))"
 argument_list|)
@@ -35263,7 +35000,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select `path`, x from (select 1 as path, 2 as x from (values (true)))"
 argument_list|)
@@ -35275,7 +35012,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^PATH^ from (select 1 as path from (values (true)))"
 argument_list|)
@@ -35287,7 +35024,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select t.^PATH^ from (select 1 as path from (values (true))) as t"
 argument_list|)
@@ -35299,7 +35036,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select t.x, t.^PATH^ from (values (true, 1)) as t(path, x)"
 argument_list|)
@@ -35313,7 +35050,7 @@ comment|// Built-in functions can be written in any case, even those with no arg
 comment|// and regardless of spaces between function name and open parenthesis.
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"values (current_timestamp, floor(2.5), ceil (3.5))"
 argument_list|)
@@ -35323,7 +35060,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"values (CURRENT_TIMESTAMP, FLOOR(2.5), CEIL (3.5))"
 argument_list|)
@@ -35333,7 +35070,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"values (CURRENT_TIMESTAMP, CEIL (3.5))"
 argument_list|)
@@ -35346,9 +35083,6 @@ literal|"DECIMAL(2, 0) NOT NULL EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35357,10 +35091,8 @@ parameter_list|()
 block|{
 comment|// in Java mode, creating identifiers with spaces is not encouraged, but you
 comment|// can use double-quote if you really have to
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withLex
 argument_list|(
@@ -35376,7 +35108,7 @@ operator|.
 name|DOUBLE_QUOTE
 argument_list|)
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select \"x[y] z \" from (\n"
 operator|+
@@ -35389,13 +35121,7 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests using case-insensitive matching of identifiers. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35403,13 +35129,11 @@ name|testCaseInsensitive
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -35424,13 +35148,11 @@ name|BRACKET
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|sensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withQuoting
 argument_list|(
@@ -35441,7 +35163,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select EMPNO from EMP"
 argument_list|)
@@ -35451,7 +35173,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select empno from emp"
 argument_list|)
@@ -35461,7 +35183,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [empno] from [emp]"
 argument_list|)
@@ -35471,7 +35193,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [E].[empno] from [emp] as e"
 argument_list|)
@@ -35481,7 +35203,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select t.[x] from (\n"
 operator|+
@@ -35494,7 +35216,7 @@ expr_stmt|;
 comment|// correlating variable
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from emp as [e] where exists (\n"
 operator|+
@@ -35506,7 +35228,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from emp as [e] where exists (\n"
 operator|+
@@ -35529,13 +35251,7 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests using case-insensitive matching of user-defined functions. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35563,13 +35279,11 @@ name|operatorTable
 argument_list|)
 expr_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|insensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -35589,13 +35303,11 @@ name|operatorTable
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|sensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withQuoting
 argument_list|(
@@ -35612,7 +35324,7 @@ decl_stmt|;
 comment|// test table function lookup case-insensitively.
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from dept, lateral table(ramp(dept.deptno))"
 argument_list|)
@@ -35622,7 +35334,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from dept, lateral table(RAMP(dept.deptno))"
 argument_list|)
@@ -35632,7 +35344,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from dept, lateral table([RAMP](dept.deptno))"
 argument_list|)
@@ -35642,7 +35354,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from dept, lateral table([Ramp](dept.deptno))"
 argument_list|)
@@ -35653,7 +35365,7 @@ expr_stmt|;
 comment|// test scalar function lookup case-insensitively.
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select myfun(EMPNO) from EMP"
 argument_list|)
@@ -35663,7 +35375,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select MYFUN(empno) from emp"
 argument_list|)
@@ -35673,7 +35385,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [MYFUN]([empno]) from [emp]"
 argument_list|)
@@ -35683,7 +35395,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [Myfun]([E].[empno]) from [emp] as e"
 argument_list|)
@@ -35693,7 +35405,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select t.[x] from (\n"
 operator|+
@@ -35706,7 +35418,7 @@ expr_stmt|;
 comment|// correlating variable
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from emp as [e] where exists (\n"
 operator|+
@@ -35718,7 +35430,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from emp as [e] where exists (\n"
 operator|+
@@ -35731,13 +35443,7 @@ literal|"No match found for function signature myfun\\(<NUMERIC>\\).*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests using case-sensitive matching of builtin functions. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35745,13 +35451,11 @@ name|testCaseSensitiveBuiltinFunction
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|sensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -35782,7 +35486,7 @@ argument_list|)
 decl_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select sum(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35792,7 +35496,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [sum](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35802,7 +35506,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [SUM](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35812,7 +35516,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select SUM(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35822,7 +35526,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select Sum(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35832,7 +35536,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35842,7 +35546,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [count](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35852,7 +35556,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select [COUNT](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35862,7 +35566,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select COUNT(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35872,7 +35576,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select Count(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
@@ -35881,13 +35585,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-319">[CALCITE-319]    * Table aliases should follow case-sensitivity policy</a>. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35895,13 +35593,11 @@ name|testCaseInsensitiveTableAlias
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -35916,13 +35612,11 @@ name|BRACKET
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|sensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withQuoting
 argument_list|(
@@ -35938,7 +35632,7 @@ comment|// mysql> select `D`.day from DAYS as `d`, DAYS as `D`;
 comment|// ERROR 1066 (42000): Not unique table/alias: 'D'
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count(*) from dept as [D], ^dept as [d]^"
 argument_list|)
@@ -35950,7 +35644,7 @@ argument_list|)
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count(*) from dept as [D], dept as [d]"
 argument_list|)
@@ -35960,7 +35654,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count(*) from dept as [D], ^dept as [D]^"
 argument_list|)
@@ -35971,13 +35665,7 @@ literal|"Duplicate relation name 'D' in FROM clause"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1305">[CALCITE-1305]    * Case-insensitive table aliases and GROUP BY</a>. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -35985,13 +35673,11 @@ name|testCaseInsensitiveTableAliasInGroupBy
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -36007,7 +35693,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select deptno, count(*) from EMP AS emp\n"
 operator|+
@@ -36019,7 +35705,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select deptno, count(*) from EMP AS EMP\n"
 operator|+
@@ -36031,7 +35717,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select deptno, count(*) from EMP\n"
 operator|+
@@ -36043,7 +35729,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select * from EMP where exists (\n"
 operator|+
@@ -36057,7 +35743,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select deptno, count(*) from EMP group by DEPTNO"
 argument_list|)
@@ -36066,13 +35752,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1549">[CALCITE-1549]    * Improve error message when table or column not found</a>. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -36201,9 +35881,6 @@ literal|"Table 'SALES\\.emp' not found; did you mean 'EMP'\\?"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -36345,13 +36022,7 @@ literal|"did you mean 'DEPTNO', 'deptNo'\\?"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests matching of built-in operator names. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -36359,13 +36030,11 @@ name|testUnquotedBuiltInFunctionNames
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|mysql
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withUnquotedCasing
 argument_list|(
@@ -36387,13 +36056,11 @@ literal|false
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|oracle
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withUnquotedCasing
 argument_list|(
@@ -36410,7 +36077,7 @@ decl_stmt|;
 comment|// Built-in functions are always case-insensitive.
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count(*), sum(deptno), floor(2.5) from dept"
 argument_list|)
@@ -36420,7 +36087,7 @@ argument_list|()
 expr_stmt|;
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select COUNT(*), FLOOR(2.5) from dept"
 argument_list|)
@@ -36430,7 +36097,7 @@ argument_list|()
 expr_stmt|;
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select cOuNt(*), FlOOr(2.5) from dept"
 argument_list|)
@@ -36440,7 +36107,7 @@ argument_list|()
 expr_stmt|;
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select cOuNt (*), FlOOr (2.5) from dept"
 argument_list|)
@@ -36450,7 +36117,7 @@ argument_list|()
 expr_stmt|;
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select current_time from dept"
 argument_list|)
@@ -36460,7 +36127,7 @@ argument_list|()
 expr_stmt|;
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select Current_Time from dept"
 argument_list|)
@@ -36470,7 +36137,7 @@ argument_list|()
 expr_stmt|;
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select CURRENT_TIME from dept"
 argument_list|)
@@ -36480,7 +36147,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select sum(deptno), floor(2.5) from dept"
 argument_list|)
@@ -36490,7 +36157,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select count(*), sum(deptno), floor(2.5) from dept"
 argument_list|)
@@ -36500,7 +36167,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select COUNT(*), FLOOR(2.5) from dept"
 argument_list|)
@@ -36510,7 +36177,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select cOuNt(*), FlOOr(2.5) from dept"
 argument_list|)
@@ -36520,7 +36187,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select cOuNt (*), FlOOr (2.5) from dept"
 argument_list|)
@@ -36530,7 +36197,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select current_time from dept"
 argument_list|)
@@ -36540,7 +36207,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select Current_Time from dept"
 argument_list|)
@@ -36550,7 +36217,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select CURRENT_TIME from dept"
 argument_list|)
@@ -36579,7 +36246,7 @@ comment|// lower-case, and is matched case-insensitively because it is a built-i
 comment|// So, the query succeeds.
 name|oracle
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select \"count\"(*) from dept"
 argument_list|)
@@ -36589,7 +36256,7 @@ argument_list|()
 expr_stmt|;
 name|mysql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select `count`(*) from dept"
 argument_list|)
@@ -36598,13 +36265,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Sanity check: All built-ins are upper-case. We rely on this. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -36671,9 +36332,6 @@ break|break;
 block|}
 block|}
 block|}
-end_function
-
-begin_function
 specifier|private
 specifier|static
 name|int
@@ -36700,13 +36358,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests that operators, sorted by precedence, are in a sane order. Each    * operator has a {@link SqlOperator#getLeftPrec() left} and    * {@link SqlOperator#getRightPrec()} right} precedence, but we would like    * the order to remain the same even if we tweak particular operators'    * precedences. If you need to update the expected output, you might also    * need to change    *<a href="http://calcite.apache.org/docs/reference.html#operator-precedence">    * the documentation</a>. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37317,13 +36969,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests that it is an error to insert into the same column twice, even using    * case-insensitive matching. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37355,13 +37001,7 @@ literal|"Target column 'EMPNO' is assigned more than once"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. (The standard says it should be an error, but we don't right    * now.) */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37369,13 +37009,11 @@ name|testCaseInsensitiveSubQuery
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|insensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -37390,13 +37028,11 @@ name|BRACKET
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|sensitive
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withCaseSensitive
 argument_list|(
@@ -37426,7 +37062,7 @@ literal|"select EMPNO as [e], DEPTNO as d, 1 as [e2] from EMP)"
 decl_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql
 argument_list|)
@@ -37436,7 +37072,7 @@ argument_list|()
 expr_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql
 argument_list|)
@@ -37453,7 +37089,7 @@ literal|"select EMPNO as [e2], DEPTNO as d, 1 as [E] from EMP)"
 decl_stmt|;
 name|insensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -37463,7 +37099,7 @@ argument_list|()
 expr_stmt|;
 name|sensitive
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -37472,13 +37108,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests using case-insensitive matching of table names. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37486,13 +37116,11 @@ name|testCaseInsensitiveTables
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|mssql
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withLex
 argument_list|(
@@ -37503,7 +37131,7 @@ argument_list|)
 decl_stmt|;
 name|mssql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select eMp.* from (select * from emp) as EmP"
 argument_list|)
@@ -37513,7 +37141,7 @@ argument_list|()
 expr_stmt|;
 name|mssql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ^eMp^.* from (select * from emp as EmP)"
 argument_list|)
@@ -37525,7 +37153,7 @@ argument_list|)
 expr_stmt|;
 name|mssql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select eMp.* from (select * from emP) as EmP"
 argument_list|)
@@ -37535,7 +37163,7 @@ argument_list|()
 expr_stmt|;
 name|mssql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select eMp.empNo from (select * from emP) as EmP"
 argument_list|)
@@ -37545,7 +37173,7 @@ argument_list|()
 expr_stmt|;
 name|mssql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select empNo from (select Empno from emP) as EmP"
 argument_list|)
@@ -37555,7 +37183,7 @@ argument_list|()
 expr_stmt|;
 name|mssql
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select empNo from (select Empno from emP)"
 argument_list|)
@@ -37564,9 +37192,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37682,9 +37307,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37710,9 +37332,6 @@ literal|"does not equal number of source items \\(3\\)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37720,13 +37339,11 @@ name|testInsertSubset
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -37745,7 +37362,7 @@ literal|"values (1, 'nom', 'job', 0, timestamp '1970-01-01 00:00:00')"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -37763,7 +37380,7 @@ literal|"values (1, 'nom', null, 0, null)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -37772,13 +37389,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1510">[CALCITE-1510]    * INSERT/UPSERT should allow fewer values than columns</a>,    * check for default value only when target field is null. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -37800,13 +37411,11 @@ name|get
 argument_list|()
 decl_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -37825,7 +37434,7 @@ literal|"timestamp '1970-01-01 00:00:00', 1, 1, 1, false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -37868,7 +37477,7 @@ literal|"  timestamp '1970-01-01 00:00:00', 1, 1, 1, false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -37911,7 +37520,7 @@ literal|"  timestamp '1970-01-01 00:00:00', 1, 1, 1)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql3
 argument_list|)
@@ -37960,7 +37569,7 @@ literal|"  timestamp '1970-01-01 00:00:00', 1, 1, false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql4
 argument_list|)
@@ -37989,9 +37598,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38009,9 +37615,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38036,9 +37639,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38046,20 +37646,18 @@ name|testInsertModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_MODIFIABLEVIEW (empno, ename, job)\n"
 operator|+
@@ -38071,7 +37669,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_MODIFIABLEVIEW2 (empno, ename, job, extra)\n"
 operator|+
@@ -38082,9 +37680,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38092,13 +37687,11 @@ name|testInsertSubsetModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -38112,7 +37705,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_MODIFIABLEVIEW2\n"
 operator|+
@@ -38124,7 +37717,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_MODIFIABLEVIEW2\n"
 operator|+
@@ -38137,9 +37730,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38155,6 +37745,12 @@ literal|"insert into empnullables (empno, ename, deptno)\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType0
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, INTEGER ?2)"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql0
@@ -38163,9 +37759,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, INTEGER ?2)"
+name|is
+argument_list|(
+name|expectedType0
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// multiple VALUES
@@ -38177,6 +37776,12 @@ literal|"insert into empnullables (empno, ename, deptno)\n"
 operator|+
 literal|"values (?, 'Pat', 1), (2, ?, ?), (3, 'Tod', ?), (4, 'Arthur', null)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType1
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, INTEGER ?2, INTEGER ?3)"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql1
@@ -38185,9 +37790,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, INTEGER ?2, INTEGER ?3)"
+name|is
+argument_list|(
+name|expectedType1
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// VALUES with expression
@@ -38199,9 +37807,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// SELECT
@@ -38213,9 +37824,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// WITH
@@ -38237,9 +37851,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// UNION
@@ -38271,15 +37888,15 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 name|expected2
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38295,6 +37912,12 @@ operator|+
 literal|" (empno, ename, \"f.dc\" ^varchar(10)^)\n"
 operator|+
 literal|"values (?, ?, ?)"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedType0
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -38314,9 +37937,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2)"
+name|is
+argument_list|(
+name|expectedType0
+argument_list|)
 argument_list|)
 operator|.
 name|withConformance
@@ -38343,6 +37969,12 @@ literal|" (empno, ename, dynamic_column ^double^ not null)\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType1
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, DOUBLE ?2)"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql1
@@ -38361,9 +37993,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, DOUBLE ?2)"
+name|is
+argument_list|(
+name|expectedType1
+argument_list|)
 argument_list|)
 operator|.
 name|withConformance
@@ -38390,6 +38025,12 @@ literal|" (f0.c0, f1.c1, \"F2\".\"C2\" ^varchar(20)^ not null)\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType2
+init|=
+literal|"RecordType(INTEGER ?0, INTEGER ?1, VARCHAR(20) ?2)"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql2
@@ -38408,9 +38049,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, INTEGER ?1, VARCHAR(20) ?2)"
+name|is
+argument_list|(
+name|expectedType2
+argument_list|)
 argument_list|)
 operator|.
 name|withConformance
@@ -38428,9 +38072,6 @@ literal|"the current SQL conformance level"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38438,13 +38079,11 @@ name|testInsertBindSubset
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -38462,9 +38101,15 @@ literal|"insert into empnullables\n"
 operator|+
 literal|"values (?, ?, ?)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType0
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2)"
+decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -38472,9 +38117,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2)"
+name|is
+argument_list|(
+name|expectedType0
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// multiple VALUES
@@ -38488,9 +38136,17 @@ literal|"values (?, 'Pat', 'Tailor'), (2, ?, ?),\n"
 operator|+
 literal|" (3, 'Tod', ?), (4, 'Arthur', null)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType1
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2, "
+operator|+
+literal|"VARCHAR(10) ?3)"
+decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -38498,17 +38154,18 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2, "
-operator|+
-literal|"VARCHAR(10) ?3)"
+name|is
+argument_list|(
+name|expectedType1
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// VALUES with expression
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empnullables values (? + 1, ?)"
 argument_list|)
@@ -38516,15 +38173,18 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// SELECT
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empnullables select ?, ? from (values (1))"
 argument_list|)
@@ -38532,9 +38192,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// WITH
@@ -38550,7 +38213,7 @@ literal|"select ?, ? from (values (1))"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql3
 argument_list|)
@@ -38558,9 +38221,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// UNION
@@ -38586,7 +38252,7 @@ literal|" INTEGER ?2, VARCHAR(20) ?3)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -38594,15 +38260,15 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 name|expected2
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38617,6 +38283,12 @@ literal|"insert into EMP_MODIFIABLEVIEW (mgr, empno, ename)"
 operator|+
 literal|" values (?, ?, ?)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedType
+init|=
+literal|"RecordType(INTEGER ?0, INTEGER ?1, VARCHAR(20) ?2)"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -38628,15 +38300,15 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, INTEGER ?1, VARCHAR(20) ?2)"
+name|is
+argument_list|(
+name|expectedType
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38688,9 +38360,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38698,13 +38367,11 @@ name|testInsertModifiableViewFailConstraint
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -38727,7 +38394,7 @@ literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -38755,7 +38422,7 @@ literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -38785,7 +38452,7 @@ literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -38796,9 +38463,6 @@ name|error2
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38806,20 +38470,18 @@ name|testUpdateModifiableViewPassConstraint
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW2"
 operator|+
@@ -38833,7 +38495,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW2"
 operator|+
@@ -38846,9 +38508,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38856,13 +38515,11 @@ name|testUpdateModifiableViewFailConstraint
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -38887,7 +38544,7 @@ literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -38909,7 +38566,7 @@ literal|" where ename = 'Lex'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -38920,9 +38577,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -38930,20 +38584,18 @@ name|testInsertTargetTableWithVirtualColumns
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into VIRTUALCOLUMNS.VC_T1\n"
 operator|+
@@ -38969,7 +38621,7 @@ literal|"Cannot INSERT into generated column 'D'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -38989,7 +38641,7 @@ literal|"values(1, 2, 'abc', DEFAULT, DEFAULT)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -39015,7 +38667,7 @@ literal|"does not equal number of source items \\(4\\).*"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -39043,7 +38695,7 @@ literal|"does not equal number of source items \\(6\\).*"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql3
 argument_list|)
@@ -39071,7 +38723,7 @@ literal|"from source field 'EXPR\\$1' of type CHAR\\(1\\).*"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql4
 argument_list|)
@@ -39088,7 +38740,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql4
 argument_list|)
@@ -39097,9 +38749,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39137,9 +38786,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39147,13 +38793,11 @@ name|testInsertSubsetFailNullability
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -39164,7 +38808,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into ^emp^ values (1)"
 argument_list|)
@@ -39176,7 +38820,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into emp ^values (null, 'Liam')^"
 argument_list|)
@@ -39188,7 +38832,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into emp ^values (45, null, 5)^"
 argument_list|)
@@ -39199,9 +38843,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39239,9 +38880,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39249,13 +38887,11 @@ name|testInsertSubsetViewFailNullability
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -39266,7 +38902,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into ^EMP_20^ values (1)"
 argument_list|)
@@ -39278,7 +38914,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_20 ^values (null, 'Liam')^"
 argument_list|)
@@ -39290,7 +38926,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_20 ^values (45, null)^"
 argument_list|)
@@ -39301,9 +38937,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39341,9 +38974,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39351,13 +38981,11 @@ name|testInsertBindSubsetFailNullability
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -39368,7 +38996,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into ^emp^ values (?)"
 argument_list|)
@@ -39380,7 +39008,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into emp ^values (null, ?)^"
 argument_list|)
@@ -39392,7 +39020,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into emp ^values (?, null)^"
 argument_list|)
@@ -39403,9 +39031,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39449,9 +39074,6 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39495,9 +39117,6 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39529,9 +39148,6 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39575,13 +39191,11 @@ literal|"Duplicate name 'EXTRA' in column list"
 argument_list|)
 expr_stmt|;
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -39596,7 +39210,7 @@ literal|"from EMP_MODIFIABLEVIEW (extra int, ^extra^ int)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -39616,7 +39230,7 @@ literal|" (extra int, ^extra^ boolean)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -39627,9 +39241,6 @@ literal|"Duplicate name 'EXTRA' in column list"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39662,9 +39273,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39672,20 +39280,18 @@ name|testSelectViewExtendedColumnCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR\n"
 operator|+
@@ -39699,7 +39305,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, \"Sal\", HIREDATE, MGR\n"
 operator|+
@@ -39712,9 +39318,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39722,20 +39325,18 @@ name|testSelectViewExtendedColumnExtendedCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA\n"
 operator|+
@@ -39749,7 +39350,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA,"
 operator|+
@@ -39764,9 +39365,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39774,20 +39372,18 @@ name|testSelectViewExtendedColumnUnderlyingCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
 operator|+
@@ -39801,7 +39397,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, \"comM\"\n"
 operator|+
@@ -39814,9 +39410,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39848,9 +39441,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39906,9 +39496,6 @@ literal|"from source field 'EMPNO' of type INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -39916,13 +39503,11 @@ name|testSelectViewExtendedColumnFailCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -39949,7 +39534,7 @@ literal|" BOOLEAN from source field 'SLACKER' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -39981,7 +39566,7 @@ literal|" INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -39992,9 +39577,6 @@ name|error1
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40002,13 +39584,11 @@ name|testSelectViewExtendedColumnFailExtendedCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -40035,7 +39615,7 @@ literal|" BOOLEAN from source field 'EXTRA' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -40059,7 +39639,7 @@ literal|" where SAL = 20"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -40070,9 +39650,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40080,13 +39657,11 @@ name|testSelectViewExtendedColumnFailUnderlyingCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -40113,7 +39688,7 @@ literal|" from source field 'COMM' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -40137,7 +39712,7 @@ literal|" where SAL = 20"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -40148,9 +39723,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40188,9 +39760,6 @@ literal|"Column 'EXTRA' not found in any table; did you mean 'extra'\\?"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40198,13 +39767,11 @@ name|testInsertFailCaseSensitivity
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -40221,7 +39788,7 @@ literal|" values (45, 'Jake', 5)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -40243,7 +39810,7 @@ literal|" values (45, 'Jake', 5)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -40265,7 +39832,7 @@ literal|" values (45, 'Jake', 5)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -40276,9 +39843,6 @@ literal|"Unknown target column 'extra'"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40286,13 +39850,11 @@ name|testInsertFailExcludedColumn
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -40309,7 +39871,7 @@ literal|" values (45, 'Jake', 5)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql
 argument_list|)
@@ -40320,9 +39882,6 @@ literal|"Unknown target column 'DEPTNO'"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40330,13 +39889,11 @@ name|testInsertBindViewFailExcludedColumn
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -40351,7 +39908,7 @@ literal|" values (?, ?, ?)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql
 argument_list|)
@@ -40362,9 +39919,6 @@ literal|"Unknown target column 'DEPTNO'"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40410,9 +39964,6 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40420,13 +39971,11 @@ name|testInsertSubsetWithCustomInitializerExpressionFactory
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -40437,7 +39986,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empdefaults values (101)"
 argument_list|)
@@ -40447,7 +39996,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empdefaults values (101, 'Coral')"
 argument_list|)
@@ -40457,7 +40006,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empdefaults ^values (null, 'Tod')^"
 argument_list|)
@@ -40469,7 +40018,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empdefaults ^values (78, null)^"
 argument_list|)
@@ -40480,9 +40029,6 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40497,9 +40043,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(INTEGER ?0)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40510,9 +40059,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40538,9 +40090,6 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40548,13 +40097,11 @@ name|testInsertBindSubsetWithCustomInitializerExpressionFactory
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withConformance
 argument_list|(
@@ -40565,7 +40112,7 @@ argument_list|)
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empdefaults values (101, ?)"
 argument_list|)
@@ -40573,14 +40120,17 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(VARCHAR(20) ?0)"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into empdefaults ^values (null, ?)^"
 argument_list|)
@@ -40591,9 +40141,6 @@ literal|"Column 'EMPNO' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40634,9 +40181,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 name|expected
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -40664,9 +40214,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 name|expected2
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -40694,9 +40247,12 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 name|expected3
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40776,9 +40332,6 @@ literal|"Target column '\"F1\".\"C0\"' is assigned more than once"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40803,15 +40356,15 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40836,15 +40389,15 @@ operator|.
 name|ok
 argument_list|()
 operator|.
-name|bindType
+name|assertBindType
+argument_list|(
+name|is
 argument_list|(
 literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40886,9 +40439,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -40955,9 +40505,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41029,9 +40576,6 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41099,13 +40643,7 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Tests that various expressions are monotonic. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41117,11 +40655,14 @@ argument_list|(
 literal|"select stream floor(rowtime to hour) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41129,11 +40670,14 @@ argument_list|(
 literal|"select stream ceil(rowtime to minute) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41141,11 +40685,14 @@ argument_list|(
 literal|"select stream extract(minute from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41153,11 +40700,14 @@ argument_list|(
 literal|"select stream (rowtime - timestamp '1970-01-01 00:00:00') hour from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41169,11 +40719,14 @@ operator|+
 literal|"from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41185,11 +40738,14 @@ operator|+
 literal|"from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41201,11 +40757,14 @@ operator|+
 literal|"from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// constant
@@ -41214,11 +40773,14 @@ argument_list|(
 literal|"select stream 1 - 2 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41226,11 +40788,14 @@ argument_list|(
 literal|"select stream 1 + 2 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// extract(YEAR) is monotonic, extract(other time unit) is not
@@ -41239,11 +40804,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41251,11 +40819,14 @@ argument_list|(
 literal|"select stream extract(month from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//<monotonic> - constant
@@ -41264,11 +40835,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) - 3 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41276,11 +40850,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) * 5 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41288,11 +40865,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) * -5 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|DECREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//<monotonic> / constant
@@ -41301,11 +40881,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) / -5 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|DECREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41313,11 +40896,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) / 5 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41325,11 +40911,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) / 0 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// +inf is constant!
@@ -41338,11 +40927,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) / null from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41350,11 +40942,14 @@ argument_list|(
 literal|"select stream null / extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41362,11 +40957,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) / cast(null as integer) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41374,11 +40972,14 @@ argument_list|(
 literal|"select stream cast(null as integer) / extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// constant /<monotonic> is not monotonic (we don't know whether sign of
@@ -41388,11 +40989,14 @@ argument_list|(
 literal|"select stream 5 / extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//<monotonic> * constant
@@ -41401,11 +41005,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) * -5 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|DECREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41413,11 +41020,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) * 5 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41425,11 +41035,14 @@ argument_list|(
 literal|"select stream extract(year from rowtime) * 0 from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// 0 is constant!
@@ -41439,11 +41052,14 @@ argument_list|(
 literal|"select stream -5 * extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|DECREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41451,11 +41067,14 @@ argument_list|(
 literal|"select stream 5 * extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|sql
@@ -41463,11 +41082,14 @@ argument_list|(
 literal|"select stream 0 * extract(year from rowtime) from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|CONSTANT
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//<monotonic> -<monotonic>
@@ -41480,11 +41102,14 @@ operator|+
 literal|"from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|NOT_MONOTONIC
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|//<monotonic> +<monotonic>
@@ -41497,17 +41122,17 @@ operator|+
 literal|"from orders"
 argument_list|)
 operator|.
-name|monotonic
+name|assertMonotonicity
+argument_list|(
+name|is
 argument_list|(
 name|SqlMonotonicity
 operator|.
 name|INCREASING
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41606,9 +41231,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41670,9 +41292,6 @@ name|STR_SET_OP_INCONSISTENT
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41768,9 +41387,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41811,9 +41427,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41838,9 +41451,6 @@ literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41853,9 +41463,6 @@ literal|"T"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -41868,9 +41475,6 @@ literal|"T_10"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 specifier|private
 name|void
 name|checkCustomColumnResolving
@@ -42395,9 +41999,6 @@ literal|"'"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -42425,12 +42026,8 @@ literal|"Unknown identifier 'COLUMN_NOT_EXIST'"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTumbleTableFunction
 parameter_list|()
@@ -42664,12 +42261,8 @@ literal|"Object 'TABLER_NOT_EXIST' not found"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHopTableFunction
 parameter_list|()
@@ -42923,12 +42516,8 @@ literal|"Object 'TABLER_NOT_EXIST' not found"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSessionTableFunction
 parameter_list|()
@@ -43101,12 +42690,8 @@ literal|"Object 'TABLER_NOT_EXIST' not found"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamTumble
 parameter_list|()
@@ -43241,9 +42826,6 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43309,9 +42891,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43336,9 +42915,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43368,9 +42944,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43400,9 +42973,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43410,13 +42980,11 @@ name|testInsertExtendedColumnModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -43433,7 +43001,7 @@ literal|"values (20, 10, '2', true, 'ok')"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -43455,7 +43023,7 @@ literal|" timestamp '1970-01-01 00:00:00', 1, 1,  1, false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -43464,9 +43032,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43474,20 +43039,18 @@ name|testInsertBindExtendedColumnModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
 operator|+
@@ -43499,7 +43062,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN)"
 operator|+
@@ -43512,9 +43075,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43522,13 +43082,11 @@ name|testInsertExtendedColumnModifiableViewFailConstraint
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -43553,7 +43111,7 @@ literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -43575,7 +43133,7 @@ literal|"values (^?^, 10, '2', true, 'ok')"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -43599,7 +43157,7 @@ literal|" timestamp '1970-01-01 00:00:00', 1, 1,  1, false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -43610,9 +43168,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43620,13 +43175,11 @@ name|testInsertExtendedColumnModifiableViewFailColumnCount
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -43651,7 +43204,7 @@ literal|" equal number of source items \\(11\\)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -43679,7 +43232,7 @@ literal|" equal number of source items \\(4\\)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -43690,9 +43243,6 @@ name|error1
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43700,13 +43250,11 @@ name|testInsertExtendedColumnFailDuplicate
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -43731,7 +43279,7 @@ literal|"Duplicate name 'EXTCOL' in column list"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -43751,7 +43299,7 @@ literal|" ^extcol^ BOOLEAN) (extcol) values (1)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -43771,7 +43319,7 @@ literal|" ^extcol^ BOOLEAN) (extcol) values (false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -43791,7 +43339,7 @@ literal|" (extcol) values (1)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql3
 argument_list|)
@@ -43811,7 +43359,7 @@ literal|" (extcol) values (false)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql4
 argument_list|)
@@ -43822,9 +43370,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43868,9 +43413,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -43999,9 +43541,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -44046,9 +43585,6 @@ literal|" from source field 'EXPR$0' of type CHAR(1)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -44075,9 +43611,6 @@ literal|"Column 'empno' not found in any table; did you mean 'EMPNO'\\?"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44113,9 +43646,6 @@ literal|"Unknown target column 'extra'"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44147,9 +43677,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44157,20 +43684,18 @@ name|testUpdateExtendedColumnModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
 operator|+
@@ -44184,7 +43709,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN)"
 operator|+
@@ -44197,9 +43722,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44207,20 +43729,18 @@ name|testUpdateBindExtendedColumnModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
 operator|+
@@ -44234,7 +43754,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN)"
 operator|+
@@ -44247,9 +43767,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44257,13 +43774,11 @@ name|testUpdateExtendedColumnModifiableViewFailConstraint
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -44292,7 +43807,7 @@ literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -44314,7 +43829,7 @@ literal|" where ename = 'Jane'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -44325,9 +43840,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44347,9 +43859,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44357,20 +43866,18 @@ name|testUpdateExtendedColumnModifiableViewCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW3(empno INTEGER NOT NULL,"
 operator|+
@@ -44386,7 +43893,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW3(empno INTEGER NOT NULL,"
 operator|+
@@ -44401,9 +43908,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44439,9 +43943,6 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -44482,9 +43983,6 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44492,13 +43990,11 @@ name|testUpdateExtendedColumnModifiableViewFailCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -44525,7 +44021,7 @@ literal|" INTEGER NOT NULL from source field 'EMPNO' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql
 argument_list|)
@@ -44536,9 +44032,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44579,9 +44072,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44589,13 +44079,11 @@ name|testUpdateExtendedColumnModifiableViewFailUnderlyingCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -44622,7 +44110,7 @@ literal|" INTEGER from source field 'COMM' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql
 argument_list|)
@@ -44633,9 +44121,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44643,13 +44128,11 @@ name|testUpdateExtendedColumnFailDuplicate
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -44672,7 +44155,7 @@ literal|"Duplicate name 'COMM' in column list"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -44696,7 +44179,7 @@ literal|"where deptno = 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -44707,9 +44190,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44727,9 +44207,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44758,9 +44235,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44789,9 +44263,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44820,9 +44291,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44912,9 +44380,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -44922,13 +44387,11 @@ name|testInsertExtendedColumnModifiableViewFailCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -44951,7 +44414,7 @@ literal|" BOOLEAN from source field 'SLACKER' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -44979,7 +44442,7 @@ literal|" BOOLEAN from source field 'EXPR\\$3' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -44996,7 +44459,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45024,7 +44487,7 @@ literal|" INTEGER from source field 'EXPR\\$3' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45041,7 +44504,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45050,9 +44513,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45060,13 +44520,11 @@ name|testInsertExtendedColumnModifiableViewFailExtendedCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45089,7 +44547,7 @@ literal|" BOOLEAN from source field 'EXTRA' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -45117,7 +44575,7 @@ literal|" BOOLEAN from source field 'EXPR\\$3' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45142,7 +44600,7 @@ literal|" (empno, ename, job, extra) values (1, 'Arthur', 'clown', 1)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45170,7 +44628,7 @@ literal|" INTEGER from source field 'EXPR\\$3' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql3
 argument_list|)
@@ -45197,7 +44655,7 @@ literal|"values (1, 'Arthur', 'clown', true)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql4
 argument_list|)
@@ -45206,9 +44664,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45216,13 +44671,11 @@ name|testInsertExtendedColumnModifiableViewFailUnderlyingCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45245,7 +44698,7 @@ literal|" (empno, ename, job, comm) values (1, 'Arthur', 'clown', true)"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -45271,7 +44724,7 @@ literal|"Unknown target column 'COMM'"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45299,7 +44752,7 @@ literal|" BOOLEAN from source field 'EXPR\\$3' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45316,7 +44769,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45325,9 +44778,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45343,9 +44793,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45369,9 +44816,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45395,9 +44839,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45405,20 +44846,18 @@ name|testDeleteModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW2 where deptno = 10"
 argument_list|)
@@ -45428,7 +44867,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW2 where deptno = 20"
 argument_list|)
@@ -45438,7 +44877,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW2 where empno = 30"
 argument_list|)
@@ -45447,9 +44886,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45457,20 +44893,18 @@ name|testDeleteExtendedColumnModifiableView
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW2(extra BOOLEAN) where sal> 10"
 argument_list|)
@@ -45480,7 +44914,7 @@ argument_list|()
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW2(note BOOLEAN) where note = 'fired'"
 argument_list|)
@@ -45489,9 +44923,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45516,9 +44947,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45526,13 +44954,11 @@ name|testDeleteExtendedColumnModifiableViewCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45547,7 +44973,7 @@ literal|"empno INTEGER NOT NULL) where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -45565,7 +44991,7 @@ literal|"where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45583,7 +45009,7 @@ literal|"where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45601,7 +45027,7 @@ literal|"where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql3
 argument_list|)
@@ -45619,7 +45045,7 @@ literal|"where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql4
 argument_list|)
@@ -45637,7 +45063,7 @@ literal|"where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql5
 argument_list|)
@@ -45646,9 +45072,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45656,13 +45079,11 @@ name|testDeleteExtendedColumnFailCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45685,7 +45106,7 @@ literal|" INTEGER NOT NULL from source field 'EMPNO' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -45713,7 +45134,7 @@ literal|" INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45733,7 +45154,7 @@ literal|" where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql2
 argument_list|)
@@ -45745,7 +45166,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45756,9 +45177,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45766,13 +45184,11 @@ name|testDeleteExtendedColumnModifiableViewFailCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45795,7 +45211,7 @@ literal|" INTEGER from source field 'DEPTNO' of type BOOLEAN"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -45815,7 +45231,7 @@ literal|" where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45826,9 +45242,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45836,13 +45249,11 @@ name|testDeleteExtendedColumnModifiableViewFailExtendedCollision
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45865,7 +45276,7 @@ literal|"where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql0
 argument_list|)
@@ -45885,7 +45296,7 @@ literal|" where sal> 10"
 decl_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 name|sql1
 argument_list|)
@@ -45896,9 +45307,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -45906,13 +45314,11 @@ name|testDeleteExtendedColumnFailDuplicate
 parameter_list|()
 block|{
 specifier|final
-name|Sql
+name|SqlValidatorFixture
 name|s
 init|=
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|withExtendedCatalog
 argument_list|()
@@ -45929,7 +45335,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW (extra VARCHAR, ^extra^ VARCHAR)"
 operator|+
@@ -45943,7 +45349,7 @@ argument_list|)
 expr_stmt|;
 name|s
 operator|.
-name|sql
+name|withSql
 argument_list|(
 literal|"delete from EMP_MODIFIABLEVIEW (extra VARCHAR, ^\"EXTRA\"^ VARCHAR)"
 operator|+
@@ -45956,13 +45362,7 @@ literal|"Duplicate name 'EXTRA' in column list"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1804">[CALCITE-1804]    * Cannot assign NOT NULL array to nullable array</a>. */
-end_comment
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46166,9 +45566,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46336,9 +45733,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46430,9 +45824,6 @@ name|maxError
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46467,9 +45858,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46495,9 +45883,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46585,9 +45970,6 @@ name|orderByError
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46621,9 +46003,6 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46667,9 +46046,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46745,9 +46121,6 @@ name|onError
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46842,9 +46215,6 @@ literal|"(?s).*Illegal use of .NULL.*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46870,9 +46240,6 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -46987,9 +46354,6 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47067,9 +46431,6 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47103,9 +46464,6 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47131,9 +46489,6 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47177,9 +46532,6 @@ literal|"(?s).*Expected a character type*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47260,9 +46612,6 @@ literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47296,9 +46645,6 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47352,9 +46698,6 @@ literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47408,9 +46751,6 @@ literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47464,9 +46804,6 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47502,9 +46839,6 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47560,9 +46894,6 @@ literal|"(?s).*Invalid number of arguments.*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47611,9 +46942,6 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47746,9 +47074,6 @@ literal|"(?s).*Cannot apply.*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -47920,9 +47245,6 @@ literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -48118,9 +47440,6 @@ literal|"MYFUN\\(<NUMERIC>,<NUMERIC>\\).*"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -48167,9 +47486,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -48227,9 +47543,12 @@ specifier|final
 name|SqlValidator
 name|validator
 init|=
-name|tester
+name|fixture
+argument_list|()
 operator|.
-name|getValidator
+name|factory
+operator|.
+name|createValidator
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -48322,9 +47641,12 @@ specifier|final
 name|SqlValidator
 name|validator
 init|=
-name|tester
+name|fixture
+argument_list|()
 operator|.
-name|getValidator
+name|factory
+operator|.
+name|createValidator
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -48380,9 +47702,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -48406,9 +47725,12 @@ specifier|final
 name|SqlValidator
 name|validator
 init|=
-name|tester
+name|fixture
+argument_list|()
 operator|.
-name|getValidator
+name|factory
+operator|.
+name|createValidator
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -48544,9 +47866,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Test
 name|void
@@ -48615,8 +47934,311 @@ literal|"RecordType(BIGINT NOT NULL A, BIGINT B) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-end_function
+comment|/** Validator that rewrites columnar sql identifiers 'UNEXPANDED'.'Something'    * to 'DEPT'.'Something', where 'Something' is any string. */
+specifier|private
+specifier|static
+class|class
+name|UnexpandedToDeptValidator
+extends|extends
+name|SqlValidatorImpl
+block|{
+name|UnexpandedToDeptValidator
+parameter_list|(
+name|SqlOperatorTable
+name|opTab
+parameter_list|,
+name|SqlValidatorCatalogReader
+name|catalogReader
+parameter_list|,
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|Config
+name|config
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|opTab
+argument_list|,
+name|catalogReader
+argument_list|,
+name|typeFactory
+argument_list|,
+name|config
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlNode
+name|expand
+parameter_list|(
+name|SqlNode
+name|expr
+parameter_list|,
+name|SqlValidatorScope
+name|scope
+parameter_list|)
+block|{
+name|SqlNode
+name|rewrittenNode
+init|=
+name|rewriteNode
+argument_list|(
+name|expr
+argument_list|)
+decl_stmt|;
+return|return
+name|super
+operator|.
+name|expand
+argument_list|(
+name|rewrittenNode
+argument_list|,
+name|scope
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlNode
+name|expandSelectExpr
+parameter_list|(
+name|SqlNode
+name|expr
+parameter_list|,
+name|SelectScope
+name|scope
+parameter_list|,
+name|SqlSelect
+name|select
+parameter_list|)
+block|{
+name|SqlNode
+name|rewrittenNode
+init|=
+name|rewriteNode
+argument_list|(
+name|expr
+argument_list|)
+decl_stmt|;
+return|return
+name|super
+operator|.
+name|expandSelectExpr
+argument_list|(
+name|rewrittenNode
+argument_list|,
+name|scope
+argument_list|,
+name|select
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|SqlNode
+name|expandGroupByOrHavingExpr
+parameter_list|(
+name|SqlNode
+name|expr
+parameter_list|,
+name|SqlValidatorScope
+name|scope
+parameter_list|,
+name|SqlSelect
+name|select
+parameter_list|,
+name|boolean
+name|havingExpression
+parameter_list|)
+block|{
+name|SqlNode
+name|rewrittenNode
+init|=
+name|rewriteNode
+argument_list|(
+name|expr
+argument_list|)
+decl_stmt|;
+return|return
+name|super
+operator|.
+name|expandGroupByOrHavingExpr
+argument_list|(
+name|rewrittenNode
+argument_list|,
+name|scope
+argument_list|,
+name|select
+argument_list|,
+name|havingExpression
+argument_list|)
+return|;
+block|}
+specifier|private
+name|SqlNode
+name|rewriteNode
+parameter_list|(
+name|SqlNode
+name|sqlNode
+parameter_list|)
+block|{
+return|return
+name|sqlNode
+operator|.
+name|accept
+argument_list|(
+operator|new
+name|SqlShuttle
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|SqlNode
+name|visit
+parameter_list|(
+name|SqlIdentifier
+name|id
+parameter_list|)
+block|{
+return|return
+name|rewriteIdentifier
+argument_list|(
+name|id
+argument_list|)
+return|;
+block|}
+block|}
+argument_list|)
+return|;
+block|}
+specifier|private
+name|SqlIdentifier
+name|rewriteIdentifier
+parameter_list|(
+name|SqlIdentifier
+name|sqlIdentifier
+parameter_list|)
+block|{
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|sqlIdentifier
+operator|.
+name|names
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|2
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|sqlIdentifier
+operator|.
+name|names
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|equals
+argument_list|(
+literal|"UNEXPANDED"
+argument_list|)
+condition|)
+block|{
+return|return
+operator|new
+name|SqlIdentifier
+argument_list|(
+name|asList
+argument_list|(
+literal|"DEPT"
+argument_list|,
+name|sqlIdentifier
+operator|.
+name|names
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|,
+literal|null
+argument_list|,
+name|sqlIdentifier
+operator|.
+name|getParserPosition
+argument_list|()
+argument_list|,
+name|asList
+argument_list|(
+name|sqlIdentifier
+operator|.
+name|getComponentParserPosition
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|sqlIdentifier
+operator|.
+name|getComponentParserPosition
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
+name|sqlIdentifier
+operator|.
+name|names
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|equals
+argument_list|(
+literal|"DEPT"
+argument_list|)
+condition|)
+block|{
+comment|//  Identifiers are expanded multiple times
+return|return
+name|sqlIdentifier
+return|;
+block|}
+else|else
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Unknown Identifier "
+operator|+
+name|sqlIdentifier
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+block|}
+end_class
 
-unit|}
 end_unit
 

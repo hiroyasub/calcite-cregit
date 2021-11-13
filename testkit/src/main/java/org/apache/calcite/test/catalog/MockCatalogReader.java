@@ -1196,8 +1196,8 @@ argument_list|(
 name|DEFAULT_SCHEMA
 argument_list|)
 decl_stmt|;
-comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data.</p>    *    * @param typeFactory Type factory    */
-specifier|public
+comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data;    * constructor is protected to encourage you to define a {@code create}    * method in each concrete sub-class.    *    * @param typeFactory Type factory    */
+specifier|protected
 name|MockCatalogReader
 parameter_list|(
 name|RelDataTypeFactory

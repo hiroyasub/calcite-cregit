@@ -57,14 +57,18 @@ name|TypeCoercionConverterTest
 extends|extends
 name|SqlToRelTestBase
 block|{
-annotation|@
-name|Override
 specifier|protected
-name|DiffRepository
-name|getDiffRepos
-parameter_list|()
-block|{
-return|return
+specifier|static
+specifier|final
+name|SqlToRelFixture
+name|FIXTURE
+init|=
+name|SqlToRelFixture
+operator|.
+name|DEFAULT
+operator|.
+name|withDiffRepos
+argument_list|(
 name|DiffRepository
 operator|.
 name|lookup
@@ -73,30 +77,36 @@ name|TypeCoercionConverterTest
 operator|.
 name|class
 argument_list|)
-return|;
-block|}
+argument_list|)
+operator|.
+name|withFactory
+argument_list|(
+name|f
+lambda|->
+name|f
+operator|.
+name|withCatalogReader
+argument_list|(
+name|TCatalogReader
+operator|::
+name|create
+argument_list|)
+argument_list|)
+operator|.
+name|withDecorrelate
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
 annotation|@
 name|Override
-specifier|protected
-name|Tester
-name|createTester
+specifier|public
+name|SqlToRelFixture
+name|fixture
 parameter_list|()
 block|{
 return|return
-name|super
-operator|.
-name|createTester
-argument_list|()
-operator|.
-name|withCatalogReaderFactory
-argument_list|(
-operator|new
-name|TypeCoercionTest
-argument_list|()
-operator|.
-name|getCatalogReaderFactory
-argument_list|()
-argument_list|)
+name|FIXTURE
 return|;
 block|}
 comment|/** Test case for {@link TypeCoercion#commonTypeForBinaryComparison}. */
@@ -107,7 +117,7 @@ name|testBinaryComparison
 parameter_list|()
 block|{
 comment|// for constant cast, there is reduce rule
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select\n"
 operator|+
@@ -131,6 +141,9 @@ literal|"cast('2019-09-23' as date) between t1_date and t1_timestamp as f8\n"
 operator|+
 literal|"from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test cases for {@link TypeCoercion#inOperationCoercion}. */
@@ -140,7 +153,7 @@ name|void
 name|testInOperation
 parameter_list|()
 block|{
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select\n"
 operator|+
@@ -152,6 +165,9 @@ literal|"(1, 2) in (('1', '2'), ('3', '4')) as f2\n"
 operator|+
 literal|"from (values (true, true, true))"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -160,7 +176,7 @@ name|void
 name|testNotInOperation
 parameter_list|()
 block|{
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select\n"
 operator|+
@@ -172,6 +188,9 @@ literal|"(1, 2) not in (('1', '2'), ('3', '4')) as f2\n"
 operator|+
 literal|"from (values (false, false, false))"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test cases for {@link TypeCoercion#inOperationCoercion}. */
@@ -181,7 +200,7 @@ name|void
 name|testInDateTimestamp
 parameter_list|()
 block|{
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select (t1_timestamp, t1_date)\n"
 operator|+
@@ -189,6 +208,9 @@ literal|"in ((DATE '2020-04-16', TIMESTAMP '2020-04-16 11:40:53'))\n"
 operator|+
 literal|"from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test case for    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.{@code booleanEquality}. */
@@ -202,7 +224,7 @@ comment|// REVIEW Danny 2018-05-16: Now we do not support cast between numeric<-
 comment|// Calcite execution runtime, but we still add cast in the plan so other systems
 comment|// using Calcite can rewrite Cast operator implementation.
 comment|// for this case, we replace the boolean literal with numeric 1.
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select\n"
 operator|+
@@ -220,6 +242,9 @@ literal|"10000000000=true as f5\n"
 operator|+
 literal|"from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -228,10 +253,13 @@ name|void
 name|testCaseWhen
 parameter_list|()
 block|{
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select case when 1> 0 then t2_bigint else t2_decimal end from t2"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -240,10 +268,13 @@ name|void
 name|testBuiltinFunctionCoercion
 parameter_list|()
 block|{
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select 1||'a' from (values true)"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -252,10 +283,13 @@ name|void
 name|testStarImplicitTypeCoercion
 parameter_list|()
 block|{
-name|checkPlanEquals
+name|sql
 argument_list|(
 literal|"select * from (values(1, '3')) union select * from (values('2', 4))"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -280,10 +314,13 @@ literal|"union select t1_varchar20, t1_decimal, t1_float, t1_double from t1 "
 operator|+
 literal|"union select t2_varchar20, t2_decimal, t2_smallint, t2_double from t2"
 decl_stmt|;
-name|checkPlanEquals
+name|sql
 argument_list|(
 name|sql
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -300,10 +337,13 @@ literal|"insert into t1 select t2_smallint, t2_int, t2_bigint, t2_float,\n"
 operator|+
 literal|"t2_double, t2_decimal, t2_int, t2_date, t2_timestamp, t2_varchar20, t2_int from t2"
 decl_stmt|;
-name|checkPlanEquals
+name|sql
 argument_list|(
 name|sql
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -320,28 +360,13 @@ literal|"update t1 set t1_varchar20=123, "
 operator|+
 literal|"t1_date=TIMESTAMP '2020-01-03 10:14:34', t1_int=12.3"
 decl_stmt|;
-name|checkPlanEquals
+name|sql
 argument_list|(
 name|sql
 argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|checkPlanEquals
-parameter_list|(
-name|String
-name|sql
-parameter_list|)
-block|{
-name|tester
 operator|.
-name|assertConvertsTo
-argument_list|(
-name|sql
-argument_list|,
-literal|"${plan}"
-argument_list|)
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 block|}

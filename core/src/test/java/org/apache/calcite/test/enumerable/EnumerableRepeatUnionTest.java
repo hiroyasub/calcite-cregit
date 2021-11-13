@@ -106,11 +106,6 @@ operator|.
 name|that
 argument_list|()
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 comment|//   WITH RECURSIVE delta(n) AS (
@@ -237,11 +232,6 @@ name|CalciteAssert
 operator|.
 name|that
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withRel
 argument_list|(
@@ -385,11 +375,6 @@ name|CalciteAssert
 operator|.
 name|that
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withRel
 argument_list|(
@@ -544,11 +529,6 @@ name|CalciteAssert
 operator|.
 name|that
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withRel
 argument_list|(
@@ -729,11 +709,6 @@ name|CalciteAssert
 operator|.
 name|that
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withRel
 argument_list|(
@@ -965,11 +940,6 @@ name|CalciteAssert
 operator|.
 name|that
 argument_list|()
-operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
 operator|.
 name|withRel
 argument_list|(

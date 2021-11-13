@@ -539,7 +539,7 @@ operator|.
 name|config
 argument_list|()
 operator|.
-name|sqlConformance
+name|conformance
 argument_list|()
 operator|.
 name|allowAliasUnnestItems

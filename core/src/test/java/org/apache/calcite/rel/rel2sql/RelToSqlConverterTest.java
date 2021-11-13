@@ -1107,16 +1107,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -1265,6 +1255,18 @@ name|assertTrue
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Tests for {@link RelToSqlConverter}.  */
 end_comment
@@ -1273,14 +1275,10 @@ begin_class
 class|class
 name|RelToSqlConverterTest
 block|{
-comment|/** Initiates a test case with a given SQL query. */
 specifier|private
 name|Sql
-name|sql
-parameter_list|(
-name|String
-name|sql
-parameter_list|)
+name|fixture
+parameter_list|()
 block|{
 return|return
 operator|new
@@ -1292,7 +1290,7 @@ name|SchemaSpec
 operator|.
 name|JDBC_FOODMART
 argument_list|,
-name|sql
+literal|"?"
 argument_list|,
 name|CalciteSqlDialect
 operator|.
@@ -1327,6 +1325,25 @@ name|DEFAULT
 argument_list|)
 return|;
 block|}
+comment|/** Initiates a test case with a given SQL query. */
+specifier|private
+name|Sql
+name|sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+name|fixture
+argument_list|()
+operator|.
+name|withSql
+argument_list|(
+name|sql
+argument_list|)
+return|;
+block|}
 comment|/** Initiates a test case with a given {@link RelNode} supplier. */
 specifier|private
 name|Sql
@@ -1342,10 +1359,8 @@ name|relFn
 parameter_list|)
 block|{
 return|return
-name|sql
-argument_list|(
-literal|"?"
-argument_list|)
+name|fixture
+argument_list|()
 operator|.
 name|schema
 argument_list|(
@@ -24994,8 +25009,6 @@ name|this
 operator|.
 name|typeSystem
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeSystem
@@ -25003,6 +25016,37 @@ argument_list|,
 literal|"typeSystem"
 argument_list|)
 expr_stmt|;
+block|}
+name|Sql
+name|withSql
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|schemaSpec
+argument_list|,
+name|sql
+argument_list|,
+name|dialect
+argument_list|,
+name|parserConfig
+argument_list|,
+name|librarySet
+argument_list|,
+name|config
+argument_list|,
+name|relFn
+argument_list|,
+name|transforms
+argument_list|,
+name|typeSystem
+argument_list|)
+return|;
 block|}
 name|Sql
 name|dialect

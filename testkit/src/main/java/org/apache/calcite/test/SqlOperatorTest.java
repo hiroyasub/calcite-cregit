@@ -11,8 +11,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
-operator|.
 name|test
 package|;
 end_package
@@ -313,6 +311,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlSyntax
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|dialect
 operator|.
 name|AnsiSqlDialect
@@ -332,22 +344,6 @@ operator|.
 name|fun
 operator|.
 name|SqlLibrary
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|fun
-operator|.
-name|SqlLibraryOperatorTableFactory
 import|;
 end_import
 
@@ -428,6 +424,104 @@ operator|.
 name|pretty
 operator|.
 name|SqlPrettyWriter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|AbstractSqlTester
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|VmName
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlTestFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlTester
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlTests
 import|;
 end_import
 
@@ -523,22 +617,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlConformance
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlConformanceEnum
 import|;
 end_import
@@ -588,34 +666,6 @@ operator|.
 name|validate
 operator|.
 name|SqlValidatorScope
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|test
-operator|.
-name|CalciteAssert
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|test
-operator|.
-name|SqlLimitsTest
 import|;
 end_import
 
@@ -759,20 +809,6 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|BeforeEach
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Disabled
 import|;
 end_import
@@ -882,16 +918,6 @@ operator|.
 name|util
 operator|.
 name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Arrays
 import|;
 end_import
 
@@ -1057,6 +1083,258 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|ResultCheckers
+operator|.
+name|isExactly
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|ResultCheckers
+operator|.
+name|isNullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|ResultCheckers
+operator|.
+name|isSet
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|ResultCheckers
+operator|.
+name|isSingle
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|ResultCheckers
+operator|.
+name|isWithin
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|BAD_DATETIME_MESSAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|DIVISION_BY_ZERO_MESSAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|INVALID_ARGUMENTS_NUMBER
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|INVALID_CHAR_MESSAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|LITERAL_OUT_OF_RANGE_MESSAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|OUT_OF_RANGE_MESSAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
+name|SqlOperatorFixture
+operator|.
+name|STRING_TRUNC_MESSAGE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|DateTimeStringUtils
@@ -1093,15 +1371,13 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|jupiter
+name|core
 operator|.
-name|api
+name|Is
 operator|.
-name|Assertions
-operator|.
-name|assertEquals
+name|is
 import|;
 end_import
 
@@ -1117,7 +1393,7 @@ name|api
 operator|.
 name|Assertions
 operator|.
-name|assertFalse
+name|assertEquals
 import|;
 end_import
 
@@ -1154,16 +1430,25 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.</p>  *  *<p>Different implementations of {@link SqlTester} are possible, such as:</p>  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls  * {@link SqlTester#setFor(org.apache.calcite.sql.SqlOperator, org.apache.calcite.sql.test.SqlTester.VmName...)}  * to declare which operator it is testing.  *  *<blockquote>  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *</blockquote>  *  *<p>The rest of the method contains calls to the various {@code checkXxx}  * methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
+comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>To run, you also need an execution mechanism: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which is obtained via the {@link #fixture()} method. The default tester  * merely validates calls to operators, but {@code CalciteSqlOperatorTest}  * uses a tester that executes calls and checks that results are valid.  *  *<p>Different implementations of {@link SqlTester} are possible, such as:  *  *<ul>  *<li>Execute against a JDBC database;  *<li>Parse and validate but do not evaluate expressions;  *<li>Generate a SQL script;  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls  * {@link SqlOperatorFixture#setFor(SqlOperator, VmName...)}  * to declare which operator it is testing.  *  *<blockquote>  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *</blockquote>  *  *<p>The rest of the method contains calls to the various {@code checkXxx}  * methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
 end_comment
 
 begin_class
 specifier|public
-specifier|abstract
 class|class
-name|SqlOperatorBaseTest
+name|SqlOperatorTest
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
+specifier|public
+specifier|static
+specifier|final
+name|TesterImpl
+name|TESTER
+init|=
+operator|new
+name|TesterImpl
+argument_list|()
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -1174,124 +1459,10 @@ name|CalciteTrace
 operator|.
 name|getTestTracer
 argument_list|(
-name|SqlOperatorBaseTest
+name|SqlOperatorTest
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-comment|// TODO: Change message when Fnl3Fixed to something like
-comment|// "Invalid character for cast: PC=0 Code=22018"
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|INVALID_CHAR_MESSAGE
-init|=
-name|Bug
-operator|.
-name|FNL3_FIXED
-condition|?
-literal|null
-else|:
-literal|"(?s).*"
-decl_stmt|;
-comment|// TODO: Change message when Fnl3Fixed to something like
-comment|// "Overflow during calculation or cast: PC=0 Code=22003"
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|OUT_OF_RANGE_MESSAGE
-init|=
-name|Bug
-operator|.
-name|FNL3_FIXED
-condition|?
-literal|null
-else|:
-literal|"(?s).*"
-decl_stmt|;
-comment|// TODO: Change message when Fnl3Fixed to something like
-comment|// "Division by zero: PC=0 Code=22012"
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|DIVISION_BY_ZERO_MESSAGE
-init|=
-name|Bug
-operator|.
-name|FNL3_FIXED
-condition|?
-literal|null
-else|:
-literal|"(?s).*"
-decl_stmt|;
-comment|// TODO: Change message when Fnl3Fixed to something like
-comment|// "String right truncation: PC=0 Code=22001"
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|STRING_TRUNC_MESSAGE
-init|=
-name|Bug
-operator|.
-name|FNL3_FIXED
-condition|?
-literal|null
-else|:
-literal|"(?s).*"
-decl_stmt|;
-comment|// TODO: Change message when Fnl3Fixed to something like
-comment|// "Invalid datetime format: PC=0 Code=22007"
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|BAD_DATETIME_MESSAGE
-init|=
-name|Bug
-operator|.
-name|FNL3_FIXED
-condition|?
-literal|null
-else|:
-literal|"(?s).*"
-decl_stmt|;
-comment|// Error messages when an invalid time unit is given as
-comment|// input to extract for a particular input type.
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
-init|=
-literal|"Extract.*from.*type data is not supported"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
-init|=
-literal|"Cannot apply 'EXTRACT' to arguments of type .*'\n.*"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|LITERAL_OUT_OF_RANGE_MESSAGE
-init|=
-literal|"(?s).*Numeric literal.*out of range.*"
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|INVALID_ARGUMENTS_NUMBER
-init|=
-literal|"Invalid number of arguments to function .* Was expecting .* arguments"
 decl_stmt|;
 specifier|public
 specifier|static
@@ -1345,41 +1516,14 @@ argument_list|(
 literal|"[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
 argument_list|)
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-index|[]
-name|NUMERIC_TYPE_NAMES
-init|=
+comment|/** Minimum and maximum values for each exact and approximate numeric    * type. */
+enum|enum
+name|Numeric
 block|{
+name|TINYINT
+argument_list|(
 literal|"TINYINT"
-block|,
-literal|"SMALLINT"
-block|,
-literal|"INTEGER"
-block|,
-literal|"BIGINT"
-block|,
-literal|"DECIMAL(5, 2)"
-block|,
-literal|"REAL"
-block|,
-literal|"FLOAT"
-block|,
-literal|"DOUBLE"
-block|}
-decl_stmt|;
-comment|// REVIEW jvs 27-Apr-2006:  for Float and Double, MIN_VALUE
-comment|// is the smallest positive value, not the smallest negative value
-specifier|public
-specifier|static
-specifier|final
-name|String
-index|[]
-name|MIN_NUMERIC_STRINGS
-init|=
-block|{
+argument_list|,
 name|Long
 operator|.
 name|toString
@@ -1388,7 +1532,43 @@ name|Byte
 operator|.
 name|MIN_VALUE
 argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Byte
+operator|.
+name|MIN_VALUE
+operator|-
+literal|1
+argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Byte
+operator|.
+name|MAX_VALUE
+argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Byte
+operator|.
+name|MAX_VALUE
+operator|+
+literal|1
+argument_list|)
+argument_list|)
 block|,
+name|SMALLINT
+argument_list|(
+literal|"SMALLINT"
+argument_list|,
 name|Long
 operator|.
 name|toString
@@ -1397,7 +1577,43 @@ name|Short
 operator|.
 name|MIN_VALUE
 argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Short
+operator|.
+name|MIN_VALUE
+operator|-
+literal|1
+argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Short
+operator|.
+name|MAX_VALUE
+argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Short
+operator|.
+name|MAX_VALUE
+operator|+
+literal|1
+argument_list|)
+argument_list|)
 block|,
+name|INTEGER
+argument_list|(
+literal|"INTEGER"
+argument_list|,
 name|Long
 operator|.
 name|toString
@@ -1406,59 +1622,7 @@ name|Integer
 operator|.
 name|MIN_VALUE
 argument_list|)
-block|,
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Long
-operator|.
-name|MIN_VALUE
-argument_list|)
-block|,
-literal|"-999.99"
-block|,
-comment|// NOTE jvs 26-Apr-2006:  Win32 takes smaller values from win32_values.h
-literal|"1E-37"
-block|,
-comment|/*Float.toString(Float.MIN_VALUE)*/
-literal|"2E-307"
-block|,
-comment|/*Double.toString(Double.MIN_VALUE)*/
-literal|"2E-307"
-comment|/*Double.toString(Double.MIN_VALUE)*/
-block|,   }
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-index|[]
-name|MIN_OVERFLOW_NUMERIC_STRINGS
-init|=
-block|{
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Byte
-operator|.
-name|MIN_VALUE
-operator|-
-literal|1
-argument_list|)
-block|,
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Short
-operator|.
-name|MIN_VALUE
-operator|-
-literal|1
-argument_list|)
-block|,
+argument_list|,
 name|Long
 operator|.
 name|toString
@@ -1472,7 +1636,44 @@ name|MIN_VALUE
 operator|-
 literal|1
 argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Integer
+operator|.
+name|MAX_VALUE
+argument_list|)
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+operator|(
+name|long
+operator|)
+name|Integer
+operator|.
+name|MAX_VALUE
+operator|+
+literal|1
+argument_list|)
+argument_list|)
 block|,
+name|BIGINT
+argument_list|(
+literal|"BIGINT"
+argument_list|,
+name|Long
+operator|.
+name|toString
+argument_list|(
+name|Long
+operator|.
+name|MIN_VALUE
+argument_list|)
+argument_list|,
 operator|new
 name|BigDecimal
 argument_list|(
@@ -1490,51 +1691,7 @@ argument_list|)
 operator|.
 name|toString
 argument_list|()
-block|,
-literal|"-1000.00"
-block|,
-literal|"1e-46"
-block|,
-literal|"1e-324"
-block|,
-literal|"1e-324"
-block|}
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-index|[]
-name|MAX_NUMERIC_STRINGS
-init|=
-block|{
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Byte
-operator|.
-name|MAX_VALUE
-argument_list|)
-block|,
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Short
-operator|.
-name|MAX_VALUE
-argument_list|)
-block|,
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Integer
-operator|.
-name|MAX_VALUE
-argument_list|)
-block|,
+argument_list|,
 name|Long
 operator|.
 name|toString
@@ -1543,67 +1700,7 @@ name|Long
 operator|.
 name|MAX_VALUE
 argument_list|)
-block|,
-literal|"999.99"
-block|,
-comment|// NOTE jvs 26-Apr-2006:  use something slightly less than MAX_VALUE
-comment|// because roundtripping string to approx to string doesn't preserve
-comment|// MAX_VALUE on win32
-literal|"3.4028234E38"
-block|,
-comment|/*Float.toString(Float.MAX_VALUE)*/
-literal|"1.79769313486231E308"
-block|,
-comment|/*Double.toString(Double.MAX_VALUE)*/
-literal|"1.79769313486231E308"
-comment|/*Double.toString(Double.MAX_VALUE)*/
-block|}
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-index|[]
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-init|=
-block|{
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Byte
-operator|.
-name|MAX_VALUE
-operator|+
-literal|1
-argument_list|)
-block|,
-name|Long
-operator|.
-name|toString
-argument_list|(
-name|Short
-operator|.
-name|MAX_VALUE
-operator|+
-literal|1
-argument_list|)
-block|,
-name|Long
-operator|.
-name|toString
-argument_list|(
-operator|(
-name|long
-operator|)
-name|Integer
-operator|.
-name|MAX_VALUE
-operator|+
-literal|1
-argument_list|)
-block|,
-operator|(
+argument_list|,
 operator|new
 name|BigDecimal
 argument_list|(
@@ -1611,7 +1708,6 @@ name|Long
 operator|.
 name|MAX_VALUE
 argument_list|)
-operator|)
 operator|.
 name|add
 argument_list|(
@@ -1622,16 +1718,238 @@ argument_list|)
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 block|,
+name|DECIMAL5_2
+argument_list|(
+literal|"DECIMAL(5, 2)"
+argument_list|,
+literal|"-999.99"
+argument_list|,
+literal|"-1000.00"
+argument_list|,
+literal|"999.99"
+argument_list|,
 literal|"1000.00"
+argument_list|)
 block|,
+name|REAL
+argument_list|(
+literal|"REAL"
+argument_list|,
+literal|"1E-37"
+argument_list|,
+comment|// or Float.toString(Float.MIN_VALUE)
+literal|"1e-46"
+argument_list|,
+literal|"3.4028234E38"
+argument_list|,
+comment|// or Float.toString(Float.MAX_VALUE)
 literal|"1e39"
+argument_list|)
 block|,
+name|FLOAT
+argument_list|(
+literal|"FLOAT"
+argument_list|,
+literal|"2E-307"
+argument_list|,
+comment|// or Double.toString(Double.MIN_VALUE)
+literal|"1e-324"
+argument_list|,
+literal|"1.79769313486231E308"
+argument_list|,
+comment|// or Double.toString(Double.MAX_VALUE)
 literal|"-1e309"
+argument_list|)
 block|,
+name|DOUBLE
+argument_list|(
+literal|"DOUBLE"
+argument_list|,
+literal|"2E-307"
+argument_list|,
+comment|// or Double.toString(Double.MIN_VALUE)
+literal|"1e-324"
+argument_list|,
+literal|"1.79769313486231E308"
+argument_list|,
+comment|// or Double.toString(Double.MAX_VALUE)
 literal|"1e309"
-block|}
+argument_list|)
+block|;
+specifier|private
+specifier|final
+name|String
+name|typeName
 decl_stmt|;
+comment|/** For Float and Double Java types, MIN_VALUE      * is the smallest positive value, not the smallest negative value.      * For REAL, FLOAT, DOUBLE, Win32 takes smaller values from      * win32_values.h. */
+specifier|private
+specifier|final
+name|String
+name|minNumericString
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|minOverflowNumericString
+decl_stmt|;
+comment|/** For REAL, FLOAT and DOUBLE SQL types (Flaot and Double Java types), we      * use something slightly less than MAX_VALUE because round-tripping string      * to approx to string doesn't preserve MAX_VALUE on win32. */
+specifier|private
+specifier|final
+name|String
+name|maxNumericString
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|maxOverflowNumericString
+decl_stmt|;
+name|Numeric
+parameter_list|(
+name|String
+name|typeName
+parameter_list|,
+name|String
+name|minNumericString
+parameter_list|,
+name|String
+name|minOverflowNumericString
+parameter_list|,
+name|String
+name|maxNumericString
+parameter_list|,
+name|String
+name|maxOverflowNumericString
+parameter_list|)
+block|{
+name|this
+operator|.
+name|typeName
+operator|=
+name|typeName
+expr_stmt|;
+name|this
+operator|.
+name|minNumericString
+operator|=
+name|minNumericString
+expr_stmt|;
+name|this
+operator|.
+name|minOverflowNumericString
+operator|=
+name|minOverflowNumericString
+expr_stmt|;
+name|this
+operator|.
+name|maxNumericString
+operator|=
+name|maxNumericString
+expr_stmt|;
+name|this
+operator|.
+name|maxOverflowNumericString
+operator|=
+name|maxOverflowNumericString
+expr_stmt|;
+block|}
+comment|/** Calls a consumer for each value. Similar effect to a {@code for}      * loop, but the calling line number will show up in the call stack. */
+specifier|static
+name|void
+name|forEach
+parameter_list|(
+name|Consumer
+argument_list|<
+name|Numeric
+argument_list|>
+name|consumer
+parameter_list|)
+block|{
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|TINYINT
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|SMALLINT
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|INTEGER
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|BIGINT
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|DECIMAL5_2
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|REAL
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|FLOAT
+argument_list|)
+expr_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|DOUBLE
+argument_list|)
+expr_stmt|;
+block|}
+name|double
+name|maxNumericAsDouble
+parameter_list|()
+block|{
+return|return
+name|Double
+operator|.
+name|parseDouble
+argument_list|(
+name|maxNumericString
+argument_list|)
+return|;
+block|}
+name|double
+name|minNumericAsDouble
+parameter_list|()
+block|{
+return|return
+name|Double
+operator|.
+name|parseDouble
+argument_list|(
+name|minNumericString
+argument_list|)
+return|;
+block|}
+block|}
 specifier|private
 specifier|static
 specifier|final
@@ -1648,13 +1966,9 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
-name|SqlTester
-operator|.
 name|VmName
 name|VM_FENNEL
 init|=
-name|SqlTester
-operator|.
 name|VmName
 operator|.
 name|FENNEL
@@ -1662,13 +1976,9 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
-name|SqlTester
-operator|.
 name|VmName
 name|VM_JAVA
 init|=
-name|SqlTester
-operator|.
 name|VmName
 operator|.
 name|JAVA
@@ -1676,13 +1986,9 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
-name|SqlTester
-operator|.
 name|VmName
 name|VM_EXPAND
 init|=
-name|SqlTester
-operator|.
 name|VmName
 operator|.
 name|EXPAND
@@ -1756,22 +2062,6 @@ name|DECIMAL
 init|=
 literal|false
 decl_stmt|;
-specifier|private
-specifier|final
-name|boolean
-name|enable
-decl_stmt|;
-specifier|protected
-specifier|final
-name|SqlTester
-name|tester
-decl_stmt|;
-comment|// same with tester but without implicit type coercion.
-specifier|protected
-specifier|final
-name|SqlTester
-name|strictTester
-decl_stmt|;
 comment|/** Function object that returns a string with 2 copies of each character.    * For example, {@code DOUBLER.apply("xy")} returns {@code "xxyy"}. */
 specifier|private
 specifier|static
@@ -1826,268 +2116,16 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Creates a SqlOperatorBaseTest.    *    * @param enable Whether to run "failing" tests.    * @param tester Means to validate, execute various statements.    */
+comment|/** Sub-classes should override to run tests in a different environment. */
 specifier|protected
-name|SqlOperatorBaseTest
-parameter_list|(
-name|boolean
-name|enable
-parameter_list|,
-name|SqlTester
-name|tester
-parameter_list|)
-block|{
-name|this
-operator|.
-name|enable
-operator|=
-name|enable
-expr_stmt|;
-name|this
-operator|.
-name|tester
-operator|=
-name|tester
-expr_stmt|;
-assert|assert
-name|tester
-operator|!=
-literal|null
-assert|;
-name|this
-operator|.
-name|strictTester
-operator|=
-name|tester
-operator|.
-name|enableTypeCoercion
-argument_list|(
-literal|false
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|BeforeEach
-specifier|public
-name|void
-name|setUp
+name|SqlOperatorFixture
+name|fixture
 parameter_list|()
-throws|throws
-name|Exception
-block|{
-name|tester
-operator|.
-name|setFor
-argument_list|(
-literal|null
-argument_list|)
-expr_stmt|;
-block|}
-specifier|protected
-name|SqlTester
-name|libraryTester
-parameter_list|(
-name|SqlLibrary
-name|library
-parameter_list|)
 block|{
 return|return
-name|tester
-operator|.
-name|withOperatorTable
-argument_list|(
-name|SqlLibraryOperatorTableFactory
-operator|.
-name|INSTANCE
-operator|.
-name|getOperatorTable
-argument_list|(
-name|SqlLibrary
-operator|.
-name|STANDARD
-argument_list|,
-name|library
-argument_list|)
-argument_list|)
-operator|.
-name|withConnectionFactory
-argument_list|(
-name|CalciteAssert
-operator|.
-name|EMPTY_CONNECTION_FACTORY
-operator|.
-name|with
-argument_list|(
-operator|new
-name|CalciteAssert
-operator|.
-name|AddSchemaSpecPostProcessor
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|HR
-argument_list|)
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|CalciteConnectionProperty
-operator|.
-name|FUN
-argument_list|,
-name|library
-operator|.
-name|fun
-argument_list|)
-argument_list|)
-return|;
-block|}
-specifier|protected
-name|SqlTester
-name|oracleTester
-parameter_list|(
-name|SqlConformance
-name|conformance
-parameter_list|)
-block|{
-if|if
-condition|(
-name|conformance
-operator|==
-literal|null
-condition|)
-block|{
-name|conformance
-operator|=
-name|SqlConformanceEnum
+name|SqlOperatorFixtureImpl
 operator|.
 name|DEFAULT
-expr_stmt|;
-block|}
-return|return
-name|tester
-operator|.
-name|withConformance
-argument_list|(
-name|conformance
-argument_list|)
-operator|.
-name|withOperatorTable
-argument_list|(
-name|SqlLibraryOperatorTableFactory
-operator|.
-name|INSTANCE
-operator|.
-name|getOperatorTable
-argument_list|(
-name|SqlLibrary
-operator|.
-name|STANDARD
-argument_list|,
-name|SqlLibrary
-operator|.
-name|ORACLE
-argument_list|)
-argument_list|)
-operator|.
-name|withConnectionFactory
-argument_list|(
-name|CalciteAssert
-operator|.
-name|EMPTY_CONNECTION_FACTORY
-operator|.
-name|with
-argument_list|(
-operator|new
-name|CalciteAssert
-operator|.
-name|AddSchemaSpecPostProcessor
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|HR
-argument_list|)
-argument_list|)
-operator|.
-name|with
-argument_list|(
-literal|"fun"
-argument_list|,
-literal|"oracle"
-argument_list|)
-operator|.
-name|with
-argument_list|(
-literal|"conformance"
-argument_list|,
-name|conformance
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|/** Creates a tester with special sql library. */
-specifier|protected
-name|SqlTester
-name|tester
-parameter_list|(
-name|SqlLibrary
-name|library
-parameter_list|)
-block|{
-return|return
-name|tester
-operator|.
-name|withOperatorTable
-argument_list|(
-name|SqlLibraryOperatorTableFactory
-operator|.
-name|INSTANCE
-operator|.
-name|getOperatorTable
-argument_list|(
-name|SqlLibrary
-operator|.
-name|STANDARD
-argument_list|,
-name|library
-argument_list|)
-argument_list|)
-operator|.
-name|withConnectionFactory
-argument_list|(
-name|CalciteAssert
-operator|.
-name|EMPTY_CONNECTION_FACTORY
-operator|.
-name|with
-argument_list|(
-operator|new
-name|CalciteAssert
-operator|.
-name|AddSchemaSpecPostProcessor
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|HR
-argument_list|)
-argument_list|)
-operator|.
-name|with
-argument_list|(
-literal|"fun"
-argument_list|,
-name|library
-operator|.
-name|name
-argument_list|()
-argument_list|)
-argument_list|)
 return|;
 block|}
 comment|//--- Tests -----------------------------------------------------------
@@ -2235,7 +2273,14 @@ name|void
 name|testBetween
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -2243,270 +2288,226 @@ name|SqlStdOperatorTable
 operator|.
 name|BETWEEN
 argument_list|,
-name|SqlTester
-operator|.
 name|VmName
 operator|.
 name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2 between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2 between 3 and 2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2 between symmetric 3 and 2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"3 between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"4 between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 between 4 and -3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 between -1 and -3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 between -1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 between 1 and 1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5 between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2 between 1.1 and 1.3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5 between 2 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5 between 1.6 and 1.7"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e1 between 1.1 and 1.3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e0 between 1.1 and 1.3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5e0 between 2 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5e0 between 2e0 and 3e0"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5e1 between 1.6e1 and 1.7e1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'' between x'' and x''"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer) between -1 and 2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"1 between -1 and cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"1 between cast(null as integer) and cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"1 between cast(null as integer) and 1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A00015A' between x'0A000130' and x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A00015A' between x'0A0001A0' and x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -2516,7 +2517,14 @@ name|void
 name|testNotBetween
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -2527,491 +2535,85 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2 not between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"3 not between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"4 not between 1 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e0 not between 1.1 and 1.3"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e1 not between 1.1 and 1.3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5e0 not between 2 and 3"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5e0 not between 2e0 and 3e0"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A00015A' not between x'0A000130' and x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A00015A' not between x'0A0001A0' and x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|String
-name|getCastString
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|targetType
-parameter_list|,
-name|boolean
-name|errorLoc
-parameter_list|)
-block|{
-if|if
-condition|(
-name|errorLoc
-condition|)
-block|{
-name|value
-operator|=
-literal|"^"
-operator|+
-name|value
-operator|+
-literal|"^"
-expr_stmt|;
-block|}
-return|return
-literal|"cast("
-operator|+
-name|value
-operator|+
-literal|" as "
-operator|+
-name|targetType
-operator|+
-literal|")"
-return|;
-block|}
-specifier|private
-name|void
-name|checkCastToApproxOkay
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|targetType
-parameter_list|,
-name|double
-name|expected
-parameter_list|,
-name|double
-name|delta
-parameter_list|)
-block|{
-name|tester
-operator|.
-name|checkScalarApprox
-argument_list|(
-name|getCastString
-argument_list|(
-name|value
-argument_list|,
-name|targetType
-argument_list|,
-literal|false
-argument_list|)
-argument_list|,
-name|targetType
-operator|+
-name|NON_NULLABLE_SUFFIX
-argument_list|,
-name|expected
-argument_list|,
-name|delta
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|checkCastToStringOkay
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|targetType
-parameter_list|,
-name|String
-name|expected
-parameter_list|)
-block|{
-name|tester
-operator|.
-name|checkString
-argument_list|(
-name|getCastString
-argument_list|(
-name|value
-argument_list|,
-name|targetType
-argument_list|,
-literal|false
-argument_list|)
-argument_list|,
-name|expected
-argument_list|,
-name|targetType
-operator|+
-name|NON_NULLABLE_SUFFIX
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|checkCastToScalarOkay
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|targetType
-parameter_list|,
-name|String
-name|expected
-parameter_list|)
-block|{
-name|tester
-operator|.
-name|checkScalarExact
-argument_list|(
-name|getCastString
-argument_list|(
-name|value
-argument_list|,
-name|targetType
-argument_list|,
-literal|false
-argument_list|)
-argument_list|,
-name|targetType
-operator|+
-name|NON_NULLABLE_SUFFIX
-argument_list|,
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|checkCastToScalarOkay
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|targetType
-parameter_list|)
-block|{
-name|checkCastToScalarOkay
-argument_list|(
-name|value
-argument_list|,
-name|targetType
-argument_list|,
-name|value
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|checkCastFails
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|targetType
-parameter_list|,
-name|String
-name|expectedError
-parameter_list|,
-name|boolean
-name|runtime
-parameter_list|)
-block|{
-name|tester
-operator|.
-name|checkFails
-argument_list|(
-name|getCastString
-argument_list|(
-name|value
-argument_list|,
-name|targetType
-argument_list|,
-operator|!
-name|runtime
-argument_list|)
-argument_list|,
-name|expectedError
-argument_list|,
-name|runtime
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|checkCastToString
-parameter_list|(
-name|String
-name|value
-parameter_list|,
-name|String
-name|type
-parameter_list|,
-name|String
-name|expected
-parameter_list|)
-block|{
-name|String
-name|spaces
-init|=
-literal|"     "
-decl_stmt|;
-if|if
-condition|(
-name|expected
-operator|==
-literal|null
-condition|)
-block|{
-name|expected
-operator|=
-name|value
-operator|.
-name|trim
-argument_list|()
-expr_stmt|;
-block|}
-name|int
-name|len
-init|=
-name|expected
-operator|.
-name|length
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|type
-operator|!=
-literal|null
-condition|)
-block|{
-name|value
-operator|=
-name|getCastString
-argument_list|(
-name|value
-argument_list|,
-name|type
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-block|}
-comment|// currently no exception thrown for truncation
-if|if
-condition|(
-name|Bug
-operator|.
-name|DT239_FIXED
-condition|)
-block|{
-name|checkCastFails
-argument_list|(
-name|value
-argument_list|,
-literal|"VARCHAR("
-operator|+
-operator|(
-name|len
-operator|-
-literal|1
-operator|)
-operator|+
-literal|")"
-argument_list|,
-name|STRING_TRUNC_MESSAGE
-argument_list|,
 literal|true
-argument_list|)
-expr_stmt|;
-block|}
-name|checkCastToStringOkay
-argument_list|(
-name|value
-argument_list|,
-literal|"VARCHAR("
-operator|+
-name|len
-operator|+
-literal|")"
-argument_list|,
-name|expected
-argument_list|)
-expr_stmt|;
-name|checkCastToStringOkay
-argument_list|(
-name|value
-argument_list|,
-literal|"VARCHAR("
-operator|+
-operator|(
-name|len
-operator|+
-literal|5
-operator|)
-operator|+
-literal|")"
-argument_list|,
-name|expected
-argument_list|)
-expr_stmt|;
-comment|// currently no exception thrown for truncation
-if|if
-condition|(
-name|Bug
-operator|.
-name|DT239_FIXED
-condition|)
-block|{
-name|checkCastFails
-argument_list|(
-name|value
-argument_list|,
-literal|"CHAR("
-operator|+
-operator|(
-name|len
-operator|-
-literal|1
-operator|)
-operator|+
-literal|")"
-argument_list|,
-name|STRING_TRUNC_MESSAGE
-argument_list|,
-literal|true
-argument_list|)
-expr_stmt|;
-block|}
-name|checkCastToStringOkay
-argument_list|(
-name|value
-argument_list|,
-literal|"CHAR("
-operator|+
-name|len
-operator|+
-literal|")"
-argument_list|,
-name|expected
-argument_list|)
-expr_stmt|;
-name|checkCastToStringOkay
-argument_list|(
-name|value
-argument_list|,
-literal|"CHAR("
-operator|+
-operator|(
-name|len
-operator|+
-literal|5
-operator|)
-operator|+
-literal|")"
-argument_list|,
-name|expected
-operator|+
-name|spaces
 argument_list|)
 expr_stmt|;
 block|}
@@ -3021,15 +2623,28 @@ name|void
 name|testCastToString
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(cast('abc' as char(4)) as varchar(6))"
@@ -3040,6 +2655,8 @@ literal|"abc "
 argument_list|)
 expr_stmt|;
 comment|// integer
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"123"
@@ -3049,6 +2666,8 @@ argument_list|,
 literal|"123"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"0"
@@ -3058,6 +2677,8 @@ argument_list|,
 literal|"0"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"-123"
@@ -3068,6 +2689,8 @@ literal|"-123"
 argument_list|)
 expr_stmt|;
 comment|// decimal
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"123.4"
@@ -3077,6 +2700,8 @@ argument_list|,
 literal|"123.4"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"-0.0"
@@ -3086,6 +2711,8 @@ argument_list|,
 literal|".0"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"-123.4"
@@ -3095,7 +2722,7 @@ argument_list|,
 literal|"-123.4"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3106,7 +2733,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3124,7 +2751,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3136,7 +2763,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3147,7 +2774,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3159,6 +2786,8 @@ literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// approximate
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"1.23E45"
@@ -3168,6 +2797,8 @@ argument_list|,
 literal|"1.23E45"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"CAST(0 AS DOUBLE)"
@@ -3177,6 +2808,8 @@ argument_list|,
 literal|"0E0"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"-1.20e-07"
@@ -3186,6 +2819,8 @@ argument_list|,
 literal|"-1.2E-7"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(0e0 as varchar(5))"
@@ -3200,6 +2835,8 @@ condition|(
 name|TODO
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(-45e-2 as varchar(17))"
@@ -3215,6 +2852,8 @@ condition|(
 name|TODO
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(4683442.3432498375e0 as varchar(20))"
@@ -3230,6 +2869,8 @@ condition|(
 name|TODO
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(-0.1 as real)"
@@ -3247,7 +2888,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3258,7 +2899,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3271,6 +2912,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// string
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"'abc'"
@@ -3280,6 +2923,8 @@ argument_list|,
 literal|"a"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"'abc'"
@@ -3289,6 +2934,8 @@ argument_list|,
 literal|"abc"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast('abc' as varchar(6))"
@@ -3298,6 +2945,8 @@ argument_list|,
 literal|"abc"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(' abc  ' as varchar(10))"
@@ -3307,6 +2956,8 @@ argument_list|,
 literal|" abc  "
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"cast(cast('abc' as char(4)) as varchar(6))"
@@ -3316,7 +2967,7 @@ argument_list|,
 literal|"abc "
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3327,7 +2978,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3338,7 +2989,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -3349,7 +3000,7 @@ argument_list|,
 literal|"CHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -3360,7 +3011,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -3371,7 +3022,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -3382,7 +3033,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -3393,7 +3044,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -3405,6 +3056,8 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// date& time
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"date '2008-01-01'"
@@ -3414,6 +3067,8 @@ argument_list|,
 literal|"2008-01-01"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"time '1:2:3'"
@@ -3423,6 +3078,8 @@ argument_list|,
 literal|"01:02:03"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"timestamp '2008-1-1 1:2:3'"
@@ -3432,6 +3089,8 @@ argument_list|,
 literal|"2008-01-01 01:02:03"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"timestamp '2008-1-1 1:2:3'"
@@ -3441,6 +3100,8 @@ argument_list|,
 literal|"2008-01-01 01:02:03"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"interval '3-2' year to month"
@@ -3450,6 +3111,8 @@ argument_list|,
 literal|"+3-02"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"interval '32' month"
@@ -3459,6 +3122,8 @@ argument_list|,
 literal|"+32"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"interval '1 2:3:4' day to second"
@@ -3468,6 +3133,8 @@ argument_list|,
 literal|"+1 02:03:04"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"interval '1234.56' second(4,2)"
@@ -3477,6 +3144,8 @@ argument_list|,
 literal|"+1234.56"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"interval '60' day"
@@ -3487,6 +3156,8 @@ literal|"+60     "
 argument_list|)
 expr_stmt|;
 comment|// boolean
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"True"
@@ -3496,6 +3167,8 @@ argument_list|,
 literal|"TRUE"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"True"
@@ -3505,6 +3178,8 @@ argument_list|,
 literal|"TRUE  "
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"True"
@@ -3514,6 +3189,8 @@ argument_list|,
 literal|"TRUE"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"False"
@@ -3530,7 +3207,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3541,7 +3218,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3552,7 +3229,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3563,7 +3240,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -3582,85 +3259,80 @@ name|void
 name|testCastExactNumericLimits
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// Test casting for min,max, out of range for exact numeric types
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|NUMERIC_TYPE_NAMES
+name|Numeric
 operator|.
-name|length
-condition|;
-name|i
-operator|++
-control|)
+name|forEach
+argument_list|(
+name|numeric
+lambda|->
 block|{
+specifier|final
 name|String
 name|type
 init|=
-name|NUMERIC_TYPE_NAMES
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|typeName
 decl_stmt|;
-if|if
+switch|switch
 condition|(
-name|type
-operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"DOUBLE"
-argument_list|)
-operator|||
-name|type
-operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"FLOAT"
-argument_list|)
-operator|||
-name|type
-operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"REAL"
-argument_list|)
+name|numeric
 condition|)
 block|{
+case|case
+name|DOUBLE
+case|:
+case|case
+name|FLOAT
+case|:
+case|case
+name|REAL
+case|:
 comment|// Skip approx types
-continue|continue;
+return|return;
+default|default:
+comment|// fall through
 block|}
 comment|// Convert from literal to type
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 name|type
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 name|type
 argument_list|)
@@ -3668,21 +3340,21 @@ expr_stmt|;
 comment|// Overflow test
 if|if
 condition|(
-name|type
+name|numeric
+operator|==
+name|Numeric
 operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"BIGINT"
-argument_list|)
+name|BIGINT
 condition|)
 block|{
 comment|// Literal of range
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -3691,12 +3363,13 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
-name|MIN_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -3715,12 +3388,13 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -3729,12 +3403,13 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
-name|MIN_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -3746,42 +3421,42 @@ expr_stmt|;
 block|}
 block|}
 comment|// Convert from string to type
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"'"
 operator|+
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 operator|+
 literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"'"
 operator|+
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 operator|+
 literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|)
 expr_stmt|;
 if|if
@@ -3791,14 +3466,15 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
 literal|"'"
 operator|+
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxOverflowNumericString
 operator|+
 literal|"'"
 argument_list|,
@@ -3809,14 +3485,15 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
 literal|"'"
 operator|+
-name|MIN_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minOverflowNumericString
 operator|+
 literal|"'"
 argument_list|,
@@ -3829,48 +3506,52 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Convert from type to string
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 literal|null
 argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 name|type
 argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 literal|null
 argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -3884,6 +3565,8 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
 literal|"'notnumeric'"
@@ -3897,6 +3580,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -3904,15 +3589,28 @@ name|void
 name|testCastToExactNumeric
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1"
@@ -3920,6 +3618,8 @@ argument_list|,
 literal|"BIGINT"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1"
@@ -3927,6 +3627,8 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1"
@@ -3934,6 +3636,8 @@ argument_list|,
 literal|"SMALLINT"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1"
@@ -3941,6 +3645,8 @@ argument_list|,
 literal|"TINYINT"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1"
@@ -3948,6 +3654,8 @@ argument_list|,
 literal|"DECIMAL(4, 0)"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1"
@@ -3955,6 +3663,8 @@ argument_list|,
 literal|"BIGINT"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1"
@@ -3962,6 +3672,8 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1"
@@ -3969,6 +3681,8 @@ argument_list|,
 literal|"SMALLINT"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1"
@@ -3976,6 +3690,8 @@ argument_list|,
 literal|"TINYINT"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1"
@@ -3983,6 +3699,8 @@ argument_list|,
 literal|"DECIMAL(4, 0)"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.234E3"
@@ -3992,6 +3710,8 @@ argument_list|,
 literal|"1234"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-9.99E2"
@@ -4001,6 +3721,8 @@ argument_list|,
 literal|"-999"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"'1'"
@@ -4010,6 +3732,8 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"' 01 '"
@@ -4019,6 +3743,8 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"'-1'"
@@ -4028,6 +3754,8 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"' -00 '"
@@ -4038,25 +3766,26 @@ literal|"0"
 argument_list|)
 expr_stmt|;
 comment|// string to integer
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast('6543' as integer)"
 argument_list|,
-literal|"6543"
+literal|6543
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast(' -123 ' as int)"
 argument_list|,
-literal|"-123"
+operator|-
+literal|123
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4074,13 +3803,24 @@ name|void
 name|testCastStringToDecimal
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 if|if
@@ -4092,7 +3832,7 @@ block|{
 return|return;
 block|}
 comment|// string to decimal
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4103,7 +3843,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4114,7 +3854,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4125,7 +3865,7 @@ argument_list|,
 literal|"1.2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4136,7 +3876,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4147,7 +3887,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4158,7 +3898,7 @@ argument_list|,
 literal|"-1.2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -4176,13 +3916,24 @@ name|void
 name|testCastIntervalToNumeric
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// interval to decimal
@@ -4191,7 +3942,7 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4202,7 +3953,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4213,7 +3964,7 @@ argument_list|,
 literal|"1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4224,7 +3975,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4235,7 +3986,7 @@ argument_list|,
 literal|"-1.3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4246,7 +3997,7 @@ argument_list|,
 literal|"-1.2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4257,7 +4008,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4268,7 +4019,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4279,7 +4030,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4290,7 +4041,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4301,7 +4052,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4314,7 +4065,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Interval to bigint
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4325,7 +4076,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4336,7 +4087,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4348,7 +4099,7 @@ literal|"5"
 argument_list|)
 expr_stmt|;
 comment|// Interval to integer
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4359,7 +4110,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4370,7 +4121,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4381,7 +4132,7 @@ argument_list|,
 literal|"5"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4392,7 +4143,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4403,7 +4154,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4414,7 +4165,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4425,7 +4176,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4436,7 +4187,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4447,7 +4198,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4458,7 +4209,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4469,7 +4220,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4480,7 +4231,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4491,7 +4242,7 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4502,7 +4253,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -4520,16 +4271,27 @@ name|void
 name|testCastToInterval
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4540,7 +4302,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4551,7 +4313,7 @@ argument_list|,
 literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4562,7 +4324,7 @@ argument_list|,
 literal|"INTERVAL HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4573,7 +4335,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4584,7 +4346,7 @@ argument_list|,
 literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4601,7 +4363,7 @@ name|DECIMAL
 condition|)
 block|{
 comment|// Due to DECIMAL rounding bugs, currently returns "+5"
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4612,7 +4374,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4627,7 +4389,7 @@ block|}
 else|else
 block|{
 comment|// An easier case
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4639,7 +4401,7 @@ literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4650,7 +4412,7 @@ argument_list|,
 literal|"INTERVAL MONTH(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4668,7 +4430,14 @@ name|void
 name|testCastIntervalToInterval
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4679,7 +4448,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4690,7 +4459,7 @@ argument_list|,
 literal|"INTERVAL DAY TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4701,7 +4470,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4712,7 +4481,7 @@ argument_list|,
 literal|"INTERVAL HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -4730,15 +4499,28 @@ name|void
 name|testCastWithRoundingToScalar
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.25"
@@ -4748,6 +4530,8 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.25E0"
@@ -4760,11 +4544,16 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.5"
@@ -4774,6 +4563,8 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"5E-1"
@@ -4783,6 +4574,8 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.75"
@@ -4792,6 +4585,8 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.75E0"
@@ -4801,6 +4596,8 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.25"
@@ -4810,6 +4607,8 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.25E0"
@@ -4819,6 +4618,8 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.5"
@@ -4828,6 +4629,8 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-5E-1"
@@ -4837,6 +4640,8 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.75"
@@ -4846,6 +4651,8 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.75E0"
@@ -4855,6 +4662,8 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.23454"
@@ -4864,6 +4673,8 @@ argument_list|,
 literal|"1.2345"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.23454E0"
@@ -4873,6 +4684,8 @@ argument_list|,
 literal|"1.2345"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.23455"
@@ -4882,6 +4695,8 @@ argument_list|,
 literal|"1.2346"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"5E-5"
@@ -4891,6 +4706,8 @@ argument_list|,
 literal|"0.0001"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.99995"
@@ -4900,6 +4717,8 @@ argument_list|,
 literal|"2.0000"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"1.99995E0"
@@ -4909,6 +4728,8 @@ argument_list|,
 literal|"2.0000"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.23454"
@@ -4918,6 +4739,8 @@ argument_list|,
 literal|"-1.2345"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.23454E0"
@@ -4927,6 +4750,8 @@ argument_list|,
 literal|"-1.2345"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.23455"
@@ -4936,6 +4761,8 @@ argument_list|,
 literal|"-1.2346"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-5E-5"
@@ -4945,6 +4772,8 @@ argument_list|,
 literal|"-0.0001"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.99995"
@@ -4954,6 +4783,8 @@ argument_list|,
 literal|"-2.0000"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToScalarOkay
 argument_list|(
 literal|"-1.99995E0"
@@ -4964,7 +4795,7 @@ literal|"-2.0000"
 argument_list|)
 expr_stmt|;
 comment|// 9.99 round to 10.0, should give out of range error
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -4982,75 +4813,92 @@ name|void
 name|testCastDecimalToDoubleToInteger
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast( cast(1.25 as double) as integer)"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast( cast(-1.25 as double) as integer)"
 argument_list|,
-literal|"-1"
+operator|-
+literal|1
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast( cast(1.75 as double) as integer)"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast( cast(-1.75 as double) as integer)"
 argument_list|,
-literal|"-2"
+operator|-
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast( cast(1.5 as double) as integer)"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cast( cast(-1.5 as double) as integer)"
 argument_list|,
-literal|"-2"
+operator|-
+literal|2
 argument_list|)
 expr_stmt|;
 block|}
@@ -5060,141 +4908,131 @@ name|void
 name|testCastApproxNumericLimits
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-comment|// Test casting for min,max, out of range for approx numeric types
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|NUMERIC_TYPE_NAMES
+comment|// Test casting for min, max, out of range for approx numeric types
+name|Numeric
 operator|.
-name|length
-condition|;
-name|i
-operator|++
-control|)
+name|forEach
+argument_list|(
+name|numeric
+lambda|->
 block|{
 name|String
 name|type
 init|=
-name|NUMERIC_TYPE_NAMES
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|typeName
 decl_stmt|;
 name|boolean
 name|isFloat
 decl_stmt|;
-if|if
+switch|switch
 condition|(
-name|type
-operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"DOUBLE"
-argument_list|)
-operator|||
-name|type
-operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"FLOAT"
-argument_list|)
+name|numeric
 condition|)
 block|{
+case|case
+name|DOUBLE
+case|:
+case|case
+name|FLOAT
+case|:
 name|isFloat
 operator|=
 literal|false
 expr_stmt|;
-block|}
-if|else if
-condition|(
-name|type
-operator|.
-name|equalsIgnoreCase
-argument_list|(
-literal|"REAL"
-argument_list|)
-condition|)
-block|{
+break|break;
+case|case
+name|REAL
+case|:
 name|isFloat
 operator|=
 literal|true
 expr_stmt|;
-block|}
-else|else
-block|{
+break|break;
+default|default:
 comment|// Skip non-approx types
-continue|continue;
+return|return;
 block|}
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// Convert from literal to type
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 name|type
-argument_list|,
-name|Double
-operator|.
-name|parseDouble
-argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
-argument_list|)
 argument_list|,
 name|isFloat
 condition|?
+name|isWithin
+argument_list|(
+name|numeric
+operator|.
+name|maxNumericAsDouble
+argument_list|()
+argument_list|,
 literal|1E32
+argument_list|)
 else|:
-literal|0
+name|isExactly
+argument_list|(
+name|numeric
+operator|.
+name|maxNumericAsDouble
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 name|type
 argument_list|,
-name|Double
-operator|.
-name|parseDouble
+name|isExactly
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|)
-argument_list|,
-literal|0
 argument_list|)
 expr_stmt|;
 if|if
@@ -5202,12 +5040,13 @@ condition|(
 name|isFloat
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -5220,12 +5059,13 @@ block|}
 else|else
 block|{
 comment|// Double: Literal out of range
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -5236,85 +5076,90 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Underflow: goes to 0
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
-name|MIN_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minOverflowNumericString
 argument_list|,
 name|type
 argument_list|,
+name|isExactly
+argument_list|(
 literal|0
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Convert from string to type
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"'"
 operator|+
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 operator|+
 literal|"'"
 argument_list|,
 name|type
-argument_list|,
-name|Double
-operator|.
-name|parseDouble
-argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
-argument_list|)
 argument_list|,
 name|isFloat
 condition|?
+name|isWithin
+argument_list|(
+name|numeric
+operator|.
+name|maxNumericAsDouble
+argument_list|()
+argument_list|,
 literal|1E32
+argument_list|)
 else|:
-literal|0
+name|isExactly
+argument_list|(
+name|numeric
+operator|.
+name|maxNumericAsDouble
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"'"
 operator|+
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 operator|+
 literal|"'"
 argument_list|,
 name|type
 argument_list|,
-name|Double
-operator|.
-name|parseDouble
+name|isExactly
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericAsDouble
+argument_list|()
 argument_list|)
-argument_list|,
-literal|0
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
 literal|"'"
 operator|+
-name|MAX_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxOverflowNumericString
 operator|+
 literal|"'"
 argument_list|,
@@ -5326,32 +5171,35 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// Underflow: goes to 0
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"'"
 operator|+
-name|MIN_OVERFLOW_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minOverflowNumericString
 operator|+
 literal|"'"
 argument_list|,
 name|type
 argument_list|,
+name|isExactly
+argument_list|(
 literal|0
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// Convert from type to string
 comment|// Treated as DOUBLE
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 literal|null
 argument_list|,
@@ -5372,12 +5220,13 @@ comment|/* fennel calc*/
 condition|)
 block|{
 comment|// Treated as FLOAT or DOUBLE
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -5389,12 +5238,13 @@ else|:
 literal|"1.797693134862316E308"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 literal|null
 argument_list|,
@@ -5406,12 +5256,13 @@ else|:
 literal|"4.940656458412465E-324"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -5430,12 +5281,13 @@ comment|/* JavaCalc */
 condition|)
 block|{
 comment|// Treated as FLOAT or DOUBLE
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MAX_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|maxNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -5447,12 +5299,13 @@ else|:
 literal|"1.797693134862316E308"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 literal|null
 argument_list|,
@@ -5464,12 +5317,13 @@ literal|null
 argument_list|)
 expr_stmt|;
 comment|// Treated as FLOAT or DOUBLE
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
-name|MIN_NUMERIC_STRINGS
-index|[
-name|i
-index|]
+name|numeric
+operator|.
+name|minNumericString
 argument_list|,
 name|type
 argument_list|,
@@ -5481,6 +5335,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+name|f
+operator|.
 name|checkCastFails
 argument_list|(
 literal|"'notnumeric'"
@@ -5493,6 +5349,8 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -5500,92 +5358,125 @@ name|void
 name|testCastToApproxNumeric
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"1"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"1.0"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"-2.3"
 argument_list|,
 literal|"FLOAT"
 argument_list|,
+name|isWithin
+argument_list|(
 operator|-
 literal|2.3
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"'1'"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"'  -1e-37  '"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-operator|-
-literal|1e-37
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"-1.0E-37"
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"1e0"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToApproxOkay
 argument_list|(
 literal|"0e0"
 argument_list|,
 literal|"REAL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|0
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5595,17 +5486,28 @@ name|void
 name|testCastNull
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// null
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -5617,7 +5519,7 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -5625,63 +5527,63 @@ literal|"cast(null as decimal(4,3))"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as double)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as varchar(10))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as char(10))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as date)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as time)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as timestamp)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval year to month)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval day to second(3))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -5699,7 +5601,14 @@ block|{
 comment|// Before CALCITE-1439 was fixed, constant reduction would kick in and
 comment|// generate Java constants that throw when the class is loaded, thus
 comment|// ExceptionInInitializerError.
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -5717,7 +5626,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5728,7 +5637,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5739,7 +5648,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5750,7 +5659,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5761,7 +5670,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5772,7 +5681,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5783,7 +5692,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5794,7 +5703,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -5814,16 +5723,27 @@ name|testCastDateTime
 parameter_list|()
 block|{
 comment|// Test cast for date/time/timestamp
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5834,7 +5754,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5848,10 +5768,13 @@ expr_stmt|;
 comment|// test rounding
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5871,7 +5794,7 @@ name|FRG282_FIXED
 condition|)
 block|{
 comment|// test precision
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5883,7 +5806,7 @@ literal|"TIME(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5895,7 +5818,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// timestamp<-> time
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5907,6 +5830,8 @@ literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// time<-> string
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"TIME '12:42:25'"
@@ -5921,6 +5846,8 @@ condition|(
 name|TODO
 condition|)
 block|{
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"TIME '12:42:25.34'"
@@ -5961,7 +5888,7 @@ name|getTime
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5975,7 +5902,7 @@ expr_stmt|;
 comment|// Note: Casting to time(0) should lose date info and fractional
 comment|// seconds, then casting back to timestamp should initialize to
 comment|// current_date.
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -5988,7 +5915,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6002,7 +5929,7 @@ literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// timestamp<-> date
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6014,7 +5941,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Note: casting to Date discards Time fields
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6032,7 +5959,14 @@ name|void
 name|testCastStringToDateTime
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6043,7 +5977,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6054,7 +5988,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6065,7 +5999,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6076,7 +6010,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6094,7 +6028,7 @@ operator|.
 name|FRG282_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6106,7 +6040,7 @@ literal|"TIME(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6124,7 +6058,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6135,7 +6069,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6146,7 +6080,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6157,7 +6091,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6168,7 +6102,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6181,6 +6115,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// timestamp<-> string
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"TIMESTAMP '1945-02-24 12:42:25'"
@@ -6196,6 +6132,8 @@ name|TODO
 condition|)
 block|{
 comment|// TODO: casting allows one to discard precision without error
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"TIMESTAMP '1945-02-24 12:42:25.34'"
@@ -6206,7 +6144,7 @@ literal|"1945-02-24 12:42:25.34"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6217,7 +6155,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6228,7 +6166,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6239,7 +6177,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6250,7 +6188,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6261,7 +6199,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6279,7 +6217,7 @@ operator|.
 name|FRG282_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6291,7 +6229,7 @@ literal|"TIMESTAMP(2) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6309,7 +6247,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6320,7 +6258,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6331,7 +6269,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6342,7 +6280,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6355,6 +6293,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// date<-> string
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"DATE '1945-02-24'"
@@ -6364,6 +6304,8 @@ argument_list|,
 literal|"1945-02-24"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkCastToString
 argument_list|(
 literal|"DATE '1945-2-24'"
@@ -6373,7 +6315,7 @@ argument_list|,
 literal|"1945-02-24"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6384,7 +6326,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6395,7 +6337,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -6406,7 +6348,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6424,7 +6366,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6435,7 +6377,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6448,70 +6390,70 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// cast null
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as date)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as timestamp)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as time)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as varchar(10)) as time)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as varchar(10)) as date)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as varchar(10)) as timestamp)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as date) as timestamp)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as time) as timestamp)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(cast(null as timestamp) as date)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -6775,72 +6717,73 @@ name|void
 name|testCastToBoolean
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// string to boolean
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('true' as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('false' as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('  trUe' as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('  tr' || 'Ue' as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('  fALse' as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6851,29 +6794,25 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(cast('true' as varchar(10))  as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(cast('false' as varchar(10)) as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -6891,25 +6830,36 @@ name|void
 name|testCase
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CASE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"case when 'a'='a' then 1 end"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -6920,7 +6870,7 @@ argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -6931,7 +6881,7 @@ argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -6949,22 +6899,26 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"case 2 when 1 then 11.2 when 2 then 4.543 else null end"
+literal|"case 2 when 1 then 11.2 "
+operator|+
+literal|"when 2 then 4.543 else null end"
 argument_list|,
 literal|"DECIMAL(5, 3)"
 argument_list|,
 literal|"4.543"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"case 1 when 1 then 11.2 when 2 then 4.543 else null end"
+literal|"case 1 when 1 then 11.2 "
+operator|+
+literal|"when 2 then 4.543 else null end"
 argument_list|,
 literal|"DECIMAL(5, 3)"
 argument_list|,
@@ -6972,81 +6926,96 @@ literal|"11.200"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"case 'a' when 'a' then 1 end"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|"case 1 when 1 then 11.2e0 when 2 then cast(4 as bigint) else 3 end"
+literal|"case 1 when 1 then 11.2e0 "
+operator|+
+literal|"when 2 then cast(4 as bigint) else 3 end"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|11.2
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"11.2"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|"case 1 when 1 then 11.2e0 when 2 then 4 else null end"
+literal|"case 1 when 1 then 11.2e0 "
+operator|+
+literal|"when 2 then 4 else null end"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-literal|11.2
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"11.2"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|"case 2 when 1 then 11.2e0 when 2 then 4 else null end"
+literal|"case 2 when 1 then 11.2e0 "
+operator|+
+literal|"when 2 then 4 else null end"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|4
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|"case 1 when 1 then 11.2e0 when 2 then 4.543 else null end"
+literal|"case 1 when 1 then 11.2e0 "
+operator|+
+literal|"when 2 then 4.543 else null end"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-literal|11.2
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"11.2"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|"case 2 when 1 then 11.2e0 when 2 then 4.543 else null end"
+literal|"case 2 when 1 then 11.2e0 "
+operator|+
+literal|"when 2 then 4.543 else null end"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-literal|4.543
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"4.543"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -7057,32 +7026,40 @@ comment|// Per spec, 'case x when y then ...'
 comment|// translates to 'case when x = y then ...'
 comment|// so nulls do not match.
 comment|// (Unlike Oracle's 'decode(null, null, ...)', by the way.)
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"case cast(null as int) when cast(null as int) then 'nulls match' else 'nulls do not match' end"
+literal|"case cast(null as int)\n"
+operator|+
+literal|"when cast(null as int) then 'nulls match'\n"
+operator|+
+literal|"else 'nulls do not match' end"
 argument_list|,
 literal|"nulls do not match"
 argument_list|,
 literal|"CHAR(18) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"case when 'a'=cast(null as varchar(1)) then 1 else 2 end"
+literal|"case when 'a'=cast(null as varchar(1)) then 1 "
+operator|+
+literal|"else 2 end"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
 comment|// equivalent to "nullif('a',cast(null as varchar(1)))"
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"case when 'a' = cast(null as varchar(1)) then null else 'a' end"
+literal|"case when 'a' = cast(null as varchar(1)) then null "
+operator|+
+literal|"else 'a' end"
 argument_list|,
 literal|"a"
 argument_list|,
@@ -7094,7 +7071,7 @@ condition|(
 name|TODO
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7105,11 +7082,13 @@ argument_list|,
 literal|"row(1,2)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"case 1 when 1 then row('a','b') when 2 then row('ab','cd') end"
+literal|"case 1 when 1 then row('a','b') "
+operator|+
+literal|"when 2 then row('ab','cd') end"
 argument_list|,
 literal|"ROW(CHAR(2) NOT NULL, CHAR(2) NOT NULL)"
 argument_list|,
@@ -7118,7 +7097,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// multiple values in some cases (introduced in SQL:2011)
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7139,7 +7118,7 @@ argument_list|,
 literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7160,7 +7139,7 @@ argument_list|,
 literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7181,7 +7160,7 @@ argument_list|,
 literal|"CHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7204,10 +7183,10 @@ argument_list|)
 expr_stmt|;
 comment|// tests with SqlConformance
 specifier|final
-name|SqlTester
-name|tester2
+name|SqlOperatorFixture
+name|f2
 init|=
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -7216,7 +7195,7 @@ operator|.
 name|PRAGMATIC_2003
 argument_list|)
 decl_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7227,7 +7206,7 @@ argument_list|,
 literal|"VARCHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7238,7 +7217,7 @@ argument_list|,
 literal|"VARCHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7251,7 +7230,7 @@ argument_list|,
 literal|"VARCHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7266,21 +7245,25 @@ argument_list|,
 literal|"VARCHAR(18) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"case when 'a'=cast(null as varchar(1)) then 1 else 2 end"
+literal|"case when 'a'=cast(null as varchar(1)) then 1 "
+operator|+
+literal|"else 2 end"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
 comment|// equivalent to "nullif('a',cast(null as varchar(1)))"
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
-literal|"case when 'a' = cast(null as varchar(1)) then null else 'a' end"
+literal|"case when 'a' = cast(null as varchar(1)) then null "
+operator|+
+literal|"else 'a' end"
 argument_list|,
 literal|"a"
 argument_list|,
@@ -7288,7 +7271,7 @@ literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
 comment|// multiple values in some cases (introduced in SQL:2011)
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7309,7 +7292,7 @@ argument_list|,
 literal|"VARCHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7330,7 +7313,7 @@ argument_list|,
 literal|"VARCHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7351,7 +7334,7 @@ argument_list|,
 literal|"VARCHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f2
 operator|.
 name|checkString
 argument_list|(
@@ -7380,25 +7363,36 @@ name|void
 name|testCaseNull
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CASE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"case when 1 = 1 then 10 else null end"
 argument_list|,
-literal|"10"
+literal|10
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -7412,16 +7406,27 @@ name|void
 name|testCaseType
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CASE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -7430,16 +7435,18 @@ argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|"case 1 when 1 then current_timestamp else current_timestamp end"
+literal|"case 1 when 1 then current_timestamp "
+operator|+
+literal|"else current_timestamp end"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -7448,7 +7455,7 @@ argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -7457,7 +7464,7 @@ argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -7474,7 +7481,14 @@ name|void
 name|testJdbcFn
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -7483,13 +7497,17 @@ name|SqlJdbcFunctionCall
 argument_list|(
 literal|"dummy"
 argument_list|)
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// There follows one test for each function in appendix C of the JDBC
 comment|// 3.0 specification. The test is 'if-false'd out if the function is
 comment|// not implemented or is broken.
 comment|// Numeric Functions
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7500,7 +7518,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7508,12 +7526,15 @@ literal|"{fn ACOS(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.36943
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7521,12 +7542,15 @@ literal|"{fn ASIN(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.20135
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7534,12 +7558,15 @@ literal|"{fn ATAN(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.19739
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7547,13 +7574,16 @@ literal|"{fn ATAN2(-2, 2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 operator|-
 literal|0.78539
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7564,7 +7594,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7576,7 +7606,7 @@ argument_list|,
 literal|"DECIMAL(2, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7584,12 +7614,15 @@ literal|"{fn COS(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.98007
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7597,12 +7630,15 @@ literal|"{fn COT(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|4.93315
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7610,13 +7646,16 @@ literal|"{fn DEGREES(-1)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 operator|-
 literal|57.29578
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7624,12 +7663,15 @@ literal|"{fn EXP(2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|7.389
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7640,7 +7682,7 @@ argument_list|,
 literal|"DECIMAL(2, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7648,12 +7690,15 @@ literal|"{fn LOG(10)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.30258
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7661,12 +7706,13 @@ literal|"{fn LOG10(100)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|2
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7677,7 +7723,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7685,12 +7731,15 @@ literal|"{fn PI()}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|3.14159
 argument_list|,
 literal|0.0001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7698,12 +7747,15 @@ literal|"{fn POWER(2, 3)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|8.0
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7711,12 +7763,15 @@ literal|"{fn RADIANS(90)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.57080
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7724,12 +7779,15 @@ literal|"{fn RAND(42)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.63708
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7740,7 +7798,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -7753,7 +7811,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7765,7 +7823,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7773,12 +7831,15 @@ literal|"{fn SIN(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.19867
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7786,12 +7847,15 @@ literal|"{fn SQRT(4.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.04939
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -7799,12 +7863,15 @@ literal|"{fn TAN(0.2)}"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.20271
 argument_list|,
 literal|0.001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7815,7 +7882,7 @@ argument_list|,
 literal|"DECIMAL(4, 2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7828,7 +7895,7 @@ literal|"DECIMAL(4, 2) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// String Functions
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7839,7 +7906,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7850,7 +7917,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -7862,7 +7929,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7874,7 +7941,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7885,7 +7952,7 @@ argument_list|,
 literal|"CHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -7896,14 +7963,14 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn DIFFERENCE('muller', cast(null as varchar(1)))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7914,14 +7981,14 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn REVERSE(cast(null as varchar(1)))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7932,7 +7999,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7943,7 +8010,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7954,14 +8021,14 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn LEFT(cast(null as varchar(1)), 3)}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7972,7 +8039,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7983,7 +8050,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -7994,7 +8061,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -8002,7 +8069,7 @@ literal|"{fn RIGHT(cast(null as varchar(1)), 3)}"
 argument_list|)
 expr_stmt|;
 comment|// REVIEW: is this result correct? I think it should be "abcCdef"
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8013,7 +8080,7 @@ argument_list|,
 literal|"VARCHAR(9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8029,7 +8096,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8041,7 +8108,7 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8052,7 +8119,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8063,7 +8130,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8074,7 +8141,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8085,21 +8152,21 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn REPEAT('abc', cast(null as integer))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn REPEAT(cast(null as varchar(1)), cast(null as integer))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -8113,7 +8180,7 @@ expr_stmt|;
 comment|// REPLACE returns NULL in Oracle but not in Postgres or in Calcite.
 comment|// When [CALCITE-815] is implemented and SqlConformance#emptyStringIsNull is
 comment|// enabled, it will return empty string as NULL.
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -8124,7 +8191,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -8135,28 +8202,28 @@ argument_list|,
 literal|"VARCHAR(11) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn REPLACE(cast(null as varchar(5)), 'ciao', '')}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn REPLACE('ciao', cast(null as varchar(3)), 'zz')}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn REPLACE('ciao', 'bella', cast(null as varchar(3)))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8167,7 +8234,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8178,14 +8245,14 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn SOUNDEX(cast(null as varchar(1)))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8196,14 +8263,14 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"{fn SPACE(cast(null as integer))}"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8214,7 +8281,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8226,7 +8293,7 @@ literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Time and Date Functions
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -8235,7 +8302,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -8244,7 +8311,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8265,7 +8332,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8283,7 +8350,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -8294,7 +8361,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -8306,7 +8373,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8317,7 +8384,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8328,7 +8395,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8339,7 +8406,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8360,7 +8427,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -8369,7 +8436,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8380,7 +8447,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8391,7 +8458,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8404,7 +8471,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8419,7 +8486,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8441,7 +8508,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -8453,7 +8520,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8465,7 +8532,7 @@ literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// System Functions
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -8474,7 +8541,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -8485,7 +8552,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -8498,7 +8565,7 @@ argument_list|)
 expr_stmt|;
 comment|// Conversion Functions
 comment|// Legacy JDBC style
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8510,7 +8577,7 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// ODBC/JDBC style
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8521,7 +8588,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8539,7 +8606,12 @@ name|void
 name|testChr
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -8551,19 +8623,21 @@ name|VM_FENNEL
 argument_list|,
 name|VM_JAVA
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
+name|f0
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8574,7 +8648,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8585,7 +8659,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -8601,7 +8675,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f0
 operator|.
 name|checkFails
 argument_list|(
@@ -8619,7 +8693,14 @@ name|void
 name|testSelect
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|check
 argument_list|(
@@ -8629,9 +8710,7 @@ name|SqlTests
 operator|.
 name|INTEGER_TYPE_CHECKER
 argument_list|,
-literal|"1"
-argument_list|,
-literal|0
+literal|1
 argument_list|)
 expr_stmt|;
 comment|// Check return type on scalar sub-query in select list.  Note return
@@ -8643,88 +8722,93 @@ condition|(
 name|Bug
 operator|.
 name|FRG189_FIXED
-operator|||
-operator|(
-name|getClass
-argument_list|()
-operator|!=
-name|SqlOperatorTest
-operator|.
-name|class
-operator|)
-operator|&&
-name|Bug
-operator|.
-name|TODO_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|"SELECT *,(SELECT * FROM (VALUES(1))) FROM (VALUES(2))"
+literal|"SELECT *,\n"
+operator|+
+literal|"  (SELECT * FROM (VALUES(1)))\n"
+operator|+
+literal|"FROM (VALUES(2))"
 argument_list|,
 literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|"SELECT *,(SELECT * FROM (VALUES(CAST(10 as BIGINT)))) "
+literal|"SELECT *,\n"
+operator|+
+literal|"  (SELECT * FROM (VALUES(CAST(10 as BIGINT))))\n"
 operator|+
 literal|"FROM (VALUES(CAST(10 as bigint)))"
 argument_list|,
 literal|"RecordType(BIGINT NOT NULL EXPR$0, BIGINT EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|" SELECT *,(SELECT * FROM (VALUES(10.5))) FROM (VALUES(10.5))"
+literal|"SELECT *,\n"
+operator|+
+literal|"  (SELECT * FROM (VALUES(10.5)))\n"
+operator|+
+literal|"FROM (VALUES(10.5))"
 argument_list|,
 literal|"RecordType(DECIMAL(3, 1) NOT NULL EXPR$0, DECIMAL(3, 1) EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|"SELECT *,(SELECT * FROM (VALUES('this is a char'))) "
+literal|"SELECT *,\n"
+operator|+
+literal|"  (SELECT * FROM (VALUES('this is a char')))\n"
 operator|+
 literal|"FROM (VALUES('this is a char too'))"
 argument_list|,
 literal|"RecordType(CHAR(18) NOT NULL EXPR$0, CHAR(14) EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|"SELECT *,(SELECT * FROM (VALUES(true))) FROM (values(false))"
+literal|"SELECT *,\n"
+operator|+
+literal|"  (SELECT * FROM (VALUES(true)))\n"
+operator|+
+literal|"FROM (values(false))"
 argument_list|,
 literal|"RecordType(BOOLEAN NOT NULL EXPR$0, BOOLEAN EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|" SELECT *,(SELECT * FROM (VALUES(cast('abcd' as varchar(10))))) "
+literal|" SELECT *,\n"
+operator|+
+literal|"  (SELECT * FROM (VALUES(cast('abcd' as varchar(10)))))\n"
 operator|+
 literal|"FROM (VALUES(CAST('abcd' as varchar(10))))"
 argument_list|,
 literal|"RecordType(VARCHAR(10) NOT NULL EXPR$0, VARCHAR(10) EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
-literal|"SELECT *,"
+literal|"SELECT *,\n"
 operator|+
-literal|"  (SELECT * FROM (VALUES(TIMESTAMP '2006-01-01 12:00:05'))) "
+literal|"  (SELECT * FROM (VALUES(TIMESTAMP '2006-01-01 12:00:05')))\n"
 operator|+
 literal|"FROM (VALUES(TIMESTAMP '2006-01-01 12:00:05'))"
 argument_list|,
@@ -8739,7 +8823,14 @@ name|void
 name|testLiteralChain
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -8750,70 +8841,80 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"'buttered'\n' toast'"
+literal|"'buttered'\n"
+operator|+
+literal|"' toast'"
 argument_list|,
 literal|"buttered toast"
 argument_list|,
 literal|"CHAR(14) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"'corned'\n' beef'\n' on'\n' rye'"
+literal|"'corned'\n"
+operator|+
+literal|"' beef'\n"
+operator|+
+literal|"' on'\n"
+operator|+
+literal|"' rye'"
 argument_list|,
 literal|"corned beef on rye"
 argument_list|,
 literal|"CHAR(18) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"_latin1'Spaghetti'\n' all''Amatriciana'"
+literal|"_latin1'Spaghetti'\n"
+operator|+
+literal|"' all''Amatriciana'"
 argument_list|,
 literal|"Spaghetti all'Amatriciana"
 argument_list|,
 literal|"CHAR(25) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"x'1234'\n'abcd' = x'1234abcd'"
+literal|"x'1234'\n"
+operator|+
+literal|"'abcd' = x'1234abcd'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"x'1234'\n'' = x'1234'"
+literal|"x'1234'\n"
+operator|+
+literal|"'' = x'1234'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"x''\n'ab' = x'ab'"
+literal|"x''\n"
+operator|+
+literal|"'ab' = x'ab'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -8823,61 +8924,50 @@ name|void
 name|testComplexLiteral
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|check
 argument_list|(
 literal|"select 2 * 2 * x from (select 2 as x)"
 argument_list|,
-operator|new
 name|SqlTests
 operator|.
-name|StringTypeChecker
-argument_list|(
-literal|"INTEGER NOT NULL"
-argument_list|)
+name|INTEGER_TYPE_CHECKER
 argument_list|,
-literal|"8"
-argument_list|,
-literal|0
+literal|8
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
 literal|"select 1 * 2 * 3 * x from (select 2 as x)"
 argument_list|,
-operator|new
 name|SqlTests
 operator|.
-name|StringTypeChecker
-argument_list|(
-literal|"INTEGER NOT NULL"
-argument_list|)
+name|INTEGER_TYPE_CHECKER
 argument_list|,
-literal|"12"
-argument_list|,
-literal|0
+literal|12
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
 literal|"select 1 + 2 + 3 + 4 + x from (select 2 as x)"
 argument_list|,
-operator|new
 name|SqlTests
 operator|.
-name|StringTypeChecker
-argument_list|(
-literal|"INTEGER NOT NULL"
-argument_list|)
+name|INTEGER_TYPE_CHECKER
 argument_list|,
-literal|"12"
-argument_list|,
-literal|0
+literal|12
 argument_list|)
 expr_stmt|;
 block|}
@@ -8887,7 +8977,14 @@ name|void
 name|testRow
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -8905,75 +9002,76 @@ name|void
 name|testAndOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|AND
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true and false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true and true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) and false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false and cast(null as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as boolean) and true"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true and (not false)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -8983,37 +9081,40 @@ name|void
 name|testAndOperator2
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"case when false then unknown else true end and true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"case when false then cast(null as boolean) else true end and true"
+literal|"case when false then cast(null as boolean) "
+operator|+
+literal|"else true end and true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"case when false then null else true end and true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -9023,19 +9124,30 @@ name|void
 name|testAndOperatorLazy
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|AND
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// lazy eval returns FALSE;
 comment|// eager eval executes RHS of AND and throws;
 comment|// both are valid
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -9052,9 +9164,7 @@ argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
 argument_list|(
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|,
 name|INVALID_ARG_FOR_POWER
 argument_list|,
@@ -9069,16 +9179,27 @@ name|void
 name|testConcatOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CONCAT
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9089,28 +9210,28 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|" 'a' || cast(null as char(2)) "
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|" cast(null as char(2)) || 'b' "
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|" cast(null as char(1)) || cast(null as char(2)) "
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9121,7 +9242,7 @@ argument_list|,
 literal|"BINARY(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9133,7 +9254,7 @@ literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Precision is larger than VARCHAR allows, so result is unbounded
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9144,7 +9265,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9155,21 +9276,21 @@ argument_list|,
 literal|"VARCHAR(33335) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"x'ff' || cast(null as varbinary)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|" cast(null as ANY) || cast(null as ANY) "
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9189,9 +9310,18 @@ name|void
 name|testConcatFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkConcatFunc
 argument_list|(
-name|tester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -9201,7 +9331,9 @@ argument_list|)
 expr_stmt|;
 name|checkConcatFunc
 argument_list|(
-name|tester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -9211,7 +9343,9 @@ argument_list|)
 expr_stmt|;
 name|checkConcat2Func
 argument_list|(
-name|tester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -9221,14 +9355,15 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkConcatFunc
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -9237,7 +9372,7 @@ operator|.
 name|CONCAT_FUNCTION
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9248,7 +9383,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9261,21 +9396,21 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"concat('a', 'b', cast(null as char(2)))"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"concat(cast(null as ANY), 'b', cast(null as char(2)))"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9286,7 +9421,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9297,7 +9432,7 @@ argument_list|,
 literal|"VARCHAR(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -9310,14 +9445,15 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkConcat2Func
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -9326,7 +9462,7 @@ operator|.
 name|CONCAT2
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9337,7 +9473,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9348,7 +9484,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9359,7 +9495,7 @@ argument_list|,
 literal|"VARCHAR(33335) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9370,7 +9506,7 @@ argument_list|,
 literal|"VARCHAR(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9381,7 +9517,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -9392,14 +9528,14 @@ argument_list|,
 literal|"VARCHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"concat('a', cast(null as varchar))"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -9410,7 +9546,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -9430,10 +9566,17 @@ parameter_list|()
 block|{
 comment|// "%" is allowed under MYSQL_5 SQL conformance level
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
 operator|.
 name|withConformance
 argument_list|(
@@ -9442,7 +9585,7 @@ operator|.
 name|MYSQL_5
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -9451,52 +9594,54 @@ operator|.
 name|PERCENT_REMAINDER
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"4%2"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"8%5"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"-12%7"
 argument_list|,
-literal|"-5"
+operator|-
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"-12%-7"
 argument_list|,
-literal|"-5"
+operator|-
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"12%-7"
 argument_list|,
-literal|"5"
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9515,7 +9660,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9526,7 +9671,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9537,7 +9682,7 @@ argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9557,10 +9702,17 @@ parameter_list|()
 block|{
 comment|// "%" is allowed under MYSQL_5 SQL conformance level
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
 operator|.
 name|withConformance
 argument_list|(
@@ -9569,7 +9721,7 @@ operator|.
 name|MYSQL_5
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -9578,22 +9730,22 @@ operator|.
 name|PERCENT_REMAINDER
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"1 + 5 % 3 % 4 * 14 % 17"
 argument_list|,
-literal|"12"
+literal|12
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"(1 + 5 % 3) % 4 + 14 % 17"
 argument_list|,
-literal|"17"
+literal|17
 argument_list|)
 expr_stmt|;
 block|}
@@ -9605,10 +9757,17 @@ parameter_list|()
 block|{
 comment|// "%" is allowed under MYSQL_5 SQL conformance level
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
 operator|.
 name|withConformance
 argument_list|(
@@ -9617,14 +9776,14 @@ operator|.
 name|MYSQL_5
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer) % 2"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -9639,7 +9798,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -9655,10 +9814,17 @@ parameter_list|()
 block|{
 comment|// "%" is allowed under MYSQL_5 SQL conformance level
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
 operator|.
 name|withConformance
 argument_list|(
@@ -9673,7 +9839,7 @@ comment|// compiling the expression.  The test frame work would then issue
 comment|// unexpected exception occurred during "validation".  You cannot
 comment|// submit as non-runtime because the janino exception does not have
 comment|// error position information and the framework is unhappy with that.
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -9691,16 +9857,27 @@ name|void
 name|testDivideOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|DIVIDE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9711,7 +9888,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9722,7 +9899,7 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9733,7 +9910,7 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -9741,12 +9918,13 @@ literal|" cast(10.0 as double) / 5"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|2.0
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|2
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -9754,12 +9932,13 @@ literal|" cast(10.0 as real) / 4"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
-literal|2.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"2.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -9767,12 +9946,13 @@ literal|" 6.0 / cast(10.0 as real) "
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|0.6
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"0.6"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9788,7 +9968,7 @@ condition|(
 name|DECIMAL
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9799,7 +9979,7 @@ argument_list|,
 literal|"0.333333"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9810,7 +9990,7 @@ argument_list|,
 literal|"1001000.0000000"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -9822,7 +10002,7 @@ literal|"10010000000.00000000"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -9836,7 +10016,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -9855,7 +10035,14 @@ name|void
 name|testDivideOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -9866,7 +10053,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -9877,21 +10064,21 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"interval '2' day / cast(null as bigint)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval month) / 2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -9902,7 +10089,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -9920,250 +10107,221 @@ name|void
 name|testEqualsOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|EQUALS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1=1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1=1.0"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.34=1.34"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1=1.34"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1e2=100e0"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1e2=101"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1e2 as real)=cast(101 as bigint)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a'='b'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true = true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true = false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false = true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false = false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('a' as varchar(30))=cast('a' as varchar(30))"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('a ' as varchar(30))=cast('a' as varchar(30))"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(' a' as varchar(30))=cast(' a' as varchar(30))"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('a ' as varchar(15))=cast('a ' as varchar(30))"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(' ' as varchar(3))=cast(' ' as varchar(2))"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('abcd' as varchar(2))='ab'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('a' as varchar(30))=cast('b' as varchar(30))"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('a' as varchar(30))=cast('a' as varchar(15))"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as boolean)=cast(null as boolean)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)=1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -10177,40 +10335,41 @@ name|void
 name|testEqualsOperatorInterval
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day = interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day = interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2:2:2' hour to second = interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -10224,221 +10383,196 @@ name|void
 name|testGreaterThanOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|GREATER_THAN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1>2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(-1 as TINYINT)>cast(1 as TINYINT)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1 as SMALLINT)>cast(1 as SMALLINT)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2>1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1>1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1.1>-1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1>1.1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2>1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1e1>1.2e1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(-1.1 as real)> cast(-1.2 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1e2>1.1e2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e0>1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1.2e0 as real)>1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true>false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true>true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false>false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false>true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"3.0>cast(null as double)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"DATE '2013-02-23'> DATE '1945-02-24'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10447,15 +10581,13 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A000130'>x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -10465,102 +10597,93 @@ name|void
 name|testGreaterThanOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day> interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day> interval '5' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2 2:2:2' day to second> interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day> interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day> interval '-2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day> interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' minute> interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' second> interval '2' minute"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)> interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -10574,7 +10697,14 @@ name|void
 name|testIsDistinctFromOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -10585,92 +10715,76 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 is distinct from 1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 is distinct from 1.0"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 is distinct from 2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as integer) is distinct from 2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as integer) is distinct from cast(null as integer)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.23 is distinct from 1.23"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.23 is distinct from 5.23"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-23e0 is distinct from -2.3e1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// IS DISTINCT FROM not implemented for ROW yet
@@ -10679,7 +10793,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10688,7 +10802,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10699,26 +10813,22 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Intervals
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day is distinct from interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '10' hour is distinct from interval '10' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -10728,7 +10838,14 @@ name|void
 name|testIsNotDistinctFromOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -10739,92 +10856,76 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 is not distinct from 1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 is not distinct from 1.0"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 is not distinct from 2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as integer) is not distinct from 2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as integer) is not distinct from cast(null as integer)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.23 is not distinct from 1.23"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.23 is not distinct from 5.23"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-23e0 is not distinct from -2.3e1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 comment|// IS NOT DISTINCT FROM not implemented for ROW yet
@@ -10833,7 +10934,7 @@ condition|(
 literal|false
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10842,7 +10943,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -10853,26 +10954,22 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Intervals
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day is not distinct from interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '10' hour is not distinct from interval '10' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -10882,218 +10979,193 @@ name|void
 name|testGreaterThanOrEqualOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|GREATER_THAN_OR_EQUAL
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1>=2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1>=1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1>=1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2>=1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1>=1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1.1>=-1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1>=1.1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2>=1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e4>=1e5"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e4>=cast(1e5 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2>=cast(1e5 as double)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"120000>=cast(1e5 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true>=false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true>=true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false>=false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false>=true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as real)>=999"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A000130'>=x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A0001B0'>=x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -11103,102 +11175,93 @@ name|void
 name|testGreaterThanOrEqualOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day>= interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day>= interval '5' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2 2:2:2' day to second>= interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day>= interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day>= interval '-2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day>= interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' minute>= interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' second>= interval '2' minute"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)>= interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -11212,7 +11275,14 @@ name|void
 name|testInOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -11223,7 +11293,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11232,7 +11302,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11241,7 +11311,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11250,7 +11320,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11266,7 +11336,7 @@ operator|.
 name|FRG327_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11275,7 +11345,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11288,13 +11358,16 @@ block|}
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// AND has lower precedence than IN
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11313,7 +11386,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -11331,7 +11404,14 @@ name|void
 name|testNotInOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -11342,7 +11422,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11351,7 +11431,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11363,12 +11443,15 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11377,7 +11460,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11393,7 +11476,7 @@ operator|.
 name|FRG327_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11402,7 +11485,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11413,7 +11496,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// AND has lower precedence than NOT IN
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -11432,7 +11515,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -11450,7 +11533,14 @@ name|void
 name|testOverlapsOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -11461,134 +11551,154 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(date '1-2-3', date '1-2-3') overlaps (date '1-2-3', interval '1' year)"
+literal|"(date '1-2-3', date '1-2-3') "
+operator|+
+literal|"overlaps (date '1-2-3', interval '1' year)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(date '1-2-3', date '1-2-3') overlaps (date '4-5-6', interval '1' year)"
+literal|"(date '1-2-3', date '1-2-3') "
+operator|+
+literal|"overlaps (date '4-5-6', interval '1' year)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(date '1-2-3', date '4-5-6') overlaps (date '2-2-3', date '3-4-5')"
+literal|"(date '1-2-3', date '4-5-6') "
+operator|+
+literal|"overlaps (date '2-2-3', date '3-4-5')"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"(cast(null as date), date '1-2-3') overlaps (date '1-2-3', interval '1' year)"
+literal|"(cast(null as date), date '1-2-3') "
+operator|+
+literal|"overlaps (date '1-2-3', interval '1' year)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"(date '1-2-3', date '1-2-3') overlaps (date '1-2-3', cast(null as date))"
+literal|"(date '1-2-3', date '1-2-3') overlaps "
+operator|+
+literal|"(date '1-2-3', cast(null as date))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(time '1:2:3', interval '1' second) overlaps (time '23:59:59', time '1:2:3')"
+literal|"(time '1:2:3', interval '1' second) "
+operator|+
+literal|"overlaps (time '23:59:59', time '1:2:3')"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(time '1:2:3', interval '1' second) overlaps (time '23:59:59', time '1:2:2')"
+literal|"(time '1:2:3', interval '1' second) "
+operator|+
+literal|"overlaps (time '23:59:59', time '1:2:2')"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(time '1:2:3', interval '1' second) overlaps (time '23:59:59', interval '2' hour)"
+literal|"(time '1:2:3', interval '1' second) "
+operator|+
+literal|"overlaps (time '23:59:59', interval '2' hour)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"(time '1:2:3', cast(null as time)) overlaps (time '23:59:59', time '1:2:3')"
+literal|"(time '1:2:3', cast(null as time)) "
+operator|+
+literal|"overlaps (time '23:59:59', time '1:2:3')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"(time '1:2:3', interval '1' second) overlaps (time '23:59:59', cast(null as interval hour))"
+literal|"(time '1:2:3', interval '1' second) "
+operator|+
+literal|"overlaps (time '23:59:59', cast(null as interval hour))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (timestamp '1-2-3 4:5:6', interval '1 2:3:4.5' day to second)"
+literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) "
+operator|+
+literal|"overlaps (timestamp '1-2-3 4:5:6',"
+operator|+
+literal|" interval '1 2:3:4.5' day to second)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (timestamp '2-2-3 4:5:6', interval '1 2:3:4.5' day to second)"
+literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) "
+operator|+
+literal|"overlaps (timestamp '2-2-3 4:5:6',"
+operator|+
+literal|" interval '1 2:3:4.5' day to second)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"(timestamp '1-2-3 4:5:6', cast(null as interval day) ) overlaps (timestamp '1-2-3 4:5:6', interval '1 2:3:4.5' day to second)"
+literal|"(timestamp '1-2-3 4:5:6', cast(null as interval day) ) "
+operator|+
+literal|"overlaps (timestamp '1-2-3 4:5:6',"
+operator|+
+literal|" interval '1 2:3:4.5' day to second)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (cast(null as timestamp), interval '1 2:3:4.5' day to second)"
+literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) "
+operator|+
+literal|"overlaps (cast(null as timestamp),"
+operator|+
+literal|" interval '1 2:3:4.5' day to second)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11641,11 +11751,20 @@ block|,
 literal|"TIMESTAMP '1970-04-01 00:00:00'"
 block|,     }
 decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkOverlaps
 argument_list|(
 operator|new
 name|OverlapChecker
 argument_list|(
+name|f
+argument_list|,
 name|times
 argument_list|)
 argument_list|)
@@ -11655,6 +11774,8 @@ argument_list|(
 operator|new
 name|OverlapChecker
 argument_list|(
+name|f
+argument_list|,
 name|dates
 argument_list|)
 argument_list|)
@@ -11664,12 +11785,14 @@ argument_list|(
 operator|new
 name|OverlapChecker
 argument_list|(
+name|f
+argument_list|,
 name|timestamps
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
+specifier|static
 name|void
 name|checkOverlaps
 parameter_list|(
@@ -12482,221 +12605,198 @@ name|void
 name|testLessThanOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LESS_THAN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1<1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2<1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1<1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1.1<-1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1<1.1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1.1 as real)<1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1.1 as real)<1.1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1.1 as real)<cast(1.2 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1.1e-1<-1.2e-1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(1.1 as real)<cast(1.1 as double)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true<false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true<true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false<false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false<true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"123<cast(null as bigint)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as tinyint)<123"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)<1.32"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A000130'<x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -12714,106 +12814,99 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day< interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day< interval '5' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2 2:2:2' day to second< interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day< interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day< interval '-2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day< interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' minute< interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' second< interval '2' minute"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)< interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"interval '2:2' hour to minute< cast(null as interval second)"
+literal|"interval '2:2' hour to minute "
+operator|+
+literal|"< cast(null as interval second)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12823,239 +12916,214 @@ name|void
 name|testLessThanOrEqualOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LESS_THAN_OR_EQUAL
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<=2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<=1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1<=1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"2<=1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1<=1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"-1.1<=-1.2"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1<=1.1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2<=1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<=cast(1e2 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1000<=cast(1e2 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e1<=1e2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.2e1<=cast(1e2 as real)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true<=false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true<=true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false<=false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false<=true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as real)<=cast(1 as real)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)<=3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"3<=cast(null as smallint)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)<=1.32"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A000130'<=x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"x'0A0001B0'<=x'0A0001B0'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -13065,106 +13133,99 @@ name|void
 name|testLessThanOrEqualOperatorInterval
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<= interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<= interval '5' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2 2:2:2' day to second<= interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<= interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<= interval '-2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<= interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' minute<= interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' second<= interval '2' minute"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)<= interval '2' minute"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"interval '2:2' hour to minute<= cast(null as interval second)"
+literal|"interval '2:2' hour to minute "
+operator|+
+literal|"<= cast(null as interval second)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13174,43 +13235,56 @@ name|void
 name|testMinusOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|MINUS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"-2-1"
 argument_list|,
-literal|"-3"
+operator|-
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"-2-1-5"
 argument_list|,
-literal|"-8"
+operator|-
+literal|8
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"2-1"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -13218,12 +13292,13 @@ literal|"cast(2.0 as double) -1"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -13231,13 +13306,14 @@ literal|"cast(1 as smallint)-cast(2.0 as real)"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 operator|-
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -13245,21 +13321,25 @@ literal|"2.4-cast(2.0 as real)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.4
 argument_list|,
 literal|0.00000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"1-2"
 argument_list|,
-literal|"-1"
+operator|-
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13270,7 +13350,7 @@ argument_list|,
 literal|"5.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13281,14 +13361,14 @@ argument_list|,
 literal|"15.48"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"1e1-cast(null as double)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -13304,7 +13384,7 @@ name|FNL25_FIXED
 condition|)
 block|{
 comment|// Should throw out of range error
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13315,7 +13395,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13326,7 +13406,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13337,7 +13417,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13348,7 +13428,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13359,7 +13439,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13378,16 +13458,27 @@ name|void
 name|testMinusIntervalOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|MINUS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13398,7 +13489,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13409,7 +13500,7 @@ argument_list|,
 literal|"INTERVAL DAY TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13420,7 +13511,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13431,7 +13522,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -13439,7 +13530,7 @@ literal|"cast(null as interval day) + interval '2' hour"
 argument_list|)
 expr_stmt|;
 comment|// Datetime minus interval
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13452,7 +13543,7 @@ argument_list|)
 expr_stmt|;
 comment|// Per [CALCITE-1632] Return types of datetime + interval
 comment|// make sure that TIME values say in range
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13463,7 +13554,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13474,7 +13565,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13485,7 +13576,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13496,7 +13587,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13507,7 +13598,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13518,7 +13609,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13529,7 +13620,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13540,7 +13631,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13551,11 +13642,13 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestamp '2003-08-02 12:54:01' - interval '-4 2:4' day to minute"
+literal|"timestamp '2003-08-02 12:54:01' "
+operator|+
+literal|"- interval '-4 2:4' day to minute"
 argument_list|,
 literal|"2003-08-06 14:58:01"
 argument_list|,
@@ -13563,7 +13656,7 @@ literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Datetime minus year-month interval
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13574,7 +13667,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13585,7 +13678,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13603,16 +13696,27 @@ name|void
 name|testMinusDateOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|MINUS_DATE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13623,7 +13727,7 @@ argument_list|,
 literal|"INTERVAL MINUTE TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13634,7 +13738,7 @@ argument_list|,
 literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13645,29 +13749,33 @@ argument_list|,
 literal|"INTERVAL MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"(timestamp '2004-05-01 12:03:34' - timestamp '2004-04-29 11:57:23') day to second"
+literal|"(timestamp '2004-05-01 12:03:34'"
+operator|+
+literal|" - timestamp '2004-04-29 11:57:23') day to second"
 argument_list|,
 literal|"+2 00:06:11.000000"
 argument_list|,
 literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"(timestamp '2004-05-01 12:03:34' - timestamp '2004-04-29 11:57:23') day to hour"
+literal|"(timestamp '2004-05-01 12:03:34'"
+operator|+
+literal|" - timestamp '2004-04-29 11:57:23') day to hour"
 argument_list|,
 literal|"+2 00"
 argument_list|,
 literal|"INTERVAL DAY TO HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13678,7 +13786,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -13686,7 +13794,7 @@ literal|"(cast(null as date) - date '2003-12-01') day"
 argument_list|)
 expr_stmt|;
 comment|// combine '<datetime> +<interval>' with '<datetime> -<datetime>'
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13701,7 +13809,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13716,7 +13824,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13738,7 +13846,7 @@ operator|.
 name|DT1684_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -13748,9 +13856,7 @@ literal|" (CURRENT_DATE - "
 operator|+
 literal|"  date '1969-04-29') day / 2) is not null"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -13762,52 +13868,64 @@ name|void
 name|testMultiplyOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|MULTIPLY
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"2*3"
 argument_list|,
-literal|"6"
+literal|6
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"2*-3"
 argument_list|,
-literal|"-6"
+operator|-
+literal|6
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"+2*3"
 argument_list|,
-literal|"6"
+literal|6
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"2*0"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -13815,12 +13933,13 @@ literal|"cast(2.0 as float)*3"
 argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|6
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -13828,12 +13947,13 @@ literal|"3*cast(2.0 as real)"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|6
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -13841,12 +13961,13 @@ literal|"cast(2.0 as real)*3.2"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|6.4
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"6.4"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13857,7 +13978,7 @@ argument_list|,
 literal|"50.00"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -13868,21 +13989,21 @@ argument_list|,
 literal|"82.656"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(1 as real)*cast(null as real)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"2e-3*cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -13897,7 +14018,7 @@ name|FNL25_FIXED
 condition|)
 block|{
 comment|// Should throw out of range error
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13908,7 +14029,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13919,7 +14040,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13930,7 +14051,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13941,7 +14062,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13952,7 +14073,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -13971,7 +14092,14 @@ name|void
 name|testMultiplyIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13982,7 +14110,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -13993,14 +14121,14 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"interval '2' day * cast(null as bigint)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -14012,7 +14140,7 @@ condition|(
 name|TODO
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14023,7 +14151,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14042,7 +14170,14 @@ name|void
 name|testDatePlusInterval
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14054,7 +14189,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// 60 days is more than 2^32 milliseconds
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14073,54 +14208,61 @@ name|void
 name|testNullOperand
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester
+name|f
 argument_list|,
 literal|"="
 argument_list|)
 expr_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester
+name|f
 argument_list|,
 literal|">"
 argument_list|)
 expr_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester
+name|f
 argument_list|,
 literal|"<"
 argument_list|)
 expr_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester
+name|f
 argument_list|,
 literal|"<="
 argument_list|)
 expr_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester
+name|f
 argument_list|,
 literal|">="
 argument_list|)
 expr_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester
+name|f
 argument_list|,
 literal|"<>"
 argument_list|)
 expr_stmt|;
 comment|// "!=" is allowed under ORACLE_10 SQL conformance level
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f1
 init|=
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -14131,7 +14273,7 @@ argument_list|)
 decl_stmt|;
 name|checkNullOperand
 argument_list|(
-name|tester1
+name|f1
 argument_list|,
 literal|"<>"
 argument_list|)
@@ -14141,14 +14283,14 @@ specifier|private
 name|void
 name|checkNullOperand
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|,
 name|String
 name|op
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -14161,7 +14303,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -14174,7 +14316,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -14194,57 +14336,63 @@ name|void
 name|testNotEqualsOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|NOT_EQUALS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<>1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a'<>'A'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1e0<>1e1"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"'a'<>cast(null as varchar(1))"
 argument_list|)
 expr_stmt|;
-comment|// "!=" is not an acceptable alternative to "<>" under default SQL conformance level
-name|tester
+comment|// "!=" is not an acceptable alternative to "<>" under default SQL
+comment|// conformance level
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -14257,10 +14405,10 @@ argument_list|)
 expr_stmt|;
 comment|// "!=" is allowed under ORACLE_10 SQL conformance level
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f1
 init|=
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -14269,29 +14417,25 @@ operator|.
 name|ORACLE_10
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1<> 1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 != 1"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
@@ -14307,40 +14451,41 @@ name|void
 name|testNotEqualsOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<> interval '1' day"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2' day<> interval '2' day"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"interval '2:2:2' hour to second<> interval '2' hour"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -14354,49 +14499,54 @@ name|void
 name|testOrOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|OR
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true or false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false or false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true or cast(null as boolean)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -14410,18 +14560,29 @@ name|void
 name|testOrOperatorLazy
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|OR
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// need to evaluate 2nd argument if first evaluates to null, therefore
 comment|// get error
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -14450,7 +14611,7 @@ comment|// Do not need to evaluate 2nd argument if first evaluates to true.
 comment|// In eager evaluation, get error;
 comment|// lazy evaluation returns true;
 comment|// both are valid.
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -14467,9 +14628,7 @@ argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
 argument_list|(
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|,
 name|INVALID_ARG_FOR_POWER
 argument_list|,
@@ -14481,7 +14640,7 @@ comment|// NULL OR FALSE --> NULL
 comment|// In eager evaluation, get error;
 comment|// lazy evaluation returns NULL;
 comment|// both are valid.
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -14507,15 +14666,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// NULL OR TRUE --> TRUE
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1< cast(null as integer) or sqrt(4) = 2"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -14525,43 +14682,54 @@ name|void
 name|testPlusOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|PLUS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"1+2"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"-1+2"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"1+2+3"
 argument_list|,
-literal|"6"
+literal|6
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14569,12 +14737,13 @@ literal|"1+cast(2.0 as double)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|3
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14582,12 +14751,13 @@ literal|"1+cast(2.0 as double)+cast(6.0 as float)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|9
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14598,7 +14768,7 @@ argument_list|,
 literal|"15.0"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14609,7 +14779,7 @@ argument_list|,
 literal|"23.88"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -14620,7 +14790,7 @@ argument_list|,
 literal|"29.88"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -14628,19 +14798,22 @@ literal|"19.68 + cast(4.2 as float)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|23.88
 argument_list|,
 literal|0.02
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as tinyint)+1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -14655,7 +14828,7 @@ name|FNL25_FIXED
 condition|)
 block|{
 comment|// Should throw out of range error
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -14666,7 +14839,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -14677,7 +14850,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -14688,7 +14861,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -14699,18 +14872,20 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
-literal|"cast(-5e18 as decimal(19,0)) + cast(-5e18 as decimal(19,0))"
+literal|"cast(-5e18 as decimal(19,0))"
+operator|+
+literal|" + cast(-5e18 as decimal(19,0))"
 argument_list|,
 name|OUT_OF_RANGE_MESSAGE
 argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -14729,16 +14904,27 @@ name|void
 name|testPlusOperatorAny
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|PLUS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14756,16 +14942,27 @@ name|void
 name|testPlusIntervalOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|PLUS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14776,7 +14973,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14787,18 +14984,20 @@ argument_list|,
 literal|"INTERVAL DAY TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"interval '2' day + interval '5' minute + interval '-3' second"
+literal|"interval '2' day + interval '5' minute"
+operator|+
+literal|" + interval '-3' second"
 argument_list|,
 literal|"+2 00:04:57.000000"
 argument_list|,
 literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14809,7 +15008,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -14817,7 +15016,7 @@ literal|"interval '2' year + cast(null as interval month)"
 argument_list|)
 expr_stmt|;
 comment|// Datetime plus interval
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14830,7 +15029,7 @@ argument_list|)
 expr_stmt|;
 comment|// Per [CALCITE-1632] Return types of datetime + interval
 comment|// make sure that TIME values say in range
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14841,7 +15040,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14852,7 +15051,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14863,7 +15062,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14874,7 +15073,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14885,7 +15084,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14896,7 +15095,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14907,7 +15106,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14918,7 +15117,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14929,11 +15128,13 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestamp '2003-08-02 12:54:01' + interval '-4 2:4' day to minute"
+literal|"timestamp '2003-08-02 12:54:01'"
+operator|+
+literal|" + interval '-4 2:4' day to minute"
 argument_list|,
 literal|"2003-07-29 10:50:01"
 argument_list|,
@@ -14941,7 +15142,7 @@ literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Datetime plus year-to-month interval
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -14952,22 +15153,26 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestamp '2003-08-02 12:54:01' + interval '5-3' year to month"
+literal|"timestamp '2003-08-02 12:54:01'"
+operator|+
+literal|" + interval '5-3' year to month"
 argument_list|,
 literal|"2008-11-02 12:54:01"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"interval '5-3' year to month + timestamp '2003-08-02 12:54:01'"
+literal|"interval '5-3' year to month"
+operator|+
+literal|" + timestamp '2003-08-02 12:54:01'"
 argument_list|,
 literal|"2008-11-02 12:54:01"
 argument_list|,
@@ -14981,7 +15186,14 @@ name|void
 name|testDescendingOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -14999,35 +15211,42 @@ name|void
 name|testIsNotNullOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_NOT_NULL
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is not null"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is not null"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -15037,35 +15256,42 @@ name|void
 name|testIsNullOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_NULL
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is null"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is null"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -15075,55 +15301,64 @@ name|void
 name|testIsNotTrueOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_NOT_TRUE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is not true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false is not true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is not true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"select ^'a string' is not true^ from (values (1))"
 argument_list|,
-literal|"(?s)Cannot apply 'IS NOT TRUE' to arguments of type '<CHAR\\(8\\)> IS NOT TRUE'. Supported form\\(s\\): '<BOOLEAN> IS NOT TRUE'.*"
+literal|"(?s)Cannot apply 'IS NOT TRUE' to arguments of type "
+operator|+
+literal|"'<CHAR\\(8\\)> IS NOT TRUE'. Supported form\\(s\\): "
+operator|+
+literal|"'<BOOLEAN> IS NOT TRUE'.*"
 argument_list|,
 literal|false
 argument_list|)
@@ -15135,46 +15370,51 @@ name|void
 name|testIsTrueOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_TRUE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is true"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false is true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -15184,46 +15424,51 @@ name|void
 name|testIsNotFalseOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_NOT_FALSE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false is not false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is not false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is not false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -15233,46 +15478,51 @@ name|void
 name|testIsFalseOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_FALSE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false is false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is false"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -15282,7 +15532,14 @@ name|void
 name|testIsNotUnknownOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15293,51 +15550,43 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false is not unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is not unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is not unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"unknown is not unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -15355,7 +15604,14 @@ name|void
 name|testIsUnknownOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15366,51 +15622,43 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"false is unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"true is unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as boolean) is unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"unknown is unknown"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -15428,7 +15676,14 @@ name|void
 name|testIsASetOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15439,81 +15694,69 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1, 1] is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset[cast(null as boolean), cast(null as boolean)] is a set"
+literal|"multiset[cast(null as boolean), cast(null as boolean)]"
+operator|+
+literal|" is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[cast(null as boolean)] is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['a'] is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['a', 'b'] is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['a', 'b', 'a'] is a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -15523,7 +15766,14 @@ name|void
 name|testIsNotASetOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15534,81 +15784,69 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1, 1] is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset[cast(null as boolean), cast(null as boolean)] is not a set"
+literal|"multiset[cast(null as boolean), cast(null as boolean)]"
+operator|+
+literal|" is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[cast(null as boolean)] is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['a'] is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['a', 'b'] is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['a', 'b', 'a'] is not a set"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -15618,7 +15856,14 @@ name|void
 name|testIntersectOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15629,7 +15874,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15640,7 +15885,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15651,7 +15896,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15662,7 +15907,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15673,7 +15918,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15684,7 +15929,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15695,7 +15940,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15708,7 +15953,7 @@ argument_list|,
 literal|"INTEGER MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15721,7 +15966,7 @@ argument_list|,
 literal|"INTEGER MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15741,7 +15986,14 @@ name|void
 name|testExceptOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15752,7 +16004,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15763,7 +16015,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15774,7 +16026,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15785,7 +16037,7 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -15796,81 +16048,81 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"cardinality(multiset[1,2,3,2] multiset except distinct multiset[1])"
+literal|"cardinality(multiset[1,2,3,2]"
+operator|+
+literal|" multiset except distinct multiset[1])"
 argument_list|,
 literal|"2"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"cardinality(multiset[1,2,3,2] multiset except all multiset[1])"
+literal|"cardinality(multiset[1,2,3,2]"
+operator|+
+literal|" multiset except all multiset[1])"
 argument_list|,
 literal|"3"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(multiset[1,2,3,2] multiset except distinct multiset[1]) submultiset of multiset[2, 3]"
+literal|"(multiset[1,2,3,2] multiset except distinct multiset[1])"
+operator|+
+literal|" submultiset of multiset[2, 3]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(multiset[1,2,3,2] multiset except distinct multiset[1]) submultiset of multiset[2, 3]"
+literal|"(multiset[1,2,3,2] multiset except distinct multiset[1])"
+operator|+
+literal|" submultiset of multiset[2, 3]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"(multiset[1,2,3,2] multiset except all multiset[1]) submultiset of multiset[2, 2, 3]"
+literal|"(multiset[1,2,3,2] multiset except all multiset[1])"
+operator|+
+literal|" submultiset of multiset[2, 2, 3]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"(multiset[1,2,3] multiset except multiset[1]) is empty"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"(multiset[1] multiset except multiset[1]) is empty"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -15880,7 +16132,14 @@ name|void
 name|testIsEmptyOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15891,15 +16150,13 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] is empty"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -15909,7 +16166,14 @@ name|void
 name|testIsNotEmptyOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15920,15 +16184,13 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] is not empty"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -15938,7 +16200,14 @@ name|void
 name|testExistsOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -15956,38 +16225,45 @@ name|void
 name|testNotOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|NOT
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"not true"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"not false"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -15996,7 +16272,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -16010,16 +16286,32 @@ name|void
 name|testPrefixMinusOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|UNARY_MINUS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -16030,7 +16322,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -16039,16 +16331,17 @@ argument_list|,
 literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"-1"
 argument_list|,
-literal|"-1"
+operator|-
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -16059,7 +16352,7 @@ argument_list|,
 literal|"-1.23"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -16067,20 +16360,21 @@ literal|"-1.0e0"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 operator|-
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"-cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -16094,7 +16388,14 @@ name|void
 name|testPrefixMinusOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16105,7 +16406,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16116,7 +16417,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16127,7 +16428,7 @@ argument_list|,
 literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -16141,7 +16442,14 @@ name|void
 name|testPrefixPlusOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -16152,16 +16460,16 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"+1"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -16172,7 +16480,7 @@ argument_list|,
 literal|"1.23"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -16180,19 +16488,20 @@ literal|"+1.0e0"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"+cast(null as integer)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -16206,7 +16515,14 @@ name|void
 name|testPrefixPlusOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16217,7 +16533,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16235,7 +16551,7 @@ operator|.
 name|FRG254_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16247,7 +16563,7 @@ literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -16258,7 +16574,7 @@ argument_list|,
 literal|"INTERVAL MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -16272,7 +16588,14 @@ name|void
 name|testExplicitTableOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -16290,7 +16613,14 @@ name|void
 name|testValuesOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -16301,23 +16631,15 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
 literal|"select 'abc' from (values(true))"
 argument_list|,
-operator|new
-name|SqlTests
-operator|.
-name|StringTypeChecker
-argument_list|(
 literal|"CHAR(3) NOT NULL"
-argument_list|)
 argument_list|,
 literal|"abc"
-argument_list|,
-literal|0
 argument_list|)
 expr_stmt|;
 block|}
@@ -16327,7 +16649,14 @@ name|void
 name|testNotLikeOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -16338,59 +16667,49 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc' not like '_b_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd' not like 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'123\n\n45\n' not like '%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' not like '%cd%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' not like '%cde%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -16400,52 +16719,11 @@ name|void
 name|testRlikeOperator
 parameter_list|()
 block|{
-name|checkRlike
-argument_list|(
-name|SqlLibrary
-operator|.
-name|SPARK
-argument_list|)
-expr_stmt|;
-name|checkRlike
-argument_list|(
-name|SqlLibrary
-operator|.
-name|HIVE
-argument_list|)
-expr_stmt|;
-name|checkRlikeFails
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-expr_stmt|;
-name|checkRlikeFails
-argument_list|(
-name|SqlLibrary
-operator|.
-name|ORACLE
-argument_list|)
-expr_stmt|;
-block|}
-name|void
-name|checkRlike
-parameter_list|(
-name|SqlLibrary
-name|library
-parameter_list|)
-block|{
-specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|library
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -16455,96 +16733,136 @@ name|RLIKE
 argument_list|,
 name|VM_EXPAND
 argument_list|)
+decl_stmt|;
+name|checkRlike
+argument_list|(
+name|f
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|SPARK
+argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester1
+name|checkRlike
+argument_list|(
+name|f
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|HIVE
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkRlikeFails
+argument_list|(
+name|f
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkRlikeFails
+argument_list|(
+name|f
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+name|void
+name|checkRlike
+parameter_list|(
+name|SqlOperatorFixture
+name|f
+parameter_list|)
+block|{
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'Merrisa@gmail.com' rlike '.+@*\\.com'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'Merrisa@gmail.com' rlike '.com$'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acbd' rlike '^ac+'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acb' rlike 'acb|efg'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acb|efg' rlike 'acb\\|efg'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'Acbd' rlike '^ac+'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'Merrisa@gmail.com' rlike 'Merrisa_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcdef' rlike '%cd%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -16555,85 +16873,57 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'Merrisagmail' not rlike '.+@*\\.com'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acbd' not rlike '^ac+'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acb|efg' not rlike 'acb\\|efg'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'Merrisa@gmail.com' not rlike 'Merrisa_'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
 name|void
 name|checkRlikeFails
 parameter_list|(
-name|SqlLibrary
-name|library
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
-argument_list|(
-name|library
-argument_list|)
-decl_stmt|;
-name|tester1
-operator|.
-name|setFor
-argument_list|(
-name|SqlLibraryOperators
-operator|.
-name|RLIKE
-argument_list|,
-name|VM_EXPAND
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|noRlike
 init|=
 literal|"(?s).*No match found for function signature RLIKE"
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -16644,7 +16934,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -16661,7 +16951,7 @@ name|noNotRlike
 init|=
 literal|"(?s).*No match found for function signature NOT RLIKE"
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -16672,7 +16962,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -16690,101 +16980,96 @@ name|void
 name|testLikeEscape
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LIKE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a_c' like 'a#_c' escape '#'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'axc' like 'a#_c' escape '#'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a_c' like 'a\\_c' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'axc' like 'a\\_c' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a%c' like 'a\\%c' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a%cde' like 'a\\%c_e' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbc' like 'a%c' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbc' like 'a\\%c' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -16794,112 +17079,101 @@ name|void
 name|testIlikeEscape
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|ILIKE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|POSTGRESQL
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a_c' ilike 'a#_C' escape '#'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'axc' ilike 'a#_C' escape '#'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a_c' ilike 'a\\_C' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'axc' ilike 'a\\_C' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a%c' ilike 'a\\%C' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a%cde' ilike 'a\\%C_e' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbc' ilike 'a%C' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbc' ilike 'a\\%C' escape '\\'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -16914,26 +17188,29 @@ name|void
 name|testLikeEscape2
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'x' not like 'x' escape 'x'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xyz' not like 'xyz' escape 'xyz'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -16943,233 +17220,204 @@ name|void
 name|testLikeOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LIKE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"''  like ''"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like 'a'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like 'b'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like 'A'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like '_a'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like '%a'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like '%a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' like 'a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   like 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc'  like 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' like 'a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   like '_b'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' like '_d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' like '%d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd' like 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc\ncd' like 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'123\n\n45\n' like '%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' like '%cd%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' like '%cde%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -17179,13 +17427,24 @@ name|void
 name|testIlikeOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|ILIKE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -17194,7 +17453,7 @@ name|noLike
 init|=
 literal|"No match found for function signature ILIKE"
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -17205,7 +17464,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -17222,7 +17481,7 @@ name|noNotLike
 init|=
 literal|"No match found for function signature NOT ILIKE"
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -17233,7 +17492,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -17245,344 +17504,286 @@ literal|false
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f1
 init|=
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|POSTGRESQL
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"''  ilike ''"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike 'a'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike 'b'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike 'A'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike '_a'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike '%a'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike '%A'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike '%a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike '%A%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike 'a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' ilike 'A%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   ilike 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   ilike 'A_'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc'  ilike 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' ilike 'a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' ilike 'A%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   ilike '_b'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   ilike '_B'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' ilike '_d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' ilike '%d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' ilike '%D'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd' ilike 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd' ilike 'aB%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc\ncd' ilike 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc\ncd' ilike 'Ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'123\n\n45\n' ilike '%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' ilike '%cd%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' ilike '%CD%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' ilike '%cde%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -17593,37 +17794,38 @@ name|void
 name|testLikeDot
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc' like 'a.c'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcde' like '%c.e'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc.e' like '%c.e'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -17633,68 +17835,65 @@ name|void
 name|testIlikeDot
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|ILIKE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|POSTGRESQL
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc' ilike 'a.c'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcde' ilike '%c.e'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc.e' ilike '%c.e'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc.e' ilike '%c.E'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -17704,7 +17903,14 @@ name|void
 name|testNotSimilarToOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -17715,7 +17921,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -17724,7 +17930,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -17733,7 +17939,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -17742,7 +17948,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -17751,7 +17957,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -17760,11 +17966,13 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"cast(null as varchar(3)) not similar to cast(null as char(2))"
+literal|"cast(null as varchar(3))"
+operator|+
+literal|" not similar to cast(null as char(2))"
 argument_list|,
 literal|null
 argument_list|)
@@ -17776,1067 +17984,893 @@ name|void
 name|testSimilarToOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SIMILAR_TO
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// like LIKE
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"''  similar to ''"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'a'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'b'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'A'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to '_a'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to '%a'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to '%a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   similar to 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc'  similar to 'a_'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' similar to 'a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab'   similar to '_b'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' similar to '_d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' similar to '%d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd' similar to 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc\ncd' similar to 'ab%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'123\n\n45\n' similar to '%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' similar to '%cd%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab\ncd\nef' similar to '%cde%'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// simple regular expressions
 comment|// ab*c+d matches acd, abcd, acccd, abcccd but not abd, aabc
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acd'    similar to 'ab*c+d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd'   similar to 'ab*c+d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acccd'  similar to 'ab*c+d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcccd' similar to 'ab*c+d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abd'    similar to 'ab*c+d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'aabc'   similar to 'ab*c+d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// compound regular expressions
 comment|// x(ab|c)*y matches xy, xccy, xababcy but not xbcy
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xy'      similar to 'x(ab|c)*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xccy'    similar to 'x(ab|c)*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xababcy' similar to 'x(ab|c)*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xbcy'    similar to 'x(ab|c)*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// x(ab|c)+y matches xccy, xababcy but not xy, xbcy
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xy'      similar to 'x(ab|c)+y'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xccy'    similar to 'x(ab|c)+y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xababcy' similar to 'x(ab|c)+y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xbcy'    similar to 'x(ab|c)+y'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab' similar to 'a%' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'a%' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' similar to 'a_' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' similar to 'a%' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'1a' similar to '_a' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'123aXYZ' similar to '%a%'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'123aXYZ' similar to '_%_a%_' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xy' similar to '(xy)' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abd' similar to '[ab][bcde]d' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'bdd' similar to '[ab][bcde]d' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abd' similar to '[ab]d' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'cd' similar to '[a-e]d' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'amy' similar to 'amy|fred' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'fred' similar to 'amy|fred' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'mike' similar to 'amy|fred' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'acd' similar to 'ab*c+d' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'accccd' similar to 'ab*c+d' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abd' similar to 'ab*c+d' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'aabc' similar to 'ab*c+d' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abb' similar to 'a(b{3})' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbb' similar to 'a(b{3})' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbbbb' similar to 'a(b{3})' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbbbb' similar to 'ab{3,6}' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abbbbbbbb' similar to 'ab{3,6}' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'' similar to 'ab?' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'ab?' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a' similar to 'a(b?)' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab' similar to 'ab?' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab' similar to 'a(b?)' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abb' similar to 'ab?' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab' similar to 'a\\_' ESCAPE '\\' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'ab' similar to 'a\\%' ESCAPE '\\' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a_' similar to 'a\\_' ESCAPE '\\' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a%' similar to 'a\\%' ESCAPE '\\' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a(b{3})' similar to 'a(b{3})' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a(b{3})' similar to 'a\\(b\\{3\\}\\)' ESCAPE '\\' "
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to '[a-ey]d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to '[^a-ey]d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to '[^a-ex-z]d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to '[a-ex-z]d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to '[x-za-e]d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to '[^a-ey]?d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yyyd' similar to '[a-ey]*d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 comment|// range must be specified in []
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd' similar to 'x-zd'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x-z'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'cd' similar to '([a-e])d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'xy' similar to 'x*?y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x*?y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to '(x?)*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x+?y'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x?+y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x*+y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 comment|// dot is a wildcard for SIMILAR TO but not LIKE
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc' similar to 'a.c'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a.c' similar to 'a.c'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' similar to 'a.*d'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abc' like 'a.c'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'a.c' like 'a.c'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'abcd' like 'a.*d'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// The following two tests throws exception(They probably should).
 comment|// "Dangling meta character '*' near index 2"
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x+*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to 'x?*y'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
 comment|// some negative tests
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -18876,7 +18910,7 @@ literal|"\\[\\:LOWER\\:\\]\\{2\\}\\[\\:DIGIT\\:\\]\\{,5\\}\n"
 operator|+
 literal|"                    \\^"
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -18894,7 +18928,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -18905,7 +18939,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -18926,15 +18960,13 @@ operator|.
 name|FRG375_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'cd' similar to '[a-e^c]d' "
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// FRG-375
@@ -18948,128 +18980,106 @@ operator|.
 name|FRG377_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'y' similar to '[:ALPHA:]*'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd32' similar to '[:LOWER:]{2}[:DIGIT:]*'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd32' similar to '[:ALNUM:]*'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd32' similar to '[:ALNUM:]*[:DIGIT:]?'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd32' similar to '[:ALNUM:]?[:DIGIT:]*'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd3223' similar to '([:LOWER:]{2})[:DIGIT:]{2,5}'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd3223' similar to '[:LOWER:]{2}[:DIGIT:]{2,}'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd3223' similar to '[:LOWER:]{2}||[:DIGIT:]{4}'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd3223' similar to '[:LOWER:]{2}[:DIGIT:]{3}'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'yd  3223' similar to '[:UPPER:]{2}  [:DIGIT:]{3}'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'YD  3223' similar to '[:UPPER:]{2}  [:DIGIT:]{3}'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -19077,23 +19087,21 @@ literal|"'YD  3223' similar to "
 operator|+
 literal|"'[:UPPER:]{2}||[:WHITESPACE:]*[:DIGIT:]{4}'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"'YD\t3223' similar to '[:UPPER:]{2}[:SPACE:]*[:DIGIT:]{4}'"
+literal|"'YD\t3223' similar to "
+operator|+
+literal|"'[:UPPER:]{2}[:SPACE:]*[:DIGIT:]{4}'"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -19101,12 +19109,10 @@ literal|"'YD\t3223' similar to "
 operator|+
 literal|"'[:UPPER:]{2}[:WHITESPACE:]*[:DIGIT:]{4}'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -19114,9 +19120,7 @@ literal|"'YD\t\t3223' similar to "
 operator|+
 literal|"'([:UPPER:]{2}[:WHITESPACE:]+)||[:DIGIT:]{4}'"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -19127,7 +19131,14 @@ name|void
 name|testEscapeOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -19145,7 +19156,14 @@ name|void
 name|testConvertFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -19165,7 +19183,14 @@ name|void
 name|testTranslateFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -19186,17 +19211,11 @@ name|testTranslate3Func
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|ORACLE
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -19204,8 +19223,15 @@ name|SqlLibraryOperators
 operator|.
 name|TRANSLATE3
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19216,7 +19242,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19227,7 +19253,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19238,7 +19264,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19249,7 +19275,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19260,21 +19286,21 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"translate(cast(null as varchar(7)), 'ab', '+-')"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"translate('aabbcc', cast(null as varchar(2)), '+-')"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19288,16 +19314,27 @@ name|void
 name|testOverlayFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|OVERLAY
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19308,7 +19345,7 @@ argument_list|,
 literal|"VARCHAR(9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19321,10 +19358,13 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19340,10 +19380,13 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19357,21 +19400,23 @@ literal|"VARCHAR(15) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"overlay('ABCdef' placing 'abc' from 1 for cast(null as integer))"
+literal|"overlay('ABCdef' placing 'abc'"
+operator|+
+literal|" from 1 for cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"overlay(cast(null as varchar(1)) placing 'abc' from 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19382,7 +19427,7 @@ argument_list|,
 literal|"VARBINARY(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19395,10 +19440,13 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19414,10 +19462,13 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19431,21 +19482,23 @@ literal|"VARBINARY(8) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"overlay(x'ABCdef' placing x'abcd' from 1 for cast(null as integer))"
+literal|"overlay(x'ABCdef' placing x'abcd'"
+operator|+
+literal|" from 1 for cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"overlay(cast(null as varbinary(1)) placing x'abcd' from 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19459,193 +19512,204 @@ name|void
 name|testPositionFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|POSITION
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('b' in 'abc')"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('' in 'abc')"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('b' in 'abcabc' FROM 3)"
 argument_list|,
-literal|"5"
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('b' in 'abcabc' FROM 5)"
 argument_list|,
-literal|"5"
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('b' in 'abcabc' FROM 6)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('b' in 'abcabc' FROM -5)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('' in 'abc' FROM 3)"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('' in 'abc' FROM 10)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'bb' in x'aabbcc')"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'' in x'aabbcc')"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'bb' in x'aabbccaabbcc' FROM 3)"
 argument_list|,
-literal|"5"
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'bb' in x'aabbccaabbcc' FROM 5)"
 argument_list|,
-literal|"5"
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'bb' in x'aabbccaabbcc' FROM 6)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'bb' in x'aabbccaabbcc' FROM -5)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'cc' in x'aabbccdd' FROM 2)"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'' in x'aabbcc' FROM 3)"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position(x'' in x'aabbcc' FROM 10)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
 comment|// FRG-211
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"position('tra' in 'fdgjklewrtra')"
 argument_list|,
-literal|"10"
+literal|10
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"position(cast(null as varchar(1)) in '0010')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"position('a' in cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -19663,16 +19727,27 @@ name|void
 name|testReplaceFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|REPLACE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19683,7 +19758,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19694,21 +19769,21 @@ argument_list|,
 literal|"VARCHAR(11) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"REPLACE(cast(null as varchar(5)), 'ciao', '')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"REPLACE('ciao', cast(null as varchar(3)), 'zz')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19722,25 +19797,36 @@ name|void
 name|testCharLengthFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CHAR_LENGTH
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"char_length('abc')"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19754,25 +19840,36 @@ name|void
 name|testCharacterLengthFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CHARACTER_LENGTH
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"CHARACTER_LENGTH('abc')"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19786,25 +19883,36 @@ name|void
 name|testOctetLengthFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|OCTET_LENGTH
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"OCTET_LENGTH(x'aabbcc')"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19818,89 +19926,100 @@ name|void
 name|testAsciiFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ASCII
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII('')"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII('a')"
 argument_list|,
-literal|"97"
+literal|97
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII('1')"
 argument_list|,
-literal|"49"
+literal|49
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII('abc')"
 argument_list|,
-literal|"97"
+literal|97
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII('ABC')"
 argument_list|,
-literal|"65"
+literal|65
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII(_UTF8'\u0082')"
 argument_list|,
-literal|"130"
+literal|130
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII(_UTF8'\u5B57')"
 argument_list|,
-literal|"23383"
+literal|23383
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"ASCII(_UTF8'\u03a9')"
 argument_list|,
-literal|"937"
+literal|937
 argument_list|)
 expr_stmt|;
 comment|// omega
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -19915,17 +20034,20 @@ name|testToBase64
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|MYSQL
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -19934,7 +20056,7 @@ operator|.
 name|TO_BASE64
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19945,7 +20067,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -19996,7 +20118,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20007,7 +20129,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20046,7 +20168,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20057,7 +20179,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20068,7 +20190,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20087,17 +20209,11 @@ name|testFromBase64
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20105,8 +20221,15 @@ name|SqlLibraryOperators
 operator|.
 name|FROM_BASE64
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20117,7 +20240,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20128,7 +20251,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20139,7 +20262,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20150,14 +20273,14 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"from_base64('-1')"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -20172,17 +20295,11 @@ name|testMd5
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20190,8 +20307,15 @@ name|SqlLibraryOperators
 operator|.
 name|MD5
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20202,7 +20326,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20213,7 +20337,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20224,7 +20348,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20243,17 +20367,11 @@ name|testSha1
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20261,8 +20379,15 @@ name|SqlLibraryOperators
 operator|.
 name|SHA1
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20273,7 +20398,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20284,7 +20409,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20295,7 +20420,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20314,17 +20439,11 @@ name|testRepeatFunc
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20332,8 +20451,15 @@ name|SqlLibraryOperators
 operator|.
 name|REPEAT
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20344,7 +20470,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20355,7 +20481,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20366,7 +20492,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20377,7 +20503,7 @@ argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20388,28 +20514,28 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"REPEAT(cast(null as varchar(1)), -1)"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"REPEAT(cast(null as varchar(1)), 2)"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"REPEAT('abc', cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -20424,17 +20550,11 @@ name|testSpaceFunc
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20442,8 +20562,15 @@ name|SqlLibraryOperators
 operator|.
 name|SPACE
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20454,7 +20581,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20465,7 +20592,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20476,7 +20603,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20487,7 +20614,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20498,7 +20625,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -20513,17 +20640,11 @@ name|testStrcmpFunc
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20531,8 +20652,15 @@ name|SqlLibraryOperators
 operator|.
 name|STRCMP
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20543,7 +20671,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20554,7 +20682,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20565,14 +20693,14 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"STRCMP('mytesttext', cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -20587,17 +20715,11 @@ name|testSoundexFunc
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|ORACLE
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20605,8 +20727,15 @@ name|SqlLibraryOperators
 operator|.
 name|SOUNDEX
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20617,7 +20746,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20628,7 +20757,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20639,7 +20768,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20650,7 +20779,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20661,7 +20790,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20672,7 +20801,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20683,7 +20812,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20694,14 +20823,14 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"SOUNDEX(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -20720,17 +20849,11 @@ name|testDifferenceFunc
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|POSTGRESQL
-argument_list|)
-decl_stmt|;
-name|tester1
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20738,87 +20861,94 @@ name|SqlLibraryOperators
 operator|.
 name|DIFFERENCE
 argument_list|)
-expr_stmt|;
-name|tester1
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('Miller', 'miller')"
 argument_list|,
-literal|"4"
+literal|4
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('Miller', 'myller')"
 argument_list|,
-literal|"4"
+literal|4
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('muller', 'miller')"
 argument_list|,
-literal|"4"
+literal|4
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('muller', 'miller')"
 argument_list|,
-literal|"4"
+literal|4
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('muller', 'milk')"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('muller', 'mile')"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('muller', 'm')"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"DIFFERENCE('muller', 'lee')"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"DIFFERENCE('muller', cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -20833,17 +20963,11 @@ name|testReverseFunc
 parameter_list|()
 block|{
 specifier|final
-name|SqlTester
-name|testerMysql
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|)
-decl_stmt|;
-name|testerMysql
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -20851,8 +20975,15 @@ name|SqlLibraryOperators
 operator|.
 name|REVERSE
 argument_list|)
-expr_stmt|;
-name|testerMysql
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20863,7 +20994,7 @@ argument_list|,
 literal|"VARCHAR(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|testerMysql
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20874,7 +21005,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|testerMysql
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20885,7 +21016,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|testerMysql
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20896,7 +21027,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|testerMysql
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20907,7 +21038,7 @@ argument_list|,
 literal|"VARCHAR(11) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|testerMysql
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20918,7 +21049,7 @@ argument_list|,
 literal|"VARCHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|testerMysql
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -20932,9 +21063,18 @@ name|void
 name|testIfFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkIf
 argument_list|(
-name|tester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -20944,7 +21084,9 @@ argument_list|)
 expr_stmt|;
 name|checkIf
 argument_list|(
-name|tester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -20954,7 +21096,9 @@ argument_list|)
 expr_stmt|;
 name|checkIf
 argument_list|(
-name|tester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -20967,11 +21111,11 @@ specifier|private
 name|void
 name|checkIf
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -20980,7 +21124,7 @@ operator|.
 name|IF
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -20991,7 +21135,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21002,7 +21146,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21013,7 +21157,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21025,7 +21169,7 @@ literal|"CHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// TRUE yields first arg, FALSE and UNKNOWN yield second arg
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -21036,7 +21180,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -21047,7 +21191,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -21065,16 +21209,27 @@ name|void
 name|testUpperFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|UPPER
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21085,7 +21240,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21096,7 +21251,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21107,7 +21262,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21118,7 +21273,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -21132,6 +21287,13 @@ name|void
 name|testLeftFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|Stream
 operator|.
 name|of
@@ -21147,9 +21309,9 @@ argument_list|)
 operator|.
 name|map
 argument_list|(
-name|this
+name|f
 operator|::
-name|tester
+name|withLibrary
 argument_list|)
 operator|.
 name|forEach
@@ -21293,6 +21455,13 @@ name|void
 name|testRightFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|Stream
 operator|.
 name|of
@@ -21308,9 +21477,9 @@ argument_list|)
 operator|.
 name|map
 argument_list|(
-name|this
+name|f
 operator|::
-name|tester
+name|withLibrary
 argument_list|)
 operator|.
 name|forEach
@@ -21454,6 +21623,13 @@ name|void
 name|testRegexpReplaceFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|Stream
 operator|.
 name|of
@@ -21469,9 +21645,9 @@ argument_list|)
 operator|.
 name|map
 argument_list|(
-name|this
+name|f
 operator|::
-name|tester
+name|withLibrary
 argument_list|)
 operator|.
 name|forEach
@@ -21680,7 +21856,14 @@ name|testJsonExists
 parameter_list|()
 block|{
 comment|// default pathmode the default is: strict mode
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21688,12 +21871,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'$.foo')"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21701,12 +21882,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'strict $.foo' false on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21714,12 +21893,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'strict $.foo' true on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21727,12 +21904,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'strict $.foo' unknown on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21740,12 +21915,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo' false on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21753,12 +21926,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo' true on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21766,12 +21937,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo' unknown on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21779,12 +21948,10 @@ literal|"json_exists('{}', "
 operator|+
 literal|"'invalid $.foo' false on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21792,12 +21959,10 @@ literal|"json_exists('{}', "
 operator|+
 literal|"'invalid $.foo' true on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21809,7 +21974,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 comment|// not exists
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21817,12 +21982,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'strict $.foo1' false on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21830,12 +21993,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'strict $.foo1' true on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21846,7 +22007,7 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21854,12 +22015,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo1' true on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21867,12 +22026,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo1' false on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21880,12 +22037,10 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo1' error on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -21893,13 +22048,16 @@ literal|"json_exists('{\"foo\":\"bar\"}', "
 operator|+
 literal|"'lax $.foo1' unknown on error)"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -21912,7 +22070,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21923,7 +22081,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -21939,12 +22097,19 @@ name|void
 name|testJsonValue
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 literal|false
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -21957,7 +22122,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// default pathmode the default is: strict mode
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21969,7 +22134,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// type casting test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21980,7 +22145,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -21991,7 +22156,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22002,7 +22167,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -22010,12 +22175,13 @@ literal|"json_value('{\"foo\":100}', 'lax $.foo1' returning integer "
 operator|+
 literal|"null on empty)"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -22023,13 +22189,14 @@ literal|"json_value('{\"foo\":\"100\"}', 'strict $.foo1' returning boolean "
 operator|+
 literal|"null on error)"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 comment|// lax test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22040,7 +22207,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22051,7 +22218,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22062,7 +22229,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22073,7 +22240,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22084,7 +22251,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22095,7 +22262,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22106,7 +22273,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22117,7 +22284,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22128,7 +22295,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22139,7 +22306,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22150,7 +22317,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22162,7 +22329,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// path error test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22173,7 +22340,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22184,7 +22351,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22198,7 +22365,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// strict test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22209,7 +22376,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22220,7 +22387,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22233,7 +22400,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22244,7 +22411,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22255,7 +22422,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22268,7 +22435,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22279,7 +22446,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22292,7 +22459,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22306,7 +22473,12 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -22317,7 +22489,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22328,7 +22500,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -22342,8 +22514,15 @@ name|void
 name|testJsonQuery
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// default pathmode the default is: strict mode
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22355,7 +22534,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// lax test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22366,7 +22545,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22377,7 +22556,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22388,7 +22567,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22399,7 +22578,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22410,7 +22589,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22421,7 +22600,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22432,7 +22611,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22444,7 +22623,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// path error test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22455,7 +22634,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22466,7 +22645,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22479,7 +22658,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22493,7 +22672,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// strict test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22504,7 +22683,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22515,7 +22694,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22526,7 +22705,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22537,7 +22716,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22548,7 +22727,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22559,7 +22738,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22570,7 +22749,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22581,7 +22760,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22592,7 +22771,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -22605,7 +22784,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22616,7 +22795,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22628,7 +22807,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// array wrapper test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22639,7 +22818,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22650,7 +22829,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22661,7 +22840,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22674,7 +22853,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22687,7 +22866,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22698,7 +22877,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22709,7 +22888,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22720,7 +22899,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22733,7 +22912,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22747,7 +22926,12 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -22758,7 +22942,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22769,7 +22953,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -22783,7 +22967,14 @@ name|void
 name|testJsonPretty
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22794,7 +22985,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22805,7 +22996,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22817,7 +23008,12 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -22828,7 +23024,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22839,7 +23035,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -22853,7 +23049,14 @@ name|void
 name|testJsonStorageSize
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22864,7 +23067,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22875,7 +23078,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22886,7 +23089,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22897,7 +23100,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22908,7 +23111,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22919,7 +23122,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22931,7 +23134,12 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -22942,7 +23150,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22953,7 +23161,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -22967,16 +23175,27 @@ name|void
 name|testJsonType
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|JSON_TYPE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22987,7 +23206,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22998,7 +23217,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23009,7 +23228,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23020,7 +23239,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23031,14 +23250,14 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"json_type(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23049,7 +23268,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23060,7 +23279,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23071,7 +23290,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23083,7 +23302,12 @@ literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -23094,7 +23318,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23105,7 +23329,7 @@ argument_list|,
 literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -23119,16 +23343,27 @@ name|void
 name|testJsonDepth
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|JSON_DEPTH
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23139,7 +23374,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23150,7 +23385,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23161,7 +23396,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23172,7 +23407,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23183,7 +23418,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23194,7 +23429,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23205,7 +23440,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23216,7 +23451,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23227,7 +23462,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23238,7 +23473,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23249,7 +23484,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23261,7 +23496,12 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -23272,7 +23512,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23283,7 +23523,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -23297,8 +23537,15 @@ name|void
 name|testJsonLength
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// no path context
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23309,7 +23556,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23320,7 +23567,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23331,7 +23578,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23342,7 +23589,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23354,7 +23601,7 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// default pathmode the default is: strict mode
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23366,7 +23613,7 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// lax test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23377,7 +23624,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23388,7 +23635,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23399,7 +23646,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23410,7 +23657,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23421,7 +23668,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23432,7 +23679,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23444,7 +23691,7 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// strict test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23455,7 +23702,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23466,7 +23713,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23477,7 +23724,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23488,7 +23735,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23499,7 +23746,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23511,7 +23758,7 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// catch error test
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -23522,7 +23769,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -23534,7 +23781,12 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -23545,7 +23797,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23556,7 +23808,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -23570,8 +23822,15 @@ name|void
 name|testJsonKeys
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// no path context
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23582,7 +23841,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23593,7 +23852,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23604,7 +23863,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23615,7 +23874,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23627,7 +23886,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// lax test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23638,7 +23897,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23649,7 +23908,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23660,7 +23919,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23671,7 +23930,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23682,7 +23941,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23693,7 +23952,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23705,7 +23964,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// strict test
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23716,7 +23975,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23727,7 +23986,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23738,7 +23997,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23749,7 +24008,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23760,7 +24019,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23772,7 +24031,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// catch error test
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -23783,7 +24042,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -23795,7 +24054,12 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -23806,7 +24070,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23817,7 +24081,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -23831,7 +24095,14 @@ name|void
 name|testJsonRemove
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23842,7 +24113,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23853,7 +24124,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23864,7 +24135,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23875,7 +24146,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23886,7 +24157,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -23898,7 +24169,12 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -23909,7 +24185,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23920,7 +24196,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -23934,7 +24210,14 @@ name|void
 name|testJsonObject
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23945,7 +24228,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23956,7 +24239,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23967,7 +24250,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23978,7 +24261,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -23989,7 +24272,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24000,7 +24283,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24011,7 +24294,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24022,7 +24305,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24040,34 +24323,46 @@ name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"json_objectagg('foo': 'bar')"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"json_objectagg('foo': null)"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"json_objectagg(100: 'bar')"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -24104,7 +24399,7 @@ literal|"'bar3'"
 block|}
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggWithMultipleArgs
 argument_list|(
@@ -24112,12 +24407,13 @@ literal|"json_objectagg(x: x2)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"{\"foo\":\"bar\",\"foo2\":null,\"foo3\":\"bar3\"}"
-argument_list|,
-literal|0.0D
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggWithMultipleArgs
 argument_list|(
@@ -24125,12 +24421,13 @@ literal|"json_objectagg(x: x2 null on null)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"{\"foo\":\"bar\",\"foo2\":null,\"foo3\":\"bar3\"}"
-argument_list|,
-literal|0.0D
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggWithMultipleArgs
 argument_list|(
@@ -24138,9 +24435,10 @@ literal|"json_objectagg(x: x2 absent on null)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"{\"foo\":\"bar\",\"foo3\":\"bar3\"}"
-argument_list|,
-literal|0.0D
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -24150,7 +24448,14 @@ name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -24161,7 +24466,7 @@ argument_list|,
 literal|"ANY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -24172,14 +24477,14 @@ argument_list|,
 literal|"ANY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as varchar) format json"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -24190,7 +24495,12 @@ argument_list|,
 literal|"ANY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -24208,7 +24518,14 @@ name|void
 name|testJsonArray
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24219,7 +24536,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24230,7 +24547,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24241,7 +24558,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24252,7 +24569,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24263,7 +24580,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24274,7 +24591,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24285,7 +24602,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24296,7 +24613,7 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24314,19 +24631,26 @@ name|void
 name|testJsonArrayAgg
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"json_arrayagg('foo')"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"json_arrayagg(null)"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
@@ -24345,7 +24669,7 @@ block|,
 literal|"'foo3'"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -24353,12 +24677,13 @@ literal|"json_arrayagg(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[\"foo\",\"foo3\"]"
-argument_list|,
-literal|0.0D
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -24366,12 +24691,13 @@ literal|"json_arrayagg(x null on null)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[\"foo\",null,\"foo3\"]"
-argument_list|,
-literal|0.0D
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -24379,9 +24705,10 @@ literal|"json_arrayagg(x absent on null)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[\"foo\",\"foo3\"]"
-argument_list|,
-literal|0.0D
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -24391,7 +24718,14 @@ name|void
 name|testJsonPredicate
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24400,7 +24734,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24409,7 +24743,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24418,7 +24752,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24427,7 +24761,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24436,7 +24770,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24445,7 +24779,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24454,7 +24788,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24463,7 +24797,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24472,7 +24806,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24481,7 +24815,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24490,7 +24824,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24499,7 +24833,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24508,7 +24842,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24517,7 +24851,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24526,7 +24860,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -24542,24 +24876,27 @@ name|void
 name|testCompress
 parameter_list|()
 block|{
-name|SqlTester
-name|sqlTester
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|MYSQL
 argument_list|)
 decl_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"COMPRESS(NULL)"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24570,7 +24907,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24581,7 +24918,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24592,7 +24929,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24603,7 +24940,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24621,31 +24958,34 @@ name|void
 name|testExtractValue
 parameter_list|()
 block|{
-name|SqlTester
-name|mySqlTester
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|MYSQL
 argument_list|)
 decl_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"ExtractValue(NULL, '//b')"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"ExtractValue('', NULL)"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24656,7 +24996,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24667,7 +25007,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24678,7 +25018,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24689,7 +25029,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24700,7 +25040,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24711,7 +25051,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24722,7 +25062,7 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|mySqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -24740,31 +25080,34 @@ name|void
 name|testXmlTransform
 parameter_list|()
 block|{
-name|SqlTester
-name|sqlTester
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"XMLTRANSFORM('', NULL)"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"XMLTRANSFORM(NULL,'')"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24775,25 +25118,31 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|sqlTester
-operator|.
-name|checkFails
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"XMLTRANSFORM('<', '<?xml version=\"1.0\"?>\n"
 operator|+
 literal|"<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
 operator|+
 literal|"</xsl:stylesheet>')"
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+name|sql
 argument_list|,
 literal|"Invalid input for XMLTRANSFORM xml: '.*"
 argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|sqlTester
-operator|.
-name|checkString
-argument_list|(
+specifier|final
+name|String
+name|sql2
+init|=
 literal|"XMLTRANSFORM("
 operator|+
 literal|"'<?xml version=\"1.0\"?>\n"
@@ -24839,6 +25188,12 @@ operator|+
 literal|"</xsl:template>"
 operator|+
 literal|"</xsl:stylesheet>')"
+decl_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+name|sql2
 argument_list|,
 literal|"    Article - My Article    Authors:     - Mr. Foo    - Mr. Bar"
 argument_list|,
@@ -24852,17 +25207,20 @@ name|void
 name|testExtractXml
 parameter_list|()
 block|{
-name|SqlTester
-name|sqlTester
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24873,7 +25231,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24884,65 +25242,91 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"\"EXTRACT\"('', NULL)"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"\"EXTRACT\"(NULL,'')"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"\"EXTRACT\"('<Article><Title>Article1</Title><Authors><Author>Foo</Author><Author>Bar"
+literal|"\"EXTRACT\"("
 operator|+
-literal|"</Author></Authors><Body>article text"
+literal|"'<Article>"
 operator|+
-literal|".</Body></Article>', '/Article/Title')"
+literal|"<Title>Article1</Title>"
+operator|+
+literal|"<Authors>"
+operator|+
+literal|"<Author>Foo</Author>"
+operator|+
+literal|"<Author>Bar</Author>"
+operator|+
+literal|"</Authors>"
+operator|+
+literal|"<Body>article text.</Body>"
+operator|+
+literal|"</Article>', '/Article/Title')"
 argument_list|,
 literal|"<Title>Article1</Title>"
 argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"\"EXTRACT\"('<Article><Title>Article1</Title><Title>Article2</Title><Authors><Author>Foo"
+literal|"\"EXTRACT\"('"
 operator|+
-literal|"</Author><Author>Bar</Author></Authors><Body>article text"
+literal|"<Article>"
 operator|+
-literal|".</Body></Article>', '/Article/Title')"
+literal|"<Title>Article1</Title>"
+operator|+
+literal|"<Title>Article2</Title>"
+operator|+
+literal|"<Authors><Author>Foo</Author><Author>Bar</Author></Authors>"
+operator|+
+literal|"<Body>article text.</Body>"
+operator|+
+literal|"</Article>', '/Article/Title')"
 argument_list|,
 literal|"<Title>Article1</Title><Title>Article2</Title>"
 argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
 literal|"\"EXTRACT\"(\n"
 operator|+
-literal|"'<books xmlns=\"http://www.contoso"
+literal|"'<books xmlns=\"http://www.contoso.com/books\">"
 operator|+
-literal|".com/books\"><book><title>Title</title><author>Author Name</author><price>5"
+literal|"<book><title>Title</title>"
 operator|+
-literal|".50</price></book></books>'"
+literal|"<author>Author Name</author>"
 operator|+
-literal|", '/books:books/books:book', 'books=\"http://www.contoso.com/books\"'"
+literal|"<price>5.50</price>"
 operator|+
-literal|")"
+literal|"</book>"
+operator|+
+literal|"</books>', "
+operator|+
+literal|"'/books:books/books:book', "
+operator|+
+literal|"'books=\"http://www.contoso.com/books\"')"
 argument_list|,
 literal|"<book xmlns=\"http://www.contoso.com/books\"><title>Title</title><author>Author "
 operator|+
@@ -24958,17 +25342,20 @@ name|void
 name|testExistsNode
 parameter_list|()
 block|{
-name|SqlTester
-name|sqlTester
+name|SqlOperatorFixture
+name|f
 init|=
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24979,7 +25366,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -24990,99 +25377,121 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"EXISTSNODE('', NULL)"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"EXISTSNODE(NULL,'')"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"EXISTSNODE('<Article><Title>Article1</Title><Authors><Author>Foo</Author><Author>Bar"
+literal|"EXISTSNODE('<Article>"
 operator|+
-literal|"</Author></Authors><Body>article text"
+literal|"<Title>Article1</Title>"
 operator|+
-literal|".</Body></Article>', '/Article/Title')"
+literal|"<Authors><Author>Foo</Author><Author>Bar</Author></Authors>"
+operator|+
+literal|"<Body>article text.</Body>"
+operator|+
+literal|"</Article>', '/Article/Title')"
 argument_list|,
 literal|"1"
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"EXISTSNODE('<Article><Title>Article1</Title><Authors><Author>Foo</Author><Author>Bar"
+literal|"EXISTSNODE('<Article>"
 operator|+
-literal|"</Author></Authors><Body>article text"
+literal|"<Title>Article1</Title>"
 operator|+
-literal|".</Body></Article>', '/Article/Title/Books')"
+literal|"<Authors><Author>Foo</Author><Author>Bar</Author></Authors>"
+operator|+
+literal|"<Body>article text.</Body></Article>', '/Article/Title/Books')"
 argument_list|,
 literal|"0"
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
-literal|"EXISTSNODE('<Article><Title>Article1</Title><Title>Article2</Title><Authors><Author>Foo"
+literal|"EXISTSNODE('<Article>"
 operator|+
-literal|"</Author><Author>Bar</Author></Authors><Body>article text"
+literal|"<Title>Article1</Title>"
 operator|+
-literal|".</Body></Article>', '/Article/Title')"
+literal|"<Title>Article2</Title>"
+operator|+
+literal|"<Authors><Author>Foo</Author><Author>Bar</Author></Authors>"
+operator|+
+literal|"<Body>article text.</Body></Article>', '/Article/Title')"
 argument_list|,
 literal|"1"
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
 literal|"EXISTSNODE(\n"
 operator|+
-literal|"'<books xmlns=\"http://www.contoso"
+literal|"'<books xmlns=\"http://www.contoso.com/books\">"
 operator|+
-literal|".com/books\"><book><title>Title</title><author>Author Name</author><price>5"
+literal|"<book>"
 operator|+
-literal|".50</price></book></books>'"
+literal|"<title>Title</title>"
 operator|+
-literal|", '/books:books/books:book', 'books=\"http://www.contoso.com/books\"'"
+literal|"<author>Author Name</author>"
 operator|+
-literal|")"
+literal|"<price>5.50</price>"
+operator|+
+literal|"</book>"
+operator|+
+literal|"</books>', "
+operator|+
+literal|"'/books:books/books:book', "
+operator|+
+literal|"'books=\"http://www.contoso.com/books\"')"
 argument_list|,
 literal|"1"
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|sqlTester
+name|f
 operator|.
 name|checkString
 argument_list|(
 literal|"EXISTSNODE(\n"
 operator|+
-literal|"'<books xmlns=\"http://www.contoso"
+literal|"'<books xmlns=\"http://www.contoso.com/books\">"
 operator|+
-literal|".com/books\"><book><title>Title</title><author>Author Name</author><price>5"
+literal|"<book><title>Title</title>"
 operator|+
-literal|".50</price></book></books>'"
+literal|"<author>Author Name</author>"
 operator|+
-literal|", '/books:books/books:book/books:title2', 'books=\"http://www.contoso.com/books\"'"
+literal|"<price>5.50</price></book></books>', "
+operator|+
+literal|"'/books:books/books:book/books:title2', "
+operator|+
+literal|"'books=\"http://www.contoso.com/books\"'"
 operator|+
 literal|")"
 argument_list|,
@@ -25098,17 +25507,28 @@ name|void
 name|testLowerFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LOWER
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003 6.29.8 The type of lower is the type of its argument
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25119,7 +25539,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25130,7 +25550,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25141,7 +25561,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25152,7 +25572,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25169,7 +25589,14 @@ block|{
 comment|// Note: the initcap function is an Oracle defined function and is not
 comment|// defined in the SQL:2003 standard
 comment|// todo: implement in fennel
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -25180,7 +25607,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25191,7 +25618,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25202,7 +25629,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25213,7 +25640,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -25224,7 +25651,7 @@ argument_list|,
 literal|"CHAR(11) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25232,18 +25659,27 @@ literal|"initcap(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 comment|// dtbug 232
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^initcap(cast(null as date))^"
 argument_list|,
-literal|"Cannot apply 'INITCAP' to arguments of type 'INITCAP\\(<DATE>\\)'\\. Supported form\\(s\\): 'INITCAP\\(<CHARACTER>\\)'"
+literal|"Cannot apply 'INITCAP' to arguments of type "
+operator|+
+literal|"'INITCAP\\(<DATE>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'INITCAP\\(<CHARACTER>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -25259,16 +25695,27 @@ name|void
 name|testPowerFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|POWER
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25276,19 +25723,20 @@ literal|"power(2,-2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|0.25
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"0.25"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"power(cast(null as integer),2)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25296,7 +25744,7 @@ literal|"power(2,cast(null as double))"
 argument_list|)
 expr_stmt|;
 comment|// 'pow' is an obsolete form of the 'power' function
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -25314,7 +25762,14 @@ name|void
 name|testSqrtFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -25322,14 +25777,12 @@ name|SqlStdOperatorTable
 operator|.
 name|SQRT
 argument_list|,
-name|SqlTester
-operator|.
 name|VmName
 operator|.
 name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -25338,7 +25791,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -25347,7 +25800,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -25356,18 +25809,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^sqrt('abc')^"
 argument_list|,
-literal|"Cannot apply 'SQRT' to arguments of type 'SQRT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SQRT\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'SQRT' to arguments of type "
+operator|+
+literal|"'SQRT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'SQRT\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -25376,7 +25838,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25384,12 +25846,15 @@ literal|"sqrt(2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.4142d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25397,19 +25862,22 @@ literal|"sqrt(cast(2 as decimal(2, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.4142d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"sqrt(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25423,7 +25891,14 @@ name|void
 name|testExpFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -25434,7 +25909,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25442,12 +25917,15 @@ literal|"exp(2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|7.389056
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25455,19 +25933,22 @@ literal|"exp(-2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.1353
 argument_list|,
 literal|0.0001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"exp(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25481,61 +25962,74 @@ name|void
 name|testModFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|MOD
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"mod(4,2)"
 argument_list|,
-literal|"0"
+literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"mod(8,5)"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"mod(-12,7)"
 argument_list|,
-literal|"-5"
+operator|-
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"mod(-12,-7)"
 argument_list|,
-literal|"-5"
+operator|-
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"mod(12,-7)"
 argument_list|,
-literal|"5"
+literal|5
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -25554,7 +26048,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -25565,7 +26059,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -25576,11 +26070,13 @@ argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"mod(cast(-9 as decimal(2, 0)), cast(7 as decimal(1, 0)))"
+literal|"mod(cast(-9 as decimal(2, 0)), "
+operator|+
+literal|"cast(7 as decimal(1, 0)))"
 argument_list|,
 literal|"DECIMAL(1, 0) NOT NULL"
 argument_list|,
@@ -25594,14 +26090,21 @@ name|void
 name|testModFuncNull
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"mod(cast(null as integer),2)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25616,7 +26119,7 @@ condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25636,7 +26139,14 @@ comment|// compiling the expression.  The test frame work would then issue
 comment|// unexpected exception occurred during "validation".  You cannot
 comment|// submit as non-runtime because the janino exception does not have
 comment|// error position information and the framework is unhappy with that.
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -25654,16 +26164,27 @@ name|void
 name|testLnFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25671,12 +26192,15 @@ literal|"ln(2.71828)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.0
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25684,12 +26208,15 @@ literal|"ln(2.71828)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.999999327
 argument_list|,
 literal|0.0000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25703,16 +26230,27 @@ name|void
 name|testLogFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LOG10
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25720,12 +26258,15 @@ literal|"log10(10)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.0
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25733,12 +26274,15 @@ literal|"log10(100.0)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.0
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25746,12 +26290,15 @@ literal|"log10(cast(10e8 as double))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|9.0
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25759,12 +26306,15 @@ literal|"log10(cast(10e2 as float))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|3.0
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25772,13 +26322,16 @@ literal|"log10(cast(10e-3 as real))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 operator|-
 literal|2.0
 argument_list|,
 literal|0.000001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -25792,16 +26345,27 @@ name|void
 name|testRandFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|RAND
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -25828,7 +26392,7 @@ operator|++
 control|)
 block|{
 comment|// Result must always be between 0 and 1, inclusive.
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25836,9 +26400,12 @@ literal|"rand()"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.5
 argument_list|,
 literal|0.5
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -25849,16 +26416,27 @@ name|void
 name|testRandSeedFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|RAND
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25866,12 +26444,15 @@ literal|"rand(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.6016
 argument_list|,
 literal|0.0001
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25879,9 +26460,12 @@ literal|"rand(2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.4728
 argument_list|,
 literal|0.0001
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -25891,13 +26475,24 @@ name|void
 name|testRandIntegerFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|RAND_INTEGER
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 for|for
@@ -25916,7 +26511,7 @@ operator|++
 control|)
 block|{
 comment|// Result must always be between 0 and 10, inclusive.
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -25924,9 +26519,12 @@ literal|"rand_integer(11)"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|5.0
 argument_list|,
 literal|5.0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -25937,16 +26535,27 @@ name|void
 name|testRandIntegerSeedFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|RAND_INTEGER
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -25957,7 +26566,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -25976,17 +26585,11 @@ name|void
 name|testArrayConcat
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|BIG_QUERY
-argument_list|)
-decl_stmt|;
-name|tester
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -25994,8 +26597,15 @@ name|SqlLibraryOperators
 operator|.
 name|ARRAY_CONCAT
 argument_list|)
-expr_stmt|;
-name|tester
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -26006,7 +26616,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26017,7 +26627,7 @@ argument_list|,
 literal|"INTEGER NOT NULL ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26028,18 +26638,20 @@ argument_list|,
 literal|"INTEGER ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"array_concat(array['hello', 'world'], array['!'], array[cast(null as char)])"
+literal|"array_concat(array['hello', 'world'], array['!'], "
+operator|+
+literal|"array[cast(null as char)])"
 argument_list|,
 literal|"[hello, world, !, null]"
 argument_list|,
 literal|"CHAR(5) ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26054,17 +26666,11 @@ name|void
 name|testArrayReverseFunc
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|BIG_QUERY
-argument_list|)
-decl_stmt|;
-name|tester
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -26072,8 +26678,15 @@ name|SqlLibraryOperators
 operator|.
 name|ARRAY_REVERSE
 argument_list|)
-expr_stmt|;
-name|tester
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26084,7 +26697,7 @@ argument_list|,
 literal|"INTEGER NOT NULL ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26095,7 +26708,7 @@ argument_list|,
 literal|"INTEGER NOT NULL ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26114,17 +26727,11 @@ name|void
 name|testArrayLengthFunc
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|BIG_QUERY
-argument_list|)
-decl_stmt|;
-name|tester
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -26132,8 +26739,15 @@ name|SqlLibraryOperators
 operator|.
 name|ARRAY_LENGTH
 argument_list|)
-expr_stmt|;
-name|tester
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26144,7 +26758,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26155,7 +26769,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26170,17 +26784,11 @@ name|void
 name|testUnixSecondsFunc
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 init|=
-name|libraryTester
-argument_list|(
-name|SqlLibrary
-operator|.
-name|BIG_QUERY
-argument_list|)
-decl_stmt|;
-name|tester
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -26188,8 +26796,15 @@ name|SqlLibraryOperators
 operator|.
 name|UNIX_SECONDS
 argument_list|)
-expr_stmt|;
-name|tester
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26200,28 +26815,28 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"unix_seconds(cast(null as timestamp))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"unix_millis(cast(null as timestamp))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"unix_micros(cast(null as timestamp))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26232,28 +26847,28 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"timestamp_seconds(cast(null as bigint))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"timestamp_millis(cast(null as bigint))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"timestamp_micros(cast(null as bigint))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26266,14 +26881,14 @@ argument_list|)
 expr_stmt|;
 comment|// Have to quote the "DATE" function because we're not using the Babel
 comment|// parser. In the regular parser, DATE is a reserved keyword.
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"\"DATE\"(null)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26284,7 +26899,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26293,7 +26908,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26302,7 +26917,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26318,25 +26933,36 @@ name|void
 name|testAbsFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ABS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"abs(-1)"
 argument_list|,
-literal|"1"
+literal|1
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -26347,7 +26973,7 @@ argument_list|,
 literal|"10"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -26358,7 +26984,7 @@ argument_list|,
 literal|"20"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -26369,7 +26995,7 @@ argument_list|,
 literal|"100"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -26380,7 +27006,7 @@ argument_list|,
 literal|"1000"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -26391,7 +27017,7 @@ argument_list|,
 literal|"54.4"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -26402,7 +27028,7 @@ argument_list|,
 literal|"54.4"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26410,12 +27036,13 @@ literal|"abs(-9.32E-2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|0.0932
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"0.0932"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26423,12 +27050,13 @@ literal|"abs(cast(-3.5 as double))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|3.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"3.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26436,12 +27064,13 @@ literal|"abs(cast(-3.5 as float))"
 argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|,
-literal|3.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"3.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26449,12 +27078,13 @@ literal|"abs(cast(3.5 as real))"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
-literal|3.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"3.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26468,7 +27098,14 @@ name|void
 name|testAbsFuncIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26479,7 +27116,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26490,7 +27127,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26504,16 +27141,27 @@ name|void
 name|testAcosFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ACOS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26522,7 +27170,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26531,7 +27179,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26540,18 +27188,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^acos('abc')^"
 argument_list|,
-literal|"Cannot apply 'ACOS' to arguments of type 'ACOS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ACOS\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'ACOS' to arguments of type "
+operator|+
+literal|"'ACOS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'ACOS\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26560,7 +27217,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26568,12 +27225,15 @@ literal|"acos(0.5)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.0472d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26581,19 +27241,22 @@ literal|"acos(cast(0.5 as decimal(1, 1)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.0472d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"acos(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26607,16 +27270,27 @@ name|void
 name|testAsinFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ASIN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26625,7 +27299,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26634,7 +27308,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26643,18 +27317,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^asin('abc')^"
 argument_list|,
-literal|"Cannot apply 'ASIN' to arguments of type 'ASIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ASIN\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'ASIN' to arguments of type "
+operator|+
+literal|"'ASIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'ASIN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26663,7 +27346,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26671,12 +27354,15 @@ literal|"asin(0.5)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.5236d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26684,19 +27370,22 @@ literal|"asin(cast(0.5 as decimal(1, 1)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.5236d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"asin(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26710,16 +27399,27 @@ name|void
 name|testAtanFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ATAN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26728,7 +27428,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26737,7 +27437,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26746,18 +27446,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^atan('abc')^"
 argument_list|,
-literal|"Cannot apply 'ATAN' to arguments of type 'ATAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ATAN\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'ATAN' to arguments of type "
+operator|+
+literal|"'ATAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'ATAN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26766,7 +27475,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26774,12 +27483,15 @@ literal|"atan(2)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.1071d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26787,19 +27499,22 @@ literal|"atan(cast(2 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.1071d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"atan(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26813,16 +27528,27 @@ name|void
 name|testAtan2Func
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ATAN2
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26831,7 +27557,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26839,12 +27565,15 @@ literal|"atan2(cast(1 as float), -1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.3562d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26853,18 +27582,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^atan2('abc', 'def')^"
 argument_list|,
-literal|"Cannot apply 'ATAN2' to arguments of type 'ATAN2\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ATAN2\\(<NUMERIC>,<NUMERIC>\\)'"
+literal|"Cannot apply 'ATAN2' to arguments of type "
+operator|+
+literal|"'ATAN2\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'ATAN2\\(<NUMERIC>,<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26873,7 +27611,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -26881,32 +27619,40 @@ literal|"atan2(0.5, -0.5)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.3562d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|"atan2(cast(0.5 as decimal(1, 1)), cast(-0.5 as decimal(1, 1)))"
+literal|"atan2(cast(0.5 as decimal(1, 1)),"
+operator|+
+literal|" cast(-0.5 as decimal(1, 1)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.3562d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"atan2(cast(null as integer), -1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -26920,16 +27666,27 @@ name|void
 name|testCbrtFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CBRT
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26938,7 +27695,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26947,7 +27704,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26956,18 +27713,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^cbrt('abc')^"
 argument_list|,
-literal|"Cannot apply 'CBRT' to arguments of type 'CBRT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'CBRT\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'CBRT' to arguments of type "
+operator|+
+literal|"'CBRT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'CBRT\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -26976,7 +27742,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26987,7 +27753,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -26998,7 +27764,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27009,14 +27775,14 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cbrt(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27030,16 +27796,27 @@ name|void
 name|testCosFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|COS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27048,7 +27825,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27057,7 +27834,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27066,18 +27843,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^cos('abc')^"
 argument_list|,
-literal|"Cannot apply 'COS' to arguments of type 'COS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'COS\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'COS' to arguments of type "
+operator|+
+literal|"'COS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'COS\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27086,7 +27872,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27094,12 +27880,15 @@ literal|"cos(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.5403d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27107,19 +27896,22 @@ literal|"cos(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.5403d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cos(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27133,17 +27925,27 @@ name|void
 name|testCoshFunc
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27152,7 +27954,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27161,7 +27963,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27170,7 +27972,12 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f0
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -27181,7 +27988,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27190,7 +27997,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27198,12 +28005,15 @@ literal|"cosh(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.5430d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27211,19 +28021,22 @@ literal|"cosh(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.5430d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cosh(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27237,16 +28050,27 @@ name|void
 name|testCotFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|COT
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27255,7 +28079,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27264,7 +28088,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27273,18 +28097,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^cot('abc')^"
 argument_list|,
-literal|"Cannot apply 'COT' to arguments of type 'COT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'COT\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'COT' to arguments of type "
+operator|+
+literal|"'COT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'COT\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27293,7 +28126,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27301,12 +28134,15 @@ literal|"cot(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.6421d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27314,19 +28150,22 @@ literal|"cot(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.6421d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"cot(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27340,16 +28179,27 @@ name|void
 name|testDegreesFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|DEGREES
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27358,7 +28208,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27367,7 +28217,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27376,18 +28226,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^degrees('abc')^"
 argument_list|,
-literal|"Cannot apply 'DEGREES' to arguments of type 'DEGREES\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'DEGREES\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'DEGREES' to arguments of type "
+operator|+
+literal|"'DEGREES\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'DEGREES\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27396,7 +28255,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27404,12 +28263,15 @@ literal|"degrees(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|57.2958d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27417,19 +28279,22 @@ literal|"degrees(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|57.2958d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"degrees(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27443,16 +28308,27 @@ name|void
 name|testPiFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|PI
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27460,12 +28336,15 @@ literal|"PI"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|3.1415d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -27477,14 +28356,19 @@ literal|false
 argument_list|)
 expr_stmt|;
 comment|// assert that PI function is not dynamic [CALCITE-2750]
-name|assertFalse
+name|assertThat
 argument_list|(
+literal|"PI operator should not be identified as dynamic function"
+argument_list|,
 name|PI
 operator|.
 name|isDynamicFunction
 argument_list|()
 argument_list|,
-literal|"PI operator should not be identified as dynamic function"
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -27494,16 +28378,27 @@ name|void
 name|testRadiansFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|RADIANS
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27512,7 +28407,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27521,7 +28416,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27530,18 +28425,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^radians('abc')^"
 argument_list|,
-literal|"Cannot apply 'RADIANS' to arguments of type 'RADIANS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'RADIANS\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'RADIANS' to arguments of type "
+operator|+
+literal|"'RADIANS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'RADIANS\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27550,7 +28454,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27558,12 +28462,15 @@ literal|"radians(42)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.7330d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27571,19 +28478,22 @@ literal|"radians(cast(42 as decimal(2, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.7330d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"radians(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27597,16 +28507,27 @@ name|void
 name|testRoundFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ROUND
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27615,7 +28536,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27624,7 +28545,7 @@ argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27633,18 +28554,27 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^round('abc', 'def')^"
 argument_list|,
-literal|"Cannot apply 'ROUND' to arguments of type 'ROUND\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ROUND\\(<NUMERIC>,<INTEGER>\\)'"
+literal|"Cannot apply 'ROUND' to arguments of type "
+operator|+
+literal|"'ROUND\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\): 'ROUND\\(<NUMERIC>,<INTEGER>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27653,7 +28583,7 @@ argument_list|,
 literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27664,7 +28594,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27682,7 +28612,7 @@ argument_list|,
 literal|"DECIMAL(2, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27701,35 +28631,35 @@ argument_list|,
 literal|"DECIMAL(2, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"round(cast(null as integer), 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"round(cast(null as double), 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"round(43.21, cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"round(cast(null as double))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27740,7 +28670,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27758,7 +28688,7 @@ argument_list|,
 literal|"DECIMAL(2, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27776,7 +28706,7 @@ argument_list|,
 literal|"DECIMAL(5, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27801,16 +28731,27 @@ name|void
 name|testSignFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SIGN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27819,7 +28760,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27828,7 +28769,7 @@ argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27837,18 +28778,27 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^sign('abc')^"
 argument_list|,
-literal|"Cannot apply 'SIGN' to arguments of type 'SIGN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SIGN\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'SIGN' to arguments of type "
+operator|+
+literal|"'SIGN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'SIGN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27857,7 +28807,7 @@ argument_list|,
 literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27868,7 +28818,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27885,7 +28835,7 @@ argument_list|,
 literal|"DECIMAL(1, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -27896,14 +28846,14 @@ argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"sign(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -27917,16 +28867,27 @@ name|void
 name|testSinFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SIN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27935,7 +28896,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27944,7 +28905,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27953,18 +28914,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^sin('abc')^"
 argument_list|,
-literal|"Cannot apply 'SIN' to arguments of type 'SIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SIN\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'SIN' to arguments of type "
+operator|+
+literal|"'SIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'SIN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -27973,7 +28943,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27981,12 +28951,15 @@ literal|"sin(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.8415d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -27994,19 +28967,22 @@ literal|"sin(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.8415d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"sin(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28020,17 +28996,27 @@ name|void
 name|testSinhFunc
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28039,7 +29025,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28048,7 +29034,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28057,7 +29043,12 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f0
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -28068,7 +29059,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28077,7 +29068,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28085,12 +29076,15 @@ literal|"sinh(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.1752d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28098,19 +29092,22 @@ literal|"sinh(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.1752d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"sinh(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28124,16 +29121,27 @@ name|void
 name|testTanFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|TAN
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28142,7 +29150,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28151,7 +29159,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28160,18 +29168,27 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^tan('abc')^"
 argument_list|,
-literal|"Cannot apply 'TAN' to arguments of type 'TAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'TAN\\(<NUMERIC>\\)'"
+literal|"Cannot apply 'TAN' to arguments of type "
+operator|+
+literal|"'TAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'TAN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28180,7 +29197,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28188,12 +29205,15 @@ literal|"tan(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.5574d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28201,19 +29221,22 @@ literal|"tan(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.5574d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"tan(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28227,17 +29250,26 @@ name|void
 name|testTanhFunc
 parameter_list|()
 block|{
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f0
 init|=
-name|tester
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28246,7 +29278,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28255,7 +29287,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28264,7 +29296,12 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f0
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -28275,7 +29312,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28284,7 +29321,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28292,12 +29329,15 @@ literal|"tanh(1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.7615d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28305,19 +29345,22 @@ literal|"tanh(cast(1 as decimal(1, 0)))"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isWithin
+argument_list|(
 literal|0.7615d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"tanh(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28331,16 +29374,27 @@ name|void
 name|testTruncateFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|TRUNCATE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28349,7 +29403,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28358,7 +29412,7 @@ argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28367,18 +29421,27 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^truncate('abc', 'def')^"
 argument_list|,
-literal|"Cannot apply 'TRUNCATE' to arguments of type 'TRUNCATE\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'TRUNCATE\\(<NUMERIC>,<INTEGER>\\)'"
+literal|"Cannot apply 'TRUNCATE' to arguments of type "
+operator|+
+literal|"'TRUNCATE\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\): 'TRUNCATE\\(<NUMERIC>,<INTEGER>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28387,7 +29450,7 @@ argument_list|,
 literal|"DECIMAL(19, 9) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28398,7 +29461,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28416,7 +29479,7 @@ argument_list|,
 literal|"DECIMAL(2, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28435,28 +29498,28 @@ argument_list|,
 literal|"DECIMAL(2, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"truncate(cast(null as integer), 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"truncate(cast(null as double), 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"truncate(43.21, cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28467,7 +29530,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28485,7 +29548,7 @@ argument_list|,
 literal|"DECIMAL(5, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28496,7 +29559,7 @@ argument_list|,
 literal|"FLOAT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28514,14 +29577,14 @@ argument_list|,
 literal|"DECIMAL(2, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"truncate(cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28535,7 +29598,14 @@ name|void
 name|testNullifFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28546,14 +29616,14 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"nullif(1,1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28564,7 +29634,7 @@ argument_list|,
 literal|"1.5"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28575,7 +29645,7 @@ argument_list|,
 literal|"13.56"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28586,7 +29656,7 @@ argument_list|,
 literal|"1.5"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28597,7 +29667,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28605,12 +29675,13 @@ literal|"nullif(1.5e0, 3e0)"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-literal|1.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"1.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28618,12 +29689,13 @@ literal|"nullif(1.5, cast(3e0 as REAL))"
 argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|,
-literal|1.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"1.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28634,7 +29706,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28645,7 +29717,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -28653,12 +29725,13 @@ literal|"nullif(1.5e0, 3.4)"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-literal|1.5
-argument_list|,
-literal|0
+name|isExactly
+argument_list|(
+literal|"1.5"
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -28669,7 +29742,7 @@ argument_list|,
 literal|"3.4"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28680,7 +29753,7 @@ argument_list|,
 literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28691,14 +29764,14 @@ argument_list|,
 literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"nullif(cast(null as varchar(1)),'a')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28707,7 +29780,7 @@ argument_list|)
 expr_stmt|;
 comment|// Error message reflects the fact that Nullif is expanded before it is
 comment|// validated (like a C macro). Not perfect, but good enough.
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -28718,13 +29791,15 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"1 + ^nullif(1, 2, 3)^ + 2"
 argument_list|,
-literal|"Invalid number of arguments to function 'NULLIF'\\. Was expecting 2 arguments"
+literal|"Invalid number of arguments to function 'NULLIF'\\. "
+operator|+
+literal|"Was expecting 2 arguments"
 argument_list|,
 literal|false
 argument_list|)
@@ -28736,7 +29811,14 @@ name|void
 name|testNullIfOperatorIntervals
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -28747,18 +29829,20 @@ argument_list|,
 literal|"INTERVAL MONTH"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"nullif(interval '2 5' day to hour, interval '5' second)"
+literal|"nullif(interval '2 5' day to hour,"
+operator|+
+literal|" interval '5' second)"
 argument_list|,
 literal|"+2 05"
 argument_list|,
 literal|"INTERVAL DAY TO HOUR"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -28772,7 +29856,14 @@ name|void
 name|testCoalesceFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28783,7 +29874,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28794,16 +29885,21 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"coalesce(null,null,3)"
 argument_list|,
-literal|"3"
+literal|3
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -28814,7 +29910,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -28830,7 +29926,14 @@ name|void
 name|testUserFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28841,7 +29944,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28859,7 +29962,14 @@ name|void
 name|testCurrentUserFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28870,7 +29980,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28888,7 +29998,14 @@ name|void
 name|testSessionUserFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28899,7 +30016,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28917,7 +30034,14 @@ name|void
 name|testSystemUserFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28939,7 +30063,7 @@ literal|"user.name"
 argument_list|)
 decl_stmt|;
 comment|// e.g. "jhyde"
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28957,7 +30081,14 @@ name|void
 name|testCurrentPathFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28968,7 +30099,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -28986,7 +30117,14 @@ name|void
 name|testCurrentRoleFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -28999,7 +30137,7 @@ argument_list|)
 expr_stmt|;
 comment|// By default, the CURRENT_ROLE function returns
 comment|// the empty string because a role has to be set explicitly.
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -29017,7 +30155,14 @@ name|void
 name|testCurrentCatalogFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -29030,7 +30175,7 @@ argument_list|)
 expr_stmt|;
 comment|// By default, the CURRENT_CATALOG function returns
 comment|// the empty string because a catalog has to be set explicitly.
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -29092,16 +30237,27 @@ argument_list|>
 name|pair
 parameter_list|)
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LOCALTIME
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29112,7 +30268,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29123,7 +30279,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29134,7 +30290,7 @@ argument_list|,
 literal|"TIME(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29159,7 +30315,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29242,16 +30398,27 @@ argument_list|>
 name|pair
 parameter_list|)
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LOCALTIMESTAMP
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29262,7 +30429,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29273,7 +30440,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29284,7 +30451,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29295,7 +30462,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29308,7 +30475,7 @@ argument_list|)
 expr_stmt|;
 comment|// Check that timestamp is being generated in the right timezone by
 comment|// generating a specific timestamp.
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29328,7 +30495,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29406,16 +30573,27 @@ argument_list|>
 name|pair
 parameter_list|)
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CURRENT_TIME
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29426,7 +30604,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29437,7 +30615,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29448,7 +30626,7 @@ argument_list|,
 literal|"TIME(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29473,7 +30651,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29556,16 +30734,27 @@ argument_list|>
 name|pair
 parameter_list|)
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CURRENT_TIMESTAMP
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29576,7 +30765,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29587,7 +30776,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29598,7 +30787,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29609,7 +30798,7 @@ argument_list|,
 literal|"TIMESTAMP(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29629,7 +30818,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29875,7 +31064,14 @@ argument_list|>
 name|pair
 parameter_list|)
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -29888,10 +31084,10 @@ argument_list|)
 expr_stmt|;
 comment|// A tester with a lenient conformance that allows parentheses.
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f1
 init|=
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -29900,7 +31096,7 @@ operator|.
 name|LENIENT
 argument_list|)
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29911,7 +31107,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -29922,7 +31118,7 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -29931,7 +31127,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -29940,7 +31136,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -29949,7 +31145,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -29960,7 +31156,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
@@ -29969,7 +31165,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
@@ -29978,7 +31174,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkBoolean
 argument_list|(
@@ -29987,7 +31183,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkType
 argument_list|(
@@ -29996,7 +31192,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkType
 argument_list|(
@@ -30005,7 +31201,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkType
 argument_list|(
@@ -30014,7 +31210,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkType
 argument_list|(
@@ -30044,7 +31240,7 @@ operator|.
 name|right
 init|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30062,7 +31258,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30080,7 +31276,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkScalar
 argument_list|(
@@ -30098,7 +31294,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkScalar
 argument_list|(
@@ -30116,7 +31312,7 @@ argument_list|,
 literal|"VARCHAR(30) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkScalar
 argument_list|(
@@ -30134,7 +31330,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkScalar
 argument_list|(
@@ -30160,16 +31356,27 @@ name|void
 name|testLastDayFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|LAST_DAY
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30180,7 +31387,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30191,7 +31398,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30202,7 +31409,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30213,7 +31420,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30224,7 +31431,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30236,7 +31443,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Edge tests
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30247,7 +31454,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30258,7 +31465,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30269,7 +31476,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30280,7 +31487,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30291,7 +31498,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30302,7 +31509,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30313,7 +31520,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30324,7 +31531,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30335,7 +31542,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30346,7 +31553,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30357,14 +31564,14 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"last_day(cast(null as date))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30375,7 +31582,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30386,7 +31593,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30397,7 +31604,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30408,7 +31615,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30420,7 +31627,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Edge tests
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30431,7 +31638,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30442,7 +31649,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30453,7 +31660,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30464,7 +31671,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30475,7 +31682,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30486,7 +31693,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30497,7 +31704,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30508,7 +31715,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30519,7 +31726,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -30530,7 +31737,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -30545,14 +31752,21 @@ name|void
 name|testSubstringFunction
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkSubstringFunction
 argument_list|(
-name|tester
+name|f
 argument_list|)
 expr_stmt|;
 name|checkSubstringFunction
 argument_list|(
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -30566,11 +31780,11 @@ block|}
 name|void
 name|checkSubstringFunction
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -30579,7 +31793,7 @@ operator|.
 name|SUBSTRING
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -30590,7 +31804,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -30603,9 +31817,9 @@ argument_list|)
 expr_stmt|;
 switch|switch
 condition|(
-name|tester
+name|f
 operator|.
-name|getConformance
+name|conformance
 argument_list|()
 operator|.
 name|semantics
@@ -30615,7 +31829,7 @@ block|{
 case|case
 name|BIG_QUERY
 case|:
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -30626,7 +31840,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -30639,7 +31853,7 @@ argument_list|)
 expr_stmt|;
 break|break;
 default|default:
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -30650,7 +31864,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -30670,7 +31884,7 @@ name|FRG296_FIXED
 condition|)
 block|{
 comment|// substring regexp not supported yet
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -30682,35 +31896,35 @@ literal|"xx"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"substring(cast(null as varchar(1)),1,2)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"substring(cast(null as varchar(1)) FROM 1 FOR 2)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"substring('abc' FROM cast(null as integer) FOR 2)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"substring('abc' FROM cast(null as integer))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -30860,24 +32074,30 @@ name|SqlLibrary
 name|library
 parameter_list|)
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 return|return
 operator|new
 name|SubFunChecker
 argument_list|(
-name|tester
+name|f
 operator|.
 name|withConnectionFactory
 argument_list|(
-name|CalciteAssert
-operator|.
-name|EMPTY_CONNECTION_FACTORY
+name|cf
+lambda|->
+name|cf
 operator|.
 name|with
 argument_list|(
-operator|new
-name|CalciteAssert
+name|ConnectionFactories
 operator|.
-name|AddSchemaSpecPostProcessor
+name|add
 argument_list|(
 name|CalciteAssert
 operator|.
@@ -30919,7 +32139,10 @@ return|return
 operator|new
 name|SubFunChecker
 argument_list|(
-name|tester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|library
 argument_list|)
@@ -30936,8 +32159,8 @@ class|class
 name|SubFunChecker
 block|{
 specifier|final
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 decl_stmt|;
 specifier|final
 name|SqlLibrary
@@ -30949,8 +32172,8 @@ name|function
 decl_stmt|;
 name|SubFunChecker
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|,
 name|SqlLibrary
 name|library
@@ -30961,11 +32184,11 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|t
+name|f
 operator|=
-name|t
+name|f
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -31219,6 +32442,14 @@ literal|""
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+name|library
+argument_list|)
+throw|;
 block|}
 name|assertReturns
 argument_list|(
@@ -31692,6 +32923,14 @@ literal|"ab"
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+name|library
+argument_list|)
+throw|;
 block|}
 comment|// For negative start and start + length between 0 and actual-length,
 comment|// confusion reigns.
@@ -31751,6 +32990,14 @@ literal|"a"
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+name|library
+argument_list|)
+throw|;
 block|}
 comment|// For very negative start, BigQuery differs from Oracle and PostgreSQL.
 switch|switch
@@ -31868,6 +33115,14 @@ literal|""
 argument_list|)
 expr_stmt|;
 break|break;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+name|library
+argument_list|)
+throw|;
 block|}
 block|}
 name|void
@@ -32114,7 +33369,7 @@ operator|==
 literal|null
 condition|)
 block|{
-name|t
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -32143,7 +33398,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32165,17 +33420,28 @@ name|void
 name|testTrimFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|TRIM
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 comment|// SQL:2003 6.29.11 Trimming a CHAR yields a VARCHAR
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32186,7 +33452,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32197,7 +33463,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32208,7 +33474,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32219,14 +33485,14 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"trim(cast(null as varchar(1)) from 'a')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -32240,7 +33506,7 @@ comment|// TODO: Change message to "Invalid argument\(s\) for
 comment|// 'TRIM' function".
 comment|// The message should come from a resource file, and should still
 comment|// have the SQL error code 22027.
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -32251,7 +33517,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -32263,10 +33529,10 @@ literal|true
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f1
 init|=
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -32275,7 +33541,7 @@ operator|.
 name|MYSQL_5
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkString
 argument_list|(
@@ -32286,7 +33552,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkString
 argument_list|(
@@ -32297,7 +33563,7 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f1
 operator|.
 name|checkString
 argument_list|(
@@ -32315,27 +33581,32 @@ name|void
 name|testRtrimFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|RTRIM
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32346,7 +33617,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -32360,27 +33631,32 @@ name|void
 name|testLtrimFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|LTRIM
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32391,7 +33667,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -32405,27 +33681,32 @@ name|void
 name|testGreatestFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|GREATEST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32436,7 +33717,7 @@ argument_list|,
 literal|"CHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32447,18 +33728,19 @@ argument_list|,
 literal|"CHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"greatest(12, CAST(NULL AS INTEGER), 3)"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32470,17 +33752,19 @@ literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlTester
-name|tester2
+name|SqlOperatorFixture
+name|f12
 init|=
-name|oracleTester
+name|f
+operator|.
+name|forOracle
 argument_list|(
 name|SqlConformanceEnum
 operator|.
 name|ORACLE_12
 argument_list|)
 decl_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32491,7 +33775,7 @@ argument_list|,
 literal|"VARCHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32509,27 +33793,32 @@ name|void
 name|testLeastFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|LEAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32540,7 +33829,7 @@ argument_list|,
 literal|"CHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32551,18 +33840,19 @@ argument_list|,
 literal|"CHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"least(12, CAST(NULL AS INTEGER), 3)"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32574,17 +33864,19 @@ literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlTester
-name|tester2
+name|SqlOperatorFixture
+name|f12
 init|=
-name|oracleTester
+name|f
+operator|.
+name|forOracle
 argument_list|(
 name|SqlConformanceEnum
 operator|.
 name|ORACLE_12
 argument_list|)
 decl_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32595,7 +33887,7 @@ argument_list|,
 literal|"VARCHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32613,27 +33905,32 @@ name|void
 name|testNvlFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|NVL
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester1
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|ORACLE
 argument_list|)
 decl_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32644,7 +33941,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -32655,7 +33952,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32666,7 +33963,7 @@ argument_list|,
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32677,7 +33974,7 @@ argument_list|,
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32688,7 +33985,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32699,7 +33996,7 @@ argument_list|,
 literal|"CHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32710,7 +34007,7 @@ argument_list|,
 literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32721,7 +34018,7 @@ argument_list|,
 literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -32729,17 +34026,19 @@ literal|"nvl(CAST(NULL AS VARCHAR(6)), cast(NULL AS VARCHAR(4)))"
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlTester
-name|tester2
+name|SqlOperatorFixture
+name|f12
 init|=
-name|oracleTester
+name|f
+operator|.
+name|forOracle
 argument_list|(
 name|SqlConformanceEnum
 operator|.
 name|ORACLE_12
 argument_list|)
 decl_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32750,7 +34049,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32761,7 +34060,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32772,7 +34071,7 @@ argument_list|,
 literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkString
 argument_list|(
@@ -32783,7 +34082,7 @@ argument_list|,
 literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester2
+name|f12
 operator|.
 name|checkNull
 argument_list|(
@@ -32799,7 +34098,10 @@ parameter_list|()
 block|{
 name|checkDecodeFunc
 argument_list|(
-name|libraryTester
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -32811,22 +34113,24 @@ block|}
 name|void
 name|checkDecodeFunc
 parameter_list|(
-name|SqlTester
-name|tester1
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|this
-operator|.
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlLibraryOperators
 operator|.
 name|DECODE
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32837,7 +34141,7 @@ argument_list|,
 literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32849,7 +34153,7 @@ literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
 comment|// if there are duplicates, take the first match
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32861,19 +34165,20 @@ literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
 comment|// if there's no match, and no "else", return null
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"decode(3, 0, 'a', 1, 'b', 2, 'c')"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"CHAR(1)"
 argument_list|)
 expr_stmt|;
 comment|// if there's no match, return the "else" value
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32884,7 +34189,7 @@ argument_list|,
 literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32896,7 +34201,7 @@ literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// nulls match
-name|tester1
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -32916,31 +34221,28 @@ name|void
 name|testWindow
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|check
 argument_list|(
-literal|"select sum(1) over (order by x) from (select 1 as x, 2 as y from (values (true)))"
+literal|"select sum(1) over (order by x)\n"
+operator|+
+literal|"from (select 1 as x, 2 as y\n"
+operator|+
+literal|"  from (values (true)))"
 argument_list|,
-operator|new
 name|SqlTests
 operator|.
-name|StringTypeChecker
-argument_list|(
-literal|"INTEGER"
-argument_list|)
+name|INTEGER_TYPE_CHECKER
 argument_list|,
-literal|"1"
-argument_list|,
-literal|0
+literal|1
 argument_list|)
 expr_stmt|;
 block|}
@@ -32950,7 +34252,14 @@ name|void
 name|testElementFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -32963,7 +34272,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -32974,7 +34283,7 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -32988,7 +34297,14 @@ name|void
 name|testCardinalityFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33001,41 +34317,44 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cardinality(multiset[cast(null as integer),2])"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// applied to array
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cardinality(array['foo', 'bar'])"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
 comment|// applied to map
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
 literal|"cardinality(map['foo', 1, 'bar', 2])"
 argument_list|,
-literal|"2"
+literal|2
 argument_list|)
 expr_stmt|;
 block|}
@@ -33045,7 +34364,14 @@ name|void
 name|testMemberOfOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33058,59 +34384,51 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1 member of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"'2' member of multiset['1']"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"cast(null as double) member of multiset[cast(null as double)]"
+literal|"cast(null as double) member of"
+operator|+
+literal|" multiset[cast(null as double)]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast(null as double) member of multiset[1.1]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.1 member of multiset[cast(null as double)]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -33120,7 +34438,14 @@ name|void
 name|testMultisetUnionOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33133,18 +34458,18 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset[1,2] submultiset of (multiset[2] multiset union multiset[1])"
+literal|"multiset[1,2] submultiset of "
+operator|+
+literal|"(multiset[2] multiset union multiset[1])"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -33157,7 +34482,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -33170,7 +34495,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33180,12 +34505,10 @@ literal|"multiset union distinct multiset[1, 4, 5, 7, 8]) "
 operator|+
 literal|"submultiset of multiset[1, 2, 3, 4, 5, 7, 8]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33195,12 +34518,10 @@ literal|"multiset union distinct multiset[1, 4, 5, 7, 8]) "
 operator|+
 literal|"submultiset of multiset[1, 2, 3, 4, 5, 7, 8]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -33213,7 +34534,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -33226,7 +34547,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33236,12 +34557,10 @@ literal|"multiset union distinct multiset['c', 'd', 'e'])"
 operator|+
 literal|" submultiset of multiset['a', 'b', 'c', 'd', 'e']"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33251,27 +34570,29 @@ literal|"multiset union distinct multiset['c', 'd', 'e'])"
 operator|+
 literal|" submultiset of multiset['a', 'b', 'c', 'd', 'e']"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"multiset[cast(null as double)] multiset union multiset[cast(null as double)]"
+literal|"multiset[cast(null as double)] "
+operator|+
+literal|"multiset union multiset[cast(null as double)]"
 argument_list|,
 literal|"[null, null]"
 argument_list|,
 literal|"DOUBLE MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"multiset[cast(null as boolean)] multiset union multiset[cast(null as boolean)]"
+literal|"multiset[cast(null as boolean)] "
+operator|+
+literal|"multiset union multiset[cast(null as boolean)]"
 argument_list|,
 literal|"[null, null]"
 argument_list|,
@@ -33285,7 +34606,14 @@ name|void
 name|testMultisetUnionAllOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33298,7 +34626,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -33311,7 +34639,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33321,12 +34649,10 @@ literal|"multiset union all multiset[1, 4, 5, 7, 8]) "
 operator|+
 literal|"submultiset of multiset[1, 2, 3, 4, 5, 7, 8]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33336,12 +34662,10 @@ literal|"multiset union all multiset[1, 4, 5, 7, 8]) "
 operator|+
 literal|"submultiset of multiset[1, 1, 2, 2, 3, 4, 4, 5, 7, 8]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -33354,7 +34678,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33364,12 +34688,10 @@ literal|"multiset union all multiset['c', 'd', 'e']) "
 operator|+
 literal|"submultiset of multiset['a', 'b', 'c', 'd', 'e']"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -33379,27 +34701,29 @@ literal|"multiset union distinct multiset['c', 'd', 'e']) "
 operator|+
 literal|"submultiset of multiset['a', 'b', 'c', 'd', 'e', 'c']"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"multiset[cast(null as double)] multiset union all multiset[cast(null as double)]"
+literal|"multiset[cast(null as double)] "
+operator|+
+literal|"multiset union all multiset[cast(null as double)]"
 argument_list|,
 literal|"[null, null]"
 argument_list|,
 literal|"DOUBLE MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"multiset[cast(null as boolean)] multiset union all multiset[cast(null as boolean)]"
+literal|"multiset[cast(null as boolean)] "
+operator|+
+literal|"multiset union all multiset[cast(null as boolean)]"
 argument_list|,
 literal|"[null, null]"
 argument_list|,
@@ -33413,7 +34737,14 @@ name|void
 name|testSubMultisetOfOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33426,92 +34757,80 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[2] submultiset of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] submultiset of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1, 2] submultiset of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] submultiset of multiset[1, 2]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1, 2] submultiset of multiset[1, 2]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset['a', 'b'] submultiset of multiset['c', 'd', 's', 'a']"
+literal|"multiset['a', 'b'] submultiset of "
+operator|+
+literal|"multiset['c', 'd', 's', 'a']"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset['a', 'd'] submultiset of multiset['c', 's', 'a', 'w', 'd']"
+literal|"multiset['a', 'd'] submultiset of "
+operator|+
+literal|"multiset['c', 's', 'a', 'w', 'd']"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset['q', 'a'] submultiset of multiset['a', 'q']"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -33521,7 +34840,14 @@ name|void
 name|testNotSubMultisetOfOperator
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33534,92 +34860,82 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[2] not submultiset of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] not submultiset of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1, 2] not submultiset of multiset[1]"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1] not submultiset of multiset[1, 2]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
 literal|"multiset[1, 2] not submultiset of multiset[1, 2]"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset['a', 'b'] not submultiset of multiset['c', 'd', 's', 'a']"
+literal|"multiset['a', 'b'] not submultiset of "
+operator|+
+literal|"multiset['c', 'd', 's', 'a']"
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset['a', 'd'] not submultiset of multiset['c', 's', 'a', 'w', 'd']"
+literal|"multiset['a', 'd'] not submultiset of "
+operator|+
+literal|"multiset['c', 's', 'a', 'w', 'd']"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
-literal|"multiset['q', 'a'] not submultiset of multiset['a', 'q']"
+literal|"multiset['q', 'a'] not submultiset of "
+operator|+
+literal|"multiset['a', 'q']"
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -33629,7 +34945,14 @@ name|void
 name|testCollectFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33642,7 +34965,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -33653,34 +34976,34 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"collect(1)"
 argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"collect(1.2)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"collect(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -33691,7 +35014,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -33717,7 +35040,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33725,17 +35048,13 @@ literal|"collect(x)"
 argument_list|,
 name|values
 argument_list|,
-name|Collections
-operator|.
-name|singletonList
+name|isSet
 argument_list|(
 literal|"[0, 2, 2]"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33743,31 +35062,24 @@ literal|"collect(x) within group(order by x desc)"
 argument_list|,
 name|values
 argument_list|,
-name|Collections
-operator|.
-name|singletonList
+name|isSet
 argument_list|(
 literal|"[2, 2, 0]"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
-name|Object
-name|result1
-init|=
-operator|-
-literal|3
-decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33775,18 +35087,14 @@ literal|"collect(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-name|result1
-argument_list|,
-literal|0d
+name|isSingle
+argument_list|(
+operator|-
+literal|3
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|Object
-name|result
-init|=
-operator|-
-literal|1
-decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33794,12 +35102,14 @@ literal|"collect(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-name|result
-argument_list|,
-literal|0d
+name|isSingle
+argument_list|(
+operator|-
+literal|1
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33807,9 +35117,10 @@ literal|"collect(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -33819,7 +35130,14 @@ name|void
 name|testListAggFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -33832,7 +35150,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -33843,16 +35161,21 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"listagg(12)"
 argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -33863,16 +35186,21 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"listagg(cast(12 as double))"
 argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -33883,7 +35211,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -33894,7 +35222,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -33905,19 +35233,19 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"listagg('test')"
 argument_list|,
 literal|"CHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"listagg('test', ', ')"
 argument_list|,
 literal|"CHAR(4) NOT NULL"
@@ -33938,7 +35266,7 @@ block|,
 literal|"'!'"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33946,9 +35274,10 @@ literal|"listagg(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"hello,world,!"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -33966,7 +35295,7 @@ block|,
 literal|"3"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -33974,9 +35303,10 @@ literal|"listagg(cast(x as CHAR))"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"0,1,2,3"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -33986,9 +35316,18 @@ name|void
 name|testStringAggFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkStringAggFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -33998,7 +35337,9 @@ argument_list|)
 expr_stmt|;
 name|checkStringAggFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34008,7 +35349,9 @@ argument_list|)
 expr_stmt|;
 name|checkStringAggFuncFails
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34021,8 +35364,8 @@ specifier|private
 name|void
 name|checkStringAggFunc
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
 specifier|final
@@ -34038,7 +35381,7 @@ block|,
 literal|"'yz'"
 block|}
 decl_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34046,12 +35389,13 @@ literal|"string_agg(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x,yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34059,12 +35403,13 @@ literal|"string_agg(x,':')"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x:yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34072,12 +35417,13 @@ literal|"string_agg(x,':' order by x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x:yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34085,12 +35431,13 @@ literal|"string_agg(x order by char_length(x) desc)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"yz,x"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34103,7 +35450,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34121,8 +35468,8 @@ specifier|private
 name|void
 name|checkStringAggFuncFails
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
 specifier|final
@@ -34136,7 +35483,7 @@ block|,
 literal|"'y'"
 block|}
 decl_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34149,7 +35496,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34164,7 +35511,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34186,9 +35533,18 @@ name|void
 name|testGroupConcatFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkGroupConcatFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34198,7 +35554,9 @@ argument_list|)
 expr_stmt|;
 name|checkGroupConcatFuncFails
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34208,7 +35566,9 @@ argument_list|)
 expr_stmt|;
 name|checkGroupConcatFuncFails
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34221,8 +35581,8 @@ specifier|private
 name|void
 name|checkGroupConcatFunc
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
 specifier|final
@@ -34238,7 +35598,7 @@ block|,
 literal|"'yz'"
 block|}
 decl_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34246,12 +35606,13 @@ literal|"group_concat(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x,yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34259,12 +35620,13 @@ literal|"group_concat(x,':')"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x:yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34272,12 +35634,13 @@ literal|"group_concat(x,':' order by x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x:yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34285,12 +35648,13 @@ literal|"group_concat(x order by x separator '|')"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"x|yz"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34298,12 +35662,13 @@ literal|"group_concat(x order by char_length(x) desc)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"yz,x"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34316,7 +35681,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34334,7 +35699,7 @@ specifier|private
 name|void
 name|checkGroupConcatFuncFails
 parameter_list|(
-name|SqlTester
+name|SqlOperatorFixture
 name|t
 parameter_list|)
 block|{
@@ -34399,9 +35764,18 @@ name|void
 name|testArrayAggFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkArrayAggFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34411,7 +35785,9 @@ argument_list|)
 expr_stmt|;
 name|checkArrayAggFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34421,7 +35797,9 @@ argument_list|)
 expr_stmt|;
 name|checkArrayAggFuncFails
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34434,11 +35812,11 @@ specifier|private
 name|void
 name|checkArrayAggFunc
 parameter_list|(
-name|SqlTester
-name|t
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -34464,7 +35842,7 @@ block|,
 literal|"'yz'"
 block|}
 decl_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34472,12 +35850,13 @@ literal|"array_agg(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[x, yz]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34485,12 +35864,13 @@ literal|"array_agg(x ignore nulls)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[x, yz]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34498,9 +35878,10 @@ literal|"array_agg(x respect nulls)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[x, yz]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -34511,7 +35892,7 @@ literal|"Invalid number of arguments "
 operator|+
 literal|"to function 'ARRAY_AGG'. Was expecting 1 arguments"
 decl_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34524,7 +35905,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -34537,7 +35918,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34545,9 +35926,10 @@ literal|"array_agg(x order by char_length(x) desc)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[yz, x]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -34555,7 +35937,7 @@ specifier|private
 name|void
 name|checkArrayAggFuncFails
 parameter_list|(
-name|SqlTester
+name|SqlOperatorFixture
 name|t
 parameter_list|)
 block|{
@@ -34645,9 +36027,18 @@ name|void
 name|testArrayConcatAggFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 name|checkArrayConcatAggFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34657,7 +36048,9 @@ argument_list|)
 expr_stmt|;
 name|checkArrayConcatAggFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34667,7 +36060,9 @@ argument_list|)
 expr_stmt|;
 name|checkArrayConcatAggFuncFails
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -34679,7 +36074,7 @@ block|}
 name|void
 name|checkArrayConcatAggFunc
 parameter_list|(
-name|SqlTester
+name|SqlOperatorFixture
 name|t
 parameter_list|)
 block|{
@@ -34707,10 +36102,10 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|t
+operator|.
 name|checkAggType
 argument_list|(
-name|t
-argument_list|,
 literal|"array_concat_agg(ARRAY[1,2,3])"
 argument_list|,
 literal|"INTEGER NOT NULL ARRAY NOT NULL"
@@ -34781,9 +36176,10 @@ literal|"array_concat_agg(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[0, 1, 2, 3]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -34805,16 +36201,17 @@ literal|"array_concat_agg(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[0, 1, 1, 2]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 name|void
 name|checkArrayConcatAggFuncFails
 parameter_list|(
-name|SqlTester
+name|SqlOperatorFixture
 name|t
 parameter_list|)
 block|{
@@ -34904,7 +36301,14 @@ name|void
 name|testFusionFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -34917,7 +36321,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -34928,16 +36332,21 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"fusion(MULTISET[1,2,3])"
 argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -34963,7 +36372,7 @@ block|,
 literal|"MULTISET[3]"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34971,9 +36380,10 @@ literal|"fusion(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[0, 1, 2, 3]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -34987,7 +36397,7 @@ block|,
 literal|"MULTISET[1, 2]"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -34995,9 +36405,10 @@ literal|"fusion(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[0, 1, 1, 2]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -35007,7 +36418,14 @@ name|void
 name|testIntersectionFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35020,7 +36438,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35031,16 +36449,21 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"intersection(MULTISET[1,2,3])"
 argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -35066,7 +36489,7 @@ block|,
 literal|"MULTISET[3]"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35074,9 +36497,10 @@ literal|"intersection(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -35090,7 +36514,7 @@ block|,
 literal|"MULTISET[1, 2]"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35098,9 +36522,10 @@ literal|"intersection(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[1]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -35114,7 +36539,7 @@ block|,
 literal|"MULTISET[0, 1, 2]"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35122,9 +36547,10 @@ literal|"intersection(x)"
 argument_list|,
 name|values3
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"[0, 1, 1]"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -35134,7 +36560,14 @@ name|void
 name|testModeFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35145,7 +36578,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35156,29 +36589,48 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^mode()^"
 argument_list|,
-literal|"Invalid number of arguments to function 'MODE'. Was expecting 1 arguments"
+literal|"Invalid number of arguments to function 'MODE'. "
+operator|+
+literal|"Was expecting 1 arguments"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^mode(1,2)^"
 argument_list|,
-literal|"Invalid number of arguments to function 'MODE'. Was expecting 1 arguments"
+literal|"Invalid number of arguments to function 'MODE'. "
+operator|+
+literal|"Was expecting 1 arguments"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
@@ -35189,7 +36641,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -35198,34 +36650,34 @@ argument_list|,
 literal|"CHAR(4)"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"mode(1)"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"mode(1.2)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"mode(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -35255,7 +36707,7 @@ block|,
 literal|"3"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35263,9 +36715,10 @@ literal|"mode(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"3"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -35287,7 +36740,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35295,9 +36748,10 @@ literal|"mode(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"2"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -35307,7 +36761,7 @@ name|values3
 init|=
 block|{}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35315,12 +36769,11 @@ literal|"mode(x)"
 argument_list|,
 name|values3
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35328,13 +36781,14 @@ literal|"mode(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 operator|-
 literal|1
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35342,13 +36796,14 @@ literal|"mode(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 operator|-
 literal|1
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -35356,9 +36811,10 @@ literal|"mode(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|0
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -35368,7 +36824,14 @@ name|void
 name|testYear
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35381,7 +36844,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35392,7 +36855,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35406,7 +36869,14 @@ name|void
 name|testQuarter
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35419,7 +36889,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35430,7 +36900,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35441,7 +36911,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35452,7 +36922,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35463,7 +36933,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35474,7 +36944,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35485,7 +36955,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35496,7 +36966,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35507,7 +36977,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35518,7 +36988,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35529,7 +36999,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35540,7 +37010,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35551,7 +37021,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35565,7 +37035,14 @@ name|void
 name|testMonth
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35578,7 +37055,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35589,7 +37066,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35603,7 +37080,14 @@ name|void
 name|testWeek
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35624,7 +37108,7 @@ name|CALCITE_2539_FIXED
 condition|)
 block|{
 comment|// TODO: Not implemented in operator test execution code
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35635,7 +37119,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35654,7 +37138,14 @@ name|void
 name|testDayOfYear
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35675,7 +37166,7 @@ name|CALCITE_2539_FIXED
 condition|)
 block|{
 comment|// TODO: Not implemented in operator test execution code
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35686,7 +37177,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35705,7 +37196,14 @@ name|void
 name|testDayOfMonth
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35718,7 +37216,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35729,7 +37227,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35743,7 +37241,14 @@ name|void
 name|testDayOfWeek
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35764,7 +37269,7 @@ name|CALCITE_2539_FIXED
 condition|)
 block|{
 comment|// TODO: Not implemented in operator test execution code
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35775,7 +37280,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -35794,7 +37299,14 @@ name|void
 name|testHour
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35807,7 +37319,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35818,7 +37330,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35832,7 +37344,14 @@ name|void
 name|testMinute
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35845,7 +37364,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35856,7 +37375,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35870,7 +37389,14 @@ name|void
 name|testSecond
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35883,7 +37409,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35894,7 +37420,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -35908,7 +37434,14 @@ name|void
 name|testExtractIntervalYearMonth
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -35928,7 +37461,7 @@ condition|)
 block|{
 comment|// Not supported, fails in type validation because the extract
 comment|// unit is not YearMonth interval type.
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35941,7 +37474,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35952,40 +37485,46 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millisecond from interval '4-2' year to month)"
+literal|"extract(millisecond from "
+operator|+
+literal|"interval '4-2' year to month)"
 argument_list|,
 literal|"0"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(microsecond from interval '4-2' year to month)"
+literal|"extract(microsecond "
+operator|+
+literal|"from interval '4-2' year to month)"
 argument_list|,
 literal|"0"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(nanosecond from interval '4-2' year to month)"
+literal|"extract(nanosecond from "
+operator|+
+literal|"interval '4-2' year to month)"
 argument_list|,
 literal|"0"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -35996,7 +37535,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36007,7 +37546,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36021,7 +37560,7 @@ expr_stmt|;
 block|}
 comment|// Postgres doesn't support DOW, ISODOW, DOY and WEEK on INTERVAL YEAR MONTH type.
 comment|// SQL standard doesn't have extract units for DOW, ISODOW, DOY and WEEK.
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36032,7 +37571,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36043,7 +37582,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36054,7 +37593,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36065,7 +37604,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36076,7 +37615,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36087,7 +37626,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36098,33 +37637,39 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(decade from interval '426-3' year(3) to month)"
+literal|"extract(decade from "
+operator|+
+literal|"interval '426-3' year(3) to month)"
 argument_list|,
 literal|"42"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(century from interval '426-3' year(3) to month)"
+literal|"extract(century from "
+operator|+
+literal|"interval '426-3' year(3) to month)"
 argument_list|,
 literal|"4"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millennium from interval '2005-3' year(4) to month)"
+literal|"extract(millennium from "
+operator|+
+literal|"interval '2005-3' year(4) to month)"
 argument_list|,
 literal|"2"
 argument_list|,
@@ -36138,7 +37683,14 @@ name|void
 name|testExtractIntervalDayTime
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -36157,11 +37709,13 @@ name|TODO
 condition|)
 block|{
 comment|// Not implemented in operator test
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(epoch from interval '2 3:4:5.678' day to second)"
+literal|"extract(epoch from "
+operator|+
+literal|"interval '2 3:4:5.678' day to second)"
 argument_list|,
 comment|// number of seconds elapsed since timestamp
 comment|// '1970-01-01 00:00:00' + input interval
@@ -36171,40 +37725,46 @@ literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millisecond from interval '2 3:4:5.678' day to second)"
+literal|"extract(millisecond from "
+operator|+
+literal|"interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(microsecond from interval '2 3:4:5.678' day to second)"
+literal|"extract(microsecond from "
+operator|+
+literal|"interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678000"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(nanosecond from interval '2 3:4:5.678' day to second)"
+literal|"extract(nanosecond from "
+operator|+
+literal|"interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678000000"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36215,7 +37775,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36226,7 +37786,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36237,7 +37797,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36257,7 +37817,7 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36268,7 +37828,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36279,7 +37839,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36290,7 +37850,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36302,7 +37862,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36317,7 +37877,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36332,7 +37892,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36347,7 +37907,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36362,7 +37922,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36384,7 +37944,14 @@ name|void
 name|testExtractDate
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -36397,7 +37964,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36410,7 +37977,7 @@ comment|// '1970-01-01 00:00:00' for given date
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36421,7 +37988,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36432,7 +37999,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36443,7 +38010,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36454,7 +38021,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36465,7 +38032,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36476,7 +38043,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36487,7 +38054,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36498,7 +38065,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36509,7 +38076,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36520,7 +38087,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36531,7 +38098,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36542,7 +38109,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36553,7 +38120,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36564,7 +38131,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36575,7 +38142,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36586,7 +38153,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36597,7 +38164,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36608,7 +38175,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36619,7 +38186,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36630,18 +38197,19 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(week from cast(null as date))"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"BIGINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36652,7 +38220,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36663,7 +38231,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36674,7 +38242,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36685,7 +38253,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36696,7 +38264,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36707,7 +38275,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36718,7 +38286,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36729,7 +38297,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36740,7 +38308,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36758,7 +38326,14 @@ name|void
 name|testExtractTimestamp
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -36771,7 +38346,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36784,7 +38359,7 @@ comment|// '1970-01-01 00:00:00' for given date
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36795,7 +38370,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36806,7 +38381,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36817,7 +38392,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36828,7 +38403,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36839,7 +38414,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36850,7 +38425,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36861,7 +38436,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36872,7 +38447,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36883,7 +38458,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36894,7 +38469,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36913,7 +38488,7 @@ name|CALCITE_2539_FIXED
 condition|)
 block|{
 comment|// TODO: Not implemented in operator test execution code
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36925,7 +38500,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// TODO: Not implemented in operator test execution code
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36937,7 +38512,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// TODO: Not implemented in operator test execution code
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -36949,7 +38524,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36960,7 +38535,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36971,7 +38546,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36982,7 +38557,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -36993,7 +38568,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37004,7 +38579,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37022,7 +38597,14 @@ name|void
 name|testExtractFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -37035,7 +38617,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37046,7 +38628,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37057,7 +38639,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37068,7 +38650,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37080,7 +38662,7 @@ literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// TODO: Seconds should include precision
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37091,40 +38673,46 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millisecond from interval '2 3:4:5.678' day to second)"
+literal|"extract(millisecond from"
+operator|+
+literal|" interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(microsecond from interval '2 3:4:5.678' day to second)"
+literal|"extract(microsecond from"
+operator|+
+literal|" interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678000"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(nanosecond from interval '2 3:4:5.678' day to second)"
+literal|"extract(nanosecond from"
+operator|+
+literal|" interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678000000"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -37138,7 +38726,14 @@ name|void
 name|testExtractFuncFromDateTime
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -37151,7 +38746,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37162,7 +38757,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37173,7 +38768,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37184,7 +38779,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37195,7 +38790,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37206,7 +38801,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37217,42 +38812,42 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"extract(month from cast(null as timestamp))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"extract(month from cast(null as date))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"extract(second from cast(null as time))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"extract(millisecond from cast(null as time))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"extract(microsecond from cast(null as time))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -37266,18 +38861,27 @@ name|void
 name|testExtractWithDatesBeforeUnixEpoch
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millisecond from TIMESTAMP '1969-12-31 21:13:17.357')"
+literal|"extract(millisecond from"
+operator|+
+literal|" TIMESTAMP '1969-12-31 21:13:17.357')"
 argument_list|,
 literal|"17357"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37288,7 +38892,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37299,7 +38903,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37310,7 +38914,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37321,7 +38925,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37332,7 +38936,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37343,7 +38947,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37354,7 +38958,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37365,7 +38969,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37376,7 +38980,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37387,7 +38991,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37398,7 +39002,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37409,7 +39013,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37420,7 +39024,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37431,22 +39035,26 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millisecond from TIMESTAMP '1969-12-31 21:13:17.357')"
+literal|"extract(millisecond from"
+operator|+
+literal|" TIMESTAMP '1969-12-31 21:13:17.357')"
 argument_list|,
 literal|"17357"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(microsecond from TIMESTAMP '1969-12-31 21:13:17.357')"
+literal|"extract(microsecond from"
+operator|+
+literal|" TIMESTAMP '1969-12-31 21:13:17.357')"
 argument_list|,
 literal|"17357000"
 argument_list|,
@@ -37460,16 +39068,27 @@ name|void
 name|testArrayValueConstructor
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ARRAY_VALUE_CONSTRUCTOR
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37482,7 +39101,7 @@ argument_list|)
 expr_stmt|;
 comment|// empty array is illegal per SQL spec. presumably because one can't
 comment|// infer type
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -37500,16 +39119,27 @@ name|void
 name|testItemOp
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|ITEM
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37520,18 +39150,19 @@ argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"ARRAY ['foo', 'bar'][0]"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37542,31 +39173,34 @@ argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"ARRAY ['foo', 'bar'][3]"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"CHAR(3)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"ARRAY ['foo', 'bar'][1 + CAST(NULL AS INTEGER)]"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"^ARRAY ['foo', 'bar']['baz']^"
 argument_list|,
-literal|"Cannot apply 'ITEM' to arguments of type 'ITEM\\(<CHAR\\(3\\) ARRAY>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\):<ARRAY>\\[<INTEGER>\\]\n"
+literal|"Cannot apply 'ITEM' to arguments of type 'ITEM\\(<CHAR\\(3\\) ARRAY>, "
+operator|+
+literal|"<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\):<ARRAY>\\[<INTEGER>\\]\n"
 operator|+
 literal|"<MAP>\\[<ANY>\\]\n"
 operator|+
@@ -37577,7 +39211,7 @@ argument_list|)
 expr_stmt|;
 comment|// Array of INTEGER NOT NULL is interesting because we might be tempted
 comment|// to represent the result as Java "int".
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37588,19 +39222,20 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"ARRAY [2, 4, 6][4]"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// Map item
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -37611,18 +39246,20 @@ argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"map['foo', CAST(NULL AS INTEGER), 'bar', 7]['bar']"
+literal|"map['foo', CAST(NULL AS INTEGER), 'bar', 7]"
+operator|+
+literal|"['bar']"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
 literal|"7"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -37630,10 +39267,11 @@ literal|"map['foo', CAST(NULL AS INTEGER), 'bar', 7]['baz']"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkColumnType
 argument_list|(
@@ -37651,7 +39289,7 @@ literal|"select \"T\".\"X\"[1] "
 operator|+
 literal|"from (VALUES (ROW(ROW(3, 7), ROW(4, 8)))) as T(x, y)"
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -37662,11 +39300,9 @@ operator|.
 name|INTEGER_TYPE_CHECKER
 argument_list|,
 literal|3
-argument_list|,
-literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkColumnType
 argument_list|(
@@ -37675,7 +39311,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -37688,11 +39324,9 @@ operator|.
 name|INTEGER_TYPE_CHECKER
 argument_list|,
 literal|3
-argument_list|,
-literal|0
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -37704,12 +39338,11 @@ name|SqlTests
 operator|.
 name|ANY_TYPE_CHECKER
 argument_list|,
-literal|null
-argument_list|,
-literal|0
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -37731,7 +39364,14 @@ name|void
 name|testMapValueConstructor
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -37742,7 +39382,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -37753,7 +39393,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -37764,7 +39404,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -37775,22 +39415,22 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
-name|checkScalarExact
+name|checkScalar
 argument_list|(
 literal|"map['washington', 1, 'obama', 44]"
 argument_list|,
-literal|"(CHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
-argument_list|,
 literal|"{washington=1, obama=44}"
+argument_list|,
+literal|"(CHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlTester
-name|tester2
+name|SqlOperatorFixture
+name|f1
 init|=
-name|tester
+name|f
 operator|.
 name|withConformance
 argument_list|(
@@ -37799,15 +39439,15 @@ operator|.
 name|PRAGMATIC_2003
 argument_list|)
 decl_stmt|;
-name|tester2
+name|f1
 operator|.
-name|checkScalarExact
+name|checkScalar
 argument_list|(
 literal|"map['washington', 1, 'obama', 44]"
 argument_list|,
-literal|"(VARCHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
-argument_list|,
 literal|"{washington=1, obama=44}"
+argument_list|,
+literal|"(VARCHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -37817,7 +39457,14 @@ name|void
 name|testCeilFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -37828,7 +39475,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -37836,12 +39483,13 @@ literal|"ceil(10.1e0)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|11
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -37849,13 +39497,14 @@ literal|"ceil(cast(-11.2e0 as real))"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 operator|-
 literal|11
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -37866,7 +39515,7 @@ argument_list|,
 literal|"100"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -37877,7 +39526,7 @@ argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -37888,14 +39537,14 @@ argument_list|,
 literal|"-1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"ceiling(cast(null as decimal(2,0)))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -37909,15 +39558,25 @@ name|void
 name|testCeilFuncInterval
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37928,7 +39587,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37939,7 +39598,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37950,7 +39609,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -37961,7 +39620,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -37975,7 +39634,14 @@ name|void
 name|testFloorFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -37986,7 +39652,7 @@ argument_list|,
 name|VM_FENNEL
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -37994,12 +39660,13 @@ literal|"floor(2.5e0)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 literal|2
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarApprox
 argument_list|(
@@ -38007,13 +39674,14 @@ literal|"floor(cast(-1.2e0 as real))"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
+name|isExactly
+argument_list|(
 operator|-
 literal|2
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -38024,7 +39692,7 @@ argument_list|,
 literal|"100"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -38035,7 +39703,7 @@ argument_list|,
 literal|"1"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalarExact
 argument_list|(
@@ -38046,14 +39714,14 @@ argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"floor(cast(null as decimal(2,0)))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -38067,13 +39735,29 @@ name|void
 name|testFloorFuncDateTime
 parameter_list|()
 block|{
-name|strictTester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^floor('12:34:56')^"
 argument_list|,
-literal|"Cannot apply 'FLOOR' to arguments of type 'FLOOR\\(<CHAR\\(8\\)>\\)'\\. Supported form\\(s\\): 'FLOOR\\(<NUMERIC>\\)'\n"
+literal|"Cannot apply 'FLOOR' to arguments of type "
+operator|+
+literal|"'FLOOR\\(<CHAR\\(8\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'FLOOR\\(<NUMERIC>\\)'\n"
 operator|+
 literal|"'FLOOR\\(<DATETIME_INTERVAL>\\)'\n"
 operator|+
@@ -38086,7 +39770,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -38095,7 +39779,7 @@ argument_list|,
 literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38106,7 +39790,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38117,7 +39801,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38128,7 +39812,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38139,7 +39823,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38150,7 +39834,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38161,7 +39845,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38172,7 +39856,7 @@ argument_list|,
 literal|"TIMESTAMP(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38183,7 +39867,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38194,7 +39878,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38205,7 +39889,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38216,7 +39900,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38227,14 +39911,14 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"floor(cast(null as timestamp) to month)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -38248,13 +39932,29 @@ name|void
 name|testCeilFuncDateTime
 parameter_list|()
 block|{
-name|strictTester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^ceil('12:34:56')^"
 argument_list|,
-literal|"Cannot apply 'CEIL' to arguments of type 'CEIL\\(<CHAR\\(8\\)>\\)'\\. Supported form\\(s\\): 'CEIL\\(<NUMERIC>\\)'\n"
+literal|"Cannot apply 'CEIL' to arguments of type "
+operator|+
+literal|"'CEIL\\(<CHAR\\(8\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'CEIL\\(<NUMERIC>\\)'\n"
 operator|+
 literal|"'CEIL\\(<DATETIME_INTERVAL>\\)'\n"
 operator|+
@@ -38267,7 +39967,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -38276,7 +39976,7 @@ argument_list|,
 literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38287,7 +39987,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38298,7 +39998,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38309,7 +40009,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38320,7 +40020,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -38331,7 +40031,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38342,7 +40042,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38353,7 +40053,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38364,7 +40064,7 @@ argument_list|,
 literal|"TIMESTAMP(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38375,7 +40075,7 @@ argument_list|,
 literal|"TIMESTAMP(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38386,7 +40086,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38397,7 +40097,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38408,7 +40108,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38419,7 +40119,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38430,14 +40130,14 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"ceil(cast(null as timestamp) to month)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -38445,7 +40145,7 @@ literal|"ceil(cast(null as date) to month)"
 argument_list|)
 expr_stmt|;
 comment|// ceiling alias
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38456,7 +40156,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38467,7 +40167,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -38481,15 +40181,25 @@ name|void
 name|testFloorFuncInterval
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38500,7 +40210,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38511,7 +40221,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38522,7 +40232,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38533,7 +40243,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38544,7 +40254,7 @@ argument_list|,
 literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38555,7 +40265,7 @@ argument_list|,
 literal|"INTERVAL MINUTE TO SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38566,7 +40276,7 @@ argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38577,7 +40287,7 @@ argument_list|,
 literal|"INTERVAL DAY TO HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38588,7 +40298,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38599,7 +40309,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38610,7 +40320,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38621,7 +40331,7 @@ argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -38635,16 +40345,27 @@ name|void
 name|testTimestampAdd
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|TIMESTAMP_ADD
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38655,7 +40376,7 @@ argument_list|,
 literal|"TIMESTAMP(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38666,7 +40387,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38677,7 +40398,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38688,7 +40409,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38699,7 +40420,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38710,7 +40431,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -38719,14 +40440,14 @@ operator|+
 literal|" timestamp '2016-02-24 12:42:25')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"timestampadd(HOUR, -200, CAST(NULL AS TIMESTAMP))"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38737,19 +40458,20 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"timestampadd(MONTH, 3, cast(null as timestamp))"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
 comment|// TIMESTAMPADD with DATE; returns a TIMESTAMP value for sub-day intervals.
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38760,7 +40482,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38771,7 +40493,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38782,7 +40504,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38793,7 +40515,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38804,7 +40526,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38815,30 +40537,32 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"timestampadd(SECOND, 1, cast(null as date))"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"timestampadd(DAY, 1, cast(null as date))"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"DATE"
 argument_list|)
 expr_stmt|;
 comment|// Round to the last day of previous month
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38849,7 +40573,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38860,7 +40584,7 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38872,7 +40596,7 @@ literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// TIMESTAMPADD with time; returns a time value.The interval is positive.
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38883,7 +40607,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38894,7 +40618,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38905,7 +40629,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38916,7 +40640,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38927,7 +40651,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38938,7 +40662,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38949,7 +40673,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38960,7 +40684,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38972,7 +40696,7 @@ literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// TIMESTAMPADD with time; returns a time value .The interval is negative.
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38983,7 +40707,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -38994,7 +40718,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39005,7 +40729,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39016,7 +40740,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39027,7 +40751,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39038,7 +40762,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39049,7 +40773,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39067,16 +40791,27 @@ name|void
 name|testTimestampAddFractionalSeconds
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|TIMESTAMP_ADD
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39090,9 +40825,9 @@ comment|// The following test would correctly return "TIMESTAMP(6) NOT NULL" if 
 comment|// precision were 6 or higher
 name|assumeTrue
 argument_list|(
-name|tester
+name|f
 operator|.
-name|getValidator
+name|getFactory
 argument_list|()
 operator|.
 name|getTypeFactory
@@ -39111,7 +40846,7 @@ operator|==
 literal|3
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39128,16 +40863,27 @@ name|void
 name|testTimestampDiff
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|TIMESTAMP_DIFF
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39152,7 +40898,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39167,7 +40913,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39182,7 +40928,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39197,7 +40943,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39212,7 +40958,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39227,7 +40973,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39242,7 +40988,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39257,7 +41003,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39272,7 +41018,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39287,7 +41033,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39302,7 +41048,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39317,7 +41063,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39327,12 +41073,13 @@ literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
 literal|"cast(null as timestamp))"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39342,13 +41089,14 @@ literal|"cast(null as timestamp), "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25')"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// timestampdiff with date
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39359,7 +41107,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39370,7 +41118,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39381,7 +41129,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39392,7 +41140,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39403,7 +41151,7 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -39414,24 +41162,26 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"timestampdiff(SECOND, cast(null as date), date '2016-06-15')"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
 literal|"timestampdiff(DAY, date '2016-06-15', cast(null as date))"
 argument_list|,
-literal|null
+name|isNullValue
+argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
@@ -39443,7 +41193,14 @@ name|void
 name|testDenseRankFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39463,7 +41220,14 @@ name|void
 name|testPercentRankFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39483,7 +41247,14 @@ name|void
 name|testRankFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39503,7 +41274,14 @@ name|void
 name|testCumeDistFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39523,7 +41301,14 @@ name|void
 name|testRowNumberFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39543,7 +41328,14 @@ name|void
 name|testPercentileContFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39556,7 +41348,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39565,7 +41357,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39578,7 +41370,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39589,7 +41381,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39600,7 +41392,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39620,7 +41412,14 @@ name|void
 name|testPercentileDiscFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39633,7 +41432,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39642,7 +41441,7 @@ argument_list|,
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39655,7 +41454,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39666,7 +41465,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39677,7 +41476,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39697,7 +41496,14 @@ name|void
 name|testCountFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -39708,7 +41514,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39717,7 +41523,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39726,7 +41532,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39735,7 +41541,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39744,7 +41550,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39753,7 +41559,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39764,7 +41570,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39773,7 +41579,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39797,7 +41603,7 @@ block|,
 literal|"0"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39805,12 +41611,13 @@ literal|"COUNT(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|3
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39818,12 +41625,13 @@ literal|"COUNT(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39831,9 +41639,10 @@ literal|"COUNT(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// string values -- note that empty string is not null
@@ -39850,7 +41659,7 @@ block|,
 literal|"''"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39858,12 +41667,13 @@ literal|"COUNT(*)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|3
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39871,12 +41681,13 @@ literal|"COUNT(x)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39884,12 +41695,13 @@ literal|"COUNT(DISTINCT x)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -39897,9 +41709,10 @@ literal|"COUNT(DISTINCT 123)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|1
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -39909,7 +41722,12 @@ name|void
 name|testCountifFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
 operator|.
 name|setFor
 argument_list|(
@@ -39921,19 +41739,15 @@ name|VM_FENNEL
 argument_list|,
 name|VM_JAVA
 argument_list|)
-expr_stmt|;
-specifier|final
-name|SqlTester
-name|tester
-init|=
-name|libraryTester
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
 name|BIG_QUERY
 argument_list|)
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39942,7 +41756,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39951,7 +41765,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -39968,7 +41782,7 @@ literal|"Invalid number of arguments to function "
 operator|+
 literal|"'COUNTIF'. Was expecting 1 arguments"
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -39979,7 +41793,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40000,7 +41814,7 @@ literal|"type 'COUNTIF\\(<INTEGER>\\)'\\. Supported form\\(s\\): "
 operator|+
 literal|"'COUNTIF\\(<BOOLEAN>\\)'"
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40026,7 +41840,7 @@ block|,
 literal|"1"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40034,12 +41848,13 @@ literal|"countif(x> 0)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|3
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40047,12 +41862,13 @@ literal|"countif(x< 2)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40060,12 +41876,13 @@ literal|"countif(x is not null) filter (where x< 2)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40073,12 +41890,13 @@ literal|"countif(x< 2) filter (where x is not null)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40086,12 +41904,13 @@ literal|"countif(x between 1 and 2)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|3
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40099,9 +41918,10 @@ literal|"countif(x< 0)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|0
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -40111,7 +41931,14 @@ name|void
 name|testApproxCountDistinctFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -40122,7 +41949,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40133,7 +41960,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40142,7 +41969,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40151,7 +41978,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40160,7 +41987,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40169,7 +41996,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40182,7 +42009,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40191,7 +42018,7 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40216,7 +42043,7 @@ literal|"0"
 block|}
 decl_stmt|;
 comment|// currently APPROX_COUNT_DISTINCT(x) returns the same as COUNT(DISTINCT x)
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40224,12 +42051,13 @@ literal|"APPROX_COUNT_DISTINCT(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40237,13 +42065,14 @@ literal|"APPROX_COUNT_DISTINCT(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|1
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// DISTINCT keyword is allowed but has no effect
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40251,9 +42080,10 @@ literal|"APPROX_COUNT_DISTINCT(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// string values -- note that empty string is not null
@@ -40270,7 +42100,7 @@ block|,
 literal|"''"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40278,12 +42108,13 @@ literal|"APPROX_COUNT_DISTINCT(x)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40291,12 +42122,13 @@ literal|"APPROX_COUNT_DISTINCT(DISTINCT x)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40304,9 +42136,10 @@ literal|"APPROX_COUNT_DISTINCT(DISTINCT 123)"
 argument_list|,
 name|stringValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|1
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -40316,7 +42149,14 @@ name|void
 name|testSumFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -40327,7 +42167,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40338,18 +42178,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^sum('name')^"
 argument_list|,
-literal|"(?s)Cannot apply 'SUM' to arguments of type 'SUM\\(<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): 'SUM\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'SUM' to arguments of type "
+operator|+
+literal|"'SUM\\(<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'SUM\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40358,34 +42207,34 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"sum(1)"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"sum(1.2)"
 argument_list|,
 literal|"DECIMAL(19, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"sum(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(19, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40396,7 +42245,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40407,18 +42256,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^sum(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'SUM' to arguments of type 'SUM\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'SUM\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'SUM' to arguments of type "
+operator|+
+literal|"'SUM\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'SUM\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40442,7 +42300,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40450,26 +42308,24 @@ literal|"sum(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|4
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|Object
-name|result1
-init|=
-operator|-
-literal|3
-decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40477,18 +42333,14 @@ literal|"sum(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-name|result1
-argument_list|,
-literal|0d
+name|isSingle
+argument_list|(
+operator|-
+literal|3
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|Object
-name|result
-init|=
-operator|-
-literal|1
-decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40496,12 +42348,14 @@ literal|"sum(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-name|result
-argument_list|,
-literal|0d
+name|isSingle
+argument_list|(
+operator|-
+literal|1
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40509,39 +42363,10 @@ literal|"sum(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0d
 argument_list|)
-expr_stmt|;
-block|}
-comment|/** Very similar to {@code tester.checkType}, but generates inside a SELECT    * with a non-empty GROUP BY. Aggregate functions may be nullable if executed    * in a SELECT with an empty GROUP BY.    *    *<p>Viz: {@code SELECT sum(1) FROM emp} has type "INTEGER",    * {@code SELECT sum(1) FROM emp GROUP BY deptno} has type "INTEGER NOT NULL",    */
-specifier|protected
-name|void
-name|checkAggType
-parameter_list|(
-name|SqlTester
-name|tester
-parameter_list|,
-name|String
-name|expr
-parameter_list|,
-name|String
-name|type
-parameter_list|)
-block|{
-name|tester
-operator|.
-name|checkColumnType
-argument_list|(
-name|AbstractSqlTester
-operator|.
-name|buildQueryAgg
-argument_list|(
-name|expr
-argument_list|)
-argument_list|,
-name|type
 argument_list|)
 expr_stmt|;
 block|}
@@ -40551,7 +42376,14 @@ name|void
 name|testAvgFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -40562,7 +42394,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40573,18 +42405,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^avg(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'AVG' to arguments of type 'AVG\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'AVG\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'AVG' to arguments of type "
+operator|+
+literal|"'AVG\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'AVG\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40593,7 +42434,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40602,37 +42443,37 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"AVG(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"avg(1)"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"avg(1.2)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"avg(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -40641,7 +42482,10 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
@@ -40661,7 +42505,7 @@ block|,
 literal|"3"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40669,12 +42513,13 @@ literal|"AVG(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|2d
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40682,18 +42527,13 @@ literal|"AVG(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1.5d
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|Object
-name|result
-init|=
-operator|-
-literal|1
-decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40701,9 +42541,11 @@ literal|"avg(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-name|result
-argument_list|,
-literal|0d
+name|isSingle
+argument_list|(
+operator|-
+literal|1
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -40713,7 +42555,14 @@ name|void
 name|testCovarPopFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -40724,7 +42573,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40735,18 +42584,31 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
-literal|"^covar_pop(cast(null as varchar(2)),cast(null as varchar(2)))^"
+literal|"^covar_pop(cast(null as varchar(2)),"
+operator|+
+literal|" cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'COVAR_POP' to arguments of type 'COVAR_POP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_POP\\(<NUMERIC>,<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'COVAR_POP' to arguments of type "
+operator|+
+literal|"'COVAR_POP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"'COVAR_POP\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40755,7 +42617,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40764,10 +42626,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"covar_pop(1.5, 2.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -40776,13 +42638,16 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40793,9 +42658,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -40805,7 +42669,14 @@ name|void
 name|testCovarSampFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -40816,7 +42687,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40827,18 +42698,31 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
-literal|"^covar_samp(cast(null as varchar(2)),cast(null as varchar(2)))^"
+literal|"^covar_samp(cast(null as varchar(2)),"
+operator|+
+literal|" cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'COVAR_SAMP' to arguments of type 'COVAR_SAMP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_SAMP\\(<NUMERIC>,<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'COVAR_SAMP' to arguments of type "
+operator|+
+literal|"'COVAR_SAMP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"'COVAR_SAMP\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40847,7 +42731,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40856,10 +42740,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"covar_samp(1.5, 2.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -40868,13 +42752,16 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40885,9 +42772,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -40897,7 +42783,14 @@ name|void
 name|testRegrSxxFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -40908,7 +42801,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -40919,18 +42812,31 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
-literal|"^regr_sxx(cast(null as varchar(2)), cast(null as varchar(2)))^"
+literal|"^regr_sxx(cast(null as varchar(2)),"
+operator|+
+literal|" cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'REGR_SXX' to arguments of type 'REGR_SXX\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'REGR_SXX\\(<NUMERIC>,<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'REGR_SXX' to arguments of type "
+operator|+
+literal|"'REGR_SXX\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"'REGR_SXX\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40939,7 +42845,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -40948,10 +42854,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"regr_sxx(1.5, 2.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -40960,13 +42866,16 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -40977,9 +42886,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -40989,7 +42897,14 @@ name|void
 name|testRegrSyyFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41000,7 +42915,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41011,18 +42926,31 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
-literal|"^regr_syy(cast(null as varchar(2)), cast(null as varchar(2)))^"
+literal|"^regr_syy(cast(null as varchar(2)),"
+operator|+
+literal|" cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'REGR_SYY' to arguments of type 'REGR_SYY\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'REGR_SYY\\(<NUMERIC>,<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'REGR_SYY' to arguments of type "
+operator|+
+literal|"'REGR_SYY\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"'REGR_SYY\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41031,7 +42959,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41040,10 +42968,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"regr_syy(1.5, 2.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -41052,13 +42980,16 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41069,9 +43000,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -41081,7 +43011,14 @@ name|void
 name|testStddevPopFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41092,7 +43029,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41103,18 +43040,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^stddev_pop(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'STDDEV_POP' to arguments of type 'STDDEV_POP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'STDDEV_POP\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'STDDEV_POP' to arguments of type "
+operator|+
+literal|"'STDDEV_POP\\(<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'STDDEV_POP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41123,7 +43069,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41132,10 +43078,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"stddev_pop(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -41158,11 +43104,14 @@ block|}
 decl_stmt|;
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 comment|// verified on Oracle 10g
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41170,13 +43119,16 @@ literal|"stddev_pop(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.414213562373095d
 argument_list|,
 literal|0.000000000000001d
 argument_list|)
+argument_list|)
 expr_stmt|;
 comment|// Oracle does not allow distinct
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41184,12 +43136,13 @@ literal|"stddev_pop(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|1.5d
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41197,14 +43150,15 @@ literal|"stddev_pop(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|0
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 comment|// with one value
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41217,13 +43171,14 @@ block|{
 literal|"5"
 block|}
 argument_list|,
+name|isSingle
+argument_list|(
 literal|0
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41234,9 +43189,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -41246,7 +43200,14 @@ name|void
 name|testStddevSampFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41257,7 +43218,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41268,18 +43229,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^stddev_samp(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'STDDEV_SAMP' to arguments of type 'STDDEV_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'STDDEV_SAMP\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'STDDEV_SAMP' to arguments of type "
+operator|+
+literal|"'STDDEV_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'STDDEV_SAMP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41288,7 +43258,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41297,10 +43267,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"stddev_samp(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -41323,11 +43293,14 @@ block|}
 decl_stmt|;
 if|if
 condition|(
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 comment|// verified on Oracle 10g
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41335,13 +43308,16 @@ literal|"stddev_samp(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isWithin
+argument_list|(
 literal|1.732050807568877d
 argument_list|,
 literal|0.000000000000001d
 argument_list|)
+argument_list|)
 expr_stmt|;
 comment|// Oracle does not allow distinct
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41349,12 +43325,15 @@ literal|"stddev_samp(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.121320343559642d
 argument_list|,
 literal|0.000000000000001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41362,14 +43341,13 @@ literal|"stddev_samp(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
 comment|// with one value
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41382,13 +43360,12 @@ block|{
 literal|"5"
 block|}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41399,9 +43376,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -41411,7 +43387,14 @@ name|void
 name|testStddevFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41422,7 +43405,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41433,18 +43416,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^stddev(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'STDDEV' to arguments of type 'STDDEV\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'STDDEV\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'STDDEV' to arguments of type "
+operator|+
+literal|"'STDDEV\\(<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'STDDEV\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41453,7 +43445,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41462,32 +43454,17 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"stddev(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
-specifier|final
-name|String
-index|[]
-name|values
-init|=
-block|{
-literal|"0"
-block|,
-literal|"CAST(null AS FLOAT)"
-block|,
-literal|"3"
-block|,
-literal|"3"
-block|}
-decl_stmt|;
 comment|// with one value
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41500,13 +43477,12 @@ block|{
 literal|"5"
 block|}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41517,9 +43493,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -41529,7 +43504,14 @@ name|void
 name|testVarPopFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41540,7 +43522,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41551,18 +43533,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^var_pop(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'VAR_POP' to arguments of type 'VAR_POP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'VAR_POP\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'VAR_POP' to arguments of type "
+operator|+
+literal|"'VAR_POP\\(<VARCHAR\\(2\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'VAR_POP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41571,7 +43562,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41580,10 +43571,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"var_pop(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -41607,12 +43598,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41620,13 +43614,14 @@ literal|"var_pop(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|2d
-argument_list|,
-comment|// verified on Oracle 10g
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+comment|// verified on Oracle 10g
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41635,12 +43630,15 @@ argument_list|,
 comment|// Oracle does not allow distinct
 name|values
 argument_list|,
+name|isWithin
+argument_list|(
 literal|2.25d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41648,13 +43646,14 @@ literal|"var_pop(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|0
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41667,13 +43666,14 @@ block|{
 literal|"5"
 block|}
 argument_list|,
+name|isExactly
+argument_list|(
 literal|0
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41684,9 +43684,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -41696,7 +43695,14 @@ name|void
 name|testVarSampFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41707,7 +43713,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41718,18 +43724,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^var_samp(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'VAR_SAMP' to arguments of type 'VAR_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'VAR_SAMP\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'VAR_SAMP' to arguments of type "
+operator|+
+literal|"'VAR_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'VAR_SAMP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41738,7 +43753,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41747,10 +43762,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"var_samp(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -41774,12 +43789,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41787,13 +43805,14 @@ literal|"var_samp(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|3d
-argument_list|,
-comment|// verified on Oracle 10g
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+comment|// verified on Oracle 10g
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41802,12 +43821,15 @@ argument_list|,
 comment|// Oracle does not allow distinct
 name|values
 argument_list|,
+name|isWithin
+argument_list|(
 literal|4.5d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41815,13 +43837,12 @@ literal|"var_samp(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41834,13 +43855,12 @@ block|{
 literal|"5"
 block|}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41851,9 +43871,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -41863,7 +43882,14 @@ name|void
 name|testVarFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -41874,7 +43900,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -41885,18 +43911,27 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|strictTester
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
 operator|.
 name|checkFails
 argument_list|(
 literal|"^variance(cast(null as varchar(2)))^"
 argument_list|,
-literal|"(?s)Cannot apply 'VARIANCE' to arguments of type 'VARIANCE\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'VARIANCE\\(<NUMERIC>\\)'.*"
+literal|"(?s)Cannot apply 'VARIANCE' to arguments of type "
+operator|+
+literal|"'VARIANCE\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'VARIANCE\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41905,7 +43940,7 @@ argument_list|,
 literal|"DECIMAL(19, 9)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -41914,10 +43949,10 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
 name|checkAggType
 argument_list|(
-name|tester
-argument_list|,
 literal|"variance(DISTINCT 1.5)"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
@@ -41941,12 +43976,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41954,13 +43992,14 @@ literal|"variance(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isExactly
+argument_list|(
 literal|3d
-argument_list|,
-comment|// verified on Oracle 10g
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+comment|// verified on Oracle 10g
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41969,12 +44008,15 @@ argument_list|,
 comment|// Oracle does not allow distinct
 name|values
 argument_list|,
+name|isWithin
+argument_list|(
 literal|4.5d
 argument_list|,
 literal|0.0001d
 argument_list|)
+argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -41982,13 +44024,12 @@ literal|"variance(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// with one value
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42001,13 +44042,12 @@ block|{
 literal|"5"
 block|}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// with zero values
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42018,9 +44058,8 @@ name|String
 index|[]
 block|{}
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -42030,7 +44069,14 @@ name|void
 name|testMinFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42041,7 +44087,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42052,7 +44098,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42061,7 +44107,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42070,7 +44116,7 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42079,24 +44125,28 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"^min()^"
 argument_list|,
-literal|"Invalid number of arguments to function 'MIN'. Was expecting 1 arguments"
+literal|"Invalid number of arguments to function 'MIN'. "
+operator|+
+literal|"Was expecting 1 arguments"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"^min(1, 2)^"
 argument_list|,
-literal|"Invalid number of arguments to function 'MIN'. Was expecting 1 arguments"
+literal|"Invalid number of arguments to function 'MIN'. "
+operator|+
+literal|"Was expecting 1 arguments"
 argument_list|,
 literal|false
 argument_list|)
@@ -42119,12 +44169,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42132,12 +44185,13 @@ literal|"min(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"0"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42145,12 +44199,13 @@ literal|"min(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"-1"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42158,12 +44213,13 @@ literal|"min(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"-1"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42171,9 +44227,10 @@ literal|"min(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"0"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -42183,7 +44240,14 @@ name|void
 name|testMaxFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42194,7 +44258,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42205,7 +44269,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42214,7 +44278,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42223,7 +44287,7 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42232,7 +44296,7 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42243,7 +44307,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42272,12 +44336,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42285,12 +44352,13 @@ literal|"max(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"2"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42298,12 +44366,13 @@ literal|"max(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"-1"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42311,12 +44380,13 @@ literal|"max(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"-1"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42324,9 +44394,10 @@ literal|"max(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"2"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -42336,7 +44407,14 @@ name|void
 name|testLastValueFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42365,12 +44443,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -42382,16 +44463,12 @@ literal|"ROWS 3 PRECEDING"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|isSet
 argument_list|(
 literal|"3"
 argument_list|,
 literal|"0"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -42405,7 +44482,7 @@ block|,
 literal|"1.2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -42417,16 +44494,12 @@ literal|"ROWS 3 PRECEDING"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|isSet
 argument_list|(
 literal|"1.6"
 argument_list|,
 literal|"1.2"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -42442,7 +44515,7 @@ block|,
 literal|"'name'"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -42454,9 +44527,7 @@ literal|"ROWS 3 PRECEDING"
 argument_list|,
 literal|"CHAR(4) NOT NULL"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|isSet
 argument_list|(
 literal|"foo "
 argument_list|,
@@ -42464,8 +44535,6 @@ literal|"bar "
 argument_list|,
 literal|"name"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
 block|}
@@ -42475,7 +44544,14 @@ name|void
 name|testFirstValueFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42504,12 +44580,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -42521,14 +44600,10 @@ literal|"ROWS 3 PRECEDING"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|isSet
 argument_list|(
 literal|"0"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -42542,7 +44617,7 @@ block|,
 literal|"1.2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -42554,14 +44629,10 @@ literal|"ROWS 3 PRECEDING"
 argument_list|,
 literal|"DECIMAL(2, 1) NOT NULL"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|isSet
 argument_list|(
 literal|"1.6"
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -42577,7 +44648,7 @@ block|,
 literal|"'name'"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkWinAgg
 argument_list|(
@@ -42589,14 +44660,10 @@ literal|"ROWS 3 PRECEDING"
 argument_list|,
 literal|"CHAR(4) NOT NULL"
 argument_list|,
-name|Arrays
-operator|.
-name|asList
+name|isSet
 argument_list|(
 literal|"foo "
 argument_list|)
-argument_list|,
-literal|0d
 argument_list|)
 expr_stmt|;
 block|}
@@ -42606,7 +44673,14 @@ name|void
 name|testEveryFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42617,7 +44691,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42628,7 +44702,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42637,7 +44711,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42646,7 +44720,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42655,7 +44729,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42666,7 +44740,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42692,7 +44766,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42700,9 +44774,10 @@ literal|"every(x = 2)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"false"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -42712,7 +44787,14 @@ name|void
 name|testSomeAggFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42723,7 +44805,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42734,7 +44816,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42743,7 +44825,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42752,7 +44834,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42761,7 +44843,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42772,7 +44854,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42798,7 +44880,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42806,9 +44888,10 @@ literal|"some(x = 2)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"true"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -42818,7 +44901,14 @@ name|void
 name|testAnyValueFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -42829,7 +44919,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42840,7 +44930,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42849,7 +44939,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42858,7 +44948,7 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -42867,7 +44957,7 @@ argument_list|,
 literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42878,7 +44968,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -42907,12 +44997,15 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42920,12 +45013,13 @@ literal|"any_value(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"0"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42933,12 +45027,13 @@ literal|"any_value(CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"-1"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42946,12 +45041,13 @@ literal|"any_value(DISTINCT CASE x WHEN 0 THEN NULL ELSE -1 END)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"-1"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -42959,9 +45055,10 @@ literal|"any_value(DISTINCT x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"0"
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -42971,6 +45068,13 @@ name|void
 name|testBoolAndFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// not in standard dialect
 specifier|final
 name|String
@@ -42985,7 +45089,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -43000,7 +45104,9 @@ argument_list|)
 expr_stmt|;
 name|checkBoolAndFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -43012,11 +45118,11 @@ block|}
 name|void
 name|checkBoolAndFunc
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -43027,7 +45133,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43038,7 +45144,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43047,7 +45153,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43060,7 +45166,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43071,7 +45177,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43095,7 +45201,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43103,9 +45209,10 @@ literal|"bool_and(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|true
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43120,7 +45227,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43128,9 +45235,10 @@ literal|"bool_and(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|false
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43145,7 +45253,7 @@ block|,
 literal|"false"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43153,9 +45261,10 @@ literal|"bool_and(x)"
 argument_list|,
 name|values3
 argument_list|,
+name|isSingle
+argument_list|(
 literal|false
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43166,7 +45275,7 @@ block|{
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43174,9 +45283,8 @@ literal|"bool_and(x)"
 argument_list|,
 name|values4
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -43186,6 +45294,13 @@ name|void
 name|testBoolOrFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// not in standard dialect
 specifier|final
 name|String
@@ -43200,7 +45315,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -43215,7 +45330,9 @@ argument_list|)
 expr_stmt|;
 name|checkBoolOrFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -43227,11 +45344,11 @@ block|}
 name|void
 name|checkBoolOrFunc
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -43242,7 +45359,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43253,7 +45370,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43262,7 +45379,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43275,7 +45392,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43286,7 +45403,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43310,7 +45427,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43318,9 +45435,10 @@ literal|"bool_or(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|true
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43335,7 +45453,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43343,9 +45461,10 @@ literal|"bool_or(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|true
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43360,7 +45479,7 @@ block|,
 literal|"false"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43368,9 +45487,10 @@ literal|"bool_or(x)"
 argument_list|,
 name|values3
 argument_list|,
+name|isSingle
+argument_list|(
 literal|false
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43381,7 +45501,7 @@ block|{
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43389,9 +45509,8 @@ literal|"bool_or(x)"
 argument_list|,
 name|values4
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -43401,6 +45520,13 @@ name|void
 name|testLogicalAndFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// not in standard dialect
 specifier|final
 name|String
@@ -43415,7 +45541,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -43430,7 +45556,9 @@ argument_list|)
 expr_stmt|;
 name|checkLogicalAndFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -43442,11 +45570,11 @@ block|}
 name|void
 name|checkLogicalAndFunc
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -43457,7 +45585,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43468,7 +45596,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43477,7 +45605,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43490,7 +45618,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43501,7 +45629,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43525,7 +45653,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43533,9 +45661,10 @@ literal|"logical_and(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|true
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43550,7 +45679,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43558,9 +45687,10 @@ literal|"logical_and(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|false
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43575,7 +45705,7 @@ block|,
 literal|"false"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43583,9 +45713,10 @@ literal|"logical_and(x)"
 argument_list|,
 name|values3
 argument_list|,
+name|isSingle
+argument_list|(
 literal|false
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43596,7 +45727,7 @@ block|{
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43604,9 +45735,8 @@ literal|"logical_and(x)"
 argument_list|,
 name|values4
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -43616,6 +45746,13 @@ name|void
 name|testLogicalOrFunc
 parameter_list|()
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
 comment|// not in standard dialect
 specifier|final
 name|String
@@ -43630,7 +45767,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -43645,7 +45782,9 @@ argument_list|)
 expr_stmt|;
 name|checkLogicalOrFunc
 argument_list|(
-name|libraryTester
+name|f
+operator|.
+name|withLibrary
 argument_list|(
 name|SqlLibrary
 operator|.
@@ -43657,11 +45796,11 @@ block|}
 name|void
 name|checkLogicalOrFunc
 parameter_list|(
-name|SqlTester
-name|tester
+name|SqlOperatorFixture
+name|f
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -43672,7 +45811,7 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43683,7 +45822,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43692,7 +45831,7 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43705,7 +45844,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43716,7 +45855,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43740,7 +45879,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43748,9 +45887,10 @@ literal|"logical_or(x)"
 argument_list|,
 name|values1
 argument_list|,
+name|isSingle
+argument_list|(
 literal|true
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43765,7 +45905,7 @@ block|,
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43773,9 +45913,10 @@ literal|"logical_or(x)"
 argument_list|,
 name|values2
 argument_list|,
+name|isSingle
+argument_list|(
 literal|true
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43790,7 +45931,7 @@ block|,
 literal|"false"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43798,9 +45939,10 @@ literal|"logical_or(x)"
 argument_list|,
 name|values3
 argument_list|,
+name|isSingle
+argument_list|(
 literal|false
-argument_list|,
-literal|0d
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|String
@@ -43811,7 +45953,7 @@ block|{
 literal|"null"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43819,9 +45961,8 @@ literal|"logical_or(x)"
 argument_list|,
 name|values4
 argument_list|,
-literal|null
-argument_list|,
-literal|0d
+name|isNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -43831,7 +45972,14 @@ name|void
 name|testBitAndFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -43844,7 +45992,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43855,7 +46003,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43864,7 +46012,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43873,7 +46021,7 @@ argument_list|,
 literal|"TINYINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43882,7 +46030,7 @@ argument_list|,
 literal|"SMALLINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43891,7 +46039,7 @@ argument_list|,
 literal|"BIGINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -43900,7 +46048,7 @@ argument_list|,
 literal|"BINARY(1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43913,7 +46061,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43924,7 +46072,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -43948,7 +46096,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43956,9 +46104,10 @@ literal|"bit_and(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"2"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -43976,7 +46125,7 @@ block|,
 literal|"cast(null AS BINARY)"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -43984,12 +46133,13 @@ literal|"bit_and(x)"
 argument_list|,
 name|binaryValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"02"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44002,12 +46152,13 @@ block|{
 literal|"CAST(x'02' AS BINARY)"
 block|}
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"02"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAggFails
 argument_list|(
@@ -44042,7 +46193,14 @@ name|void
 name|testBitOrFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -44055,7 +46213,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44066,7 +46224,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44075,7 +46233,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44084,7 +46242,7 @@ argument_list|,
 literal|"TINYINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44093,7 +46251,7 @@ argument_list|,
 literal|"SMALLINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44102,7 +46260,7 @@ argument_list|,
 literal|"BIGINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44111,20 +46269,24 @@ argument_list|,
 literal|"BINARY(1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"^bit_or(1.2)^"
 argument_list|,
-literal|"Cannot apply 'BIT_OR' to arguments of type 'BIT_OR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_OR\\(<INTEGER>\\)'\n"
+literal|"Cannot apply 'BIT_OR' to arguments of type "
+operator|+
+literal|"'BIT_OR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'BIT_OR\\(<INTEGER>\\)'\n"
 operator|+
 literal|"'BIT_OR\\(<BINARY>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44135,7 +46297,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44159,7 +46321,7 @@ block|,
 literal|"2"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44167,9 +46329,10 @@ literal|"bit_or(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|3
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -44187,7 +46350,7 @@ block|,
 literal|"cast(null AS BINARY)"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44195,12 +46358,13 @@ literal|"bit_or(x)"
 argument_list|,
 name|binaryValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"03"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44213,9 +46377,10 @@ block|{
 literal|"CAST(x'02' AS BINARY)"
 block|}
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"02"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -44225,7 +46390,14 @@ name|void
 name|testBitXorFunc
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -44238,7 +46410,7 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44249,7 +46421,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44258,7 +46430,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44267,7 +46439,7 @@ argument_list|,
 literal|"TINYINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44276,7 +46448,7 @@ argument_list|,
 literal|"SMALLINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44285,7 +46457,7 @@ argument_list|,
 literal|"BIGINT"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44294,20 +46466,24 @@ argument_list|,
 literal|"BINARY(1)"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
 literal|"^bit_xor(1.2)^"
 argument_list|,
-literal|"Cannot apply 'BIT_XOR' to arguments of type 'BIT_XOR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_XOR\\(<INTEGER>\\)'\n"
+literal|"Cannot apply 'BIT_XOR' to arguments of type "
+operator|+
+literal|"'BIT_XOR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): "
+operator|+
+literal|"'BIT_XOR\\(<INTEGER>\\)'\n"
 operator|+
 literal|"'BIT_XOR\\(<BINARY>\\)'"
 argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44318,7 +46494,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44342,7 +46518,7 @@ block|,
 literal|"1"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44350,9 +46526,10 @@ literal|"bit_xor(x)"
 argument_list|,
 name|values
 argument_list|,
+name|isSingle
+argument_list|(
 literal|2
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -44370,7 +46547,7 @@ block|,
 literal|"cast(null AS BINARY)"
 block|}
 decl_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44378,12 +46555,13 @@ literal|"bit_xor(x)"
 argument_list|,
 name|binaryValues
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"02"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44396,12 +46574,13 @@ block|{
 literal|"CAST(x'02' AS BINARY)"
 block|}
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"02"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkAgg
 argument_list|(
@@ -44416,9 +46595,10 @@ block|,
 literal|"CAST(x'02' AS BINARY)"
 block|}
 argument_list|,
+name|isSingle
+argument_list|(
 literal|"02"
-argument_list|,
-literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -44429,19 +46609,33 @@ name|void
 name|testLiteralAtLimit
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
@@ -44453,13 +46647,13 @@ name|RelDataType
 argument_list|>
 name|types
 init|=
-name|SqlLimitsTest
+name|SqlTests
 operator|.
 name|getTypes
 argument_list|(
-name|tester
+name|f
 operator|.
-name|getValidator
+name|getFactory
 argument_list|()
 operator|.
 name|getTypeFactory
@@ -44535,7 +46729,7 @@ literal|")"
 decl_stmt|;
 try|try
 block|{
-name|tester
+name|f
 operator|.
 name|checkType
 argument_list|(
@@ -44565,7 +46759,7 @@ comment|// X'AB00'.
 block|}
 else|else
 block|{
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44585,47 +46779,23 @@ block|}
 catch|catch
 parameter_list|(
 name|Error
-name|e
-parameter_list|)
-block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-literal|"Failed for expr=["
-operator|+
-name|expr
-operator|+
-literal|"]"
-argument_list|)
-expr_stmt|;
-throw|throw
-name|e
-throw|;
-block|}
-catch|catch
-parameter_list|(
+decl||
 name|RuntimeException
 name|e
 parameter_list|)
 block|{
-name|System
-operator|.
-name|out
-operator|.
-name|println
+throw|throw
+operator|new
+name|RuntimeException
 argument_list|(
 literal|"Failed for expr=["
 operator|+
 name|expr
 operator|+
 literal|"]"
-argument_list|)
-expr_stmt|;
-throw|throw
+argument_list|,
 name|e
+argument_list|)
 throw|;
 block|}
 block|}
@@ -44638,13 +46808,24 @@ name|void
 name|testLiteralBeyondLimit
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -44654,13 +46835,13 @@ name|RelDataType
 argument_list|>
 name|types
 init|=
-name|SqlLimitsTest
+name|SqlTests
 operator|.
 name|getTypes
 argument_list|(
-name|tester
+name|f
 operator|.
-name|getValidator
+name|getFactory
 argument_list|()
 operator|.
 name|getTypeFactory
@@ -44758,7 +46939,7 @@ condition|)
 block|{
 comment|// Values which are too large to be literals fail at
 comment|// validate time.
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44842,7 +47023,7 @@ comment|// validate time).
 comment|//
 comment|// NOTE: Because Java and Fennel calcs give
 comment|// different errors, the pattern hedges its bets.
-name|tester
+name|f
 operator|.
 name|checkFails
 argument_list|(
@@ -44872,16 +47053,27 @@ name|void
 name|testCastTruncates
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
 operator|.
 name|setFor
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CAST
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44892,7 +47084,7 @@ argument_list|,
 literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44903,7 +47095,7 @@ argument_list|,
 literal|"VARCHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44914,7 +47106,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44925,7 +47117,7 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44936,7 +47128,7 @@ argument_list|,
 literal|"BINARY(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44947,7 +47139,7 @@ argument_list|,
 literal|"VARBINARY(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44958,7 +47150,7 @@ argument_list|,
 literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkScalar
 argument_list|(
@@ -44972,12 +47164,15 @@ expr_stmt|;
 if|if
 condition|(
 operator|!
-name|enable
+name|f
+operator|.
+name|brokenTestsEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
 block|}
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -44986,7 +47181,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -45014,15 +47209,25 @@ name|testArgumentBounds
 parameter_list|()
 block|{
 specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+specifier|final
 name|SqlValidatorImpl
 name|validator
 init|=
 operator|(
 name|SqlValidatorImpl
 operator|)
-name|tester
+name|f
 operator|.
-name|getValidator
+name|getFactory
+argument_list|()
+operator|.
+name|createValidator
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -45315,17 +47520,18 @@ condition|)
 block|{
 continue|continue;
 block|}
-switch|switch
+if|if
 condition|(
 name|op
 operator|.
 name|getSyntax
 argument_list|()
+operator|==
+name|SqlSyntax
+operator|.
+name|SPECIAL
 condition|)
 block|{
-case|case
-name|SPECIAL
-case|:
 continue|continue;
 block|}
 specifier|final
@@ -45594,7 +47800,7 @@ operator|.
 name|ANY
 condition|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -45656,7 +47862,7 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
-name|tester
+name|f
 operator|.
 name|check
 argument_list|(
@@ -45865,120 +48071,6 @@ return|return
 name|values
 return|;
 block|}
-comment|// TODO: Test other stuff
-comment|/**    * Result checker that considers a test to have succeeded if it throws an    * exception that matches one of a list of patterns.    */
-specifier|private
-specifier|static
-class|class
-name|ExceptionResultChecker
-implements|implements
-name|SqlTester
-operator|.
-name|ResultChecker
-block|{
-specifier|private
-specifier|final
-name|Pattern
-index|[]
-name|patterns
-decl_stmt|;
-name|ExceptionResultChecker
-parameter_list|(
-name|Pattern
-modifier|...
-name|patterns
-parameter_list|)
-block|{
-name|this
-operator|.
-name|patterns
-operator|=
-name|patterns
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|checkResult
-parameter_list|(
-name|ResultSet
-name|result
-parameter_list|)
-throws|throws
-name|Exception
-block|{
-name|Throwable
-name|thrown
-init|=
-literal|null
-decl_stmt|;
-try|try
-block|{
-name|result
-operator|.
-name|next
-argument_list|()
-expr_stmt|;
-name|fail
-argument_list|(
-literal|"expected exception"
-argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
-name|thrown
-operator|=
-name|e
-expr_stmt|;
-block|}
-specifier|final
-name|String
-name|stack
-init|=
-name|Throwables
-operator|.
-name|getStackTraceAsString
-argument_list|(
-name|thrown
-argument_list|)
-decl_stmt|;
-for|for
-control|(
-name|Pattern
-name|pattern
-range|:
-name|patterns
-control|)
-block|{
-if|if
-condition|(
-name|pattern
-operator|.
-name|matcher
-argument_list|(
-name|stack
-argument_list|)
-operator|.
-name|matches
-argument_list|()
-condition|)
-block|{
-return|return;
-block|}
-block|}
-name|fail
-argument_list|(
-literal|"Stack did not match any pattern; "
-operator|+
-name|stack
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 comment|/**    * Result checker that considers a test to have succeeded if it returns a    * particular value or throws an exception that matches one of a list of    * patterns.    *    *<p>Sounds peculiar, but is necessary when eager and lazy behaviors are    * both valid.    */
 specifier|private
 specifier|static
@@ -46023,6 +48115,8 @@ operator|=
 name|patterns
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkResult
@@ -46134,22 +48228,6 @@ expr_stmt|;
 block|}
 block|}
 block|}
-specifier|public
-specifier|static
-name|SqlTester
-name|tester
-parameter_list|()
-block|{
-return|return
-operator|new
-name|TesterImpl
-argument_list|(
-name|SqlTestFactory
-operator|.
-name|INSTANCE
-argument_list|)
-return|;
-block|}
 comment|/**    * Implementation of {@link org.apache.calcite.sql.test.SqlTester} based on a    * JDBC connection.    */
 specifier|protected
 specifier|static
@@ -46160,21 +48238,8 @@ name|SqlRuntimeTester
 block|{
 specifier|public
 name|TesterImpl
-parameter_list|(
-name|SqlTestFactory
-name|testFactory
-parameter_list|)
+parameter_list|()
 block|{
-name|super
-argument_list|(
-name|testFactory
-argument_list|,
-name|UnaryOperator
-operator|.
-name|identity
-argument_list|()
-argument_list|)
-expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -46182,15 +48247,24 @@ specifier|public
 name|void
 name|check
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|query
 parameter_list|,
+name|SqlTester
+operator|.
 name|TypeChecker
 name|typeChecker
 parameter_list|,
+name|SqlTester
+operator|.
 name|ParameterChecker
 name|parameterChecker
 parameter_list|,
+name|SqlTester
+operator|.
 name|ResultChecker
 name|resultChecker
 parameter_list|)
@@ -46199,6 +48273,8 @@ name|super
 operator|.
 name|check
 argument_list|(
+name|factory
+argument_list|,
 name|query
 argument_list|,
 name|typeChecker
@@ -46208,25 +48284,13 @@ argument_list|,
 name|resultChecker
 argument_list|)
 expr_stmt|;
-comment|//noinspection unchecked
 specifier|final
-name|CalciteAssert
-operator|.
 name|ConnectionFactory
 name|connectionFactory
 init|=
-operator|(
-name|CalciteAssert
+name|factory
 operator|.
-name|ConnectionFactory
-operator|)
-name|getFactory
-argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|"connectionFactory"
-argument_list|)
+name|connectionFactory
 decl_stmt|;
 try|try
 init|(
@@ -46281,24 +48345,6 @@ name|e
 argument_list|)
 throw|;
 block|}
-block|}
-annotation|@
-name|Override
-specifier|protected
-name|SqlTester
-name|with
-parameter_list|(
-name|SqlTestFactory
-name|factory
-parameter_list|)
-block|{
-return|return
-operator|new
-name|TesterImpl
-argument_list|(
-name|factory
-argument_list|)
-return|;
 block|}
 block|}
 comment|/** A type, a value, and its {@link SqlNode} representation. */
@@ -46678,9 +48724,14 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Runs an OVERLAPS test with a given set of literal values. */
+specifier|static
 class|class
 name|OverlapChecker
 block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+decl_stmt|;
 specifier|final
 name|String
 index|[]
@@ -46688,11 +48739,20 @@ name|values
 decl_stmt|;
 name|OverlapChecker
 parameter_list|(
+name|SqlOperatorFixture
+name|f
+parameter_list|,
 name|String
 modifier|...
 name|values
 parameter_list|)
 block|{
+name|this
+operator|.
+name|f
+operator|=
+name|f
+expr_stmt|;
 name|this
 operator|.
 name|values
@@ -46708,7 +48768,7 @@ name|String
 name|s
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -46717,9 +48777,7 @@ argument_list|(
 name|s
 argument_list|)
 argument_list|,
-name|Boolean
-operator|.
-name|TRUE
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -46731,7 +48789,7 @@ name|String
 name|s
 parameter_list|)
 block|{
-name|tester
+name|f
 operator|.
 name|checkBoolean
 argument_list|(
@@ -46740,9 +48798,7 @@ argument_list|(
 name|s
 argument_list|)
 argument_list|,
-name|Boolean
-operator|.
-name|FALSE
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

@@ -267,11 +267,6 @@ name|HrSchema
 argument_list|()
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 comment|// Retrieve departments without employees. Equivalent SQL:
@@ -378,11 +373,6 @@ argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"?"
 argument_list|)
 operator|.
 name|withRel
@@ -535,11 +525,6 @@ argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"?"
 argument_list|)
 operator|.
 name|withRel
@@ -702,11 +687,6 @@ name|HrSchema
 argument_list|()
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 comment|// build a rel equivalent to sql:
@@ -825,11 +805,6 @@ argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"?"
 argument_list|)
 operator|.
 name|withHook
@@ -1136,11 +1111,6 @@ name|HrSchema
 argument_list|()
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withHook
 argument_list|(
 name|Hook
@@ -1353,11 +1323,6 @@ argument_list|,
 operator|new
 name|HierarchySchema
 argument_list|()
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"?"
 argument_list|)
 operator|.
 name|withHook

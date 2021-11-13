@@ -105,20 +105,6 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Assertions
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Test
 import|;
 end_import
@@ -215,6 +201,22 @@ name|castNonNull
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
 begin_comment
 comment|/**  * Test {@link RelMetadataHandlerGeneratorUtil}.  */
 end_comment
@@ -242,7 +244,7 @@ name|void
 name|testAllPredicatesGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -260,7 +262,7 @@ name|void
 name|testCollationGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -278,7 +280,7 @@ name|void
 name|testColumnOriginGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -296,7 +298,7 @@ name|void
 name|testColumnUniquenessGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -314,7 +316,7 @@ name|void
 name|testCumulativeCostGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -332,7 +334,7 @@ name|void
 name|testDistinctRowCountGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -350,7 +352,7 @@ name|void
 name|testDistributionGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -368,7 +370,7 @@ name|void
 name|testExplainVisibilityGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -386,7 +388,7 @@ name|void
 name|testExpressionLineageGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -404,7 +406,7 @@ name|void
 name|testLowerBoundCostGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -422,7 +424,7 @@ name|void
 name|testMaxRowCountGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -440,7 +442,7 @@ name|void
 name|testMemoryGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -458,7 +460,7 @@ name|void
 name|testMinRowCountGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -476,7 +478,7 @@ name|void
 name|testNodeTypesGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -494,7 +496,7 @@ name|void
 name|testNonCumulativeCostGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -512,7 +514,7 @@ name|void
 name|testParallelismGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -530,7 +532,7 @@ name|void
 name|testPercentageOriginalRowsGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -548,7 +550,7 @@ name|void
 name|testPopulationSizeGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -566,7 +568,7 @@ name|void
 name|testPredicatesGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -584,7 +586,7 @@ name|void
 name|testRowCountGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -602,7 +604,7 @@ name|void
 name|testSelectivityGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -620,7 +622,7 @@ name|void
 name|testSizeGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -638,7 +640,7 @@ name|void
 name|testTableReferencesGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -656,7 +658,7 @@ name|void
 name|testUniqueKeysGenerateHandler
 parameter_list|()
 block|{
-name|testGenerateHandler
+name|checkGenerateHandler
 argument_list|(
 name|BuiltInMetadata
 operator|.
@@ -671,7 +673,7 @@ block|}
 comment|/**    * Performance a regression test on the generated code for a given handler.    */
 specifier|private
 name|void
-name|testGenerateHandler
+name|checkGenerateHandler
 parameter_list|(
 name|Class
 argument_list|<
@@ -766,8 +768,6 @@ argument_list|)
 operator|:
 literal|"Generated code should not contain \\r"
 assert|;
-name|Assertions
-operator|.
 name|assertEquals
 argument_list|(
 name|expected

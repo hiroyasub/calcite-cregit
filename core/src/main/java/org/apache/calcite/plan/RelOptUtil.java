@@ -10249,7 +10249,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|,
 name|boolean
-name|enableMaterialziations
+name|enableMaterializations
 parameter_list|,
 name|boolean
 name|enableBindable
@@ -10283,7 +10283,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|enableMaterialziations
+name|enableMaterializations
 condition|)
 block|{
 name|registerMaterializationRules

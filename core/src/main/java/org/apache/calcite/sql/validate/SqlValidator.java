@@ -1503,33 +1503,61 @@ parameter_list|)
 function_decl|;
 comment|/** Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.      * Default is {@link SqlConformanceEnum#DEFAULT}. */
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-annotation|@
 name|Value
 operator|.
 name|Default
+specifier|default
+name|SqlConformance
+name|conformance
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+return|;
+block|}
+comment|/** Returns the SQL conformance.      * @deprecated Use {@link #conformance()} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|default
 name|SqlConformance
 name|sqlConformance
 parameter_list|()
 block|{
 return|return
-name|SqlConformance
-operator|.
-name|DEFAULT
+name|conformance
+argument_list|()
 return|;
 block|}
-comment|/** Sets up the sql conformance of the validator. */
+comment|/** Sets the SQL conformance of the validator. */
+name|Config
+name|withConformance
+parameter_list|(
+name|SqlConformance
+name|conformance
+parameter_list|)
+function_decl|;
+comment|/** Sets the SQL conformance of the validator.      * @deprecated Use {@link #conformance()} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|default
 name|Config
 name|withSqlConformance
 parameter_list|(
 name|SqlConformance
 name|conformance
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|withConformance
+argument_list|(
+name|conformance
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_interface

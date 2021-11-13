@@ -27,31 +27,40 @@ name|sql
 operator|.
 name|test
 operator|.
-name|SqlOperatorBaseTest
+name|SqlOperatorFixture
 import|;
 end_import
 
 begin_comment
-comment|/**  * Embodiment of {@link org.apache.calcite.sql.test.SqlOperatorBaseTest}  * that generates SQL statements and executes them using Calcite.  */
+comment|/**  * Embodiment of {@link SqlOperatorTest}  * that generates SQL statements and executes them using Calcite.  */
 end_comment
 
 begin_class
 class|class
 name|CalciteSqlOperatorTest
 extends|extends
-name|SqlOperatorBaseTest
+name|SqlOperatorTest
 block|{
-name|CalciteSqlOperatorTest
+annotation|@
+name|Override
+specifier|protected
+name|SqlOperatorFixture
+name|fixture
 parameter_list|()
 block|{
+return|return
 name|super
-argument_list|(
-literal|false
-argument_list|,
-name|tester
+operator|.
+name|fixture
 argument_list|()
+operator|.
+name|withTester
+argument_list|(
+name|t
+lambda|->
+name|TESTER
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 block|}
 end_class

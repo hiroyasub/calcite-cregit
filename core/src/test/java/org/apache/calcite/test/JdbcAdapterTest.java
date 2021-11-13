@@ -1666,7 +1666,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1382">[CALCITE-1382]    * ClassCastException in JDBC adapter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinPlan3
 parameter_list|()

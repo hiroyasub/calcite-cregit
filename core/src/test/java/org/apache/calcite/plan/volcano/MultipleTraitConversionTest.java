@@ -307,7 +307,6 @@ literal|"ConstantConditions"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleTraitConversion
 parameter_list|()

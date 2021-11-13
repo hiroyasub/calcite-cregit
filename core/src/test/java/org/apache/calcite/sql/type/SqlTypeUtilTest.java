@@ -1459,7 +1459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetMaxPrecisionScaleDecimal
 parameter_list|()
@@ -1663,7 +1662,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualSansNullability
 parameter_list|()

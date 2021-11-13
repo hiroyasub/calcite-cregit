@@ -2791,7 +2791,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3758">[CALCITE-3758]    * FilterTableScanRule generate wrong mapping for filter condition    * when underlying is BindableTableScan</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPFTableInBindableConvention
 parameter_list|()

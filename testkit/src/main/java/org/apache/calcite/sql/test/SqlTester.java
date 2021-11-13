@@ -25,11 +25,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|avatica
+name|rel
 operator|.
-name|util
-operator|.
-name|Casing
+name|RelNode
 import|;
 end_import
 
@@ -41,25 +39,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|avatica
+name|rel
 operator|.
-name|util
-operator|.
-name|Quoting
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|config
-operator|.
-name|Lex
+name|RelRoot
 import|;
 end_import
 
@@ -89,6 +71,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlOperator
 import|;
 end_import
@@ -103,7 +99,9 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlOperatorTable
+name|parser
+operator|.
+name|SqlParseException
 import|;
 end_import
 
@@ -135,38 +133,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlConformance
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
-name|SqlMonotonicity
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlValidator
 import|;
 end_import
@@ -181,7 +147,7 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|CalciteAssert
+name|DiffRepository
 import|;
 end_import
 
@@ -193,9 +159,25 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|test
+name|util
 operator|.
-name|SqlValidatorTestCase
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
+name|Nullable
 import|;
 end_import
 
@@ -217,12 +199,24 @@ name|util
 operator|.
 name|function
 operator|.
-name|UnaryOperator
+name|Consumer
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
 begin_comment
-comment|/**  * SqlTester defines a callback for testing SQL queries and expressions.  *  *<p>The idea is that when you define an operator (or another piece of SQL  * functionality), you can define the logical behavior of that operator once, as  * part of that operator. Later you can define one or more physical  * implementations of that operator, and test them all using the same set of  * tests.  *  *<p>Specific implementations of<code>SqlTester</code> might evaluate the  * queries in different ways, for example, using a C++ versus Java calculator.  * An implementation might even ignore certain calls altogether.  */
+comment|/**  * Callback for testing SQL queries and expressions.  *  *<p>The idea is that when you define an operator (or another piece of SQL  * functionality), you can define the logical behavior of that operator once, as  * part of that operator. Later you can define one or more physical  * implementations of that operator, and test them all using the same set of  * tests.  *  *<p>Specific implementations of<code>SqlTester</code> might evaluate the  * queries in different ways, for example, using a C++ versus Java calculator.  * An implementation might even ignore certain calls altogether.  */
 end_comment
 
 begin_interface
@@ -231,10 +225,6 @@ interface|interface
 name|SqlTester
 extends|extends
 name|AutoCloseable
-extends|,
-name|SqlValidatorTestCase
-operator|.
-name|Tester
 block|{
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**    * Name of a virtual machine that can potentially implement an operator.    */
@@ -248,212 +238,128 @@ block|,
 name|EXPAND
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Given a scalar expression, generates a sequence of SQL queries that    * evaluate it, and calls a given action with each.    *    * @param factory    Factory    * @param expression Scalar expression    * @param consumer   Action to be called for each query    */
+name|void
+name|forEachQuery
+parameter_list|(
 name|SqlTestFactory
-name|getFactory
-parameter_list|()
-function_decl|;
-comment|/** Returns a tester that tests a given SQL quoting style. */
-name|SqlTester
-name|withQuoting
-parameter_list|(
-name|Quoting
-name|quoting
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that applies a given casing policy to quoted    * identifiers. */
-name|SqlTester
-name|withQuotedCasing
-parameter_list|(
-name|Casing
-name|casing
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that applies a given casing policy to unquoted    * identifiers. */
-name|SqlTester
-name|withUnquotedCasing
-parameter_list|(
-name|Casing
-name|casing
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that matches identifiers by case-sensitive or    * case-insensitive. */
-name|SqlTester
-name|withCaseSensitive
-parameter_list|(
-name|boolean
-name|sensitive
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that follows a lex policy. */
-name|SqlTester
-name|withLex
-parameter_list|(
-name|Lex
-name|lex
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that tests conformance to a particular SQL language    * version. */
-name|SqlTester
-name|withConformance
-parameter_list|(
-name|SqlConformance
-name|conformance
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that tests with implicit type coercion on/off. */
-name|SqlTester
-name|enableTypeCoercion
-parameter_list|(
-name|boolean
-name|enabled
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that does not fail validation if it encounters an    * unknown function. */
-name|SqlTester
-name|withLenientOperatorLookup
-parameter_list|(
-name|boolean
-name|lenient
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that gets connections from a given factory. */
-name|SqlTester
-name|withConnectionFactory
-parameter_list|(
-name|CalciteAssert
-operator|.
-name|ConnectionFactory
-name|connectionFactory
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that uses a given operator table. */
-name|SqlTester
-name|withOperatorTable
-parameter_list|(
-name|SqlOperatorTable
-name|operatorTable
-parameter_list|)
-function_decl|;
-comment|/** Returns a tester that applies the given transform to a validator before    * using it. */
-name|SqlTester
-name|withValidatorTransform
-parameter_list|(
-name|UnaryOperator
+name|factory
+parameter_list|,
+name|String
+name|expression
+parameter_list|,
+name|Consumer
 argument_list|<
-name|UnaryOperator
+name|String
+argument_list|>
+name|consumer
+parameter_list|)
+function_decl|;
+comment|/** Parses a query. */
+name|SqlNode
+name|parseQuery
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|String
+name|sql
+parameter_list|)
+throws|throws
+name|SqlParseException
+function_decl|;
+comment|/** Parses an expression. */
+name|SqlNode
+name|parseExpression
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|String
+name|expr
+parameter_list|)
+throws|throws
+name|SqlParseException
+function_decl|;
+comment|/** Parses and validates a query, then calls an action on the result. */
+name|void
+name|validateAndThen
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|StringAndPos
+name|sap
+parameter_list|,
+name|ValidatedNodeConsumer
+name|consumer
+parameter_list|)
+function_decl|;
+comment|/** Parses and validates a query, then calls a function on the result. */
+parameter_list|<
+name|R
+parameter_list|>
+name|R
+name|validateAndApply
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|StringAndPos
+name|sap
+parameter_list|,
+name|ValidatedNodeFunction
 argument_list|<
-name|SqlValidator
+name|R
 argument_list|>
-argument_list|>
-name|transform
+name|function
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns the expected result and the    * expected type. For example,    *    *<blockquote>    *<pre>checkScalar("1.1 + 2.9", "4.0", "DECIMAL(2, 1) NOT NULL");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */
+comment|/**    * Checks that a query is valid, or, if invalid, throws the right    * message at the right location.    *    *<p>If<code>expectedMsgPattern</code> is null, the query must    * succeed.    *    *<p>If<code>expectedMsgPattern</code> is not null, the query must    * fail, and give an error location of (expectedLine, expectedColumn)    * through (expectedEndLine, expectedEndColumn).    *    * @param factory            Factory    * @param sap                SQL statement    * @param expectedMsgPattern If this parameter is null the query must be    */
 name|void
-name|checkScalar
+name|assertExceptionIsThrown
 parameter_list|(
-name|String
-name|expression
+name|SqlTestFactory
+name|factory
 parameter_list|,
-name|Object
-name|result
+name|StringAndPos
+name|sap
 parameter_list|,
-name|String
-name|resultType
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns the expected exact numeric    * result as an integer. For example,    *    *<blockquote>    *<pre>checkScalarExact("1 + 2", "3");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    */
-name|void
-name|checkScalarExact
-parameter_list|(
-name|String
-name|expression
-parameter_list|,
-name|String
-name|result
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns the expected exact numeric    * result. For example,    *    *<blockquote>    *<pre>checkScalarExact("1 + 2", "3");</pre>    *</blockquote>    *    * @param expression   Scalar expression    * @param expectedType Type we expect the result to have, including    *                     nullability, precision and scale, for example    *<code>DECIMAL(2, 1) NOT NULL</code>.    * @param result       Expected result    */
-name|void
-name|checkScalarExact
-parameter_list|(
-name|String
-name|expression
-parameter_list|,
-name|String
-name|expectedType
-parameter_list|,
-name|String
-name|result
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns expected appoximate numeric    * result. For example,    *    *<blockquote>    *<pre>checkScalarApprox("1.0 + 2.1", "3.1");</pre>    *</blockquote>    *    * @param expression     Scalar expression    * @param expectedType   Type we expect the result to have, including    *                       nullability, precision and scale, for example    *<code>DECIMAL(2, 1) NOT NULL</code>.    * @param expectedResult Expected result    * @param delta          Allowed margin of error between expected and actual    *                       result    */
-name|void
-name|checkScalarApprox
-parameter_list|(
-name|String
-name|expression
-parameter_list|,
-name|String
-name|expectedType
-parameter_list|,
-name|double
-name|expectedResult
-parameter_list|,
-name|double
-name|delta
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns the expected boolean result.    * For example,    *    *<blockquote>    *<pre>checkScalarExact("TRUE AND FALSE", Boolean.TRUE);</pre>    *</blockquote>    *    *<p>The expected result can be null:    *    *<blockquote>    *<pre>checkScalarExact("NOT UNKNOWN", null);</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result (null signifies NULL).    */
-name|void
-name|checkBoolean
-parameter_list|(
-name|String
-name|expression
-parameter_list|,
-name|Boolean
-name|result
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns the expected string result.    * For example,    *    *<blockquote>    *<pre>checkScalarExact("'ab' || 'c'", "abc");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */
-name|void
-name|checkString
-parameter_list|(
-name|String
-name|expression
-parameter_list|,
-name|String
-name|result
-parameter_list|,
-name|String
-name|resultType
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a SQL expression returns the SQL NULL value. For example,    *    *<blockquote>    *<pre>checkNull("CHAR_LENGTH(CAST(NULL AS VARCHAR(3))");</pre>    *</blockquote>    *    * @param expression Scalar expression    */
-name|void
-name|checkNull
-parameter_list|(
-name|String
-name|expression
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that a SQL expression has a given type. For example,    *    *<blockquote>    *<code>checkType("SUBSTR('hello' FROM 1 FOR 3)",    * "VARCHAR(3) NOT NULL");</code>    *</blockquote>    *    *<p>This method checks length/precision, scale, and whether the type allows    * NULL values, so is more precise than the type-checking done by methods    * such as {@link #checkScalarExact}.    *    * @param expression Scalar expression    * @param type       Type string    */
-name|void
-name|checkType
-parameter_list|(
-name|String
-name|expression
-parameter_list|,
-name|String
-name|type
-parameter_list|)
-function_decl|;
-comment|/**    * Checks that a query returns one column of an expected type. For example,    *<code>checkType("VALUES (1 + 2)", "INTEGER NOT NULL")</code>.    *    * @param sql  Query expression    * @param type Type string    */
 annotation|@
-name|Override
+name|Nullable
+name|String
+name|expectedMsgPattern
+parameter_list|)
+function_decl|;
+comment|/**    * Returns the data type of the sole column of a SQL query.    *    *<p>For example,<code>getResultType("VALUES (1")</code> returns    *<code>INTEGER</code>.    *    *<p>Fails if query returns more than one column.    *    * @see #getResultType(SqlTestFactory, String)    */
+name|RelDataType
+name|getColumnType
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|String
+name|sql
+parameter_list|)
+function_decl|;
+comment|/**    * Returns the data type of the row returned by a SQL query.    *    *<p>For example,<code>getResultType("VALUES (1, 'foo')")</code>    * returns<code>RecordType(INTEGER EXPR$0, CHAR(3) EXPR#1)</code>.    */
+name|RelDataType
+name|getResultType
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|String
+name|sql
+parameter_list|)
+function_decl|;
+comment|/**    * Checks that a query returns one column of an expected type. For example,    *<code>checkType("VALUES (1 + 2)", "INTEGER NOT NULL")</code>.    *    * @param factory    Factory    * @param sql        Query expression    * @param type       Type string    */
 name|void
 name|checkColumnType
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|sql
 parameter_list|,
@@ -461,27 +367,47 @@ name|String
 name|type
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a SQL query returns a single column with the given type. For    * example,    *    *<blockquote>    *<pre>check("VALUES (1 + 2)", "3", SqlTypeName.Integer);</pre>    *</blockquote>    *    *<p>If<code>result</code> is null, the expression must yield the SQL NULL    * value. If<code>result</code> is a {@link java.util.regex.Pattern}, the    * result must match that pattern.    *    * @param query       SQL query    * @param typeChecker Checks whether the result is the expected type; must    *                    not be null    * @param result      Expected result    * @param delta       The acceptable tolerance between the expected and actual    */
+comment|/**    * Tests that a SQL query returns a single column with the given type. For    * example,    *    *<blockquote>    *<pre>check("VALUES (1 + 2)", "3", SqlTypeName.Integer);</pre>    *</blockquote>    *    *<p>If<code>result</code> is null, the expression must yield the SQL NULL    * value. If<code>result</code> is a {@link java.util.regex.Pattern}, the    * result must match that pattern.    *    * @param factory       Factory    * @param query         SQL query    * @param typeChecker   Checks whether the result is the expected type    * @param resultChecker Checks whether the result has the expected value    */
+specifier|default
 name|void
 name|check
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|query
 parameter_list|,
 name|TypeChecker
 name|typeChecker
 parameter_list|,
-name|Object
-name|result
-parameter_list|,
-name|double
-name|delta
+name|ResultChecker
+name|resultChecker
 parameter_list|)
-function_decl|;
-comment|/**    * Tests that a SQL query returns a result of expected type and value.    * Checking of type and value are abstracted using {@link TypeChecker}    * and {@link ResultChecker} functors.    *    * @param query         SQL query    * @param typeChecker   Checks whether the result is the expected type; must    *                      not be null    * @param parameterChecker Checks whether the parameters are of expected    *                      types    * @param resultChecker Checks whether the result has the expected value;    *                      must not be null    */
+block|{
+name|check
+argument_list|(
+name|factory
+argument_list|,
+name|query
+argument_list|,
+name|typeChecker
+argument_list|,
+name|SqlTests
+operator|.
+name|ANY_PARAMETER_CHECKER
+argument_list|,
+name|resultChecker
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that a SQL query returns a result of expected type and value.    * Checking of type and value are abstracted using {@link TypeChecker}    * and {@link ResultChecker} functors.    *    * @param factory       Factory    * @param query         SQL query    * @param typeChecker   Checks whether the result is the expected type    * @param parameterChecker Checks whether the parameters are of expected    *                      types    * @param resultChecker Checks whether the result has the expected value    */
 name|void
 name|check
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|query
 parameter_list|,
@@ -493,17 +419,6 @@ name|parameterChecker
 parameter_list|,
 name|ResultChecker
 name|resultChecker
-parameter_list|)
-function_decl|;
-comment|/**    * Tests that the first column of a SQL query has a given monotonicity.    *    * @param expectedMonotonicity Expected monotonicity    * @param query                SQL query    */
-name|void
-name|checkMonotonic
-parameter_list|(
-name|String
-name|query
-parameter_list|,
-name|SqlMonotonicity
-name|expectedMonotonicity
 parameter_list|)
 function_decl|;
 comment|/**    * Declares that this test is for a given operator. So we can check that all    * operators are tested.    *    * @param operator             Operator    * @param unimplementedVmNames Names of virtual machines for which this    */
@@ -518,10 +433,13 @@ modifier|...
 name|unimplementedVmNames
 parameter_list|)
 function_decl|;
-comment|/**    * Checks that an aggregate expression returns the expected result.    *    *<p>For example,<code>checkAgg("AVG(DISTINCT x)", new String[] {"2", "3",    * null, "3" }, new Double(2.5), 0);</code>    *    * @param expr        Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>    * @param inputValues Array of input values, e.g.<code>["1", null,    *                    "2"]</code>.    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
+comment|/**    * Checks that an aggregate expression returns the expected result.    *    *<p>For example,<code>checkAgg("AVG(DISTINCT x)", new String[] {"2", "3",    * null, "3" }, new Double(2.5), 0);</code>    *    * @param factory     Factory    * @param expr        Aggregate expression, e.g. {@code SUM(DISTINCT x)}    * @param inputValues Array of input values, e.g. {@code ["1", null, "2"]}    * @param resultChecker Checks whether the result has the expected value    */
 name|void
 name|checkAgg
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|expr
 parameter_list|,
@@ -529,36 +447,17 @@ name|String
 index|[]
 name|inputValues
 parameter_list|,
-name|Object
-name|result
-parameter_list|,
-name|double
-name|delta
+name|ResultChecker
+name|resultChecker
 parameter_list|)
 function_decl|;
-comment|/**    * Checks that an aggregate expression with multiple args returns the expected    * result.    *    * @param expr        Aggregate expression, e.g.<code>AGG_FUNC(x, x2, x3)</code>    * @param inputValues Nested array of input values, e.g.<code>[    *                    ["1", null, "2"]    *                    ["3", "4", null]    *                    ]</code>.    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
-name|void
-name|checkAggWithMultipleArgs
-parameter_list|(
-name|String
-name|expr
-parameter_list|,
-name|String
-index|[]
-index|[]
-name|inputValues
-parameter_list|,
-name|Object
-name|result
-parameter_list|,
-name|double
-name|delta
-parameter_list|)
-function_decl|;
-comment|/**    * Checks that a windowed aggregate expression returns the expected result.    *    *<p>For example,<code>checkWinAgg("FIRST_VALUE(x)", new String[] {"2",    * "3", null, "3" }, "INTEGER NOT NULL", 2, 0d);</code>    *    * @param expr        Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>    * @param inputValues Array of input values, e.g.<code>["1", null,    *                    "2"]</code>.    * @param type        Expected result type    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
+comment|/**    * Checks that a windowed aggregate expression returns the expected result.    *    *<p>For example,<code>checkWinAgg("FIRST_VALUE(x)", new String[] {"2",    * "3", null, "3" }, "INTEGER NOT NULL", 2, 0d);</code>    *    * @param factory     Factory    * @param expr        Aggregate expression, e.g. {@code SUM(DISTINCT x)}    * @param inputValues Array of input values, e.g. {@code ["1", null, "2"]}    * @param type        Expected result type    * @param resultChecker Checks whether the result has the expected value    */
 name|void
 name|checkWinAgg
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|expr
 parameter_list|,
@@ -572,17 +471,17 @@ parameter_list|,
 name|String
 name|type
 parameter_list|,
-name|Object
-name|result
-parameter_list|,
-name|double
-name|delta
+name|ResultChecker
+name|resultChecker
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that an aggregate expression fails at run time.    * @param expr An aggregate expression    * @param inputValues Array of input values    * @param expectedError Pattern for expected error    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
+comment|/**    * Tests that an aggregate expression fails at run time.    *    * @param factory       Factory    * @param expr          An aggregate expression    * @param inputValues   Array of input values    * @param expectedError Pattern for expected error    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
 name|void
 name|checkAggFails
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|expr
 parameter_list|,
@@ -597,10 +496,13 @@ name|boolean
 name|runtime
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a scalar SQL expression fails at run time.    *    * @param expression    SQL scalar expression    * @param expectedError Pattern for expected error. If !runtime, must    *                      include an error location.    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
+comment|/**    * Tests that a scalar SQL expression fails at run time.    *    * @param factory       Factory    * @param expression    SQL scalar expression    * @param expectedError Pattern for expected error. If !runtime, must    *                      include an error location.    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
 name|void
 name|checkFails
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|StringAndPos
 name|expression
 parameter_list|,
@@ -611,11 +513,14 @@ name|boolean
 name|runtime
 parameter_list|)
 function_decl|;
-comment|/** As {@link #checkFails(StringAndPos, String, boolean)}, but with a string    * that contains carets. */
+comment|/** As {@link #checkFails(SqlTestFactory, StringAndPos, String, boolean)},    * but with a string that contains carets. */
 specifier|default
 name|void
 name|checkFails
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|expression
 parameter_list|,
@@ -628,6 +533,8 @@ parameter_list|)
 block|{
 name|checkFails
 argument_list|(
+name|factory
+argument_list|,
 name|StringAndPos
 operator|.
 name|of
@@ -641,10 +548,13 @@ name|runtime
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Tests that a SQL query fails at prepare time.    *    * @param sap           SQL query and error position    * @param expectedError Pattern for expected error. Must    *                      include an error location.    */
+comment|/**    * Tests that a SQL query fails at prepare time.    *    * @param factory       Factory    * @param sap           SQL query and error position    * @param expectedError Pattern for expected error. Must    *                      include an error location.    */
 name|void
 name|checkQueryFails
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|StringAndPos
 name|sap
 parameter_list|,
@@ -652,12 +562,109 @@ name|String
 name|expectedError
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a SQL query succeeds at prepare time.    *    * @param sql           SQL query    */
-name|void
-name|checkQuery
+comment|/**    * Converts a SQL string to a {@link RelNode} tree.    *    * @param factory Factory    * @param sql SQL statement    * @param decorrelate Whether to decorrelate    * @param trim Whether to trim    * @return Relational expression, never null    */
+specifier|default
+name|RelRoot
+name|convertSqlToRel
 parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
 name|String
 name|sql
+parameter_list|,
+name|boolean
+name|decorrelate
+parameter_list|,
+name|boolean
+name|trim
+parameter_list|)
+block|{
+name|Pair
+argument_list|<
+name|SqlValidator
+argument_list|,
+name|RelRoot
+argument_list|>
+name|pair
+init|=
+name|convertSqlToRel2
+argument_list|(
+name|factory
+argument_list|,
+name|sql
+argument_list|,
+name|decorrelate
+argument_list|,
+name|trim
+argument_list|)
+decl_stmt|;
+return|return
+name|requireNonNull
+argument_list|(
+name|pair
+operator|.
+name|right
+argument_list|)
+return|;
+block|}
+comment|/** Converts a SQL string to a (SqlValidator, RelNode) pair. */
+name|Pair
+argument_list|<
+name|SqlValidator
+argument_list|,
+name|RelRoot
+argument_list|>
+name|convertSqlToRel2
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|boolean
+name|decorrelate
+parameter_list|,
+name|boolean
+name|trim
+parameter_list|)
+function_decl|;
+comment|/**    * Checks that a SQL statement converts to a given plan, optionally    * trimming columns that are not needed.    *    * @param factory Factory    * @param diffRepos Diff repository    * @param sql  SQL query or expression    * @param plan Expected plan    * @param trim Whether to trim columns that are not needed    * @param expression True if {@code sql} is an expression, false if it is a query    */
+name|void
+name|assertConvertsTo
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|DiffRepository
+name|diffRepos
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|String
+name|plan
+parameter_list|,
+name|boolean
+name|trim
+parameter_list|,
+name|boolean
+name|expression
+parameter_list|,
+name|boolean
+name|decorrelate
+parameter_list|)
+function_decl|;
+comment|/** Trims a RelNode. */
+name|RelNode
+name|trimRelNode
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|,
+name|RelNode
+name|relNode
 parameter_list|)
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
@@ -697,6 +704,45 @@ name|result
 parameter_list|)
 throws|throws
 name|Exception
+function_decl|;
+block|}
+comment|/** Action that is called after validation.    *    * @see #validateAndThen    */
+interface|interface
+name|ValidatedNodeConsumer
+block|{
+name|void
+name|accept
+parameter_list|(
+name|StringAndPos
+name|sap
+parameter_list|,
+name|SqlValidator
+name|validator
+parameter_list|,
+name|SqlNode
+name|validatedNode
+parameter_list|)
+function_decl|;
+block|}
+comment|/** A function to apply to the result of validation.    *    * @param<R> Result type of the function    *    * @see AbstractSqlTester#validateAndApply */
+interface|interface
+name|ValidatedNodeFunction
+parameter_list|<
+name|R
+parameter_list|>
+block|{
+name|R
+name|apply
+parameter_list|(
+name|StringAndPos
+name|sap
+parameter_list|,
+name|SqlValidator
+name|validator
+parameter_list|,
+name|SqlNode
+name|validatedNode
+parameter_list|)
 function_decl|;
 block|}
 block|}

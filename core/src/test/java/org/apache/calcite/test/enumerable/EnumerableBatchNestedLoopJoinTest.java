@@ -252,11 +252,6 @@ name|HrSchema
 argument_list|()
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withHook
 argument_list|(
 name|Hook
@@ -890,11 +885,6 @@ name|HrSchemaBig
 argument_list|()
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withHook
 argument_list|(
 name|Hook
@@ -1048,11 +1038,6 @@ argument_list|,
 operator|new
 name|HrSchema
 argument_list|()
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"?"
 argument_list|)
 operator|.
 name|withHook

@@ -137,19 +137,21 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|function
+operator|.
+name|BiConsumer
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|function
+name|Objects
 operator|.
-name|BiConsumer
+name|requireNonNull
 import|;
 end_import
 
@@ -201,14 +203,6 @@ specifier|public
 specifier|final
 name|RexUnknownAs
 name|nullAs
-decl_stmt|;
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.28
-specifier|public
-specifier|final
-name|boolean
-name|containsNull
 decl_stmt|;
 specifier|public
 specifier|final
@@ -385,8 +379,6 @@ name|this
 operator|.
 name|rangeSet
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rangeSet
@@ -398,24 +390,12 @@ name|this
 operator|.
 name|nullAs
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|nullAs
 argument_list|,
 literal|"nullAs"
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|containsNull
-operator|=
-name|nullAs
-operator|==
-name|RexUnknownAs
-operator|.
-name|TRUE
 expr_stmt|;
 name|this
 operator|.
@@ -864,7 +844,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Returns whether this Sarg is a collection of 1 or more points (and perhaps    * an {@code IS NULL} if {@link #containsNull}).    *    *<p>Such sargs could be translated as {@code ref = value}    * or {@code ref IN (value1, ...)}. */
+comment|/** Returns whether this Sarg is a collection of 1 or more    * points (and perhaps an {@code IS NULL} if    * {@code nullAs == RexUnknownAs.TRUE}).    *    *<p>Such sargs could be translated as {@code ref = value}    * or {@code ref IN (value1, ...)}. */
 specifier|public
 name|boolean
 name|isPoints
@@ -882,7 +862,7 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/** Returns whether this Sarg, when negated, is a collection of 1 or more    * points (and perhaps an {@code IS NULL} if {@link #containsNull}).    *    *<p>Such sargs could be translated as {@code ref<> value}    * or {@code ref NOT IN (value1, ...)}. */
+comment|/** Returns whether this Sarg, when negated, is a collection of 1 or more    * points (and perhaps an {@code IS NULL} if    * {@code nullAs == RexUnknownAs.TRUE}).    *    *<p>Such sargs could be translated as {@code ref<> value}    * or {@code ref NOT IN (value1, ...)}. */
 specifier|public
 name|boolean
 name|isComplementedPoints

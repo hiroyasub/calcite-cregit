@@ -41,6 +41,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptMaterialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptPlanner
 import|;
 end_import
@@ -103,6 +117,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Pair
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -160,9 +188,162 @@ end_comment
 begin_class
 class|class
 name|MaterializedViewRelOptRulesTest
-extends|extends
-name|AbstractMaterializedViewTest
 block|{
+specifier|static
+specifier|final
+name|MaterializedViewTester
+name|TESTER
+init|=
+operator|new
+name|MaterializedViewTester
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|protected
+name|List
+argument_list|<
+name|RelNode
+argument_list|>
+name|optimize
+parameter_list|(
+name|RelNode
+name|queryRel
+parameter_list|,
+name|List
+argument_list|<
+name|RelOptMaterialization
+argument_list|>
+name|materializationList
+parameter_list|)
+block|{
+name|RelOptPlanner
+name|planner
+init|=
+name|queryRel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getPlanner
+argument_list|()
+decl_stmt|;
+name|RelTraitSet
+name|traitSet
+init|=
+name|queryRel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|traitSet
+argument_list|()
+operator|.
+name|replace
+argument_list|(
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+argument_list|)
+decl_stmt|;
+name|RelOptUtil
+operator|.
+name|registerDefaultRules
+argument_list|(
+name|planner
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+return|return
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|Programs
+operator|.
+name|standard
+argument_list|()
+operator|.
+name|run
+argument_list|(
+name|planner
+argument_list|,
+name|queryRel
+argument_list|,
+name|traitSet
+argument_list|,
+name|materializationList
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|)
+argument_list|)
+return|;
+block|}
+block|}
+decl_stmt|;
+comment|/** Creates a fixture. */
+specifier|protected
+name|MaterializedViewFixture
+name|fixture
+parameter_list|(
+name|String
+name|query
+parameter_list|)
+block|{
+return|return
+name|MaterializedViewFixture
+operator|.
+name|create
+argument_list|(
+name|query
+argument_list|,
+name|TESTER
+argument_list|)
+return|;
+block|}
+comment|/** Creates a fixture with a given query. */
+specifier|protected
+specifier|final
+name|MaterializedViewFixture
+name|sql
+parameter_list|(
+name|String
+name|materialize
+parameter_list|,
+name|String
+name|query
+parameter_list|)
+block|{
+return|return
+name|fixture
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMaterializations
+argument_list|(
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|Pair
+operator|.
+name|of
+argument_list|(
+name|materialize
+argument_list|,
+literal|"MV0"
+argument_list|)
+argument_list|)
+argument_list|)
+return|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -211,9 +392,7 @@ argument_list|,
 literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -222,7 +401,6 @@ operator|+
 literal|"  EnumerableAggregate(group=[{0}], agg#0=[$SUM0($1)])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -259,16 +437,13 @@ argument_list|,
 literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{1}])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -307,16 +482,13 @@ argument_list|,
 literal|"select \"deptno\" from \"emps\" where \"deptno\" = 10 group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{1}])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -357,9 +529,7 @@ argument_list|,
 literal|"select \"deptno\" from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -368,7 +538,6 @@ operator|+
 literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[10], expr#3=[<($t2, $t1)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -447,16 +616,13 @@ argument_list|,
 literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{1}])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -480,16 +646,13 @@ operator|+
 literal|"from \"emps\" group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{1}], C=[$SUM0($2)], S=[$SUM0($3)])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -513,16 +676,13 @@ operator|+
 literal|"from \"emps\" group by \"empid\", \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t1], empid=[$t0], S=[$t3], C=[$t2])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -546,9 +706,7 @@ operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -559,7 +717,6 @@ operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -583,9 +740,7 @@ operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -600,7 +755,6 @@ operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -645,9 +799,7 @@ operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -662,7 +814,6 @@ operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -907,12 +1058,9 @@ operator|+
 literal|"from \"events\" group by floor(cast(\"ts\" as timestamp) to hour)"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|"EnumerableTableScan(table=[[hr, events]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -980,12 +1128,9 @@ operator|+
 literal|"where \"sal\" = 33"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|"EnumerableValues(tuples=[[]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1013,9 +1158,7 @@ operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1024,7 +1167,6 @@ operator|+
 literal|"empid=[$t0], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1052,9 +1194,7 @@ operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1063,7 +1203,6 @@ operator|+
 literal|"empid=[$t1], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1117,9 +1256,7 @@ operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1128,7 +1265,6 @@ operator|+
 literal|"empid=[$t0], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1156,9 +1292,7 @@ operator|+
 literal|"group by \"depts\".\"deptno\", \"emps\".\"empid\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1167,7 +1301,6 @@ operator|+
 literal|"deptno=[$t0], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1195,9 +1328,7 @@ operator|+
 literal|"group by \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1208,7 +1339,6 @@ operator|+
 literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1252,9 +1382,7 @@ operator|+
 literal|"group by \"dependents\".\"empid\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{0}])"
 argument_list|,
@@ -1265,7 +1393,6 @@ argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
 literal|"expr#5=[Sarg[(10..11]]], expr#6=[SEARCH($t0, $t5)]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1350,9 +1477,7 @@ operator|+
 literal|"group by \"dependents\".\"empid\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{0}])"
 argument_list|,
@@ -1363,7 +1488,6 @@ argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
 literal|"expr#5=[Sarg[(10..11], [19..20)]], expr#6=[SEARCH($t0, $t5)]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1407,9 +1531,7 @@ operator|+
 literal|"group by \"dependents\".\"empid\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1424,7 +1546,6 @@ operator|+
 literal|"expr#8=[=($t6, $t7)], expr#9=[AND($t5, $t8)], proj#0..4=[{exprs}], $condition=[$t9])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1449,16 +1570,13 @@ argument_list|,
 literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{1}])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1486,16 +1604,13 @@ operator|+
 literal|"group by \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{1}], C=[$SUM0($2)], S=[$SUM0($3)])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1522,16 +1637,13 @@ operator|+
 literal|"from \"emps\" group by \"empid\", \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t1], empid=[$t0], S=[$t3], C=[$t2])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1559,9 +1671,7 @@ operator|+
 literal|"where \"emps\".\"deptno\"> 10 group by \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1572,7 +1682,6 @@ operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1600,9 +1709,7 @@ operator|+
 literal|"where \"depts\".\"deptno\"> 10 group by \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1617,7 +1724,6 @@ operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1704,9 +1810,7 @@ operator|+
 literal|"group by \"dependents\".\"empid\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1717,7 +1821,6 @@ operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, depts]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1751,9 +1854,7 @@ operator|+
 literal|"group by \"depts\".\"name\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -1764,7 +1865,6 @@ operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, depts]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1796,16 +1896,13 @@ operator|+
 literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..2=[{inputs}], deptno=[$t1], S=[$t2])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -1878,13 +1975,11 @@ operator|+
 literal|"group by \"dependents\".\"empid\""
 argument_list|)
 operator|.
-name|withChecker
+name|checkingThatResultContains
 argument_list|(
-name|resultContains
-argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], "
 operator|+
-literal|"expr#3=[+($t1, $t2)], empid=[$t0], EXPR$1=[$t3])\n"
+literal|"expr#2=[1], expr#3=[+($t1, $t2)], empid=[$t0], EXPR$1=[$t3])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{0}], agg#0=[$SUM0($1)])"
 argument_list|,
@@ -1897,7 +1992,6 @@ argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
 literal|"expr#5=[Sarg[(10..11], [19..20)]], expr#6=[SEARCH($t0, $t5)]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2078,12 +2172,9 @@ argument_list|,
 name|q
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 name|plan
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2199,9 +2290,7 @@ operator|+
 literal|"join \"depts\" using (\"deptno\") where \"empid\" = 1"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2210,7 +2299,6 @@ operator|+
 literal|"expr#3=[=($t1, $t2)], deptno=[$t0], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2234,9 +2322,7 @@ operator|+
 literal|"join \"depts\" using (\"deptno\") where \"empid\"> 1"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2245,7 +2331,6 @@ operator|+
 literal|"expr#2=[1], expr#3=[<($t2, $t1)], EXPR$0=[$t1], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2269,9 +2354,7 @@ operator|+
 literal|"join \"depts\" using (\"deptno\") where \"empid\" = 1"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2282,7 +2365,6 @@ operator|+
 literal|"EXPR$0=[$t1], $condition=[$t4])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2312,9 +2394,7 @@ operator|+
 literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2329,7 +2409,6 @@ operator|+
 literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t1):VARCHAR], empid=[$t0], name0=[$t2])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2359,9 +2438,7 @@ operator|+
 literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2376,7 +2453,6 @@ operator|+
 literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t1):VARCHAR], proj#0..2=[{exprs}])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2441,16 +2517,13 @@ operator|+
 literal|"where \"depts\".\"deptno\"> 10"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|"EnumerableUnion(all=[true])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, MV0]])"
 argument_list|,
 literal|"expr#5=[Sarg[(10..30]]], expr#6=[SEARCH($t0, $t5)]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2559,16 +2632,13 @@ operator|+
 literal|"join \"dependents\" using (\"empid\")\n"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2646,16 +2716,13 @@ operator|+
 literal|"where \"emps\".\"empid\" = 1"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2687,16 +2754,13 @@ operator|+
 literal|"where \"emps\".\"empid\" = 1"
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2818,9 +2882,7 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2829,7 +2891,6 @@ operator|+
 literal|" expr#10=[3], expr#11=[<=($t1, $t10)], expr#12=[AND($t9, $t11)], $f0=[$t12])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2870,9 +2931,7 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -2881,7 +2940,6 @@ operator|+
 literal|"expr#20=[3], expr#21=[<=($t8, $t20)], expr#22=[AND($t19, $t21)], $f0=[$t22])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2918,16 +2976,13 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], time_id=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -2964,16 +3019,13 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], EXPR$1=[$t1])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3016,16 +3068,13 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..4=[{inputs}], time_id=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3053,9 +3102,7 @@ operator|+
 literal|"join \"depts\" on \"depts\".\"deptno\" = \"empid\" group by \"empid\", \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -3068,7 +3115,6 @@ operator|+
 literal|"      EnumerableTableScan(table=[[hr, MV0]])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, depts]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3096,9 +3142,7 @@ operator|+
 literal|"join \"depts\" on \"depts\".\"deptno\" = \"empid\" group by \"empid\", \"depts\".\"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -3111,7 +3155,6 @@ operator|+
 literal|"      EnumerableTableScan(table=[[hr, MV0]])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, depts]])"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3145,16 +3188,13 @@ operator|+
 literal|"group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{0}], C=[COUNT($1)])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3188,16 +3228,13 @@ operator|+
 literal|"group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
 literal|"EnumerableAggregate(group=[{0}], C=[COUNT($2)])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, MV0]]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3231,9 +3268,7 @@ operator|+
 literal|"group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -3242,7 +3277,6 @@ operator|+
 literal|"  EnumerableAggregate(group=[{0, 2}])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]]"
-argument_list|)
 argument_list|)
 operator|.
 name|ok
@@ -3276,9 +3310,7 @@ operator|+
 literal|"group by \"deptno\""
 argument_list|)
 operator|.
-name|withChecker
-argument_list|(
-name|resultContains
+name|checkingThatResultContains
 argument_list|(
 literal|""
 operator|+
@@ -3288,99 +3320,10 @@ literal|"  EnumerableAggregate(group=[{0, 1}])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, MV0]]"
 argument_list|)
-argument_list|)
 operator|.
 name|ok
 argument_list|()
 expr_stmt|;
-block|}
-specifier|protected
-name|List
-argument_list|<
-name|RelNode
-argument_list|>
-name|optimize
-parameter_list|(
-name|TestConfig
-name|testConfig
-parameter_list|)
-block|{
-name|RelNode
-name|queryRel
-init|=
-name|testConfig
-operator|.
-name|queryRel
-decl_stmt|;
-name|RelOptPlanner
-name|planner
-init|=
-name|queryRel
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|getPlanner
-argument_list|()
-decl_stmt|;
-name|RelTraitSet
-name|traitSet
-init|=
-name|queryRel
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|traitSet
-argument_list|()
-operator|.
-name|replace
-argument_list|(
-name|EnumerableConvention
-operator|.
-name|INSTANCE
-argument_list|)
-decl_stmt|;
-name|RelOptUtil
-operator|.
-name|registerDefaultRules
-argument_list|(
-name|planner
-argument_list|,
-literal|true
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|Programs
-operator|.
-name|standard
-argument_list|()
-operator|.
-name|run
-argument_list|(
-name|planner
-argument_list|,
-name|queryRel
-argument_list|,
-name|traitSet
-argument_list|,
-name|testConfig
-operator|.
-name|materializations
-argument_list|,
-name|ImmutableList
-operator|.
-name|of
-argument_list|()
-argument_list|)
-argument_list|)
-return|;
 block|}
 block|}
 end_class

@@ -21716,18 +21716,8 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-operator|new
-name|CalciteAssert
-operator|.
-name|ConnectionFactory
-argument_list|()
-block|{
-specifier|public
-name|CalciteConnection
-name|createConnection
 parameter_list|()
-throws|throws
-name|SQLException
+lambda|->
 block|{
 name|CalciteConnection
 name|connection
@@ -21784,7 +21774,6 @@ expr_stmt|;
 return|return
 name|connection
 return|;
-block|}
 block|}
 argument_list|)
 operator|.
@@ -25948,7 +25937,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIf
 parameter_list|()
@@ -26049,7 +26037,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIfWithExpression
 parameter_list|()
@@ -26858,7 +26845,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseSensitiveConfigurableSimpleCalciteSchema
 parameter_list|()
@@ -29779,7 +29765,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBindableIntersect
 parameter_list|()
@@ -29867,7 +29852,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBindableMinus
 parameter_list|()
@@ -30247,7 +30231,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAllValues
 parameter_list|()
@@ -31082,7 +31065,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionDateTime
 parameter_list|()
@@ -31126,7 +31108,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedCastBigInt
 parameter_list|()
@@ -31168,7 +31149,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceNullAndRow
 parameter_list|()
@@ -31203,7 +31183,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayOfDates
 parameter_list|()
@@ -31233,7 +31212,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntAndBigDecimalInArray
 parameter_list|()

@@ -41,6 +41,22 @@ name|sql
 operator|.
 name|parser
 operator|.
+name|SqlParserFixture
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
 name|babel
 operator|.
 name|SqlBabelParserImpl
@@ -542,6 +558,135 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+comment|/** Tests that you can run tests via {@link Fixtures}. */
+annotation|@
+name|Test
+name|void
+name|testFixtures
+parameter_list|()
+block|{
+specifier|final
+name|SqlValidatorFixture
+name|v
+init|=
+name|Fixtures
+operator|.
+name|forValidator
+argument_list|()
+decl_stmt|;
+name|v
+operator|.
+name|withSql
+argument_list|(
+literal|"select ^1 + date '2002-03-04'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Cannot apply '\\+' to arguments of"
+operator|+
+literal|" type '<INTEGER> \\+<DATE>'.*"
+argument_list|)
+expr_stmt|;
+name|v
+operator|.
+name|withSql
+argument_list|(
+literal|"select 1 + 2 as three"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL THREE) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// 'as' as identifier is invalid with Core parser
+specifier|final
+name|SqlParserFixture
+name|p
+init|=
+name|Fixtures
+operator|.
+name|forParser
+argument_list|()
+decl_stmt|;
+name|p
+operator|.
+name|sql
+argument_list|(
+literal|"select ^as^ from t"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"as\".*"
+argument_list|)
+expr_stmt|;
+comment|// 'as' as identifier is invalid if you use Babel's tester and Core parser
+name|p
+operator|.
+name|sql
+argument_list|(
+literal|"select ^as^ from t"
+argument_list|)
+operator|.
+name|withTester
+argument_list|(
+operator|new
+name|BabelParserTest
+operator|.
+name|BabelTesterImpl
+argument_list|()
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"as\".*"
+argument_list|)
+expr_stmt|;
+comment|// 'as' as identifier is valid with Babel parser
+name|p
+operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withParserFactory
+argument_list|(
+name|SqlBabelParserImpl
+operator|.
+name|FACTORY
+argument_list|)
+argument_list|)
+operator|.
+name|sql
+argument_list|(
+literal|"select as from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `AS`\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+comment|// Postgres cast is invalid with core parser
+name|p
+operator|.
+name|sql
+argument_list|(
+literal|"select 1 ^:^: integer as x"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \":\" at .*"
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

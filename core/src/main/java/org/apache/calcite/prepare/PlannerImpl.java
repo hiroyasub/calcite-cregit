@@ -2132,7 +2132,7 @@ name|lenientOperatorLookup
 argument_list|()
 argument_list|)
 operator|.
-name|withSqlConformance
+name|withConformance
 argument_list|(
 name|connectionConfig
 operator|.

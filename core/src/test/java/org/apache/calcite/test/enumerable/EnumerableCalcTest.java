@@ -142,11 +142,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 operator|.
-name|query
-argument_list|(
-literal|"?"
-argument_list|)
-operator|.
 name|withRel
 argument_list|(
 name|builder
@@ -373,11 +368,6 @@ operator|new
 name|HrSchema
 argument_list|()
 argument_list|)
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"?"
 argument_list|)
 operator|.
 name|withRel
