@@ -15,6 +15,30 @@ name|util
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|AvaticaUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Holder for a list of constants describing which bugs which have not been  * fixed.  *  *<p>You can use these constants to control the flow of your code. For example,  * suppose that bug CALCITE-123 causes the "INSERT" statement to return an  * incorrect row-count, and you want to disable unit tests. You might use the  * constant in your code as follows:  *  *<blockquote>  *<pre>Statement stmt = connection.createStatement();  * int rowCount = stmt.execute(  *     "INSERT INTO FemaleEmps SELECT * FROM Emps WHERE gender = 'F'");  * if (Bug.CALCITE_123_FIXED) {  *    assertEquals(rowCount, 5);  * }</pre>  *</blockquote>  *  *<p>The usage of the constant is a convenient way to identify the impact of  * the bug. When someone fixes the bug, they will remove the constant and all  * usages of it. Also, the constant helps track the propagation of the fix: as  * the fix is integrated into other branches, the constant will be removed from  * those branches.</p>  *  */
 end_comment
@@ -272,6 +296,16 @@ name|CALCITE_4213_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-4877">[CALCITE-4877]    * Make the exception information of class not found more explicit</a> is    * fixed. The actual fix is in Avatica, and we don't know the precise version    * of Avatica, so we have to deduce whether it is fixed from Avatica's    * behavior. We memoize the result so that we don't generate lots of exceptions.  */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_4877_FIXED
+init|=
+name|isCalcite4877Fixed
+argument_list|()
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static
@@ -315,6 +349,58 @@ argument_list|(
 name|remark
 argument_list|)
 expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
+specifier|private
+specifier|static
+name|boolean
+name|isCalcite4877Fixed
+parameter_list|()
+block|{
+try|try
+block|{
+name|AvaticaUtils
+operator|.
+name|instantiatePlugin
+argument_list|(
+name|Integer
+operator|.
+name|class
+argument_list|,
+literal|"org.apache.calcite.NonExistent"
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+comment|// Avatica 1.19 and earlier gives
+comment|//   Property 'org.apache.calcite.NonExistent' not valid for plugin type
+comment|//   java.lang.Integer
+comment|// Avatica 1.20 and later gives
+comment|//   Property 'org.apache.calcite.NonExistent' not valid as
+comment|//   'org.apache.calcite.NonExistent' not found in the classpath
+return|return
+name|Objects
+operator|.
+name|equals
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+literal|"Property 'org.apache.calcite.NonExistent' not valid as "
+operator|+
+literal|"'org.apache.calcite.NonExistent' not found in the classpath"
+argument_list|)
+return|;
+block|}
 return|return
 literal|false
 return|;
