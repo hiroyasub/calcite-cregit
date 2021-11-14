@@ -904,7 +904,7 @@ name|SqlKind
 operator|.
 name|UNION
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|false
 argument_list|)
@@ -924,7 +924,7 @@ name|SqlKind
 operator|.
 name|UNION
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|true
 argument_list|)
@@ -944,7 +944,7 @@ name|SqlKind
 operator|.
 name|EXCEPT
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|false
 argument_list|)
@@ -964,7 +964,7 @@ name|SqlKind
 operator|.
 name|EXCEPT
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|true
 argument_list|)
@@ -984,7 +984,7 @@ name|SqlKind
 operator|.
 name|INTERSECT
 argument_list|,
-literal|18
+literal|14
 argument_list|,
 literal|false
 argument_list|)
@@ -1004,7 +1004,7 @@ name|SqlKind
 operator|.
 name|INTERSECT
 argument_list|,
-literal|18
+literal|14
 argument_list|,
 literal|true
 argument_list|)
@@ -1021,7 +1021,7 @@ name|SqlMultisetSetOperator
 argument_list|(
 literal|"MULTISET UNION DISTINCT"
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|false
 argument_list|)
@@ -1038,7 +1038,7 @@ name|SqlMultisetSetOperator
 argument_list|(
 literal|"MULTISET UNION ALL"
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|true
 argument_list|)
@@ -1055,7 +1055,7 @@ name|SqlMultisetSetOperator
 argument_list|(
 literal|"MULTISET EXCEPT DISTINCT"
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|false
 argument_list|)
@@ -1072,7 +1072,7 @@ name|SqlMultisetSetOperator
 argument_list|(
 literal|"MULTISET EXCEPT ALL"
 argument_list|,
-literal|14
+literal|12
 argument_list|,
 literal|true
 argument_list|)
@@ -1089,7 +1089,7 @@ name|SqlMultisetSetOperator
 argument_list|(
 literal|"MULTISET INTERSECT DISTINCT"
 argument_list|,
-literal|18
+literal|14
 argument_list|,
 literal|false
 argument_list|)
@@ -1106,7 +1106,7 @@ name|SqlMultisetSetOperator
 argument_list|(
 literal|"MULTISET INTERSECT ALL"
 argument_list|,
-literal|18
+literal|14
 argument_list|,
 literal|true
 argument_list|)

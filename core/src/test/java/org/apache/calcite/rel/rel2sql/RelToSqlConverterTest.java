@@ -9136,6 +9136,102 @@ name|expectedSql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4876">[CALCITE-4876]    * Converting RelNode to SQL with CalciteSqlDialect gets wrong result    * while EnumerableIntersect is followed by EnumerableLimit</a>.    */
+annotation|@
+name|Test
+name|void
+name|testUnparseIntersectWithLimit
+parameter_list|()
+block|{
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|relFn
+init|=
+name|b
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|intersect
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|1
+argument_list|,
+literal|3
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expectedSql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"scott\".\"DEPT\"\n"
+operator|+
+literal|"INTERSECT ALL\n"
+operator|+
+literal|"SELECT \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"scott\".\"EMP\")\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+decl_stmt|;
+name|relFn
+argument_list|(
+name|relFn
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedSql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

@@ -37253,6 +37253,12 @@ literal|"TABLESAMPLE -\n"
 operator|+
 literal|"\n"
 operator|+
+literal|"NULLS FIRST post\n"
+operator|+
+literal|"NULLS LAST post\n"
+operator|+
+literal|"\n"
+operator|+
 literal|"INTERSECT left\n"
 operator|+
 literal|"INTERSECT ALL left\n"
@@ -37260,10 +37266,6 @@ operator|+
 literal|"MULTISET INTERSECT ALL left\n"
 operator|+
 literal|"MULTISET INTERSECT DISTINCT left\n"
-operator|+
-literal|"NULLS FIRST post\n"
-operator|+
-literal|"NULLS LAST post\n"
 operator|+
 literal|"\n"
 operator|+
