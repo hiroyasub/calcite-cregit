@@ -679,20 +679,6 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Iterables
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
 name|Multimap
 import|;
 end_import
@@ -5134,11 +5120,22 @@ operator|++
 control|)
 block|{
 specifier|final
+name|RexNode
+name|expr
+init|=
+name|nodeExprs
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+decl_stmt|;
+specifier|final
 name|Set
 argument_list|<
 name|RexNode
 argument_list|>
-name|s
+name|lineages
 init|=
 name|mq
 operator|.
@@ -5146,17 +5143,12 @@ name|getExpressionLineage
 argument_list|(
 name|node
 argument_list|,
-name|nodeExprs
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|expr
 argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|s
+name|lineages
 operator|==
 literal|null
 condition|)
@@ -5164,16 +5156,38 @@ block|{
 comment|// Next expression
 continue|continue;
 block|}
-comment|// We only support project - filter - join, thus it should map to
-comment|// a single expression
-assert|assert
-name|s
+if|if
+condition|(
+name|lineages
 operator|.
 name|size
 argument_list|()
-operator|==
+operator|!=
 literal|1
-assert|;
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"We only support project - filter - join, "
+operator|+
+literal|"thus expression lineage should map to a single expression, got: '"
+operator|+
+name|lineages
+operator|+
+literal|"' for expr '"
+operator|+
+name|expr
+operator|+
+literal|"' in node '"
+operator|+
+name|node
+operator|+
+literal|"'"
+argument_list|)
+throw|;
+block|}
 comment|// Rewrite expr. First we swap the table references following the table
 comment|// mapping, then we take first element from the corresponding equivalence class
 specifier|final
@@ -5186,7 +5200,7 @@ name|swapTableColumnReferences
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|s
+name|lineages
 operator|.
 name|iterator
 argument_list|()
@@ -5334,11 +5348,22 @@ operator|++
 control|)
 block|{
 specifier|final
+name|RexNode
+name|expr
+init|=
+name|nodeExprs
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+decl_stmt|;
+specifier|final
 name|Set
 argument_list|<
 name|RexNode
 argument_list|>
-name|s
+name|lineages
 init|=
 name|mq
 operator|.
@@ -5346,17 +5371,12 @@ name|getExpressionLineage
 argument_list|(
 name|node
 argument_list|,
-name|nodeExprs
-operator|.
-name|get
-argument_list|(
-name|i
-argument_list|)
+name|expr
 argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|s
+name|lineages
 operator|==
 literal|null
 condition|)
@@ -5364,19 +5384,38 @@ block|{
 comment|// Next expression
 continue|continue;
 block|}
-comment|// We only support project - filter - join, thus it should map to
-comment|// a single expression
-specifier|final
-name|RexNode
-name|node2
-init|=
-name|Iterables
+if|if
+condition|(
+name|lineages
 operator|.
-name|getOnlyElement
+name|size
+argument_list|()
+operator|!=
+literal|1
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
 argument_list|(
-name|s
+literal|"We only support project - filter - join, "
+operator|+
+literal|"thus expression lineage should map to a single expression, got: '"
+operator|+
+name|lineages
+operator|+
+literal|"' for expr '"
+operator|+
+name|expr
+operator|+
+literal|"' in node '"
+operator|+
+name|node
+operator|+
+literal|"'"
 argument_list|)
-decl_stmt|;
+throw|;
+block|}
 comment|// Rewrite expr. First we take first element from the corresponding equivalence class,
 comment|// then we swap the table references following the table mapping
 specifier|final
@@ -5389,7 +5428,13 @@ name|swapColumnTableReferences
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|node2
+name|lineages
+operator|.
+name|iterator
+argument_list|()
+operator|.
+name|next
+argument_list|()
 argument_list|,
 name|ec
 operator|.

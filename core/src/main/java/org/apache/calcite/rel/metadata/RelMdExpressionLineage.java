@@ -2950,9 +2950,12 @@ operator|new
 name|ArrayList
 argument_list|<>
 argument_list|(
-name|RelOptUtil
+literal|1
+argument_list|)
+decl_stmt|;
+name|updatedPreds
 operator|.
-name|conjunctions
+name|add
 argument_list|(
 name|rexBuilder
 operator|.
@@ -2961,8 +2964,7 @@ argument_list|(
 name|expr
 argument_list|)
 argument_list|)
-argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|replacer
 operator|.
 name|mutate

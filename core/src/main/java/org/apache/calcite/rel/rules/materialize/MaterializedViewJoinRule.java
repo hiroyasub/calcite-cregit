@@ -1470,7 +1470,7 @@ name|Set
 argument_list|<
 name|RexNode
 argument_list|>
-name|s
+name|lineages
 init|=
 name|mq
 operator|.
@@ -1483,7 +1483,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|s
+name|lineages
 operator|==
 literal|null
 condition|)
@@ -1493,14 +1493,38 @@ return|return
 literal|null
 return|;
 block|}
-assert|assert
-name|s
+if|if
+condition|(
+name|lineages
 operator|.
 name|size
 argument_list|()
-operator|==
+operator|!=
 literal|1
-assert|;
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"We only support project - filter - join, "
+operator|+
+literal|"thus expression lineage should map to a single expression, got: '"
+operator|+
+name|lineages
+operator|+
+literal|"' for expr '"
+operator|+
+name|expr
+operator|+
+literal|"' in node '"
+operator|+
+name|node
+operator|+
+literal|"'"
+argument_list|)
+throw|;
+block|}
 comment|// Rewrite expr. Take first element from the corresponding equivalence class
 comment|// (no need to swap the table references following the table mapping)
 name|exprsLineage
@@ -1513,7 +1537,7 @@ name|swapColumnReferences
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|s
+name|lineages
 operator|.
 name|iterator
 argument_list|()

@@ -15031,6 +15031,109 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|// ----------------------------------------------------------------------
+comment|// Tests for getExpressionLineage
+comment|// ----------------------------------------------------------------------
+specifier|private
+name|void
+name|assertExpressionLineage
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|int
+name|columnIndex
+parameter_list|,
+name|String
+name|expected
+parameter_list|,
+name|String
+name|comment
+parameter_list|)
+block|{
+name|RelNode
+name|rel
+init|=
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+name|RelMetadataQuery
+name|mq
+init|=
+name|rel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
+argument_list|()
+decl_stmt|;
+name|RexNode
+name|ref
+init|=
+name|RexInputRef
+operator|.
+name|of
+argument_list|(
+name|columnIndex
+argument_list|,
+name|rel
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|Set
+argument_list|<
+name|RexNode
+argument_list|>
+name|r
+init|=
+name|mq
+operator|.
+name|getExpressionLineage
+argument_list|(
+name|rel
+argument_list|,
+name|ref
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+name|expected
+argument_list|,
+name|String
+operator|.
+name|valueOf
+argument_list|(
+name|r
+argument_list|)
+argument_list|,
+literal|"Lineage for expr '"
+operator|+
+name|ref
+operator|+
+literal|"' in node '"
+operator|+
+name|rel
+operator|+
+literal|"'"
+operator|+
+literal|" for query '"
+operator|+
+name|sql
+operator|+
+literal|"': "
+operator|+
+name|comment
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -15845,6 +15948,90 @@ operator|.
 name|getIdentifier
 argument_list|()
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testExpressionLineageConjuntiveExpression
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select (empno = 1 or ename = 'abc') and deptno> 1 from emp"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"[AND(OR(=([CATALOG, SALES, EMP].#0.$0, 1), "
+operator|+
+literal|"=([CATALOG, SALES, EMP].#0.$1, 'abc')), "
+operator|+
+literal|">([CATALOG, SALES, EMP].#0.$7, 1))]"
+decl_stmt|;
+name|String
+name|comment
+init|=
+literal|"'empno' is column 0 in 'catalog.sales.emp', "
+operator|+
+literal|"'ename' is column 1 in 'catalog.sales.emp', and "
+operator|+
+literal|"'deptno' is column 7 in 'catalog.sales.emp'"
+decl_stmt|;
+name|assertExpressionLineage
+argument_list|(
+name|sql
+argument_list|,
+literal|0
+argument_list|,
+name|expected
+argument_list|,
+name|comment
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testExpressionLineageBetweenExpressionWithJoin
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select dept.deptno + empno between 1 and 2"
+operator|+
+literal|" from emp join dept on emp.deptno = dept.deptno"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"[AND(>=(+([CATALOG, SALES, DEPT].#0.$0, [CATALOG, SALES, EMP].#0.$0), 1),"
+operator|+
+literal|"<=(+([CATALOG, SALES, DEPT].#0.$0, [CATALOG, SALES, EMP].#0.$0), 2))]"
+decl_stmt|;
+name|String
+name|comment
+init|=
+literal|"'empno' is column 0 in 'catalog.sales.emp', "
+operator|+
+literal|"'deptno' is column 0 in 'catalog.sales.dept', and "
+operator|+
+literal|"'dept.deptno + empno between 1 and 2' is translated into "
+operator|+
+literal|"'dept.deptno + empno>= 1 and dept.deptno + empno<= 2'"
+decl_stmt|;
+name|assertExpressionLineage
+argument_list|(
+name|sql
+argument_list|,
+literal|0
+argument_list|,
+name|expected
+argument_list|,
+name|comment
 argument_list|)
 expr_stmt|;
 block|}

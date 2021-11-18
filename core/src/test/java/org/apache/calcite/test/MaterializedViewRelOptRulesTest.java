@@ -158,7 +158,6 @@ comment|/**  * Unit test for  * {@link org.apache.calcite.rel.rules.materialize.
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|MaterializedViewRelOptRulesTest
 extends|extends
@@ -2783,6 +2782,250 @@ operator|+
 literal|"join \"depts\" \"a\" on (\"emps\".\"deptno\"=\"a\".\"deptno\")\n"
 operator|+
 literal|"where \"emps\".\"name\" = 'Bill'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQueryProjectWithBetween
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select *"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|,
+literal|"select s.\"time_id\" between 1 and 3"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|)
+operator|.
+name|withDefaultSchemaSpec
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..7=[{inputs}], expr#8=[1], expr#9=[>=($t1, $t8)],"
+operator|+
+literal|" expr#10=[3], expr#11=[<=($t1, $t10)], expr#12=[AND($t9, $t11)], $f0=[$t12])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testJoinQueryProjectWithBetween
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select *"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" join \"foodmart\".\"time_by_day\" as t on s.\"time_id\" = t.\"time_id\""
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|,
+literal|"select s.\"time_id\" between 1 and 3"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" join \"foodmart\".\"time_by_day\" as t on s.\"time_id\" = t.\"time_id\""
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|)
+operator|.
+name|withDefaultSchemaSpec
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..17=[{inputs}], expr#18=[1], expr#19=[>=($t8, $t18)], "
+operator|+
+literal|"expr#20=[3], expr#21=[<=($t8, $t20)], expr#22=[AND($t19, $t21)], $f0=[$t22])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testViewProjectWithBetween
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select s.\"time_id\", s.\"time_id\" between 1 and 3"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|,
+literal|"select s.\"time_id\""
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|)
+operator|.
+name|withDefaultSchemaSpec
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..1=[{inputs}], time_id=[$t0])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQueryAndViewProjectWithBetween
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select s.\"time_id\", s.\"time_id\" between 1 and 3"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|,
+literal|"select s.\"time_id\" between 1 and 3"
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|)
+operator|.
+name|withDefaultSchemaSpec
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..1=[{inputs}], EXPR$1=[$t1])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testViewProjectWithMultifieldExpressions
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select s.\"time_id\", s.\"time_id\">= 1 and s.\"time_id\"< 3,"
+operator|+
+literal|" s.\"time_id\">= 1 or s.\"time_id\"< 3, "
+operator|+
+literal|" s.\"time_id\" + s.\"time_id\", "
+operator|+
+literal|" s.\"time_id\" * s.\"time_id\""
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|,
+literal|"select s.\"time_id\""
+operator|+
+literal|" from \"foodmart\".\"sales_fact_1997\" as s"
+operator|+
+literal|" where s.\"store_id\" = 1"
+argument_list|)
+operator|.
+name|withDefaultSchemaSpec
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|withChecker
+argument_list|(
+name|resultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..4=[{inputs}], time_id=[$t0])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[foodmart, MV0]])"
+argument_list|)
 argument_list|)
 operator|.
 name|ok
