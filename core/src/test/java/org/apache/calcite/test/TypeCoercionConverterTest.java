@@ -346,6 +346,48 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4897">[CALCITE-4897]    * Set operation in DML, implicit type conversion is not complete</a>. */
+annotation|@
+name|Test
+name|void
+name|testInsertUnionQuerySourceCoercion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into t1 "
+operator|+
+literal|"select 'a', 1, 1.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false union "
+operator|+
+literal|"select 'b', 2, 2,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false union "
+operator|+
+literal|"select 'c', CAST(3 AS SMALLINT), 3.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false union "
+operator|+
+literal|"select 'd', 4, 4.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false union "
+operator|+
+literal|"select 'e', 5, 5.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

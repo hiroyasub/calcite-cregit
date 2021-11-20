@@ -788,7 +788,11 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-specifier|final
+comment|// Operand1 should be coerced even if operand0 not need to be coerced.
+comment|// For example, we have one table named t:
+comment|// INSERT INTO t -- only one column is c(int).
+comment|// SELECT 1 UNION   -- operand0 not need to be coerced.
+comment|// SELECT 1.0  -- operand1 should be coerced.
 name|boolean
 name|coerced
 init|=
@@ -802,7 +806,9 @@ name|columnIndex
 argument_list|,
 name|targetType
 argument_list|)
-operator|&&
+decl_stmt|;
+name|coerced
+operator|=
 name|rowTypeCoercion
 argument_list|(
 name|scope
@@ -813,7 +819,9 @@ name|columnIndex
 argument_list|,
 name|targetType
 argument_list|)
-decl_stmt|;
+operator|||
+name|coerced
+expr_stmt|;
 comment|// Update the nested SET operator node type.
 if|if
 condition|(
