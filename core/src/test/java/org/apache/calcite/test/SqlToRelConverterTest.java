@@ -11306,6 +11306,35 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSubQueryNoExpand
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select (select empno from EMP where 1 = 0)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 end_comment

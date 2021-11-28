@@ -731,7 +731,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"X=2; EXPR$1=0\nX=4; EXPR$1=0\n"
+literal|"X=2; EXPR$1=null\nX=4; EXPR$1=null\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
