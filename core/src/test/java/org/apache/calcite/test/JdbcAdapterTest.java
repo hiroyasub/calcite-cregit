@@ -304,7 +304,7 @@ operator|new
 name|ReentrantLock
 argument_list|()
 decl_stmt|;
-comment|/** VALUES is not pushed down, currently. */
+comment|/** VALUES is pushed down. */
 annotation|@
 name|Test
 name|void
@@ -321,15 +321,13 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"EnumerableNestedLoopJoin(condition=[true], joinType=[inner])\n"
-operator|+
-literal|"  JdbcToEnumerableConverter\n"
+literal|"  JdbcJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"    JdbcTableScan(table=[[foodmart, days]])\n"
 operator|+
-literal|"  EnumerableValues(tuples=[[{ 1 }, { 2 }]])"
+literal|"    JdbcValues(tuples=[[{ 1 }, { 2 }]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -337,7 +335,11 @@ name|jdbcSql
 init|=
 literal|"SELECT *\n"
 operator|+
-literal|"FROM \"foodmart\".\"days\""
+literal|"FROM \"foodmart\".\"days\",\n"
+operator|+
+literal|"(VALUES (1),\n"
+operator|+
+literal|"(2)) AS \"t\" (\"C\")"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -385,6 +387,11 @@ operator|.
 name|planHasSql
 argument_list|(
 name|jdbcSql
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|14
 argument_list|)
 expr_stmt|;
 block|}
@@ -1362,7 +1369,6 @@ literal|"FROM \"SCOTT\".\"DEPT\") AS \"t0\" ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTN
 argument_list|)
 expr_stmt|;
 block|}
-comment|// JdbcJoin not used for this
 annotation|@
 name|Test
 name|void
@@ -1387,17 +1393,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableNestedLoopJoin(condition=[true], "
+literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"joinType=[inner])\n"
-operator|+
-literal|"  JdbcToEnumerableConverter\n"
+literal|"  JdbcJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"    JdbcProject(EMPNO=[$0], ENAME=[$1])\n"
 operator|+
 literal|"      JdbcTableScan(table=[[SCOTT, EMP]])\n"
-operator|+
-literal|"  JdbcToEnumerableConverter\n"
 operator|+
 literal|"    JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
 operator|+
@@ -1497,6 +1499,75 @@ operator|+
 literal|"INNER JOIN (SELECT \"DEPTNO\", \"DNAME\"\n"
 operator|+
 literal|"FROM \"SCOTT\".\"DEPT\") AS \"t1\" ON \"t0\".\"DEPTNO\" = \"t1\".\"DEPTNO\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testJoinConditionAlwaysTruePushDown
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, ename, d.deptno, dname\n"
+operator|+
+literal|"from scott.emp e,scott.dept d\n"
+operator|+
+literal|"where true"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"    JdbcProject(EMPNO=[$0], ENAME=[$1])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"    JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, DEPT]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\",\n"
+operator|+
+literal|"(SELECT \"DEPTNO\", \"DNAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t0\""
 argument_list|)
 expr_stmt|;
 block|}

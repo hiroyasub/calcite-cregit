@@ -2215,6 +2215,13 @@ argument_list|()
 condition|)
 block|{
 case|case
+name|LITERAL
+case|:
+comment|// literal on a join condition would be TRUE or FALSE
+return|return
+literal|true
+return|;
+case|case
 name|AND
 case|:
 case|case
