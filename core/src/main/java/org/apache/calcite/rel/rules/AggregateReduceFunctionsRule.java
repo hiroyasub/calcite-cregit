@@ -467,6 +467,18 @@ name|IntPredicate
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Predicate
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that reduces aggregate functions in  * {@link org.apache.calcite.rel.core.Aggregate}s to simpler forms.  *  *<p>Rewrites:  *<ul>  *  *<li>AVG(x)&rarr; SUM(x) / COUNT(x)  *  *<li>STDDEV_POP(x)&rarr; SQRT(  *     (SUM(x * x) - SUM(x) * SUM(x) / COUNT(x))  *    / COUNT(x))  *  *<li>STDDEV_SAMP(x)&rarr; SQRT(  *     (SUM(x * x) - SUM(x) * SUM(x) / COUNT(x))  *     / CASE COUNT(x) WHEN 1 THEN NULL ELSE COUNT(x) - 1 END)  *  *<li>VAR_POP(x)&rarr; (SUM(x * x) - SUM(x) * SUM(x) / COUNT(x))  *     / COUNT(x)  *  *<li>VAR_SAMP(x)&rarr; (SUM(x * x) - SUM(x) * SUM(x) / COUNT(x))  *        / CASE COUNT(x) WHEN 1 THEN NULL ELSE COUNT(x) - 1 END  *  *<li>COVAR_POP(x, y)&rarr; (SUM(x * y) - SUM(x, y) * SUM(y, x)  *     / REGR_COUNT(x, y)) / REGR_COUNT(x, y)  *  *<li>COVAR_SAMP(x, y)&rarr; (SUM(x * y) - SUM(x, y) * SUM(y, x) / REGR_COUNT(x, y))  *     / CASE REGR_COUNT(x, y) WHEN 1 THEN NULL ELSE REGR_COUNT(x, y) - 1 END  *  *<li>REGR_SXX(x, y)&rarr; REGR_COUNT(x, y) * VAR_POP(y)  *  *<li>REGR_SYY(x, y)&rarr; REGR_COUNT(x, y) * VAR_POP(x)  *  *</ul>  *  *<p>Since many of these rewrites introduce multiple occurrences of simpler  * forms like {@code COUNT(x)}, the rule gathers common sub-expressions as it  * goes.  *  * @see CoreRules#AGGREGATE_REDUCE_FUNCTIONS  */
 end_comment
@@ -836,6 +848,16 @@ operator|.
 name|getKind
 argument_list|()
 argument_list|)
+operator|&&
+name|config
+operator|.
+name|extraCondition
+argument_list|()
+operator|.
+name|test
+argument_list|(
+name|call
+argument_list|)
 return|;
 block|}
 comment|/**    * Reduces calls to functions AVG, SUM, STDDEV_POP, STDDEV_SAMP, VAR_POP,    * VAR_SAMP, COVAR_POP, COVAR_SAMP, REGR_SXX, REGR_SYY if the function is    * present in {@link AggregateReduceFunctionsRule#functionsToReduce}    *    *<p>It handles newly generated common subexpressions since this was done    * at the sql2rel stage.    */
@@ -989,7 +1011,7 @@ name|fields
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// create new agg function calls and rest of project list together
+comment|// create new aggregate function calls and rest of project list together
 for|for
 control|(
 name|AggregateCall
@@ -4214,7 +4236,7 @@ return|return
 name|ordinal
 return|;
 block|}
-comment|/**    * Do a shallow clone of oldAggRel and update aggCalls. Could be refactored    * into Aggregate and subclasses - but it's only needed for some    * subclasses.    *    * @param relBuilder Builder of relational expressions; at the top of its    *                   stack is its input    * @param oldAggregate LogicalAggregate to clone.    * @param newCalls  New list of AggregateCalls    */
+comment|/**    * Does a shallow clone of oldAggRel and updates aggCalls. Could be refactored    * into Aggregate and subclasses - but it's only needed for some    * subclasses.    *    * @param relBuilder Builder of relational expressions; at the top of its    *                   stack is its input    * @param oldAggregate LogicalAggregate to clone.    * @param newCalls  New list of AggregateCalls    */
 specifier|protected
 name|void
 name|newAggregateRel
@@ -4255,7 +4277,7 @@ name|newCalls
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Add a calc with the expressions to compute the original agg calls from the    * decomposed ones.    *    * @param relBuilder Builder of relational expressions; at the top of its    *                   stack is its input    * @param rowType The output row type of the original aggregate.    * @param exprs The expressions to compute the original agg calls.    */
+comment|/**    * Adds a calculation with the expressions to compute the original aggregate    * calls from the decomposed ones.    *    * @param relBuilder Builder of relational expressions; at the top of its    *                   stack is its input    * @param rowType The output row type of the original aggregate.    * @param exprs The expressions to compute the original aggregate calls    */
 specifier|protected
 name|void
 name|newCalcRel
@@ -4369,6 +4391,7 @@ name|this
 argument_list|)
 return|;
 block|}
+comment|/** The set of aggregate function types to try to reduce.      *      *<p>Any aggregate function whose type is omitted from this set, OR which      * does not pass the {@link #extraCondition}, will be ignored.      */
 annotation|@
 name|Nullable
 name|Set
@@ -4378,6 +4401,25 @@ argument_list|>
 name|functionsToReduce
 parameter_list|()
 function_decl|;
+comment|/** A test that must pass before attempting to reduce any aggregate function.      *      *<p>Any aggegate function which does not pass, OR whose type is omitted      * from {@link #functionsToReduce}, will be ignored. The default predicate      * always passes.      */
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
+name|Predicate
+argument_list|<
+name|AggregateCall
+argument_list|>
+name|extraCondition
+parameter_list|()
+block|{
+return|return
+name|ignored
+lambda|->
+literal|true
+return|;
+block|}
 comment|/** Sets {@link #functionsToReduce}. */
 name|Config
 name|withFunctionsToReduce
@@ -4417,6 +4459,17 @@ name|functionSet
 argument_list|)
 return|;
 block|}
+comment|/** Sets {@link #extraCondition}. */
+name|Config
+name|withExtraCondition
+parameter_list|(
+name|Predicate
+argument_list|<
+name|AggregateCall
+argument_list|>
+name|test
+parameter_list|)
+function_decl|;
 comment|/** Returns the validated set of functions to reduce, or the default set      * if not specified. */
 specifier|default
 name|Set

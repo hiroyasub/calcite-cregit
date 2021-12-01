@@ -27050,6 +27050,62 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testReduceWithNonTypePredicate
+parameter_list|()
+block|{
+comment|// Make sure we can reduce with more specificity than just agg function type.
+specifier|final
+name|RelOptRule
+name|rule
+init|=
+name|AggregateReduceFunctionsRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|withExtraCondition
+argument_list|(
+name|call
+lambda|->
+name|call
+operator|.
+name|distinctKeys
+operator|!=
+literal|null
+argument_list|)
+operator|.
+name|toRule
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select avg(sal), avg(sal) within distinct (deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|rule
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/** Test case for   *<a href="https://issues.apache.org/jira/browse/CALCITE-2803">[CALCITE-2803]   * Identify expanded IS NOT DISTINCT FROM expression when pushing project past join</a>.   */
 end_comment
