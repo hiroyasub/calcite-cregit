@@ -10977,6 +10977,76 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testSimplifyAndIsNotNullWithEquality
+parameter_list|()
+block|{
+comment|// "AND(IS NOT NULL(x), =(x, y)) => AND(IS NOT NULL(x), =(x, y)) (unknownAsFalse=false),
+comment|// "=(x, y)" (unknownAsFalse=true)
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|isNotNull
+argument_list|(
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|vInt
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(IS NOT NULL(?0.int0), =(?0.int0, ?0.int1))"
+argument_list|,
+literal|"=(?0.int0, ?0.int1)"
+argument_list|)
+expr_stmt|;
+comment|// "AND(IS NOT NULL(x), =(x, y)) => "=(x, y)"
+name|checkSimplify
+argument_list|(
+name|and
+argument_list|(
+name|isNotNull
+argument_list|(
+name|vIntNotNull
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|vIntNotNull
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"=(?0.notNullInt0, ?0.int1)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSimplifyAndIsNull
 parameter_list|()
 block|{
