@@ -5847,52 +5847,6 @@ argument_list|)
 return|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
-comment|/** @deprecated Use {@link #groupKey(ImmutableBitSet)}    * or {@link #groupKey(ImmutableBitSet, Iterable)}. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 2.0
-specifier|public
-name|GroupKey
-name|groupKey
-parameter_list|(
-name|ImmutableBitSet
-name|groupSet
-parameter_list|,
-annotation|@
-name|Nullable
-name|ImmutableList
-argument_list|<
-name|ImmutableBitSet
-argument_list|>
-name|groupSets
-parameter_list|)
-block|{
-return|return
-name|groupKey_
-argument_list|(
-name|groupSet
-argument_list|,
-name|groupSets
-operator|==
-literal|null
-condition|?
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|groupSet
-argument_list|)
-else|:
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
-name|groupSets
-argument_list|)
-argument_list|)
-return|;
-block|}
-comment|// CHECKSTYLE: IGNORE 1
 comment|/** @deprecated Use {@link #groupKey(ImmutableBitSet, Iterable)}. */
 annotation|@
 name|Deprecated

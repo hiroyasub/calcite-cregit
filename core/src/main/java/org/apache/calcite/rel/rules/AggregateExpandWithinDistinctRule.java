@@ -1508,12 +1508,6 @@ name|groupKey
 argument_list|(
 name|fullGroupSet
 argument_list|,
-operator|(
-name|Iterable
-argument_list|<
-name|ImmutableBitSet
-argument_list|>
-operator|)
 name|groupSets
 argument_list|)
 argument_list|,
@@ -1912,12 +1906,6 @@ name|getGroupSet
 argument_list|()
 argument_list|)
 argument_list|,
-operator|(
-name|Iterable
-argument_list|<
-name|ImmutableBitSet
-argument_list|>
-operator|)
 name|remap
 argument_list|(
 name|fullGroupSet
