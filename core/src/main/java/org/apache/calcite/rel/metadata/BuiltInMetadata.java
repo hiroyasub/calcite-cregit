@@ -324,6 +324,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -349,6 +351,20 @@ name|RexNode
 name|predicate
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Selectivity
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about which combinations of columns are unique identifiers. */
@@ -399,6 +415,8 @@ name|ignoreNulls
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -425,6 +443,20 @@ name|boolean
 name|ignoreNulls
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|UniqueKeys
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about whether a set of columns uniquely identifies a row. */
@@ -473,6 +505,8 @@ name|ignoreNulls
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -497,6 +531,20 @@ name|boolean
 name|ignoreNulls
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|ColumnUniqueness
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about which columns are sorted. */
@@ -542,6 +590,8 @@ name|collations
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -563,6 +613,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Collation
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about how a relational expression is distributed.    *    *<p>If you are an operator consuming a relational expression, which subset    * of the rows are you seeing? You might be seeing all of them (BROADCAST    * or SINGLETON), only those whose key column values have a particular hash    * code (HASH) or only those whose column values have particular values or    * ranges of values (RANGE).    *    *<p>When a relational expression is partitioned, it is often partitioned    * among nodes, but it may be partitioned among threads running on the same    * node. */
@@ -605,6 +669,8 @@ name|distribution
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -623,6 +689,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Distribution
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/**    * Metadata about the node types in a relational expression.    *    *<p>For each relational expression, it returns a multimap from the class    * to the nodes instantiating that class. Each node will appear in the    * multimap only once.    */
@@ -677,6 +757,8 @@ name|getNodeTypes
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -707,6 +789,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|NodeTypes
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the number of rows returned by a relational expression. */
@@ -751,6 +847,8 @@ name|getRowCount
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -771,6 +869,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|RowCount
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the maximum number of rows returned by a relational    * expression. */
@@ -815,6 +927,8 @@ name|getMaxRowCount
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -835,6 +949,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|MaxRowCount
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the minimum number of rows returned by a relational    * expression. */
@@ -879,6 +1007,8 @@ name|getMinRowCount
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -899,6 +1029,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|MinRowCount
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the number of distinct rows returned by a set of columns    * in a relational expression. */
@@ -951,6 +1095,8 @@ name|predicate
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -979,6 +1125,20 @@ name|RexNode
 name|predicate
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|DistinctRowCount
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the proportion of original rows that remain in a relational    * expression. */
@@ -1023,6 +1183,8 @@ name|getPercentageOriginalRows
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1043,6 +1205,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|PercentageOriginalRows
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the number of distinct values in the original source of a    * column or set of columns. */
@@ -1090,6 +1266,8 @@ name|groupKey
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1113,6 +1291,20 @@ name|ImmutableBitSet
 name|groupKey
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|PopulationSize
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the size of rows and columns. */
@@ -1210,6 +1402,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Size
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the origins of columns. */
@@ -1260,6 +1466,8 @@ name|outputColumn
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1286,6 +1494,20 @@ name|int
 name|outputColumn
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|ColumnOrigin
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the origins of expressions. */
@@ -1336,6 +1558,8 @@ name|expression
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1362,6 +1586,20 @@ name|RexNode
 name|expression
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|ExpressionLineage
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata to obtain references to tables used by a given expression. */
@@ -1407,6 +1645,8 @@ name|getTableReferences
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1428,6 +1668,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|TableReferences
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the cost of evaluating a relational expression, including    * all of its inputs. */
@@ -1470,6 +1724,8 @@ name|getCumulativeCost
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1488,6 +1744,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|CumulativeCost
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the cost of evaluating a relational expression, not    * including its inputs. */
@@ -1530,6 +1800,8 @@ name|getNonCumulativeCost
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1548,6 +1820,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|NonCumulativeCost
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about whether a relational expression should appear in a plan. */
@@ -1593,6 +1879,8 @@ name|explainLevel
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1614,6 +1902,20 @@ name|SqlExplainLevel
 name|explainLevel
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|ExplainVisibility
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the predicates that hold in the rows emitted from a    * relational expression. */
@@ -1656,6 +1958,8 @@ name|getPredicates
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1674,6 +1978,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Predicates
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the predicates that hold in the rows emitted from a    * relational expression.    *    *<p>The difference with respect to {@link Predicates} provider is that    * this provider tries to extract ALL predicates even if they are not    * applied on the output expressions of the relational expression; we rely    * on {@link RexTableInputRef} to reference origin columns in    * {@link org.apache.calcite.rel.core.TableScan} for the result predicates.    */
@@ -1718,6 +2036,8 @@ name|getAllPredicates
 parameter_list|()
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1738,6 +2058,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|AllPredicates
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the degree of parallelism of a relational expression, and    * how its operators are assigned to processes with independent resource    * pools. */
@@ -1819,6 +2153,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Parallelism
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata to get the lower bound cost of a RelNode. */
@@ -1864,6 +2212,8 @@ name|planner
 parameter_list|)
 function_decl|;
 comment|/** Handler API. */
+annotation|@
+name|FunctionalInterface
 interface|interface
 name|Handler
 extends|extends
@@ -1885,6 +2235,20 @@ name|VolcanoPlanner
 name|planner
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|LowerBoundCost
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** Metadata about the memory use of an operator. */
@@ -1999,6 +2363,20 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
+specifier|default
+name|MetadataDef
+argument_list|<
+name|Memory
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|DEF
+return|;
+block|}
 block|}
 block|}
 comment|/** The built-in forms of metadata. */
