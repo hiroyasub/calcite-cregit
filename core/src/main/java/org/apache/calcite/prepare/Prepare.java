@@ -1318,7 +1318,7 @@ name|LOGGER
 operator|.
 name|debug
 argument_list|(
-literal|"Plan after physical tweaks: {}"
+literal|"Plan after physical tweaks:\n{}"
 argument_list|,
 name|RelOptUtil
 operator|.
