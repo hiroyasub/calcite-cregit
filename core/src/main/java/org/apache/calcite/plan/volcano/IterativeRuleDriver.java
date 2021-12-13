@@ -57,18 +57,6 @@ name|Logger
 import|;
 end_import
 
-begin_import
-import|import static
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-operator|.
-name|requireNonNull
-import|;
-end_import
-
 begin_comment
 comment|/***  *<p>The algorithm executes repeatedly. The exact rules  * that may be fired varies.  *  *<p>The planner iterates over the rule matches presented  * by the rule queue until the rule queue becomes empty.  */
 end_comment
@@ -144,22 +132,24 @@ condition|(
 literal|true
 condition|)
 block|{
+assert|assert
+name|planner
+operator|.
+name|root
+operator|!=
+literal|null
+operator|:
+literal|"RelSubset must not be null at this point"
+assert|;
 name|LOGGER
 operator|.
 name|debug
 argument_list|(
-literal|"PLANNER = {}; COST = {}"
+literal|"Best cost before rule match: {}"
 argument_list|,
-name|this
-argument_list|,
-name|requireNonNull
-argument_list|(
 name|planner
 operator|.
 name|root
-argument_list|,
-literal|"planner.root"
-argument_list|)
 operator|.
 name|bestCost
 argument_list|)
