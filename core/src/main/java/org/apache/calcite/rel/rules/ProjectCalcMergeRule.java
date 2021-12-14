@@ -234,7 +234,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalProject} and a  * {@link org.apache.calcite.rel.logical.LogicalCalc}.  *  *<p>The resulting {@link org.apache.calcite.rel.logical.LogicalCalc} has the  * same project list as the original  * {@link org.apache.calcite.rel.logical.LogicalProject}, but expressed in terms  * of the original {@link org.apache.calcite.rel.logical.LogicalCalc}'s inputs.  *  * @see FilterCalcMergeRule  * @see CoreRules#PROJECT_CALC_MERGE  */
+comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.core.Project} and a  * {@link org.apache.calcite.rel.core.Calc}.  *  *<p>The resulting {@link org.apache.calcite.rel.core.Calc} has the  * same project list as the original  * {@link org.apache.calcite.rel.core.Project}, but expressed in terms  * of the original {@link org.apache.calcite.rel.core.Calc}'s inputs.  *  * @see FilterCalcMergeRule  * @see CoreRules#PROJECT_CALC_MERGE  */
 end_comment
 
 begin_class
@@ -334,9 +334,7 @@ argument_list|)
 decl_stmt|;
 comment|// Don't merge a project which contains windowed aggregates onto a
 comment|// calc. That would effectively be pushing a windowed aggregate down
-comment|// through a filter. Transform the project into an identical calc,
-comment|// which we'll have chance to merge later, after the over is
-comment|// expanded.
+comment|// through a filter.
 specifier|final
 name|RelOptCluster
 name|cluster
@@ -386,25 +384,6 @@ name|program
 argument_list|)
 condition|)
 block|{
-name|LogicalCalc
-name|projectAsCalc
-init|=
-name|LogicalCalc
-operator|.
-name|create
-argument_list|(
-name|calc
-argument_list|,
-name|program
-argument_list|)
-decl_stmt|;
-name|call
-operator|.
-name|transformTo
-argument_list|(
-name|projectAsCalc
-argument_list|)
-expr_stmt|;
 return|return;
 block|}
 comment|// Create a program containing the project node's expressions.
@@ -494,13 +473,18 @@ name|rexBuilder
 argument_list|)
 decl_stmt|;
 specifier|final
-name|LogicalCalc
+name|Calc
 name|newCalc
 init|=
-name|LogicalCalc
+name|calc
 operator|.
-name|create
+name|copy
 argument_list|(
+name|calc
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
 name|calc
 operator|.
 name|getInput

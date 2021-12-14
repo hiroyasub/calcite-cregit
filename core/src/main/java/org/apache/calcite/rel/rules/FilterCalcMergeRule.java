@@ -101,22 +101,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalFilter
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rex
 operator|.
 name|RexBuilder
@@ -178,7 +162,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalFilter} and a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. The  * result is a {@link org.apache.calcite.rel.logical.LogicalCalc}  * whose filter condition is the logical AND of the two.  *  * @see FilterMergeRule  * @see ProjectCalcMergeRule  * @see CoreRules#FILTER_CALC_MERGE  */
+comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.core.Filter} and a  * {@link org.apache.calcite.rel.core.Calc}. The  * result is a {@link org.apache.calcite.rel.core.Calc}  * whose filter condition is the logical AND of the two.  *  * @see FilterMergeRule  * @see ProjectCalcMergeRule  * @see CoreRules#FILTER_CALC_MERGE  */
 end_comment
 
 begin_class
@@ -255,7 +239,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|LogicalFilter
+name|Filter
 name|filter
 init|=
 name|call
@@ -266,7 +250,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|LogicalCalc
+name|Calc
 name|calc
 init|=
 name|call
@@ -364,13 +348,18 @@ name|rexBuilder
 argument_list|)
 decl_stmt|;
 specifier|final
-name|LogicalCalc
+name|Calc
 name|newCalc
 init|=
-name|LogicalCalc
+name|calc
 operator|.
-name|create
+name|copy
 argument_list|(
+name|calc
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
 name|calc
 operator|.
 name|getInput
