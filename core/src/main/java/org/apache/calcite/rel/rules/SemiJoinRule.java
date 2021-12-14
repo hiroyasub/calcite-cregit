@@ -699,6 +699,14 @@ name|semiJoin
 argument_list|(
 name|newCondition
 argument_list|)
+operator|.
+name|hints
+argument_list|(
+name|join
+operator|.
+name|getHints
+argument_list|()
+argument_list|)
 expr_stmt|;
 break|break;
 case|case
