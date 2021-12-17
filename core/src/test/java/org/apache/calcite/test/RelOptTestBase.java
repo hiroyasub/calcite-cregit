@@ -1482,8 +1482,8 @@ specifier|public
 name|Sql
 name|with
 parameter_list|(
-name|HepPlanner
-name|hepPlanner
+name|RelOptPlanner
+name|planner
 parameter_list|)
 block|{
 return|return
@@ -1496,7 +1496,7 @@ name|sql
 argument_list|,
 name|preProgram
 argument_list|,
-name|hepPlanner
+name|planner
 argument_list|,
 name|hooks
 argument_list|,
