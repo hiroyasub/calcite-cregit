@@ -601,14 +601,6 @@ name|Bug
 operator|.
 name|CALCITE_1048_FIXED
 return|;
-case|case
-literal|"calcite4877"
-case|:
-return|return
-name|Bug
-operator|.
-name|CALCITE_4877_FIXED
-return|;
 block|}
 return|return
 literal|null
