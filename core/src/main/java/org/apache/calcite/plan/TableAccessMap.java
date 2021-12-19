@@ -138,10 +138,13 @@ comment|// names instead of List<String>.
 end_comment
 
 begin_comment
-comment|/**  *<code>TableAccessMap</code> represents the tables accessed by a query plan,  * with READ/WRITE information.  */
+comment|/**  *<code>TableAccessMap</code> represents the tables accessed by a query plan,  * with READ/WRITE information.  *  * @deprecated As of 1.30.0, if you need to know how tables in a plan are accessed you are  * encouraged to implement your own logic (using a RelNode visitor or other). The class is not used  * anywhere in the project and remains untested thus it is deprecated.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|TableAccessMap
