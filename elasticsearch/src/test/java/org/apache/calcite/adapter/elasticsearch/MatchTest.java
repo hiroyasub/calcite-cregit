@@ -425,20 +425,6 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Disabled
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
 name|Test
 import|;
 end_import
@@ -643,11 +629,6 @@ end_comment
 
 begin_class
 annotation|@
-name|Disabled
-argument_list|(
-literal|"RestClient often timeout in PR CI"
-argument_list|)
-annotation|@
 name|ResourceLock
 argument_list|(
 name|value
@@ -682,14 +663,6 @@ name|String
 name|ZIPS
 init|=
 literal|"match-zips"
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|int
-name|ZIPS_SIZE
-init|=
-literal|149
 decl_stmt|;
 comment|/**    * Used to create {@code zips} index and insert zip data in bulk.    * @throws Exception when instance setup failed    */
 annotation|@

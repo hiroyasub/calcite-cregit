@@ -856,6 +856,31 @@ name|httpHost
 argument_list|()
 argument_list|)
 operator|.
+name|setRequestConfigCallback
+argument_list|(
+name|requestConfigBuilder
+lambda|->
+name|requestConfigBuilder
+operator|.
+name|setConnectTimeout
+argument_list|(
+literal|60
+operator|*
+literal|1000
+argument_list|)
+comment|// default 1000
+operator|.
+name|setSocketTimeout
+argument_list|(
+literal|3
+operator|*
+literal|60
+operator|*
+literal|1000
+argument_list|)
+argument_list|)
+comment|// default 30000
+operator|.
 name|build
 argument_list|()
 decl_stmt|;

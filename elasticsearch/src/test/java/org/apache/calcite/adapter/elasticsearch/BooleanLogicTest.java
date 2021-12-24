@@ -93,6 +93,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|fasterxml
@@ -132,20 +146,6 @@ operator|.
 name|api
 operator|.
 name|BeforeAll
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
-name|Disabled
 import|;
 end_import
 
@@ -270,11 +270,6 @@ comment|/**  * Test of different boolean expressions (some more complex than oth
 end_comment
 
 begin_class
-annotation|@
-name|Disabled
-argument_list|(
-literal|"RestClient often timeout in PR CI"
-argument_list|)
 annotation|@
 name|ResourceLock
 argument_list|(
@@ -674,11 +669,24 @@ argument_list|(
 literal|"select * from view where num> 42 and num< 42 or num = 42"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_4965_FIXED
+condition|)
+block|{
 name|assertSingle
 argument_list|(
 literal|"select * from view where num> 42 or num< 42 or num = 42"
 argument_list|)
 expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where num is null"
+argument_list|)
+expr_stmt|;
+block|}
 name|assertSingle
 argument_list|(
 literal|"select * from view where num>= 42 and num<= 42 and num = 42"

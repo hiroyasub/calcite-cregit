@@ -107,6 +107,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|fasterxml
@@ -173,7 +187,7 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|BeforeAll
+name|Assumptions
 import|;
 end_import
 
@@ -187,7 +201,7 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Disabled
+name|BeforeAll
 import|;
 end_import
 
@@ -708,13 +722,22 @@ return|;
 block|}
 comment|/**    * Currently the patterns like below will be converted to Search in range    * which is not supported in elastic search adapter.    * (val1>= 10 and val1<= 20)    * (val1<= 10 or val1>=20)    * (val1<= 10) or (val1> 15 and val1<= 20)    * So disable this test case until the translation from Search in range    * to rang Query in ES is implemented.    */
 annotation|@
-name|Disabled
-annotation|@
 name|Test
 name|void
 name|searchInRange
 parameter_list|()
 block|{
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4645_FIXED
+argument_list|,
+literal|"CALCITE-4645"
+argument_list|)
+expr_stmt|;
 name|CalciteAssert
 operator|.
 name|that

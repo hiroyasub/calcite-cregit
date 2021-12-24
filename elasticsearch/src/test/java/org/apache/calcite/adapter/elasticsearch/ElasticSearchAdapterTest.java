@@ -129,6 +129,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TestUtil
 import|;
 end_import
@@ -201,7 +215,7 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|BeforeAll
+name|Assumptions
 import|;
 end_import
 
@@ -215,7 +229,7 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Disabled
+name|BeforeAll
 import|;
 end_import
 
@@ -414,11 +428,6 @@ comment|/**  * Set of tests for ES adapter. Uses real instance via {@link Embedd
 end_comment
 
 begin_class
-annotation|@
-name|Disabled
-argument_list|(
-literal|"RestClient often timeout in PR CI"
-argument_list|)
 annotation|@
 name|ResourceLock
 argument_list|(
@@ -2047,6 +2056,17 @@ name|void
 name|testFilterSortDesc
 parameter_list|()
 block|{
+name|Assumptions
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_4645_FIXED
+argument_list|,
+literal|"CALCITE-4645"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -2090,9 +2110,9 @@ index|[]
 name|searches
 init|=
 block|{
-literal|"query: {'constant_score':{filter:{bool:{should:"
+literal|"query: {'constant_score':{filter:{terms:{pop:"
 operator|+
-literal|"[{term:{pop:96074}},{term:{pop:99568}}]}}}}"
+literal|"[96074, 99568]}}}}"
 block|,
 literal|"script_fields: {longitude:{script:'params._source.loc[0]'}, "
 operator|+
