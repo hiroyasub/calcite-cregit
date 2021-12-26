@@ -4768,7 +4768,7 @@ literal|0
 operator|&&
 name|driverMinor
 operator|<
-literal|30
+literal|40
 argument_list|)
 expr_stmt|;
 name|assertEquals
