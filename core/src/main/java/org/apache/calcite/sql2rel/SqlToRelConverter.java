@@ -15093,6 +15093,11 @@ name|leftRel
 argument_list|,
 name|innerRel
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|p
 operator|.
 name|id

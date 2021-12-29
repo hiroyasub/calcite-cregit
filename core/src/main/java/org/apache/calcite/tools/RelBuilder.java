@@ -13795,6 +13795,11 @@ name|right
 operator|.
 name|rel
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|id
 argument_list|,
 name|requiredColumns
@@ -14077,6 +14082,11 @@ argument_list|,
 name|right
 operator|.
 name|rel
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|correlationId
 argument_list|,

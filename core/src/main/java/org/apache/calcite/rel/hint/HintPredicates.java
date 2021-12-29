@@ -129,6 +129,23 @@ operator|.
 name|CALC
 argument_list|)
 decl_stmt|;
+comment|/** A hint predicate that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Correlate} nodes. */
+specifier|public
+specifier|static
+specifier|final
+name|HintPredicate
+name|CORRELATE
+init|=
+operator|new
+name|NodeTypeHintPredicate
+argument_list|(
+name|NodeTypeHintPredicate
+operator|.
+name|NodeType
+operator|.
+name|CORRELATE
+argument_list|)
+decl_stmt|;
 comment|/**    * Returns a composed hint predicate that represents a short-circuiting logical    * AND of an array of hint predicates {@code hintPredicates}.  When evaluating the composed    * predicate, if a predicate is {@code false}, then all the left    * predicates are not evaluated.    *    *<p>The predicates are evaluated in sequence.    */
 specifier|public
 specifier|static

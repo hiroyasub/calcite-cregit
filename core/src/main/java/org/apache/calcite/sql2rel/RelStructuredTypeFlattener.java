@@ -2831,6 +2831,11 @@ argument_list|)
 argument_list|,
 name|rel
 operator|.
+name|getHints
+argument_list|()
+argument_list|,
+name|rel
+operator|.
 name|getCorrelationId
 argument_list|()
 argument_list|,

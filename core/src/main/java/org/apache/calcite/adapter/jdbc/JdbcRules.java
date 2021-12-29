@@ -1170,6 +1170,8 @@ name|left
 parameter_list|,
 name|right
 parameter_list|,
+name|hints
+parameter_list|,
 name|correlationId
 parameter_list|,
 name|requiredColumns

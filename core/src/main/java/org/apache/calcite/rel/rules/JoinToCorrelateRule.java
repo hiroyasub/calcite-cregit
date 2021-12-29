@@ -657,6 +657,11 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
+name|join
+operator|.
+name|getHints
+argument_list|()
+argument_list|,
 name|correlationId
 argument_list|,
 name|requiredColumns

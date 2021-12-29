@@ -8582,6 +8582,11 @@ operator|.
 name|getTraitSet
 argument_list|()
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|left
 argument_list|,
 name|right
@@ -18221,6 +18226,11 @@ argument_list|,
 name|logicalCorrelate
 operator|.
 name|getTraitSet
+argument_list|()
+argument_list|,
+name|logicalCorrelate
+operator|.
+name|getHints
 argument_list|()
 argument_list|,
 name|logicalCorrelate

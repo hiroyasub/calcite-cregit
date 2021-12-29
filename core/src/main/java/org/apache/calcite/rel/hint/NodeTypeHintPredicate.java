@@ -75,6 +75,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Correlate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Join
 import|;
 end_import
@@ -170,6 +186,14 @@ comment|/**      * The hint would be propagated to the Calc nodes.      */
 name|CALC
 argument_list|(
 name|Calc
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/**      * The hint would be propagated to the Correlate nodes.      */
+name|CORRELATE
+argument_list|(
+name|Correlate
 operator|.
 name|class
 argument_list|)

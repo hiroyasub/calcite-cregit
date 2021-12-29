@@ -1708,7 +1708,7 @@ specifier|public
 interface|interface
 name|CorrelateFactory
 block|{
-comment|/**      * Creates a correlate.      *      * @param left             Left input      * @param right            Right input      * @param correlationId    Variable name for the row of left input      * @param requiredColumns  Required columns      * @param joinType         Join type      */
+comment|/**      * Creates a correlate.      *      * @param left             Left input      * @param right            Right input      * @param hints            Hints      * @param correlationId    Variable name for the row of left input      * @param requiredColumns  Required columns      * @param joinType         Join type      */
 name|RelNode
 name|createCorrelate
 parameter_list|(
@@ -1717,6 +1717,12 @@ name|left
 parameter_list|,
 name|RelNode
 name|right
+parameter_list|,
+name|List
+argument_list|<
+name|RelHint
+argument_list|>
+name|hints
 parameter_list|,
 name|CorrelationId
 name|correlationId
@@ -1749,6 +1755,12 @@ parameter_list|,
 name|RelNode
 name|right
 parameter_list|,
+name|List
+argument_list|<
+name|RelHint
+argument_list|>
+name|hints
+parameter_list|,
 name|CorrelationId
 name|correlationId
 parameter_list|,
@@ -1767,6 +1779,8 @@ argument_list|(
 name|left
 argument_list|,
 name|right
+argument_list|,
+name|hints
 argument_list|,
 name|correlationId
 argument_list|,
