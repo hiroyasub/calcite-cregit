@@ -1958,6 +1958,49 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4901">[CALCITE-4901]    * JDBC adapter incorrectly adds ORDER BY columns to the SELECT list</a>. */
+annotation|@
+name|Test
+name|void
+name|testOrderByNotInSelectList
+parameter_list|()
+block|{
+comment|// Before 4901 was fixed, the generated query would have "product_id" in its
+comment|// SELECT clause.
+name|String
+name|query
+init|=
+literal|"select count(1) as c\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+operator|+
+literal|"group by \"product_id\"\n"
+operator|+
+literal|"order by \"product_id\" desc"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\"\n"
+operator|+
+literal|"ORDER BY \"product_id\" DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -7688,7 +7731,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT \"product_id\", \"net_weight\"\n"
+literal|"SELECT \"product_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
@@ -7754,9 +7797,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT \"product_id\", \"net_weight\","
-operator|+
-literal|" \"gross_weight\"\n"
+literal|"SELECT \"product_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
@@ -7790,9 +7831,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT"
-operator|+
-literal|" \"product_id\", \"net_weight\", \"gross_weight\", \"low_fat\"\n"
+literal|"SELECT \"product_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
@@ -12436,7 +12475,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT \"product_id\", \"net_weight\"\n"
+literal|"SELECT \"product_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
@@ -12451,7 +12490,7 @@ specifier|final
 name|String
 name|expectedBigQuery
 init|=
-literal|"SELECT product_id, net_weight\n"
+literal|"SELECT product_id\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
@@ -26065,7 +26104,8 @@ argument_list|(
 name|validate
 argument_list|)
 operator|.
-name|rel
+name|project
+argument_list|()
 expr_stmt|;
 block|}
 for|for

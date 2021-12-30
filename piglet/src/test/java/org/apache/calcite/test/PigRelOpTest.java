@@ -1844,9 +1844,9 @@ literal|"        FROM scott.EMP\n"
 operator|+
 literal|"        GROUP BY DEPTNO) AS $cor4,\n"
 operator|+
-literal|"      LATERAL (SELECT COLLECT(ROW(ENAME, JOB, DEPTNO, SAL)) AS X\n"
+literal|"      LATERAL (SELECT X\n"
 operator|+
-literal|"        FROM (SELECT ENAME, JOB, DEPTNO, SAL\n"
+literal|"        FROM (SELECT 'all' AS $f0, COLLECT(ROW(ENAME, JOB, DEPTNO, SAL)) AS X\n"
 operator|+
 literal|"            FROM UNNEST (SELECT $cor4.A AS $f0\n"
 operator|+
@@ -1856,9 +1856,9 @@ literal|"AS t2 (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)\n"
 operator|+
 literal|"            WHERE JOB<> 'CLERK'\n"
 operator|+
-literal|"            ORDER BY SAL) AS t5\n"
+literal|"            GROUP BY 'all'\n"
 operator|+
-literal|"        GROUP BY 'all') AS t8) AS $cor5,\n"
+literal|"            ORDER BY SAL) AS t7) AS t8) AS $cor5,\n"
 operator|+
 literal|"  LATERAL UNNEST (SELECT $cor5.X AS $f0\n"
 operator|+
