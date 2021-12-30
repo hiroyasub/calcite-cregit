@@ -26,6 +26,9 @@ specifier|public
 enum|enum
 name|NullPolicy
 block|{
+comment|/** Returns null if and only if all of the arguments are null;    * If all of the arguments are false return false otherwise true. */
+name|ALL
+block|,
 comment|/** Returns null if and only if one of the arguments are null. */
 name|STRICT
 block|,

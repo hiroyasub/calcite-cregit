@@ -5328,7 +5328,7 @@ name|method
 argument_list|,
 name|NullPolicy
 operator|.
-name|NONE
+name|ALL
 argument_list|)
 expr_stmt|;
 name|defineMethod
@@ -21180,6 +21180,26 @@ literal|0
 argument_list|)
 return|;
 block|}
+if|if
+condition|(
+name|nullPolicy
+operator|==
+name|NullPolicy
+operator|.
+name|ALL
+condition|)
+block|{
+comment|// Condition for NullPolicy.ALL: v0 == null&& v1 == null
+return|return
+name|Expressions
+operator|.
+name|foldAnd
+argument_list|(
+name|argIsNullList
+argument_list|)
+return|;
+block|}
+comment|// Condition for regular cases: v0 == null || v1 == null
 return|return
 name|Expressions
 operator|.

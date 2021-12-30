@@ -3374,7 +3374,7 @@ literal|"({10, MANAGER},1)\n"
 operator|+
 literal|"({null, CLERK},4)\n"
 operator|+
-literal|"({null, null},14)\n"
+literal|"(null,14)\n"
 operator|+
 literal|"({20, null},5)\n"
 operator|+
@@ -3524,7 +3524,7 @@ literal|"({10, MANAGER},1)\n"
 operator|+
 literal|"({null, CLERK},4)\n"
 operator|+
-literal|"({null, null},14)\n"
+literal|"(null,14)\n"
 operator|+
 literal|"({10, PRESIDENT},1)\n"
 operator|+
