@@ -190,8 +190,6 @@ parameter_list|)
 block|{
 comment|// Parentheses are not required, but we use them to be consistent with
 comment|// Microsoft SQL Server, which recommends them but does not require them.
-comment|//
-comment|// Note that "fetch" is ignored.
 name|writer
 operator|.
 name|keyword
@@ -233,6 +231,41 @@ argument_list|(
 literal|")"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|offset
+operator|!=
+literal|null
+condition|)
+block|{
+name|writer
+operator|.
+name|keyword
+argument_list|(
+literal|"START"
+argument_list|)
+expr_stmt|;
+name|writer
+operator|.
+name|keyword
+argument_list|(
+literal|"AT"
+argument_list|)
+expr_stmt|;
+name|offset
+operator|.
+name|unparse
+argument_list|(
+name|writer
+argument_list|,
+operator|-
+literal|1
+argument_list|,
+operator|-
+literal|1
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 end_class

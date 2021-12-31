@@ -633,6 +633,10 @@ if|if
 condition|(
 operator|!
 name|top
+operator|&&
+name|offset
+operator|!=
+literal|null
 condition|)
 block|{
 name|super
@@ -671,6 +675,10 @@ block|{
 if|if
 condition|(
 name|top
+operator|||
+name|offset
+operator|==
+literal|null
 condition|)
 block|{
 comment|// Per Microsoft:
@@ -679,7 +687,7 @@ comment|//   statements. We recommend that you always use parentheses for TOP in
 comment|//   SELECT statements. Doing so provides consistency with its required
 comment|//   use in INSERT, UPDATE, MERGE, and DELETE statements."
 comment|//
-comment|// Note that "fetch" is ignored.
+comment|// Note that "offset" is ignored.
 name|writer
 operator|.
 name|keyword

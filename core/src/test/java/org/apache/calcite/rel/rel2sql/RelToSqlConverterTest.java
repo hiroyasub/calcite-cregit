@@ -12597,13 +12597,11 @@ specifier|final
 name|String
 name|expectedMssql
 init|=
-literal|"SELECT [product_id]\n"
+literal|"SELECT TOP (100) [product_id]\n"
 operator|+
 literal|"FROM [foodmart].[product]\n"
 operator|+
-literal|"ORDER BY CASE WHEN [product_id] IS NULL THEN 1 ELSE 0 END, [product_id]\n"
-operator|+
-literal|"FETCH NEXT 100 ROWS ONLY"
+literal|"ORDER BY CASE WHEN [product_id] IS NULL THEN 1 ELSE 0 END, [product_id]"
 decl_stmt|;
 specifier|final
 name|String
@@ -15761,6 +15759,81 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testFetchMssql
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT * FROM \"employee\" LIMIT 1"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT TOP (1) *\nFROM [foodmart].[employee]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testFetchOffset
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT * FROM \"employee\" LIMIT 1 OFFSET 1"
+decl_stmt|;
+name|String
+name|expectedMssql
+init|=
+literal|"SELECT *\nFROM [foodmart].[employee]\nOFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 1 ROWS ONLY"
+decl_stmt|;
+name|String
+name|expectedSybase
+init|=
+literal|"SELECT TOP (1) START AT 1 *\nFROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMssql
+argument_list|)
+operator|.
+name|withSybase
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedSybase
 argument_list|)
 expr_stmt|;
 block|}
