@@ -35344,6 +35344,58 @@ literal|" null}"
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"select e.empno from dept_nested, unnest(employees) as e"
+argument_list|)
+operator|.
+name|assertFieldOrigin
+argument_list|(
+name|is
+argument_list|(
+literal|"{CATALOG.SALES.DEPT_NESTED.EMPLOYEES.EMPNO}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from UNNEST(ARRAY['a', 'b'])"
+argument_list|)
+operator|.
+name|assertFieldOrigin
+argument_list|(
+name|is
+argument_list|(
+literal|"{null}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from UNNEST(ARRAY['a', 'b'], ARRAY['d', 'e'])"
+argument_list|)
+operator|.
+name|assertFieldOrigin
+argument_list|(
+name|is
+argument_list|(
+literal|"{null, null}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select dpt.skill.desc from dept_nested as dpt"
+argument_list|)
+operator|.
+name|assertFieldOrigin
+argument_list|(
+name|is
+argument_list|(
+literal|"{CATALOG.SALES.DEPT_NESTED.SKILL.DESC}"
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
