@@ -4493,6 +4493,110 @@ name|getFrom
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// We would like to remove ORDER BY clause from an expanded view, except if
+comment|// it is top-level or affects semantics.
+comment|//
+comment|// Top-level example. Given the view definition
+comment|//   CREATE VIEW v AS SELECT * FROM t ORDER BY x
+comment|// we would retain the view's ORDER BY in
+comment|//   SELECT * FROM v
+comment|// or
+comment|//   SELECT * FROM v WHERE y = 5
+comment|// but remove the view's ORDER BY in
+comment|//   SELECT * FROM v ORDER BY z
+comment|// and
+comment|//   SELECT deptno, COUNT(*) FROM v GROUP BY deptno
+comment|// because the ORDER BY and GROUP BY mean that the view is not 'top level' in
+comment|// the query.
+comment|//
+comment|// Semantics example. Given the view definition
+comment|//   CREATE VIEW v2 AS SELECT * FROM t ORDER BY x LIMIT 10
+comment|// we would never remove the ORDER BY, because "ORDER BY ... LIMIT" is about
+comment|// semantics. It is not a 'pure order'.
+if|if
+condition|(
+name|RelOptUtil
+operator|.
+name|isPureOrder
+argument_list|(
+name|castNonNull
+argument_list|(
+name|bb
+operator|.
+name|root
+argument_list|)
+argument_list|)
+operator|&&
+name|config
+operator|.
+name|isRemoveSortInSubQuery
+argument_list|()
+condition|)
+block|{
+comment|// Remove the Sort if the view is at the top level. Also remove the Sort
+comment|// if there are other nodes, which will cause the view to be in the
+comment|// sub-query.
+if|if
+condition|(
+operator|!
+name|bb
+operator|.
+name|top
+operator|||
+name|validator
+argument_list|()
+operator|.
+name|isAggregate
+argument_list|(
+name|select
+argument_list|)
+operator|||
+name|select
+operator|.
+name|isDistinct
+argument_list|()
+operator|||
+name|select
+operator|.
+name|hasOrderBy
+argument_list|()
+operator|||
+name|select
+operator|.
+name|getFetch
+argument_list|()
+operator|!=
+literal|null
+operator|||
+name|select
+operator|.
+name|getOffset
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+name|bb
+operator|.
+name|setRoot
+argument_list|(
+name|castNonNull
+argument_list|(
+name|bb
+operator|.
+name|root
+argument_list|)
+operator|.
+name|getInput
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 name|convertWhere
 argument_list|(
 name|bb
@@ -14162,10 +14266,6 @@ name|extendedFields
 argument_list|)
 expr_stmt|;
 block|}
-specifier|final
-name|RelNode
-name|tableRel
-decl_stmt|;
 comment|// Review Danny 2020-01-13: hacky to construct a new table scan
 comment|// in order to apply the hint strategies.
 specifier|final
@@ -14203,15 +14303,17 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelNode
 name|tableRel
-operator|=
+init|=
 name|toRel
 argument_list|(
 name|table
 argument_list|,
 name|hints
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|bb
 operator|.
 name|setRoot
@@ -14221,6 +14323,48 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|RelOptUtil
+operator|.
+name|isPureOrder
+argument_list|(
+name|castNonNull
+argument_list|(
+name|bb
+operator|.
+name|root
+argument_list|)
+argument_list|)
+operator|&&
+name|removeSortInSubQuery
+argument_list|(
+name|bb
+operator|.
+name|top
+argument_list|)
+condition|)
+block|{
+name|bb
+operator|.
+name|setRoot
+argument_list|(
+name|castNonNull
+argument_list|(
+name|bb
+operator|.
+name|root
+argument_list|)
+operator|.
+name|getInput
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|usedDataset

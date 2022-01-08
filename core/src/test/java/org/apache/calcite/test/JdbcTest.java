@@ -965,6 +965,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql2rel
+operator|.
+name|SqlToRelConverter
+operator|.
+name|Config
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|schemata
@@ -1058,6 +1074,20 @@ operator|.
 name|util
 operator|.
 name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Holder
 import|;
 end_import
 
@@ -1672,6 +1702,22 @@ operator|.
 name|sql
 operator|.
 name|DataSource
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|CalciteAssert
+operator|.
+name|checkResult
 import|;
 end_import
 
@@ -21362,11 +21408,662 @@ end_empty_stmt
 
 begin_comment
 unit|}
-comment|/** Tests a view with ORDER BY and LIMIT clauses. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4323">[CALCITE-4323]    * View with ORDER BY throws AssertionError during view expansion</a>. */
 end_comment
 
 begin_function
 unit|@
+name|Test
+name|void
+name|testSortedView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|viewSql
+init|=
+literal|"select * from \"EMPLOYEES\" order by \"deptno\""
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|modelWithView
+argument_list|(
+name|viewSql
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+comment|// Keep sort, because view is top node
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], "
+operator|+
+literal|"salary=[$3], commission=[$4])\n"
+operator|+
+literal|"  LogicalSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"    LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Remove sort, because view not is top node
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V union all select * from  \"adhoc\".\"EMPLOYEES\""
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalUnion(all=[true])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from "
+operator|+
+literal|"(select \"empid\", \"deptno\" from  \"adhoc\".V) where \"deptno\"> 10"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"  LogicalFilter(condition=[>($1, 10)])\n"
+operator|+
+literal|"    LogicalProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".\"EMPLOYEES\" where exists (select * from \"adhoc\".V)"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], "
+operator|+
+literal|"salary=[$3], commission=[$4])\n"
+operator|+
+literal|"  LogicalFilter(condition=[EXISTS({\n"
+operator|+
+literal|"LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n"
+operator|+
+literal|"})])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// View is used in a query at top levelï¼but it's not the top plan
+comment|// Still remove sort
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V order by \"empid\""
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V, \"adhoc\".\"EMPLOYEES\""
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], "
+operator|+
+literal|"salary=[$3], commission=[$4], empid0=[$5], deptno0=[$6], name0=[$7], salary0=[$8],"
+operator|+
+literal|" commission0=[$9])\n"
+operator|+
+literal|"  LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"    LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"empid\", count(*) from \"adhoc\".V group by \"empid\""
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalAggregate(group=[{0}], EXPR$1=[COUNT()])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select distinct * from \"adhoc\".V"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalAggregate(group=[{0, 1, 2, 3, 4}])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testCustomRemoveSortInView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|viewSql
+init|=
+literal|"select * from \"EMPLOYEES\" order by \"deptno\""
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|modelWithView
+argument_list|(
+name|viewSql
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+comment|// Some cases where we may or may not want to keep the Sort
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V where \"deptno\"> 10"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], "
+operator|+
+literal|"salary=[$3], commission=[$4])\n"
+operator|+
+literal|"  LogicalFilter(condition=[>($1, 10)])\n"
+operator|+
+literal|"    LogicalSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      LogicalProject(empid=[$0], deptno=[$1], name=[$2], "
+operator|+
+literal|"salary=[$3], commission=[$4])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V where \"deptno\"> 10"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|SQL2REL_CONVERTER_CONFIG_BUILDER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|Holder
+argument_list|<
+name|Config
+argument_list|>
+argument_list|>
+operator|)
+name|configHolder
+lambda|->
+name|configHolder
+operator|.
+name|set
+argument_list|(
+name|configHolder
+operator|.
+name|get
+argument_list|()
+operator|.
+name|withRemoveSortInSubQuery
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], "
+operator|+
+literal|"salary=[$3], commission=[$4])\n"
+operator|+
+literal|"  LogicalFilter(condition=[>($1, 10)])\n"
+operator|+
+literal|"    LogicalSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V limit 10"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(fetch=[10])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V limit 10"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|SQL2REL_CONVERTER_CONFIG_BUILDER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|Holder
+argument_list|<
+name|Config
+argument_list|>
+argument_list|>
+operator|)
+name|configHolder
+lambda|->
+name|configHolder
+operator|.
+name|set
+argument_list|(
+name|configHolder
+operator|.
+name|get
+argument_list|()
+operator|.
+name|withRemoveSortInSubQuery
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(fetch=[10])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V offset 10"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(offset=[10])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V offset 10"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|SQL2REL_CONVERTER_CONFIG_BUILDER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|Holder
+argument_list|<
+name|Config
+argument_list|>
+argument_list|>
+operator|)
+name|configHolder
+lambda|->
+name|configHolder
+operator|.
+name|set
+argument_list|(
+name|configHolder
+operator|.
+name|get
+argument_list|()
+operator|.
+name|withRemoveSortInSubQuery
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(offset=[10])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V limit 5 offset 5"
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(offset=[5], fetch=[5])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"adhoc\".V limit 5 offset 5"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|SQL2REL_CONVERTER_CONFIG_BUILDER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|Holder
+argument_list|<
+name|Config
+argument_list|>
+argument_list|>
+operator|)
+name|configHolder
+lambda|->
+name|configHolder
+operator|.
+name|set
+argument_list|(
+name|configHolder
+operator|.
+name|get
+argument_list|()
+operator|.
+name|withRemoveSortInSubQuery
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|" without implementation "
+argument_list|,
+name|checkResult
+argument_list|(
+literal|"PLAN="
+operator|+
+literal|"LogicalSort(offset=[5], fetch=[5])\n"
+operator|+
+literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"    LogicalSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], "
+operator|+
+literal|"commission=[$4])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[adhoc, EMPLOYEES]])\n\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests a view with ORDER BY and LIMIT clauses. */
+end_comment
+
+begin_function
+annotation|@
 name|Test
 name|void
 name|testOrderByView
