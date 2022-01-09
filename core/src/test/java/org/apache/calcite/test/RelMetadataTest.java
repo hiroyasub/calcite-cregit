@@ -3742,6 +3742,37 @@ argument_list|(
 literal|"getArguments"
 argument_list|)
 name|void
+name|testColumnOriginsSnapshot
+parameter_list|(
+specifier|final
+name|MetadataConfig
+name|metadataConfig
+parameter_list|)
+block|{
+name|checkSingleColumnOrigin
+argument_list|(
+literal|"select productid from products_temporal\n"
+operator|+
+literal|"for system_time as of TIMESTAMP '2011-01-02 00:00:00'"
+argument_list|,
+literal|"PRODUCTS_TEMPORAL"
+argument_list|,
+literal|"PRODUCTID"
+argument_list|,
+literal|false
+argument_list|,
+name|metadataConfig
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|ParameterizedTest
+annotation|@
+name|MethodSource
+argument_list|(
+literal|"getArguments"
+argument_list|)
+name|void
 name|testColumnOriginsAggKey
 parameter_list|(
 specifier|final
