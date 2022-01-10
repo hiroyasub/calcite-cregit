@@ -137,7 +137,7 @@ parameter_list|,
 annotation|@
 name|JsonProperty
 argument_list|(
-literal|"steram"
+literal|"stream"
 argument_list|)
 name|JsonStream
 name|stream
