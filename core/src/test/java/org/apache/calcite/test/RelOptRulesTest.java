@@ -10068,6 +10068,47 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4982">[CALCITE-4982]    * NonNull field shouldn't be pushed down into leaf of outer-join    * in 'ProjectJoinTransposeRule'</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPushProjectPastOutJoinWithCastNonNullExpr
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.empno + 1 as c1, coalesce(d.name, b.job, '') as c2\n"
+operator|+
+literal|"from emp e\n"
+operator|+
+literal|"left join bonus b on e.ename = b.ename\n"
+operator|+
+literal|"left join dept d on e.deptno = d.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_JOIN_TRANSPOSE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
