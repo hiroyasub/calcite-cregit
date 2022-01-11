@@ -487,6 +487,17 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
+name|supportsApproxCountDistinct
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
 name|supportsCharSet
 parameter_list|()
 block|{

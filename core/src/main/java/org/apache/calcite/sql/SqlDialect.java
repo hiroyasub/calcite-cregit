@@ -3236,6 +3236,16 @@ return|return
 literal|false
 return|;
 block|}
+comment|/** Returns whether this dialect supports APPROX_COUNT_DISTINCT functions. */
+specifier|public
+name|boolean
+name|supportsApproxCountDistinct
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Returns whether this dialect supports the use of FILTER clauses for    * aggregate functions. e.g. {@code COUNT(*) FILTER (WHERE a = 2)}. */
 specifier|public
 name|boolean
