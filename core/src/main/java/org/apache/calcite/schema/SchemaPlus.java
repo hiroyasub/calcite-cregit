@@ -132,6 +132,20 @@ name|Table
 name|table
 parameter_list|)
 function_decl|;
+comment|/** Removes a table from this schema, used e.g. to clean-up temporary tables. */
+specifier|default
+name|boolean
+name|removeTable
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+comment|// Default implementation provided for backwards compatibility, to be removed before 2.0
+return|return
+literal|false
+return|;
+block|}
 comment|/** Adds a function to this schema. */
 name|void
 name|add

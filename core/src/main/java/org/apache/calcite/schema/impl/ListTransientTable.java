@@ -437,18 +437,6 @@ name|AtomicBoolean
 import|;
 end_import
 
-begin_import
-import|import static
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-operator|.
-name|requireNonNull
-import|;
-end_import
-
 begin_comment
 comment|/**  * {@link TransientTable} backed by a Java list. It will be automatically added to the  * current schema when {@link #scan(DataContext)} method gets called.  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
 end_comment
@@ -479,6 +467,11 @@ index|[]
 operator|.
 name|class
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"rawtypes"
+argument_list|)
 specifier|private
 specifier|final
 name|List
@@ -488,6 +481,15 @@ operator|new
 name|ArrayList
 argument_list|()
 decl_stmt|;
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"unused"
+block|,
+literal|"FieldCanBeLocal"
+block|}
+argument_list|)
 specifier|private
 specifier|final
 name|String
@@ -593,6 +595,11 @@ argument_list|)
 return|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"rawtypes"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|Collection
@@ -619,24 +626,6 @@ name|DataContext
 name|root
 parameter_list|)
 block|{
-comment|// add the table into the schema, so that it is accessible by any potential operator
-name|requireNonNull
-argument_list|(
-name|root
-operator|.
-name|getRootSchema
-argument_list|()
-argument_list|,
-literal|"root.getRootSchema()"
-argument_list|)
-operator|.
-name|add
-argument_list|(
-name|name
-argument_list|,
-name|this
-argument_list|)
-expr_stmt|;
 specifier|final
 name|AtomicBoolean
 name|cancelFlag
@@ -687,6 +676,15 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"rawtypes"
+block|,
+literal|"unchecked"
+block|}
+argument_list|)
 specifier|private
 specifier|final
 name|List
@@ -823,6 +821,11 @@ parameter_list|,
 name|String
 name|tableName
 parameter_list|,
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"rawtypes"
+argument_list|)
 name|Class
 name|clazz
 parameter_list|)

@@ -269,6 +269,11 @@ argument_list|,
 name|union
 operator|.
 name|iterationLimit
+argument_list|,
+name|union
+operator|.
+name|getTransientTable
+argument_list|()
 argument_list|)
 return|;
 block|}

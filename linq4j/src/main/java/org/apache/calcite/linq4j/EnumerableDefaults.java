@@ -22752,7 +22752,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/**    * Repeat Union enumerable. Evaluates the seed enumerable once, and then starts    * to evaluate the iteration enumerable over and over, until either it returns    * no results, or it reaches an optional maximum number of iterations.    *    * @param seed seed enumerable    * @param iteration iteration enumerable    * @param iterationLimit maximum numbers of repetitions for the iteration enumerable    *                       (negative value means no limit)    * @param all whether duplicates will be considered or not    * @param comparer {@link EqualityComparer} to control duplicates,    *                 only used if {@code all} is {@code false}    * @param<TSource> record type    */
+comment|/**    * Repeat Union enumerable. Evaluates the seed enumerable once, and then starts    * to evaluate the iteration enumerable over and over, until either it returns    * no results, or it reaches an optional maximum number of iterations.    *    * @param seed seed enumerable    * @param iteration iteration enumerable    * @param iterationLimit maximum numbers of repetitions for the iteration enumerable    *                       (negative value means no limit)    * @param all whether duplicates will be considered or not    * @param comparer {@link EqualityComparer} to control duplicates,    *                 only used if {@code all} is {@code false}    * @param cleanUpFunction optional clean-up actions (e.g. delete temporary table)    * @param<TSource> record type    */
 end_comment
 
 begin_function
@@ -22795,6 +22795,14 @@ argument_list|<
 name|TSource
 argument_list|>
 name|comparer
+parameter_list|,
+annotation|@
+name|Nullable
+name|Function0
+argument_list|<
+name|Boolean
+argument_list|>
+name|cleanUpFunction
 parameter_list|)
 block|{
 return|return
@@ -23218,6 +23226,19 @@ name|void
 name|close
 parameter_list|()
 block|{
+if|if
+condition|(
+name|cleanUpFunction
+operator|!=
+literal|null
+condition|)
+block|{
+name|cleanUpFunction
+operator|.
+name|apply
+argument_list|()
+expr_stmt|;
+block|}
 name|seedEnumerator
 operator|.
 name|close

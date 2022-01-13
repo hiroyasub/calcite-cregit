@@ -2459,6 +2459,9 @@ name|all
 parameter_list|,
 name|int
 name|iterationLimit
+parameter_list|,
+name|RelOptTable
+name|table
 parameter_list|)
 function_decl|;
 block|}
@@ -2487,6 +2490,9 @@ name|all
 parameter_list|,
 name|int
 name|iterationLimit
+parameter_list|,
+name|RelOptTable
+name|table
 parameter_list|)
 block|{
 return|return
@@ -2501,6 +2507,8 @@ argument_list|,
 name|all
 argument_list|,
 name|iterationLimit
+argument_list|,
+name|table
 argument_list|)
 return|;
 block|}

@@ -13331,6 +13331,10 @@ argument_list|,
 name|all
 argument_list|,
 name|iterationLimit
+argument_list|,
+name|finder
+operator|.
+name|relOptTable
 argument_list|)
 decl_stmt|;
 return|return
