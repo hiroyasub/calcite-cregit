@@ -23,6 +23,22 @@ name|checkerframework
 operator|.
 name|checker
 operator|.
+name|initialization
+operator|.
+name|qual
+operator|.
+name|UnderInitialization
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
 name|nullness
 operator|.
 name|qual
@@ -78,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The methods in this class allow to cast nullable reference to a non-nullable one.  * This is an internal class, and it is not meant to be used as a public API.  *<p>The class enables to remove checker-qual runtime dependency, and helps IDEs to see  * the resulting types of {@code castNonNull} better</p>  */
+comment|/**  * The methods in this class allow to cast nullable reference to a non-nullable one.  * This is an internal class, and it is not meant to be used as a public API.  *  *<p>The class enables to remove checker-qual runtime dependency, and helps IDEs to see  * the resulting types of {@code castNonNull} better.  */
 end_comment
 
 begin_class
@@ -88,7 +104,7 @@ argument_list|(
 block|{
 literal|"cast.unsafe"
 block|,
-literal|"NullableProblems"
+literal|"RedundantCast"
 block|,
 literal|"contracts.postcondition.not.satisfied"
 block|}
@@ -102,7 +118,7 @@ name|Nullness
 parameter_list|()
 block|{
 block|}
-comment|/**    * Enables to threat nullable type as non-nullable with no assertions.    *    *<p>It is useful in the case you have a nullable lately-initialized field like the following:    * {@code class Wrapper<T> { @Nullable T value; }}.    * That signature allows to use {@code Wrapper} with both nullable or non-nullable types:    * {@code Wrapper<@Nullable Integer>} vs {@code Wrapper<Integer>}. Suppose you need to implement    * {@code T get() { return value; }} The issue is checkerframework does not permit that    * because {@code T} has unknown nullability, so the following needs to be used:    * {@code T get() { return sneakyNull(value); }}</p>    *    * @param<T>     the type of the reference    * @param ref     a reference of @Nullable type, that is non-null at run time    * @return the argument, casted to have the type qualifier @NonNull    */
+comment|/**    * Allows you to treat a nullable type as non-nullable with no assertions.    *    *<p>It is useful in the case you have a nullable lately-initialized field    * like the following:    *    *<pre><code>    * class Wrapper&lt;T&gt; {    *&#64;Nullable T value;    * }    *</code></pre>    *    *<p>That signature allows you to use {@code Wrapper} with both nullable or    * non-nullable types: {@code Wrapper<@Nullable Integer>}    * vs {@code Wrapper<Integer>}. Suppose you need to implement    *    *<pre><code>    * T get() { return value; }    *</code></pre>    *    *<p>The issue is checkerframework does not permit that because {@code T}    * has unknown nullability, so the following needs to be used:    *    *<pre><code>    * T get() { return sneakyNull(value); }    *</code></pre>    *    * @param<T>     the type of the reference    * @param ref     a reference of @Nullable type, that is non-null at run time    *    * @return the argument, cast to have the type qualifier @NonNull    */
 annotation|@
 name|Pure
 specifier|public
@@ -137,6 +153,62 @@ name|NonNull
 name|T
 operator|)
 name|ref
+return|;
+block|}
+comment|/**    * Allows you to treat an uninitialized or under-initialization object as    * initialized with no assertions.    *    * @param<T>     The type of the reference    * @param ref     A reference that was @Uninitialized at some point but is    *                now fully initialized    *    * @return the argument, cast to have type qualifier @Initialized    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"unchecked"
+block|}
+argument_list|)
+annotation|@
+name|Pure
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|castToInitialized
+parameter_list|(
+annotation|@
+name|UnderInitialization
+name|T
+name|ref
+parameter_list|)
+block|{
+comment|// To throw CheckerFramework off the scent, we put the object into an array,
+comment|// cast the array to an Object, and cast back to an array.
+name|Object
+name|src
+init|=
+operator|new
+name|Object
+index|[]
+block|{
+name|ref
+block|}
+decl_stmt|;
+name|Object
+index|[]
+name|dest
+init|=
+operator|(
+name|Object
+index|[]
+operator|)
+name|src
+decl_stmt|;
+return|return
+operator|(
+name|T
+operator|)
+name|dest
+index|[
+literal|0
+index|]
 return|;
 block|}
 block|}
