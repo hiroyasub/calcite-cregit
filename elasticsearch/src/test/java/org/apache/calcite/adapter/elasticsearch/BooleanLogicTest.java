@@ -93,20 +93,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|fasterxml
@@ -669,13 +655,6 @@ argument_list|(
 literal|"select * from view where num> 42 and num< 42 or num = 42"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_4965_FIXED
-condition|)
-block|{
 name|assertSingle
 argument_list|(
 literal|"select * from view where num> 42 or num< 42 or num = 42"
@@ -686,7 +665,6 @@ argument_list|(
 literal|"select * from view where num is null"
 argument_list|)
 expr_stmt|;
-block|}
 name|assertSingle
 argument_list|(
 literal|"select * from view where num>= 42 and num<= 42 and num = 42"

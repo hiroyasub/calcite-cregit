@@ -281,15 +281,6 @@ name|CALCITE_4645_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-4965">[CALCITE-4965]    * IS NOT NULL failed in Elasticsearch Adapter</a> is    * fixed. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|CALCITE_4965_FIXED
-init|=
-literal|false
-decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static
