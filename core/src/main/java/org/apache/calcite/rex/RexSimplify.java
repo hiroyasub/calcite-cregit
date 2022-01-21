@@ -4996,6 +4996,7 @@ block|{
 if|if
 condition|(
 operator|!
+operator|(
 name|RexUtil
 operator|.
 name|isReferenceOrAccess
@@ -5004,6 +5005,14 @@ name|a
 argument_list|,
 literal|true
 argument_list|)
+operator|||
+name|RexUtil
+operator|.
+name|isDeterministic
+argument_list|(
+name|a
+argument_list|)
+operator|)
 condition|)
 block|{
 return|return
@@ -14315,6 +14324,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
+operator|(
 name|RexUtil
 operator|.
 name|isReferenceOrAccess
@@ -14323,6 +14333,14 @@ name|pA
 argument_list|,
 literal|true
 argument_list|)
+operator|||
+name|RexUtil
+operator|.
+name|isDeterministic
+argument_list|(
+name|pA
+argument_list|)
+operator|)
 condition|)
 block|{
 return|return
