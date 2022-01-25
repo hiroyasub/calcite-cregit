@@ -69,6 +69,18 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementation of {@link RelDataTypeField}.  */
 end_comment
@@ -113,21 +125,16 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-assert|assert
-name|name
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|type
-operator|!=
-literal|null
-assert|;
 name|this
 operator|.
 name|name
 operator|=
+name|requireNonNull
+argument_list|(
 name|name
+argument_list|,
+literal|"name"
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -139,7 +146,12 @@ name|this
 operator|.
 name|type
 operator|=
+name|requireNonNull
+argument_list|(
 name|type
+argument_list|,
+literal|"type"
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
