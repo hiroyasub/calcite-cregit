@@ -1152,6 +1152,17 @@ argument_list|)
 expr_stmt|;
 name|addAlias
 argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|NULL_SAFE_EQUAL
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|IS_NOT_DISTINCT_FROM
+argument_list|)
+expr_stmt|;
+name|addAlias
+argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|PERCENT_REMAINDER

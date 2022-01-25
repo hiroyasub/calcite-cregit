@@ -1307,6 +1307,136 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests parsing MySQL-style "<=>" equal operator. */
+annotation|@
+name|Test
+name|void
+name|testParseNullSafeEqual
+parameter_list|()
+block|{
+comment|// x<=> y
+specifier|final
+name|String
+name|projectSql
+init|=
+literal|"SELECT x<=> 3 FROM (VALUES (1, 2)) as tbl(x,y)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|projectSql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (`X`<=> 3)\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL` (`X`, `Y`)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|filterSql
+init|=
+literal|"SELECT y FROM (VALUES (1, 2)) as tbl(x,y) WHERE x<=> null"
+decl_stmt|;
+name|sql
+argument_list|(
+name|filterSql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL` (`X`, `Y`)\n"
+operator|+
+literal|"WHERE (`X`<=> NULL)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|joinConditionSql
+init|=
+literal|"SELECT tbl1.y FROM (VALUES (1, 2)) as tbl1(x,y)\n"
+operator|+
+literal|"LEFT JOIN (VALUES (null, 3)) as tbl2(x,y) ON tbl1.x<=> tbl2.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|joinConditionSql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `TBL1`.`Y`\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL1` (`X`, `Y`)\n"
+operator|+
+literal|"LEFT JOIN (VALUES (ROW(NULL, 3))) AS `TBL2` (`X`, `Y`) ON (`TBL1`.`X`<=> `TBL2`.`X`)"
+argument_list|)
+expr_stmt|;
+comment|// (a, b)<=> (x, y)
+specifier|final
+name|String
+name|rowComparisonSql
+init|=
+literal|"SELECT y\n"
+operator|+
+literal|"FROM (VALUES (1, 2)) as tbl(x,y) WHERE (x,y)<=> (null,2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|rowComparisonSql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL` (`X`, `Y`)\n"
+operator|+
+literal|"WHERE ((ROW(`X`, `Y`))<=> (ROW(NULL, 2)))"
+argument_list|)
+expr_stmt|;
+comment|// the higher precedence
+specifier|final
+name|String
+name|highPrecedenceSql
+init|=
+literal|"SELECT x<=> 3 + 3 FROM (VALUES (1, 2)) as tbl(x,y)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|highPrecedenceSql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (`X`<=> (3 + 3))\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL` (`X`, `Y`)"
+argument_list|)
+expr_stmt|;
+comment|// the lower precedence
+specifier|final
+name|String
+name|lowPrecedenceSql
+init|=
+literal|"SELECT NOT x<=> 3 FROM (VALUES (1, 2)) as tbl(x,y)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|lowPrecedenceSql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (NOT (`X`<=> 3))\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL` (`X`, `Y`)"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

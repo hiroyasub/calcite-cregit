@@ -688,6 +688,128 @@ literal|"(?s).*Encountered \":\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testNullSafeEqual
+parameter_list|()
+block|{
+comment|// x<=> y
+name|checkSqlResult
+argument_list|(
+literal|"mysql"
+argument_list|,
+literal|"SELECT 1<=> NULL"
+argument_list|,
+literal|"EXPR$0=false\n"
+argument_list|)
+expr_stmt|;
+name|checkSqlResult
+argument_list|(
+literal|"mysql"
+argument_list|,
+literal|"SELECT NULL<=> NULL"
+argument_list|,
+literal|"EXPR$0=true\n"
+argument_list|)
+expr_stmt|;
+comment|// (a, b)<=> (x, y)
+name|checkSqlResult
+argument_list|(
+literal|"mysql"
+argument_list|,
+literal|"SELECT (CAST(NULL AS Integer), 1)<=> (1, CAST(NULL AS Integer))"
+argument_list|,
+literal|"EXPR$0=false\n"
+argument_list|)
+expr_stmt|;
+name|checkSqlResult
+argument_list|(
+literal|"mysql"
+argument_list|,
+literal|"SELECT (CAST(NULL AS Integer), CAST(NULL AS Integer))\n"
+operator|+
+literal|"<=> (CAST(NULL AS Integer), CAST(NULL AS Integer))"
+argument_list|,
+literal|"EXPR$0=true\n"
+argument_list|)
+expr_stmt|;
+comment|// the higher precedence
+name|checkSqlResult
+argument_list|(
+literal|"mysql"
+argument_list|,
+literal|"SELECT x<=> 1 + 3 FROM (VALUES (1, 2)) as tbl(x,y)"
+argument_list|,
+literal|"EXPR$0=false\n"
+argument_list|)
+expr_stmt|;
+comment|// the lower precedence
+name|checkSqlResult
+argument_list|(
+literal|"mysql"
+argument_list|,
+literal|"SELECT NOT x<=> 1 FROM (VALUES (1, 2)) as tbl(x,y)"
+argument_list|,
+literal|"EXPR$0=false\n"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkSqlResult
+parameter_list|(
+name|String
+name|funLibrary
+parameter_list|,
+name|String
+name|query
+parameter_list|,
+name|String
+name|result
+parameter_list|)
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|PARSER_FACTORY
+argument_list|,
+name|SqlBabelParserImpl
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"#FACTORY"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|FUN
+argument_list|,
+name|funLibrary
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|result
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
