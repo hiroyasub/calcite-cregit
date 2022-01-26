@@ -13380,6 +13380,56 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4683">[CALCITE-4683]    * IN-list converted to JOIN throws type mismatch exception</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testInToSemiJoinWithNewProject
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM (\n"
+operator|+
+literal|"SELECT '20210101' AS dt, deptno\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY deptno\n"
+operator|+
+literal|") t\n"
+operator|+
+literal|"WHERE cast(deptno as varchar) in ('1')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withInSubQueryThreshold
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1944">[CALCITE-1944]    * Window function applied to sub-query with dynamic star gets wrong    * plan</a>. */
 end_comment
 

@@ -24429,11 +24429,21 @@ name|currentProjection
 argument_list|)
 expr_stmt|;
 block|}
+comment|// if the original root rel is a leaf rel, the new root should be a leaf.
+comment|// otherwise the field offset will be wrong.
 name|setRoot
 argument_list|(
 name|newLeftInput
 argument_list|,
-literal|false
+name|leaves
+operator|.
+name|remove
+argument_list|(
+name|root
+argument_list|()
+argument_list|)
+operator|!=
+literal|null
 argument_list|)
 expr_stmt|;
 comment|// right fields appear after the LHS fields.
