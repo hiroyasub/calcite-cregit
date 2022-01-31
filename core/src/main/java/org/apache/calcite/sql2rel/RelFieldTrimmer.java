@@ -4705,7 +4705,13 @@ name|Mappings
 operator|.
 name|createIdentity
 argument_list|(
-name|fieldCount
+name|join
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
 argument_list|)
 argument_list|)
 return|;
