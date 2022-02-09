@@ -27137,6 +27137,51 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5000">[CALCITE-5000]    * Expand rule of `AGGREGATE_REDUCE_FUNCTIONS`, when arg of agg-call exist in the agg's group</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testReduceAggregateFunctionsByGroup
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sal, max(sal) as sal_max, min(sal) as sal_min,\n"
+operator|+
+literal|"avg(sal) sal_avg, any_value(sal) as sal_val, first_value(sal) as sal_first,\n"
+operator|+
+literal|"last_value(sal) as sal_last\n"
+operator|+
+literal|"from emp group by sal, deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|AGGREGATE_REDUCE_FUNCTIONS
+argument_list|,
+name|CoreRules
+operator|.
+name|PROJECT_MERGE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
