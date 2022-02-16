@@ -1189,7 +1189,7 @@ return|return
 name|e3
 return|;
 block|}
-comment|/**    * Simplifies a boolean expression.    *    *<p>In particular:</p>    *<ul>    *<li>{@code simplify(x = 1 AND y = 2 AND NOT x = 1)}    * returns {@code y = 2}</li>    *<li>{@code simplify(x = 1 AND FALSE)}    * returns {@code FALSE}</li>    *</ul>    *    *<p>Handles UNKNOWN values using the policy specified when you created this    * {@code RexSimplify}. Unless you used a deprecated constructor, that policy    * is {@link RexUnknownAs#UNKNOWN}.    *    *<p>If the expression is a predicate in a WHERE clause, consider instead    * using {@link #simplifyUnknownAsFalse(RexNode)}.    *    * @param e Expression to simplify    */
+comment|/**    * Simplifies a boolean expression.    *    *<p>In particular:</p>    *<ul>    *<li>{@code simplify(x = 1 OR NOT x = 1 OR x IS NULL)}    * returns {@code TRUE}</li>    *<li>{@code simplify(x = 1 AND FALSE)}    * returns {@code FALSE}</li>    *</ul>    *    *<p>Handles UNKNOWN values using the policy specified when you created this    * {@code RexSimplify}. Unless you used a deprecated constructor, that policy    * is {@link RexUnknownAs#UNKNOWN}.    *    *<p>If the expression is a predicate in a WHERE clause, consider instead    * using {@link #simplifyUnknownAsFalse(RexNode)}.    *    * @param e Expression to simplify    */
 specifier|public
 name|RexNode
 name|simplify

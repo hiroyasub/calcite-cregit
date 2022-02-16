@@ -6523,6 +6523,79 @@ name|hRef
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// "x = 1 or not x = 1 or x is null" simplifies to "true"
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|eq
+argument_list|(
+name|hRef
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|,
+name|not
+argument_list|(
+name|eq
+argument_list|(
+name|hRef
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNull
+argument_list|(
+name|hRef
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"true"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|or
+argument_list|(
+name|eq
+argument_list|(
+name|iRef
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|,
+name|not
+argument_list|(
+name|eq
+argument_list|(
+name|iRef
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|isNull
+argument_list|(
+name|iRef
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"true"
+argument_list|)
+expr_stmt|;
 comment|// "(not x) is null" to "x is null"
 name|checkSimplify
 argument_list|(
@@ -7574,7 +7647,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-comment|// condition "1< a&& 5< x" yields "5< x"
+comment|// condition "1< a&& 5< a" yields "5< a"
 name|checkSimplifyFilter
 argument_list|(
 name|and
@@ -7640,7 +7713,7 @@ argument_list|,
 literal|"SEARCH(?0.a, Sarg[(1..5)])"
 argument_list|)
 expr_stmt|;
-comment|// condition "1> a&& 5> x" yields "1> a"
+comment|// condition "1> a&& 5> a" yields "1> a"
 name|checkSimplifyFilter
 argument_list|(
 name|and
