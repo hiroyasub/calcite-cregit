@@ -13495,6 +13495,291 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testLimitUnion2
+parameter_list|()
+block|{
+comment|// LIMIT is allowed in a parenthesized sub-query inside UNION;
+comment|// the result probably has more parentheses than strictly necessary.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"(select a from t limit 10)\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select b from t offset 20)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"((SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY)\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"OFFSET 20 ROWS))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnionOffset
+parameter_list|()
+block|{
+comment|// Note that the second sub-query has parentheses, to ensure that ORDER BY,
+comment|// OFFSET, FETCH are associated with just that sub-query, not the UNION.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a from t\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select b from t order by b offset 3 fetch next 5 rows only)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"(SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `B`\n"
+operator|+
+literal|"OFFSET 3 ROWS\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// as above, just ORDER BY
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select a from t\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select b from t order by b)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"(SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `B`))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+comment|// as above, just OFFSET
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select a from t\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select b from t offset 3)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"(SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"OFFSET 3 ROWS))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+comment|// as above, just FETCH
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"select a from t\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select b from t fetch next 5 rows only)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected4
+init|=
+literal|"(SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected4
+argument_list|)
+expr_stmt|;
+comment|// as above, just FETCH and OFFSET
+specifier|final
+name|String
+name|sql5
+init|=
+literal|"select a from t\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select b from t offset 3 fetch next 5 rows only)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected5
+init|=
+literal|"(SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"OFFSET 3 ROWS\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql5
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected5
+argument_list|)
+expr_stmt|;
+comment|// as previous, INTERSECT
+specifier|final
+name|String
+name|sql6
+init|=
+literal|"select a from t\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"(select b from t offset 3 fetch next 5 rows only)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected6
+init|=
+literal|"(SELECT `A`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"(SELECT `B`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"OFFSET 3 ROWS\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql6
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected6
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUnionOfNonQueryFails
 parameter_list|()
 block|{

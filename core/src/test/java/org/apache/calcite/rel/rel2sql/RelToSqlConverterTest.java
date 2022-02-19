@@ -14959,6 +14959,219 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5013">[CALCITE-5013]    * Unparse SqlSetOperator should be retained parentheses    * when the operand has limit or offset</a>. */
+annotation|@
+name|Test
+name|void
+name|testSetOpRetainParentheses
+parameter_list|()
+block|{
+comment|// Parentheses will be discarded, because semantics not be affected.
+specifier|final
+name|String
+name|discardedParenthesesQuery
+init|=
+literal|"SELECT \"product_id\" FROM \"product\""
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" WHERE \"product_id\"> 10)\n"
+operator|+
+literal|"INTERSECT ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" )"
+decl_stmt|;
+specifier|final
+name|String
+name|discardedParenthesesRes
+init|=
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\"> 10\n"
+operator|+
+literal|"INTERSECT ALL\n"
+operator|+
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|discardedParenthesesQuery
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|discardedParenthesesRes
+argument_list|)
+expr_stmt|;
+comment|// Parentheses will be retained because sub-query has LIMIT or OFFSET.
+comment|// If parentheses are discarded the semantics of parsing will be affected.
+specifier|final
+name|String
+name|allSetOpQuery
+init|=
+literal|"SELECT \"product_id\" FROM \"product\""
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" LIMIT 10)\n"
+operator|+
+literal|"INTERSECT ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" OFFSET 10)\n"
+operator|+
+literal|"EXCEPT ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" LIMIT 5 OFFSET 5)"
+decl_stmt|;
+specifier|final
+name|String
+name|allSetOpRes
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM ((SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY)\n"
+operator|+
+literal|"INTERSECT ALL\n"
+operator|+
+literal|"(SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"OFFSET 10 ROWS)))\n"
+operator|+
+literal|"EXCEPT ALL\n"
+operator|+
+literal|"(SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"OFFSET 5 ROWS\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|allSetOpQuery
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|allSetOpRes
+argument_list|)
+expr_stmt|;
+comment|// After the config is enabled, order by will be retained, so parentheses are required.
+specifier|final
+name|String
+name|retainOrderQuery
+init|=
+literal|"SELECT \"product_id\" FROM \"product\""
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" ORDER BY \"product_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|retainOrderResult
+init|=
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"ORDER BY \"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|retainOrderQuery
+argument_list|)
+operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withRemoveSortInSubQuery
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|retainOrderResult
+argument_list|)
+expr_stmt|;
+comment|// Parentheses are required to keep ORDER and LIMIT on the sub-query.
+specifier|final
+name|String
+name|retainLimitQuery
+init|=
+literal|"SELECT \"product_id\" FROM \"product\""
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT \"product_id\" FROM \"product\" ORDER BY \"product_id\" LIMIT 2)"
+decl_stmt|;
+specifier|final
+name|String
+name|retainLimitResult
+init|=
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"(SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"ORDER BY \"product_id\"\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|retainLimitQuery
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|retainLimitResult
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4674">[CALCITE-4674]    * Excess quotes in generated SQL when STAR is a column alias</a>. */
 annotation|@
 name|Test
