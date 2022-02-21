@@ -1280,7 +1280,7 @@ literal|"IN SET(DATE '2018-02-05', DATE '2018-02-06') OR timeValue "
 operator|+
 literal|"IN SET(TIME '03:22:23', TIME '07:22:23') OR timestampValue "
 operator|+
-literal|"IN SET(TIMESTAMP '2018-02-05 04:22:33', TIMESTAMP '2017-02-05 04:22:33') "
+literal|"IN SET(TIMESTAMP '2017-02-05 04:22:33', TIMESTAMP '2018-02-05 04:22:33') "
 operator|+
 literal|"OR booleanValue = true OR booleanValue = false"
 argument_list|)

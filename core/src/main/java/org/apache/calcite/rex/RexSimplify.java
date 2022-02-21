@@ -14996,6 +14996,9 @@ case|:
 case|case
 name|FIELD_ACCESS
 case|:
+case|case
+name|CAST
+case|:
 switch|switch
 condition|(
 name|right
@@ -15044,6 +15047,9 @@ name|INPUT_REF
 case|:
 case|case
 name|FIELD_ACCESS
+case|:
+case|case
+name|CAST
 case|:
 return|return
 name|accept2b

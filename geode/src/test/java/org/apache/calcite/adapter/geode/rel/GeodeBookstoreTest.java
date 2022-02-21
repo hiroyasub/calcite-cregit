@@ -529,9 +529,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeProject(author=[$4])\n"
 operator|+
-literal|"    GeodeFilter(condition=[OR(=(CAST($0):INTEGER, 123), "
-operator|+
-literal|"=(CAST($0):INTEGER, 789))])\n"
+literal|"    GeodeFilter(condition=[SEARCH(CAST($0):INTEGER, Sarg[123, 789])])\n"
 operator|+
 literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
@@ -1570,7 +1568,7 @@ name|expectedQuery
 init|=
 literal|"SELECT author AS author FROM /BookMaster "
 operator|+
-literal|"WHERE itemNumber IN SET(789, 123)"
+literal|"WHERE itemNumber IN SET(123, 789)"
 decl_stmt|;
 name|calciteAssert
 argument_list|()
