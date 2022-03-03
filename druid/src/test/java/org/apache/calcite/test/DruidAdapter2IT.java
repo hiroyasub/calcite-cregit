@@ -4652,7 +4652,7 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1997-01-01T00:00:00.000Z/1998-01-01T00:00:00.000Z]], filter=[AND(>=(CAST($11):INTEGER, 8),<=(CAST($11):INTEGER, 10),<(CAST($10):INTEGER, 15))], projects=[[$90]], groups=[{}], aggs=[[SUM($0)]])"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1997-01-01T00:00:00.000Z/1998-01-01T00:00:00.000Z]], filter=[AND(SEARCH(CAST($11):INTEGER, Sarg[[8..10]]),<(CAST($10):INTEGER, 15))], projects=[[$90]], groups=[{}], aggs=[[SUM($0)]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -10345,11 +10345,11 @@ name|plan
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"2992-01-10T00:00:00.000Z]], filter=[=(FLOOR(CAST($0):DATE NOT NULL, FLAG(MONTH)), "
+literal|"intervals=[[1997-01-01T00:00:00.000Z/1997-02-01T00:00:00.000Z]], "
 operator|+
-literal|"1997-01-01)], projects=[[FLOOR($0, FLAG(DAY))]], groups=[{0}], aggs=[[]], sort0=[0], "
+literal|"projects=[[FLOOR($0, FLAG(DAY))]], groups=[{0}], aggs=[[]], sort0=[0], "
 operator|+
 literal|"dir0=[ASC], fetch=[3])"
 decl_stmt|;
