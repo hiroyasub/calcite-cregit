@@ -266,7 +266,7 @@ name|connection
 operator|.
 name|prepareStatement
 argument_list|(
-literal|"select * from artist where name = ?"
+literal|"select * from \"Artist\" where \"Name\" = ?"
 argument_list|)
 decl_stmt|;
 name|pS

@@ -2044,6 +2044,9 @@ name|void
 name|testTablesNoCatalogSchema
 parameter_list|()
 block|{
+comment|// Switch from "FOODMART" user, whose default schema is 'foodmart',
+comment|// to "sa", whose default schema is the root, and therefore cannot
+comment|// see the table unless directed to look in a particular schema.
 specifier|final
 name|String
 name|model
@@ -2051,6 +2054,20 @@ init|=
 name|FoodmartSchema
 operator|.
 name|FOODMART_MODEL
+operator|.
+name|replace
+argument_list|(
+literal|"jdbcUser: 'FOODMART'"
+argument_list|,
+literal|"jdbcUser: 'sa'"
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+literal|"jdbcPassword: 'FOODMART'"
+argument_list|,
+literal|"jdbcPassword: ''"
+argument_list|)
 operator|.
 name|replace
 argument_list|(
