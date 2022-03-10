@@ -17654,7 +17654,99 @@ name|sql
 init|=
 literal|"select deptno, deptno + 1, empno + deptno\n"
 operator|+
-literal|"from sales.emp where deptno = 10"
+literal|"from sales.emp\n"
+operator|+
+literal|"where deptno = 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPre
+argument_list|(
+name|getTransitiveProgram
+argument_list|()
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|JOIN_PUSH_TRANSITIVE_PREDICATES
+argument_list|,
+name|CoreRules
+operator|.
+name|PROJECT_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPullConstantIntoProjectWithIsNotDistinctFrom
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, deptno + 1, empno + deptno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where deptno is not distinct from 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPre
+argument_list|(
+name|getTransitiveProgram
+argument_list|()
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|JOIN_PUSH_TRANSITIVE_PREDICATES
+argument_list|,
+name|CoreRules
+operator|.
+name|PROJECT_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPullConstantIntoProjectWithIsNotDistinctFromForNull
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select mgr, deptno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where mgr is not distinct from null"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -23657,9 +23749,9 @@ literal|"select job\n"
 operator|+
 literal|"from sales.emp\n"
 operator|+
-literal|"where sal is null and job = 'Clerk'\n"
+literal|"where mgr is null and job = 'Clerk'\n"
 operator|+
-literal|"group by sal, job\n"
+literal|"group by mgr, job\n"
 operator|+
 literal|"having count(*)> 3"
 decl_stmt|;
@@ -23700,9 +23792,9 @@ literal|"select hiredate\n"
 operator|+
 literal|"from sales.emp\n"
 operator|+
-literal|"where sal is null and hiredate = current_timestamp\n"
+literal|"where mgr is null and hiredate = current_timestamp\n"
 operator|+
-literal|"group by sal, hiredate\n"
+literal|"group by mgr, hiredate\n"
 operator|+
 literal|"having count(*)> 3"
 decl_stmt|;
