@@ -1230,6 +1230,19 @@ operator|.
 name|getGroupSet
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|groupKey
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// Aggregate with no GROUP BY always returns 1 row (even on empty table).
+return|return
+literal|1D
+return|;
+block|}
 comment|// rowCount is the cardinality of the group by columns
 name|Double
 name|distinctRowCount
