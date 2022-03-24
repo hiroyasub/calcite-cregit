@@ -1769,6 +1769,13 @@ name|contains
 argument_list|(
 literal|"GOOGLE BIGQUERY"
 argument_list|)
+operator|||
+name|upperProductName
+operator|.
+name|contains
+argument_list|(
+literal|"GOOGLE BIG QUERY"
+argument_list|)
 condition|)
 block|{
 return|return

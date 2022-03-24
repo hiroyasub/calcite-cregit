@@ -907,7 +907,7 @@ block|}
 comment|// Now the fuzzy matches.
 if|if
 condition|(
-name|databaseProductName
+name|upperProductName
 operator|.
 name|startsWith
 argument_list|(
@@ -943,11 +943,36 @@ return|;
 block|}
 if|else if
 condition|(
-name|databaseProductName
+name|upperProductName
+operator|.
+name|contains
+argument_list|(
+literal|"GOOGLE BIGQUERY"
+argument_list|)
+operator|||
+name|upperProductName
+operator|.
+name|contains
+argument_list|(
+literal|"GOOGLE BIG QUERY"
+argument_list|)
+condition|)
+block|{
+return|return
+operator|new
+name|BigQuerySqlDialect
+argument_list|(
+name|c
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
+name|upperProductName
 operator|.
 name|startsWith
 argument_list|(
-literal|"Informix"
+literal|"INFORMIX"
 argument_list|)
 condition|)
 block|{
@@ -997,11 +1022,11 @@ return|;
 block|}
 if|else if
 condition|(
-name|databaseProductName
+name|upperProductName
 operator|.
 name|startsWith
 argument_list|(
-literal|"HP Neoview"
+literal|"HP NEOVIEW"
 argument_list|)
 condition|)
 block|{
