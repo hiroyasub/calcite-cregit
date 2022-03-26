@@ -24300,7 +24300,7 @@ name|checkString
 argument_list|(
 literal|"json_object('foo': json_object('foo': 'bar'))"
 argument_list|,
-literal|"{\"foo\":\"{\\\"foo\\\":\\\"bar\\\"}\"}"
+literal|"{\"foo\":{\"foo\":\"bar\"}}"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
@@ -24472,7 +24472,7 @@ name|checkScalar
 argument_list|(
 literal|"'[1, 2, 3]' format json"
 argument_list|,
-literal|"[1, 2, 3]"
+literal|"[1,2,3]"
 argument_list|,
 literal|"ANY NOT NULL"
 argument_list|)
@@ -24608,7 +24608,7 @@ name|checkString
 argument_list|(
 literal|"json_array(json_array('foo'))"
 argument_list|,
-literal|"[\"[\\\"foo\\\"]\"]"
+literal|"[[\"foo\"]]"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)

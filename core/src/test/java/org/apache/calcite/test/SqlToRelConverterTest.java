@@ -14841,6 +14841,166 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testJsonNestedJsonObjectConstructor
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"json_object(\n"
+operator|+
+literal|"  'key1' :\n"
+operator|+
+literal|"  json_object(\n"
+operator|+
+literal|"    'key2' :\n"
+operator|+
+literal|"    ename)),\n"
+operator|+
+literal|"  json_object(\n"
+operator|+
+literal|"    'key3' :\n"
+operator|+
+literal|"    json_array(12, 'hello', deptno))\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testJsonNestedJsonArrayConstructor
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"json_array(\n"
+operator|+
+literal|"  json_object(\n"
+operator|+
+literal|"    'key1' :\n"
+operator|+
+literal|"    json_object(\n"
+operator|+
+literal|"      'key2' :\n"
+operator|+
+literal|"       ename)),\n"
+operator|+
+literal|"  json_array(12, 'hello', deptno))\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testJsonNestedJsonObjectAggConstructor
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"json_object(\n"
+operator|+
+literal|"  'k2' :\n"
+operator|+
+literal|"  json_objectagg(\n"
+operator|+
+literal|"    ename :\n"
+operator|+
+literal|"    json_object(\n"
+operator|+
+literal|"      'k1' :\n"
+operator|+
+literal|"      deptno)))\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testJsonNestedJsonArrayAggConstructor
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"json_object(\n"
+operator|+
+literal|"  'k2' :\n"
+operator|+
+literal|"  json_arrayagg(\n"
+operator|+
+literal|"    json_object(\n"
+operator|+
+literal|"      ename :\n"
+operator|+
+literal|"      deptno)))\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testWithinGroup1
 parameter_list|()
 block|{

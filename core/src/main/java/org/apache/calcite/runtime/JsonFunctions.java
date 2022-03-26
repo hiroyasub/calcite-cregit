@@ -4232,9 +4232,7 @@ name|toString
 parameter_list|()
 block|{
 return|return
-name|Objects
-operator|.
-name|toString
+name|jsonize
 argument_list|(
 name|obj
 argument_list|)

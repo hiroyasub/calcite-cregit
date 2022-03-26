@@ -600,6 +600,9 @@ block|,
 comment|/** {@code JSON_OBJECTAGG} aggregate function. */
 name|JSON_OBJECTAGG
 block|,
+comment|/** {@code JSON} type function. */
+name|JSON_TYPE
+block|,
 comment|/** {@code UNNEST} operator. */
 name|UNNEST
 block|,
