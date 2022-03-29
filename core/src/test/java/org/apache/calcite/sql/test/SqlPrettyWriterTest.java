@@ -41,6 +41,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlSelect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlWriter
 import|;
 end_import
@@ -146,6 +160,58 @@ operator|.
 name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isLinux
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|Matchers
+operator|.
+name|instanceOf
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|Matchers
+operator|.
+name|notNullValue
 import|;
 end_import
 
@@ -1462,6 +1528,106 @@ argument_list|)
 operator|.
 name|check
 argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4401">[CALCITE-4401]    * SqlJoin toString throws RuntimeException</a>. */
+annotation|@
+name|Test
+name|void
+name|testJoinClauseToString
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT t.region_name, t0.o_totalprice\n"
+operator|+
+literal|"FROM (SELECT c_custkey, region_name\n"
+operator|+
+literal|"FROM tpch.out_tpch_vw__customer) AS t\n"
+operator|+
+literal|"INNER JOIN (SELECT o_custkey, o_totalprice\n"
+operator|+
+literal|"FROM tpch.out_tpch_vw__orders) AS t0 ON t.c_custkey = t0.o_custkey"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedJoinString
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `C_CUSTKEY`, `REGION_NAME`\n"
+operator|+
+literal|"FROM `TPCH`.`OUT_TPCH_VW__CUSTOMER`) AS `T`\n"
+operator|+
+literal|"INNER JOIN (SELECT `O_CUSTKEY`, `O_TOTALPRICE`\n"
+operator|+
+literal|"FROM `TPCH`.`OUT_TPCH_VW__ORDERS`) AS `T0`"
+operator|+
+literal|" ON `T`.`C_CUSTKEY` = `T0`.`O_CUSTKEY`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|checkTransformedNode
+argument_list|(
+name|root
+lambda|->
+block|{
+name|assertThat
+argument_list|(
+name|root
+argument_list|,
+name|instanceOf
+argument_list|(
+name|SqlSelect
+operator|.
+name|class
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|SqlNode
+name|from
+init|=
+operator|(
+operator|(
+name|SqlSelect
+operator|)
+name|root
+operator|)
+operator|.
+name|getFrom
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|from
+argument_list|,
+name|notNullValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|from
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|isLinux
+argument_list|(
+name|expectedJoinString
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|from
+return|;
+block|}
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
