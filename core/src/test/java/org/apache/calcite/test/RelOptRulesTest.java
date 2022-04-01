@@ -10221,6 +10221,108 @@ block|}
 end_function
 
 begin_comment
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-5073">[CALCITE-5073]    * JoinConditionPushRule cannot infer 'LHS.C1 = LHS.C2' from    * 'LHS.C1 = RHS.C1 AND LHS.C2 = RHS.C1'</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testJoinConditionPushdown1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp e1, emp e2, dept d2\n"
+operator|+
+literal|"where e1.deptno = d2.deptno and e2.deptno = d2.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_INTO_JOIN
+argument_list|,
+name|CoreRules
+operator|.
+name|JOIN_CONDITION_PUSH
+argument_list|,
+name|CoreRules
+operator|.
+name|PROJECT_MERGE
+argument_list|,
+name|CoreRules
+operator|.
+name|FILTER_PROJECT_TRANSPOSE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-5073">[CALCITE-5073]    * JoinConditionPushRule cannot infer 'LHS.C1 = LHS.C2' from    * 'LHS.C1 = RHS.C1 AND LHS.C2 = RHS.C1'</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testJoinConditionPushdown2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp e, dept d\n"
+operator|+
+literal|"where e.deptno = d.deptno and e.empno = d.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_INTO_JOIN
+argument_list|,
+name|CoreRules
+operator|.
+name|JOIN_CONDITION_PUSH
+argument_list|,
+name|CoreRules
+operator|.
+name|PROJECT_MERGE
+argument_list|,
+name|CoreRules
+operator|.
+name|FILTER_PROJECT_TRANSPOSE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Tests that filters are combined if they are identical. */
 end_comment
 

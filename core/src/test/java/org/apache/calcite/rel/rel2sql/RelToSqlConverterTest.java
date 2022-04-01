@@ -23601,9 +23601,9 @@ literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
 literal|"GROUP BY \"department_id\") \"t1\"\n"
 operator|+
-literal|"GROUP BY \"t1\".\"department_id\") \"t3\" ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
+literal|"GROUP BY \"t1\".\"department_id\"\n"
 operator|+
-literal|" AND \"employee\".\"department_id\" = \"t3\".\"EXPR$0\""
+literal|"HAVING \"t1\".\"department_id\" = MIN(\"t1\".\"department_id\")) \"t4\" ON \"employee\".\"department_id\" = \"t4\".\"department_id0\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -23642,15 +23642,11 @@ literal|"SELECT \"employee\".\"department_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"t1\".\"department_id\" AS \"department_id0\","
-operator|+
-literal|" MIN(\"t1\".\"department_id\") AS \"EXPR$0\"\n"
+literal|"INNER JOIN (SELECT \"t1\".\"department_id\" AS \"department_id0\", MIN(\"t1\".\"department_id\") AS \"EXPR$0\"\n"
 operator|+
 literal|"FROM (SELECT *\n"
 operator|+
-literal|"FROM (VALUES (NULL, NULL))"
-operator|+
-literal|" AS \"t\" (\"department_id\", \"department_description\")\n"
+literal|"FROM (VALUES (NULL, NULL)) AS \"t\" (\"department_id\", \"department_description\")\n"
 operator|+
 literal|"WHERE 1 = 0) AS \"t\",\n"
 operator|+
@@ -23660,11 +23656,9 @@ literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
 literal|"GROUP BY \"department_id\") AS \"t1\"\n"
 operator|+
-literal|"GROUP BY \"t1\".\"department_id\") AS \"t3\" "
+literal|"GROUP BY \"t1\".\"department_id\"\n"
 operator|+
-literal|"ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
-operator|+
-literal|" AND \"employee\".\"department_id\" = \"t3\".\"EXPR$0\""
+literal|"HAVING \"t1\".\"department_id\" = MIN(\"t1\".\"department_id\")) AS \"t4\" ON \"employee\".\"department_id\" = \"t4\".\"department_id0\""
 decl_stmt|;
 name|sql
 argument_list|(
