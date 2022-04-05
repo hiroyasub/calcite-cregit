@@ -209,6 +209,20 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexDynamicParam
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexInputRef
 import|;
 end_import
@@ -4015,6 +4029,14 @@ condition|(
 name|rowCount
 operator|==
 literal|null
+operator|||
+name|offset
+operator|instanceof
+name|RexDynamicParam
+operator|||
+name|fetch
+operator|instanceof
+name|RexDynamicParam
 condition|)
 block|{
 comment|// Cannot be determined

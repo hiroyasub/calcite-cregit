@@ -19646,6 +19646,72 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-5048">[CALCITE-5048]    * Query with parameterized LIMIT and correlated sub-query throws AssertionError "not a    * literal"</a>.    */
+annotation|@
+name|Test
+name|void
+name|testDynamicParameterInLimitOffset
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT * FROM \"hr\".\"emps\" AS a "
+operator|+
+literal|"WHERE \"deptno\" = "
+operator|+
+literal|"(SELECT MAX(\"deptno\") "
+operator|+
+literal|"FROM \"hr\".\"emps\" AS b "
+operator|+
+literal|"WHERE a.\"empid\" = b.\"empid\""
+operator|+
+literal|") ORDER BY \"salary\" LIMIT ? OFFSET ?"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableLimit(offset=[?1], fetch=[?0])"
+argument_list|)
+operator|.
+name|consumesPreparedStatement
+argument_list|(
+name|p
+lambda|->
+block|{
+name|p
+operator|.
+name|setInt
+argument_list|(
+literal|1
+argument_list|,
+literal|2
+argument_list|)
+expr_stmt|;
+name|p
+operator|.
+name|setInt
+argument_list|(
+literal|2
+argument_list|,
+literal|1
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500\n"
+operator|+
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a JDBC connection that provides a model (a single schema based on    * a JDBC database). */
 annotation|@
 name|Test
