@@ -3158,7 +3158,7 @@ name|format
 init|=
 name|getDateFormatter
 argument_list|(
-literal|"'TIMESTAMP' ''yyyy-MM-DD HH:mm:SS''"
+literal|"'TIMESTAMP' ''yyyy-MM-dd HH:mm:ss''"
 argument_list|)
 decl_stmt|;
 return|return
