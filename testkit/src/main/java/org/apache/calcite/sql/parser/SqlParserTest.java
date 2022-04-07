@@ -15835,7 +15835,7 @@ literal|"current SQL conformance level"
 decl_stmt|;
 name|sql
 argument_list|(
-literal|"select a from foo limit 1,^2^"
+literal|"select a from foo ^limit 1,2^"
 argument_list|)
 operator|.
 name|withConformance
@@ -15962,22 +15962,61 @@ argument_list|(
 name|expected3
 argument_list|)
 expr_stmt|;
-comment|// "fetch next 4" overrides the earlier "limit 3"
+comment|// "fetch next 4" is invalid after "limit 3"
+name|sql
+argument_list|(
+literal|"select a from foo limit 2,3 ^fetch^ next 4 rows only"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"fetch\" at line 1.*"
+argument_list|)
+expr_stmt|;
+comment|// "limit start, all" is not valid
+name|sql
+argument_list|(
+literal|"select a from foo limit 2, ^all^"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"all\" at line 1.*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5086">[CALCITE-5086]    * Calcite supports OFFSET start LIMIT count expression</a>. */
+annotation|@
+name|Test
+name|void
+name|testOffsetStartLimitCount
+parameter_list|()
+block|{
 specifier|final
 name|String
-name|expected4
+name|error
 init|=
-literal|"SELECT `A`\n"
+literal|"'OFFSET start LIMIT count' is not allowed under the "
 operator|+
-literal|"FROM `FOO`\n"
-operator|+
-literal|"OFFSET 2 ROWS\n"
-operator|+
-literal|"FETCH NEXT 4 ROWS ONLY"
+literal|"current SQL conformance level"
 decl_stmt|;
 name|sql
 argument_list|(
-literal|"select a from foo limit 2,3 fetch next 4 rows only"
+literal|"select a from foo order by b, c offset 1 limit 2"
 argument_list|)
 operator|.
 name|withConformance
@@ -15989,13 +16028,86 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-name|expected4
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `B`, `C`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo order by b, c ^offset 1 limit 2^"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+comment|// "limit 2" overrides the earlier "offset 4"
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 2 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo offset 4 limit 2,3"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+comment|// "fetch next 4" is illegal following "limit 3"
+name|sql
+argument_list|(
+literal|"select a from foo offset 2 limit 3 ^fetch^ next 4 rows only"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"fetch\" at line 1.*"
 argument_list|)
 expr_stmt|;
 comment|// "limit start, all" is not valid
 name|sql
 argument_list|(
-literal|"select a from foo limit 2, ^all^"
+literal|"select a from foo offset 1 limit 2, ^all^"
 argument_list|)
 operator|.
 name|withConformance

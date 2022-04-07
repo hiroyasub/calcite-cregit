@@ -259,6 +259,11 @@ name|boolean
 name|isLimitStartCountAllowed
 parameter_list|()
 function_decl|;
+comment|/**    * Whether to allow the SQL syntax "{@code OFFSET start LIMIT count}"    * (that is, {@code OFFSET} before {@code LIMIT},    * in addition to {@code LIMIT} before {@code OFFSET}    * and {@code OFFSET} before {@code FETCH}).    *    *<p>The equivalent syntax in standard SQL is    * "{@code OFFSET start ROW FETCH FIRST count ROWS ONLY}".    *    *<p>Trino allows this behavior.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+name|boolean
+name|isOffsetLimitAllowed
+parameter_list|()
+function_decl|;
 comment|/**    * Whether to allow geo-spatial extensions, including the GEOMETRY type.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#PRESTO},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|allowGeometry

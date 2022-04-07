@@ -190,6 +190,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"''OFFSET start LIMIT count'' is not allowed under the current SQL conformance level"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|offsetLimitNotAllowed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"APPLY operator is not allowed under the current SQL conformance level"
 argument_list|)
 name|ExInst
