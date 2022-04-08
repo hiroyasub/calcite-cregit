@@ -11768,6 +11768,27 @@ argument_list|,
 literal|"can't"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|tricky
+init|=
+literal|"string with doublequote\", singlequote', "
+operator|+
+literal|"backslash\\, percent20%20, plus+, ampersand&, linefeed\n"
+operator|+
+literal|", carriage return\r, lfcr\n"
+operator|+
+literal|"\r."
+decl_stmt|;
+name|map
+operator|.
+name|put
+argument_list|(
+literal|"tricky"
+argument_list|,
+name|tricky
+argument_list|)
+expr_stmt|;
 name|List
 argument_list|<
 name|Object
@@ -11826,6 +11847,13 @@ name|list
 operator|.
 name|add
 argument_list|(
+name|tricky
+argument_list|)
+expr_stmt|;
+name|list
+operator|.
+name|add
+argument_list|(
 literal|null
 argument_list|)
 expr_stmt|;
@@ -11838,8 +11866,10 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|assertEquals
-argument_list|(
+specifier|final
+name|String
+name|expected
+init|=
 literal|"{\n"
 operator|+
 literal|"  \"foo\": 1,\n"
@@ -11847,6 +11877,12 @@ operator|+
 literal|"  \"baz\": true,\n"
 operator|+
 literal|"  \"bar\": \"can't\",\n"
+operator|+
+literal|"  \"tricky\": \"string with doublequote\\\", singlequote', "
+operator|+
+literal|"backslash\\\\, percent20%20, plus+, ampersand&, linefeed\\n"
+operator|+
+literal|", carriage return\\r, lfcr\\n\\r.\",\n"
 operator|+
 literal|"  \"list\": [\n"
 operator|+
@@ -11858,6 +11894,12 @@ literal|"    [],\n"
 operator|+
 literal|"    {},\n"
 operator|+
+literal|"    \"string with doublequote\\\", singlequote', backslash\\\\, "
+operator|+
+literal|"percent20%20, plus+, ampersand&, linefeed\\n"
+operator|+
+literal|", carriage return\\r, lfcr\\n\\r.\",\n"
+operator|+
 literal|"    null\n"
 operator|+
 literal|"  ],\n"
@@ -11865,12 +11907,19 @@ operator|+
 literal|"  \"nullValue\": null\n"
 operator|+
 literal|"}"
-argument_list|,
+decl_stmt|;
+name|assertThat
+argument_list|(
 name|builder
 operator|.
 name|toJsonString
 argument_list|(
 name|map
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
 argument_list|)
 argument_list|)
 expr_stmt|;
