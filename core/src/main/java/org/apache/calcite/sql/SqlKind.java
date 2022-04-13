@@ -146,6 +146,9 @@ block|,
 comment|/** A dynamic parameter. */
 name|DYNAMIC_PARAM
 block|,
+comment|/** The DISTINCT keyword of the GROUP BY clause. */
+name|GROUP_BY_DISTINCT
+block|,
 comment|/**    * ORDER BY clause.    *    * @see #DESCENDING    * @see #NULLS_FIRST    * @see #NULLS_LAST    */
 name|ORDER_BY
 block|,

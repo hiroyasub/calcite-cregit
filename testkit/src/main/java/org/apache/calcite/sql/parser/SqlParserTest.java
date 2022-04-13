@@ -11259,6 +11259,97 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testGroupByAllOrDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by all cube (a, b), rollup (a, b)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY CUBE(`A`, `B`), ROLLUP(`A`, `B`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by distinct cube (a, b), rollup (a, b)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY DISTINCT CUBE(`A`, `B`), ROLLUP(`A`, `B`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by cube (a, b), rollup (a, b)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY CUBE(`A`, `B`), ROLLUP(`A`, `B`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testGroupByCube2
 parameter_list|()
 block|{

@@ -16640,6 +16640,78 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5089">[CALCITE-5089]    * Allow GROUP BY ALL or DISTINCT set quantifier on GROUPING SETS</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testGroupByDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno, job, count(*)\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY DISTINCT\n"
+operator|+
+literal|"CUBE (deptno, job),\n"
+operator|+
+literal|"ROLLUP (deptno, job)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5089">[CALCITE-5089]    * Allow GROUP BY ALL or DISTINCT set quantifier on GROUPING SETS</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testGroupByAll
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno, job, count(*)\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY ALL\n"
+operator|+
+literal|"CUBE (deptno, job),\n"
+operator|+
+literal|"ROLLUP (deptno, job)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 unit|}
 end_unit
 

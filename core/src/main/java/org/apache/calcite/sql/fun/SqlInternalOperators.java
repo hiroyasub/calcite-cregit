@@ -549,6 +549,23 @@ operator|.
 name|ANY
 argument_list|)
 decl_stmt|;
+comment|/** {@code DISTINCT} operator, occurs within {@code GROUP BY} clause. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|GROUP_BY_DISTINCT
+init|=
+operator|new
+name|SqlRollupOperator
+argument_list|(
+literal|"GROUP BY DISTINCT"
+argument_list|,
+name|SqlKind
+operator|.
+name|GROUP_BY_DISTINCT
+argument_list|)
+decl_stmt|;
 block|}
 end_class
 
