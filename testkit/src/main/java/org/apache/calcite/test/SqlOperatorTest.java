@@ -4521,24 +4521,24 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.25"
+literal|"cast(1.25 as int)"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
-literal|"1"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.25E0"
+literal|"cast(1.25E0 as int)"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
-literal|"1"
+literal|true
 argument_list|)
 expr_stmt|;
 if|if
@@ -4554,244 +4554,244 @@ return|return;
 block|}
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.5"
+literal|"cast(1.5 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"2"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"5E-1"
+literal|"cast(5E-1 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"1"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.75"
+literal|"cast(1.75 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"2"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.75E0"
+literal|"cast(1.75E0 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"2"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.25"
+literal|"cast(-1.25 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-1"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.25E0"
+literal|"cast(-1.25E0 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-1"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.5"
+literal|"cast(-1.5 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-2"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-5E-1"
+literal|"cast(-5E-1 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-1"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.75"
+literal|"cast(-1.75 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-2"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.75E0"
+literal|"cast(-1.75E0 as int)"
 argument_list|,
-literal|"INTEGER"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-2"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.23454"
+literal|"cast(1.23454 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"1.2345"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.23454E0"
+literal|"cast(1.23454E0 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"1.2345"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.23455"
+literal|"cast(1.23455 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"1.2346"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"5E-5"
+literal|"cast(5E-5 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"0.0001"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.99995"
+literal|"cast(1.99995 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"2.0000"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"1.99995E0"
+literal|"cast(1.99995E0 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"2.0000"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.23454"
+literal|"cast(-1.23454 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-1.2345"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.23454E0"
+literal|"cast(-1.23454E0 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-1.2345"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.23455"
+literal|"cast(-1.23455 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-1.2346"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-5E-5"
+literal|"cast(-5E-5 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-0.0001"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.99995"
+literal|"cast(-1.99995 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-2.0000"
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkCastToScalarOkay
+name|checkFails
 argument_list|(
-literal|"-1.99995E0"
+literal|"cast(-1.99995E0 as int)"
 argument_list|,
-literal|"DECIMAL(8, 4)"
+name|OUT_OF_RANGE_MESSAGE
 argument_list|,
-literal|"-2.0000"
+literal|true
 argument_list|)
 expr_stmt|;
 comment|// 9.99 round to 10.0, should give out of range error
@@ -4835,21 +4835,24 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkScalarExact
+name|checkFails
 argument_list|(
 literal|"cast( cast(1.25 as double) as integer)"
 argument_list|,
-literal|1
+name|OUT_OF_RANGE_MESSAGE
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkScalarExact
+name|checkFails
 argument_list|(
 literal|"cast( cast(-1.25 as double) as integer)"
 argument_list|,
-operator|-
-literal|1
+name|OUT_OF_RANGE_MESSAGE
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 if|if
@@ -4865,40 +4868,46 @@ return|return;
 block|}
 name|f
 operator|.
-name|checkScalarExact
+name|checkFails
 argument_list|(
 literal|"cast( cast(1.75 as double) as integer)"
 argument_list|,
-literal|2
+name|OUT_OF_RANGE_MESSAGE
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkScalarExact
+name|checkFails
 argument_list|(
 literal|"cast( cast(-1.75 as double) as integer)"
 argument_list|,
-operator|-
-literal|2
+name|OUT_OF_RANGE_MESSAGE
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkScalarExact
+name|checkFails
 argument_list|(
 literal|"cast( cast(1.5 as double) as integer)"
 argument_list|,
-literal|2
+name|OUT_OF_RANGE_MESSAGE
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkScalarExact
+name|checkFails
 argument_list|(
 literal|"cast( cast(-1.5 as double) as integer)"
 argument_list|,
-operator|-
-literal|2
+name|OUT_OF_RANGE_MESSAGE
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -6819,6 +6828,32 @@ argument_list|(
 literal|"cast(cast('blah' as varchar(10)) as boolean)"
 argument_list|,
 name|INVALID_CHAR_MESSAGE
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4861">[CALCITE-4861]    * Optimisation of chained cast calls can lead to unexpected behaviour.</a>.    */
+annotation|@
+name|Test
+name|void
+name|testChainedCast
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"CAST(CAST(CAST(123456 AS TINYINT) AS INT) AS BIGINT)"
+argument_list|,
+literal|"Value out of range. Value:\"123456\""
 argument_list|,
 literal|true
 argument_list|)
