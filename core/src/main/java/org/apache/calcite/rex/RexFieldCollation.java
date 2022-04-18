@@ -109,6 +109,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Expression combined with sort flags (DESCENDING, NULLS LAST).  */
 end_comment
@@ -216,11 +228,14 @@ name|super
 argument_list|(
 name|left
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|KINDS
 operator|.
 name|get
 argument_list|(
 name|right
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

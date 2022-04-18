@@ -902,6 +902,8 @@ name|joinFieldRefCountsList
 operator|.
 name|add
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|leftMultiJoin
 operator|.
 name|getJoinFieldRefCountsMap
@@ -910,6 +912,7 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 operator|.
 name|toIntArray
@@ -1029,6 +1032,8 @@ name|joinFieldRefCountsList
 operator|.
 name|add
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|rightMultiJoin
 operator|.
 name|getJoinFieldRefCountsMap
@@ -1037,6 +1042,7 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 operator|.
 name|toIntArray

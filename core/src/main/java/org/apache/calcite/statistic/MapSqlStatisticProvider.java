@@ -133,6 +133,18 @@ name|Collectors
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link SqlStatisticProvider} that looks up values in a  * table.  *  *<p>Only for testing.  */
 end_comment
@@ -786,6 +798,8 @@ name|getQualifiedName
 argument_list|)
 decl_stmt|;
 return|return
+name|requireNonNull
+argument_list|(
 name|cardinalityMap
 operator|.
 name|get
@@ -794,6 +808,7 @@ name|qualifiedName
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}

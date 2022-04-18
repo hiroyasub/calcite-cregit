@@ -3439,6 +3439,8 @@ expr_stmt|;
 name|int
 name|newInputPos
 init|=
+name|requireNonNull
+argument_list|(
 name|frame
 operator|.
 name|oldToNewOutputs
@@ -3446,6 +3448,7 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|projects
@@ -4967,6 +4970,8 @@ specifier|final
 name|int
 name|newCorVarOffset
 init|=
+name|requireNonNull
+argument_list|(
 name|frame
 operator|.
 name|oldToNewOutputs
@@ -4974,6 +4979,7 @@ operator|.
 name|get
 argument_list|(
 name|oldCorVarOffset
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Add all unique positions referenced.
@@ -5297,6 +5303,8 @@ specifier|final
 name|int
 name|newLocalOutput
 init|=
+name|requireNonNull
+argument_list|(
 name|frame
 operator|.
 name|oldToNewOutputs
@@ -5306,6 +5314,7 @@ argument_list|(
 name|corRef
 operator|.
 name|field
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// newOutput is the index of the corVar in the referenced
@@ -6975,6 +6984,8 @@ specifier|final
 name|int
 name|newLeftPos
 init|=
+name|requireNonNull
+argument_list|(
 name|leftFrame
 operator|.
 name|oldToNewOutputs
@@ -6984,6 +6995,7 @@ argument_list|(
 name|corDef
 operator|.
 name|field
+argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -7171,6 +7183,8 @@ name|i
 operator|+
 name|oldLeftFieldCount
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|rightFrame
 operator|.
 name|oldToNewOutputs
@@ -7178,6 +7192,7 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 operator|+
 name|newLeftFieldCount
@@ -7538,6 +7553,8 @@ name|i
 operator|+
 name|oldLeftFieldCount
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|rightFrame
 operator|.
 name|oldToNewOutputs
@@ -7545,6 +7562,7 @@ operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 operator|+
 name|newLeftFieldCount
@@ -7788,6 +7806,8 @@ condition|)
 block|{
 name|newLocalOrdinal
 operator|=
+name|requireNonNull
+argument_list|(
 name|frame
 operator|.
 name|oldToNewOutputs
@@ -7795,6 +7815,7 @@ operator|.
 name|get
 argument_list|(
 name|oldLocalOrdinal
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

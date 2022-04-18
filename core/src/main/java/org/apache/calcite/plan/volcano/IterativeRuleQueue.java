@@ -177,6 +177,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Priority queue of relexps whose rules have not been called, and rule-matches  * which have not yet been acted upon.  */
 end_comment
@@ -328,6 +340,8 @@ name|matchMap
 operator|.
 name|put
 argument_list|(
+name|requireNonNull
+argument_list|(
 name|planner
 operator|.
 name|getSubset
@@ -338,6 +352,7 @@ name|rels
 index|[
 literal|0
 index|]
+argument_list|)
 argument_list|)
 argument_list|,
 name|match

@@ -245,6 +245,22 @@ name|nullness
 operator|.
 name|qual
 operator|.
+name|NonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
 name|Nullable
 import|;
 end_import
@@ -262,6 +278,18 @@ operator|.
 name|Nullness
 operator|.
 name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -606,7 +634,7 @@ name|name
 argument_list|()
 return|;
 block|}
-comment|/** Converts a string to an enum value.    * The converse of {@link #fromEnum(Enum)}. */
+comment|/** Converts a string to an enum value.    * The converse of {@link #fromEnum(Enum)}.    *    * @throws NullPointerException if there is no corresponding registered {@link Enum}    * */
 specifier|static
 parameter_list|<
 name|E
@@ -616,6 +644,8 @@ argument_list|<
 name|E
 argument_list|>
 parameter_list|>
+annotation|@
+name|NonNull
 name|E
 name|toEnum
 parameter_list|(
@@ -627,11 +657,14 @@ return|return
 operator|(
 name|E
 operator|)
+name|requireNonNull
+argument_list|(
 name|ENUM_BY_NAME
 operator|.
 name|get
 argument_list|(
 name|name
+argument_list|)
 argument_list|)
 return|;
 block|}

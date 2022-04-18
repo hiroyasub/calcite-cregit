@@ -315,6 +315,18 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A MultiJoin represents a join of N inputs, whereas regular Joins  * represent strictly binary joins.  */
 end_comment
@@ -707,11 +719,14 @@ name|put
 argument_list|(
 name|i
 argument_list|,
+name|requireNonNull
+argument_list|(
 name|joinFieldRefCountsMap
 operator|.
 name|get
 argument_list|(
 name|i
+argument_list|)
 argument_list|)
 operator|.
 name|toIntArray

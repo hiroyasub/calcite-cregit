@@ -273,6 +273,22 @@ name|nullness
 operator|.
 name|qual
 operator|.
+name|NonNull
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|checkerframework
+operator|.
+name|checker
+operator|.
+name|nullness
+operator|.
+name|qual
+operator|.
 name|Nullable
 import|;
 end_import
@@ -1001,6 +1017,11 @@ name|SQL_92_RESERVED_WORD_SET
 return|;
 block|}
 comment|/**    * Creates a call.    *    * @param funName           Name of function    * @param pos               Position in source code    * @param funcType          Type of function    * @param functionQualifier Qualifier    * @param operands          Operands to call    * @return Call    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"argument.type.incompatible"
+argument_list|)
 specifier|protected
 name|SqlCall
 name|createCall

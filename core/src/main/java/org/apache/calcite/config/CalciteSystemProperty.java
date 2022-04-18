@@ -155,6 +155,18 @@ name|Stream
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A Calcite specific system property that is used to configure various aspects of the framework.  *  *<p>Calcite system properties must always be in the "calcite" root namespace.</p>  *  * @param<T> the type of the property value  */
 end_comment
@@ -1157,7 +1169,12 @@ init|(
 name|InputStream
 name|stream
 init|=
+name|requireNonNull
+argument_list|(
 name|classLoader
+argument_list|,
+literal|"classLoader"
+argument_list|)
 operator|.
 name|getResourceAsStream
 argument_list|(
