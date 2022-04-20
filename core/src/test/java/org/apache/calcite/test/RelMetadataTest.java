@@ -4440,7 +4440,7 @@ name|assertThatRowCount
 argument_list|(
 name|is
 argument_list|(
-name|EMP_SIZE
+literal|1D
 argument_list|)
 argument_list|,
 name|is
