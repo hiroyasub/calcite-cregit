@@ -3365,7 +3365,21 @@ name|newPos
 init|=
 literal|0
 decl_stmt|;
-comment|// oldInput has the original group by keys in the front.
+specifier|final
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|groupKeyIndices
+init|=
+name|rel
+operator|.
+name|getGroupSet
+argument_list|()
+operator|.
+name|asList
+argument_list|()
+decl_stmt|;
 specifier|final
 name|NavigableMap
 argument_list|<
@@ -3396,6 +3410,17 @@ operator|++
 control|)
 block|{
 specifier|final
+name|int
+name|idx
+init|=
+name|groupKeyIndices
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+decl_stmt|;
+specifier|final
 name|RexLiteral
 name|constant
 init|=
@@ -3403,7 +3428,7 @@ name|projectedLiteral
 argument_list|(
 name|newInput
 argument_list|,
-name|i
+name|idx
 argument_list|)
 decl_stmt|;
 if|if
@@ -3419,7 +3444,7 @@ name|omittedConstants
 operator|.
 name|put
 argument_list|(
-name|i
+name|idx
 argument_list|,
 name|constant
 argument_list|)
@@ -3431,7 +3456,7 @@ name|outputMap
 operator|.
 name|put
 argument_list|(
-name|i
+name|idx
 argument_list|,
 name|newPos
 argument_list|)
@@ -3447,7 +3472,7 @@ name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
-name|i
+name|idx
 argument_list|)
 argument_list|)
 decl_stmt|;
