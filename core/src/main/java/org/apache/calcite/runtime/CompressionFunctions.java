@@ -139,7 +139,7 @@ name|CompressionFunctions
 parameter_list|()
 block|{
 block|}
-comment|/**    * MySql Compression is based on zlib.    *<a href="https://docs.oracle.com/javase/8/docs/api/java/util/zip/Deflater.html">Deflater</a>    * is used to implement compression.    */
+comment|/**    * MySql Compression is based on zlib.    *<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/zip/Deflater.html">Deflater</a>    * is used to implement compression.    */
 specifier|public
 specifier|static
 annotation|@
