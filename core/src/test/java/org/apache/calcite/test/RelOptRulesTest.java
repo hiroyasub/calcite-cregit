@@ -14814,6 +14814,72 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5117">[CALCITE-5117]    * Optimize the EXISTS sub-query by Metadata RowCount</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testExistsWithAtLeastOneRowSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept as d\n"
+operator|+
+literal|"where EXISTS (\n"
+operator|+
+literal|"  select count(*) from emp e where d.deptno = e.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withSubQueryRules
+argument_list|()
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testExistsWithNoRowSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept as d\n"
+operator|+
+literal|"where NOT EXISTS (\n"
+operator|+
+literal|"  select count(*) from emp e having false)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withSubQueryRules
+argument_list|()
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4848">[CALCITE-4848]    * Adding a HAVING condition to a query with a dynamic parameter makes the result always empty</a>. */
 end_comment
 
