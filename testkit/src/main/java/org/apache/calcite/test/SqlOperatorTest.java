@@ -9338,6 +9338,48 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array[1, 2] || array[2, 3]"
+argument_list|,
+literal|"[1, 2, 2, 3]"
+argument_list|,
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array[1, 2] || array[2, null]"
+argument_list|,
+literal|"[1, 2, 2, null]"
+argument_list|,
+literal|"INTEGER ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array['hello', 'world'] || array['!'] || "
+operator|+
+literal|"array[cast(null as char)]"
+argument_list|,
+literal|"[hello, world, !, null]"
+argument_list|,
+literal|"CHAR(5) ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"cast(null as integer array) || array[1]"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
