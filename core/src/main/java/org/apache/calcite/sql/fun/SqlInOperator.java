@@ -301,22 +301,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlValidatorImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlValidatorScope
 import|;
 end_import
@@ -827,12 +811,7 @@ argument_list|)
 throw|;
 block|}
 comment|// Record the RHS type for use by SqlToRelConverter.
-operator|(
-operator|(
-name|SqlValidatorImpl
-operator|)
 name|validator
-operator|)
 operator|.
 name|setValidatedNodeType
 argument_list|(
