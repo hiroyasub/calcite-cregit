@@ -32108,6 +32108,16 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
+literal|"select * from unnest(array(select deptno from dept)) with ordinality as t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL T, INTEGER NOT NULL ORDINALITY) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
 literal|"select*from ^unnest(1) with ordinality^"
 argument_list|)
 operator|.
@@ -32249,6 +32259,24 @@ argument_list|(
 name|expectedType
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"select fruit.* from UNNEST(array(select 'banana')) as fruit"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT array(SELECT y + 1 FROM UNNEST(s.x) y) FROM (SELECT ARRAY[1,2,3] as x) s"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
 comment|// The magic doesn't happen if the query is not an UNNEST.
 comment|// In this case, the query is a SELECT.
 name|sql
@@ -32299,6 +32327,22 @@ name|type
 argument_list|(
 literal|"RecordType(INTEGER NOT NULL F) NOT NULL"
 argument_list|)
+expr_stmt|;
+comment|// The magic doesn't happen if the UNNEST is used without AS operator.
+name|sql
+argument_list|(
+literal|"select * from (SELECT ARRAY['banana'] as fruits) as t, UNNEST(t.fruits)"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(CHAR(6) NOT NULL ARRAY NOT NULL FRUITS, "
+operator|+
+literal|"CHAR(6) NOT NULL EXPR$0) NOT NULL"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
