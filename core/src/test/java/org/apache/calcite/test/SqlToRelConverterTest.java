@@ -9819,6 +9819,36 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testCorrelatedForOuterFields
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT ARRAY(SELECT dept.deptno)\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"LEFT OUTER JOIN dept\n"
+operator|+
+literal|"ON emp.empno = dept.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-614">[CALCITE-614]    * IN within CASE within GROUP BY gives AssertionError</a>.    */
 end_comment

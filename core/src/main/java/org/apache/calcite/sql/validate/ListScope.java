@@ -350,6 +350,26 @@ name|name
 argument_list|)
 return|;
 block|}
+comment|/**    * Whether the ith child namespace produces nullable result.    *    * For example, in below query,    *<pre>    *   SELECT *    *   FROM EMPS    *   LEFT OUTER JOIN DEPT    *</pre>    * the namespace which corresponding to 'DEPT' is nullable.    *    * @param i The child index.    * @return Whether it's nullable.    */
+specifier|public
+name|boolean
+name|isChildNullable
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+name|children
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+operator|.
+name|nullable
+return|;
+block|}
 specifier|private
 annotation|@
 name|Nullable
