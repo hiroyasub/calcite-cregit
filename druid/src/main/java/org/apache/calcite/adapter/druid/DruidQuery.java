@@ -2258,9 +2258,6 @@ name|TimeExtractionFunction
 operator|.
 name|isValidTimeExtract
 argument_list|(
-operator|(
-name|RexCall
-operator|)
 name|rexNode
 argument_list|)
 condition|)
@@ -2455,9 +2452,6 @@ name|TimeExtractionFunction
 operator|.
 name|isValidTimeFloor
 argument_list|(
-operator|(
-name|RexCall
-operator|)
 name|rexNode
 argument_list|)
 condition|)

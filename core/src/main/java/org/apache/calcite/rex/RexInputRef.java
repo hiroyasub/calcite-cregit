@@ -302,9 +302,6 @@ name|Pair
 operator|.
 name|of
 argument_list|(
-operator|(
-name|RexNode
-operator|)
 operator|new
 name|RexInputRef
 argument_list|(

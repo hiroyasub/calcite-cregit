@@ -3006,9 +3006,6 @@ name|Lists
 operator|.
 name|newArrayList
 argument_list|(
-operator|(
-name|RexNode
-operator|)
 name|builder
 operator|.
 name|field

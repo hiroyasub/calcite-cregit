@@ -4162,12 +4162,7 @@ name|assertEquals
 argument_list|(
 literal|"_UTF8'foobar':CHAR(6) CHARACTER SET \"UTF-8\""
 argument_list|,
-operator|(
-operator|(
-name|RexLiteral
-operator|)
 name|literal
-operator|)
 operator|.
 name|computeDigest
 argument_list|(

@@ -126,9 +126,6 @@ name|of
 argument_list|(
 name|SPLUNK_TABLE_NAME
 argument_list|,
-operator|(
-name|Table
-operator|)
 name|SplunkTable
 operator|.
 name|INSTANCE

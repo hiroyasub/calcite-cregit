@@ -1356,9 +1356,6 @@ name|Pair
 operator|.
 name|of
 argument_list|(
-operator|(
-name|SqlNode
-operator|)
 operator|new
 name|SqlIdentifier
 argument_list|(

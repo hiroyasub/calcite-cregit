@@ -580,10 +580,6 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
-operator|(
-name|Class
-index|[]
-operator|)
 name|addMethod
 operator|.
 name|getParameterTypes

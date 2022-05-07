@@ -172,9 +172,6 @@ block|{
 name|Statement
 name|stmt
 init|=
-operator|(
-name|PreparedStatement
-operator|)
 name|testContext
 operator|.
 name|getCurrentStatement

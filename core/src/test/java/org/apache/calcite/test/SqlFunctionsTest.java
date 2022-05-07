@@ -8919,9 +8919,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -8943,9 +8940,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -8967,9 +8961,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -8995,9 +8986,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9023,9 +9011,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9051,9 +9036,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9083,9 +9065,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9201,9 +9180,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9225,9 +9201,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9249,9 +9222,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9277,9 +9247,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9305,9 +9272,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9333,9 +9297,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(
@@ -9365,9 +9326,6 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|Object
-operator|)
 operator|new
 name|BigDecimal
 argument_list|(

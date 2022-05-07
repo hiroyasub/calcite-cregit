@@ -1252,12 +1252,7 @@ return|return;
 block|}
 if|if
 condition|(
-operator|(
-operator|(
-name|Config
-operator|)
 name|config
-operator|)
 operator|.
 name|isUsingGroupingSets
 argument_list|()
