@@ -16348,6 +16348,37 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testJoinWithOnConditionQuery
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"SELECT emp.deptno, emp.sal\n"
+operator|+
+literal|"FROM dept\n"
+operator|+
+literal|"JOIN emp\n"
+operator|+
+literal|"ON (SELECT AVG(emp.sal)> 0 FROM emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testJoinExpandAndDecorrelation
 parameter_list|()
 block|{
