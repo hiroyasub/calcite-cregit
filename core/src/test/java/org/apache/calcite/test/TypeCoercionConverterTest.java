@@ -459,6 +459,47 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testInsertValuesQuerySourceCoercion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into t1 values "
+operator|+
+literal|"('a', 1, 1.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false), "
+operator|+
+literal|"('b', 2,  2,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false), "
+operator|+
+literal|"('c', CAST(3 AS SMALLINT),  3.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false), "
+operator|+
+literal|"('d', 4, 4.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false), "
+operator|+
+literal|"('e', 5, 5.0,"
+operator|+
+literal|" 0, 0, 0, 0, TIMESTAMP '2021-11-28 00:00:00', date '2021-11-28', x'0A', false)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUpdateQuerySourceCoercion
 parameter_list|()
 block|{
