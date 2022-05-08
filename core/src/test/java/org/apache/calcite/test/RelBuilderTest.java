@@ -13972,7 +13972,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalJoin(condition=[=($5, 1000)], joinType=[left])\n"
+literal|"LogicalJoin(condition=[=($5, 1000)], joinType=[left], variablesSet=[[$cor0]])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
@@ -24127,7 +24127,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalJoin(condition=[=($7, $8)], joinType=[semi])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[semi], variablesSet=[[$cor0]])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
@@ -24219,7 +24219,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalJoin(condition=[=($7, $8)], joinType=[anti])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[anti], variablesSet=[[$cor0]])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
@@ -24311,7 +24311,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalJoin(condition=[=($7, $8)], joinType=[left])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[left], variablesSet=[[$cor0]])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
@@ -24403,7 +24403,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalJoin(condition=[=($7, $8)], joinType=[inner])\n"
+literal|"LogicalJoin(condition=[=($7, $8)], joinType=[inner], variablesSet=[[$cor0]])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
