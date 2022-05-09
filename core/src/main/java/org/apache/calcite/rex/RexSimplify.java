@@ -706,9 +706,14 @@ name|RexExecutor
 name|executor
 decl_stmt|;
 specifier|private
+specifier|static
 specifier|final
 name|Strong
-name|strong
+name|STRONG
+init|=
+operator|new
+name|Strong
+argument_list|()
 decl_stmt|;
 comment|/**    * Creates a RexSimplify.    *    * @param rexBuilder Rex builder    * @param predicates Predicates known to hold on input fields    * @param executor Executor for constant reduction, not null    */
 specifier|public
@@ -818,14 +823,6 @@ name|executor
 argument_list|,
 literal|"executor"
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|strong
-operator|=
-operator|new
-name|Strong
-argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1286,7 +1283,7 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|strong
+name|STRONG
 operator|.
 name|isNull
 argument_list|(

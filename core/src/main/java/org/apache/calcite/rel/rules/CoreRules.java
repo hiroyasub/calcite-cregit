@@ -1931,6 +1931,22 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
+comment|/** Rule that derives IS NOT NULL predicates from a inner {@link Join} and creates    * {@link Filter}s with those predicates as new inputs of the {@link Join}. */
+specifier|public
+specifier|static
+specifier|final
+name|JoinDeriveIsNotNullFilterRule
+name|JOIN_DERIVE_IS_NOT_NULL_FILTER_RULE
+init|=
+name|JoinDeriveIsNotNullFilterRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|toRule
+argument_list|()
+decl_stmt|;
 comment|/** Rule that reduces constants inside a {@link Join}.    *    * @see #FILTER_REDUCE_EXPRESSIONS    * @see #PROJECT_REDUCE_EXPRESSIONS */
 specifier|public
 specifier|static
