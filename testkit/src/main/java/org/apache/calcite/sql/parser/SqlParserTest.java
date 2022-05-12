@@ -22887,6 +22887,39 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testArrayQueryConstructor
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT array(SELECT x FROM (VALUES(1)) x)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY ((SELECT `X`\n"
+operator|+
+literal|"FROM (VALUES (ROW(1))) AS `X`)))"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT array(SELECT x FROM (VALUES(1)) x ORDER BY x)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY (SELECT `X`\n"
+operator|+
+literal|"FROM (VALUES (ROW(1))) AS `X`\n"
+operator|+
+literal|"ORDER BY `X`))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testCastAsCollectionType
 parameter_list|()
 block|{
