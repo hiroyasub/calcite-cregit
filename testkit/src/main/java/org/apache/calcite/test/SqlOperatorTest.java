@@ -14357,6 +14357,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkNullOperand
 parameter_list|(
@@ -39895,7 +39896,7 @@ name|checkFails
 argument_list|(
 literal|"floor(timestamp '2015-02-19 12:34:56.78' to ^microsecond^)"
 argument_list|,
-literal|"(?s)Encountered \"microsecond\" at .*"
+literal|"'MICROSECOND' is not a valid datetime format"
 argument_list|,
 literal|false
 argument_list|)
@@ -39906,7 +39907,7 @@ name|checkFails
 argument_list|(
 literal|"floor(timestamp '2015-02-19 12:34:56.78' to ^nanosecond^)"
 argument_list|,
-literal|"(?s)Encountered \"nanosecond\" at .*"
+literal|"'NANOSECOND' is not a valid datetime format"
 argument_list|,
 literal|false
 argument_list|)
@@ -40092,7 +40093,7 @@ name|checkFails
 argument_list|(
 literal|"ceil(timestamp '2015-02-19 12:34:56.78' to ^microsecond^)"
 argument_list|,
-literal|"(?s)Encountered \"microsecond\" at .*"
+literal|"'MICROSECOND' is not a valid datetime format"
 argument_list|,
 literal|false
 argument_list|)
@@ -40103,7 +40104,7 @@ name|checkFails
 argument_list|(
 literal|"ceil(timestamp '2015-02-19 12:34:56.78' to ^nanosecond^)"
 argument_list|,
-literal|"(?s)Encountered \"nanosecond\" at .*"
+literal|"'NANOSECOND' is not a valid datetime format"
 argument_list|,
 literal|false
 argument_list|)

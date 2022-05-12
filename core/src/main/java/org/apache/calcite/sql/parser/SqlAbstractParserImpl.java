@@ -41,6 +41,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|TimeUnit
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|config
 operator|.
 name|CharLiteralStyle
@@ -414,6 +430,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
 import|;
 end_import
 
@@ -1412,6 +1438,21 @@ name|setIdentifierMaxLength
 parameter_list|(
 name|int
 name|identifierMaxLength
+parameter_list|)
+function_decl|;
+comment|/**    * Sets the map from identifier to time unit.    */
+specifier|public
+specifier|abstract
+name|void
+name|setTimeUnitCodes
+parameter_list|(
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|timeUnitCodes
 parameter_list|)
 function_decl|;
 comment|/**    * Sets the SQL language conformance level.    */
