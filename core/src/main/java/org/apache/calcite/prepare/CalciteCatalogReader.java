@@ -505,7 +505,7 @@ name|sql
 operator|.
 name|util
 operator|.
-name|ListSqlOperatorTable
+name|SqlOperatorTables
 import|;
 end_import
 
@@ -2141,11 +2141,15 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|final
-name|ListSqlOperatorTable
-name|table
+name|List
+argument_list|<
+name|SqlOperator
+argument_list|>
+name|list
 init|=
 operator|new
-name|ListSqlOperatorTable
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -2187,7 +2191,7 @@ operator|.
 name|ZERO
 argument_list|)
 decl_stmt|;
-name|table
+name|list
 operator|.
 name|add
 argument_list|(
@@ -2204,7 +2208,12 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|table
+name|SqlOperatorTables
+operator|.
+name|of
+argument_list|(
+name|list
+argument_list|)
 return|;
 block|}
 end_function

@@ -174,6 +174,10 @@ argument_list|>
 name|operatorList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+comment|/** Creates an empty, mutable ListSqlOperatorTable.    *    * @deprecated Use {@link SqlOperatorTables#of}, which creates an immutable    * table. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|ListSqlOperatorTable
 parameter_list|()
@@ -184,9 +188,15 @@ operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a mutable ListSqlOperatorTable backed by a given list.    *    * @deprecated Use {@link SqlOperatorTables#of}, which creates an immutable    * table. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|ListSqlOperatorTable
 parameter_list|(
@@ -198,6 +208,27 @@ name|operatorList
 parameter_list|)
 block|{
 name|this
+argument_list|(
+name|operatorList
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+comment|// internal constructor
+name|ListSqlOperatorTable
+parameter_list|(
+name|List
+argument_list|<
+name|SqlOperator
+argument_list|>
+name|operatorList
+parameter_list|,
+name|boolean
+name|ignored
+parameter_list|)
+block|{
+name|this
 operator|.
 name|operatorList
 operator|=
@@ -205,6 +236,10 @@ name|operatorList
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Adds an operator to this table.    *    * @deprecated Use {@link SqlOperatorTables#of}, which creates an immutable    * table. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|void
 name|add
