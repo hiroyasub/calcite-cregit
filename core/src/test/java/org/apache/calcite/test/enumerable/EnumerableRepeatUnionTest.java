@@ -1560,7 +1560,7 @@ literal|"      EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
 literal|"  EnumerableTableSpool(readType=[LAZY], writeType=[LAZY], table=[[#DELTA#]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..8=[{inputs}], empid=[$t4], name=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], empid=[$t3], name=[$t4])\n"
 operator|+
 literal|"      EnumerableCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{1}])\n"
 comment|// It is important to have EnumerableCorrelate + #DELTA# table scan on its right
@@ -1570,13 +1570,13 @@ literal|"        EnumerableCorrelate(correlation=[$cor0], joinType=[inner], requ
 operator|+
 literal|"          EnumerableTableScan(table=[[s, hierarchies]])\n"
 operator|+
-literal|"          EnumerableCalc(expr#0..1=[{inputs}], expr#2=[$cor0], expr#3=[$t2.managerid], expr#4=[=($t0, $t3)], proj#0..1=[{exprs}], $condition=[$t4])\n"
+literal|"          EnumerableCalc(expr#0..1=[{inputs}], expr#2=[$cor0], expr#3=[$t2.managerid], expr#4=[=($t0, $t3)], empid=[$t0], $condition=[$t4])\n"
 operator|+
 literal|"            EnumerableInterpreter\n"
 operator|+
 literal|"              BindableTableScan(table=[[#DELTA#]])\n"
 operator|+
-literal|"        EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor1], expr#6=[$t5.subordinateid], expr#7=[=($t6, $t0)], proj#0..4=[{exprs}], $condition=[$t7])\n"
+literal|"        EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor1], expr#6=[$t5.subordinateid], expr#7=[=($t6, $t0)], empid=[$t0], name=[$t2], $condition=[$t7])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[s, emps]])\n"
 argument_list|)

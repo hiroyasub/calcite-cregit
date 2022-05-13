@@ -31124,9 +31124,7 @@ name|convert
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(C=[$0], EMPID=[$1], TWO=[$2])\n"
-operator|+
-literal|"  LogicalMatch(partition=[[]], order=[[0 DESC]], "
+literal|"LogicalMatch(partition=[[]], order=[[0 DESC]], "
 operator|+
 literal|"outputFields=[[C, EMPID, TWO]], allRows=[false], "
 operator|+
@@ -31138,7 +31136,7 @@ literal|"patternDefinitions=[[=(CAST(PREV(UP.$0, 0)):INTEGER NOT NULL, 100)]], "
 operator|+
 literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[hr, emps]])\n"
+literal|"  LogicalTableScan(table=[[hr, emps]])\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -31228,9 +31226,7 @@ name|convert
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(C=[$0], EMPID=[$1])\n"
-operator|+
-literal|"  LogicalMatch(partition=[[]], order=[[0 DESC]], "
+literal|"LogicalMatch(partition=[[]], order=[[0 DESC]], "
 operator|+
 literal|"outputFields=[[C, EMPID]], allRows=[false], "
 operator|+
@@ -31242,7 +31238,7 @@ literal|"patternDefinitions=[[<(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
 operator|+
 literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[hr, emps]])\n"
+literal|"  LogicalTableScan(table=[[hr, emps]])\n"
 decl_stmt|;
 specifier|final
 name|String

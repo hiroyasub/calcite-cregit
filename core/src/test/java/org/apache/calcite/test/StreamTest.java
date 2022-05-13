@@ -525,11 +525,13 @@ name|convertContains
 argument_list|(
 literal|"LogicalDelta\n"
 operator|+
-literal|"  LogicalProject(PRODUCT=[$2])\n"
+literal|"  LogicalProject(PRODUCT=[$1])\n"
 operator|+
-literal|"    LogicalFilter(condition=[>($3, 6)])\n"
+literal|"    LogicalFilter(condition=[>($2, 6)])\n"
 operator|+
-literal|"      LogicalTableScan(table=[[STREAMS, ORDERS]])\n"
+literal|"      LogicalProject(ROWTIME=[$0], PRODUCT=[$2], UNITS=[$3])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[STREAMS, ORDERS]])\n"
 argument_list|)
 operator|.
 name|explainContains
@@ -999,11 +1001,11 @@ name|convertContains
 argument_list|(
 literal|"LogicalDelta\n"
 operator|+
-literal|"  LogicalProject(ROWTIME=[$0], ORDERID=[$1], SUPPLIERID=[$6])\n"
+literal|"  LogicalProject(ROWTIME=[$0], ORDERID=[$1], SUPPLIERID=[$4])\n"
 operator|+
-literal|"    LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"    LogicalJoin(condition=[=($2, $3)], joinType=[inner])\n"
 operator|+
-literal|"      LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT0=[CAST($2):VARCHAR(32) NOT NULL])\n"
+literal|"      LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT0=[CAST($2):VARCHAR(32) NOT NULL])\n"
 operator|+
 literal|"        LogicalTableScan(table=[[STREAM_JOINS, ORDERS]])\n"
 operator|+
@@ -1014,13 +1016,13 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..1=[{exprs}], SUPPLIERID=[$t6])\n"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], proj#0..1=[{exprs}], SUPPLIERID=[$t4])\n"
 operator|+
-literal|"  EnumerableMergeJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"  EnumerableMergeJoin(condition=[=($2, $3)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableSort(sort0=[$4], dir0=[ASC])\n"
+literal|"    EnumerableSort(sort0=[$2], dir0=[ASC])\n"
 operator|+
-literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) NOT NULL], proj#0..4=[{exprs}])\n"
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) NOT NULL], proj#0..1=[{exprs}], PRODUCT0=[$t4])\n"
 operator|+
 literal|"        EnumerableInterpreter\n"
 operator|+

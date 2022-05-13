@@ -1609,19 +1609,21 @@ literal|"      EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
 literal|"  EnumerableTableSpool(readType=[LAZY], writeType=[LAZY], table=[[#DELTA#]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..8=[{inputs}], empid=[$t4], name=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], empid=[$t3], name=[$t4])\n"
 operator|+
-literal|"      EnumerableMergeJoin(condition=[=($3, $4)], joinType=[inner])\n"
+literal|"      EnumerableMergeJoin(condition=[=($2, $3)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableSort(sort0=[$3], dir0=[ASC])\n"
+literal|"        EnumerableSort(sort0=[$2], dir0=[ASC])\n"
 operator|+
-literal|"          EnumerableMergeJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"          EnumerableMergeJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
 literal|"            EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"              EnumerableInterpreter\n"
+literal|"              EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
-literal|"                BindableTableScan(table=[[#DELTA#]])\n"
+literal|"                EnumerableInterpreter\n"
+operator|+
+literal|"                  BindableTableScan(table=[[#DELTA#]])\n"
 operator|+
 literal|"            EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
@@ -1629,7 +1631,9 @@ literal|"              EnumerableTableScan(table=[[s, hierarchies]])\n"
 operator|+
 literal|"        EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[s, emps]])\n"
+literal|"          EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[s, emps]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered
