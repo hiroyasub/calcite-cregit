@@ -8344,8 +8344,6 @@ expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-35">[CALCITE-35]    * Support parenthesized sub-clause in JOIN</a>. */
 annotation|@
-name|Disabled
-annotation|@
 name|Test
 name|void
 name|testJoinJoin
@@ -8409,9 +8407,11 @@ literal|" or \"promotion\".\"media_type\" = 'Street Handout')\n"
 operator|+
 literal|" and (\"product_class\".\"product_family\" = 'Drink')\n"
 operator|+
-literal|" and (\"customer\".\"country\" = 'USA' and \"customer\".\"state_province\""
+literal|" and (\"customer\".\"country\" = 'USA'\n"
 operator|+
-literal|" = 'WA' and \"customer\".\"city\" = 'Bellingham')\n"
+literal|"   and \"customer\".\"state_province\" = 'WA'\n"
+operator|+
+literal|"   and \"customer\".\"city\" = 'Bellingham')\n"
 operator|+
 literal|"group by \"product_class\".\"product_family\",\n"
 operator|+
@@ -8423,30 +8423,22 @@ literal|"   \"customer\".\"state_province\",\n"
 operator|+
 literal|"   \"customer\".\"city\"\n"
 operator|+
-literal|"order by ISNULL(\"product_class\".\"product_family\") ASC,   \"product_class\".\"product_family\" ASC,\n"
+literal|"order by \"product_class\".\"product_family\" asc nulls first,\n"
 operator|+
-literal|"   ISNULL(\"product_class\".\"product_department\") ASC,   \"product_class\".\"product_department\" ASC,\n"
+literal|"   \"product_class\".\"product_department\" asc nulls first,\n"
 operator|+
-literal|"   ISNULL(\"customer\".\"country\") ASC,   \"customer\".\"country\" ASC,\n"
+literal|"   \"customer\".\"country\" asc nulls first,\n"
 operator|+
-literal|"   ISNULL(\"customer\".\"state_province\") ASC,   \"customer\".\"state_province\" ASC,\n"
+literal|"   \"customer\".\"state_province\" asc nulls first,\n"
 operator|+
-literal|"   ISNULL(\"customer\".\"city\") ASC,   \"customer\".\"city\" ASC"
+literal|"   \"customer\".\"city\" asc nulls first"
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"+-------+---------------------+-----+------+------------+\n"
-operator|+
-literal|"| c0    | c1                  | c2  | c3   | c4         |\n"
-operator|+
-literal|"+-------+---------------------+-----+------+------------+\n"
-operator|+
-literal|"| Drink | Alcoholic Beverages | USA | WA   | Bellingham |\n"
-operator|+
-literal|"| Drink | Dairy               | USA | WA   | Bellingham |\n"
-operator|+
-literal|"+-------+---------------------+-----+------+------------+"
+literal|"c0=Drink; c1=Alcoholic Beverages; c2=USA; c3=WA; c4=Bellingham"
+argument_list|,
+literal|"c0=Drink; c1=Dairy; c2=USA; c3=WA; c4=Bellingham"
 argument_list|)
 expr_stmt|;
 block|}

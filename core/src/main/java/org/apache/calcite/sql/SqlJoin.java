@@ -166,6 +166,19 @@ name|SqlJoin
 extends|extends
 name|SqlCall
 block|{
+specifier|static
+specifier|final
+name|SqlJoinOperator
+name|COMMA_OPERATOR
+init|=
+operator|new
+name|SqlJoinOperator
+argument_list|(
+literal|"COMMA-JOIN"
+argument_list|,
+literal|16
+argument_list|)
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -174,7 +187,11 @@ name|OPERATOR
 init|=
 operator|new
 name|SqlJoinOperator
-argument_list|()
+argument_list|(
+literal|"JOIN"
+argument_list|,
+literal|18
+argument_list|)
 decl_stmt|;
 name|SqlNode
 name|left
@@ -324,9 +341,24 @@ name|SqlOperator
 name|getOperator
 parameter_list|()
 block|{
+comment|//noinspection SwitchStatementWithTooFewBranches
+switch|switch
+condition|(
+name|getJoinType
+argument_list|()
+condition|)
+block|{
+case|case
+name|COMMA
+case|:
+return|return
+name|COMMA_OPERATOR
+return|;
+default|default:
 return|return
 name|OPERATOR
 return|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -606,7 +638,7 @@ operator|=
 name|right
 expr_stmt|;
 block|}
-comment|/**    *<code>SqlJoinOperator</code> describes the syntax of the SQL<code>    * JOIN</code> operator. Since there is only one such operator, this class is    * almost certainly a singleton.    */
+comment|/** Describes the syntax of the SQL {@code JOIN} operator.    *    *<p>A variant describes the comma operator, which has lower precedence.    */
 specifier|public
 specifier|static
 class|class
@@ -634,17 +666,23 @@ decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
 name|SqlJoinOperator
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|int
+name|prec
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"JOIN"
+name|name
 argument_list|,
 name|SqlKind
 operator|.
 name|JOIN
 argument_list|,
-literal|16
+name|prec
 argument_list|,
 literal|true
 argument_list|,

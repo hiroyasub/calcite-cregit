@@ -13969,7 +13969,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"full inner\" at line 1, column 17.*"
+literal|"(?s).*Encountered \"full inner\" at line .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14008,12 +14008,10 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"inner outer\" at line 1, column 17.*"
+literal|"(?s).*Encountered \"inner outer\" at line .*"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Disabled
 annotation|@
 name|Test
 name|void
@@ -14022,6 +14020,17 @@ parameter_list|()
 block|{
 comment|// joins are left-associative
 comment|// 1. no parens needed
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"NATURAL LEFT JOIN `B`\n"
+operator|+
+literal|"LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"select * from (a natural left join b) left join c on b.c1 = c.c1"
@@ -14029,12 +14038,19 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT *\n"
-operator|+
-literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)\n"
+name|expected
 argument_list|)
 expr_stmt|;
 comment|// 2. parens needed
+name|String
+name|expected2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"NATURAL LEFT JOIN (`B` LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`))"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"select * from a natural left join (b left join c on b.c1 = c.c1)"
@@ -14042,9 +14058,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT *\n"
-operator|+
-literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)\n"
+name|expected2
 argument_list|)
 expr_stmt|;
 comment|// 3. same as 1
@@ -14055,9 +14069,38 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// bushy
+name|String
+name|sql4
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (a cross join b)\n"
+operator|+
+literal|"cross join (c cross join d)"
+decl_stmt|;
+name|String
+name|expected4
+init|=
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (`A` NATURAL LEFT JOIN `B`) LEFT JOIN `C` ON (`B`.`C1` = `C`.`C1`)\n"
+literal|"FROM `A`\n"
+operator|+
+literal|"CROSS JOIN `B`\n"
+operator|+
+literal|"CROSS JOIN (`C` CROSS JOIN `D`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected4
 argument_list|)
 expr_stmt|;
 block|}
@@ -15014,7 +15057,6 @@ name|void
 name|testMixedFrom
 parameter_list|()
 block|{
-comment|// REVIEW: Is this syntax even valid?
 name|sql
 argument_list|(
 literal|"select * from a join b using (x), c join d using (y)"
@@ -17600,12 +17642,12 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from (table ^(^select empno from emp))"
+literal|"select * from (table (^select^ empno from emp))"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"\\(\".*"
+literal|"(?s)Encountered \"select\".*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17799,12 +17841,12 @@ expr_stmt|;
 comment|// Bad: Parentheses make it look like a sub-query
 name|sql
 argument_list|(
-literal|"select * from lateral (table^(^ramp(1)))"
+literal|"select * from lateral (^table (ramp(1))^)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"\\(\" at .*"
+literal|"Expected query or join"
 argument_list|)
 expr_stmt|;
 comment|// Good: LATERAL (subQuery)
@@ -32400,15 +32442,16 @@ comment|// UNNEST may not occur within parentheses.
 comment|// FIXME should fail at "unnest"
 name|sql
 argument_list|(
-literal|"select *from ^(^unnest(x))"
+literal|"select *from (^unnest(x)^)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"\\( unnest\" at .*"
+literal|"Expected query or join"
 argument_list|)
 expr_stmt|;
 comment|//<table-name> may not occur within parentheses.
+comment|// TODO: Postgres gives "syntax error at ')'", which might be better
 name|sql
 argument_list|(
 literal|"select * from (^emp^)"
@@ -32416,18 +32459,19 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Non-query expression encountered in illegal context.*"
+literal|"(?s)Expected query or join.*"
 argument_list|)
 expr_stmt|;
 comment|//<table-name> may not occur within parentheses.
+comment|// TODO: Postgres gives "syntax error at ')'", which might be better
 name|sql
 argument_list|(
-literal|"select * from (^emp^ as x)"
+literal|"select * from (^emp as x^)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Non-query expression encountered in illegal context.*"
+literal|"Expected query or join"
 argument_list|)
 expr_stmt|;
 comment|//<table-name> may not occur within parentheses.
@@ -32438,37 +32482,388 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Non-query expression encountered in illegal context.*"
+literal|"Expected query or join"
 argument_list|)
 expr_stmt|;
 comment|// Parentheses around JOINs are OK, and sometimes necessary.
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-comment|// todo:
+name|String
+name|sql1
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (emp join dept using (deptno))"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"INNER JOIN `DEPT` USING (`DEPTNO`)"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"select * from (emp join dept using (deptno))"
+name|sql1
 argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"xx"
+name|expected
+argument_list|)
+expr_stmt|;
+name|String
+name|sql2
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (emp join dept using (deptno))\n"
+operator|+
+literal|"join foo using (x)"
+decl_stmt|;
+name|String
+name|expected2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"INNER JOIN `DEPT` USING (`DEPTNO`)\n"
+operator|+
+literal|"INNER JOIN `FOO` USING (`X`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+comment|// In Postgres and Standard SQL, you can alias a join:
+comment|//   "select x.i from (t cross join u) as x"
+comment|// is syntactically and semantically valid; but
+comment|//   "select t.i from (t cross join u) as x"
+comment|// is semantically invalid.
+comment|// TODO: Support this in Calcite.
+name|sql
+argument_list|(
+literal|"select * from (t cross ^join^ u) as x"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Join expression encountered in illegal context"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from (emp join dept using (deptno)) join foo using (x)"
+literal|"select *\n"
+operator|+
+literal|"from (t cross ^join^ u)\n"
+operator|+
+literal|"  tablesample substitute('medium')"
 argument_list|)
 operator|.
-name|ok
+name|fails
 argument_list|(
-literal|"xx"
+literal|"Join expression encountered in illegal context"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from (t cross ^join^ u)\n"
+operator|+
+literal|"PIVOT (sum(sal) AS sal FOR job in ('CLERK' AS c))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Join expression encountered in illegal context"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-35">[CALCITE-35]    * Support parenthesized sub-clause in JOIN</a>. */
+annotation|@
+name|Test
+name|void
+name|testParenthesizedJoins
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM "
+operator|+
+literal|"(((S.C c INNER JOIN S.N n ON n.id = c.id) "
+operator|+
+literal|"INNER JOIN S.A a ON (NOT a.isactive)) "
+operator|+
+literal|"INNER JOIN S.T t ON t.id = a.id)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `S`.`C` AS `C`\n"
+operator|+
+literal|"INNER JOIN `S`.`N` AS `N` ON (`N`.`ID` = `C`.`ID`)\n"
+operator|+
+literal|"INNER JOIN `S`.`A` AS `A` ON (NOT `A`.`ISACTIVE`)\n"
+operator|+
+literal|"INNER JOIN `S`.`T` AS `T` ON (`T`.`ID` = `A`.`ID`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select *\n"
+operator|+
+literal|"from a\n"
+operator|+
+literal|" join (b join c on b.x = c.x)\n"
+operator|+
+literal|" on a.y = c.y"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"INNER JOIN (`B` INNER JOIN `C` ON (`B`.`X` = `C`.`X`))"
+operator|+
+literal|" ON (`A`.`Y` = `C`.`Y`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testFromExpr
+parameter_list|()
+block|{
+name|String
+name|sql0
+init|=
+literal|"select * from a cross join b"
+decl_stmt|;
+name|String
+name|sql1
+init|=
+literal|"select * from (a cross join b)"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"CROSS JOIN `B`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests parsing parenthesized queries. */
+annotation|@
+name|Test
+name|void
+name|testParenthesizedQueries
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `TAB`) AS `X`"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (((SELECT * FROM tab))) X"
+decl_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM ((((((((((((SELECT * FROM tab)))))))))))) X"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM ((((((((((((SELECT * FROM t)))\n"
+operator|+
+literal|"  cross join ((table t2)))))))))))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `T`)\n"
+operator|+
+literal|"CROSS JOIN (TABLE `T2`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+comment|// Adding an alias to the previous query makes it invalid
+comment|// (The error message and location could be improved)
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM ((((((((((((SELECT * FROM t)))\n"
+operator|+
+literal|"  cross ^join^ ((table t2))))))))))) X"
+decl_stmt|;
+specifier|final
+name|String
+name|sql5
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM ((((((((((((SELECT * FROM t)))\n"
+operator|+
+literal|"  cross ^join^ ((table t2))))))))))) as X"
+decl_stmt|;
+specifier|final
+name|String
+name|sql6
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM ((((((((((((SELECT * FROM t)))\n"
+operator|+
+literal|"  cross ^join^ ((table t2))))))))))) as X (a, b, c)"
+decl_stmt|;
+specifier|final
+name|String
+name|message
+init|=
+literal|"Join expression encountered in illegal context"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql5
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql6
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

@@ -24640,11 +24640,10 @@ literal|" VARCHAR(10) NAME) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|// todo: Cannot handle '(a join b)' yet -- we see the '(' and expect to
-comment|// see 'select'.
-specifier|public
+annotation|@
+name|Test
 name|void
-name|_testJoinUsing
+name|testJoinUsingWithParentheses
 parameter_list|()
 block|{
 name|sql
@@ -24657,18 +24656,19 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
-comment|// cannot alias a JOIN (actually this is a parser error, but who's
-comment|// counting?)
+comment|// Cannot alias a JOIN (until
+comment|// [CALCITE-5168] Allow AS after parenthesized JOIN
+comment|// is fixed).
 name|sql
 argument_list|(
-literal|"select * from (emp join bonus using (job)) as x\n"
+literal|"select * from (emp ^join^ bonus using (job)) as x\n"
 operator|+
 literal|"join dept using (deptno)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"as wrong here"
+literal|"Join expression encountered in illegal context"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -24680,7 +24680,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"dname not found in lhs"
+literal|"Column 'DNAME' not found in any table"
 argument_list|)
 expr_stmt|;
 comment|// Needs real Error Message and error marks in query
@@ -24688,12 +24688,12 @@ name|sql
 argument_list|(
 literal|"select * from (emp join bonus using (job))\n"
 operator|+
-literal|"join (select 1 as job from (true)) using (job)"
+literal|"join (select 1 as job from ^(^true)) using (job)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ambig"
+literal|"(?s).*Encountered \"\\( true\" at .*"
 argument_list|)
 expr_stmt|;
 block|}

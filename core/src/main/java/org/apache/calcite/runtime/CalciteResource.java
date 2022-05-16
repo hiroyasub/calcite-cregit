@@ -366,6 +366,30 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Join expression encountered in illegal context"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|illegalJoinExpression
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Expected query or join"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|expectedQueryOrJoinExpression
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"CURSOR expression encountered in illegal context"
 argument_list|)
 name|ExInst

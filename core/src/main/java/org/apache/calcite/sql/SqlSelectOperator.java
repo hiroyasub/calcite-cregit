@@ -690,7 +690,7 @@ name|writer
 argument_list|,
 name|SqlJoin
 operator|.
-name|OPERATOR
+name|COMMA_OPERATOR
 operator|.
 name|getLeftPrec
 argument_list|()
@@ -699,7 +699,7 @@ literal|1
 argument_list|,
 name|SqlJoin
 operator|.
-name|OPERATOR
+name|COMMA_OPERATOR
 operator|.
 name|getRightPrec
 argument_list|()
