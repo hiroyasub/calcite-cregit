@@ -1978,6 +1978,42 @@ literal|"CITY=Ionia"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5157">[CALCITE-5157]    * ClassCastException in checkRollUp with DOT operator</a>. */
+annotation|@
+name|Test
+name|void
+name|testSelectWithFieldAccessOnFirstLevelRecordTypeWithParentheses
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|BOOKSTORE
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select (\"birthPlace\").\"city\" as city from \"bookstore\".\"authors\"\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"CITY=Heraklion"
+argument_list|,
+literal|"CITY=BesanÃ§on"
+argument_list|,
+literal|"CITY=Ionia"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test

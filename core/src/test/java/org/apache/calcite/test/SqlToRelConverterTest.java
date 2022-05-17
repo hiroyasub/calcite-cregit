@@ -721,6 +721,27 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testDotAfterParenthesizedIdentifier
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select (home_address).city from emp_address"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testRowValueConstructorWithSubquery
 parameter_list|()
 block|{

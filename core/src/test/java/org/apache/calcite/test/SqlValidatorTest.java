@@ -8399,6 +8399,23 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testDotAfterParenthesizedIdentifier
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select (home_address).city from emp_address"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMultiset
 parameter_list|()
 block|{

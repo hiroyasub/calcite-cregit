@@ -8096,7 +8096,9 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT ((ROW(1, 2)).`A`)\nFROM `C`.`T`"
+literal|"SELECT ((ROW(1, 2)).`A`)\n"
+operator|+
+literal|"FROM `C`.`T`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -8106,7 +8108,9 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT ((ROW(1, 2)).`A`)\nFROM `C`.`T`"
+literal|"SELECT ((ROW(1, 2)).`A`)\n"
+operator|+
+literal|"FROM `C`.`T`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -8116,7 +8120,28 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT ((`TBL`.`FOO`(0).`COL`).`BAR`)\nFROM `TBL`"
+literal|"SELECT ((`TBL`.`FOO`(0).`COL`).`BAR`)\n"
+operator|+
+literal|"FROM `TBL`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testDotAfterParenthesizedIdentifier
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select (a).c.d from c.t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT ((`A`.`C`).`D`)\n"
+operator|+
+literal|"FROM `C`.`T`"
 argument_list|)
 expr_stmt|;
 block|}
