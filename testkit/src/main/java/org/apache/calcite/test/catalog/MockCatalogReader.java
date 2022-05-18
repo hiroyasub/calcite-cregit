@@ -2624,6 +2624,7 @@ name|of
 argument_list|()
 expr_stmt|;
 block|}
+specifier|public
 name|void
 name|addWrap
 parameter_list|(
