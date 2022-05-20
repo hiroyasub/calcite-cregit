@@ -6201,6 +6201,33 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5162">[CALCITE-5162]    * RelMdUniqueKeys can return more precise unique keys for Aggregate</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testGroupByPreciseUniqueKeys
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select empno, ename from emp group by empno, ename"
+argument_list|)
+operator|.
+name|assertThatUniqueKeysAre
+argument_list|(
+name|bitSetOf
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
