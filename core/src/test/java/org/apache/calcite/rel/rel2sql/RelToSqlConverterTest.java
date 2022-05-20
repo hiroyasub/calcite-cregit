@@ -11693,6 +11693,74 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testMySqlUnparseListAggCall
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select\n"
+operator|+
+literal|"listagg(distinct \"product_name\", ',') within group(order by \"cases_per_pallet\"),\n"
+operator|+
+literal|"listagg(\"product_name\", ',') within group(order by \"cases_per_pallet\"),\n"
+operator|+
+literal|"listagg(distinct \"product_name\") within group(order by \"cases_per_pallet\" desc),\n"
+operator|+
+literal|"listagg(distinct \"product_name\", ',') within group(order by \"cases_per_pallet\"),\n"
+operator|+
+literal|"listagg(\"product_name\"),\n"
+operator|+
+literal|"listagg(\"product_name\", ',')\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by \"product_id\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT GROUP_CONCAT(DISTINCT `product_name` "
+operator|+
+literal|"ORDER BY `cases_per_pallet` IS NULL, `cases_per_pallet` SEPARATOR ','), "
+operator|+
+literal|"GROUP_CONCAT(`product_name` "
+operator|+
+literal|"ORDER BY `cases_per_pallet` IS NULL, `cases_per_pallet` SEPARATOR ','), "
+operator|+
+literal|"GROUP_CONCAT(DISTINCT `product_name` "
+operator|+
+literal|"ORDER BY `cases_per_pallet` IS NULL DESC, `cases_per_pallet` DESC), "
+operator|+
+literal|"GROUP_CONCAT(DISTINCT `product_name` "
+operator|+
+literal|"ORDER BY `cases_per_pallet` IS NULL, `cases_per_pallet` SEPARATOR ','), "
+operator|+
+literal|"GROUP_CONCAT(`product_name`), GROUP_CONCAT(`product_name` SEPARATOR ',')\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_id`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMySqlWithHighNullsSelectWithOrderByAscNullsLastAndNoEmulation
 parameter_list|()
 block|{
