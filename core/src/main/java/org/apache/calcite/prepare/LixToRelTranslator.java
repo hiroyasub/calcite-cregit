@@ -351,6 +351,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -738,6 +752,11 @@ name|String
 argument_list|>
 operator|)
 literal|null
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
 argument_list|)
 return|;
 case|case

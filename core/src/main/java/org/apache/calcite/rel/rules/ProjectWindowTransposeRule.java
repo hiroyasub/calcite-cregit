@@ -311,6 +311,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|immutables
@@ -503,7 +517,7 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// Put a DrillProjectRel below LogicalWindow
+comment|// Put a Project below LogicalWindow
 specifier|final
 name|List
 argument_list|<
@@ -608,6 +622,11 @@ argument_list|,
 name|builder
 operator|.
 name|build
+argument_list|()
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
 argument_list|()
 argument_list|)
 decl_stmt|;

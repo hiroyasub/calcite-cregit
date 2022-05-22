@@ -682,6 +682,11 @@ argument_list|()
 operator|.
 name|getFieldNames
 argument_list|()
+argument_list|,
+name|project
+operator|.
+name|getVariablesSet
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|call

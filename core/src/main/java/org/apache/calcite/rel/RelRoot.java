@@ -165,6 +165,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -723,6 +737,11 @@ name|right
 argument_list|(
 name|fields
 argument_list|)
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
 argument_list|)
 return|;
 block|}

@@ -1779,6 +1779,11 @@ name|proj
 operator|.
 name|getRowType
 argument_list|()
+argument_list|,
+name|proj
+operator|.
+name|getVariablesSet
+argument_list|()
 argument_list|)
 return|;
 block|}

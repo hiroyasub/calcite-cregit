@@ -382,7 +382,7 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the variables that are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>Note: only {@link org.apache.calcite.rel.core.Correlate} should set    * variables.    *    * @return Names of variables which are set in this relational    *   expression    */
+comment|/**    * Returns the variables that are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    * @return Names of variables which are set in this relational    *   expression    */
 name|Set
 argument_list|<
 name|CorrelationId

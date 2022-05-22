@@ -361,6 +361,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|immutables
@@ -936,7 +950,13 @@ return|;
 block|}
 block|}
 return|return
-literal|true
+name|project
+operator|.
+name|getVariablesSet
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
 return|;
 block|}
 annotation|@
@@ -958,6 +978,21 @@ name|LogicalProject
 operator|)
 name|rel
 decl_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|project
+operator|.
+name|getVariablesSet
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+argument_list|,
+literal|"GeodeProject does now allow variables"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelTraitSet
 name|traitSet

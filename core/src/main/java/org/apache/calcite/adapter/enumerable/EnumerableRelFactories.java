@@ -153,6 +153,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|checkerframework
@@ -387,8 +401,26 @@ name|Nullable
 name|String
 operator|>
 name|fieldNames
+argument_list|,
+name|Set
+argument_list|<
+name|CorrelationId
+argument_list|>
+name|variablesSet
 argument_list|)
 block|{
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|variablesSet
+operator|.
+name|isEmpty
+argument_list|()
+argument_list|,
+literal|"EnumerableProject does not allow variables"
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelDataType
 name|rowType

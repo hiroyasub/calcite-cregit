@@ -6066,6 +6066,11 @@ name|project
 operator|.
 name|getRowType
 argument_list|()
+argument_list|,
+name|project
+operator|.
+name|getVariablesSet
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return

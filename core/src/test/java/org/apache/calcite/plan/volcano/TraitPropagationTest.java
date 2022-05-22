@@ -827,6 +827,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|checkerframework
@@ -1403,6 +1417,11 @@ name|integerType
 argument_list|)
 operator|.
 name|build
+argument_list|()
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -2614,6 +2633,11 @@ argument_list|,
 name|exps
 argument_list|,
 name|rowType
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

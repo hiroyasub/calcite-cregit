@@ -716,7 +716,13 @@ return|;
 block|}
 block|}
 return|return
-literal|true
+name|project
+operator|.
+name|getVariablesSet
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
 return|;
 block|}
 annotation|@
