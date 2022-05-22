@@ -278,7 +278,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlNode</code> is a SQL parse tree.  *  *<p>It may be an  * {@link SqlOperator operator}, {@link SqlLiteral literal},  * {@link SqlIdentifier identifier}, and so forth.  */
+comment|/**  * A<code>SqlNode</code> is a SQL parse tree.  *  *<p>It may be a  * {@link SqlCall call}, {@link SqlLiteral literal},  * {@link SqlIdentifier identifier}, and so forth.  */
 end_comment
 
 begin_class
