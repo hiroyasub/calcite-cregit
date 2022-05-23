@@ -106,7 +106,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An internal operator that throws an exception.  *  *<p>The exception is thrown with a (localized) error message which is the only  * input parameter to the operator.</p>  *  *<p>The return type is defined as a<code>BOOLEAN</code> to facilitate the use  * of it in constructs such as the following:</p>  *  *<blockquote><code>CASE<br>  * WHEN&lt;conditionn&gt; THEN true<br>  * ELSE throw("what's wrong with you man?")<br>  * END</code></blockquote>  */
+comment|/**  * An internal operator that throws an exception.  *  *<p>The exception is thrown with a (localized) error message which is the only  * input parameter to the operator.</p>  *  *<p>The return type is defined as a<code>BOOLEAN</code> to facilitate the use  * of it in constructs such as the following:</p>  *  *<blockquote><code>CASE<br>  * WHEN&lt;condition&gt; THEN true<br>  * ELSE throw("what's wrong with you man?")<br>  * END</code></blockquote>  */
 end_comment
 
 begin_class

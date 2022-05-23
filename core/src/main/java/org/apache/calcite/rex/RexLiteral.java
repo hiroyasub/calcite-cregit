@@ -1467,7 +1467,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Computes if data type can be omitted from the digset.    *<p>For instance, {@code 1:BIGINT} has to keep data type while {@code 1:INT}    * should be represented as just {@code 1}.    *    *<p>Implementation assumption: this method should be fast. In fact might call    * {@link NlsString#getValue()} which could decode the string, however we rely on the cache there.    *    * @see RexLiteral#computeDigest(RexDigestIncludeType)    * @param value value of the literal    * @param type type of the literal    * @return NO_TYPE when type can be omitted, ALWAYS otherwise    */
+comment|/**    * Computes if data type can be omitted from the digest.    *<p>For instance, {@code 1:BIGINT} has to keep data type while {@code 1:INT}    * should be represented as just {@code 1}.    *    *<p>Implementation assumption: this method should be fast. In fact might call    * {@link NlsString#getValue()} which could decode the string, however we rely on the cache there.    *    * @see RexLiteral#computeDigest(RexDigestIncludeType)    * @param value value of the literal    * @param type type of the literal    * @return NO_TYPE when type can be omitted, ALWAYS otherwise    */
 specifier|private
 specifier|static
 name|RexDigestIncludeType

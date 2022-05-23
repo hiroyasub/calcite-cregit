@@ -4363,7 +4363,7 @@ case|case
 name|EQUALS
 case|:
 block|{
-comment|// checks that the EQUALS operands may be splitted and
+comment|// checks that the EQUALS operands may be split and
 comment|// doesn't push EQUALS into CASE
 name|List
 argument_list|<

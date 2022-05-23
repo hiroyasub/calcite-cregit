@@ -11832,7 +11832,7 @@ name|operand
 argument_list|)
 condition|)
 block|{
-comment|// x :: y below means cast(x as y) (which is PostgreSQL-specifiic cast by the way)
+comment|// x :: y below means cast(x as y) (which is PostgreSQL-specific cast by the way)
 comment|// A) Remove lossless casts:
 comment|// A.1) intExpr :: bigint :: int => intExpr
 comment|// A.2) char2Expr :: char(5) :: char(2) => char2Expr

@@ -47,7 +47,7 @@ name|IllegalStateException
 argument_list|()
 throw|;
 block|}
-comment|/**    * Returns the row with the highest index whose corresponding symbol matches, null otherwese.    * @param symbol Target Symbol    * @param rows List of passed rows    * @param symbols Corresponding symbols to rows    * @return index or -1    */
+comment|/**    * Returns the row with the highest index whose corresponding symbol matches, null otherwise.    * @param symbol Target Symbol    * @param rows List of passed rows    * @param symbols Corresponding symbols to rows    * @return index or -1    */
 specifier|public
 specifier|static
 parameter_list|<
