@@ -24283,7 +24283,7 @@ literal|"select *\n"
 operator|+
 literal|"from (select ename as name, hiredate as deptno from emp)\n"
 operator|+
-literal|"natural ^join^\n"
+literal|"^natural^ join\n"
 operator|+
 literal|"(select deptno, name as sal from dept)"
 argument_list|)
@@ -24381,20 +24381,165 @@ literal|"Column 'GENDER' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5171">[CALCITE-5171]    * NATURAL join and USING should fail if join columns are not unique</a>. */
 annotation|@
 name|Test
 name|void
-name|testJoinUsingDupColsFails
+name|testNaturalJoinDuplicateColumns
 parameter_list|()
 block|{
+comment|// NATURAL join and USING should fail if join columns are not unique
+specifier|final
+name|String
+name|message
+init|=
+literal|"Column name 'DEPTNO' in NATURAL join or "
+operator|+
+literal|"USING clause is not unique on one side of join"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"select * from emp left join (select deptno, name as deptno from dept) using (^deptno^)"
+literal|"select e.ename, d.name\n"
+operator|+
+literal|"from dept as d\n"
+operator|+
+literal|"^natural^ join (select ename, sal as deptno, deptno from emp) as e"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Column name 'DEPTNO' in USING clause is not unique on one side of join"
+name|message
+argument_list|)
+expr_stmt|;
+comment|// A similar query with USING fails with the same error
+name|sql
+argument_list|(
+literal|"select e.ename, d.name\n"
+operator|+
+literal|"from dept as d\n"
+operator|+
+literal|"join (select ename, sal as deptno, deptno from emp) as e\n"
+operator|+
+literal|"  using (^deptno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+comment|// Also with "*". (Proves that FROM is validated before SELECT.)
+name|sql
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"left join (select deptno, name as deptno from dept)\n"
+operator|+
+literal|"  using (^deptno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+comment|// Reversed query gives reversed error message
+name|sql
+argument_list|(
+literal|"select e.ename, d.name\n"
+operator|+
+literal|"from (select ename, sal as deptno, deptno from emp) as e\n"
+operator|+
+literal|"join dept as d\n"
+operator|+
+literal|"  using (^deptno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+comment|// The error only occurs if the duplicate column is referenced. The
+comment|// following query has a duplicate hiredate column.
+name|sql
+argument_list|(
+literal|"select e.ename, d.name\n"
+operator|+
+literal|"from dept as d\n"
+operator|+
+literal|"join (select ename, sal as hiredate, deptno from emp) as e\n"
+operator|+
+literal|"  using (deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testNaturalEmptyKey
+parameter_list|()
+block|{
+comment|// If there are no columns in common, natural join is empty, and that's OK.
+name|sql
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from (select ename from emp) as e\n"
+operator|+
+literal|"natural join dept as d"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType("
+operator|+
+literal|"VARCHAR(20) NOT NULL ENAME, "
+operator|+
+literal|"INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// If there are duplicates on one side, that's OK, because the empty natural
+comment|// join prevents us from checking.
+name|sql
+argument_list|(
+literal|"select d.*\n"
+operator|+
+literal|"from (select ename, sal as ename from emp) as e\n"
+operator|+
+literal|"natural join dept as d"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType("
+operator|+
+literal|"INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Cannot expand star if it contains duplicate columns.
+comment|// (Postgres thinks this query is OK.)
+name|sql
+argument_list|(
+literal|"select ^e.*^\n"
+operator|+
+literal|"from (select ename, sal as ename from emp) as e\n"
+operator|+
+literal|"natural join dept as d"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'ENAME' is ambiguous"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24771,9 +24916,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"Column name 'DEPTNO' in USING clause is not "
+literal|"Column name 'DEPTNO' in NATURAL join or "
 operator|+
-literal|"unique on one side of join"
+literal|"USING clause is not unique on one side of join"
 decl_stmt|;
 name|sql
 argument_list|(

@@ -1506,7 +1506,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Column name ''{0}'' in USING clause is not unique on one side of join"
+literal|"Column name ''{0}'' in NATURAL join or USING clause is not unique on one side of join"
 argument_list|)
 name|ExInst
 argument_list|<
