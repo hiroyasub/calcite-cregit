@@ -9694,7 +9694,6 @@ literal|"true"
 argument_list|)
 expr_stmt|;
 comment|// "a = 1 or a<> 2" could (and should) be simplified to "a<> 2"
-comment|// but can't do that right now
 name|checkSimplifyFilter
 argument_list|(
 name|or
@@ -9714,7 +9713,30 @@ name|literal2
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(=(?0.a, 1),<>(?0.a, 2))"
+literal|"<>(?0.a, 2)"
+argument_list|)
+expr_stmt|;
+comment|// "a< 1 or a> 1" ==> "a<> 1"
+name|checkSimplifyFilter
+argument_list|(
+name|or
+argument_list|(
+name|lt
+argument_list|(
+name|aRef
+argument_list|,
+name|literal1
+argument_list|)
+argument_list|,
+name|gt
+argument_list|(
+name|aRef
+argument_list|,
+name|literal1
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"<>(?0.a, 1)"
 argument_list|)
 expr_stmt|;
 comment|// "(a>= 1 and a<= 3) or a<> 2", or equivalently

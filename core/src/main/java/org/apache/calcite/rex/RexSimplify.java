@@ -15614,6 +15614,11 @@ name|sarg
 operator|.
 name|rangeSet
 argument_list|)
+operator|||
+name|sarg
+operator|.
+name|isComplementedPoints
+argument_list|()
 return|;
 block|}
 comment|/** If a term is a call to {@code SEARCH} on a {@link RexSargBuilder},      * converts it to a {@code SEARCH} on a {@link Sarg}. */

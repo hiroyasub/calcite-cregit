@@ -6769,6 +6769,68 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5169">[CALCITE-5169]    * 'xx< 1 OR xx> 1' cannot be simplified to 'xx<> 1'</a>.    *    *<p>{@code ename<> '' and ename<> '3'} should be simplified to Sarg.    */
+annotation|@
+name|Test
+name|void
+name|testExpressionSimplification1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where ename<> '' and ename<> '3'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5169">[CALCITE-5169]    * 'xx< 1 OR xx> 1' cannot be simplified to 'xx<> 1'</a>.    *    *<p>{@code (ename< '' or ename> '') and (ename< '3' or ename> '3')} should be    * simplified to Sarg too.    * The difference between this and {@link #testExpressionSimplification1()} is    * that '<' and '<>' have different    * {@link org.apache.calcite.sql.type.SqlOperandTypeChecker.Consistency} which    * will lead to different type inference result for literals. These two tests    * show that the simplification could handle this case.    */
+annotation|@
+name|Test
+name|void
+name|testExpressionSimplification2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where (ename< '' or ename> '') and (ename< '3' or ename> '3')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
