@@ -586,7 +586,7 @@ name|type
 operator|==
 name|Type
 operator|.
-name|RANDOM_DISTRIBUTED
+name|RANGE_DISTRIBUTED
 operator|||
 name|keys
 operator|.
