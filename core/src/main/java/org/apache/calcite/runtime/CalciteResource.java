@@ -226,7 +226,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Illegal {0} literal {1}: {2}"
+literal|"Illegal {0} literal ''{1}'': {2}"
 argument_list|)
 name|ExInst
 argument_list|<

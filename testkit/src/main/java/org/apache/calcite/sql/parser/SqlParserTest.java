@@ -20913,6 +20913,170 @@ name|expected4
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that on BigQuery, DATE, TIME and TIMESTAMP literals can use    * single- or double-quoted strings. */
+annotation|@
+name|Test
+name|void
+name|testDateLiteralBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|SqlParserFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select date '2020-10-10'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT DATE '2020-10-10'"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select date\"2020-10-10\""
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT DATE '2020-10-10'"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select timestamp '2018-02-17 13:22:04'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT TIMESTAMP '2018-02-17 13:22:04'"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select timestamp \"2018-02-17 13:22:04\""
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT TIMESTAMP '2018-02-17 13:22:04'"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select time '13:22:04'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT TIME '13:22:04'"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select time \"13:22:04\""
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT TIME '13:22:04'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testIntervalLiteralBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|SqlParserFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|expression
+argument_list|(
+literal|true
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"interval '1' day"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL '1' DAY"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"interval \"1\" day"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL '1' DAY"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"interval '1:2:3' hour to second"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL '1:2:3' HOUR TO SECOND"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"interval \"1:2:3\" hour to second"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"INTERVAL '1:2:3' HOUR TO SECOND"
+argument_list|)
+expr_stmt|;
+block|}
 comment|// check date/time functions.
 annotation|@
 name|Test
