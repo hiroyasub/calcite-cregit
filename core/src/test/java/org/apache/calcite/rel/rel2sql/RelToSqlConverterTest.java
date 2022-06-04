@@ -20872,6 +20872,43 @@ name|expectedSnowflake
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5179">[CALCITE-5179]    * In RelToSqlConverter, AssertionError for values with more than two items    * when SqlDialect#supportsAliasedValues is false</a>.    */
+annotation|@
+name|Test
+name|void
+name|testThreeValues
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values (1), (2), (3)) as t(\"a\")\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRedshift
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT 1 AS \"a\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2 AS \"a\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 3 AS \"a\")"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
