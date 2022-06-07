@@ -3704,17 +3704,6 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|newProject
-operator|=
-name|RelOptUtil
-operator|.
-name|copyRelHints
-argument_list|(
-name|newInput
-argument_list|,
-name|newProject
-argument_list|)
-expr_stmt|;
 comment|// update mappings:
 comment|// oldInput ----> newInput
 comment|//
@@ -4218,17 +4207,10 @@ block|}
 name|RelNode
 name|newRel
 init|=
-name|RelOptUtil
-operator|.
-name|copyRelHints
-argument_list|(
-name|rel
-argument_list|,
 name|relBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|)
 decl_stmt|;
 comment|// Aggregate does not change input ordering so corVars will be
 comment|// located at the same position as the input newProject.
@@ -4819,17 +4801,6 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|newProject
-operator|=
-name|RelOptUtil
-operator|.
-name|copyRelHints
-argument_list|(
-name|rel
-argument_list|,
-name|newProject
-argument_list|)
-expr_stmt|;
 return|return
 name|register
 argument_list|(
@@ -7469,14 +7440,6 @@ name|of
 argument_list|()
 argument_list|)
 operator|.
-name|hints
-argument_list|(
-name|rel
-operator|.
-name|getHints
-argument_list|()
-argument_list|)
-operator|.
 name|build
 argument_list|()
 decl_stmt|;
@@ -8748,6 +8711,17 @@ argument_list|>
 name|corDefOutputs
 parameter_list|)
 block|{
+name|newRel
+operator|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
+argument_list|(
+name|rel
+argument_list|,
+name|newRel
+argument_list|)
+expr_stmt|;
 specifier|final
 name|Frame
 name|frame
