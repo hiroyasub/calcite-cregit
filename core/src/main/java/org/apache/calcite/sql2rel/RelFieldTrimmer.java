@@ -1812,8 +1812,6 @@ argument_list|(
 name|rel
 argument_list|,
 name|mapping
-argument_list|,
-name|rel
 argument_list|)
 return|;
 block|}
