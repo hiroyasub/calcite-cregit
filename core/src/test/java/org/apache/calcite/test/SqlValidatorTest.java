@@ -26349,6 +26349,44 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Tests that you can reference a column alias in the ORDER BY clause if    * {@link SqlConformance#isSortByAlias()}. */
+annotation|@
+name|Test
+name|void
+name|testOrderByAlias
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select count(*) as total from emp order by ^total^"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|STRICT_2003
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'TOTAL' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

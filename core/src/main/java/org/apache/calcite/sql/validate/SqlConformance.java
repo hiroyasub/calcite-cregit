@@ -184,7 +184,7 @@ name|boolean
 name|isSortByOrdinal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether '{@code ORDER BY x}' is interpreted to mean 'sort by the select    * list item whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#SQL_SERVER_2008},    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
+comment|/**    * Whether '{@code ORDER BY x}' is interpreted to mean 'sort by the select    * list item whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#SQL_SERVER_2008},    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
 name|boolean
 name|isSortByAlias
 parameter_list|()
