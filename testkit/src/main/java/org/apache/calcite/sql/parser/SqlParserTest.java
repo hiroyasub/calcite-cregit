@@ -21391,6 +21391,34 @@ literal|"(?s).*when1.*"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4802">[CALCITE-4802]    * Babel parser doesn't parse IF(condition, then, else) statements</a>.    */
+annotation|@
+name|Test
+name|void
+name|testIf
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"if(true, 1, 0)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"`IF`(TRUE, 1, 0)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 as if"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT 1 AS `IF`"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
