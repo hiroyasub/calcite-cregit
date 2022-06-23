@@ -34027,6 +34027,272 @@ name|expected2
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5194">[CALCITE-5194]    * Cannot parse parenthesized UNION in FROM</a>. */
+annotation|@
+name|Test
+name|void
+name|testParenthesizedUnionInFrom
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  (select x from a)\n"
+operator|+
+literal|"  union\n"
+operator|+
+literal|"  (select y from b))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `X`\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM `B`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testParenthesizedUnionAndJoinInFrom
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  (select x from a) as a"
+operator|+
+literal|"  cross join\n"
+operator|+
+literal|"  (select x from a\n"
+operator|+
+literal|"  union\n"
+operator|+
+literal|"  select y from b) as b)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `X`\n"
+operator|+
+literal|"FROM `A`) AS `A`\n"
+operator|+
+literal|"CROSS JOIN (SELECT `X`\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM `B`) AS `B`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testParenthesizedUnionAndJoinInFrom()}    * but the UNION is the first input to the JOIN. */
+annotation|@
+name|Test
+name|void
+name|testParenthesizedUnionAndJoinInFrom2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  (select x from a\n"
+operator|+
+literal|"  union\n"
+operator|+
+literal|"  select y from b) as b\n"
+operator|+
+literal|"  cross join\n"
+operator|+
+literal|"  (select x from a) as a)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `X`\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM `B`) AS `B`\n"
+operator|+
+literal|"CROSS JOIN (SELECT `X`\n"
+operator|+
+literal|"FROM `A`) AS `A`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testParenthesizedUnionAndJoinInFrom2()}    * but INNER JOIN rather than CROSS JOIN. */
+annotation|@
+name|Test
+name|void
+name|testParenthesizedUnionAndJoinInFrom3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  (select x from a\n"
+operator|+
+literal|"  union\n"
+operator|+
+literal|"  select y from b) as b\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select x from a) as a on b.x = a.x)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `X`\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM `B`) AS `B`\n"
+operator|+
+literal|"INNER JOIN (SELECT `X`\n"
+operator|+
+literal|"FROM `A`) AS `A` ON (`B`.`X` = `A`.`X`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testParenthesizedUnion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"(select x from a\n"
+operator|+
+literal|"  union\n"
+operator|+
+literal|"  select y from b)\n"
+operator|+
+literal|"except\n"
+operator|+
+literal|"(select z from c)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"((SELECT `X`\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT `Y`\n"
+operator|+
+literal|"FROM `B`)\n"
+operator|+
+literal|"EXCEPT\n"
+operator|+
+literal|"SELECT `Z`\n"
+operator|+
+literal|"FROM `C`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
