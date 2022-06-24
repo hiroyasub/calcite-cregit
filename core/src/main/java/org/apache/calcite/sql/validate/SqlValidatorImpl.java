@@ -3046,7 +3046,6 @@ name|expanded
 argument_list|)
 expr_stmt|;
 block|}
-specifier|final
 name|RelDataType
 name|type
 init|=
@@ -3057,6 +3056,35 @@ argument_list|,
 name|expanded
 argument_list|)
 decl_stmt|;
+comment|// Re-derive SELECT ITEM's data type that may be nullable in AggregatingSelectScope when it
+comment|// appears in advanced grouping elements such as CUBE, ROLLUP , GROUPING SETS.
+comment|// For example, SELECT CASE WHEN c = 1 THEN '1' ELSE '23' END AS x FROM t GROUP BY CUBE(x),
+comment|// the 'x' should be nullable even if x's literal values are not null.
+if|if
+condition|(
+name|selectScope
+operator|instanceof
+name|AggregatingSelectScope
+condition|)
+block|{
+name|type
+operator|=
+name|requireNonNull
+argument_list|(
+name|selectScope
+operator|.
+name|nullifyType
+argument_list|(
+name|stripAs
+argument_list|(
+name|expanded
+argument_list|)
+argument_list|,
+name|type
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 name|setValidatedNodeType
 argument_list|(
 name|expanded

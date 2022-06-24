@@ -16832,6 +16832,133 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5045">[CALCITE-5045]    * Alias within GroupingSets throws type mis-match exception</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAliasWithinGroupingSets
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT empno / 2 AS x\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY ROLLUP(x)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5145">[CALCITE-5145]    * CASE statement within GROUPING SETS throws type mis-match exception</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseAliasWithinGroupingSets
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno,\n"
+operator|+
+literal|"CASE\n"
+operator|+
+literal|"WHEN ename in ('Fred','Eric') THEN 'CEO'\n"
+operator|+
+literal|"ELSE 'Other'\n"
+operator|+
+literal|"END AS derived_col\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY GROUPING SETS ((empno, derived_col),(empno))"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5145">[CALCITE-5145]    * CASE statement within GROUPING SETS throws type mis-match exception</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testCaseWithinGroupingSets
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT empno,\n"
+operator|+
+literal|"CASE WHEN ename IN ('Fred','Eric') THEN 'Manager' ELSE 'Other' END\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY GROUPING SETS (\n"
+operator|+
+literal|"(empno, CASE WHEN ename IN ('Fred','Eric') THEN 'Manager' ELSE 'Other' END),\n"
+operator|+
+literal|"(empno)\n"
+operator|+
+literal|")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 unit|}
 end_unit
 
