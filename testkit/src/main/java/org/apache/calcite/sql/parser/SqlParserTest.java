@@ -36096,6 +36096,42 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4746">[CALCITE-4746]    * Pivots with pivotAgg without alias fail with Babel Parser Implementation</a>.*/
+annotation|@
+name|Test
+name|void
+name|testPivotWithoutAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM emp\n"
+operator|+
+literal|"PIVOT (sum(sal) FOR job in ('CLERK'))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` PIVOT (SUM(`SAL`)"
+operator|+
+literal|" FOR `JOB` IN ('CLERK'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** In PIVOT, FOR clause must contain only simple identifiers. */
 annotation|@
 name|Test
