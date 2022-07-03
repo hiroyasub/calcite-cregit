@@ -1967,6 +1967,26 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
+comment|/** Rule that creates a {@link Join#isSemiJoin semi-join} from a    * {@link Join}, and it's right keys are unique in its right input.    */
+specifier|public
+specifier|static
+specifier|final
+name|SemiJoinRule
+operator|.
+name|JoinOnUniqueToSemiJoinRule
+name|JOIN_ON_UNIQUE_TO_SEMI_JOIN
+init|=
+name|SemiJoinRule
+operator|.
+name|JoinOnUniqueToSemiJoinRule
+operator|.
+name|JoinOnUniqueToSemiJoinRuleConfig
+operator|.
+name|DEFAULT
+operator|.
+name|toRule
+argument_list|()
+decl_stmt|;
 comment|/** Rule that converts a {@link LogicalJoin}    * into a {@link LogicalCorrelate}. */
 specifier|public
 specifier|static

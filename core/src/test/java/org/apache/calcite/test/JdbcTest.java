@@ -19640,6 +19640,13 @@ expr_stmt|;
 block|}
 comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-5048">[CALCITE-5048]    * Query with parameterized LIMIT and correlated sub-query throws AssertionError "not a    * literal"</a>.    */
 annotation|@
+name|Disabled
+argument_list|(
+literal|"[CALCITE-5229] JdbcTest#testDynamicParameterInLimitOffset"
+operator|+
+literal|" throws IllegalArgumentException"
+argument_list|)
+annotation|@
 name|Test
 name|void
 name|testDynamicParameterInLimitOffset

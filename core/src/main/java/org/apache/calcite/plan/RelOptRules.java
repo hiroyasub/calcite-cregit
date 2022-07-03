@@ -512,6 +512,10 @@ name|PROJECT_TO_SEMI_JOIN
 argument_list|,
 name|CoreRules
 operator|.
+name|JOIN_ON_UNIQUE_TO_SEMI_JOIN
+argument_list|,
+name|CoreRules
+operator|.
 name|JOIN_TO_SEMI_JOIN
 argument_list|,
 name|CoreRules
