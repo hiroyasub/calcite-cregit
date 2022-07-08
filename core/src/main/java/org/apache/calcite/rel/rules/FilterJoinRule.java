@@ -1284,6 +1284,7 @@ return|;
 block|}
 comment|/**    * Splits out the equal sets.    *    * @param rexNodes the original conditions    * @param leftNodes where the conditions not feasible for equal sets are put    * @return the equal sets    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|Set

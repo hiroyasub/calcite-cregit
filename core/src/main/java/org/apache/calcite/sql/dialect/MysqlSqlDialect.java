@@ -1433,8 +1433,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Unparses LISTAGG for MySQL. This call is translated to GROUP_CONCAT.<br/>    * For example:    * source:<code>LISTAGG(DISTINCT c1, ',') WITHIN GROUP (ORDER BY c2, c3)</code>    * target:<code>GROUP_CONCAT(DISTINCT c1 ORDER BY c2, c3 SEPARATOR ',')</code>    *    * @param writer Writer    * @param listAggCall Call of LISTAGG    * @param orderItemNode Elems of WITHIN_GROUP, NULL means none elem in the WITHIN_GROUP    * @param leftPrec leftPrec    * @param rightPrec rightPrec    */
+comment|/**    * Unparses LISTAGG for MySQL. This call is translated to GROUP_CONCAT.    *    *<p>For example:    *<ul>    *<li>source:    *<code>LISTAGG(DISTINCT c1, ',') WITHIN GROUP (ORDER BY c2, c3)</code>    *<li>target:    *<code>GROUP_CONCAT(DISTINCT c1 ORDER BY c2, c3 SEPARATOR ',')</code>    *</ul>    *    * @param writer Writer    * @param call Call to LISTAGG    * @param orderItemNode Elements of WITHIN_GROUP; null means no elements in    *                     the WITHIN_GROUP    * @param leftPrec Left precedence    * @param rightPrec Right precedence    */
 specifier|private
+specifier|static
 name|void
 name|unparseListAggCall
 parameter_list|(
@@ -1442,7 +1443,7 @@ name|SqlWriter
 name|writer
 parameter_list|,
 name|SqlCall
-name|listAggCall
+name|call
 parameter_list|,
 annotation|@
 name|Nullable
@@ -1463,7 +1464,7 @@ name|SqlNode
 argument_list|>
 name|listAggCallOperands
 init|=
-name|listAggCall
+name|call
 operator|.
 name|getOperandList
 argument_list|()
@@ -1490,11 +1491,10 @@ name|newOperandListBuilder
 init|=
 name|ImmutableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|builder
 argument_list|()
+decl_stmt|;
+name|newOperandListBuilder
 operator|.
 name|add
 argument_list|(
@@ -1505,7 +1505,7 @@ argument_list|(
 literal|0
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 if|if
 condition|(
 name|orderItemNode
@@ -1550,18 +1550,22 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|final
+name|SqlCall
+name|call2
+init|=
 name|SqlLibraryOperators
 operator|.
 name|GROUP_CONCAT
 operator|.
 name|createCall
 argument_list|(
-name|listAggCall
+name|call
 operator|.
 name|getFunctionQuantifier
 argument_list|()
 argument_list|,
-name|listAggCall
+name|call
 operator|.
 name|getParserPosition
 argument_list|()
@@ -1571,6 +1575,8 @@ operator|.
 name|build
 argument_list|()
 argument_list|)
+decl_stmt|;
+name|call2
 operator|.
 name|unparse
 argument_list|(

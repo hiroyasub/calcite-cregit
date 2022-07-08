@@ -214,18 +214,6 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"JSON path expression must be specified after the JSON value expression"
-argument_list|)
-name|ExInst
-argument_list|<
-name|CalciteException
-argument_list|>
-name|jsonPathMustBeSpecified
-parameter_list|()
-function_decl|;
-annotation|@
-name|BaseMessage
-argument_list|(
 literal|"Illegal {0} literal ''{1}'': {2}"
 argument_list|)
 name|ExInst

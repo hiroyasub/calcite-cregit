@@ -461,6 +461,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|void
 name|appendString
 parameter_list|(

@@ -21606,6 +21606,7 @@ throw|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|boolean
 name|isReturnBooleanType
 parameter_list|(

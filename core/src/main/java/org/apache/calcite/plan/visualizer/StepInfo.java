@@ -19,11 +19,29 @@ end_package
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|Collections
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
 import|;
 end_import
 
@@ -111,9 +129,9 @@ name|this
 operator|.
 name|updates
 operator|=
-name|Collections
+name|ImmutableMap
 operator|.
-name|unmodifiableMap
+name|copyOf
 argument_list|(
 name|updates
 argument_list|)
@@ -122,9 +140,9 @@ name|this
 operator|.
 name|matchedRels
 operator|=
-name|Collections
+name|ImmutableList
 operator|.
-name|unmodifiableList
+name|copyOf
 argument_list|(
 name|matchedRels
 argument_list|)
