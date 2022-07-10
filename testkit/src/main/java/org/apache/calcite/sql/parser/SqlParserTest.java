@@ -20147,6 +20147,117 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testMergeMismatchedParentheses
+parameter_list|()
+block|{
+comment|// Invalid; more '(' than ')'
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"merge into emps as e\n"
+operator|+
+literal|"using temps as t on e.empno = t.empno\n"
+operator|+
+literal|"when not matched\n"
+operator|+
+literal|"then insert (a, b) (values (1, 2^)^"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"<EOF>\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// Invalid; more ')' than '('
+specifier|final
+name|String
+name|sql1b
+init|=
+literal|"merge into emps as e\n"
+operator|+
+literal|"using temps as t on e.empno = t.empno\n"
+operator|+
+literal|"when not matched\n"
+operator|+
+literal|"then insert (a, b) values (1, 2)^)^"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1b
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\)\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// As sql1, with extra ')', therefore valid
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"merge into emps as e\n"
+operator|+
+literal|"using temps as t on e.empno = t.empno\n"
+operator|+
+literal|"when not matched\n"
+operator|+
+literal|"then insert (a, b) (values (1, 2))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"MERGE INTO `EMPS` AS `E`\n"
+operator|+
+literal|"USING `TEMPS` AS `T`\n"
+operator|+
+literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
+operator|+
+literal|"WHEN NOT MATCHED THEN INSERT (`A`, `B`) (VALUES (ROW(1, 2)))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// As sql1, removing unmatched '(', therefore valid
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"merge into emps as e\n"
+operator|+
+literal|"using temps as t on e.empno = t.empno\n"
+operator|+
+literal|"when not matched\n"
+operator|+
+literal|"then insert (a, b) values (1, 2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testBitStringNotImplemented
 parameter_list|()
 block|{
