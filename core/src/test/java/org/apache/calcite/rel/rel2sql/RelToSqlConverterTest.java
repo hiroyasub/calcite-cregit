@@ -17372,6 +17372,46 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testUnparseSqlIntervalQualifierFirebolt
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" + "
+operator|+
+literal|"INTERVAL '10' HOUR> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"WHERE (\"hire_date\" + INTERVAL '10 HOUR')"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withFirebolt
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testFloorMysqlWeek
 parameter_list|()
 block|{
