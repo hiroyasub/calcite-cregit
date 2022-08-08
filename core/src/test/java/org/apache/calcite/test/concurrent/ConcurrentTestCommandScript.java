@@ -1406,7 +1406,7 @@ literal|'-'
 argument_list|)
 decl_stmt|;
 comment|// Special "thread ids" for setup& cleanup sections; actually setup&
-comment|// cleanup SQL is executed by the main thread, and neither are in the the
+comment|// cleanup SQL is executed by the main thread, and neither are in the
 comment|// thread map.
 specifier|private
 specifier|static
@@ -7985,7 +7985,7 @@ argument_list|)
 expr_stmt|;
 try|try
 block|{
-comment|// direct stdout& stderr to the the threadWriter
+comment|// direct stdout& stderr to the threadWriter
 name|int
 name|status
 init|=

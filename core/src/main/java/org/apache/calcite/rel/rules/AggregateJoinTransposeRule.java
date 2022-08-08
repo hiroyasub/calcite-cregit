@@ -1460,7 +1460,7 @@ comment|// to areColumnsUnique that currently (until [CALCITE-1048] "Make
 comment|// metadata more robust" is fixed) places a heavy load on
 comment|// the metadata system.
 comment|//
-comment|// So we choose to imagine the the input is already unique, which is
+comment|// So we choose to imagine the input is already unique, which is
 comment|// untrue but harmless.
 comment|//
 name|Util

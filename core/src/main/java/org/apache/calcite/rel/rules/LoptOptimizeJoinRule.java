@@ -3419,7 +3419,7 @@ argument_list|)
 control|)
 block|{
 comment|// if the factor corresponds to a dimension table whose
-comment|// join we can remove, make sure the the corresponding fact
+comment|// join we can remove, make sure the corresponding fact
 comment|// table is in the current join tree
 name|Integer
 name|factIdx

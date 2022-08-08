@@ -489,7 +489,7 @@ argument_list|,
 name|window
 argument_list|)
 decl_stmt|;
-comment|// If all the the window input columns are referred,
+comment|// If all the window input columns are referred,
 comment|// it is impossible to trim anyone of them out
 if|if
 condition|(

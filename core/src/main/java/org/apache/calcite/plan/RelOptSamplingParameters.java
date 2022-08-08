@@ -88,7 +88,7 @@ name|repeatableSeed
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Indicates whether Bernoulli or system sampling should be performed.    * Bernoulli sampling requires the decision whether to include each row in    * the the sample to be independent across rows. System sampling allows    * implementation-dependent behavior.    *    * @return true if Bernoulli sampling is configured, false for system    * sampling    */
+comment|/**    * Indicates whether Bernoulli or system sampling should be performed.    * Bernoulli sampling requires the decision whether to include each row in    * the sample to be independent across rows. System sampling allows    * implementation-dependent behavior.    *    * @return true if Bernoulli sampling is configured, false for system    * sampling    */
 specifier|public
 name|boolean
 name|isBernoulli

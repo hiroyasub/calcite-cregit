@@ -561,7 +561,7 @@ return|return
 name|viewSql
 return|;
 block|}
-comment|/** Returns the the schema path of the view. */
+comment|/** Returns the schema path of the view. */
 specifier|public
 name|List
 argument_list|<
@@ -574,7 +574,7 @@ return|return
 name|schemaPath
 return|;
 block|}
-comment|/** Returns the the path of the view. */
+comment|/** Returns the path of the view. */
 specifier|public
 annotation|@
 name|Nullable

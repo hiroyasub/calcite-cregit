@@ -551,7 +551,7 @@ operator|>=
 literal|0
 condition|)
 block|{
-comment|// The the escape character is a special character
+comment|// The escape character is a special character
 comment|// SQL 2003 Part 2 Section 8.6 General Rule 3.b
 for|for
 control|(

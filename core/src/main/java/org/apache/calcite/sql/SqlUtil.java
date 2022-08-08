@@ -4467,7 +4467,7 @@ name|operator
 operator|)
 return|;
 block|}
-comment|/**    * Creates the type of an {@link org.apache.calcite.util.NlsString}.    *    *<p>The type inherits the The NlsString's {@link Charset} and    * {@link SqlCollation}, if they are set, otherwise it gets the system    * defaults.    *    * @param typeFactory Type factory    * @param str         String    * @return Type, including collation and charset    */
+comment|/**    * Creates the type of an {@link org.apache.calcite.util.NlsString}.    *    *<p>The type inherits the NlsString's {@link Charset} and    * {@link SqlCollation}, if they are set, otherwise it gets the system    * defaults.    *    * @param typeFactory Type factory    * @param str         String    * @return Type, including collation and charset    */
 specifier|public
 specifier|static
 name|RelDataType
