@@ -3577,6 +3577,19 @@ return|;
 block|}
 block|}
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|PERCENTILE_DISC
+init|=
+name|opBinding
+lambda|->
+name|opBinding
+operator|.
+name|getCollationType
+argument_list|()
+decl_stmt|;
 block|}
 end_class
 

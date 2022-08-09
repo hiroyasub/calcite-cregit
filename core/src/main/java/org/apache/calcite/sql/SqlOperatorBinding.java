@@ -558,6 +558,18 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
+comment|/**    * Returns the collation type.    */
+specifier|public
+name|RelDataType
+name|getCollationType
+parameter_list|()
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
 comment|/**    * Collects the types of the bound operands into a list.    *    * @return collected list    */
 specifier|public
 name|List

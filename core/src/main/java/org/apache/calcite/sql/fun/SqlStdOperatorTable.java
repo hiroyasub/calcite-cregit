@@ -7057,7 +7057,7 @@ argument_list|(
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * {@code PERCENTILE_DISC} inverse distribution aggregate function.    *    *<p>The argument must be a numeric literal in the range 0 to 1 inclusive    * (representing a percentage), and the return type is {@code DOUBLE}.    * (The return type should determined by the type of the {@code ORDER BY}    * expression, but this cannot be determined by the function itself.)    */
+comment|/**    * {@code PERCENTILE_DISC} inverse distribution aggregate function.    *    *<p>The argument must be a numeric literal in the range 0 to 1 inclusive    * (representing a percentage), and the return type is the type of the    * {@code ORDER BY} expression.    */
 specifier|public
 specifier|static
 specifier|final
@@ -7074,7 +7074,7 @@ name|PERCENTILE_DISC
 argument_list|,
 name|ReturnTypes
 operator|.
-name|DOUBLE
+name|PERCENTILE_DISC
 argument_list|,
 name|OperandTypes
 operator|.

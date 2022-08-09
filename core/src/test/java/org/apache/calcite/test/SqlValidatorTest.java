@@ -31634,7 +31634,7 @@ argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(DOUBLE NOT NULL C, DOUBLE NOT NULL D) NOT NULL"
+literal|"RecordType(DOUBLE NOT NULL C, INTEGER NOT NULL D) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

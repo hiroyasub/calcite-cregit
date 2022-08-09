@@ -43408,7 +43408,7 @@ name|checkType
 argument_list|(
 literal|"percentile_disc(0.25) within group (order by 1)"
 argument_list|,
-literal|"DOUBLE NOT NULL"
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
