@@ -698,6 +698,8 @@ literal|"KEYWORD(CEIL)"
 argument_list|,
 literal|"KEYWORD(CEILING)"
 argument_list|,
+literal|"KEYWORD(CHAR)"
+argument_list|,
 literal|"KEYWORD(CHARACTER_LENGTH)"
 argument_list|,
 literal|"KEYWORD(CHAR_LENGTH)"

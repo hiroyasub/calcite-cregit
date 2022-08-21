@@ -1300,6 +1300,22 @@ operator|.
 name|CHAR
 argument_list|)
 decl_stmt|;
+comment|/**    * Type-inference strategy whereby the result type of a call is a nullable    * CHAR(1).    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|CHAR_FORCE_NULLABLE
+init|=
+name|CHAR
+operator|.
+name|andThen
+argument_list|(
+name|SqlTypeTransforms
+operator|.
+name|FORCE_NULLABLE
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is an Integer.    */
 specifier|public
 specifier|static
