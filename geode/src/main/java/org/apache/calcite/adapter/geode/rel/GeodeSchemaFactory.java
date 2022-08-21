@@ -43,7 +43,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
+name|SpatialTypeFunctions
 import|;
 end_import
 
@@ -359,7 +359,7 @@ operator|.
 name|of
 argument_list|()
 argument_list|,
-name|GeoFunctions
+name|SpatialTypeFunctions
 operator|.
 name|class
 operator|.

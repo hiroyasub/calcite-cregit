@@ -27643,7 +27643,7 @@ name|sql
 init|=
 literal|"select\n"
 operator|+
-literal|"  ST_Buffer(ST_Point(0.0, 1.0), 2) as b\n"
+literal|"  ST_Buffer(ST_Point(0.0, 0.0), 1, 4) as b\n"
 operator|+
 literal|"from GEO.Restaurants as r"
 decl_stmt|;

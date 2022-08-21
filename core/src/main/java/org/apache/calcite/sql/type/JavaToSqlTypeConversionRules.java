@@ -35,20 +35,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|Geometries
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -74,6 +60,20 @@ operator|.
 name|qual
 operator|.
 name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|locationtech
+operator|.
+name|jts
+operator|.
+name|geom
+operator|.
+name|Geometry
 import|;
 end_import
 
@@ -466,9 +466,7 @@ argument_list|)
 decl|.
 name|put
 argument_list|(
-name|Geometries
-operator|.
-name|Geom
+name|Geometry
 operator|.
 name|class
 argument_list|,

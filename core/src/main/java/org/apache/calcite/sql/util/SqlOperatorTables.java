@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
+name|SpatialTypeFunctions
 import|;
 end_import
 
@@ -85,7 +85,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlGeoFunctions
+name|SqlSpatialTypeFunctions
 import|;
 end_import
 
@@ -199,14 +199,14 @@ name|CalciteCatalogReader
 operator|.
 name|operatorTable
 argument_list|(
-name|GeoFunctions
+name|SpatialTypeFunctions
 operator|.
 name|class
 operator|.
 name|getName
 argument_list|()
 argument_list|,
-name|SqlGeoFunctions
+name|SqlSpatialTypeFunctions
 operator|.
 name|class
 operator|.

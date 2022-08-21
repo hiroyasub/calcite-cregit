@@ -529,21 +529,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|Geometries
+name|SpatialTypeFunctions
 import|;
 end_import
 
@@ -762,6 +748,20 @@ operator|.
 name|qual
 operator|.
 name|Nullable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|locationtech
+operator|.
+name|jts
+operator|.
+name|geom
+operator|.
+name|Geometry
 import|;
 end_import
 
@@ -4375,9 +4375,7 @@ case|case
 name|GEOMETRY
 case|:
 specifier|final
-name|Geometries
-operator|.
-name|Geom
+name|Geometry
 name|geom
 init|=
 name|requireNonNull
@@ -4386,9 +4384,7 @@ name|literal
 operator|.
 name|getValueAs
 argument_list|(
-name|Geometries
-operator|.
-name|Geom
+name|Geometry
 operator|.
 name|class
 argument_list|)
@@ -4404,7 +4400,7 @@ specifier|final
 name|String
 name|wkt
 init|=
-name|GeoFunctions
+name|SpatialTypeFunctions
 operator|.
 name|ST_AsWKT
 argument_list|(

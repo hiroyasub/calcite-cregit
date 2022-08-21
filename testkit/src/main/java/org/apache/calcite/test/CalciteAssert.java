@@ -405,7 +405,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
+name|Hook
 import|;
 end_import
 
@@ -419,7 +419,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|Hook
+name|SpatialTypeFunctions
 import|;
 end_import
 
@@ -669,7 +669,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlGeoFunctions
+name|SqlSpatialTypeFunctions
 import|;
 end_import
 
@@ -5215,7 +5215,7 @@ literal|null
 argument_list|,
 name|emptyPath
 argument_list|,
-name|GeoFunctions
+name|SpatialTypeFunctions
 operator|.
 name|class
 operator|.
@@ -5237,7 +5237,7 @@ literal|null
 argument_list|,
 name|emptyPath
 argument_list|,
-name|SqlGeoFunctions
+name|SqlSpatialTypeFunctions
 operator|.
 name|class
 operator|.
@@ -5245,6 +5245,28 @@ name|getName
 argument_list|()
 argument_list|,
 literal|"*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|ModelHandler
+operator|.
+name|addFunctions
+argument_list|(
+name|rootSchema
+argument_list|,
+literal|"roundGeom"
+argument_list|,
+name|emptyPath
+argument_list|,
+name|TestUtil
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+literal|"roundGeom"
 argument_list|,
 literal|true
 argument_list|)

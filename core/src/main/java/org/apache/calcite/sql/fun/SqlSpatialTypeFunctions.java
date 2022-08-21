@@ -113,23 +113,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|Geometries
-operator|.
-name|Geom
+name|SpatialTypeFunctions
 import|;
 end_import
 
@@ -251,34 +235,6 @@ begin_import
 import|import
 name|com
 operator|.
-name|esri
-operator|.
-name|core
-operator|.
-name|geometry
-operator|.
-name|Envelope
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|esri
-operator|.
-name|core
-operator|.
-name|geometry
-operator|.
-name|Geometry
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
 name|google
 operator|.
 name|common
@@ -307,6 +263,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|locationtech
+operator|.
+name|jts
+operator|.
+name|geom
+operator|.
+name|Geometry
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -316,21 +286,21 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utilities for Geo/Spatial functions.  *  *<p>Includes some table functions, and may in future include other functions  * that have dependencies beyond the {@code org.apache.calcite.runtime} package.  */
+comment|/**  * Utilities for spatial type functions.  *  *<p>Includes some table functions, and may in future include other functions  * that have dependencies beyond the {@code org.apache.calcite.runtime} package.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SqlGeoFunctions
+name|SqlSpatialTypeFunctions
 block|{
 specifier|private
-name|SqlGeoFunctions
+name|SqlSpatialTypeFunctions
 parameter_list|()
 block|{
 block|}
 comment|// Geometry table functions =================================================
-comment|/** Calculates a regular grid of polygons based on {@code geom}.    *    * @see GeoFunctions ST_MakeGrid */
+comment|/** Calculates a regular grid of polygons based on {@code geom}.    *    * @see SpatialTypeFunctions ST_MakeGrid */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -346,7 +316,7 @@ name|ScannableTable
 name|ST_MakeGrid
 parameter_list|(
 specifier|final
-name|Geom
+name|Geometry
 name|geom
 parameter_list|,
 specifier|final
@@ -372,7 +342,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Calculates a regular grid of points based on {@code geom}.    *    * @see GeoFunctions ST_MakeGridPoints */
+comment|/** Calculates a regular grid of points based on {@code geom}.    *    * @see SpatialTypeFunctions ST_MakeGridPoints */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -388,7 +358,7 @@ name|ScannableTable
 name|ST_MakeGridPoints
 parameter_list|(
 specifier|final
-name|Geom
+name|Geometry
 name|geom
 parameter_list|,
 specifier|final
@@ -424,7 +394,7 @@ name|ScannableTable
 block|{
 specifier|private
 specifier|final
-name|Geom
+name|Geometry
 name|geom
 decl_stmt|;
 specifier|private
@@ -443,7 +413,7 @@ name|point
 decl_stmt|;
 name|GridTable
 parameter_list|(
-name|Geom
+name|Geometry
 name|geom
 parameter_list|,
 name|BigDecimal
@@ -592,30 +562,6 @@ operator|!=
 literal|null
 condition|)
 block|{
-specifier|final
-name|Geometry
-name|geometry
-init|=
-name|geom
-operator|.
-name|g
-argument_list|()
-decl_stmt|;
-specifier|final
-name|Envelope
-name|envelope
-init|=
-operator|new
-name|Envelope
-argument_list|()
-decl_stmt|;
-name|geometry
-operator|.
-name|queryEnvelope
-argument_list|(
-name|envelope
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|deltaX
@@ -643,11 +589,14 @@ condition|)
 block|{
 return|return
 operator|new
-name|GeoFunctions
+name|SpatialTypeFunctions
 operator|.
 name|GridEnumerable
 argument_list|(
-name|envelope
+name|geom
+operator|.
+name|getEnvelopeInternal
+argument_list|()
 argument_list|,
 name|deltaX
 argument_list|,

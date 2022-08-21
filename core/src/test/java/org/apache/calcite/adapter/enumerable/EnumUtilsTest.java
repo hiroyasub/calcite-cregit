@@ -107,7 +107,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
+name|SpatialTypeFunctions
 import|;
 end_import
 
@@ -1307,7 +1307,7 @@ name|call
 argument_list|(
 literal|null
 argument_list|,
-name|GeoFunctions
+name|SpatialTypeFunctions
 operator|.
 name|class
 argument_list|,
@@ -1334,7 +1334,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"org.apache.calcite.runtime.GeoFunctions.ST_MakePoint("
+literal|"org.apache.calcite.runtime.SpatialTypeFunctions.ST_MakePoint("
 operator|+
 literal|"new java.math.BigDecimal(\n  1), "
 operator|+

@@ -26913,7 +26913,7 @@ name|sql
 init|=
 literal|"select distinct\n"
 operator|+
-literal|"  ST_PointFromText('POINT(-71.0642.28)') as c\n"
+literal|"  ST_PointFromText('POINT(-71.0642 .28)') as c\n"
 operator|+
 literal|"from \"hr\".\"emps\""
 decl_stmt|;
@@ -26944,7 +26944,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"C={\"x\":-71.0642,\"y\":0.28}"
+literal|"C=POINT (-71.0642 0.28)"
 argument_list|)
 expr_stmt|;
 comment|// NVL is present in the Oracle operator table, but not spatial or core
@@ -31077,14 +31077,14 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"org.apache.calcite.runtime.GeoFunctions.ST_MakePoint("
+literal|"org.apache.calcite.runtime.SpatialTypeFunctions.ST_MakePoint("
 operator|+
 literal|"$L4J$C$new_java_math_BigDecimal_1_, literal_value0)"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"EXPR$0={\"x\":1,\"y\":2.1}\n"
+literal|"EXPR$0=POINT (1 2.1)\n"
 argument_list|)
 expr_stmt|;
 block|}
