@@ -4057,6 +4057,47 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5243">[CALCITE-5243]    * "SELECT NULL AS C causes NoSuchMethodException: java.sql.ResultSet.getVoid(int)</a>. */
+annotation|@
+name|Test
+name|void
+name|testNullSelect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select NULL AS C from \"days\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|FoodmartSchema
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsCount
+argument_list|(
+literal|7
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=null\nC=null\nC=null\nC=null\nC=null\nC=null\nC=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Acquires a lock, and releases it when closed. */
 specifier|static
 class|class
