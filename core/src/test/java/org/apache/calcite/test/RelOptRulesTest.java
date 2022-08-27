@@ -30458,6 +30458,96 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-5247">[CALCITE-5247]    *    * FilterJoinRule cannot simplify left join to inner join for `WHERE RHS.C1 IS NOT NULL OR    *    RHS.C2 IS NOT NULL`</a>.    *    *    This tests the case where the condition contains an OR between the IS NOT NULL filters    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testFilterJoinRuleOrIsNotNull
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"emp LHS\n"
+operator|+
+literal|"left join dept RHS on LHS.EMPNO = RHS.DEPTNO\n"
+operator|+
+literal|"where\n"
+operator|+
+literal|"RHS.DEPTNO is not null\n"
+operator|+
+literal|"OR RHS.NAME is not null"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_INTO_JOIN
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-5247">[CALCITE-5247]    *    * FilterJoinRule cannot simplify left join to inner join for `WHERE RHS.C1 IS NOT NULL OR    *    RHS.C2 IS NOT NULL`</a>.    *    *    This tests the case where the condition contains an AND between the IS NOT NULL filters    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testFilterJoinRuleAndIsNotNull
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"emp LHS\n"
+operator|+
+literal|"left join dept RHS on LHS.EMPNO = RHS.DEPTNO\n"
+operator|+
+literal|"where\n"
+operator|+
+literal|"RHS.DEPTNO is not null\n"
+operator|+
+literal|"AND RHS.NAME is not null"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_INTO_JOIN
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
