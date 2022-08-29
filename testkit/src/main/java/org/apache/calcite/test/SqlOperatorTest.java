@@ -39191,6 +39191,110 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4999">[CALCITE-4999]    * ARRAY, MULTISET functions should return an collection of scalars    * if a sub-query returns 1 column</a>.    */
+annotation|@
+name|Test
+name|void
+name|testArrayQueryConstructor
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|ARRAY_QUERY
+argument_list|,
+name|SqlOperatorFixture
+operator|.
+name|VmName
+operator|.
+name|EXPAND
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"array(select 1)"
+argument_list|,
+literal|"[1]"
+argument_list|,
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|check
+argument_list|(
+literal|"select array(select ROW(1,2))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) NOT NULL ARRAY NOT NULL"
+argument_list|,
+literal|"[{1, 2}]"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4999">[CALCITE-4999]    * ARRAY, MULTISET functions should return an collection of scalars    * if a sub-query returns 1 column</a>.    */
+annotation|@
+name|Test
+name|void
+name|testMultisetQueryConstructor
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MULTISET_QUERY
+argument_list|,
+name|SqlOperatorFixture
+operator|.
+name|VmName
+operator|.
+name|EXPAND
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset(select 1)"
+argument_list|,
+literal|"[1]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|check
+argument_list|(
+literal|"select multiset(select ROW(1,2))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) NOT NULL MULTISET NOT NULL"
+argument_list|,
+literal|"[{1, 2}]"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

@@ -31669,6 +31669,34 @@ literal|"CHAR(3) ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4999">[CALCITE-4999]    * ARRAY, MULTISET functions should return a collection of scalars    * if a sub-query returns 1 column</a>.    */
+annotation|@
+name|Test
+name|void
+name|testArrayQueryConstructor
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select array(select 1)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select array(select ROW(1,2))"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -31955,6 +31983,34 @@ literal|"INTEGER MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4999">[CALCITE-4999]    * ARRAY, MULTISET functions should return an collection of scalars    * if a sub-query returns 1 column</a>.    */
+annotation|@
+name|Test
+name|void
+name|testMultisetQueryConstructor
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select multiset(select 1)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select multiset(select ROW(1,2))"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -32149,7 +32205,7 @@ name|fails
 argument_list|(
 literal|"List of column aliases must have same degree as table; table has 2 "
 operator|+
-literal|"columns \\('DEPTNO', 'ORDINALITY'\\), "
+literal|"columns \\('EXPR\\$0', 'ORDINALITY'\\), "
 operator|+
 literal|"whereas alias list has 1 columns"
 argument_list|)
@@ -32175,7 +32231,7 @@ name|fails
 argument_list|(
 literal|"List of column aliases must have same degree as table; table has 2 "
 operator|+
-literal|"columns \\('DEPTNO', 'ORDINALITY'\\), "
+literal|"columns \\('EXPR\\$0', 'ORDINALITY'\\), "
 operator|+
 literal|"whereas alias list has 3 columns"
 argument_list|)

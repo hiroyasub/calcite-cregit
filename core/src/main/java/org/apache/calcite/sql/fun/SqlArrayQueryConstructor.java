@@ -73,7 +73,7 @@ name|ARRAY_QUERY_CONSTRUCTOR
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|TO_ARRAY
+name|TO_ARRAY_QUERY
 argument_list|)
 expr_stmt|;
 block|}

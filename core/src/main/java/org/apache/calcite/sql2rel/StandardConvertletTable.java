@@ -3714,20 +3714,12 @@ name|getComponentType
 argument_list|()
 operator|!=
 literal|null
-operator|&&
-name|msType
-operator|.
-name|getComponentType
-argument_list|()
-operator|.
-name|isStruct
-argument_list|()
 operator|:
 literal|"componentType of "
 operator|+
 name|msType
 operator|+
-literal|" must be struct"
+literal|" must not be null"
 assert|;
 assert|assert
 name|originalType
@@ -3741,43 +3733,8 @@ literal|"componentType of "
 operator|+
 name|originalType
 operator|+
-literal|" must be struct"
+literal|" must not be null"
 assert|;
-if|if
-condition|(
-operator|!
-name|originalType
-operator|.
-name|getComponentType
-argument_list|()
-operator|.
-name|isStruct
-argument_list|()
-condition|)
-block|{
-comment|// If the type is not a struct, the multiset operator will have
-comment|// wrapped the type as a record. Add a call to the $SLICE operator
-comment|// to compensate. For example,
-comment|// if '<ms>' has type 'RECORD (INTEGER x) MULTISET',
-comment|// then '$SLICE(<ms>) has type 'INTEGER MULTISET'.
-comment|// This will be removed as the expression is translated.
-name|expr
-operator|=
-name|cx
-operator|.
-name|getRexBuilder
-argument_list|()
-operator|.
-name|makeCall
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|SLICE
-argument_list|,
-name|expr
-argument_list|)
-expr_stmt|;
-block|}
 return|return
 name|expr
 return|;

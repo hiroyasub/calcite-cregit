@@ -163,9 +163,37 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|BuiltInMethod
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -445,15 +473,76 @@ operator|.
 name|block
 argument_list|)
 decl_stmt|;
+name|RelDataType
+name|collectionComponentType
+init|=
+name|requireNonNull
+argument_list|(
+name|rowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getComponentType
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelDataType
+name|childRecordType
+init|=
+name|result
+operator|.
+name|physType
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getType
+argument_list|()
+decl_stmt|;
+name|Expression
+name|conv_
+init|=
+name|child_
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|SqlTypeUtil
+operator|.
+name|sameNamedType
+argument_list|(
+name|collectionComponentType
+argument_list|,
+name|childRecordType
+argument_list|)
+condition|)
+block|{
 comment|// In the internal representation of multisets , every element must be a record. In case the
 comment|// result above is a scalar type we have to wrap it around a physical type capable of
 comment|// representing records. For this reason the following conversion is necessary.
 comment|// REVIEW zabetak January 7, 2019: If we can ensure that the input to this operator
-comment|// has the correct physical type (e.g., respecting the Prefer.ARRAY above) then this conversion
-comment|// can be removed.
-name|Expression
+comment|// has the correct physical type (e.g., respecting the Prefer.ARRAY above)
+comment|// then this conversion can be removed.
 name|conv_
-init|=
+operator|=
 name|builder
 operator|.
 name|append
@@ -473,7 +562,8 @@ operator|.
 name|ARRAY
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+block|}
 name|Expression
 name|list_
 init|=

@@ -10011,7 +10011,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=[{10}, {20}, {10}, {10}]"
+literal|"A=[10, 20, 10, 10]"
 argument_list|)
 expr_stmt|;
 block|}

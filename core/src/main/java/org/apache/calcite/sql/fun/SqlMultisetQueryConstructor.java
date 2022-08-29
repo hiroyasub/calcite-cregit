@@ -313,7 +313,7 @@ name|MULTISET_QUERY_CONSTRUCTOR
 argument_list|,
 name|SqlTypeTransforms
 operator|.
-name|TO_MULTISET
+name|TO_MULTISET_QUERY
 argument_list|)
 expr_stmt|;
 block|}
