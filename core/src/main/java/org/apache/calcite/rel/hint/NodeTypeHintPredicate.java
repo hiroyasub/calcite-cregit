@@ -155,6 +155,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Snapshot
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Sort
 import|;
 end_import
@@ -314,6 +330,14 @@ comment|/**      * The hint would be propagated to the Window nodes.      */
 name|WINDOW
 argument_list|(
 name|Window
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/**      * The hint would be propagated to the Snapshot nodes.      */
+name|SNAPSHOT
+argument_list|(
+name|Snapshot
 operator|.
 name|class
 argument_list|)
