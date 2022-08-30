@@ -67,7 +67,7 @@ extends|extends
 name|RelDataTypeImpl
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|public
+specifier|private
 specifier|final
 name|ImmutableList
 argument_list|<
@@ -153,6 +153,19 @@ parameter_list|()
 block|{
 return|return
 literal|false
+return|;
+block|}
+comment|/**    * Returns the contained types.    *    * @return data types.    */
+specifier|public
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|getTypes
+parameter_list|()
+block|{
+return|return
+name|types
 return|;
 block|}
 annotation|@

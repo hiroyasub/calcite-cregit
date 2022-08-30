@@ -2425,7 +2425,7 @@ specifier|static
 name|void
 name|getTypeList
 parameter_list|(
-name|ImmutableList
+name|List
 argument_list|<
 name|RelDataType
 argument_list|>
@@ -2462,7 +2462,8 @@ operator|)
 name|inType
 operator|)
 operator|.
-name|types
+name|getTypes
+argument_list|()
 argument_list|,
 name|flatTypes
 argument_list|)
@@ -2519,7 +2520,8 @@ name|type1
 range|:
 name|crossType
 operator|.
-name|types
+name|getTypes
+argument_list|()
 control|)
 block|{
 name|addFields

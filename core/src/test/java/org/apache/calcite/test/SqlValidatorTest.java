@@ -713,6 +713,20 @@ name|jupiter
 operator|.
 name|api
 operator|.
+name|DisplayName
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -24553,7 +24567,7 @@ comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CAL
 annotation|@
 name|Test
 name|void
-name|testNaturalJoinDuplicateColumns
+name|testJoinDuplicateColumns
 parameter_list|()
 block|{
 comment|// NATURAL join and USING should fail if join columns are not unique
@@ -24596,23 +24610,6 @@ argument_list|(
 name|message
 argument_list|)
 expr_stmt|;
-comment|// Also with "*". (Proves that FROM is validated before SELECT.)
-name|sql
-argument_list|(
-literal|"select *\n"
-operator|+
-literal|"from emp\n"
-operator|+
-literal|"left join (select deptno, name as deptno from dept)\n"
-operator|+
-literal|"  using (^deptno^)"
-argument_list|)
-operator|.
-name|fails
-argument_list|(
-name|message
-argument_list|)
-expr_stmt|;
 comment|// Reversed query gives reversed error message
 name|sql
 argument_list|(
@@ -24630,6 +24627,123 @@ argument_list|(
 name|message
 argument_list|)
 expr_stmt|;
+comment|// Also with "*". (Proves that FROM is validated before SELECT.)
+name|sql
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"left join (select deptno, name as deptno from dept)\n"
+operator|+
+literal|"  using (^deptno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+annotation|@
+name|DisplayName
+argument_list|(
+literal|"Natural join require input column uniqueness"
+argument_list|)
+name|void
+name|testNaturalJoinRequireInputColumnUniqueness
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|message
+init|=
+literal|"Column name 'DEPTNO' in NATURAL join or "
+operator|+
+literal|"USING clause is not unique on one side of join"
+decl_stmt|;
+comment|// Invalid. NATURAL JOIN eliminates duplicate columns from its output but
+comment|// requires input columns to be unique.
+name|sql
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from (emp as e cross join dept as d)\n"
+operator|+
+literal|"^natural^ join\n"
+operator|+
+literal|"(emp as e2 cross join dept as d2)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+annotation|@
+name|DisplayName
+argument_list|(
+literal|"Should produce two DEPTNO columns"
+argument_list|)
+name|void
+name|testReturnsCorrectRowTypeOnCombinedJoin
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"natural join dept as d\n"
+operator|+
+literal|"join (select deptno as x, deptno from dept) as d2"
+operator|+
+literal|"  on d2.deptno = e.deptno"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType("
+operator|+
+literal|"INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"INTEGER NOT NULL EMPNO, "
+operator|+
+literal|"VARCHAR(20) NOT NULL ENAME, "
+operator|+
+literal|"VARCHAR(10) NOT NULL JOB, "
+operator|+
+literal|"INTEGER MGR, "
+operator|+
+literal|"TIMESTAMP(0) NOT NULL HIREDATE, "
+operator|+
+literal|"INTEGER NOT NULL SAL, "
+operator|+
+literal|"INTEGER NOT NULL COMM, "
+operator|+
+literal|"BOOLEAN NOT NULL SLACKER, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME, "
+operator|+
+literal|"INTEGER NOT NULL X, "
+operator|+
+literal|"INTEGER NOT NULL DEPTNO1) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5171">[CALCITE-5171]    * NATURAL join and USING should fail if join columns are not unique</a>. */
+annotation|@
+name|Test
+name|void
+name|testCorrectJoinDuplicateColumns
+parameter_list|()
+block|{
 comment|// The error only occurs if the duplicate column is referenced. The
 comment|// following query has a duplicate hiredate column.
 name|sql
@@ -24641,6 +24755,15 @@ operator|+
 literal|"join (select ename, sal as hiredate, deptno from emp) as e\n"
 operator|+
 literal|"  using (deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// Previous join chain does not affect validation.
+name|sql
+argument_list|(
+literal|"select * from EMP natural join EMPNULLABLES natural join DEPT"
 argument_list|)
 operator|.
 name|ok
@@ -25080,23 +25203,13 @@ literal|"join dept as d using (deptno)\n"
 operator|+
 literal|"join dept as d2 using (^deptno^)"
 decl_stmt|;
-specifier|final
-name|String
-name|expected
-init|=
-literal|"Column name 'DEPTNO' in NATURAL join or "
-operator|+
-literal|"USING clause is not unique on one side of join"
-decl_stmt|;
 name|sql
 argument_list|(
 name|sql1
 argument_list|)
 operator|.
-name|fails
-argument_list|(
-name|expected
-argument_list|)
+name|ok
+argument_list|()
 expr_stmt|;
 specifier|final
 name|String
