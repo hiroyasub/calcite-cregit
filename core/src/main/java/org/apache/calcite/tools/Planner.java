@@ -225,6 +225,11 @@ parameter_list|)
 throws|throws
 name|ValidationException
 function_decl|;
+comment|/**    * Returns a record type that contains the name and type of each parameter.    * Returns a record type with no fields if there are no parameters.    *    * @return Record type    */
+name|RelDataType
+name|getParameterRowType
+parameter_list|()
+function_decl|;
 comment|/**    * Converts a SQL parse tree into a tree of relational expressions.    *    *<p>You must call {@link #validate(org.apache.calcite.sql.SqlNode)} first.    *    * @param sql The root node of the SQL parse tree.    * @return The root node of the newly generated RelNode tree.    * @throws org.apache.calcite.tools.RelConversionException if the node    * cannot be converted or has not been validated    */
 name|RelRoot
 name|rel
