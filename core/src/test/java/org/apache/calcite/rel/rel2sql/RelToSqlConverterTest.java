@@ -2135,10 +2135,11 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4321">[CALCITE-4321]    * JDBC adapter omits FILTER (WHERE ...) expressions when generating SQL</a>    * and    *<a href="https://issues.apache.org/jira/browse/CALCITE-5270">[CALCITE-5270]    * JDBC adapter should not generate FILTER (WHERE) in Firebolt dialect</a>. */
 annotation|@
 name|Test
 name|void
-name|testAggregateFilterWhereToSqlFromProductTable
+name|testAggregateFilterWhere
 parameter_list|()
 block|{
 name|String
@@ -2158,13 +2159,49 @@ literal|"group by \"product_id\""
 decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedDefault
 init|=
 literal|"SELECT"
 operator|+
 literal|" SUM(\"shelf_width\") FILTER (WHERE \"net_weight\"> 0 IS TRUE),"
 operator|+
 literal|" SUM(\"shelf_width\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\"> 0\n"
+operator|+
+literal|"GROUP BY \"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT"
+operator|+
+literal|" SUM(CASE WHEN net_weight> 0 IS TRUE"
+operator|+
+literal|" THEN shelf_width ELSE NULL END), "
+operator|+
+literal|"SUM(shelf_width)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"WHERE product_id> 0\n"
+operator|+
+literal|"GROUP BY product_id"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedFirebolt
+init|=
+literal|"SELECT"
+operator|+
+literal|" SUM(CASE WHEN \"net_weight\"> 0 IS TRUE"
+operator|+
+literal|" THEN \"shelf_width\" ELSE NULL END), "
+operator|+
+literal|"SUM(\"shelf_width\")\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
@@ -2179,50 +2216,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testAggregateFilterWhereToBigQuerySqlFromProductTable
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"select\n"
-operator|+
-literal|"  sum(\"shelf_width\") filter (where \"net_weight\"> 0),\n"
-operator|+
-literal|"  sum(\"shelf_width\")\n"
-operator|+
-literal|"from \"foodmart\".\"product\"\n"
-operator|+
-literal|"where \"product_id\"> 0\n"
-operator|+
-literal|"group by \"product_id\""
-decl_stmt|;
-specifier|final
-name|String
-name|expected
-init|=
-literal|"SELECT SUM(CASE WHEN net_weight> 0 IS TRUE"
-operator|+
-literal|" THEN shelf_width ELSE NULL END), "
-operator|+
-literal|"SUM(shelf_width)\n"
-operator|+
-literal|"FROM foodmart.product\n"
-operator|+
-literal|"WHERE product_id> 0\n"
-operator|+
-literal|"GROUP BY product_id"
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
+name|expectedDefault
 argument_list|)
 operator|.
 name|withBigQuery
@@ -2230,7 +2224,15 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected
+name|expectedBigQuery
+argument_list|)
+operator|.
+name|withFirebolt
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedFirebolt
 argument_list|)
 expr_stmt|;
 block|}
