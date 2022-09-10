@@ -1415,22 +1415,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|test
-operator|.
-name|SqlTestFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|OperandTypes
@@ -1450,22 +1434,6 @@ operator|.
 name|type
 operator|.
 name|ReturnTypes
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|type
-operator|.
-name|SqlTypeFactoryImpl
 import|;
 end_import
 
@@ -31647,19 +31615,6 @@ block|}
 block|}
 block|}
 decl_stmt|;
-name|SqlTestFactory
-operator|.
-name|TypeFactoryFactory
-name|typeFactorySupplier
-init|=
-name|conformance
-lambda|->
-operator|new
-name|SqlTypeFactoryImpl
-argument_list|(
-name|typeSystem
-argument_list|)
-decl_stmt|;
 comment|// Expected plan:
 comment|// LogicalProject(EXPR$0=[CAST($0):BIGINT NOT NULL], EXPR$1=[$1])
 comment|//   LogicalAggregate(group=[{}], EXPR$0=[$SUM0($1)], EXPR$1=[COUNT($0)])
@@ -31681,9 +31636,11 @@ name|f
 lambda|->
 name|f
 operator|.
-name|withTypeFactoryFactory
+name|withTypeSystem
 argument_list|(
-name|typeFactorySupplier
+name|ignore
+lambda|->
+name|typeSystem
 argument_list|)
 argument_list|)
 operator|.
@@ -31781,19 +31738,6 @@ block|}
 block|}
 block|}
 decl_stmt|;
-name|SqlTestFactory
-operator|.
-name|TypeFactoryFactory
-name|typeFactoryFactory
-init|=
-name|conformance
-lambda|->
-operator|new
-name|SqlTypeFactoryImpl
-argument_list|(
-name|typeSystem
-argument_list|)
-decl_stmt|;
 comment|// Expected plan:
 comment|// LogicalProject(EXPR$0=[CAST($0):BIGINT], EXPR$1=[$1])
 comment|//  LogicalAggregate(group=[{}], EXPR$0=[SUM($1)], EXPR$1=[SUM($0)]) // RowType[DECIMAL, BIGINT]
@@ -31815,9 +31759,11 @@ name|f
 lambda|->
 name|f
 operator|.
-name|withTypeFactoryFactory
+name|withTypeSystem
 argument_list|(
-name|typeFactoryFactory
+name|ignore
+lambda|->
+name|typeSystem
 argument_list|)
 argument_list|)
 operator|.
