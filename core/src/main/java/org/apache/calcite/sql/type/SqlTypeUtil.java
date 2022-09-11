@@ -4605,6 +4605,15 @@ operator|==
 name|SqlTypeName
 operator|.
 name|UNKNOWN
+operator|||
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|GEOMETRY
 condition|)
 block|{
 name|int

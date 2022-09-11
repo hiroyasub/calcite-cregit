@@ -718,6 +718,10 @@ operator|.
 name|compile
 argument_list|(
 literal|"^(?:srid:(\\d*);)?(.*)$"
+argument_list|,
+name|Pattern
+operator|.
+name|DOTALL
 argument_list|)
 decl_stmt|;
 name|java

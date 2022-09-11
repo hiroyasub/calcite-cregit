@@ -4784,13 +4784,13 @@ operator|.
 name|class
 argument_list|)
 block|,
-name|ST_GEOM_FROM_TEXT
+name|ST_GEOM_FROM_EWKT
 argument_list|(
 name|SpatialTypeFunctions
 operator|.
 name|class
 argument_list|,
-literal|"ST_GeomFromText"
+literal|"ST_GeomFromEWKT"
 argument_list|,
 name|String
 operator|.

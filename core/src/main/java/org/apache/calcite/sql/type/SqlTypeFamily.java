@@ -783,14 +783,9 @@ case|case
 name|GEO
 case|:
 return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
 name|SqlTypeName
 operator|.
-name|GEOMETRY
-argument_list|)
+name|GEOMETRY_TYPES
 return|;
 case|case
 name|MULTISET

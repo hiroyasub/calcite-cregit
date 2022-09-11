@@ -1728,6 +1728,20 @@ operator|.
 name|TO_MAP
 argument_list|)
 decl_stmt|;
+comment|/**    * Type-inference strategy that always returns GEOMETRY.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|GEOMETRY
+init|=
+name|explicit
+argument_list|(
+name|SqlTypeName
+operator|.
+name|GEOMETRY
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is    * {@link #ARG0_INTERVAL_NULLABLE} and {@link #LEAST_RESTRICTIVE}. These rules    * are used for integer division.    */
 specifier|public
 specifier|static

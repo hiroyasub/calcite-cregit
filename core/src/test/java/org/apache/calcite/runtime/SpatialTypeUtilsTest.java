@@ -183,6 +183,34 @@ name|getY
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|Geometry
+name|g3
+init|=
+name|SpatialTypeUtils
+operator|.
+name|fromEwkt
+argument_list|(
+literal|"GEOMETRYCOLLECTION(\n"
+operator|+
+literal|"  POLYGON((0 0, 3 -1, 1.5 2, 0 0)),\n"
+operator|+
+literal|"  POLYGON((2 0, 3 3, 4 2, 2 0)),\n"
+operator|+
+literal|"  POINT(5 6),\n"
+operator|+
+literal|"  LINESTRING(1 1, 1 6))"
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+name|g3
+operator|.
+name|getSRID
+argument_list|()
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
