@@ -24565,7 +24565,7 @@ literal|"\"account_id\", \"account_parent\", \"account_description\", "
 operator|+
 literal|"\"account_type\", \"account_rollup\", \"Custom_Members\")\n"
 operator|+
-literal|"(SELECT \"EXPR$0\" AS \"account_id\","
+literal|"SELECT \"EXPR$0\" AS \"account_id\","
 operator|+
 literal|" \"EXPR$1\" AS \"account_parent\","
 operator|+
@@ -24583,7 +24583,7 @@ literal|"AS \"Custom_Members\"\n"
 operator|+
 literal|"FROM (VALUES (1, NULL, '123', '123')) "
 operator|+
-literal|"AS \"t\" (\"EXPR$0\", \"EXPR$1\", \"EXPR$2\", \"EXPR$3\"))"
+literal|"AS \"t\" (\"EXPR$0\", \"EXPR$1\", \"EXPR$2\", \"EXPR$3\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -24645,7 +24645,7 @@ literal|"(\"account_id\", \"account_parent\", \"account_description\", "
 operator|+
 literal|"\"account_type\", \"account_rollup\", \"Custom_Members\")\n"
 operator|+
-literal|"(SELECT \"product\".\"product_id\" AS \"account_id\", "
+literal|"SELECT \"product\".\"product_id\" AS \"account_id\", "
 operator|+
 literal|"CAST(NULL AS INTEGER) AS \"account_parent\", CAST(NULL AS VARCHAR"
 operator|+
@@ -24665,7 +24665,7 @@ literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
 literal|"INNER JOIN \"foodmart\".\"sales_fact_1997\" "
 operator|+
-literal|"ON \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\")"
+literal|"ON \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -25370,6 +25370,116 @@ operator|.
 name|ok
 argument_list|(
 name|expectedCalciteX
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5265">[CALCITE-5265]    * JDBC adapter sometimes adds unnecessary parentheses around SELECT in INSERT</a>. */
+annotation|@
+name|Test
+name|void
+name|testInsertSelect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into \"DEPT\" select * from \"DEPT\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5265">[CALCITE-5265]    * JDBC adapter sometimes adds unnecessary parentheses around SELECT in INSERT</a>. */
+annotation|@
+name|Test
+name|void
+name|testInsertUnionThenIntersect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"insert into \"DEPT\"\n"
+operator|+
+literal|"(select * from \"DEPT\" union select * from \"DEPT\")\n"
+operator|+
+literal|"intersect select * from \"DEPT\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\"\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\")\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}

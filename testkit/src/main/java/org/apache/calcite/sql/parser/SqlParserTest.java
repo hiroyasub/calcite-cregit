@@ -19581,9 +19581,9 @@ name|expected
 init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19762,9 +19762,9 @@ name|expected
 init|=
 literal|"INSERT INTO `EMPS` (`X`, `Y`)\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19789,9 +19789,9 @@ name|expected
 init|=
 literal|"INSERT INTO `emps` (`x`, `y`)\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19815,9 +19815,9 @@ name|expected
 init|=
 literal|"INSERT INTO `EMPS` EXTEND (`Z` BOOLEAN) (`X`, `Y`)\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19833,9 +19833,9 @@ name|expected
 operator|=
 literal|"INSERT INTO `EMPS` EXTEND (`Z` BOOLEAN) (`X`, `Y`, `Z`)\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 expr_stmt|;
 name|sql
 argument_list|(
@@ -19944,9 +19944,9 @@ name|expected
 init|=
 literal|"INSERT INTO `emps` EXTEND (`z` BOOLEAN) (`x`, `y`)\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19962,9 +19962,9 @@ name|expected
 operator|=
 literal|"INSERT INTO `emps` EXTEND (`z` BOOLEAN) (`x`, `y`, `z`)\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 expr_stmt|;
 name|sql
 argument_list|(
@@ -20000,9 +20000,9 @@ literal|" WITH IMPLEMENTATION FOR\n"
 operator|+
 literal|"INSERT INTO `EMPS1`\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS2`)"
+literal|"FROM `EMPS2`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20091,9 +20091,9 @@ name|expected
 init|=
 literal|"UPSERT INTO `EMPS`\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMP` AS `E`)"
+literal|"FROM `EMP` AS `E`"
 decl_stmt|;
 if|if
 condition|(
@@ -27621,9 +27621,9 @@ name|str0
 init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -27703,9 +27703,9 @@ name|str1
 init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"(SELECT `EMPNO`\n"
+literal|"SELECT `EMPNO`\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -41181,9 +41181,9 @@ literal|"INSERT INTO `EMPS`\n"
 operator|+
 literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS`)"
+literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(

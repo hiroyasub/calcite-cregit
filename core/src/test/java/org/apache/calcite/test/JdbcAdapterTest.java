@@ -3598,7 +3598,7 @@ literal|" (\"store_id\", \"account_id\", \"exp_date\", \"time_id\","
 operator|+
 literal|" \"category_id\", \"currency_id\", \"amount\")\n"
 operator|+
-literal|"(SELECT \"store_id\", \"account_id\", \"exp_date\","
+literal|"SELECT \"store_id\", \"account_id\", \"exp_date\","
 operator|+
 literal|" \"time_id\" + 1 AS \"time_id\", \"category_id\","
 operator|+
@@ -3606,7 +3606,7 @@ literal|" \"currency_id\", \"amount\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"expense_fact\"\n"
 operator|+
-literal|"WHERE \"store_id\" = 666)"
+literal|"WHERE \"store_id\" = 666"
 decl_stmt|;
 name|that
 operator|.

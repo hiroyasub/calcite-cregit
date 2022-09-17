@@ -990,6 +990,16 @@ name|frameType
 operator|==
 name|FrameTypeEnum
 operator|.
+name|SELECT
+operator|)
+operator|||
+operator|(
+name|frame
+operator|.
+name|frameType
+operator|==
+name|FrameTypeEnum
+operator|.
 name|ORDER_BY
 operator|)
 operator|||
