@@ -12213,6 +12213,162 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5252">[CALCITE-5252]    * JDBC adapter sometimes miss parentheses around SELECT in WITH_ITEM body</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithAsUnion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp2 as (select * from emp union select * from emp)\n"
+operator|+
+literal|"select * from emp2\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`) SELECT *\n"
+operator|+
+literal|"FROM `EMP2`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5252">[CALCITE-5252]    * JDBC adapter sometimes miss parentheses around SELECT in WITH_ITEM body</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithAsOrderBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp2 as (select * from emp order by deptno)\n"
+operator|+
+literal|"select * from emp2\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"ORDER BY `DEPTNO`) SELECT *\n"
+operator|+
+literal|"FROM `EMP2`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5252">[CALCITE-5252]    * JDBC adapter sometimes miss parentheses around SELECT in WITH_ITEM body</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithAsJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp2 as (select * from emp e1 join emp e2 on e1.deptno = e2.deptno)\n"
+operator|+
+literal|"select * from emp2\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP` AS `E1`\n"
+operator|+
+literal|"INNER JOIN `EMP` AS `E2` ON (`E1`.`DEPTNO` = `E2`.`DEPTNO`)) SELECT *\n"
+operator|+
+literal|"FROM `EMP2`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5252">[CALCITE-5252]    * JDBC adapter sometimes miss parentheses around SELECT in WITH_ITEM body</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithAsNestedInSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp3 as (with emp2 as (select * from emp) select * from emp2)\n"
+operator|+
+literal|"select * from emp3\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"WITH `EMP3` AS (WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`) SELECT *\n"
+operator|+
+literal|"FROM `EMP2`) SELECT *\n"
+operator|+
+literal|"FROM `EMP3`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

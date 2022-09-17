@@ -378,9 +378,9 @@ name|unparse
 argument_list|(
 name|writer
 argument_list|,
-literal|10
+name|MDX_PRECEDENCE
 argument_list|,
-literal|10
+name|MDX_PRECEDENCE
 argument_list|)
 expr_stmt|;
 block|}
