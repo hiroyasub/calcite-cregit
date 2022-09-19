@@ -15527,8 +15527,9 @@ parameter_list|()
 block|{
 comment|// Fix and converts to SEARCH if:
 comment|// 1. A Sarg has complexity greater than 1;
-comment|// 2. The terms are reduced as simpler Sarg points;
-comment|// 3. The terms are reduced as simpler Sarg comparison.
+comment|// 2. A Sarg was merged with another Sarg or range;
+comment|// 3. The terms are reduced as simpler Sarg points;
+comment|// 4. The terms are reduced as simpler Sarg comparison.
 comment|// Ignore 'negate' just to be compatible with previous versions of this
 comment|// method. "build().complexity()" would be a better estimate, if we could
 comment|// switch to it breaking lots of plans.
@@ -15565,6 +15566,10 @@ name|complexity
 argument_list|()
 operator|>
 literal|1
+operator|||
+name|b
+operator|.
+name|mergedSarg
 argument_list|)
 operator|||
 name|newTermsCount
@@ -15780,6 +15785,12 @@ name|TreeRangeSet
 operator|.
 name|create
 argument_list|()
+decl_stmt|;
+name|boolean
+name|hasSarg
+decl_stmt|;
+name|boolean
+name|mergedSarg
 decl_stmt|;
 name|RexUnknownAs
 name|nullAs
@@ -16144,6 +16155,10 @@ argument_list|(
 name|range
 argument_list|)
 expr_stmt|;
+name|mergedSarg
+operator||=
+name|hasSarg
+expr_stmt|;
 name|nullAs
 operator|=
 name|nullAs
@@ -16238,6 +16253,18 @@ name|addAll
 argument_list|(
 name|r
 argument_list|)
+expr_stmt|;
+name|mergedSarg
+operator||=
+operator|!
+name|rangeSet
+operator|.
+name|isEmpty
+argument_list|()
+expr_stmt|;
+name|hasSarg
+operator|=
+literal|true
 expr_stmt|;
 switch|switch
 condition|(
