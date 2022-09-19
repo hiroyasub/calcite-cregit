@@ -1340,8 +1340,8 @@ condition|(
 name|sort
 operator|.
 name|fetch
-operator|!=
-literal|null
+operator|instanceof
+name|RexLiteral
 condition|)
 block|{
 return|return
