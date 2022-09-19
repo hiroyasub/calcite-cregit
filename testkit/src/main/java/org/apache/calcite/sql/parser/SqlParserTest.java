@@ -33973,6 +33973,85 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testTimeTrunc
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select time_trunc(TIME '15:30:00', hour) from t"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT TIME_TRUNC(TIME '15:30:00', HOUR)\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// should fail for time unit not appropriate for TIME type.
+specifier|final
+name|String
+name|weekSql
+init|=
+literal|"select time_trunc(time '15:30:00', ^week^) from t"
+decl_stmt|;
+name|sql
+argument_list|(
+name|weekSql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Was expecting one of.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTimestampTrunc
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select timestamp_trunc(timestamp '2008-12-25 15:30:00', week) from t"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT TIMESTAMP_TRUNC(TIMESTAMP '2008-12-25 15:30:00', WEEK)\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUnnest
 parameter_list|()
 block|{

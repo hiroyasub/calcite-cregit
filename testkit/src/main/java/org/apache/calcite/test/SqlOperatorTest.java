@@ -41490,6 +41490,306 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testTimeTrunc
+parameter_list|()
+block|{
+name|SqlOperatorFixture
+name|nonBigQuery
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIME_TRUNC
+argument_list|)
+decl_stmt|;
+name|nonBigQuery
+operator|.
+name|checkFails
+argument_list|(
+literal|"^time_trunc(time '15:30:00', hour)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"TIME_TRUNC\\(<TIME>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIME_TRUNC
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"time_trunc(time '12:34:56', ^year^)"
+argument_list|,
+literal|"Encountered \"year\" at line 1, column 37\\.\n"
+operator|+
+literal|"Was expecting one of:\n"
+operator|+
+literal|"    \"HOUR\" \\.\\.\\.\n"
+operator|+
+literal|"    \"MILLISECOND\" \\.\\.\\.\n"
+operator|+
+literal|"    \"MINUTE\" \\.\\.\\.\n"
+operator|+
+literal|"    \"SECOND\" \\.\\.\\.\n"
+operator|+
+literal|"    "
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^time_trunc(123.45, minute)^"
+argument_list|,
+literal|"Cannot apply 'TIME_TRUNC' to arguments of type "
+operator|+
+literal|"'TIME_TRUNC\\(<DECIMAL\\(5, 2\\)>,<INTERVAL MINUTE>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'TIME_TRUNC\\(<TIME>,<DATETIME_INTERVAL>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_trunc(time '12:34:56', second)"
+argument_list|,
+literal|"12:34:56"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_trunc(time '12:34:56', minute)"
+argument_list|,
+literal|"12:34:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_trunc(time '12:34:56', hour)"
+argument_list|,
+literal|"12:00:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"time_trunc(cast(null as time), second)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTimestampTrunc
+parameter_list|()
+block|{
+name|SqlOperatorFixture
+name|nonBigQuery
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIMESTAMP_TRUNC
+argument_list|)
+decl_stmt|;
+name|nonBigQuery
+operator|.
+name|checkFails
+argument_list|(
+literal|"^timestamp_trunc(timestamp '2012-05-02 15:30:00', hour)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"TIMESTAMP_TRUNC\\(<TIMESTAMP>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIMESTAMP_TRUNC
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^timestamp_trunc(100, hour)^"
+argument_list|,
+literal|"Cannot apply 'TIMESTAMP_TRUNC' to arguments of type "
+operator|+
+literal|"'TIMESTAMP_TRUNC\\(<INTEGER>,<INTERVAL HOUR>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'TIMESTAMP_TRUNC\\(<TIMESTAMP>,<DATETIME_INTERVAL>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56.78', ^microsecond^)"
+argument_list|,
+literal|"'MICROSECOND' is not a valid datetime format"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56.78', ^nanosecond^)"
+argument_list|,
+literal|"'NANOSECOND' is not a valid datetime format"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56.78', second)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56', minute)"
+argument_list|,
+literal|"2015-02-19 12:34:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56', hour)"
+argument_list|,
+literal|"2015-02-19 12:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56', day)"
+argument_list|,
+literal|"2015-02-19 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56', week)"
+argument_list|,
+literal|"2015-02-15 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56', month)"
+argument_list|,
+literal|"2015-02-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56', year)"
+argument_list|,
+literal|"2015-01-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testDenseRankFunc
 parameter_list|()
 block|{

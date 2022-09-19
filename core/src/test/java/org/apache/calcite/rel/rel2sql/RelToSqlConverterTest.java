@@ -8487,6 +8487,77 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testBigQueryTimeTruncFunctions
+parameter_list|()
+block|{
+name|String
+name|timestampTrunc
+init|=
+literal|"select timestamp_trunc(timestamp '2012-02-03 15:30:00', month)\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedTimestampTrunc
+init|=
+literal|"SELECT TIMESTAMP_TRUNC(TIMESTAMP '2012-02-03 15:30:00', MONTH)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|timestampTrunc
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedTimestampTrunc
+argument_list|)
+expr_stmt|;
+name|String
+name|timeTrunc
+init|=
+literal|"select time_trunc(time '15:30:00', minute)\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedTimeTrunc
+init|=
+literal|"SELECT TIME_TRUNC(TIME '15:30:00', MINUTE)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|timeTrunc
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedTimeTrunc
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>,    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in BigQuery dialect</a>, and    *<a href="https://issues.apache.org/jira/browse/CALCITE-3771">[CALCITE-3771]    * Support of TRIM function for SPARK dialect and improvement in HIVE    * Dialect</a>. */
 annotation|@
 name|Test
