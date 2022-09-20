@@ -191,6 +191,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Intersect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Join
 import|;
 end_import
@@ -208,6 +224,22 @@ operator|.
 name|core
 operator|.
 name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Minus
 import|;
 end_import
 
@@ -255,55 +287,23 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Union
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Values
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalIntersect
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalMinus
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalUnion
 import|;
 end_import
 
@@ -491,7 +491,7 @@ parameter_list|()
 function_decl|;
 block|}
 block|}
-comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.logical.LogicalUnion}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.core.Union}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -511,7 +511,7 @@ name|b0
 operator|.
 name|operand
 argument_list|(
-name|LogicalUnion
+name|Union
 operator|.
 name|class
 argument_list|)
@@ -549,7 +549,7 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
-comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.logical.LogicalMinus}.    *    *<p>Examples:    *    *<ul>    *<li>Minus(Rel, Empty, Rel2) becomes Minus(Rel, Rel2)    *<li>Minus(Empty, Rel) becomes Empty    *</ul>    */
+comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.core.Minus}.    *    *<p>Examples:    *    *<ul>    *<li>Minus(Rel, Empty, Rel2) becomes Minus(Rel, Rel2)    *<li>Minus(Empty, Rel) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -569,7 +569,7 @@ name|b0
 operator|.
 name|operand
 argument_list|(
-name|LogicalMinus
+name|Minus
 operator|.
 name|class
 argument_list|)
@@ -607,7 +607,7 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
-comment|/**    * Rule that converts a    * {@link org.apache.calcite.rel.logical.LogicalIntersect} to    * empty if any of its children are empty.    *    *<p>Examples:    *    *<ul>    *<li>Intersect(Rel, Empty, Rel2) becomes Empty    *<li>Intersect(Empty, Rel) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a    * {@link org.apache.calcite.rel.core.Intersect} to    * empty if any of its children are empty.    *    *<p>Examples:    *    *<ul>    *<li>Intersect(Rel, Empty, Rel2) becomes Empty    *<li>Intersect(Empty, Rel) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -627,7 +627,7 @@ name|b0
 operator|.
 name|operand
 argument_list|(
-name|LogicalIntersect
+name|Intersect
 operator|.
 name|class
 argument_list|)
@@ -770,7 +770,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalProject}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Project(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Project}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Project(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -801,7 +801,7 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalFilter}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Filter(Empty) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Filter}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Filter(Empty) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -1526,7 +1526,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|LogicalUnion
+name|Union
 name|union
 init|=
 name|call
@@ -1710,7 +1710,7 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|LogicalMinus
+name|Minus
 name|minus
 init|=
 name|call
@@ -1904,7 +1904,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalIntersect
+name|Intersect
 name|intersect
 init|=
 name|call
