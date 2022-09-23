@@ -2071,7 +2071,6 @@ specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
-comment|/** The type of dynamic parameters until a type is imposed on them. */
 specifier|protected
 specifier|final
 name|RelDataType
@@ -2258,12 +2257,20 @@ argument_list|,
 literal|"config"
 argument_list|)
 expr_stmt|;
+comment|// It is assumed that unknown type is nullable by default
 name|unknownType
 operator|=
 name|typeFactory
 operator|.
+name|createTypeWithNullability
+argument_list|(
+name|typeFactory
+operator|.
 name|createUnknownType
 argument_list|()
+argument_list|,
+literal|true
+argument_list|)
 expr_stmt|;
 name|booleanType
 operator|=

@@ -34173,6 +34173,23 @@ block|}
 annotation|@
 name|Test
 name|void
+name|dynamicParameterType
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"CAST(? AS INTEGER)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testRecordType
 parameter_list|()
 block|{

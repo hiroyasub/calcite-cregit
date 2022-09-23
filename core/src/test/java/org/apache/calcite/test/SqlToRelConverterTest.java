@@ -17261,6 +17261,33 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5297">[CALCITE-5297]    * Casting dynamic variable twice throws exception</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testDynamicParameterDoubleCast
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT CAST(CAST(? AS INTEGER) AS CHAR)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 unit|}
 end_unit
 
