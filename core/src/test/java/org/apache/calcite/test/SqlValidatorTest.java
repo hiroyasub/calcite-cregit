@@ -28672,6 +28672,24 @@ argument_list|(
 literal|"RecordType(INTEGER NOT NULL DEPTNO, INTEGER EMPNO) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// empno becomes NULL because it is rolled up, and so does empno + 1.
+name|sql
+argument_list|(
+literal|"select empno, empno + 1 as e1\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by rollup(empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER EMPNO, INTEGER E1) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
