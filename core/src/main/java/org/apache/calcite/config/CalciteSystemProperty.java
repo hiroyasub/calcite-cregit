@@ -512,6 +512,8 @@ range|:
 name|dirs
 control|)
 block|{
+try|try
+block|{
 if|if
 condition|(
 operator|new
@@ -538,6 +540,16 @@ block|{
 return|return
 name|s
 return|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|SecurityException
+name|ignore
+parameter_list|)
+block|{
+comment|// Ignore SecurityException on purpose because if
+comment|// we can't get to the file we fall through.
 block|}
 block|}
 return|return
@@ -1256,31 +1268,12 @@ throw|;
 block|}
 catch|catch
 parameter_list|(
-name|RuntimeException
-name|e
+name|SecurityException
+name|ignore
 parameter_list|)
 block|{
-if|if
-condition|(
-operator|!
-literal|"java.security.AccessControlException"
-operator|.
-name|equals
-argument_list|(
-name|e
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-condition|)
-block|{
-throw|throw
-name|e
-throw|;
-block|}
+comment|// Ignore SecurityException on purpose because if
+comment|// we can't get to the file we fall through.
 block|}
 comment|// Merge system and saffron properties, mapping deprecated saffron
 comment|// namespaces to calcite

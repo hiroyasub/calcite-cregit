@@ -350,31 +350,12 @@ throw|;
 block|}
 catch|catch
 parameter_list|(
-name|RuntimeException
-name|e
+name|SecurityException
+name|ignore
 parameter_list|)
 block|{
-if|if
-condition|(
-operator|!
-literal|"java.security.AccessControlException"
-operator|.
-name|equals
-argument_list|(
-name|e
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-argument_list|)
-condition|)
-block|{
-throw|throw
-name|e
-throw|;
-block|}
+comment|// Ignore SecurityException on purpose because if
+comment|// we can't get to the file we fall through.
 block|}
 comment|// copy in all system properties which start with "saffron."
 name|Properties
