@@ -4994,6 +4994,21 @@ name|getEnvelope
 argument_list|()
 return|;
 block|}
+comment|/**    * Explodes the {@code geom} into multiple geometries.    */
+specifier|private
+specifier|static
+name|void
+name|ST_Explode
+parameter_list|(
+specifier|final
+name|Geometry
+name|geom
+parameter_list|)
+block|{
+comment|// This is a dummy function. We cannot include table functions in this
+comment|// package, because they have too many dependencies. See the real definition
+comment|// in SqlSpatialTypeFunctions.
+block|}
 comment|// Geometry predicates ======================================================
 comment|/**    * Returns whether {@code geom1} contains {@code geom2}.    */
 annotation|@
