@@ -4978,6 +4978,28 @@ name|geom2
 argument_list|)
 return|;
 block|}
+comment|/**    * Returns whether no point in {@code geom1} is outside {@code geom2}.    */
+specifier|public
+specifier|static
+name|boolean
+name|ST_CoveredBy
+parameter_list|(
+name|Geometry
+name|geom1
+parameter_list|,
+name|Geometry
+name|geom2
+parameter_list|)
+block|{
+return|return
+name|geom1
+operator|.
+name|coveredBy
+argument_list|(
+name|geom2
+argument_list|)
+return|;
+block|}
 comment|/**    * Returns whether no point in {@code geom2} is outside {@code geom1}.    */
 specifier|public
 specifier|static
