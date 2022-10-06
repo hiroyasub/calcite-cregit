@@ -9583,7 +9583,7 @@ name|literal
 parameter_list|)
 block|{
 comment|// Use nullIndicator to decide whether to project null.
-comment|// Do nothing if the literal is null.
+comment|// Do nothing if the literal is null or symbol.
 if|if
 condition|(
 operator|!
@@ -9601,6 +9601,14 @@ name|nullIndicator
 operator|!=
 literal|null
 operator|)
+operator|&&
+operator|!
+name|RexUtil
+operator|.
+name|isSymbolLiteral
+argument_list|(
+name|literal
+argument_list|)
 condition|)
 block|{
 return|return

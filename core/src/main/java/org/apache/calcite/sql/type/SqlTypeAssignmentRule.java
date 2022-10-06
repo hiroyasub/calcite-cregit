@@ -1040,6 +1040,25 @@ name|MAP
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// SYMBOL is assignable from ...
+name|rules
+operator|.
+name|add
+argument_list|(
+name|SqlTypeName
+operator|.
+name|SYMBOL
+argument_list|,
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|SqlTypeName
+operator|.
+name|SYMBOL
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// ANY is assignable from ...
 name|rule
 operator|.
