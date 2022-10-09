@@ -447,6 +447,10 @@ name|PruneEmptyRules
 operator|.
 name|SORT_FETCH_ZERO_INSTANCE
 argument_list|,
+name|PruneEmptyRules
+operator|.
+name|EMPTY_TABLE_INSTANCE
+argument_list|,
 name|CoreRules
 operator|.
 name|UNION_MERGE

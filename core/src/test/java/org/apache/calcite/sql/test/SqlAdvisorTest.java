@@ -556,6 +556,8 @@ literal|"TABLE(CATALOG.SALES.EMP_20)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMPNULLABLES_20)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.EMPTY_PRODUCTS)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_ADDRESS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.DEPT)"
