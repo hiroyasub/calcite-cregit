@@ -6463,7 +6463,7 @@ literal|"WHEN NOT MATCHED THEN"
 operator|+
 literal|" INSERT (name, dept, salary)"
 operator|+
-literal|" (VALUES (t.name, 10, (t.salary * 0.15)))"
+literal|" VALUES (t.name, 10, (t.salary * 0.15))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20271,7 +20271,7 @@ literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
-literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+literal|"VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15)))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20340,7 +20340,7 @@ literal|", `E`.`SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
-literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+literal|"VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15)))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20404,7 +20404,7 @@ literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
-literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+literal|"VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15)))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20460,7 +20460,7 @@ literal|", `E`.`SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
-literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+literal|"VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15)))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -20548,7 +20548,7 @@ literal|"USING `TEMPS` AS `T`\n"
 operator|+
 literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
 operator|+
-literal|"WHEN NOT MATCHED THEN INSERT (`A`, `B`) (VALUES (ROW(1, 2)))"
+literal|"WHEN NOT MATCHED THEN INSERT (`A`, `B`) VALUES (ROW(1, 2))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -41328,7 +41328,7 @@ literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
-literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+literal|"VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15)))"
 decl_stmt|;
 name|sql
 argument_list|(
