@@ -1010,7 +1010,7 @@ name|frameType
 operator|==
 name|FrameTypeEnum
 operator|.
-name|WITH
+name|WITH_BODY
 operator|)
 operator|||
 operator|(

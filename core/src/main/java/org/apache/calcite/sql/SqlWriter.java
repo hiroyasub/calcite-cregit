@@ -151,6 +151,9 @@ block|,
 comment|/**      * WITH clause of a SELECT statement. The "list" has only two items:      * the WITH clause and the query, with AS as the separator.      */
 name|WITH
 block|,
+comment|/**      * The body query of WITH.      */
+name|WITH_BODY
+block|,
 comment|/**      * OFFSET clause.      *      *<p>Example:</p>      *<ul>      *<li><code>OFFSET 10 ROWS</code></li>      *</ul>      */
 name|OFFSET
 block|,

@@ -11903,9 +11903,9 @@ literal|"WITH `FEMALEEMPS` AS (SELECT *\n"
 operator|+
 literal|"FROM `EMPS`\n"
 operator|+
-literal|"WHERE (`GENDER` = 'F')) (SELECT `DEPTNO`\n"
+literal|"WHERE (`GENDER` = 'F')) SELECT `DEPTNO`\n"
 operator|+
-literal|"FROM `FEMALEEMPS`)"
+literal|"FROM `FEMALEEMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11946,9 +11946,9 @@ literal|"WHERE (`GENDER` = 'F')), `MARRIEDFEMALEEMPS` (`X`, `Y`) AS (SELECT *\n"
 operator|+
 literal|"FROM `FEMALEEMPS`\n"
 operator|+
-literal|"WHERE (`MARITASTATUS` = 'M')) (SELECT `DEPTNO`\n"
+literal|"WHERE (`MARITASTATUS` = 'M')) SELECT `DEPTNO`\n"
 operator|+
-literal|"FROM `FEMALEEMPS`)"
+literal|"FROM `FEMALEEMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -12008,9 +12008,9 @@ name|expected
 init|=
 literal|"WITH `V` (`I`, `C`) AS (VALUES (ROW(1, 'a')),\n"
 operator|+
-literal|"(ROW(2, 'bb'))) (SELECT `C`, `I`\n"
+literal|"(ROW(2, 'bb'))) SELECT `C`, `I`\n"
 operator|+
-literal|"FROM `V`)"
+literal|"FROM `V`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -12051,6 +12051,80 @@ literal|"(?s)Encountered \"with\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5299">[CALCITE-5299]    * JDBC adapter sometimes adds unnecessary parentheses around SELECT in WITH body</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithSelect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`) SELECT *\n"
+operator|+
+literal|"FROM `EMP2`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5299">[CALCITE-5299]    * JDBC adapter sometimes adds unnecessary parentheses around SELECT in WITH body</a>. */
+annotation|@
+name|Test
+name|void
+name|testWithOrderBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with emp2 as (select * from emp)\n"
+operator|+
+literal|"select * from emp2 order by deptno\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"WITH `EMP2` AS (SELECT *\n"
+operator|+
+literal|"FROM `EMP`) SELECT *\n"
+operator|+
+literal|"FROM `EMP2`\n"
+operator|+
+literal|"ORDER BY `DEPTNO`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
@@ -12078,9 +12152,9 @@ literal|"WITH `EMP2` AS (SELECT *\n"
 operator|+
 literal|"FROM `EMP`) (WITH `DEPT2` AS (SELECT *\n"
 operator|+
-literal|"FROM `DEPT`) (SELECT 1 AS `UNO`\n"
+literal|"FROM `DEPT`) SELECT 1 AS `UNO`\n"
 operator|+
-literal|"FROM `EMPDEPT`))"
+literal|"FROM `EMPDEPT`)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -12118,7 +12192,7 @@ name|expected
 init|=
 literal|"WITH `EMP2` AS (SELECT *\n"
 operator|+
-literal|"FROM `EMP`) (SELECT *\n"
+literal|"FROM `EMP`) SELECT *\n"
 operator|+
 literal|"FROM `EMP2`\n"
 operator|+
@@ -12126,7 +12200,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMP2`)"
+literal|"FROM `EMP2`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -12999,9 +13073,9 @@ specifier|final
 name|String
 name|sql2b
 init|=
-literal|"WITH `T` AS (SELECT 1 AS `x'y`) (SELECT `x'y`\n"
+literal|"WITH `T` AS (SELECT 1 AS `x'y`) SELECT `x'y`\n"
 operator|+
-literal|"FROM `T` AS `u`)"
+literal|"FROM `T` AS `u`"
 decl_stmt|;
 name|f2
 operator|.
@@ -13056,9 +13130,9 @@ specifier|final
 name|String
 name|sql3b
 init|=
-literal|"WITH `t` AS (SELECT 1 AS `x`) (SELECT `x`\n"
+literal|"WITH `t` AS (SELECT 1 AS `x`) SELECT `x`\n"
 operator|+
-literal|"FROM `t`)"
+literal|"FROM `t`"
 decl_stmt|;
 specifier|final
 name|SqlParserFixture
@@ -13453,7 +13527,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"WHERE ((`DEPTNO` IN ((SELECT `DEPTNO`\n"
+literal|"WHERE ((`DEPTNO` IN (SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `DEPT`\n"
 operator|+
@@ -13461,7 +13535,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `DEPT`)\n"
+literal|"FROM `DEPT`\n"
 operator|+
 literal|"EXCEPT\n"
 operator|+
@@ -13686,7 +13760,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -13694,7 +13768,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -13704,7 +13778,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -13712,7 +13786,7 @@ literal|"UNION ALL\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -13722,7 +13796,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -13730,7 +13804,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13753,7 +13827,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT `A`, `B`\n"
+literal|"SELECT `A`, `B`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -13761,7 +13835,7 @@ literal|"UNION ALL\n"
 operator|+
 literal|"SELECT `X`, `Y`\n"
 operator|+
-literal|"FROM `U`)\n"
+literal|"FROM `U`\n"
 operator|+
 literal|"ORDER BY 1, 2 DESC"
 argument_list|)
@@ -13833,7 +13907,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"((SELECT `A`\n"
+literal|"(SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -13845,7 +13919,7 @@ literal|"(SELECT `B`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"OFFSET 20 ROWS))"
+literal|"OFFSET 20 ROWS)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -13880,7 +13954,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"(SELECT `A`\n"
+literal|"SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -13894,7 +13968,7 @@ literal|"ORDER BY `B`\n"
 operator|+
 literal|"OFFSET 3 ROWS\n"
 operator|+
-literal|"FETCH NEXT 5 ROWS ONLY))"
+literal|"FETCH NEXT 5 ROWS ONLY)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -13921,7 +13995,7 @@ specifier|final
 name|String
 name|expected2
 init|=
-literal|"(SELECT `A`\n"
+literal|"SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -13931,7 +14005,7 @@ literal|"(SELECT `B`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"ORDER BY `B`))"
+literal|"ORDER BY `B`)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -13958,7 +14032,7 @@ specifier|final
 name|String
 name|expected3
 init|=
-literal|"(SELECT `A`\n"
+literal|"SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -13968,7 +14042,7 @@ literal|"(SELECT `B`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"OFFSET 3 ROWS))"
+literal|"OFFSET 3 ROWS)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -13995,7 +14069,7 @@ specifier|final
 name|String
 name|expected4
 init|=
-literal|"(SELECT `A`\n"
+literal|"SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -14005,7 +14079,7 @@ literal|"(SELECT `B`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"FETCH NEXT 5 ROWS ONLY))"
+literal|"FETCH NEXT 5 ROWS ONLY)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14032,7 +14106,7 @@ specifier|final
 name|String
 name|expected5
 init|=
-literal|"(SELECT `A`\n"
+literal|"SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -14044,7 +14118,7 @@ literal|"FROM `T`\n"
 operator|+
 literal|"OFFSET 3 ROWS\n"
 operator|+
-literal|"FETCH NEXT 5 ROWS ONLY))"
+literal|"FETCH NEXT 5 ROWS ONLY)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14071,7 +14145,7 @@ specifier|final
 name|String
 name|expected6
 init|=
-literal|"(SELECT `A`\n"
+literal|"SELECT `A`\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -14083,7 +14157,7 @@ literal|"FROM `T`\n"
 operator|+
 literal|"OFFSET 3 ROWS\n"
 operator|+
-literal|"FETCH NEXT 5 ROWS ONLY))"
+literal|"FETCH NEXT 5 ROWS ONLY)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14093,6 +14167,52 @@ operator|.
 name|ok
 argument_list|(
 name|expected6
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testUnionIntersect
+parameter_list|()
+block|{
+comment|// Note that the union sub-query has parentheses.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"(select * from a union select * from b)\n"
+operator|+
+literal|"intersect select * from c"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `A`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `B`)\n"
+operator|+
+literal|"INTERSECT\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `C`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -14154,7 +14274,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -14162,7 +14282,7 @@ literal|"EXCEPT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14172,7 +14292,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -14180,7 +14300,7 @@ literal|"EXCEPT ALL\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14190,7 +14310,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -14198,7 +14318,7 @@ literal|"EXCEPT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14235,7 +14355,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"(SELECT `COL1`\n"
+literal|"SELECT `COL1`\n"
 operator|+
 literal|"FROM `TABLE1`\n"
 operator|+
@@ -14243,7 +14363,7 @@ literal|"EXCEPT\n"
 operator|+
 literal|"SELECT `COL1`\n"
 operator|+
-literal|"FROM `TABLE2`)"
+literal|"FROM `TABLE2`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14272,7 +14392,7 @@ specifier|final
 name|String
 name|expected2
 init|=
-literal|"(SELECT `COL1`\n"
+literal|"SELECT `COL1`\n"
 operator|+
 literal|"FROM `TABLE1`\n"
 operator|+
@@ -14280,7 +14400,7 @@ literal|"EXCEPT ALL\n"
 operator|+
 literal|"SELECT `COL1`\n"
 operator|+
-literal|"FROM `TABLE2`)"
+literal|"FROM `TABLE2`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14351,7 +14471,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -14359,7 +14479,7 @@ literal|"INTERSECT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14369,7 +14489,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -14377,7 +14497,7 @@ literal|"INTERSECT ALL\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14387,7 +14507,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -14395,7 +14515,7 @@ literal|"INTERSECT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `A`)"
+literal|"FROM `A`"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15932,7 +16052,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"((SELECT *\n"
+literal|"(SELECT *\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
@@ -15942,7 +16062,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMP`)"
+literal|"FROM `EMP`"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -16407,7 +16527,7 @@ specifier|final
 name|String
 name|expected5
 init|=
-literal|"(SELECT A\n"
+literal|"SELECT A\n"
 operator|+
 literal|"FROM FOO\n"
 operator|+
@@ -16415,7 +16535,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT B\n"
 operator|+
-literal|"FROM BAZ)\n"
+literal|"FROM BAZ\n"
 operator|+
 literal|"LIMIT 3"
 decl_stmt|;
@@ -17610,13 +17730,13 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"((((SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
 literal|"UNION\n"
 operator|+
-literal|"((SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `B`\n"
 operator|+
@@ -17624,31 +17744,31 @@ literal|"INTERSECT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `C`)\n"
+literal|"FROM `C`\n"
 operator|+
 literal|"INTERSECT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `D`))\n"
+literal|"FROM `D`\n"
 operator|+
 literal|"EXCEPT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `E`)\n"
+literal|"FROM `E`\n"
 operator|+
 literal|"EXCEPT\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `F`)\n"
+literal|"FROM `F`\n"
 operator|+
 literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `G`)"
+literal|"FROM `G`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19803,7 +19923,7 @@ literal|""
 operator|+
 literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
 operator|+
-literal|"(SELECT `DEPTNO`\n"
+literal|"SELECT `DEPTNO`\n"
 operator|+
 literal|"FROM `EMPS`\n"
 operator|+
@@ -19811,7 +19931,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT `DEPTNO`\n"
 operator|+
-literal|"FROM `DEPTS`)"
+literal|"FROM `DEPTS`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -19936,7 +20056,7 @@ name|expected
 init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"(SELECT *\n"
+literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMPS1`\n"
 operator|+
@@ -19944,7 +20064,7 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"FROM `EMPS2`)"
+literal|"FROM `EMPS2`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -35021,7 +35141,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"((SELECT `X`\n"
+literal|"SELECT `X`\n"
 operator|+
 literal|"FROM `A`\n"
 operator|+
@@ -35029,13 +35149,13 @@ literal|"UNION\n"
 operator|+
 literal|"SELECT `Y`\n"
 operator|+
-literal|"FROM `B`)\n"
+literal|"FROM `B`\n"
 operator|+
 literal|"EXCEPT\n"
 operator|+
 literal|"SELECT `Z`\n"
 operator|+
-literal|"FROM `C`)"
+literal|"FROM `C`"
 decl_stmt|;
 name|sql
 argument_list|(

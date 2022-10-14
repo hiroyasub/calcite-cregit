@@ -1327,6 +1327,8 @@ argument_list|,
 name|UNNEST
 argument_list|)
 argument_list|,
+name|SET_QUERY
+argument_list|,
 name|AGGREGATE
 argument_list|,
 name|DML
