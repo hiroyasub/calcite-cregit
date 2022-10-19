@@ -101,6 +101,18 @@ name|TimeZone
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|Math
+operator|.
+name|floorMod
+import|;
+end_import
+
 begin_comment
 comment|/**  * Time with time-zone literal.  *  *<p>Immutable, internally represented as a string (in ISO format),  * and can support unlimited precision (milliseconds, nanoseconds).  */
 end_comment
@@ -861,13 +873,11 @@ argument_list|(
 operator|(
 name|int
 operator|)
-name|DateTimeUtils
-operator|.
 name|floorMod
 argument_list|(
 name|i
 argument_list|,
-literal|1000
+literal|1000L
 argument_list|)
 argument_list|)
 return|;

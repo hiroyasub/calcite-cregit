@@ -4890,7 +4890,7 @@ argument_list|)
 block|,
 name|FLOOR_DIV
 argument_list|(
-name|DateTimeUtils
+name|Math
 operator|.
 name|class
 argument_list|,
@@ -4907,7 +4907,7 @@ argument_list|)
 block|,
 name|FLOOR_MOD
 argument_list|(
-name|DateTimeUtils
+name|Math
 operator|.
 name|class
 argument_list|,

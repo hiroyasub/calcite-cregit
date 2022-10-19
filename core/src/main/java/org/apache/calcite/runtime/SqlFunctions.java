@@ -777,6 +777,30 @@ begin_import
 import|import static
 name|java
 operator|.
+name|lang
+operator|.
+name|Math
+operator|.
+name|floorDiv
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|Math
+operator|.
+name|floorMod
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
 name|nio
 operator|.
 name|charset
@@ -15425,8 +15449,6 @@ specifier|final
 name|long
 name|millis
 init|=
-name|DateTimeUtils
-operator|.
 name|floorMod
 argument_list|(
 name|timestamp
@@ -15541,11 +15563,6 @@ expr_stmt|;
 name|int
 name|deltaYear
 init|=
-operator|(
-name|int
-operator|)
-name|DateTimeUtils
-operator|.
 name|floorDiv
 argument_list|(
 name|m0
@@ -15559,11 +15576,6 @@ name|deltaYear
 expr_stmt|;
 name|m0
 operator|=
-operator|(
-name|int
-operator|)
-name|DateTimeUtils
-operator|.
 name|floorMod
 argument_list|(
 name|m0
@@ -15802,8 +15814,6 @@ specifier|final
 name|long
 name|millis0
 init|=
-name|DateTimeUtils
-operator|.
 name|floorMod
 argument_list|(
 name|t0
@@ -15820,8 +15830,6 @@ init|=
 operator|(
 name|int
 operator|)
-name|DateTimeUtils
-operator|.
 name|floorDiv
 argument_list|(
 name|t0
@@ -15837,8 +15845,6 @@ specifier|final
 name|long
 name|millis1
 init|=
-name|DateTimeUtils
-operator|.
 name|floorMod
 argument_list|(
 name|t1
@@ -15855,8 +15861,6 @@ init|=
 operator|(
 name|int
 operator|)
-name|DateTimeUtils
-operator|.
 name|floorDiv
 argument_list|(
 name|t1
