@@ -465,10 +465,8 @@ operator|&&
 operator|(
 name|method
 operator|.
-name|getParameterTypes
+name|getParameterCount
 argument_list|()
-operator|.
-name|length
 operator|==
 literal|0
 operator|)

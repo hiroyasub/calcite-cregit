@@ -4622,10 +4622,8 @@ argument_list|)
 operator|&&
 name|method1
 operator|.
-name|getParameterTypes
+name|getParameterCount
 argument_list|()
-operator|.
-name|length
 operator|==
 name|args
 operator|.

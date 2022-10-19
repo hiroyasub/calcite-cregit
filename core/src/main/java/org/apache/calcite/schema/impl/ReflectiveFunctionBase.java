@@ -293,10 +293,8 @@ if|if
 condition|(
 name|constructor
 operator|.
-name|getParameterTypes
+name|getParameterCount
 argument_list|()
-operator|.
-name|length
 operator|==
 literal|0
 operator|&&
@@ -350,10 +348,8 @@ if|if
 condition|(
 name|constructor
 operator|.
-name|getParameterTypes
+name|getParameterCount
 argument_list|()
-operator|.
-name|length
 operator|==
 literal|1
 operator|&&
