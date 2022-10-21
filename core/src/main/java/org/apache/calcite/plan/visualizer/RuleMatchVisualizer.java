@@ -2299,6 +2299,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|String
 name|getNodeLabel
 parameter_list|(
@@ -2371,6 +2372,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|String
 name|getSetId
 parameter_list|(
@@ -2451,6 +2453,7 @@ end_function
 
 begin_function
 specifier|private
+specifier|static
 name|String
 name|getNodeExplanation
 parameter_list|(

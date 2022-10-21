@@ -1518,6 +1518,7 @@ return|;
 block|}
 comment|/**    * Constructs new equal conditions from the equal sets.    *    * @param join the original {@link Join} node    * @param equalSets the equal sets    * @return the newly constructed conditions from equal sets    */
 specifier|private
+specifier|static
 name|List
 argument_list|<
 name|RexNode
