@@ -907,6 +907,20 @@ name|jupiter
 operator|.
 name|api
 operator|.
+name|AfterAll
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Assertions
 import|;
 end_import
@@ -1146,7 +1160,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for {@link org.apache.calcite.rel.hint.RelHint}.  */
+comment|/**  * Unit test for {@link org.apache.calcite.rel.hint.RelHint}.  * See {@link RelOptRulesTest} for an explanation of how to add tests.  */
 end_comment
 
 begin_class
@@ -1237,6 +1251,37 @@ name|HINT_STRATEGY_TABLE
 argument_list|)
 argument_list|)
 decl_stmt|;
+annotation|@
+name|Nullable
+specifier|private
+specifier|static
+name|DiffRepository
+name|diffRepos
+init|=
+literal|null
+decl_stmt|;
+annotation|@
+name|AfterAll
+specifier|public
+specifier|static
+name|void
+name|checkActualAndReferenceFiles
+parameter_list|()
+block|{
+if|if
+condition|(
+name|diffRepos
+operator|!=
+literal|null
+condition|)
+block|{
+name|diffRepos
+operator|.
+name|checkActualAndReferenceFiles
+argument_list|()
+expr_stmt|;
+block|}
+block|}
 specifier|protected
 name|Fixture
 name|fixture
@@ -1251,6 +1296,13 @@ name|RelOptFixture
 name|ruleFixture
 parameter_list|()
 block|{
+name|diffRepos
+operator|=
+name|RULE_FIXTURE
+operator|.
+name|diffRepos
+argument_list|()
+expr_stmt|;
 return|return
 name|RULE_FIXTURE
 return|;
