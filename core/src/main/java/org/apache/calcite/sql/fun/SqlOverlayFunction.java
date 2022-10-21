@@ -155,12 +155,10 @@ name|OTC_CUSTOM
 init|=
 name|OperandTypes
 operator|.
+name|STRING_STRING_INTEGER
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|STRING_STRING_INTEGER
-argument_list|,
 name|OperandTypes
 operator|.
 name|STRING_STRING_INTEGER_INTEGER

@@ -103,7 +103,7 @@ implements|implements
 name|SqlSingleOperandTypeChecker
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Package private. Use {@link org.apache.calcite.sql.type.OperandTypes#and},    * {@link org.apache.calcite.sql.type.OperandTypes#or}.    */
+comment|/** Creates a CompositeSingleOperandTypeChecker. Outside this package, use    * {@link SqlSingleOperandTypeChecker#and(SqlSingleOperandTypeChecker)},    * {@link OperandTypes#and}, {@link OperandTypes#or} and similar. */
 name|CompositeSingleOperandTypeChecker
 parameter_list|(
 name|CompositeOperandTypeChecker
@@ -132,6 +132,8 @@ argument_list|,
 name|allowedRules
 argument_list|,
 name|allowedSignatures
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|)

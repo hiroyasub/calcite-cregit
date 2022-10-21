@@ -75,6 +75,18 @@ name|Nullable
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|BiFunction
+import|;
+end_import
+
 begin_comment
 comment|/**  * Strategy interface to check for allowed operand types of an operator call.  *  *<p>This interface is an example of the  * {@link org.apache.calcite.util.Glossary#STRATEGY_PATTERN strategy pattern}.  *  * @see OperandTypes  */
 end_comment
@@ -113,18 +125,55 @@ name|opName
 parameter_list|)
 function_decl|;
 comment|/** Returns the strategy for making the arguments have consistency types. */
+specifier|default
 name|Consistency
 name|getConsistency
 parameter_list|()
-function_decl|;
+block|{
+return|return
+name|Consistency
+operator|.
+name|NONE
+return|;
+block|}
+comment|/** Returns a copy of this checker with the given signature generator. */
+specifier|default
+name|CompositeOperandTypeChecker
+name|withGenerator
+parameter_list|(
+name|BiFunction
+argument_list|<
+name|SqlOperator
+argument_list|,
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|signatureGenerator
+parameter_list|)
+block|{
+comment|// We should support for all subclasses but don't yet.
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"withGenerator"
+argument_list|)
+throw|;
+block|}
 comment|/** Returns whether the {@code i}th operand is optional. */
+specifier|default
 name|boolean
 name|isOptional
 parameter_list|(
 name|int
 name|i
 parameter_list|)
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Returns whether the list of parameters is fixed-length. In standard SQL,    * user-defined functions are fixed-length.    *    *<p>If true, the validator should expand calls, supplying a {@code DEFAULT}    * value for each parameter for which an argument is not supplied. */
 specifier|default
 name|boolean
@@ -145,6 +194,46 @@ parameter_list|()
 block|{
 return|return
 literal|null
+return|;
+block|}
+comment|/** Composes this with another checker using AND. */
+specifier|default
+name|SqlOperandTypeChecker
+name|and
+parameter_list|(
+name|SqlOperandTypeChecker
+name|checker
+parameter_list|)
+block|{
+return|return
+name|OperandTypes
+operator|.
+name|and
+argument_list|(
+name|this
+argument_list|,
+name|checker
+argument_list|)
+return|;
+block|}
+comment|/** Composes this with another checker using OR. */
+specifier|default
+name|SqlOperandTypeChecker
+name|or
+parameter_list|(
+name|SqlOperandTypeChecker
+name|checker
+parameter_list|)
+block|{
+return|return
+name|OperandTypes
+operator|.
+name|or
+argument_list|(
+name|this
+argument_list|,
+name|checker
+argument_list|)
 return|;
 block|}
 comment|/** Strategy used to make arguments consistent. */

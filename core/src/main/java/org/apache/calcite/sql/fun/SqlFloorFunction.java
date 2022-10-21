@@ -257,12 +257,10 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|NUMERIC_OR_INTERVAL
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|NUMERIC_OR_INTERVAL
-argument_list|,
 name|OperandTypes
 operator|.
 name|sequence

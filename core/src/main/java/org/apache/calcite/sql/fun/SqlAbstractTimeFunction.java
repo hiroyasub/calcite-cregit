@@ -237,12 +237,10 @@ name|OTC_CUSTOM
 init|=
 name|OperandTypes
 operator|.
+name|POSITIVE_INTEGER_LITERAL
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|POSITIVE_INTEGER_LITERAL
-argument_list|,
 name|OperandTypes
 operator|.
 name|NILADIC

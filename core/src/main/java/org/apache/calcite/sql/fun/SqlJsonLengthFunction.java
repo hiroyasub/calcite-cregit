@@ -161,12 +161,10 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|ANY
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|ANY
-argument_list|,
 name|OperandTypes
 operator|.
 name|family

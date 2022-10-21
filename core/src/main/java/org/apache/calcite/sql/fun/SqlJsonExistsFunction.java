@@ -189,10 +189,6 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|or
-argument_list|(
-name|OperandTypes
-operator|.
 name|family
 argument_list|(
 name|SqlTypeFamily
@@ -203,7 +199,9 @@ name|SqlTypeFamily
 operator|.
 name|CHARACTER
 argument_list|)
-argument_list|,
+operator|.
+name|or
+argument_list|(
 name|OperandTypes
 operator|.
 name|family

@@ -137,12 +137,10 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|NUMERIC
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|NUMERIC
-argument_list|,
 name|OperandTypes
 operator|.
 name|NUMERIC_NUMERIC

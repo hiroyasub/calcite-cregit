@@ -188,12 +188,10 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|INTEGER
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|INTEGER
-argument_list|,
 name|OperandTypes
 operator|.
 name|BINARY

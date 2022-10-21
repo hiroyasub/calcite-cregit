@@ -141,12 +141,10 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|STRING
+operator|.
 name|or
 argument_list|(
-name|OperandTypes
-operator|.
-name|STRING
-argument_list|,
 name|OperandTypes
 operator|.
 name|STRING_STRING
