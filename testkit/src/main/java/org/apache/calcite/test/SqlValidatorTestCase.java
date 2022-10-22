@@ -134,7 +134,7 @@ return|return
 name|FIXTURE
 return|;
 block|}
-comment|/** Creates a test context with a SQL query. */
+comment|/**    * Creates a test context with a SQL query.    * Default catalog: {@link org.apache.calcite.test.catalog.MockCatalogReaderSimple#init()}.    */
 specifier|public
 specifier|final
 name|SqlValidatorFixture

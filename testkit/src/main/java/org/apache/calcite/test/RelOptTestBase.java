@@ -76,7 +76,7 @@ operator|.
 name|DEFAULT
 return|;
 block|}
-comment|/** Creates a fixture and sets its SQL statement. */
+comment|/**    * Creates a test context with a SQL query.    * Default catalog: {@link org.apache.calcite.test.catalog.MockCatalogReaderSimple#init()}.    */
 specifier|protected
 specifier|final
 name|RelOptFixture

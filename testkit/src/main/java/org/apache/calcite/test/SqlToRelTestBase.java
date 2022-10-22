@@ -213,7 +213,7 @@ operator|.
 name|DEFAULT
 return|;
 block|}
-comment|/** Sets the SQL statement for a test. */
+comment|/**    * Creates a test context with a SQL query.    * Default catalog: {@link org.apache.calcite.test.catalog.MockCatalogReaderSimple#init()}.    */
 specifier|public
 specifier|final
 name|SqlToRelFixture
