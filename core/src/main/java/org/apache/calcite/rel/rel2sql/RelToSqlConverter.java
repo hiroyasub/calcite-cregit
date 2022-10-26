@@ -2334,6 +2334,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -5280,6 +5282,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5391,6 +5395,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 comment|// Wrap "SELECT 1 AS x"
@@ -5431,6 +5437,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -5457,6 +5465,8 @@ name|dual
 argument_list|,
 name|createAlwaysFalseCondition
 argument_list|()
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,
@@ -5721,6 +5731,8 @@ name|query
 argument_list|,
 name|createAlwaysFalseCondition
 argument_list|()
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,
@@ -8128,6 +8140,8 @@ operator|.
 name|SINGLETON_STAR
 argument_list|,
 name|tableCall
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,

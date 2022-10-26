@@ -865,7 +865,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testRowValueConstructorWithSubquery
+name|testRowValueConstructorWithSubQuery
 parameter_list|()
 block|{
 specifier|final
@@ -12425,6 +12425,296 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithoutReferences
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, deptno\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY ROW_NUMBER() over (partition by ename order by deptno) = 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithoutReferencesAndFilter
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, deptno\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WHERE deptno> 5\n"
+operator|+
+literal|"QUALIFY ROW_NUMBER() over (partition by ename order by deptno) = 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithReferences
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, deptno,\n"
+operator|+
+literal|"   ROW_NUMBER() over (partition by ename order by deptno) as row_num\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY row_num = 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithMultipleReferences
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, deptno + 1 as derived_deptno,\n"
+operator|+
+literal|"   ROW_NUMBER() over (partition by ename order by deptno) as row_num\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY row_num = derived_deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithDerivedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, deptno, SUBSTRING(ename,1,1) as DERIVED_COLUMN "
+operator|+
+literal|"FROM emp "
+operator|+
+literal|"QUALIFY ROW_NUMBER() OVER (PARTITION BY deptno\n"
+operator|+
+literal|"                           ORDER BY DERIVED_COLUMN) = 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithWindowClause
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, SUM(deptno) OVER myWindow as sumDeptNo\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WINDOW myWindow AS (PARTITION BY ename ORDER BY empno)\n"
+operator|+
+literal|"QUALIFY sumDeptNo = 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyInDdl
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"INSERT INTO dept(deptno, name)\n"
+operator|+
+literal|"SELECT DISTINCT empno, ename\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WHERE deptno> 5\n"
+operator|+
+literal|"QUALIFY RANK() OVER (PARTITION BY ename\n"
+operator|+
+literal|"                     ORDER BY slacker DESC) = 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyInSubQuery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|" SELECT DISTINCT empno, ename, deptno\n"
+operator|+
+literal|" FROM emp\n"
+operator|+
+literal|" QUALIFY RANK() OVER (PARTITION BY ename\n"
+operator|+
+literal|"                      ORDER BY deptno DESC) = 1)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithSubQueryFilter
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT empno, ename, deptno,\n"
+operator|+
+literal|"    RANK() OVER (PARTITION BY ename\n"
+operator|+
+literal|"                 ORDER BY deptno DESC) as rank_val\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY rank_val = (SELECT COUNT(*) FROM emp)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyWithEverything
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT DISTINCT empno, ename, deptno,\n"
+operator|+
+literal|"    RANK() OVER (PARTITION BY ename\n"
+operator|+
+literal|"                 ORDER BY deptno DESC) as rank_val\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WHERE sal> 1000\n"
+operator|+
+literal|"QUALIFY rank_val = (SELECT COUNT(*) FROM emp)\n"
+operator|+
+literal|"ORDER BY deptno\n"
+operator|+
+literal|"LIMIT 5"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyInCorrelatedSubQuery
+parameter_list|()
+block|{
+comment|// The QUALIFY clause is inside a WHERE EXISTS and references columns from
+comment|// the enclosing query.
+name|sql
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WHERE EXISTS(\n"
+operator|+
+literal|" SELECT name\n"
+operator|+
+literal|" FROM dept\n"
+operator|+
+literal|" QUALIFY RANK() OVER (PARTITION BY name\n"
+operator|+
+literal|"                      ORDER BY dept.deptno DESC) = emp.deptno\n"
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1313">[CALCITE-1313]    * Validator should derive type of expression in ORDER BY</a>.    */
 end_comment
@@ -17840,7 +18130,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseAliasWithinGroupingSets
 parameter_list|()

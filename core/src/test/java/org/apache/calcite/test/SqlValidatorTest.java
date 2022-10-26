@@ -251,20 +251,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlSelect
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|SqlSpecialOperator
 import|;
 end_import
@@ -441,22 +427,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SelectScope
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlAbstractConformance
 import|;
 end_import
@@ -585,22 +555,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlValidatorScope
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlValidatorUtil
 import|;
 end_import
@@ -676,20 +630,6 @@ operator|.
 name|util
 operator|.
 name|ImmutableBitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
 import|;
 end_import
 
@@ -21525,6 +21465,361 @@ argument_list|)
 operator|.
 name|ok
 argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests the {@code QUALIFY} clause. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyPositive
+parameter_list|()
+block|{
+specifier|final
+name|SqlValidatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|qualifyWithoutAlias
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"empno, ename\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY ROW_NUMBER() over (partition by ename order by deptno) = 1"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyWithoutAlias
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|qualifyWithAlias
+init|=
+literal|"SELECT empno, ename, deptno,\n"
+operator|+
+literal|"   ROW_NUMBER() over (partition by ename order by deptno) as row_num\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY row_num = 1"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyWithAlias
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|qualifyWithWindowClause
+init|=
+literal|"SELECT empno, ename,\n"
+operator|+
+literal|" SUM(deptno) OVER myWindow as sumDeptNo\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WINDOW myWindow AS (PARTITION BY ename ORDER BY empno)\n"
+operator|+
+literal|"QUALIFY sumDeptNo = 1"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyWithWindowClause
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|qualifyWithEverything
+init|=
+literal|"SELECT DISTINCT empno, ename, deptno,\n"
+operator|+
+literal|"    RANK() OVER (PARTITION BY ename ORDER BY deptno DESC) as rank_val\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WHERE sal> 1000\n"
+operator|+
+literal|"QUALIFY rank_val = (SELECT COUNT(*) FROM emp)\n"
+operator|+
+literal|"ORDER BY deptno\n"
+operator|+
+literal|"LIMIT 5"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyWithEverything
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|qualifyReferencingCommonColumnInJoin
+init|=
+literal|"SELECT * \n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"NATURAL JOIN dept\n"
+operator|+
+literal|"QUALIFY ROW_NUMBER() over (partition by ename order by emp.deptno) = 1"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyReferencingCommonColumnInJoin
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|qualifyOnMultipleWindowFunctions
+init|=
+literal|"SELECT"
+operator|+
+literal|"   AVG(deptno) OVER (PARTITION BY ename) avgDeptNo,"
+operator|+
+literal|"   RANK() OVER (PARTITION BY deptno ORDER BY ename) as myRank\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY avgDeptNo = 1 AND myRank = 1"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyOnMultipleWindowFunctions
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Negative tests for the {@code QUALIFY} clause. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testQualifyNegative
+parameter_list|()
+block|{
+specifier|final
+name|SqlValidatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+decl_stmt|;
+comment|// The predicate in the QUALIFY clause expression must be a boolean, since
+comment|// we use it as a filter.
+specifier|final
+name|String
+name|qualifyWithNonBooleanExpression
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"empno, ename\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY ^1 + 1^"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyWithNonBooleanExpression
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"QUALIFY clause must be a condition"
+argument_list|)
+expr_stmt|;
+comment|// We don't allow for using ordinal column references in QUALIFY.
+specifier|final
+name|String
+name|qualifyWithOrdinal
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"empno, ename, ROW_NUMBER() over (partition by ename order by deptno) = 1\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY ^3^"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyWithOrdinal
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"QUALIFY clause must be a condition"
+argument_list|)
+expr_stmt|;
+comment|// 'deptno' is a common column in both the emp and dept table.
+comment|// We need to use emp.deptno or dept.deptno to make it unambiguous
+specifier|final
+name|String
+name|qualifyReferencingAmbiguousCommonColumnInJoin
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"NATURAL JOIN dept\n"
+operator|+
+literal|"QUALIFY ROW_NUMBER() over (partition by ename order by ^deptno^) = 1"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyReferencingAmbiguousCommonColumnInJoin
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'DEPTNO' is ambiguous"
+argument_list|)
+expr_stmt|;
+comment|// Qualify must contain a window function. This matches the behavior where
+comment|// HAVING needs to have an aggregate or reference a group column.
+specifier|final
+name|String
+name|qualifyOnNonWindowFunction
+init|=
+literal|"SELECT * \n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY ^SUM(deptno) = 1^"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyOnNonWindowFunction
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"QUALIFY expression 'SUM\\(`EMP`\\.`DEPTNO`\\) = 1' "
+operator|+
+literal|"must contain a window function"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|qualifyOnAliasedNonWindowFunction
+init|=
+literal|""
+operator|+
+literal|"SELECT ^SUM(deptno) as sumDeptNo\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY sumDeptNo = 1^"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|qualifyOnAliasedNonWindowFunction
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"QUALIFY expression 'SUM\\(`EMP`\\.`DEPTNO`\\) = 1' "
+operator|+
+literal|"must contain a window function"
+argument_list|)
+expr_stmt|;
+comment|// This query fails, since it's a mix of regular aggregates and window
+comment|// functions. This query needs to fail, since we assume that qualify filters
+comment|// on the result of a window function in SqlToRelConverter and that the
+comment|// input Rel is a LogicalProject and not a LogicalAggregate.
+specifier|final
+name|String
+name|mixedNonAggregateAndWindowAggregate
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"   SUM(deptno) as sumDeptNo, "
+operator|+
+literal|"   RANK() OVER (PARTITION BY ^ename^ ORDER BY deptno) myRank\n"
+operator|+
+literal|"FROM emp\n"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+name|mixedNonAggregateAndWindowAggregate
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'ENAME' is not being grouped"
+argument_list|)
 expr_stmt|;
 block|}
 end_function
@@ -46131,13 +46426,10 @@ annotation|@
 name|Override
 specifier|public
 name|SqlNode
-name|expand
+name|validate
 parameter_list|(
 name|SqlNode
-name|expr
-parameter_list|,
-name|SqlValidatorScope
-name|scope
+name|topNode
 parameter_list|)
 block|{
 name|SqlNode
@@ -46145,100 +46437,20 @@ name|rewrittenNode
 init|=
 name|rewriteNode
 argument_list|(
-name|expr
+name|topNode
 argument_list|)
 decl_stmt|;
 return|return
 name|super
 operator|.
-name|expand
+name|validate
 argument_list|(
 name|rewrittenNode
-argument_list|,
-name|scope
-argument_list|)
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|SqlNode
-name|expandSelectExpr
-parameter_list|(
-name|SqlNode
-name|expr
-parameter_list|,
-name|SelectScope
-name|scope
-parameter_list|,
-name|SqlSelect
-name|select
-parameter_list|)
-block|{
-name|SqlNode
-name|rewrittenNode
-init|=
-name|rewriteNode
-argument_list|(
-name|expr
-argument_list|)
-decl_stmt|;
-return|return
-name|super
-operator|.
-name|expandSelectExpr
-argument_list|(
-name|rewrittenNode
-argument_list|,
-name|scope
-argument_list|,
-name|select
-argument_list|)
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|SqlNode
-name|expandGroupByOrHavingExpr
-parameter_list|(
-name|SqlNode
-name|expr
-parameter_list|,
-name|SqlValidatorScope
-name|scope
-parameter_list|,
-name|SqlSelect
-name|select
-parameter_list|,
-name|boolean
-name|havingExpression
-parameter_list|)
-block|{
-name|SqlNode
-name|rewrittenNode
-init|=
-name|rewriteNode
-argument_list|(
-name|expr
-argument_list|)
-decl_stmt|;
-return|return
-name|super
-operator|.
-name|expandGroupByOrHavingExpr
-argument_list|(
-name|rewrittenNode
-argument_list|,
-name|scope
-argument_list|,
-name|select
-argument_list|,
-name|havingExpression
 argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|rewriteNode
 parameter_list|(
@@ -46277,6 +46489,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|SqlIdentifier
 name|rewriteIdentifier
 parameter_list|(
@@ -46284,20 +46497,22 @@ name|SqlIdentifier
 name|sqlIdentifier
 parameter_list|)
 block|{
-name|Preconditions
-operator|.
-name|checkArgument
-argument_list|(
+if|if
+condition|(
 name|sqlIdentifier
 operator|.
 name|names
 operator|.
 name|size
 argument_list|()
-operator|==
+operator|!=
 literal|2
-argument_list|)
-expr_stmt|;
+condition|)
+block|{
+return|return
+name|sqlIdentifier
+return|;
+block|}
 if|if
 condition|(
 name|sqlIdentifier
@@ -46383,15 +46598,9 @@ return|;
 block|}
 else|else
 block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-literal|"Unknown Identifier "
-operator|+
+return|return
 name|sqlIdentifier
-argument_list|)
-throw|;
+return|;
 block|}
 block|}
 block|}

@@ -2241,6 +2241,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"QUALIFY expression ''{0}'' must contain a window function"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|qualifyExpressionMustContainWindowFunction
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"ROW/RANGE not allowed with RANK, DENSE_RANK or ROW_NUMBER functions"
 argument_list|)
 name|ExInst

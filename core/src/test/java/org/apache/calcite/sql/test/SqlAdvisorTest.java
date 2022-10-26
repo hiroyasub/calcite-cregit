@@ -1162,6 +1162,8 @@ literal|"KEYWORD(GROUP)"
 argument_list|,
 literal|"KEYWORD(HAVING)"
 argument_list|,
+literal|"KEYWORD(QUALIFY)"
+argument_list|,
 literal|"KEYWORD(INTERSECT)"
 argument_list|,
 literal|"KEYWORD(ORDER)"
@@ -1227,6 +1229,8 @@ argument_list|,
 literal|"KEYWORD(OUTER)"
 argument_list|,
 literal|"KEYWORD(RIGHT)"
+argument_list|,
+literal|"KEYWORD(QUALIFY)"
 argument_list|,
 literal|"KEYWORD(GROUP)"
 argument_list|,

@@ -139,15 +139,13 @@ name|expanded
 init|=
 name|validator
 operator|.
-name|expandGroupByOrHavingExpr
+name|extendedExpandGroupBy
 argument_list|(
 name|expr
 argument_list|,
 name|this
 argument_list|,
 name|select
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// expression needs to be valid in parent scope too

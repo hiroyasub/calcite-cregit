@@ -23610,6 +23610,219 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testQualify
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT empno, ename,\n"
+operator|+
+literal|" ROW_NUMBER() over (partition by ename order by deptno) as rn\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY rn = 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `EMPNO`, `ENAME`,"
+operator|+
+literal|" (ROW_NUMBER() OVER (PARTITION BY `ENAME` ORDER BY `DEPTNO`)) AS `RN`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"QUALIFY (`RN` = 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQualifyWithoutAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT empno, ename\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"QUALIFY ROW_NUMBER() over (partition by ename order by deptno) = 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `EMPNO`, `ENAME`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"QUALIFY ((ROW_NUMBER() OVER (PARTITION BY `ENAME` ORDER BY `DEPTNO`)) = 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQualifyWithWindowClause
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT empno, ename,\n"
+operator|+
+literal|" SUM(deptno) OVER myWindow as sumDeptNo\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WINDOW myWindow AS (PARTITION BY ename ORDER BY empno)\n"
+operator|+
+literal|"QUALIFY sumDeptNo = 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `EMPNO`, `ENAME`,"
+operator|+
+literal|" (SUM(`DEPTNO`) OVER `MYWINDOW`) AS `SUMDEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WINDOW `MYWINDOW` AS (PARTITION BY `ENAME` ORDER BY `EMPNO`)\n"
+operator|+
+literal|"QUALIFY (`SUMDEPTNO` = 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQualifyWithEverything
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT DISTINCT ename,\n"
+operator|+
+literal|" SUM(deptno) OVER (PARTITION BY ename) as r\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"WHERE deptno> 3\n"
+operator|+
+literal|"GROUP BY ename, deptno\n"
+operator|+
+literal|"HAVING SUM(empno)> 4\n"
+operator|+
+literal|"QUALIFY sumDeptNo = 1\n"
+operator|+
+literal|"ORDER BY ename\n"
+operator|+
+literal|"LIMIT 5\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT DISTINCT `ENAME`,"
+operator|+
+literal|" (SUM(`DEPTNO`) OVER (PARTITION BY `ENAME`)) AS `R`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`DEPTNO`> 3)\n"
+operator|+
+literal|"GROUP BY `ENAME`, `DEPTNO`\n"
+operator|+
+literal|"HAVING (SUM(`EMPNO`)> 4)\n"
+operator|+
+literal|"QUALIFY (`SUMDEPTNO` = 1)\n"
+operator|+
+literal|"ORDER BY `ENAME`\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testQualifyIllegalAfterOrder
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT x\n"
+operator|+
+literal|"FROM t\n"
+operator|+
+literal|"ORDER BY 1 DESC\n"
+operator|+
+literal|"^QUALIFY^ x = 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"QUALIFY\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testNullTreatment
 parameter_list|()
 block|{
