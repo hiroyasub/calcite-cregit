@@ -172,11 +172,10 @@ block|{
 name|RelJson
 name|relJson
 init|=
-operator|new
 name|RelJson
-argument_list|(
-literal|null
-argument_list|)
+operator|.
+name|create
+argument_list|()
 decl_stmt|;
 comment|// in org.apache.calcite.rel package
 name|assertThat

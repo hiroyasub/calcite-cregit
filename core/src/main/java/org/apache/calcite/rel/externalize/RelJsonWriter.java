@@ -167,6 +167,30 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Callback for a relational expression to dump itself as JSON.  *  * @see RelJsonReader  */
 end_comment
@@ -241,6 +265,7 @@ name|String
 name|previousId
 decl_stmt|;
 comment|//~ Constructors -------------------------------------------------------------
+comment|/** Creates a RelJsonWriter with a private JsonBuilder. */
 specifier|public
 name|RelJsonWriter
 parameter_list|()
@@ -253,6 +278,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Creates a RelJsonWriter with a given JsonBuilder. */
 specifier|public
 name|RelJsonWriter
 parameter_list|(
@@ -261,10 +287,40 @@ name|jsonBuilder
 parameter_list|)
 block|{
 name|this
+argument_list|(
+name|jsonBuilder
+argument_list|,
+name|UnaryOperator
+operator|.
+name|identity
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a RelJsonWriter. */
+specifier|public
+name|RelJsonWriter
+parameter_list|(
+name|JsonBuilder
+name|jsonBuilder
+parameter_list|,
+name|UnaryOperator
+argument_list|<
+name|RelJson
+argument_list|>
+name|relJsonTransform
+parameter_list|)
+block|{
+name|this
 operator|.
 name|jsonBuilder
 operator|=
+name|requireNonNull
+argument_list|(
 name|jsonBuilder
+argument_list|,
+literal|"jsonBuilder"
+argument_list|)
 expr_stmt|;
 name|relList
 operator|=
@@ -277,12 +333,19 @@ argument_list|()
 expr_stmt|;
 name|relJson
 operator|=
-operator|new
-name|RelJson
-argument_list|(
-name|this
+name|relJsonTransform
 operator|.
+name|apply
+argument_list|(
+name|RelJson
+operator|.
+name|create
+argument_list|()
+operator|.
+name|withJsonBuilder
+argument_list|(
 name|jsonBuilder
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
