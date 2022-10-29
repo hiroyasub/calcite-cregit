@@ -12709,11 +12709,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select cardinality(arr) from"
+literal|"select cardinality(arr) from (\n"
 operator|+
-literal|"(select array(select e.deptno) arr\n"
+literal|"  select array(select e.deptno) arr from (\n"
 operator|+
-literal|"from (select deptno, ename from emp) e)"
+literal|"    select deptno, ename from emp) e)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14911,19 +14911,88 @@ begin_function
 annotation|@
 name|Test
 name|void
-name|testUserDefinedOrderByOver
+name|testUserDefinedOrderByOverLow
 parameter_list|()
+block|{
+name|checkUserDefinedOrderByOver
+argument_list|(
+name|NullCollation
+operator|.
+name|LOW
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testUserDefinedOrderByOverHigh
+parameter_list|()
+block|{
+name|checkUserDefinedOrderByOver
+argument_list|(
+name|NullCollation
+operator|.
+name|HIGH
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testUserDefinedOrderByOverFirst
+parameter_list|()
+block|{
+name|checkUserDefinedOrderByOver
+argument_list|(
+name|NullCollation
+operator|.
+name|FIRST
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testUserDefinedOrderByOverLast
+parameter_list|()
+block|{
+name|checkUserDefinedOrderByOver
+argument_list|(
+name|NullCollation
+operator|.
+name|LAST
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+name|void
+name|checkUserDefinedOrderByOver
+parameter_list|(
+name|NullCollation
+name|nullCollation
+parameter_list|)
 block|{
 name|String
 name|sql
 init|=
 literal|"select deptno,\n"
 operator|+
-literal|"  rank() over(partition by empno order by deptno)\n"
+literal|"  rank() over (partition by empno order by comm desc)\n"
 operator|+
 literal|"from emp\n"
 operator|+
-literal|"order by row_number() over(partition by empno order by deptno)"
+literal|"order by row_number() over (partition by empno order by comm)"
 decl_stmt|;
 name|Properties
 name|properties
@@ -14943,9 +15012,7 @@ operator|.
 name|camelName
 argument_list|()
 argument_list|,
-name|NullCollation
-operator|.
-name|LOW
+name|nullCollation
 operator|.
 name|name
 argument_list|()
