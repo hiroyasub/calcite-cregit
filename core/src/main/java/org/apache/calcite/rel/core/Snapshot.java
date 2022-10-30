@@ -55,6 +55,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
 import|;
 end_import
@@ -243,6 +257,18 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression that returns the contents of a relation expression as  * it was at a given time in the past.  *  *<p>For example, if {@code Products} is a temporal table, and  * {@link TableScan}(Products) is a relational operator that returns all  * versions of the contents of the table, then  * {@link Snapshot}(TableScan(Products)) is a relational operator that only  * returns the contents whose versions that overlap with the given specific  * period (i.e. those that started before given period and ended after it).  */
 end_comment
@@ -272,6 +298,50 @@ argument_list|>
 name|hints
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+comment|/**    * Creates a Snapshot by parsing serialized output.    */
+specifier|public
+name|Snapshot
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|input
+operator|.
+name|getCluster
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
+name|input
+operator|.
+name|getInput
+argument_list|()
+argument_list|,
+name|requireNonNull
+argument_list|(
+name|input
+operator|.
+name|getExpression
+argument_list|(
+literal|"period"
+argument_list|)
+argument_list|,
+literal|"period"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Creates a Snapshot.    *    * @param cluster   Cluster that this relational expression belongs to    * @param traitSet  The traits of this relational expression    * @param hints     Hints for this node    * @param input     Input relational expression    * @param period    Timestamp expression which as the table was at the given    *                  time in the past    */
 annotation|@
 name|SuppressWarnings

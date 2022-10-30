@@ -97,6 +97,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelInput
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
 import|;
 end_import
@@ -231,6 +245,20 @@ extends|extends
 name|Snapshot
 block|{
 comment|//~ Constructors -----------------------------------------------------------
+comment|/**    * Creates a LogicalSnapshot by parsing serialized output.    */
+specifier|public
+name|LogicalSnapshot
+parameter_list|(
+name|RelInput
+name|input
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|input
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Creates a LogicalSnapshot.    *    *<p>Use {@link #create} unless you know what you're doing.    *    * @param cluster   Cluster that this relational expression belongs to    * @param traitSet  The traits of this relational expression    * @param hints     Hints for this node    * @param input     Input relational expression    * @param period    Timestamp expression which as the table was at the given    *                  time in the past    */
 specifier|public
 name|LogicalSnapshot
