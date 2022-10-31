@@ -864,6 +864,19 @@ name|c
 argument_list|)
 return|;
 case|case
+literal|"PRESTO"
+case|:
+case|case
+literal|"AWS.ATHENA"
+case|:
+return|return
+operator|new
+name|PrestoSqlDialect
+argument_list|(
+name|c
+argument_list|)
+return|;
+case|case
 literal|"MYSQL (INFOBRIGHT)"
 case|:
 return|return

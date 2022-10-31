@@ -1528,6 +1528,9 @@ return|;
 case|case
 literal|"PRESTO"
 case|:
+case|case
+literal|"AWS.ATHENA"
+case|:
 return|return
 name|DatabaseProduct
 operator|.

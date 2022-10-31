@@ -473,6 +473,26 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -626,6 +646,21 @@ name|JdbcSchema
 implements|implements
 name|Schema
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|LOGGER
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|JdbcSchema
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 specifier|final
 name|DataSource
 name|dataSource
@@ -1800,14 +1835,12 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|System
+name|LOGGER
 operator|.
-name|out
-operator|.
-name|println
+name|info
 argument_list|(
-literal|"Unknown table type: "
-operator|+
+literal|"Unknown table type: {}"
+argument_list|,
 name|tableTypeName2
 argument_list|)
 expr_stmt|;
