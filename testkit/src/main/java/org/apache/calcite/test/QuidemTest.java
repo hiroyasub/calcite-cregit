@@ -315,6 +315,20 @@ name|junit
 operator|.
 name|jupiter
 operator|.
+name|api
+operator|.
+name|TestInstance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
 name|params
 operator|.
 name|ParameterizedTest
@@ -516,6 +530,15 @@ comment|/**  * Test that runs every Quidem file as a test.  */
 end_comment
 
 begin_class
+annotation|@
+name|TestInstance
+argument_list|(
+name|TestInstance
+operator|.
+name|Lifecycle
+operator|.
+name|PER_CLASS
+argument_list|)
 specifier|public
 specifier|abstract
 class|class
@@ -794,8 +817,7 @@ specifier|protected
 specifier|static
 name|Collection
 argument_list|<
-name|Object
-index|[]
+name|String
 argument_list|>
 name|data
 parameter_list|(
@@ -925,21 +947,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|Util
-operator|.
-name|transform
-argument_list|(
 name|paths
-argument_list|,
-name|path
-lambda|->
-operator|new
-name|Object
-index|[]
-block|{
-name|path
-block|}
-argument_list|)
 return|;
 block|}
 specifier|protected
@@ -1404,7 +1412,7 @@ name|ParameterizedTest
 annotation|@
 name|MethodSource
 argument_list|(
-literal|"data"
+literal|"getPath"
 argument_list|)
 specifier|public
 name|void
@@ -1500,6 +1508,16 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Factory method for {@link QuidemTest#test(String)} parameters. */
+specifier|protected
+specifier|abstract
+name|Collection
+argument_list|<
+name|String
+argument_list|>
+name|getPath
+parameter_list|()
+function_decl|;
 comment|/** Quidem connection factory for Calcite's built-in test schemas. */
 specifier|protected
 specifier|static

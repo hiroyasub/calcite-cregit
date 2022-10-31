@@ -431,14 +431,14 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|/** For {@link QuidemTest#test(String)} parameters. */
+annotation|@
+name|Override
 specifier|public
-specifier|static
 name|Collection
 argument_list|<
-name|Object
-index|[]
+name|String
 argument_list|>
-name|data
+name|getPath
 parameter_list|()
 block|{
 comment|// Start with a test file we know exists, then find the directory and list
