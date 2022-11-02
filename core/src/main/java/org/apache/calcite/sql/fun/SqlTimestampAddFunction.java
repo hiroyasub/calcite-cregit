@@ -416,11 +416,14 @@ return|;
 block|}
 comment|/** Creates a SqlTimestampAddFunction. */
 name|SqlTimestampAddFunction
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"TIMESTAMPADD"
+name|name
 argument_list|,
 name|SqlKind
 operator|.

@@ -45,6 +45,22 @@ name|rel
 operator|.
 name|type
 operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
 name|RelDataTypeFactory
 import|;
 end_import
@@ -101,9 +117,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|type
-operator|.
-name|OperandTypes
+name|SqlOperatorBinding
 import|;
 end_import
 
@@ -119,7 +133,7 @@ name|sql
 operator|.
 name|type
 operator|.
-name|SqlReturnTypeInference
+name|OperandTypes
 import|;
 end_import
 
@@ -165,15 +179,14 @@ name|SqlTimestampDiffFunction
 extends|extends
 name|SqlFunction
 block|{
-comment|/** Creates a SqlTimestampDiffFunction. */
 specifier|private
 specifier|static
-specifier|final
-name|SqlReturnTypeInference
-name|RETURN_TYPE_INFERENCE
-init|=
+name|RelDataType
+name|inferReturnType2
+parameter_list|(
+name|SqlOperatorBinding
 name|opBinding
-lambda|->
+parameter_list|)
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -184,8 +197,8 @@ operator|.
 name|getTypeFactory
 argument_list|()
 decl_stmt|;
-name|SqlTypeName
-name|sqlTypeName
+name|TimeUnit
+name|timeUnit
 init|=
 name|opBinding
 operator|.
@@ -197,6 +210,11 @@ name|TimeUnit
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+name|SqlTypeName
+name|sqlTypeName
+init|=
+name|timeUnit
 operator|==
 name|TimeUnit
 operator|.
@@ -244,19 +262,24 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-decl_stmt|;
+comment|/** Creates a SqlTimestampDiffFunction. */
 name|SqlTimestampDiffFunction
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"TIMESTAMPDIFF"
+name|name
 argument_list|,
 name|SqlKind
 operator|.
 name|TIMESTAMP_DIFF
 argument_list|,
-name|RETURN_TYPE_INFERENCE
+name|SqlTimestampDiffFunction
+operator|::
+name|inferReturnType2
 argument_list|,
 literal|null
 argument_list|,

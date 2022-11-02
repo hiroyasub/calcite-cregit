@@ -178,6 +178,14 @@ argument_list|,
 literal|"mysql"
 argument_list|)
 block|,
+comment|/** A collection of operators that are in Microsoft SQL Server (MSSql) but not    * in standard SQL. */
+name|MSSQL
+argument_list|(
+literal|"q"
+argument_list|,
+literal|"mssql"
+argument_list|)
+block|,
 comment|/** A collection of operators that are in Oracle but not in standard SQL. */
 name|ORACLE
 argument_list|(

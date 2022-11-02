@@ -213,11 +213,14 @@ comment|// SQL2003, Part 2, Section 4.4.3 - extract returns a exact numeric
 comment|// TODO: Return type should be decimal for seconds
 specifier|public
 name|SqlExtractFunction
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"EXTRACT"
+name|name
 argument_list|,
 name|SqlKind
 operator|.

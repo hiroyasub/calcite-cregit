@@ -6388,7 +6388,9 @@ name|TIMESTAMP_ADD
 init|=
 operator|new
 name|SqlTimestampAddFunction
-argument_list|()
+argument_list|(
+literal|"TIMESTAMPADD"
+argument_list|)
 decl_stmt|;
 comment|/** The<code>TIMESTAMPDIFF</code> function. */
 specifier|public
@@ -6399,7 +6401,9 @@ name|TIMESTAMP_DIFF
 init|=
 operator|new
 name|SqlTimestampDiffFunction
-argument_list|()
+argument_list|(
+literal|"TIMESTAMPDIFF"
+argument_list|)
 decl_stmt|;
 comment|/**    * Use of the<code>IN_FENNEL</code> operator forces the argument to be    * evaluated in Fennel. Otherwise acts as identity function.    */
 specifier|public
@@ -6452,7 +6456,9 @@ name|EXTRACT
 init|=
 operator|new
 name|SqlExtractFunction
-argument_list|()
+argument_list|(
+literal|"EXTRACT"
+argument_list|)
 decl_stmt|;
 comment|/**    * The SQL<code>YEAR</code> operator. Returns the Year    * from a DATETIME  E.g.<br>    *<code>YEAR(date '2008-9-23')</code> returns<code>    * 2008</code>    */
 specifier|public
