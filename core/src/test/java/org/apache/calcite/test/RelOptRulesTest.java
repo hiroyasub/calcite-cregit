@@ -1627,6 +1627,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|DateString
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|ImmutableBitSet
 import|;
 end_import
@@ -19020,6 +19034,10 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Tests propagation of a filter derived from an "IS NOT DISTINCT FROM"    * predicate.    *    *<p>By the time the rule sees the predicate, it has been converted to    * "deptno = 10 OR (deptno IS NULL AND 10 IS NULL)", so    * {@link #testPullConstantIntoProjectWithIsNotDistinctFromDate()} is a purer    * test of the functionality. */
+end_comment
+
 begin_function
 annotation|@
 name|Test
@@ -19099,6 +19117,112 @@ name|CoreRules
 operator|.
 name|JOIN_PUSH_TRANSITIVE_PREDICATES
 argument_list|,
+name|CoreRules
+operator|.
+name|PROJECT_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5336">[CALCITE-5336]    * Infer constants from predicates with IS NOT DISTINCT FROM operator</a>.    *    *<p>Reduce expression rules should identify constants with    * {@code IS NOT DISTINCT FROM} operator as they do for {@code =}. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testPullConstantIntoProjectWithIsNotDistinctFromDate
+parameter_list|()
+block|{
+comment|// Build a tree equivalent to the SQL
+comment|//   SELECT hiredate
+comment|//   FROM emp
+comment|//   WHERE hiredate IS NOT DISTINCT FROM DATE '2020-12-11'
+comment|//
+comment|// We build a tree because if we used the SQL parser, it would expand
+comment|//   x IS NOT DISTINCT FROM y
+comment|// to
+comment|//   x = y OR (x IS NULL AND y IS NULL)
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|relFn
+init|=
+name|b
+lambda|->
+name|b
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|b
+operator|.
+name|getRexBuilder
+argument_list|()
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_NOT_DISTINCT_FROM
+argument_list|,
+name|b
+operator|.
+name|field
+argument_list|(
+literal|4
+argument_list|)
+argument_list|,
+name|b
+operator|.
+name|literal
+argument_list|(
+operator|new
+name|DateString
+argument_list|(
+literal|2020
+argument_list|,
+literal|12
+argument_list|,
+literal|11
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|b
+operator|.
+name|field
+argument_list|(
+literal|4
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|relFn
+argument_list|(
+name|relFn
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
 name|CoreRules
 operator|.
 name|PROJECT_REDUCE_EXPRESSIONS
