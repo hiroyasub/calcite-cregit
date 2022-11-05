@@ -391,6 +391,25 @@ name|shouldConvertRaggedUnionTypesToVarying
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|TimeFrameSet
+name|deriveTimeFrameSet
+parameter_list|(
+name|TimeFrameSet
+name|frameSet
+parameter_list|)
+block|{
+return|return
+name|typeSystem
+operator|.
+name|deriveTimeFrameSet
+argument_list|(
+name|frameSet
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

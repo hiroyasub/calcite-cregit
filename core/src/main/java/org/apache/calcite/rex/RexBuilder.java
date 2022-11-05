@@ -779,6 +779,22 @@ end_import
 
 begin_import
 import|import static
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Verify
+operator|.
+name|verifyNotNull
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|apache
@@ -5238,11 +5254,29 @@ name|SqlIntervalQualifier
 name|intervalQualifier
 parameter_list|)
 block|{
-assert|assert
+name|verifyNotNull
+argument_list|(
 name|intervalQualifier
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|intervalQualifier
+operator|.
+name|timeFrameName
 operator|!=
 literal|null
-assert|;
+condition|)
+block|{
+return|return
+name|makePreciseStringLiteral
+argument_list|(
+name|intervalQualifier
+operator|.
+name|timeFrameName
+argument_list|)
+return|;
+block|}
 return|return
 name|makeFlag
 argument_list|(

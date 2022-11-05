@@ -62,7 +62,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility methods to manipulate String representation of DateTime values.  */
+comment|/**  * Utility methods to manipulate String representation of DateTime values.  *  * @see DateTimeUtils  */
 end_comment
 
 begin_class

@@ -101,6 +101,38 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|TimeFrameSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|runtime
 operator|.
 name|CalciteContextException
@@ -332,6 +364,9 @@ init|=
 literal|128
 decl_stmt|;
 comment|/** Default value of {@link Config#timeUnitCodes()}.    * The map is empty, which means that there are no abbreviations other than    * the time unit names ("YEAR", "SECOND", etc.) */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 specifier|final
@@ -1067,7 +1102,10 @@ argument_list|>
 name|charLiteralStyles
 parameter_list|)
 function_decl|;
-comment|/** Returns a mapping from abbreviations to time units.      *      *<p>For example, if the map contains the entry      * ("Y", {@link TimeUnit#YEAR}) then you can write      * "{@code EXTRACT(S FROM orderDate)}". */
+comment|/** Returns a mapping from abbreviations to time units.      *      *<p>For example, if the map contains the entry      * ("Y", {@link TimeUnit#YEAR}) then you can write      * "{@code EXTRACT(S FROM orderDate)}".      *      * @deprecated This property is deprecated, and has no effect. All      * non-standard time units are now parsed as identifiers, and resolved in      * the validator. You can define custom time frames using      * {@link RelDataTypeSystem#deriveTimeFrameSet(TimeFrameSet)}. To alias a      * time frame, use {@link TimeFrameSet.Builder#addAlias(String, String)}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 annotation|@
 name|Value
 operator|.

@@ -260,6 +260,9 @@ parameter_list|<
 name|V
 parameter_list|>
 name|NameMap
+argument_list|<
+name|V
+argument_list|>
 name|immutableCopyOf
 parameter_list|(
 name|Map

@@ -71,6 +71,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|TimeFrameSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|runtime
 operator|.
 name|CalciteContextException
@@ -1441,8 +1457,10 @@ name|identifierMaxLength
 parameter_list|)
 function_decl|;
 comment|/**    * Sets the map from identifier to time unit.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
-specifier|abstract
 name|void
 name|setTimeUnitCodes
 parameter_list|(
@@ -1454,7 +1472,8 @@ name|TimeUnit
 argument_list|>
 name|timeUnitCodes
 parameter_list|)
-function_decl|;
+block|{
+block|}
 comment|/**    * Sets the SQL language conformance level.    */
 specifier|public
 specifier|abstract

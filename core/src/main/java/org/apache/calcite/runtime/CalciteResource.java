@@ -2753,13 +2753,13 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"''{0}'' is not a valid datetime format"
+literal|"''{0}'' is not a valid time frame"
 argument_list|)
 name|ExInst
 argument_list|<
-name|CalciteException
+name|SqlValidatorException
 argument_list|>
-name|invalidDatetimeFormat
+name|invalidTimeFrame
 parameter_list|(
 name|String
 name|a0

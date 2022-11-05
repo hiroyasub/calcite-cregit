@@ -23,22 +23,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|TimeUnit
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|sql
 operator|.
 name|SqlDialect
@@ -248,16 +232,6 @@ operator|.
 name|util
 operator|.
 name|Locale
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -1164,9 +1138,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT `DATEADD`(DAY, 1, `T`),"
+literal|"SELECT DATEADD(DAY, 1, `T`),"
 operator|+
-literal|" `DATEDIFF`(WEEK, 2, `T`), `DATE_PART`(YEAR, `T`)\n"
+literal|" DATEDIFF(WEEK, 2, `T`), DATE_PART(YEAR, `T`)\n"
 operator|+
 literal|"FROM `MYTABLE`"
 decl_stmt|;
@@ -1183,152 +1157,136 @@ expr_stmt|;
 block|}
 comment|/** Overrides, adding tests for DATEADD, DATEDIFF, DATE_PART functions    * in addition to EXTRACT. */
 annotation|@
-name|Override
+name|Test
 specifier|protected
 name|void
-name|checkTimeUnitCodes
-parameter_list|(
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|TimeUnit
-argument_list|>
-name|timeUnitCodes
-parameter_list|)
+name|testTimeUnitCodes
+parameter_list|()
 block|{
 name|super
 operator|.
-name|checkTimeUnitCodes
-argument_list|(
-name|timeUnitCodes
-argument_list|)
-expr_stmt|;
-name|SqlParserFixture
-name|f
-init|=
-name|fixture
+name|testTimeUnitCodes
 argument_list|()
-operator|.
-name|withConfig
-argument_list|(
-name|config
-lambda|->
-name|config
-operator|.
-name|withTimeUnitCodes
-argument_list|(
-name|timeUnitCodes
-argument_list|)
-argument_list|)
-decl_stmt|;
-name|timeUnitCodes
-operator|.
-name|forEach
-argument_list|(
-parameter_list|(
-name|abbrev
-parameter_list|,
-name|timeUnit
-parameter_list|)
-lambda|->
-block|{
+expr_stmt|;
+comment|// As for FLOOR in the base class, so for DATEADD, DATEDIFF, DATE_PART.
+comment|// Extensions such as 'y' remain as identifiers; they are resolved in the
+comment|// validator.
+specifier|final
 name|String
-name|sql
+name|ts
 init|=
-literal|"SELECT "
-operator|+
-literal|"DATEADD("
-operator|+
-name|abbrev
-operator|+
-literal|", 1, '2022-06-03 15:30:00.000'),"
-operator|+
-literal|"DATEDIFF("
-operator|+
-name|abbrev
-operator|+
-literal|", '2021-06-03 12:00:00.000', '2022-06-03 15:30:00.000'),"
-operator|+
-literal|"DATE_PART("
-operator|+
-name|abbrev
-operator|+
-literal|", '2022-06-03 15:30:00.000')"
+literal|"'2022-06-03 12:00:00.000'"
 decl_stmt|;
+specifier|final
 name|String
-name|expected
+name|ts2
 init|=
-literal|"SELECT "
-operator|+
-literal|"`DATEADD`("
-operator|+
-name|timeUnit
-operator|+
-literal|", 1, '2022-06-03 15:30:00.000'), "
-operator|+
-literal|"`DATEDIFF`("
-operator|+
-name|timeUnit
-operator|+
-literal|", '2021-06-03 12:00:00.000', '2022-06-03 15:30:00.000'), "
-operator|+
-literal|"`DATE_PART`("
-operator|+
-name|timeUnit
-operator|+
-literal|", '2022-06-03 15:30:00.000')"
+literal|"'2022-06-03 15:30:00.000'"
 decl_stmt|;
-name|f
-operator|.
-name|sql
+name|expr
 argument_list|(
-name|sql
+literal|"DATEADD(year, 1, "
+operator|+
+name|ts
+operator|+
+literal|")"
 argument_list|)
 operator|.
 name|ok
 argument_list|(
-name|expected
+literal|"DATEADD(YEAR, 1, "
+operator|+
+name|ts
+operator|+
+literal|")"
 argument_list|)
 expr_stmt|;
-block|}
+name|expr
+argument_list|(
+literal|"DATEADD(y, 1, "
+operator|+
+name|ts
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATEADD(`Y`, 1, "
+operator|+
+name|ts
+operator|+
+literal|")"
 argument_list|)
 expr_stmt|;
-name|f
-operator|.
-name|sql
+name|expr
 argument_list|(
-literal|"SELECT DATEADD(^A^, 1, NOW())"
+literal|"DATEDIFF(year, 1, "
+operator|+
+name|ts
+operator|+
+literal|", "
+operator|+
+name|ts2
+operator|+
+literal|")"
 argument_list|)
 operator|.
-name|fails
+name|ok
 argument_list|(
-literal|"'A' is not a valid datetime format"
-argument_list|)
-expr_stmt|;
-if|if
-condition|(
-name|timeUnitCodes
-operator|.
-name|containsKey
-argument_list|(
-literal|"S"
-argument_list|)
-condition|)
-block|{
-name|f
-operator|.
-name|sql
-argument_list|(
-literal|"SELECT DATEADD(S^.^A, 1, NOW())"
-argument_list|)
-operator|.
-name|fails
-argument_list|(
-literal|"(?s).*Encountered \".\" at .*"
+literal|"DATEDIFF(YEAR, 1, '2022-06-03 12:00:00.000', "
+operator|+
+literal|"'2022-06-03 15:30:00.000')"
 argument_list|)
 expr_stmt|;
-block|}
+name|expr
+argument_list|(
+literal|"DATEDIFF(y, 1, "
+operator|+
+name|ts
+operator|+
+literal|", "
+operator|+
+name|ts2
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATEDIFF(`Y`, 1, '2022-06-03 12:00:00.000', "
+operator|+
+literal|"'2022-06-03 15:30:00.000')"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"DATE_PART(year, "
+operator|+
+name|ts
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATE_PART(YEAR, '2022-06-03 12:00:00.000')"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"DATE_PART(y, "
+operator|+
+name|ts
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATE_PART(`Y`, '2022-06-03 12:00:00.000')"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** PostgreSQL and Redshift allow TIMESTAMP literals that contain only a    * date part. */
 annotation|@

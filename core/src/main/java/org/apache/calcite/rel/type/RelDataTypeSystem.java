@@ -1089,6 +1089,19 @@ return|return
 literal|null
 return|;
 block|}
+comment|/** Returns a list of supported time frames.    *    *<p>The validator calls this method with {@link TimeFrames#CORE} as an    * argument, and the default implementation of this method returns its input,    * and therefore {@link TimeFrames#CORE CORE} is the default time frame set.    *    *<p>If you wish to use a custom time frame set, create an instance of    * {@code RelDataTypeSystem} that overrides this method. Your method should    * call {@link TimeFrameSet#builder()}, will probably add all or most of the    * time frames in the {@code frameSet} argument, and then call    * {@link TimeFrameSet.Builder#build()}.    *    * @param frameSet Set of built-in time frames    */
+specifier|default
+name|TimeFrameSet
+name|deriveTimeFrameSet
+parameter_list|(
+name|TimeFrameSet
+name|frameSet
+parameter_list|)
+block|{
+return|return
+name|frameSet
+return|;
+block|}
 block|}
 end_interface
 

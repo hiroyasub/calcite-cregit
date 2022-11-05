@@ -85,6 +85,22 @@ name|rel
 operator|.
 name|type
 operator|.
+name|DelegatingTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
 name|RelDataType
 import|;
 end_import
@@ -102,6 +118,38 @@ operator|.
 name|type
 operator|.
 name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|TimeFrameSet
 import|;
 end_import
 
@@ -749,6 +797,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|TryThreadLocal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -918,6 +980,16 @@ operator|.
 name|util
 operator|.
 name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
 import|;
 end_import
 
@@ -1434,6 +1506,11 @@ comment|/**  * Contains unit tests for all operators. Each of the methods is nam
 end_comment
 
 begin_class
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MethodCanBeStatic"
+argument_list|)
 specifier|public
 class|class
 name|SqlOperatorTest
@@ -1514,6 +1591,188 @@ operator|.
 name|compile
 argument_list|(
 literal|"[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|MICROSECOND_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"FRAC_SECOND"
+argument_list|,
+literal|"MICROSECOND"
+argument_list|,
+literal|"SQL_TSI_MICROSECOND"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|NANOSECOND_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"NANOSECOND"
+argument_list|,
+literal|"SQL_TSI_FRAC_SECOND"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|SECOND_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"SECOND"
+argument_list|,
+literal|"SQL_TSI_SECOND"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|MINUTE_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"MINUTE"
+argument_list|,
+literal|"SQL_TSI_MINUTE"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|HOUR_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"HOUR"
+argument_list|,
+literal|"SQL_TSI_HOUR"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|DAY_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"DAY"
+argument_list|,
+literal|"SQL_TSI_DAY"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|WEEK_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"WEEK"
+argument_list|,
+literal|"SQL_TSI_WEEK"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|MONTH_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"MONTH"
+argument_list|,
+literal|"SQL_TSI_MONTH"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|QUARTER_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"QUARTER"
+argument_list|,
+literal|"SQL_TSI_QUARTER"
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|YEAR_VARIANTS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"YEAR"
+argument_list|,
+literal|"SQL_TSI_YEAR"
 argument_list|)
 decl_stmt|;
 comment|/** Minimum and maximum values for each exact and approximate numeric    * type. */
@@ -16979,6 +17238,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|static
 name|void
 name|checkRlike
 parameter_list|(
@@ -17106,6 +17366,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+specifier|static
 name|void
 name|checkRlikeFails
 parameter_list|(
@@ -21304,6 +21565,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkIf
 parameter_list|(
@@ -31973,6 +32235,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+specifier|static
 name|void
 name|checkSubstringFunction
 parameter_list|(
@@ -34306,6 +34570,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+specifier|static
 name|void
 name|checkDecodeFunc
 parameter_list|(
@@ -35557,6 +35823,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkStringAggFunc
 parameter_list|(
@@ -35661,6 +35928,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkStringAggFuncFails
 parameter_list|(
@@ -35774,6 +36042,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkGroupConcatFunc
 parameter_list|(
@@ -35892,6 +36161,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkGroupConcatFuncFails
 parameter_list|(
@@ -36005,6 +36275,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkArrayAggFunc
 parameter_list|(
@@ -36130,6 +36401,7 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|void
 name|checkArrayAggFuncFails
 parameter_list|(
@@ -36267,6 +36539,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+specifier|static
 name|void
 name|checkArrayConcatAggFunc
 parameter_list|(
@@ -36404,6 +36678,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
+specifier|static
 name|void
 name|checkArrayConcatAggFuncFails
 parameter_list|(
@@ -38162,6 +38438,17 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
+name|checkFails
+argument_list|(
+literal|"extract(^a^ from date '2008-2-23')"
+argument_list|,
+literal|"'A' is not a valid time frame"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(epoch from date '2008-2-23')"
@@ -38544,6 +38831,17 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
+name|checkFails
+argument_list|(
+literal|"extract(^a^ from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"'A' is not a valid time frame"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(epoch from timestamp '2008-2-23 12:34:56')"
@@ -38790,7 +39088,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testExtractFunc
+name|testExtractInterval
 parameter_list|()
 block|{
 specifier|final
@@ -38811,6 +39109,17 @@ argument_list|,
 name|VM_FENNEL
 argument_list|,
 name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(^a^ from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"'A' is not a valid time frame"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|f
@@ -40114,28 +40423,6 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
-argument_list|(
-literal|"floor(timestamp '2015-02-19 12:34:56.78' to ^microsecond^)"
-argument_list|,
-literal|"'MICROSECOND' is not a valid datetime format"
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-name|f
-operator|.
-name|checkFails
-argument_list|(
-literal|"floor(timestamp '2015-02-19 12:34:56.78' to ^nanosecond^)"
-argument_list|,
-literal|"'NANOSECOND' is not a valid datetime format"
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-name|f
-operator|.
 name|checkScalar
 argument_list|(
 literal|"floor(time '12:34:56' to minute)"
@@ -40311,28 +40598,6 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
-argument_list|(
-literal|"ceil(timestamp '2015-02-19 12:34:56.78' to ^microsecond^)"
-argument_list|,
-literal|"'MICROSECOND' is not a valid datetime format"
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-name|f
-operator|.
-name|checkFails
-argument_list|(
-literal|"ceil(timestamp '2015-02-19 12:34:56.78' to ^nanosecond^)"
-argument_list|,
-literal|"'NANOSECOND' is not a valid datetime format"
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-name|f
-operator|.
 name|checkScalar
 argument_list|(
 literal|"ceil(time '12:34:56' to minute)"
@@ -40475,7 +40740,347 @@ literal|"ceiling(cast(null as timestamp) to month)"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests {@code FLOOR}, {@code CEIL}, {@code TIMESTAMPADD},    * {@code TIMESTAMPDIFF} functions with custom time frames. */
 annotation|@
+name|Test
+name|void
+name|testCustomTimeFrame
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withFactory
+argument_list|(
+name|tf
+lambda|->
+name|tf
+operator|.
+name|withTypeSystem
+argument_list|(
+name|typeSystem
+lambda|->
+operator|new
+name|DelegatingTypeSystem
+argument_list|(
+name|typeSystem
+argument_list|)
+block|{
+block_content|@Override public TimeFrameSet deriveTimeFrameSet(                       TimeFrameSet frameSet
+argument_list|)
+block|{
+return|return
+name|TimeFrameSet
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addAll
+argument_list|(
+name|frameSet
+argument_list|)
+operator|.
+name|addDivision
+argument_list|(
+literal|"minute15"
+argument_list|,
+literal|4
+argument_list|,
+literal|"HOUR"
+argument_list|)
+operator|.
+name|addMultiple
+argument_list|(
+literal|"month4"
+argument_list|,
+literal|4
+argument_list|,
+literal|"MONTH"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+block|}
+block|)
+end_class
+
+begin_empty_stmt
+unit|)
+empty_stmt|;
+end_empty_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2020-06-27 12:34:56' to \"minute15\")"
+argument_list|,
+literal|"2020-06-27 12:30:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2020-06-27 12:34:56' to \"month4\")"
+argument_list|,
+literal|"2020-05-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(date '2020-06-27' to \"month4\")"
+argument_list|,
+literal|"2020-05-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2020-06-27 12:34:56' to \"minute15\")"
+argument_list|,
+literal|"2020-06-27 12:45:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"ceil(timestamp '2020-06-27 12:34:56' to ^\"minute25\"^)"
+argument_list|,
+literal|"'minute25' is not a valid time frame"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(\"minute15\", 7, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-02-24 14:27:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(\"month4\", 7, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2018-06-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(\"month4\", 7, date '2016-02-24')"
+argument_list|,
+literal|"2018-06-24"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"minute15\", "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 15:42:25')"
+argument_list|,
+literal|"12"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 15:42:25')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2018-02-24 15:42:25')"
+argument_list|,
+literal|"6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2018-02-23 15:42:25')"
+argument_list|,
+literal|"5"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", date '2016-02-24', "
+operator|+
+literal|"date '2020-03-24')"
+argument_list|,
+literal|"12"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", date '2016-02-24', "
+operator|+
+literal|"date '2016-06-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", date '2016-02-24', "
+operator|+
+literal|"date '2016-06-24')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", date '2016-02-24', "
+operator|+
+literal|"date '2015-10-24')"
+argument_list|,
+literal|"-1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_expr_stmt
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(\"month4\", date '2016-02-24', "
+operator|+
+literal|"date '2016-02-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_function
+unit|}    @
 name|Test
 name|void
 name|testFloorFuncInterval
@@ -40639,6 +41244,9 @@ literal|"floor(cast(null as interval year))"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40665,426 +41273,847 @@ operator|.
 name|EXPAND
 argument_list|)
 expr_stmt|;
+name|MICROSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MICROSECOND, 2000000, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 2000000, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:42:27"
 argument_list|,
 literal|"TIMESTAMP(3) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SQL_TSI_SECOND, 2, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 2, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:42:27"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|NANOSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(NANOSECOND, 3000000000, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 3000000000, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:42:28"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|NANOSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SQL_TSI_FRAC_SECOND, 2000000000, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 2000000000, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:42:27"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MINUTE, 2, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 2, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:44:25"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(HOUR, -2000, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -2000, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2015-12-03 04:42:25"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"timestampadd(HOUR, CAST(NULL AS INTEGER),"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", CAST(NULL AS INTEGER),"
 operator|+
 literal|" timestamp '2016-02-24 12:42:25')"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"timestampadd(HOUR, -200, CAST(NULL AS TIMESTAMP))"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -200, CAST(NULL AS TIMESTAMP))"
+argument_list|)
 argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, 3, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 3, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-05-24 12:42:25"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, 3, cast(null as timestamp))"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 3, cast(null as timestamp))"
 argument_list|,
 name|isNullValue
 argument_list|()
 argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
+argument_list|)
 expr_stmt|;
 comment|// TIMESTAMPADD with DATE; returns a TIMESTAMP value for sub-day intervals.
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, 1, date '2016-06-15')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, date '2016-06-15')"
 argument_list|,
 literal|"2016-07-15"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(DAY, 1, date '2016-06-15')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, date '2016-06-15')"
 argument_list|,
 literal|"2016-06-16"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(HOUR, -1, date '2016-06-15')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, date '2016-06-15')"
 argument_list|,
 literal|"2016-06-14 23:00:00"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MINUTE, 1, date '2016-06-15')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, date '2016-06-15')"
 argument_list|,
 literal|"2016-06-15 00:01:00"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SQL_TSI_SECOND, -1, date '2016-06-15')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, date '2016-06-15')"
 argument_list|,
 literal|"2016-06-14 23:59:59"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SECOND, 1, date '2016-06-15')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, date '2016-06-15')"
 argument_list|,
 literal|"2016-06-15 00:00:01"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SECOND, 1, cast(null as date))"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, cast(null as date))"
 argument_list|,
 name|isNullValue
 argument_list|()
 argument_list|,
 literal|"TIMESTAMP(0)"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(DAY, 1, cast(null as date))"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, cast(null as date))"
 argument_list|,
 name|isNullValue
 argument_list|()
 argument_list|,
 literal|"DATE"
 argument_list|)
+argument_list|)
 expr_stmt|;
 comment|// Round to the last day of previous month
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, 1, date '2016-05-31')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, date '2016-05-31')"
 argument_list|,
 literal|"2016-06-30"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, 5, date '2016-01-31')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 5, date '2016-01-31')"
 argument_list|,
 literal|"2016-06-30"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, -1, date '2016-03-31')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, date '2016-03-31')"
 argument_list|,
 literal|"2016-02-29"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
 comment|// TIMESTAMPADD with time; returns a time value.The interval is positive.
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SECOND, 1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, time '23:59:59')"
 argument_list|,
 literal|"00:00:00"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MINUTE, 1, time '00:00:00')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, time '00:00:00')"
 argument_list|,
 literal|"00:01:00"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MINUTE, 1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, time '23:59:59')"
 argument_list|,
 literal|"00:00:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(HOUR, 1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, time '23:59:59')"
 argument_list|,
 literal|"00:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(DAY, 15, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 15, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|WEEK_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(WEEK, 3, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 3, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, 6, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 6, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(QUARTER, 1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 1, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|YEAR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(YEAR, 10, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", 10, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
+argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// TIMESTAMPADD with time; returns a time value .The interval is negative.
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(SECOND, -1, time '00:00:00')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '00:00:00')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MINUTE, -1, time '00:00:00')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '00:00:00')"
 argument_list|,
 literal|"23:59:00"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(HOUR, -1, time '00:00:00')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '00:00:00')"
 argument_list|,
 literal|"23:00:00"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(DAY, -1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|WEEK_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(WEEK, -1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MONTH, -1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(QUARTER, -1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|YEAR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(YEAR, -1, time '23:59:59')"
+literal|"timestampadd("
+operator|+
+name|s
+operator|+
+literal|", -1, time '23:59:59')"
 argument_list|,
 literal|"23:59:59"
 argument_list|,
 literal|"TIME(0) NOT NULL"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41157,6 +42186,9 @@ literal|"TIMESTAMP(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41183,11 +42215,21 @@ operator|.
 name|EXPAND
 argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(HOUR, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2016-02-24 12:42:25', "
 operator|+
@@ -41197,12 +42239,23 @@ literal|"3"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MICROSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MICROSECOND, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2016-02-24 12:42:25', "
 operator|+
@@ -41212,12 +42265,23 @@ literal|"-5000000"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|NANOSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(SQL_TSI_FRAC_SECOND, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2016-02-24 12:42:25', "
 operator|+
@@ -41227,27 +42291,23 @@ literal|"-5000000000"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
-expr_stmt|;
-name|f
-operator|.
-name|checkScalar
-argument_list|(
-literal|"timestampdiff(NANOSECOND, "
-operator|+
-literal|"timestamp '2016-02-24 12:42:25', "
-operator|+
-literal|"timestamp '2016-02-24 12:42:20')"
-argument_list|,
-literal|"-5000000000"
-argument_list|,
-literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
+name|YEAR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(YEAR, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
@@ -41257,12 +42317,23 @@ literal|"2"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|WEEK_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(WEEK, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
@@ -41272,12 +42343,23 @@ literal|"104"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|WEEK_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(WEEK, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2014-02-19 12:42:25', "
 operator|+
@@ -41287,12 +42369,23 @@ literal|"105"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MONTH, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
@@ -41302,12 +42395,23 @@ literal|"24"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MONTH, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2019-09-01 00:00:00', "
 operator|+
@@ -41317,12 +42421,23 @@ literal|"6"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MONTH, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2019-09-01 00:00:00', "
 operator|+
@@ -41332,12 +42447,23 @@ literal|"-37"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(QUARTER, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
@@ -41347,27 +42473,39 @@ literal|"8"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+comment|// Until 1.33, CENTURY was an invalid time frame for TIMESTAMPDIFF
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
-literal|"timestampdiff(^CENTURY^, "
+literal|"timestampdiff(CENTURY, "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
 literal|"timestamp '2614-02-24 12:42:25')"
 argument_list|,
-literal|"(?s)Encountered \"CENTURY\" at .*"
+literal|"6"
 argument_list|,
-literal|false
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(QUARTER, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
 operator|+
@@ -41378,12 +42516,23 @@ argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(QUARTER, "
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
 operator|+
 literal|"cast(null as timestamp), "
 operator|+
@@ -41394,99 +42543,270 @@ argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
+argument_list|)
 expr_stmt|;
 comment|// timestampdiff with date
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MONTH, date '2016-03-15', date '2016-06-14')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-03-15', date '2016-06-14')"
 argument_list|,
 literal|"2"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MONTH, date '2019-09-01', date '2020-03-01')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2019-09-01', date '2020-03-01')"
 argument_list|,
 literal|"6"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MONTH, date '2019-09-01', date '2016-08-01')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2019-09-01', date '2016-08-01')"
 argument_list|,
 literal|"-37"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(DAY, date '2016-06-15', date '2016-06-14')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-06-15', date '2016-06-14')"
 argument_list|,
 literal|"-1"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(HOUR, date '2016-06-15', date '2016-06-14')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-06-15', date '2016-06-14')"
 argument_list|,
 literal|"-24"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(MINUTE, date '2016-06-15',  date '2016-06-15')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-06-15',  date '2016-06-15')"
 argument_list|,
 literal|"0"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(SECOND, cast(null as date), date '2016-06-15')"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-06-15', date '2016-06-14')"
+argument_list|,
+literal|"-1440"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"cast(null as date), date '2016-06-15')"
 argument_list|,
 name|isNullValue
 argument_list|()
 argument_list|,
 literal|"INTEGER"
 argument_list|)
+argument_list|)
 expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampdiff(DAY, date '2016-06-15', cast(null as date))"
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-06-15', cast(null as date))"
 argument_list|,
 name|isNullValue
 argument_list|()
 argument_list|,
 literal|"INTEGER"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
+comment|/** The {@code DATEDIFF} function is implemented in the Babel parser but not    * the Core parser, and therefore gives validation errors. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testDateDiff
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATEDIFF
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"datediff(^\"MONTH\"^, '2019-09-14',  '2019-09-15')"
+argument_list|,
+literal|"(?s)Column 'MONTH' not found in any table"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41546,19 +42866,7 @@ name|checkFails
 argument_list|(
 literal|"time_trunc(time '12:34:56', ^year^)"
 argument_list|,
-literal|"Encountered \"year\" at line 1, column 37\\.\n"
-operator|+
-literal|"Was expecting one of:\n"
-operator|+
-literal|"    \"HOUR\" \\.\\.\\.\n"
-operator|+
-literal|"    \"MILLISECOND\" \\.\\.\\.\n"
-operator|+
-literal|"    \"MINUTE\" \\.\\.\\.\n"
-operator|+
-literal|"    \"SECOND\" \\.\\.\\.\n"
-operator|+
-literal|"    "
+literal|"'YEAR' is not a valid time frame"
 argument_list|,
 literal|false
 argument_list|)
@@ -41619,6 +42927,9 @@ literal|"time_trunc(cast(null as time), second)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41691,9 +43002,24 @@ name|f
 operator|.
 name|checkFails
 argument_list|(
+literal|"^timestamp_trunc(100, foo)^"
+argument_list|,
+literal|"Cannot apply 'TIMESTAMP_TRUNC' to arguments of type "
+operator|+
+literal|"'TIMESTAMP_TRUNC\\(<INTEGER>,<INTERVAL `FOO`>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'TIMESTAMP_TRUNC\\(<TIMESTAMP>,<DATETIME_INTERVAL>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
 literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56.78', ^microsecond^)"
 argument_list|,
-literal|"'MICROSECOND' is not a valid datetime format"
+literal|"'MICROSECOND' is not a valid time frame"
 argument_list|,
 literal|false
 argument_list|)
@@ -41704,7 +43030,18 @@ name|checkFails
 argument_list|(
 literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56.78', ^nanosecond^)"
 argument_list|,
-literal|"'NANOSECOND' is not a valid datetime format"
+literal|"'NANOSECOND' is not a valid time frame"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"timestamp_trunc(timestamp '2015-02-19 12:34:56.78', ^millisecond^)"
+argument_list|,
+literal|"'MILLISECOND' is not a valid time frame"
 argument_list|,
 literal|false
 argument_list|)
@@ -41787,6 +43124,9 @@ literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41814,6 +43154,9 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41841,6 +43184,9 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41868,6 +43214,9 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41895,6 +43244,9 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41922,6 +43274,9 @@ name|VM_JAVA
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42006,6 +43361,9 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42090,6 +43448,9 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42316,6 +43677,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42525,6 +43889,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42743,6 +44110,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42970,6 +44340,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43149,6 +44522,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43263,6 +44639,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43377,6 +44756,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43491,6 +44873,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43605,6 +44990,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43794,6 +45182,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43981,6 +45372,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44098,6 +45492,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44289,6 +45686,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44476,6 +45876,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44663,6 +46066,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44834,6 +46240,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45001,6 +46410,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45138,6 +46550,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45267,6 +46682,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45381,6 +46799,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45495,6 +46916,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45662,6 +47086,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45715,6 +47142,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
+specifier|private
+specifier|static
 name|void
 name|checkBoolAndFunc
 parameter_list|(
@@ -45888,6 +47320,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45941,6 +47376,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
+specifier|private
+specifier|static
 name|void
 name|checkBoolOrFunc
 parameter_list|(
@@ -46114,6 +47554,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46167,6 +47610,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
+specifier|private
+specifier|static
 name|void
 name|checkLogicalAndFunc
 parameter_list|(
@@ -46340,6 +47788,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46393,6 +47844,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
+specifier|private
+specifier|static
 name|void
 name|checkLogicalOrFunc
 parameter_list|(
@@ -46566,6 +48022,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46787,6 +48246,9 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46984,6 +48446,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47202,7 +48667,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests that CAST fails when given a value just outside the valid range for    * that type. For example,    *    *<ul>    *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;    *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;    *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses    * precision.    *</ul>    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47401,7 +48872,13 @@ block|}
 block|}
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests that CAST fails when given a value just outside the valid range for    * that type. For example,    *    *<ul>    *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;    *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;    *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses    * precision.    *</ul>    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47647,6 +49124,9 @@ block|}
 block|}
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47791,7 +49271,13 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test that calls all operators with all possible argument types, and for    * each type, with a set of tricky values.    *    *<p>This is not really a unit test since there are no assertions;    * it either succeeds or fails in the preparation of the operator case    * and not when actually testing (validating/executing) the call.    *    *<p>Nevertheless the log messages conceal many problems which potentially    * need to be fixed especially cases where the query passes from the    * validation stage and fails at runtime. */
+end_comment
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -48519,6 +50005,9 @@ block|}
 block|}
 block|}
 block|}
+end_function
+
+begin_function
 specifier|private
 name|Throwable
 name|findMostDescriptiveCause
@@ -48572,6 +50061,9 @@ return|return
 name|ex
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|List
 argument_list|<
@@ -48671,7 +50163,13 @@ return|return
 name|values
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Result checker that considers a test to have succeeded if it returns a    * particular value or throws an exception that matches one of a list of    * patterns.    *    *<p>Sounds peculiar, but is necessary when eager and lazy behaviors are    * both valid.    */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -48828,7 +50326,13 @@ expr_stmt|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Implementation of {@link org.apache.calcite.sql.test.SqlTester} based on a    * JDBC connection.    */
+end_comment
+
+begin_class
 specifier|protected
 specifier|static
 class|class
@@ -48885,15 +50389,58 @@ name|resultChecker
 argument_list|)
 expr_stmt|;
 specifier|final
+name|RelDataTypeSystem
+name|typeSystem
+init|=
+name|factory
+operator|.
+name|typeSystemTransform
+operator|.
+name|apply
+argument_list|(
+name|RelDataTypeSystem
+operator|.
+name|DEFAULT
+argument_list|)
+decl_stmt|;
+specifier|final
 name|ConnectionFactory
 name|connectionFactory
 init|=
 name|factory
 operator|.
 name|connectionFactory
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TYPE_SYSTEM
+argument_list|,
+name|CustomTimeFrameTypeSystem
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
 decl_stmt|;
 try|try
 init|(
+name|TryThreadLocal
+operator|.
+name|Memo
+name|ignore
+init|=
+name|CustomTimeFrameTypeSystem
+operator|.
+name|DELEGATE
+operator|.
+name|push
+argument_list|(
+name|typeSystem
+argument_list|)
+init|;
 name|Connection
 name|connection
 init|=
@@ -48947,7 +50494,13 @@ throw|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** A type, a value, and its {@link SqlNode} representation. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|ValueType
@@ -49162,7 +50715,13 @@ throw|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Builds lists of types and sample values. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|Builder
@@ -49323,7 +50882,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Runs an OVERLAPS test with a given set of literal values. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|OverlapChecker
@@ -49455,8 +51020,54 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
+comment|/** Type system whose constructor reads from a thread-local. You must invoke    * the constructor in the same thread, but once constructed you can use from    * other threads.    *    *<p>It's a bit strange, but the best we can do to pass objects via Avatica's    * plugin system until    *<a href="https://issues.apache.org/jira/browse/CALCITE-5295">[CALCITE-5295]    * Read the values of plugins (such as connect string properties) from    * ThreadLocal fields</a> is fixed.    */
+end_comment
+
+begin_class
+specifier|public
+specifier|static
+class|class
+name|CustomTimeFrameTypeSystem
+extends|extends
+name|DelegatingTypeSystem
+block|{
+comment|/** Assign to this thread-local before you instantiate a FooTypeSystem      * (in the same thread) and your FooTypeSystem will behave in the same      * way. */
+specifier|public
+specifier|static
+specifier|final
+name|TryThreadLocal
+argument_list|<
+name|RelDataTypeSystem
+argument_list|>
+name|DELEGATE
+init|=
+name|TryThreadLocal
+operator|.
+name|of
+argument_list|(
+name|DEFAULT
+argument_list|)
+decl_stmt|;
+comment|/** Creates a CustomTimeFrameTypeSystem, taking a snapshot of      * {@link #DELEGATE}. */
+specifier|public
+name|CustomTimeFrameTypeSystem
+parameter_list|()
+block|{
+name|super
+argument_list|(
+name|DELEGATE
+operator|.
+name|get
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
+unit|}
 end_unit
 

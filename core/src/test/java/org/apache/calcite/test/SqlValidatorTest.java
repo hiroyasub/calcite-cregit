@@ -89,6 +89,22 @@ name|rel
 operator|.
 name|type
 operator|.
+name|DelegatingTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
 name|RelDataType
 import|;
 end_import
@@ -122,6 +138,22 @@ operator|.
 name|type
 operator|.
 name|RelDataTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|TimeFrameSet
 import|;
 end_import
 
@@ -685,6 +717,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableMap
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|Ordering
 import|;
 end_import
@@ -842,6 +888,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|BiConsumer
 import|;
 end_import
 
@@ -16927,7 +16985,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Was expecting one of.*"
+literal|"'INCORRECT' is not a valid time frame"
 argument_list|)
 expr_stmt|;
 name|expr
@@ -16937,7 +16995,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Was expecting one of.*"
+literal|"'INCORRECT' is not a valid time frame"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17872,7 +17930,693 @@ literal|"INTERVAL SECOND NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
+comment|/** Tests that EXTRACT, FLOOR, CEIL functions accept abbreviations for    * time units (such as "Y" for "YEAR").    *    *<p>This used to be accomplished via the now deprecated    * {@code timeUnitCodes} method in {@link SqlParser.Config}, and is now    * accomplished via    * {@link RelDataTypeSystem#deriveTimeFrameSet(TimeFrameSet)}. */
+annotation|@
+name|Test
+name|void
+name|testTimeUnitCodes
+parameter_list|()
+block|{
+specifier|final
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|simpleCodes
+init|=
+name|ImmutableMap
+operator|.
+expr|<
+name|String
+decl_stmt|,
+name|TimeUnit
+decl|>
+name|builder
+argument_list|()
+decl|.
+name|put
+argument_list|(
+literal|"Y"
+argument_list|,
+name|TimeUnit
+operator|.
+name|YEAR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"M"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MONTH
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"D"
+argument_list|,
+name|TimeUnit
+operator|.
+name|DAY
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"H"
+argument_list|,
+name|TimeUnit
+operator|.
+name|HOUR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"N"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MINUTE
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"S"
+argument_list|,
+name|TimeUnit
+operator|.
+name|SECOND
+argument_list|)
+decl|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Time unit abbreviations for Microsoft SQL Server
+specifier|final
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|mssqlCodes
+init|=
+name|ImmutableMap
+operator|.
+expr|<
+name|String
+decl_stmt|,
+name|TimeUnit
+decl|>
+name|builder
+argument_list|()
+decl|.
+name|put
+argument_list|(
+literal|"Y"
+argument_list|,
+name|TimeUnit
+operator|.
+name|YEAR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"YY"
+argument_list|,
+name|TimeUnit
+operator|.
+name|YEAR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"YYYY"
+argument_list|,
+name|TimeUnit
+operator|.
+name|YEAR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"Q"
+argument_list|,
+name|TimeUnit
+operator|.
+name|QUARTER
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"QQ"
+argument_list|,
+name|TimeUnit
+operator|.
+name|QUARTER
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"M"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MONTH
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"MM"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MONTH
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"W"
+argument_list|,
+name|TimeUnit
+operator|.
+name|WEEK
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"WK"
+argument_list|,
+name|TimeUnit
+operator|.
+name|WEEK
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"WW"
+argument_list|,
+name|TimeUnit
+operator|.
+name|WEEK
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"DY"
+argument_list|,
+name|TimeUnit
+operator|.
+name|DOY
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"DW"
+argument_list|,
+name|TimeUnit
+operator|.
+name|DOW
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"D"
+argument_list|,
+name|TimeUnit
+operator|.
+name|DAY
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"DD"
+argument_list|,
+name|TimeUnit
+operator|.
+name|DAY
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"H"
+argument_list|,
+name|TimeUnit
+operator|.
+name|HOUR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"HH"
+argument_list|,
+name|TimeUnit
+operator|.
+name|HOUR
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"N"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MINUTE
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"MI"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MINUTE
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"S"
+argument_list|,
+name|TimeUnit
+operator|.
+name|SECOND
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"SS"
+argument_list|,
+name|TimeUnit
+operator|.
+name|SECOND
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"MS"
+argument_list|,
+name|TimeUnit
+operator|.
+name|MILLISECOND
+argument_list|)
+decl|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkTimeUnitCodes
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|checkTimeUnitCodes
+argument_list|(
+name|simpleCodes
+argument_list|)
+expr_stmt|;
+name|checkTimeUnitCodes
+argument_list|(
+name|mssqlCodes
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Checks parsing of built-in functions that accept time unit    * abbreviations.    *    *<p>For example, {@code EXTRACT(Y FROM orderDate)} is using    * "Y" as an abbreviation for "YEAR".    *    *<p>Override if your parser supports more such functions. */
+specifier|protected
+name|void
+name|checkTimeUnitCodes
+parameter_list|(
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|timeUnitCodes
+parameter_list|)
+block|{
+name|SqlValidatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withFactory
+argument_list|(
+name|tf
+lambda|->
+name|tf
+operator|.
+name|withTypeSystem
+argument_list|(
+name|typeSystem
+lambda|->
+operator|new
+name|DelegatingTypeSystem
+argument_list|(
+name|typeSystem
+argument_list|)
+block|{
+block_content|@Override public TimeFrameSet deriveTimeFrameSet(                       TimeFrameSet frameSet
+argument_list|)
+block|{
+name|TimeFrameSet
+operator|.
+name|Builder
+name|b
+operator|=
+name|TimeFrameSet
+operator|.
+name|builder
+argument_list|()
+block|;
+name|b
+operator|.
+name|addAll
+argument_list|(
+name|frameSet
+argument_list|)
+block|;
+name|timeUnitCodes
+operator|.
+name|forEach
+argument_list|(
+parameter_list|(
+name|name
+parameter_list|,
+name|unit
+parameter_list|)
+lambda|->
+name|b
+operator|.
+name|addAlias
+argument_list|(
+name|name
+argument_list|,
+name|unit
+operator|.
+name|name
+argument_list|()
+argument_list|)
+argument_list|)
+block|;
+return|return
+name|b
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+block|}
+block|)
+end_class
+
+begin_empty_stmt
+unit|)
+empty_stmt|;
+end_empty_stmt
+
+begin_decl_stmt
+specifier|final
+name|String
+name|ts
+init|=
+literal|"TIMESTAMP '2020-08-27 18:16:43'"
+decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
+name|BiConsumer
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|validConsumer
+init|=
+parameter_list|(
+name|abbrev
+parameter_list|,
+name|timeUnit
+parameter_list|)
+lambda|->
+block|{
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select extract("
+operator|+
+name|abbrev
+operator|+
+literal|" from "
+operator|+
+name|ts
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select floor("
+operator|+
+name|ts
+operator|+
+literal|" to "
+operator|+
+name|abbrev
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select ceil("
+operator|+
+name|ts
+operator|+
+literal|" to "
+operator|+
+name|abbrev
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
+name|BiConsumer
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|invalidConsumer
+init|=
+parameter_list|(
+name|abbrev
+parameter_list|,
+name|timeUnit
+parameter_list|)
+lambda|->
+block|{
+specifier|final
+name|String
+name|upAbbrev
+init|=
+name|abbrev
+operator|.
+name|toUpperCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+decl_stmt|;
+name|String
+name|message
+init|=
+literal|"'"
+operator|+
+name|upAbbrev
+operator|+
+literal|"' is not a valid time frame"
+decl_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"select extract(^"
+operator|+
+name|abbrev
+operator|+
+literal|"^ from "
+operator|+
+name|ts
+operator|+
+literal|")"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"SELECT FLOOR("
+operator|+
+name|ts
+operator|+
+literal|" to ^"
+operator|+
+name|abbrev
+operator|+
+literal|"^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|withSql
+argument_list|(
+literal|"SELECT CEIL("
+operator|+
+name|ts
+operator|+
+literal|" to ^"
+operator|+
+name|abbrev
+operator|+
+literal|"^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|message
+argument_list|)
+expr_stmt|;
+block|}
+decl_stmt|;
+end_decl_stmt
+
+begin_comment
+comment|// Check that each valid code passes each query that it should.
+end_comment
+
+begin_expr_stmt
+name|timeUnitCodes
+operator|.
+name|forEach
+argument_list|(
+name|validConsumer
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_comment
+comment|// If "M" is a valid code then "m" should be also.
+end_comment
+
+begin_expr_stmt
+name|timeUnitCodes
+operator|.
+name|forEach
+argument_list|(
+parameter_list|(
+name|abbrev
+parameter_list|,
+name|timeUnit
+parameter_list|)
+lambda|->
+name|validConsumer
+operator|.
+name|accept
+argument_list|(
+name|abbrev
+operator|.
+name|toLowerCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+argument_list|,
+name|timeUnit
+argument_list|)
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_comment
+comment|// Check that invalid codes generate the right error messages.
+end_comment
+
+begin_decl_stmt
+specifier|final
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TimeUnit
+argument_list|>
+name|invalidCodes
+init|=
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"A"
+argument_list|,
+name|TimeUnit
+operator|.
+name|YEAR
+argument_list|,
+literal|"a"
+argument_list|,
+name|TimeUnit
+operator|.
+name|YEAR
+argument_list|)
+decl_stmt|;
+end_decl_stmt
+
+begin_expr_stmt
+name|invalidCodes
+operator|.
+name|forEach
+argument_list|(
+name|invalidConsumer
+argument_list|)
+expr_stmt|;
+end_expr_stmt
+
+begin_function
+unit|}    public
 name|void
 name|checkWinFuncExpWithWinClause
 parameter_list|(
@@ -17894,7 +18638,13 @@ name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|// test window partition clause. See SQL 2003 specification for detail
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|_testWinPartClause
@@ -17912,7 +18662,13 @@ argument_list|)
 expr_stmt|;
 comment|// Test specified collation, window clause syntax rule 4,5.
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-820">[CALCITE-820]    * Validate that window functions have OVER clause</a>, and    *<a href="https://issues.apache.org/jira/browse/CALCITE-1340">[CALCITE-1340]    * Window aggregates give invalid errors</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -17977,6 +18733,9 @@ literal|"OVER clause is necessary for window functions"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18010,6 +18769,9 @@ literal|"PARTITION BY expression should not contain OVER clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18043,6 +18805,9 @@ literal|"ORDER BY expression should not contain OVER clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18088,6 +18853,9 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18135,6 +18903,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18164,6 +18935,9 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18258,6 +19032,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18771,7 +19548,13 @@ name|RANK_REQUIRES_ORDER_BY
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-883">[CALCITE-883]    * Give error if the aggregate function don't support null treatment</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -18907,7 +19690,13 @@ literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'ABS'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-883">[CALCITE-883]    * Give error if the aggregate function don't support null treatment</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19043,7 +19832,13 @@ literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'ABS'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1954">[CALCITE-1954]    * Column from outer join should be null, whether or not it is aliased</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19132,6 +19927,9 @@ name|type
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19175,6 +19973,9 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19495,6 +20296,9 @@ literal|"Window 'W1' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19534,6 +20338,9 @@ literal|"sum(sal) over (partition by empno + ename order by empno range 5 preced
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19917,6 +20724,9 @@ literal|"Column 'NON_EXIST_COL' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19941,6 +20751,9 @@ literal|"Duplicate window specification not allowed in the same window clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -19986,7 +20799,13 @@ literal|"Column 'HIREDATE' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-754">[CALCITE-754]    * Validator error when resolving OVER clause of JOIN query</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20026,7 +20845,13 @@ literal|"Column 'DEPTNO' is ambiguous"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1535">[CALCITE-1535]    * Give error if column referenced in ORDER BY is ambiguous</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20124,6 +20949,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20236,6 +21064,9 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|void
 name|checkNegWindow
@@ -20271,6 +21102,9 @@ name|msg
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20311,6 +21145,9 @@ literal|"Cannot use DISALLOW PARTIAL with window based on RANGE"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20326,6 +21163,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20537,6 +21377,9 @@ literal|"Column 'DEPTNO' is ambiguous"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20606,6 +21449,9 @@ literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20733,6 +21579,9 @@ literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20789,7 +21638,13 @@ literal|"Not a record type. The '\\*' operator requires a record"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * Allow table, column and field called '*'</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20807,6 +21662,9 @@ literal|"RecordType(INTEGER NOT NULL A, INTEGER NOT NULL *) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20824,6 +21682,9 @@ literal|"Unknown field '\\*'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20844,7 +21705,13 @@ name|EMP_RECORD_TYPE
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Parser does not allow "*" in FROM clause.    * Parser allows "*" in column expressions, but throws if they are outside    * of the SELECT clause.    *    * @see #testStarIdentifier()    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20892,6 +21759,9 @@ literal|"Unknown field '\\*'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20931,6 +21801,9 @@ literal|"(?s).*Encountered \".\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -20990,6 +21863,9 @@ literal|"RecordType(CHAR(2) NOT NULL A, INTEGER NOT NULL B) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21023,6 +21899,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21254,6 +22133,9 @@ name|ERR_IN_OPERANDS_INCOMPATIBLE
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21294,6 +22176,9 @@ literal|"Values passed to IN operator must have compatible types"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21534,6 +22419,9 @@ name|ERR_IN_OPERANDS_INCOMPATIBLE
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21565,6 +22453,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21581,6 +22472,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21705,6 +22599,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21762,6 +22659,9 @@ literal|"Unknown identifier 'SALES.EMP'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21895,7 +22795,13 @@ literal|"Table 'SALES.BAD' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-881">[CALCITE-881]    * Allow schema.table.column references in GROUP BY</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21927,6 +22833,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21944,6 +22853,9 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -21974,6 +22886,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -22012,7 +22927,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    *    *<p>Make sure table name of GROUP BY item with nested field could be    * properly validated.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -22048,7 +22969,13 @@ literal|"Table 'UNKNOWN_TABLE_ALIAS.COORD' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1781">[CALCITE-1781]    * Allow expression in CUBE and ROLLUP</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -22150,7 +23077,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Unit test for    * {@link org.apache.calcite.sql.validate.SqlValidatorUtil#rollup}. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -22408,6 +23341,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|ImmutableList
 argument_list|<
@@ -22434,7 +23370,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Unit test for    * {@link org.apache.calcite.sql.validate.SqlValidatorUtil#cube}. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -22699,6 +23641,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|ImmutableList
 argument_list|<
@@ -22725,6 +23670,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -22970,6 +23918,9 @@ literal|"GROUPING operator may only occur in SELECT, HAVING or ORDER BY clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23211,6 +24162,9 @@ literal|"GROUPING_ID operator may only occur in SELECT, HAVING or ORDER BY claus
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23413,6 +24367,9 @@ literal|"Aggregate expressions cannot be nested"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23440,6 +24397,9 @@ literal|"Argument to GROUPING operator must be a grouped expression"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23472,6 +24432,9 @@ literal|"RecordType(DECIMAL(19, 9) NOT NULL EXPR$0, INTEGER NOT NULL DEPTNO) NOT
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23489,6 +24452,9 @@ literal|"Invalid number of arguments to function 'SUM'. Was expecting 1 argument
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23506,6 +24472,9 @@ literal|"Invalid number of arguments to function 'SUM'. Was expecting 1 argument
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23521,6 +24490,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23542,6 +24514,9 @@ literal|"Table 'EMP' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23565,6 +24540,9 @@ literal|"Table 'E2' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23588,6 +24566,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23627,6 +24608,9 @@ literal|"Column 'EMPNO' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23648,6 +24632,9 @@ literal|"Column count mismatch in UNION"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23697,6 +24684,9 @@ literal|"Column count mismatch in UNION"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23750,6 +24740,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23803,6 +24796,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23918,6 +24914,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23935,6 +24934,9 @@ literal|"Values passed to VALUES operator must have compatible types"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23954,6 +24956,9 @@ literal|"clause\\) following CROSS JOIN"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -23973,6 +24978,9 @@ literal|"clause\\) following CROSS JOIN"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24316,6 +25324,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24337,6 +25348,9 @@ literal|"USING clause\\) following CROSS JOIN"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24358,6 +25372,9 @@ literal|"\\(NATURAL keyword or ON or USING clause\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24375,6 +25392,9 @@ literal|"Cannot specify NATURAL keyword with ON or USING clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24392,6 +25412,9 @@ literal|"Cannot specify NATURAL keyword with ON or USING clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24453,6 +25476,9 @@ name|type1
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24503,6 +25529,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24545,6 +25574,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24563,7 +25595,13 @@ literal|"Column 'GENDER' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5171">[CALCITE-5171]    * NATURAL join and USING should fail if join columns are not unique</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24645,6 +25683,9 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 annotation|@
@@ -24683,6 +25724,9 @@ name|message
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 annotation|@
@@ -24737,7 +25781,13 @@ literal|"INTEGER NOT NULL DEPTNO1) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5171">[CALCITE-5171]    * NATURAL join and USING should fail if join columns are not unique</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24770,6 +25820,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24834,6 +25887,9 @@ literal|"Column 'ENAME' is ambiguous"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24931,6 +25987,9 @@ literal|" VARCHAR(10) NAME) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -24988,6 +26047,9 @@ literal|"(?s).*Encountered \"\\( true\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -25013,6 +26075,9 @@ literal|"require alias"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25036,6 +26101,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25059,6 +26127,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25084,6 +26155,9 @@ literal|"Column 'EMPNO' not found in table 'D'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25107,6 +26181,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25130,6 +26207,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25165,6 +26245,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25304,6 +26387,9 @@ name|type3
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25321,6 +26407,9 @@ literal|"WHERE clause must be a condition"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25338,6 +26427,9 @@ literal|"ON clause must be a condition"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25384,6 +26476,9 @@ literal|"Expression 'SAL' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25411,7 +26506,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests the {@code WITH} clause, also called common table expressions. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25561,7 +26662,13 @@ literal|"RecordType(INTEGER NOT NULL UNO) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests the {@code WITH} clause with UNION. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25583,7 +26690,13 @@ name|EMP_RECORD_TYPE
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests the {@code WITH} clause and column aliases. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25641,7 +26754,13 @@ literal|"Duplicate name 'X' in column list"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests the {@code WITH} clause in sub-queries. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25759,6 +26878,9 @@ literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25812,7 +26934,13 @@ literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating S
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4092">[CALCITE-4092]    * NPE using WITH clause without a corresponding SELECT FROM</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25838,7 +26966,13 @@ literal|"Table 'EMP2' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests a large scalar expression, which will expose any O(n^2) algorithms    * lurking in the validation process.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -25861,6 +26995,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|static
 name|void
 name|checkLarge
@@ -26073,6 +27210,9 @@ literal|" from dept)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|String
@@ -26145,6 +27285,9 @@ name|toString
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26231,6 +27374,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26368,6 +27514,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26630,7 +27779,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that you can reference a column alias in the ORDER BY clause if    * {@link SqlConformance#isSortByAlias()}. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26668,6 +27823,9 @@ literal|"Column 'TOTAL' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26683,7 +27841,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-633">[CALCITE-633]    * WITH ... ORDER BY cannot find table</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26711,7 +27875,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-662">[CALCITE-662]    * Query validation fails when an ORDER BY clause is used with WITH    * CLAUSE</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26760,6 +27930,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -26913,7 +28086,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of the ORDER BY clause when GROUP BY is present.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -27054,7 +28233,13 @@ literal|"xxxx"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of the aliases in GROUP BY.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1306">[CALCITE-1306]    * Allow GROUP BY and HAVING to reference SELECT expressions by ordinal and    * alias</a>.    *    * @see SqlConformance#isGroupByAlias()    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -27507,7 +28692,13 @@ literal|"Column 'E' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of ordinals in GROUP BY.    *    * @see SqlConformance#isGroupByOrdinal()    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -27903,7 +29094,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of the aliases in HAVING.    *    * @see SqlConformance#isHavingAlias()    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28094,7 +29291,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of the ORDER BY clause when DISTINCT is present.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28286,7 +29489,13 @@ literal|"Column 'ENO' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of the ORDER BY clause when DISTINCT and GROUP BY are    * present.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-634">[CALCITE-634]    * Allow ORDER BY aggregate function in SELECT DISTINCT, provided that it    * occurs in SELECT clause</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28402,6 +29611,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28522,7 +29734,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-886">[CALCITE-886]    * System functions in GROUP BY clause</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28564,6 +29782,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28612,6 +29833,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28691,6 +29915,9 @@ literal|"RecordType(INTEGER EMPNO, INTEGER E1) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28718,6 +29945,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28765,6 +29995,9 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28830,7 +30063,13 @@ literal|"Expression 'EMP\\.EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|// todo: enable when correlating variables work
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|_testGroupExpressionEquivalenceCorrelated
@@ -28859,7 +30098,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|// todo: enable when params are implemented
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|_testGroupExpressionEquivalenceParams
@@ -28874,6 +30119,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -28963,6 +30211,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29046,6 +30297,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29062,6 +30316,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29127,6 +30384,9 @@ name|ERR_NESTED_AGG
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29635,6 +30895,9 @@ name|ERR_NESTED_AGG
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29652,6 +30915,9 @@ name|ERR_AGG_IN_GROUP_BY
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29720,6 +30986,9 @@ literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29755,6 +31024,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29772,6 +31044,9 @@ literal|"RecordType(INTEGER S) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29789,6 +31064,9 @@ literal|"FILTER clause must be a condition"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29808,6 +31086,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29825,6 +31106,9 @@ literal|"FILTER must not contain aggregate expression"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29948,7 +31232,13 @@ literal|"WITHIN GROUP must not contain aggregate expression"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4644">[CALCITE-4644]    * Add PERCENTILE_CONT and PERCENTILE_DISC aggregate functions</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -29980,7 +31270,13 @@ literal|"RecordType(DOUBLE NOT NULL C, DOUBLE NOT NULL D) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that {@code PERCENTILE_CONT} only allows numeric fields. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30010,7 +31306,13 @@ literal|"'PERCENTILE_CONT' function. Only NUMERIC types are supported"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that {@code PERCENTILE_CONT} only allows one sort key. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30038,6 +31340,9 @@ literal|"'PERCENTILE_CONT' requires precisely one ORDER BY key"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30067,6 +31372,9 @@ literal|"Argument to function 'PERCENTILE_CONT' must be a literal"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30096,7 +31404,13 @@ literal|"literal between 0 and 1"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that {@code PERCENTILE_DISC} only allows numeric fields. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30126,7 +31440,13 @@ literal|"'PERCENTILE_DISC' function. Only NUMERIC types are supported"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that {@code PERCENTILE_DISC} only allows one sort key. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30154,6 +31474,9 @@ literal|"'PERCENTILE_DISC' requires precisely one ORDER BY key"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30183,6 +31506,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30314,7 +31640,13 @@ literal|"'<INTERVAL MONTH> =<INTERVAL DAY>'.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-613">[CALCITE-613]    * Implicitly convert strings in comparisons</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30486,6 +31818,9 @@ literal|"Cannot apply 'AND' to arguments of type '<BOOLEAN> AND<CHAR\\(4\\)>'\\.
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -30733,6 +32068,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31023,6 +32361,9 @@ name|cannotApply
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31078,6 +32419,9 @@ literal|"(?s).*Cannot apply.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31179,6 +32523,9 @@ literal|"INTERVAL YEAR TO MONTH to type INTERVAL SECOND"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31216,6 +32563,9 @@ literal|"(?s).*Parameters must be of the same type.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31299,7 +32649,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1310">[CALCITE-1310]    * Infer type of arguments to BETWEEN operator</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31349,6 +32705,9 @@ literal|"Illegal use of dynamic parameter"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31486,7 +32845,13 @@ literal|"Column 'C1' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31596,6 +32961,9 @@ literal|"\\('EMPNO', 'ENAME', 'DETAIL'\\), whereas alias list has 1 columns"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31751,6 +33119,9 @@ literal|"Column 'C1' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31800,7 +33171,13 @@ literal|"CHAR(3) ARRAY NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4999">[CALCITE-4999]    * ARRAY, MULTISET functions should return a collection of scalars    * if a sub-query returns 1 column</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -31828,6 +33205,9 @@ literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) NOT NULL A
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32001,6 +33381,9 @@ literal|"Unknown identifier 'MYUDT'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32097,6 +33480,9 @@ literal|"MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32114,7 +33500,13 @@ literal|"INTEGER MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4999">[CALCITE-4999]    * ARRAY, MULTISET functions should return an collection of scalars    * if a sub-query returns 1 column</a>.    */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32142,6 +33534,9 @@ literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL EXPR$1) NOT NULL M
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32267,6 +33662,9 @@ literal|"Table 'D' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32404,6 +33802,9 @@ literal|"Column 'ORDINALITY' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32421,7 +33822,13 @@ literal|"RecordType(INTEGER NOT NULL KEY, INTEGER NOT NULL VALUE) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4305">[CALCITE-4305]    * Implicit column alias for single-column UNNEST</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32532,6 +33939,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32569,6 +33979,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32616,6 +34029,9 @@ literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32663,6 +34079,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32696,6 +34115,9 @@ literal|"Expression 'DEPTNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32724,6 +34146,9 @@ comment|// todo. FUSION is an aggregate function. test that validator can only
 comment|// take set operators in its select list once aggregation support is
 comment|// complete
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32773,6 +34198,9 @@ literal|"Invalid number of arguments to function 'COUNT'. Was expecting 1 argume
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32834,6 +34262,9 @@ literal|"(?s).*Encountered \",\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32889,6 +34320,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -32944,6 +34378,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33004,6 +34441,9 @@ literal|"Aggregate expression 'MODE' must not contain a WITHIN GROUP clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33049,6 +34489,9 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33064,6 +34507,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33184,6 +34630,9 @@ literal|"'BOOL_OR\\(<VARCHAR\\(20\\)>\\)'.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33209,6 +34658,9 @@ literal|"DISTINCT/ALL not allowed with COALESCE function"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33226,6 +34678,9 @@ literal|"Column 'B0' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33243,6 +34698,9 @@ literal|"Column 'B0' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33260,6 +34718,9 @@ literal|"Column 'B0' not found in table 'E'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33473,6 +34934,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33529,6 +34993,9 @@ literal|"SELECT must have a FROM clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33621,6 +35088,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33654,6 +35124,9 @@ literal|"RecordType(INTEGER NOT NULL Z) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33733,6 +35206,9 @@ literal|"Object 'NONEXISTENT' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33831,7 +35307,13 @@ literal|" RecordType\\(INTEGER I\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that Calcite gives an error if a table function is used anywhere    * that a scalar expression is expected. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -33925,7 +35407,13 @@ literal|"Cannot call table function here: 'RAMP'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1309">[CALCITE-1309]    * Support LATERAL TABLE</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34052,6 +35540,9 @@ name|expectedType3
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34089,6 +35580,9 @@ literal|"Table 'DEPT' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34116,6 +35610,9 @@ literal|"Object 'BLOOP' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34201,6 +35698,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34275,6 +35775,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -34301,6 +35804,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34318,6 +35824,9 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34363,6 +35872,9 @@ literal|"INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34414,6 +35926,9 @@ literal|"RecordType(VARCHAR(10) OA) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34437,7 +35952,13 @@ literal|"<ROW>\\[<CHARACTER>\\|<INTEGER>\\].*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-497">[CALCITE-497]    * Support optional qualifier for column name references</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34559,6 +36080,9 @@ literal|" INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34736,6 +36260,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34760,7 +36287,13 @@ literal|"FROM `DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1238">[CALCITE-1238]    * Unparsing LIMIT without ORDER BY after validation</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34799,6 +36332,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34839,6 +36375,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34877,6 +36416,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34923,6 +36465,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34947,6 +36492,9 @@ literal|"FROM `CATALOG`.`SALES`.`DEPT` AS `DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -34989,6 +36537,9 @@ literal|"ORDER BY `NAME`"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35051,6 +36602,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35133,6 +36687,9 @@ name|expectedSql
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35192,6 +36749,9 @@ name|expected2
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35255,6 +36815,9 @@ name|expected2
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35333,6 +36896,9 @@ literal|"Invalid number of arguments to function 'WEEK'. Was expecting 1 argumen
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35409,6 +36975,9 @@ literal|"Invalid number of arguments to function 'WEEK'. Was expecting 1 argumen
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 annotation|@
@@ -35430,6 +36999,9 @@ literal|"functions not allowed in ROW definitions\\."
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35545,6 +37117,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35644,6 +37219,9 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35758,7 +37336,13 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-145">[CALCITE-145]    * Unexpected upper-casing of keywords when using java lexer</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35888,6 +37472,9 @@ literal|"DECIMAL(2, 0) NOT NULL EXPR$1) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -35926,7 +37513,13 @@ literal|"RecordType(INTEGER NOT NULL x[y] z ) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests using case-insensitive matching of identifiers. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36056,7 +37649,13 @@ literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests using case-insensitive matching of user-defined functions. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36240,7 +37839,13 @@ literal|"No match found for function signature myfun\\(<NUMERIC>\\).*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests using case-sensitive matching of builtin functions. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36382,7 +37987,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-319">[CALCITE-319]    * Table aliases should follow case-sensitivity policy</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36462,7 +38073,13 @@ literal|"Duplicate relation name 'D' in FROM clause"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1305">[CALCITE-1305]    * Case-insensitive table aliases and GROUP BY</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36549,7 +38166,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1549">[CALCITE-1549]    * Improve error message when table or column not found</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36678,6 +38301,9 @@ literal|"Table 'SALES\\.emp' not found; did you mean 'EMP'\\?"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -36819,7 +38445,13 @@ literal|"did you mean 'DEPTNO', 'deptNo'\\?"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests matching of built-in operator names. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -37062,7 +38694,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Sanity check: All built-ins are upper-case. We rely on this. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -37129,6 +38767,9 @@ break|break;
 block|}
 block|}
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|int
@@ -37155,7 +38796,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that operators, sorted by precedence, are in a sane order. Each    * operator has a {@link SqlOperator#getLeftPrec() left} and    * {@link SqlOperator#getRightPrec()} right} precedence, but we would like    * the order to remain the same even if we tweak particular operators'    * precedences. If you need to update the expected output, you might also    * need to change    *<a href="http://calcite.apache.org/docs/reference.html#operator-precedence">    * the documentation</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -37766,7 +39413,13 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that it is an error to insert into the same column twice, even using    * case-insensitive matching. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -37798,7 +39451,13 @@ literal|"Target column 'EMPNO' is assigned more than once"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. (The standard says it should be an error, but we don't right    * now.) */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -37905,7 +39564,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests using case-insensitive matching of table names. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -37989,6 +39654,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38104,6 +39772,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38129,6 +39800,9 @@ literal|"does not equal number of source items \\(3\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38186,7 +39860,13 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1510">[CALCITE-1510]    * INSERT/UPSERT should allow fewer values than columns</a>,    * check for default value only when target field is null. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38395,6 +40075,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38412,6 +40095,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38436,6 +40122,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38477,6 +40166,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38527,6 +40219,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38694,6 +40389,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -38869,6 +40567,9 @@ literal|"the current SQL conformance level"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39066,6 +40767,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39106,6 +40810,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39157,6 +40864,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39260,6 +40970,9 @@ name|error2
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39305,6 +41018,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39374,6 +41090,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39546,6 +41265,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39583,6 +41305,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39640,6 +41365,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39677,6 +41405,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39734,6 +41465,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39771,6 +41505,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39828,6 +41565,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39871,6 +41611,9 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39914,6 +41657,9 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -39945,6 +41691,9 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40038,6 +41787,9 @@ literal|"Duplicate name 'EXTRA' in column list"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40070,6 +41822,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40115,6 +41870,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40162,6 +41920,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40207,6 +41968,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40238,6 +42002,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40293,6 +42060,9 @@ literal|"from source field 'EMPNO' of type INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40374,6 +42144,9 @@ name|error1
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40447,6 +42220,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40520,6 +42296,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40557,6 +42336,9 @@ literal|"Column 'EXTRA' not found in any table; did you mean 'extra'\\?"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40640,6 +42422,9 @@ literal|"Unknown target column 'extra'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40679,6 +42464,9 @@ literal|"Unknown target column 'DEPTNO'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40716,6 +42504,9 @@ literal|"Unknown target column 'DEPTNO'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40761,6 +42552,9 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40826,6 +42620,9 @@ literal|"Column 'ENAME' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40887,6 +42684,9 @@ literal|"number of source items \\(2\\)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -40938,6 +42738,9 @@ literal|"Column 'EMPNO' has no default value and does not allow NULLs"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41129,6 +42932,9 @@ literal|"Target column '\"F1\".\"C0\"' is assigned more than once"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41162,6 +42968,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41195,6 +43004,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41236,6 +43048,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41302,6 +43117,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41373,6 +43191,9 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41440,7 +43261,13 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Tests that various expressions are monotonic. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -41930,6 +43757,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42028,6 +43858,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42089,6 +43922,9 @@ name|STR_SET_OP_INCONSISTENT
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42184,6 +44020,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42224,6 +44063,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42248,6 +44090,9 @@ literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42260,6 +44105,9 @@ literal|"T"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42272,6 +44120,9 @@ literal|"T_10"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|void
 name|checkCustomColumnResolving
@@ -42796,6 +44647,9 @@ literal|"'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -42823,6 +44677,9 @@ literal|"Unknown identifier 'COLUMN_NOT_EXIST'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43058,6 +44915,9 @@ literal|"Object 'TABLER_NOT_EXIST' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43313,6 +45173,9 @@ literal|"Object 'TABLER_NOT_EXIST' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43487,6 +45350,9 @@ literal|"Object 'TABLER_NOT_EXIST' not found"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43623,6 +45489,9 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43688,6 +45557,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43712,6 +45584,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43741,6 +45616,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43770,6 +45648,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43829,6 +45710,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43872,6 +45756,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -43965,6 +45852,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44040,6 +45930,9 @@ name|error1
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44167,6 +46060,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44210,6 +46106,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44338,6 +46237,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -44382,6 +46284,9 @@ literal|" from source field 'EXPR$0' of type CHAR(1)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -44408,6 +46313,9 @@ literal|"Column 'empno' not found in any table; did you mean 'EMPNO'\\?"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44443,6 +46351,9 @@ literal|"Unknown target column 'extra'"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44474,6 +46385,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44519,6 +46433,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44564,6 +46481,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44637,6 +46557,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44656,6 +46579,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44705,6 +46631,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44740,6 +46669,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Disabled
 argument_list|(
@@ -44780,6 +46712,9 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44829,6 +46764,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44869,6 +46807,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44918,6 +46859,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -44987,6 +46931,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45004,6 +46951,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45032,6 +46982,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45060,6 +47013,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45088,6 +47044,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45177,6 +47136,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45310,6 +47272,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45461,6 +47426,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45575,6 +47543,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45590,6 +47561,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45613,6 +47587,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45636,6 +47613,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45683,6 +47663,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45720,6 +47703,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45744,6 +47730,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45869,6 +47858,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -45974,6 +47966,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46039,6 +48034,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46104,6 +48102,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46159,7 +48160,13 @@ literal|"Duplicate name 'EXTRA' in column list"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1804">[CALCITE-1804]    * Cannot assign NOT NULL array to nullable array</a>. */
+end_comment
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46363,6 +48370,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46530,6 +48540,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46621,6 +48634,9 @@ name|maxError
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46655,6 +48671,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46680,6 +48699,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46767,6 +48789,9 @@ name|orderByError
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46800,6 +48825,9 @@ name|error
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46843,6 +48871,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -46918,6 +48949,9 @@ name|onError
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47012,6 +49046,9 @@ literal|"(?s).*Illegal use of .NULL.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47037,6 +49074,9 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47151,6 +49191,9 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47228,6 +49271,9 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47261,6 +49307,9 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47286,6 +49335,9 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47329,6 +49381,9 @@ literal|"(?s).*Expected a character type*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47409,6 +49464,9 @@ literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47442,6 +49500,9 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47495,6 +49556,9 @@ literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47548,6 +49612,9 @@ literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47601,6 +49668,9 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47636,6 +49706,9 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47691,6 +49764,9 @@ literal|"(?s).*Invalid number of arguments.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47739,6 +49815,9 @@ literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -47871,6 +49950,9 @@ literal|"(?s).*Cannot apply.*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -48042,6 +50124,9 @@ literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -48229,6 +50314,9 @@ literal|"MYFUN\\(<NUMERIC>,<NUMERIC>\\).*"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -48275,6 +50363,9 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -48491,6 +50582,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -48655,6 +50749,9 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|Test
 name|void
@@ -48715,7 +50812,13 @@ literal|"RecordType(BIGINT NOT NULL A, BIGINT B) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Validator that rewrites columnar sql identifiers 'UNEXPANDED'.'Something'    * to 'DEPT'.'Something', where 'Something' is any string. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -49018,8 +51121,8 @@ throw|;
 block|}
 block|}
 block|}
-block|}
 end_class
 
+unit|}
 end_unit
 
