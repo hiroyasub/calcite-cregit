@@ -582,8 +582,10 @@ name|copy2
 operator|=
 name|copy2
 operator|.
-name|with
+name|withObject
 argument_list|(
+literal|"/"
+operator|+
 name|names
 index|[
 name|i

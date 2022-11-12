@@ -696,7 +696,7 @@ name|scrollCurrent
 init|=
 name|node
 operator|.
-name|with
+name|get
 argument_list|(
 literal|"nodes"
 argument_list|)

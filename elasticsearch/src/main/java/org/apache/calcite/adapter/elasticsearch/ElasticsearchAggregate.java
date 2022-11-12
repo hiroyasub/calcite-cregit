@@ -946,8 +946,10 @@ name|field
 init|=
 name|aggregation
 operator|.
-name|with
+name|withObject
 argument_list|(
+literal|"/"
+operator|+
 name|toElasticAggregate
 argument_list|(
 name|aggCall
