@@ -9438,6 +9438,35 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5377">[CALCITE-5377]    * RelFieldTrimmer support Sort with dynamic param</a>. */
+annotation|@
+name|Test
+name|void
+name|testDynamicParameterSortWithTrim
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ename from "
+operator|+
+literal|"(select * from emp order by sal limit ? offset ?) a"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withTrim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3183">[CALCITE-3183]    * Trimming method for Filter rel uses wrong traitSet</a>. */
 annotation|@
 name|SuppressWarnings
