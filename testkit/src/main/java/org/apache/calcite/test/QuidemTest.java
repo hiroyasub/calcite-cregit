@@ -1873,6 +1873,15 @@ operator|.
 name|that
 argument_list|()
 operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+argument_list|,
+literal|"UTC"
+argument_list|)
+operator|.
 name|withSchema
 argument_list|(
 literal|"s"
