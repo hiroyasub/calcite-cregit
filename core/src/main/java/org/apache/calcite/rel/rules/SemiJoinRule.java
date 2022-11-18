@@ -1665,6 +1665,14 @@ name|project
 operator|.
 name|getProjects
 argument_list|()
+argument_list|,
+name|project
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldNames
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|call

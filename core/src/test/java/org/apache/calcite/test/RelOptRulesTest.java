@@ -6268,6 +6268,49 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case of    *<a href="https://issues.apache.org/jira/browse/CALCITE-5391">[CALCITE-5391]    * JoinOnUniqueToSemiJoinRule should preserve field names, if possible</a>. */
+annotation|@
+name|Test
+name|void
+name|testSemiJoinRuleWithJoinOnUniqueInputWithAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select emp.deptno as department_id, emp.sal as salary\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where exists(select * from dept where emp.deptno = dept.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDecorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withTrim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|CoreRules
+operator|.
+name|JOIN_ON_UNIQUE_TO_SEMI_JOIN
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1495">[CALCITE-1495]    * SemiJoinRule should not apply to RIGHT and FULL JOIN</a>. */
 annotation|@
 name|Test
