@@ -14914,6 +14914,43 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5392">[CALCITE-5392]    * Support Snapshot in RelMdExpressionLineage</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testExpressionLineageSnapshot
+parameter_list|()
+block|{
+name|String
+name|expected
+init|=
+literal|"[[CATALOG, SALES, PRODUCTS_TEMPORAL].#0.$0]"
+decl_stmt|;
+name|String
+name|comment
+init|=
+literal|"'productid' is column 0 in 'catalog.sales.products_temporal'"
+decl_stmt|;
+name|assertExpressionLineage
+argument_list|(
+literal|"select productid from products_temporal\n"
+operator|+
+literal|"for system_time as of TIMESTAMP '2011-01-02 00:00:00'"
+argument_list|,
+literal|0
+argument_list|,
+name|expected
+argument_list|,
+name|comment
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
