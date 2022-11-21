@@ -1191,6 +1191,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -1245,6 +1247,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -1425,6 +1429,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -1465,6 +1471,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -1505,6 +1513,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|,
 name|POSTGRESQL
@@ -2499,6 +2509,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|,
 name|POSTGRESQL
@@ -2535,6 +2547,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|,
 name|POSTGRESQL
@@ -2571,6 +2585,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|,
 name|POSTGRESQL
@@ -2675,6 +2691,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|,
 name|POSTGRESQL
@@ -3075,6 +3093,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|}
 argument_list|)
@@ -3114,6 +3134,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|}
 argument_list|)
@@ -3786,6 +3808,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -3820,6 +3844,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -3854,6 +3880,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|}
 argument_list|)
@@ -3888,6 +3916,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|,
 name|POSTGRESQL
@@ -3943,6 +3973,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|MYSQL
 block|,
 name|POSTGRESQL
