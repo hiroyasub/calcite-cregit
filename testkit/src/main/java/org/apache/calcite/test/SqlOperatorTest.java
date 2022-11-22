@@ -32602,6 +32602,328 @@ literal|"last_day(cast(null as timestamp))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testStartsWithFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|STARTS_WITH
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with('12345', '123')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with('12345', '1243')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with(x'11', x'11')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with(x'112211', x'33')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^starts_with('aabbcc', x'aa')^"
+argument_list|,
+literal|"Cannot apply 'STARTS_WITH' to arguments of type "
+operator|+
+literal|"'STARTS_WITH\\(<CHAR\\(6\\)>,<BINARY\\(1\\)>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\): 'STARTS_WITH\\(<STRING>,<STRING>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"starts_with(null, null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"starts_with('12345', null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"starts_with(null, '123')"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with('', '123')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with('', '')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"starts_with(x'aa', null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"starts_with(null, x'aa')"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with(x'1234', x'')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with(x'', x'123456')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"starts_with(x'', x'')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testEndsWithFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|ENDS_WITH
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with('12345', '345')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with('12345', '123')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with(x'11', x'11')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with(x'112211', x'33')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ends_with('aabbcc', x'aa')^"
+argument_list|,
+literal|"Cannot apply 'ENDS_WITH' to arguments of type "
+operator|+
+literal|"'ENDS_WITH\\(<CHAR\\(6\\)>,<BINARY\\(1\\)>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\): 'ENDS_WITH\\(<STRING>,<STRING>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"ends_with(null, null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"ends_with('12345', null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"ends_with(null, '123')"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with('', '123')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with('', '')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"ends_with(x'aa', null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"ends_with(null, x'aa')"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with(x'1234', x'')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with(x'', x'123456')"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"ends_with(x'', x'')"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the {@code SUBSTRING} operator. Many test cases that used to be    * have been moved to {@link SubFunChecker#assertSubFunReturns}, and are    * called for both {@code SUBSTRING} and {@code SUBSTR}. */
 annotation|@
 name|Test
