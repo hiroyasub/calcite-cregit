@@ -29405,6 +29405,64 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testArgMinMaxFunctions
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT ARG_MIN(1, true) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT ARG_MAX(2, false) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT ARG_MIN(sal, deptno) FROM emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT ARG_MAX(deptno, sal) FROM emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT ARG_MIN('a', 5.5) FROM emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT ARG_MAX('b', 5) FROM emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testModeFunction
 parameter_list|()
 block|{

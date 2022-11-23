@@ -777,6 +777,12 @@ block|,
 comment|/** The {@code MODE} aggregate function. */
 name|MODE
 block|,
+comment|/** The {@code ARG_MAX} aggregate function. */
+name|ARG_MAX
+block|,
+comment|/** The {@code ARG_MIN} aggregate function. */
+name|ARG_MIN
+block|,
 comment|/** The {@code PERCENTILE_CONT} aggregate function. */
 name|PERCENTILE_CONT
 block|,
