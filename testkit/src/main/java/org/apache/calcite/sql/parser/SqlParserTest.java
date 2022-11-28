@@ -18352,6 +18352,18 @@ name|void
 name|testValues
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"VALUES (ROW(1, 'two'))"
+decl_stmt|;
+specifier|final
+name|String
+name|pattern
+init|=
+literal|"VALUE is not allowed under the current SQL conformance level"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"values(1,'two')"
@@ -18359,7 +18371,43 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"VALUES (ROW(1, 'two'))"
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"value(1,'two')"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|MYSQL_5
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"^value^(1,'two')"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|pattern
 argument_list|)
 expr_stmt|;
 block|}
@@ -20199,6 +20247,12 @@ literal|"INSERT INTO `EMPS`\n"
 operator|+
 literal|"VALUES (ROW(1, 'Fredkin'))"
 decl_stmt|;
+specifier|final
+name|String
+name|pattern
+init|=
+literal|"VALUE is not allowed under the current SQL conformance level"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"insert into emps values (1,'Fredkin')"
@@ -20216,6 +20270,42 @@ argument_list|(
 name|isDdl
 argument_list|()
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps value (1, 'Fredkin')"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|MYSQL_5
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps ^value^ (1, 'Fredkin')"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|pattern
 argument_list|)
 expr_stmt|;
 block|}

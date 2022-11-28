@@ -214,6 +214,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"VALUE is not allowed under the current SQL conformance level"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|valueNotAllowed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Illegal {0} literal ''{1}'': {2}"
 argument_list|)
 name|ExInst

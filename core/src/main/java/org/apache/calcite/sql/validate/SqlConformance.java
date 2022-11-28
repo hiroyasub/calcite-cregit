@@ -305,6 +305,11 @@ name|boolean
 name|allowQualifyingCommonColumn
 parameter_list|()
 function_decl|;
+comment|/**    * Whether {@code VALUE} is allowed as an alternative to {@code VALUES} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+name|boolean
+name|isValueAllowed
+parameter_list|()
+function_decl|;
 comment|/**    * Controls the behavior of operators that are part of Standard SQL but    * nevertheless have different behavior in different databases.    *    *<p>Consider the {@code SUBSTRING} operator. In ISO standard SQL, negative    * start indexes are converted to 1; in Google BigQuery, negative start    * indexes are treated as offsets from the end of the string. For example,    * {@code SUBSTRING('abcde' FROM -3 FOR 2)} returns {@code 'ab'} in standard    * SQL and 'cd' in BigQuery.    *    *<p>If you specify {@code conformance=BIG_QUERY} in your connection    * parameters, {@code SUBSTRING} will give the BigQuery behavior. Similarly    * MySQL and Oracle.    *    *<p>Among the built-in conformance levels:    *<ul>    *<li>{@link SqlConformanceEnum#BIG_QUERY} returns    *     {@link SqlLibrary#BIG_QUERY};    *<li>{@link SqlConformanceEnum#MYSQL_5} returns {@link SqlLibrary#MYSQL};    *<li>{@link SqlConformanceEnum#ORACLE_10} and    *     {@link SqlConformanceEnum#ORACLE_12} return {@link SqlLibrary#ORACLE};    *<li>otherwise returns {@link SqlLibrary#STANDARD}.    *</ul>    */
 name|SqlLibrary
 name|semantics
