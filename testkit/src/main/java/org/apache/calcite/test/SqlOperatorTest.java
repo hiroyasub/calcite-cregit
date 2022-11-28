@@ -29730,6 +29730,62 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testPowFunc
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|POW
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"pow(2,3)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+name|isExactly
+argument_list|(
+literal|"8.0"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"pow(2, cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"pow(cast(null as integer), 2)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testRoundFunc
 parameter_list|()
 block|{
@@ -30629,6 +30685,231 @@ name|ORACLE
 argument_list|)
 argument_list|,
 name|consumer
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testTruncFunc
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TRUNC
+argument_list|)
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkType
+argument_list|(
+literal|"trunc(42, -1)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkType
+argument_list|(
+literal|"trunc(cast(42 as float), 1)"
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkType
+argument_list|(
+literal|"trunc(case when false then 42 else null end, -1)"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|checkFails
+argument_list|(
+literal|"^trunc('abc', 'def')^"
+argument_list|,
+literal|"Cannot apply 'TRUNC' to arguments of type "
+operator|+
+literal|"'TRUNC\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\): 'TRUNC\\(<NUMERIC>,<INTEGER>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkType
+argument_list|(
+literal|"trunc('abc', 'def')"
+argument_list|,
+literal|"DECIMAL(19, 9) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(42, -1)"
+argument_list|,
+literal|40
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(cast(42.345 as decimal(2, 3)), 2)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|4234
+argument_list|,
+literal|2
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(cast(-42.345 as decimal(2, 3)), 2)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+operator|-
+literal|4234
+argument_list|,
+literal|2
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"trunc(cast(null as integer), 1)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"trunc(cast(null as double), 1)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"trunc(43.21, cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(42)"
+argument_list|,
+literal|42
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(42.324)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|42
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(5, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(cast(42.324 as float))"
+argument_list|,
+literal|42F
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"trunc(cast(42.345 as decimal(2, 3)))"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|42
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"trunc(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"trunc(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}

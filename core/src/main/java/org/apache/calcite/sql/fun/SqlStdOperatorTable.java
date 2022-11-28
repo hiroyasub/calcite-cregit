@@ -5277,7 +5277,7 @@ comment|/** The {@code POWER(numeric, numeric)} function.    *    *<p>The return
 specifier|public
 specifier|static
 specifier|final
-name|SqlFunction
+name|SqlBasicFunction
 name|POWER
 init|=
 name|SqlBasicFunction
@@ -5293,6 +5293,10 @@ argument_list|,
 name|OperandTypes
 operator|.
 name|NUMERIC_NUMERIC
+argument_list|,
+name|SqlFunctionCategory
+operator|.
+name|NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/** The {@code SQRT(numeric)} function. */
@@ -5796,7 +5800,7 @@ comment|/** The {@code TRUNCATE(numeric [, numeric])} function. */
 specifier|public
 specifier|static
 specifier|final
-name|SqlFunction
+name|SqlBasicFunction
 name|TRUNCATE
 init|=
 name|SqlBasicFunction
