@@ -284,7 +284,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Transforms the projection of a geometry.  */
+comment|/**  * Transforms the projection of a geometry.  *  * This class uses Proj4J to transform the projection of a geometry  * and should not be used beyond the scope of the Spatial Type Extensions.  * Proj4J is released under the Apache License 2.0, however, it also uses the EPSG dataset,  * which has restricting<a href="https://epsg.org/terms-of-use.html">terms of use</a>.  * As a result, Proj4J is not suitable for inclusion in Apache Calcite  * and this class will throw {@code ClassNotFoundException}s  * if Proj4J is not added to the classpath by the user.  */
 end_comment
 
 begin_class
