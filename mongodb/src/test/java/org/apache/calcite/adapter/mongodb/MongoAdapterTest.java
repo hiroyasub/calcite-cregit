@@ -2633,6 +2633,57 @@ literal|"EXPR$0=2012-09-05"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5405">[CALCITE-5405]    * Error casting MongoDB dates to TIMESTAMP</a>. */
+annotation|@
+name|Test
+name|void
+name|testDateConversion
+parameter_list|()
+block|{
+name|assertModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'test',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'test',\n"
+operator|+
+literal|"       factory: 'org.apache.calcite.adapter.mongodb.MongoSchemaFactory',\n"
+operator|+
+literal|"       operand: {\n"
+operator|+
+literal|"         host: 'localhost',\n"
+operator|+
+literal|"         database: 'test'\n"
+operator|+
+literal|"       }\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cast(_MAP['date'] as TIMESTAMP) from \"datatypes\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=2012-09-05 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-665">[CALCITE-665]    * ClassCastException in MongoDB adapter</a>. */
 annotation|@
 name|Test
