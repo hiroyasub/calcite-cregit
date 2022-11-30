@@ -25,6 +25,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Experimental
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|fun
@@ -292,6 +308,13 @@ function_decl|;
 comment|/**    * Controls the behavior of operators that are part of Standard SQL but    * nevertheless have different behavior in different databases.    *    *<p>Consider the {@code SUBSTRING} operator. In ISO standard SQL, negative    * start indexes are converted to 1; in Google BigQuery, negative start    * indexes are treated as offsets from the end of the string. For example,    * {@code SUBSTRING('abcde' FROM -3 FOR 2)} returns {@code 'ab'} in standard    * SQL and 'cd' in BigQuery.    *    *<p>If you specify {@code conformance=BIG_QUERY} in your connection    * parameters, {@code SUBSTRING} will give the BigQuery behavior. Similarly    * MySQL and Oracle.    *    *<p>Among the built-in conformance levels:    *<ul>    *<li>{@link SqlConformanceEnum#BIG_QUERY} returns    *     {@link SqlLibrary#BIG_QUERY};    *<li>{@link SqlConformanceEnum#MYSQL_5} returns {@link SqlLibrary#MYSQL};    *<li>{@link SqlConformanceEnum#ORACLE_10} and    *     {@link SqlConformanceEnum#ORACLE_12} return {@link SqlLibrary#ORACLE};    *<li>otherwise returns {@link SqlLibrary#STANDARD}.    *</ul>    */
 name|SqlLibrary
 name|semantics
+parameter_list|()
+function_decl|;
+comment|/**    * Whether to allow coercion string literal to array literal    *    *<p>For example,    *    *<blockquote><pre>SELECT ARRAY[0,1,2] == '{0,1,2}'    *</pre></blockquote>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * false otherwise.    */
+annotation|@
+name|Experimental
+name|boolean
+name|allowCoercionStringToArray
 parameter_list|()
 function_decl|;
 block|}

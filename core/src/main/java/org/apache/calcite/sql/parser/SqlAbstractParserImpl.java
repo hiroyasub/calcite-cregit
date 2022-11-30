@@ -1484,6 +1484,15 @@ name|SqlConformance
 name|conformance
 parameter_list|)
 function_decl|;
+comment|/**    * Parses string to array literal.    */
+specifier|public
+specifier|abstract
+name|SqlNode
+name|parseArray
+parameter_list|()
+throws|throws
+name|SqlParseException
+function_decl|;
 comment|/**    * Sets the SQL text that is being parsed.    */
 specifier|public
 name|void

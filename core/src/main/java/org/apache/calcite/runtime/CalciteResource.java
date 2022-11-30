@@ -429,6 +429,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Illegal array expression ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|illegalArrayExpression
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"''FROM'' without operands preceding it is illegal"
 argument_list|)
 name|ExInst

@@ -1690,6 +1690,140 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testArrayLiteralFromString
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select array '{1,2,3}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY[1, 2, 3])"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select array '{{1,2,5}, {3,4,7}}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY[(ARRAY[1, 2, 5]), (ARRAY[3, 4, 7])])"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select array '{}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY[])"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select array '{\"1\", \"2\", \"3\"}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY['1', '2', '3'])"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select array '{null, 1, null, 2}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY[NULL, 1, NULL, 2])"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select array ^'null, 1, null, 2'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal array expression 'null, 1, null, 2'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testArrayLiteralBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|SqlParserFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withDialect
+argument_list|(
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select array '{1, 2}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY[1, 2])"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select array \"{1, 2}\""
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY[1, 2])"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select array '{\"a\", \"b\"}'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY['a', 'b'])"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|sql
+argument_list|(
+literal|"select array \"{\\\"a\\\", \\\"b\\\"}\""
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (ARRAY['a', 'b'])"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Similar to {@link #testHoist()} but using custom parser. */
 annotation|@
 name|Test

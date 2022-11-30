@@ -3972,14 +3972,10 @@ decl_stmt|;
 if|if
 condition|(
 name|c2
-operator|==
+operator|!=
 literal|null
 condition|)
 block|{
-return|return
-literal|false
-return|;
-block|}
 return|return
 name|canCastFrom
 argument_list|(
@@ -3990,6 +3986,7 @@ argument_list|,
 name|coerce
 argument_list|)
 return|;
+block|}
 block|}
 if|if
 condition|(
