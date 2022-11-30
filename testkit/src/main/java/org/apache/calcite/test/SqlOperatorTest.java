@@ -1100,14 +1100,20 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
+import|import static
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|stream
+name|calcite
 operator|.
-name|Stream
+name|linq4j
+operator|.
+name|tree
+operator|.
+name|Expressions
+operator|.
+name|list
 import|;
 end_import
 
@@ -21759,37 +21765,22 @@ parameter_list|()
 block|{
 specifier|final
 name|SqlOperatorFixture
-name|f
+name|f0
 init|=
 name|fixture
 argument_list|()
 decl_stmt|;
-name|Stream
-operator|.
-name|of
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|,
-name|SqlLibrary
-operator|.
-name|POSTGRESQL
-argument_list|)
-operator|.
-name|map
-argument_list|(
+specifier|final
+name|Consumer
+argument_list|<
+name|SqlOperatorFixture
+argument_list|>
+name|consumer
+init|=
 name|f
-operator|::
-name|withLibrary
-argument_list|)
-operator|.
-name|forEach
-argument_list|(
-name|t
 lambda|->
 block|{
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -21798,7 +21789,7 @@ operator|.
 name|LEFT
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21809,7 +21800,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21820,7 +21811,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21831,7 +21822,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21842,14 +21833,14 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"left(cast(null as varchar(1)), -2)"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -21857,7 +21848,7 @@ literal|"left('abcd', cast(null as Integer))"
 argument_list|)
 expr_stmt|;
 comment|// test for ByteString
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21868,7 +21859,7 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21879,7 +21870,7 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21890,7 +21881,7 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21901,14 +21892,14 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"left(cast(null as binary(1)), -2)"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -21916,6 +21907,23 @@ literal|"left(x'ABCdef', cast(null as Integer))"
 argument_list|)
 expr_stmt|;
 block|}
+decl_stmt|;
+name|f0
+operator|.
+name|forEachLibrary
+argument_list|(
+name|list
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|,
+name|consumer
 argument_list|)
 expr_stmt|;
 block|}
@@ -21927,37 +21935,22 @@ parameter_list|()
 block|{
 specifier|final
 name|SqlOperatorFixture
-name|f
+name|f0
 init|=
 name|fixture
 argument_list|()
 decl_stmt|;
-name|Stream
-operator|.
-name|of
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|,
-name|SqlLibrary
-operator|.
-name|POSTGRESQL
-argument_list|)
-operator|.
-name|map
-argument_list|(
+specifier|final
+name|Consumer
+argument_list|<
+name|SqlOperatorFixture
+argument_list|>
+name|consumer
+init|=
 name|f
-operator|::
-name|withLibrary
-argument_list|)
-operator|.
-name|forEach
-argument_list|(
-name|t
 lambda|->
 block|{
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -21966,7 +21959,7 @@ operator|.
 name|RIGHT
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21977,7 +21970,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21988,7 +21981,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -21999,7 +21992,7 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22010,14 +22003,14 @@ argument_list|,
 literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"right(cast(null as varchar(1)), -2)"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -22025,7 +22018,7 @@ literal|"right('abcd', cast(null as Integer))"
 argument_list|)
 expr_stmt|;
 comment|// test for ByteString
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22036,7 +22029,7 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22047,7 +22040,7 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22058,7 +22051,7 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22069,14 +22062,14 @@ argument_list|,
 literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"right(cast(null as binary(1)), -2)"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
@@ -22084,6 +22077,23 @@ literal|"right(x'ABCdef', cast(null as Integer))"
 argument_list|)
 expr_stmt|;
 block|}
+decl_stmt|;
+name|f0
+operator|.
+name|forEachLibrary
+argument_list|(
+name|list
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|,
+name|consumer
 argument_list|)
 expr_stmt|;
 block|}
@@ -22095,37 +22105,22 @@ parameter_list|()
 block|{
 specifier|final
 name|SqlOperatorFixture
-name|f
+name|f0
 init|=
 name|fixture
 argument_list|()
 decl_stmt|;
-name|Stream
-operator|.
-name|of
-argument_list|(
-name|SqlLibrary
-operator|.
-name|MYSQL
-argument_list|,
-name|SqlLibrary
-operator|.
-name|ORACLE
-argument_list|)
-operator|.
-name|map
-argument_list|(
+specifier|final
+name|Consumer
+argument_list|<
+name|SqlOperatorFixture
+argument_list|>
+name|consumer
+init|=
 name|f
-operator|::
-name|withLibrary
-argument_list|)
-operator|.
-name|forEach
-argument_list|(
-name|t
 lambda|->
 block|{
-name|t
+name|f
 operator|.
 name|setFor
 argument_list|(
@@ -22134,7 +22129,7 @@ operator|.
 name|REGEXP_REPLACE
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22145,7 +22140,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22156,7 +22151,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22167,7 +22162,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22178,28 +22173,28 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"regexp_replace(cast(null as varchar), '(-)', '###')"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"regexp_replace('100-200', cast(null as varchar), '###')"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkNull
 argument_list|(
 literal|"regexp_replace('100-200', '(-)', cast(null as varchar))"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22210,7 +22205,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22221,7 +22216,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22232,7 +22227,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22243,7 +22238,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22254,7 +22249,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22265,7 +22260,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22276,7 +22271,7 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkString
 argument_list|(
@@ -22287,28 +22282,28 @@ argument_list|,
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkQuery
 argument_list|(
 literal|"select regexp_replace('a b c', 'b', 'X')"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkQuery
 argument_list|(
 literal|"select regexp_replace('a b c', 'b', 'X', 1)"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkQuery
 argument_list|(
 literal|"select regexp_replace('a b c', 'b', 'X', 1, 3)"
 argument_list|)
 expr_stmt|;
-name|t
+name|f
 operator|.
 name|checkQuery
 argument_list|(
@@ -22316,6 +22311,23 @@ literal|"select regexp_replace('a b c', 'b', 'X', 1, 3, 'i')"
 argument_list|)
 expr_stmt|;
 block|}
+decl_stmt|;
+name|f0
+operator|.
+name|forEachLibrary
+argument_list|(
+name|list
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|,
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+argument_list|,
+name|consumer
 argument_list|)
 expr_stmt|;
 block|}
