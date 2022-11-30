@@ -203,6 +203,16 @@ name|org
 operator|.
 name|bson
 operator|.
+name|BsonArray
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|bson
+operator|.
 name|BsonDateTime
 import|;
 end_import
@@ -793,6 +803,34 @@ operator|new
 name|BsonString
 argument_list|(
 literal|"531e7789e4b0853ddb861313"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|doc
+operator|.
+name|put
+argument_list|(
+literal|"arr"
+argument_list|,
+operator|new
+name|BsonArray
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+operator|new
+name|BsonString
+argument_list|(
+literal|"a"
+argument_list|)
+argument_list|,
+operator|new
+name|BsonString
+argument_list|(
+literal|"b"
+argument_list|)
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2681,6 +2719,57 @@ operator|.
 name|returnsUnordered
 argument_list|(
 literal|"EXPR$0=2012-09-05 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5407">[CALCITE-5407]    * Error casting MongoDB array to VARCHAR ARRAY</a>. */
+annotation|@
+name|Test
+name|void
+name|testArrayConversion
+parameter_list|()
+block|{
+name|assertModel
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'test',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'test',\n"
+operator|+
+literal|"       factory: 'org.apache.calcite.adapter.mongodb.MongoSchemaFactory',\n"
+operator|+
+literal|"       operand: {\n"
+operator|+
+literal|"         host: 'localhost',\n"
+operator|+
+literal|"         database: 'test'\n"
+operator|+
+literal|"       }\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cast(_MAP['arr'] as VARCHAR ARRAY) from \"datatypes\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=[a, b]"
 argument_list|)
 expr_stmt|;
 block|}
