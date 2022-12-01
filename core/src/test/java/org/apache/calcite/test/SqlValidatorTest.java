@@ -2844,6 +2844,40 @@ argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
+literal|"5.1 % 3"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"DECIMAL(2, 1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"2 % 5.1"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"DECIMAL(2, 1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
 literal|"exp(3.67)"
 argument_list|)
 operator|.
