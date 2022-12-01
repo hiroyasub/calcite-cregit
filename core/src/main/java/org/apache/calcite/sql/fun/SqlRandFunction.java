@@ -69,20 +69,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlSyntax
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|OperandTypes
@@ -153,19 +139,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Override
-specifier|public
-name|SqlSyntax
-name|getSyntax
-parameter_list|()
-block|{
-return|return
-name|SqlSyntax
-operator|.
-name|FUNCTION
-return|;
-block|}
 comment|// Plans referencing context variables should never be cached
 annotation|@
 name|Override

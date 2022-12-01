@@ -37948,7 +37948,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `T` MATCH_RECOGNIZE(\n"
 operator|+
-literal|"MEASURES (MATCH_NUMBER ()) AS `MATCH_NUM`, "
+literal|"MEASURES (MATCH_NUMBER()) AS `MATCH_NUM`, "
 operator|+
 literal|"(CLASSIFIER()) AS `VAR_MATCH`, "
 operator|+

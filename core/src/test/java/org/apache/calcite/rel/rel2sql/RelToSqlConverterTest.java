@@ -19781,7 +19781,7 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"FINAL MATCH_NUMBER () AS \"MATCH_NUM\", "
+literal|"FINAL MATCH_NUMBER() AS \"MATCH_NUM\", "
 operator|+
 literal|"FINAL CLASSIFIER() AS \"VAR_MATCH\", "
 operator|+
