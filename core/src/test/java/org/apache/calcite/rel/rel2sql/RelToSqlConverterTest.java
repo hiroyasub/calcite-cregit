@@ -24576,23 +24576,13 @@ literal|"GROUP BY CUBE(\"product_id\", \"product_class_id\")"
 decl_stmt|;
 specifier|final
 name|String
-name|expectedInSpark
+name|expectedSpark
 init|=
 literal|"SELECT COUNT(*)\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
-literal|"GROUP BY product_id, product_class_id WITH CUBE"
-decl_stmt|;
-specifier|final
-name|String
-name|expectedPresto
-init|=
-literal|"SELECT COUNT(*)\n"
-operator|+
-literal|"FROM \"foodmart\".\"product\"\n"
-operator|+
-literal|"GROUP BY CUBE(\"product_id\", \"product_class_id\")"
+literal|"GROUP BY CUBE(product_id, product_class_id)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -24609,7 +24599,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedPresto
+name|expected
 argument_list|)
 operator|.
 name|withSpark
@@ -24617,7 +24607,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedInSpark
+name|expectedSpark
 argument_list|)
 expr_stmt|;
 block|}
@@ -24655,17 +24645,7 @@ literal|"SELECT COUNT(*)\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
-literal|"GROUP BY product_id, product_class_id WITH ROLLUP"
-decl_stmt|;
-specifier|final
-name|String
-name|expectedPresto
-init|=
-literal|"SELECT COUNT(*)\n"
-operator|+
-literal|"FROM \"foodmart\".\"product\"\n"
-operator|+
-literal|"GROUP BY ROLLUP(\"product_id\", \"product_class_id\")"
+literal|"GROUP BY ROLLUP(product_id, product_class_id)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -24682,7 +24662,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expectedPresto
+name|expected
 argument_list|)
 operator|.
 name|withSpark
