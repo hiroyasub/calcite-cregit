@@ -4220,11 +4220,15 @@ specifier|final
 name|String
 name|expectedMysql
 init|=
-literal|"SELECT `product_class_id`, `brand_name`\n"
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `product_class_id`, `brand_name`\n"
 operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
-literal|"GROUP BY `brand_name`, `product_class_id` WITH ROLLUP"
+literal|"GROUP BY `product_class_id`, `brand_name` WITH ROLLUP) AS `t0`\n"
+operator|+
+literal|"ORDER BY `brand_name`, `product_class_id`"
 decl_stmt|;
 name|sql
 argument_list|(
