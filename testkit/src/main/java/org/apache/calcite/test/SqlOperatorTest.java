@@ -42723,6 +42723,169 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Tests {@code TIMESTAMP_ADD}, BigQuery's 2-argument variant of the    * 3-argument {@code TIMESTAMPADD} function. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testTimestampAdd2
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIMESTAMP_ADD2
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^timestamp_add(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 5 minute)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"TIMESTAMP_ADD\\(<TIMESTAMP>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_5422_FIXED
+condition|)
+block|{
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 100000000000 microsecond)"
+argument_list|,
+literal|"2008-12-26 19:16:40"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 100000000 millisecond)"
+argument_list|,
+literal|"2008-12-26 19:16:40"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2016-02-24 12:42:25', interval 2 second)"
+argument_list|,
+literal|"2016-02-24 12:42:27"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2016-02-24 12:42:25', interval 2 minute)"
+argument_list|,
+literal|"2016-02-24 12:44:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2016-02-24 12:42:25', interval -2000 hour)"
+argument_list|,
+literal|"2015-12-03 04:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2016-02-24 12:42:25', interval 1 day)"
+argument_list|,
+literal|"2016-02-25 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2016-02-24 12:42:25', interval 1 month)"
+argument_list|,
+literal|"2016-03-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_add(timestamp '2016-02-24 12:42:25', interval 1 year)"
+argument_list|,
+literal|"2017-02-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestamp_add(CAST(NULL AS TIMESTAMP), interval 5 minute)"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
