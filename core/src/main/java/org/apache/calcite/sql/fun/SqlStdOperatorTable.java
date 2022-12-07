@@ -6244,6 +6244,23 @@ operator|new
 name|SqlTimestampDiffFunction
 argument_list|(
 literal|"TIMESTAMPDIFF"
+argument_list|,
+name|OperandTypes
+operator|.
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|ANY
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|TIMESTAMP
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|TIMESTAMP
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    * Use of the<code>IN_FENNEL</code> operator forces the argument to be    * evaluated in Fennel. Otherwise acts as identity function.    */
