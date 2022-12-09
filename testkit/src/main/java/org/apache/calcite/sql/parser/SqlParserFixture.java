@@ -443,7 +443,7 @@ name|same
 parameter_list|()
 block|{
 return|return
-name|ok_
+name|compare
 argument_list|(
 name|sap
 operator|.
@@ -480,15 +480,15 @@ argument_list|)
 throw|;
 block|}
 return|return
-name|ok_
+name|compare
 argument_list|(
 name|expected
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|public
 name|SqlParserFixture
-name|ok_
+name|compare
 parameter_list|(
 name|String
 name|expected
