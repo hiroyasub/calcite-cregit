@@ -183,6 +183,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlUnknownLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlWriterConfig
 import|;
 end_import
@@ -282,6 +296,22 @@ operator|.
 name|test
 operator|.
 name|SqlTests
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
 import|;
 end_import
 
@@ -1865,6 +1895,10 @@ argument_list|,
 literal|"2011"
 argument_list|,
 literal|"2014"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"DATETIME"
 argument_list|,
 literal|"c"
 argument_list|,
@@ -22704,10 +22738,8 @@ argument_list|(
 literal|"TIME '12:01:01.'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIME '12:01:01'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22755,10 +22787,8 @@ argument_list|(
 literal|"TIMESTAMP '2004-12-01 12:01:01.'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIMESTAMP '2004-12-01 12:01:01'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22778,46 +22808,64 @@ operator|.
 name|same
 argument_list|()
 expr_stmt|;
-comment|// Failures.
-name|sql
+comment|// Datetime, Timestamp with local time zone literals.
+name|expr
+argument_list|(
+literal|"DATETIME '2004-12-01 12:01:01'"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+comment|// Value strings that are illegal for their type are considered valid at
+comment|// parse time, invalid at validate time. See SqlValidatorTest.testLiteral.
+name|expr
 argument_list|(
 literal|"^DATE '12/21/99'^"
 argument_list|)
 operator|.
-name|fails
-argument_list|(
-literal|"(?s).*Illegal DATE literal.*"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
-name|sql
+name|expr
 argument_list|(
 literal|"^TIME '1230:33'^"
 argument_list|)
 operator|.
-name|fails
-argument_list|(
-literal|"(?s).*Illegal TIME literal.*"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
-name|sql
+name|expr
 argument_list|(
 literal|"^TIME '12:00:00 PM'^"
 argument_list|)
 operator|.
-name|fails
-argument_list|(
-literal|"(?s).*Illegal TIME literal.*"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
-name|sql
+name|expr
 argument_list|(
-literal|"^TIMESTAMP '12-21-99, 12:30:00'^"
+literal|"TIMESTAMP '12-21-99, 12:30:00'"
 argument_list|)
 operator|.
-name|fails
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
 argument_list|(
-literal|"(?s).*Illegal TIMESTAMP literal.*"
+literal|"TIMESTAMP WITH LOCAL TIME ZONE '12-21-99, 12:30:00'"
 argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"DATETIME '12-21-99, 12:30:00'"
+argument_list|)
+operator|.
+name|same
+argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Tests for casting to/from date/time types.    */
@@ -36428,6 +36476,14 @@ name|v
 operator|.
 name|node
 decl_stmt|;
+name|SqlTypeName
+name|typeName
+init|=
+name|literal
+operator|.
+name|getTypeName
+argument_list|()
+decl_stmt|;
 return|return
 literal|"["
 operator|+
@@ -36437,10 +36493,27 @@ name|ordinal
 operator|+
 literal|":"
 operator|+
-name|literal
+operator|(
+name|typeName
+operator|==
+name|SqlTypeName
 operator|.
-name|getTypeName
+name|UNKNOWN
+condition|?
+operator|(
+operator|(
+name|SqlUnknownLiteral
+operator|)
+name|literal
+operator|)
+operator|.
+name|tag
+else|:
+name|typeName
+operator|.
+name|getName
 argument_list|()
+operator|)
 operator|+
 literal|":"
 operator|+

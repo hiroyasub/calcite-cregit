@@ -2062,6 +2062,35 @@ name|name
 argument_list|)
 return|;
 block|}
+comment|/** Returns the SqlTypeName value whose name or {@link #getSpaceName()}    * matches the given name, or throws {@link IllegalArgumentException}; never    * returns null. */
+specifier|public
+specifier|static
+name|SqlTypeName
+name|lookup
+parameter_list|(
+name|String
+name|tag
+parameter_list|)
+block|{
+name|String
+name|tag2
+init|=
+name|tag
+operator|.
+name|replace
+argument_list|(
+literal|' '
+argument_list|,
+literal|'_'
+argument_list|)
+decl_stmt|;
+return|return
+name|valueOf
+argument_list|(
+name|tag2
+argument_list|)
+return|;
+block|}
 specifier|public
 name|boolean
 name|allowsNoPrecNoScale
@@ -4310,6 +4339,8 @@ name|SqlLiteral
 operator|.
 name|createTimestamp
 argument_list|(
+name|this
+argument_list|,
 name|o
 operator|instanceof
 name|Calendar
@@ -4353,8 +4384,26 @@ name|getName
 parameter_list|()
 block|{
 return|return
-name|toString
+name|name
 argument_list|()
+return|;
+block|}
+comment|/** Returns the name of this type, with underscores converted to spaces,    * for example "TIMESTAMP WITH LOCAL TIME ZONE", "DATE". */
+specifier|public
+name|String
+name|getSpaceName
+parameter_list|()
+block|{
+return|return
+name|name
+argument_list|()
+operator|.
+name|replace
+argument_list|(
+literal|'_'
+argument_list|,
+literal|' '
+argument_list|)
 return|;
 block|}
 comment|/**    * Flags indicating precision/scale combinations.    *    *<p>Note: for intervals:    *    *<ul>    *<li>precision = start (leading field) precision</li>    *<li>scale = fractional second precision</li>    *</ul>    */

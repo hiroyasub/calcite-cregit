@@ -189,7 +189,7 @@ literal|" `ANINTEGER` -45,"
 operator|+
 literal|" `ADATE` DATE '1970-03-21',"
 operator|+
-literal|" `quoted.id` TIMESTAMP '1970-03-21 12:04:56.78',"
+literal|" `quoted.id` TIMESTAMP '1970-03-21 12:4:56.78',"
 operator|+
 literal|" `ASTRING` 'foo''bar')"
 decl_stmt|;

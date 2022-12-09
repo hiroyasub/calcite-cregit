@@ -1203,6 +1203,14 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
+comment|/** Resolves a literal.    *    *<p>Usually returns the literal unchanged, but if the literal is of type    * {@link org.apache.calcite.sql.type.SqlTypeName#UNKNOWN} looks up its type    * and converts to the appropriate literal subclass. */
+name|SqlLiteral
+name|resolveLiteral
+parameter_list|(
+name|SqlLiteral
+name|literal
+parameter_list|)
+function_decl|;
 comment|/**    * Returns whether a field is a system field. Such fields may have    * particular properties such as sortedness and nullability.    *    *<p>In the default implementation, always returns {@code false}.    *    * @param field Field    * @return whether field is a system field    */
 name|boolean
 name|isSystemField

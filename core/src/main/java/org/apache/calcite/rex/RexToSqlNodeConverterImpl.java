@@ -420,6 +420,11 @@ name|SqlLiteral
 operator|.
 name|createTimestamp
 argument_list|(
+name|literal
+operator|.
+name|getTypeName
+argument_list|()
+argument_list|,
 name|requireNonNull
 argument_list|(
 name|literal

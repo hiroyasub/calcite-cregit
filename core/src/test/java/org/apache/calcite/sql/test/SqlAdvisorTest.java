@@ -746,6 +746,8 @@ literal|"KEYWORD(CURSOR)"
 argument_list|,
 literal|"KEYWORD(DATE)"
 argument_list|,
+literal|"KEYWORD(DATETIME)"
+argument_list|,
 literal|"KEYWORD(DENSE_RANK)"
 argument_list|,
 literal|"KEYWORD(ELEMENT)"

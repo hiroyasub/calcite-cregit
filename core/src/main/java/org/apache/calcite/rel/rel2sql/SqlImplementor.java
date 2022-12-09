@@ -8690,6 +8690,8 @@ name|SqlLiteral
 operator|.
 name|createTimestamp
 argument_list|(
+name|typeName
+argument_list|,
 name|castNonNull
 argument_list|(
 name|literal

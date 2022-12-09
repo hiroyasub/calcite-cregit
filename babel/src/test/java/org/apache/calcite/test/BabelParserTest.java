@@ -1295,6 +1295,9 @@ name|void
 name|testShortTimestampLiteral
 parameter_list|()
 block|{
+comment|// Parser doesn't actually check the contents of the string. The validator
+comment|// will convert it to '1969-07-20 00:00:00', when it has decided that
+comment|// TIMESTAMP maps to the TIMESTAMP type.
 name|sql
 argument_list|(
 literal|"select timestamp '1969-07-20'"
@@ -1302,7 +1305,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT TIMESTAMP '1969-07-20 00:00:00'"
+literal|"SELECT TIMESTAMP '1969-07-20'"
 argument_list|)
 expr_stmt|;
 comment|// PostgreSQL allows the following. We should too.
@@ -1311,27 +1314,21 @@ argument_list|(
 literal|"select ^timestamp '1969-07-20 1:2'^"
 argument_list|)
 operator|.
-name|fails
+name|ok
 argument_list|(
-literal|"Illegal TIMESTAMP literal '1969-07-20 1:2': not in format "
-operator|+
-literal|"'yyyy-MM-dd HH:mm:ss'"
+literal|"SELECT TIMESTAMP '1969-07-20 1:2'"
 argument_list|)
 expr_stmt|;
-comment|// PostgreSQL gives 1969-07-20 01:02:00
 name|sql
 argument_list|(
 literal|"select ^timestamp '1969-07-20:23:'^"
 argument_list|)
 operator|.
-name|fails
+name|ok
 argument_list|(
-literal|"Illegal TIMESTAMP literal '1969-07-20:23:': not in format "
-operator|+
-literal|"'yyyy-MM-dd HH:mm:ss'"
+literal|"SELECT TIMESTAMP '1969-07-20:23:'"
 argument_list|)
 expr_stmt|;
-comment|// PostgreSQL gives 1969-07-20 23:00:00
 block|}
 comment|/** Tests parsing PostgreSQL-style "::" cast operator. */
 annotation|@

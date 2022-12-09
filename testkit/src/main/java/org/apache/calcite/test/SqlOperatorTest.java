@@ -54608,6 +54608,11 @@ name|SqlLiteral
 operator|.
 name|createTimestamp
 argument_list|(
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+argument_list|,
 name|ts
 argument_list|,
 name|type

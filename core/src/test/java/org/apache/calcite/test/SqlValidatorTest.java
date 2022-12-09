@@ -1578,6 +1578,107 @@ literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests that date-time literals with invalid strings are considered invalid.    * Originally the parser did that checking, but now the parser creates a    * {@link org.apache.calcite.sql.SqlUnknownLiteral} and the checking is    * deferred to the validator. */
+annotation|@
+name|Test
+name|void
+name|testLiteral
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"^DATE '12/21/99'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Illegal DATE literal.*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"^TIME '1230:33'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Illegal TIME literal.*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"^TIME '12:00:00 PM'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Illegal TIME literal.*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"^TIMESTAMP '12-21-99, 12:30:00'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Illegal TIMESTAMP literal.*"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"^TIMESTAMP WITH LOCAL TIME ZONE '12-21-99, 12:30:00'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Illegal TIMESTAMP WITH LOCAL TIME ZONE literal.*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** PostgreSQL and Redshift allow TIMESTAMP literals that contain only a    * date part. */
+annotation|@
+name|Test
+name|void
+name|testShortTimestampLiteral
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select timestamp '1969-07-20'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// PostgreSQL allows the following. We should too.
+name|sql
+argument_list|(
+literal|"select ^timestamp '1969-07-20 1:2'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal TIMESTAMP literal '1969-07-20 1:2': not in format "
+operator|+
+literal|"'yyyy-MM-dd HH:mm:ss'"
+argument_list|)
+expr_stmt|;
+comment|// PostgreSQL gives 1969-07-20 01:02:00
+name|sql
+argument_list|(
+literal|"select ^timestamp '1969-07-20:23:'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal TIMESTAMP literal '1969-07-20:23:': not in format "
+operator|+
+literal|"'yyyy-MM-dd HH:mm:ss'"
+argument_list|)
+expr_stmt|;
+comment|// PostgreSQL gives 1969-07-20 23:00:00
+block|}
 annotation|@
 name|Test
 name|void
