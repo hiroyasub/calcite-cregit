@@ -465,6 +465,9 @@ return|;
 case|case
 name|TIMESTAMP
 case|:
+case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
+case|:
 name|Timestamp
 name|timestamp
 init|=

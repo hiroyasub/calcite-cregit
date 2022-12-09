@@ -28116,20 +28116,20 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Have to quote the "DATE" function because we're not using the Babel
-comment|// parser. In the regular parser, DATE is a reserved keyword.
+comment|// DATE is a reserved keyword, but the parser has special treatment to
+comment|// allow it as a function.
 name|f
 operator|.
 name|checkNull
 argument_list|(
-literal|"\"DATE\"(null)"
+literal|"DATE(null)"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
 name|checkScalar
 argument_list|(
-literal|"\"DATE\"('1985-12-06')"
+literal|"DATE('1985-12-06')"
 argument_list|,
 literal|"1985-12-06"
 argument_list|,

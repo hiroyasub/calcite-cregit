@@ -1256,6 +1256,20 @@ operator|.
 name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
+comment|/**    * Type-inference strategy whereby the result type of a call is TIMESTAMP    * WITH LOCAL TIME ZONE.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|TIMESTAMP_LTZ
+init|=
+name|explicit
+argument_list|(
+name|SqlTypeName
+operator|.
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Double.    */
 specifier|public
 specifier|static

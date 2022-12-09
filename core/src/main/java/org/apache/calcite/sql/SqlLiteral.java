@@ -3478,7 +3478,7 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/** Creates a TIMESTAMP or TIMESTAMP WITH TIME ZONE literal. */
+comment|/** Creates a TIMESTAMP or TIMESTAMP WITH LOCAL TIME ZONE literal. */
 specifier|public
 specifier|static
 name|SqlTimestampLiteral

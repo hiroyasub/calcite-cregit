@@ -525,7 +525,7 @@ literal|false
 argument_list|,
 name|Types
 operator|.
-name|OTHER
+name|TIMESTAMP
 argument_list|,
 name|SqlTypeFamily
 operator|.
