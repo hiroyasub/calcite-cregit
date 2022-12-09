@@ -10760,10 +10760,8 @@ argument_list|(
 literal|"'\\'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'\\'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -12532,10 +12530,8 @@ argument_list|(
 literal|"`x``y``z`"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"`x``y``z`"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|f
 operator|.
@@ -15573,10 +15569,8 @@ argument_list|(
 literal|"'2004-06-01'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'2004-06-01'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -15609,30 +15603,24 @@ argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.1234'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIMESTAMP '2004-06-01 15:55:55.1234'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.1236'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIMESTAMP '2004-06-01 15:55:55.1236'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.9999'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIMESTAMP '2004-06-01 15:55:55.9999'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -15654,20 +15642,16 @@ argument_list|(
 literal|"'abba'\n'abba'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'abba'\n'abba'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"'abba'\n'0001'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'abba'\n'0001'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -17350,10 +17334,8 @@ argument_list|(
 literal|"1"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"1"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -17370,10 +17352,8 @@ argument_list|(
 literal|"-1"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"-1"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -17390,20 +17370,16 @@ argument_list|(
 literal|"1.0"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"1.0"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"-3.2"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"-3.2"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -17430,20 +17406,16 @@ argument_list|(
 literal|"2500000000"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"2500000000"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"5000000000"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"5000000000"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// Approximates
 name|expr
@@ -17926,40 +17898,32 @@ argument_list|(
 literal|"'a''b'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'a''b'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"'''x'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'''x'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"''"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"''"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"'Quoted strings aren''t \"hard\"'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'Quoted strings aren''t \"hard\"'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -21408,10 +21372,8 @@ argument_list|(
 literal|"'boring string'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'boring string'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -21428,10 +21390,8 @@ argument_list|(
 literal|"'three'\n' blind'\n' mice'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'three'\n' blind'\n' mice'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -21479,20 +21439,16 @@ argument_list|(
 literal|"'foo\rbar'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'foo\rbar'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"'foo\nbar'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'foo\nbar'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -21505,10 +21461,8 @@ argument_list|(
 literal|false
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"'foo\r\nbar'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -22554,10 +22508,8 @@ argument_list|(
 literal|"CURRENT_TIME(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CURRENT_TIME(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// checkFails("SELECT CURRENT_TIME() FROM foo",
 comment|//     "SELECT CURRENT_TIME() FROM `FOO`");
@@ -22566,10 +22518,8 @@ argument_list|(
 literal|"CURRENT_TIME"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CURRENT_TIME"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22587,10 +22537,8 @@ argument_list|(
 literal|"LOCALTIME(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"LOCALTIME(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// checkFails("SELECT LOCALTIME() FROM foo",
 comment|//     "SELECT LOCALTIME() FROM `FOO`");
@@ -22599,10 +22547,8 @@ argument_list|(
 literal|"LOCALTIME"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"LOCALTIME"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22620,10 +22566,8 @@ argument_list|(
 literal|"LOCALTIMESTAMP(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"LOCALTIMESTAMP(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// checkFails("SELECT LOCALTIMESTAMP() FROM foo",
 comment|//     "SELECT LOCALTIMESTAMP() FROM `FOO`");
@@ -22632,10 +22576,8 @@ argument_list|(
 literal|"LOCALTIMESTAMP"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"LOCALTIMESTAMP"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22653,10 +22595,8 @@ argument_list|(
 literal|"CURRENT_DATE(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CURRENT_DATE(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// checkFails("SELECT CURRENT_DATE() FROM foo",
 comment|//     "SELECT CURRENT_DATE() FROM `FOO`");
@@ -22665,10 +22605,8 @@ argument_list|(
 literal|"CURRENT_DATE"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CURRENT_DATE"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// checkFails("SELECT CURRENT_DATE(x+y) FROM foo",
 comment|//     "CURRENT_DATE((`X` + `Y`))");
@@ -22678,10 +22616,8 @@ argument_list|(
 literal|"CURRENT_TIMESTAMP(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CURRENT_TIMESTAMP(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// checkFails("SELECT CURRENT_TIMESTAMP() FROM foo",
 comment|//     "SELECT CURRENT_TIMESTAMP() FROM `FOO`");
@@ -22690,10 +22626,8 @@ argument_list|(
 literal|"CURRENT_TIMESTAMP"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CURRENT_TIMESTAMP"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22711,10 +22645,8 @@ argument_list|(
 literal|"DATE '2004-12-01'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"DATE '2004-12-01'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// Time literals
 name|expr
@@ -22722,10 +22654,8 @@ argument_list|(
 literal|"TIME '12:01:01'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIME '12:01:01'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
@@ -22742,30 +22672,24 @@ argument_list|(
 literal|"TIME '12:01:01.000'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIME '12:01:01.000'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"TIME '12:01:01.001'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIME '12:01:01.001'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"TIME '12:01:01.01023456789'"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"TIME '12:01:01.01023456789'"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// Timestamp literals
 name|expr
@@ -22872,20 +22796,16 @@ argument_list|(
 literal|"CAST('2001-12-21' AS DATE)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CAST('2001-12-21' AS DATE)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"CAST(12 AS DATE)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"CAST(12 AS DATE)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
@@ -27419,60 +27339,48 @@ argument_list|(
 literal|"INTERVAL '-' YEAR"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '-' YEAR"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '1-2' YEAR"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '1-2' YEAR"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '1.2' YEAR"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '1.2' YEAR"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '1 2' YEAR"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '1 2' YEAR"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '1-2' YEAR(2)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '1-2' YEAR(2)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL 'bogus text' YEAR"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL 'bogus text' YEAR"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// negative field values
 name|expr
@@ -27480,10 +27388,8 @@ argument_list|(
 literal|"INTERVAL '--1' YEAR"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '--1' YEAR"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// Field value out of range
 comment|//  (default, explicit default, alt, neg alt, max, neg max)
@@ -27502,50 +27408,40 @@ argument_list|(
 literal|"INTERVAL '100' YEAR(2)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '100' YEAR(2)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '1000' YEAR(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '1000' YEAR(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '-1000' YEAR(3)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '-1000' YEAR(3)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '2147483648' YEAR(10)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '2147483648' YEAR(10)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '-2147483648' YEAR(10)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '-2147483648' YEAR(10)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// precision> maximum
 name|expr
@@ -27553,10 +27449,8 @@ argument_list|(
 literal|"INTERVAL '1' YEAR(11)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '1' YEAR(11)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 comment|// precision< minimum allowed)
 comment|// note: parser will catch negative values, here we
@@ -27566,10 +27460,8 @@ argument_list|(
 literal|"INTERVAL '0' YEAR(0)"
 argument_list|)
 operator|.
-name|ok
-argument_list|(
-literal|"INTERVAL '0' YEAR(0)"
-argument_list|)
+name|same
+argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Runs tests for INTERVAL... YEAR TO MONTH that should pass parser but fail    * validator. A substantially identical set of tests exists in    * SqlValidatorTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXFailsValidation() tests.    */
