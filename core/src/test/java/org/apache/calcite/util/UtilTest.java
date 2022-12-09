@@ -6516,7 +6516,7 @@ name|Integer
 argument_list|>
 name|map
 init|=
-name|ImmutableMap
+name|Compatible
 operator|.
 name|copyOf
 argument_list|(

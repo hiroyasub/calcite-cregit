@@ -347,6 +347,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|errorprone
+operator|.
+name|annotations
+operator|.
+name|CanIgnoreReturnValue
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|apiguardian
@@ -1096,6 +1110,18 @@ operator|.
 name|Nullness
 operator|.
 name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -4211,6 +4237,39 @@ name|e
 argument_list|)
 return|;
 block|}
+comment|/** Until we upgrade to Guava 19. */
+annotation|@
+name|CanIgnoreReturnValue
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|verifyNotNull
+parameter_list|(
+annotation|@
+name|Nullable
+name|T
+name|reference
+parameter_list|)
+block|{
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"Remove when minimum Guava version is 17"
+argument_list|)
+expr_stmt|;
+return|return
+name|requireNonNull
+argument_list|(
+name|reference
+argument_list|,
+literal|"expected a non-null reference"
+argument_list|)
+return|;
+block|}
 comment|/** As {@link Throwables}{@code .throwIfUnchecked(Throwable)},    * which was introduced in Guava 20,    * but we don't require Guava version 20 yet. */
 specifier|public
 specifier|static
@@ -4228,8 +4287,6 @@ argument_list|(
 literal|"Remove when minimum Guava version is 20"
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|throwable
@@ -6019,8 +6076,6 @@ block|{
 name|String
 name|value
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|matcher

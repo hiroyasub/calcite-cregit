@@ -779,22 +779,6 @@ end_import
 
 begin_import
 import|import static
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Verify
-operator|.
-name|verifyNotNull
-import|;
-end_import
-
-begin_import
-import|import static
 name|org
 operator|.
 name|apache
@@ -806,6 +790,22 @@ operator|.
 name|Nullness
 operator|.
 name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+operator|.
+name|verifyNotNull
 import|;
 end_import
 
