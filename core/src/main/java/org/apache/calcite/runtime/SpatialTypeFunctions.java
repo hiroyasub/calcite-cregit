@@ -915,6 +915,22 @@ name|fromWkt
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
+import|;
+end_import
+
 begin_comment
 comment|/**  * Helper methods to implement spatial type (ST) functions in generated code.  *  *<p>Remaining tasks:  *  *<ul>  *<li>Determine type code for  *   {@link org.apache.calcite.sql.type.ExtraSqlTypes#GEOMETRY}  *<li>Should we create aliases for functions in upper-case?  *   Without ST_ prefix?  *<li>Consider adding spatial literals, e.g. `GEOMETRY 'POINT (30 10)'`  *<li>Integer arguments, e.g. SELECT ST_MakePoint(1, 2, 1.5),  *     ST_MakePoint(1, 2)  *<li>Are GEOMETRY values comparable? If so add ORDER BY test  *<li>We have to add 'Z' to create 3D objects. This is inconsistent with  *   PostGIS. Who is right? At least document the difference.  *<li>Should add GeometryEngine.intersects; similar to disjoint etc.  *<li>Make {@link #ST_MakeLine(Geometry, Geometry)} varargs</li>  *</ul>  */
 end_comment
@@ -5641,6 +5657,8 @@ name|int
 name|srid
 parameter_list|)
 block|{
+try|try
+block|{
 name|ProjectionTransformer
 name|projectionTransformer
 init|=
@@ -5663,6 +5681,23 @@ argument_list|(
 name|geom
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|IllegalStateException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|RESOURCE
+operator|.
+name|proj4jEpsgIsMissing
+argument_list|()
+operator|.
+name|ex
+argument_list|()
+throw|;
+block|}
 block|}
 comment|/**    * Returns a copy of {@code geom} with a new SRID.    */
 specifier|public

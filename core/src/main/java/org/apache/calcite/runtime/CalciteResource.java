@@ -301,6 +301,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Proj4J EPSG is missing from the classpath; to resolve this problem, download the EPSG data set and agree to its terms of use"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|proj4jEpsgIsMissing
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Illegal INTERVAL literal {0}; at {1}"
 argument_list|)
 annotation|@
