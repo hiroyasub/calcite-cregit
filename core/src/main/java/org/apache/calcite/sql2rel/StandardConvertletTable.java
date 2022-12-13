@@ -1230,6 +1230,17 @@ operator|.
 name|MOD
 argument_list|)
 expr_stmt|;
+name|addAlias
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|IFNULL
+argument_list|,
+name|SqlLibraryOperators
+operator|.
+name|NVL
+argument_list|)
+expr_stmt|;
 comment|// Register convertlets for specific objects.
 name|registerOp
 argument_list|(
@@ -2319,7 +2330,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Converts a call to the NVL function. */
+comment|/** Converts a call to the {@code NVL} function (and also its synonym,    * {@code IFNULL}). */
 specifier|private
 specifier|static
 name|RexNode

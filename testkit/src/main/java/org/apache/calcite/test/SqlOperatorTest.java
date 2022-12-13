@@ -35684,6 +35684,128 @@ literal|"nvl(CAST(NULL AS VARCHAR(6)), cast(NULL AS VARCHAR(4)))"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests {@code IFNULL}, which is a synonym for {@code NVL}, and is related to    * {@code COALESCE} but requires precisely two arguments. */
+annotation|@
+name|Test
+name|void
+name|testIfnullFunc
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|IFNULL
+argument_list|,
+name|VM_EXPAND
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"ifnull('a','b')"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"CHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"ifnull(null,'b')"
+argument_list|,
+literal|"b"
+argument_list|,
+literal|"CHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ifnull(4,3)"
+argument_list|,
+literal|4
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ifnull(null, 4)"
+argument_list|,
+literal|4
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|checkFails
+argument_list|(
+literal|"1 + ifnull('a', 1) + 2"
+argument_list|,
+literal|"Cannot infer return type for IFNULL; operand types: \\[CHAR\\(1\\), INTEGER\\]"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkType
+argument_list|(
+literal|"1 + ifnull(1, null) + 2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ifnull(1,2,3)^"
+argument_list|,
+literal|"Invalid number of arguments to function 'IFNULL'. Was expecting 2 arguments"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ifnull(1)^"
+argument_list|,
+literal|"Invalid number of arguments to function 'IFNULL'. Was expecting 2 arguments"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

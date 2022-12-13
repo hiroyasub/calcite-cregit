@@ -1174,7 +1174,7 @@ argument_list|)
 specifier|public
 specifier|static
 specifier|final
-name|SqlFunction
+name|SqlBasicFunction
 name|NVL
 init|=
 name|SqlBasicFunction
@@ -1199,6 +1199,29 @@ argument_list|,
 name|OperandTypes
 operator|.
 name|SAME_SAME
+argument_list|)
+decl_stmt|;
+comment|/** The "IFNULL(value, value)" function. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|IFNULL
+init|=
+name|NVL
+operator|.
+name|withName
+argument_list|(
+literal|"IFNULL"
 argument_list|)
 decl_stmt|;
 comment|/** The "LTRIM(string)" function. */
