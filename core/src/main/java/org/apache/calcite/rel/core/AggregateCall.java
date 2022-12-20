@@ -2252,6 +2252,15 @@ operator|==
 name|SqlKind
 operator|.
 name|PERCENTILE_DISC
+operator|||
+name|aggFunction
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|PERCENTILE_CONT
 condition|)
 block|{
 assert|assert

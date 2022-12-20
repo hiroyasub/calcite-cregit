@@ -543,6 +543,18 @@ operator|==
 name|SqlKind
 operator|.
 name|PERCENTILE_DISC
+operator|||
+name|inner
+operator|.
+name|getOperator
+argument_list|()
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|PERCENTILE_CONT
 condition|)
 block|{
 comment|// We first check the percentile call operands, and then derive the correct type using

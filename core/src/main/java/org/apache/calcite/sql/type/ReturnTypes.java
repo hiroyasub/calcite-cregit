@@ -3581,7 +3581,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlReturnTypeInference
-name|PERCENTILE_DISC
+name|PERCENTILE_DISC_CONT
 init|=
 name|opBinding
 lambda|->
