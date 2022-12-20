@@ -44862,6 +44862,405 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+name|void
+name|testTimestampSub
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIMESTAMP_SUB
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^timestamp_sub(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 5 minute)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"TIMESTAMP_SUB\\(<TIMESTAMP>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_5422_FIXED
+condition|)
+block|{
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 100000000000 microsecond)"
+argument_list|,
+literal|"2008-12-24 11:44:20"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 100000000 millisecond)"
+argument_list|,
+literal|"2008-12-24 11:44:20"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 2 second)"
+argument_list|,
+literal|"2016-02-24 12:42:23"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 2 minute)"
+argument_list|,
+literal|"2016-02-24 12:40:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 2000 hour)"
+argument_list|,
+literal|"2015-12-03 04:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 1 day)"
+argument_list|,
+literal|"2016-02-23 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 1 month)"
+argument_list|,
+literal|"2016-01-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 1 year)"
+argument_list|,
+literal|"2015-02-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestamp_sub(CAST(NULL AS TIMESTAMP), interval 5 minute)"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testTimeSub
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIME_SUB
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^time_sub(time '15:30:00', "
+operator|+
+literal|"interval 5 minute)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"TIME_SUB\\(<TIME>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_5422_FIXED
+condition|)
+block|{
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '15:30:00', "
+operator|+
+literal|"interval 100000000000 microsecond)"
+argument_list|,
+literal|"11:44:20"
+argument_list|,
+literal|"TIME(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '15:30:00', "
+operator|+
+literal|"interval 100000000 millisecond)"
+argument_list|,
+literal|"11:44:20"
+argument_list|,
+literal|"TIME(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '12:42:25', interval 2 second)"
+argument_list|,
+literal|"12:42:23"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '12:42:25', interval 2 minute)"
+argument_list|,
+literal|"12:40:25"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '12:42:25', interval 0 minute)"
+argument_list|,
+literal|"12:42:25"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '12:42:25', interval 20 hour)"
+argument_list|,
+literal|"16:42:25"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_sub(time '12:34:45', interval -5 second)"
+argument_list|,
+literal|"12:34:50"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"time_sub(CAST(NULL AS TIME), interval 5 minute)"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testDateSub
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATE_SUB
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^date_sub(date '2008-12-25', "
+operator|+
+literal|"interval 5 day)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"DATE_SUB\\(<DATE>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_sub(date '2016-02-24', interval 2 day)"
+argument_list|,
+literal|"2016-02-22"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_sub(date '2016-02-24', interval 3 month)"
+argument_list|,
+literal|"2015-11-24"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_sub(date '2016-02-24', interval 5 year)"
+argument_list|,
+literal|"2011-02-24"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"date_sub(CAST(NULL AS DATE), interval 5 day)"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/** The {@code DATEDIFF} function is implemented in the Babel parser but not    * the Core parser, and therefore gives validation errors. */
 end_comment

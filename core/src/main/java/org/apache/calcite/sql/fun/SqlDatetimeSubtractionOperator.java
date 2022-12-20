@@ -131,7 +131,7 @@ name|sql
 operator|.
 name|type
 operator|.
-name|ReturnTypes
+name|SqlReturnTypeInference
 import|;
 end_import
 
@@ -152,7 +152,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A special operator for the subtraction of two DATETIMEs. The format of  * DATETIME subtraction is:  *  *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"  *&lt;interval qualifier&gt;</code></blockquote>  *  *<p>This operator is special since it needs to hold the  * additional interval qualifier specification, when in {@link SqlCall} form.  * In {@link org.apache.calcite.rex.RexNode} form, it has only two parameters,  * and the return type describes the desired type of interval.  */
+comment|/**  * A special operator for the subtraction of two DATETIMEs. The format of  * DATETIME subtraction is:  *  *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"  *&lt;interval qualifier&gt;</code></blockquote>  *  *<p>This operator is special since it needs to hold the  * additional interval qualifier specification, when in {@link SqlCall} form.  * In {@link org.apache.calcite.rex.RexNode} form, it has only two parameters,  * and the return type describes the desired type of interval.  *  *<p>When being used for BigQuery's {@code TIMESTAMP_SUB}, {@code TIME_SUB},  * and {@code DATE_SUB} operators, this operator subtracts an interval value  * from a timestamp value. The return type differs due to differing number of  * parameters and ordering. This is accounted for by passing in a  * {@link SqlReturnTypeInference} which is passed in by  * the standard {@link SqlStdOperatorTable#MINUS_DATE MINUS_DATE}  * and the library {@link SqlInternalOperators#MINUS_DATE2 MINUS_DATE2}  * operators at their respective initializations.  */
 end_comment
 
 begin_class
@@ -165,7 +165,13 @@ block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlDatetimeSubtractionOperator
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|SqlReturnTypeInference
+name|returnTypeInference
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -179,9 +185,7 @@ literal|40
 argument_list|,
 literal|true
 argument_list|,
-name|ReturnTypes
-operator|.
-name|ARG2_NULLABLE
+name|returnTypeInference
 argument_list|,
 name|InferTypes
 operator|.

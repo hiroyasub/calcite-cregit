@@ -4200,7 +4200,13 @@ name|MINUS_DATE
 init|=
 operator|new
 name|SqlDatetimeSubtractionOperator
-argument_list|()
+argument_list|(
+literal|"-"
+argument_list|,
+name|ReturnTypes
+operator|.
+name|ARG2_NULLABLE
+argument_list|)
 decl_stmt|;
 comment|/**    * The MULTISET Value Constructor. e.g. "<code>MULTISET[1,2,3]</code>".    */
 specifier|public

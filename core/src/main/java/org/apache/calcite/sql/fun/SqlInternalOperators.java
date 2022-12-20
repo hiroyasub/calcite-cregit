@@ -608,6 +608,23 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/** 2-argument form of the special minus-date operator    * to be used with BigQuery subtraction functions. It differs from    * the standard MINUS_DATE operator in that it has 2 arguments,    * and subtracts an interval from a datetime. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlDatetimeSubtractionOperator
+name|MINUS_DATE2
+init|=
+operator|new
+name|SqlDatetimeSubtractionOperator
+argument_list|(
+literal|"MINUS_DATE2"
+argument_list|,
+name|ReturnTypes
+operator|.
+name|ARG0_NULLABLE
+argument_list|)
+decl_stmt|;
 comment|/** Offset operator is ONLY used for its precedence during unparsing. */
 specifier|public
 specifier|static

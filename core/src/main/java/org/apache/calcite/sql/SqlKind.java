@@ -404,14 +404,23 @@ block|,
 comment|/** {@code LEAST} function (Oracle). */
 name|LEAST
 block|,
+comment|/** {@code DATE_SUB} function (BigQuery). */
+name|DATE_SUB
+block|,
+comment|/** {@code TIME_ADD} function (BigQuery). */
+name|TIME_ADD
+block|,
+comment|/** {@code TIME_SUB} function (BigQuery). */
+name|TIME_SUB
+block|,
 comment|/** {@code TIMESTAMP_ADD} function (ODBC, SQL Server, MySQL). */
 name|TIMESTAMP_ADD
 block|,
 comment|/** {@code TIMESTAMP_DIFF} function (ODBC, SQL Server, MySQL). */
 name|TIMESTAMP_DIFF
 block|,
-comment|/** {@code TIME_ADD} function (BigQuery semantics). */
-name|TIME_ADD
+comment|/** {@code TIMESTAMP_SUB} function (BigQuery). */
+name|TIMESTAMP_SUB
 block|,
 comment|// prefix operators
 comment|/** Logical {@code NOT} operator. */
@@ -1290,11 +1299,17 @@ name|FLOOR
 argument_list|,
 name|CEIL
 argument_list|,
+name|DATE_SUB
+argument_list|,
+name|TIME_ADD
+argument_list|,
+name|TIME_SUB
+argument_list|,
 name|TIMESTAMP_ADD
 argument_list|,
 name|TIMESTAMP_DIFF
 argument_list|,
-name|TIME_ADD
+name|TIMESTAMP_SUB
 argument_list|,
 name|EXTRACT
 argument_list|,
