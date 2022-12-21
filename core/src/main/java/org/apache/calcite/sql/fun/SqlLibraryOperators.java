@@ -1224,6 +1224,31 @@ argument_list|(
 literal|"IFNULL"
 argument_list|)
 decl_stmt|;
+comment|/** The "LENGTH(string)" function. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|LENGTH
+init|=
+name|SqlStdOperatorTable
+operator|.
+name|CHAR_LENGTH
+operator|.
+name|withName
+argument_list|(
+literal|"LENGTH"
+argument_list|)
+decl_stmt|;
 comment|/** The "LTRIM(string)" function. */
 annotation|@
 name|LibraryOperator

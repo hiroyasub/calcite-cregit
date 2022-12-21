@@ -1177,6 +1177,17 @@ comment|// Register aliases (operators which have a different name but
 comment|// identical behavior to other operators).
 name|addAlias
 argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|LENGTH
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|CHAR_LENGTH
+argument_list|)
+expr_stmt|;
+name|addAlias
+argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|CHARACTER_LENGTH
