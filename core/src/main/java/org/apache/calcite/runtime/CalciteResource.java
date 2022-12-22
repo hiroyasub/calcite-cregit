@@ -4127,6 +4127,30 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|illegalNegativePadLength
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Third argument (pad pattern) for LPAD/RPAD must not be empty"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|illegalEmptyPadPattern
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Substring error: negative substring length not allowed"
 argument_list|)
 name|ExInst

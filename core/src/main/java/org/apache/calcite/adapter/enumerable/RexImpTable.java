@@ -2027,6 +2027,24 @@ name|fun
 operator|.
 name|SqlLibraryOperators
 operator|.
+name|LPAD
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
 name|MD5
 import|;
 end_import
@@ -2154,6 +2172,24 @@ operator|.
 name|SqlLibraryOperators
 operator|.
 name|RLIKE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
+name|RPAD
 import|;
 end_import
 
@@ -5917,6 +5953,36 @@ argument_list|,
 name|NullPolicy
 operator|.
 name|ANY
+argument_list|)
+expr_stmt|;
+name|defineMethod
+argument_list|(
+name|LPAD
+argument_list|,
+name|BuiltInMethod
+operator|.
+name|LPAD
+operator|.
+name|method
+argument_list|,
+name|NullPolicy
+operator|.
+name|STRICT
+argument_list|)
+expr_stmt|;
+name|defineMethod
+argument_list|(
+name|RPAD
+argument_list|,
+name|BuiltInMethod
+operator|.
+name|RPAD
+operator|.
+name|method
+argument_list|,
+name|NullPolicy
+operator|.
+name|STRICT
 argument_list|)
 expr_stmt|;
 name|defineMethod
@@ -15347,7 +15413,7 @@ name|WinAggResultContext
 name|result
 parameter_list|)
 block|{
-comment|// Window cannot be empty since ROWS/RANGE is not possible for ROW_NUMBER
+comment|// Window must not be empty since ROWS/RANGE is not possible for ROW_NUMBER
 return|return
 name|Expressions
 operator|.

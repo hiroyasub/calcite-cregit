@@ -33293,6 +33293,374 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testLpadFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|LPAD
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|check
+argument_list|(
+literal|"select lpad('12345', 8, 'a')"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|,
+literal|"aaa12345"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad('12345', 8)"
+argument_list|,
+literal|"   12345"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad('12345', 8, 'ab')"
+argument_list|,
+literal|"aba12345"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad('12345', 3, 'a')"
+argument_list|,
+literal|"123"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"lpad('12345', -3, 'a')"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"lpad('12345', -3)"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"lpad('12345', 3, '')"
+argument_list|,
+literal|"Third argument (pad pattern) for LPAD/RPAD must not be empty"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad(x'aa', 4, x'bb')"
+argument_list|,
+literal|"bbbbbbaa"
+argument_list|,
+literal|"VARBINARY(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad(x'aa', 4)"
+argument_list|,
+literal|"202020aa"
+argument_list|,
+literal|"VARBINARY(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad(x'aaaaaa', 2)"
+argument_list|,
+literal|"aaaa"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"lpad(x'aaaaaa', 2, x'bb')"
+argument_list|,
+literal|"aaaa"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"lpad(x'aa', -3, x'bb')"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"lpad(x'aa', -3)"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"lpad(x'aa', 3, x'')"
+argument_list|,
+literal|"Third argument (pad pattern) for LPAD/RPAD must not be empty"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testRpadFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|RPAD
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|check
+argument_list|(
+literal|"select rpad('12345', 8, 'a')"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|,
+literal|"12345aaa"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad('12345', 8)"
+argument_list|,
+literal|"12345   "
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad('12345', 8, 'ab')"
+argument_list|,
+literal|"12345aba"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad('12345', 3, 'a')"
+argument_list|,
+literal|"123"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"rpad('12345', -3, 'a')"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"rpad('12345', -3)"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"rpad('12345', 3, '')"
+argument_list|,
+literal|"Third argument (pad pattern) for LPAD/RPAD must not be empty"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad(x'aa', 4, x'bb')"
+argument_list|,
+literal|"aabbbbbb"
+argument_list|,
+literal|"VARBINARY(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad(x'aa', 4)"
+argument_list|,
+literal|"aa202020"
+argument_list|,
+literal|"VARBINARY(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad(x'aaaaaa', 2)"
+argument_list|,
+literal|"aaaa"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkString
+argument_list|(
+literal|"rpad(x'aaaaaa', 2, x'bb')"
+argument_list|,
+literal|"aaaa"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"rpad(x'aa', -3, x'bb')"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"rpad(x'aa', -3)"
+argument_list|,
+literal|"Second argument for LPAD/RPAD must not be negative"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"rpad(x'aa', 3, x'')"
+argument_list|,
+literal|"Third argument (pad pattern) for LPAD/RPAD must not be empty"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testStartsWithFunction
 parameter_list|()
 block|{
