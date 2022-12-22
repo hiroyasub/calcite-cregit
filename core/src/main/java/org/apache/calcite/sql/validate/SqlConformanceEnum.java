@@ -471,6 +471,9 @@ case|case
 name|BABEL
 case|:
 case|case
+name|BIG_QUERY
+case|:
+case|case
 name|MYSQL_5
 case|:
 case|case
@@ -541,6 +544,9 @@ name|BABEL
 case|:
 case|case
 name|LENIENT
+case|:
+case|case
+name|BIG_QUERY
 case|:
 case|case
 name|MYSQL_5
