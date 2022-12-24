@@ -3618,7 +3618,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-comment|/** The "TIMESTAMP_ADD(timestamp_expression, interval_expression)" function    * (BigQuery), the two-argument variant of the built-in    * {@link SqlStdOperatorTable#TIMESTAMP_ADD TIMESTAMPADD} function, which has    * three arguments.    *    *<p>In BigQuery, the syntax is "TIMESTAMP_ADD(timestamp_expression, INTERVAL    * int64_expression date_part)" but in Calcite the second argument can be any    * interval expression, not just an interval literal. */
+comment|/** The "TIMESTAMP_ADD(timestamp, interval)" function (BigQuery), the    * two-argument variant of the built-in    * {@link SqlStdOperatorTable#TIMESTAMP_ADD TIMESTAMPADD} function, which has    * three arguments.    *    *<p>In BigQuery, the syntax is "TIMESTAMP_ADD(timestamp, INTERVAL    * int64_expression date_part)" but in Calcite the second argument can be any    * interval expression, not just an interval literal. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -3658,7 +3658,7 @@ operator|.
 name|TIMEDATE
 argument_list|)
 decl_stmt|;
-comment|/** The "TIMESTAMP_DIFF(timestamp_expression, timestamp_expression, date_time_part)"    * function (BigQuery) returns the number of date_time_part between the two timestamp    * expressions.    *    *<p>TIMESTAMP_DIFF(t1, t2, unit) is equivalent to TIMESTAMPDIFF(</p>*/
+comment|/** The "TIMESTAMP_DIFF(timestamp, timestamp, timeUnit)" function (BigQuery);    * returns the number of timeUnit between the two timestamp expressions.    *    *<p>{@code TIMESTAMP_DIFF(t1, t2, unit)} is equivalent to    * {@code TIMESTAMPDIFF(unit, t2, t1)} and {@code (t1 - t2) unit}. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -3697,7 +3697,86 @@ name|ANY
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/** The "TIME_TRUNC(time_expression, time_part)" function (BigQuery);    * truncates a TIME value to the granularity of time_part. The TIME value is    * always rounded to the beginning of time_part. */
+comment|/** The "TIME_ADD(time, interval)" function (BigQuery);    * adds interval expression to the specified time expression. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|TIME_ADD
+init|=
+name|SqlBasicFunction
+operator|.
+name|create
+argument_list|(
+name|SqlKind
+operator|.
+name|TIME_ADD
+argument_list|,
+name|ReturnTypes
+operator|.
+name|ARG0_NULLABLE
+argument_list|,
+name|OperandTypes
+operator|.
+name|TIME_INTERVAL
+argument_list|)
+operator|.
+name|withFunctionType
+argument_list|(
+name|SqlFunctionCategory
+operator|.
+name|TIMEDATE
+argument_list|)
+decl_stmt|;
+comment|/** The "TIME_DIFF(time, time, timeUnit)" function (BigQuery);    * returns the number of timeUnit between the two time expressions. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|TIME_DIFF
+init|=
+operator|new
+name|SqlTimestampDiffFunction
+argument_list|(
+literal|"TIME_DIFF"
+argument_list|,
+name|OperandTypes
+operator|.
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|TIME
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|TIME
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|ANY
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|/** The "TIME_TRUNC(time, timeUnit)" function (BigQuery);    * truncates a TIME value to the beginning of a timeUnit. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -3746,7 +3825,7 @@ operator|.
 name|TIMEDATE
 argument_list|)
 decl_stmt|;
-comment|/** The "TIMESTAMP_TRUNC(timestamp_expression, date_time_part[, time_zone])"    * function (BigQuery); truncates a TIMESTAMP value to the granularity of    * date_time_part. The TIMESTAMP value is always rounded to the beginning of    * date_time_part. */
+comment|/** The "TIMESTAMP_TRUNC(timestamp, timeUnit[, timeZone])" function (BigQuery);    * truncates a TIMESTAMP value to the beginning of a timeUnit. */
 annotation|@
 name|LibraryOperator
 argument_list|(

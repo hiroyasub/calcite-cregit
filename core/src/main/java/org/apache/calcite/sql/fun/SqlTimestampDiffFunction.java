@@ -241,12 +241,15 @@ operator|.
 name|getTypeFactory
 argument_list|()
 decl_stmt|;
+specifier|final
 name|TimeUnit
 name|timeUnit
 decl_stmt|;
+specifier|final
 name|RelDataType
 name|type1
 decl_stmt|;
+specifier|final
 name|RelDataType
 name|type2
 decl_stmt|;
@@ -435,14 +438,15 @@ argument_list|)
 expr_stmt|;
 comment|// This is either a time unit or a time frame:
 comment|//
-comment|//  * In "TIMESTAMPDIFF(YEAR, timestamp1, timestamp2)" operand 0 is a SqlIntervalQualifier
-comment|//    with startUnit = YEAR and timeFrameName = null. The same is true for BigQuery's
-comment|//    TIMESTAMP_DIFF() however the SqlIntervalQualifier is operand 2 due to differing
-comment|//    parameter orders.
+comment|//  * In "TIMESTAMPDIFF(YEAR, timestamp1, timestamp2)" operand 0 is a
+comment|//    SqlIntervalQualifier with startUnit = YEAR and timeFrameName = null.
+comment|//    The same is true for BigQuery's TIMESTAMP_DIFF(), however the
+comment|//    SqlIntervalQualifier is operand 2 due to differing parameter orders.
 comment|//
-comment|//  * In "TIMESTAMP_ADD(MINUTE15, timestamp1, timestamp2) operand 0 is a SqlIntervalQualifier
-comment|//    with startUnit = EPOCH and timeFrameName = 'MINUTE15'. As above, for BigQuery's
-comment|//    TIMESTAMP_DIFF() the SqlIntervalQualifier is found in operand 2 instead.
+comment|//  * In "TIMESTAMP_ADD(MINUTE15, timestamp1, timestamp2) operand 0 is a
+comment|//    SqlIntervalQualifier with startUnit = EPOCH and timeFrameName =
+comment|//    'MINUTE15'. As above, for BigQuery's TIMESTAMP_DIFF() the
+comment|//    SqlIntervalQualifier is found in operand 2 instead.
 comment|//
 comment|// If the latter, check that timeFrameName is valid.
 if|if
@@ -461,9 +465,6 @@ name|validator
 operator|.
 name|validateTimeFrame
 argument_list|(
-operator|(
-name|SqlIntervalQualifier
-operator|)
 name|call
 operator|.
 name|operand
@@ -479,9 +480,6 @@ name|validator
 operator|.
 name|validateTimeFrame
 argument_list|(
-operator|(
-name|SqlIntervalQualifier
-operator|)
 name|call
 operator|.
 name|operand

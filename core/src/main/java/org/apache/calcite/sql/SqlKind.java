@@ -410,6 +410,9 @@ block|,
 comment|/** {@code TIMESTAMP_DIFF} function (ODBC, SQL Server, MySQL). */
 name|TIMESTAMP_DIFF
 block|,
+comment|/** {@code TIME_ADD} function (BigQuery semantics). */
+name|TIME_ADD
+block|,
 comment|// prefix operators
 comment|/** Logical {@code NOT} operator. */
 name|NOT
@@ -1290,6 +1293,8 @@ argument_list|,
 name|TIMESTAMP_ADD
 argument_list|,
 name|TIMESTAMP_DIFF
+argument_list|,
+name|TIME_ADD
 argument_list|,
 name|EXTRACT
 argument_list|,

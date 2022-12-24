@@ -44901,6 +44901,351 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Tests BigQuery's {@code TIME_ADD}, which adds an interval to a time    * expression. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testTimeAdd
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIME_ADD
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^time_add(time '15:30:00', interval 5 minute)^"
+argument_list|,
+literal|"No match found for function signature TIME_ADD\\(<TIME>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_5422_FIXED
+condition|)
+block|{
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '15:30:00', interval 5000000 millisecond)"
+argument_list|,
+literal|"15:30:05"
+argument_list|,
+literal|"TIME(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '15:30:00', interval 5000000000 microsecond)"
+argument_list|,
+literal|"15:30:05"
+argument_list|,
+literal|"TIME(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '23:59:59', interval 2 second)"
+argument_list|,
+literal|"00:00:01"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '23:59:59', interval 86402 second)"
+argument_list|,
+literal|"00:00:01"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '15:30:00', interval 5 minute)"
+argument_list|,
+literal|"15:35:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '15:30:00', interval 1445 minute)"
+argument_list|,
+literal|"15:35:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '15:30:00', interval 3 hour)"
+argument_list|,
+literal|"18:30:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_add(time '15:30:00', interval 27 hour)"
+argument_list|,
+literal|"18:30:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"time_add(cast(null as time), interval 5 minute)"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testTimeDiff
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|TIME_DIFF
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^time_diff(time '15:30:00', "
+operator|+
+literal|"time '16:30:00', "
+operator|+
+literal|"minute)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"TIME_DIFF\\(<TIME>,<TIME>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_diff(time '15:30:00', "
+operator|+
+literal|"time '15:30:05', "
+operator|+
+literal|"millisecond)"
+argument_list|,
+literal|"-5000"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|MICROSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_diff(time '15:30:00', "
+operator|+
+literal|"time '15:30:05', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-5000000"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|SECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_diff(time '15:30:00', "
+operator|+
+literal|"time '15:29:00', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"60"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_diff(time '15:30:00', "
+operator|+
+literal|"time '15:29:00', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_diff(time '15:30:00', "
+operator|+
+literal|"time '16:30:00', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time_diff(time '15:30:00', "
+operator|+
+literal|"cast(null as time), "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+name|isNullValue
+argument_list|()
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
