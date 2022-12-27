@@ -1465,6 +1465,101 @@ operator|>
 literal|0
 condition|)
 block|{
+comment|// We calculate the result in 3 cases:
+comment|// 1) If N and n are not very large values, we directly calculate
+comment|//    N * [1 - exp(n * ln(1 - 1 / N))]
+comment|// 2) If N or n are very large values, but n / N is not close to 0,
+comment|//    We compute the result by expanding the exponent n * ln(1 - 1 / N)
+comment|//    as a Taylor series.
+comment|// 3) If N or n are very large values, and n / N is close to 0,
+comment|//    we expand the whole formula as a Taylor series.
+comment|// We separate the 3 cases by trying to expand the exponent as a Taylor series.
+comment|// If the required number of terms for convergence is too big, it is case 1.
+comment|// If the required number of terms is too small, it is case 3. Otherwise,
+comment|// it is case 2.
+comment|// To expand the component as a Taylor series, we have:
+comment|// n * ln(1 - 1 / N)
+comment|//    = n * (- 1 / N - 1 / (2 * N ^ 2) - 1 / (3 * N ^ 3) - ...)
+comment|//
+comment|// To get an approximate result, we truncate the series after the first m terms.
+comment|// This leads to an error of:
+comment|// n * (1 / [(m + 1) * N ^ (m + 1)] + 1 / [(m + 2) * dSize ^ (m + 2) + ...])
+comment|//< n / (m + 1) / [N ^ m * (N - 1)]<  n / (N ^ m)
+comment|//
+comment|// To get an accurate result, the error should be smaller than 1e-16, because a
+comment|// double can represent at most 15 digits after the decimal point. Therefore, we need
+comment|// n / (N ^ m )< 1e-16, or N ^ m / n> 1e16.
+comment|//
+comment|// The smallest value of m that satisfies the above formula is the
+comment|// number of terms required for convergence.
+specifier|final
+name|int
+name|maxTerms
+init|=
+literal|32
+decl_stmt|;
+specifier|final
+name|int
+name|minTerms
+init|=
+literal|1
+decl_stmt|;
+name|int
+name|numTerms
+init|=
+literal|1
+decl_stmt|;
+if|if
+condition|(
+name|dSize
+operator|>
+literal|10
+condition|)
+block|{
+name|double
+name|dPower
+init|=
+name|dSize
+decl_stmt|;
+while|while
+condition|(
+name|dPower
+operator|/
+name|numSel
+operator|<=
+literal|1e16
+condition|)
+block|{
+name|dPower
+operator|=
+name|dPower
+operator|*
+name|dPower
+expr_stmt|;
+name|numTerms
+operator|*=
+literal|2
+expr_stmt|;
+block|}
+block|}
+else|else
+block|{
+comment|// for small dSize, force case 1
+name|numTerms
+operator|=
+name|maxTerms
+operator|+
+literal|1
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|numTerms
+operator|>
+name|maxTerms
+condition|)
+block|{
+comment|// case 1
 name|double
 name|expo
 init|=
@@ -1496,6 +1591,156 @@ operator|)
 operator|*
 name|dSize
 expr_stmt|;
+block|}
+if|else if
+condition|(
+name|numTerms
+operator|>
+name|minTerms
+condition|)
+block|{
+comment|// case 2
+name|double
+name|expo
+init|=
+literal|0
+decl_stmt|;
+name|double
+name|dPower
+init|=
+name|dSize
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|1
+init|;
+name|i
+operator|<=
+name|numTerms
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|expo
+operator|-=
+name|numSel
+operator|/
+name|dPower
+operator|/
+name|i
+expr_stmt|;
+name|dPower
+operator|*=
+name|dSize
+expr_stmt|;
+block|}
+name|res
+operator|=
+operator|(
+literal|1.0
+operator|-
+name|Math
+operator|.
+name|exp
+argument_list|(
+name|expo
+argument_list|)
+operator|)
+operator|*
+name|dSize
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// numTerms<= minTerms
+comment|// case 3
+comment|// Since the ratio n / N is close to 0, we can expand the exponent as
+comment|// n * ln(1 - 1 / N) â n * (- 1 / N) = - n / N.
+comment|// So N * [1 - (1 - 1 / N) ^ n ] = N * [1 - exp(n * ln(1 - 1 / N))]
+comment|// â N * [1 - exp(- n / N)].
+comment|// Since exp(x) = 1 + x + x ^ 2 / 2 + x ^ 3 / 6 + ..., we have
+comment|// N * [1 - exp(- n / N)] = N * [n / N - n ^ 2 / (2 * N ^ 2) + n ^ 3 / (6 * N ^ 3) - ...]
+comment|// = n - n ^ 2 / (2 * N) + n ^ 3 / (6 * N ^ 2) - ...
+comment|// Since n / N is close to 0, and due to the factorial in the denominator,
+comment|// the above series converges to 0 very quickly.
+name|res
+operator|=
+literal|0
+expr_stmt|;
+name|numTerms
+operator|=
+literal|5
+expr_stmt|;
+name|double
+name|selPower
+init|=
+name|numSel
+decl_stmt|;
+name|double
+name|domPower
+init|=
+literal|1
+decl_stmt|;
+name|int
+name|factorial
+init|=
+literal|1
+decl_stmt|;
+name|int
+name|sign
+init|=
+literal|1
+decl_stmt|;
+for|for
+control|(
+name|int
+name|i
+init|=
+literal|1
+init|;
+name|i
+operator|<
+name|numTerms
+condition|;
+name|i
+operator|++
+control|)
+block|{
+name|res
+operator|+=
+name|sign
+operator|*
+name|selPower
+operator|/
+name|factorial
+operator|/
+name|domPower
+expr_stmt|;
+name|selPower
+operator|*=
+name|numSel
+expr_stmt|;
+name|domPower
+operator|*=
+name|dSize
+expr_stmt|;
+name|factorial
+operator|*=
+name|i
+operator|+
+literal|1
+expr_stmt|;
+name|sign
+operator|*=
+operator|-
+literal|1
+expr_stmt|;
+block|}
+block|}
 block|}
 comment|// fix the boundary cases
 if|if
