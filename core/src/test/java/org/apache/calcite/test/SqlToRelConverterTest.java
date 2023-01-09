@@ -3217,6 +3217,59 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5468">[CALCITE-5468]    * SqlToRelConverter throws if ORDER BY contains IN</a>.    */
+annotation|@
+name|Test
+name|void
+name|testOrderByWithIn
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT empno\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"ORDER BY\n"
+operator|+
+literal|"CASE WHEN empno IN (1,2) THEN 0 ELSE 1 END"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testOrderByWithSubQuery
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT empno\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"ORDER BY\n"
+operator|+
+literal|"(SELECT empno FROM emp LIMIT 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
