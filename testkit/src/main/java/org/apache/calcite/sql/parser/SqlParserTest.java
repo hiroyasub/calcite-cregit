@@ -25370,9 +25370,17 @@ literal|"    \"MONTH\" \\.\\.\\.\n"
 operator|+
 literal|"    \"MONTHS\" \\.\\.\\.\n"
 operator|+
+literal|"    \"QUARTER\" \\.\\.\\.\n"
+operator|+
+literal|"    \"QUARTERS\" \\.\\.\\.\n"
+operator|+
 literal|"    \"SECOND\" \\.\\.\\.\n"
 operator|+
 literal|"    \"SECONDS\" \\.\\.\\.\n"
+operator|+
+literal|"    \"WEEK\" \\.\\.\\.\n"
+operator|+
+literal|"    \"WEEKS\" \\.\\.\\.\n"
 operator|+
 literal|"    \"YEAR\" \\.\\.\\.\n"
 operator|+
@@ -26997,16 +27005,6 @@ expr_stmt|;
 name|expr
 argument_list|(
 literal|"INTERVAL '10' ^DECADE^"
-argument_list|)
-operator|.
-name|fails
-argument_list|(
-name|ANY
-argument_list|)
-expr_stmt|;
-name|expr
-argument_list|(
-literal|"INTERVAL '4' ^QUARTER^"
 argument_list|)
 operator|.
 name|fails

@@ -45775,9 +45775,31 @@ name|f
 operator|.
 name|checkScalar
 argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 2 week)"
+argument_list|,
+literal|"2016-02-10 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
 literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 1 month)"
 argument_list|,
 literal|"2016-01-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp_sub(timestamp '2016-02-24 12:42:25', interval 1 quarter)"
+argument_list|,
+literal|"2015-11-24 12:42:25"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
@@ -46015,7 +46037,40 @@ name|f
 operator|.
 name|checkScalar
 argument_list|(
+literal|"date_sub(date '2016-02-24', interval 1 week)"
+argument_list|,
+literal|"2016-02-17"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_sub(date '2020-10-17', interval 0 week)"
+argument_list|,
+literal|"2020-10-17"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
 literal|"date_sub(date '2016-02-24', interval 3 month)"
+argument_list|,
+literal|"2015-11-24"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_sub(date '2016-02-24', interval 1 quarter)"
 argument_list|,
 literal|"2015-11-24"
 argument_list|,

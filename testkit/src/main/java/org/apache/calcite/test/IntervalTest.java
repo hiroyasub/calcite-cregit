@@ -89,6 +89,15 @@ expr_stmt|;
 name|subTestIntervalSecondPositive
 argument_list|()
 expr_stmt|;
+name|subTestIntervalWeekPositive
+argument_list|()
+expr_stmt|;
+name|subTestIntervalQuarterPositive
+argument_list|()
+expr_stmt|;
+name|subTestIntervalPlural
+argument_list|()
+expr_stmt|;
 comment|// Tests that should pass parser but fail validator
 name|subTestIntervalYearNegative
 argument_list|()
@@ -3765,6 +3774,547 @@ argument_list|(
 literal|"Interval leading field precision '0' out of range for "
 operator|+
 literal|"INTERVAL YEAR\\(0\\) TO MONTH"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Runs tests for INTERVAL... WEEK that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlValidatorTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
+specifier|public
+name|void
+name|subTestIntervalWeekPositive
+parameter_list|()
+block|{
+comment|// default precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '99' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// explicit precision equal to default
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '1' WEEK(2)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '99' WEEK(2)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// max precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '2147483647' WEEK(10)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// min precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '0' WEEK(1)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// alternate precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '1234' WEEK(4)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// sign
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '-1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL +'1' WEEK"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL +'+1' WEEK"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL +'-1' WEEK"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '-1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL -'1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL -'+1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL -'-1' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Runs tests for INTERVAL... QUARTER that should pass both parser and    * validator. A substantially identical set of tests exists in    * SqlValidatorTest, and any changes here should be synchronized there.    * Similarly, any changes to tests here should be echoed appropriately to    * each of the other 12 subTestIntervalXXXPositive() tests.    */
+specifier|public
+name|void
+name|subTestIntervalQuarterPositive
+parameter_list|()
+block|{
+comment|// default precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '99' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// explicit precision equal to default
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '1' QUARTER(2)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '99' QUARTER(2)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// max precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '2147483647' QUARTER(10)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// min precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '0' QUARTER(1)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// alternate precision
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '1234' QUARTER(4)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// sign
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '-1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL +'1' QUARTER"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL +'+1' QUARTER"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL +'-1' QUARTER"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '-1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL -'1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL -'+1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL -'-1' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|subTestIntervalPlural
+parameter_list|()
+block|{
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' SECONDS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' SECOND"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL SECOND NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' HOURS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' HOUR"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL HOUR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' DAYS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' DAY"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL DAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' WEEKS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' WEEK"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL WEEK NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' QUARTERS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' QUARTER"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL QUARTER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' MONTHS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' MONTH"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL MONTH NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|expr
+argument_list|(
+literal|"INTERVAL '+2' YEARS"
+argument_list|)
+operator|.
+name|assertParse
+argument_list|(
+literal|"INTERVAL '+2' YEAR"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTERVAL YEAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
