@@ -16842,6 +16842,9 @@ case|case
 name|YEAR
 case|:
 case|case
+name|ISOYEAR
+case|:
+case|case
 name|QUARTER
 case|:
 case|case

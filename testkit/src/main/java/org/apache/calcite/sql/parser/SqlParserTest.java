@@ -2500,6 +2500,10 @@ literal|"2014"
 argument_list|,
 literal|"c"
 argument_list|,
+literal|"FRIDAY"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"FROM"
 argument_list|,
 literal|"92"
@@ -3344,6 +3348,10 @@ argument_list|,
 literal|"2011"
 argument_list|,
 literal|"2014"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"MONDAY"
 argument_list|,
 literal|"c"
 argument_list|,
@@ -4354,6 +4362,10 @@ literal|"2014"
 argument_list|,
 literal|"c"
 argument_list|,
+literal|"SATURDAY"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"SAVEPOINT"
 argument_list|,
 literal|"99"
@@ -4772,6 +4784,10 @@ literal|"2014"
 argument_list|,
 literal|"c"
 argument_list|,
+literal|"SUNDAY"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"SYMMETRIC"
 argument_list|,
 literal|"99"
@@ -4857,6 +4873,10 @@ argument_list|,
 literal|"2011"
 argument_list|,
 literal|"2014"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"THURSDAY"
 argument_list|,
 literal|"c"
 argument_list|,
@@ -5047,6 +5067,10 @@ argument_list|,
 literal|"2011"
 argument_list|,
 literal|"2014"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"TUESDAY"
 argument_list|,
 literal|"c"
 argument_list|,
@@ -5301,6 +5325,10 @@ argument_list|,
 literal|"92"
 argument_list|,
 literal|"99"
+argument_list|,
+literal|"WEDNESDAY"
+argument_list|,
+literal|"c"
 argument_list|,
 literal|"WHEN"
 argument_list|,
@@ -27728,7 +27756,7 @@ literal|"(?s)Encountered \"to\".*"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that EXTRACT, FLOOR, CEIL functions accept abbreviations for    * time units (such as "Y" for "YEAR") when configured via    * {@link Config#timeUnitCodes()}. */
+comment|/** Tests that EXTRACT, FLOOR, CEIL, DATE_TRUNC functions accept abbreviations for    * time units (such as "Y" for "YEAR") when configured via    * {@link Config#timeUnitCodes()}. */
 annotation|@
 name|Test
 specifier|protected
@@ -27884,6 +27912,37 @@ operator|.
 name|ok
 argument_list|(
 literal|"EXTRACT(MICROSECOND FROM `D`)"
+argument_list|)
+expr_stmt|;
+comment|// As for FLOOR, so for DATE_TRUNC.
+name|expr
+argument_list|(
+literal|"date_trunc(d , year)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATE_TRUNC(`D`, YEAR)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"date_trunc(d , y)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATE_TRUNC(`D`, `Y`)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"date_trunc(d , week(tuesday))"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DATE_TRUNC(`D`, `WEEK_TUESDAY`)"
 argument_list|)
 expr_stmt|;
 block|}
