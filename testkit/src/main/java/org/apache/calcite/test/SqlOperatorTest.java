@@ -45570,6 +45570,103 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testDateTrunc
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATE_TRUNC
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"date_trunc(date '2015-02-19', ^foo^)"
+argument_list|,
+literal|"'FOO' is not a valid time frame"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_trunc(date '2015-02-19', day)"
+argument_list|,
+literal|"2015-02-19"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_trunc(date '2015-02-19', week)"
+argument_list|,
+literal|"2015-02-15"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_trunc(date '2015-02-19', month)"
+argument_list|,
+literal|"2015-02-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_trunc(date '2015-02-19', quarter)"
+argument_list|,
+literal|"2015-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date_trunc(date '2015-02-19', year)"
+argument_list|,
+literal|"2015-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testDenseRankFunc
 parameter_list|()
 block|{

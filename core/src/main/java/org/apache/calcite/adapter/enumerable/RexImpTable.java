@@ -1631,6 +1631,24 @@ name|fun
 operator|.
 name|SqlLibraryOperators
 operator|.
+name|DATE_TRUNC
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
 name|DAYNAME
 import|;
 end_import
@@ -6881,6 +6899,20 @@ argument_list|)
 expr_stmt|;
 comment|// TIMESTAMP_TRUNC and TIME_TRUNC methods are syntactic sugar for standard
 comment|// datetime FLOOR.
+name|map
+operator|.
+name|put
+argument_list|(
+name|DATE_TRUNC
+argument_list|,
+name|map
+operator|.
+name|get
+argument_list|(
+name|FLOOR
+argument_list|)
+argument_list|)
+expr_stmt|;
 name|map
 operator|.
 name|put
