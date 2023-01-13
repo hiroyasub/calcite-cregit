@@ -1010,7 +1010,7 @@ name|canCastFrom
 argument_list|(
 name|f
 operator|.
-name|sqlTimestamp
+name|sqlTimestampPrec3
 argument_list|,
 name|f
 operator|.
@@ -1042,7 +1042,7 @@ name|canCastFrom
 argument_list|(
 name|f
 operator|.
-name|sqlTimestamp
+name|sqlTimestampPrec3
 argument_list|,
 name|f
 operator|.
