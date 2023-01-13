@@ -17698,6 +17698,37 @@ name|TimeUnit
 name|timeUnit
 parameter_list|)
 block|{
+if|if
+condition|(
+name|timeUnit
+operator|.
+name|multiplier
+operator|.
+name|compareTo
+argument_list|(
+name|BigDecimal
+operator|.
+name|ONE
+argument_list|)
+operator|<
+literal|0
+condition|)
+block|{
+comment|// MICROSECOND has a multiplier of 0.001,
+comment|// NANOSECOND has a multiplier of 0.000001.
+comment|// In integer arithmetic, these underflow to zero, so we get a
+comment|// divide-by-zero exception. FLOOR and CEIL on these units should no-op.
+return|return
+name|EnumUtils
+operator|.
+name|convert
+argument_list|(
+name|operand
+argument_list|,
+name|type
+argument_list|)
+return|;
+block|}
 return|return
 name|Expressions
 operator|.

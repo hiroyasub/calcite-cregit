@@ -1107,6 +1107,18 @@ name|java
 operator|.
 name|util
 operator|.
+name|function
+operator|.
+name|UnaryOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|stream
 operator|.
 name|Collectors
@@ -1639,7 +1651,29 @@ name|registerOp
 argument_list|(
 name|SqlLibraryOperators
 operator|.
-name|DATETIME_SUB
+name|DATE_ADD
+argument_list|,
+operator|new
+name|TimestampAddConvertlet
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|registerOp
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATE_DIFF
+argument_list|,
+operator|new
+name|TimestampDiffConvertlet
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|registerOp
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATE_SUB
 argument_list|,
 operator|new
 name|TimestampSubConvertlet
@@ -1650,7 +1684,29 @@ name|registerOp
 argument_list|(
 name|SqlLibraryOperators
 operator|.
-name|DATE_SUB
+name|DATETIME_ADD
+argument_list|,
+operator|new
+name|TimestampAddConvertlet
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|registerOp
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_DIFF
+argument_list|,
+operator|new
+name|TimestampDiffConvertlet
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|registerOp
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_SUB
 argument_list|,
 operator|new
 name|TimestampSubConvertlet
@@ -11959,12 +12015,32 @@ name|SqlCall
 name|call
 parameter_list|)
 block|{
+comment|// The standard TIMESTAMPDIFF and BigQuery's TIMESTAMP_DIFF have two key
+comment|// differences. The first being the order of the subtraction, outlined
+comment|// below. The second is that BigQuery truncates each timestamp to the
+comment|// specified time unit before the difference is computed.
+comment|//
+comment|// In fact, all BigQuery functions (TIMESTAMP_DIFF, DATETIME_DIFF,
+comment|// DATE_DIFF) truncate before subtracting when applied to date intervals
+comment|// (DAY, WEEK, ISOWEEK, MONTH, YEAR, etc.)
+comment|//
+comment|// For example, if computing the number of weeks between two timestamps,
+comment|// one occurring on a Saturday and the other occurring the next day on
+comment|// Sunday, their week difference is 1. This is because the first timestamp
+comment|// is truncated to the previous Sunday. This is done by making calls to
+comment|// TIMESTAMP_TRUNC and the difference is then computed using their
+comment|// results.
+comment|//
 comment|// TIMESTAMPDIFF(unit, t1, t2)
 comment|//    => (t2 - t1) UNIT
 comment|// TIMESTAMP_DIFF(t1, t2, unit)
 comment|//    => (t1 - t2) UNIT
 name|SqlIntervalQualifier
 name|qualifier
+decl_stmt|;
+specifier|final
+name|boolean
+name|preTruncate
 decl_stmt|;
 specifier|final
 name|RexNode
@@ -11999,6 +12075,10 @@ name|operand
 argument_list|(
 literal|0
 argument_list|)
+expr_stmt|;
+name|preTruncate
+operator|=
+literal|false
 expr_stmt|;
 name|op1
 operator|=
@@ -12040,6 +12120,13 @@ argument_list|(
 literal|2
 argument_list|)
 expr_stmt|;
+name|preTruncate
+operator|=
+name|qualifier
+operator|.
+name|isDate
+argument_list|()
+expr_stmt|;
 name|op1
 operator|=
 name|cx
@@ -12079,6 +12166,15 @@ name|getRexBuilder
 argument_list|()
 decl_stmt|;
 specifier|final
+name|RelDataTypeFactory
+name|typeFactory
+init|=
+name|cx
+operator|.
+name|getTypeFactory
+argument_list|()
+decl_stmt|;
+specifier|final
 name|TimeFrame
 name|timeFrame
 init|=
@@ -12107,6 +12203,17 @@ name|TimeUnit
 operator|.
 name|EPOCH
 argument_list|)
+decl_stmt|;
+name|UnaryOperator
+argument_list|<
+name|RexNode
+argument_list|>
+name|truncateFn
+init|=
+name|UnaryOperator
+operator|.
+name|identity
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -12138,6 +12245,41 @@ operator|.
 name|timeFrameName
 argument_list|)
 decl_stmt|;
+comment|// This additional logic accounts for BigQuery truncating prior to
+comment|// computing the difference.
+if|if
+condition|(
+name|preTruncate
+condition|)
+block|{
+name|truncateFn
+operator|=
+name|e
+lambda|->
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|e
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|SqlLibraryOperators
+operator|.
+name|TIMESTAMP_TRUNC
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|e
+argument_list|,
+name|timeFrameName
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 return|return
 name|rexBuilder
 operator|.
@@ -12163,12 +12305,69 @@ name|of
 argument_list|(
 name|timeFrameName
 argument_list|,
+name|truncateFn
+operator|.
+name|apply
+argument_list|(
 name|op1
+argument_list|)
 argument_list|,
+name|truncateFn
+operator|.
+name|apply
+argument_list|(
 name|op2
 argument_list|)
 argument_list|)
+argument_list|)
 return|;
+block|}
+if|if
+condition|(
+name|preTruncate
+condition|)
+block|{
+comment|// The timestamps should be truncated unless the time unit is HOUR, in
+comment|// which case only the whole number of hours between the timestamps
+comment|// should be returned.
+specifier|final
+name|RexNode
+name|timeUnit
+init|=
+name|cx
+operator|.
+name|convertExpression
+argument_list|(
+name|qualifier
+argument_list|)
+decl_stmt|;
+name|truncateFn
+operator|=
+name|e
+lambda|->
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|e
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|SqlLibraryOperators
+operator|.
+name|TIMESTAMP_TRUNC
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|e
+argument_list|,
+name|timeUnit
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 name|BigDecimal
 name|multiplier
@@ -12308,17 +12507,11 @@ specifier|final
 name|RelDataType
 name|intervalType
 init|=
-name|cx
-operator|.
-name|getTypeFactory
-argument_list|()
+name|typeFactory
 operator|.
 name|createTypeWithNullability
 argument_list|(
-name|cx
-operator|.
-name|getTypeFactory
-argument_list|()
+name|typeFactory
 operator|.
 name|createSqlIntervalType
 argument_list|(
@@ -12343,12 +12536,9 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|RexCall
-name|rexCall
+name|RexNode
+name|call2
 init|=
-operator|(
-name|RexCall
-operator|)
 name|rexBuilder
 operator|.
 name|makeCall
@@ -12363,9 +12553,19 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
+name|truncateFn
+operator|.
+name|apply
+argument_list|(
 name|op2
+argument_list|)
 argument_list|,
+name|truncateFn
+operator|.
+name|apply
+argument_list|(
 name|op1
+argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -12373,17 +12573,11 @@ specifier|final
 name|RelDataType
 name|intType
 init|=
-name|cx
-operator|.
-name|getTypeFactory
-argument_list|()
+name|typeFactory
 operator|.
 name|createTypeWithNullability
 argument_list|(
-name|cx
-operator|.
-name|getTypeFactory
-argument_list|()
+name|typeFactory
 operator|.
 name|createSqlType
 argument_list|(
@@ -12394,7 +12588,7 @@ name|SqlTypeUtil
 operator|.
 name|containsNullable
 argument_list|(
-name|rexCall
+name|call2
 operator|.
 name|getType
 argument_list|()
@@ -12410,7 +12604,7 @@ name|makeCast
 argument_list|(
 name|intType
 argument_list|,
-name|rexCall
+name|call2
 argument_list|)
 decl_stmt|;
 return|return

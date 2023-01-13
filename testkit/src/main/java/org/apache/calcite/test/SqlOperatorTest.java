@@ -42512,6 +42512,39 @@ name|f
 operator|.
 name|checkScalar
 argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56.78' to millisecond)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56.78' to microsecond)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(timestamp '2015-02-19 12:34:56.78' to nanosecond)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
 literal|"floor(timestamp '2015-02-19 12:34:56' to minute)"
 argument_list|,
 literal|"2015-02-19 12:34:00"
@@ -42690,6 +42723,39 @@ argument_list|(
 literal|"ceil(timestamp '2015-02-19 12:34:56.78' to second)"
 argument_list|,
 literal|"2015-02-19 12:34:57"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56.78' to millisecond)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56.78' to microsecond)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(timestamp '2015-02-19 12:34:56.78' to nanosecond)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
 argument_list|,
 literal|"TIMESTAMP(2) NOT NULL"
 argument_list|)
@@ -44447,6 +44513,169 @@ block|}
 end_function
 
 begin_comment
+comment|/** Tests BigQuery's {@code DATETIME_ADD(timestamp, interval)} function.    * When Calcite runs in BigQuery mode, {@code DATETIME} is a type alias for    * {@code TIMESTAMP} and this function follows the same behavior as    * {@code TIMESTAMP_ADD(timestamp, interval)}. The tests below use    * {@code TIMESTAMP} values rather than the {@code DATETIME} alias because the    * operator fixture does not currently support type aliases. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testDatetimeAdd
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_ADD
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^datetime_add(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 5 minute)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"DATETIME_ADD\\(<TIMESTAMP>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_5422_FIXED
+condition|)
+block|{
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 100000000000 microsecond)"
+argument_list|,
+literal|"2008-12-26 19:16:40"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"interval 100000000 millisecond)"
+argument_list|,
+literal|"2008-12-26 19:16:40"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2016-02-24 12:42:25', interval 2 second)"
+argument_list|,
+literal|"2016-02-24 12:42:27"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2016-02-24 12:42:25', interval 2 minute)"
+argument_list|,
+literal|"2016-02-24 12:44:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2016-02-24 12:42:25', interval -2000 hour)"
+argument_list|,
+literal|"2015-12-03 04:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2016-02-24 12:42:25', interval 1 day)"
+argument_list|,
+literal|"2016-02-25 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2016-02-24 12:42:25', interval 1 month)"
+argument_list|,
+literal|"2016-03-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_add(timestamp '2016-02-24 12:42:25', interval 1 year)"
+argument_list|,
+literal|"2017-02-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"datetime_add(CAST(NULL AS TIMESTAMP), interval 5 minute)"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Tests {@code TIMESTAMP_DIFF}, BigQuery's variant of the    * {@code TIMESTAMPDIFF} function, which differs in the ordering    * of the parameters and the ordering of the subtraction between    * the two timestamps. In {@code TIMESTAMPDIFF} it is (t2 - t1)    * while for {@code TIMESTAMP_DIFF} is is (t1 - t2). */
 end_comment
 
@@ -44784,7 +45013,7 @@ name|s
 operator|+
 literal|")"
 argument_list|,
-literal|"-2"
+literal|"-3"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
@@ -44945,6 +45174,522 @@ operator|.
 name|checkScalar
 argument_list|(
 literal|"timestamp_diff(date '2016-06-15', "
+operator|+
+literal|"cast(null as date), "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+name|isNullValue
+argument_list|()
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests BigQuery's {@code DATETIME_DIFF(timestamp, timestamp2, timeUnit)}    * function. When Calcite runs in BigQuery mode, {@code DATETIME} is a type    * alias for {@code TIMESTAMP} and this function follows the same behavior as    * {@code TIMESTAMP_DIFF(timestamp, timestamp2, timeUnit)}. The tests below    * use {@code TIMESTAMP} values rather than the {@code DATETIME} alias because    * the operator fixture does not currently support type aliases. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testDatetimeDiff
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_DIFF
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^datetime_diff(timestamp '2008-12-25 15:30:00', "
+operator|+
+literal|"timestamp '2008-12-25 16:30:00', "
+operator|+
+literal|"minute)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"DATETIME_DIFF\\(<TIMESTAMP>,<TIMESTAMP>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_DIFF
+argument_list|)
+decl_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 15:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-3"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MICROSECOND_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:20', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"5000000"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|YEAR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|WEEK_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-104"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|WEEK_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2014-02-19 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-105"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-24"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2019-09-01 12:42:25', "
+operator|+
+literal|"timestamp '2020-03-01 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2019-09-01 12:42:25', "
+operator|+
+literal|"timestamp '2016-08-01 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"37"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-8"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2614-02-24 12:42:25', "
+operator|+
+literal|"CENTURY)"
+argument_list|,
+literal|"-6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|QUARTER_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"cast(null as timestamp), "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+name|isNullValue
+argument_list|()
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// datetime_diff with date
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2016-03-15', "
+operator|+
+literal|"date '2016-06-14', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-3"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2019-09-01', "
+operator|+
+literal|"date '2020-03-01', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"-6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2019-09-01', "
+operator|+
+literal|"date '2016-08-01', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"37"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2016-06-15', "
+operator|+
+literal|"date '2016-06-14', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2016-06-15', "
+operator|+
+literal|"date '2016-06-14', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"24"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|HOUR_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2016-06-15',  "
+operator|+
+literal|"date '2016-06-15', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MINUTE_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2016-06-15', "
+operator|+
+literal|"date '2016-06-14', "
+operator|+
+name|s
+operator|+
+literal|")"
+argument_list|,
+literal|"1440"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|DAY_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_diff(date '2016-06-15', "
 operator|+
 literal|"cast(null as date), "
 operator|+

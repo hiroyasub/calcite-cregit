@@ -404,6 +404,9 @@ block|,
 comment|/** {@code LEAST} function (Oracle). */
 name|LEAST
 block|,
+comment|/** {@code DATE_DIFF} function (BigQuery Semantics). */
+name|DATE_ADD
+block|,
 comment|/** {@code DATE_SUB} function (BigQuery). */
 name|DATE_SUB
 block|,
@@ -1304,6 +1307,8 @@ argument_list|,
 name|FLOOR
 argument_list|,
 name|CEIL
+argument_list|,
+name|DATE_ADD
 argument_list|,
 name|DATE_SUB
 argument_list|,
