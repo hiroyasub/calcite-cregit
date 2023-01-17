@@ -73,20 +73,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
-operator|.
-name|SqlFunctions
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|util
 operator|.
 name|NameMap
@@ -1480,7 +1466,7 @@ argument_list|()
 decl_stmt|;
 comment|// e.g. 12 for YEAR
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|addMonths
 argument_list|(
@@ -1628,7 +1614,7 @@ argument_list|()
 decl_stmt|;
 comment|// e.g. 12 for YEAR
 return|return
-name|SqlFunctions
+name|DateTimeUtils
 operator|.
 name|addMonths
 argument_list|(
