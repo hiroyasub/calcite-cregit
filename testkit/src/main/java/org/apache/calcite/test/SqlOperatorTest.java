@@ -47046,6 +47046,323 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testFormatTime
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|FORMAT_TIME
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^FORMAT_TIME('%x', timestamp '2008-12-25 15:30:00')^"
+argument_list|,
+literal|"Cannot apply 'FORMAT_TIME' to arguments of type "
+operator|+
+literal|"'FORMAT_TIME\\(<CHAR\\(2\\)>,<TIMESTAMP\\(0\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"'FORMAT_TIME\\(<CHARACTER>,<TIME>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIME('%H', TIME '12:34:33')"
+argument_list|,
+literal|"12"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIME('%R', TIME '12:34:33')"
+argument_list|,
+literal|"12:34"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIME('The time is %M-%S', TIME '12:34:33')"
+argument_list|,
+literal|"The time is 34-33"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testFormatDate
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|FORMAT_DATE
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^FORMAT_DATE('%x', 123)^"
+argument_list|,
+literal|"Cannot apply 'FORMAT_DATE' to arguments of type "
+operator|+
+literal|"'FORMAT_DATE\\(<CHAR\\(2\\)>,<INTEGER>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"'FORMAT_DATE\\(<CHARACTER>,<DATE>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+comment|// Can implicitly cast TIMESTAMP to DATE
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_DATE('%x', timestamp '2008-12-25 15:30:00')"
+argument_list|,
+literal|"12/25/08"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_DATE('%b-%d-%Y', DATE '2008-12-25')"
+argument_list|,
+literal|"Dec-25-2008"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_DATE('%b %Y', DATE '2008-12-25')"
+argument_list|,
+literal|"Dec 2008"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_DATE('%x', DATE '2008-12-25')"
+argument_list|,
+literal|"12/25/08"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_DATE('The date is: %x', DATE '2008-12-25')"
+argument_list|,
+literal|"The date is: 12/25/08"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testFormatTimestamp
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|FORMAT_TIMESTAMP
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^FORMAT_TIMESTAMP('%x', 123)^"
+argument_list|,
+literal|"Cannot apply 'FORMAT_TIMESTAMP' to arguments of type "
+operator|+
+literal|"'FORMAT_TIMESTAMP\\(<CHAR\\(2\\)>,<INTEGER>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): "
+operator|+
+literal|"FORMAT_TIMESTAMP\\(<CHARACTER>, "
+operator|+
+literal|"<TIMESTAMP WITH LOCAL TIME ZONE>\\)\n"
+operator|+
+literal|"FORMAT_TIMESTAMP\\(<CHARACTER>, "
+operator|+
+literal|"<TIMESTAMP WITH LOCAL TIME ZONE>,<CHARACTER>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIMESTAMP('%c',"
+operator|+
+literal|" TIMESTAMP WITH LOCAL TIME ZONE '2008-12-25 15:30:00')"
+argument_list|,
+literal|"Thu Dec 25 15:30:00 2008"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIMESTAMP('%b-%d-%Y',"
+operator|+
+literal|" TIMESTAMP WITH LOCAL TIME ZONE '2008-12-25 15:30:00')"
+argument_list|,
+literal|"Dec-25-2008"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIMESTAMP('%b %Y',"
+operator|+
+literal|" TIMESTAMP WITH LOCAL TIME ZONE '2008-12-25 15:30:00')"
+argument_list|,
+literal|"Dec 2008"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIMESTAMP('%x',"
+operator|+
+literal|" TIMESTAMP WITH LOCAL TIME ZONE '2008-12-25 15:30:00')"
+argument_list|,
+literal|"12/25/08"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIMESTAMP('The time is: %R',"
+operator|+
+literal|" TIMESTAMP WITH LOCAL TIME ZONE '2008-12-25 15:30:00')"
+argument_list|,
+literal|"The time is: 15:30"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"FORMAT_TIMESTAMP('The time is: %R.%E2S',"
+operator|+
+literal|" TIMESTAMP WITH LOCAL TIME ZONE '2008-12-25 15:30:00.1235456')"
+argument_list|,
+literal|"The time is: 15:30.123"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testDenseRankFunc
 parameter_list|()
 block|{

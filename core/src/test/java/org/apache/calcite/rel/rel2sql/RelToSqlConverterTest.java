@@ -9186,6 +9186,146 @@ name|expectedTimeTrunc
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testBigQueryDatetimeFormatFunctions
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|formatTime
+init|=
+literal|"select format_time('%H', time '12:45:30')\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|formatDate
+init|=
+literal|"select format_date('%b-%d-%Y', date '2012-02-03')\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|formatTimestamp
+init|=
+literal|"select format_timestamp('%b-%d-%Y',\n"
+operator|+
+literal|"    timestamp with local time zone '2012-02-03 12:30:40')\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|formatDatetime
+init|=
+literal|"select format_datetime('%R',\n"
+operator|+
+literal|"    timestamp '2012-02-03 12:34:34')\n"
+operator|+
+literal|"from \"foodmart\".\"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBqFormatTime
+init|=
+literal|"SELECT FORMAT_TIME('%H', TIME '12:45:30')\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBqFormatDate
+init|=
+literal|"SELECT FORMAT_DATE('%b-%d-%Y', DATE '2012-02-03')\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBqFormatTimestamp
+init|=
+literal|"SELECT FORMAT_TIMESTAMP('%b-%d-%Y', TIMESTAMP_WITH_LOCAL_TIME_ZONE '2012-02-03 12:30:40')\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBqFormatDatetime
+init|=
+literal|"SELECT FORMAT_DATETIME('%R', TIMESTAMP '2012-02-03 12:34:34')\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+specifier|final
+name|Sql
+name|sql
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|sql
+operator|.
+name|withSql
+argument_list|(
+name|formatTime
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedBqFormatTime
+argument_list|)
+expr_stmt|;
+name|sql
+operator|.
+name|withSql
+argument_list|(
+name|formatDate
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedBqFormatDate
+argument_list|)
+expr_stmt|;
+name|sql
+operator|.
+name|withSql
+argument_list|(
+name|formatTimestamp
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedBqFormatTimestamp
+argument_list|)
+expr_stmt|;
+name|sql
+operator|.
+name|withSql
+argument_list|(
+name|formatDatetime
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedBqFormatDatetime
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>,    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in BigQuery dialect</a>, and    *<a href="https://issues.apache.org/jira/browse/CALCITE-3771">[CALCITE-3771]    * Support of TRIM function for SPARK dialect and improvement in HIVE    * Dialect</a>. */
 annotation|@
 name|Test

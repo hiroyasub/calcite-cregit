@@ -359,6 +359,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|format
+operator|.
+name|FormatModel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|format
+operator|.
+name|FormatModels
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -4140,6 +4172,18 @@ name|offsetFrame
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+comment|/**    * Returns a description of the format string used by functions in this    * dialect.    *    *<p>Dialects may need to override this element mapping if they differ from    *<a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Format-Models.html">    * Oracle's format elements</a>. By default, this returns {@link FormatModels#DEFAULT}.    */
+specifier|public
+name|FormatModel
+name|getFormatModel
+parameter_list|()
+block|{
+return|return
+name|FormatModels
+operator|.
+name|DEFAULT
+return|;
 block|}
 comment|/**    * Returns whether the dialect supports nested aggregations, for instance    * {@code SELECT SUM(SUM(1)) }.    */
 specifier|public
