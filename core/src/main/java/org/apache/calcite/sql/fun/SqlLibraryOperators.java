@@ -4476,7 +4476,7 @@ argument_list|)
 specifier|public
 specifier|static
 specifier|final
-name|SqlFunction
+name|SqlBasicFunction
 name|TIMESTAMP_SUB
 init|=
 name|SqlBasicFunction
@@ -4501,6 +4501,29 @@ argument_list|(
 name|SqlFunctionCategory
 operator|.
 name|TIMEDATE
+argument_list|)
+decl_stmt|;
+comment|/** BigQuery's {@code DATETIME_SUB(timestamp, interval)} function    * is a synonym for TIMESTAMP_SUB because in Calcite, DATETIME    * is an alias for TIMESTAMP. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|DATETIME_SUB
+init|=
+name|TIMESTAMP_SUB
+operator|.
+name|withName
+argument_list|(
+literal|"DATETIME_SUB"
 argument_list|)
 decl_stmt|;
 comment|/** The "TIMESTAMP_TRUNC(timestamp, timeUnit[, timeZone])" function (BigQuery);    * truncates a TIMESTAMP value to the beginning of a timeUnit. */

@@ -1639,6 +1639,17 @@ name|registerOp
 argument_list|(
 name|SqlLibraryOperators
 operator|.
+name|DATETIME_SUB
+argument_list|,
+operator|new
+name|TimestampSubConvertlet
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|registerOp
+argument_list|(
+name|SqlLibraryOperators
+operator|.
 name|DATE_SUB
 argument_list|,
 operator|new
