@@ -13276,6 +13276,92 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testReducingConstantsInferredFromCorrelate
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT ename,\n"
+operator|+
+literal|"  empno,\n"
+operator|+
+literal|"  T.empno_r,\n"
+operator|+
+literal|"  CASE\n"
+operator|+
+literal|"    WHEN __source__type__ = 'bounded'\n"
+operator|+
+literal|"      THEN 1\n"
+operator|+
+literal|"    ELSE 2\n"
+operator|+
+literal|"    END AS type\n"
+operator|+
+literal|"FROM (\n"
+operator|+
+literal|"  SELECT ename,\n"
+operator|+
+literal|"    empno,\n"
+operator|+
+literal|"    'bounded' AS __source__type__\n"
+operator|+
+literal|"  FROM emp\n"
+operator|+
+literal|"  ) a,\n"
+operator|+
+literal|"  lateral TABLE (ramp(empno)) AS T(empno_r)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRelBuilderConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withSimplifyValues
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|withProgram
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testRemoveSemiJoin
 parameter_list|()
 block|{
