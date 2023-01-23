@@ -6310,11 +6310,11 @@ name|ANY
 argument_list|,
 name|SqlTypeFamily
 operator|.
-name|TIMESTAMP
+name|DATETIME
 argument_list|,
 name|SqlTypeFamily
 operator|.
-name|TIMESTAMP
+name|DATETIME
 argument_list|)
 argument_list|)
 decl_stmt|;

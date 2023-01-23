@@ -921,6 +921,36 @@ begin_import
 import|import
 name|org
 operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|ParameterizedTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|params
+operator|.
+name|provider
+operator|.
+name|ValueSource
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -44934,10 +44964,29 @@ end_function
 
 begin_function
 annotation|@
-name|Test
+name|ValueSource
+argument_list|(
+name|booleans
+operator|=
+block|{
+literal|true
+block|,
+literal|false
+block|}
+argument_list|)
+annotation|@
+name|ParameterizedTest
+argument_list|(
+name|name
+operator|=
+literal|"CoercionEnabled: {0}"
+argument_list|)
 name|void
 name|testTimestampDiff
-parameter_list|()
+parameter_list|(
+name|boolean
+name|coercionEnabled
+parameter_list|)
 block|{
 specifier|final
 name|SqlOperatorFixture
@@ -44945,6 +44994,18 @@ name|f
 init|=
 name|fixture
 argument_list|()
+operator|.
+name|withValidatorConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withTypeCoercionEnabled
+argument_list|(
+name|coercionEnabled
+argument_list|)
+argument_list|)
 decl_stmt|;
 name|f
 operator|.
@@ -45357,6 +45418,78 @@ operator|+
 literal|"date '2019-09-01', date '2016-08-01')"
 argument_list|,
 literal|"-37"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"time '12:42:25', time '12:42:25')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"time '12:42:25', date '2016-06-14')"
+argument_list|,
+literal|"-1502389"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|MONTH_VARIANTS
+operator|.
+name|forEach
+argument_list|(
+name|s
+lambda|->
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff("
+operator|+
+name|s
+operator|+
+literal|", "
+operator|+
+literal|"date '2016-06-14', time '12:42:25')"
+argument_list|,
+literal|"1502389"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
