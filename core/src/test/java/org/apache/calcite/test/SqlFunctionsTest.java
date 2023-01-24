@@ -10361,10 +10361,8 @@ operator|)
 operator|(
 name|minusDayZone
 operator|.
-name|getOffset
-argument_list|(
-literal|0L
-argument_list|)
+name|getRawOffset
+argument_list|()
 operator|-
 name|MILLIS_PER_DAY
 operator|)
@@ -10405,10 +10403,8 @@ operator|)
 operator|(
 name|plusDayZone
 operator|.
-name|getOffset
-argument_list|(
-literal|0L
-argument_list|)
+name|getRawOffset
+argument_list|()
 operator|+
 name|MILLIS_PER_DAY
 operator|)
