@@ -583,6 +583,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|parallel
+operator|.
+name|ResourceLock
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -700,6 +716,13 @@ comment|/**  * Unit test for {@link org.apache.calcite.sql2rel.SqlToRelConverter
 end_comment
 
 begin_class
+annotation|@
+name|ResourceLock
+argument_list|(
+name|value
+operator|=
+literal|"SqlToRelConverterTest.xml"
+argument_list|)
 class|class
 name|SqlToRelConverterTest
 extends|extends
