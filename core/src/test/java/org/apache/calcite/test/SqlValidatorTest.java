@@ -24118,6 +24118,84 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5507">[CALCITE-5507]    * HAVING alias failed when aggregate function in condition</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testAggregateFunAndAliasInHaving
+parameter_list|()
+block|{
+specifier|final
+name|SqlConformanceEnum
+name|lenient
+init|=
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+decl_stmt|;
+specifier|final
+name|SqlConformanceEnum
+name|strict
+init|=
+name|SqlConformanceEnum
+operator|.
+name|STRICT_2003
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select count(empno) as e from emp having ^e^> 10 and count(empno)> 10 "
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|strict
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'E' not found in any table"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|lenient
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(empno) as e from emp having count(empno)> 10 and count(^e^)> 10"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|strict
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'E' not found in any table"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|lenient
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'E' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/**    * Tests validation of the aliases in HAVING.    *    * @see SqlConformance#isHavingAlias()    */
 end_comment
 

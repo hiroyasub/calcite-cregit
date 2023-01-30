@@ -1776,6 +1776,59 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5507">[CALCITE-5507]    * HAVING alias failed when aggregate function in condition</a>. */
+annotation|@
+name|Test
+name|void
+name|testAggregateFunAndAliasInHaving1
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select count(empno) as e\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"having e> 10 and count(empno)> 10"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testAggregateFunAndAliasInHaving2
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select count(empno) as e\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"having e> 10 or count(empno)< 5"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
