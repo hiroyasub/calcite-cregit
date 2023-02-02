@@ -4743,7 +4743,7 @@ literal|"FROM scott.EMP\n"
 operator|+
 literal|"GROUP BY DEPTNO, MGR, HIREDATE\n"
 operator|+
-literal|"ORDER BY CAST(SUM(SAL) AS DECIMAL(19, 0))"
+literal|"ORDER BY 3"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -5070,7 +5070,7 @@ literal|"FROM scott.EMP\n"
 operator|+
 literal|"GROUP BY DEPTNO, MGR, HIREDATE\n"
 operator|+
-literal|"ORDER BY CAST(SUM(SAL) AS DECIMAL(19, 0))"
+literal|"ORDER BY 3"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -5147,7 +5147,7 @@ literal|"FROM scott.EMP\n"
 operator|+
 literal|"GROUP BY DEPTNO, MGR, HIREDATE\n"
 operator|+
-literal|"ORDER BY CAST(SUM(SAL) AS DECIMAL(19, 0))"
+literal|"ORDER BY 3"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -5292,7 +5292,7 @@ literal|"FROM scott.EMP\n"
 operator|+
 literal|"GROUP BY DEPTNO, MGR, HIREDATE\n"
 operator|+
-literal|"ORDER BY CAST(SUM(SAL) AS DECIMAL(19, 0))"
+literal|"ORDER BY 7"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -5446,7 +5446,7 @@ literal|"    WHERE DEPTNO>= 20\n"
 operator|+
 literal|"    GROUP BY CAST(DEPTNO AS INTEGER)) AS t7 ON t4.DEPTNO = t7.DEPTNO\n"
 operator|+
-literal|"ORDER BY CASE WHEN t4.DEPTNO IS NOT NULL THEN t4.DEPTNO ELSE t7.DEPTNO END"
+literal|"ORDER BY 1"
 decl_stmt|;
 name|pig
 argument_list|(

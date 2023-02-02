@@ -715,6 +715,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|dialect
+operator|.
+name|PrestoSqlDialect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|SqlLibrary
@@ -3896,7 +3912,7 @@ literal|" (\"EMPNO\", \"ENAME\"), \"EMPNO\")\n"
 operator|+
 literal|"HAVING GROUPING(\"EMPNO\", \"ENAME\", \"JOB\")<> 0\n"
 operator|+
-literal|"ORDER BY COUNT(*)"
+literal|"ORDER BY 4"
 decl_stmt|;
 name|relFn
 argument_list|(
@@ -4415,7 +4431,7 @@ literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
 literal|"GROUP BY ROLLUP(\"product_class_id\")\n"
 operator|+
-literal|"ORDER BY \"product_class_id\", COUNT(*)"
+literal|"ORDER BY \"product_class_id\", 2"
 decl_stmt|;
 specifier|final
 name|String
@@ -4429,7 +4445,7 @@ literal|"GROUP BY `product_class_id` WITH ROLLUP\n"
 operator|+
 literal|"ORDER BY `product_class_id` IS NULL, `product_class_id`,"
 operator|+
-literal|" COUNT(*) IS NULL, COUNT(*)"
+literal|" COUNT(*) IS NULL, 2"
 decl_stmt|;
 specifier|final
 name|String
@@ -4443,7 +4459,7 @@ literal|"GROUP BY ROLLUP(\"product_class_id\")\n"
 operator|+
 literal|"ORDER BY \"product_class_id\" IS NULL, \"product_class_id\", "
 operator|+
-literal|"COUNT(*) IS NULL, COUNT(*)"
+literal|"COUNT(*) IS NULL, 2"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4579,7 +4595,7 @@ literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
 literal|"GROUP BY ROLLUP(\"product_class_id\", \"brand_name\")\n"
 operator|+
-literal|"ORDER BY \"product_class_id\", \"brand_name\", COUNT(*)"
+literal|"ORDER BY \"product_class_id\", \"brand_name\", 3"
 decl_stmt|;
 specifier|final
 name|String
@@ -4597,7 +4613,7 @@ literal|"ORDER BY `product_class_id` IS NULL, `product_class_id`,"
 operator|+
 literal|" `brand_name` IS NULL, `brand_name`,"
 operator|+
-literal|" COUNT(*) IS NULL, COUNT(*)"
+literal|" COUNT(*) IS NULL, 3"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8746,6 +8762,95 @@ argument_list|(
 literal|"SELECT ROW_NUMBER() OVER (ORDER BY 1)\n"
 operator|+
 literal|"FROM \"foodmart\".\"employee\""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5510">[CALCITE-5510]    * RelToSqlConverter don't support sort by ordinal when sort by column is an expression</a>.    */
+annotation|@
+name|Test
+name|void
+name|testOrderByOrdinalWithExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_id\", count(*) as \"c\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by \"product_id\"\n"
+operator|+
+literal|"order by 2"
+decl_stmt|;
+specifier|final
+name|String
+name|ordinalExpected
+init|=
+literal|"SELECT \"product_id\", COUNT(*) AS \"c\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\"\n"
+operator|+
+literal|"ORDER BY 2"
+decl_stmt|;
+specifier|final
+name|String
+name|nonOrdinalExpected
+init|=
+literal|"SELECT product_id, COUNT(*) AS c\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id\n"
+operator|+
+literal|"ORDER BY COUNT(*)"
+decl_stmt|;
+specifier|final
+name|String
+name|prestoExpected
+init|=
+literal|"SELECT \"product_id\", COUNT(*) AS \"c\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\"\n"
+operator|+
+literal|"ORDER BY COUNT(*) IS NULL, 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|ordinalExpected
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|nonOrdinalDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|nonOrdinalExpected
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|PrestoSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|prestoExpected
 argument_list|)
 expr_stmt|;
 block|}
@@ -26656,7 +26761,7 @@ literal|"GROUP BY DEPTNO\n"
 operator|+
 literal|"HAVING COUNT(DISTINCT EMPNO)> 0\n"
 operator|+
-literal|"ORDER BY COUNT(DISTINCT EMPNO) IS NULL DESC, COUNT(DISTINCT EMPNO) DESC"
+literal|"ORDER BY COUNT(DISTINCT EMPNO) IS NULL DESC, 2 DESC"
 decl_stmt|;
 comment|// Convert rel node to SQL with BigQuery dialect,
 comment|// in which "isHavingAlias" is true.
