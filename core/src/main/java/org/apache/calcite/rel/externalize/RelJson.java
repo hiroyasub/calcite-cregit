@@ -4664,6 +4664,36 @@ return|return
 name|map
 return|;
 block|}
+comment|/**    * Translates a JSON expression into a RexNode.    *    * @param cluster The optimization environment    * @param o JSON object    * @return the transformed RexNode    */
+specifier|public
+name|RexNode
+name|toRex
+parameter_list|(
+name|RelOptCluster
+name|cluster
+parameter_list|,
+name|Object
+name|o
+parameter_list|)
+block|{
+name|RelInput
+name|input
+init|=
+operator|new
+name|RelInputForCluster
+argument_list|(
+name|cluster
+argument_list|)
+decl_stmt|;
+return|return
+name|toRex
+argument_list|(
+name|input
+argument_list|,
+name|o
+argument_list|)
+return|;
+block|}
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -6255,7 +6285,10 @@ return|return
 name|map
 return|;
 block|}
-comment|/**    * Translates a JSON expression into a RexNode,    * using a given {@link InputTranslator} to transform JSON objects that    * represent input references into RexNodes.    *    * @param cluster The optimization environment    * @param translator Input translator    * @param o JSON object    * @return the transformed RexNode    */
+comment|/**    * Translates a JSON expression into a RexNode,    * using a given {@link InputTranslator} to transform JSON objects that    * represent input references into RexNodes.    *    * @param cluster The optimization environment    * @param translator Input translator    * @param o JSON object    * @return the transformed RexNode    *    * @deprecated Use {@link #toRex(RelOptCluster, Object)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RexNode

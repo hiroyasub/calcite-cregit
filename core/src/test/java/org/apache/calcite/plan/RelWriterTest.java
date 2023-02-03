@@ -3561,7 +3561,7 @@ name|Object
 argument_list|>
 argument_list|>
 argument_list|()
-block|{     }
+block|{         }
 decl_stmt|;
 specifier|final
 name|Map
@@ -3610,18 +3610,31 @@ name|e
 argument_list|)
 throw|;
 block|}
-name|RexNode
-name|e
+specifier|final
+name|RelJson
+name|relJson
 init|=
 name|RelJson
 operator|.
-name|readExpression
+name|create
+argument_list|()
+operator|.
+name|withInputTranslator
 argument_list|(
-name|cluster
-argument_list|,
 name|RelWriterTest
 operator|::
 name|translateInput
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexNode
+name|e
+init|=
+name|relJson
+operator|.
+name|toRex
+argument_list|(
+name|cluster
 argument_list|,
 name|o
 argument_list|)
