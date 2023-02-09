@@ -2736,6 +2736,17 @@ name|toString
 argument_list|(
 name|newRel
 argument_list|)
+operator|+
+name|getFullTypeDifferenceString
+argument_list|(
+literal|"rowtype of original rel"
+argument_list|,
+name|expectedRowType
+argument_list|,
+literal|"rowtype of new rel"
+argument_list|,
+name|actualRowType
+argument_list|)
 decl_stmt|;
 throw|throw
 operator|new

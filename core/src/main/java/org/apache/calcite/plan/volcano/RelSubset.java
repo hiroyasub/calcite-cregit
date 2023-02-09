@@ -273,20 +273,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Litmus
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Pair
 import|;
 end_import
@@ -1594,39 +1580,6 @@ operator|.
 name|relEquivalenceFound
 argument_list|(
 name|event
-argument_list|)
-expr_stmt|;
-block|}
-comment|// If this isn't the first rel in the set, it must have compatible
-comment|// row type.
-if|if
-condition|(
-name|set
-operator|.
-name|rel
-operator|!=
-literal|null
-condition|)
-block|{
-name|RelOptUtil
-operator|.
-name|equal
-argument_list|(
-literal|"rowtype of new rel"
-argument_list|,
-name|rel
-operator|.
-name|getRowType
-argument_list|()
-argument_list|,
-literal|"rowtype of set"
-argument_list|,
-name|getRowType
-argument_list|()
-argument_list|,
-name|Litmus
-operator|.
-name|THROW
 argument_list|)
 expr_stmt|;
 block|}
