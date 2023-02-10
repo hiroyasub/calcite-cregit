@@ -17107,14 +17107,32 @@ decl_stmt|;
 name|String
 name|expectedMssql
 init|=
-literal|"SELECT *\nFROM [foodmart].[employee]\nOFFSET 1 ROWS\n"
+literal|"SELECT *\n"
+operator|+
+literal|"FROM [foodmart].[employee]\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
 operator|+
 literal|"FETCH NEXT 1 ROWS ONLY"
 decl_stmt|;
 name|String
 name|expectedSybase
 init|=
-literal|"SELECT TOP (1) START AT 1 *\nFROM foodmart.employee"
+literal|"SELECT TOP (1) START AT 1 *\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"OFFSET 1\n"
+operator|+
+literal|"LIMIT 1"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -17135,6 +17153,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedSybase
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
