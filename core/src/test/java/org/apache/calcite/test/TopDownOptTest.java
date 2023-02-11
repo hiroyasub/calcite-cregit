@@ -1163,6 +1163,11 @@ expr_stmt|;
 block|}
 argument_list|)
 operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
 name|check
 argument_list|()
 expr_stmt|;

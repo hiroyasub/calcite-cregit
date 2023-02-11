@@ -14465,6 +14465,18 @@ argument_list|(
 name|query
 argument_list|)
 operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
 name|ok
 argument_list|(
 name|expected
@@ -24646,7 +24658,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testUnionAllWithNoOperandsUsingOracleDialect
+name|testUnionAll
 parameter_list|()
 block|{
 name|String
@@ -24660,7 +24672,7 @@ literal|" where A.\"department_id\" = ( select min( A.\"department_id\") from \"
 decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expectedOracle
 init|=
 literal|"SELECT \"employee\".\"department_id\"\n"
 operator|+
@@ -24684,34 +24696,19 @@ literal|"GROUP BY \"t1\".\"department_id\"\n"
 operator|+
 literal|"HAVING \"t1\".\"department_id\" = MIN(\"t1\".\"department_id\")) \"t4\" ON \"employee\".\"department_id\" = \"t4\".\"department_id0\""
 decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withOracle
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
-name|testUnionAllWithNoOperands
-parameter_list|()
-block|{
+specifier|final
 name|String
-name|query
+name|expectedNoExpand
 init|=
-literal|"select A.\"department_id\" "
+literal|"SELECT \"department_id\"\n"
 operator|+
-literal|"from \"foodmart\".\"employee\" A "
+literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
-literal|" where A.\"department_id\" = ( select min( A.\"department_id\") from \"foodmart\".\"department\" B where 1=2 )"
+literal|"WHERE \"department_id\" = (((SELECT MIN(\"employee\".\"department_id\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\"\n"
+operator|+
+literal|"WHERE 1 = 2)))"
 decl_stmt|;
 specifier|final
 name|String
@@ -24746,7 +24743,32 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
+name|expectedNoExpand
+argument_list|)
+operator|.
+name|withConfig
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 name|expected
+argument_list|)
+operator|.
+name|withOracle
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedOracle
 argument_list|)
 expr_stmt|;
 block|}

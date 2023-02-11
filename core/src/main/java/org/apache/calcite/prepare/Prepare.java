@@ -1513,13 +1513,10 @@ argument_list|)
 operator|.
 name|withExpand
 argument_list|(
-name|castNonNull
-argument_list|(
 name|THREAD_EXPAND
 operator|.
 name|get
 argument_list|()
-argument_list|)
 argument_list|)
 operator|.
 name|withInSubQueryThreshold
@@ -2172,13 +2169,10 @@ argument_list|)
 operator|.
 name|withExpand
 argument_list|(
-name|castNonNull
-argument_list|(
 name|THREAD_EXPAND
 operator|.
 name|get
 argument_list|()
-argument_list|)
 argument_list|)
 operator|.
 name|withInSubQueryThreshold

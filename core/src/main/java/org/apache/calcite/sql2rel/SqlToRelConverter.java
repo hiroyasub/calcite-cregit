@@ -33281,7 +33281,7 @@ name|boolean
 name|explain
 parameter_list|)
 function_decl|;
-comment|/** Returns the {@code expand} option. Controls whether to expand      * sub-queries. If false, each sub-query becomes a      * {@link org.apache.calcite.rex.RexSubQuery}. */
+comment|/** Returns the {@code expand} option. Controls whether to expand      * sub-queries. If false (the default), each sub-query becomes a      * {@link org.apache.calcite.rex.RexSubQuery}.      *      *<p>Setting {@code expand} to true is deprecated. Expansion still works,      * but there will be less development effort in that area. */
 annotation|@
 name|Value
 operator|.
@@ -33292,10 +33292,10 @@ name|isExpand
 parameter_list|()
 block|{
 return|return
-literal|true
+literal|false
 return|;
 block|}
-comment|/** Sets {@link #isExpand()}. */
+comment|/** Sets {@link #isExpand()}.      *      *<p>Expansion is deprecated. We recommend that you do not call this      * method, and use the default value of {@link #isExpand()}, false. */
 name|Config
 name|withExpand
 parameter_list|(

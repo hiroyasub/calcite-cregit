@@ -18354,29 +18354,12 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a correlated scalar sub-query in the SELECT clause.    *    *<p>Note that there should be an extra row "empid=200; deptno=20;    * DNAME=null" but left join doesn't work.</p> */
+comment|/** Tests a correlated scalar sub-query in the SELECT clause.    *    *<p>Note that there should be an extra row "empid=200; deptno=20;    * DNAME=null" but left join doesn't work. */
 annotation|@
 name|Test
 name|void
 name|testScalarSubQuery
 parameter_list|()
-block|{
-try|try
-init|(
-name|TryThreadLocal
-operator|.
-name|Memo
-name|ignored
-init|=
-name|Prepare
-operator|.
-name|THREAD_EXPAND
-operator|.
-name|push
-argument_list|(
-literal|true
-argument_list|)
-init|)
 block|{
 name|CalciteAssert
 operator|.
@@ -18405,7 +18388,6 @@ argument_list|,
 literal|"empid=200; deptno=20; DNAME=null"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-559">[CALCITE-559]    * Correlated scalar sub-query in WHERE gives error</a>. */
 annotation|@
@@ -18829,23 +18811,6 @@ name|void
 name|testScalarSubQueryInCase
 parameter_list|()
 block|{
-try|try
-init|(
-name|TryThreadLocal
-operator|.
-name|Memo
-name|ignored
-init|=
-name|Prepare
-operator|.
-name|THREAD_EXPAND
-operator|.
-name|push
-argument_list|(
-literal|true
-argument_list|)
-init|)
-block|{
 name|CalciteAssert
 operator|.
 name|hr
@@ -18881,7 +18846,6 @@ argument_list|,
 literal|"name=Theodore; DEPTNAME=Sales"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
