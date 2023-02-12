@@ -4265,6 +4265,88 @@ name|expectedMysql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5518">[CALCITE-5518]    * RelToSql converter generates invalid order of ROLLUP fields</a>.    */
+annotation|@
+name|Test
+name|void
+name|testGroupingSetsRollupNonNaturalOrder
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query1
+init|=
+literal|"select \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by GROUPING SETS ((\"product_class_id\", \"brand_name\"),"
+operator|+
+literal|" (\"brand_name\"), ())\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"brand_name\", \"product_class_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query1
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|query2
+init|=
+literal|"select \"product_class_id\", \"brand_name\", \"product_id\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by GROUPING SETS ("
+operator|+
+literal|" (\"product_class_id\", \"brand_name\", \"product_id\"),"
+operator|+
+literal|" (\"product_class_id\", \"brand_name\"),"
+operator|+
+literal|" (\"brand_name\"), ())\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT \"product_class_id\", \"brand_name\", \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"brand_name\", \"product_class_id\", \"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query2
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a query with GROUP BY and a sub-query which is also with GROUP BY.    * If we flatten sub-queries, the number of rows going into AVG becomes    * incorrect. */
 annotation|@
 name|Test
