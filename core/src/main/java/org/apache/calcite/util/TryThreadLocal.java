@@ -43,6 +43,22 @@ name|Supplier
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Nullness
+operator|.
+name|castNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Thread-local variable that returns a handle that can be closed.  *  * @param<T> Value type  */
 end_comment
@@ -52,13 +68,13 @@ specifier|public
 class|class
 name|TryThreadLocal
 parameter_list|<
-annotation|@
-name|Nullable
 name|T
 parameter_list|>
 extends|extends
 name|ThreadLocal
 argument_list|<
+annotation|@
+name|Nullable
 name|T
 argument_list|>
 block|{
@@ -120,6 +136,23 @@ parameter_list|()
 block|{
 return|return
 name|initialValue
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|T
+name|get
+parameter_list|()
+block|{
+return|return
+name|castNonNull
+argument_list|(
+name|super
+operator|.
+name|get
+argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/** Assigns the value as {@code value} for the current thread.    * Returns a {@link Memo} which, when closed, will assign the value    * back to the previous value. */

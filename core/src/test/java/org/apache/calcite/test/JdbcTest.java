@@ -32848,6 +32848,8 @@ specifier|static
 specifier|final
 name|TryThreadLocal
 argument_list|<
+annotation|@
+name|Nullable
 name|List
 argument_list|<
 name|Employee
@@ -33356,6 +33358,8 @@ specifier|static
 specifier|final
 name|TryThreadLocal
 argument_list|<
+annotation|@
+name|Nullable
 name|Handler
 argument_list|>
 name|HANDLERS
