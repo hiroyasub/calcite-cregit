@@ -3042,9 +3042,9 @@ name|create
 argument_list|(
 name|hint
 argument_list|)
-comment|// Rule to validate the hint.
 argument_list|)
 decl_stmt|;
+comment|// Rule to validate the hint.
 name|ruleFixture
 argument_list|()
 operator|.
@@ -3152,9 +3152,9 @@ name|create
 argument_list|(
 name|hint
 argument_list|)
-comment|// Rule to validate the hint.
 argument_list|)
 decl_stmt|;
+comment|// Rule to validate the hint.
 name|ruleFixture
 argument_list|()
 operator|.

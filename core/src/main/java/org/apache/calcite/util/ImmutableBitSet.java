@@ -1973,7 +1973,7 @@ literal|1
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Returns the index of the first bit that is set to {@code true}    * that occurs on or after the specified starting index. If no such    * bit exists then {@code -1} is returned.    *    *<p>Based upon {@link BitSet#nextSetBit}.    *    * @param  fromIndex the index to start checking from (inclusive)    * @return the index of the next set bit, or {@code -1} if there    *         is no such bit    * @throws IndexOutOfBoundsException if the specified index is negative    */
+comment|/**    * Returns the index of the first bit that is set to {@code true}    * that occurs on or after the specified starting index. If no such    * bit exists then {@code -1} is returned.    *    *<p>Based upon {@link BitSet#nextSetBit(int)}.    *    * @param  fromIndex the index to start checking from (inclusive)    * @return the index of the next set bit, or {@code -1} if there    *         is no such bit    * @throws IndexOutOfBoundsException if the specified index is negative    */
 specifier|public
 name|int
 name|nextSetBit
