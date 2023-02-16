@@ -13169,11 +13169,11 @@ block|{
 name|String
 name|errorMessage
 init|=
-literal|"'"
+literal|"Column '"
 operator|+
 name|weekday
 operator|+
-literal|"' is not a valid time frame"
+literal|"' not found in any table"
 decl_stmt|;
 name|f
 operator|.

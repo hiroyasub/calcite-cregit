@@ -259,6 +259,22 @@ name|sql
 operator|.
 name|type
 operator|.
+name|OperandHandlers
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
 name|OperandTypes
 import|;
 end_import
@@ -4139,6 +4155,13 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|TIMEDATE
+argument_list|)
+operator|.
+name|withOperandHandler
+argument_list|(
+name|OperandHandlers
+operator|.
+name|OPERAND_1_MIGHT_BE_TIME_FRAME
 argument_list|)
 decl_stmt|;
 comment|/** The "TIME_SUB(time, interval)" function (BigQuery);    * subtracts an interval from a time, independent of any time zone.    *    *<p>In BigQuery, the syntax is "TIME_SUB(time, INTERVAL int64 date_part)"    * but in Calcite the second argument can be any interval expression, not just    * an interval literal. */

@@ -46880,7 +46880,7 @@ name|checkFails
 argument_list|(
 literal|"date_trunc(date '2015-02-19', ^foo^)"
 argument_list|,
-literal|"'FOO' is not a valid time frame"
+literal|"Column 'FOO' not found in any table"
 argument_list|,
 literal|false
 argument_list|)
