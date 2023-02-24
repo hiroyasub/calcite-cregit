@@ -92,15 +92,17 @@ import|;
 end_import
 
 begin_comment
-comment|/** Validator. */
+comment|/** Validator.  */
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|CalciteSqlValidator
 extends|extends
 name|SqlValidatorImpl
 block|{
+specifier|public
 name|CalciteSqlValidator
 parameter_list|(
 name|SqlOperatorTable

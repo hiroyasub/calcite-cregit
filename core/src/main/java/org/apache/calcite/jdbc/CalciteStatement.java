@@ -294,7 +294,7 @@ name|calciteConnection
 operator|.
 name|prepareFactory
 operator|.
-name|apply
+name|get
 argument_list|()
 decl_stmt|;
 specifier|final

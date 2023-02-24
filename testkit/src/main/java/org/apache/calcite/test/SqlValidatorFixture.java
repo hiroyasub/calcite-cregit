@@ -1126,6 +1126,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+specifier|public
 name|SqlValidatorFixture
 name|withWhole
 parameter_list|(
@@ -1179,6 +1180,7 @@ name|whole
 argument_list|)
 return|;
 block|}
+specifier|public
 name|SqlValidatorFixture
 name|ok
 parameter_list|()
@@ -1202,6 +1204,7 @@ name|this
 return|;
 block|}
 comment|/**    * Checks that a SQL expression gives a particular error.    */
+specifier|public
 name|SqlValidatorFixture
 name|fails
 parameter_list|(
@@ -1235,6 +1238,7 @@ name|this
 return|;
 block|}
 comment|/**    * Checks that a SQL expression fails, giving an {@code expected} error,    * if {@code b} is true, otherwise succeeds.    */
+specifier|public
 name|SqlValidatorFixture
 name|failsIf
 parameter_list|(

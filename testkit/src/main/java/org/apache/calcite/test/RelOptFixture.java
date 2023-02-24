@@ -646,6 +646,7 @@ comment|/**  * A fixture for testing planner rules.  *  *<p>It provides a fluent
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|RelOptFixture
 block|{

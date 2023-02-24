@@ -349,22 +349,6 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
-name|function
-operator|.
-name|Function0
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
 name|tree
 operator|.
 name|Expression
@@ -960,6 +944,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Supplier
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -1012,7 +1008,7 @@ name|CalciteSchema
 name|rootSchema
 decl_stmt|;
 specifier|final
-name|Function0
+name|Supplier
 argument_list|<
 name|CalcitePrepare
 argument_list|>
@@ -1087,8 +1083,8 @@ operator|.
 name|prepareFactory
 operator|=
 name|driver
-operator|.
-name|prepareFactory
+operator|::
+name|createPrepare
 expr_stmt|;
 if|if
 condition|(
@@ -1721,7 +1717,7 @@ name|prepare
 init|=
 name|prepareFactory
 operator|.
-name|apply
+name|get
 argument_list|()
 decl_stmt|;
 return|return
