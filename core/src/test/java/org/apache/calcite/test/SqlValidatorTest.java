@@ -15240,7 +15240,7 @@ comment|// null); d) valid because existing window does not have an ORDER BY
 comment|// clause
 name|win
 argument_list|(
-literal|"window w as (w2 range 2 preceding ), w2 as (order by sal)"
+literal|"window w as (w2 range 2 preceding), w2 as (order by sal)"
 argument_list|)
 operator|.
 name|ok

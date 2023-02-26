@@ -3061,6 +3061,14 @@ operator|.
 name|createStatement
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"JOINEDAT\", \"JOINTIME\", \"JOINTIMES\" "
+operator|+
+literal|"from \"DATE\" where EMPNO = 100"
+decl_stmt|;
 name|ResultSet
 name|resultSet
 init|=
@@ -3068,7 +3076,7 @@ name|statement
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select \"JOINEDAT\", \"JOINTIME\", \"JOINTIMES\" from \"DATE\" where EMPNO = 100"
+name|sql
 argument_list|)
 decl_stmt|;
 name|resultSet

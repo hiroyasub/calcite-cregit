@@ -4342,7 +4342,8 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-comment|// No column equality predicates in source, but column equality predicates in target
+comment|// No column equality predicates in source, but column equality predicates
+comment|// in target
 return|return
 literal|null
 return|;
@@ -5416,8 +5417,9 @@ literal|"'"
 argument_list|)
 throw|;
 block|}
-comment|// Rewrite expr. First we take first element from the corresponding equivalence class,
-comment|// then we swap the table references following the table mapping
+comment|// Rewrite expr. First we take first element from the corresponding
+comment|// equivalence class, then we swap the table references following the
+comment|// table mapping
 specifier|final
 name|RexNode
 name|e

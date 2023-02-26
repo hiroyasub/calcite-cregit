@@ -2359,7 +2359,9 @@ name|Pattern
 operator|.
 name|compile
 argument_list|(
-literal|"(?s).*could not calculate results for the following row.*PC=5 Code=2201F.*"
+literal|"(?s).*could not calculate results for the following "
+operator|+
+literal|"row.*PC=5 Code=2201F.*"
 argument_list|)
 decl_stmt|;
 comment|/**    * Whether DECIMAL type is implemented.    */
@@ -32509,6 +32511,25 @@ name|getTimeInMillis
 argument_list|()
 decl_stmt|;
 specifier|final
+name|Consumer
+argument_list|<
+name|Holder
+argument_list|<
+name|Long
+argument_list|>
+argument_list|>
+name|consumer
+init|=
+name|o
+lambda|->
+name|o
+operator|.
+name|set
+argument_list|(
+name|timeInMillis
+argument_list|)
+decl_stmt|;
+specifier|final
 name|Hook
 operator|.
 name|Closeable
@@ -32520,23 +32541,7 @@ name|CURRENT_TIME
 operator|.
 name|addThread
 argument_list|(
-operator|(
-name|Consumer
-argument_list|<
-name|Holder
-argument_list|<
-name|Long
-argument_list|>
-argument_list|>
-operator|)
-name|o
-lambda|->
-name|o
-operator|.
-name|set
-argument_list|(
-name|timeInMillis
-argument_list|)
+name|consumer
 argument_list|)
 decl_stmt|;
 return|return

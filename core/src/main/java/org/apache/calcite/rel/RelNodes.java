@@ -17,20 +17,6 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|Utilities
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -116,7 +102,7 @@ block|{
 name|int
 name|c
 init|=
-name|Utilities
+name|Integer
 operator|.
 name|compare
 argument_list|(
@@ -220,7 +206,7 @@ specifier|final
 name|int
 name|c
 init|=
-name|Utilities
+name|Integer
 operator|.
 name|compare
 argument_list|(
@@ -254,7 +240,7 @@ name|c
 return|;
 block|}
 return|return
-name|Utilities
+name|Integer
 operator|.
 name|compare
 argument_list|(

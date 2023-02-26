@@ -930,6 +930,15 @@ name|call
 parameter_list|)
 block|{
 specifier|final
+name|SqlOperator
+name|operator
+init|=
+name|call
+operator|.
+name|getOperator
+argument_list|()
+decl_stmt|;
+specifier|final
 name|SqlOperandMetadata
 name|operandMetadata
 init|=
@@ -938,10 +947,7 @@ argument_list|(
 operator|(
 name|SqlOperandMetadata
 operator|)
-name|call
-operator|.
-name|getOperator
-argument_list|()
+name|operator
 operator|.
 name|getOperandTypeChecker
 argument_list|()
@@ -954,10 +960,7 @@ name|call
 operator|+
 literal|", operator "
 operator|+
-name|call
-operator|.
-name|getOperator
-argument_list|()
+name|operator
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1180,10 +1183,7 @@ operator|.
 name|getSimple
 argument_list|()
 argument_list|,
-name|call
-operator|.
-name|getOperator
-argument_list|()
+name|operator
 operator|.
 name|getName
 argument_list|()

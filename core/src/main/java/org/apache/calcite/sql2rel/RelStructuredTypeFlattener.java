@@ -1748,9 +1748,7 @@ argument_list|(
 name|structuredType
 argument_list|)
 decl_stmt|;
-name|RexNode
-name|rowConstructor
-init|=
+return|return
 name|rexBuilder
 operator|.
 name|makeCall
@@ -1763,9 +1761,6 @@ name|ROW
 argument_list|,
 name|structFields
 argument_list|)
-decl_stmt|;
-return|return
-name|rowConstructor
 return|;
 block|}
 specifier|protected

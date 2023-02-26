@@ -17375,40 +17375,6 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testFloorMssqlWeek
-parameter_list|()
-block|{
-name|String
-name|query
-init|=
-literal|"SELECT floor(\"hire_date\" TO WEEK) FROM \"employee\""
-decl_stmt|;
-name|String
-name|expected
-init|=
-literal|"SELECT CONVERT(DATETIME, CONVERT(VARCHAR(10), "
-operator|+
-literal|"DATEADD(day, - (6 + DATEPART(weekday, [hire_date] )) % 7, [hire_date] ), 126))\n"
-operator|+
-literal|"FROM [foodmart].[employee]"
-decl_stmt|;
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withMssql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-name|void
 name|testFetchMssql
 parameter_list|()
 block|{
@@ -17597,7 +17563,9 @@ name|expectedMssql
 init|=
 literal|"SELECT CONVERT(DATETIME, CONVERT(VARCHAR(10), "
 operator|+
-literal|"DATEADD(day, - (6 + DATEPART(weekday, [hire_date] )) % 7, [hire_date] ), 126))\n"
+literal|"DATEADD(day, - (6 + DATEPART(weekday, [hire_date] )) % 7, [hire_date] "
+operator|+
+literal|"), 126))\n"
 operator|+
 literal|"FROM [foodmart].[employee]"
 decl_stmt|;

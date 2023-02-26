@@ -118,16 +118,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
 import|import static
 name|java
 operator|.
@@ -164,7 +154,7 @@ parameter_list|(
 name|SqlValidatorImpl
 name|validator
 parameter_list|,
-name|ImmutableList
+name|List
 argument_list|<
 name|String
 argument_list|>
@@ -182,13 +172,11 @@ name|this
 operator|.
 name|names
 operator|=
-name|Objects
+name|ImmutableList
 operator|.
-name|requireNonNull
+name|copyOf
 argument_list|(
 name|names
-argument_list|,
-literal|"names"
 argument_list|)
 expr_stmt|;
 block|}

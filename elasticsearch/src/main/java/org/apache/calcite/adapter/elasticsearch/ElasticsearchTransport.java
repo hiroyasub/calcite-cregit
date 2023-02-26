@@ -1703,7 +1703,15 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"Error while querying Elastic (on %s/%s) status: %s\nPayload:\n%s\nError:\n%s\n"
+literal|"Error while querying Elastic (on %s/%s) status: %s\n"
+operator|+
+literal|"Payload:\n"
+operator|+
+literal|"%s\n"
+operator|+
+literal|"Error:\n"
+operator|+
+literal|"%s\n"
 argument_list|,
 name|response
 operator|.

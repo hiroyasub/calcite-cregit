@@ -433,17 +433,19 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Optional
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|Optional
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -950,8 +952,6 @@ block|{
 name|RelDataType
 name|relDataType
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rowType
@@ -1621,8 +1621,6 @@ name|getSession
 parameter_list|()
 block|{
 return|return
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|schema

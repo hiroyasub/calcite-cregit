@@ -985,9 +985,6 @@ operator|+
 literal|" is not found in schema "
 operator|+
 name|relOptSchema
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 return|;
 block|}
@@ -2193,14 +2190,14 @@ name|aggMap
 argument_list|)
 decl_stmt|;
 specifier|final
-name|Boolean
+name|boolean
 name|distinct
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|Boolean
 operator|)
-name|requireNonNull
-argument_list|(
 name|jsonAggCall
 operator|.
 name|get
@@ -2223,14 +2220,14 @@ name|Integer
 argument_list|>
 name|operands
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|List
 argument_list|<
 name|Integer
 argument_list|>
 operator|)
-name|requireNonNull
-argument_list|(
 name|jsonAggCall
 operator|.
 name|get

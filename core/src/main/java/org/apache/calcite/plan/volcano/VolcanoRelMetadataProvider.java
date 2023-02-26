@@ -192,12 +192,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -320,8 +322,6 @@ specifier|final
 name|RelMetadataProvider
 name|provider
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|rel

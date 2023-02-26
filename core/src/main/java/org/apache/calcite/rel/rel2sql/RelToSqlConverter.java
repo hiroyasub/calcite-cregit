@@ -7504,7 +7504,7 @@ argument_list|)
 argument_list|,
 parameter_list|()
 lambda|->
-literal|"non-null string value expected for 0th operand of AFTER call "
+literal|"non-null string expected for 0th operand of AFTER call "
 operator|+
 name|call
 argument_list|)

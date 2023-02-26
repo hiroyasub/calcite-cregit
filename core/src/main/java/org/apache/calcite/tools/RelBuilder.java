@@ -9934,7 +9934,11 @@ block|{
 annotation|@
 name|SuppressWarnings
 argument_list|(
+block|{
 literal|"unchecked"
+block|,
+literal|"rawtypes"
+block|}
 argument_list|)
 specifier|final
 name|List
@@ -9948,12 +9952,12 @@ init|=
 name|nodes
 operator|instanceof
 name|List
-condition|?
+operator|?
 operator|(
 name|List
 operator|)
 name|nodes
-else|:
+operator|:
 name|ImmutableList
 operator|.
 name|copyOf

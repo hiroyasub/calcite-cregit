@@ -753,7 +753,6 @@ argument_list|(
 name|now
 argument_list|)
 decl_stmt|;
-comment|//noinspection LoopStatementThatDoesntLoop
 for|for
 control|(
 name|String
@@ -1959,11 +1958,6 @@ name|CalciteSchema
 argument_list|>
 argument_list|()
 block|{
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"NullableProblems"
-argument_list|)
 annotation|@
 name|Override
 specifier|public

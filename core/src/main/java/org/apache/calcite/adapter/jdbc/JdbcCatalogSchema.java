@@ -619,8 +619,6 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-parameter_list|()
-lambda|->
 literal|"got null schemaName from the database"
 argument_list|)
 decl_stmt|;

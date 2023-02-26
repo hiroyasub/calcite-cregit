@@ -1426,7 +1426,7 @@ argument_list|()
 argument_list|,
 parameter_list|()
 lambda|->
-literal|"getTraitSet().getCollation() is null, current traits are "
+literal|"getTraitSet().getCollation() is null; traits are "
 operator|+
 name|getTraitSet
 argument_list|()

@@ -2909,7 +2909,7 @@ argument_list|(
 name|hint
 argument_list|)
 argument_list|,
-comment|// Rule to validate the hint.
+comment|// validates hint
 name|CoreRules
 operator|.
 name|FILTER_PROJECT_TRANSPOSE
@@ -3049,7 +3049,7 @@ name|hint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Rule to validate the hint.
+comment|// validates hint
 name|ruleFixture
 argument_list|()
 operator|.
@@ -3164,7 +3164,7 @@ name|hint
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Rule to validate the hint.
+comment|// validates hint
 name|ruleFixture
 argument_list|()
 operator|.

@@ -427,16 +427,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Set
 import|;
 end_import
@@ -464,6 +454,18 @@ operator|.
 name|Nullness
 operator|.
 name|castNonNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1806,8 +1808,6 @@ argument_list|)
 argument_list|,
 name|input
 lambda|->
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|input

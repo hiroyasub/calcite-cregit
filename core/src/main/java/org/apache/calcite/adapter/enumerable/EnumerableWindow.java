@@ -1593,7 +1593,8 @@ range|:
 name|aggs
 control|)
 block|{
-comment|// CALCITE-4326
+comment|// [CALCITE-4326] NullPointerException possible in EnumerableWindow when
+comment|// agg.call.name is null
 name|String
 name|name
 init|=
@@ -3739,10 +3740,7 @@ return|return
 name|hasRows
 return|;
 block|}
-comment|//noinspection UnnecessaryLocalVariable
-name|Expression
-name|res
-init|=
+return|return
 name|block
 operator|.
 name|append
@@ -3779,9 +3777,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-decl_stmt|;
-return|return
-name|res
 return|;
 block|}
 end_function

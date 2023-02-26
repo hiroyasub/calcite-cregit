@@ -279,19 +279,14 @@ literal|"   ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
+specifier|private
 specifier|static
 specifier|final
-name|List
-argument_list|<
 name|String
-argument_list|>
-name|QUERIES
+index|[]
+name|QUERY_ARRAY
 init|=
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-comment|// 01
+block|{
 literal|"select\n"
 operator|+
 literal|"  l_returnflag,\n"
@@ -335,7 +330,7 @@ operator|+
 literal|"  l_returnflag,\n"
 operator|+
 literal|"  l_linestatus"
-argument_list|,
+block|,
 comment|// 02
 literal|"select\n"
 operator|+
@@ -430,7 +425,7 @@ operator|+
 literal|"  p.p_partkey\n"
 operator|+
 literal|"limit 100"
-argument_list|,
+block|,
 comment|// 03
 literal|"select\n"
 operator|+
@@ -483,7 +478,7 @@ operator|+
 literal|"  o.o_orderdate\n"
 operator|+
 literal|"limit 10"
-argument_list|,
+block|,
 comment|// 04
 literal|"select\n"
 operator|+
@@ -530,7 +525,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  o_orderpriority"
-argument_list|,
+block|,
 comment|// 05
 literal|"select\n"
 operator|+
@@ -585,7 +580,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  revenue desc"
-argument_list|,
+block|,
 comment|// 06
 literal|"select\n"
 operator|+
@@ -606,7 +601,7 @@ operator|+
 literal|"  l_discount between 0.03 - 0.01 and 0.03 + 0.01\n"
 operator|+
 literal|"  and l_quantity< 24"
-argument_list|,
+block|,
 comment|// 07
 literal|"select\n"
 operator|+
@@ -685,7 +680,7 @@ operator|+
 literal|"  cust_nation,\n"
 operator|+
 literal|"  l_year"
-argument_list|,
+block|,
 comment|// 08
 literal|"select\n"
 operator|+
@@ -760,7 +755,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  o_year"
-argument_list|,
+block|,
 comment|// 09
 literal|"select\n"
 operator|+
@@ -825,7 +820,7 @@ operator|+
 literal|"  nation,\n"
 operator|+
 literal|"  o_year desc"
-argument_list|,
+block|,
 comment|// 10
 literal|"select\n"
 operator|+
@@ -890,7 +885,7 @@ operator|+
 literal|"  revenue desc\n"
 operator|+
 literal|"limit 20"
-argument_list|,
+block|,
 comment|// 11
 literal|"select\n"
 operator|+
@@ -945,7 +940,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  \"value\" desc"
-argument_list|,
+block|,
 comment|// 12
 literal|"select\n"
 operator|+
@@ -1002,7 +997,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  l.l_shipmode"
-argument_list|,
+block|,
 comment|// 13
 literal|"select\n"
 operator|+
@@ -1045,7 +1040,7 @@ operator|+
 literal|"  custdist desc,\n"
 operator|+
 literal|"  c_count desc"
-argument_list|,
+block|,
 comment|// 14
 literal|"select\n"
 operator|+
@@ -1072,7 +1067,7 @@ operator|+
 literal|"  and l.l_shipdate>= date '1994-08-01'\n"
 operator|+
 literal|"  and l.l_shipdate< date '1994-08-01' + interval '1' month"
-argument_list|,
+block|,
 comment|// 15
 literal|"with revenue0 (supplier_no, total_revenue) as (\n"
 operator|+
@@ -1133,7 +1128,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  s.s_suppkey"
-argument_list|,
+block|,
 comment|// 16
 literal|"select\n"
 operator|+
@@ -1194,7 +1189,7 @@ operator|+
 literal|"  p.p_type,\n"
 operator|+
 literal|"  p.p_size"
-argument_list|,
+block|,
 comment|// 17
 literal|"select\n"
 operator|+
@@ -1229,7 +1224,7 @@ operator|+
 literal|"      l2.l_partkey = p.p_partkey\n"
 operator|+
 literal|"  )"
-argument_list|,
+block|,
 comment|// 18
 literal|"select\n"
 operator|+
@@ -1296,7 +1291,7 @@ operator|+
 literal|"  o.o_orderdate\n"
 operator|+
 literal|"limit 100"
-argument_list|,
+block|,
 comment|// 19
 literal|"select\n"
 operator|+
@@ -1367,7 +1362,7 @@ operator|+
 literal|"    and l.l_shipinstruct = 'DELIVER IN PERSON'\n"
 operator|+
 literal|"  )"
-argument_list|,
+block|,
 comment|// 20
 literal|"select\n"
 operator|+
@@ -1442,7 +1437,7 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  s.s_name"
-argument_list|,
+block|,
 comment|// 21
 literal|"select\n"
 operator|+
@@ -1523,7 +1518,7 @@ operator|+
 literal|"  s.s_name\n"
 operator|+
 literal|"limit 100"
-argument_list|,
+block|,
 comment|// 22
 literal|"select\n"
 operator|+
@@ -1598,6 +1593,21 @@ operator|+
 literal|"order by\n"
 operator|+
 literal|"  cntrycode"
+block|}
+decl_stmt|;
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|QUERIES
+init|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|QUERY_ARRAY
 argument_list|)
 decl_stmt|;
 annotation|@

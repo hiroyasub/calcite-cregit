@@ -1469,19 +1469,13 @@ argument_list|,
 name|relBuilder
 argument_list|)
 decl_stmt|;
-specifier|final
-name|RelNode
-name|rel
-init|=
+return|return
 name|relFieldTrimmer
 operator|.
 name|trim
 argument_list|(
 name|relNode
 argument_list|)
-decl_stmt|;
-return|return
-name|rel
 return|;
 block|}
 comment|/**    * Returns whether {@code table} uses one or more of the tables in    * {@code usedTables}.    */

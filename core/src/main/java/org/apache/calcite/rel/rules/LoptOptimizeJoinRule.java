@@ -2620,8 +2620,6 @@ argument_list|(
 name|currFactor
 argument_list|)
 argument_list|,
-parameter_list|()
-lambda|->
 literal|"factorToOffsetMap.get(currFactor)"
 argument_list|)
 operator|+

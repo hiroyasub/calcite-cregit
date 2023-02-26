@@ -934,9 +934,6 @@ argument_list|(
 operator|new
 name|Interval
 argument_list|(
-operator|(
-name|String
-operator|)
 name|interval
 argument_list|,
 name|ISOChronology

@@ -629,9 +629,6 @@ operator|.
 name|getCluster
 argument_list|()
 decl_stmt|;
-name|RelNode
-name|newRel
-decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
@@ -749,8 +746,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|newRel
-operator|=
+return|return
 operator|new
 name|EnumerableMergeJoin
 argument_list|(
@@ -774,9 +770,6 @@ operator|.
 name|getJoinType
 argument_list|()
 argument_list|)
-expr_stmt|;
-return|return
-name|newRel
 return|;
 block|}
 block|}

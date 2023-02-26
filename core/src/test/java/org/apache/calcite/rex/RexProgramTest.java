@@ -22153,7 +22153,7 @@ literal|null
 argument_list|,
 literal|null
 argument_list|)
-block|{     }
+block|{         }
 decl_stmt|;
 comment|// Operator with no Strong.Policy defined: no simplification can be made
 name|checkSimplifyUnchanged
@@ -22225,7 +22225,7 @@ name|Policy
 operator|.
 name|AS_IS
 argument_list|)
-block|{     }
+block|{         }
 decl_stmt|;
 comment|// Operator with Strong.Policy.AS_IS: no simplification can be made
 name|checkSimplifyUnchanged
@@ -22297,7 +22297,7 @@ name|Policy
 operator|.
 name|ANY
 argument_list|)
-block|{     }
+block|{         }
 decl_stmt|;
 comment|// Operator with Strong.Policy.ANY: simplification possible with null parameter
 name|checkSimplifyUnchanged

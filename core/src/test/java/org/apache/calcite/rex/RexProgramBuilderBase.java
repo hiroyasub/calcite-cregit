@@ -1767,9 +1767,7 @@ name|RexNode
 name|literal
 parameter_list|)
 block|{
-name|RexNode
-name|rexNode
-init|=
+return|return
 name|rexBuilder
 operator|.
 name|makeCall
@@ -1782,9 +1780,6 @@ name|inputRef
 argument_list|,
 name|literal
 argument_list|)
-decl_stmt|;
-return|return
-name|rexNode
 return|;
 block|}
 comment|/**    * Generates {@code x IN (y, z)} expression when called as    * {@code in(x, y, z)}.    *    * @param node left side of the IN expression    * @param nodes nodes in the right side of IN expression    * @return IN expression    */

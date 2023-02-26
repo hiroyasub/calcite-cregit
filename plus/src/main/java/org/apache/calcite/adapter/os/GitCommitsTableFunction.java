@@ -654,7 +654,7 @@ index|]
 operator|=
 name|Long
 operator|.
-name|valueOf
+name|parseLong
 argument_list|(
 name|line
 operator|.
@@ -731,7 +731,7 @@ index|]
 operator|=
 name|Long
 operator|.
-name|valueOf
+name|parseLong
 argument_list|(
 name|line
 operator|.

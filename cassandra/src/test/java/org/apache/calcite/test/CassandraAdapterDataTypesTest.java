@@ -186,12 +186,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -688,8 +690,6 @@ comment|// timestamp retrieval depends on the user timezone, we must compute the
 name|long
 name|v
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|TypeCodecs

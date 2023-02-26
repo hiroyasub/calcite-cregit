@@ -1853,7 +1853,7 @@ name|transform
 argument_list|(
 name|columnList
 argument_list|,
-name|sqlNode
+name|node
 lambda|->
 operator|(
 operator|(
@@ -1861,9 +1861,9 @@ name|SqlIdentifier
 operator|)
 name|requireNonNull
 argument_list|(
-name|sqlNode
+name|node
 argument_list|,
-literal|"sqlNode"
+literal|"node"
 argument_list|)
 operator|)
 operator|.

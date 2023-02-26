@@ -155,6 +155,41 @@ operator|)
 name|ref
 return|;
 block|}
+comment|/**    * Allows you to treat an array of nullable values as an array of non-nullable    * values.    *    * @param<T>     Type of the array elements    * @param ts      Array    * @return the argument, cast so that elements are @NonNull    */
+annotation|@
+name|Pure
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+annotation|@
+name|NonNull
+name|T
+index|[]
+name|castNonNullArray
+parameter_list|(
+annotation|@
+name|Nullable
+name|T
+index|[]
+name|ts
+parameter_list|)
+block|{
+comment|//noinspection ConstantConditions,unchecked
+return|return
+operator|(
+expr|@
+name|NonNull
+name|T
+index|[]
+operator|)
+operator|(
+name|Object
+operator|)
+name|ts
+return|;
+block|}
 comment|/**    * Allows you to treat an uninitialized or under-initialization object as    * initialized with no assertions.    *    * @param<T>     The type of the reference    * @param ref     A reference that was @Uninitialized at some point but is    *                now fully initialized    *    * @return the argument, cast to have type qualifier @Initialized    */
 annotation|@
 name|SuppressWarnings

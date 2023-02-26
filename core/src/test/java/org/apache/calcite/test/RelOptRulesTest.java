@@ -2423,7 +2423,7 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2865">[CALCITE-2865]    * FilterProjectTransposeRule generates wrong traitSet when copyFilter/Project is true</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2865">[CALCITE-2865]    * FilterProjectTransposeRule generates wrong traitSet when    * copyFilter/copyProject is true</a>. */
 annotation|@
 name|Test
 name|void
@@ -2440,11 +2440,11 @@ name|Arrays
 operator|.
 name|asList
 argument_list|(
+comment|// default: copyFilter=true, copyProject=true
 name|CoreRules
 operator|.
 name|FILTER_PROJECT_TRANSPOSE
 argument_list|,
-comment|// default: copyFilter=true, copyProject=true
 name|CoreRules
 operator|.
 name|FILTER_PROJECT_TRANSPOSE

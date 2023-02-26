@@ -263,17 +263,19 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Set
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|Set
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -586,8 +588,6 @@ name|String
 name|operands
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|name
@@ -1005,8 +1005,6 @@ block|{
 name|String
 name|functionName
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|functionsTupleSet
@@ -1022,8 +1020,6 @@ decl_stmt|;
 name|String
 name|operandsType
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|functionsTupleSet

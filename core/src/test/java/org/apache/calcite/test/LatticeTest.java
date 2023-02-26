@@ -3693,6 +3693,14 @@ throws|throws
 name|SQLException
 block|{
 specifier|final
+name|String
+name|url
+init|=
+literal|"jdbc:calcite:model="
+operator|+
+literal|"core/src/test/resources/mysql-foodmart-lattice-model.json"
+decl_stmt|;
+specifier|final
 name|Connection
 name|connection
 init|=
@@ -3700,7 +3708,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:calcite:model=core/src/test/resources/mysql-foodmart-lattice-model.json"
+name|url
 argument_list|)
 decl_stmt|;
 specifier|final

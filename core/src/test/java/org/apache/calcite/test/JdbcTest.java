@@ -1773,18 +1773,6 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|equalTo
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|hamcrest
-operator|.
-name|CoreMatchers
-operator|.
 name|hasItem
 import|;
 end_import
@@ -3068,7 +3056,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N=1\n"
 operator|+
@@ -3141,7 +3129,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N={'a'=1, 'baz'=2}\n"
 operator|+
@@ -3194,7 +3182,9 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2], cast(1 as bigint))) as t(n)"
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2], cast(1 as bigint))) as t(n)"
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -3206,7 +3196,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N={'a'=1, 'baz'=2}\n"
 operator|+
@@ -3224,7 +3214,9 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2], true)) as t(n)"
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2], true)) as t(n)"
 argument_list|)
 expr_stmt|;
 name|assertThat
@@ -3236,7 +3228,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N={'a'=1, 'baz'=2}\n"
 operator|+
@@ -3254,7 +3246,9 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],"
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],"
 operator|+
 literal|"cast(cast(1 as int) as varchar(1)))) as t(n)"
 argument_list|)
@@ -3268,7 +3262,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N={'a'=1, 'baz'=2}\n"
 operator|+
@@ -3285,7 +3279,9 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],"
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],"
 operator|+
 literal|"cast(cast(cast('2019-10-18 10:35:23' as TIMESTAMP) as BIGINT) as VARCHAR))) as t(n)"
 argument_list|)
@@ -3299,7 +3295,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N={'a'=1, 'baz'=2}     \n"
 operator|+
@@ -3326,7 +3322,9 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select * from table(\"s\".\"view\"(5)) as t(n)"
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"view\"(5)) as t(n)"
 argument_list|)
 expr_stmt|;
 name|assertThat
@@ -3338,7 +3336,7 @@ argument_list|(
 name|resultSet
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"N=1\n"
 operator|+
@@ -6087,7 +6085,7 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"column 'z' not found"
 argument_list|)
@@ -6127,7 +6125,7 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"invalid column ordinal: 0"
 argument_list|)
@@ -6167,7 +6165,7 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"invalid column ordinal: 5"
 argument_list|)
@@ -7687,7 +7685,7 @@ name|assertThat
 argument_list|(
 name|bigDecimal
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 name|BigDecimal
 operator|.
@@ -9288,7 +9286,9 @@ name|calciteStatement
 operator|.
 name|executeQuery
 argument_list|(
-literal|"SELECT ID, CARDINALITY(VALS), VALS[2] FROM ARR_TABLE"
+literal|"SELECT ID, CARDINALITY(VALS), VALS[2]\n"
+operator|+
+literal|"FROM ARR_TABLE"
 argument_list|)
 expr_stmt|;
 name|assertTrue
@@ -9375,7 +9375,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"INTEGER"
 argument_list|)
@@ -9390,7 +9390,7 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"INTEGER ARRAY"
 argument_list|)
@@ -9405,7 +9405,7 @@ argument_list|(
 literal|3
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"VARCHAR(10) ARRAY"
 argument_list|)
@@ -9570,7 +9570,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|100
 argument_list|)
@@ -9585,7 +9585,7 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"[[x, y, z], [Bill]]"
 argument_list|)
@@ -9609,7 +9609,7 @@ operator|.
 name|getBaseType
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 name|Types
 operator|.
@@ -9637,7 +9637,7 @@ name|arrayValues
 operator|.
 name|length
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|2
 argument_list|)
@@ -9662,7 +9662,7 @@ operator|.
 name|getBaseType
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 name|Types
 operator|.
@@ -9690,7 +9690,7 @@ name|subArrayValues
 operator|.
 name|length
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|3
 argument_list|)
@@ -9703,7 +9703,7 @@ index|[
 literal|2
 index|]
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 operator|(
 name|Object
@@ -9743,7 +9743,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"x"
 argument_list|)
@@ -9783,7 +9783,7 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"invalid column ordinal: 2"
 argument_list|)
@@ -9838,7 +9838,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"z"
 argument_list|)
@@ -19730,7 +19730,7 @@ name|model
 argument_list|,
 name|not
 argument_list|(
-name|equalTo
+name|is
 argument_list|(
 name|FoodmartSchema
 operator|.
@@ -24615,7 +24615,9 @@ name|stmt
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select min(\"date\") mindate from \"foodmart\".\"currency\""
+literal|"select min(\"date\") mindate\n"
+operator|+
+literal|"from \"foodmart\".\"currency\""
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -24758,7 +24760,11 @@ name|stmt
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select \"hire_date\" from \"foodmart\".\"employee\" where \"employee_id\" = 1"
+literal|"select \"hire_date\"\n"
+operator|+
+literal|"from \"foodmart\".\"employee\"\n"
+operator|+
+literal|"where \"employee_id\" = 1"
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -25066,7 +25072,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"`"
 argument_list|)
@@ -25079,7 +25085,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25092,7 +25098,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25105,7 +25111,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25118,7 +25124,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25131,7 +25137,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25144,7 +25150,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25157,7 +25163,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25170,7 +25176,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25245,7 +25251,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"\""
 argument_list|)
@@ -25258,7 +25264,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25271,7 +25277,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25284,7 +25290,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25297,7 +25303,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25310,7 +25316,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25323,7 +25329,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25336,7 +25342,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25349,7 +25355,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25424,7 +25430,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"["
 argument_list|)
@@ -25437,7 +25443,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25450,7 +25456,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25463,7 +25469,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25476,7 +25482,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25489,7 +25495,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25502,7 +25508,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25515,7 +25521,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25528,7 +25534,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25603,7 +25609,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"\""
 argument_list|)
@@ -25616,7 +25622,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25629,7 +25635,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25642,7 +25648,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25655,7 +25661,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25668,7 +25674,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25684,7 +25690,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25697,7 +25703,7 @@ operator|.
 name|storesUpperCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25710,7 +25716,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25785,7 +25791,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"`"
 argument_list|)
@@ -25798,7 +25804,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25811,7 +25817,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25824,7 +25830,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25837,7 +25843,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25850,7 +25856,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -25863,7 +25869,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25876,7 +25882,7 @@ operator|.
 name|storesUpperCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -25889,7 +25895,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26006,7 +26012,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"`"
 argument_list|)
@@ -26019,7 +26025,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -26032,7 +26038,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26045,7 +26051,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26058,7 +26064,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26071,7 +26077,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -26084,7 +26090,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26097,7 +26103,7 @@ operator|.
 name|storesUpperCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26110,7 +26116,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26185,7 +26191,7 @@ operator|.
 name|getIdentifierQuoteString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"`"
 argument_list|)
@@ -26198,7 +26204,7 @@ operator|.
 name|supportsMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26211,7 +26217,7 @@ operator|.
 name|storesMixedCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -26224,7 +26230,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26237,7 +26243,7 @@ operator|.
 name|storesLowerCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26250,7 +26256,7 @@ operator|.
 name|supportsMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26263,7 +26269,7 @@ operator|.
 name|storesMixedCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|true
 argument_list|)
@@ -26276,7 +26282,7 @@ operator|.
 name|storesUpperCaseIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -26289,7 +26295,7 @@ operator|.
 name|storesLowerCaseQuotedIdentifiers
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|false
 argument_list|)
@@ -27088,7 +27094,7 @@ name|args
 operator|.
 name|length
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|2
 argument_list|)
@@ -27116,7 +27122,7 @@ index|[
 literal|0
 index|]
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"select \"deptno\", \"commission\", sum(\"salary\") s\n"
 operator|+
@@ -27162,7 +27168,7 @@ index|[
 literal|0
 index|]
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|0
 argument_list|)
@@ -27179,7 +27185,7 @@ index|[
 literal|0
 index|]
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|1
 argument_list|)
@@ -28804,7 +28810,7 @@ operator|.
 name|size
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|4
 argument_list|)
@@ -29448,7 +29454,7 @@ argument_list|(
 literal|"ID"
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|1
 argument_list|)
@@ -29466,7 +29472,7 @@ argument_list|(
 literal|"VALS"
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|1.0
 argument_list|)
@@ -29497,7 +29503,7 @@ argument_list|(
 literal|"ID"
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|2
 argument_list|)
@@ -29554,7 +29560,7 @@ argument_list|(
 literal|"VALS"
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|2.0
 argument_list|)
@@ -29873,7 +29879,7 @@ argument_list|(
 literal|"VALS"
 argument_list|)
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|2.0
 argument_list|)

@@ -740,6 +740,8 @@ init|=
 operator|new
 name|BlockBuilder
 argument_list|()
+decl_stmt|;
+name|blockBuilder
 operator|.
 name|append
 argument_list|(
@@ -855,7 +857,7 @@ name|limitValue
 argument_list|)
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 return|return
 name|implementor
 operator|.

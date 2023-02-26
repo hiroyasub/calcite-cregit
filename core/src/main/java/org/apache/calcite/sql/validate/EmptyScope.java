@@ -853,15 +853,10 @@ name|SchemaNamespace
 argument_list|(
 name|validator
 argument_list|,
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
 name|path
 operator|.
 name|stepNames
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 continue|continue;

@@ -214,7 +214,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Implementation of {@link org.apache.calcite.rel.core.Union} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  * Performs a union (or union all) of all its inputs (which must be already sorted),  * respecting the order. */
+comment|/** Implementation of {@link org.apache.calcite.rel.core.Union} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  *<p>Performs a union (or union all) of all its inputs (which must be already  * sorted), respecting the order. */
 end_comment
 
 begin_class
@@ -325,9 +325,9 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"EnumerableMergeUnion input does not satisfy collation. "
+literal|"EnumerableMergeUnion input does "
 operator|+
-literal|"EnumerableMergeUnion collation: "
+literal|"not satisfy collation. EnumerableMergeUnion collation: "
 operator|+
 name|collation
 operator|+

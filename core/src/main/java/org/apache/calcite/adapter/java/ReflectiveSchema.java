@@ -2010,8 +2010,6 @@ specifier|final
 name|Object
 name|o
 init|=
-name|requireNonNull
-argument_list|(
 name|method
 operator|.
 name|invoke
@@ -2026,6 +2024,10 @@ operator|.
 name|toArray
 argument_list|()
 argument_list|)
+decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|o
 argument_list|,
 parameter_list|()
 lambda|->
@@ -2037,7 +2039,7 @@ literal|" returned null for arguments "
 operator|+
 name|arguments
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 return|return
 operator|(
 name|TranslatableTable

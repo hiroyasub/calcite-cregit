@@ -3334,9 +3334,12 @@ argument_list|,
 name|expanded
 argument_list|)
 decl_stmt|;
-comment|// Re-derive SELECT ITEM's data type that may be nullable in AggregatingSelectScope when it
-comment|// appears in advanced grouping elements such as CUBE, ROLLUP , GROUPING SETS.
-comment|// For example, SELECT CASE WHEN c = 1 THEN '1' ELSE '23' END AS x FROM t GROUP BY CUBE(x),
+comment|// Re-derive SELECT ITEM's data type that may be nullable in
+comment|// AggregatingSelectScope when it appears in advanced grouping elements such
+comment|// as CUBE, ROLLUP, GROUPING SETS. For example, in
+comment|//   SELECT CASE WHEN c = 1 THEN '1' ELSE '23' END AS x
+comment|//   FROM t
+comment|//   GROUP BY CUBE(x)
 comment|// the 'x' should be nullable even if x's literal values are not null.
 if|if
 condition|(
@@ -18134,8 +18137,9 @@ operator|.
 name|getRowType
 argument_list|()
 decl_stmt|;
-name|RelDataType
-name|colType
+specifier|final
+name|RelDataTypeField
+name|field
 init|=
 name|requireNonNull
 argument_list|(
@@ -18158,12 +18162,12 @@ literal|" in "
 operator|+
 name|rowType
 argument_list|)
+decl_stmt|;
+return|return
+name|field
 operator|.
 name|getType
 argument_list|()
-decl_stmt|;
-return|return
-name|colType
 return|;
 block|}
 comment|/** Validates a column in a USING clause, or an inferred join key in a    * NATURAL join, in the left or right input to the join. */
@@ -25103,6 +25107,8 @@ specifier|final
 name|SqlNodeList
 name|targetColumnList
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 operator|(
 name|SqlUpdate
@@ -25112,17 +25118,11 @@ operator|)
 operator|.
 name|getTargetColumnList
 argument_list|()
+argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|targetColumnList
-operator|!=
-literal|null
-condition|)
-block|{
 specifier|final
 name|int
-name|targetColumnCnt
+name|targetColumnCount
 init|=
 name|targetColumnList
 operator|.
@@ -25139,7 +25139,7 @@ name|typeFactory
 argument_list|,
 name|targetRowType
 argument_list|,
-name|targetColumnCnt
+name|targetColumnCount
 argument_list|)
 expr_stmt|;
 name|sourceRowType
@@ -25152,10 +25152,9 @@ name|typeFactory
 argument_list|,
 name|sourceRowType
 argument_list|,
-name|targetColumnCnt
+name|targetColumnCount
 argument_list|)
 expr_stmt|;
-block|}
 name|isUpdateModifiableViewTable
 operator|=
 name|table
@@ -27597,9 +27596,6 @@ block|{
 name|identifier
 operator|=
 operator|(
-name|SqlIdentifier
-operator|)
-operator|(
 operator|(
 name|SqlBasicCall
 operator|)
@@ -27616,11 +27612,11 @@ else|else
 block|{
 name|identifier
 operator|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|SqlIdentifier
 operator|)
-name|requireNonNull
-argument_list|(
 name|node
 argument_list|,
 parameter_list|()
@@ -29108,11 +29104,11 @@ specifier|final
 name|PivotScope
 name|scope
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|PivotScope
 operator|)
-name|requireNonNull
-argument_list|(
 name|getJoinScope
 argument_list|(
 name|pivot

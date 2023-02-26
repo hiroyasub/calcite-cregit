@@ -2332,12 +2332,12 @@ name|score
 expr_stmt|;
 block|}
 block|}
-comment|// if a suitable dimension table has been found, associate it
+comment|// If a suitable dimension table has been found, associate it
 comment|// with the fact table in the chosenSemiJoins array; also remove
-comment|// the entry from possibleSemiJoins so we won't chose it again;
-comment|// note that we create the SemiJoin using the chosen semijoins
+comment|// the entry from possibleSemiJoins, so we won't choose it again;
+comment|// note that we create the SemiJoin using the chosen semi-joins
 comment|// already created for each factor so any chaining of filters will
-comment|// be accounted for
+comment|// be accounted for.
 if|if
 condition|(
 name|bestDimIdx
@@ -2346,11 +2346,6 @@ operator|-
 literal|1
 condition|)
 block|{
-name|int
-name|bestDimIdxFinal
-init|=
-name|bestDimIdx
-decl_stmt|;
 name|LogicalJoin
 name|semiJoin
 init|=
@@ -2360,16 +2355,10 @@ name|possibleDimensions
 operator|.
 name|get
 argument_list|(
-name|bestDimIdxFinal
+name|bestDimIdx
 argument_list|)
 argument_list|,
-parameter_list|()
-lambda|->
-literal|"possibleDimensions.get("
-operator|+
-name|bestDimIdxFinal
-operator|+
-literal|") is null"
+literal|"possibleDimensions.get(bestDimIdx)"
 argument_list|)
 decl_stmt|;
 name|LogicalJoin

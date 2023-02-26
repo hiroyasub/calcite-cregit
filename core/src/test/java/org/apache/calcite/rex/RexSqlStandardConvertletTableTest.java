@@ -249,15 +249,23 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|jupiter
+name|MatcherAssert
 operator|.
-name|api
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
 operator|.
-name|Assertions
+name|hamcrest
 operator|.
-name|assertEquals
+name|Matchers
+operator|.
+name|hasToString
 import|;
 end_import
 
@@ -323,14 +331,14 @@ argument_list|(
 name|rex
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|assertThat
+argument_list|(
+name|convertedSql
+argument_list|,
+name|hasToString
 argument_list|(
 literal|"CASE WHEN NULL IS NOT NULL THEN NULL ELSE 'a' END"
-argument_list|,
-name|convertedSql
-operator|.
-name|toString
-argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -386,14 +394,14 @@ argument_list|(
 name|rex
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|assertThat
+argument_list|(
+name|convertedSql
+argument_list|,
+name|hasToString
 argument_list|(
 literal|"CASE WHEN NULL = NULL THEN NULL ELSE 'a' END"
-argument_list|,
-name|convertedSql
-operator|.
-name|toString
-argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -404,6 +412,12 @@ name|testCaseNoValue
 parameter_list|()
 block|{
 specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT CASE WHEN NULL IS NULL THEN NULL ELSE 'a' END"
+decl_stmt|;
+specifier|final
 name|Project
 name|project
 init|=
@@ -412,7 +426,7 @@ name|Project
 operator|)
 name|convertSqlToRel
 argument_list|(
-literal|"SELECT CASE WHEN NULL IS NULL THEN NULL ELSE 'a' END"
+name|sql
 argument_list|,
 literal|false
 argument_list|)
@@ -449,14 +463,14 @@ argument_list|(
 name|rex
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|assertThat
+argument_list|(
+name|convertedSql
+argument_list|,
+name|hasToString
 argument_list|(
 literal|"CASE WHEN NULL IS NULL THEN NULL ELSE 'a' END"
-argument_list|,
-name|convertedSql
-operator|.
-name|toString
-argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

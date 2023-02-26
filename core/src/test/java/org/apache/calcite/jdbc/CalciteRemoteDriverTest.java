@@ -790,7 +790,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Test for Calcite's remote JDBC driver.  * Technically speaking, the test is thread safe, however Caclite/Avatica have thread-safety issues  * see https://issues.apache.org/jira/browse/CALCITE-2853.  */
+comment|/**  * Test for Calcite's remote JDBC driver.  *  *<p>Technically, the test is thread-safe, however Calcite/Avatica have  * thread-safety issues; see  *<a href="https://issues.apache.org/jira/browse/CALCITE-2853">  * [CALCITE-2853] avatica.MetaImpl and calcite.jdbc.CalciteMetaImpl are not  * thread-safe</a>.  */
 end_comment
 
 begin_class
@@ -1104,15 +1104,11 @@ name|connect
 argument_list|()
 expr_stmt|;
 comment|// Make sure we pick an ephemeral port for the server
-name|start
-operator|=
-name|Main
-operator|.
-name|start
-argument_list|(
-operator|new
+specifier|final
 name|String
 index|[]
+name|args
+init|=
 block|{
 name|Factory
 operator|.
@@ -1121,6 +1117,14 @@ operator|.
 name|getName
 argument_list|()
 block|}
+decl_stmt|;
+name|start
+operator|=
+name|Main
+operator|.
+name|start
+argument_list|(
+name|args
 argument_list|,
 literal|0
 argument_list|,
@@ -5949,7 +5953,9 @@ name|connection
 operator|.
 name|prepareStatement
 argument_list|(
-literal|"insert into \"foo\".\"bar\" values (?, ?, ?, ?, ?)"
+literal|"insert into \"foo\".\"bar\"\n"
+operator|+
+literal|"values (?, ?, ?, ?, ?)"
 argument_list|)
 decl_stmt|;
 name|pst

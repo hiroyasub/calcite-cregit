@@ -382,13 +382,10 @@ init|=
 name|mapper
 argument_list|()
 decl_stmt|;
-name|JsonRoot
-name|root
+specifier|final
+name|String
+name|json
 init|=
-name|mapper
-operator|.
-name|readValue
-argument_list|(
 literal|"{\n"
 operator|+
 literal|"  version: '1.0',\n"
@@ -466,6 +463,15 @@ operator|+
 literal|"   ]\n"
 operator|+
 literal|"}"
+decl_stmt|;
+name|JsonRoot
+name|root
+init|=
+name|mapper
+operator|.
+name|readValue
+argument_list|(
+name|json
 argument_list|,
 name|JsonRoot
 operator|.
@@ -683,13 +689,10 @@ init|=
 name|mapper
 argument_list|()
 decl_stmt|;
-name|JsonRoot
-name|root
+specifier|final
+name|String
+name|json
 init|=
-name|mapper
-operator|.
-name|readValue
-argument_list|(
 literal|"{\n"
 operator|+
 literal|"  version: '1.0',\n"
@@ -717,6 +720,15 @@ operator|+
 literal|"   ]\n"
 operator|+
 literal|"}"
+decl_stmt|;
+name|JsonRoot
+name|root
+init|=
+name|mapper
+operator|.
+name|readValue
+argument_list|(
+name|json
 argument_list|,
 name|JsonRoot
 operator|.

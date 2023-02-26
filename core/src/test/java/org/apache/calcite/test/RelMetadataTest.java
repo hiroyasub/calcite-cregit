@@ -10485,9 +10485,7 @@ decl_stmt|;
 specifier|final
 name|EnumerableMergeJoin
 name|join
-decl_stmt|;
-name|join
-operator|=
+init|=
 name|EnumerableMergeJoin
 operator|.
 name|create
@@ -10511,7 +10509,7 @@ name|JoinRelType
 operator|.
 name|INNER
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|collations
 operator|=
 name|RelMdCollation

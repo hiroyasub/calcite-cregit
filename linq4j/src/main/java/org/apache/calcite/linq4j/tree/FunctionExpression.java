@@ -552,14 +552,11 @@ name|classLoader
 init|=
 name|requireNonNull
 argument_list|(
-name|requireNonNull
-argument_list|(
 name|getClass
 argument_list|()
 operator|.
 name|getClassLoader
 argument_list|()
-argument_list|)
 argument_list|)
 decl_stmt|;
 comment|//noinspection unchecked

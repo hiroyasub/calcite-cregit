@@ -957,6 +957,18 @@ name|Pattern
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression representing a scan of a Druid data set.  */
 end_comment
@@ -1698,8 +1710,6 @@ name|this
 operator|.
 name|converterOperatorMap
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|converterOperatorMap
@@ -5447,8 +5457,6 @@ name|EXTRACT_COLUMN_NAME_PREFIX
 operator|+
 literal|"_"
 operator|+
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|DruidDateTimeUtils
@@ -5491,8 +5499,6 @@ name|FLOOR_COLUMN_NAME_PREFIX
 operator|+
 literal|"_"
 operator|+
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|DruidDateTimeUtils
@@ -9531,8 +9537,6 @@ name|this
 operator|.
 name|queryType
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|queryType
@@ -9544,8 +9548,6 @@ name|this
 operator|.
 name|queryString
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|queryString

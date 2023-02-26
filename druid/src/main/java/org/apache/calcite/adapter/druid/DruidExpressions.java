@@ -267,17 +267,19 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|TimeZone
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|TimeZone
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -1121,8 +1123,6 @@ argument_list|>
 name|args
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|functionName
@@ -1130,8 +1130,6 @@ argument_list|,
 literal|"druid functionName"
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|args
@@ -1183,8 +1181,6 @@ specifier|final
 name|String
 name|arg
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|args
@@ -1260,8 +1256,6 @@ argument_list|>
 name|args
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|druidOperator
@@ -1269,8 +1263,6 @@ argument_list|,
 literal|"druid operator missing"
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|args
@@ -1320,8 +1312,6 @@ specifier|final
 name|String
 name|arg
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|args
@@ -1490,8 +1480,6 @@ name|TimeZone
 name|timeZone
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|input
@@ -1499,8 +1487,6 @@ argument_list|,
 literal|"input"
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|granularity
@@ -1570,8 +1556,6 @@ name|TimeZone
 name|timeZone
 parameter_list|)
 block|{
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|input
@@ -1579,8 +1563,6 @@ argument_list|,
 literal|"input"
 argument_list|)
 expr_stmt|;
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|granularity

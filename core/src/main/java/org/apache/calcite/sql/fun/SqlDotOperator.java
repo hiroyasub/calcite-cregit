@@ -1255,8 +1255,8 @@ name|class
 argument_list|)
 decl_stmt|;
 specifier|final
-name|RelDataType
-name|type
+name|RelDataTypeField
+name|field
 init|=
 name|requireNonNull
 argument_list|(
@@ -1281,6 +1281,12 @@ literal|" is not found in "
 operator|+
 name|recordType
 argument_list|)
+decl_stmt|;
+specifier|final
+name|RelDataType
+name|type
+init|=
+name|field
 operator|.
 name|getType
 argument_list|()

@@ -161,19 +161,21 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|stream
+operator|.
+name|Collectors
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|stream
+name|Objects
 operator|.
-name|Collectors
+name|requireNonNull
 import|;
 end_import
 
@@ -349,8 +351,6 @@ argument_list|)
 expr_stmt|;
 name|def
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 operator|(
@@ -444,8 +444,6 @@ block|{
 name|Method
 name|metadataMethod
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|methodMap
@@ -468,8 +466,6 @@ decl_stmt|;
 name|RelNode
 name|rel
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 operator|(
@@ -486,8 +482,6 @@ decl_stmt|;
 name|RelMetadataQuery
 name|mq
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 operator|(
@@ -503,6 +497,15 @@ argument_list|)
 decl_stmt|;
 comment|// using deprecated RelMetadataProvider method here as the non-deprecated methods completely
 comment|// sidestep the purpose of RelMetadataProvider reflection-based functionality.
+annotation|@
+name|SuppressWarnings
+argument_list|(
+block|{
+literal|"unchecked"
+block|,
+literal|"rawtypes"
+block|}
+argument_list|)
 name|UnboundMetadata
 name|metadata
 init|=
@@ -510,14 +513,6 @@ name|provider
 operator|.
 name|apply
 argument_list|(
-operator|(
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|RelNode
-argument_list|>
-operator|)
 name|rel
 operator|.
 name|getClass
@@ -598,11 +593,11 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"No handler for "
+literal|"No handler for method [%s] applied to "
 operator|+
-literal|"method [%s] applied to argument of type [%s]; we recommend you create a "
+literal|"argument of type [%s]; we recommend you create a catch-all "
 operator|+
-literal|"catch-all (RelNode) handler"
+literal|"(RelNode) handler"
 argument_list|,
 name|handlerMethod
 argument_list|,
@@ -617,8 +612,6 @@ block|}
 name|Metadata
 name|bound
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|metadata

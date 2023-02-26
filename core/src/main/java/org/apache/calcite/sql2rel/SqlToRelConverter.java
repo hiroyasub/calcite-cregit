@@ -5505,8 +5505,7 @@ name|bb
 operator|.
 name|root
 assert|;
-comment|// Usual case: all of the expressions in the SELECT clause are
-comment|// different.
+comment|// Usual case: all expressions in the SELECT clause are different.
 specifier|final
 name|ImmutableBitSet
 name|groupSet
@@ -17455,10 +17454,6 @@ argument_list|(
 name|joinRel
 argument_list|)
 expr_stmt|;
-specifier|final
-name|RelNode
-name|newProjectRel
-init|=
 name|relBuilder
 operator|.
 name|project
@@ -17468,15 +17463,15 @@ operator|.
 name|fields
 argument_list|()
 argument_list|)
-operator|.
-name|build
-argument_list|()
-decl_stmt|;
+expr_stmt|;
 name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|newProjectRel
+name|relBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|,
 literal|false
 argument_list|)
@@ -17549,11 +17544,11 @@ specifier|final
 name|SqlNodeList
 name|list
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|SqlNodeList
 operator|)
-name|requireNonNull
-argument_list|(
 name|join
 operator|.
 name|getCondition
@@ -22065,11 +22060,10 @@ argument_list|(
 name|call
 argument_list|)
 decl_stmt|;
-name|RelNode
-name|sourceRel
+specifier|final
+name|SqlSelect
+name|sourceSelect
 init|=
-name|convertSelect
-argument_list|(
 name|requireNonNull
 argument_list|(
 name|call
@@ -22083,6 +22077,13 @@ literal|"sourceSelect for "
 operator|+
 name|call
 argument_list|)
+decl_stmt|;
+name|RelNode
+name|sourceRel
+init|=
+name|convertSelect
+argument_list|(
+name|sourceSelect
 argument_list|,
 literal|false
 argument_list|)
@@ -22121,14 +22122,9 @@ name|call
 parameter_list|)
 block|{
 specifier|final
-name|SqlValidatorScope
-name|scope
+name|SqlSelect
+name|sourceSelect
 init|=
-name|validator
-argument_list|()
-operator|.
-name|getWhereScope
-argument_list|(
 name|requireNonNull
 argument_list|(
 name|call
@@ -22142,6 +22138,17 @@ literal|"sourceSelect for "
 operator|+
 name|call
 argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlValidatorScope
+name|scope
+init|=
+name|validator
+argument_list|()
+operator|.
+name|getWhereScope
+argument_list|(
+name|sourceSelect
 argument_list|)
 decl_stmt|;
 name|Blackboard
@@ -22244,9 +22251,6 @@ operator|:
 literal|"column "
 operator|+
 name|id
-operator|.
-name|toString
-argument_list|()
 operator|+
 literal|" not found"
 assert|;
@@ -22266,19 +22270,7 @@ name|sourceRel
 init|=
 name|convertSelect
 argument_list|(
-name|requireNonNull
-argument_list|(
-name|call
-operator|.
-name|getSourceSelect
-argument_list|()
-argument_list|,
-parameter_list|()
-lambda|->
-literal|"sourceSelect for "
-operator|+
-name|call
-argument_list|)
+name|sourceSelect
 argument_list|,
 literal|false
 argument_list|)
@@ -22486,11 +22478,10 @@ comment|// 2) all columns from the target table (if there is an update)
 comment|// 3) the set expressions in the update call (if there is an update)
 comment|// first, convert the merge's source select to construct the columns
 comment|// from the target table and the set expressions in the update call
-name|RelNode
-name|mergeSourceRel
+specifier|final
+name|SqlSelect
+name|sourceSelect
 init|=
-name|convertSelect
-argument_list|(
 name|requireNonNull
 argument_list|(
 name|call
@@ -22504,6 +22495,13 @@ literal|"sourceSelect for "
 operator|+
 name|call
 argument_list|)
+decl_stmt|;
+name|RelNode
+name|mergeSourceRel
+init|=
+name|convertSelect
+argument_list|(
+name|sourceSelect
 argument_list|,
 literal|false
 argument_list|)

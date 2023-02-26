@@ -145,17 +145,19 @@ name|java
 operator|.
 name|util
 operator|.
-name|Objects
+name|Properties
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
-name|Properties
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -290,14 +292,13 @@ operator|new
 name|Properties
 argument_list|()
 decl_stmt|;
-comment|// read properties from the file "saffron.properties", if it exists in classpath
+comment|// Read properties from the file "saffron.properties", if it exists in
+comment|// classpath.
 try|try
 init|(
 name|InputStream
 name|stream
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|Helper
@@ -342,7 +343,7 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"while reading from saffron.properties file"
+literal|"while reading saffron.properties file"
 argument_list|,
 name|e
 argument_list|)
@@ -393,8 +394,6 @@ decl_stmt|;
 name|String
 name|value
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|source

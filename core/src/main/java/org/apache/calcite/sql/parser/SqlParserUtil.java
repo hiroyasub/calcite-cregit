@@ -2233,11 +2233,6 @@ operator|.
 name|DEFAULT
 argument_list|)
 expr_stmt|;
-assert|assert
-name|ret
-operator|!=
-literal|null
-assert|;
 block|}
 catch|catch
 parameter_list|(
@@ -2448,11 +2443,6 @@ operator|.
 name|DEFAULT
 argument_list|)
 expr_stmt|;
-assert|assert
-name|ret
-operator|!=
-literal|null
-assert|;
 block|}
 catch|catch
 parameter_list|(

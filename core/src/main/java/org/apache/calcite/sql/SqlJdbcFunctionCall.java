@@ -329,9 +329,6 @@ argument_list|,
 literal|"UCASE"
 argument_list|)
 decl_stmt|;
-comment|// "ASCII", "CHAR", "DIFFERENCE", "LOWER",
-comment|// "LEFT", "TRIM", "REPEAT", "REPLACE",
-comment|// "RIGHT", "SPACE", "SUBSTRING", "UPPER", "INITCAP", "OVERLAY"
 comment|/** List of all time/date function names defined by JDBC. */
 specifier|private
 specifier|static

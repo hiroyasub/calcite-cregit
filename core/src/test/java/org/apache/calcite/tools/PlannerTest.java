@@ -2804,11 +2804,10 @@ name|rules
 init|=
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptRule
-operator|>
 name|builder
 argument_list|()
+decl_stmt|;
+name|rules
 operator|.
 name|add
 argument_list|(
@@ -2836,7 +2835,7 @@ name|EnumerableRules
 operator|.
 name|ENUMERABLE_UNION_RULE
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|rules
 operator|.
 name|add
@@ -3234,6 +3233,12 @@ name|ruleSet
 argument_list|)
 argument_list|)
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from \"emps\" order by \"emps\".\"deptno\""
+decl_stmt|;
 name|SqlNode
 name|parse
 init|=
@@ -3241,9 +3246,7 @@ name|planner
 operator|.
 name|parse
 argument_list|(
-literal|"select * from \"emps\" "
-operator|+
-literal|"order by \"emps\".\"deptno\""
+name|sql
 argument_list|)
 decl_stmt|;
 name|SqlNode
@@ -3380,13 +3383,10 @@ name|ruleSet
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|SqlNode
-name|parse
+specifier|final
+name|String
+name|sql
 init|=
-name|planner
-operator|.
-name|parse
-argument_list|(
 literal|"select e.\"deptno\" from \"emps\" e "
 operator|+
 literal|"left outer join \"depts\" d "
@@ -3396,6 +3396,15 @@ operator|+
 literal|"order by e.\"deptno\" "
 operator|+
 literal|"limit 10"
+decl_stmt|;
+name|SqlNode
+name|parse
+init|=
+name|planner
+operator|.
+name|parse
+argument_list|(
+name|sql
 argument_list|)
 decl_stmt|;
 name|SqlNode
@@ -3845,13 +3854,10 @@ name|ruleSet
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|SqlNode
-name|parse
+specifier|final
+name|String
+name|sql
 init|=
-name|planner
-operator|.
-name|parse
-argument_list|(
 literal|"select \"empid\" from ( "
 operator|+
 literal|"select * "
@@ -3861,6 +3867,15 @@ operator|+
 literal|"order by \"emps\".\"deptno\") "
 operator|+
 literal|"order by \"deptno\""
+decl_stmt|;
+name|SqlNode
+name|parse
+init|=
+name|planner
+operator|.
+name|parse
+argument_list|(
+name|sql
 argument_list|)
 decl_stmt|;
 name|SqlNode
@@ -3954,6 +3969,12 @@ name|standard
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into \"emps\" values(1, 1, null, 1, 1)"
+decl_stmt|;
 name|SqlNode
 name|parse
 init|=
@@ -3961,7 +3982,7 @@ name|planner
 operator|.
 name|parse
 argument_list|(
-literal|"insert into \"emps\" values(1, 1, null, 1, 1)"
+name|sql
 argument_list|)
 decl_stmt|;
 name|SqlNode
@@ -4515,6 +4536,14 @@ argument_list|(
 literal|null
 argument_list|)
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (select * from \"emps\") as t\n"
+operator|+
+literal|"where \"name\" like '%e%'"
+decl_stmt|;
 name|SqlNode
 name|parse
 init|=
@@ -4522,9 +4551,7 @@ name|planner
 operator|.
 name|parse
 argument_list|(
-literal|"select * from (select * from \"emps\") as t\n"
-operator|+
-literal|"where \"name\" like '%e%'"
+name|sql
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -7271,7 +7298,9 @@ name|plan
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{7}])\n"
+literal|"EnumerableCorrelate(correlation=[$cor0], joinType=[inner], "
+operator|+
+literal|"requiredColumns=[{7}])\n"
 operator|+
 literal|"  EnumerableUnion(all=[true])\n"
 operator|+

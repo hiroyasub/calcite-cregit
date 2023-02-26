@@ -809,6 +809,18 @@ name|verifyNotNull
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Factory for row expressions.  *  *<p>Some common literal values (NULL, TRUE, FALSE, 0, 1, '') are cached.</p>  */
 end_comment
@@ -1667,8 +1679,6 @@ name|aggCallMapping
 argument_list|,
 name|i
 lambda|->
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|aggArgTypes
@@ -4661,8 +4671,6 @@ block|{
 return|return
 name|makeLiteral
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|s
@@ -4997,8 +5005,6 @@ block|{
 return|return
 name|makeLiteral
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|date
@@ -5066,8 +5072,6 @@ block|{
 return|return
 name|makeLiteral
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|time
@@ -5107,8 +5111,6 @@ block|{
 return|return
 name|makeLiteral
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|time
@@ -5178,8 +5180,6 @@ block|{
 return|return
 name|makeLiteral
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|timestamp
@@ -5219,8 +5219,6 @@ block|{
 return|return
 name|makeLiteral
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|timestamp
@@ -5519,8 +5517,6 @@ decl_stmt|;
 name|RelDataType
 name|sargType
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeFactory
@@ -5792,8 +5788,6 @@ decl_stmt|;
 name|RelDataType
 name|sargType
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|typeFactory

@@ -1231,6 +1231,20 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(s.StringUnion(\n"
+operator|+
+literal|"  GenerateStrings(5),\n"
+operator|+
+literal|"  cursor (select name from emps)))\n"
+operator|+
+literal|"where char_length(s)> 3"
+decl_stmt|;
 name|ResultSet
 name|resultSet
 init|=
@@ -1241,15 +1255,7 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select *\n"
-operator|+
-literal|"from table(s.StringUnion(\n"
-operator|+
-literal|"  GenerateStrings(5),\n"
-operator|+
-literal|"  cursor (select name from emps)))\n"
-operator|+
-literal|"where char_length(s)> 3"
+name|sql
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -1360,6 +1366,16 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"s\".\"emps_view\"\n"
+operator|+
+literal|"where \"empid\"< 120"
+decl_stmt|;
 name|ResultSet
 name|resultSet
 init|=
@@ -1370,24 +1386,23 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select *\n"
-operator|+
-literal|"from \"s\".\"emps_view\"\n"
-operator|+
-literal|"where \"empid\"< 120"
+name|sql
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|assertThat
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
-operator|+
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
-argument_list|,
 name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
 name|resultSet
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
+operator|+
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1603,18 +1618,17 @@ operator|.
 name|createStatement
 argument_list|()
 decl_stmt|;
+comment|// "hr_emps" -> "hr"."emps", 4 rows
 name|ResultSet
 name|resultSet
-decl_stmt|;
-name|resultSet
-operator|=
+init|=
 name|statement
 operator|.
 name|executeQuery
 argument_list|(
 literal|"select * from \"s\".\"hr_emps\""
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|assertEquals
 argument_list|(
 literal|4
@@ -1625,7 +1639,7 @@ name|resultSet
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// "hr_emps" -> "hr"."emps", 4 rows
+comment|// "s_emps" -> "s"."emps", 3 rows
 name|resultSet
 operator|=
 name|statement
@@ -1635,7 +1649,6 @@ argument_list|(
 literal|"select * from \"s\".\"s_emps\""
 argument_list|)
 expr_stmt|;
-comment|// "s_emps" -> "s"."emps", 3 rows
 name|assertEquals
 argument_list|(
 literal|3
@@ -1646,6 +1659,7 @@ name|resultSet
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// "null_emps" -> "s"."emps", 3
 name|resultSet
 operator|=
 name|statement
@@ -1655,7 +1669,6 @@ argument_list|(
 literal|"select * from \"s\".\"null_emps\""
 argument_list|)
 expr_stmt|;
-comment|// "null_emps" -> "s"."emps", 3
 name|assertEquals
 argument_list|(
 literal|3

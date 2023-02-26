@@ -224,13 +224,9 @@ operator|.
 name|createStatement
 argument_list|()
 decl_stmt|;
-name|ResultSet
-name|resultSet
+name|String
+name|sql
 init|=
-name|statement
-operator|.
-name|executeQuery
-argument_list|(
 literal|"SELECT \"b\".\"author\", \"b\".\"retailCost\", \"i\".\"quantityInStock\"\n"
 operator|+
 literal|"FROM \"TEST\".\"BookMaster\" AS \"b\" "
@@ -240,6 +236,15 @@ operator|+
 literal|"  ON \"b\".\"itemNumber\" = \"i\".\"itemNumber\"\n "
 operator|+
 literal|"WHERE  \"b\".\"retailCost\"> 0"
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+name|sql
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -330,9 +335,6 @@ argument_list|(
 literal|"Result entry: "
 operator|+
 name|buf
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|buf

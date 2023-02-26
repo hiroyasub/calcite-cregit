@@ -120,12 +120,14 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -243,8 +245,6 @@ name|this
 operator|.
 name|abbrev
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|abbrev
@@ -256,8 +256,6 @@ name|this
 operator|.
 name|fun
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|fun
@@ -357,8 +355,6 @@ block|{
 name|SqlLibrary
 name|library
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|SqlLibrary

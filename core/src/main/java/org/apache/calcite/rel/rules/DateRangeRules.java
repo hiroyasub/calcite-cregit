@@ -1968,11 +1968,11 @@ specifier|final
 name|TimeUnitRange
 name|timeUnit
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|TimeUnitRange
 operator|)
-name|requireNonNull
-argument_list|(
 name|flag
 operator|.
 name|getValue
@@ -2148,11 +2148,11 @@ specifier|final
 name|TimeUnitRange
 name|timeUnit
 init|=
+name|requireNonNull
+argument_list|(
 operator|(
 name|TimeUnitRange
 operator|)
-name|requireNonNull
-argument_list|(
 name|flag
 operator|.
 name|getValue

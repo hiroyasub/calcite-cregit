@@ -1602,7 +1602,7 @@ operator|,
 name|err
 block|}
 argument_list|)
-init|;         }
+init|;              }
 block_content|)
 block|)
 block|{

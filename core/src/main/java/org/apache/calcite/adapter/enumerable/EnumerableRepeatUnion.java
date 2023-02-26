@@ -238,12 +238,30 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+operator|.
+name|last
+import|;
+end_import
+
+begin_import
+import|import static
 name|java
 operator|.
 name|util
 operator|.
 name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -420,8 +438,6 @@ name|implementor
 operator|.
 name|stash
 argument_list|(
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|transientTable
@@ -442,22 +458,12 @@ decl_stmt|;
 name|String
 name|tableName
 init|=
-name|transientTable
-operator|.
-name|getQualifiedName
-argument_list|()
-operator|.
-name|get
+name|last
 argument_list|(
 name|transientTable
 operator|.
 name|getQualifiedName
 argument_list|()
-operator|.
-name|size
-argument_list|()
-operator|-
-literal|1
 argument_list|)
 decl_stmt|;
 name|Expression

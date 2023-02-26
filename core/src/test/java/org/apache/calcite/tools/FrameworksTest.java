@@ -1148,7 +1148,7 @@ argument_list|(
 name|typeFactory
 argument_list|)
 argument_list|)
-block|{           }
+block|{               }
 decl_stmt|;
 specifier|final
 name|EnumerableTableScan

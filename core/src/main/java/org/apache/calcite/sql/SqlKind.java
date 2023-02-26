@@ -1811,7 +1811,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/** Returns the kind that you get if you apply NOT to this kind.    *    *<p>For example, {@code IS_NOT_NULL.negate()} returns {@link #IS_NULL}.    *    *<p>For {@link #IS_TRUE}, {@link #IS_FALSE}, {@link #IS_NOT_TRUE},    * {@link #IS_NOT_FALSE}, nullable inputs need to be treated carefully.    *    *<p>{@code NOT(IS_TRUE(null))} = {@code NOT(false)} = {@code true},    * while {@code IS_FALSE(null)} = {@code false},    * so {@code NOT(IS_TRUE(X))} should be {@code IS_NOT_TRUE(X)}.    * On the other hand,    * {@code IS_TRUE(NOT(null))} = {@code IS_TRUE(null)} = {@code false}.    *    *<p>This is why negate() != negateNullSafe() for these operators.    */
+comment|/** Returns the kind that you get if you apply NOT to this kind.    *    *<p>For example, {@code IS_NOT_NULL.negate()} returns {@link #IS_NULL}.    *    *<p>For {@link #IS_TRUE}, {@link #IS_FALSE}, {@link #IS_NOT_TRUE},    * {@link #IS_NOT_FALSE}, nullable inputs need to be treated carefully.    *    *<p>{@code NOT(IS_TRUE(null))} = {@code NOT false} = {@code true},    * while {@code IS_FALSE(null)} = {@code false},    * so {@code NOT(IS_TRUE(X))} should be {@code IS_NOT_TRUE(X)}.    * On the other hand,    * {@code IS_TRUE(NOT(null))} = {@code IS_TRUE(null)} = {@code false}.    *    *<p>This is why negate() != negateNullSafe() for these operators.    */
 specifier|public
 name|SqlKind
 name|negate

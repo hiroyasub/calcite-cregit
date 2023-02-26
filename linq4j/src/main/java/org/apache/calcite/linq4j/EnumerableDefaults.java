@@ -17850,6 +17850,12 @@ parameter_list|)
 block|{
 comment|// Use LinkedHashMap because groupJoin requires order of keys to be
 comment|// preserved.
+comment|// Java 8 cannot infer return type with LinkedHashMap::new is used
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"Convert2MethodRef"
+argument_list|)
 specifier|final
 name|Map
 argument_list|<
@@ -17863,7 +17869,6 @@ operator|new
 name|WrapMap
 argument_list|<>
 argument_list|(
-comment|// Java 8 cannot infer return type with LinkedHashMap::new is used
 parameter_list|()
 lambda|->
 operator|new

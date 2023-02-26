@@ -244,16 +244,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -266,6 +256,18 @@ operator|.
 name|Static
 operator|.
 name|RESOURCE
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+operator|.
+name|requireNonNull
 import|;
 end_import
 
@@ -320,8 +322,6 @@ name|this
 operator|.
 name|table
 operator|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|table
@@ -626,8 +626,6 @@ specifier|final
 name|SqlValidatorTable
 name|validatorTable
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|relOptTable
@@ -683,8 +681,6 @@ specifier|final
 name|Table
 name|schemaTable
 init|=
-name|Objects
-operator|.
 name|requireNonNull
 argument_list|(
 name|table

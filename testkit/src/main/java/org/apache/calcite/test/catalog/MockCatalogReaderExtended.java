@@ -440,9 +440,11 @@ name|viewMacro
 argument_list|(
 name|rootSchema
 argument_list|,
-literal|"select EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, SLACKER from EMPDEFAULTS"
+literal|"select EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, SLACKER\n"
 operator|+
-literal|" where DEPTNO = 20"
+literal|"from EMPDEFAULTS\n"
+operator|+
+literal|"where DEPTNO = 20"
 argument_list|,
 name|empModifiableViewNames
 operator|.
@@ -564,11 +566,13 @@ name|viewMacro
 argument_list|(
 name|rootSchema
 argument_list|,
-literal|"select ENAME, EMPNO, JOB, DEPTNO, SLACKER, SAL, EXTRA, HIREDATE, MGR, COMM"
+literal|"select ENAME, EMPNO, JOB, DEPTNO, SLACKER, SAL, EXTRA, HIREDATE,"
 operator|+
-literal|" from EMPDEFAULTS extend (EXTRA boolean)"
+literal|" MGR, COMM\n"
 operator|+
-literal|" where DEPTNO = 20"
+literal|"from EMPDEFAULTS extend (EXTRA boolean)\n"
+operator|+
+literal|"where DEPTNO = 20"
 argument_list|,
 name|empModifiableViewNames2
 operator|.
@@ -689,9 +693,11 @@ name|viewMacro
 argument_list|(
 name|rootSchema
 argument_list|,
-literal|"select EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, SLACKER from EMPDEFAULTS"
+literal|"select EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, SLACKER\n"
 operator|+
-literal|" where DEPTNO = 20"
+literal|"from EMPDEFAULTS\n"
+operator|+
+literal|"where DEPTNO = 20"
 argument_list|,
 name|empModifiableViewNames3
 operator|.

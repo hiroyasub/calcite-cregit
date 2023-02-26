@@ -6036,11 +6036,10 @@ argument_list|()
 decl_stmt|;
 comment|// can directly add positions into corDefOutputs since join
 comment|// does not change the output ordering from the inputs.
+specifier|final
 name|RelNode
 name|valueGen
 init|=
-name|requireNonNull
-argument_list|(
 name|createValueGenerator
 argument_list|(
 name|corVarList
@@ -6049,10 +6048,14 @@ name|leftInputOutputCount
 argument_list|,
 name|corDefOutputs
 argument_list|)
-argument_list|,
-literal|"createValueGenerator(...) is null"
-argument_list|)
 decl_stmt|;
+name|requireNonNull
+argument_list|(
+name|valueGen
+argument_list|,
+literal|"valueGen"
+argument_list|)
+expr_stmt|;
 name|RelNode
 name|join
 init|=
@@ -6075,18 +6078,6 @@ argument_list|(
 name|JoinRelType
 operator|.
 name|INNER
-argument_list|,
-name|relBuilder
-operator|.
-name|literal
-argument_list|(
-literal|true
-argument_list|)
-argument_list|,
-name|ImmutableSet
-operator|.
-name|of
-argument_list|()
 argument_list|)
 operator|.
 name|build
