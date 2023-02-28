@@ -47673,6 +47673,170 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testDatetimeTrunc
+parameter_list|()
+block|{
+name|SqlOperatorFixture
+name|nonBigQuery
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_TRUNC
+argument_list|)
+decl_stmt|;
+name|nonBigQuery
+operator|.
+name|checkFails
+argument_list|(
+literal|"^datetime_trunc(timestamp '2012-05-02 15:30:00', hour)^"
+argument_list|,
+literal|"No match found for function signature "
+operator|+
+literal|"DATETIME_TRUNC\\(<TIMESTAMP>,<INTERVAL_DAY_TIME>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|DATETIME_TRUNC
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^datetime_trunc(100, hour)^"
+argument_list|,
+literal|"Cannot apply 'DATETIME_TRUNC' to arguments of type "
+operator|+
+literal|"'DATETIME_TRUNC\\(<INTEGER>,<INTERVAL HOUR>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'DATETIME_TRUNC\\(<TIMESTAMP>,<DATETIME_INTERVAL>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^datetime_trunc(100, foo)^"
+argument_list|,
+literal|"Cannot apply 'DATETIME_TRUNC' to arguments of type "
+operator|+
+literal|"'DATETIME_TRUNC\\(<INTEGER>,<INTERVAL `FOO`>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'DATETIME_TRUNC\\(<TIMESTAMP>,<DATETIME_INTERVAL>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56.78', second)"
+argument_list|,
+literal|"2015-02-19 12:34:56"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56', minute)"
+argument_list|,
+literal|"2015-02-19 12:34:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56', hour)"
+argument_list|,
+literal|"2015-02-19 12:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56', day)"
+argument_list|,
+literal|"2015-02-19 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56', week)"
+argument_list|,
+literal|"2015-02-15 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56', month)"
+argument_list|,
+literal|"2015-02-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"datetime_trunc(timestamp '2015-02-19 12:34:56', year)"
+argument_list|,
+literal|"2015-01-01 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testDateTrunc
 parameter_list|()
 block|{

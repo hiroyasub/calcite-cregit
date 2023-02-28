@@ -2781,7 +2781,7 @@ operator|.
 name|TIMEDATE
 argument_list|)
 decl_stmt|;
-comment|/** The "DATETIME" function returns a Calcite    * {@code TIMESTAMP} (which BigQuery calls a {@code DATETIME}).    * It has the following overloads:    *    *<ul>    *<li>{@code DATETIME(year, month, day, hour, minute, second)}    *<li>{@code DATETIME(date[, time])}    *<li>{@code DATETIME(timestampLtz[, timeZone])}    *</ul>    */
+comment|/** The "DATETIME" function returns a Calcite    * {@code TIMESTAMP} (which BigQuery calls a {@code DATETIME}).    *    *<p>It has the following overloads:    *    *<ul>    *<li>{@code DATETIME(year, month, day, hour, minute, second)}    *<li>{@code DATETIME(date[, time])}    *<li>{@code DATETIME(timestampLtz[, timeZone])}    *</ul>    */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -4173,7 +4173,7 @@ operator|.
 name|STRING
 argument_list|)
 decl_stmt|;
-comment|/** The "FORMAT_DATETIME(string, timestamp)" function (BigQuery);    * Formats a timestamp object according to the specified string. */
+comment|/** The "FORMAT_DATETIME(string, timestamp)" function (BigQuery);    * formats a timestamp object according to the specified string.    *    *<p>Note that the {@code TIMESTAMP} type of Calcite and Standard SQL    * is called {@code DATETIME} in BigQuery. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -4582,7 +4582,7 @@ operator|.
 name|TIMEDATE
 argument_list|)
 decl_stmt|;
-comment|/** BigQuery's {@code DATETIME_SUB(timestamp, interval)} function    * is a synonym for TIMESTAMP_SUB because in Calcite, DATETIME    * is an alias for TIMESTAMP. */
+comment|/** The "DATETIME_SUB(timestamp, interval)" function (BigQuery).    *    *<p>Note that the {@code TIMESTAMP} type of Calcite and Standard SQL    * is called {@code DATETIME} in BigQuery.    *    *<p>A synonym for {@link #TIMESTAMP_SUB}, which supports both    * {@code TIMESTAMP} and {@code TIMESTAMP WITH LOCAL TIME ZONE} operands. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -4605,7 +4605,7 @@ argument_list|(
 literal|"DATETIME_SUB"
 argument_list|)
 decl_stmt|;
-comment|/** The "TIMESTAMP_TRUNC(timestamp, timeUnit[, timeZone])" function (BigQuery);    * truncates a TIMESTAMP value to the beginning of a timeUnit. */
+comment|/** The "TIMESTAMP_TRUNC(timestamp, timeUnit[, timeZone])" function (BigQuery);    * truncates a {@code TIMESTAMP WITH LOCAL TIME ZONE} value to the beginning    * of a timeUnit.    *    *<p>Note that the {@code TIMESTAMP WITH LOCAL TIME ZONE} type of Calcite    * is called {@code TIMESTAMP} in BigQuery. */
 annotation|@
 name|LibraryOperator
 argument_list|(
@@ -4636,6 +4636,53 @@ operator|.
 name|sequence
 argument_list|(
 literal|"'TIMESTAMP_TRUNC(<TIMESTAMP>,<DATETIME_INTERVAL>)'"
+argument_list|,
+name|OperandTypes
+operator|.
+name|TIMESTAMP
+argument_list|,
+name|OperandTypes
+operator|.
+name|timestampInterval
+argument_list|()
+argument_list|)
+argument_list|,
+name|SqlFunctionCategory
+operator|.
+name|TIMEDATE
+argument_list|)
+decl_stmt|;
+comment|/** The "DATETIME_TRUNC(timestamp, timeUnit)" function (BigQuery);    * truncates a TIMESTAMP value to the beginning of a timeUnit.    *    *<p>Note that the {@code TIMESTAMP} type of Calcite and Standard SQL    * is called {@code DATETIME} in BigQuery. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|DATETIME_TRUNC
+init|=
+name|SqlBasicFunction
+operator|.
+name|create
+argument_list|(
+literal|"DATETIME_TRUNC"
+argument_list|,
+name|ReturnTypes
+operator|.
+name|TIMESTAMP_NULLABLE
+argument_list|,
+name|OperandTypes
+operator|.
+name|sequence
+argument_list|(
+literal|"'DATETIME_TRUNC(<TIMESTAMP>,<DATETIME_INTERVAL>)'"
 argument_list|,
 name|OperandTypes
 operator|.
@@ -4885,7 +4932,7 @@ argument_list|(
 literal|"DATETIME_ADD"
 argument_list|)
 decl_stmt|;
-comment|/** The "DATETIME_DIFF(timestamp, timestamp2, timeUnit)" function (BigQuery). */
+comment|/** The "DATETIME_DIFF(timestamp, timestamp2, timeUnit)" function (BigQuery).    *    *<p>Note that the {@code TIMESTAMP} type of Calcite and Standard SQL    * is called {@code DATETIME} in BigQuery. */
 annotation|@
 name|LibraryOperator
 argument_list|(
