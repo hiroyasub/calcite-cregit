@@ -1936,12 +1936,13 @@ name|expression
 operator|.
 name|matches
 argument_list|(
-literal|"(?i).*percentile_(cont|disc).*"
+literal|"(?i).*(percentile_(cont|disc)|convert)\\(.*"
 argument_list|)
 condition|)
 block|{
 comment|// PERCENTILE_CONT requires its argument to be a literal,
 comment|// so converting its argument to a column will cause false errors.
+comment|// Similarly, MSSQL-style CONVERT.
 return|return
 name|buildQuery
 argument_list|(

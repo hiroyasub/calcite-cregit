@@ -6743,6 +6743,132 @@ literal|"cast(cast(null as timestamp) as time)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testMssqlConvert
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|MSSQL_CONVERT
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
+argument_list|)
+expr_stmt|;
+comment|// happy-paths (no need to test all, proper functionality is tested by CAST already
+comment|// just need to make sure it works at all
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"convert(INTEGER, 45.4)"
+argument_list|,
+literal|"45"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"convert(DATE, '2000-01-01')"
+argument_list|,
+literal|"2000-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// null-values
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"convert(DATE, NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testMssqlConvertWithStyle
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|fixture
+argument_list|()
+decl_stmt|;
+name|f
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|MSSQL_CONVERT
+argument_list|,
+name|VmName
+operator|.
+name|EXPAND
+argument_list|)
+expr_stmt|;
+comment|// ensure 'style' argument is ignored
+comment|// 3rd argument 'style' is a literal. However,
+comment|// AbstractSqlTester converts values to a single value in a column.
+comment|// see AbstractSqlTester.buildQuery2
+comment|// But CONVERT 'style' is supposed to be a literal.
+comment|// So for now, they are put in a @Disabled test
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"convert(INTEGER, 45.4, 999)"
+argument_list|,
+literal|"45"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"convert(DATE, '2000-01-01', 999)"
+argument_list|,
+literal|"2000-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// including 'NULL' style argument
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"convert(DATE, '2000-01-01', NULL)"
+argument_list|,
+literal|"2000-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 name|Calendar

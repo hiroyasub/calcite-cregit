@@ -9892,6 +9892,62 @@ literal|"(?s).*Encountered \"without\" at line 1, column 23.\n.*"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test for MSSQL CONVERT parsing, with focus on iffy DATE type and    * testing that the extra "style" operand is parsed    * Other tests are defined in functions.iq    */
+annotation|@
+name|Test
+name|void
+name|testMssqlConvert
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"CONVERT(VARCHAR(5), 'xx')"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"CONVERT(VARCHAR(5), 'xx')"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"CONVERT(VARCHAR(5), NULL)"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"CONVERT(VARCHAR(5), NULL, NULL)"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"CONVERT(DATE, 'xx', 121)"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"CONVERT(DATE, 'xx')"
+argument_list|)
+operator|.
+name|same
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void
