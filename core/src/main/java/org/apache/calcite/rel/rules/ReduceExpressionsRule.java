@@ -315,6 +315,22 @@ name|rel
 operator|.
 name|type
 operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
 name|RelDataTypeFactory
 import|;
 end_import
@@ -4929,6 +4945,14 @@ comment|// Also, we cannot reduce CAST('abc' AS VARCHAR(4)) to 'abc'.
 comment|// If we make 'abc' of type VARCHAR(4), we may later encounter
 comment|// the same expression in a Project's digest where it has
 comment|// type VARCHAR(3), and that's wrong.
+name|RelDataType
+name|type
+init|=
+name|call
+operator|.
+name|getType
+argument_list|()
+decl_stmt|;
 name|replacement
 operator|=
 name|simplify
@@ -4937,12 +4961,11 @@ name|rexBuilder
 operator|.
 name|makeAbstractCast
 argument_list|(
-name|call
-operator|.
-name|getType
-argument_list|()
+name|type
 argument_list|,
 name|replacement
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

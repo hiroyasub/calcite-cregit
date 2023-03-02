@@ -870,6 +870,8 @@ literal|"KEYWORD(ROW_NUMBER)"
 argument_list|,
 literal|"KEYWORD(RUNNING)"
 argument_list|,
+literal|"KEYWORD(SAFE_CAST)"
+argument_list|,
 literal|"KEYWORD(SECOND)"
 argument_list|,
 literal|"KEYWORD(SESSION_USER)"

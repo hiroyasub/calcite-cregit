@@ -558,6 +558,9 @@ block|,
 comment|/**    * The "CAST" operator, and also the PostgreSQL-style infix cast operator    * "::".    */
 name|CAST
 block|,
+comment|/** The {@code SAFE_CAST} function, which is similar to {@link #CAST} but    * returns NULL rather than throwing an error if the conversion fails. */
+name|SAFE_CAST
+block|,
 comment|/**    * The "NEXT VALUE OF sequence" operator.    */
 name|NEXT_VALUE
 block|,

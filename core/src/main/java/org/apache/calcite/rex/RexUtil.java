@@ -13277,6 +13277,8 @@ argument_list|,
 name|simplifiedNode
 argument_list|,
 name|matchNullability
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}

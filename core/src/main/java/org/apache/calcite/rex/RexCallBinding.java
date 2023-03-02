@@ -409,6 +409,9 @@ block|{
 case|case
 name|CAST
 case|:
+case|case
+name|SAFE_CAST
+case|:
 return|return
 operator|new
 name|RexCastCallBinding

@@ -1339,6 +1339,8 @@ argument_list|(
 name|type
 argument_list|,
 name|e
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}

@@ -3644,6 +3644,15 @@ argument_list|,
 literal|"longValue"
 argument_list|)
 block|,
+name|STRING_TO_UPPER
+argument_list|(
+name|String
+operator|.
+name|class
+argument_list|,
+literal|"toUpperCase"
+argument_list|)
+block|,
 name|COMPARATOR_COMPARE
 argument_list|(
 name|Comparator

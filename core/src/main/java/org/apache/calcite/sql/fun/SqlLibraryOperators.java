@@ -905,8 +905,11 @@ operator|::
 name|transformConvert
 argument_list|,
 name|SqlCastFunction
-operator|::
-name|inferReturnTypeImpl
+operator|.
+name|returnTypeInference
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 argument_list|,
 name|OperandTypes
@@ -5701,6 +5704,30 @@ init|=
 operator|new
 name|SqlCastOperator
 argument_list|()
+decl_stmt|;
+comment|/** The "SAFE_CAST(expr AS type)" function; identical to CAST(),    * except that if conversion fails, it returns NULL instead of raising an    * error. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|SAFE_CAST
+init|=
+operator|new
+name|SqlCastFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|SAFE_CAST
+argument_list|)
 decl_stmt|;
 comment|/** NULL-safe "&lt;=&gt;" equal operator used by MySQL, for example    * {@code 1<=>NULL}. */
 annotation|@
