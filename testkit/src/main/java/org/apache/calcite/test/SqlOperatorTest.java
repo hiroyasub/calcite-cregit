@@ -1467,24 +1467,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
-operator|.
-name|test
-operator|.
-name|SqlOperatorFixture
-operator|.
-name|STRING_TRUNC_MESSAGE
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|util
 operator|.
 name|DateTimeStringUtils
@@ -3083,25 +3065,17 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(2.523 as char(2))"
 argument_list|,
-name|STRING_TRUNC_MESSAGE
+literal|"2."
 argument_list|,
-literal|true
+literal|"CHAR(2) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|f
 operator|.
 name|checkString
@@ -3220,36 +3194,28 @@ literal|"-1E-1"
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(1.3243232e0 as varchar(4))"
 argument_list|,
-name|STRING_TRUNC_MESSAGE
+literal|"1.32"
 argument_list|,
-literal|true
+literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(1.9e5 as char(4))"
 argument_list|,
-name|STRING_TRUNC_MESSAGE
+literal|"1.9E"
 argument_list|,
-literal|true
+literal|"CHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// string
 name|f
 operator|.
@@ -3539,58 +3505,50 @@ argument_list|,
 literal|"FALSE"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(true as char(3))"
 argument_list|,
-name|INVALID_CHAR_MESSAGE
+literal|"TRU"
 argument_list|,
-literal|true
+literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(false as char(4))"
 argument_list|,
-name|INVALID_CHAR_MESSAGE
+literal|"FALS"
 argument_list|,
-literal|true
+literal|"CHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(true as varchar(3))"
 argument_list|,
-name|INVALID_CHAR_MESSAGE
+literal|"TRU"
 argument_list|,
-literal|true
+literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkString
 argument_list|(
 literal|"cast(false as varchar(4))"
 argument_list|,
-name|INVALID_CHAR_MESSAGE
+literal|"FALS"
 argument_list|,
-literal|true
+literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -6399,69 +6357,61 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1241241' as TIME)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"72:40:12"
 argument_list|,
-literal|true
+literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('12:54:78' as TIME)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"12:55:18"
 argument_list|,
-literal|true
+literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('12:34:5' as TIME)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"12:34:05"
 argument_list|,
-literal|true
+literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('12:3:45' as TIME)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"12:03:45"
 argument_list|,
-literal|true
+literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1:23:45' as TIME)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"01:23:45"
 argument_list|,
-literal|true
+literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// timestamp<-> string
 name|f
 operator|.
@@ -6588,58 +6538,50 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1241241' as TIMESTAMP)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"1241-01-01 00:00:00"
 argument_list|,
-literal|true
+literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1945-20-24 12:42:25.34' as TIMESTAMP)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"1946-08-26 12:42:25"
 argument_list|,
-literal|true
+literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1945-01-24 25:42:25.34' as TIMESTAMP)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"1945-01-25 01:42:25"
 argument_list|,
-literal|true
+literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1945-1-24 12:23:34.454' as TIMESTAMP)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"1945-01-24 12:23:34"
 argument_list|,
-literal|true
+literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// date<-> string
 name|f
 operator|.
@@ -6707,36 +6649,28 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('52534253' as DATE)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"7368-10-13"
 argument_list|,
-literal|true
+literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"cast('1945-30-24' as DATE)"
 argument_list|,
-name|BAD_DATETIME_MESSAGE
+literal|"1947-06-26"
 argument_list|,
-literal|true
+literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// cast null
 name|f
 operator|.
@@ -8711,36 +8645,28 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"{fn DAYOFWEEK(DATE '2014-12-10')}"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"4"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"{fn DAYOFYEAR(DATE '2014-12-10')}"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"344"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|f
 operator|.
 name|checkScalar
@@ -8869,25 +8795,17 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"{fn WEEK(DATE '2014-12-10')}"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"50"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|f
 operator|.
 name|checkScalar
@@ -10541,25 +10459,17 @@ argument_list|(
 literal|"1e1 / cast(null as float)"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
-name|checkFails
+name|checkScalarExact
 argument_list|(
 literal|"100.1 / 0.00000000000000001"
 argument_list|,
-name|OUT_OF_RANGE_MESSAGE
+literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|,
-literal|true
+literal|"1.001E+19"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -39670,37 +39580,24 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
-comment|// TODO: Not implemented in operator test execution code
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"week(date '2008-1-23')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"4"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkNull
 argument_list|(
 literal|"week(cast(null as date))"
-argument_list|,
-literal|"cannot translate call EXTRACT.*"
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -39728,37 +39625,24 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
-comment|// TODO: Not implemented in operator test execution code
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
-literal|"dayofyear(date '2008-1-23')"
+literal|"dayofyear(date '2008-01-23')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"23"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkNull
 argument_list|(
 literal|"dayofyear(cast(null as date))"
-argument_list|,
-literal|"cannot translate call EXTRACT.*"
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -39831,37 +39715,24 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
-comment|// TODO: Not implemented in operator test execution code
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"dayofweek(date '2008-1-23')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"4"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|checkFails
+name|checkNull
 argument_list|(
 literal|"dayofweek(cast(null as date))"
-argument_list|,
-literal|"cannot translate call EXTRACT.*"
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -40130,11 +40001,18 @@ expr_stmt|;
 block|}
 comment|// Postgres doesn't support DOW, ISODOW, DOY and WEEK on INTERVAL YEAR MONTH type.
 comment|// SQL standard doesn't have extract units for DOW, ISODOW, DOY and WEEK.
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|f
 operator|.
 name|checkFails
 argument_list|(
-literal|"^extract(doy from interval '4-2' year to month)^"
+literal|"extract(doy from interval '4-2' year to month)"
 argument_list|,
 name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
 argument_list|,
@@ -40174,6 +40052,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+block|}
 name|f
 operator|.
 name|checkScalar
@@ -40380,13 +40259,6 @@ argument_list|)
 expr_stmt|;
 comment|// Postgres doesn't support DOW, ISODOW, DOY and WEEK on INTERVAL DAY TIME type.
 comment|// SQL standard doesn't have extract units for DOW, ISODOW, DOY and WEEK.
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
 name|f
 operator|.
 name|checkFails
@@ -40431,7 +40303,6 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-block|}
 name|f
 operator|.
 name|checkFails
@@ -40716,6 +40587,17 @@ name|f
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(dayofyear from date '2008-2-23')"
+argument_list|,
+literal|"54"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(dow from date '2008-2-23')"
 argument_list|,
 literal|"7"
@@ -40730,6 +40612,17 @@ argument_list|(
 literal|"extract(dow from date '2008-2-24')"
 argument_list|,
 literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(dayofweek from date '2008-2-23')"
+argument_list|,
+literal|"7"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
@@ -41072,50 +40965,39 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|CALCITE_2539_FIXED
-condition|)
-block|{
-comment|// TODO: Not implemented in operator test execution code
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"extract(doy from timestamp '2008-2-23 12:34:56')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"54"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Not implemented in operator test execution code
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"extract(dow from timestamp '2008-2-23 12:34:56')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"7"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Not implemented in operator test execution code
 name|f
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"extract(week from timestamp '2008-2-23 12:34:56')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"8"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|f
 operator|.
 name|checkScalar
@@ -54406,6 +54288,11 @@ comment|// they are truncated. See testCastTruncates().
 block|}
 else|else
 block|{
+comment|// Value outside legal bound should fail at runtime (not
+comment|// validate time).
+comment|//
+comment|// NOTE: Because Java and Fennel calcs give
+comment|// different errors, the pattern hedges its bets.
 if|if
 condition|(
 name|Bug
@@ -54413,11 +54300,6 @@ operator|.
 name|CALCITE_2539_FIXED
 condition|)
 block|{
-comment|// Value outside legal bound should fail at runtime (not
-comment|// validate time).
-comment|//
-comment|// NOTE: Because Java and Fennel calcs give
-comment|// different errors, the pattern hedges its bets.
 name|f
 operator|.
 name|checkFails
