@@ -19129,7 +19129,6 @@ end_comment
 
 begin_function
 specifier|private
-specifier|static
 name|boolean
 name|checkIfCorrelated
 parameter_list|(
@@ -19161,6 +19160,19 @@ condition|)
 block|{
 return|return
 literal|false
+return|;
+block|}
+if|if
+condition|(
+operator|!
+name|config
+operator|.
+name|convertCorrelateToJoin
+argument_list|()
+condition|)
+block|{
+return|return
+literal|true
 return|;
 block|}
 name|CorrelationId
@@ -22924,6 +22936,28 @@ name|withAggregateUnique
 parameter_list|(
 name|boolean
 name|aggregateUnique
+parameter_list|)
+function_decl|;
+comment|/** Whether to convert Correlate to Join if correlation variable is unused. */
+annotation|@
+name|Value
+operator|.
+name|Default
+specifier|default
+name|boolean
+name|convertCorrelateToJoin
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
+comment|/** Sets {@link #convertCorrelateToJoin()}. */
+name|Config
+name|withConvertCorrelateToJoin
+parameter_list|(
+name|boolean
+name|convertCorrelateToJoin
 parameter_list|)
 function_decl|;
 block|}
