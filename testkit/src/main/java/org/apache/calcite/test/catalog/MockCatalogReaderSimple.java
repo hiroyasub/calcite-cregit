@@ -1072,6 +1072,41 @@ argument_list|(
 name|deptTable
 argument_list|)
 expr_stmt|;
+comment|// Register "DEPT_SINGLE" table.
+name|MockTable
+name|deptSingleTable
+init|=
+name|MockTable
+operator|.
+name|create
+argument_list|(
+name|this
+argument_list|,
+name|salesSchema
+argument_list|,
+literal|"DEPT_SINGLE"
+argument_list|,
+literal|false
+argument_list|,
+literal|4
+argument_list|)
+decl_stmt|;
+name|deptSingleTable
+operator|.
+name|addColumn
+argument_list|(
+literal|"SKILL"
+argument_list|,
+name|fixture
+operator|.
+name|singleRecordType
+argument_list|)
+expr_stmt|;
+name|registerTable
+argument_list|(
+name|deptSingleTable
+argument_list|)
+expr_stmt|;
 comment|// Register "DEPT_NESTED" table.
 name|MockTable
 name|deptNestedTable
@@ -2029,13 +2064,10 @@ name|suppliersTable
 argument_list|)
 expr_stmt|;
 comment|// Register "EMP_20" and "EMPNULLABLES_20 views.
-comment|// Same columns as "EMP" amd "EMPNULLABLES",
-comment|// but "DEPTNO" not visible and set to 20 by default
-comment|// and "SAL" is visible but must be greater than 1000,
-comment|// which is the equivalent of:
+comment|// Same columns as "EMP" amd "EMPNULLABLES", but "DEPTNO" not visible and set to 20 by default
+comment|// and "SAL" is visible but must be greater than 1000, which is the equivalent of:
 comment|//   SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, SLACKER
-comment|//   FROM EMP
-comment|//   WHERE DEPTNO = 20 AND SAL> 1000
+comment|//   FROM EMP WHERE DEPTNO = 20 AND SAL> 1000
 specifier|final
 name|ImmutableIntList
 name|m0
@@ -3008,12 +3040,8 @@ name|structNullableTypeTable
 argument_list|)
 expr_stmt|;
 comment|// Register "STRUCT.T_10" view.
-comment|// Same columns as "STRUCT.T",
-comment|// but "F0.C0" is set to 10 by default,
-comment|// which is the equivalent of:
-comment|//   SELECT *
-comment|//   FROM T
-comment|//   WHERE F0.C0 = 10
+comment|// Same columns as "STRUCT.T", but "F0.C0" is set to 10 by default, which is the equivalent of:
+comment|//   SELECT * FROM T WHERE F0.C0 = 10
 comment|// This table uses MockViewTable which does not populate the constrained columns with default
 comment|// values on INSERT.
 specifier|final

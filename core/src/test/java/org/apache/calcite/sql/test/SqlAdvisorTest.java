@@ -562,6 +562,8 @@ literal|"TABLE(CATALOG.SALES.EMP_ADDRESS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.DEPT)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.DEPT_SINGLE)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.DEPT_NESTED)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.DEPT_NESTED_EXPANDED)"

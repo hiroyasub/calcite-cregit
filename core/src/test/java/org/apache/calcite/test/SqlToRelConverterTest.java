@@ -13754,6 +13754,32 @@ begin_function
 annotation|@
 name|Test
 name|void
+name|testNestedStructSingleFieldAccessWhere
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select dn.skill\n"
+operator|+
+literal|"from sales.dept_single dn WHERE dn.skill.type = ''"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
 name|testFunctionWithStructInput
 parameter_list|()
 block|{
