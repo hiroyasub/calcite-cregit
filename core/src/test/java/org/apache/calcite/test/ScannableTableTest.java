@@ -425,18 +425,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|jetbrains
-operator|.
-name|annotations
-operator|.
-name|NotNull
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|jupiter
@@ -3788,8 +3776,6 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
-annotation|@
-name|NotNull
 annotation|@
 name|Override
 specifier|public
