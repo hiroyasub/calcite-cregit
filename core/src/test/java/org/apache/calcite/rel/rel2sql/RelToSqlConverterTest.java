@@ -16142,6 +16142,41 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-5577">[CALCITE-5577]    * Map value constructor is unparsed incorrectly for SparkSqlDialect</a>.*/
+annotation|@
+name|Test
+name|void
+name|testMapValueConstructorSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT MAP['k1', 'v1', 'k2', 'v2']"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT MAP ('k1', 'v1', 'k2', 'v2')\n"
+operator|+
+literal|"FROM (VALUES (0)) t (ZERO)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-4674">[CALCITE-4674]    * Excess quotes in generated SQL when STAR is a column alias</a>. */
 annotation|@
 name|Test
