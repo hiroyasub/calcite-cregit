@@ -2810,6 +2810,24 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Call to function ''{0}'' with argument of type ''{1}'' requires extra delimiter argument"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|delimiterIsRequired
+parameter_list|(
+name|String
+name|functionName
+parameter_list|,
+name|String
+name|argumentTypeName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Wrong arguments for table function ''{0}'' call. Expected ''{1}'', actual ''{2}''"
 argument_list|)
 name|ExInst

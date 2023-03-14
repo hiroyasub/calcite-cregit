@@ -34079,6 +34079,179 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests the {@code SPLIT} operator. */
+annotation|@
+name|Test
+name|void
+name|testSplitFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|SPLIT
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^split('hello')^"
+argument_list|,
+literal|"No match found for function signature SPLIT\\(<CHARACTER>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT('h,e,l,l,o')"
+argument_list|,
+literal|"[h, e, l, l, o]"
+argument_list|,
+literal|"CHAR(9) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT('h-e-l-l-o', '-')"
+argument_list|,
+literal|"[h, e, l, l, o]"
+argument_list|,
+literal|"CHAR(9) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT('hello', '-')"
+argument_list|,
+literal|"[hello]"
+argument_list|,
+literal|"CHAR(5) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT('')"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"CHAR(0) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT('', '-')"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"CHAR(0) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"SPLIT(null)"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"SPLIT('hello', null)"
+argument_list|)
+expr_stmt|;
+comment|// In ASCII, x'41' = 'A', x'42' = 'B', x'43' = 'C'
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT(x'414243', x'ff')"
+argument_list|,
+literal|"[ABC]"
+argument_list|,
+literal|"BINARY(3) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT(x'414243', x'41')"
+argument_list|,
+literal|"[, BC]"
+argument_list|,
+literal|"BINARY(3) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT(x'414243', x'42')"
+argument_list|,
+literal|"[A, C]"
+argument_list|,
+literal|"BINARY(3) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"SPLIT(x'414243', x'43')"
+argument_list|,
+literal|"[AB, ]"
+argument_list|,
+literal|"BINARY(3) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkFails
+argument_list|(
+literal|"^SPLIT(x'aabbcc')^"
+argument_list|,
+literal|"Call to function 'SPLIT' with argument of type 'BINARY\\(3\\)' "
+operator|+
+literal|"requires extra delimiter argument"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the {@code SUBSTRING} operator. Many test cases that used to be    * have been moved to {@link SubFunChecker#assertSubFunReturns}, and are    * called for both {@code SUBSTRING} and {@code SUBSTR}. */
 annotation|@
 name|Test

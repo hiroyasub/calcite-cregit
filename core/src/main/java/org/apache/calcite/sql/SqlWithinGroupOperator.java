@@ -630,6 +630,7 @@ return|;
 block|}
 block|}
 specifier|private
+specifier|static
 name|SqlNode
 name|getCollationColumn
 parameter_list|(
