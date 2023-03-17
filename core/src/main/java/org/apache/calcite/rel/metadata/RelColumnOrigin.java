@@ -126,7 +126,7 @@ return|return
 name|iOriginColumn
 return|;
 block|}
-comment|/**    * Consider the query<code>select a+b as c, d as e from t</code>. The    * output column c has two origins (a and b), both of them derived. The    * output column d as one origin (c), which is not derived.    *    * @return false if value taken directly from column in origin table; true    * otherwise    */
+comment|/**    * Consider the query<code>select a+b as c, d as e from t</code>. The    * output column c has two origins (a and b), both of them derived. The    * output column e has one origin (d), which is not derived.    *    * @return false if value taken directly from column in origin table; true    * otherwise    */
 specifier|public
 name|boolean
 name|isDerived
