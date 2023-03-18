@@ -453,6 +453,14 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
+name|String
+name|ZIPS_ALIAS
+init|=
+literal|"zips_alias"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
 name|int
 name|ZIPS_SIZE
 init|=
@@ -502,6 +510,15 @@ argument_list|(
 name|ZIPS
 argument_list|,
 name|mapping
+argument_list|)
+expr_stmt|;
+name|NODE
+operator|.
+name|createAlias
+argument_list|(
+name|ZIPS
+argument_list|,
+name|ZIPS_ALIAS
 argument_list|)
 expr_stmt|;
 comment|// load records from file
@@ -681,7 +698,7 @@ operator|.
 name|mapper
 argument_list|()
 argument_list|,
-name|ZIPS
+literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -984,6 +1001,26 @@ operator|.
 name|returnsCount
 argument_list|(
 literal|0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testAlias
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from elastic.zips_alias"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+name|ZIPS_SIZE
 argument_list|)
 expr_stmt|;
 block|}
