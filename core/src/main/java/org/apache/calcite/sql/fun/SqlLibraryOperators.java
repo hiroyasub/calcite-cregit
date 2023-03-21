@@ -5409,6 +5409,8 @@ argument_list|(
 name|libraries
 operator|=
 block|{
+name|BIG_QUERY
+block|,
 name|ORACLE
 block|,
 name|POSTGRESQL
