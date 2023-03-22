@@ -34250,6 +34250,201 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testStrposFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlOperatorFixture
+name|f0
+init|=
+name|fixture
+argument_list|()
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|STRPOS
+argument_list|)
+decl_stmt|;
+name|f0
+operator|.
+name|checkFails
+argument_list|(
+literal|"^strpos('abc', 'a')^"
+argument_list|,
+literal|"No match found for function signature STRPOS\\(<CHARACTER>,<CHARACTER>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlOperatorFixture
+name|f
+init|=
+name|f0
+operator|.
+name|withLibrary
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+decl_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS('abc', 'a')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS('abcabc', 'bc')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS('abcabc', 'd')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS('abc', '')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS('', 'a')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"STRPOS(null, 'a')"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"STRPOS('a', null)"
+argument_list|)
+expr_stmt|;
+comment|// test for BINARY
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS(x'2212', x'12')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS(x'2122', x'12')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS(x'1222', x'12')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS(x'1111', x'22')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS(x'2122', x'')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkScalar
+argument_list|(
+literal|"STRPOS(x'', x'12')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"STRPOS(null, x'')"
+argument_list|)
+expr_stmt|;
+name|f
+operator|.
+name|checkNull
+argument_list|(
+literal|"STRPOS(x'', null)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testStartsWithFunction
 parameter_list|()
 block|{

@@ -5187,7 +5187,9 @@ name|POSITION
 init|=
 operator|new
 name|SqlPositionFunction
-argument_list|()
+argument_list|(
+literal|"POSITION"
+argument_list|)
 decl_stmt|;
 specifier|public
 specifier|static

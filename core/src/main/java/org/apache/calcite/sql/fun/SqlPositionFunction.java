@@ -183,11 +183,14 @@ argument_list|)
 decl_stmt|;
 specifier|public
 name|SqlPositionFunction
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"POSITION"
+name|name
 argument_list|,
 name|SqlKind
 operator|.

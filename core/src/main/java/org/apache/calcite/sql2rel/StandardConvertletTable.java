@@ -2181,6 +2181,51 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// "STRPOS(string, substring) is equivalent to
+comment|// "POSITION(substring IN string)"
+name|registerOp
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|STRPOS
+argument_list|,
+parameter_list|(
+name|cx
+parameter_list|,
+name|call
+parameter_list|)
+lambda|->
+name|cx
+operator|.
+name|convertExpression
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|POSITION
+operator|.
+name|createCall
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|,
+name|call
+operator|.
+name|operand
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|call
+operator|.
+name|operand
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// REVIEW jvs 24-Apr-2006: This only seems to be working from within a
 comment|// windowed agg.  I have added an optimizer rule
 comment|// org.apache.calcite.rel.rules.AggregateReduceFunctionsRule which handles

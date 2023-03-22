@@ -1900,6 +1900,30 @@ return|return
 name|type
 return|;
 block|}
+comment|/** The "STRPOS(string, substring)" function. */
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|BIG_QUERY
+block|,
+name|POSTGRESQL
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|STRPOS
+init|=
+operator|new
+name|SqlPositionFunction
+argument_list|(
+literal|"STRPOS"
+argument_list|)
+decl_stmt|;
 comment|/** Generic "SUBSTR(string, position [, substringLength ])" function. */
 specifier|private
 specifier|static
